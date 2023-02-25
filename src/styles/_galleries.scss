@@ -70,7 +70,6 @@ section._container {
   justify-content: center;
   direction: ltr;
   border: none;
-  color: var(--primary_5);
   text-align: center;
   width: 100%;
 }
@@ -91,7 +90,7 @@ footer {
 }
 
 ::ng-deep {
-  .mat-select-panel .mat-option {
+  .mat-mdc-select-panel .mat-option {
     font-size: var(--font_s);
     line-height: 3em;
     height: 3em;

@@ -14,8 +14,26 @@
     color: var(--secondary_8);
   }
 
+  .mat-select-placeholder {
+    color: var(--secondary_8);
+    font-size: var(--font_ss);
+  }
+
+  .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: var(--pink_500);
+  }
+
   .mat-dialog-container {
+    background: var(--white);
+    color: var(--primary_7);
     direction: rtl;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    direction: rtl;
+    justify-content: flex-start;
   }
 
   .mat-select {
@@ -29,15 +47,6 @@
   }
 
   .mat-select-panel .mat-optgroup-label,
-  .mat-select-panel .mat-option {
-    font-size: var(--font_s);
-    line-height: 3em;
-    height: 3em;
-    text-align: right;
-    font-family: inherit;
-    font-weight: 600;
-  }
-
   .mat-select-panel .mat-option {
     font-size: var(--font_s);
     line-height: 3em;
@@ -71,9 +80,6 @@
     border-color: var(--secondary_5);
   }
 
-  .mat-dialog-actions {
-    justify-content: flex-start;
-  }
 }
 
 .radio_group {
@@ -83,8 +89,8 @@
 
 .check_boxes {
   border-radius: $border_15;
-  box-shadow: 0px 0px 2px 1px var(--primary_6);
+  // box-shadow: 0px 0px 2px 1px var(--primary_6);
   background: var(--white);
-  padding: var(--font_s);
+  padding: var(--font_xs);
   margin-top: var(--font_05);
 }

@@ -4,10 +4,10 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 27rem));
   direction: rtl;
   justify-content: center;
-  gap: var(--font_2);
+  gap: var(--font_l2);
 }
 
 main {
@@ -59,30 +59,23 @@ main {
   margin: auto;
   padding: var(--font_xs) 0;
   width: 100%;
-  max-width: 19rem;
   border-radius: $border_15;
 }
 
 .title {
   color: var(--primary_3);
   text-align: center;
-  margin: var(--font_05);
   font-size: var(--font_l2);
-}
-
-h2.title {
-  color: var(--primary_4);
-  text-align: center;
-  margin: var(--font_05);
-  font-size: var(--font_l);
 }
 
 .change_pass {
   text-align: center;
 
-  button {
+  ._full_width {
+    max-width: 100%;
+    width: 100%;
+    margin-top: var(--font_05);
     background: var(--primary_2);
-    margin: var(--font_2);
     color: var(--white);
   }
 }

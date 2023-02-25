@@ -17,7 +17,7 @@
   display: grid;
   direction: rtl;
   text-align: center;
-  padding: var(--font_xs) var(--font_02) var(--font_xs) var(--font_02);
+  padding: var(--font_xs) var(--font_02);
   border-radius: $border_15;
   gap: var(--font_02);
 }
@@ -42,8 +42,9 @@ h3 {
 }
 
 footer {
-  margin-top: var(--font_05);
-  text-align: center;
+  background: var(--white);
+  padding: var(--font_05);
+  border-radius: $border_7;
 }
 
 [hidden] {

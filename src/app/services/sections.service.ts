@@ -37,25 +37,25 @@ export class SectionsService {
     }
     if (this.dynamicValue.hasOwnProperty('provinceId')) {
       if (MathS.isNull(this.dynamicValue.provinceId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_provinceId);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_province);
         return false;
       }
     }
     if (this.dynamicValue.hasOwnProperty('countryId')) {
       if (MathS.isNull(this.dynamicValue.countryId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_countryId);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_country);
         return false;
       }
     }
     if (this.dynamicValue.hasOwnProperty('regionId')) {
       if (MathS.isNull(this.dynamicValue.regionId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_regionId);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_region);
         return false;
       }
     }
     if (this.dynamicValue.hasOwnProperty('zoneId')) {
       if (MathS.isNull(this.dynamicValue.zoneId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zoneId);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }

@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
-@import '~material-design-icons/iconfont/material-icons.css';
 
 @font-face {
   font-family: BLotus;
@@ -157,14 +156,6 @@ input[type=number] {
   text-align: center;
   font-size: var(--font_s);
   font-weight: 600;
-}
-
-:host ::ng-deep {
-
-  .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
-  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: var(--pink_500);
-  }
 }
 
 :host ::ng-deep {

@@ -1,7 +1,7 @@
 <div class="over_all">
     <main>
-        <h1 class="title">مشخصات کاربری</h1>
         <div class="content">
+            <h1 class="title">مشخصات کاربری</h1>
             <div class="_desc">
                 <div *ngFor="let item of _selectCols" class="input_2">
                     <div class="_key">{{item.header}}</div>
@@ -13,8 +13,8 @@
 
     <section>
 
-        <h1 class="title">تغییر گذرواژه</h1>
         <form #form="ngForm" (ngSubmit)="changePassword()" class="content">
+            <h1 class="title">تغییر گذرواژه</h1>
 
             <div class="_desc">
                 <div class="input_2">
@@ -32,21 +32,21 @@
             </div>
 
             <div class="change_pass">
-                <button type="submit" class="btn_2">ذخیره</button>
+                <button type="submit" class="btn_2 _full_width">ذخیره</button>
             </div>
         </form>
 
     </section>
 
     <section>
-        <h1 class="title">تصاویر</h1>
-        <div class="content">
-            <h2 class="title">نمایش تصاویر</h2>
+        <div class="content">            
+            <h1 class="title">نمایش تصاویر</h1>
             <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs"
                 optionLabel="label" optionValue="value"
                 (onChange)="setValueOfShowCarouselMedia(profileService.showStateVals.groupImgs)">
             </p-selectButton>
-            <h2 class="title">اندازه تصاویر</h2>
+            <hr>
+            <h1 class="title">اندازه تصاویر</h1>
             <p-selectButton [options]="stateOptionsImageOption" [(ngModel)]="profileService.showStateVals.imgOptions"
                 optionLabel="label" optionValue="value"
                 (onChange)="setValuesOfImg(profileService.showStateVals.imgOptions)">
@@ -55,8 +55,8 @@
     </section>
 
     <section>
-        <h1 class="title">جستجو براساس</h1>
         <div class="content">
+            <h1 class="title">جستجو براساس</h1>
             <p-selectButton [options]="stateOptionsSearchType"
                 [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label" optionValue="value"
                 (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
@@ -65,8 +65,8 @@
     </section>
 
     <section>
-        <h1 class="title">امکان لغو درخواست</h1>
         <div class="content">
+            <h1 class="title">امکان لغو درخواست</h1>
             <p-selectButton [options]="stateOptionsSpinner"
                 [(ngModel)]="profileService.showStateVals.hasCanclableSpinner" optionLabel="label" optionValue="value"
                 (onChange)="setCanclableSpinner(profileService.showStateVals.hasCanclableSpinner)">
@@ -75,8 +75,8 @@
     </section>
 
     <section>
-        <h1 class="title">اندازه فونت</h1>
         <div class="content">
+            <h1 class="title">اندازه فونت</h1>
             <p-selectButton [options]="stateFontStyleOptions"
                 [(ngModel)]="profileService.showStateVals.defaultFontStyle" optionLabel="label" optionValue="value"
                 (onChange)="setFontStyle(profileService.showStateVals.defaultFontStyle)">
@@ -84,8 +84,8 @@
         </div>
     </section>
     <section>
-        <h1 class="title">مکان اعلان پیام ها</h1>
         <div class="content">
+            <h1 class="title">مکان اعلان پیام ها</h1>
             <p-selectButton [options]="notifyPositionOptions" [(ngModel)]="profileService.showStateVals.notifyPosition"
                 optionLabel="label" optionValue="value"
                 (onChange)="setNotifyPosition(profileService.showStateVals.notifyPosition)">
@@ -94,8 +94,8 @@
     </section>
 
     <section>
-        <h1 class="title">امکان تغییر اندازه ستونها در جدول</h1>
         <div class="content">
+            <h1 class="title">امکان تغییر اندازه ستونها در جدول</h1>
             <p-selectButton [options]="stateOptionsResizableTable"
                 [(ngModel)]="profileService.showStateVals.reSizableTable" optionLabel="label" optionValue="value"
                 (onChange)="setResizableTable(profileService.showStateVals.reSizableTable)">
@@ -104,8 +104,8 @@
     </section>
 
     <section>
-        <h1 class="title">امکان جابجایی ستونها در جدول</h1>
         <div class="content">
+            <h1 class="title">امکان جابجایی ستونها در جدول</h1>
             <p-selectButton [options]="stateOptionsReordersableTable"
                 [(ngModel)]="profileService.showStateVals.reOrderableTable" optionLabel="label" optionValue="value"
                 (onChange)="setReOrderableTable(profileService.showStateVals.reOrderableTable)">
@@ -113,8 +113,8 @@
         </div>
     </section>
     <section>
-        <h1 class="title">گروه‌بندی پیشفرض در کارتابل</h1>
         <div class="content">
+            <h1 class="title">گروه‌بندی پیشفرض در کارتابل</h1>
             <p-selectButton [options]="stateOptionsAggregateTracks" [(ngModel)]="profileService._agg.flag"
                 optionLabel="label" optionValue="value"
                 (onChange)="setDefaultAggregateTracks(profileService._agg.flag)">

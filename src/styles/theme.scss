@@ -36,24 +36,9 @@
   }
 
   ._info_each_item {
-    border-radius: 15px;
+    height: 2rem;
+    width: 2rem;
+    border-radius: $border_50;
     border: 1px solid var(--primary_7);
-    padding: var(--font_05) var(--font_xs);
-    margin: var(--font_01);
-
-    div {
-      display: flex;
-      justify-content: flex-end;
-      color: var(--secondary_8);
-      text-align: right;
-      font-size: var(--font_s);
-      font-weight: 600;
-
-      &::after {
-        content: '\2713';
-        color: var(--green_500);
-        padding: 0 0 0 var(--font_03);
-      }
-    }
   }
 }

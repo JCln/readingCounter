@@ -2,9 +2,9 @@
 
 .order_by {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 10rem));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 11rem));
   direction: rtl;
-  margin: 2rem;
+  margin: var(--font_05);
   font-weight: 600;
   gap: var(--font_05);
   align-items: center;
