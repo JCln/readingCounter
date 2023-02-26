@@ -22,10 +22,10 @@
 .content {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
   justify-content: center;
-  gap: var(--font_05);
+  gap: var(--font_xs);
   background: var(--secondary_1);
+  padding: var(--font_s);
 }
 
 

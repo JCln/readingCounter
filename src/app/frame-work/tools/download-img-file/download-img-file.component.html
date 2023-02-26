@@ -1,8 +1,4 @@
-<app-collapsable [_isCollapsed]=toolsService._isCollapseFileDownloadImage
-    (_clicked)=" toolsService._isCollapseFileDownloadImage = !toolsService._isCollapseFileDownloadImage">
-</app-collapsable>
-
-<section [hidden]="toolsService._isCollapseFileDownloadImage">
+<section>
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="static_part">
             <section class="content">
@@ -24,13 +20,14 @@
                         </app-date-jalali>
                     </div>
                 </div>
+                <footer class="center_footer">
+                    <button type="submit" class="btn_1">
+                        دانلود تصاویر
+                        <i class="fa fa-file-zip-o"></i>
+                    </button>
+                </footer>
+
             </section>
         </section>
-        <footer class="center_footer">
-            <button type="submit" class="btn_1">
-                دانلود تصاویر
-                <i class="fa fa-file-zip-o"></i>
-            </button>
-        </footer>
     </form>
 </section>

@@ -27,7 +27,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
   @Input() _isSortable: boolean = true;
-  @Input() _hasCollapsible: boolean = false;  
+  @Input() _hasCollapsible: boolean = false;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
   @Input() _hasAggregating: boolean = false;
@@ -256,7 +256,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
     else {
       this.updateRowGroupMetaData('');
     }
-  } 
+  }
   doCustomSort = (event: any) => {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];

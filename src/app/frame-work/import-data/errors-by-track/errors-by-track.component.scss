@@ -3,11 +3,11 @@
 @import 'button';
 
 .insert_track {
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  justify-content: center;
   direction: rtl;
+  gap: var(--font_s);
   margin: auto;
   padding: 2rem;
   background: var(--secondary_1);

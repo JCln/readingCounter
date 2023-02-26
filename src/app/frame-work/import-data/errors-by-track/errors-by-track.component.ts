@@ -21,7 +21,6 @@ export class ErrorsByTrackComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForImportErrorsByTrackNumber = null;
-      this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber = null;
     }
     if (!this.closeTabService.saveDataForImportErrorsByTrackNumber && this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber) {
       this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.getById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber);

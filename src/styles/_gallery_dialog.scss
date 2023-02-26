@@ -1,11 +1,11 @@
 .insert_track {
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  justify-content: center;
   direction: rtl;
   margin: auto;
   padding: 2rem;
+  gap: var(--font_s);
   background: var(--secondary_1);
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);

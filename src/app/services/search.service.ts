@@ -48,7 +48,8 @@ export class SearchService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: this.utilsService.getFirstYear()
+    year: this.utilsService.getFirstYear(),
+    isCollapsed: false
   }
 
   private _searchProExcel: IObjectIteratation[] = [

@@ -1,5 +1,5 @@
 <main class="main">
-    <form #form="ngForm" (ngSubmit)="connectToServer()">
+    <form #form="ngForm" (ngSubmit)="connectToServer()" [hidden]="searchService._searchSimpleReq.isCollapsed">
         <section class="order_by">
             <h2>جستجو بر اساس :</h2>
             <div *ngFor="let orderType of searchService.utilsService.getSearchInOrderTo">
@@ -80,5 +80,7 @@
     [_checkUpName]="'simpleSearch'" [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
     [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
     (routedToLMAll)="searchService.routeToLMAll($event)" (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
-    (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)">
+    (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)"
+    [_hasCollapsible]=true [_isCollaped]="searchService._searchSimpleReq.isCollapsed"
+    (collapsed)="searchService._searchSimpleReq.isCollapsed = !searchService._searchSimpleReq.isCollapsed">
 </app-prime-table>

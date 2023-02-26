@@ -27,8 +27,6 @@ import { UtilsService } from './utils.service';
 export class ToolsService {
   ENReadingReports = ENReadingReports;
   _isCollapsedRandomImgCarouDetails: boolean = true;
-  _isCollapseFileDownloadImage: boolean = false;
-  _isCollapseFileDownloadImageTwo: boolean = false;
   _isCollapsedRandomImages: boolean = false;
   _isCollapsedImageAttrDetails: boolean = false;
   _isCollapsedImageAttrGridBased: boolean = false;

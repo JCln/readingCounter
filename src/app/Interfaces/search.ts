@@ -16,7 +16,8 @@ export interface ISearchSimpleReq {
     fromDate: string,
     toDate: string,
     readingPeriodId: string,
-    year: number
+    year: number,
+    isCollapsed?: boolean
 }
 export interface ISearchSimpleOutput {
     trackingId: string,
