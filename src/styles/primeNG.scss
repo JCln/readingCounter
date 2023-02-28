@@ -407,9 +407,13 @@
     justify-content: center;
     border: solid var(--secondary_1);
   }
-
+// making drop-downs and canelndar in table showing properly
   .p-datatable-resizable>.p-datatable-wrapper {
     overflow-x: unset;
+  }
+
+  .p-datatable>.p-datatable-wrapper {
+    overflow: initial;
   }
 
   .p-datatable-resizable .p-datatable-tbody>tr>td,
