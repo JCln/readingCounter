@@ -36,7 +36,8 @@ export interface ICounterReport {
     isKarbari: boolean,
     canNumberBeLessThanPre: boolean,
     isTavizi: boolean,
-    clientOrder: number
+    clientOrder: number,
+    hasImage: boolean
 }
 
 // fragment manager 

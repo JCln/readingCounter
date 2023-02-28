@@ -1454,7 +1454,8 @@ export class ColumnManager {
         { field: 'isKarbari', header: 'کاربری', isSelected: true, isBoolean: true },
         { field: 'canNumberBeLessThanPre', header: 'کمتر از قبلی', isSelected: true, isBoolean: true },
         { field: 'isTavizi', header: 'تعویض', isSelected: true, isBoolean: true },
-        { field: 'clientOrder', header: 'ترتیب', isSelected: true }
+        { field: 'clientOrder', header: 'ترتیب', isSelected: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: true, isBoolean: true }
     ]
     readingConfigDefault: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
