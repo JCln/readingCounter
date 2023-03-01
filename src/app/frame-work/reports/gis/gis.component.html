@@ -30,20 +30,24 @@
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
-                    <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
-                        [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                        filter="true" (onChange)="getCounterStateByZoneId()" (onChange)="getFragmentByZone()"
-                        (onChange)="readingReportManagerService.gisReq.fragmentMasterIds = []">
-                    </p-dropdown>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
+                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                            filter="true" (onChange)="getCounterStateByZoneId()" (onChange)="getFragmentByZone()"
+                            (onChange)="readingReportManagerService.gisReq.fragmentMasterIds = []">
+                        </p-dropdown>
+                    </div>
                 </div>
                 <div class="input_2">
                     <div class="_key">نوبتی</div>
-                    <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
-                        [(ngModel)]="readingReportManagerService.gisReq.fragmentMasterIds" optionLabel="routeTitle"
-                        optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '150px'}"
-                        placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                    </p-multiSelect>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
+                            [(ngModel)]="readingReportManagerService.gisReq.fragmentMasterIds" optionLabel="routeTitle"
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '150px'}"
+                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
                 </div>
                 <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                     <div class="_key">نوع دوره</div>
@@ -83,11 +87,6 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <mat-checkbox name="isCluster" [(ngModel)]="readingReportManagerService.gisReq.isCluster">خوشه بندی
-                </mat-checkbox>
-            </section>
-
-            <section class="content">
                 <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
@@ -106,6 +105,9 @@
                         </app-date-jalali>
                     </div>
                 </div>
+                <mat-checkbox name="isCluster" [(ngModel)]="readingReportManagerService.gisReq.isCluster">خوشه بندی
+                </mat-checkbox>
+
             </section>
             <footer>
                 <button type="submit" class="btn_1">مشاهده</button>

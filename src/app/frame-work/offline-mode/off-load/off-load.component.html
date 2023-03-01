@@ -10,7 +10,7 @@
                 optionValue="id" [showClear]="true" placeholder="انتخاب مورد" (onChange)="getCounterReader()">
             </p-dropdown>
         </span>
-        <div class="input_2 this">
+        <div class="input_2">
             <div class="_key">مامور</div>
             <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
                 [options]="userCounterReaderDictionary" [(ngModel)]="offlineModeService.loadForm.counterReaderId"

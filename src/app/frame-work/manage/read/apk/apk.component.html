@@ -1,9 +1,6 @@
 <div class="over_all">
     <section>
-
         <h1 class="title">ایجاد نسخه جدید</h1>
-
-
         <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
             <div class="_desc">
                 <input class="input_1" type="text" placeholder="نام نسخه " name="versionName"
@@ -29,7 +26,7 @@
                     max="100">{{progress}}</progress>
 
                 <div class="change_pass">
-                    <button *ngIf="progress == 0" class="btn_2" type="submit">
+                    <button *ngIf="progress == 0" class="btn_1" type="submit">
                         <div class="fa fa-upload"></div>
                         ارسال
                     </button>
@@ -45,19 +42,10 @@
         <h1 class="title">نسخه های گذشته</h1>
         <div class="content">
 
-            <app-prime-table 
-            [dataSource]="closeTabService.saveDataForAPKManager" 
-            [_rowsNumbers]=5
-            [_numberOfExtraColumns]="['1']"
-            [_multiSelectEnable]=false 
-            [_outputEnabled]=false 
-            [_hasSaveColumns]=false
-            [_outputFileName]="'apk'"
-            [_checkUpName]="'apk'" 
-            (downloadedAPK)="downloadAPK()"
-            (removedRow)="removeRow($event)"
-            (refreshedTable)="classWrapper(true)"
-            >
+            <app-prime-table [dataSource]="closeTabService.saveDataForAPKManager" [_rowsNumbers]=5
+                [_numberOfExtraColumns]="['1']" [_multiSelectEnable]=false [_outputEnabled]=false
+                [_hasSaveColumns]=false [_outputFileName]="'apk'" [_checkUpName]="'apk'" (downloadedAPK)="downloadAPK()"
+                (removedRow)="removeRow($event)" (refreshedTable)="classWrapper(true)">
             </app-prime-table>
 
         </div>

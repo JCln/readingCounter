@@ -23,7 +23,7 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2 this" [hidden]="!readingPeriodDictionary.length">
+                <div class="input_2" [hidden]="!readingPeriodDictionary.length">
                     <div class="_key">دوره قرائت</div>
                     <mat-select placeholder="انتخاب مورد"
                         [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.readingPeriodId"
@@ -35,7 +35,7 @@
                 </div>
 
 
-                <div class="input_2 this" *ngIf="userCounterReader.length">
+                <div class="input_2" *ngIf="userCounterReader.length">
                     <div class="_key">مامور</div>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
                         [options]="userCounterReader" name="counter-reader"
@@ -53,7 +53,7 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2 double_size">
+                <div class="input_2">
                     <div class="_key">ش لیست</div>
                     <input class="_value double_size" name="listNumber"
                         [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.listNumber">
@@ -62,6 +62,16 @@
                     <div class="_key">توضیحات</div>
                     <input class="_value" name="desc"
                         [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.description">
+                </div>
+                <div class="input_2" [hidden]="!_showAlalHesabPercent">
+                    <div class="_key">درصد علی‌الحساب</div>
+                    <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent">
+                </div>
+                <div class="input_2" [hidden]="!_showimagePercent">
+                    <div class="_key">درصد تصویر</div>
+                    <input class="_value" type="number" min="0" max="100" name="imagePercent"
+                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.imagePercent">
                 </div>
 
             </section>
@@ -94,33 +104,23 @@
                     <div class="tooltip_text">دانلود نمونه فایل Excel</div>
                 </i>
             </div>
-        </section>
-        <section *ngIf="canShowEditButton" class="dynamic_content">
-            <div class="input_2 this" [hidden]="!_showAlalHesabPercent">
-                <div class="_key">درصد علی‌الحساب</div>
-                <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
-                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent">
-            </div>
-            <div class="input_2 this" [hidden]="!_showimagePercent">
-                <div class="_key">درصد تصویر</div>
-                <input class="_value" type="number" min="0" max="100" name="imagePercent"
-                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.imagePercent">
-            </div>
-        </section>
-        <section>
-            <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
-                <span class="pi pi-file-excel"></span>
-                فایل <small>Excel</small> انتخاب نمایید
-            </label>
-            <label *ngIf="choosenFileName" class="label_choose_file" for="files">
-                {{choosenFileName}}
-            </label>
-            <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
-                name="screenshot" (change)="onChange($event)" id="files">
+
+            <section>
+                <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files"
+                    title="فایلی انتخاب نشده است">
+                    <span class="pi pi-file-excel"></span>
+                    فایل <small>Excel</small> انتخاب نمایید
+                </label>
+                <label *ngIf="choosenFileName" class="label_choose_file" for="files">
+                    {{choosenFileName}}
+                </label>
+                <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
+                    name="screenshot" (change)="onChange($event)" id="files">
+            </section>
 
         </section>
 
-        <footer>
+        <footer class="footer_with_background">
             <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
         </footer>
     </form>

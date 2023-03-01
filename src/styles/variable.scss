@@ -97,6 +97,12 @@ a:active {
   cursor: pointer;
 }
 
+footer.footer_with_background {
+  background: var(--white);
+  padding: var(--font_05);
+  border-radius: $border_7;
+}
+
 ._circle_border {
   display: grid !important;
   place-content: center;

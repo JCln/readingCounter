@@ -6,8 +6,14 @@
 @import '_mat.scss';
 @import '_gallery_dialog.scss';
 
+.insert_track {
+  width: 20rem;
+  padding: var(--font_s);
+  justify-content: initial;
+}
+
 .btn_1 {
-  max-width: 16rem;
+  max-width: initial;
 }
 
 .contain {

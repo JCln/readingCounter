@@ -17,11 +17,17 @@
                 </mat-select>
             </div>
 
-            <input class="input_1" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
-                [(ngModel)]="offlineModeService.fileUploadSingle.item" autofocus>
+            <div class="input_2">
+                <div class="_key">شماره پیگیری</div>
+                <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
+                    [(ngModel)]="offlineModeService.fileUploadSingle.item" autofocus>
+            </div>
 
-            <input class="input_1" type="text" placeholder="توضیحات" name="description"
-                [(ngModel)]="offlineModeService.fileUploadSingleReq.description">
+            <div class="input_2">
+                <div class="_key">توضیحات</div>
+                <input class="_value" placeholder="توضیحات" name="description"
+                    [(ngModel)]="offlineModeService.fileUploadSingleReq.description">
+            </div>
 
             <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="تصویری انتخاب نشده است">
                 <span class="icon_android fa fa-image"></span>
@@ -38,7 +44,7 @@
             <progress *ngIf="progress > 0" id="progress" [value]="progress" min="0" max="100">{{progress}}</progress>
 
             <div class="change_pass">
-                <button *ngIf="progress == 0" class="btn_2" type="submit">
+                <button *ngIf="progress == 0" class="btn_1" type="submit">
                     <div class="fa fa-upload"></div>
                     ارسال
                 </button>

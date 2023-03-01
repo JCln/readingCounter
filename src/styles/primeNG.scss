@@ -307,6 +307,7 @@
   .p-multiselect {
     border-radius: $border_7;
     background: var(--white);
+    height: var(--font_26);
   }
 
   .p-dropdown {
@@ -407,7 +408,8 @@
     justify-content: center;
     border: solid var(--secondary_1);
   }
-// making drop-downs and canelndar in table showing properly
+
+  // making drop-downs and canelndar in table showing properly
   .p-datatable-resizable>.p-datatable-wrapper {
     overflow-x: unset;
   }

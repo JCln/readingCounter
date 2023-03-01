@@ -5,24 +5,16 @@
 @import 'media.scss';
 @import 'choose-files.scss';
 
-.over_all {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
-  direction: rtl;
-  justify-content: center;
-  gap: var(--font_xs);
-}
-
-@include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(25rem, auto)));
-
 .content {
   direction: rtl;
   text-align: center;
-  min-height: 25rem;
+  min-height: 22rem;
   background: var(--secondary_1);
   padding: var(--font_2) 0;
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  margin: auto;
+  width: 20rem;
 }
 
 input {
@@ -30,9 +22,13 @@ input {
   width: 19rem;
 }
 
+._value {
+  border: 0;
+}
+
 ._desc {
   display: grid;
-  justify-content: center;
+  padding: var(--font_s);
 }
 
 .icon_android,

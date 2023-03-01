@@ -1,24 +1,18 @@
 @import 'variable.scss';
 @import 'button.scss';
 @import 'input.scss';
-@import '_mat.scss';
+@import 'primeNG.scss';
 @import 'mixins.scss';
 
 section {
   display: grid;
-  justify-content: center;
   direction: rtl;
   margin: auto;
-  padding: var(--font_xs);
-  width: 18rem;
+  width: 20rem;
+  padding: var(--font_s);
   background: var(--secondary_1);
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-}
-
-.input_2 {
-  text-align: center;
-  width: 15rem;
 }
 
 .btn_1 {

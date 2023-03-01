@@ -10,7 +10,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./gis.component.scss']
 })
 export class GisComponent extends FactoryONE {
-  gisResponse: IReadingReportGISResponse[] = [];
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
@@ -28,7 +27,8 @@ export class GisComponent extends FactoryONE {
   }
 
   getCounterStateByZoneId = async () => {
-    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
+    if (this.readingReportManagerService.gisReq.zoneId)
+      this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
   }
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.gisReq.zoneId)

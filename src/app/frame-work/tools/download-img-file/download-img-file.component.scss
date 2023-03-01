@@ -10,8 +10,9 @@
   border: none;
 }
 
-.btn_1 {
-  max-width: 16rem;
+.static_part {
+  display: grid;
+  justify-content: center;
 }
 
 ._container {
@@ -22,7 +23,7 @@
 .content {
   display: grid;
   direction: rtl;
-  justify-content: center;
+  width: 20rem;
   gap: var(--font_xs);
   background: var(--secondary_1);
   padding: var(--font_s);

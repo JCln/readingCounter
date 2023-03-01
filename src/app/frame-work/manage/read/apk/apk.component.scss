@@ -12,7 +12,7 @@
   gap: var(--font_xs);
 }
 
-@include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(25rem, auto)));
+@include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(22rem, auto)));
 
 .content {
   background: var(--secondary_1);

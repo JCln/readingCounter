@@ -18,7 +18,7 @@ section {
   &:hover,
   &:focus,
   &:active {
-    border: 2px solid var(--primary_3);
+    outline: 2px solid var(--primary_3);
   }
 
 }

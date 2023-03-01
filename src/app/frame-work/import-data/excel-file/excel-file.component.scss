@@ -16,7 +16,6 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
   gap: var(--font_05);
   align-items: center;
 }
@@ -30,23 +29,32 @@ section.dynamic_content {
   grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
   gap: var(--font_05);
   align-items: center;
-  border: .15rem solid var(--thirdy_3);
-  box-shadow: 1px 1px 3px 1px var(--thirdy_3);
   border-radius: $border_15;
   padding: var(--font_xxs);
   margin: var(--font_xs) 0;
 }
 
 .static_part {
+  margin: auto;
   background: var(--white);
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
   padding: var(--font_xxs);
+  width: 19rem;
+
+  @media (min-width: 550px) {
+    width: 23rem;
+  }
+
+  @media (min-width: 700px) {
+    width: 29rem;
+  }
 }
+
 
 .check_boxes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 9rem));
   align-items: center;
   gap: var(--font_05);
 }
@@ -75,7 +83,8 @@ h2 {
 
 footer {
   margin-top: var(--font_2);
-  text-align: center;
+  // overridden to textAlign right from footer_with_background class
+  text-align: center !important;
 
   button {
     margin: var(--font_01) 0;

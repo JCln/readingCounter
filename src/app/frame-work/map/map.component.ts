@@ -152,11 +152,17 @@ export class MapComponent implements OnInit, OnDestroy {
     this.mapConfigOptions(this.mapService.getFromLocalStorage(), true);
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
+    let numberOfFragmentMasterIds: string[] = [];
+    for (let index = 0; index < this.route.snapshot.paramMap.get('fragmentMasterIds').split(',').length; index++) {
+      numberOfFragmentMasterIds.push(this.route.snapshot.paramMap.get('fragmentMasterIds').split(',')[index])
+    }
+
     return {
       zoneId: parseInt(this.route.snapshot.paramMap.get('zoneId')),
       isCounterState: this.route.snapshot.paramMap.get('isCounterState') === 'true' ? true : false,
       counterStateId: parseInt(this.route.snapshot.paramMap.get('counterStateId')),
       isKarbariChange: this.route.snapshot.paramMap.get('isKarbariChange') === 'true' ? true : false,
+      fragmentMasterIds: numberOfFragmentMasterIds,
       isAhadChange: this.route.snapshot.paramMap.get('isAhadChange') === 'true' ? true : false,
       isForbidden: this.route.snapshot.paramMap.get('isForbidden') === 'true' ? true : false,
       readingPeriodId: parseInt(this.route.snapshot.paramMap.get('readingPeriodId')),

@@ -5,19 +5,14 @@
 .insert_track {
   display: grid;
   align-items: center;
-  justify-content: center;
   direction: rtl;
   gap: var(--font_s);
-  margin: auto;
-  padding: 2rem;
+  margin: auto auto var(--font_01);
+  width: 20rem;
+  padding: var(--font_s);
   background: var(--secondary_1);
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-}
-
-
-.btn_1 {
-  max-width: 16rem;
 }
 
 input {
