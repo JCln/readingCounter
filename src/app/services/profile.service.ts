@@ -28,7 +28,7 @@ export class ProfileService {
     groupImgs: false,
     searchBasedOnDate: false,
     hasCanclableSpinner: false,
-    defaultFontStyle: 3,
+    defaultFontStyle: 1,
     reSizableTable: false,
     reOrderableTable: false,
     notifyPosition: 'bottom-left',
@@ -113,7 +113,7 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
   }
   getFontStyle = (): number => {
-    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 3);
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 1);
   }
   columnSelectedProfile = (): IObjectIteratation[] => {
     return this.columnManager.profile;
