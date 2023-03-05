@@ -19,6 +19,7 @@ export class EnvService implements IENV {
   reSizableTable = this.temp.reSizableTable;
   reOrderableTable = this.temp.reOrderableTable;
   defaultAggregateTracks = this.temp.defaultAggregateTracks;
+  simafaImportStatus = this.temp.simafaImportStatus;
   version = this.temp.version;
 
   // Whether or not to enable debug mode

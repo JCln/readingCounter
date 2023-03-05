@@ -9,6 +9,10 @@ export interface IENV {
     browserVersions: IBrowserVersions,
     years: { title: string, value: number }[],
     getDeleteDictionary: { id: number, title: string }[],
+    simafaImportStatus: {
+        hasSingle: boolean,
+        hasBatch: boolean
+    }
     hasCanclableSpinner: boolean,
     timeout: number,
     defaultAggregateTracks: boolean,
@@ -102,6 +106,13 @@ export class ENMapCenter {
 export class timeout {
     // static time = 18000;
     static time = 2000;
+}
+export class simafaImportStatus {
+    // interface is simafaImportStatus
+    static simafaImportStatus = {
+        hasSingle: true,
+        hasBatch: true
+    }
 }
 export class version {
     static readonly version = 'build: 0.0.0';

@@ -436,27 +436,29 @@
                     </div>
                 </div>
             </td>
-            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue"
+            <td *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasSingle && dataSource.canContinue"
                 (click)="routeToSingle(dataSource)">
                 <span class="ui-column-title">تکی</span>
                 <i class="tooltip p_icons pi pi-minus">
                     <div class="tooltip_text_right">تکی</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue"
+            <td *ngIf="_checkUpName == 'simafa-readingProg' && utilsService.getSimafaImportStatus().hasBatch && dataSource.canContinue"
                 (click)="routeToBatch(dataSource)">
                 <span class="ui-column-title">دسته‌ای</span>
                 <i class="tooltip p_icons pi pi-th-large">
                     <div class="tooltip_text_right">دسته‌ای</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'simafa-readingProg' && !dataSource.canContinue">
+            <td
+                *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasSingle && !dataSource.canContinue">
                 <span class="ui-column-title">لیست قبلا صادر شده</span>
                 <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
                     <div class="tooltip_text">لیست قبلا صادر شده</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'simafa-readingProg' && !dataSource.canContinue">
+            <td
+                *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasBatch && !dataSource.canContinue">
                 <span class="ui-column-title">لیست قبلا صادر شده</span>
                 <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
                     <div class="tooltip_text_right">لیست قبلا صادر شده</div>

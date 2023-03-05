@@ -163,6 +163,10 @@ export interface ITestSidebar {
     isRefreshable: boolean;
     sid_isOpenItems: boolean;
 }
+export interface ISimafaImportStatus {
+    hasSingle: boolean,
+    hasBatch: boolean
+}
 export interface ISnackBar {
     message: string;
     duration: ENSnackBarTimes;

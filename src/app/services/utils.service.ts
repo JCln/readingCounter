@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ISimafaImportStatus, ITitleValue } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
@@ -29,6 +29,9 @@ export class UtilsService {
     private snackWrapperService: SnackWrapperService
   ) { }
 
+  getSimafaImportStatus = (): ISimafaImportStatus => {
+    return this.envService.simafaImportStatus;
+  }
   getYears = (): ITitleValue[] => {
     return this.envService.years;
   }

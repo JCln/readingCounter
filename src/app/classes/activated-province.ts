@@ -13,6 +13,7 @@ import {
     IENV_BROWSER_SETUP,
     reorderableTable,
     resizableTable,
+    simafaImportStatus,
     timeout,
 } from 'interfaces/build';
 
@@ -32,6 +33,7 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -48,6 +50,7 @@ export class ActivatedProvince implements IENV {
         ENYears.ESF.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -64,6 +67,7 @@ export class ActivatedProvince implements IENV {
         ENYears.TEH_ZONE4.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -80,6 +84,7 @@ export class ActivatedProvince implements IENV {
         ENYears.TEH_SE.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -96,6 +101,7 @@ export class ActivatedProvince implements IENV {
         ENYears.TEH_SE_LOCAL.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -112,6 +118,7 @@ export class ActivatedProvince implements IENV {
         ENYears.KERMANSHAH.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -129,6 +136,7 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -145,6 +153,7 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -161,6 +170,7 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
         version.version
     );
@@ -193,6 +203,7 @@ export class ActivatedProvince implements IENV {
         public readonly years: { title: string, value: number }[],
         public readonly getDeleteDictionary: { id: number, title: string }[],
         public readonly hasCanclableSpinner: boolean,
+        public simafaImportStatus: { hasSingle: boolean, hasBatch: boolean },
         public timeout: number,
         public version: string,
     ) { }
