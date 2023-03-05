@@ -35,8 +35,8 @@
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
         dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session"
         (onFilter)="filteredTableEvent($event.filteredValue)" (sortFunction)="listManagerService.customSort($event)"
-        [stateKey]="_sessionName" editMode="row" dataKey="id" [resizableColumns]="getLocalResizable()"
-        [reorderableColumns]="getLocalReOrderable()">
+        [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
+        [resizableColumns]="getLocalResizable()" [reorderableColumns]="getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -290,7 +290,7 @@
                 <!-- for making readable and compatible singleton dataType -->
                 <td (click)="doShowCarousel(dataSource)">
                     <span class="ui-column-title">بررسی عکس/صوت</span>
-                    <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons fas fa-camera">
+                    <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons pi pi-camera">
                         <div class="tooltip_text_right">بررسی عکس/صوت</div>
                     </i>
                 </td>

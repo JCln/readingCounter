@@ -24,6 +24,10 @@
     color: var(--secondary_8);
     border: 1px solid var(--secondary_1);
     padding: var(--font_05);
+
+    @media (max-width: 550px) {
+      flex-wrap: wrap;
+    }
   }
 
   .p-datatable .p-datatable-thead>tr>th,
@@ -45,6 +49,7 @@
 
   .p-datatable .p-datatable-tbody>tr>td {
     word-break: break-word;
+    overflow: inherit;
   }
 
   ._editable {
@@ -83,6 +88,12 @@
 
     .p-datatable {
       &.p-datatable-responsive {
+
+        .p-datatable-tfoot>tr>td,
+        .p-datatable-thead {
+          display: none !important;
+        }
+
         .p-datatable-tbody>tr>td {
           text-align: left;
           display: block;
@@ -379,9 +390,9 @@
       @media (max-width: 550px) {
         display: flex;
         flex-wrap: wrap;
-        position: absolute;
-        top: 4.4rem;
-        right: var(--font_xs);
+        position: static;
+        // top: 4.4rem;
+        // right: var(--font_xs);
       }
     }
 
@@ -410,18 +421,18 @@
   }
 
   // making drop-downs and canelndar in table showing properly
-  .p-datatable-resizable>.p-datatable-wrapper {
-    overflow-x: unset;
-  }
-
   .p-datatable>.p-datatable-wrapper {
-    overflow: initial;
+    overflow: visible;
   }
 
-  .p-datatable-resizable .p-datatable-tbody>tr>td,
-  .p-datatable-resizable .p-datatable-tfoot>tr>td,
+  .p-datatable-resizable-table>.p-datatable-thead>tr>th,
+  .p-datatable-resizable-table>.p-datatable-tfoot>tr>td,
+  .p-datatable-resizable-table>.p-datatable-tbody>tr>td .p-datatable-resizable .p-datatable-tbody>tr>td,
+  .p-datatable-resizable .p-datatable-tfoot>tr>td {
+    overflow: visible;
+  }
+
   .p-datatable-resizable .p-datatable-thead>tr>th {
-    overflow: inherit;
     white-space: normal;
   }
 

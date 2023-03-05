@@ -87,7 +87,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   onRowEditInit = (dataSource: object) => {
     this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
-    console.log(this.onRowEditing);
     this.onRowEditedInit.emit(dataSource);
   }
   onRowEditSave = (dataSource: object, ri: number) => {

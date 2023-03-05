@@ -46,7 +46,7 @@ li {
 
 ._name {
   margin-left: auto;
-  font-size: var(--font_xxs);
+  font-size: var(--font_xs);
   color: var(--primary_5);
   cursor: auto;
   @include _borders();
@@ -109,5 +109,5 @@ li {
   font-size: var(--font_xs);
 }
 
-@include media_wrapper(550px, '._name', font-size, var(--font_xs));
+@include media_wrapper(550px, '._name', font-size, var(--font_ss));
 @include media_wrapper(780px, '._name', font-size, var(--font_m));
