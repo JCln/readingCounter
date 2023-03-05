@@ -38,7 +38,7 @@ export class FragmentManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private columnManager: ColumnManager
   ) { }
 

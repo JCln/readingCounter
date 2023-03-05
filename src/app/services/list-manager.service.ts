@@ -16,7 +16,6 @@ import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { Converter } from '../classes/converter';
@@ -46,7 +45,6 @@ export class ListManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    private authService: AuthService,
     private columnManager: ColumnManager
   ) { }
 
@@ -60,8 +58,7 @@ export class ListManagerService {
     this.utilsService.routeToByUrl(EN_Routes.wrmtrackoffloaded);
   }
   denyTracking = (): boolean => {
-    const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+    return this.utilsService.getDenyTracking();
   }
   getLMPerDay = (): IObjectIteratation[] => {
     return this.columnManager.columnSelectedMenus('lMPerDay');
@@ -144,14 +141,14 @@ export class ListManagerService {
   /*OTHER */
   // setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
   //   console.log('do nothing for now');
-    // dataSource.forEach(item => {
-    //   if (item.newRate > 0)
-    //     item.newRate = parseFloat(MathS.getRange(item.newRate))
-    //   item.preAverage = +MathS.getRange(item.preAverage);
-    //   item.x = MathS.getRange(item.x);
-    //   item.y = MathS.getRange(item.y);
-    //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
-    // })
+  // dataSource.forEach(item => {
+  //   if (item.newRate > 0)
+  //     item.newRate = parseFloat(MathS.getRange(item.newRate))
+  //   item.preAverage = +MathS.getRange(item.preAverage);
+  //   item.x = MathS.getRange(item.x);
+  //   item.y = MathS.getRange(item.y);
+  //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
+  // })
   // }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

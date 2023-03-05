@@ -3,10 +3,10 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
 import { Observable } from 'rxjs/internal/Observable';
 import { CloseTabService } from 'services/close-tab.service';
+import { CompositeService } from 'services/composite.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SignalRService } from 'services/signal-r.service';
-import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../interfaces/routes.enum';
@@ -20,9 +20,9 @@ export class AuthService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private jwtService: JwtService,
-    private utilsService: UtilsService,
     private closeTabService: CloseTabService,
     private signalRService: SignalRService,
+    private compositeService: CompositeService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
@@ -33,7 +33,7 @@ export class AuthService {
     return this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
   }
   logging = (userData: ICredentials) => {
-    const returnUrl = this.utilsService.getRouteParams('returnUrl');
+    const returnUrl = this.compositeService.getRouteParams('returnUrl');
     this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).toPromise().then((res: IAuthTokenType) => {
       this.saveTolStorage(res);
       this.routeToReturnUrl(returnUrl);
@@ -48,7 +48,7 @@ export class AuthService {
     this.signalRService.disconnectConnection();
     this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogout, { refreshToken }).toPromise().then(() => {
       this.jwtService.removeAuthLocalStorage();
-      this.utilsService.routeTo(EN_Routes.login);
+      this.compositeService.routeTo(EN_Routes.login);
     })
   }
   saveTolStorage = (token: IAuthTokenType) => {
@@ -57,9 +57,9 @@ export class AuthService {
   }
   private routeToReturnUrl = (returnUrl: string) => {
     if (!MathS.isNull(returnUrl))
-      this.utilsService.routeTo(returnUrl);
+      this.compositeService.routeTo(returnUrl);
     else
-      this.utilsService.routeTo(EN_Routes.wr);
+      this.compositeService.routeTo(EN_Routes.wr);
   }
   isAuthUserLoggedIn(): boolean {
     return (this.jwtService.hasStoredAccessAndRefreshTokens() &&

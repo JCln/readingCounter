@@ -45,14 +45,12 @@ import {
 import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
 import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
+import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
 import { IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
-import { ICountryManager, IProvinceManager } from 'interfaces/izones';
+import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-
-import { IOffLoadPerDay, ITracking } from './../interfaces/itrackings';
-import { IRegionManager, IZoneBoundManager, IZoneManager } from './../interfaces/izones';
 
 @Injectable({
   providedIn: 'root'

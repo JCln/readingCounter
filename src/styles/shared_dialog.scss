@@ -33,6 +33,11 @@
   gap: var(--font_xs);
 }
 
+.check_boxes {
+  display: flex;
+  gap: var(--font_05);
+}
+
 .mat-checkbox {
   direction: rtl;
   margin-bottom: var(--font_xs);

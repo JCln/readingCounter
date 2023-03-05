@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ISimafaImportStatus, ITitleValue } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
-
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { CompositeService } from './composite.service';
 
 export interface IDialogMessage {
   messageTitle: string,
@@ -22,8 +21,7 @@ export class UtilsService {
 
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
+    private compositeService: CompositeService,
     private envService: EnvService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService
@@ -31,6 +29,10 @@ export class UtilsService {
 
   getSimafaImportStatus = (): ISimafaImportStatus => {
     return this.envService.simafaImportStatus;
+  }
+  getDenyTracking = (): boolean => {
+    const jwtRole = this.compositeService.getAuthUser();
+    return jwtRole.roles.toString().includes('denytracking') ? true : false;
   }
   getYears = (): ITitleValue[] => {
     return this.envService.years;
@@ -105,22 +107,22 @@ export class UtilsService {
   }
   // routing
   routeToByUrl = (router: string) => {
-    this.router.navigateByUrl(router);
+    this.compositeService.routeToByUrl(router);
   }
   routeTo = (router: string) => {
-    this.router.navigate([router]);
+    this.compositeService.routeTo(router);
   }
   routeToByParams = (router: string, params: any) => {
-    this.router.navigate([router, params], { relativeTo: this.route.parent });
+    this.compositeService.routeToByParams(router, params);
   }
   routeToByExtras = (router: string, body: object) => {
-    this.router.navigate([router], body);
+    this.compositeService.routeToByExtras(router, body);
   }
   getRouteParams = (paramName: string): string => {
-    return this.route.snapshot.paramMap.get(paramName);
+    return this.compositeService.getRouteParams(paramName);
   }
   getRouteBySplit = (spliter: string): string => {
-    return this.router.url.split(spliter).pop();
+    return this.compositeService.getRouteBySplit(spliter);
   }
 
 }

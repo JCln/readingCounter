@@ -25,7 +25,7 @@
 
             </section>
 
-            <div class="check_boxes">
+            <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
                 <mat-checkbox name="hasPreNumber" [(ngModel)]="simafaSingleReq.hasPreNumber">شماره قبلی
                 </mat-checkbox>
 

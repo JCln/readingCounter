@@ -9,15 +9,14 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ProfileService } from 'services/profile.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
-
 import { MathS } from '../classes/math-s';
+import { OffloadModify } from '../classes/offload-modify-type';
+
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
-import { OffloadModify } from './../classes/offload-modify-type';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { EnvService } from './env.service';
@@ -85,8 +84,7 @@ export class TrackingManagerService {
     private jwtService: JwtService,
     private columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
-    private profileService: ProfileService,
-    private authService: AuthService
+    private profileService: ProfileService
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
@@ -294,8 +292,7 @@ export class TrackingManagerService {
     return false;
   }
   denyTracking = (): boolean => {
-    const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+    return this.utilsService.getDenyTracking();
   }
   checkVertificationDBF = (dataSource: IOutputManager): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {

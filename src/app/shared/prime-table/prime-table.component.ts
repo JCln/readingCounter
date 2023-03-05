@@ -9,7 +9,6 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
 
@@ -80,7 +79,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public dialogService: DialogService,
     public readingReportManagerService: ReadingReportManagerService,
     public profileService: ProfileService,
-    public authService: AuthService,
     public interactionService: InteractionService
   ) {
     super(
@@ -89,8 +87,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
       columnManager,
       config,
       dialogService,
-      profileService,
-      authService
+      profileService
     );
   }
   ngOnChanges(): void {

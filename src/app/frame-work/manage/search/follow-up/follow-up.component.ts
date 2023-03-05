@@ -23,12 +23,12 @@ export class FollowUpComponent extends FactoryONE {
     {
       title: 'گراف',
       isSelected: true,
-      key:'Graph'
+      key: 'Graph'
     },
     {
       title: 'جدول',
       isSelected: false,
-      key:'Table'
+      key: 'Table'
     }
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
@@ -129,7 +129,10 @@ export class FollowUpComponent extends FactoryONE {
   routeToLMAll = (row: IFollowUpHistory) => {
     row.listNumber = this.dataSourceAUX.listNumber;
     row.trackNumber = this.dataSourceAUX.trackNumber;
-    this.trackingManagerService.routeToLMAll(row);
+    console.log(row);
+    console.log(this.dataSourceAUX);
+
+    // this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }
 

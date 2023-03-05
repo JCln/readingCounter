@@ -9,7 +9,6 @@ import { BrowserStorageService } from 'services/browser-storage.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
@@ -76,8 +75,7 @@ export class FactorySharedPrime implements OnChanges {
         public columnManager: ColumnManager,
         public config: PrimeNGConfig,
         public dialogService: DialogService,
-        public profileService: ProfileService,
-        public authService: AuthService
+        public profileService: ProfileService
     ) {
         this.setTraslateToPrimeNgTable();
         this.getResizReOrderable();
@@ -209,8 +207,7 @@ export class FactorySharedPrime implements OnChanges {
         this._reOrderableTable = this.profileService.getLocalReOrderable();
     }
     denyTracking = (): boolean => {
-        const jwtRole = this.authService.getAuthUser();
-        return jwtRole.roles.toString().includes('denytracking') ? true : false;
+        return this.utilsService.getDenyTracking();
     }
 
 }
