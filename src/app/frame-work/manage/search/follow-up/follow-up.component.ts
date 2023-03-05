@@ -32,7 +32,7 @@ export class FollowUpComponent extends FactoryONE {
     }
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
-  dataSource: IFollowUp;
+  // dataSource: IFollowUp;
   dataSourceAUX: IOffLoadPerDay;
   changeHsty: IFollowUpHistory[] = [];
   _selectColumnsAUX: IObjectIteratation[];
@@ -55,16 +55,16 @@ export class FollowUpComponent extends FactoryONE {
     }
   }
   private makeConfigs = async () => {
-    this.changeHsty = this.dataSource.changeHistory;
+    this.changeHsty = this.closeTabService.saveDataForFollowUp.changeHistory;
     this.getUserRole();
     this.insertToDesc();
   }
   connectToServer = async () => {
     if (this.trackingManagerService.verificationTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
-      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
-      if (this.trackingManagerService.isValidationNull(this.dataSource))
+      this.closeTabService.saveDataForFollowUp = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
+      if (this.trackingManagerService.isValidationNull(this.closeTabService.saveDataForFollowUp))
         return;
-      this.closeTabService.saveDataForFollowUp = this.dataSource;
+
       this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
       this.makeConfigs();
@@ -73,7 +73,6 @@ export class FollowUpComponent extends FactoryONE {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.closeTabService.saveDataForFollowUp = '';
       this.connectToServer();
     }
     /** 
@@ -89,7 +88,6 @@ export class FollowUpComponent extends FactoryONE {
       return;
     }
     if (this.closeTabService.saveDataForFollowUp) {
-      this.dataSource = this.closeTabService.saveDataForFollowUp;
       this.dataSourceAUX = this.closeTabService.saveDataForFollowUpAUX;
       this.makeConfigs();
       return;
@@ -124,15 +122,14 @@ export class FollowUpComponent extends FactoryONE {
     this.clearUNUsables();
   }
   showInMap = () => {
-    this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[this.changeHsty.length - 1].insertDateJalali, this.dataSourceAUX.overalDistance, true);
+    this.trackingManagerService.routeToLMPDXY(this.closeTabService.saveDataForFollowUp.trackNumber, this.closeTabService.saveDataForFollowUp.changeHistory[this.changeHsty.length - 1].insertDateJalali, this.dataSourceAUX.overalDistance, true);
   }
   routeToLMAll = (row: IFollowUpHistory) => {
     row.listNumber = this.dataSourceAUX.listNumber;
     row.trackNumber = this.dataSourceAUX.trackNumber;
-    console.log(row);
-    console.log(this.dataSourceAUX);
+    row.zoneTitle = this.closeTabService.saveDataForFollowUp.zoneTitle;
 
-    // this.trackingManagerService.routeToLMAll(row);
+    this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }
 

@@ -42,6 +42,7 @@ import {
   IRRChartResWrapper,
   IUserKarkard,
 } from 'interfaces/ireports';
+import { IFollowUp } from 'interfaces/isearchs';
 import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
 import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
@@ -122,7 +123,7 @@ export class CloseTabService {
   saveDataForTrackFinished: ITracking[];
   saveDataForLastStates: any;
   saveDataForOffloadModify: any;
-  saveDataForFollowUp: any;
+  saveDataForFollowUp: IFollowUp;
   saveDataForFollowUpReq = {
     trackNumber: null,
     canShowGraph: false,

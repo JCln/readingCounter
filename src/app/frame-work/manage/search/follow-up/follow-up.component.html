@@ -10,16 +10,18 @@
     <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده</button>
 </form>
 
-<section class="contain" *ngIf="dataSource">
+<section class="contain" *ngIf="closeTabService.saveDataForFollowUp">
     <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
         <div class="_key">{{item.header}}</div>
         <ng-container *ngIf="item.isBoolean; else elseTemplate">
-            <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSource[item.field]">
+            <mat-checkbox [disabled]="true" name="{{item.field}}"
+                [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
                 {{item.header}}
             </mat-checkbox>
         </ng-container>
         <ng-template #elseTemplate>
-            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}" [(ngModel)]="dataSource[item.field]">
+            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
         </ng-template>
     </div>
     <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
@@ -30,18 +32,18 @@
         </ng-container>
         <ng-template #elseTemplate>
             <div class="_key">{{item.header}}</div>
-            <div class="tooltip">
+            <div class="tooltip _double_width">
                 <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
                     [(ngModel)]="dataSourceAUX[item.field]">
                 <div *ngIf="item.enableTooltip" class="tooltip_text">
-                    درصد مانع صادر شده {{dataSource['alalHesabPercent']}}
+                    درصد مانع صادر شده {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
                 </div>
             </div>
         </ng-template>
     </div>
 </section>
 
-<section *ngIf="dataSource" class="order_by">
+<section *ngIf="closeTabService.saveDataForFollowUp" class="order_by">
     <div *ngFor="let orderType of showInOrderTo">
         <div class="p-field-radiobutton">
             <p-radioButton name="orderByDate" [value]="orderType.isSelected"
@@ -52,9 +54,10 @@
     </div>
 </section>
 
-<p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && dataSource" sortField="insertDateJalali"
-    [columns]="_defColumns" [value]="changeHsty" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    editMode="row" dataKey="id" [resizableColumns]="trackingManagerService.getLocalResizable()"
+<p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && closeTabService.saveDataForFollowUp"
+    sortField="insertDateJalali" [columns]="_defColumns" [value]="changeHsty" dir="rtl"
+    styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id"
+    [resizableColumns]="trackingManagerService.getLocalResizable()"
     [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
     <ng-template pTemplate="caption">
@@ -129,13 +132,14 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource">
+    <ng-template pTemplate="emptymessage" *ngIf="!closeTabService.saveDataForFollowUp">
         <tr>
-            <td [attr.colspan]="dataSource">
+            <td [attr.colspan]="closeTabService.saveDataForFollowUp">
                 موردی پیدا نشد
             </td>
         </tr>
     </ng-template>
 </p-table>
 <!-- could implement by lazy load route -->
-<app-time-line *ngIf="closeTabService.saveDataForFollowUpReq.canShowGraph" [dataSource]="dataSource"></app-time-line>
+<app-time-line *ngIf="closeTabService.saveDataForFollowUpReq.canShowGraph"
+    [dataSource]="closeTabService.saveDataForFollowUp"></app-time-line>

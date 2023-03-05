@@ -43,7 +43,6 @@ input {
   border-radius: $border_7;
   min-width: fit-content;
   width: 100%;
-  flex: 1;
 }
 
 .order_by {
@@ -54,6 +53,10 @@ input {
   padding: var(--font_xxs);
   background-color: var(--secondary_1);
   border-radius: $border_7;
+}
+
+._double_width {
+  flex: 1;
 }
 
 .title {
