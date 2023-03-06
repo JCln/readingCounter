@@ -216,7 +216,7 @@ export class getDeleteDictionary {
     }
 }
 export class ENHasNextBazdid {
-    static readonly DEFAULT = new ENHasNextBazdid(false);
+    static readonly DEFAULT = new ENHasNextBazdid(true);
     static readonly ESF = new ENHasNextBazdid(false);
     static readonly TEH = new ENHasNextBazdid(true);
     static readonly TEH_ZONE4 = new ENHasNextBazdid(true);

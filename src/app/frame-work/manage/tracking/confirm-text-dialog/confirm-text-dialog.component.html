@@ -8,9 +8,11 @@
     <input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
         [(ngModel)]="userInputText">
 </div>
-<div *ngIf="data?.isSelectableDate" style="min-height: 20rem">
-    <app-date-jalali name="date" (dateJalEvent)="receiveFromDateJalali($event)">
-    </app-date-jalali>
+<div *ngIf="data?.isSelectableDate">
+    <div class="date_wrapper">
+        <app-date-jalali name="date" (dateJalEvent)="receiveFromDateJalali($event)">
+        </app-date-jalali>
+    </div>
 </div>
 
 <mat-dialog-actions>

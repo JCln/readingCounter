@@ -32,6 +32,12 @@ h2 {
   width: 7rem;
 }
 
+.date_wrapper {
+  min-height: 20rem;
+  display: grid;
+  justify-content: center;
+}
+
 .input_1 {
   border-radius: $border_15;
 }
