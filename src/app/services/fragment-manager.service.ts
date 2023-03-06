@@ -147,7 +147,6 @@ export class FragmentManagerService {
     return this.utilsService.firstConfirmDialog(a);
   }
   masterValidation = (body: IFragmentMaster): boolean => {
-    console.log(body);
     if (MathS.isNull(body.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;

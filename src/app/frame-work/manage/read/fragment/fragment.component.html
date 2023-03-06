@@ -16,6 +16,7 @@
         [_sessionName]="'fragmentmaster-session'"
         (newedRowChangedStatus)="testChangedValue()"
         (refreshedTable)="refreshTable()"     
+        (dropDownChanges)="closeTabService.saveDataForFragmentNOB['zoneId']"
         (removedRowEditing)="removeFragmentMaster($event)"        
         (onRowEditedSave)="onRowEditSave($event, $event)"
         (showedInMapSingle)="getIsValidateRow($event)"

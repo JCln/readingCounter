@@ -39,7 +39,7 @@
     </section>
 
     <section>
-        <div class="content">            
+        <div class="content">
             <h1 class="title">نمایش تصاویر</h1>
             <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs"
                 optionLabel="label" optionValue="value"
@@ -86,8 +86,8 @@
     <section>
         <div class="content">
             <h1 class="title">مکان اعلان پیام ها</h1>
-            <p-selectButton [options]="notifyPositionOptions" [(ngModel)]="profileService.showStateVals.notifyPosition"
-                optionLabel="label" optionValue="value"
+            <p-selectButton class="_notify_position" [options]="notifyPositionOptions"
+                [(ngModel)]="profileService.showStateVals.notifyPosition" optionLabel="label" optionValue="value"
                 (onChange)="setNotifyPosition(profileService.showStateVals.notifyPosition)">
             </p-selectButton>
         </div>

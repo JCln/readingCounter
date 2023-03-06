@@ -99,12 +99,17 @@ export class FragmentComponent extends FactoryONE {
     dataSource.fromEshterak = Converter.persianToEngNumbers(dataSource.fromEshterak);
     dataSource.toEshterak = Converter.persianToEngNumbers(dataSource.toEshterak);
 
-    if (MathS.isNull(dataSource.zoneId)) {
-      dataSource.zoneId = this.convertTitleToId(this.zoneDictionary[0].title).title;
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
     }
+
     if (this.fragmentManagerService.masterValidation(dataSource)) {
       // convert a zone to id
-      dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
 
       if (dataSource.isNew) {
         const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
