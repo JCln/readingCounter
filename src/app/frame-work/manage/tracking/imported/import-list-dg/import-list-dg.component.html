@@ -13,7 +13,7 @@
                         </mat-checkbox>
                     </ng-container>
                     <ng-template #editableCheckboxes>
-                        <div class="check_boxes">
+                        <div class="check_boxes" *ngIf="!trackingManagerService.utilsService.getDenyTracking()">
                             <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
                                 [(ngModel)]="dataSource[mainDatas.field]">
                                 {{mainDatas.header}}

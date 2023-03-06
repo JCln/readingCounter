@@ -20,7 +20,7 @@ export class ImportListDgComponent implements OnInit {
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     private cdr: ChangeDetectorRef,
     private dictionaryWrapperService: DictionaryWrapperService
   ) {

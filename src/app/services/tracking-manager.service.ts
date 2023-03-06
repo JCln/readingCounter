@@ -76,7 +76,7 @@ export class TrackingManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private dialog: MatDialog,
     private allListsService: AllListsService,

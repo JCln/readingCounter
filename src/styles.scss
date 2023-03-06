@@ -158,6 +158,26 @@ input[type=number] {
   font-weight: 600;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 :host ::ng-deep {
 
   .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
@@ -191,6 +211,7 @@ input[type=number] {
     font-weight: 600 !important;
     background: var(--secondary_3);
     color: var(--secondary_8);
+    direction: rtl;
   }
 
   .p-dropdown .p-dropdown-label.p-placeholder {
