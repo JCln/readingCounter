@@ -168,6 +168,12 @@
     background: var(--white);
   }
 
+  // .p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
+  //   padding-right: 1.5rem;
+  //   margin-right: 0;
+  //   margin-left: -1.5rem;
+  // }
+
   .p-dropdown-panel .p-dropdown-header {
     background: var(--secondary_3);
     color: var(--secondary_8);
@@ -266,10 +272,6 @@
     border-radius: $border_15 !important;
     font-family: $font_family !important;
     font-weight: 600;
-  }
-
-  .p-selectbutton .p-button.p-highlight {
-    background: var(--primary_4) !important;
   }
 
   p-radiobutton {
@@ -424,6 +426,7 @@
   // making drop-downs and canelndar in table showing properly
   .p-datatable>.p-datatable-wrapper {
     overflow: auto;
+    background-color: var(--secondary_1);
   }
 
   .p-datatable-resizable-table>.p-datatable-thead>tr>th,

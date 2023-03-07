@@ -105,6 +105,10 @@ main {
   }
 }
 
+:host ::ng-deep .p-selectbutton .p-button.p-highlight {
+  background: var(--primary_4) !important;
+}
+
 ._desc {
   display: grid;
   margin: auto;

@@ -1,6 +1,6 @@
 .overall-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
   gap: var(--font_025);
   direction: rtl;
 
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   /*has collision with primeNG margin left so should implement important */
-  margin-left: var(--font_xs) !important;
+  margin-left: .2rem !important;
 
   label {
     font-size: var(--font_s);

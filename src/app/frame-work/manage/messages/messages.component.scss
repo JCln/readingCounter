@@ -78,6 +78,25 @@ textarea {
   margin-bottom: var(--font_xs);
 }
 
+:host ::ng-deep {
+
+  .p-selectbutton .p-button.p-highlight {
+    box-shadow: 0 3px var(--secondary_1), 0 3px 2px 2px var(--thirdy_4);
+  }
+
+  ._colors_button :nth-child(2) {
+    background: green !important;
+  }
+
+  ._colors_button :nth-child(3) {
+    background: orange !important;
+  }
+
+  ._colors_button :nth-child(4) {
+    background: red !important;
+  }
+}
+
 // ///// local storage content
 .static_height {
   height: 80vh;
