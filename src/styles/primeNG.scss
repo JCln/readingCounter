@@ -423,20 +423,15 @@
     border: solid var(--secondary_1);
   }
 
-  // making drop-downs and canelndar in table showing properly
-  .p-datatable>.p-datatable-wrapper {
-    overflow: auto;
+  .p-datatable-resizable>.p-datatable-wrapper {
+    overflow-x: unset;
     background-color: var(--secondary_1);
   }
 
-  .p-datatable-resizable-table>.p-datatable-thead>tr>th,
-  .p-datatable-resizable-table>.p-datatable-tfoot>tr>td,
-  .p-datatable-resizable-table>.p-datatable-tbody>tr>td .p-datatable-resizable .p-datatable-tbody>tr>td,
-  .p-datatable-resizable .p-datatable-tfoot>tr>td {
-    overflow: initial;
-  }
-
+  .p-datatable-resizable .p-datatable-tbody>tr>td,
+  .p-datatable-resizable .p-datatable-tfoot>tr>td,
   .p-datatable-resizable .p-datatable-thead>tr>th {
+    overflow: inherit;
     white-space: normal;
   }
 

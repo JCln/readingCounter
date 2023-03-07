@@ -42,7 +42,7 @@
     "npm": "^9.5.0",
     "npm-check-updates": "^16.7.5",
     "primeicons": "^6.0.1",
-    "primeng": "^15.2.0",
+    "primeng": "^11.4.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.5.0",
     "xlsx": "^0.18.5",

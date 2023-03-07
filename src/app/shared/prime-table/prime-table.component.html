@@ -88,7 +88,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th pResizableColumn pReorderableColumn style="width: 2.2rem; min-width: 2.2rem"
+            <th pResizableColumn pReorderableColumn style="width: 2rem; min-width: 2rem"
                 *ngFor="let item of _numberOfExtraColumns">
             </th>
         </tr>
@@ -98,7 +98,7 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th pResizableColumn pReorderableColumn style="width: 2.2rem; min-width: 2.2rem"
+            <th pResizableColumn pReorderableColumn style="width: 2rem; min-width: 2rem"
                 *ngFor="let item of _numberOfExtraColumns">
             </th>
         </tr>
@@ -107,7 +107,7 @@
         <tr>
             <th pResizableColumn pReorderableColumn pSortableColumn="{{col.field}}" *ngFor="let col of columns">
                 {{col.header}}</th>
-            <th pResizableColumn pReorderableColumn style="width: 2.2rem; min-width: 2.2rem"
+            <th pResizableColumn pReorderableColumn style="width: 2rem; min-width: 2rem"
                 *ngFor="let item of _numberOfExtraColumns">
             </th>
         </tr>
