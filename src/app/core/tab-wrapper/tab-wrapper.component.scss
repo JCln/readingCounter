@@ -113,8 +113,7 @@ li.active::before {
 ._remove_all {
   margin: 0 auto 0 var(--font_03);
   cursor: pointer;
-  max-width: var(--font_s);
-  max-height: var(--font_s);
+  padding: var(--font_01);
 
   span {
     border-radius: $border_50;
@@ -140,6 +139,3 @@ li.active::before {
   bottom: -150% !important;
   left: 4rem !important;
 }
-
-@include media_wrapper(780px, '._remove_all', max-width, 2rem);
-@include media_wrapper(780px, '._remove_all', min-width, 2rem);

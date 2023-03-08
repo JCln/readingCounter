@@ -95,10 +95,12 @@ export class FragmentComponent extends FactoryONE {
     1- Make first item of dictionary if no value inserted on new row
     2- eshteraks should convert to english numbers
     */
-
     dataSource.fromEshterak = Converter.persianToEngNumbers(dataSource.fromEshterak);
     dataSource.toEshterak = Converter.persianToEngNumbers(dataSource.toEshterak);
 
+    if (dataSource.zoneId == null) {
+      dataSource.zoneId = this.zoneDictionary[0];
+    }
     if (typeof dataSource.zoneId !== 'object') {
       this.zoneDictionary.find(item => {
         if (item.title === dataSource.zoneId)
@@ -156,7 +158,8 @@ export class FragmentComponent extends FactoryONE {
     dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
 
     if (this.fragmentManagerService.masterValidation(dataSource)) {
-      this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, dataSource);
+      if (this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, dataSource))
+        this.refreshTable();
     }
   }
   @Input() get selectedColumns(): any[] {

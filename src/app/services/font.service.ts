@@ -82,10 +82,11 @@ export class FontService {
         break;
     }
   }
+  // DEAFULT Value of Font Style set in here
   private getFromLocalStorage = (name: ENFontName) => {
     const a = this.browserStorageService.get(name);
     if (a === null) {
-      this.setFontS();
+      this.setFontXS();
       return;
     }
     this.setFontStyle(this.getLastFont());

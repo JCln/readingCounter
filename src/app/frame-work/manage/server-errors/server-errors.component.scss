@@ -1,34 +1,12 @@
 @import 'primeNG';
 @import 'button';
 @import 'input';
-
-.insert_track {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  direction: rtl;
-  margin: auto;
-  width: 20rem;
-  gap: var(--font_s);
-  padding: 2rem;
-  background: var(--secondary_1);
-  border-radius: 15px;
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-}
-
-.input_2 {
-  display: flex;
-  align-items: center;
-  width: 16rem;
-  font-size: var(--font_s);
-  font-weight: 600;
-  color: var(--primary_2);
-}
-
-.btn_1 {
-  max-width: 16rem;
-}
+@import 'cards';
 
 ._value {
   height: auto;
+}
+
+._card {
+  margin-bottom: .1rem;
 }

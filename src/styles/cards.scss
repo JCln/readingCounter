@@ -1,0 +1,17 @@
+._card {
+  display: grid;
+  align-items: center;
+  width: 20rem;
+  padding: var(--font_s);
+  justify-content: initial;
+  direction: rtl;
+  margin: auto;
+  gap: var(--font_02);
+  background: var(--secondary_1);
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
+
+.btn_1 {
+  max-width: initial;
+}

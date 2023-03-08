@@ -48,8 +48,8 @@ h3 {
   padding: var(--font_03);
   margin-top: 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  height: var(--font_3);
 }
 
 [hidden] {

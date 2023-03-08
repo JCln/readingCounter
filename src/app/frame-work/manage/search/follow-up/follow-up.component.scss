@@ -5,16 +5,7 @@
 @import 'tooltip.scss';
 @import '_mat.scss';
 @import '_gallery_dialog.scss';
-
-.insert_track {
-  width: 20rem;
-  padding: var(--font_s);
-  justify-content: initial;
-}
-
-.btn_1 {
-  max-width: initial;
-}
+@import 'cards.scss';
 
 .contain {
   display: grid;

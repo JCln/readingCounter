@@ -2,16 +2,17 @@
 @import 'input';
 @import 'button';
 @import 'tooltip';
+@import 'cards';
+
+._card {
+  padding: var(--font_05);
+}
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
   justify-content: center;
   gap: var(--font_2);
-}
-
-.content {
-  direction: rtl;
 }
 
 .mobile {
@@ -24,8 +25,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 331px;
-  height: 616px;
+  width: 19rem;
+  height: 31rem;
   background: #1a1a58;
   border-radius: 30px;
   padding: 10px;
@@ -33,8 +34,8 @@
 
 .phone-mirror {
   position: relative;
-  width: 313px;
-  height: 600px;
+  width: 18rem;
+  height: 30rem;
   background-color: rgb(26, 25, 25);
   border-radius: 30px;
 }

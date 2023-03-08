@@ -4,27 +4,7 @@
 @import 'input.scss';
 @import 'media.scss';
 @import 'choose-files.scss';
-
-.content {
-  direction: rtl;
-  text-align: center;
-  min-height: 22rem;
-  background: var(--secondary_1);
-  padding: var(--font_2) 0;
-  border-radius: $border_15;
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  margin: auto;
-  width: 20rem;
-}
-
-input {
-  text-align: center;
-  width: 19rem;
-}
-
-._value {
-  border: 0;
-}
+@import 'cards';
 
 ._desc {
   display: grid;

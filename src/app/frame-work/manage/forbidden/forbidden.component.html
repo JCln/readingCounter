@@ -1,13 +1,16 @@
 <main [hidden]="forbiddenService._isCollapsedForbidden">
     <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="content">
+        <section class="_card">
 
             <div class="input_2">
                 <div class="_key">ناحیه</div>
-                <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="forbiddenService.forbiddenReq.zoneId"
-                    placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id"
-                    optionLabel="title" filter="true">
-                </p-dropdown>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="forbiddenService.forbiddenReq.zoneId" placeholder="انتخاب مورد"
+                        [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                        filter="true">
+                    </p-dropdown>
+                </div>
             </div>
             <div class="input_2">
                 <div class="_key">از</div>

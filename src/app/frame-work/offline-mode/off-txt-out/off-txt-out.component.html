@@ -1,6 +1,6 @@
 <h2 class="title">ارسال فایل</h2>
 
-<form #form="ngForm" (ngSubmit)="uploadFile(form)">
+<form #form="ngForm" (ngSubmit)="uploadFile(form)" class="_card">
     <section>
         <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
             <span class="icon_android fa fa-file-zip-o"></span>

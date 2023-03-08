@@ -3,6 +3,7 @@
 @import 'input.scss';
 @import 'media.scss';
 @import 'choose-files.scss';
+@import 'cards';
 
 .over_all {
   display: grid;
@@ -14,18 +15,8 @@
 
 @include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(22rem, auto)));
 
-.content {
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  text-align: center;
-  padding: var(--font_2) 0;
-  border-radius: $border_15;
-  min-height: 25rem;
-}
-
-input {
-  text-align: center;
-  width: 19rem;
+._card {
+  width: auto;
 }
 
 ._desc {
