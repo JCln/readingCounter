@@ -28,6 +28,7 @@ li {
   background: var(--secondary_4);
   cursor: pointer;
   padding: var(--font_02);
+  z-index: 1;
 
   @media (min-width: 700px) {
     padding: var(--font_02) 0 0;

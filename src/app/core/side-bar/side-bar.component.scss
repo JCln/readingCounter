@@ -36,18 +36,19 @@ nav {
 
 /* ***** */
 .ul {
-  position: relative;
+  position: fixed;
   right: 0;
-  list-style-type: none;
-  padding: var(--font_xs) 0;
-  margin-left: var(--font_02);
+  top: 6rem;
+  bottom: 0;
   margin-top: 0;
-  height: 90vh;
+  margin-left: var(--font_02);
+  padding: var(--font_xs) 0;
   overflow-y: auto;
   overflow-x: hidden;
-  transition: all ease-in-out 150ms;
+  list-style-type: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  transition: all ease-in-out 150ms;
 
   @media (max-width: 550px) {
     margin-top: var(--font_xs);
@@ -103,7 +104,7 @@ ul::-webkit-scrollbar {
   text-align: right;
 
   height: auto;
-  border-radius: $border_15;
+  border-radius: 100vmax;
   overflow: visible;
 
   color: var(--sidebar_1);
@@ -113,15 +114,16 @@ ul::-webkit-scrollbar {
 
   &:hover,
   &:focus {
-    background: linear-gradient(to left, var(--primary_3), rgba(255, 0, 0, 0));
-    color: var(--sidebar_5);
+    background: var(--primary_4);
+    color: var(--white);
+    border-color: var(--primary_4);
+    box-shadow: 0px 0px 2px 1px var(--primary_4);
   }
 }
 
 .active {
-  background: linear-gradient(to left, rgba(255, 0, 0, 0), var(--primary_3));
-  color: var(--sidebar_4);
-  border: 1px solid var(--sidebar_3);
+  background: var(--thirdy_1);
+  color: var(--white);
 }
 
 .ul_items {
@@ -132,7 +134,7 @@ ul::-webkit-scrollbar {
 
 .ul::after {
   content: '';
-  position: absolute;
+  position: fixed;
   background: var(--sidebar_back2);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
@@ -146,7 +148,7 @@ ul::-webkit-scrollbar {
 
 .ul::before {
   content: '';
-  position: absolute;
+  position: fixed;
   background: var(--sidebar_back1);
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
@@ -175,11 +177,19 @@ ul::-webkit-scrollbar {
 }
 
 .ul_2 {
-  position: absolute;
-  list-style-type: none;
-  height: 84vh;
-  padding: 0;
+  position: fixed;
   right: 0;
+  top: 6rem;
+  bottom: 0;
+  margin-top: 0;
+  margin-left: var(--font_02);
+  padding: var(--font_xs) 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  list-style-type: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  transition: all ease-in-out 150ms;
 
   ._show {
     position: absolute;
