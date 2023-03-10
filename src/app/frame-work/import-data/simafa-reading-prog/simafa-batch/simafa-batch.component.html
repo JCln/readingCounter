@@ -6,12 +6,14 @@
 
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="allImportsService.allImports_batch.zoneId"
-                        name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="allImportsService.allImports_batch.zoneId"
+                            name="zoneId">
+                            <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
 
                 <div class="input_2">
@@ -59,7 +61,7 @@
                 <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
                     name="selectOptions" optionLabel="header"
                     (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables.selectedSimafaBatch ,$event)"
-                    selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
+                    selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
                     [filter]="true">
                 </p-multiSelect>
                 <div class="header_icons_wrap">
@@ -91,8 +93,8 @@
                                 <div *ngIf="!dataSource.counterReaderName">
                                     <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
                                         [(ngModel)]="allImportsService.allImports_batch.routeAndReaderIds[ri].counterReaderId"
-                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id"
-                                        optionLabel="title" [filter]="true" [showClear]="true">
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" [filter]="true"
+                                        [showClear]="true">
                                     </p-dropdown>
                                 </div>
                             </ng-container>

@@ -6,18 +6,21 @@
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.userKarkardReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.userKarkardReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">وضعیت کارتابل</div>
-                        <p-dropdown name="trackingStates" [options]="trackingStatesDictionary"
-                            [(ngModel)]="readingReportManagerService.userKarkardReq.statusId" placeholder="انتخاب مورد"
-                            [style]="{'width':'7.5rem'}" optionValue="id" optionLabel="title" filter="true">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="trackingStates" [options]="trackingStatesDictionary"
+                                [(ngModel)]="readingReportManagerService.userKarkardReq.statusId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">از</div>

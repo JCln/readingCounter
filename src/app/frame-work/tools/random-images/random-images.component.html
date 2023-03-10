@@ -6,19 +6,20 @@
                     <div class="_key">ناحیه</div>
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="toolsService.randomImages.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true" (click)="verificationACounterReaderId()">
+                            [(ngModel)]="toolsService.randomImages.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                            optionLabel="title" filter="true" (click)="verificationACounterReaderId()">
                         </p-dropdown>
                     </div>
                 </div>
                 <div class="input_2" [hidden]="!userCounterReader.length">
                     <div class="_key">مامور</div>
-                    <p-dropdown [style]="{'minWidth': '10rem', 'width': '100%'}" name="counterreader" #counterreader
-                        [options]="userCounterReader" name="counter-reader"
-                        [(ngModel)]="toolsService.randomImages.userId" optionLabel="title" [filter]="true"
-                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
-                    </p-dropdown>
+                    <div class="_value">
+                        <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
+                            name="counter-reader" [(ngModel)]="toolsService.randomImages.userId" optionLabel="title"
+                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                            placeholder="انتخاب مورد">
+                        </p-dropdown>
+                    </div>
                 </div>
                 <div class="input_2">
                     <div class="_key">تاریخ</div>
@@ -30,12 +31,12 @@
                 </div>
                 <div class="input_2">
                     <div class="_key">تعداد</div>
-
-                    <p-dropdown [style]="{'minWidth': '10rem', 'width': '100%'}" name="quantity" [filter]="true"
-                        placeholder="تعداد تصاویر" [options]="_quantity"
-                        [(ngModel)]="toolsService.randomImages.quantity" [editable]="true" optionValue="value"
-                        optionLabel="title">
-                    </p-dropdown>
+                    <div class="_value">
+                        <p-dropdown name="quantity" [filter]="true" placeholder="تعداد تصاویر" [options]="_quantity"
+                            [(ngModel)]="toolsService.randomImages.quantity" [editable]="true" optionValue="value"
+                            optionLabel="title">
+                        </p-dropdown>
+                    </div>
                 </div>
 
             </section>

@@ -8,50 +8,58 @@
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.zoneId"
-                            placeholder="انتخاب مورد" [style]="{minWidth: '10rem','width':'100%'}" optionValue="id"
-                            optionLabel="title" filter="true" (onChange)="verificationACounterReaderId()">
+                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                            (onChange)="verificationACounterReaderId()">
                         </p-dropdown>
                     </div>
                 </div>
                 <!-- when zone id and kind id get -->
                 <div class="input_2" [hidden]="!readingPeriodKindsDictionary.length">
                     <div class="_key">نوع دوره</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
-                        <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
-                            (click)="verificationReadingPeriod()">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
+                            <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
+                                (click)="verificationReadingPeriod()">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2" [hidden]="!readingPeriodDictionary.length">
                     <div class="_key">دوره قرائت</div>
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.readingPeriodId"
-                        name="readingPeriodId">
-                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.readingPeriodId"
+                            name="readingPeriodId">
+                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
 
 
                 <div class="input_2" *ngIf="userCounterReader.length">
                     <div class="_key">مامور</div>
-                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
-                        [options]="userCounterReader" name="counter-reader"
-                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.counterReaderId"
-                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                        placeholder="انتخاب مورد">
-                    </p-dropdown>
+                    <div class="_value">
+                        <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
+                            name="counter-reader"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.counterReaderId"
+                            optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                            placeholder="انتخاب مورد">
+                        </p-dropdown>
+                    </div>
                 </div>
                 <div class="input_2">
                     <div class="_key">سال</div>
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.year" name="year">
-                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.year" name="year">
+                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2">
                     <div class="_key">ش لیست</div>

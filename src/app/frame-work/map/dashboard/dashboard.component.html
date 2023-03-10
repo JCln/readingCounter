@@ -1,9 +1,11 @@
 <div class="input_2">
     <div class="_key">ناحیه</div>
-    <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="dashboardService._selectedZone"
-        (onChange)="refreshPageToRebuild()" placeholder="انتخاب مورد" [style]="{minWidth:'10rem', width:'100%'}"
-        optionValue="id" optionLabel="title" filter="true">
-    </p-dropdown>
+    <div class="_value">
+        <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="dashboardService._selectedZone"
+            (onChange)="refreshPageToRebuild()" placeholder="انتخاب مورد" optionValue="id" optionLabel="title"
+            filter="true">
+        </p-dropdown>
+    </div>
 </div>
 
 <main class="container">

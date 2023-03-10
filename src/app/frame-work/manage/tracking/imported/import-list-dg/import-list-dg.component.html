@@ -27,8 +27,7 @@
                         <div class="input_2" [ngClass]="{coloring_border: mainDatas.borderize}">
                             <div class="_key">مامور جدید</div>
                             <div class="_value">
-                                <p-dropdown [style]="{'minWidth': '10rem','width': '100%'}"
-                                    [options]="allCounterReaders" name="newCounterReaderName"
+                                <p-dropdown [options]="allCounterReaders" name="newCounterReaderName"
                                     [(ngModel)]="selectedCounterReader" filter="true" placeholder="انتخاب مورد"
                                     optionLabel="title" [showClear]="true">
                                 </p-dropdown>

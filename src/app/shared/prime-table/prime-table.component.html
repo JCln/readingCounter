@@ -10,7 +10,7 @@
         <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
+            selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
             [filter]="true">
         </p-multiSelect>
 
@@ -46,8 +46,8 @@
                 <section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
                     <p-dropdown name="zones" [options]="_selectedColumns"
                         [(ngModel)]="profileService._agg.selectedAggregate" placeholder="انتخاب مورد"
-                        [style]="{'min-width':'8rem','width':'100%', 'height': '2rem'}" optionValue="field"
-                        optionLabel="header" filter="true" (onChange)="doAggregate()">
+                        [style]="{'height': '2rem'}" optionValue="field" optionLabel="header" filter="true"
+                        (onChange)="doAggregate()">
                     </p-dropdown>
                     <i (click)="resetAggregation()" class="icon_reset pi pi-refresh tooltip">
                         <div class="tooltip_text">بدون گروه‌بندی</div>

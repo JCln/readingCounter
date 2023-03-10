@@ -17,11 +17,13 @@
         </div>
         <div class="input_2">
             <div class="_key">استان</div>
-            <mat-select placeholder="انتخاب مورد" formControlName="provinceId">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" formControlName="provinceId">
+                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
         </div>
 
         <mat-checkbox formControlName="isMaskooni">مسکونی</mat-checkbox>

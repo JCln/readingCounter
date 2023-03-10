@@ -3,10 +3,13 @@
         <section class="content">
             <div class="input_2">
                 <div class="_key">ناحیه</div>
-                <p-dropdown name="zones" [options]="zoneDictionary"
-                    [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId" placeholder="انتخاب مورد"
-                    [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
-                </p-dropdown>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId" placeholder="انتخاب مورد"
+                          optionValue="id" optionLabel="title"
+                        filter="true">
+                    </p-dropdown>
+                </div>
             </div>
             <div class="input_2">
                 <div class="_key">از</div>
@@ -46,7 +49,7 @@
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
+                selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
                 [filter]="true">
             </p-multiSelect>
             <div class="header_icons_wrap">

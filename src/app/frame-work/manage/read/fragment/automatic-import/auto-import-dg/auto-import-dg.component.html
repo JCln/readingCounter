@@ -6,17 +6,21 @@
 
         <div class="input_2">
             <div class="_key">مامور قرائت</div>
-            <p-dropdown name="userCounters" [options]="userCounterReaderDictionary"
-                [(ngModel)]="dataReq.counterReaderId" placeholder="تنظیم اتوماتیک"
-                [style]="{'min-width':'10rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
-            </p-dropdown>
+            <div class="_value">
+                <p-dropdown name="userCounters" [options]="userCounterReaderDictionary"
+                    [(ngModel)]="dataReq.counterReaderId" placeholder="تنظیم اتوماتیک" optionValue="id"
+                    optionLabel="title" filter="true">
+                </p-dropdown>
+            </div>
         </div>
         <div class="input_2">
             <div class="_key">دوره قرائت</div>
-            <p-dropdown name="userCounters" [options]="readingPeriodKindDictionary"
-                [(ngModel)]="dataReq.readingPeriodKindId" placeholder="انتخاب مورد"
-                [style]="{'min-width':'10rem', 'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
-            </p-dropdown>
+            <div class="_value">
+                <p-dropdown name="userCounters" [options]="readingPeriodKindDictionary"
+                    [(ngModel)]="dataReq.readingPeriodKindId" placeholder="انتخاب مورد" optionValue="id"
+                    optionLabel="title" filter="true">
+                </p-dropdown>
+            </div>
         </div>
         <div class="input_2">
             <div class="_key">از</div>

@@ -7,18 +7,19 @@
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="toolsService.imgResultDetails.zoneId" placeholder="انتخاب مورد"
-                            [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title"
-                            filter="true">
+                            optionValue="id" optionLabel="title" filter="true">
                         </p-dropdown>
                     </div>
                 </div>
                 <div class="input_2" *ngIf="imageAttrAllDictionary.length">
                     <div class="_key">توصیف تصویر</div>
-                    <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
-                        [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
-                        optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '200px'}"
-                        placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                    </p-multiSelect>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
+                            [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"    
+                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
                 </div>
                 <div class="input_2">
                     <div class="_key">از تاریخ</div>

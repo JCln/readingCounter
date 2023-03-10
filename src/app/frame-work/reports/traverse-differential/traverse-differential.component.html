@@ -7,57 +7,72 @@
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.trvchReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true" (onChange)="getFragmentByZone()"
-                            (onChange)="readingReportManagerService.trvchReq.fragmentMasterIds = []">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.trvchReq.zoneId" placeholder="انتخاب مورد"
+                                  optionValue="id" optionLabel="title"
+                                filter="true" (onChange)="getFragmentByZone()"
+                                (onChange)="readingReportManagerService.trvchReq.fragmentMasterIds = []">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">نوبتی</div>
-                        <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
-                            [(ngModel)]="readingReportManagerService.trvchReq.fragmentMasterIds"
-                            optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                            [style]="{minWidth: '150px'}" placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
+                                [(ngModel)]="readingReportManagerService.trvchReq.fragmentMasterIds"
+                                optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                   placeholder="انتخاب مورد" [filter]="true"
+                                showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">نوع پیمایش</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.trvchReq.traverseType" name="traverseID">
-                            <mat-option *ngFor="let truefalse of traverseDiffrentialDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.trvchReq.traverseType" name="traverseID">
+                                <mat-option *ngFor="let truefalse of traverseDiffrentialDictionary"
+                                    [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
-                            <mat-option (click)="getReadingPeriod()"
-                                *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                                <mat-option (click)="getReadingPeriod()"
+                                    *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2"
                         [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.trvchReq.readingPeriodId" name="readingPeriodId">
-                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.trvchReq.readingPeriodId"
+                                name="readingPeriodId">
+                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">سال</div>
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.trvchReq.year"
-                            name="year">
-                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.trvchReq.year" name="year">
+                                <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                         <div class="_key">از</div>
