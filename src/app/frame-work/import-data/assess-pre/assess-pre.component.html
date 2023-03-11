@@ -6,24 +6,27 @@
 
     <main class="main_content">
         <section class="_toselect">
-            <div class="input_2">
-                <div class="_key">شماره لیست</div>
-                <input class="_value" name="listNumber"
-                    [(ngModel)]="closeTabService.saveDataForAssessPreReq.listNumber">
-            </div>
-            <mat-checkbox name="noImages" [(ngModel)]="closeTabService.saveDataForAssessPreReq.noImages">
-                عکس ندارد
-            </mat-checkbox>
             <section class="__content">
-                <span class="ui-float-label">
-                    <label for="float-input">ناحیه</label>
-                    <p-dropdown   name="zone" #zoneId
-                        [options]="zoneDictionary" name="_selectedKindId"
-                        [(ngModel)]="closeTabService.saveDataForAssessPreReq.zoneId" optionLabel="title" [filter]="true"
-                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
-                        (onClick)="getMasterInZone()" (onChange)="emptyPreviousValuesFromSelectOptions()">
-                    </p-dropdown>
-                </span>
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="closeTabService.saveDataForAssessPreReq.zoneId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true" filterBy="title" [showClear]="true"
+                            (onClick)="getMasterInZone()" (onChange)="emptyPreviousValuesFromSelectOptions()">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">شماره لیست</div>
+                    <input class="_value" name="listNumber"
+                        [(ngModel)]="closeTabService.saveDataForAssessPreReq.listNumber">
+                </div>
+                <div class="check_boxes">
+                    <mat-checkbox name="noImages" [(ngModel)]="closeTabService.saveDataForAssessPreReq.noImages">
+                        عکس ندارد
+                    </mat-checkbox>
+                </div>
             </section>
         </section>
 
@@ -33,32 +36,30 @@
                 <h3 class="title">وضعیت مصرف</h3>
                 <p-multiSelect [maxSelectedLabels]="2" [options]="masrafState" name="masraf"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.masrafStates" optionLabel="header"
-                    optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده"   
-                    placeholder="انتخاب مورد">
+                    optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterReportDictionary.length">
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [maxSelectedLabels]="2" [options]="counterReportDictionary" name="counterReport"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.reportIds" optionLabel="title" optionValue="id"
-                    selectedItemsLabel="{0} مورد انتخاب شده"    placeholder="انتخاب مورد"
-                    [filter]="true" showClear="true">
+                    selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterStateDictionary.length">
                 <h3 class="title">وضعیت کنتور</h3>
                 <p-multiSelect [maxSelectedLabels]="2" [options]="counterStateDictionary" name="counterState"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.counterStateIds" optionLabel="title"
-                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"   
-                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true"
+                    showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="karbariDictionary.length">
                 <h3 class="title">کاربری</h3>
                 <p-multiSelect [maxSelectedLabels]="2" [options]="karbariDictionary" name="karbari"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.karbariCodes" optionLabel="title"
-                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"   
-                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true"
+                    showClear="true">
                 </p-multiSelect>
             </article>
 
@@ -77,10 +78,10 @@
             <div class="input_2 this" *ngIf="userCounterReaderDictionary.length">
                 <div class="_key">مامور</div>
                 <div class="_value">
-                    <p-dropdown   name="counterreader" #counterreader
-                        [options]="userCounterReaderDictionary" name="counter-reader"
-                        [(ngModel)]="importDynamicService._assessAddReq.counterReaderId" optionLabel="title"
-                        [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
+                    <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                        name="counter-reader" [(ngModel)]="importDynamicService._assessAddReq.counterReaderId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد">
                     </p-dropdown>
                 </div>
             </div>

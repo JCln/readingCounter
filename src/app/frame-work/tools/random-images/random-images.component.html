@@ -1,6 +1,11 @@
+<app-collapsable [_isCollapsed]=toolsService._isCollapsedRandomImages
+    (_clicked)="toolsService._isCollapsedRandomImages = !toolsService._isCollapsedRandomImages">
+</app-collapsable>
+
 <section [hidden]="toolsService._isCollapsedRandomImages">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="static_part">
+
             <section class="content">
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
@@ -38,21 +43,19 @@
                         </p-dropdown>
                     </div>
                 </div>
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-image"></i>
+                </button>
 
             </section>
         </section>
-        <footer class="center_footer footer_with_background">
-            <button type="submit" class="btn_1">
-                مشاهده
-                <i class="pi pi-image"></i>
-            </button>
-        </footer>
     </form>
 </section>
 
 <main *ngIf="allImagesDataSource" style="position: relative;">
 
-    <div class="content">
+    <div class="img_content">
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">

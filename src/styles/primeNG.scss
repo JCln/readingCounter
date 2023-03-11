@@ -248,7 +248,7 @@
   .p-field-radiobutton {
     display: flex;
     align-items: center;
-    margin-left: var(--font_3);
+    margin-left: var(--font_2);
 
     label {
       font-size: var(--font_s);
@@ -280,7 +280,10 @@
     border-radius: $border_7;
     background: var(--white);
     height: var(--font_26);
-    min-width: 100%;
+    min-width: 8rem;
+    max-width: 9rem;
+    width: 100%;
+    direction: rtl;
   }
 
   .p-dropdown {
@@ -290,6 +293,7 @@
     max-width: 9rem;
     min-width: 8rem;
     width: 100%;
+    direction: rtl;
   }
 
   .p-dropdown .p-dropdown-trigger,
@@ -390,7 +394,8 @@
     border: solid var(--secondary_1);
   }
 
-  .p-datatable-wrapper {
+  .p-datatable-resizable>.p-datatable-wrapper {
+    overflow-x: unset;
     background-color: var(--secondary_1);
   }
 

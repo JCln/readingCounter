@@ -1,41 +1,40 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="content">
-            <div class="input_2">
-                <div class="_key">ناحیه</div>
-                <div class="_value">
-                    <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId" placeholder="انتخاب مورد"
-                          optionValue="id" optionLabel="title"
-                        filter="true">
-                    </p-dropdown>
+        <section class="static_part">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId"
+                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
                 </div>
-            </div>
-            <div class="input_2">
-                <div class="_key">از</div>
-                <div class="_value">
-                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
-                        [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.fromDate">
-                    </app-date-jalali>
+                <div class="input_2">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.fromDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
-            </div>
-            <div class="input_2">
-                <div class="_key">تا</div>
-                <div class="_value">
-                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
-                        [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.toDate">
-                    </app-date-jalali>
+                <div class="input_2">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.toDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
-            </div>
 
-            <button type="submit" class="btn_1">
-                مشاهده لیست
-                <i class="pi pi-list"></i>
-            </button>
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
 
+            </section>
         </section>
-
-
     </form>
 
     <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForUserKarkardSummary" [paginator]="true"
@@ -49,8 +48,7 @@
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
-                [filter]="true">
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
             <div class="header_icons_wrap">
                 <div class="right_side">

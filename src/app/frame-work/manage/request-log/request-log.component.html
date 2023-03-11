@@ -28,7 +28,7 @@
                 </div>
                 <button type="submit" class="btn_1">
                     <i class="pi pi-list"></i>
-                    مشاهده لیست
+                    مشاهده
                 </button>
 
             </section>
@@ -36,8 +36,9 @@
     </section>
 
     <section>
-        <app-prime-table [dataSource]="closeTabService.saveDataForRequestLog" [_outputFileName]="'requestLog'" [_checkUpName]="'requestlog'"
-            [_selectedColumnsToRemember]="'selectedRRRequestLog'" (refreshedTable)="refreshTable()">
+        <app-prime-table [dataSource]="closeTabService.saveDataForRequestLog" [_outputFileName]="'requestLog'"
+            [_checkUpName]="'requestlog'" [_selectedColumnsToRemember]="'selectedRRRequestLog'"
+            (refreshedTable)="refreshTable()">
         </app-prime-table>
     </section>
 

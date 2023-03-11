@@ -126,10 +126,11 @@
                     name="screenshot" (change)="onChange($event)" id="files">
             </section>
 
+            <footer class="footer_with_background">
+                <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
+            </footer>
+
         </section>
 
-        <footer class="footer_with_background">
-            <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
-        </footer>
     </form>
 </main>

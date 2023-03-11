@@ -68,6 +68,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _multiSelectEnable: boolean = true;
     @Input() _isCustomSort: boolean = false;
     @Input() _hasSaveColumns: boolean = true;
+    @Input() _hasRefreshTable: boolean = true;
 
     constructor(
         public browserStorageService: BrowserStorageService,

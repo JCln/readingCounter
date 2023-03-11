@@ -11,7 +11,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ServerErrorsComponent extends FactoryONE {
   // important that selectedErrors default value should be []
   selectedErrors: any[] = [];
-  
+
   constructor(
     public manageServerService: ManageServerService,
     public closeTabService: CloseTabService
@@ -23,6 +23,9 @@ export class ServerErrorsComponent extends FactoryONE {
     this.closeTabService.saveDataForServerErrors = await this.manageServerService.postArray(this.selectedErrors);
   }
   classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForServerErrors = null;
+    }
     if (!this.closeTabService.saveDataForServerErrors) {
       this.connectToServer();
     }

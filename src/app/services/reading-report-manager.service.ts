@@ -49,8 +49,8 @@ export class ReadingReportManagerService {
   isCollapsedTrvCh: boolean = false;
   isCollapsedDetails: boolean = false;
   isCollapsedUserKarkard: boolean = false;
-  _isOrderByDate: boolean = false;
   _isCollapsedAllImgs: boolean = true;
+  _isOrderByDate: boolean = false;
 
   masterReq: IReadingReportReq = {
     fromDate: '',

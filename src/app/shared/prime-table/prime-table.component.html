@@ -10,8 +10,7 @@
         <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
-            [filter]="true">
+            selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
         </p-multiSelect>
 
         <div class="header_icons_wrap">
@@ -61,7 +60,8 @@
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
                 </i>
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                <i *ngIf="_hasRefreshTable" (click)="refreshTable()"
+                    class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
                 <i *ngIf="_hasCollapsible" (click)="collapse()" class="tooltip _circle_border p_icons"

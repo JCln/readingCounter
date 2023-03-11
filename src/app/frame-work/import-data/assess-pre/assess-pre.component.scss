@@ -92,13 +92,13 @@ section.dynamic_content {
   grid-column: 1/4;
   background: var(--white);
   border: $border_5;
+  border-radius: $border_7;
 
   .__content {
-    gap: var(--font_05);
-    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
     display: grid;
     align-items: center;
     justify-content: center;
+    gap: var(--font_03);
   }
 }
 

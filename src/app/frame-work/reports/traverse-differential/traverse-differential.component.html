@@ -10,8 +10,7 @@
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="readingReportManagerService.trvchReq.zoneId" placeholder="انتخاب مورد"
-                                  optionValue="id" optionLabel="title"
-                                filter="true" (onChange)="getFragmentByZone()"
+                                optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
                                 (onChange)="readingReportManagerService.trvchReq.fragmentMasterIds = []">
                             </p-dropdown>
                         </div>
@@ -22,8 +21,7 @@
                             <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
                                 [(ngModel)]="readingReportManagerService.trvchReq.fragmentMasterIds"
                                 optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                                   placeholder="انتخاب مورد" [filter]="true"
-                                showClear="true">
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
                             </p-multiSelect>
                         </div>
                     </div>
@@ -93,7 +91,7 @@
                         </div>
                     </div>
                     <button id="grid_view" type="submit" class="btn_1">
-                        مشاهده لیست
+                        مشاهده
                         <i class="pi pi-list"></i>
                     </button>
                     <button id="chart_view" type="submit" class="btn_1">

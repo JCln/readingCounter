@@ -25,7 +25,7 @@ export class RandomImagesComponent extends FactoryONE {
 
   constructor(
     public toolsService: ToolsService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }

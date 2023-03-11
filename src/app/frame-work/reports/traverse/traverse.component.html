@@ -10,8 +10,7 @@
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="readingReportManagerService.traverseReq.zoneId" placeholder="انتخاب مورد"
-                                  optionValue="id" optionLabel="title"
-                                filter="true" (onChange)="getFragmentByZone()"
+                                optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
                                 (onChange)="readingReportManagerService.traverseReq.fragmentMasterIds = []">
                             </p-dropdown>
                         </div>
@@ -22,8 +21,7 @@
                             <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
                                 [(ngModel)]="readingReportManagerService.traverseReq.fragmentMasterIds"
                                 optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                                   placeholder="انتخاب مورد" [filter]="true"
-                                showClear="true">
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
                             </p-multiSelect>
                         </div>
                     </div>
@@ -82,7 +80,10 @@
                             </app-date-jalali>
                         </div>
                     </div>
-                    <button type="submit" class="btn_1">مشاهده</button>
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
                 </section>
 
             </section>

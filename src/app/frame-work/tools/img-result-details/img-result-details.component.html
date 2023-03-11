@@ -1,3 +1,7 @@
+<app-collapsable [_isCollapsed]=toolsService._isCollapsedImageAttrDetails
+    (_clicked)="toolsService._isCollapsedImageAttrDetails = !toolsService._isCollapsedImageAttrDetails">
+</app-collapsable>
+
 <section [hidden]="toolsService._isCollapsedImageAttrDetails">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="static_part">
@@ -16,8 +20,8 @@
                     <div class="_value">
                         <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
                             [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"    
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                            [filter]="true" showClear="true">
                         </p-multiSelect>
                     </div>
                 </div>
@@ -39,21 +43,18 @@
                         </app-date-jalali>
                     </div>
                 </div>
-
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-image"></i>
+                </button>
             </section>
         </section>
-        <footer class="center_footer footer_with_background">
-            <button type="submit" class="btn_1">
-                مشاهده
-                <i class="pi pi-image"></i>
-            </button>
-        </footer>
     </form>
 </section>
 
 <main *ngIf="allImagesDataSource" style="position: relative;">
 
-    <div class="content">
+    <div class="img_content">
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">

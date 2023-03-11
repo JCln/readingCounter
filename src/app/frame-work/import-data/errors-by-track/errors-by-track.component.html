@@ -9,7 +9,10 @@
         <input class="_value" type="number" name="trackNumber"
             [(ngModel)]="closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber" autofocus>
     </div>
-    <button type="submit" class="btn_1">مشاهده</button>
+    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+    </button>
 </form>
 
 <app-prime-table [dataSource]="closeTabService.saveDataForImportErrorsByTrackNumber"

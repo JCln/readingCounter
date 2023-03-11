@@ -42,7 +42,8 @@ h2.title {
 
 // @Override values value
 ._value {
-  height: var(--font_5);
+  min-height: var(--font_5);
+  height: auto;
   max-width: 98%;
   color: var(--primary_3);
   font-size: var(--font_22);
