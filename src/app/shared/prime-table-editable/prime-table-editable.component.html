@@ -6,7 +6,7 @@
     editMode="row" dataKey="id" [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
+        <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"

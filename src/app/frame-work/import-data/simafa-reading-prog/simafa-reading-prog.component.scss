@@ -12,10 +12,11 @@
 }
 
 section.content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 12rem));
-  gap: var(--font_05);
-  align-items: center;
+  width: 21rem;
+  margin: var(--font_02) auto;
+  background: var(--white);
+  border-radius: $border_15;
+  padding: var(--font_05);
 }
 
 .tooltip {
@@ -28,10 +29,11 @@ section.content {
 }
 
 .btn_1 {
-  font-family: $font_family;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  font-family: $font_family;
+  max-width: 100%;
 }
 
 h2 {

@@ -72,7 +72,7 @@ input::placeholder {
     display: grid;
     place-content: center;
     padding: var(--font_02);
-    border-radius: $border_5;
+    border-radius: 100vmax;
     font-size: var(--font_l);
     font-weight: 600;
     background: var(--thirdy_2);
@@ -80,6 +80,13 @@ input::placeholder {
     box-shadow: 1px 1px 3px 0px var(--thirdy_2);
     border: 1px solid var(--secondary_3);
     cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: var(--primary_4);
+      color: var(--white);
+    }
   }
 
   @media (max-width: 550px) {

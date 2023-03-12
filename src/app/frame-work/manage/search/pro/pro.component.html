@@ -78,7 +78,7 @@
 
             <article *ngIf="masrafState.length">
                 <h3 class="title">وضعیت مصرف</h3>
-                <p-multiSelect [maxSelectedLabels]="2" [options]="masrafState" name="masraf"
+                <p-multiSelect [maxSelectedLabels]="1" [options]="masrafState" name="masraf"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
                     optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
                     [filter]="true" showClear="true">
@@ -86,14 +86,14 @@
             </article>
             <article *ngIf="counterReportDictionary.length">
                 <h3 class="title">گزارش کنتور</h3>
-                <p-multiSelect [maxSelectedLabels]="2" [options]="counterReportDictionary" name="counterReport"
+                <p-multiSelect [maxSelectedLabels]="1" [options]="counterReportDictionary" name="counterReport"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterStateByZoneIdDictionary.length">
                 <h3 class="title">وضعیت کنتور</h3>
-                <p-multiSelect [maxSelectedLabels]="2" [options]="counterStateByZoneIdDictionary" name="counterState"
+                <p-multiSelect [maxSelectedLabels]="1" [options]="counterStateByZoneIdDictionary" name="counterState"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds" optionLabel="title"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true"
                     showClear="true">
@@ -101,7 +101,7 @@
             </article>
             <article *ngIf="karbariDictionary.length">
                 <h3 class="title">کاربری</h3>
-                <p-multiSelect [maxSelectedLabels]="2" [options]="karbariDictionary" name="karbari"
+                <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="karbari"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true"
                     showClear="true">
@@ -109,7 +109,7 @@
             </article>
             <article *ngIf="fragmentMasterIds.length">
                 <h3 class="title">نوبتی ها</h3>
-                <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentMasterIds" name="fragmentId"
+                <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentMasterIds" name="fragmentId"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds" optionLabel="routeTitle"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true"
                     showClear="true">

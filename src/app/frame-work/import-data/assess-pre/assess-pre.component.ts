@@ -125,13 +125,13 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService._assessAddReq.onOffLoadIds = a;
   }
   registerAssessAdd = async () => {
-    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService._assessAddReq))
-      return;
-    this.getOnOffLoadIdsFromDataSource();
-    if (!this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq))
-      return;
-    this.importDynamicService.showResDialog(await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
-    this._canShowAssessButton = false;
+    if (this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService._assessAddReq)) {
+      this.getOnOffLoadIdsFromDataSource();
+      if (this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq)) {
+        this.importDynamicService.showResDialog(await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
+        this._canShowAssessButton = false;
+      }
+    }
   }
   getReadingReportTitles = async ($event) => {
     const a = await this.importDynamicService.postById(ENInterfaces.ReadingReportTitles, $event)

@@ -162,7 +162,8 @@ export class CloseTabService {
     zoneId: 0,
     readingPeriodId: 0,
     year: this.utilsService.getFirstYear(),
-    kindId: null
+    kindId: null,
+    _isCollapsed: false
   }
   saveDataForImportDataFileExcel: any;
   saveDataForImportDataFileExcelReq: IFileExcelReq = {

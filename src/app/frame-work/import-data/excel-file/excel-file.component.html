@@ -37,8 +37,6 @@
                         </mat-select>
                     </div>
                 </div>
-
-
                 <div class="input_2" *ngIf="userCounterReader.length">
                     <div class="_key">مامور</div>
                     <div class="_value">
@@ -81,7 +79,6 @@
                     <input class="_value" type="number" min="0" max="100" name="imagePercent"
                         [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.imagePercent">
                 </div>
-
             </section>
 
             <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">

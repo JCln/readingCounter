@@ -46,7 +46,7 @@
         [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
                 selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>

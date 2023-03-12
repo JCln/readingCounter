@@ -39,7 +39,7 @@
         [resizableColumns]="getLocalResizable()" [reorderableColumns]="getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 optionLabel="header"
                 (ngModelChange)="columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
                 selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
@@ -101,7 +101,7 @@
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
                         field="counterStateId" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
+                            <p-multiSelect [maxSelectedLabels]="1" [ngModel]="value"
                                 [options]="counterStateByZoneDictionary" (onChange)="filterOptions($event, 'first')"
                                 optionLabel="title" optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
@@ -115,7 +115,7 @@
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
                         field="counterStateId" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
+                            <p-multiSelect [maxSelectedLabels]="1" [ngModel]="value"
                                 [options]="counterStateByCodeDictionary" (onChange)="filterOptions($event, 'second')"
                                 optionLabel="title" optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">

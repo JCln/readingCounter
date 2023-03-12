@@ -40,13 +40,15 @@ section.dynamic_content {
   background: var(--white);
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
-  padding: var(--font_xxs);
+  padding: var(--font_05);
 }
 
 .check_boxes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(6rem, 9rem));
   gap: var(--font_05);
+  padding: 0;
+  margin-top: 0;
 }
 
 ._key,

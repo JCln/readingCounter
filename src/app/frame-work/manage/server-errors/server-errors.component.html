@@ -6,7 +6,7 @@
     <div class="input_2">
         <div class="_key">انتخاب نوع خطا</div>
         <div class="_value">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="manageServerService.serverErrors" name="errors"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="manageServerService.serverErrors" name="errors"
                 [(ngModel)]="selectedErrors" optionLabel="name" optionValue="errorType"
                 selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد" [filter]="true" showClear="true">
             </p-multiSelect>

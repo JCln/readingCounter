@@ -7,10 +7,10 @@
                 <div class="input_2" *ngIf="userCounterReaderDictionary.length">
                     <div class="_key">مامور</div>
                     <div class="_value">
-                        <p-dropdown   name="counterreader" #counterreader
-                            [options]="userCounterReaderDictionary" name="counter-reader"
-                            [(ngModel)]="simafaSingleReq.counterReaderId" optionLabel="title" [filter]="true"
-                            filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
+                        <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                            name="counter-reader" [(ngModel)]="simafaSingleReq.counterReaderId" optionLabel="title"
+                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                            placeholder="انتخاب مورد">
                         </p-dropdown>
                     </div>
                 </div>
@@ -37,14 +37,10 @@
 
                 <mat-checkbox name="displayRadif" [(ngModel)]="simafaSingleReq.displayRadif">نمایش ش.پرونده
                 </mat-checkbox>
-
             </div>
-
+            <footer>
+                <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
+            </footer>
         </section>
-
-        <footer>
-            <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
-
-        </footer>
     </form>
 </main>

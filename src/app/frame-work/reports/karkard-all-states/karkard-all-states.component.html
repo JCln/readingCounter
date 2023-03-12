@@ -19,7 +19,7 @@
                     <div class="input_2">
                         <div class="_key">نوبتی</div>
                         <div class="_value">
-                            <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
                                 [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.fragmentMasterIds"
                                 optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
                                 placeholder="انتخاب مورد" [filter]="true" showClear="true">
@@ -102,7 +102,7 @@
         [reorderableColumns]="readingReportManagerService.getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
                 selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
