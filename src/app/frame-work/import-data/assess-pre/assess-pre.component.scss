@@ -3,6 +3,12 @@
 @import 'tooltip.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'cards';
+
+._card {
+  width: auto;
+  margin: 0 var(--font_02);
+}
 
 .main {
   direction: rtl;
@@ -16,8 +22,8 @@
 .main_content {
   display: grid;
   direction: rtl;
+  margin-bottom: var(--font_05);
 }
-
 
 .tooltip {
   cursor: pointer;
@@ -41,7 +47,7 @@ footer {
 
 section.dynamic_content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
   gap: var(--font_05);
   align-items: center;
   border-radius: $border_15;
@@ -99,7 +105,8 @@ section.dynamic_content {
   background: var(--white);
   border: $border_5;
   border-radius: $border_7 $border_7 0 0;
-  padding: var(--font_02);
+  padding: var(--font_05);
+  box-shadow: 2px 2px 3px 2px var(--secondary_7);
 
   .__content {
     gap: var(--font_02);
@@ -124,6 +131,7 @@ section.dynamic_content {
   background-color: var(--secondary_1);
   border-radius: $border_7 $border_7 0 0;
   padding: var(--font_02);
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
 
   @media (max-width: 780px) {
     margin-top: var(--font_xs);

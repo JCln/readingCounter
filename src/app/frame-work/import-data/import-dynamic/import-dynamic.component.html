@@ -13,19 +13,28 @@
                 </div>
             </section>
             <hr>
-
-            <section class="content">
+            <div class="_container">
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="this.importDynamicService.importDynamicReq.zoneId" placeholder="انتخاب مورد"
-                              optionValue="id" optionLabel="title"
-                            filter="true" (click)="verificationACounterReaderId()">
+                            optionValue="id" optionLabel="title" filter="true" (click)="verificationACounterReaderId()">
                         </p-dropdown>
                     </div>
                 </div>
-                <!-- when zone id and kind id get -->
+                <section class="content_inline">
+                    <div class="input_2">
+                        <div class="_key">از اشتراک</div>
+                        <input class="_value" name="fromEshterak"
+                            [(ngModel)]="importDynamicService.importDynamicReq.fromEshterak">
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا اشتراک</div>
+                        <input class="_value" name="toEshterak"
+                            [(ngModel)]="importDynamicService.importDynamicReq.toEshterak">
+                    </div>
+                </section>
                 <div class="input_2"
                     [hidden]="importDynamicService._isOrderByDate || !readingPeriodKindsDictionary.length">
                     <div class="_key">نوع دوره</div>
@@ -38,8 +47,7 @@
                         </mat-select>
                     </div>
                 </div>
-                <div class="input_2 this"
-                    [hidden]="importDynamicService._isOrderByDate || !readingPeriodDictionary.length">
+                <div class="input_2" [hidden]="importDynamicService._isOrderByDate || !readingPeriodDictionary.length">
                     <div class="_key">دوره قرائت</div>
                     <div class="_value">
                         <mat-select placeholder="انتخاب مورد"
@@ -50,88 +58,76 @@
                         </mat-select>
                     </div>
                 </div>
-
-                <div class="input_2">
-                    <div class="_key">از اشتراک</div>
-                    <input class="_value" name="fromEshterak"
-                        [(ngModel)]="importDynamicService.importDynamicReq.fromEshterak">
-                </div>
-                <div class="input_2">
-                    <div class="_key">تا اشتراک</div>
-                    <input class="_value" name="toEshterak"
-                        [(ngModel)]="importDynamicService.importDynamicReq.toEshterak">
-                </div>
-
-                <div class="input_2 this" *ngIf="userCounterReader.length">
+                <div class="input_2" *ngIf="userCounterReader.length">
                     <div class="_key">مامور</div>
                     <div class="_value">
-                        <p-dropdown   name="counterreader" #counterreader
-                            [options]="userCounterReader" name="counter-reader"
-                            [(ngModel)]="importDynamicService.importDynamicReq.counterReaderId" optionLabel="title"
-                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
+                            name="counter-reader" [(ngModel)]="importDynamicService.importDynamicReq.counterReaderId"
+                            optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                             placeholder="انتخاب مورد">
                         </p-dropdown>
                     </div>
                 </div>
-
-
-            </section>
-            <section class="content date_section">
-                <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
-                    <div class="_key">از</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate"
-                            (dateJalEvent)="importDynamicService.receiveFromDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
-                            [dateObject]="importDynamicService.importDynamicReq.fromDate">
-                        </app-date-jalali>
+                <section class="content_inline">
+                    <div class="input_2 " [hidden]="!_showAlalHesabPercent">
+                        <div class="_key">درصد علی‌الحساب</div>
+                        <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                            [(ngModel)]="importDynamicService.importDynamicReq.alalHesabPercent">
                     </div>
-                </div>
-                <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
-                    <div class="_key">تا</div>
-                    <div class="_value">
-                        <app-date-jalali name="toDate"
-                            (dateJalEvent)="importDynamicService.receiveToDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
-                            [dateObject]="importDynamicService.importDynamicReq.toDate">
-                        </app-date-jalali>
+                    <div class="input_2 " [hidden]="!_showimagePercent">
+                        <div class="_key">درصد تصویر</div>
+                        <input class="_value" type="number" min="0" max="100" name="imagePercent"
+                            [(ngModel)]="importDynamicService.importDynamicReq.imagePercent">
                     </div>
+                </section>
+                <section class="content_inline">
+                    <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="importDynamicService.receiveFromDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
+                                [dateObject]="importDynamicService.importDynamicReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="importDynamicService.receiveToDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
+                                [dateObject]="importDynamicService.importDynamicReq.toDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
+                    <mat-checkbox name="hasPreNumber"
+                        [(ngModel)]="importDynamicService.importDynamicReq.hasPreNumber">شماره
+                        قبلی
+                    </mat-checkbox>
+
+                    <mat-checkbox name="displayBillId"
+                        [(ngModel)]="importDynamicService.importDynamicReq.displayBillId">
+                        نمایش شناسه
+                        قبض
+                    </mat-checkbox>
+
+                    <mat-checkbox name="displayRadif"
+                        [(ngModel)]="importDynamicService.importDynamicReq.displayRadif">نمایش
+                        ش.پرونده
+                    </mat-checkbox>
+
                 </div>
-            </section>
 
-            <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
-                <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamicService.importDynamicReq.hasPreNumber">شماره
-                    قبلی
-                </mat-checkbox>
-
-                <mat-checkbox name="displayBillId" [(ngModel)]="importDynamicService.importDynamicReq.displayBillId">
-                    نمایش شناسه
-                    قبض
-                </mat-checkbox>
-
-                <mat-checkbox name="displayRadif" [(ngModel)]="importDynamicService.importDynamicReq.displayRadif">نمایش
-                    ش.پرونده
-                </mat-checkbox>
-
+                <footer>
+                    <mat-checkbox name="showDynamicCount" [(ngModel)]="_showDynamicCount"
+                        (ngModelChange)="setShowDynamicCount($event)">نمایش تعداد اشتراک
+                    </mat-checkbox>
+                    <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
+                </footer>
             </div>
         </section>
-        <section *ngIf="canShowEditButton" class="dynamic_content">
-            <div class="input_2 this" [hidden]="!_showAlalHesabPercent">
-                <div class="_key">درصد علی‌الحساب</div>
-                <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
-                    [(ngModel)]="importDynamicService.importDynamicReq.alalHesabPercent">
-            </div>
-            <div class="input_2 this" [hidden]="!_showimagePercent">
-                <div class="_key">درصد تصویر</div>
-                <input class="_value" type="number" min="0" max="100" name="imagePercent"
-                    [(ngModel)]="importDynamicService.importDynamicReq.imagePercent">
-            </div>
 
-        </section>
-
-        <footer>
-            <mat-checkbox name="showDynamicCount" [(ngModel)]="_showDynamicCount"
-                (ngModelChange)="setShowDynamicCount($event)">نمایش تعداد اشتراک
-            </mat-checkbox>
-            <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
-        </footer>
     </form>
 </main>

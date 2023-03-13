@@ -29,7 +29,7 @@ import { ProfileService } from './profile.service';
   providedIn: 'root'
 })
 export class SearchService {
-  _searchProCollapse: boolean = true;
+  _searchProCollapse: boolean = false;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
   _years: ITitleValue[] = [];

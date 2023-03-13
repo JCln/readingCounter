@@ -1,4 +1,4 @@
-<main class="main">
+<main class="main _card">
     <form #form="ngForm" (ngSubmit)="connectToServer()" [hidden]="searchService._searchSimpleReq.isCollapsed">
         <section class="order_by">
             <h2>جستجو بر اساس :</h2>
@@ -17,9 +17,8 @@
                 <div class="_key">ناحیه</div>
                 <div class="_value">
                     <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="searchService._searchSimpleReq.zoneId" placeholder="انتخاب مورد"
-                          optionValue="id" optionLabel="title"
-                        filter="true">
+                        [(ngModel)]="searchService._searchSimpleReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                        optionLabel="title" filter="true">
                     </p-dropdown>
                 </div>
             </div>
