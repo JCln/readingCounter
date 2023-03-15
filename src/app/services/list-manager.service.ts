@@ -217,6 +217,7 @@ export class ListManagerService {
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
+      OffloadModify.selectAOption,
       OffloadModify.callAnnounce,
       OffloadModify.wrongReading,
       OffloadModify.bazresi

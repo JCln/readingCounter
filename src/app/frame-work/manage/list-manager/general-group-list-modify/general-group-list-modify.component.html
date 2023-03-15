@@ -7,7 +7,7 @@
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
-            <input [readOnly]="true" class="_value _bigger_input" name="listNumber"
+            <input [readOnly]="true" class="_value" name="listNumber"
                 [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.listNumber">
         </div>
         <div class="input_2">
@@ -42,8 +42,7 @@
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 optionLabel="header"
                 (ngModelChange)="columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
-                [filter]="true">
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
 
             <div class="header_icons_wrap">
@@ -139,11 +138,12 @@
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isSelectOption;else selectOption">
                         <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
+
                         <ng-container *ngIf="(col.field == 'modifyType'); else secondDict">
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown name="modify" [options]="modifyType" [(ngModel)]="dataSource[col.field]"
-                                        placeholder="انتخاب مورد" [ngClass]="{'p-dropdown-editable': true}"
+                                        [placeholder]="dataSource.modifyType" [ngClass]="{'p-dropdown-editable': true}"
                                         optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], 'modifyType' , dataSource.id)">
                                     </p-dropdown>

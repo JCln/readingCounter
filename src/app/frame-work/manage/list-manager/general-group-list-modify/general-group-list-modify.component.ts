@@ -1,3 +1,4 @@
+import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -175,7 +176,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   filterOptions = (e: any, filterValid: string) => {
-
     if (MathS.isNull(e.value)) {
       this.tempFilter[filterValid] = [];
     }

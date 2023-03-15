@@ -406,6 +406,7 @@ export enum ENSelectedColumnVariables {
     selectedSimafaReadingProgram = 'simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
+    selectAOption = 'انتخاب کنید',
     callAnnounce = 'اعلام تلفنی',
     blueScreenLight = 'اشتباه در قرائت',
     intenseLight = 'نور صفحه آبی',

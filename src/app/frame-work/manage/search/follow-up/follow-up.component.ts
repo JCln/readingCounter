@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
-import { IFollowUp, IFollowUpHistory } from 'interfaces/isearchs';
+import { IFollowUpHistory } from 'interfaces/isearchs';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { FollowUpService } from 'services/follow-up.service';

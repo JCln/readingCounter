@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { InteractionService } from 'services/interaction.service';
 import { ProfileService } from 'services/profile.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 
@@ -15,8 +14,7 @@ export class SpinnerComponent implements OnInit {
 
   constructor(
     private spinnerWrapper: SpinnerWrapperService,
-    private profileService: ProfileService,
-    private interactionService: InteractionService
+    private profileService: ProfileService
   ) { }
 
   ngOnInit(): void {
