@@ -98,10 +98,10 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'bottom-left');
   }
   getLocalResizable = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, this.envService.defaultAggregateTracks);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, this.envService.reSizableTable);
   }
   getLocalReOrderable = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.envService.defaultAggregateTracks);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.envService.reOrderableTable);
   }
   getLocalDefaultAggregateTracks = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.envService.defaultAggregateTracks);

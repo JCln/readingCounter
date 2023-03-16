@@ -25,7 +25,7 @@
   }
 
   .mat-dialog-container {
-    background: var(--white);
+    background: var(--secondary_1);
     color: var(--primary_7);
     direction: rtl;
   }
@@ -34,6 +34,41 @@
     display: flex;
     direction: rtl;
     justify-content: flex-start;
+  }
+
+  .cdk-overlay-pane {
+    position: relative !important;
+  }
+
+  .close_dg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    cursor: pointer;
+    border: none;
+    right: 0;
+    top: 0;
+    padding: 13px;
+    width: 1.7rem;
+    height: 1.7rem;
+    line-height: 14px;
+    border-radius: 50%;
+    background: var(--secondary_1);
+
+    &:hover,
+    &:active {
+      color: #495057;
+      border-color: transparent;
+      background: var(--secondary_4);
+    }
+    
+    &:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      background: var(--secondary_4);
+      box-shadow: 0 0 0 0.2rem #a6d5fa;
+    }
   }
 
   .mat-select {

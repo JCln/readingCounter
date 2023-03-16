@@ -16,7 +16,9 @@
 </div>
 
 <mat-dialog-actions>
-    <button class="btn_2" *ngIf="data.doesNotReturnButton" (click)="cancel()">بازگشت</button>
+    <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel()">
+        <i class="pi pi-times"></i>
+    </button>
     <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
         (click)="confirm()">تایید
     </button>

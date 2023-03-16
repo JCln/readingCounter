@@ -30,6 +30,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="btn_2" (click)="cancel()">بازگشت</button>
+    <button class="close_dg" type="button" (click)="cancel()">
+        <i class="pi pi-times"></i>
+    </button>
     <button *ngIf="data.isConfirm" class="btn_2 _custom" (click)="confirm()">تایید</button>
 </mat-dialog-actions>

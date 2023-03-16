@@ -125,13 +125,19 @@ li {
   padding: var(--font_03) !important;
 }
 
+.p-dialog .p-dialog-header {
+  background: var(--secondary_1) !important;
+}
+
 .p-dialog .p-dialog-header .p-dialog-header-icon {
+  background: var(--secondary_1) !important;
   z-index: 100 !important;
 }
 
 .p-dialog .p-dialog-content {
   padding: 0 var(--font_05) !important;
   margin-top: -1.7rem !important; // it's not dynamic because button width & hight are statics
+  background: var(--secondary_1) !important;
 }
 
 // ts config

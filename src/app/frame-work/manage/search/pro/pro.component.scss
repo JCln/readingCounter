@@ -141,7 +141,7 @@ form.bottom-form {
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: var(--thirdy_1_spec);
+    background: var(--secondary_1);
     direction: rtl;
   }
 }
