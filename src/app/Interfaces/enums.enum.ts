@@ -140,6 +140,7 @@ export enum EN_messages {
 
     tableSaved = 'ذخیره ستونها انجام شد',
     tableResetSaved = 'بازنشانی ستونها انجام شد',
+    ResetLocalStorage = 'از بازگشت به تنظیمات پیش‌فرض اطمینان دارید',
     tableDefaultColumnOrder = 'ستونها درحالت پیشفرض قرار دارند',
     carouselShowEnabled = 'نمایش تصاویر بطور گروهی خواهد بود',
     carouselShowDisabled = 'نمایش تصاویر بطور تکی خواهد بود',
