@@ -58,7 +58,7 @@ export class UserOnlinesComponent extends FactoryONE {
     this.ref = this.dialogService.open(UserOnlinesImgDgComponent, {
       data: { _data: value },
       rtl: true,
-      width: '80%',
+      width: '21rem',
     })
     this.ref.onClose.subscribe(async res => {
       if (res)
@@ -70,7 +70,7 @@ export class UserOnlinesComponent extends FactoryONE {
     this.ref = this.dialogService.open(UserOnlinesVideoDgComponent, {
       data: { _data: value },
       rtl: true,
-      width: '80%',
+      width: '21rem',
     })
     this.ref.onClose.subscribe(async res => {
       if (res)

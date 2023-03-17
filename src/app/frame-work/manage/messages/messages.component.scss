@@ -3,6 +3,7 @@
 @import 'mixins.scss';
 @import 'input.scss';
 @import 'mat.scss';
+@import 'cards';
 
 .over_all {
   display: grid;
@@ -10,13 +11,6 @@
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
-}
-
-.content {
-  background: var(--secondary_1);
-  border-radius: $border_15;
-  margin: auto;
-  padding: var(--font_xs);
 }
 
 .text {
@@ -36,6 +30,7 @@ textarea {
   outline: none;
   padding: var(--font_xxs);
   height: 8rem;
+  max-width: 19rem;
   border-radius: $border_15;
   font-family: inherit;
 }

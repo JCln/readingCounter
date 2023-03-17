@@ -2,10 +2,10 @@
   display: grid;
   align-items: center;
   width: 20rem;
-  padding: var(--font_s);
+  padding: var(--font_05);
   justify-content: initial;
   direction: rtl;
-  margin: auto;
+  margin: auto auto var(--font_03) auto;  
   gap: var(--font_02);
   background: var(--white);
   border-radius: 10px;

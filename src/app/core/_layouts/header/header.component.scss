@@ -46,7 +46,7 @@ li {
 
 ._name {
   margin-left: auto;
-  font-size: var(--font_xs);
+  font-size: var(--font_ss);
   color: var(--primary_5);
   cursor: auto;
   @include _borders();
@@ -67,8 +67,15 @@ li {
 
 }
 
-._borders {
-  @include _borders();
+::ng-deep {
+
+  ._borders {
+    @include _borders();
+
+    .dp-popup {
+      transform: translateX(0);
+    }
+  }
 }
 
 ._status {

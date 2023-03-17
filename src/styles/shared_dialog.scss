@@ -40,7 +40,7 @@
 
 .mat-checkbox {
   direction: rtl;
-  margin-bottom: var(--font_xs);
+  margin-bottom: 0;
 }
 
 .mat-option {
@@ -81,10 +81,12 @@ h2 {
   font-weight: 600;
   color: var(--primary_4);
   border-radius: 15px;
-  padding: var(--font_xs);
+  margin-bottom: 0;
+  padding: var(--font_05);
 }
 
 .mat-dialog-container {
+  position: relative;
   border: 1px solid var(--primary_2);
 }
 

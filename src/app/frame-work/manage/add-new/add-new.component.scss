@@ -10,6 +10,7 @@
   overflow: auto;
   direction: rtl;
   text-align: right;
+  margin: .1rem;
 
   @media (min-width: 780px) {
     min-width: 28rem;
@@ -38,7 +39,8 @@ h2 {
   color: var(--secondary_2);
   background: var(--primary_2);
   border-radius: 15px;
-  padding: var(--font_xs);
+  padding: var(--font_xxs);
+  margin-bottom: var(--font_02);
 }
 
 p {

@@ -2,6 +2,7 @@
 @import '_mat.scss';
 @import 'input.scss';
 @import 'button.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
@@ -62,7 +63,6 @@ footer {
 
 hr {
   margin: 0 auto;
-  background-color: var(--primary_5);
   height: var(--font_02);
   margin-bottom: var(--font_05);
 }

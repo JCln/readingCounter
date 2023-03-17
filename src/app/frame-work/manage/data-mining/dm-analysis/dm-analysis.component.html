@@ -1,7 +1,7 @@
 <main class="main">
     <section [hidden]="dataMiningAnalysesService.isCollapsedCranlz">
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
+            <section class="_card">
                 <section class="order_by">
                     <h2>جستجو بر اساس :</h2>
                     <div *ngFor="let orderType of dataMiningAnalysesService.utilsService.getSearchInOrderTo">
@@ -20,8 +20,7 @@
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="dataMiningAnalysesService.dataMiningReq.zoneId" placeholder="انتخاب مورد"
-                                  optionValue="id" optionLabel="title"
-                                filter="true">
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
@@ -80,7 +79,7 @@
                         </div>
                     </div>
 
-                      <button type="submit" class="btn_1">
+                    <button type="submit" class="btn_1">
                         مشاهده
                         <i class="pi pi-list"></i>
                     </button>

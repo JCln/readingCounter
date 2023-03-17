@@ -206,7 +206,7 @@ export class TrackingManagerService {
   hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '80%',
+        minWidth: '21rem',
         data: {
           title: message,
           isSelectableDate: true

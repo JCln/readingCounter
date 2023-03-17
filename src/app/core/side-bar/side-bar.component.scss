@@ -103,7 +103,7 @@ ul::-webkit-scrollbar {
   text-align: right;
 
   height: auto;
-  border-radius: 100vmax;
+  border-radius: $border_100vmax;
   overflow: visible;
 
   color: var(--sidebar_1);

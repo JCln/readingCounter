@@ -4,6 +4,7 @@
 @import '_mat.scss';
 @import 'tooltip.scss';
 @import 'choose-files.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
@@ -31,6 +32,7 @@ section.content {
   border-radius: $border_15;
   padding: var(--font_xxs);
   width: 19rem;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
 
   @media (min-width: 550px) {
     width: 23rem;

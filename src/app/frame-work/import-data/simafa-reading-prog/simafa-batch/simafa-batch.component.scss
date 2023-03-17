@@ -41,6 +41,8 @@ section.dynamic_content {
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
   padding: var(--font_05);
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+  margin-bottom: var(--font_03);
 }
 
 .check_boxes {

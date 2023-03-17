@@ -39,7 +39,7 @@
   .unit_toggle {
     cursor: pointer;
     border: 2px solid var(--orange_500);
-    border-radius: 100vmax;
+    border-radius: $border_100vmax;
     width: var(--font_5);
     transition: all ease-in-out 250ms;
 
@@ -113,7 +113,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100vmax;
+  border-radius: $border_100vmax;
   width: var(--font_25);
   height: var(--font_25);
   padding: 0rem;

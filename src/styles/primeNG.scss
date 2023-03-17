@@ -173,6 +173,10 @@
     color: var(--secondary_8);
   }
 
+  .p-multiselect .p-multiselect-label {
+    padding: var(--font_02);
+  }
+
   .p-dropdown .p-dropdown-label.p-placeholder {
     font-family: BLotus, "Blotus", tahoma, Sans-Serif;
     font-size: var(--font_ss);
@@ -282,7 +286,7 @@
     border-radius: $border_7;
     background: var(--white);
     height: var(--font_26);
-    min-width: 8rem;
+    min-width: 7rem;
     max-width: 9rem;
     width: 100%;
     direction: rtl;
@@ -293,7 +297,7 @@
     height: var(--font_26);
     border-radius: 10px;
     background: var(--white);
-    min-width: 8rem;
+    min-width: 7rem;
     max-width: 9rem;
     width: 100%;
     direction: rtl;
@@ -425,9 +429,10 @@
   p-cellEditor {
     input {
       width: 100%;
+      height: var(--font_26);
       padding: var(--font_03);
       text-align: center;
-      font-size: var(--font_m);
+      font-size: var(--font_s);
       font-weight: 600;
       outline: 2.5px dotted var(--orange_500);
       border-color: var(--primary_2);
@@ -441,7 +446,7 @@
       margin: auto;
       width: var(--font_3);
       border: 2px dotted var(--orange_500);
-      padding: var(--font_xxs) var(--font_l) var(--font_xxs) 0;
+      padding: var(--font_05) var(--font_m) var(--font_05) 0;
     }
 
     .p-dropdown-editable {

@@ -1,57 +1,55 @@
 <main *ngIf="route.children.length === 0" class="main">
     <form #form="ngForm" (ngSubmit)="connectToServer()"
         [hidden]="closeTabService.importSimafaReadingProgramReq._isCollapsed">
-        <section class="static_part">
-            <section class="content">
-                <div class="input_2">
-                    <div class="_key">ناحیه</div>
-                    <div class="_value">
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.zoneId" placeholder="انتخاب مورد"
-                            optionValue="id" optionLabel="title" filter="true">
-                        </p-dropdown>
-                    </div>
+        <section class="_card">
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.zoneId" placeholder="انتخاب مورد"
+                        optionValue="id" optionLabel="title" filter="true">
+                    </p-dropdown>
                 </div>
-                <div class="input_2">
-                    <div class="_key">نوع دوره</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.kindId" name="_selectedKindId">
-                            <mat-option (click)="getReadingPeriod()"
-                                *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
-                    </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">نوع دوره</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.kindId" name="_selectedKindId">
+                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindsDictionary"
+                            [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
                 </div>
-                <div class="input_2" [hidden]="!readingPeriodDictionary.length">
-                    <div class="_key">دوره قرائت</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.readingPeriodId"
-                            name="readingPeriodId">
-                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
-                    </div>
+            </div>
+            <div class="input_2" [hidden]="!readingPeriodDictionary.length">
+                <div class="_key">دوره قرائت</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
                 </div>
-                <div class="input_2">
-                    <div class="_key">سال</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.year" name="year">
-                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
-                    </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">سال</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
                 </div>
-                <button type="submit" class="btn_1">
-                    مشاهده
-                    <i class="pi pi-list"></i>
-                </button>
-            </section>
+            </div>
+            <button type="submit" class="btn_1">
+                مشاهده
+                <i class="pi pi-list"></i>
+            </button>
         </section>
 
     </form>

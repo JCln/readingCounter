@@ -1,7 +1,7 @@
 <div class="over_all">
     <main>
         <h1>جزئیات پیام</h1>
-        <div class="content">
+        <div class="_card">
             <div class="_save_this">
                 <h2>عنوان</h2>
                 <input type="text" class="input_1" [(ngModel)]="messageService.message.title">
@@ -20,8 +20,8 @@
                 <div class="color">
                     <h2>رنگ</h2>
                     <div class="c_separator">
-                        <p-selectButton class="_colors_button" [options]="colors" [(ngModel)]="messageService.message.color" optionLabel="text"
-                            optionValue="value">
+                        <p-selectButton class="_colors_button" [options]="colors"
+                            [(ngModel)]="messageService.message.color" optionLabel="text" optionValue="value">
                         </p-selectButton>
                     </div>
                 </div>

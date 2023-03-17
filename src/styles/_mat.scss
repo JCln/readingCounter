@@ -1,5 +1,5 @@
 :host,
-:host::ng-deep,
+:host ::ng-deep,
 ::ng-deep {
   .mat-select-value {
     font-family: $font_family;
@@ -25,6 +25,7 @@
   }
 
   .mat-dialog-container {
+    position: relative;
     background: var(--secondary_1);
     color: var(--primary_7);
     direction: rtl;
@@ -34,10 +35,6 @@
     display: flex;
     direction: rtl;
     justify-content: flex-start;
-  }
-
-  .cdk-overlay-pane {
-    position: relative !important;
   }
 
   .close_dg {
@@ -62,7 +59,7 @@
       border-color: transparent;
       background: var(--secondary_4);
     }
-    
+
     &:focus {
       outline: 0 none;
       outline-offset: 0;

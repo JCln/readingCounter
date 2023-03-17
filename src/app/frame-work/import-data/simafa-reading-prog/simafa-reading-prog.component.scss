@@ -2,6 +2,7 @@
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
@@ -9,14 +10,6 @@
   padding: var(--font_05);
   border-radius: $border_15;
   border: .15rem solid var(--secondary_2);
-}
-
-section.content {
-  width: 21rem;
-  margin: var(--font_02) auto;
-  background: var(--white);
-  border-radius: $border_15;
-  padding: var(--font_05);
 }
 
 .input_1 {

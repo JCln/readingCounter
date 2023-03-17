@@ -56,7 +56,7 @@ export class BudgetComponent extends FactoryONE {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          minWidth: '65vw',
+          minWidth: '21rem',
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result)

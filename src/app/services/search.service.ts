@@ -30,6 +30,7 @@ import { ProfileService } from './profile.service';
 })
 export class SearchService {
   _searchProCollapse: boolean = false;
+  _searchMoshtarakCollapse: boolean = false;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
   _years: ITitleValue[] = [];

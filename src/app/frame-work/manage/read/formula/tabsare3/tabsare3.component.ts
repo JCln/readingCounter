@@ -54,7 +54,7 @@ export class Tabsare3Component extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          minWidth: '65vw',
+          minWidth: '21rem',
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {

@@ -1,4 +1,4 @@
-<main class="main">
+<main class="main" [hidden]="searchService._searchMoshtarakCollapse">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="content">
 
@@ -44,5 +44,7 @@
     [_checkUpName]="'allComponent'" [_selectedColumnsToRemember]="'selectedListManagerMosh'"
     [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"
-    (openedBriefKardexDialog)="openBriefKardexDialog($event)">
+    (openedBriefKardexDialog)="openBriefKardexDialog($event)" [_hasCollapsible]=true
+    [_isCollaped]="searchService._searchMoshtarakCollapse"
+    (collapsed)="searchService._searchMoshtarakCollapse = !searchService._searchMoshtarakCollapse">
 </app-prime-table>
