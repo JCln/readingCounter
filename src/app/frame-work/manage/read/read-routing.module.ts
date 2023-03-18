@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'nob', loadChildren: () => import('./fragment/fragment.module').then(fragmentNob => fragmentNob.FragmentModule) },
   { path: 'formula', loadChildren: () => import('./formula/formula.module').then(formula => formula.FormulaModule) },
   { path: 'imgattr', loadChildren: () => import('./image-attribution/image-attribution.module').then(imageAttribution => imageAttribution.ImageAttributionModule) },
+  { path: 'guild', loadChildren: () => import('./guild/guild.module').then(guildManager => guildManager.GuildModule) },
 ];
 
 @NgModule({

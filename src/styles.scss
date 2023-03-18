@@ -36,13 +36,6 @@ p {
   font-weight: 600;
 }
 
-hr {
-  width: 80%;
-  border: 0;
-  height: .14rem;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary_4), rgba(0, 0, 0, 0));
-}
-
 .hr_1 {
   width: 70%;
   margin-bottom: var(--font_l);
@@ -50,13 +43,19 @@ hr {
   border-radius: 30px;
 }
 
-
 .hr_2 {
   opacity: .7;
   width: 70%;
   margin: var(--font_25) auto;
   height: var(--font_02);
   border-radius: 30px;
+}
+
+hr {
+  width: 80%;
+  border: 0;
+  height: .14rem;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary_4), rgba(0, 0, 0, 0));
 }
 
 :root {

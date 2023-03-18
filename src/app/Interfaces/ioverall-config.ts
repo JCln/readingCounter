@@ -396,6 +396,7 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriod = 'readingPeriod',
     selectedReadingPeriodKind = 'periodKind',
     selectedImageAttribution = 'imgattr',
+    selectedImageGuild = 'guild',
     selectedTextOutput = 'textOutput',
     selectedKarbari = 'karbari',
     selectedQotr = 'qotr',

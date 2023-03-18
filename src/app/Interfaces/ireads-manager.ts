@@ -9,9 +9,9 @@ export interface IKarbari {
     isSaxt: boolean,
     hasReadingVibrate: boolean
 }
-export interface IQotr {
+// export interface IQotr {
 
-}
+// }
 export interface IReadingPeriod {
     id: number,
     title: string,
@@ -102,6 +102,12 @@ export interface IFragmentDetails {
 export interface IImageAttribution {
     id?: number,
     title: string,
+    isNew?: boolean
+}
+export interface IGuild {
+    id: number,
+    title: string,
+    isActive?: boolean,
     isNew?: boolean
 }
 export interface ICounterState {

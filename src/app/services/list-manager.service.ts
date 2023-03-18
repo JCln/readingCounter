@@ -45,7 +45,7 @@ export class ListManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    private columnManager: ColumnManager
+    public columnManager: ColumnManager
   ) { }
 
   routeToLMPDXY = (dataSource: IOffLoadPerDay, day: string) => {
@@ -59,12 +59,6 @@ export class ListManagerService {
   }
   denyTracking = (): boolean => {
     return this.utilsService.getDenyTracking();
-  }
-  getLMPerDay = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('lMPerDay');
-  }
-  getLMPerDayPositions = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('lMPerDayPositions');
   }
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();

@@ -1,0 +1,19 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForGuild" 
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"    
+    [_isInRowEditing]=true
+    [_checkUpName]="'guild'"    
+    [_numberOfExtraColumns]="[1,2]"
+    [_selectedColumnsToRemember]="'selectedImageGuild'"
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
+    (refreshedTable)="refreshTable()"
+    (newedRowChangedStatus)="testChangedValue()"
+    (onRowEditedSave)="onRowEditSave($event)"
+    (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (removedRowEditing)="removeRow($event)"
+ > 
+</app-prime-table-editable>
+<!-- [_outputFileName]="'imgattr'" on prime table editable accur table not show data -->

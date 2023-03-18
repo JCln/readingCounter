@@ -39,7 +39,7 @@ export class CounterStateComponent extends FactoryONE {
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }
   columnSelectedMenuDefault = () => {
-    this._selectCols = this.readManagerService.columnSelectedMenuDefault();
+    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus('counterStateDto');
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {

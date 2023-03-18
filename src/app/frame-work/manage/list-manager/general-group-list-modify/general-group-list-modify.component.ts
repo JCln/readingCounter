@@ -60,7 +60,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     public closeTabService: CloseTabService,
     public allListsService: AllListsService,
     public outputManagerService: OutputManagerService,
-    public columnManager: ColumnManager,
     public browserStorageService: BrowserStorageService,
     public utilsService: UtilsService,
     public profileService: ProfileService
@@ -118,9 +117,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
       } else {
-        this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+        this._selectCols = this.listManagerService.columnManager.columnSelectedMenus(this._outputFileName);
       }
-      this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+      this._selectedColumns = this.listManagerService.columnManager.customizeSelectedColumns(this._selectCols);
       this.insertSelectedColumns();
       // setDynamics should implement before new instance of dataSource create      
       this.closeTabService.saveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
@@ -324,7 +323,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     // if OnOffloadComponent rendering
     let temp: any[] = [];
     // should be false on initial(_generalGroupHeaderCheckbox) because filter on DataSource happen
-    if (this.columnManager._generalGroupHeaderCheckbox) {
+    if (this.listManagerService.columnManager._generalGroupHeaderCheckbox) {
       this.tempOriginDataSource = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
       for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
         if (this.closeTabService.saveDataForLMGeneralGroupModify[index].counterStateId !== null)

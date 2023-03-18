@@ -28,14 +28,16 @@
             </section>
 
             <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
-                <mat-checkbox name="hasPreNumber" [(ngModel)]="simafaSingleReq.hasPreNumber">شماره قبلی
+                <mat-checkbox name="hasPreNumber" [(ngModel)]="simafaSingleReq.hasPreNumber">
+                    شماره قبلی
                 </mat-checkbox>
 
                 <mat-checkbox name="displayBillId" [(ngModel)]="simafaSingleReq.displayBillId">
-                    نمایش شناسه قبض
+                    شناسه قبض
                 </mat-checkbox>
 
-                <mat-checkbox name="displayRadif" [(ngModel)]="simafaSingleReq.displayRadif">نمایش ش.پرونده
+                <mat-checkbox name="displayRadif" [(ngModel)]="simafaSingleReq.displayRadif">
+                    ش.پرونده
                 </mat-checkbox>
             </div>
             <footer>

@@ -6,7 +6,6 @@ import {
   ENSnackBarColors,
   ENSnackBarTimes,
   IDictionaryManager,
-  IObjectIteratation,
   IResponses,
 } from 'interfaces/ioverall-config';
 import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';
@@ -29,17 +28,11 @@ export class FragmentManagerService {
     GUid: null
   };
 
-  columnSelectedFragmentMaster = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('_fragmentMaster');
-  }
-  columnSelectedFragmentDetails = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('fragmentDetails');
-  }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
-    private columnManager: ColumnManager
+    public columnManager: ColumnManager
   ) { }
 
   getDataSourceByQuote = (method: ENInterfaces, id: string): Promise<any> => {

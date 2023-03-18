@@ -44,8 +44,8 @@
     position: absolute;
     cursor: pointer;
     border: none;
-    right: 0;
-    top: 0;
+    right: var(--font_03);
+    top: var(--font_03);
     padding: 13px;
     width: 1.7rem;
     height: 1.7rem;

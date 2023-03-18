@@ -41,7 +41,7 @@
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 optionLabel="header"
-                (ngModelChange)="columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+                (ngModelChange)="listManagerService.columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
                 selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
 
@@ -71,7 +71,7 @@
                         <label class="font_family"
                             for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}}) نمایش قرائت شده
                             ها</label>
-                        <p-checkbox [(ngModel)]="columnManager._generalGroupHeaderCheckbox" [binary]="true">
+                        <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox" [binary]="true">
                         </p-checkbox>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">

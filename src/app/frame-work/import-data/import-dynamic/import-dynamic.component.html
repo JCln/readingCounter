@@ -14,15 +14,29 @@
             </section>
             <hr>
             <div class="_container">
-                <div class="input_2" [hidden]="!zoneDictionary.length">
-                    <div class="_key">ناحیه</div>
-                    <div class="_value">
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="this.importDynamicService.importDynamicReq.zoneId" placeholder="انتخاب مورد"
-                            optionValue="id" optionLabel="title" filter="true" (click)="verificationACounterReaderId()">
-                        </p-dropdown>
+                <section class="content_inline">
+                    <div class="input_2" [hidden]="!zoneDictionary.length">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="this.importDynamicService.importDynamicReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                (click)="verificationACounterReaderId()">
+                            </p-dropdown>
+                        </div>
                     </div>
-                </div>
+                    <div class="input_2" *ngIf="userCounterReader.length">
+                        <div class="_key">مامور</div>
+                        <div class="_value">
+                            <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
+                                name="counter-reader"
+                                [(ngModel)]="importDynamicService.importDynamicReq.counterReaderId" optionLabel="title"
+                                [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                                placeholder="انتخاب مورد">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </section>
                 <section class="content_inline">
                     <div class="input_2">
                         <div class="_key">از اشتراک</div>
@@ -35,39 +49,33 @@
                             [(ngModel)]="importDynamicService.importDynamicReq.toEshterak">
                     </div>
                 </section>
-                <div class="input_2"
-                    [hidden]="importDynamicService._isOrderByDate || !readingPeriodKindsDictionary.length">
-                    <div class="_key">نوع دوره</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
-                            <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
-                                (click)="verificationReadingPeriod()">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                <section class="content_inline">
+                    <div class="input_2"
+                        [hidden]="importDynamicService._isOrderByDate || !readingPeriodKindsDictionary.length">
+                        <div class="_key">نوع دوره</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
+                                <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary"
+                                    [value]="truefalse.id" (click)="verificationReadingPeriod()">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
-                </div>
-                <div class="input_2" [hidden]="importDynamicService._isOrderByDate || !readingPeriodDictionary.length">
-                    <div class="_key">دوره قرائت</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="importDynamicService.importDynamicReq.readingPeriodId" name="readingPeriodId">
-                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                    <div class="input_2"
+                        [hidden]="importDynamicService._isOrderByDate || !readingPeriodDictionary.length">
+                        <div class="_key">دوره قرائت</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="importDynamicService.importDynamicReq.readingPeriodId"
+                                name="readingPeriodId">
+                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
-                </div>
-                <div class="input_2" *ngIf="userCounterReader.length">
-                    <div class="_key">مامور</div>
-                    <div class="_value">
-                        <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
-                            name="counter-reader" [(ngModel)]="importDynamicService.importDynamicReq.counterReaderId"
-                            optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                            placeholder="انتخاب مورد">
-                        </p-dropdown>
-                    </div>
-                </div>
+                </section>
                 <section class="content_inline">
                     <div class="input_2 " [hidden]="!_showAlalHesabPercent">
                         <div class="_key">درصد علی‌الحساب</div>
@@ -102,24 +110,21 @@
                 </section>
 
                 <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
-                    <mat-checkbox name="hasPreNumber"
-                        [(ngModel)]="importDynamicService.importDynamicReq.hasPreNumber">شماره
-                        قبلی
+                    <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamicService.importDynamicReq.hasPreNumber">
+                        شماره قبلی
                     </mat-checkbox>
 
                     <mat-checkbox name="displayBillId"
                         [(ngModel)]="importDynamicService.importDynamicReq.displayBillId">
-                        نمایش شناسه
-                        قبض
+                        شناسه قبض
                     </mat-checkbox>
 
-                    <mat-checkbox name="displayRadif"
-                        [(ngModel)]="importDynamicService.importDynamicReq.displayRadif">نمایش
+                    <mat-checkbox name="displayRadif" [(ngModel)]="importDynamicService.importDynamicReq.displayRadif">
                         ش.پرونده
                     </mat-checkbox>
 
                 </div>
-
+                <hr class="hr_1">
                 <footer>
                     <mat-checkbox name="showDynamicCount" [(ngModel)]="_showDynamicCount"
                         (ngModelChange)="setShowDynamicCount($event)">نمایش تعداد اشتراک

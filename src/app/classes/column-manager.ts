@@ -1569,6 +1569,10 @@ export class ColumnManager {
         { field: 'versionCode', header: 'نسخه', isSelected: true },
         // { field: 'fileRepositoryId', header: 'دانلود فایل', isSelected: true }
     ]
+    guild: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true, readonly: true, icon: '_editable' },
+    ]
 
     columnSelectedMenus = (name: string): IObjectIteratation[] => {
         return this[name];

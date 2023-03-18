@@ -132,7 +132,8 @@
   }
 
   .p-dropdown .p-dropdown-clear-icon {
-    right: -1.3rem;
+    right: 0;
+    transform: translateX(50%);
     top: 50%;
   }
 
@@ -153,6 +154,7 @@
     font-size: var(--font_ss);
     font-weight: 600;
     color: var(--primary_5);
+    border: 0;
   }
 
   .p-dropdown-panel .p-dropdown-header {
@@ -188,6 +190,7 @@
     font-family: BLotus, "Blotus", tahoma, Sans-Serif;
     font-size: var(--font_ss);
     font-weight: 600;
+    border: 0;
   }
 
   .p-dropdown-item {

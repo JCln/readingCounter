@@ -238,8 +238,6 @@ export class ImportDynamicService {
       return false;
     }
     if (!_isOrderByDate) {
-      console.log(1);
-
       if (!this.validationOnNull(val.readingPeriodId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_reading_time);
         return false;
@@ -490,7 +488,7 @@ export class ImportDynamicService {
       const dialogRef = this.dialog.open(ConfirmDialogComponent,
         {
           disableClose: disableClose,
-          minWidth: '65vw',
+          minWidth: '21rem',
           data: {
             data: res,
             title: title,

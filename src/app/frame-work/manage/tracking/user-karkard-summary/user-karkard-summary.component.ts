@@ -4,7 +4,6 @@ import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-conf
 import { IUserKarkardSummary } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -24,8 +23,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
 
   constructor(
     public trackingManagerService: TrackingManagerService,
-    public closeTabService: CloseTabService,
-    private columnManager: ColumnManager,
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -37,14 +35,14 @@ export class UserKarkardSummaryComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForUserKarkardSummary) {
       this._selectCols = this.closeTabService.saveDataForUserKarkardSummaryTwo;
-      this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+      this._selectedColumns = this.trackingManagerService.columnManager.customizeSelectedColumns(this._selectCols);
     }
 
     this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.getCounterStateHeaders(this.tempData);
-    this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+    this._selectedColumns = this.trackingManagerService.columnManager.customizeSelectedColumns(this._selectCols);
     this.closeTabService.saveDataForUserKarkardSummaryTwo = this._selectCols;
   }
   @Input() get selectedColumns(): any[] {

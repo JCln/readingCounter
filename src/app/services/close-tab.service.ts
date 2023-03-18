@@ -21,6 +21,7 @@ import {
   ICounterState,
   IFragmentDetails,
   IFragmentMaster,
+  IGuild,
   IImageAttribution,
   IKarbari,
   IReadingPeriod,
@@ -75,6 +76,7 @@ export class CloseTabService {
 
   saveDataForCounterState: ICounterState[];
   saveDataForImageAttribution: IImageAttribution[];
+  saveDataForGuild: IGuild[];
   saveDataForKarbari: IKarbari[];
   saveDataForReadingConfig: IReadingConfigDefault[];
   saveDataForReadingPeriodManager: IReadingPeriod[];

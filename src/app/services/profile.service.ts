@@ -40,7 +40,7 @@ export class ProfileService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private columnManager: ColumnManager,
+    public columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
     private jwtService: JwtService,
     private envService: EnvService,
@@ -111,9 +111,6 @@ export class ProfileService {
   }
   getFontStyle = (): number => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 1);
-  }
-  columnSelectedProfile = (): IObjectIteratation[] => {
-    return this.columnManager.profile;
   }
   verification = (password: IChangePassword) => {
     if (MathS.isNull(password.oldPassword)) {

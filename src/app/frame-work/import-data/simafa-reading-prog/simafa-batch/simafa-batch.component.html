@@ -35,11 +35,11 @@
                 </mat-checkbox>
 
                 <mat-checkbox name="displayBillId" [(ngModel)]="allImportsService.allImports_batch.displayBillId">
-                    نمایش شناسه قبض
+                    شناسه قبض
                 </mat-checkbox>
 
                 <mat-checkbox name="displayRadif" [(ngModel)]="allImportsService.allImports_batch.displayRadif">
-                    نمایش ش.پرونده
+                    ش.پرونده
                 </mat-checkbox>
 
             </div>
@@ -61,8 +61,7 @@
                 <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                     name="selectOptions" optionLabel="header"
                     (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables.selectedSimafaBatch ,$event)"
-                    selectedItemsLabel="{0} ستون انتخاب شده"     placeholder="ستون ها"
-                    [filter]="true">
+                    selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
                 </p-multiSelect>
                 <div class="header_icons_wrap">
                     <div class="right_side">

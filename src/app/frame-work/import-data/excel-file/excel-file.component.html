@@ -84,19 +84,16 @@
             <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
                 <mat-checkbox name="hasPreNumber"
                     [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.hasPreNumber">
-                    شماره
-                    قبلی
+                    شماره قبلی
                 </mat-checkbox>
 
                 <mat-checkbox name="billId"
                     [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayBillId">
-                    نمایش شناسه
-                    قبض
+                    شناسه قبض
                 </mat-checkbox>
 
                 <mat-checkbox name="displayRadif"
                     [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayRadif">
-                    نمایش
                     ش.پرونده
                 </mat-checkbox>
                 <mat-checkbox name="skipErrors"

@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -38,18 +38,6 @@ export class TrackingManagerService {
     zoneId: 0
   };
 
-  getColumnDefColumns = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('defColumns');
-  }
-  getFollowUpView = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('followUpView');
-  }
-  getImportedListDetails = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('importedListDetails');
-  }
-  getLMPerDayFollowUpPositions = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
-  }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
       OffloadModify.callAnnounce,
@@ -82,7 +70,7 @@ export class TrackingManagerService {
     private allListsService: AllListsService,
     private envService: EnvService,
     private jwtService: JwtService,
-    private columnManager: ColumnManager,
+    public columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
     private profileService: ProfileService
   ) { }
