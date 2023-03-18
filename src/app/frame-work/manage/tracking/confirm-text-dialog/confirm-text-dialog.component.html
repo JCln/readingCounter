@@ -1,28 +1,34 @@
-<h2 mat-dialog-title [ngClass]="{'_delete_style': data?.isDelete }">
-    {{data.title}}
-    <p>
-        {{data.title2}}
-    </p>
-</h2>
-<div class="input_box">
-    <input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
-        [(ngModel)]="userInputText">
-</div>
-<div *ngIf="data?.isSelectableDate">
-    <div class="date_wrapper">
-        <app-date-jalali name="date" (dateJalEvent)="receiveFromDateJalali($event)">
-        </app-date-jalali>
+<main class="_container">
+    <div class="_icon">
+        <i [ngClass]="data?.isDelete? 'pi pi-trash': 'pi pi-info-circle'"></i>
     </div>
-</div>
+    <h2 mat-dialog-title>
+        {{data.title}}
+        <p>
+            {{data.title2}}
+        </p>
+    </h2>
+    <div class="input_box">
+        <input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
+            [(ngModel)]="userInputText">
+    </div>
+    <div *ngIf="data?.isSelectableDate">
+        <div class="date_wrapper">
+            <app-date-jalali name="date" (dateJalEvent)="receiveFromDateJalali($event)">
+            </app-date-jalali>
+        </div>
+    </div>
 
-<mat-dialog-actions>
-    <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel()">
-        <i class="pi pi-times"></i>
-    </button>
-    <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
-        (click)="confirm()">تایید
-    </button>
-    <button *ngIf="!data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
-        (click)="confirmWithoutText()">تایید
-    </button>
-</mat-dialog-actions>
+    <mat-dialog-actions>
+        <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel()">
+            <i class="pi pi-times"></i>
+        </button>
+        <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
+            (click)="confirm()">تایید
+        </button>
+        <button *ngIf="!data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
+            (click)="confirmWithoutText()">تایید
+        </button>
+    </mat-dialog-actions>
+
+</main>

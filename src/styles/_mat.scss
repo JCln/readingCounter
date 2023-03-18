@@ -33,8 +33,9 @@
 
   .mat-dialog-actions {
     display: flex;
-    direction: rtl;
     justify-content: flex-start;
+    direction: rtl;
+    min-height: 1rem;
   }
 
   .close_dg {
@@ -52,6 +53,7 @@
     line-height: 14px;
     border-radius: 50%;
     background: var(--secondary_1);
+    color: var(--secondary_8);
 
     &:hover,
     &:active {

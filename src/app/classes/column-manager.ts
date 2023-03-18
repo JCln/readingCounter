@@ -372,7 +372,8 @@ export class ColumnManager {
         { field: 'possibleCounterSerial', header: 'سریال کنتور پیمایش', isSelected: false, readonly: false },
         { field: 'mobile', header: 'موبایل', isSelected: false, readonly: true },
         { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, readonly: true },
-        { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true }
+        { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true },
+        { field: 'guildTitle', header: 'صنف', isSelected: false, readonly: true }
     ]
     trvDiff: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
