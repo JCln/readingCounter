@@ -29,15 +29,15 @@
             <button class="btn_2" matStepperPrevious>صفحه قبل</button>
         </section>
 
+
+        <app-prime-table [dataSource]="closeTabService.saveDataForUserSearchRes" [_numberOfExtraColumns]="[1 , 2 , 3]"
+            [_sessionName]="'user-search-session'" [_sortMode]="'multiple'" [_outputFileName]="'userSearch'"
+            [_selectedColumnsToRemember]="'selectedUsersSearch'" [_checkUpName]="'userSearch'"
+            (refreshedTable)="searchUsers()" (routedToEditPage)="usersAllService.routeToEditPage($event)"
+            (routedToLoggs)="userLogginsService.updateUserLogginsInfo($event)"
+            (showedExactConfig)="showExactConfig($event)" (ActivatedUser)="ActivateUser($event)"
+            (DeActivatedUser)="DeActivateUser($event)" (resetedPasswordUser)="resetPasswordUser($event)">
+        </app-prime-table>
     </mat-step>
 
 </mat-horizontal-stepper>
-
-
-<app-prime-table [dataSource]="closeTabService.saveDataForUserSearchRes" [_numberOfExtraColumns]="[1 , 2 , 3]"
-    [_sessionName]="'user-search-session'" [_sortMode]="'multiple'" [_outputFileName]="'userSearch'"
-    [_selectedColumnsToRemember]="'selectedUsersSearch'" [_checkUpName]="'userSearch'" (refreshedTable)="searchUsers()"
-    (routedToEditPage)="usersAllService.routeToEditPage($event)"
-    (routedToLoggs)="userLogginsService.updateUserLogginsInfo($event)" (showedExactConfig)="showExactConfig($event)"
-    (ActivatedUser)="ActivateUser($event)" (DeActivatedUser)="DeActivateUser($event)"
-    (resetedPasswordUser)="resetPasswordUser($event)"></app-prime-table>

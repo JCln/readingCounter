@@ -1,5 +1,10 @@
+<app-collapsable [_isCollapsed]=closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed
+    (_clicked)="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed = !closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed">
+</app-collapsable>
+
 <main class="main">
-    <form #form="ngForm" (ngSubmit)="verification()">
+    <form #form="ngForm" (ngSubmit)="verification()"
+        [hidden]="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed">
         <section class="_card">
             <section class="content">
                 <div class="input_2">

@@ -15,8 +15,8 @@ export class UserRoleComponent {
     private usersAllService: UsersAllService,
   ) { }
   changeRadio = ($event: any) => {
-    this.selectedRole = $event;
-    this.usersAllService.userEditOnRoleInsertRole(this.selectedRole);
+    this.selectedRole = $event.id;
+    this.usersAllService.userEditOnRoleInsertRole($event);
   }
 
 }

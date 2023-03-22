@@ -2,7 +2,7 @@
     [dataSource]="closeTabService.saveDataForTrackOffloadedGroup" 
     [_outputFileName]="'offloadedGroup'"
     [_checkUpName]="'offloadedGroup'"
-    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4]: [1,2,3,4,5]"
     [_calculableSUM]=true
     [_hasAggregating]= true
     [_isCustomSort]=true
@@ -13,6 +13,7 @@
     (downloadedOutputSingle)="downloadOutputSingle($event)"            
     (routedToOffloadGeneralModify)="routeToOffloadGeneralGroupModify($event)"        
     (backedToImportedConfirmDialog)="backToReading($event)"
-    (routedToLMAll)="routeToAssessPre($event)"        
+    (routedToLMAll)="routeToAssessPre($event)"     
+    (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"   
  > 
 </app-prime-table>

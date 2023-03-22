@@ -63,7 +63,7 @@ export class ImportedComponent extends FactoryONE {
     });
   }
   firstConfirmDialog = async (rowDataAndIndex: object) => {
-    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_deleteRoute, true, true);
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_deleteRoute, true, true, 'pi pi-trash');
     if (a) {
       await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowDataAndIndex['dataSource'], a);
       this.refreshTable();

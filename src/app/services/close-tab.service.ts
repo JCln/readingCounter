@@ -112,7 +112,8 @@ export class CloseTabService {
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
     fromDate: '',
-    toDate: ''
+    toDate: '',
+    _isCollapsed: false
   };
   saveDataForUserKarkardSummary: any;
   saveDataForUserKarkardSummaryTwo: any;

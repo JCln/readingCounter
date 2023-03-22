@@ -2,7 +2,7 @@
     <div *ngFor="let orderType of roleItems">
         <div class="p-field-radiobutton">
             <p-radioButton name="orderByDate" [value]="orderType.id" [(ngModel)]="selectedRole" [inputId]="orderType.id"
-                (change)="changeRadio(orderType.id)">
+                (ngModelChange)="changeRadio(orderType)">
             </p-radioButton>
             <label [for]="orderType.id">{{orderType.title}}</label>
         </div>

@@ -20,6 +20,7 @@ import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackin
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { EnvService } from './env.service';
+import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
 
@@ -72,15 +73,17 @@ export class TrackingManagerService {
     private jwtService: JwtService,
     public columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private followUpService: FollowUpService,
   ) { }
 
-  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
+  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean, icon: string): Promise<any> => {
     const a = {
       messageTitle: message,
       minWidth: '19rem',
       isInput: isInput,
-      isDelete: isDelete
+      isDelete: isDelete,
+      icon: icon
     }
     return this.utilsService.firstConfirmDialog(a);
   }
@@ -349,6 +352,10 @@ export class TrackingManagerService {
   }
   verificationTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
+  }
+  routeToFollowUp = (row: ITracking) => {
+    this.followUpService.setTrackNumber(row.trackNumber);
+    this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
   }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });

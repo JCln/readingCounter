@@ -12,6 +12,7 @@ export interface IDialogMessage {
   minWidth: string,
   isInput: boolean,
   isDelete: boolean,
+  icon: string,
   doesNotReturnButton?: boolean
 }
 @Injectable({
@@ -91,10 +92,11 @@ export class UtilsService {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: config.minWidth,
         data: {
-          title: config.messageTitle,
-          title2: config.messageTitleTwo,
+          messageTitle: config.messageTitle,
+          messageTitleTwo: config.messageTitleTwo,
           isInput: config.isInput,
           isDelete: config.isDelete,
+          icon: config.icon,
           doesNotReturnButton: config.doesNotReturnButton
         }
       });

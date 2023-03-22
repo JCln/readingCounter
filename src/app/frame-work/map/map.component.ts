@@ -114,9 +114,10 @@ export class MapComponent implements OnInit, OnDestroy {
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup],
     });
 
+    this.map.attributionControl.setPrefix('TarnamaSepCo');
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {

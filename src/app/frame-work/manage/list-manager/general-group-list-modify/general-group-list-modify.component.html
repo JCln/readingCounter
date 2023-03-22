@@ -71,7 +71,8 @@
                         <label class="font_family"
                             for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}}) نمایش قرائت شده
                             ها</label>
-                        <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox" [binary]="true">
+                        <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox"
+                            [binary]="true">
                         </p-checkbox>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
@@ -157,10 +158,10 @@
                             <ng-container>
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                        <p-dropdown [options]="counterStateByZoneDictionary"
-                                            [(ngModel)]="dataSource[col.field]" placeholder="انتخاب مورد"
+                                        <p-dropdown name="drops" [options]="counterStateByZoneDictionary"
+                                            [(ngModel)]="dataSource[col.field]" [placeholder]="dataSource[col.field]"
                                             [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
-                                            (onChange)="clickedDropDowns(dataSource[col.field], 'counterStateId' , dataSource.id)">
+                                            (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
                                         </p-dropdown>
                                     </ng-template>
                                     <ng-template pTemplate="output">

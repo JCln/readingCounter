@@ -184,7 +184,16 @@
                     <div class="tooltip_text">اطلاعات روزانه</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'simpleSearch'" (click)="routeToFollowUp(dataSource)">
+            <td *ngIf="
+            _checkUpName == 'simpleSearch' ||
+            _outputFileName== 'imported' || 
+            _outputFileName== 'loaded' ||
+             _outputFileName== 'reading' ||
+             _outputFileName== 'offloaded'||
+             _outputFileName== 'finished' ||
+             _outputFileName== 'lastStates' ||
+             _outputFileName== 'offloadedGroup'
+              " (click)="routeToFollowUp(dataSource)">
                 <span class="ui-column-title">مشاهده در پیگیری موردی</span>
                 <i class="tooltip p_icons pi pi-search-plus">
                     <div class="tooltip_text_right">مشاهده در پیگیری موردی</div>

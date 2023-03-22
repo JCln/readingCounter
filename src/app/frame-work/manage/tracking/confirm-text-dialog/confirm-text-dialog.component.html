@@ -1,11 +1,11 @@
 <main class="_container">
     <div class="_icon">
-        <i [ngClass]="data?.isDelete? 'pi pi-trash': 'pi pi-info-circle'"></i>
+        <i [ngClass]="data.icon"></i>
     </div>
     <h2 mat-dialog-title>
-        {{data.title}}
+        {{data.messageTitle}}
         <p>
-            {{data.title2}}
+            {{data.messageTitleTwo}}
         </p>
     </h2>
     <div class="input_box">

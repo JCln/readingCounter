@@ -137,9 +137,10 @@ export class ProfileService {
   changePassword = async (password: IChangePassword): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_yourPassword,
-      minWidth: '65vw',
+      minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      icon: 'fas fa-user-lock'
     }
     if (this.verification(password)) {
       if (await this.utilsService.firstConfirmDialog(a)) {
@@ -155,7 +156,8 @@ export class ProfileService {
       messageTitle: EN_messages.ResetLocalStorage,
       minWidth: '20rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      icon: 'pi pi-refresh'
     }
     if (await this.utilsService.firstConfirmDialog(a))
       this.jwtService.removeAllExceptAuths();

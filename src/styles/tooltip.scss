@@ -46,7 +46,6 @@
 }
 
 .tooltip .tooltip_text_bottom {
-  transform: translateY(50%) translateX(-50%);
   position: absolute;
   direction: rtl;
   visibility: hidden;
@@ -54,10 +53,11 @@
   color: var(--white);
   text-align: center;
   border-radius: 6px;
-  width: 120px;
-  padding: 5px 0;
+  width: 15rem;
+  padding: 3px;
   z-index: 4;
   left: 50%;
+  transform: translateY(50%) translateX(-50%);
   top: 50%;
   font-weight: 600;
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
