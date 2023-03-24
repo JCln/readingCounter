@@ -21,6 +21,7 @@ import {
   ICounterState,
   IFragmentDetails,
   IFragmentMaster,
+  IGuild,
   IImageAttribution,
   IKarbari,
   IReadingPeriod,
@@ -75,6 +76,7 @@ export class CloseTabService {
 
   saveDataForCounterState: ICounterState[];
   saveDataForImageAttribution: IImageAttribution[];
+  saveDataForGuild: IGuild[];
   saveDataForKarbari: IKarbari[];
   saveDataForReadingConfig: IReadingConfigDefault[];
   saveDataForReadingPeriodManager: IReadingPeriod[];
@@ -110,7 +112,8 @@ export class CloseTabService {
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
     fromDate: '',
-    toDate: ''
+    toDate: '',
+    _isCollapsed: false
   };
   saveDataForUserKarkardSummary: any;
   saveDataForUserKarkardSummaryTwo: any;
@@ -127,7 +130,7 @@ export class CloseTabService {
   saveDataForFollowUpReq = {
     trackNumber: null,
     canShowGraph: false,
-    _isCollapsed: true
+    _isCollapsed: false
   }
   saveDataForFollowUpAUX: any;
   // import dynamic
@@ -162,7 +165,8 @@ export class CloseTabService {
     zoneId: 0,
     readingPeriodId: 0,
     year: this.utilsService.getFirstYear(),
-    kindId: null
+    kindId: null,
+    _isCollapsed: false
   }
   saveDataForImportDataFileExcel: any;
   saveDataForImportDataFileExcelReq: IFileExcelReq = {

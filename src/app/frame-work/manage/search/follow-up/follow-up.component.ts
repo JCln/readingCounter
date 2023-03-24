@@ -2,18 +2,20 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
-import { IFollowUp, IFollowUpHistory } from 'interfaces/isearchs';
+import { IFollowUpHistory } from 'interfaces/isearchs';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { FollowUpService } from 'services/follow-up.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-follow-up',
   templateUrl: './follow-up.component.html',
-  styleUrls: ['./follow-up.component.scss']
+  styleUrls: ['./follow-up.component.scss'],
+  animations: [transitionAnimation]
 })
 export class FollowUpComponent extends FactoryONE {
   shouldActive: boolean = false;
@@ -49,7 +51,7 @@ export class FollowUpComponent extends FactoryONE {
   }
 
   toPreStatus = async (dataSource: IFollowUpHistory) => {
-    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_backToPrev, true, false);
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_backToPrev, true, false, 'pi pi-step-backward');
     if (a) {
       this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingPRE, dataSource.id, a);
     }
@@ -115,10 +117,10 @@ export class FollowUpComponent extends FactoryONE {
   insertToDesc = () => {
     if (this.dataSourceAUX) {
       this.trackingManagerService.setGetRanges(this.dataSourceAUX);
-      this._selectColumnsAUX = this.trackingManagerService.getLMPerDayFollowUpPositions();
+      this._selectColumnsAUX = this.trackingManagerService.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
     }
-    this._showDesc = this.trackingManagerService.getFollowUpView();
-    this._defColumns = this.trackingManagerService.getColumnDefColumns();
+    this._showDesc = this.trackingManagerService.columnManager.columnSelectedMenus('followUpView');
+    this._defColumns = this.trackingManagerService.columnManager.columnSelectedMenus('defColumns');
     this.clearUNUsables();
   }
   showInMap = () => {

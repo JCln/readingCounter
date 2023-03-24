@@ -1,38 +1,41 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="content">
-            <div class="input_2">
-                <div class="_key">ناحیه</div>
-                <p-dropdown name="zones" [options]="zoneDictionary"
-                    [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId" placeholder="انتخاب مورد"
-                    [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
-                </p-dropdown>
-            </div>
-            <div class="input_2">
-                <div class="_key">از</div>
-                <div class="_value">
-                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
-                        [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.fromDate">
-                    </app-date-jalali>
+        <section class="_card"
+            [@openClose]="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed ? 'slideUp' : 'slideDown'">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId"
+                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
                 </div>
-            </div>
-            <div class="input_2">
-                <div class="_key">تا</div>
-                <div class="_value">
-                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
-                        [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.toDate">
-                    </app-date-jalali>
+                <div class="input_2">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.fromDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
-            </div>
+                <div class="input_2">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.toDate">
+                        </app-date-jalali>
+                    </div>
+                </div>
 
-            <button type="submit" class="btn_1">
-                مشاهده لیست
-                <i class="pi pi-list"></i>
-            </button>
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
 
+            </section>
         </section>
-
-
     </form>
 
     <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForUserKarkardSummary" [paginator]="true"
@@ -44,15 +47,17 @@
         [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
-                [filter]="true">
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
             <div class="header_icons_wrap">
                 <div class="right_side">
                 </div>
                 <div class="left_side">
+                    <app-collapsable [_isCollapsed]=closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed
+                        (_clicked)="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed = !closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed">
+                    </app-collapsable>
                 </div>
             </div>
         </ng-template>

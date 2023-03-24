@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ISimafaImportStatus, ITitleValue } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
 import { CompositeService } from './composite.service';
 
 export interface IDialogMessage {
@@ -12,7 +12,9 @@ export interface IDialogMessage {
   minWidth: string,
   isInput: boolean,
   isDelete: boolean,
-  doesNotReturnButton?: boolean
+  icon: string,
+  doesNotReturnButton?: boolean,
+  isSelectableDate?: boolean
 }
 @Injectable({
   providedIn: 'root'
@@ -91,11 +93,13 @@ export class UtilsService {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: config.minWidth,
         data: {
-          title: config.messageTitle,
-          title2: config.messageTitleTwo,
+          messageTitle: config.messageTitle,
+          messageTitleTwo: config.messageTitleTwo,
           isInput: config.isInput,
           isDelete: config.isDelete,
-          doesNotReturnButton: config.doesNotReturnButton
+          icon: config.icon,
+          doesNotReturnButton: config.doesNotReturnButton,
+          isSelectableDate: config.isSelectableDate
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

@@ -49,9 +49,7 @@ section {
   .send {
     margin: var(--font_2) 0 var(--font_05);
 
-    .btn_2 {
-      color: var(--primary_2);
-      background: var(--secondary_1);
+    .btn_1 {
       width: 10.5rem;
     }
   }
@@ -92,6 +90,7 @@ section {
 }
 
 .p-dialog .p-dialog-header {
+  background: var(--secondary_1) !important;
   padding: var(--font_025) !important;
 }
 
@@ -102,14 +101,15 @@ section {
   }
 
   ._colors_button :nth-child(2) {
-    background: green !important;
+    background: rgb(71, 123, 71) !important;
   }
 
   ._colors_button :nth-child(3) {
-    background: orange !important;
+    background: rgb(188, 136, 39) !important;
   }
 
   ._colors_button :nth-child(4) {
-    background: red !important;
+    background: rgb(192, 26, 26) !important;
   }
+
 }

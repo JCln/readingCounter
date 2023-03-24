@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
@@ -21,7 +20,6 @@ import { WaterAddDgComponent } from './water/water-add-dg/water-add-dg.component
   ],
   imports: [
     SharedModule,
-    SharedTwoModule,
     SharedThreeModule,
     FormulaRoutingModule
   ]

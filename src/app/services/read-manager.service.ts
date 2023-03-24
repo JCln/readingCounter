@@ -5,7 +5,7 @@ import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'inter
 
 import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
-import { ICounterState, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
+import { ICounterState, IGuild, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
@@ -22,12 +22,9 @@ export class ReadManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
-    private columnManager: ColumnManager
+    public columnManager: ColumnManager
   ) { }
 
-  columnSelectedMenuDefault = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('counterStateDto');
-  }
   /* API CALLS */
   getProvinceDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getProvinceDictionary();
@@ -99,6 +96,13 @@ export class ReadManagerService {
     }
     return true;
   }
+  verificationGuild = (dataSource: IGuild): boolean => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    return true;
+  }
   verificationCounterState = (dataSource: ICounterState): boolean => {
     if (!this.counterStateVertification(dataSource))
       return false;
@@ -126,7 +130,8 @@ export class ReadManagerService {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
   }

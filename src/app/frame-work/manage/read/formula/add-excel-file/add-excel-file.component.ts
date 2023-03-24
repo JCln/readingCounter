@@ -43,6 +43,6 @@ export class AddExcelFileComponent {
 
     this.dialogRef.close(true);
   }
-  closeDialog = () => this.dialogRef.close();
+  close = () => this.dialogRef.close();
 
 }

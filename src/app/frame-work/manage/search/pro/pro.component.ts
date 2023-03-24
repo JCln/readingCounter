@@ -1,3 +1,4 @@
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -14,7 +15,8 @@ import { AllListsFactory } from 'src/app/classes/factory';
 @Component({
   selector: 'app-pro',
   templateUrl: './pro.component.html',
-  styleUrls: ['./pro.component.scss']
+  styleUrls: ['./pro.component.scss'],
+  animations: [transitionAnimation]
 })
 export class ProComponent extends AllListsFactory {
 
@@ -63,7 +65,7 @@ export class ProComponent extends AllListsFactory {
     this.closeTabService.saveDataForSearchProReq.karbariCodes = [];
     this.closeTabService.saveDataForSearchProReq.fragmentMasterIds = [];
   }
-  getNesseseriesByZone = async () => {    
+  getNesseseriesByZone = async () => {
     const _zone = this.closeTabService.saveDataForSearchProReq.zoneId;
     if (!_zone) {
       this.counterStateDictionary = await this.searchService.getCounterStateDictionary();

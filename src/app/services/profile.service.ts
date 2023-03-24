@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
@@ -11,7 +10,6 @@ import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { EnvService } from './env.service';
 import { LocalClientConfigsService } from './local-client-configs.service';
 
@@ -42,8 +40,7 @@ export class ProfileService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dialog: MatDialog,
-    private columnManager: ColumnManager,
+    public columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
     private jwtService: JwtService,
     private envService: EnvService,
@@ -101,10 +98,10 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'bottom-left');
   }
   getLocalResizable = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, this.envService.defaultAggregateTracks);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, this.envService.reSizableTable);
   }
   getLocalReOrderable = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.envService.defaultAggregateTracks);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.envService.reOrderableTable);
   }
   getLocalDefaultAggregateTracks = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.envService.defaultAggregateTracks);
@@ -114,9 +111,6 @@ export class ProfileService {
   }
   getFontStyle = (): number => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 1);
-  }
-  columnSelectedProfile = (): IObjectIteratation[] => {
-    return this.columnManager.profile;
   }
   verification = (password: IChangePassword) => {
     if (MathS.isNull(password.oldPassword)) {
@@ -140,10 +134,33 @@ export class ProfileService {
   showMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
   }
-  changePassword = (password: IChangePassword) => {
-    if (this.verification(password)) {
-      this.firstConfirmDialog(EN_messages.confirm_yourPassword, password);
+  changePassword = async (password: IChangePassword): Promise<any> => {
+    const a = {
+      messageTitle: EN_messages.confirm_yourPassword,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'fas fa-user-lock'
     }
+    if (this.verification(password)) {
+      if (await this.utilsService.firstConfirmDialog(a)) {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
+          if (res)
+            this.showMessage(res.message);
+        });
+      }
+    }
+  }
+  resetAllSavedLocals = async (): Promise<any> => {
+    const a = {
+      messageTitle: EN_messages.ResetLocalStorage,
+      minWidth: '20rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-refresh'
+    }
+    if (await this.utilsService.firstConfirmDialog(a))
+      this.jwtService.removeAllExceptAuths();
   }
   getMyInfoDataSource = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
@@ -158,26 +175,6 @@ export class ProfileService {
         resolve(res)
       });
     });
-  }
-  firstConfirmDialog = (reason: EN_messages, password: any): Promise<any> => {
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '65vw',
-        data: {
-          title: reason,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
-            if (res)
-              this.utilsService.snackBarMessageSuccess(res.message);
-          });
-        }
-      })
-    })
   }
   // TODO: get access aggregating from trackingManager(کارتابل)
   _agg = {

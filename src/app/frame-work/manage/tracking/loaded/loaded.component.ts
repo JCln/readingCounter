@@ -33,7 +33,7 @@ export class LoadedComponent extends FactoryONE {
 
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
-    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false);
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false, 'pi pi-step-backward');
     if (a) {
       await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToImportedFromLoad, rowDataAndIndex['dataSource'], a);
       this.refreshTable();

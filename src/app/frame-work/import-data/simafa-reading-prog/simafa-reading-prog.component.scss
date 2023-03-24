@@ -2,6 +2,7 @@
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
@@ -11,27 +12,17 @@
   border: .15rem solid var(--secondary_2);
 }
 
-section.content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 11rem));
-  gap: var(--font_05);
-  align-items: center;
-}
-
-.tooltip {
-  cursor: pointer;
-}
-
 .input_1 {
   border-radius: 10px;
   min-width: 100%;
 }
 
 .btn_1 {
-  font-family: $font_family;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  font-family: $font_family;
+  max-width: 100%;
 }
 
 h2 {

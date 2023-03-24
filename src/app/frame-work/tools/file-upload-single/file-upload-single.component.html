@@ -8,13 +8,16 @@
 
             <div class="input_2">
                 <div class="_key">نوع جستجو</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="offlineModeService.fileUploadSingle.searchBy"
-                    name="searchType">
-                    <mat-option (click)="_searchByInfo = truefalse.searchBy"
-                        *ngFor="let truefalse of offlineModeService.fileUploadSingle.searchType" [value]="truefalse.id">
-                        {{truefalse.searchBy}}
-                    </mat-option>
-                </mat-select>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="offlineModeService.fileUploadSingle.searchBy"
+                        name="searchType">
+                        <mat-option (click)="_searchByInfo = truefalse.searchBy"
+                            *ngFor="let truefalse of offlineModeService.fileUploadSingle.searchType"
+                            [value]="truefalse.id">
+                            {{truefalse.searchBy}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
 
             <div class="input_2">

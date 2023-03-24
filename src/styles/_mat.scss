@@ -1,5 +1,5 @@
 :host,
-:host::ng-deep,
+:host ::ng-deep,
 ::ng-deep {
   .mat-select-value {
     font-family: $font_family;
@@ -25,15 +25,50 @@
   }
 
   .mat-dialog-container {
-    background: var(--white);
+    position: relative;
+    background: var(--secondary_1);
     color: var(--primary_7);
     direction: rtl;
   }
 
   .mat-dialog-actions {
     display: flex;
-    direction: rtl;
     justify-content: flex-start;
+    direction: rtl;
+    min-height: 1rem;
+    margin-bottom: 0;
+  }
+
+  .close_dg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    cursor: pointer;
+    border: none;
+    right: var(--font_03);
+    top: var(--font_03);
+    padding: 13px;
+    width: 1.7rem;
+    height: 1.7rem;
+    line-height: 14px;
+    border-radius: 50%;
+    background: var(--secondary_1);
+    color: var(--secondary_8);
+
+    &:hover,
+    &:active {
+      color: #495057;
+      border-color: transparent;
+      background: var(--secondary_4);
+    }
+
+    &:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      background: var(--secondary_4);
+      box-shadow: 0 0 0 0.2rem #a6d5fa;
+    }
   }
 
   .mat-select {

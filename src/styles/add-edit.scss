@@ -7,8 +7,8 @@
 
 form._user-input {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
-  gap: var(--font_xxs);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  gap: var(--font_02);
 }
 
 .btn_1 {
@@ -19,6 +19,7 @@ form._user-input {
 ._value {
   border: 0;
   font-weight: 800;
+  font-size: var(--font_ss);
 }
 
 input::placeholder {
@@ -72,7 +73,7 @@ input::placeholder {
     display: grid;
     place-content: center;
     padding: var(--font_02);
-    border-radius: $border_5;
+    border-radius: $border_100vmax;
     font-size: var(--font_l);
     font-weight: 600;
     background: var(--thirdy_2);
@@ -80,6 +81,13 @@ input::placeholder {
     box-shadow: 1px 1px 3px 0px var(--thirdy_2);
     border: 1px solid var(--secondary_3);
     cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: var(--primary_4);
+      color: var(--white);
+    }
   }
 
   @media (max-width: 550px) {
@@ -185,15 +193,15 @@ input::placeholder {
 .roles {
   background: var(--thirdy_2);
   border-radius: $border_5;
-  padding: var(--font_05);
+  padding: var(--font_02);
 }
 
 .role_items {
   direction: rtl;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 12rem));
-  gap: var(--font_05);
-  padding: var(--font_xs);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
+  gap: var(--font_02);
+  padding: var(--font_05);
   border-radius: $border_15;
   margin-bottom: var(--font_2);
   background: var(--secondary_1);
@@ -258,6 +266,7 @@ h2 {
 .mat-stepper-horizontal {
   font-family: $font_family;
   padding: var(--font_05);
+  border-radius: $border_7;
 }
 
 .mat-checkbox-layout .mat-checkbox-label {

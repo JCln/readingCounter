@@ -6,12 +6,14 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 @Component({
   selector: 'app-traverse-differential',
   templateUrl: './traverse-differential.component.html',
-  styleUrls: ['./traverse-differential.component.scss']
+  styleUrls: ['./traverse-differential.component.scss'],
+  animations: [transitionAnimation]
 })
 export class TraverseDifferentialComponent extends FactoryONE {
   karbariDictionaryByCode: IDictionaryManager[] = [];

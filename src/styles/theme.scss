@@ -16,7 +16,7 @@
   ._color_palete {
     display: flex;
     position: relative;
-    border-radius: 100vmax;
+    border-radius: $border_100vmax;
     padding: .4rem;
     font-size: var(--font_m);
     place-content: center;

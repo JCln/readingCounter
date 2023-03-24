@@ -35,7 +35,6 @@ section {
 .title {
   color: var(--thirdy_1);
   text-align: center;
-  margin: var(--font_xs) var(--font_05);
   font-size: var(--font_l2);
 }
 
@@ -51,7 +50,7 @@ input {
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: var(--thirdy_1);
+    background: var(--secondary_1);
     direction: rtl;
   }
 }

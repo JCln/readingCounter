@@ -5,11 +5,13 @@
 
         <div class="input_2">
             <div class="_key">دوره قرائت</div>
-            <mat-select placeholder="انتخاب مورد" [(value)]="selectedPeriodKindId" name="readingPeriodKindId">
-                <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" [(value)]="selectedPeriodKindId" name="readingPeriodKindId">
+                    <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
         </div>
 
         <div class="input_2">
@@ -54,7 +56,9 @@
     </main>
 
     <mat-dialog-actions>
-        <button class="btn_2" type="button" (click)="close()">بازگشت</button>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
         <button class="btn_2 _custom" type="submit">ذخیره</button>
     </mat-dialog-actions>
 

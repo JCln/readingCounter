@@ -19,7 +19,7 @@ export class ApkService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private snackWrapperService: SnackWrapperService,
-    private utilsService: UtilsService    
+    private utilsService: UtilsService
   ) { }
 
   getDataSource = (): any => {
@@ -109,7 +109,8 @@ export class ApkService {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
   }

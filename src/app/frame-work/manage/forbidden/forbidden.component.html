@@ -1,14 +1,13 @@
-<main [hidden]="forbiddenService._isCollapsedForbidden">
+<main>
     <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="_card">
+        <section class="_card" [@openClose]="forbiddenService._isCollapsedForbidden ? 'slideUp' : 'slideDown'">
 
             <div class="input_2">
                 <div class="_key">ناحیه</div>
                 <div class="_value">
                     <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="forbiddenService.forbiddenReq.zoneId" placeholder="انتخاب مورد"
-                        [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                        filter="true">
+                        [(ngModel)]="forbiddenService.forbiddenReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                        optionLabel="title" filter="true">
                     </p-dropdown>
                 </div>
             </div>
@@ -29,7 +28,7 @@
                 </div>
             </div>
             <button type="submit" class="btn_1">
-                مشاهده لیست
+                مشاهده
                 <i class="pi pi-list"></i>
             </button>
         </section>

@@ -1,19 +1,7 @@
 @import 'shared_reports';
 
-.over_all {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 21rem));
-  direction: rtl;
-  justify-content: center;
-  gap: var(--font_2);
-}
-
 .content {
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  text-align: center;
   padding: var(--font_xs) 0;
-  justify-content: space-around;
   border-radius: $border_15;
 }
 

@@ -1,14 +1,16 @@
-<app-collapsable [_isReversed]="true" [_isCollapsed]=readingReportManagerService._isCollapsedAllImgs
+<app-collapsable [_isCollapsed]=readingReportManagerService._isCollapsedAllImgs
     (_clicked)=" readingReportManagerService._isCollapsedAllImgs = !readingReportManagerService._isCollapsedAllImgs">
 </app-collapsable>
-<form #form="ngForm" *ngIf="readingReportManagerService._isCollapsedAllImgs" class="_card"
-    (ngSubmit)="connectToServer()">
+<form #form="ngForm" class="_card" (ngSubmit)="connectToServer()"
+    [@openClose]="readingReportManagerService._isCollapsedAllImgs ? 'slideUp' : 'slideDown'">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
         <input class="_value" type="number" name="trackNumber"
             [(ngModel)]="readingReportManagerService.trackNumberAllImages">
     </div>
-    <button type="submit" class="btn_1">مشاهده</button>
+    <button type="submit" class="btn_1">
+        مشاهده
+    </button>
 </form>
 
 <section *ngIf="allImagesDataSource" class="_descriptions">
@@ -39,9 +41,9 @@
         <input readonly="true" class="_value" name="counterReader" [(ngModel)]="allImagesDataSource.counterReaderName">
     </div>
 </section>
-<main *ngIf="allImagesDataSource" style="position: relative;">
 
-    <div class="content">
+<main *ngIf="allImagesDataSource" style="position: relative;">
+    <div class="img_content">
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
@@ -58,7 +60,6 @@
                     <p>{{item.imageDescription}}</p>
                 </div>
             </div>
-
         </div>
     </div>
 

@@ -68,6 +68,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _multiSelectEnable: boolean = true;
     @Input() _isCustomSort: boolean = false;
     @Input() _hasSaveColumns: boolean = true;
+    @Input() _hasRefreshTable: boolean = true;
 
     constructor(
         public browserStorageService: BrowserStorageService,
@@ -93,7 +94,7 @@ export class FactorySharedPrime implements OnChanges {
         if (this._checkUpName == 'allComponent') {
             let temp: any[] = [];
             // should be false on initial(_primeNGHeaderCheckbox) because filter on DataSource happen
-            if (this.columnManager._primeNGHeaderCheckbox) {
+            if (this.profileService.columnManager._primeNGHeaderCheckbox) {
                 this.tempOriginDataSource = JSON.parse(JSON.stringify(this.dataSource));
                 for (let index = 0; index < this.dataSource.length; index++) {
                     if (this.dataSource[index].counterStateId !== null)
@@ -134,10 +135,10 @@ export class FactorySharedPrime implements OnChanges {
                 this._showSavedColumnButton = false;
             }
             else {
-                this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+                this._selectCols = this.profileService.columnManager.columnSelectedMenus(this._outputFileName);
                 this._showSavedColumnButton = true;
             }
-            this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+            this._selectedColumns = this.profileService.columnManager.customizeSelectedColumns(this._selectCols);
         }
     }
     resetSavedColumns = () => {

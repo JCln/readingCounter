@@ -1,15 +1,16 @@
 <div class="over_all">
     <main>
         <h1>جزئیات پیام</h1>
-        <div class="content">
+        <div class="_card">
             <div class="_save_this">
                 <h2>عنوان</h2>
-                <input type="text" class="input_1" [(ngModel)]="messageService.message.title">
+                <input type="text" class="input_1" [ngStyle]="{'color': messageService.message.exactColor}"
+                    [(ngModel)]="messageService.message.title">
             </div>
             <div class="text">
                 <h2>متن</h2>
-                <textarea name="text" id="text" cols="30" rows="10"
-                    [(ngModel)]="messageService.message.message"></textarea>
+                <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="messageService.message.message"
+                    [ngStyle]="{'color': messageService.message.exactColor}"></textarea>
             </div>
             <div class="time">
                 <h2>زمان (ثانیه)</h2>
@@ -20,8 +21,8 @@
                 <div class="color">
                     <h2>رنگ</h2>
                     <div class="c_separator">
-                        <p-selectButton class="_colors_button" [options]="colors" [(ngModel)]="messageService.message.color" optionLabel="text"
-                            optionValue="value">
+                        <p-selectButton class="_colors_button" [options]="colors"
+                            [(ngModel)]="messageService.message.color" optionLabel="text" optionValue="value">
                         </p-selectButton>
                     </div>
                 </div>

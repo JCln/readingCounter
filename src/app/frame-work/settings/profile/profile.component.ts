@@ -126,7 +126,7 @@ export class ProfileComponent extends FactoryONE {
     this.profileService.changePassword(this.password);
   }
   getSelectedColumns = () => {
-    this._selectCols = this.profileService.columnSelectedProfile();
+    this._selectCols = this.profileService.columnManager.columnSelectedMenus('profile');
   }
   getValuesOfImg = () => {
     this.profileService.showStateVals.imgOptions = this.profileService.getImg();

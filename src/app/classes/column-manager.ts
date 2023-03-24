@@ -372,7 +372,8 @@ export class ColumnManager {
         { field: 'possibleCounterSerial', header: 'سریال کنتور پیمایش', isSelected: false, readonly: false },
         { field: 'mobile', header: 'موبایل', isSelected: false, readonly: true },
         { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, readonly: true },
-        { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true }
+        { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true },
+        { field: 'guildTitle', header: 'صنف', isSelected: false, readonly: true }
     ]
     trvDiff: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
@@ -1568,6 +1569,10 @@ export class ColumnManager {
         { field: 'versionName', header: 'نام نسخه', isSelected: true },
         { field: 'versionCode', header: 'نسخه', isSelected: true },
         // { field: 'fileRepositoryId', header: 'دانلود فایل', isSelected: true }
+    ]
+    guild: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true, readonly: true, icon: '_editable' },
     ]
 
     columnSelectedMenus = (name: string): IObjectIteratation[] => {

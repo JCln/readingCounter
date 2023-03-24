@@ -57,7 +57,7 @@ export class LatestReadsComponent extends AllListsFactory {
       maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup2]
     });
-
+    this.map2.attributionControl.setPrefix('TarnamaSepCo');
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map2);
   }
 

@@ -8,17 +8,19 @@
 
         <div class="input_2" *ngIf="data.data.includes('zoneId')">
             <div class="_key">ناحیه</div>
-            <p-dropdown name="zones" [options]="zoneDictionary" placeholder="انتخاب مورد"
-                [(ngModel)]="_content['zoneId']" [style]="{minWidth: '10rem',width:'100%'}" optionValue="id"
-                optionLabel="title" filter="true">
-            </p-dropdown>
+            <div class="_value">
+                <p-dropdown name="zones" [options]="zoneDictionary" placeholder="انتخاب مورد"
+                    [(ngModel)]="_content['zoneId']" optionValue="id" optionLabel="title" filter="true">
+                </p-dropdown>
+            </div>
         </div>
         <div class="input_2" *ngIf="data.data.includes('karbari')">
             <div class="_key">کاربری</div>
-            <p-dropdown name="karbari" [options]="karbariByCodeDictionary" placeholder="انتخاب مورد"
-                [(ngModel)]="_content['karbari']" [style]="{minWidth: '10rem',width:'100%'}" optionValue="id"
-                optionLabel="title" filter="true">
-            </p-dropdown>
+            <div class="_value">
+                <p-dropdown name="karbari" [options]="karbariByCodeDictionary" placeholder="انتخاب مورد"
+                    [(ngModel)]="_content['karbari']" optionValue="id" optionLabel="title" filter="true">
+                </p-dropdown>
+            </div>
         </div>
         <div class="input_2" *ngIf="data.data.includes('fromDate')">
             <div class="_key">از</div>

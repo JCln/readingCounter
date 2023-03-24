@@ -9,7 +9,7 @@ import {
   IObjectIteratation,
   IResponses,
 } from 'interfaces/ioverall-config';
-import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
+import { IAUserEditSave, IUserEditManager, IUserEditOnRole, IUserEditOnRoleManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { Observable } from 'rxjs/internal/Observable';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
@@ -22,12 +22,16 @@ import { UtilsService } from './utils.service';
 export interface IUserEditNessessities {
   GUid: string
 }
+interface IIDTitle {
+  id: number,
+  title: string
+}
 @Injectable({
   providedIn: 'root'
 })
 export class UsersAllService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  userEditOnRoleRoleVal: number;
+  userEditOnRoleRoleVal: IIDTitle;
   userEdit_pageSign: IUserEditNessessities = {
     GUid: null,
   };
@@ -100,14 +104,15 @@ export class UsersAllService {
       })
     });
   }
-  firstConfirmDialog = (reason: EN_messages, reasonTwo?: EN_messages, doesNotReturnButton?: boolean): Promise<any> => {
+  firstConfirmDialog = (dialogConfig: any): Promise<any> => {
     const a = {
-      messageTitle: reason,
-      messageTitle2: reasonTwo,
+      messageTitle: dialogConfig.messageTitle,
+      messageTitleTwo: dialogConfig.messageTitleTwo,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
-      doesNotReturnButton: doesNotReturnButton
+      icon: dialogConfig.icon ? dialogConfig.icon : 'fas fa-user-lock',
+      doesNotReturnButton: dialogConfig.doesNotReturnButton
     }
     return this.utilsService.firstConfirmDialog(a);
   }
@@ -141,14 +146,14 @@ export class UsersAllService {
       return [0];
     return a;
   }
-  private addAUserActions = (actionItems: any): string[] => {
+  private addAUserActions = (items: any): string[] => {
     let selectedActions: string[] = [];
-    actionItems.map(appIt => {
+    items.map(appIt => {
       appIt.moduleItems.map(moduleIt => {
         moduleIt.controllerItems.map(ctrlIt => {
           ctrlIt.actionItems.map(actionIt => {
             if (actionIt.isSelected) {
-              selectedActions.push(actionIt.value)
+              selectedActions.push(actionIt.value);
             }
           })
         })
@@ -206,8 +211,8 @@ export class UsersAllService {
   }
   private connectToServerEdit = async (vals: IAUserEditSave) => {
     if (this.vertification(vals)) {
-
-      if (await this.firstConfirmDialog(EN_messages.confirm_userChange)) {
+      const text = EN_messages.confirm_userChange + ' ' + vals.displayName + ' ' + EN_messages.confirm_userChange_2;
+      if (await this.firstConfirmDialog({ messageTitle: text })) {
         this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
           if (res) {
             this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
@@ -249,33 +254,42 @@ export class UsersAllService {
       });
     });
   }
-  private verificationEditOnRole = (dataSource: IUserEditOnRole) => {
-    if (MathS.isNull(dataSource.roleId)) {
+  private verificationEditOnRoleGroupAccess = (dataSource: any) => {
+    if (MathS.isNull(dataSource)) {
       this.utilsService.snackBarMessage(EN_messages.insert_group_access, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
+    return true;
+  }
+  private verificationEditOnRole = (dataSource: IUserEditOnRole) => {
     if (MathS.isNull(dataSource.selectedActions[0])) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
       return false;
     }
-
     return true;
   }
-  userEditOnRole = async (dataSource: IAddUserManager) => {
-    const val: IUserEditOnRole = {
-      roleId: this.userEditOnRoleRoleVal,
-      selectedActions: this.addAUserActions(dataSource.appItems),
-    }
-    if (!this.verificationEditOnRole(val))
-      return;
-    if (await this.firstConfirmDialog(EN_messages.confirm_userGroupChange)) {
-      const res = await this.postDataSource(ENInterfaces.userEditOnRole, val);
-      if (res)
-        this.snackBarMessageSuccess(res);
+  userEditOnRole = async (dataSource: IUserEditOnRoleManager) => {
+    if (this.verificationEditOnRoleGroupAccess(this.userEditOnRoleRoleVal)) {
+
+      const val: IUserEditOnRole = {
+        roleId: this.userEditOnRoleRoleVal.id,
+        selectedActions: this.addAUserActions(dataSource.appItems)
+      }
+
+      if (this.verificationEditOnRole(val)) {
+        const text = EN_messages.confirm_userGroupChange_1 + ' ' + this.userEditOnRoleRoleVal.title + ' ' + EN_messages.confirm_userGroupChange_2;
+        if (await this.firstConfirmDialog({ messageTitle: text })) {
+          const res = await this.postDataSource(ENInterfaces.userEditOnRole, val);
+          if (res)
+            this.snackBarMessageSuccess(res);
+        }
+      }
     }
   }
   userEditOnRoleInsertRole = (val: any) => {
     this.userEditOnRoleRoleVal = val;
+    console.log(this.userEditOnRoleRoleVal);
+
   }
   postNotifyDirectImage = (filesList: any, val: INotifyDirectImage): Observable<any> => {
     const formData: FormData = new FormData();

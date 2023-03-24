@@ -2,6 +2,9 @@
 
 <mat-dialog-content>
     <main>
+        <div class="_icon">
+            <i class="pi pi-question"></i>
+        </div>
         <p *ngIf="data.messageOne">{{data.messageOne}}</p>
         <div *ngIf="data.imgOne" class="_img_content">
             <img src="{{data.imgOne}}" alt="">
@@ -18,5 +21,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="btn_2" (click)="close()">بازگشت</button>
+    <button class="close_dg" type="button" (click)="close()">
+        <i class="pi pi-times"></i>
+    </button>
 </mat-dialog-actions>

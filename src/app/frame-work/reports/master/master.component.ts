@@ -5,11 +5,13 @@ import { SortEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-master',
   templateUrl: './master.component.html',
-  styleUrls: ['./master.component.scss']
+  styleUrls: ['./master.component.scss'],
+  animations: [transitionAnimation]
 })
 export class MasterComponent extends FactoryONE {
   rowGroupMetadata: any;

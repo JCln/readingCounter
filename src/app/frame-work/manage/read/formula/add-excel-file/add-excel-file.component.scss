@@ -14,7 +14,10 @@
   padding: var(--font_xs) 0;
   justify-content: space-around;
   border-radius: $border_15;
-  min-height: 25rem;
+  min-height: 20rem;
+  width: 20rem;
+  margin: auto;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
 }
 
 ._desc {

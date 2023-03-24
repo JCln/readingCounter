@@ -7,11 +7,10 @@
     [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)">
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
+        <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
-            [filter]="true">
+            selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
         </p-multiSelect>
 
         <div class="header_icons_wrap">
@@ -46,8 +45,8 @@
                 <section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
                     <p-dropdown name="zones" [options]="_selectedColumns"
                         [(ngModel)]="profileService._agg.selectedAggregate" placeholder="انتخاب مورد"
-                        [style]="{'min-width':'8rem','width':'100%', 'height': '2rem'}" optionValue="field"
-                        optionLabel="header" filter="true" (onChange)="doAggregate()">
+                        [style]="{'height': '2rem'}" optionValue="field" optionLabel="header" filter="true"
+                        (onChange)="doAggregate()">
                     </p-dropdown>
                     <i (click)="resetAggregation()" class="icon_reset pi pi-refresh tooltip">
                         <div class="tooltip_text">بدون گروه‌بندی</div>
@@ -61,12 +60,13 @@
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
                 </i>
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                <i *ngIf="_hasRefreshTable" (click)="refreshTable()"
+                    class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
                 <i *ngIf="_hasCollapsible" (click)="collapse()" class="tooltip _circle_border p_icons"
                     [ngClass]="_isCollaped ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
-                    <div class="tooltip_text_right">{{_isCollaped? 'باز': 'بسته'}}</div>
+                    <div class="tooltip_text_right">{{_isCollaped? 'نمایش': 'بستن'}}</div>
                 </i>
                 <i *ngIf="_backToPreviousEnabled" (click)="backToPrevious()"
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
@@ -184,7 +184,16 @@
                     <div class="tooltip_text">اطلاعات روزانه</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'simpleSearch'" (click)="routeToFollowUp(dataSource)">
+            <td *ngIf="
+            _checkUpName == 'simpleSearch' ||
+            _outputFileName== 'imported' || 
+            _outputFileName== 'loaded' ||
+             _outputFileName== 'reading' ||
+             _outputFileName== 'offloaded'||
+             _outputFileName== 'finished' ||
+             _outputFileName== 'lastStates' ||
+             _outputFileName== 'offloadedGroup'
+              " (click)="routeToFollowUp(dataSource)">
                 <span class="ui-column-title">مشاهده در پیگیری موردی</span>
                 <i class="tooltip p_icons pi pi-search-plus">
                     <div class="tooltip_text_right">مشاهده در پیگیری موردی</div>

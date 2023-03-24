@@ -8,9 +8,7 @@ import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
-import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 import { IGisXYResponse } from 'src/app/interfaces/idashboard-map';
@@ -94,11 +92,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
   constructor(
     public mapService: MapService,
-    private readingReportManagerService: ReadingReportManagerService,
     public route: ActivatedRoute,
     private router: Router,
     private utilsService: UtilsService,
-    private envService: EnvService,
     private dateJalaliService: DateJalaliService
   ) { }
 
@@ -110,13 +106,14 @@ export class MapComponent implements OnInit, OnDestroy {
   initMap = () => {
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
-      center: this.envService.mapCenter,
+      center: this.mapService.envService.mapCenter,
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup],
     });
 
+    this.map.attributionControl.setPrefix('TarnamaSepCo');
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {
@@ -173,7 +170,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   private classWrapperCluster = async () => {
-    this.extraDataSourceRes = await this.readingReportManagerService.portRRTest(ENInterfaces.ListToGis, this.makeClusterRouteObject());
+    this.extraDataSourceRes = await this.mapService.postDataSource(ENInterfaces.ListToGis, this.makeClusterRouteObject());
 
     if (this.extraDataSourceRes.length === 0) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
@@ -275,7 +272,7 @@ export class MapComponent implements OnInit, OnDestroy {
     })
   }
   private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
-    this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
+    this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 12);
     xyData.map((items) => {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
@@ -283,7 +280,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private getXYMarkerClusterPosition = (xyData: any) => {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
-      this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 11);
+      this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
         .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
         ));

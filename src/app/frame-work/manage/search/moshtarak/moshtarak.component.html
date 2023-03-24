@@ -1,23 +1,26 @@
-<main class="main">
+<main class="main" [@openClose]="searchService._searchMoshtarakCollapse ? 'slideUp' : 'slideDown'">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="content">
 
             <div class="input_2">
                 <div class="_key">نوع جستجو</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService.searchReqMosh.searchBy"
-                    name="searchType">
-                    <mat-option (click)="_searchByInfo = truefalse.searchBy" *ngFor="let truefalse of searchType"
-                        [value]="truefalse.id">
-                        {{truefalse.searchBy}}
-                    </mat-option>
-                </mat-select>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService.searchReqMosh.searchBy"
+                        name="searchType">
+                        <mat-option (click)="_searchByInfo = truefalse.searchBy" *ngFor="let truefalse of searchType"
+                            [value]="truefalse.id">
+                            {{truefalse.searchBy}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
             <div class="input_2">
                 <div class="_key">ناحیه</div>
-                <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService.searchReqMosh.zoneId"
-                    placeholder="انتخاب مورد" [style]="{'max-width':'8rem', 'min-width': '8rem','width':'100%'}" optionValue="id"
-                    optionLabel="title" filter="true">
-                </p-dropdown>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService.searchReqMosh.zoneId"
+                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
             </div>
             <input class="input_1" placeholder="{{_searchByInfo}} را وارد نمایید " name="counterNumber"
                 [(ngModel)]="searchService.searchReqMosh.item" autofocus>
@@ -37,9 +40,11 @@
     </form>
 </main>
 
-<app-prime-table [dataSource]="closeTabService.saveDataForSearchMoshtarakin" [_outputFileName]="'searchMosh'" [_checkUpName]="'allComponent'"
-    [_selectedColumnsToRemember]="'selectedListManagerMosh'" [_numberOfExtraColumns]="[1,2,3,4]"
-    [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
+<app-prime-table [dataSource]="closeTabService.saveDataForSearchMoshtarakin" [_outputFileName]="'searchMosh'"
+    [_checkUpName]="'allComponent'" [_selectedColumnsToRemember]="'selectedListManagerMosh'"
+    [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"
-    (openedBriefKardexDialog)="openBriefKardexDialog($event)">
+    (openedBriefKardexDialog)="openBriefKardexDialog($event)" [_hasCollapsible]=true
+    [_isCollaped]="searchService._searchMoshtarakCollapse"
+    (collapsed)="searchService._searchMoshtarakCollapse = !searchService._searchMoshtarakCollapse">
 </app-prime-table>

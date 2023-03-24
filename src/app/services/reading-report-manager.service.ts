@@ -49,8 +49,9 @@ export class ReadingReportManagerService {
   isCollapsedTrvCh: boolean = false;
   isCollapsedDetails: boolean = false;
   isCollapsedUserKarkard: boolean = false;
+  isCollapsedImageAttrFileResult: boolean = false;  
+  _isCollapsedAllImgs: boolean = false;
   _isOrderByDate: boolean = false;
-  _isCollapsedAllImgs: boolean = true;
 
   masterReq: IReadingReportReq = {
     fromDate: '',
@@ -572,7 +573,8 @@ export class ReadingReportManagerService {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
   }

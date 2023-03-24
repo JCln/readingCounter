@@ -21,7 +21,7 @@ export class OffloadedComponent extends FactoryONE {
 
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    public outputManagerService: OutputManagerService,    
+    public outputManagerService: OutputManagerService,
     private envService: EnvService
   ) {
     super();
@@ -37,7 +37,7 @@ export class OffloadedComponent extends FactoryONE {
     }
   }
   downloadOutputSingle = async (row: ITracking) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.downloadPermit, false, false);
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.downloadPermit, false, false, 'pi pi-download');
     if (desc) {
       if (this.envService.hasNextBazdid) {
         this.hasNextBazdid(row);
@@ -65,7 +65,7 @@ export class OffloadedComponent extends FactoryONE {
   }
 
   backToReading = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.toReading, true, false);
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.toReading, true, false, 'pi pi-step-backward');
     if (desc) {
       this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex['dataSource'], desc);
       this.refreshTable();

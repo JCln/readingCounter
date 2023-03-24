@@ -3,6 +3,12 @@
 @import 'tooltip.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'cards';
+
+._card {
+  width: auto;
+  margin: 0 var(--font_02);
+}
 
 .main {
   direction: rtl;
@@ -16,12 +22,8 @@
 .main_content {
   display: grid;
   direction: rtl;
-  text-align: center;
-  padding: var(--font_xs) var(--font_02);
-  border-radius: $border_15;
-  gap: var(--font_02);
+  margin-bottom: var(--font_05);
 }
-
 
 .tooltip {
   cursor: pointer;
@@ -31,16 +33,13 @@
   border-radius: 10px;
 }
 
-h2 {
-  color: var(--secondary_6);
-}
+footer {
+  margin: 0 !important;
 
-h3 {
-  color: var(--primary_3);
-  font-size: var(--font_m2);
-  padding: var(--font_05);
+  &.footer_with_background {
+    border-radius: 0 0 7px 7px;
+  }
 }
-
 
 [hidden] {
   display: none;
@@ -48,7 +47,7 @@ h3 {
 
 section.dynamic_content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
   gap: var(--font_05);
   align-items: center;
   border-radius: $border_15;
@@ -56,21 +55,18 @@ section.dynamic_content {
 
 .static_part {
   border-radius: $border_15;
-  padding: var(--font_xxs);
+  padding: var(--font_05);
   direction: rtl;
 }
 
 .check_boxes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
   gap: var(--font_05);
   padding: var(--font_025);
-}
-
-._key,
-._value {
-  font-size: var(--font_m);
-  font-weight: 800;
+  margin-top: 0;
+  box-shadow: none;
+  background: none;
 }
 
 ._value {
@@ -88,27 +84,54 @@ section.dynamic_content {
   color: var(--white);
 }
 
-._toselect {
-  grid-column: 1/4;
-  background: var(--white);
-  border: $border_5;
+.btn_2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  background-color: var(--thirdy_1);
+  color: var(--white);
 
-  .__content {
-    gap: var(--font_05);
-    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
-    display: grid;
-    align-items: center;
-    justify-content: center;
+  &:hover,
+  &:focus,
+  &:active {
+    background: var(--primary_4);
+    box-shadow: 0px 0px 2px 1px var(--primary_4);
   }
 }
 
+._toselect {
+  grid-column: 1/2;
+  background: var(--white);
+  border: $border_5;
+  border-radius: $border_7 $border_7 0 0;
+  padding: var(--font_05);
+  box-shadow: 2px 2px 3px 2px var(--secondary_7);
+
+  .__content {
+    gap: var(--font_02);
+    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+    display: grid;
+    align-items: center;
+
+    .check_boxes {
+      text-align: right;
+      margin: 0;
+    }
+  }
+
+}
+
+.input_2 {
+  margin: 0;
+}
+
 ._more_options {
-  grid-column: 4/10;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
-  justify-content: center;
-  background-color: var(--white);
-  border-radius: 5px;
+  grid-column: 2/7;
+  background-color: var(--secondary_1);
+  border-radius: $border_7 $border_7 0 0;
+  padding: var(--font_02);
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
 
   @media (max-width: 780px) {
     margin-top: var(--font_xs);
@@ -119,6 +142,12 @@ section.dynamic_content {
     margin-top: 2rem;
   }
 
+  .__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 14rem));
+    justify-content: center;
+    gap: var(--font_02);
+  }
 }
 
 app-date-jalali {
@@ -127,42 +156,6 @@ app-date-jalali {
   background: var(--white);
   border-radius: 9px;
   border: 1px solid var(--secondary_2);
-}
-
-span label {
-  margin-left: var(--font_05);
-  color: var(--secondary_8);
-}
-
-.ui-float-label {
-  display: grid;
-  font-size: var(--font_m);
-  font-weight: 600;
-  padding: var(--font_03) var(--font_01);
-  border-radius: $border_7;
-  background: var(--secondary_2);
-}
-
-.title {
-  color: var(--primary_3);
-  text-align: center;
-}
-
-article {
-  padding: var(--font_05);
-  border-radius: $border_15;
-  background-color: var(--secondary_2);
-  margin: var(--font_01);
-}
-
-hr {
-  margin-bottom: var(--font_xs);
-}
-
-.p-dropdown {
-  width: 100%;
-  border-radius: 5px;
-  height: var(--font_335);
 }
 
 [hidden] {
@@ -175,53 +168,15 @@ form.bottom-form {
   position: relative;
   border: 1px solid var(--secondary_5);
   border-radius: $border_15;
-  padding: var(--font_xxs);
   font-family: $font_family;
-  margin: var(--font_xxs) var(--font_s);
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_2);
-}
-
-.insert_track {
-  direction: rtl;
-
-  .input_2 {
-    width: 20rem;
-    margin: var(--font_025) auto;
-  }
-}
-
-
-._checked-list {
-  position: absolute;
-  left: 5px;
-  top: 5px;
-}
-
-.check_boxes {
-  box-shadow: none;
-}
-
-hr {
-  margin-bottom: var(--font_xs);
-}
-
-.p-dropdown {
-  width: 100%;
-  border-radius: 5px;
-  height: var(--font_335);
-}
-
-footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--font_xs);
 }
 
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: var(--thirdy_1_spec);
+    background: var(--secondary_1);
     direction: rtl;
   }
 }

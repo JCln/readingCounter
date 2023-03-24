@@ -15,7 +15,7 @@
             </div>
         </section>
         <hr>
-        <section class="static_part">
+        <section class="_card">
 
             <section class="order_by" [hidden]="readingReportManagerService._orderByGIS == 'isForbidden'">
                 <div *ngFor="let datePeriod of readingReportManagerService.utilsService.getSearchInOrderTo">
@@ -33,8 +33,8 @@
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true" (onChange)="getCounterStateByZoneId()" (onChange)="getFragmentByZone()"
+                            optionValue="id" optionLabel="title" filter="true" (onChange)="getCounterStateByZoneId()"
+                            (onChange)="getFragmentByZone()"
                             (onChange)="readingReportManagerService.gisReq.fragmentMasterIds = []">
                         </p-dropdown>
                     </div>
@@ -42,50 +42,58 @@
                 <div class="input_2">
                     <div class="_key">نوبتی</div>
                     <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
                             [(ngModel)]="readingReportManagerService.gisReq.fragmentMasterIds" optionLabel="routeTitle"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '150px'}"
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                            [filter]="true" showClear="true">
                         </p-multiSelect>
                     </div>
                 </div>
                 <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                     <div class="_key">نوع دوره</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
-                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
-                            [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                            <mat-option (click)="getReadingPeriod()"
+                                *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2"
                     [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                     <div class="_key">دوره قرائت</div>
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="readingReportManagerService.gisReq.readingPeriodId" name="readingPeriodId">
-                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="readingReportManagerService.gisReq.readingPeriodId" name="readingPeriodId">
+                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2"
                     [hidden]="!readingReportManagerService.gisReq.isCounterState || !counterStateDictionary.length">
                     <div class="_key">وضعیت کنتور</div>
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="readingReportManagerService.gisReq.counterStateId" name="counterStateId">
-                        <mat-option *ngFor="let truefalse of counterStateDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="readingReportManagerService.gisReq.counterStateId" name="counterStateId">
+                            <mat-option *ngFor="let truefalse of counterStateDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                     <div class="_key">سال</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.gisReq.year"
-                        [(value)]="readingReportManagerService.gisReq.year" name="year">
-                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.gisReq.year"
+                            [(value)]="readingReportManagerService.gisReq.year" name="year">
+                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                     <div class="_key">از</div>
@@ -110,7 +118,10 @@
 
             </section>
             <footer>
-                <button type="submit" class="btn_1">مشاهده</button>
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
             </footer>
         </section>
     </main>

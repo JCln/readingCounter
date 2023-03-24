@@ -1,27 +1,8 @@
 @import 'shared_reports';
 
-
-.btn_1 {
-  color: var(--secondary_1);
-}
-
 h2 {
   white-space: nowrap;
   color: var(--primary_3);
-  margin: var(--font_05);
-  font-size: var(--font_l2);
-}
-
-.static_part {
-  width: 20rem;
-  padding: var(--font_s);
-  margin: auto;
-}
-
-section.content {
-  grid-template: none;
-}
-
-.order_by {
-  justify-content: center;
+  margin-left: var(--font_05);
+  font-size: var(--font_s);
 }

@@ -3,6 +3,7 @@
 @import 'mixins.scss';
 @import 'input.scss';
 @import 'mat.scss';
+@import 'cards';
 
 .over_all {
   display: grid;
@@ -10,13 +11,6 @@
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
-}
-
-.content {
-  background: var(--secondary_1);
-  border-radius: $border_15;
-  margin: auto;
-  padding: var(--font_xs);
 }
 
 .text {
@@ -28,7 +22,6 @@
 textarea {
   background: var(--secondary_3);
   font-size: var(--font_m);
-  color: var(--primary_4);
   font-weight: 600;
   text-align: right;
   direction: rtl;
@@ -36,6 +29,7 @@ textarea {
   outline: none;
   padding: var(--font_xxs);
   height: 8rem;
+  max-width: 19rem;
   border-radius: $border_15;
   font-family: inherit;
 }
@@ -85,16 +79,17 @@ textarea {
   }
 
   ._colors_button :nth-child(2) {
-    background: green !important;
+    background: rgb(71, 123, 71) !important;
   }
 
   ._colors_button :nth-child(3) {
-    background: orange !important;
+    background: rgb(188, 136, 39) !important;
   }
 
   ._colors_button :nth-child(4) {
-    background: red !important;
+    background: rgb(192, 26, 26) !important;
   }
+
 }
 
 // ///// local storage content
@@ -170,7 +165,6 @@ h2 {
     width: 100%;
     border: none;
     border-radius: $border_15;
-    color: var(--primary_4);
     background: var(--secondary_3);
   }
 

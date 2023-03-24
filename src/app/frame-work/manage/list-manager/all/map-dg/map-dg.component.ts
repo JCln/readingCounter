@@ -54,7 +54,7 @@ export class MapDgComponent implements OnInit {
       maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
     });
-
+    this.map.attributionControl.setPrefix('TarnamaSepCo');
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   ngOnInit(): void {

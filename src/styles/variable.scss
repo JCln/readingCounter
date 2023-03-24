@@ -1,6 +1,7 @@
 $border_5: 5px;
 $border_7: 7px;
 $border_15: 15px;
+$border_100vmax: 100vmax;
 $border_50: 50%;
 
 $font_family: BLotus,
@@ -8,30 +9,8 @@ $font_family: BLotus,
 tahoma,
 Sans-Serif;
 
-hr {
-  width: 80%;
-  border: 0;
-  height: .14rem;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary_4), rgba(0, 0, 0, 0));
-}
-
-.hr_1 {
-  width: 70%;
-  margin-bottom: var(--font_l);
-  height: .4rem;
-  border-radius: 30px;
-}
-
 .font_family {
   font-family: $font_family;
-}
-
-.hr_2 {
-  opacity: .7;
-  width: 70%;
-  margin: var(--font_25) auto;
-  height: var(--font_02);
-  border-radius: 30px;
 }
 
 .d_rtl {
@@ -76,7 +55,7 @@ a:active {
 }
 
 ._pdf {
-  background: var(--red_500);
+  background: var(--red_500) !important;
 }
 
 ._save_columns {
@@ -106,8 +85,8 @@ footer.footer_with_background {
 ._circle_border {
   display: grid !important;
   place-content: center;
-  width: var(--font_25);
-  height: var(--font_25);
+  width: var(--font_22);
+  height: var(--font_22);
   border-radius: 50%;
   border: 1.5px solid;
   cursor: pointer;

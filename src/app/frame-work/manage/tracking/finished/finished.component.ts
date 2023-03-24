@@ -41,7 +41,7 @@ export class FinishedComponent extends FactoryONE {
     }
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_toOffloaded, true, false);
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_toOffloaded, true, false, 'pi pi-step-backward');
     if (desc) {
       this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
     }

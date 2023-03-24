@@ -2,14 +2,17 @@
     [_isCollapsed]=closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed
     (_clicked)=" closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed = !closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed">
 </app-collapsable>
-<form #form="ngForm" *ngIf="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed" class="_card"
-    (ngSubmit)="connectToServer()">
+<form #form="ngForm" class="_card" (ngSubmit)="connectToServer()"
+    [@openClose]="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed ? 'slideUp' : 'slideDown'">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
         <input class="_value" type="number" name="trackNumber"
             [(ngModel)]="closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber" autofocus>
     </div>
-    <button type="submit" class="btn_1">مشاهده</button>
+    <button type="submit" class="btn_1">
+        مشاهده
+        <i class="pi pi-list"></i>
+    </button>
 </form>
 
 <app-prime-table [dataSource]="closeTabService.saveDataForImportErrorsByTrackNumber"

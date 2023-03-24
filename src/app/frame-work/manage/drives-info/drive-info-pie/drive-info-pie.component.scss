@@ -11,5 +11,6 @@ canvas {
   background: var(--secondary_1);
   margin: auto;
   height: 15vh;
+  min-height: 8rem;
   padding: var(--font_xs);
 }

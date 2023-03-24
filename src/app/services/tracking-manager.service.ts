@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -15,11 +15,11 @@ import { Converter } from 'src/app/classes/converter';
 import { MathS } from '../classes/math-s';
 import { OffloadModify } from '../classes/offload-modify-type';
 
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { EnvService } from './env.service';
+import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
 
@@ -38,18 +38,6 @@ export class TrackingManagerService {
     zoneId: 0
   };
 
-  getColumnDefColumns = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('defColumns');
-  }
-  getFollowUpView = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('followUpView');
-  }
-  getImportedListDetails = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('importedListDetails');
-  }
-  getLMPerDayFollowUpPositions = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
-  }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
       OffloadModify.callAnnounce,
@@ -82,17 +70,19 @@ export class TrackingManagerService {
     private allListsService: AllListsService,
     private envService: EnvService,
     private jwtService: JwtService,
-    private columnManager: ColumnManager,
+    public columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private followUpService: FollowUpService,
   ) { }
 
-  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
+  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean, icon: string): Promise<any> => {
     const a = {
       messageTitle: message,
       minWidth: '19rem',
       isInput: isInput,
-      isDelete: isDelete
+      isDelete: isDelete,
+      icon: icon
     }
     return this.utilsService.firstConfirmDialog(a);
   }
@@ -204,20 +194,15 @@ export class TrackingManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '80%',
-        data: {
-          title: message,
-          isSelectableDate: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: message,
+      minWidth: '21rem',
+      icon: 'pi pi-calendar-times',
+      isInput: false,
+      isDelete: false,
+      isSelectableDate: true,
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
@@ -361,6 +346,10 @@ export class TrackingManagerService {
   }
   verificationTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
+  }
+  routeToFollowUp = (row: ITracking) => {
+    this.followUpService.setTrackNumber(row.trackNumber);
+    this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
   }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });

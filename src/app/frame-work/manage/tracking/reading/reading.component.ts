@@ -30,13 +30,13 @@ export class ReadingComponent extends FactoryONE {
     }
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false);
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false, 'pi pi-fast-backward');
     if (desc) {
       await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, rowDataAndIndex['dataSource'], desc);
     }
   }
   forceOffload = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_forceOffload, true, true);
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_forceOffload, true, true, 'pi pi-ban');
     if (desc) {
       await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc);
       this.refreshTable();
