@@ -1,7 +1,8 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.isCollapsedMaster">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.isCollapsedMaster ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -59,7 +60,7 @@
                         </div>
                     </div>
 
-                      <button type="submit" class="btn_1">
+                    <button type="submit" class="btn_1">
                         مشاهده
                         <i class="pi pi-list"></i>
                     </button>

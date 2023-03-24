@@ -15,7 +15,6 @@ import { Converter } from 'src/app/classes/converter';
 import { MathS } from '../classes/math-s';
 import { OffloadModify } from '../classes/offload-modify-type';
 
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -195,20 +194,15 @@ export class TrackingManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '21rem',
-        data: {
-          title: message,
-          isSelectableDate: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: message,
+      minWidth: '21rem',
+      icon: 'pi pi-calendar-times',
+      isInput: false,
+      isDelete: false,
+      isSelectableDate: true,
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();

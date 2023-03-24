@@ -1,8 +1,8 @@
-<app-collapsable [_isReversed]="true" [_isCollapsed]=readingReportManagerService._isCollapsedAllImgs
+<app-collapsable [_isCollapsed]=readingReportManagerService._isCollapsedAllImgs
     (_clicked)=" readingReportManagerService._isCollapsedAllImgs = !readingReportManagerService._isCollapsedAllImgs">
 </app-collapsable>
-<form #form="ngForm" *ngIf="readingReportManagerService._isCollapsedAllImgs" class="_card"
-    (ngSubmit)="connectToServer()">
+<form #form="ngForm" class="_card" (ngSubmit)="connectToServer()"
+    [@openClose]="readingReportManagerService._isCollapsedAllImgs ? 'slideUp' : 'slideDown'">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
         <input class="_value" type="number" name="trackNumber"

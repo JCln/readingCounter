@@ -49,7 +49,8 @@ export class ReadingReportManagerService {
   isCollapsedTrvCh: boolean = false;
   isCollapsedDetails: boolean = false;
   isCollapsedUserKarkard: boolean = false;
-  _isCollapsedAllImgs: boolean = true;
+  isCollapsedImageAttrFileResult: boolean = false;  
+  _isCollapsedAllImgs: boolean = false;
   _isOrderByDate: boolean = false;
 
   masterReq: IReadingReportReq = {

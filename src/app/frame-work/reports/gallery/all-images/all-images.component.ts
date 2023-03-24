@@ -3,12 +3,14 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/interfaces/ireports';
 
 @Component({
   selector: 'app-all-images',
   templateUrl: './all-images.component.html',
-  styleUrls: ['./all-images.component.scss']
+  styleUrls: ['./all-images.component.scss'],
+  animations: [transitionAnimation]
 })
 export class AllImagesComponent extends FactoryONE {
 

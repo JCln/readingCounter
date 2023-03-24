@@ -3,11 +3,13 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-errors-by-track',
   templateUrl: './errors-by-track.component.html',
-  styleUrls: ['./errors-by-track.component.scss']
+  styleUrls: ['./errors-by-track.component.scss'],
+  animations: [transitionAnimation]
 })
 export class ErrorsByTrackComponent extends FactoryONE {
 

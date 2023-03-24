@@ -111,7 +111,7 @@ export class UsersAllService {
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
-      icon: 'fas fa-user-lock',
+      icon: dialogConfig.icon ? dialogConfig.icon : 'fas fa-user-lock',
       doesNotReturnButton: dialogConfig.doesNotReturnButton
     }
     return this.utilsService.firstConfirmDialog(a);

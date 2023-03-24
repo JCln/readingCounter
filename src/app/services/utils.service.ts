@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ISimafaImportStatus, ITitleValue } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
 import { CompositeService } from './composite.service';
 
 export interface IDialogMessage {
@@ -13,7 +13,8 @@ export interface IDialogMessage {
   isInput: boolean,
   isDelete: boolean,
   icon: string,
-  doesNotReturnButton?: boolean
+  doesNotReturnButton?: boolean,
+  isSelectableDate?: boolean
 }
 @Injectable({
   providedIn: 'root'
@@ -97,7 +98,8 @@ export class UtilsService {
           isInput: config.isInput,
           isDelete: config.isDelete,
           icon: config.icon,
-          doesNotReturnButton: config.doesNotReturnButton
+          doesNotReturnButton: config.doesNotReturnButton,
+          isSelectableDate: config.isSelectableDate
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

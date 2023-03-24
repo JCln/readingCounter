@@ -2,10 +2,10 @@ $border_15: 10px;
 
 .input_1 {
   min-width: 19rem;
-  height: var(--font_3);
+  height: var(--font_28);
   background: var(--white);
-  padding: 0 var(--font_xs);
-  margin: var(--font_025) 0;
+  padding: 0 3px;
+  margin: 2px 0;
   text-align: center;
   font-size: var(--font_s);
   color: var(--primary_4);
@@ -25,16 +25,15 @@ $border_15: 10px;
   color: var(--secondary_3);
   display: flex;
   align-items: center;
-  margin: var(--font_01) 0 var(--font_02) 0;
+  margin: 2px 0;
   height: var(--font_28);
   border: 1px solid var(--secondary_3_spec);
   border-radius: $border_7;
 }
 
 ._key {
-  color: var(--primary_4);
   text-align: left;
-  padding-right: var(--font_05);
+  padding-right: 3px;
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -44,14 +43,13 @@ $border_15: 10px;
 }
 
 ._value {
-  border-radius: inherit;
-  margin: .2em;
+  margin: 2px;
   width: 100%;
   flex: 1;
   text-align: center;
   background: var(--white);
-  color: var(--primary_4);
   border: 0;
+  border-radius: inherit;
 }
 
 ._key,
@@ -62,4 +60,5 @@ $border_15: 10px;
   min-height: 85%;
   font-size: var(--font_s);
   font-weight: 600;
+  color: var(--primary_4);
 }

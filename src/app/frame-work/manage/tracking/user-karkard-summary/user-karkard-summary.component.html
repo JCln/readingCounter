@@ -1,11 +1,7 @@
-<app-collapsable [_isCollapsed]=closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed
-    (_clicked)="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed = !closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed">
-</app-collapsable>
-
 <main class="main">
-    <form #form="ngForm" (ngSubmit)="verification()"
-        [hidden]="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed">
-        <section class="_card">
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <section class="_card"
+            [@openClose]="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed ? 'slideUp' : 'slideDown'">
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
@@ -59,6 +55,9 @@
                 <div class="right_side">
                 </div>
                 <div class="left_side">
+                    <app-collapsable [_isCollapsed]=closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed
+                        (_clicked)="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed = !closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed">
+                    </app-collapsable>
                 </div>
             </div>
         </ng-template>

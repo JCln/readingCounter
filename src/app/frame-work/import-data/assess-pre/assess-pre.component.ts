@@ -10,13 +10,15 @@ import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 import { MapDgComponent } from '../../manage/list-manager/all/map-dg/map-dg.component';
 
 @Component({
   selector: 'app-assess-pre',
   templateUrl: './assess-pre.component.html',
-  styleUrls: ['./assess-pre.component.scss']
+  styleUrls: ['./assess-pre.component.scss'],
+  animations: [transitionAnimation]
 })
 export class AssessPreComponent extends AllListsFactory {
 

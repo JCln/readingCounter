@@ -14,7 +14,7 @@
   direction: rtl;
   text-align: center;
   gap: var(--font_05);
-  margin: var(--font_xxs) 0;
+  margin: 0 0 var(--font_xxs) 0;
   background: var(--secondary_1);
   padding: var(--font_05);
   border-radius: $border_15;
@@ -31,7 +31,7 @@ input {
 ._value {
   border: 0;
   border-radius: $border_7;
-  width: 100%;
+  width: 97%;
 }
 
 .order_by {

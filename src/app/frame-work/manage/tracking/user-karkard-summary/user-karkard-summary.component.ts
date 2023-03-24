@@ -5,11 +5,13 @@ import { IUserKarkardSummary } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-user-karkard-summary',
   templateUrl: './user-karkard-summary.component.html',
-  styleUrls: ['./user-karkard-summary.component.scss']
+  styleUrls: ['./user-karkard-summary.component.scss'],
+  animations: [transitionAnimation]
 })
 export class UserKarkardSummaryComponent extends FactoryONE {
   tempData: IUserKarkardSummary[] = [];

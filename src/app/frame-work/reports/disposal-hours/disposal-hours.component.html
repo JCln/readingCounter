@@ -1,7 +1,7 @@
 <main class="main" *ngIf="route.children.length === 0">
-    <section [hidden]="readingReportManagerService.isCollapsedDH">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card">
+            <section class="_card" [@openClose]="readingReportManagerService.isCollapsedDH ? 'slideUp' : 'slideDown'">
 
                 <section class="content">
                     <div class="input_2">

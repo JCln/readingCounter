@@ -1,4 +1,4 @@
-<main class="main" [hidden]="searchService._searchMoshtarakCollapse">
+<main class="main" [@openClose]="searchService._searchMoshtarakCollapse ? 'slideUp' : 'slideDown'">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="content">
 

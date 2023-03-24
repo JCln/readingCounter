@@ -66,7 +66,7 @@
                 </i>
                 <i *ngIf="_hasCollapsible" (click)="collapse()" class="tooltip _circle_border p_icons"
                     [ngClass]="_isCollaped ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
-                    <div class="tooltip_text_right">{{_isCollaped? 'باز': 'بسته'}}</div>
+                    <div class="tooltip_text_right">{{_isCollaped? 'نمایش': 'بستن'}}</div>
                 </i>
                 <i *ngIf="_backToPreviousEnabled" (click)="backToPrevious()"
                     class="tooltip _circle_border p_icons pi pi-arrow-left">

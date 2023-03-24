@@ -1,7 +1,8 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.offKarkardAllStatesReq.isCollapsed ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -122,6 +123,9 @@
                     </i>
                 </div>
                 <div class="left_side">
+                    <app-collapsable [_isCollapsed]=readingReportManagerService.offKarkardAllStatesReq.isCollapsed
+                        (_clicked)="readingReportManagerService.offKarkardAllStatesReq.isCollapsed = !readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
+                    </app-collapsable>
                 </div>
             </div>
         </ng-template>

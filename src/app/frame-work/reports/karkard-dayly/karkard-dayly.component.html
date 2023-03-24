@@ -1,7 +1,8 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.isCollapsedDaily">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.isCollapsedDaily ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -10,8 +11,8 @@
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="readingReportManagerService.karkardDailyReq.zoneId"
-                                placeholder="انتخاب مورد"  
-                                optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                (onChange)="getFragmentByZone()"
                                 (onChange)="readingReportManagerService.karkardDailyReq.fragmentMasterIds = []">
                             </p-dropdown>
                         </div>
@@ -22,8 +23,7 @@
                             <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
                                 [(ngModel)]="readingReportManagerService.karkardDailyReq.fragmentMasterIds"
                                 optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                                   placeholder="انتخاب مورد" [filter]="true"
-                                showClear="true">
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
                             </p-multiSelect>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                     <mat-checkbox name="beginFromImported"
                         [(ngModel)]="readingReportManagerService.karkardDailyReq.beginFromImported">نمایش همه
                     </mat-checkbox>
-                      <button type="submit" class="btn_1">
+                    <button type="submit" class="btn_1">
                         مشاهده
                         <i class="pi pi-list"></i>
                     </button>

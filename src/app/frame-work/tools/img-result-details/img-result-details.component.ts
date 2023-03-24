@@ -1,15 +1,18 @@
+import { EN_messages } from 'interfaces/enums.enum';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ENRandomNumbers, ENSnackBarColors } from 'interfaces/ioverall-config';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ToolsService } from 'services/tools.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-img-result-details',
   templateUrl: './img-result-details.component.html',
-  styleUrls: ['./img-result-details.component.scss']
+  styleUrls: ['./img-result-details.component.scss'],
+  animations: [transitionAnimation]
 })
 export class ImgResultDetailsComponent extends FactoryONE {
   imageAttrAllDictionary: IDictionaryManager[] = [];
@@ -30,7 +33,7 @@ export class ImgResultDetailsComponent extends FactoryONE {
 
   classWrapper = async () => {
     this.zoneDictionary = await this.toolsService.getZoneDictionary();
-    this.imageAttrAllDictionary = await this.toolsService.getImageAttributionAllDictionary();    
+    this.imageAttrAllDictionary = await this.toolsService.getImageAttributionAllDictionary();
     if (this.closeTabService.saveDataForImgResultDetailsRes) {
       this.allImagesDataSource = this.closeTabService.saveDataForImgResultDetailsResFirst;
       this.imgsOriginUrl = this.closeTabService.saveDataForImgResultDetailsRes;
@@ -39,8 +42,13 @@ export class ImgResultDetailsComponent extends FactoryONE {
   connectToServer = async () => {
     if (this.toolsService.verificationImageResultDetails(this.toolsService.imgResultDetails)) {
       this.allImagesDataSource = await this.toolsService.postDataSource(ENInterfaces.postImgAttrResultDetails, this.toolsService.imgResultDetails);
-      this.closeTabService.saveDataForImgResultDetailsResFirst = this.allImagesDataSource;
-      this.showAllImgs();
+      if (this.allImagesDataSource.imageCount == ENRandomNumbers.zero) {
+        this.toolsService.showSnack(EN_messages.notFound, ENSnackBarColors.warn);
+      }
+      else {
+        this.closeTabService.saveDataForImgResultDetailsResFirst = this.allImagesDataSource;
+        this.showAllImgs();
+      }
     }
   }
 

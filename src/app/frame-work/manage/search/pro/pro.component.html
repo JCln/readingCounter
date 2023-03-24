@@ -1,4 +1,5 @@
-<form #form="ngForm" [hidden]="searchService._searchProCollapse" (ngSubmit)="connectToServer()">
+<form #form="ngForm" [@openClose]="searchService._searchProCollapse ? 'slideUp' : 'slideDown'"
+    (ngSubmit)="connectToServer()">
     <main class="main_content">
         <section class="_toselect">
             <section class="order_by">

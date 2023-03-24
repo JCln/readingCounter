@@ -4,11 +4,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-forbidden',
   templateUrl: './forbidden.component.html',
-  styleUrls: ['./forbidden.component.scss']
+  styleUrls: ['./forbidden.component.scss'],
+  animations: [transitionAnimation]
 })
 export class ForbiddenComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];

@@ -8,11 +8,13 @@ import { ListManagerService } from 'services/list-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-rr-locked',
   templateUrl: './rr-locked.component.html',
-  styleUrls: ['./rr-locked.component.scss']
+  styleUrls: ['./rr-locked.component.scss'],
+  animations: [transitionAnimation]
 })
 export class RrLockedComponent extends AllListsFactory {
   _selectedKindId: string = '';

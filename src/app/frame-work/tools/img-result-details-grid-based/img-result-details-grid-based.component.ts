@@ -4,11 +4,13 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ToolsService } from 'services/tools.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-img-result-details-grid-based',
   templateUrl: './img-result-details-grid-based.component.html',
-  styleUrls: ['./img-result-details-grid-based.component.scss']
+  styleUrls: ['./img-result-details-grid-based.component.scss'],
+  animations: [transitionAnimation]
 })
 export class ImgResultDetailsGridBasedComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];

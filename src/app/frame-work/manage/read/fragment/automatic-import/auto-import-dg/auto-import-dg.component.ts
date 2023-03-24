@@ -52,9 +52,6 @@ export class AutoImportDgComponent implements OnInit {
       }
     }
   }
-  close() {
-    this.ref.close();
-  }
   receiveStartDayJalali = (event: string) => {
     this.dataReq.startDay = event;
   }

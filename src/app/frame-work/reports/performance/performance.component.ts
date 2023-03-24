@@ -6,11 +6,13 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
-  styleUrls: ['./performance.component.scss']
+  styleUrls: ['./performance.component.scss'],
+  animations: [transitionAnimation]
 })
 export class PerformanceComponent extends FactoryONE {
   _selectedKindId: string = '';

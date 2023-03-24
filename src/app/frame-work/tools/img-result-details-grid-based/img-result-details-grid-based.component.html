@@ -1,7 +1,7 @@
 <main class="main">
-    <section [hidden]="toolsService._isCollapsedImageAttrGridBased">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card">
+            <section class="_card" [@openClose]="toolsService._isCollapsedImageAttrGridBased ? 'slideUp' : 'slideDown'">
                 <section class="content">
                     <div class="input_2" [hidden]="!zoneDictionary.length">
                         <div class="_key">ناحیه</div>
@@ -18,8 +18,7 @@
                             <p-multiSelect [maxSelectedLabels]="1" [options]="imageAttrAllDictionary" name="imgAttr"
                                 [(ngModel)]="toolsService.imgResultDetailsGridBased.imageAttributionIds"
                                 optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                                    placeholder="انتخاب مورد" [filter]="true"
-                                showClear="true">
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
                             </p-multiSelect>
                         </div>
                     </div>

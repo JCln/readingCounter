@@ -1,8 +1,5 @@
-<app-collapsable [_isCollapsed]=manageServerService._isCollapsed
-    (_clicked)="manageServerService._isCollapsed = !manageServerService._isCollapsed">
-</app-collapsable>
-
-<form #form="ngForm" *ngIf="!manageServerService._isCollapsed" (ngSubmit)="connectToServer()" class="_card">
+<form #form="ngForm" (ngSubmit)="connectToServer()" class="_card"
+    [@openClose]="manageServerService._isCollapsed ? 'slideUp' : 'slideDown'">
     <div class="input_2">
         <div class="_key">انتخاب نوع خطا</div>
         <div class="_value">
@@ -20,5 +17,7 @@
 
 <app-prime-table [dataSource]="closeTabService.saveDataForServerErrors" [_outputFileName]="'serverErrors'"
     [_numberOfExtraColumns]="[1]" [_checkUpName]="'serverErrors'" [_selectedColumnsToRemember]="'selectedServerErrors'"
-    (clickedElmah)="linkToElmah($event)" (refreshedTable)="refreshTable()">
+    (clickedElmah)="linkToElmah($event)" (refreshedTable)="refreshTable()" [_hasCollapsible]=true
+    [_isCollaped]="manageServerService._isCollapsed"
+    (collapsed)="manageServerService._isCollapsed = !manageServerService._isCollapsed">
 </app-prime-table>

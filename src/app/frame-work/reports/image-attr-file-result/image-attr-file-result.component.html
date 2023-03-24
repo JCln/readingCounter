@@ -1,37 +1,38 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
-                <section class="_card">
-                    <div class="input_2" [hidden]="!_isOrderByDate">
-                        <div class="_key">از</div>
-                        <div class="_value">
-                            <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.imgAttrResult, $event)"
-                                [dateObject]="readingReportManagerService.imgAttrResultReq.fromDate">
-                            </app-date-jalali>
-                        </div>
+            <section class="_card"
+                [@openClose]="readingReportManagerService.isCollapsedImageAttrFileResult ? 'slideUp' : 'slideDown'">
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.imgAttrResult, $event)"
+                            [dateObject]="readingReportManagerService.imgAttrResultReq.fromDate">
+                        </app-date-jalali>
                     </div>
-                    <div class="input_2" [hidden]="!_isOrderByDate">
-                        <div class="_key">تا</div>
-                        <div class="_value">
-                            <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.imgAttrResult, $event)"
-                                [dateObject]="readingReportManagerService.imgAttrResultReq.toDate">
-                            </app-date-jalali>
-                        </div>
+                </div>
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate"
+                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.imgAttrResult, $event)"
+                            [dateObject]="readingReportManagerService.imgAttrResultReq.toDate">
+                        </app-date-jalali>
                     </div>
+                </div>
 
-                      <button type="submit" class="btn_1">
-                        مشاهده
-                        <i class="pi pi-list"></i>
-                    </button>
-                </section>
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
             </section>
         </form>
     </section>
     <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrResult" [_outputFileName]="'_imageAttrResult'"
-        [_selectedColumnsToRemember]="'selectedImageAttrResult'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+        [_selectedColumnsToRemember]="'selectedImageAttrResult'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.isCollapsedImageAttrFileResult"
+        (collapsed)="readingReportManagerService.isCollapsedImageAttrFileResult = !readingReportManagerService.isCollapsedImageAttrFileResult"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ICredentials } from 'interfaces/iauth-guard-permission';
@@ -8,6 +7,7 @@ import { infoVersion } from 'services/DI/info-version';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionLoginHelp } from 'src/app/directives/animation.directive';
 
 import { AuthService } from '../auth.service';
 
@@ -16,23 +16,7 @@ import { AuthService } from '../auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [
-    trigger('openClose', [
-      state('closeSubItems', style({
-        height: '0',
-        width: '0',
-        opacity: '0',
-        visibility: 'hidden'
-      })),
-      state('openSubItems', style({
-        opacity: '1',
-        maxHeight: '15rem',
-        width: '19rem',
-        visibility: 'visible'
-      })),
-      transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
-    ])
-  ]
+  animations: [transitionLoginHelp]
 })
 export class LoginComponent {
   userData: ICredentials = { username: '', password: '', appVersion: this.utilsService.getAppVersion() };

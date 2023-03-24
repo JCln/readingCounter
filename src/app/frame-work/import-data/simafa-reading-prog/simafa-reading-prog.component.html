@@ -1,7 +1,7 @@
 <main *ngIf="route.children.length === 0" class="main">
-    <form #form="ngForm" (ngSubmit)="connectToServer()"
-        [hidden]="closeTabService.importSimafaReadingProgramReq._isCollapsed">
-        <section class="_card">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="_card"
+            [@openClose]="closeTabService.importSimafaReadingProgramReq._isCollapsed ? 'slideUp' : 'slideDown'">
             <div class="input_2">
                 <div class="_key">ناحیه</div>
                 <div class="_value">

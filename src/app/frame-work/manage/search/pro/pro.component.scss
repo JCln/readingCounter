@@ -57,7 +57,7 @@ footer {
   grid-column: 1/2;
   background: var(--white);
   border: $border_5;
-  border-radius: $border_7 $border_7 0 0;
+  border-radius: $border_7;
   padding: var(--font_05);
   box-shadow: 2px 2px 3px 2px var(--secondary_7);
 
@@ -81,7 +81,7 @@ footer {
 ._more_options {
   grid-column: 2/7;
   background-color: var(--secondary_1);
-  border-radius: $border_7 $border_7 0 0;
+  border-radius: $border_7;
   padding: var(--font_02);
   box-shadow: 0px 2px 6px 2px var(--secondary_7);
 

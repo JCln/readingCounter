@@ -1,7 +1,8 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.isCollapsedUserKarkard">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.isCollapsedUserKarkard ? 'slideUp' : 'slideDown'">
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>

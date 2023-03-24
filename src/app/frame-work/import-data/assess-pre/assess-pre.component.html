@@ -2,7 +2,8 @@
     (_clicked)="importDynamicService._assessPreCollapse = !importDynamicService._assessPreCollapse">
 </app-collapsable>
 
-<form #form="ngForm" *ngIf="importDynamicService._assessPreCollapse" (ngSubmit)="editCloseData()">
+<form #form="ngForm" (ngSubmit)="editCloseData()"
+    [@openClose]="importDynamicService._assessPreCollapse ? 'slideUp' : 'slideDown'">
 
     <main class="main_content">
         <section class="_toselect _card">

@@ -7,11 +7,13 @@ import { ListManagerService } from 'services/list-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-rr-pre-number-shown',
   templateUrl: './rr-pre-number-shown.component.html',
-  styleUrls: ['./rr-pre-number-shown.component.scss']
+  styleUrls: ['./rr-pre-number-shown.component.scss'],
+  animations: [transitionAnimation]
 })
 export class RrPreNumberShownComponent extends AllListsFactory {
   _selectedKindId: string = '';

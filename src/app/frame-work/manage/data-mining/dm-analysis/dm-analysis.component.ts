@@ -6,11 +6,13 @@ import { DataMiningAnalysesService } from 'services/data-mining-analyses.service
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-dm-analysis',
   templateUrl: './dm-analysis.component.html',
-  styleUrls: ['./dm-analysis.component.scss']
+  styleUrls: ['./dm-analysis.component.scss'],
+  animations: [transitionAnimation]
 })
 export class DmAnalysisComponent extends FactoryONE {
   _selectedKindId: string = '';

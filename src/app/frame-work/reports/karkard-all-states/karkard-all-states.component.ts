@@ -7,11 +7,13 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-karkard-all-states',
   templateUrl: './karkard-all-states.component.html',
-  styleUrls: ['./karkard-all-states.component.scss']
+  styleUrls: ['./karkard-all-states.component.scss'],
+  animations: [transitionAnimation]
 })
 export class KarkardAllStatesComponent extends FactoryONE {
   tempData: IKarkardAllStatesDto[] = [];

@@ -6,11 +6,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ToolsService } from 'services/tools.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-random-images',
   templateUrl: './random-images.component.html',
-  styleUrls: ['./random-images.component.scss']
+  styleUrls: ['./random-images.component.scss'],
+  animations: [transitionAnimation]
 })
 export class RandomImagesComponent extends FactoryONE {
   userCounterReader: IDictionaryManager[] = [];

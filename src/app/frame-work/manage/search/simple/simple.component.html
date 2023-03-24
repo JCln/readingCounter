@@ -1,5 +1,5 @@
-<main class="main _card">
-    <form #form="ngForm" (ngSubmit)="connectToServer()" [hidden]="searchService._searchSimpleReq.isCollapsed">
+<main class="main _card" [@openClose]="searchService._searchSimpleReq.isCollapsed ? 'slideUp' : 'slideDown'">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="order_by">
             <h2>جستجو بر اساس :</h2>
             <div *ngFor="let orderType of searchService.utilsService.getSearchInOrderTo">

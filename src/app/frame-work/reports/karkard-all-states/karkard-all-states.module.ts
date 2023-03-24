@@ -1,3 +1,4 @@
+import { SharedCollapseModule } from 'src/app/shared/shared-collapse.module';
 import { NgModule } from '@angular/core';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedSortByModule } from 'src/app/shared/shared-sort-by';
@@ -17,6 +18,7 @@ import { KarkardAllStatesComponent } from './karkard-all-states.component';
     SharedThreeModule,
     SharedPrimeNgModule,
     SharedSortByModule,
+    SharedCollapseModule,
     KarkardAllStatesRoutingModule
   ]
 })

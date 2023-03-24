@@ -1,3 +1,4 @@
+import { InterfaceManagerService } from 'services/interface-manager.service';
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 import { Location } from '@angular/common';
@@ -6,8 +7,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
-import { ListManagerService } from 'services/list-manager.service';
-
 
 declare let L;
 
@@ -33,10 +32,10 @@ export class MapService {
   private map: L.Map;
 
   constructor(
-    private listManagerService: ListManagerService,
     private browserStorageService: BrowserStorageService,
     private _location: Location,
-    private envService: EnvService
+    private interfaceManagerService: InterfaceManagerService,
+    public envService: EnvService
   ) { }
 
   getFirstItemUrl = (): any => {
@@ -98,12 +97,6 @@ export class MapService {
   backToPreviousPage = () => {
     this._location.back();
   }
-  getPointerMarks = (a: object): Promise<any> => {
-    return this.listManagerService.postBodyDataSource(ENInterfaces.ListPerDayXY, a);
-  }
-  getXY = (a: string): Promise<any> => {
-    return this.listManagerService.postById(ENInterfaces.ListXY, parseInt(a));
-  }
   validateGISAccuracy = (temp: any[]): boolean => {
     let bol: boolean = false;
     temp.find(item => {
@@ -111,5 +104,25 @@ export class MapService {
     })
 
     return bol;
+  }
+  postDataSource = (method: ENInterfaces, val: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res) => {
+        resolve(res)
+      })
+    });
+  }
+  postById = (method: ENInterfaces, id?: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+  getPointerMarks = (a: object): Promise<any> => {
+    return this.postDataSource(ENInterfaces.ListPerDayXY, a);
+  }
+  getXY = (a: string): Promise<any> => {
+    return this.postById(ENInterfaces.ListXY, parseInt(a));
   }
 }

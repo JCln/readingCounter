@@ -34,11 +34,11 @@ li {
   display: flex;
   align-items: center;
   margin: 0 var(--font_025);
-  border-radius: 15px;
   color: var(--secondary_7);
   text-align: center;
   list-style-type: none;
   cursor: pointer;
+  border: none;
 
   font-size: var(--font_m);
   font-weight: 600;

@@ -6,13 +6,15 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 
 @Component({
   selector: 'app-karkard',
   templateUrl: './karkard.component.html',
-  styleUrls: ['./karkard.component.scss']
+  styleUrls: ['./karkard.component.scss'],
+  animations: [transitionAnimation]
 })
 export class KarkardComponent extends FactoryONE {
   _selectedKindId: string = '';

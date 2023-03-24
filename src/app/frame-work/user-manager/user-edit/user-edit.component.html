@@ -1,6 +1,6 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="closeTabService.saveDataForEditUsers.userInfo">
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForEditUsers.userInfo">
         <form *ngIf="closeTabService.saveDataForEditUsers.userInfo">
             <ng-template matStepLabel>مشخصات کاربر</ng-template>
             <app-user-inputs [editInfo]="closeTabService.saveDataForEditUsers.userInfo"
@@ -8,19 +8,19 @@
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="closeTabService.saveDataForEditUsers.provinceItems">
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForEditUsers.provinceItems">
         <form *ngIf="closeTabService.saveDataForEditUsers.provinceItems">
             <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
             <app-select-zone [provinceItemsData]="closeTabService.saveDataForEditUsers.provinceItems"></app-select-zone>
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="closeTabService.saveDataForEditUsers.appItems">
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForEditUsers.appItems">
         <ng-template matStepLabel>سطح دسترسی به خدمات</ng-template>
         <app-select-action [userAddData]="closeTabService.saveDataForEditUsers.appItems"></app-select-action>
     </mat-step>
 
-    <mat-step>
+    <mat-step [completed]="false">
         <ng-template matStepLabel>گروه دسترسی</ng-template>
         <h2>گروه دسترسی</h2>
         <section class="role_items">
@@ -39,7 +39,7 @@
         </div>
     </mat-step>
 
-    <mat-step>
+    <mat-step [completed]="false">
         <ng-template matStepLabel>ذخیره</ng-template>
         <section class="accept">
             <button class="btn_2 _special" (click)="connectToServer()">ذخیره تغییرات</button>

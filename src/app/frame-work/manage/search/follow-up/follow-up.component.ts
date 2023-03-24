@@ -9,11 +9,13 @@ import { FollowUpService } from 'services/follow-up.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-follow-up',
   templateUrl: './follow-up.component.html',
-  styleUrls: ['./follow-up.component.scss']
+  styleUrls: ['./follow-up.component.scss'],
+  animations: [transitionAnimation]
 })
 export class FollowUpComponent extends FactoryONE {
   shouldActive: boolean = false;
@@ -49,7 +51,7 @@ export class FollowUpComponent extends FactoryONE {
   }
 
   toPreStatus = async (dataSource: IFollowUpHistory) => {
-    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_backToPrev, true, false,'pi pi-step-backward');
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_backToPrev, true, false, 'pi pi-step-backward');
     if (a) {
       this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingPRE, dataSource.id, a);
     }

@@ -7,6 +7,7 @@
   .p-datatable table {
     font-family: $font_family;
     font-size: var(--font_s);
+    background: var(--secondary_1);
   }
 
   tr:nth-child(even) {
@@ -328,6 +329,11 @@
 
   .p-column-filter-row p-columnfilterformelement {
     width: 100%;
+  }
+
+  .p-column-filter-overlay .p-column-filter-row-items {
+    text-align: right;
+    font-weight: 600;
   }
 
   .p-hidden-space {

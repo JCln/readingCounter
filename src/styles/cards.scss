@@ -15,39 +15,3 @@
 .btn_1 {
   max-width: initial;
 }
-
-._card_animation {
-  animation-name: collapse;
-  animation-iteration-count: 2;
-  animation-duration: 4s;
-  animation-timing-function: ease-in-out;
-  // animation-fill-mode: forwards;
-  height: 0;
-  display: none;
-}
-
-._card_add_reverse {
-  animation-name: collapse;
-  animation-direction: reverse;
-  animation-iteration-count: 1;
-  height: 100%;
-}
-
-@keyframes collapse {
-  0% {
-    height: 100%;
-    background: blue;    
-  }
-
-  50% {
-    height: 50%;
-    background: lightblue;
-  }
-
-  100% {
-    height: 0%;
-    background-color: red;
-    // display: none !important;
-    visibility: hidden;
-  }
-}

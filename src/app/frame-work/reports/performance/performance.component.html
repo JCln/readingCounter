@@ -1,7 +1,7 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.isCollapsedPrfm">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card">
+            <section class="_card" [@openClose]="readingReportManagerService.isCollapsedPrfm ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -10,8 +10,7 @@
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="readingReportManagerService.anlzPrfmReq.zoneId" placeholder="انتخاب مورد"
-                                  optionValue="id" optionLabel="title"
-                                filter="true">
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
@@ -70,7 +69,7 @@
                         </div>
                     </div>
 
-                      <button type="submit" class="btn_1">
+                    <button type="submit" class="btn_1">
                         مشاهده
                         <i class="pi pi-list"></i>
                     </button>

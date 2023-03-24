@@ -6,7 +6,7 @@
         <span class="input_2">
             <div class="_key">ناحیه</div>
             <div class="_value">
-                <p-dropdown   name="zone" #zoneId [options]="zoneDictionary"
+                <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
                     [(ngModel)]="offlineModeService.loadForm.zoneId" optionLabel="title" [filter]="true"
                     filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
                     (onChange)="getCounterReader()">
@@ -16,10 +16,9 @@
         <div class="input_2">
             <div class="_key">مامور</div>
             <div class="_value">
-                <p-dropdown   name="counterreader" #counterreader
-                    [options]="userCounterReaderDictionary" [(ngModel)]="offlineModeService.loadForm.counterReaderId"
-                    optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                    placeholder="انتخاب مورد">
+                <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                    [(ngModel)]="offlineModeService.loadForm.counterReaderId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
                 </p-dropdown>
             </div>
         </div>
