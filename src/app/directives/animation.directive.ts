@@ -6,7 +6,7 @@ export const transitionAnimation = [
             height: '0',
             opacity: '0',
             visibility: 'hidden',
-            marginTop: '-1rem'
+            marginTop: '-.5rem'
         })),
         state('slideDown', style({
             height: '100%',
@@ -17,7 +17,6 @@ export const transitionAnimation = [
         transition('slideUp<=>slideDown', animate('250ms cubic-bezier(0.65, 0.05, 0.36, 1)'))
     ])
 ]
-
 export const transitionLoginHelp = [
     trigger('openClose', [
         state('closeSubItems', style({

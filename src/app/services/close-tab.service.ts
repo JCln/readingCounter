@@ -140,7 +140,7 @@ export class CloseTabService {
   saveDataForImportErrorsByTrackNumber: any;
   saveDataForImportErrorsByTrackNumberReq = {
     trackNumber: null,
-    _isCollapsed: true
+    _isCollapsed: false
   }
   saveDataForSimafaBatch: IFragmentDetails[];
   allImports_batch: IImportSimafaBatchReq = {

@@ -91,11 +91,13 @@
         <section class="dynamic_content">
             <div class="input_2" *ngIf="userCounterReaderDictionary.length">
                 <div class="_key">مامور</div>
-                <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
-                    name="counter-reader" [(ngModel)]="importDynamicService._assessAddReq.counterReaderId"
-                    optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                    placeholder="انتخاب مورد">
-                </p-dropdown>
+                <div class="_value">
+                    <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                        name="counter-reader" [(ngModel)]="importDynamicService._assessAddReq.counterReaderId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد">
+                    </p-dropdown>
+                </div>
             </div>
 
             <div class="input_2">

@@ -1,7 +1,3 @@
-<app-collapsable [_isReversed]="true"
-    [_isCollapsed]=closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed
-    (_clicked)=" closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed = !closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed">
-</app-collapsable>
 <form #form="ngForm" class="_card" (ngSubmit)="connectToServer()"
     [@openClose]="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed ? 'slideUp' : 'slideDown'">
     <div class="input_2">
@@ -17,5 +13,7 @@
 
 <app-prime-table [dataSource]="closeTabService.saveDataForImportErrorsByTrackNumber"
     [_outputFileName]="'errorsByTrackNumber'" [_selectedColumnsToRemember]="'selectedErrorsByTrackNumber'"
-    (refreshedTable)="refreshTable()">
+    (refreshedTable)="refreshTable()" [_hasCollapsible]=true
+    [_isCollaped]="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed"
+    (collapsed)="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed = !closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed">
 </app-prime-table>

@@ -24,8 +24,12 @@
     background: var(--white);
     color: var(--secondary_8);
     border: 1px solid var(--secondary_1);
-    border-radius: $border_15;
+    border-radius: $border_7;
     padding: var(--font_05);
+
+    .p-multiselect {
+      border: 1px solid var(--primary_6);
+    }
 
     @media (max-width: 550px) {
       flex-wrap: wrap;
@@ -138,6 +142,9 @@
   }
 
   .p-multiselect .p-multiselect-label {
+    align-items: center;
+    display: flex;
+    height: 100%;
     padding: var(--font_02);
   }
 
@@ -163,6 +170,12 @@
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
     margin-right: var(--font_025);
     margin-left: var(--font_03);
+  }
+
+  .p-multiselect-panel .p-multiselect-header .p-multiselect-close {
+    margin-left: .25rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   p-checkbox {
@@ -205,16 +218,16 @@
     }
   }
 
-  .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
-    background: var(--secondary_1);
-    color: var(--secondary_8);
-  }
-
   .p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
     color: var(--secondary_8);
   }
 
   .p-datatable .p-sortable-column:not(.p-highlight):hover {
+    background: var(--secondary_1);
+    color: var(--secondary_8);
+  }
+
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
     background: var(--secondary_1);
     color: var(--secondary_8);
   }
@@ -228,6 +241,19 @@
     width: 100%;
     direction: rtl;
     border: none;
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
+  .p-dropdown .p-dropdown-label.p-placeholder,
+  .p-multiselect .p-multiselect-label.p-placeholder,
+  .p-multiselect-label,
+  .p-multiselect-items {
+    font-family: $font_family !important;
+    font-size: var(--font_ss);
+    font-weight: 600 !important;
+    // background: var(--secondary_3);
+    border: none;
+    color: var(--secondary_8);
   }
 
   .p-dropdown .p-dropdown-clear-icon {
@@ -253,19 +279,6 @@
 
   .p-dropdown-panel .p-dropdown-header {
     background: var(--secondary_3);
-    color: var(--secondary_8);
-  }
-
-  .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
-  .p-dropdown .p-dropdown-label.p-placeholder,
-  .p-multiselect .p-multiselect-label.p-placeholder,
-  .p-multiselect-label,
-  .p-multiselect-items {
-    font-family: $font_family !important;
-    font-size: var(--font_ss);
-    font-weight: 600 !important;
-    // background: var(--secondary_3);
-    border: none;
     color: var(--secondary_8);
   }
 
@@ -362,12 +375,6 @@
     padding: var(--font_xs) 0;
   }
 
-  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background-color: var(--thirdy_1);
-    border-color: var(--thirdy_1);
-    color: var(--white);
-  }
-
   .fa-trash-o {
     color: var(--red_600);
   }
@@ -406,6 +413,12 @@
     }
   }
 
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: var(--thirdy_1);
+    border-color: var(--thirdy_1);
+    color: var(--white);
+  }
+
   .p-paginator-pages {
     display: flex;
     flex-direction: row-reverse;
@@ -418,7 +431,7 @@
     flex-wrap: wrap;
     justify-content: center;
     border: solid var(--secondary_1);
-    border-radius: $border_15;
+    border-radius: $border_7;
   }
 
   .p-datatable-resizable>.p-datatable-wrapper {

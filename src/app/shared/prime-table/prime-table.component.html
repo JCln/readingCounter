@@ -42,7 +42,8 @@
                     class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
                     <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
                 </i>
-                <section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
+                <section *ngIf="_hasAggregating && profileService._agg.flag" class="_grouping">
+                    <div class="_group_label">گروه‌بندی</div>
                     <p-dropdown name="zones" [options]="_selectedColumns"
                         [(ngModel)]="profileService._agg.selectedAggregate" placeholder="انتخاب مورد"
                         [style]="{'height': '2rem'}" optionValue="field" optionLabel="header" filter="true"
