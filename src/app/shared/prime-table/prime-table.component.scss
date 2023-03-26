@@ -90,11 +90,11 @@
   }
 }
 
-section.content {
+._grouping {
   display: flex;
   align-items: center;
   direction: rtl;
-  gap: 1rem;
+  gap: .5rem;
   height: 2rem;
   background: var(--thirdy_2);
   border-radius: $border_7;
@@ -102,4 +102,12 @@ section.content {
   .icon_reset {
     cursor: pointer;
   }
+
+  ._group_label {
+    font-family: $font_family;
+    padding-right: .25rem;
+    font-size: var(--font_s);
+    font-weight: 600;
+  }
+
 }

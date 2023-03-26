@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
@@ -66,7 +65,6 @@ export class TrackingManagerService {
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private dialog: MatDialog,
     private allListsService: AllListsService,
     private envService: EnvService,
     private jwtService: JwtService,

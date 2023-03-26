@@ -68,14 +68,15 @@ img {
   position: absolute;
   justify-content: center;
   align-items: center;
-  width: 4rem;
-  height: 4rem;
+  width: 3.7rem;
+  height: 3.7rem;
   top: 0;
   left: 50%;
   margin-top: 1px;
-  background-color: var(--primary_4);
+  color: var(--primary_4);
+  border: 1px solid var(--primary_4);
   border-radius: 50%;
-  color: var(--secondary_1);
+  background-color: var(--secondary_1);
   transform: translateX(-50%);
   box-shadow: 0 0 0 0.5rem var(--secondary_1);
 
