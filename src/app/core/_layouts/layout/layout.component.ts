@@ -11,24 +11,8 @@ export class LayoutComponent {
   refreshPage: boolean;
 
   sideBarPageSize = () => {
-    const a = document.querySelector('app-side-bar') as HTMLElement;
-    const framework = document.querySelector('app-frame-work') as HTMLElement;
-    if (screen.width >= 1200) {
-      framework.classList.toggle('framework_conf_s');
-    }
-    else if (screen.width >= 1000) {
-      a.classList.toggle('page_conf_6');
-    }
-    else if (screen.width >= 700) {
-      a.classList.toggle('page_conf_8');
-    }
-    else if (screen.width >= 550) {
-      a.classList.toggle('page_conf_13');
-    }
-    else {
-      a.classList.toggle('page_conf_13');
-    }
-
+    const a = document.querySelector('._sidebar_container') as HTMLElement;
+    a.classList.toggle('_sidebar_width_6');
   }
 
   changeSidebarStatus($event: boolean) {

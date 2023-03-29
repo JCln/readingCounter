@@ -37,7 +37,7 @@ export const light: Theme = {
         "--sidebar_2": "rgb(242, 243, 244)",
         "--sidebar_3": " rgb(203, 203, 203)",
         "--sidebar_4": "rgb(27, 49, 74)",
-        "--sidebar_5": "rgb(255, 255, 255)",
+        "--sidebar_5": "rgb(181 ,207, 236)",//hover sidebar_header
         "--fix_orange": "rgb(246, 128, 56)",
         "--orange_500": "rgb(246, 128, 56)",
         "--orange_600": "rgb(245, 91, 25)",
@@ -230,7 +230,7 @@ export const corporate: Theme = {
         "--sidebar_2": "rgb(248 ,249 ,250)",
         "--sidebar_3": "rgb(240,240 ,240)",
         "--sidebar_4": "rgb(0, 32, 94)",
-        "--sidebar_5": "blue",
+        "--sidebar_5": "rgb(178, 197, 241)",
         "--fix_orange": "rgb(246, 128, 56)",
         "--orange_500": "#00bfff",
         "--orange_600": "#049fd3",

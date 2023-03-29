@@ -37,14 +37,23 @@ export const transitionLoginHelp = [
 export const transitionSideBar = [
     trigger('openClose', [
         state('closeSubItems', style({
-            minHeight: 'var(--font_33)',
-            height: 'var(--font_33)',
+            height: '0',
+            opacity: '0',
+            visibility: 'hidden',
+            marginTop: '-.5rem'
         })),
         state('openSubItems', style({
-            minHeight: '8rem',
-            height: 'auto',
+            height: '100%',
+            opacity: '1',
+            visibility: 'visible',
+            marginTop: '0'
         })),
-        transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
+        transition('closeSubItems => openSubItems', [
+            animate('250ms cubic-bezier(0.65, 0.05, 0.36, 1)')
+        ]),
+        transition('openSubItems => closeSubItems', [
+            animate('200ms ease-in')
+        ])
     ])
 ]
 export const transitionColorPalette = [

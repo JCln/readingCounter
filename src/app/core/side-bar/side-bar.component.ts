@@ -11,8 +11,6 @@ import { transitionSideBar } from 'src/app/directives/animation.directive';
 })
 export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
-  @Output() sidebarEvent = new EventEmitter<boolean>();
-  smallScreen: boolean = false;
   currentRoute: any;
 
   constructor(
@@ -29,24 +27,18 @@ export class SideBarComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    if (screen.width <= 550) {
-      this.smallScreen = true;
-    }
   }
   toggleSubItems = (item: any): void => {
     let a = document.querySelectorAll('.pi-angle-up');
     this.currentRoute.forEach((aItem, i) => {
       if (item.title !== aItem.title) {
         aItem.isOpen = false;
-        a[i].classList.remove('tsConfig');
+        a[i].classList.remove('_toggle_angule');
       }
       else {
         aItem.isOpen = !aItem.isOpen;
-        a[i].classList.toggle('tsConfig');
+        a[i].classList.toggle('_toggle_angule');
       }
     })
-  }
-  setSidebar = () => {
-    this.sidebarEvent.emit(!this.sid_isSmall);
   }
 }

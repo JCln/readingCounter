@@ -1,10 +1,13 @@
 .ma {
   display: flex;
-  // width: 99%;
 
   &router-outlet {
     width: 95%;
   }
+}
+
+app-frame-work {
+  flex-grow: 1;
 }
 
 app-header {
@@ -12,6 +15,76 @@ app-header {
   top: 0;
   display: block;
   z-index: 30;
+}
+
+._sidebar_container {
+  position: absolute;
+  top: 6rem;
+  bottom: 0;
+  right: 0;
+  height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  z-index: 20;
+  min-width: 85%;
+  transition: all ease-in-out 250ms;
+
+  @media (min-width: 375px) {
+    min-width: 75%;
+  }
+
+  @media (min-width: 550px) {
+    position: sticky;
+    top: 0;
+    min-width: 29%;
+  }
+
+  @media (min-width: 700px) {
+    min-width: 24%;
+  }
+
+  @media (min-width: 850px) {
+    min-width: 22%;
+  }
+
+  @media (min-width: 1000px) {
+    min-width: 18%;
+  }
+
+  @media (min-width: 1200px) {
+    min-width: 14%;
+  }
+}
+
+._sidebar_width_6 {
+  display: none;
+
+  @media (min-width: 550px) {
+    display: block;
+    min-width: 4rem;
+    width: 4rem;
+  }
+
+  @media (min-width: 700px) {
+    min-width: 5rem;
+    width: 5rem;
+  }
+
+  &:hover {
+    overflow: visible;
+
+    app-side-bar {
+      position: absolute;
+      right: 0;
+      
+      @media (min-width: 550px) {
+        min-width: 13rem;
+        width: 13rem;
+      }
+    }
+  }
 }
 
 app-tab-wrapper {
@@ -29,85 +102,4 @@ app-tab-wrapper {
   @media (min-width: 1000px) {
     width: 90%;
   }
-}
-
-app-side-bar {
-  @media (min-width: 550px) {
-    width: 29%;
-  }
-
-  @media (min-width: 700px) {
-    width: 24%;
-  }
-
-  @media (min-width: 850px) {
-    width: 22%;
-  }
-
-  @media (min-width: 1000px) {
-    width: 18%;
-  }
-
-  @media (min-width: 1200px) {
-    width: 14%;
-  }
-}
-
-app-frame-work {
-  width: 100%;
-  transition: all ease-in-out 150ms;
-
-  @media (min-width: 550px) {
-    width: 71%;
-  }
-
-  @media (min-width: 700px) {
-    width: 76%;
-  }
-
-  @media (min-width: 850px) {
-    width: 84%;
-  }
-
-  @media (min-width: 1000px) {
-    width: 82%;
-  }
-
-  @media (min-width: 1200px) {
-    width: 86%;
-  }
-}
-
-//ts config
-// .page_conf_4 {
-//   width: 4.5%;
-// }
-
-.page_conf_6 {
-  width: 6.5%;
-}
-
-.page_conf_8 {
-  width: 8%;
-}
-
-.page_conf_13 {
-  width: 13%;
-
-  @media (max-width: 550px) {
-    height: 98vh;
-    width: 80%;
-    overflow-x: auto;
-    top: var(--font_xs);
-    bottom: 0;
-    border-radius: 15px;
-  }
-}
-
-.framework_conf_s {
-  width: 95%;
-}
-
-.tabWrapper_conf {
-  width: 92%;
 }

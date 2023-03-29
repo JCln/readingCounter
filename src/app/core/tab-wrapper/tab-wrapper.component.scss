@@ -18,7 +18,7 @@ li {
   justify-content: center;
   align-items: center;
   margin: 0.04rem;
-  min-width: var(--font_35);
+  min-width: 6rem;
   border: 1.5px solid;
   border-radius: 10px;
   color: var(--primary_5);
@@ -29,6 +29,10 @@ li {
   cursor: pointer;
   padding: var(--font_02);
   z-index: 1;
+
+  @media (min-width:550px) {
+    min-width: var(--font_35);
+  }
 
   @media (min-width: 700px) {
     padding: var(--font_02) 0 0;
@@ -51,6 +55,10 @@ li {
     color: var(--secondary_6);
     opacity: 0;
     transition: opacity 50ms ease-in-out;
+
+    @media (max-width:550px) {
+      opacity: 1;
+    }
 
     &:hover {
       color: var(--thirdy_1);
@@ -75,6 +83,10 @@ li {
     &:hover {
       color: var(--red_500);
       background: var(--secondary_4);
+    }
+
+    @media (max-width:550px) {
+      opacity: 1;
     }
   }
 

@@ -1,321 +1,173 @@
 @import 'variable.scss';
+@import '../_layouts/layout/layout.component.scss';
 
-nav {
-  direction: rtl;
-}
-
-/* small sidebar */
-._small_show {
-  display: none;
-}
-
-._test_show {
-  display: none;
-}
-
-@media (max-width: 550px) {
-  ._small_show {
-    display: flex !important;
-    justify-content: space-around;
-  }
-
-  ._small_notshow {
-    display: none !important;
-  }
-
-  ._test_show {
-    display: block !important;
-  }
-}
-
-.title {
-  font-size: var(--font_ss);
-  font-weight: 600;
-  color: var(--sidebar_4);
-}
-
-/* ***** */
-.ul {
-  position: fixed;
-  right: 0;
-  top: 6rem;
-  bottom: 0;
-  margin-top: 0;
-  margin-left: var(--font_02);
-  padding: var(--font_xs) 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  list-style-type: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  transition: all ease-in-out 150ms;
-
-  @media (max-width: 550px) {
-    margin-top: var(--font_xs);
-  }
-}
-
-ul::-webkit-scrollbar {
-  display: none;
-  /* Safari and Chrome */
-}
-
-.ul li {
-  background: var(--sidebar_3);
-  margin-left: var(--font_02);
-  margin-bottom: var(--font_02);
-  padding: var(--font_05) var(--font_01);
-  border-radius: var(--font_2) 0 0 var(--font_2);
-  border: 1px solid var(--sidebar_3);
-  cursor: pointer;
-}
-
-.ul li {
-  width: 100%;
-  direction: rtl;
-
-  .btn {
-    font-size: var(--font_m);
-    font-weight: 600;
-    color: var(--sidebar_4);
-
-    .on_show {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      white-space: nowrap;
-      z-index: 500;
-    }
-  }
-
-}
-
-.sub_item_1 {
-  animation: toggle_side 150ms ease-in-out;
-}
-
-.sub_item_1,
-.sub_item_2 {
-  background: var(--sidebar_2);
-  border: 1px solid var(--sidebar_1);
-  padding: var(--font_05) var(--font_xs) var(--font_05) var(--font_xxs);
-  margin: 0.13rem var(--font_02);
-  text-align: right;
-
-  height: auto;
-  border-radius: $border_100vmax;
-  overflow: visible;
-
-  color: var(--sidebar_1);
-  font-size: var(--font_ss);
-  font-weight: 600;
-  outline: none;
-
-  &:hover,
-  &:focus {
-    background: var(--primary_4);
-    color: var(--white);
-    border-color: var(--primary_4);
-    box-shadow: 0px 0px 2px 1px var(--primary_4);
-  }
-}
-
-.active {
-  background: var(--thirdy_1);
-  color: var(--white);
-}
-
-.ul_items {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.ul::after {
-  content: '';
-  position: fixed;
-  background: var(--sidebar_back2);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
-  top: 0;
-  bottom: 0;
-  border-radius: $border_15;
-  min-width: 100%;
-  min-height: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.ul::before {
-  content: '';
-  position: fixed;
-  background: var(--sidebar_back1);
-  clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
-  top: 0;
-  bottom: 0;
-  border-radius: $border_15;
-  min-width: 100%;
-  min-height: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-// for small sidebar we added ngIf and separate scss
-
-.btn_2 {
+ul {
   position: relative;
-  cursor: pointer;
-  border-radius: var(--font_2) 0 0 var(--font_2);
-  background: var(--sidebar_3);
-  margin-bottom: var(--font_025);
-  padding: var(--font_xxs) var(--font_05);
-  border: 1px solid;
-
-  @media (max-width: 550px) {
-    margin-bottom: var(--font_01);
-  }
-}
-
-.ul_2 {
-  position: fixed;
-  right: 0;
-  top: 6rem;
-  bottom: 0;
-  margin-top: 0;
-  margin-left: var(--font_02);
-  padding: var(--font_xs) 0;
-  overflow-y: auto;
-  overflow-x: hidden;
+  direction: rtl;
+  margin-bottom: var(--font_02);
+  margin: 2px 0;
+  padding-bottom: 1rem;
+  padding: 0;
   list-style-type: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  transition: all ease-in-out 150ms;
 
-  ._show {
-    position: absolute;
-    display: none;
-    width: 15rem;
-    right: 3.4rem;
-    background: var(--secondary_3);
-    padding: var(--font_05);
-    border-radius: $border_15;
-    height: 13rem;
-    z-index: 4;
-    bottom: 0;
-    box-shadow: -3px 0px 3px 0px var(--sidebar_1);
-    overflow-y: auto;
-    overflow-x: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-
-    h3 {
-      font-size: var(--font_m);
-      font-weight: 600;
-      color: var(--sidebar_4);
-      text-align: center;
-      color: var(--sidebar_4);
-    }
-
-    & a {
-      display: block;
-      padding-right: var(--font_03);
-      margin-bottom: var(--font_03);
-      color: var(--secondary_6);
-      font-size: var(--font_m);
-      font-weight: 600;
-      border-radius: $border_15;
-    }
-
-    @media (max-width: 550px) {
-      position: static;
-      background: none;
-      height: auto;
-      box-shadow: none;
-    }
+  li {
+    margin-bottom: 4px;
   }
 
-  .li_2 {
-    h3 {
-      color: var(--sidebar_1);
-    }
+  ._list_out {}
+
+  ._list_show_details {
+    padding: 1px 2px;
+    font-weight: 600;
   }
 
-  .active_2 {
-    .btn_2 {
-      border: 2px solid var(--primary_3);
-      background-color: var(--secondary_2);
-    }
+  ._list_header {
+    display: flex;
+    align-items: center;
+    background-color: var(--sidebar_3);
+    border-radius: $border_100vmax $border_5 $border_5 $border_100vmax;
+    padding: 5px 3px;
+    cursor: pointer;
 
     .icons {
-      color: var(--primary_3);
+      font-size: var(--font_m2);
+      width: 1.87rem;
+      color: var(--sidebar_1);
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0px 0px 1px var(--sidebar_5);
     }
   }
 
-  .sub_item_2 {
-    direction: rtl;
+  ._list_title {
+    margin-left: auto;
+    margin-right: 2px;
+    color: var(--sidebar_1);
   }
 
-  .btn_2:hover {
-    ._show {
-      display: block;
+  .__list_items_out {
+    background: var(--sidebar_3);
+    padding: 2px 0;
+    border-radius: 7px;
+  }
 
-      &:nth-last-child(1) {
-        top: -7rem;
-      }
-    }
+  .__list_items_in {
+    background: var(--sidebar_2);
+    border: 1px solid var(--sidebar_1);
+    padding: 2px 6px;
+    margin: 0.13rem var(--font_02);
+    text-align: right;
 
-    ::after {
-      content: '';
-      right: 2.4rem;
-      position: absolute;
-      width: 4rem;
-      min-height: 3rem;
+    border-radius: $border_100vmax;
+    color: var(--sidebar_1);
+    font-size: var(--font_ss);
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background: var(--primary_4);
+      color: var(--white);
+      border-color: var(--primary_4);
     }
   }
 
-  @media (max-width: 550px) {
+  .active_list {
+    ._list_header {
+      background-color: var(--sidebar_5);
+      font-size: var(--font_ss);
+    }
+  }
+
+  .active {
+    background: var(--thirdy_1);
+    color: var(--white);
+  }
+
+  &::before {
+    content: "";
     position: absolute;
-    width: 100%;
-    height: 150vh;
-    right: 0;
-    background: #F2F3F4;
-    border-left: 2px solid gray;
-    padding: var(--font_xs) 0 0 var(--font_05);
-    border-radius: 15px;
+    background: var(--sidebar_back1);
+    -webkit-clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
+    top: 0;
+    bottom: 0;
+    border-radius: $border_7;
+    min-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: var(--sidebar_back2);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
+    top: 0;
+    bottom: 0;
+    border-radius: $border_7;
+    min-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    z-index: -1;
   }
 }
 
+// screens less than 550px ::before and ::after effects(background of sidebar)
+// should disapear after toggle bottun clicked
+._ul_not_show {
 
-i.icons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 var(--font_02) 0 var(--font_03);
-  font-size: var(--font_l);
-  width: 1.87rem;
-  color: var(--sidebar_1);
+  ._list_header {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  ._list_show_details {
+    display: block;
+  }
+
+  .__list_items_out {
+    display: none;
+  }
+
+  @media (min-width: 550px) {
+    // display block make icons visible when just icons show on more than 550px screens 
+    // because less than 550px overrides need
+
+    ._list_title {
+      display: none;
+    }
+
+    .pi-angle-up {
+      display: none;
+    }
+
+    &:hover {
+      ._list_title {
+        display: block;
+      }
+
+      .pi-angle-up {
+        display: block;
+      }
+
+      .__list_items_out {
+        display: block;
+        background: var(--sidebar_3);
+        padding: 2px 0;
+        border-radius: 7px;
+      }
+
+    }
+  }
 }
 
-@keyframes toggle_side {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: .3;
-  }
-
-  80% {
-    opacity: .5;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-// ts config for on close/open lists
-.tsConfig {
+// ts config for toggle angle-icon
+._toggle_angule {
   transform: rotate(180deg) !important;
   color: var(--primary_2) !important;
 }

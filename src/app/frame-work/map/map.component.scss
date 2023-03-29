@@ -22,7 +22,11 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  margin: 0 2rem;
+  margin: 0 0.5rem;
+
+  @media (min-width: 550px) {
+    margin: 0 2rem;
+  }
 }
 
 ._options {
