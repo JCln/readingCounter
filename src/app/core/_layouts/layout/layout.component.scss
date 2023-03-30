@@ -24,7 +24,7 @@ app-header {
   scrollbar-width: none;
   z-index: 20;
   min-width: 85%;
-  transition: all ease-in-out 250ms;
+  transition: min-width cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
 
   @media (min-width: 375px) {
     min-width: 75%;
@@ -75,32 +75,25 @@ app-header {
 
     app-side-bar {
       position: absolute;
-      animation: testSidebar 250ms forwards;
       right: 0;
       box-shadow:
         0px 11px 10px 0px rgba(0, 0, 0, .14),
         0px 18px 18px 0px rgba(0, 0, 0, .12),
         0px 5px 5px -1px rgba(0, 0, 0, .2);
 
-      // @media (min-width: 550px) {
-      //   min-width: 13rem;
-      //   width: 13rem;
-      // }
+      animation: absolute_animation 250ms both;
     }
   }
 }
 
-@keyframes testSidebar {
-  // 0% {
-  //   width: 5rem;
-  // }
+@keyframes absolute_animation {
 
-  50% {
-    width: 9rem;
-    min-width: 9rem;
+  from {
+    width: 5rem;
+    min-width: 5rem;
   }
 
-  100% {
+  to {
     width: 13rem;
     min-width: 13rem;
   }
