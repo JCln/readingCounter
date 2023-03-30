@@ -12,7 +12,7 @@ export class LayoutComponent {
 
   sideBarPageSize = () => {
     const a = document.querySelector('._sidebar_container') as HTMLElement;
-    a.classList.toggle('_sidebar_width_6');
+    a.classList.toggle('_sidebar_small_screen_toggle');
   }
 
   changeSidebarStatus($event: boolean) {

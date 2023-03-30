@@ -1,7 +1,7 @@
 .btn_1 {
   max-width: 19rem;
   width: 100%;
-  height: var(--font_28);
+  height: var(--font_26);
   text-align: center;
   background: var(--thirdy_1);
   color: var(--white);
@@ -15,14 +15,14 @@
   &:focus,
   &:active {
     background: var(--primary_4);
-    box-shadow: 0px 0px 2px 1px var(--primary_4);
+    box-shadow: 0px 0px 5px 0px var(--primary_4)
   }
 }
 
 .btn_2 {
   max-width: 19rem;
   width: 8rem;
-  height: var(--font_28);
+  height: var(--font_26);
   text-align: center;
   border-radius: $border_100vmax;
   font-size: var(--font_m);
@@ -41,7 +41,7 @@
 .btn_2_o {
   max-width: 19rem;
   width: 8rem;
-  height: var(--font_28);
+  height: var(--font_26);
   text-align: center;
   border-radius: $border_15;
   font-size: var(--font_m);

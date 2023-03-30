@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 import { transitionSideBar } from 'src/app/directives/animation.directive';
 
@@ -9,7 +9,7 @@ import { transitionSideBar } from 'src/app/directives/animation.directive';
   styleUrls: ['./side-bar.component.scss'],
   animations: [transitionSideBar]
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent {
   @Input() sid_isSmall: boolean;
   currentRoute: any;
 
@@ -25,8 +25,6 @@ export class SideBarComponent implements OnInit {
     // this.currentRoute = this.testSidebarService.getTestSideTest();
     // this.currentRoute = this.currentRoute.items;
 
-  }
-  ngOnInit(): void {
   }
   toggleSubItems = (item: any): void => {
     let a = document.querySelectorAll('.pi-angle-up');

@@ -15,8 +15,8 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
-  gap: var(--font_05);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  gap: var(--font_025);
   align-items: center;
 }
 

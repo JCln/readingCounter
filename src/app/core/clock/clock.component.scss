@@ -2,6 +2,7 @@
 @import 'mixins.scss';
 
 .analog-clock {
+  display: none;
   position: relative;
   width: var(--font_35);
   height: var(--font_35);
@@ -9,6 +10,10 @@
   background-size: cover;
   border-radius: 50%;
   top: var(--font_01);
+
+  @media (min-width: 550px) {
+    display: grid;
+  }
 
   @media (min-width: 780px) {
     width: 4.5rem;

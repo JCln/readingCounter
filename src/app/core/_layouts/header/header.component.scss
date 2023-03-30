@@ -1,6 +1,5 @@
 @import 'variable.scss';
 @import 'mixins.scss';
-@import 'media.scss';
 @import 'hamburger';
 @import 'theme';
 @import 'tooltip';
@@ -46,10 +45,20 @@ li {
 
 ._name {
   margin-left: auto;
+  padding-right: 0;
   font-size: var(--font_ss);
   color: var(--primary_5);
   cursor: auto;
   @include _borders();
+
+  @media (min-width:550px) {
+    font-size: var(--font_ss);
+    padding-right: 0.87rem;
+  }
+
+  @media (min-width:780px) {
+    font-size: var(--font_m);
+  }
 }
 
 .menu_toggle {
@@ -115,6 +124,3 @@ li {
   width: var(--font_5);
   font-size: var(--font_xs);
 }
-
-@include media_wrapper(550px, '._name', font-size, var(--font_ss));
-@include media_wrapper(780px, '._name', font-size, var(--font_m));
