@@ -57,7 +57,6 @@ app-header {
   visibility: hidden;
   opacity: 0;
   width: 0;
-  animation: testSidebar 500ms;
 
   @media (min-width: 550px) {
     visibility: visible;
@@ -76,34 +75,29 @@ app-header {
 
     app-side-bar {
       position: absolute;
+      animation: testSidebar 250ms forwards;
       right: 0;
       box-shadow:
         0px 11px 10px 0px rgba(0, 0, 0, .14),
         0px 18px 18px 0px rgba(0, 0, 0, .12),
         0px 5px 5px -1px rgba(0, 0, 0, .2);
 
-      @media (min-width: 550px) {
-        min-width: 13rem;
-        width: 13rem;
-      }
+      // @media (min-width: 550px) {
+      //   min-width: 13rem;
+      //   width: 13rem;
+      // }
     }
   }
 }
 
 @keyframes testSidebar {
-  0% {
-    width: 4rem;
-    min-width: 4rem;
-  }
+  // 0% {
+  //   width: 5rem;
+  // }
 
   50% {
-    width: 7rem;
-    min-width: 7rem;
-  }
-
-  80% {
-    width: 10rem;
-    min-width: 10rem;
+    width: 9rem;
+    min-width: 9rem;
   }
 
   100% {
