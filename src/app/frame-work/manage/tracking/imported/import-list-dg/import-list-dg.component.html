@@ -1,6 +1,7 @@
 <section *ngIf="dataSource">
 
     <h1 class="title">ویرایش لیست صادر شده</h1>
+    <hr>
     <form #form="ngForm" (ngSubmit)="editCloseData()" class="content">
         <div class="_desc">
             <div *ngFor="let mainDatas of _selectedDatas">

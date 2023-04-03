@@ -14,7 +14,7 @@ export class ThemeService {
     { id: 1, color: 0, colorName: 'white' },
     { id: 2, color: 1, colorName: 'rgb(14, 76, 146)' },
     { id: 3, color: 2, colorName: 'rgb(127 ,108, 153)' },
-    { id: 4, color: 3, colorName: 'rgb(93 ,80 ,110)' },
+    { id: 4, color: 3, colorName: '#B5C1AE' },
     { id: 5, color: 4, colorName: '#36a3fa' },
   ];
 

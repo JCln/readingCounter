@@ -37,7 +37,7 @@
         <li class="_name">
             {{displayName}}
         </li>
-        <li class="menu_toggle" (click)="setSidebar()">
+        <li class="menu_toggle" (click)="setSidebar()" [ngClass]="{'__rotate_sidebar_toggler':sideBar}">
             <span></span>
             <span></span>
             <span></span>

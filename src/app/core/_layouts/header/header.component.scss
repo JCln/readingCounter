@@ -73,7 +73,10 @@ li {
   &:active {
     box-shadow: 0px 0px 1px 1px var(--thirdy_1);
   }
+}
 
+.__rotate_sidebar_toggler {
+  transform: rotate(90deg);
 }
 
 ::ng-deep {

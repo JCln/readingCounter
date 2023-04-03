@@ -144,7 +144,7 @@ section.dynamic_content {
 
   .__container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(9rem, 14rem));
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 16rem));
     justify-content: center;
     gap: var(--font_02);
   }

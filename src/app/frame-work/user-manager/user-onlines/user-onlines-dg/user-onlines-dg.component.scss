@@ -100,16 +100,22 @@ section {
     box-shadow: 0 3px var(--secondary_1), 0 3px 2px 2px var(--thirdy_4);
   }
 
-  ._colors_button :nth-child(2) {
-    background: rgb(71, 123, 71) !important;
-  }
+  ._colors_button {
+    .p-buttonset .p-button:first-of-type {
+      background: rgb(5, 88, 124) !important;
+    }
 
-  ._colors_button :nth-child(3) {
-    background: rgb(188, 136, 39) !important;
-  }
+    :nth-child(2) {
+      background: rgb(71, 123, 71) !important;
+    }
 
-  ._colors_button :nth-child(4) {
-    background: rgb(192, 26, 26) !important;
+    :nth-child(3) {
+      background: rgb(188, 136, 39) !important;
+    }
+
+    :nth-child(4) {
+      background: rgb(192, 26, 26) !important;
+    }
   }
 
 }

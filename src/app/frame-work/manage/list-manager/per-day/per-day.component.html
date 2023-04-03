@@ -1,16 +1,12 @@
-<div class="header_icons_wrap">
-    <div class="left_side">
-    </div>
-    <div class="left_side">
-        <i (click)="listManagerService.routeToReading()" class="tooltip _circle_border p_icons pi pi-arrow-left">
-            <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
-        </i>
-    </div>
+<div class="left_side">
+    <i (click)="listManagerService.routeToReading()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+        <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
+    </i>
 </div>
 <section>
 
-    <h1 class="title">اطلاعات کلی</h1>
     <form #form="ngForm" class="content">
+        <h1 class="title">اطلاعات کلی</h1>
         <div class="_desc">
             <div class="input_2" [ngClass]="{'double_size':mainDatas.icon}" *ngFor="let mainDatas of _selectMainDatas">
                 <div class="_key">{{mainDatas.header}}</div>
@@ -42,8 +38,8 @@
 
 </section>
 
-<h1 class="title mt-s">اطلاعات روزانه قرائت</h1>
-<section>
+<section class="content">
+    <h1 class="title">اطلاعات روزانه قرائت</h1>
     <main *ngFor="let history of closeTabService.saveDataForLMPD.offLoadPerDayHistory" class="card_wrapper">
         <div class="card__content" *ngFor="let item of _selectCols">
             <div class="input_2">

@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class HeaderComponent implements AfterContentInit, OnChanges {
   ENHubMessages = ENHubMessages;
-  private sideBar: boolean;
+  sideBar: boolean;
   @Input() sid_isSmall: boolean;
   @Output() sidebarEvent = new EventEmitter<boolean>();
 

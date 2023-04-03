@@ -19,11 +19,6 @@
     font-size: var(--font_ss);
   }
 
-  .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
-  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: var(--pink_500);
-  }
-
   .mat-dialog-container {
     position: relative;
     background: var(--secondary_1);
@@ -58,7 +53,7 @@
 
     &:hover,
     &:active {
-      color: #495057;
+      color: var(--primary_2);
       border-color: transparent;
       background: var(--secondary_4);
     }
@@ -67,7 +62,7 @@
       outline: 0 none;
       outline-offset: 0;
       background: var(--secondary_4);
-      box-shadow: 0 0 0 0.2rem #a6d5fa;
+      box-shadow: 0 0 0 0.15rem var(--primary_3);
     }
   }
 
@@ -115,6 +110,15 @@
     border-color: var(--secondary_5);
   }
 
+  .mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame {
+    border-color: var(--secondary_8);
+  }
+
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+  .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: var(--pink_500);
+  }
 }
 
 .radio_group {

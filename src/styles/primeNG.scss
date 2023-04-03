@@ -191,11 +191,15 @@
   }
 
   .p-button {
-    background: var(--thirdy_1) !important;
+    background: var(--thirdy_1);
     color: var(--white) !important;
     border-radius: $border_15 !important;
     font-family: $font_family !important;
     font-weight: 600;
+  }
+
+  .p-selectbutton .p-button:not(.p-disabled):not(.p-highlight):hover {
+    background: var(--thirdy_3) !important;
   }
 
   p-radiobutton {

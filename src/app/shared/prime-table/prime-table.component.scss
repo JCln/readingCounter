@@ -78,11 +78,13 @@
 }
 
 ._anything {
+  display: inline-flex;
+  min-width: 12rem;
+  margin-right: 1rem;
+  padding: 0 1rem;
   background: var(--primary_3) !important;
   color: var(--white) !important;
-  min-width: 12rem;
   border-radius: $border_5;
-  display: inline-flex;
   font-size: var(--font_s);
 
   td {
@@ -95,7 +97,7 @@
   align-items: center;
   direction: rtl;
   gap: .5rem;
-  height: 2rem;
+  height: 2.2rem;
   background: var(--thirdy_2);
   border-radius: $border_7;
 

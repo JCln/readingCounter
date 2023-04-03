@@ -1,7 +1,7 @@
 <div class="over_all">
     <main>
-        <h1>جزئیات پیام</h1>
         <div class="_card">
+            <h1>جزئیات پیام</h1>
             <div class="_save_this">
                 <h2>عنوان</h2>
                 <input type="text" class="input_1" [ngStyle]="{'color': messageService.message.exactColor}"
@@ -33,8 +33,8 @@
         </div>
     </main>
     <main>
-        <h1>استفاده از پیام های پیش‌فرض</h1>
         <div class="static_height">
+            <h1>استفاده از پیام های پیش‌فرض</h1>
             <div class="main_content" *ngFor="let item of allMessages"
                 [ngStyle]="{'border': '.15rem solid'+item.exactColor}">
                 <div class="_text" [ngStyle]="{'color': item.exactColor}">{{item.message}}</div>

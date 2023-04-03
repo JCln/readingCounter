@@ -1,7 +1,7 @@
 <main class="over_all">
     <div *ngFor="let item of closeTabService.saveDataForMsDriveInfo, index as i">
-        <h1 class="title">{{item.driveName}} {{item.volumeLabel}}</h1>
         <div class="content">
+            <h1 class="title">{{item.driveName}} {{item.volumeLabel}}</h1>
             <div class="_key_value">
                 <div class="_key">درصد فضای آزاد</div>
                 <div class="_value"> {{item.freePercent}}</div>

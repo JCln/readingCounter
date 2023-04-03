@@ -40,7 +40,7 @@
         <h3>زمان نمایش (ms) : {{polyline_configs}}</h3>
         <p-slider [(ngModel)]="polyline_configs" [max]=3000></p-slider>
         <article>
-            <h3>ترتیب براساس :</h3>
+            <h3 class="_config_title">ترتیب براساس :</h3>
             <div *ngFor="let orderType of orderGroup">
                 <div class="p-field-radiobutton">
                     <p-radioButton name="orderByDate" [value]="orderType.value" [(ngModel)]="_selectedOrderId"
@@ -49,7 +49,7 @@
                     <label [for]="orderType.title">{{orderType.header}}</label>
                 </div>
             </div>
-            <h3>به ترتیب صعودی؟</h3>
+            <h3 class="_config_title">به ترتیب صعودی؟</h3>
             <mat-checkbox name="orderInAsc" [(ngModel)]="_isOrderInAsc">بلی</mat-checkbox>
             <br>
         </article>

@@ -85,13 +85,6 @@ progress {
   font-size: var(--font_l2);
 }
 
-input {
-  text-align: center;
-  color: var(--secondary_5);
-  margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px var(--secondary_4);
-}
-
 input[type="file"] {
   display: none;
   position: absolute;

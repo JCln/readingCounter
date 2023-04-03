@@ -34,12 +34,6 @@
   font-size: var(--font_l2);
 }
 
-input {
-  color: var(--secondary_5);
-  margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px var(--secondary_4);
-}
-
 .check_boxes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
@@ -102,13 +96,4 @@ input {
 
 .input_2 {
   margin: 0;
-}
-
-.header_icons_wrap {
-  position: relative;
-
-  .left_side {
-    position: absolute;
-    top: 50%;
-  }
 }

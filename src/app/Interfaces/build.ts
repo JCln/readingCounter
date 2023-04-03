@@ -132,6 +132,7 @@ export class ENMapUrls {
 }
 export class ENYears {
     static readonly DEFAULT = new ENYears([
+        { title: '1402', value: 1402 },
         { title: '1401', value: 1401 },
         { title: '1400', value: 1400 },
         { title: '1399', value: 1399 },
@@ -139,67 +140,7 @@ export class ENYears {
         { title: '1397', value: 1397 },
         { title: '1396', value: 1396 },
         { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly ESF = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH_ZONE4 = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH_SE = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH_SE_LOCAL = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly KERMANSHAH = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
+        { title: '1403', value: 1403 },
     ]);
 
     private constructor(public readonly value: { title: string, value: number }[]) {
