@@ -6,6 +6,7 @@
 ._contents {
   display: grid;
   min-width: 16rem;
+  gap: var(--font_02);
   direction: rtl;
   align-items: center;
   justify-content: center;
