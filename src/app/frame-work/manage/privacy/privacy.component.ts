@@ -66,11 +66,9 @@ export class PrivacyComponent extends FactoryONE {
 
   }
   openSnackBar(message: string, duration: ENSnackBarTimes) {
-    this.snackWrapperService.openSnackBar(message, duration);
+    this.snackWrapperService.openSnackBar(message, duration, ENSnackBarColors.warn);
   }
   accessDenied(event) {
-    console.log(event);
-
     this.snackWrapperService.openSnackBar(EN_messages.needMoreAccess, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
     this.ref._checked = event;
   }
