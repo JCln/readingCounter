@@ -11,11 +11,8 @@
   border-radius: 50%;
   top: var(--font_01);
 
-  @media (min-width: 550px) {
-    display: grid;
-  }
-
   @media (min-width: 780px) {
+    display: grid;
     width: 4.5rem;
     height: 4.5rem;
   }

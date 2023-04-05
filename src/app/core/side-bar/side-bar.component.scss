@@ -11,13 +11,13 @@ ul {
   list-style-type: none;
 
   li {
-    margin-bottom: 4px;
+    margin-bottom: 0.5rem;
   }
 
   ._list_out {}
 
   ._list_show_details {
-    padding: 1px 2px;
+    padding: 0;
     font-weight: 600;
   }
 
@@ -26,7 +26,7 @@ ul {
     align-items: center;
     background-color: var(--sidebar_3);
     border-radius: $border_100vmax $border_5 $border_5 $border_100vmax;
-    padding: 5px 3px;
+    padding: 8px 3px;
     cursor: pointer;
 
     .icons {
@@ -50,7 +50,7 @@ ul {
 
   .__list_items_out {
     background: var(--sidebar_3);
-    padding: 2px 0;
+    padding: 1px 0;
     border-radius: 7px;
   }
 
@@ -162,7 +162,6 @@ ul {
       .__list_items_out {
         display: block;
         background: var(--sidebar_3);
-        padding: 2px 0;
         border-radius: 7px;
       }
 

@@ -198,8 +198,16 @@
     font-weight: 600;
   }
 
+  .p-selectbutton .p-button.p-highlight {
+    background: var(--primary_4);
+  }
+
   .p-selectbutton .p-button:not(.p-disabled):not(.p-highlight):hover {
     background: var(--thirdy_3) !important;
+  }
+
+  .p-selectbutton .p-button.p-highlight:hover {
+    background-color: var(--thirdy_3);
   }
 
   p-radiobutton {

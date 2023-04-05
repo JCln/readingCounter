@@ -4,7 +4,7 @@
   z-index: 10;
 }
 
-.tooltip .tooltip_text {
+.tooltip_text {
   position: absolute;
   direction: rtl;
   visibility: hidden;
@@ -17,15 +17,15 @@
   z-index: 4;
   bottom: 120%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 10%);
   font-weight: 600;
   font-family: $font_family;
   font-size: var(--font_s);
   line-break: auto;
+  transition: all ease-in-out 100ms;
 }
 
-.tooltip .tooltip_text_right {
-  transform: translateY(50%);
+.tooltip_text_right {
   position: absolute;
   direction: rtl;
   visibility: hidden;
@@ -43,9 +43,11 @@
   font-family: $font_family;
   font-size: var(--font_s);
   line-break: auto;
+  transform: translate(-10%, 50%);
+  transition: all ease-in-out 100ms;
 }
 
-.tooltip .tooltip_text_bottom {
+.tooltip_text_bottom {
   position: absolute;
   direction: rtl;
   visibility: hidden;
@@ -57,12 +59,13 @@
   padding: 3px;
   z-index: 4;
   left: 50%;
-  transform: translateY(50%) translateX(-50%);
+  transform: translate(-50%, 40%);
   top: 50%;
   font-weight: 600;
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
   font-size: var(--font_s);
   line-break: auto;
+  transition: all ease-in-out 100ms;
 
   &::after {
     content: "";
@@ -77,7 +80,7 @@
   }
 }
 
-.tooltip .tooltip_text::after {
+.tooltip_text::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -88,7 +91,7 @@
   border-color: var(--orange_500) transparent transparent transparent;
 }
 
-.tooltip .tooltip_text_right::after {
+.tooltip_text_right::after {
   content: "";
   position: absolute;
   top: 40%;
@@ -101,12 +104,15 @@
 
 .tooltip:hover .tooltip_text {
   visibility: visible;
+  transform: translate(-50%, 0);
 }
 
 .tooltip:hover .tooltip_text_right {
   visibility: visible;
+  transform: translate(0, 50%);
 }
 
 .tooltip:hover .tooltip_text_bottom {
   visibility: visible;
+  transform: translate(-50%, 50%);
 }
