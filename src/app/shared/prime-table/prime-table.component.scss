@@ -112,5 +112,13 @@
     font-size: var(--font_s);
     font-weight: 600;
   }
+}
 
+._tooltip_special:hover .tooltip_text {
+  transform: translate(-10%, -40%);
+
+}
+
+._tooltip_special .tooltip_text::after {
+  left: 15%;
 }

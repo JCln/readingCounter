@@ -58,7 +58,7 @@ export enum EN_Routes {
     'wrimpsimafardpg' = '/wr/imp/simafa/rdpg',
     'wrimpsimafardpgsingle' = '/wr/imp/simafa/rdpg/single',
     'wrimpsimafardpgbatch' = '/wr/imp/simafa/rdpg/batch',
-    'wrpolicies' = '/wr/policies',
+    'wrpolicies' = '/wr/m/policies',
     'wrprofile' = '/wr/settings/profile',
     'wrLicense' = '/wr/settings/license',
     'wrmtrackimported' = '/wr/m/track/imported',

@@ -13,7 +13,21 @@ export interface IPolicies {
     passwordContainsLowercase: boolean,
     passwordContainsUppercase: boolean,
     passwordContainsNonAlphaNumeric: boolean,
-    canUpdateDeviceId: boolean
+    canUpdateDeviceId: boolean,
+    enableXSSProtection?: boolean,
+    enableObscureHeaderInfo?: boolean,
+    secureCookies?: boolean,
+    DOSProtection?: boolean,
+    STEALTH?: boolean,//useSingleActiveUser true
+    useJWTDecoder?: boolean,
+    CSRFProtection?: boolean,
+    DDOSProtection?: boolean,
+    CSPProtection?: boolean,
+    HSTSProtection?: boolean,// false
+    SanitizeUserInputs?: boolean,//true
+    AES512Protection?: boolean,
+    autoClearData?: boolean,
+
 }
 export interface IPrivacy {
     minLength: number;

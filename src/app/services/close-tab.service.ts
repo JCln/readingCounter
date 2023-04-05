@@ -12,7 +12,7 @@ import {
   IImportSimafaReadingProgramsReq,
   IReadingProgramRes,
 } from 'interfaces/import-data';
-import { IAPK } from 'interfaces/inon-manage';
+import { IAPK, IPolicies } from 'interfaces/inon-manage';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import {
   IAbBahaFormula,
@@ -291,7 +291,21 @@ export class CloseTabService {
   saveDataForTextOutput: ITextOutput[];
   saveDataForToolsExcelViewer: IDynamicExcelReq[];
   saveDataForDynamicReports: IDynamicReportsRes[];
-  saveDataForPolicies: any;
+  saveDataForPolicies: IPolicies = {
+    id: 0,
+    enableValidIpCaptcha: false,
+    requireCaptchaInvalidAttempts: 0,
+    enableValidIpRecaptcha: false,
+    requireRecaptchaInvalidAttempts: 0,
+    lockInvalidAttempts: 0,
+    lockMin: 0,
+    minPasswordLength: 0,
+    passwordContainsNumber: false,
+    passwordContainsLowercase: false,
+    passwordContainsUppercase: false,
+    passwordContainsNonAlphaNumeric: false,
+    canUpdateDeviceId: false
+  };
   saveDataForFNB: IForbiddenManager[];
   saveDataForProfile: any;
   saveDataForMomentLastRead: ILatestReads[] = [];

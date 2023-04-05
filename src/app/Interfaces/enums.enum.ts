@@ -43,6 +43,7 @@ export enum EN_messages {
     insert_video = 'ویدیویی انتخاب کنید',
     accedd_denied_relogin = 'دسترسی شما باطل شده است. ساعت سیستم خود را نیز بررسی و مجددا وارد شوید',
     insert_roleAccess = 'سطح دسترسی به ناحیه ای را انتخاب نمایید',
+    needMoreAccess = 'برای تغییر دراین قسمت به دسترسی های بیشتری نیاز دارید',
     insert_group_access = 'گروه دسترسی را مشخص نمایید',
     insert_again = 'مجددا مقادیر را وارد نمایید',
     insert_fromDate = 'از تاریخ خالی است',

@@ -8,11 +8,13 @@
                         <li class="number_vals">
                             حداقل تعداد رمز عبور
                             <div class="plus_minus">
-                                <div class="plus" (click)="plusOrMinus(policies.minPasswordLength + 1)">
+                                <div class="plus"
+                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
                                     <i class="fa fa-plus"></i>
                                 </div>
-                                <div class="_value"> {{policies.minPasswordLength}}</div>
-                                <div class="minus" (click)="plusOrMinus(policies.minPasswordLength - 1)">
+                                <div class="_value"> {{closeTabService.saveDataForPolicies.minPasswordLength}}</div>
+                                <div class="minus"
+                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength - 1)">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>
@@ -21,12 +23,12 @@
                             lockInvalidAttempts
                             <div class="plus_minus">
                                 <div class="plus"
-                                    (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts + 1">
+                                    (click)="closeTabService.saveDataForPolicies.lockInvalidAttempts = closeTabService.saveDataForPolicies.lockInvalidAttempts + 1">
                                     <i class="fa fa-plus"></i>
                                 </div>
-                                <div class="_value"> {{policies.lockInvalidAttempts}}</div>
+                                <div class="_value"> {{closeTabService.saveDataForPolicies.lockInvalidAttempts}}</div>
                                 <div class="minus"
-                                    (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts - 1">
+                                    (click)="closeTabService.saveDataForPolicies.lockInvalidAttempts = closeTabService.saveDataForPolicies.lockInvalidAttempts - 1">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>
@@ -34,35 +36,40 @@
                         <li class="number_vals">
                             lockMin
                             <div class="plus_minus">
-                                <div class="plus" (click)="policies.lockMin = policies.lockMin + 1"><i
-                                        class="fa fa-plus"></i></div>
-                                <div class="_value"> {{policies.lockMin}}</div>
-                                <div class="minus" (click)="policies.lockMin = policies.lockMin - 1"><i
-                                        class="fa fa-minus"></i></div>
+                                <div class="plus"
+                                    (click)="closeTabService.saveDataForPolicies.lockMin = closeTabService.saveDataForPolicies.lockMin + 1">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="_value"> {{closeTabService.saveDataForPolicies.lockMin}}</div>
+                                <div class="minus"
+                                    (click)="closeTabService.saveDataForPolicies.lockMin = closeTabService.saveDataForPolicies.lockMin - 1">
+                                    <i class="fa fa-minus"></i>
+                                </div>
                             </div>
                         </li>
                         <li>
-                            <mat-checkbox [(ngModel)]="policies.passwordContainsNumber">
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNumber">
                                 گذرواژه شامل حداقل یک عدد باشد
                             </mat-checkbox>
                         </li>
                         <li>
-                            <mat-checkbox [(ngModel)]="policies.passwordContainsLowercase">
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsLowercase">
                                 گذرواژه شامل حداقل یک حرف کوچک انگلیسی باشد
                             </mat-checkbox>
                         </li>
                         <li>
-                            <mat-checkbox [(ngModel)]="policies.passwordContainsUppercase">
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsUppercase">
                                 گذرواژه شامل حداقل یک حرف بزرگ انگلیسی باشد
                             </mat-checkbox>
                         </li>
                         <li>
-                            <mat-checkbox [(ngModel)]="policies.passwordContainsNonAlphaNumeric">
+                            <mat-checkbox
+                                [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNonAlphaNumeric">
                                 گذرواژه شامل حداقل یک حرف غیرالفبایی باشد
                             </mat-checkbox>
                         </li>
                         <li>
-                            <mat-checkbox [(ngModel)]="policies.canUpdateDeviceId">
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.canUpdateDeviceId">
                                 شناسه قابل بروز رسانی باشد
                             </mat-checkbox>
                         </li>
@@ -81,7 +88,7 @@
                 <span>
                     <ul>
                         <li>
-                            <mat-checkbox [(ngModel)]="policies.enableValidIpCaptcha">
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpCaptcha">
                                 فعال سازی captcha
                             </mat-checkbox>
                         </li>
@@ -89,18 +96,19 @@
                             تعداد دفعات ورود با Captcha
                             <div class="plus_minus">
                                 <div class="plus"
-                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts + 1">
+                                    (click)="closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts = closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts + 1">
                                     <i class="fa fa-plus"></i>
                                 </div>
-                                <div class="_value"> {{policies.requireCaptchaInvalidAttempts}}</div>
+                                <div class="_value">
+                                    {{closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts}}</div>
                                 <div class="minus"
-                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts - 1">
+                                    (click)="closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts = closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts - 1">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <mat-checkbox [(ngModel)]="policies.enableValidIpRecaptcha">
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpRecaptcha">
                                 ip مناسب در Recaptcha
                             </mat-checkbox>
                         </li>
@@ -108,12 +116,13 @@
                             recaptcha
                             <div class="plus_minus">
                                 <div class="plus"
-                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts + 1">
+                                    (click)="closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts= closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts + 1">
                                     <i class="fa fa-plus"></i>
                                 </div>
-                                <div class="_value"> {{policies.requireRecaptchaInvalidAttempts}}</div>
+                                <div class="_value">
+                                    {{closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts}}</div>
                                 <div class="minus"
-                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts - 1">
+                                    (click)="closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts= closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts - 1">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>
@@ -126,8 +135,96 @@
 
     </section>
 
+    <section class="content">
+        <section class="_checkbox">
+            <span>
+                <ul>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.enableXSSProtection')"
+                            name="enableXssProtection" [(ngModel)]="auxDataSource.enableXSSProtection">
+                            پیشگیری از حملات XSS
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.enableObscureHeaderInfo')"
+                            name="enableObscureHeaderInfo" [(ngModel)]="auxDataSource.enableObscureHeaderInfo">
+                            درهم ریزی HEADER
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.secureCookies')"
+                            name="secureCookies" [(ngModel)]="auxDataSource.secureCookies">
+                            رمز شدن کوکی
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.DOSProtection')"
+                            name="DOSProtection" [(ngModel)]="auxDataSource.DOSProtection">
+                            پیشگیری از DOS
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.STEALTH')" name="STEALTH"
+                            [(ngModel)]="auxDataSource.STEALTH">
+                            استفاده همزمان از یک توکن
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.useJWTDecoder')"
+                            name="useJWTDecoder" [(ngModel)]="auxDataSource.useJWTDecoder">
+                            رمز نگاری JWT
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.CSRFProtection')"
+                            name="CSRFProtection" [(ngModel)]="auxDataSource.CSRFProtection">
+                            پیشگیری از CSRF
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.DDOSProtection')"
+                            name="DDOSProtection" [(ngModel)]="auxDataSource.DDOSProtection">
+                            پیشگیری از حملات DDOS
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.CSPProtection')"
+                            name="CSPProtection" [(ngModel)]="auxDataSource.CSPProtection">
+                            پیشگیری از HIJACKING
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.HSTSProtection')"
+                            name="HSTSProtection" [(ngModel)]="auxDataSource.HSTSProtection">
+                            SSL اجباری
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied('auxDataSource.SanitizeUserInputs')"
+                            name="SanitizeUserInputs" [(ngModel)]="auxDataSource.SanitizeUserInputs">
+                            Sanitizer
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="AES512Protection"
+                            [(ngModel)]="auxDataSource.AES512Protection">
+                            رمزنگاری AES512
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="autoClearData"
+                            [(ngModel)]="auxDataSource.autoClearData">
+                            حذف خودکار SESSION
+                        </mat-checkbox>
+                    </li>
+                </ul>
+            </span>
+        </section>
+    </section>
+
 </div>
 
 <footer class="btns footer_with_background">
-    <button (click)="securityService.editPolicy(policies)" class="btn_1">ذخیره تغییرات</button>
+    <button (click)="securityService.editPolicy(closeTabService.saveDataForPolicies)" class="btn_1">ذخیره
+        تغییرات</button>
 </footer>
