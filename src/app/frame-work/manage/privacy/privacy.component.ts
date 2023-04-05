@@ -49,7 +49,7 @@ export class PrivacyComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForPolicies.id) {
       this.closeTabService.saveDataForPolicies = await this.securityService.getPolicy();
     }
-
+    this.auxDataSource.HSTSProtection = location.protocol == 'http:' ? false : true;
     this.privacyOptions = this.securityService.getPrivacyToggle();
   }
   plusOrMinus = (value: number) => {
