@@ -18,7 +18,7 @@ import { JwtService } from './jwt.service';
 export class AuthService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public interfaceManagerService: InterfaceManagerService,
     private jwtService: JwtService,
     private closeTabService: CloseTabService,
     private signalRService: SignalRService,

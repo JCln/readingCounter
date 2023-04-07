@@ -29,11 +29,13 @@ import { SmallSpinnerComponent } from './small-spinner/small-spinner.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
+import { CaptchaComponent } from '../shared/captcha/captcha.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     SideBarComponent,
+    CaptchaComponent,
     TabWrapperComponent,
     HfcComponent,
     HeaderComponent,
@@ -68,6 +70,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     MatSnackBarModule,
     SpinnerComponent,
     SmallSpinnerComponent,
+    CaptchaComponent,
     SnackBarComponent,
     ClockComponent,
     SharedThreeModule,
