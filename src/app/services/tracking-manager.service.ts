@@ -413,9 +413,6 @@ export class TrackingManagerService {
     }
     return true;
   }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
-  }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
   }

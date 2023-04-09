@@ -44,8 +44,7 @@
         { id: 5, title: 'F' }
     ];
     window.__env.hasCanclableSpinner = false;
-    window.__env.timeout = 18000;
-    window.__env.reSizableTable = false;
+    window.__env.timeout = 18000;    
     window.__env.reOrderableTable = false;
     window.__env.defaultAggregateTracks = false;
     window.__env.simafaImportStatus = { hasSingle: false, hasBatch: false };

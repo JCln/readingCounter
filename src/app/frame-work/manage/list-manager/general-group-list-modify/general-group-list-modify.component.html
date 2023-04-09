@@ -36,7 +36,7 @@
         dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session"
         (onFilter)="filteredTableEvent($event.filteredValue)" (sortFunction)="listManagerService.customSort($event)"
         [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
-        [resizableColumns]="getLocalResizable()" [reorderableColumns]="getLocalReOrderable()">
+        [reorderableColumns]="getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -86,14 +86,14 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                     <p-sortIcon field="{{col.field}}"></p-sortIcon>
                     {{col.header}}
                 </th>
                 <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
             </tr>
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns">
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="contains" type="text"
                         field="{{col.field}}">
@@ -127,15 +127,16 @@
                         </ng-template>
                     </p-columnFilter>
                 </th>
-                <th pResizableColumn pReorderableColumn style="width: 2rem; min-width: 2rem"
-                    *ngFor="let item of _numberOfExtraColumns"></th>
+                <th pReorderableColumn style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns">
+                </th>
             </tr>
         </ng-template>
 
         <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing"
             let-columns="columns" let-ri=rowIndex>
             <tr [ngClass]="{'has_error': dataSource.editedErrorDescription}">
-                <td pEditableColumn *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr, '_editable': col.icon}">
+                <td class="__columns" pEditableColumn *ngFor="let col of columns"
+                    [ngClass]="{'d_ltr': col.ltr, '_editable': col.icon}">
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isSelectOption;else selectOption">
                         <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
@@ -263,38 +264,38 @@
                         </ng-template>
                     </ng-template>
                 </td>
-                <td (click)="openMoshtarakinDialog(dataSource)">
+                <td class="__columns" (click)="openMoshtarakinDialog(dataSource)">
                     <span class="ui-column-title">مشاهده سابقه</span>
                     <i class="tooltip p_icons pi pi-users">
                         <div class="tooltip_text">مشاهده سابقه</div>
                     </i>
                 </td>
-                <td (click)="openBriefKardexDialog(dataSource)">
+                <td class="__columns" (click)="openBriefKardexDialog(dataSource)">
                     <span class="ui-column-title">خلاصه کاردکس</span>
                     <i class="tooltip p_icons pi pi-list">
                         <div class="tooltip_text">خلاصه کاردکس</div>
                     </i>
                 </td>
-                <td (click)="openMapDialog(dataSource)">
+                <td class="__columns" (click)="openMapDialog(dataSource)">
                     <span class="ui-column-title">مشاهده روی نقشه</span>
                     <i class="tooltip p_icons pi pi-map-marker">
                         <div class="tooltip_text_right">مشاهده روی نقشه</div>
                     </i>
                 </td>
-                <td>
+                <td class="__columns">
                     <span class="ui-column-title">نمایش گزارش بازرسی</span>
                     <i (click)="getReadingReportTitles(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                         <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                     </i>
                 </td>
                 <!-- for making readable and compatible singleton dataType -->
-                <td (click)="doShowCarousel(dataSource)">
+                <td class="__columns" (click)="doShowCarousel(dataSource)">
                     <span class="ui-column-title">بررسی عکس/صوت</span>
                     <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons pi pi-camera">
                         <div class="tooltip_text_right">بررسی عکس/صوت</div>
                     </i>
                 </td>
-                <td class="error_info">
+                <td class="__columns" class="error_info">
                     <i *ngIf="dataSource.editedErrorDescription == '' && !dataSource.isResponseHasError"
                         class="pi-check tooltip p_icons pi pi-check-circle"></i>
                     <i *ngIf="dataSource.isResponseHasError" class="info_icon tooltip p_icons pi pi-info-circle">

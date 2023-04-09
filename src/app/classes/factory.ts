@@ -45,7 +45,6 @@ export class FactorySharedPrime implements OnChanges {
 
     _showSavedColumnButton: boolean;
     _reOrderableTable: boolean;
-    _reSizebleTable: boolean;
     tempOriginDataSource: any[] = [];
     ref: DynamicDialogRef;
 
@@ -204,7 +203,6 @@ export class FactorySharedPrime implements OnChanges {
         this.doShowCarousel(dataSource, false);
     }
     getResizReOrderable = () => {
-        this._reSizebleTable = this.profileService.getLocalResizable();
         this._reOrderableTable = this.profileService.getLocalReOrderable();
     }
     denyTracking = (): boolean => {

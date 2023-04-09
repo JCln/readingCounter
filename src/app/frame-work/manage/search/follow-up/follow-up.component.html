@@ -58,7 +58,6 @@
 <p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && closeTabService.saveDataForFollowUp"
     sortField="insertDateJalali" [columns]="_defColumns" [value]="changeHsty" dir="rtl"
     styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id"
-    [resizableColumns]="trackingManagerService.getLocalResizable()"
     [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
     <ng-template pTemplate="caption">
@@ -85,18 +84,18 @@
 
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th pResizableColumn pReorderableColumn *ngIf="shouldActive" style="width: 4rem"></th>
-            <th pResizableColumn pReorderableColumn style="width: 4rem"></th>
+            <th pReorderableColumn *ngIf="shouldActive" style="min-width: 2rem; width: 2rem"></th>
+            <th pReorderableColumn style="min-width: 2rem;width: 2rem"></th>
         </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-changeHsty let-editing="editing" let-columns="columns">
         <tr [pEditableRow]="changeHsty">
-            <td *ngFor="let col of columns">
+            <td class="__columns" *ngFor="let col of columns">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.field === 'seen'; else elseTemplate">
                     <p-cellEditor>
@@ -114,7 +113,7 @@
                     {{changeHsty[col.field]}}
                 </ng-template>
             </td>
-            <td *ngIf="shouldActive">
+            <td class="__columns" *ngIf="shouldActive">
                 <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(changeHsty)"
                     class="tooltip _edit pi pi-pencil">
@@ -123,13 +122,13 @@
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(changeHsty)" class="_save pi pi-check"></i>
                 <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
             </td>
-            <td *ngIf="changeHsty.hasMap" (click)="showInMap()">
+            <td class="__columns" *ngIf="changeHsty.hasMap" (click)="showInMap()">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td *ngIf="!changeHsty.hasMap">
+            <td class="__columns" *ngIf="!changeHsty.hasMap">
             </td>
         </tr>
     </ng-template>

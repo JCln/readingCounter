@@ -35,7 +35,6 @@ export class ListSearchMoshDgComponent implements OnInit {
   ngOnInit(): void {
     this.listManagerService.searchReqMoshDialog.zoneId = this.config.data.zoneId;
     this.listManagerService.searchReqMoshDialog.item = parseInt(this.config.data.eshterak.toString().trim());
-    console.log(this.listManagerService.searchReqMoshDialog);
     this.cdr.detectChanges();
     this.connectToServer();
   }

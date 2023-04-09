@@ -49,7 +49,7 @@ export class ReadingReportManagerService {
   isCollapsedTrvCh: boolean = false;
   isCollapsedDetails: boolean = false;
   isCollapsedUserKarkard: boolean = false;
-  isCollapsedImageAttrFileResult: boolean = false;  
+  isCollapsedImageAttrFileResult: boolean = false;
   _isCollapsedAllImgs: boolean = false;
   _isOrderByDate: boolean = false;
 
@@ -268,9 +268,6 @@ export class ReadingReportManagerService {
       this._isOrderByDate = true;
       return this.utilsService.getSearchInOrderTo;
     }
-  }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();

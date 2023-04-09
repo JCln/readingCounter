@@ -3,7 +3,6 @@ export interface IENV {
     API_URL: string,
     mapUrls: { title: string, url: string }[],
     hasNextBazdid: boolean,
-    reSizableTable: boolean,
     reOrderableTable: boolean,
     mapCenter: [number, number],
     browserVersions: IBrowserVersions,

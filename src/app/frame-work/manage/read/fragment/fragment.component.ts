@@ -50,9 +50,6 @@ export class FragmentComponent extends FactoryONE {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
-  }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
   }

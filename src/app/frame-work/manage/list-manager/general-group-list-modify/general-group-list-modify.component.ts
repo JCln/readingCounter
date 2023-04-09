@@ -376,9 +376,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     else
       this.utilsService.snackBarMessageWarn(EN_messages.done);
   }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
-  }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
   }

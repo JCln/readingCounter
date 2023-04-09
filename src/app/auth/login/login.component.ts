@@ -52,7 +52,8 @@ export class LoginComponent {
       this.convertNumbers();
       if (MathS.isNull(this.userData.password) || MathS.isNull(this.userData.username)) {
         this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
-        this.appDntCaptcha.doRefresh(); // when refresh should call?
+        return;
+        // this.appDntCaptcha.doRefresh(); // when refresh should call?
       }
       if (MathS.isNull(this.userData.captcha.DNTCaptchaInputText)) {
         this.utilsService.snackBarMessageWarn(EN_messages.userPassEnterCaptcha);

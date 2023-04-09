@@ -333,8 +333,7 @@ export enum ENLocalStorageNames {
     notifyPosition = 'notifyPosition',
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
-    fontStyle = 'fontStyle',
-    reSizableTable = 'reSizableTable',
+    fontStyle = 'fontStyle',    
     reOrderableTable = 'reOrderableTable',
     defaultAggregateTracks = 'defaultAggregateTracks',
 }

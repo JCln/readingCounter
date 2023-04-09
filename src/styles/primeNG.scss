@@ -80,6 +80,16 @@
     direction: ltr;
   }
 
+  .__columns {
+    width: auto;
+    min-width: 2rem;
+  }
+
+  .__headers {
+    width: auto;
+    min-width: 2rem;
+  }
+
   span.ui-column-title {
     display: none;
   }

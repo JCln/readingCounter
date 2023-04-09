@@ -22,7 +22,6 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
-  stateOptionsResizableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'کوچکتر', value: ENFontStyle.fontXXS },
@@ -119,7 +118,6 @@ export class ProfileComponent extends FactoryONE {
     this.getHasCanclableSpinner();
     this.getValueOfShowCarouselMedia();
     this.getDefaultAggregationTrackings();
-    this.getReSizable();
     this.getReOrderable();
   }
   changePassword = () => {
@@ -144,9 +142,6 @@ export class ProfileComponent extends FactoryONE {
   }
   getBasedOnDate = () => {
     this.profileService.showStateVals.searchBasedOnDate = this.profileService.getLocalValue();
-  }
-  getReSizable = () => {
-    this.profileService.showStateVals.reSizableTable = this.profileService.getLocalResizable();
   }
   getReOrderable = () => {
     this.profileService.showStateVals.reOrderableTable = this.profileService.getLocalReOrderable();
@@ -178,10 +173,6 @@ export class ProfileComponent extends FactoryONE {
   setNotifyPosition = (val: string) => {
     this.profileService.setLocalNotifyPosition(val);
     this.profileService.showMessage(EN_messages.notifyPositionChange);
-  }
-  setResizableTable = (val: any) => {
-    this.profileService.setLocalReSizable(val);
-    val ? this.profileService.showMessage(EN_messages.possibleResizableEnabled) : this.profileService.showMessage(EN_messages.possibleResizableDisabled);
   }
   setReOrderableTable = (val: any) => {
     this.profileService.setLocalReOrderable(val);
