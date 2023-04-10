@@ -309,13 +309,13 @@ export class CloseTabService {
   saveDataForFNB: IForbiddenManager[];
   saveDataForProfile: any;
   saveDataForMomentLastRead: ILatestReads[] = [];
-  saveDataForRRGallery: any;
+  saveDataForRRGallery = [];
   saveDataForRRGalleryRSFirst: any;
   saveDataForRRGalleryReq: any;
-  saveDataForRandomImgs: any;
+  saveDataForRandomImgs = [];
   saveDataForImgResultDetailsGridBased: IImageUrlAndInfos[];
   saveDataForRandomImgsRSFirst: any;
-  saveDataForImgResultDetailsRes: any;
+  saveDataForImgResultDetailsRes = [];
   saveDataForImgResultDetailsResFirst: any;
 
   private val: ISidebarVals[] = [

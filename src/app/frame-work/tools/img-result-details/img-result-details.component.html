@@ -49,14 +49,33 @@
     </form>
 </section>
 
+<section class="_card" *ngIf="allImagesDataSource">
+    <h1 class="title">فیلتر نمایش</h1>
+    <div class="input_2">
+        <div class="_key">جستجو براساس</div>
+        <div class="_value">
+            <p-dropdown #drop name="zones" [options]="searchInOrder" placeholder="ش پرونده" optionValue="value"
+                optionLabel="name" filter="true" (onChange)="this.userInputValue = drop.selectedOption">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="input_2">
+        <div class="_key">{{userInputValue.name}}</div>
+        <input class="_value" type="{{userInputValue.type}}" name="searchInOrder"
+            [(ngModel)]="userInputValue.insertedValue" placeholder="{{userInputValue.name}} را وارد نمایید"
+            (ngModelChange)="showItemOnSearch(userInputValue.value)">
+    </div>
+</section>
 <main *ngIf="allImagesDataSource" style="position: relative;">
 
     <div class="img_content">
-        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images"
+            [ngClass]="closeTabService.saveDataForImgResultDetailsResFirst.imageUrlAndInfos[ri].canShow ? 'showImg': 'hiddenImg'">
 
-            <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
-                <img src="{{imgsOriginUrl[ri]}}" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
-                    alt="تصویر" loading="lazy" (click)="routeToOffload(item , ri, imgsOriginUrl[ri])">
+            <div *ngIf="closeTabService.saveDataForImgResultDetailsRes[ri]" class="__img_bound_real">
+                <img src="{{closeTabService.saveDataForImgResultDetailsRes[ri]}}"
+                    onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر" loading="lazy"
+                    (click)="routeToOffload(item , ri, closeTabService.saveDataForImgResultDetailsRes[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>اش:{{item.eshterak}}</p>
                     <p>{{item.zoneTitle}}</p>

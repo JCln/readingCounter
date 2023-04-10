@@ -15,6 +15,8 @@
   gap: var(--font_05);
   margin-top: var(--font_xs);
   background: var(--secondary_1);
+  border-radius: $border_7;
+  padding: var(--font_05);
 }
 
 ._images {
@@ -80,6 +82,10 @@
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   direction: rtl;
   gap: var(--font_05);
+  margin-top: var(--font_xs);
+  background: var(--secondary_1);
+  padding: var(--font_05);
+  border-radius: $border_7;
 }
 
 .input_2 {
@@ -106,4 +112,20 @@
   font-size: var(--font_m);
   background: var(--white);
   border-radius: $border_100vmax;
+}
+
+.title {
+  direction: ltr;
+  color: var(--primary_3);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_m);
+}
+
+.hiddenImg {
+  display: none;
+}
+
+.showImg {
+  display: block;
 }
