@@ -2,7 +2,6 @@ export enum ENInterfaces {
     AuthsAccountRefresh = 'V1/Account/Refresh',
     AuthsAccountLogin = 'V1/account/login',
     AuthsAccountLogout = 'V1/Account/Logout',
-    AuthsCaptchaRefresh = 'V1/DNTCaptchaImage/Refresh',
     AuthsCaptchaApiShow = 'V1/Account/CreateDNTCaptchaParams',
 
     AuthLevel4GET = 'V1/AuthLevel4/all',

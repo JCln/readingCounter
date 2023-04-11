@@ -2,12 +2,9 @@ export interface ICredentials {
     username: string,
     password: string,
     appVersion: string,
-    captcha: {
-        DNTCaptchaText: '',
-        DNTCaptchaToken: '',
-        DNTCaptchaInputText: ''
-    },
-    hasCaptcha: boolean,
+    dntCaptchaText: string,
+    dntCaptchaToken: string,
+    dntCaptchaInputText: string
 }
 export enum ENAuthTokenType {
     access_token = 'access_token',

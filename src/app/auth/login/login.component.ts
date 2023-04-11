@@ -24,12 +24,9 @@ export class LoginComponent {
   userData: ICredentials = {
     username: '',
     password: '',
-    captcha: {
-      DNTCaptchaText: '',
-      DNTCaptchaToken: '',
-      DNTCaptchaInputText: ''
-    },
-    hasCaptcha: false,
+    dntCaptchaText: '',
+    dntCaptchaToken: '',
+    dntCaptchaInputText: '',
     appVersion: this.utilsService.getAppVersion()
   };
   showVersionInfo: boolean = false;
@@ -47,19 +44,27 @@ export class LoginComponent {
     this.userData.password = Converter.persianToEngNumbers(this.userData.password);
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
   }
-  logging = () => {
+  logging = async () => {
     if (this.browserSupportService.isValidBrowserVersion()) {
       this.convertNumbers();
       if (MathS.isNull(this.userData.password) || MathS.isNull(this.userData.username)) {
         this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
         return;
-        // this.appDntCaptcha.doRefresh(); // when refresh should call?
       }
-      if (MathS.isNull(this.userData.captcha.DNTCaptchaInputText)) {
+      if (MathS.isNull(this.userData.dntCaptchaInputText)) {
         this.utilsService.snackBarMessageWarn(EN_messages.userPassEnterCaptcha);
       }
       else {
-        this.authService.logging(this.userData);
+        const returnUrl = this.authService.compositeService.getRouteParams('returnUrl');
+        const res = await this.authService.logging(this.userData);
+
+        if (res) {
+          this.authService.saveTolStorage(res);
+          this.authService.routeToReturnUrl(returnUrl);
+        }
+        else {
+          this.appDntCaptcha.doShow();
+        }
       }
     }
     else {

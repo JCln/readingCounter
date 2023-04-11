@@ -1,9 +1,8 @@
 <div class="dntCaptcha" [id]="apiResponse.dntCaptchaId">
     <section class="_captcha">
-        <img alt="captcha" id="dntCaptchaImg" name="dntCaptchaImg" [src]="apiResponse.dntCaptchaImgUrl"
-            style="margin-bottom: 4px;">
+        <img alt="captcha" id="dntCaptchaImg" name="dntCaptchaImg" [src]="apiResponse.dntCaptchaImgUrl">
         <a class="pi pi-refresh tooltip" style="cursor: pointer" id="dntCaptchaRefreshButton"
-            name="dntCaptchaRefreshButton" (click)="doRefresh()">
+            name="dntCaptchaRefreshButton" (click)="doShow()">
             <div class="tooltip_text">بارگیری مجدد تصویر</div>
         </a>
     </section>

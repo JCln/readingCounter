@@ -37,16 +37,9 @@ export class CaptchaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.dowShow();
+    this.doShow();
   }
 
-  getCaptchaRefresh(): Promise<any> {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.AuthsCaptchaRefresh).toPromise().then(res => {
-        resolve(res)
-      })
-    })
-  }
   getCaptchaShow(): Promise<any> {
     return new Promise((resolve) => {
       this.interfaceManagerService.GET(ENInterfaces.AuthsCaptchaApiShow).toPromise().then(res => {
@@ -54,7 +47,7 @@ export class CaptchaComponent implements OnInit {
       })
     })
   }
-  dowShow = async () => {
+  doShow = async () => {
     this.inputText = "";
     const data = await this.getCaptchaShow();
     this.apiResponse = data;
@@ -63,17 +56,6 @@ export class CaptchaComponent implements OnInit {
     this.token = data.dntCaptchaTokenValue;
     this.onTokenChange();
   }
-  doRefresh = async () => {
-    this.inputText = "";
-    // const data = await this.getCaptchaRefresh(); // refresh is show Only for now
-    const data = await this.getCaptchaShow();
-    this.apiResponse = data;
-    this.text = data.dntCaptchaTextValue;
-    this.onTextChange();
-    this.token = data.dntCaptchaTokenValue;
-    this.onTokenChange();
-  }
-
   onTextChange() {
     this.textChange.emit(this.text);
   }

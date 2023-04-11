@@ -14,11 +14,10 @@
                     <i class="fa fa-lock"></i>
                 </div>
 
-                <app-captcha #appDntCaptcha [(inputText)]="userData.captcha.DNTCaptchaInputText"
-                    [(text)]="userData.captcha.DNTCaptchaText" [(token)]="userData.captcha.DNTCaptchaToken"
-                    [apiUrl]="captchaApiShow" [backColor]="'#f7f3f3'" [fontName]="'Tahoma'" [fontSize]="18"
-                    [foreColor]="'#111111'" [max]="9000" [min]="1"
-                    [placeholder]="'عبارت موجود در تصویر را وارد نمایید'">
+                <app-captcha #appDntCaptcha [(inputText)]="userData.dntCaptchaInputText"
+                    [(text)]="userData.dntCaptchaText" [(token)]="userData.dntCaptchaToken" [apiUrl]="captchaApiShow"
+                    [backColor]="'#f7f3f3'" [fontName]="'Tahoma'" [fontSize]="18" [foreColor]="'#111111'" [max]="9000"
+                    [min]="1" [placeholder]="'عبارت موجود در تصویر را وارد نمایید'">
                 </app-captcha>
             </section>
             <button class="btn_1" type="submit">ورود</button>

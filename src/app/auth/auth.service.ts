@@ -22,7 +22,7 @@ export class AuthService {
     private jwtService: JwtService,
     private closeTabService: CloseTabService,
     private signalRService: SignalRService,
-    private compositeService: CompositeService,
+    public compositeService: CompositeService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
@@ -32,12 +32,15 @@ export class AuthService {
   refreshToken = (): Observable<any> => {
     return this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
   }
-  logging = (userData: ICredentials) => {
-    const returnUrl = this.compositeService.getRouteParams('returnUrl');
-    this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).toPromise().then((res: IAuthTokenType) => {
-      this.saveTolStorage(res);
-      this.routeToReturnUrl(returnUrl);
-    })
+  logging = (userData: ICredentials): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).toPromise().then((res: IAuthTokenType) => {
+        resolve(res);
+      }).catch(() => {
+        resolve(false)
+      })
+    });
+
   }
   private clearAllSavedData = () => this.closeTabService.cleanAllData();
   private clearDictionaries = () => this.dictionaryWrapperService.cleanDictionaries();
@@ -55,7 +58,7 @@ export class AuthService {
     this.jwtService.saveToLocalStorage(token.access_token);
     this.jwtService.saveToLocalStorageRefresh(token.refresh_token);
   }
-  private routeToReturnUrl = (returnUrl: string) => {
+  routeToReturnUrl = (returnUrl: string) => {
     if (!MathS.isNull(returnUrl))
       this.compositeService.routeTo(returnUrl);
     else

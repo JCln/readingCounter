@@ -1,7 +1,7 @@
 export abstract class DNTCaptchaBase {
-    DNTCaptchaText = '';
-    DNTCaptchaToken = '';
-    DNTCaptchaInputText = '';
+    dntCaptchaText = '';
+    dntCaptchaToken = '';
+    dntCaptchaInputText = '';
 }
 
 export class DNTCaptchaApiResponse {
