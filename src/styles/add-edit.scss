@@ -190,6 +190,10 @@ input::placeholder {
   width: 16rem;
 }
 
+.tooltip:hover .tooltip_text_bottom {
+  transform: translate(-50%, 60%);
+}
+
 .roles {
   background: var(--thirdy_2);
   border-radius: $border_5;

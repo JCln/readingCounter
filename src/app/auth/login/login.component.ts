@@ -51,7 +51,7 @@ export class LoginComponent {
         this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
         return;
       }
-      if (MathS.isNull(this.userData.dntCaptchaInputText)) {
+      if (MathS.isNullTextValidation(this.userData.dntCaptchaInputText)) {
         this.utilsService.snackBarMessageWarn(EN_messages.userPassEnterCaptcha);
       }
       else {

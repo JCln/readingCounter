@@ -34,8 +34,7 @@ import { EnvService } from './env.service';
 })
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  ENReadingReports = ENReadingReports;
-  trackNumberAllImages: number;
+  ENReadingReports = ENReadingReports;  
   isCollapsedPrfm: boolean = false;
   isCollapsedDH: boolean = false;
   isCollapsedLocked: boolean = false;
@@ -49,8 +48,7 @@ export class ReadingReportManagerService {
   isCollapsedTrvCh: boolean = false;
   isCollapsedDetails: boolean = false;
   isCollapsedUserKarkard: boolean = false;
-  isCollapsedImageAttrFileResult: boolean = false;
-  _isCollapsedAllImgs: boolean = false;
+  isCollapsedImageAttrFileResult: boolean = false;  
   _isOrderByDate: boolean = false;
 
   masterReq: IReadingReportReq = {
@@ -300,13 +298,6 @@ export class ReadingReportManagerService {
 
   // CALL APIs
 
-  getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
-        resolve(res)
-      })
-    });
-  }
   postDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTById(method, id).subscribe((res) => {
@@ -581,25 +572,7 @@ export class ReadingReportManagerService {
   }
   snackWarn = (message: string) => {
     this.utilsService.snackBarMessageWarn(message);
-  }
-  private followUPValidation = (id: number): boolean => {
-    if (MathS.isNull(id)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_trackNumber);
-      return false;
-    }
-    if (MathS.isNaN(id)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumber);
-      return false;
-    }
-    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumbersLength);
-      return false;
-    }
-    return true;
-  }
-  verificationFollowUPTrackNumber = (id: number): boolean => {
-    return this.followUPValidation(id);
-  }
+  } 
   showInMapSingleValidation = (dataSource: any): boolean => {
     if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);

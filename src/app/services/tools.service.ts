@@ -26,10 +26,17 @@ import { UtilsService } from './utils.service';
 })
 export class ToolsService {
   ENReadingReports = ENReadingReports;
+  trackNumberAllImages: number;
+  _isCollapsedAllImgs: boolean = false;
   _isCollapsedRandomImgCarouDetails: boolean = true;
   _isCollapsedRandomImages: boolean = false;
   _isCollapsedImageAttrDetails: boolean = false;
   _isCollapsedImageAttrGridBased: boolean = false;
+  searchInOrder: any[] = [
+    { name: 'شماره پرونده', value: 'radif', type: 'number' },
+    { name: 'اشتراک', value: 'eshterak', type: 'number' },
+    { name: 'وضعیت کنتور', value: 'counterStateTitle', type: 'string' },
+  ]
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -164,6 +171,13 @@ export class ToolsService {
         resolve(res))
     });
   }
+  getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
+        resolve(res)
+      })
+    });
+  }
   getDataSourceById = (api: ENInterfaces, body: string): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETID(api, body).toPromise().then(res =>
@@ -279,6 +293,24 @@ export class ToolsService {
     }
 
     return true;
+  }
+  private followUPValidation = (id: number): boolean => {
+    if (MathS.isNull(id)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_trackNumber);
+      return false;
+    }
+    if (MathS.isNaN(id)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumber);
+      return false;
+    }
+    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumbersLength);
+      return false;
+    }
+    return true;
+  }
+  verificationFollowUPTrackNumber = (id: number): boolean => {
+    return this.followUPValidation(id);
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
     this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);

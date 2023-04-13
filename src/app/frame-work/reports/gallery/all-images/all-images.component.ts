@@ -1,7 +1,7 @@
+import { ToolsService } from 'services/tools.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
-import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/interfaces/ireports';
@@ -19,28 +19,23 @@ export class AllImagesComponent extends FactoryONE {
   carouselImage: IImageUrlAndInfos;
   showCarousel: boolean = false;
   rowIndex: number = 0;
-  searchInOrder: any[] = [
-    { name: 'شماره پرونده', value: 'radif', type: 'number' },
-    { name: 'اشتراک', value: 'eshterak', type: 'number' },
-    { name: 'وضعیت کنتور', value: 'counterStateTitle', type: 'string' },
-  ]
   userInputValue: any = { name: 'شماره پرونده', value: 'radif', type: 'number', insertedValue: '' };
 
   constructor(
     public closeTabService: CloseTabService,
-    public readingReportManagerService: ReadingReportManagerService
+    public toolsService: ToolsService
   ) {
     super();
   }
 
   connectToServer = async () => {
-    if (!this.readingReportManagerService.verificationFollowUPTrackNumber(this.readingReportManagerService.trackNumberAllImages))
+    if (!this.toolsService.verificationFollowUPTrackNumber(this.toolsService.trackNumberAllImages))
       return;
     this.allImagesDataSource = null;
 
-    this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.readingReportManagerService.trackNumberAllImages);
+    this.allImagesDataSource = await this.toolsService.getDataSource(ENInterfaces.ListAllImages, this.toolsService.trackNumberAllImages);
     this.closeTabService.saveDataForRRGalleryRSFirst = this.allImagesDataSource;
-    this.closeTabService.saveDataForRRGalleryReq = this.readingReportManagerService.trackNumberAllImages;
+    this.closeTabService.saveDataForRRGalleryReq = this.toolsService.trackNumberAllImages;
     this.showAllImgs();
     this.addCanShowElementToImages();
   }
@@ -57,12 +52,12 @@ export class AllImagesComponent extends FactoryONE {
       this.allImagesDataSource = this.closeTabService.saveDataForRRGalleryRSFirst;
     }
     if (this.closeTabService.saveDataForRRGalleryReq) {
-      this.readingReportManagerService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
+      this.toolsService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
     }
 
   }
   getExactImg = async (id: string, index: number) => {
-    this.closeTabService.saveDataForRRGallery[index] = this.readingReportManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.readingReportManagerService.getAuthToken();
+    this.closeTabService.saveDataForRRGallery[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();
   }
   showAllImgs = () => {
     this.allImagesDataSource.imageUrlAndInfos.forEach((item, i) => {

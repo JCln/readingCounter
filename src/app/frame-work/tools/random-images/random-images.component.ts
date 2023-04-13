@@ -24,11 +24,6 @@ export class RandomImagesComponent extends FactoryONE {
   allImagesDataSource: IImageUrlInfoWrapper;
   carouselImage: IImageUrlAndInfos;
 
-  searchInOrder: any[] = [
-    { name: 'شماره پرونده', value: 'radif', type: 'number' },
-    { name: 'اشتراک', value: 'eshterak', type: 'number' },
-    { name: 'وضعیت کنتور', value: 'counterStateTitle', type: 'string' },
-  ]
   userInputValue: any = { name: 'شماره پرونده', value: 'radif', type: 'number', insertedValue: '' };
   constructor(
     public toolsService: ToolsService,

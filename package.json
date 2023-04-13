@@ -1,5 +1,5 @@
 {
-  "name": "upgradereadingcounter",
+  "name": "readingCounter",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -72,11 +72,8 @@
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.",
   "main": "karma.conf.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JCln/readingCounter.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/JCln/readingCounter.git",
+  "author": "JCln <ghmantera@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/JCln/readingCounter/issues"

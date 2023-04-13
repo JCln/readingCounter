@@ -185,7 +185,7 @@ export const bedge: Theme = {
         "--fix_orange": "rgb(246, 128, 56)",
         "--orange_500": "#8E5E3E",
         "--orange_600": "#714B32",
-        "--green_500": "#354F52",
+        "--green_500": "#79c284",
         "--green_600": " rgb(75, 140, 56)",
         "--red_500": " rgb(246, 62, 56)",
         "--red_600": " rgb(246, 62, 56)",

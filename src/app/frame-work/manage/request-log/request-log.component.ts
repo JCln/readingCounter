@@ -31,6 +31,9 @@ export class RequestLogComponent extends FactoryONE {
     this.closeTabService.saveDataForRequestLogReq.fromTimeH = temp.toString().split(':').shift() - 1;
     this.closeTabService.saveDataForRequestLogReq.toTimeM = temp.toString().split(':').pop();
     this.closeTabService.saveDataForRequestLogReq.toTimeH = temp.toString().split(':').shift();
+    if (temp.toString().split(':').shift() == '00') {
+      this.closeTabService.saveDataForRequestLogReq.fromTimeH = '23';
+    }
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForRequestLog = await this.manageServerService.postBody(ENInterfaces.serverManagerRequestLog, this.closeTabService.saveDataForRequestLogReq);

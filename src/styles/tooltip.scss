@@ -2,70 +2,48 @@
   position: relative;
   display: inline-block;
   z-index: 10;
+
+  .tooltip_text,
+  .tooltip_text_right,
+  .tooltip_text_bottom {
+    // pointer-events: none; hover on child should not pups up tooltip
+    position: absolute;
+    pointer-events: none;
+    direction: rtl;
+    visibility: hidden;
+    background-color: var(--orange_500);
+    color: var(--white);
+    border-radius: 6px;
+    z-index: 4;
+    font-weight: 600;
+    font-family: $font_family;
+    font-size: var(--font_s);
+    text-align: center;
+    line-break: auto;
+    padding: 3px 2px;
+    transition: all ease-in-out 100ms;
+  }
 }
 
 .tooltip_text {
-  position: absolute;
-  direction: rtl;
-  visibility: hidden;
-  background-color: var(--orange_500);
-  color: var(--white);
-  text-align: center;
-  border-radius: 6px;
   width: 120px;
-  padding: 5px 0;
-  z-index: 4;
   bottom: 120%;
   left: 50%;
   transform: translate(-50%, 10%);
-  font-weight: 600;
-  font-family: $font_family;
-  font-size: var(--font_s);
-  line-break: auto;
-  transition: all ease-in-out 100ms;
 }
 
 .tooltip_text_right {
-  position: absolute;
-  direction: rtl;
-  visibility: hidden;
-  background-color: var(--orange_500);
-  color: var(--white);
-  text-align: center;
-  border-radius: 6px;
   width: 120px;
-  padding: 5px 0;
-  z-index: 4;
-  left: 10%;
+  left: 100%;
   bottom: 50%;
-  margin-left: var(--font_3);
-  font-weight: 600;
-  font-family: $font_family;
-  font-size: var(--font_s);
-  line-break: auto;
   transform: translate(-10%, 50%);
-  transition: all ease-in-out 100ms;
 }
 
 .tooltip_text_bottom {
-  position: absolute;
-  direction: rtl;
-  visibility: hidden;
-  background-color: var(--orange_500);
-  color: var(--white);
-  text-align: center;
-  border-radius: 6px;
   width: 15rem;
-  padding: 3px;
-  z-index: 4;
   left: 50%;
   transform: translate(-50%, 40%);
   top: 50%;
-  font-weight: 600;
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-  font-size: var(--font_s);
-  line-break: auto;
-  transition: all ease-in-out 100ms;
 
   &::after {
     content: "";
@@ -104,15 +82,15 @@
 
 .tooltip:hover .tooltip_text {
   visibility: visible;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -30%);
 }
 
 .tooltip:hover .tooltip_text_right {
   visibility: visible;
-  transform: translate(0, 50%);
+  transform: translate(10%, 50%);
 }
 
 .tooltip:hover .tooltip_text_bottom {
   visibility: visible;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 80%);
 }
