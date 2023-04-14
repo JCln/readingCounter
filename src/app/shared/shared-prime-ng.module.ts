@@ -1,4 +1,3 @@
-import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

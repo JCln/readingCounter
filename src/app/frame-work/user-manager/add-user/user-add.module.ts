@@ -1,3 +1,4 @@
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { NgModule } from '@angular/core';
 import { UserAddManagerService } from 'services/user-add-manager.service';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -20,6 +21,7 @@ import { UserInputsComponent } from './user-inputs/user-inputs.component';
   ],
   imports: [
     SharedModule,
+    SharedPrimeNgModule,
     UserAddRoutingModule
   ],
   providers: [UserAddManagerService]
