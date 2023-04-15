@@ -103,14 +103,14 @@ export class PrimeTableComponent extends FactorySharedPrime {
   filterEventTable(e: Table) {
     this.filteredEvent.emit(e.filteredValue);
   }
-  forceOffload = (dataSource: object, ri: number) => {
-    this.forcedOffload.emit({ dataSource, ri });
+  forceOffload = (dataSource: object) => {
+    this.forcedOffload.emit(dataSource);
   }
   customSort = (dataSource: any) => {
     this.customedSort.emit(dataSource);
   }
-  backToImportedConfirmDialog = (dataSource: object, ri: number) => {
-    this.backedToImportedConfirmDialog.emit({ dataSource, ri });
+  backToImportedConfirmDialog = (dataSource: object) => {
+    this.backedToImportedConfirmDialog.emit(dataSource);
   }
   routeToLMPayDay = (dataSource: object) => {
     this.routedToLMPayDay.emit(dataSource);
@@ -148,8 +148,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToOffloadGeneralModify = (dataSource: object) => {
     this.routedToOffloadGeneralModify.emit(dataSource);
   }
-  backToReading = (dataSource: object, ri: number) => {
-    this.backedToReading.emit({ dataSource, ri });
+  backToReading = (dataSource: object) => {
+    this.backedToReading.emit(dataSource);
   }
   backToPrevious = () => {
     this.backedToPrevious.emit(true);

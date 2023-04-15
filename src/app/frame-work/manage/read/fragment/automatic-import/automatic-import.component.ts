@@ -51,9 +51,9 @@ export class AutomaticImportComponent extends FactoryONE {
 
     this.userCounterReader = await this.fragmentManagerService.getUserCounterReaders(this.zoneId);
   }
-  removeRow = async (id: string) => {
+  removeRow = async (rowData: string) => {
     if (await this.fragmentManagerService.firstConfirmDialog()) {
-      await this.fragmentManagerService.postByQuote(ENInterfaces.automaticImportRemove, id['dataSource']);
+      await this.fragmentManagerService.postByQuote(ENInterfaces.automaticImportRemove, rowData['dataSource'].id);
       this.refreshTable();
     }
   }

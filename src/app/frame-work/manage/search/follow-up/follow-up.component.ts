@@ -51,7 +51,16 @@ export class FollowUpComponent extends FactoryONE {
   }
 
   toPreStatus = async (dataSource: IFollowUpHistory) => {
-    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_backToPrev, true, false, 'pi pi-step-backward');
+    const config = {
+      messageTitle: EN_messages.reason_backToPrev,
+      text: 'ش پیگیری: ' + this.dataSourceAUX.trackNumber + ' مامور: ' + dataSource.counterReaderName,
+      minWidth: '19rem',
+      isInput: true,
+      isDelete: false,
+      icon: 'pi pi-step-backward'
+    }
+
+    const a = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (a) {
       this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingPRE, dataSource.id, a);
     }

@@ -74,16 +74,6 @@ export class TrackingManagerService {
     private followUpService: FollowUpService,
   ) { }
 
-  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean, icon: string): Promise<any> => {
-    const a = {
-      messageTitle: message,
-      minWidth: '19rem',
-      isInput: isInput,
-      isDelete: isDelete,
-      icon: icon
-    }
-    return this.utilsService.firstConfirmDialog(a);
-  }
   getApiUrl = (): string => {
     return this.envService.API_URL;
   }

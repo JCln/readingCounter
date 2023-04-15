@@ -21,6 +21,17 @@ h2 {
   color: var(--secondary_8);
 }
 
+._title_2 {
+  padding: 0;
+  text-align: right;
+}
+
+p {
+  text-align: center;
+  color: var(--secondary_8);
+  font-size: var(--font_ss);
+}
+
 .date_wrapper {
   min-height: 20rem;
   display: grid;
@@ -64,7 +75,8 @@ h2 {
     color: var(--primary_4);
   }
 
-  .pi-trash, .pi-ban {
+  .pi-trash,
+  .pi-ban {
     color: var(--red_500);
   }
 

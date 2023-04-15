@@ -2,12 +2,15 @@
     <div class="_icon">
         <i [ngClass]="data.icon"></i>
     </div>
-    <h2 mat-dialog-title>
+    <h2>
         {{data.messageTitle}}
-        <p>
-            {{data.messageTitleTwo}}
-        </p>
     </h2>
+    <h2 class="_title_2">
+        {{data.messageTitleTwo}}
+    </h2>
+    <p>
+        {{data.text}}
+    </p>
     <div class="input_box">
         <input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
             [(ngModel)]="userInputText">

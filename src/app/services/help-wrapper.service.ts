@@ -278,6 +278,7 @@ export class HelpWrapperService {
         title: 'لیست بارگذاری شده',
         messageOne: 'کلیه اطلاعات قرائت شده (تخلیه شده) توسط مامور قرائت در این قسمت قابل مشاهده و اصلاح می باشد. برای اصلاح بروی آیکن اصلاح کلیک تا به صفحه اصلاح منتقل شوید',
         imgOne: 'assets/imgs/help/offloadmodify/allmodify.JPG',
+        messageTwo: 'با مشاهده صفحه اصلاح، میتوان برای هر اشتراک اصلاح انجام داد.'
       }
     else if (currentRoute.includes(EN_Routes.wrmlallfalse))
       return {

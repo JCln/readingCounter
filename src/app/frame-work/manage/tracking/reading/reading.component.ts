@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
+import { ITracking } from 'interfaces/itrackings';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -29,16 +30,32 @@ export class ReadingComponent extends FactoryONE {
       this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.getDataSource(ENInterfaces.trackingREADING);
     }
   }
-  backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false, 'pi pi-fast-backward');
+  backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {
+    const config = {
+      messageTitle: EN_messages.reson_delete_backtoImported,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + ' مامور: ' + rowDataAndIndex.counterReaderName,
+      minWidth: '19rem',
+      isInput: true,
+      isDelete: false,
+      icon: 'pi pi-fast-backward'
+    }
+    const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, rowDataAndIndex['dataSource'], desc);
+      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, rowDataAndIndex.id, desc);
     }
   }
-  forceOffload = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_forceOffload, true, true, 'pi pi-ban');
+  forceOffload = async (rowDataAndIndex: ITracking) => {
+    const config = {
+      messageTitle: EN_messages.reason_forceOffload,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + ' مامور: ' + rowDataAndIndex.counterReaderName,
+      minWidth: '19rem',
+      isInput: true,
+      isDelete: true,
+      icon: 'pi pi-ban'
+    }
+    const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc);
+      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex.id, desc);
       this.refreshTable();
     }
   }

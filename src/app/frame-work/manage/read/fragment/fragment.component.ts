@@ -64,8 +64,7 @@ export class FragmentComponent extends FactoryONE {
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');
     this.defaultAddStatus();
-    if (this.closeTabService.saveDataForFragmentNOB.length)
-      this.insertSelectedColumns();
+    this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus('_fragmentMaster');
@@ -142,9 +141,11 @@ export class FragmentComponent extends FactoryONE {
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
     dataSource = dataSource['dataSource'];
-    dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
+    console.log(dataSource);
+    const textMessage = 'از اشتراک: ' + dataSource.fromEshterak + ' تا اشتراک: ' + dataSource.toEshterak;
     if (this.fragmentManagerService.masterValidation(dataSource)) {
-      if (await this.fragmentManagerService.firstConfirmDialog()) {
+      if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
+        dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
         if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, dataSource))
           this.refreshTable();
       }

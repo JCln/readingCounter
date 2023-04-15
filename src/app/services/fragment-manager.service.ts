@@ -130,9 +130,10 @@ export class FragmentManagerService {
 
   /* VERIFICATION */
 
-  firstConfirmDialog = (): Promise<any> => {
+  firstConfirmDialog = (text?: string): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
+      text: text,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,

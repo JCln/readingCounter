@@ -133,8 +133,7 @@
 
 .check_boxes {
   border-radius: $border_15;
-  // box-shadow: 0px 0px 2px 1px var(--primary_6);
   background: var(--white);
-  padding: var(--font_xs);
-  margin-top: var(--font_05);
+  padding: var(--font_05);
+  margin-top: 3px;
 }

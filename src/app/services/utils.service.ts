@@ -9,6 +9,7 @@ import { CompositeService } from './composite.service';
 export interface IDialogMessage {
   messageTitle: string,
   messageTitleTwo?: string,
+  text?: string,
   minWidth: string,
   isInput: boolean,
   isDelete: boolean,
@@ -95,6 +96,7 @@ export class UtilsService {
         data: {
           messageTitle: config.messageTitle,
           messageTitleTwo: config.messageTitleTwo,
+          text: config.text,
           isInput: config.isInput,
           isDelete: config.isDelete,
           icon: config.icon,

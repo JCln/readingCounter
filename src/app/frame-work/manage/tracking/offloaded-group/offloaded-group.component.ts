@@ -36,7 +36,15 @@ export class OffloadedGroupComponent extends FactoryONE {
     }
   }
   downloadOutputSingle = async (row: ITracking) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.downloadPermit, false, false, 'pi pi-download');
+    const config = {
+      messageTitle: EN_messages.downloadPermit,
+      text: 'ش پیگیری: ' + row.trackNumber + ' مامور: ' + row.counterReaderName,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: false,
+      icon: 'pi pi-download'
+    }
+    const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
       if (this.envService.hasNextBazdid) {
         this.hasNextBazdid(row);
@@ -49,10 +57,18 @@ export class OffloadedGroupComponent extends FactoryONE {
   routeToOffloadGeneralGroupModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadGeneralModifyGrouped(dataSource);
   }
-  backToReading = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.toReading, true, false, 'pi pi-step-backward');
+  backToReading = async (rowDataAndIndex: ITracking) => {
+    const config = {
+      messageTitle: EN_messages.toReading,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + ' مامور: ' + rowDataAndIndex.counterReaderName,
+      minWidth: '19rem',
+      isInput: true,
+      isDelete: false,
+      icon: 'pi pi-step-backward'
+    }
+    const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex['dataSource'], desc);
+      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex.id, desc);
       this.refreshTable();
     }
   }
