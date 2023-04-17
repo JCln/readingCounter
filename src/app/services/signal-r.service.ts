@@ -78,7 +78,15 @@ export class SignalRService {
   }
   private receiveTextWithTimer = () => {
     this.hubConnection.on(ENInterfaces.receiveTextWithTimer, (a: IMessage) => {
-      this.snackBarService.openSnackBarSignal(a.title + '\n' + a.text, a.seconds, a.color);
+      const toast = {
+        severity: a.color,
+        summary: a.title,
+        detail: a.text,
+        icon: 'pi pi-info',
+        key: 'text',
+        life: a.seconds
+      }
+      this.snackBarService.openToastSignal(toast);
     });
   }
   private ReceiveDirectMessage = () => {
