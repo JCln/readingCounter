@@ -20,9 +20,9 @@
     [_backToPreviousEnabled]=true
     [_checkUpName]= "'user-loggins'"
     [_sortField]="'loginDateTime'"
-    [_backToPreviousText]="'بازگشت به مدیریت کاربران'"
+    [_backToPreviousText]="'بازگشت به صفحه قبل'"
     (refreshedTable)="refreshTable()"    
-    (backedToPrevious)="userLogginsService.backToUserAll()"
+    (backedToPrevious)="userLogginsService.utilsService.backToPreviousPage()"
     > 
 </app-prime-table>
 <!-- [_sortOrder]=-1 -->

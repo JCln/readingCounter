@@ -10,9 +10,9 @@ import { DNTCaptchaApiResponse } from 'src/app/classes/captcha-base';
 })
 export class CaptchaComponent implements OnInit {
   apiResponse = new DNTCaptchaApiResponse();
-  hiddenInputName = "dntCaptchaText";
-  hiddenTokenName = "dntCaptchaToken";
-  inputName = "dntCaptchaInputText";
+  hiddenInputName = 'dntCaptchaText';
+  hiddenTokenName = 'dntCaptchaToken';
+  inputName = 'dntCaptchaInputText';
 
   @Input() text: string;
   @Output() textChange = new EventEmitter<string>();
@@ -48,7 +48,7 @@ export class CaptchaComponent implements OnInit {
     })
   }
   doShow = async () => {
-    this.inputText = "";
+    this.inputText = '';
     const data = await this.getCaptchaShow(ENInterfaces.AuthsCaptchaApiShow);
     this.apiResponse = data;
     this.text = data.dntCaptchaTextValue;

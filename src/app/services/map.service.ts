@@ -1,7 +1,6 @@
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
-import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
@@ -33,7 +32,6 @@ export class MapService {
 
   constructor(
     private browserStorageService: BrowserStorageService,
-    private _location: Location,
     private interfaceManagerService: InterfaceManagerService,
     public envService: EnvService
   ) { }
@@ -93,9 +91,6 @@ export class MapService {
   }
   serviceInstantiate = (map: L.Map) => {
     this.map = map;
-  }
-  backToPreviousPage = () => {
-    this._location.back();
   }
   validateGISAccuracy = (temp: any[]): boolean => {
     let bol: boolean = false;

@@ -27,7 +27,7 @@ export class SideBarComponent {
 
   }
   toggleSubItems = (item: any): void => {
-    let a = document.querySelectorAll('.pi-angle-up');
+    let a = document.querySelectorAll('.pi-angle-down');
     this.currentRoute.forEach((aItem, i) => {
       if (item.title !== aItem.title) {
         aItem.isOpen = false;

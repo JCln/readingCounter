@@ -5,6 +5,7 @@ import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
 import { CompositeService } from './composite.service';
+import { Location } from '@angular/common';
 
 export interface IDialogMessage {
   messageTitle: string,
@@ -27,6 +28,7 @@ export class UtilsService {
     private compositeService: CompositeService,
     private envService: EnvService,
     private dialog: MatDialog,
+    private _location: Location,
     private snackWrapperService: SnackWrapperService
   ) { }
 
@@ -112,6 +114,9 @@ export class UtilsService {
     })
   }
   // routing
+  backToPreviousPage = () => {
+    this._location.back();
+  }
   routeToByUrl = (router: string) => {
     this.compositeService.routeToByUrl(router);
   }

@@ -53,7 +53,7 @@ export class FollowUpComponent extends FactoryONE {
   toPreStatus = async (dataSource: IFollowUpHistory) => {
     const config = {
       messageTitle: EN_messages.reason_backToPrev,
-      text: 'ش پیگیری: ' + this.dataSourceAUX.trackNumber + ' مامور: ' + dataSource.counterReaderName,
+      text: 'ش پیگیری: ' + this.dataSourceAUX.trackNumber + '   مامور: ' + dataSource.counterReaderName,
       minWidth: '19rem',
       isInput: true,
       isDelete: false,

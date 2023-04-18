@@ -55,6 +55,8 @@ export class LoginComponent {
         this.utilsService.snackBarMessageWarn(EN_messages.userPassEnterCaptcha);
       }
       else {
+        // button should disable after loging
+        (<HTMLInputElement>document.getElementById("btnLogin")).disabled = true;
         const returnUrl = this.authService.compositeService.getRouteParams('returnUrl');
         const res = await this.authService.logging(this.userData);
 
@@ -63,6 +65,9 @@ export class LoginComponent {
           this.authService.routeToReturnUrl(returnUrl);
         }
         else {
+          // if loggin failed refresh captcha, enable loginButton needs
+          (<HTMLInputElement>document.getElementById("btnLogin")).disabled = false;
+          this.userData.dntCaptchaInputText = '';
           this.appDntCaptcha.doShow();
         }
       }

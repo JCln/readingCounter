@@ -24,7 +24,7 @@
         [_selectedColumnsToRemember]="'selectedListManagerAll'" [_numberOfExtraColumns]="[1,2,3]"
         [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isCustomSort]=true
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
-        (backedToPrevious)="toPrePage()" (filteredEvent)="filteredTableEvent($event)"
+        (backedToPrevious)="listManagerService.utilsService.backToPreviousPage()" (filteredEvent)="filteredTableEvent($event)"
         (routedToOffload)="routeToOffload($event)" (showedPictures)="getReadingReportTitles($event)"
         (showedInMapSingle)="openMapDialog($event)">
     </app-prime-table>

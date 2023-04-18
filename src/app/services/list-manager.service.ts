@@ -43,7 +43,7 @@ export class ListManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dialog: MatDialog,
     public columnManager: ColumnManager
   ) { }

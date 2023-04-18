@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -34,7 +33,7 @@ import { EnvService } from './env.service';
 })
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  ENReadingReports = ENReadingReports;  
+  ENReadingReports = ENReadingReports;
   isCollapsedPrfm: boolean = false;
   isCollapsedDH: boolean = false;
   isCollapsedLocked: boolean = false;
@@ -48,7 +47,7 @@ export class ReadingReportManagerService {
   isCollapsedTrvCh: boolean = false;
   isCollapsedDetails: boolean = false;
   isCollapsedUserKarkard: boolean = false;
-  isCollapsedImageAttrFileResult: boolean = false;  
+  isCollapsedImageAttrFileResult: boolean = false;
   _isOrderByDate: boolean = false;
 
   masterReq: IReadingReportReq = {
@@ -288,8 +287,7 @@ export class ReadingReportManagerService {
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private dialog: MatDialog,
-    private _location: Location,
+    private dialog: MatDialog,    
     private router: Router,
     private envService: EnvService,
     private jwtService: JwtService,
@@ -499,9 +497,6 @@ export class ReadingReportManagerService {
   routeToByObject = (router: string, val: object) => {
     this.router.navigate([router, val]);
   }
-  backToPreviousPage = () => {
-    this._location.back();
-  }
   routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
     this.router.navigate([EN_Routes.wr, readingReportGISReq]);
   }
@@ -572,7 +567,7 @@ export class ReadingReportManagerService {
   }
   snackWarn = (message: string) => {
     this.utilsService.snackBarMessageWarn(message);
-  } 
+  }
   showInMapSingleValidation = (dataSource: any): boolean => {
     if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);

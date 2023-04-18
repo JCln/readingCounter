@@ -36,7 +36,7 @@ export class LoadedComponent extends FactoryONE {
   backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {
     const config = {
       messageTitle: EN_messages.reson_delete_backtoImported,
-      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + ' مامور: ' + rowDataAndIndex.counterReaderName,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '   مامور: ' + rowDataAndIndex.counterReaderName,
       minWidth: '19rem',
       isInput: true,
       isDelete: false,

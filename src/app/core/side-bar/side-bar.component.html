@@ -5,7 +5,7 @@
                 <div class="_list_header">
                     <i class="{{item.cssClass}} icons"></i>
                     <div class="_list_title">{{item.title}}</div>
-                    <i class="pi pi-angle-up"></i>
+                    <i class="pi pi-angle-down"></i>
                 </div>
                 <div [@openClose]="!item.isOpen ? 'closeSubItems' : 'openSubItems'" class="__list_items_out">
                     <div class="__list_items_in" *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"

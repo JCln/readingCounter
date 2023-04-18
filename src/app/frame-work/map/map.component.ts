@@ -94,7 +94,7 @@ export class MapComponent implements OnInit, OnDestroy {
     public mapService: MapService,
     public route: ActivatedRoute,
     private router: Router,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dateJalaliService: DateJalaliService
   ) { }
 

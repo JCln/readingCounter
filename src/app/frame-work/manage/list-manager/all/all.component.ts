@@ -24,7 +24,6 @@ export class AllComponent extends AllListsFactory {
 
   constructor(
     public listManagerService: ListManagerService,
-    private _location: Location,
     public dialogService: DialogService,
     public allListsService: AllListsService,
     public closeTabService: CloseTabService
@@ -36,9 +35,9 @@ export class AllComponent extends AllListsFactory {
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    const tempZone: number = parseInt(this.closeTabService.saveDataForLMAll[0].zoneId.toString());
-    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
-    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
+    this.closeTabService.saveDataForLMAllReq.zoneId = parseInt(this.closeTabService.saveDataForLMAll[0].zoneId.toString());
+    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.closeTabService.saveDataForLMAllReq.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForLMAllReq.zoneId);
 
     this.closeTabService.saveDataForLMAll =
       Converter.convertIdsToTitles(
@@ -65,7 +64,7 @@ export class AllComponent extends AllListsFactory {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.allLists_pageSign.GUid) {
-      this._location.back();
+      this.listManagerService.utilsService.backToPreviousPage();
     }
 
     else {
@@ -84,9 +83,6 @@ export class AllComponent extends AllListsFactory {
 
       this.dictionaryWrapps();
     }
-  }
-  toPrePage = () => {
-    this._location.back();
   }
 
 }

@@ -146,7 +146,7 @@ ul {
       display: none;
     }
 
-    .pi-angle-up {
+    .pi-angle-down {
       display: none;
     }
 
@@ -155,7 +155,7 @@ ul {
         display: block;
       }
 
-      .pi-angle-up {
+      .pi-angle-down {
         display: block;
       }
 
@@ -175,7 +175,7 @@ ul {
   color: var(--primary_2) !important;
 }
 
-.pi-angle-up {
+.pi-angle-down {
   transform: rotate(0);
   transition: transform ease-in-out 150ms;
   color: var(--sidebar_1);
