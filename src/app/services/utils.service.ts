@@ -25,7 +25,7 @@ export class UtilsService {
 
 
   constructor(
-    private compositeService: CompositeService,
+    public compositeService: CompositeService,
     private envService: EnvService,
     private dialog: MatDialog,
     private _location: Location,

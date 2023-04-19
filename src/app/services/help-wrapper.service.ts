@@ -1,6 +1,6 @@
+import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { EN_Routes } from 'interfaces/routes.enum';
 
 import { AddNewComponent } from '../frame-work/manage/add-new/add-new.component';
@@ -27,7 +27,7 @@ export class HelpWrapperService {
   }
 
   constructor(
-    private router: Router,
+    private utilsService: UtilsService,
     public dialog: MatDialog
   ) { }
 
@@ -419,9 +419,10 @@ export class HelpWrapperService {
       }
   }
   openDialog = () => {
-    let currentVal: IHelpWrapper = this.exactRoute(this.router.url);
+    const temp = this.utilsService.compositeService.getRouterUrl();
+    let currentVal: IHelpWrapper = this.exactRoute(temp);
     if (!currentVal)
-      currentVal = this.similarIncludeRoute(this.router.url);
+      currentVal = this.similarIncludeRoute(temp);
 
     this.messageToShow.title = currentVal.title;
     this.messageToShow.imgOne = currentVal.imgOne;

@@ -20,6 +20,9 @@ export class CompositeService {
   routeTo = (router: string) => {
     this.router.navigate([router]);
   }
+  routeToExtras = (router: any[], extras?: any) => {
+    this.router.navigate(router, extras);
+  }
   // routing
   routeToByUrl = (router: string) => {
     this.router.navigateByUrl(router);
@@ -32,6 +35,9 @@ export class CompositeService {
   }
   getRouteBySplit = (spliter: string): string => {
     return this.router.url.split(spliter).pop();
+  }
+  getRouterUrl = (): string => {
+    return this.router.url;
   }
   getRefreshToken = (): string => {
     return this.jwtService.getRefreshToken();

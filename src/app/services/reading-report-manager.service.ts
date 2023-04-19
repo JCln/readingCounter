@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
@@ -26,6 +25,7 @@ import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { JwtService } from './../auth/jwt.service';
 import { EnvService } from './env.service';
+import { MapService } from './map.service';
 
 
 @Injectable({
@@ -287,10 +287,10 @@ export class ReadingReportManagerService {
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private dialog: MatDialog,    
-    private router: Router,
+    private dialog: MatDialog,
     private envService: EnvService,
     private jwtService: JwtService,
+    private mapService: MapService,
     private profileService: ProfileService
   ) { }
 
@@ -494,11 +494,14 @@ export class ReadingReportManagerService {
   linkToStimulsoftView = (body: any) => {
     window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
-  routeToByObject = (router: string, val: object) => {
-    this.router.navigate([router, val]);
-  }
-  routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
-    this.router.navigate([EN_Routes.wr, readingReportGISReq]);
+  routeToMapGIS = async (readingReportGISReq: any) => {
+    // insert into gis request and should valiation before route to map     
+    const temp = await this.portRRTest(ENInterfaces.ListToGis, readingReportGISReq);
+    this.mapService.gisReqAux = readingReportGISReq;
+    this.mapService.responseGisAux.value = temp;
+
+    if (temp.length)
+      this.utilsService.compositeService.routeToExtras([EN_Routes.wr, readingReportGISReq]);
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {

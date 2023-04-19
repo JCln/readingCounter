@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
@@ -88,7 +87,6 @@ export class ImportDynamicService {
     public utilsService: UtilsService,
     private allImportsService: AllImportsService,
     private dialog: MatDialog,
-    private router: Router,
     private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService
@@ -174,7 +172,7 @@ export class ImportDynamicService {
     return true;
   }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
-    this.router.navigate([EN_Routes.wrimpsimafardpgsingle, object]);
+    this.utilsService.compositeService.routeToExtras([EN_Routes.wrimpsimafardpgsingle, object]);
   }
   routeToSimafaBatch = (object: IReadingProgramRes) => {
     this.allImportsService.allImports_batch.readingProgramId = object.id;
@@ -185,7 +183,7 @@ export class ImportDynamicService {
     this.allImportsService.allImports_batch.year = object.year;
     this.allImportsService.allImports_batch.readingPeriodId = object.readingPeriodId;
     this.allImportsService.allImports_batch.canContinue = object.canContinue;
-    this.router.navigate([EN_Routes.wrimpsimafardpgbatch]);
+    this.utilsService.routeTo(EN_Routes.wrimpsimafardpgbatch);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     return this.validationNull(searchReq);

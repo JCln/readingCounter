@@ -29,6 +29,22 @@ L.Marker.prototype.options.icon = defaultIcon;
 })
 export class MapService {
   private map: L.Map;
+  public gisReqAux = {
+    zoneId: null,
+    isCounterState: false,
+    counterStateId: null,
+    isKarbariChange: false,
+    isAhadChange: false,
+    isForbidden: false,
+    readingPeriodId: null,
+    year: null,
+    fromDate: '',
+    toDate: '',
+    fragmentMasterIds: []
+  };
+  public responseGisAux = {
+    value: null
+  }
 
   constructor(
     private browserStorageService: BrowserStorageService,
@@ -106,6 +122,28 @@ export class MapService {
         resolve(res)
       })
     });
+  }
+  postDataSourceGisSpecial = (method: ENInterfaces, val: any): Promise<any> => {
+    if (
+      this.responseGisAux.value &&
+      this.gisReqAux.zoneId == val.zoneId &&
+      this.gisReqAux.counterStateId == val.counterStateId &&
+      this.gisReqAux.fromDate == val.fromDate &&
+      this.gisReqAux.toDate == val.toDate &&
+      this.gisReqAux.isKarbariChange == val.isKarbariChange &&
+      this.gisReqAux.isForbidden == val.isForbidden &&
+      this.gisReqAux.isAhadChange == val.isAhadChange
+    ) {
+      console.log(1);      
+      
+      return this.responseGisAux.value;
+    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res) => {
+        this.responseGisAux.value = res;
+        resolve(res);
+      })
+    })
   }
   postById = (method: ENInterfaces, id?: number): Promise<any> => {
     return new Promise((resolve) => {

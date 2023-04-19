@@ -149,9 +149,12 @@ export class MapComponent implements OnInit, OnDestroy {
     this.mapConfigOptions(this.mapService.getFromLocalStorage(), true);
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
-    let numberOfFragmentMasterIds: string[] = [];
-    for (let index = 0; index < this.route.snapshot.paramMap.get('fragmentMasterIds').split(',').length; index++) {
-      numberOfFragmentMasterIds.push(this.route.snapshot.paramMap.get('fragmentMasterIds').split(',')[index])
+    let numberOfFragmentMasterIds = [];
+    const fragmentMaster = this.route.snapshot.paramMap.get('fragmentMasterIds');
+    if (fragmentMaster.length) {
+      for (let index = 0; index < this.route.snapshot.paramMap.get('fragmentMasterIds').split(',').length; index++) {
+        numberOfFragmentMasterIds.push(this.route.snapshot.paramMap.get('fragmentMasterIds').split(',')[index])
+      }
     }
 
     return {
@@ -170,7 +173,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   private classWrapperCluster = async () => {
-    this.extraDataSourceRes = await this.mapService.postDataSource(ENInterfaces.ListToGis, this.makeClusterRouteObject());
+    this.extraDataSourceRes = await this.mapService.postDataSourceGisSpecial(ENInterfaces.ListToGis, this.makeClusterRouteObject());
 
     if (this.extraDataSourceRes.length === 0) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
