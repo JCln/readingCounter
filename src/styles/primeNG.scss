@@ -461,12 +461,12 @@
     background-color: var(--secondary_1);
   }
 
-  .p-datatable-resizable .p-datatable-tbody>tr>td,
-  .p-datatable-resizable .p-datatable-tfoot>tr>td,
-  .p-datatable-resizable .p-datatable-thead>tr>th {
-    overflow: inherit;
-    white-space: normal;
-  }
+  // .p-datatable-resizable .p-datatable-tbody>tr>td,
+  // .p-datatable-resizable .p-datatable-tfoot>tr>td,
+  // .p-datatable-resizable .p-datatable-thead>tr>th {
+  //   overflow: inherit;
+  //   white-space: normal;
+  // }
 
   .p-paginator {
     background: var(--white);
