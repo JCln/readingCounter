@@ -269,7 +269,7 @@
                 </i>
             </td>
             <td class="__columns"
-                *ngIf="dataSource.hasMap &&( _checkUpName == 'lastStates' || _checkUpName == 'simpleSearch')"
+                *ngIf="dataSource.hasMap &&( _outputFileName == 'lastStates' || _checkUpName == 'simpleSearch')"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
@@ -277,7 +277,7 @@
                 </i>
             </td>
             <td class="__columns"
-                *ngIf="!dataSource.hasMap && (_checkUpName == 'lastStates' || _checkUpName == 'desc' || _checkUpName == 'simpleSearch')">
+                *ngIf="!dataSource.hasMap && (_outputFileName == 'lastStates' || _checkUpName == 'desc' || _checkUpName == 'simpleSearch')">
             </td>
             <td class="__columns" *ngIf="_outputFileName == 'finished' && !denyTracking()"
                 (click)="backToImportedConfirmDialog(dataSource)">

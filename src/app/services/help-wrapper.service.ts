@@ -166,6 +166,7 @@ export class HelpWrapperService {
         messageOne: 'برای جستجوی مشترک میتوان به 4 طریق قابل مشاهده در تصویر اقدام نمود. ',
         imgOne: 'assets/imgs/help/search/search_mosh.JPG',
         messageTwo: 'جستجوی موارد مشابه بمعنای جستجوی تقریبی مقادیر است و نه فقط مقدار وارد شده.',
+        messageThree: 'نمایش همه: مواردی که به علت بازدید یا اصلاح لیست تغییر کرده اند نمایش داده خواهند شد',
       }
     else if (currentRoute === EN_Routes.wrprofile)
       return {

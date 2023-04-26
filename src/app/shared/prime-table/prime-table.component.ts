@@ -244,9 +244,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
 
   doAggregate = () => {
-    const _agg = this.profileService._agg.flag;
+    const _aggFlag = this.profileService._agg.flag;
 
-    if (_agg) {
+    if (_aggFlag && this._checkUpName == 'Kartables') {
       this._sortField = this.profileService._agg.selectedAggregate;
       this.updateRowGroupMetaData(this.profileService._agg.selectedAggregate);
     }

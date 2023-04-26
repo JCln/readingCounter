@@ -1,5 +1,10 @@
 .ma {
-  display: flex;
+  display: block;
+
+  @media (min-width: 375px) {
+    display: flex;
+  }
+
 }
 
 app-frame-work {
@@ -62,6 +67,10 @@ app-side-bar {
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  box-shadow:
+    0px 11px 10px 0px rgba(0, 0, 0, .14),
+    0px 18px 18px 0px rgba(0, 0, 0, .12),
+    0px 5px 5px -1px rgba(0, 0, 0, .2);
 
   @media (min-width: 550px) {
     min-width: 29%;

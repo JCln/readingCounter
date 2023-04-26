@@ -43,6 +43,7 @@ export class LoginComponent {
   convertNumbers = () => {
     this.userData.password = Converter.persianToEngNumbers(this.userData.password);
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
+    this.userData.dntCaptchaInputText = Converter.persianToEngNumbers(this.userData.dntCaptchaInputText);
   }
   logging = async () => {
     if (this.browserSupportService.isValidBrowserVersion()) {

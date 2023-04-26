@@ -1,7 +1,7 @@
 <app-prime-table     
     [dataSource]="closeTabService.saveDataForTrackFinished" 
     [_outputFileName]="'finished'"
-    [_checkUpName]="'finished'"
+    [_checkUpName]="'Kartables'"
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3]"
     [_calculableSUM]=true
     [_hasAggregating] = true
