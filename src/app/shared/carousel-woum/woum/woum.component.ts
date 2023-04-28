@@ -10,7 +10,7 @@ import { ProfileService } from 'services/profile.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/interfaces/itrackings';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 

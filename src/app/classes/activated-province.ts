@@ -17,7 +17,7 @@ import {
     timeout,
 } from 'interfaces/build';
 
-import { version } from './../interfaces/build';
+import { version } from '../interfaces/build';
 
 export class ActivatedProvince implements IENV {
     public static readonly DEFAULT = new ActivatedProvince(

@@ -7,7 +7,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 
 @Component({

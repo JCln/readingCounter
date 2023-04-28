@@ -17,7 +17,7 @@ import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';

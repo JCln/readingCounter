@@ -1,9 +1,9 @@
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
-import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { Injectable } from '@angular/core';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
 
@@ -134,8 +134,6 @@ export class MapService {
       this.gisReqAux.isForbidden == val.isForbidden &&
       this.gisReqAux.isAhadChange == val.isAhadChange
     ) {
-      console.log(1);      
-      
       return this.responseGisAux.value;
     }
     return new Promise((resolve) => {

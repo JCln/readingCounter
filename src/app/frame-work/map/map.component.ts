@@ -11,8 +11,8 @@ import { DateJalaliService } from 'services/date-jalali.service';
 import { MapService } from 'services/map.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
-import { IGisXYResponse } from 'src/app/interfaces/idashboard-map';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
+import { IGisXYResponse } from 'interfaces/idashboard-map';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 
 declare let L;

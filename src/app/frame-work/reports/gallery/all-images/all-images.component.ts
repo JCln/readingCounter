@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
-import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/interfaces/ireports';
+import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'interfaces/ireports';
 
 @Component({
   selector: 'app-all-images',

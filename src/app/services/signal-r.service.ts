@@ -6,7 +6,7 @@ import { ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { ILatestReads } from 'src/app/interfaces/imoment';
+import { ILatestReads } from 'interfaces/imoment';
 
 import { JwtService } from '../auth/jwt.service';
 import { SnackWrapperService } from './snack-wrapper.service';
