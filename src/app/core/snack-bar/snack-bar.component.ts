@@ -17,6 +17,7 @@ import { ShowVideoDgComponent } from 'src/app/shared/show-video-dg/show-video-dg
 })
 export class SnackBarComponent implements OnInit {
   ref: DynamicDialogRef;
+  _notifTimer: number = 0;
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -65,6 +66,9 @@ export class SnackBarComponent implements OnInit {
   toast = () => {
     this.snackWrapperService.toastStatusSignal.subscribe((res) => {
       if (res) {
+        if (res.life) {
+          this.setInterval(res.life);
+        }
         this.messageService.add(res);
       }
     })
@@ -99,7 +103,6 @@ export class SnackBarComponent implements OnInit {
     });
   }
   openNotifyType = (message: any) => {
-    console.log(message.clickName);
 
     switch (message.clickName) {
       case 'openVideoDialog':
@@ -112,6 +115,17 @@ export class SnackBarComponent implements OnInit {
       default:
         break;
     }
+  }
+  setInterval = (life: number) => {
+    this._notifTimer = life / 1000;
+
+    const interval = setInterval(() => {
+      this._notifTimer--;
+
+      if (this._notifTimer < 1) {
+        clearInterval(interval);
+      }
+    }, 1000);
   }
 
 }

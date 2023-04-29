@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
-import { ENLocalStorageNames, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, IResponses } from 'interfaces/ioverall-config';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -10,7 +10,6 @@ import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
-import { EnvService } from './env.service';
 import { LocalClientConfigsService } from './local-client-configs.service';
 
 export interface imageOption {
@@ -28,7 +27,7 @@ export class ProfileService {
     hasCanclableSpinner: false,
     defaultFontStyle: 1,
     reOrderableTable: false,
-    notifyPosition: 'bottom-left',
+    notifyPosition: 'top-right',
     imgOptions: {
       width: '40rem',
       height: '40rem',
@@ -41,7 +40,7 @@ export class ProfileService {
     private utilsService: UtilsService,
     public columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
-    private jwtService: JwtService,    
+    private jwtService: JwtService,
     private downloadManagerService: DownloadManagerService
   ) { }
 
@@ -90,7 +89,7 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
   }
   getLocalNotifyPosition = (): string => {
-    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'bottom-left');
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'top-right');
   }
   getLocalReOrderable = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.utilsService.envService.reOrderableTable);
