@@ -66,7 +66,6 @@ export class SearchService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
     private allListsService: AllListsService,
-    private dialog: MatDialog,
     private pageSignsService: PageSignsService,
     private profileService: ProfileService
   ) { }
@@ -340,7 +339,7 @@ export class SearchService {
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',

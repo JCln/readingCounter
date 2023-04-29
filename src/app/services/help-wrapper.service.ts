@@ -27,8 +27,7 @@ export class HelpWrapperService {
   }
 
   constructor(
-    private utilsService: UtilsService,
-    public dialog: MatDialog
+    private utilsService: UtilsService
   ) { }
 
   /* STATIC ROUTE S*/
@@ -133,6 +132,12 @@ export class HelpWrapperService {
         messageOne: 'این بخش برای دریافت فایل های متعدد(dbf) طراحی شده است',
         imgOne: 'assets/imgs/help/dbf/dbf.JPG',
         messageTwo: 'کافی است پس از وارد کردن مقادیر، برروی دانلود فایل کلیک نمایید.',
+      }
+    else if (currentRoute === EN_Routes.wrmmserr)
+      return {
+        title: 'همه خطاهای صادر شده',
+        messageOne: 'کلیه خطاهایی که توسط برنامه (مانند دسترسی غیر مجاز- خطای سرور و ..) صادر شده قابل مشاهده هستند',
+        messageTwo: 'همچنین امکان بررسی فنی تر خطا همراه با جزئیات قابل پیگیری می باشد.',
       }
     else if (currentRoute === EN_Routes.wrmfbn || currentRoute === EN_Routes.wrmfbnres)
       return {
@@ -432,7 +437,7 @@ export class HelpWrapperService {
     this.messageToShow.messageTwo = currentVal.messageTwo;
     this.messageToShow.messageThree = currentVal.messageThree;
 
-    this.dialog.open(AddNewComponent, {
+    this.utilsService.dialog.open(AddNewComponent, {
       minWidth: '65vw',
       data: currentVal
     });

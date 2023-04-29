@@ -29,3 +29,7 @@ small {
   color: var(--green_500);
   margin: 0 .4rem;
 }
+
+:host ::ng-deep .p-datatable {
+  width: 100% !important;
+}

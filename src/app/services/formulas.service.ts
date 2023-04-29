@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
+import { IResponses } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
@@ -21,8 +20,7 @@ export class FormulasService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
-    private snackWrapperService: SnackWrapperService,
+    private utilsService: UtilsService
   ) { }
 
   /* API CALLS */
@@ -97,85 +95,85 @@ export class FormulasService {
   /* VALIDATION */
   isNull = (): boolean => {
     if (MathS.isNull(this.desc.rows)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_excelRows, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_excelRows);
       return false;
     }
     if (MathS.isNull(this.fileForm)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_excelFile, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_excelFile);
       return false;
     }
     return true;
   }
   isInteger = (): boolean => {
     if (this.desc.rows.toString().includes('.')) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_without_decimal, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_without_decimal);
       return false;
     }
     return true;
   }
   isExcelFormat = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'xlsx') {
-      this.snackWrapperService.openSnackBar(EN_messages.format_invalid_excel, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_excel);
       return false;
     }
     return true;
   }
   validationEditableRow = (dataSource: object): boolean => {
     if (MathS.isNull(dataSource['id'])) {
-      this.snackWrapperService.openSnackBar(EN_messages.call_supportGroup, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
     if (this.utilsService.hasOwnProperty(dataSource['zoneId'])) {
       if (MathS.isNull(dataSource['zoneId'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_zone, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['karbariMoshtarakinCode'])) {
       if (MathS.isNull(dataSource['karbariMoshtarakinCode'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_karbariMoshtarakinCode, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_karbariMoshtarakinCode);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fromDate'])) {
       if (MathS.isNull(dataSource['fromDate'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_fromDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['toDate'])) {
       if (MathS.isNull(dataSource['toDate'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_toDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fromRate'])) {
       if (MathS.isNull(dataSource['fromRate'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_fromRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromRate);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['toRate'])) {
       if (MathS.isNull(dataSource['toRate'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_toRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toRate);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['abFormula'])) {
       if (MathS.isNull(dataSource['abFormula'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_abFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_abFormula);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fazelabFormula'])) {
       if (MathS.isNull(dataSource['fazelabFormula'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_fazelabFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fazelabFormula);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['formula'])) {
       if (MathS.isNull(dataSource['formula'])) {
-        this.snackWrapperService.openSnackBar(EN_messages.insert_formula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_formula);
         return false;
       }
     }

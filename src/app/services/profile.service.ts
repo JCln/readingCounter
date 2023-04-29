@@ -41,8 +41,7 @@ export class ProfileService {
     private utilsService: UtilsService,
     public columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
-    private jwtService: JwtService,
-    private envService: EnvService,
+    private jwtService: JwtService,    
     private downloadManagerService: DownloadManagerService
   ) { }
 
@@ -94,13 +93,13 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'bottom-left');
   }
   getLocalReOrderable = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.envService.reOrderableTable);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.utilsService.envService.reOrderableTable);
   }
   getLocalDefaultAggregateTracks = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.envService.defaultAggregateTracks);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.utilsService.envService.defaultAggregateTracks);
   }
   getHasCanclableSpinner = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.utilsService.envService.hasCanclableSpinner);
   }
   getFontStyle = (): number => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 1);

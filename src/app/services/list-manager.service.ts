@@ -44,7 +44,6 @@ export class ListManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
-    private dialog: MatDialog,
     public columnManager: ColumnManager
   ) { }
 
@@ -147,7 +146,7 @@ export class ListManagerService {
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',

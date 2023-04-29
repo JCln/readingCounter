@@ -42,8 +42,7 @@ export class ToolsService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private jwtService: JwtService,
-    private envService: EnvService
+    private jwtService: JwtService
   ) { }
 
   public fileDownloadAllImages: IDownloadFileAllImages = {
@@ -163,7 +162,7 @@ export class ToolsService {
     return this.jwtService.getAuthorizationToken();
   }
   getApiUrl = (): string => {
-    return this.envService.API_URL;
+    return this.utilsService.envService.API_URL;
   }
   postDataSource = (api: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {

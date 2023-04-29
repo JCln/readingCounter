@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
@@ -24,7 +23,6 @@ import {
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { JwtService } from './../auth/jwt.service';
-import { EnvService } from './env.service';
 import { MapService } from './map.service';
 
 
@@ -270,7 +268,7 @@ export class ReadingReportManagerService {
     return this.profileService.getLocalReOrderable();
   }
   getApiUrl = (): string => {
-    return this.envService.API_URL;
+    return this.utilsService.envService.API_URL;
   }
   getAuthToken = (): string => {
     return this.jwtService.getAuthorizationToken();
@@ -287,8 +285,6 @@ export class ReadingReportManagerService {
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private dialog: MatDialog,
-    private envService: EnvService,
     private jwtService: JwtService,
     private mapService: MapService,
     private profileService: ProfileService
@@ -486,13 +482,13 @@ export class ReadingReportManagerService {
     this.utilsService.routeTo(route);
   }
   linkToStimulsoftAdd = () => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftEdit = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftView = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
   routeToMapGIS = async (readingReportGISReq: any) => {
     // insert into gis request and should valiation before route to map     
@@ -513,7 +509,7 @@ export class ReadingReportManagerService {
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',
@@ -534,7 +530,7 @@ export class ReadingReportManagerService {
   showResDialogDynamic = (res: any, options: any): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogExcelViewComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogExcelViewComponent,
         {
           disableClose: options.disableClose,
           minWidth: '90%',

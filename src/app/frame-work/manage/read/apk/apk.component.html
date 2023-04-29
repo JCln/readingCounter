@@ -45,7 +45,7 @@
             <app-prime-table [dataSource]="closeTabService.saveDataForAPKManager" [_rowsNumbers]=5
                 [_numberOfExtraColumns]="['1']" [_multiSelectEnable]=false [_outputEnabled]=false
                 [_hasSaveColumns]=false [_outputFileName]="'apk'" [_checkUpName]="'apk'" (downloadedAPK)="downloadAPK()"
-                (removedRow)="removeRow($event)" (refreshedTable)="classWrapper(true)">
+                (removedRow)="removeRow($event)" (refreshedTable)="classWrapper(true)" class="_unset_overflow_tables">
             </app-prime-table>
 
         </div>

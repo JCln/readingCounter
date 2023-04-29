@@ -86,7 +86,6 @@ export class ImportDynamicService {
   constructor(
     public utilsService: UtilsService,
     private allImportsService: AllImportsService,
-    private dialog: MatDialog,
     private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService
@@ -483,7 +482,7 @@ export class ImportDynamicService {
   showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogComponent,
         {
           disableClose: disableClose,
           minWidth: '21rem',
@@ -506,7 +505,7 @@ export class ImportDynamicService {
   showCheckboxDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',

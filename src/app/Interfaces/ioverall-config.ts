@@ -203,6 +203,7 @@ export enum ENSnackBarColorsExact {
     info = 'rgb(17, 111, 255)',
 }
 export enum ENSnackBarTimes {
+    zero = 0,
     threeMili = 3000,
     fourMili = 4000,
     fiveMili = 5000,
@@ -333,7 +334,7 @@ export enum ENLocalStorageNames {
     notifyPosition = 'notifyPosition',
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
-    fontStyle = 'fontStyle',    
+    fontStyle = 'fontStyle',
     reOrderableTable = 'reOrderableTable',
     defaultAggregateTracks = 'defaultAggregateTracks',
 }

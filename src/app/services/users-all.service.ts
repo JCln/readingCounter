@@ -44,7 +44,6 @@ export class UsersAllService {
   ]
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
   ) { }
@@ -68,7 +67,7 @@ export class UsersAllService {
     });
   }
   snackBarMessageSuccess = (res: IResponses) => {
-    this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
   changeUserStatus = (method: ENInterfaces, UUID: string) => {
     this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
@@ -314,11 +313,11 @@ export class UsersAllService {
   checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage): boolean => {
 
     if (MathS.isNull(val.caption)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_caption, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
       return false;
     }
     if (MathS.isNull(fileForm)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_Image);
       return false;
     }
     if (
@@ -329,7 +328,7 @@ export class UsersAllService {
       return true;
     }
     else {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_JPG, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_JPG);
       return false;
     }
     // return true;
@@ -337,11 +336,11 @@ export class UsersAllService {
   checkVertiticationNotifDirectVideo = (fileForm: FileList, val: INotifyDirectImage): boolean => {
 
     if (MathS.isNull(val.caption)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_caption, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
       return false;
     }
     if (MathS.isNull(fileForm)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_video, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_video);
       return false;
     }
     if (
@@ -352,7 +351,7 @@ export class UsersAllService {
       return true;
     }
     else {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_video, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_video);
       return false;
     }
     // return true;

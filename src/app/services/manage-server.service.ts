@@ -21,8 +21,7 @@ export class ManageServerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
-    private envService: EnvService,
+    private utilsService: UtilsService,    
     private jwtService: JwtService
   ) { }
 
@@ -59,13 +58,13 @@ export class ManageServerService {
     });
   }
   linkToElmah = (body: string) => {
-    window.open(this.envService.API_URL + ENInterfaces.serverManagerErrorsElmah + body, '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerErrorsElmah + body, '_blank');
   }
   linkToHangFire = () => {
-    window.open(this.envService.API_URL + ENInterfaces.serverManagerHangFire + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHangFire + this.jwtService.getAuthorizationToken(), '_blank');
   }
   linkToHealthCheck = () => {
-    window.open(this.envService.API_URL + ENInterfaces.serverManagerHealthCheck, '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHealthCheck, '_blank');
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
     this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);

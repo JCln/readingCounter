@@ -26,10 +26,10 @@ export class UtilsService {
 
   constructor(
     public compositeService: CompositeService,
-    private envService: EnvService,
-    private dialog: MatDialog,
+    public envService: EnvService,
+    public dialog: MatDialog,
     private _location: Location,
-    private snackWrapperService: SnackWrapperService
+    public snackWrapperService: SnackWrapperService
   ) { }
 
   getSimafaImportStatus = (): ISimafaImportStatus => {

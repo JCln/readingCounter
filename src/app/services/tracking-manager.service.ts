@@ -17,7 +17,6 @@ import { OffloadModify } from '../classes/offload-modify-type';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { EnvService } from './env.service';
 import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
@@ -66,7 +65,6 @@ export class TrackingManagerService {
     public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private allListsService: AllListsService,
-    private envService: EnvService,
     private jwtService: JwtService,
     public columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
@@ -75,7 +73,7 @@ export class TrackingManagerService {
   ) { }
 
   getApiUrl = (): string => {
-    return this.envService.API_URL;
+    return this.utilsService.envService.API_URL;
   }
   getAuthToken = (): string => {
     return this.jwtService.getAuthorizationToken();
