@@ -1,7 +1,8 @@
 <main class="main" *ngIf="route.children.length === 0">
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card" [@openClose]="readingReportManagerService.isCollapsedDH ? 'slideUp' : 'slideDown'">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedDH ? 'slideUp' : 'slideDown'">
 
                 <section class="content">
                     <div class="input_2">
@@ -47,8 +48,8 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRDisposalHours" [_outputFileName]="'disposalHs'"
         [_checkUpName]="'rr-disposalHs'" [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedDH"
-        (collapsed)="readingReportManagerService.isCollapsedDH = !readingReportManagerService.isCollapsedDH"
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDH"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDH = !readingReportManagerService.utilsService.collapser.isCollapsedDH"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

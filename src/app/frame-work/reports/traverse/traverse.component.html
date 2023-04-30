@@ -1,7 +1,8 @@
 <main class="main">
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card" [@openClose]="readingReportManagerService.isCollapsedTrv ? 'slideUp' : 'slideDown'">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedTrv ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -92,8 +93,8 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRTraverse" [_numberOfExtraColumns]="[1]"
         [_selectedColumnsToRemember]="'selectedRRTraverse'" [_outputFileName]="'trv'" [_checkUpName]="'rr-traverse'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedTrv"
-        (collapsed)="readingReportManagerService.isCollapsedTrv = !readingReportManagerService.isCollapsedTrv"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedTrv"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedTrv = !readingReportManagerService.utilsService.collapser.isCollapsedTrv"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

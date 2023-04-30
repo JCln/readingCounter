@@ -1,7 +1,8 @@
 <main class="main">
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card" [@openClose]="toolsService._isCollapsedImageAttrGridBased ? 'slideUp' : 'slideDown'">
+            <section class="_card"
+                [@openClose]="toolsService.utilsService.collapser._isCollapsedImageAttrGridBased ? 'slideUp' : 'slideDown'">
                 <section class="content">
                     <div class="input_2" [hidden]="!zoneDictionary.length">
                         <div class="_key">ناحیه</div>
@@ -54,8 +55,8 @@
         [_outputFileName]="'imgResultGridBased'" [_checkUpName]="'imgResultGridBased'"
         [_sessionName]="'imgResultGridBased-session'" [_numberOfExtraColumns]="[1]"
         [_selectedColumnsToRemember]="'selectedToolsImgRDGridBased'" [_hasCollapsible]=true
-        [_isCollaped]="toolsService._isCollapsedImageAttrGridBased"
-        (collapsed)="toolsService._isCollapsedImageAttrGridBased = !toolsService._isCollapsedImageAttrGridBased"
+        [_isCollaped]="toolsService.utilsService.collapser._isCollapsedImageAttrGridBased"
+        (collapsed)="toolsService.utilsService.collapser._isCollapsedImageAttrGridBased = !toolsService.utilsService.collapser._isCollapsedImageAttrGridBased"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 

@@ -27,11 +27,6 @@ import { UtilsService } from './utils.service';
 export class ToolsService {
   ENReadingReports = ENReadingReports;
   trackNumberAllImages: number;
-  _isCollapsedAllImgs: boolean = false;
-  _isCollapsedRandomImgCarouDetails: boolean = true;
-  _isCollapsedRandomImages: boolean = false;
-  _isCollapsedImageAttrDetails: boolean = false;
-  _isCollapsedImageAttrGridBased: boolean = false;
   searchInOrder: any[] = [
     { name: 'شماره پرونده', value: 'radif', type: 'number' },
     { name: 'اشتراک', value: 'eshterak', type: 'number' },
@@ -40,7 +35,7 @@ export class ToolsService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private jwtService: JwtService
   ) { }

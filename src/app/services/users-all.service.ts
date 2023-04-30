@@ -110,6 +110,7 @@ export class UsersAllService {
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
+      text: dialogConfig.text,
       icon: dialogConfig.icon ? dialogConfig.icon : 'fas fa-user-lock',
       doesNotReturnButton: dialogConfig.doesNotReturnButton
     }

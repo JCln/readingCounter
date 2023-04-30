@@ -1,10 +1,11 @@
-<app-collapsable [_isCollapsed]=toolsService._isCollapsedRandomImages
-    (_clicked)="toolsService._isCollapsedRandomImages = !toolsService._isCollapsedRandomImages">
+<app-collapsable [_isCollapsed]=toolsService.utilsService.collapser._isCollapsedRandomImages
+    (_clicked)="toolsService.utilsService.collapser._isCollapsedRandomImages = !toolsService.utilsService.collapser._isCollapsedRandomImages">
 </app-collapsable>
 
 <section>
     <form #form="ngForm" (ngSubmit)="connectToServer()">
-        <section class="_card" [@openClose]="toolsService._isCollapsedRandomImages ? 'slideUp' : 'slideDown'">
+        <section class="_card"
+            [@openClose]="toolsService.utilsService.collapser._isCollapsedRandomImages ? 'slideUp' : 'slideDown'">
             <div class="input_2" [hidden]="!zoneDictionary.length">
                 <div class="_key">ناحیه</div>
                 <div class="_value">

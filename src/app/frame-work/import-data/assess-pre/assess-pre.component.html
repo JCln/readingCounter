@@ -1,9 +1,9 @@
-<app-collapsable [_isReversed]="true" [_isCollapsed]=importDynamicService._assessPreCollapse
-    (_clicked)="importDynamicService._assessPreCollapse = !importDynamicService._assessPreCollapse">
+<app-collapsable [_isReversed]="true" [_isCollapsed]=importDynamicService.utilsService.collapser._assessPreCollapse
+    (_clicked)="importDynamicService.utilsService.collapser._assessPreCollapse = !importDynamicService.utilsService.collapser._assessPreCollapse">
 </app-collapsable>
 
 <form #form="ngForm" (ngSubmit)="editCloseData()"
-    [@openClose]="importDynamicService._assessPreCollapse ? 'slideUp' : 'slideDown'">
+    [@openClose]="importDynamicService.utilsService.collapser._assessPreCollapse ? 'slideUp' : 'slideDown'">
 
     <main class="main_content">
         <section class="_toselect _card">

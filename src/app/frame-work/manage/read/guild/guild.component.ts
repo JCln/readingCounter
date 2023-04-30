@@ -68,9 +68,10 @@ export class GuildComponent extends FactoryONE {
 
     if (!this.readManagerService.verificationGuild(dataSource['dataSource']))
       return;
-    const confirmed = await this.readManagerService.firstConfirmDialog();
+
+    const confirmed = await this.readManagerService.firstConfirmDialog('عنوان: ' + dataSource['dataSource'].title);
     if (!confirmed) return;
-    console.log(dataSource['dataSource']);
+
     const a = await this.readManagerService.deleteSingleRowByObject(ENInterfaces.GuildManagerRemove, dataSource['dataSource']);
 
     if (a) {

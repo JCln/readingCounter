@@ -45,7 +45,7 @@ export class UserRoleComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForRoleManager = this.closeTabService.saveDataForRoleManager.slice(0, index).concat(this.closeTabService.saveDataForRoleManager.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.userService.firstConfirmDialog({ messageTitle: EN_messages.confirm_remove, icon: 'pi pi-trash' });
+    const a = await this.userService.firstConfirmDialog({ messageTitle: EN_messages.confirm_remove, text: 'عنوان: ' + rowData['dataSource'].title + '،  عنوان فارسی: ' + rowData['dataSource'].titleUnicode, icon: 'pi pi-trash' });
 
     if (a) {
       await this.userService.deleteSingleRow(ENInterfaces.RoleREMOVE, rowData['dataSource'].id);

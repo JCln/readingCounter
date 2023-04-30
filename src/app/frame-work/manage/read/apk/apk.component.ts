@@ -90,8 +90,7 @@ export class ApkComponent extends FactoryONE {
   }
   removeRow = async (dataSource: number) => {
     if (this.getUserRole()) {
-
-      if (await this.apkService.firstConfirmDialog()) {
+      if (await this.apkService.firstConfirmDialog('نام نسخه: ' + dataSource['dataSource'].versionName + '،  نسخه: ' + dataSource['dataSource'].versionCode)) {
         const a = await this.apkService.postById(ENInterfaces.APKRemove, dataSource['dataSource'].id);
         if (a) {
           this.apkService.showSuccessMessage(a.message, ENSnackBarColors.success);

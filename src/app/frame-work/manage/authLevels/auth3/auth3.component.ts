@@ -58,9 +58,9 @@ export class Auth3Component extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel3 = this.closeTabService.saveDataForAppLevel3.slice(0, index).concat(this.closeTabService.saveDataForAppLevel3.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.authsManagerService.firstConfirmDialog();
+    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ماژول: ' + rowDataAndIndex['dataSource'].authLevel2Id);
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel3REMOVE, rowDataAndIndex['dataSource']);
+      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel3REMOVE, rowDataAndIndex['dataSource'].id);
       this.refetchTable(rowDataAndIndex['ri']);
     }
   }

@@ -292,7 +292,7 @@
             </td>
             <td class="__columns" *ngIf="_checkUpName != 'generalListModify'">
                 <span class="ui-column-title">حذف مورد</span>
-                <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource.id , ri)"
+                <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource , ri)"
                     class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>
                 </i>

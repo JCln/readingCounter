@@ -2,7 +2,7 @@
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="_card"
-                [@openClose]="readingReportManagerService.isCollapsedImageAttrFileResult ? 'slideUp' : 'slideDown'">
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult ? 'slideUp' : 'slideDown'">
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
@@ -31,8 +31,8 @@
     </section>
     <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrResult" [_outputFileName]="'_imageAttrResult'"
         [_selectedColumnsToRemember]="'selectedImageAttrResult'" [_hasCollapsible]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedImageAttrFileResult"
-        (collapsed)="readingReportManagerService.isCollapsedImageAttrFileResult = !readingReportManagerService.isCollapsedImageAttrFileResult"
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult = !readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

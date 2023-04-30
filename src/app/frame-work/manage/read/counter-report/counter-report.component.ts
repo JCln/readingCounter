@@ -55,12 +55,10 @@ export class CounterReportComponent extends FactoryONE {
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'zoneId');
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForCounterReport = this.closeTabService.saveDataForCounterReport.slice(0, index).concat(this.closeTabService.saveDataForCounterReport.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.readManagerService.firstConfirmDialog();
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].zoneId);
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowDataAndIndex['dataSource']);
-      this.refetchTable(rowDataAndIndex['ri']);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowDataAndIndex['dataSource'].id);
       this.refreshTable();
     }
   }
@@ -85,6 +83,7 @@ export class CounterReportComponent extends FactoryONE {
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'zoneId');
+    this.refreshTable();
   }
 
 }

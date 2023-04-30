@@ -2,7 +2,7 @@
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="_card"
-                [@openClose]="readingReportManagerService.isCollapsedOffKarkard ? 'slideUp' : 'slideDown'">
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -91,8 +91,8 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRROffloadedKarkard" [_outputFileName]="'karkardOffload'"
         [_checkUpName]="'rr-offload-karkard'" [_selectedColumnsToRemember]="'selectedRROffloadedKarkard'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedOffKarkard"
-        (collapsed)="readingReportManagerService.isCollapsedOffKarkard = !readingReportManagerService.isCollapsedOffKarkard"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard = !readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

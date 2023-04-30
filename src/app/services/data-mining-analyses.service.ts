@@ -18,8 +18,7 @@ import { UtilsService } from './utils.service';
 })
 export class DataMiningAnalysesService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  ENDataMining = ENDataMining;
-  isCollapsedCranlz: boolean = false;
+  ENDataMining = ENDataMining;  
 
   dataMiningReq: IMostReportInput = {
     zoneId: 0,

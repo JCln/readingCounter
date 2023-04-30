@@ -141,8 +141,8 @@ export class FragmentComponent extends FactoryONE {
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
     dataSource = dataSource['dataSource'];
-    console.log(dataSource);
-    const textMessage = 'از اشتراک: ' + dataSource.fromEshterak + ' تا اشتراک: ' + dataSource.toEshterak;
+
+    const textMessage = 'ناحیه: ' + dataSource.zoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
     if (this.fragmentManagerService.masterValidation(dataSource)) {
       if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
         dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;

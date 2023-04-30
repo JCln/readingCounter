@@ -1,7 +1,8 @@
 <main class="main">
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="_card" [@openClose]="dataMiningAnalysesService.isCollapsedCranlz ? 'slideUp' : 'slideDown'">
+            <section class="_card"
+                [@openClose]="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz ? 'slideUp' : 'slideDown'">
                 <section class="order_by">
                     <h2>جستجو بر اساس :</h2>
                     <div *ngFor="let orderType of dataMiningAnalysesService.utilsService.getSearchInOrderTo">
@@ -93,8 +94,8 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForDMAAnalyze" [_outputFileName]="'analysis'"
         [_checkUpName]="'dm-analysis'" [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
-        [_isCollaped]="dataMiningAnalysesService.isCollapsedCranlz"
-        (collapsed)="dataMiningAnalysesService.isCollapsedCranlz = !dataMiningAnalysesService.isCollapsedCranlz"
+        [_isCollaped]="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
+        (collapsed)="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz = !dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 

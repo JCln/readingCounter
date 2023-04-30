@@ -2,7 +2,7 @@
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="_card"
-                [@openClose]="readingReportManagerService.isCollapsedLocked ? 'slideUp' : 'slideDown'">
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedLocked ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -83,8 +83,8 @@
         [_outputFileName]="'rrLocked'" [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]"
         [_sessionName]="'rr-locked'" [_selectedColumnsToRemember]="'selectedRRLocked'" [_isCustomSort]=true
         [_hasCollapsible]=true (customedSort)="listManagerService.customSort($event)"
-        [_isCollaped]="readingReportManagerService.isCollapsedLocked"
-        (collapsed)="readingReportManagerService.isCollapsedLocked = !readingReportManagerService.isCollapsedLocked"
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedLocked"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedLocked = !readingReportManagerService.utilsService.collapser.isCollapsedLocked"
         (refreshedTable)="refreshTable()" (showedInMapSingle)="openMapDialog($event)"
         (filteredEvent)="filteredTableEvent($event)" (showedPictures)="getReadingReportTitles($event)">
     </app-prime-table>

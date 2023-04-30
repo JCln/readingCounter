@@ -64,9 +64,9 @@ export class Tabsare2Component extends FactoryONE {
   }
 
   firstConfirmDialog = async (rowData: ITabsare2Formula) => {
-    const a = await this.formulasService.firstConfirmDialog();
+    const a = await this.formulasService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId);
     if (a)
-      this.removeRow(rowData['dataSource'], rowData['ri']);
+      this.removeRow(rowData['dataSource'].id, rowData['ri']);
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };

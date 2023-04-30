@@ -59,10 +59,10 @@ export class ZoneBoundComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForZoneBound = this.closeTabService.saveDataForZoneBound.slice(0, index).concat(this.closeTabService.saveDataForZoneBound.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.sectorsManagerService.firstConfirmDialog();
+    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].zoneId);
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneBoundREMOVE, rowDataAndIndex['dataSource']);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneBoundREMOVE, rowDataAndIndex['dataSource'].id);
       this.refetchTable(rowDataAndIndex['ri']);
     }
   }

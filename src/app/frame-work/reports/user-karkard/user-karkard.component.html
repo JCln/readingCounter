@@ -2,7 +2,7 @@
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="_card"
-                [@openClose]="readingReportManagerService.isCollapsedUserKarkard ? 'slideUp' : 'slideDown'">
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard ? 'slideUp' : 'slideDown'">
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
@@ -53,8 +53,8 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForUserKarkard" [_outputFileName]="'rrUserKarkard'"
         [_checkUpName]="'rr-user-karkard'" [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedUserKarkard"
-        (collapsed)="readingReportManagerService.isCollapsedUserKarkard = !readingReportManagerService.isCollapsedUserKarkard"
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard = !readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

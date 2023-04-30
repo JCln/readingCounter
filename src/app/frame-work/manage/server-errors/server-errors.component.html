@@ -1,5 +1,5 @@
 <form #form="ngForm" (ngSubmit)="connectToServer()" class="_card"
-    [@openClose]="manageServerService._isCollapsed ? 'slideUp' : 'slideDown'">
+    [@openClose]="manageServerService.utilsService.collapser.serverError ? 'slideUp' : 'slideDown'">
     <div class="input_2">
         <div class="_key">انتخاب نوع خطا</div>
         <div class="_value">
@@ -18,6 +18,6 @@
 <app-prime-table [dataSource]="closeTabService.saveDataForServerErrors" [_outputFileName]="'serverErrors'"
     [_numberOfExtraColumns]="[1]" [_checkUpName]="'serverErrors'" [_selectedColumnsToRemember]="'selectedServerErrors'"
     (clickedElmah)="linkToElmah($event)" (refreshedTable)="refreshTable()" [_hasCollapsible]=true
-    [_isCollaped]="manageServerService._isCollapsed"
-    (collapsed)="manageServerService._isCollapsed = !manageServerService._isCollapsed">
+    [_isCollaped]="manageServerService.utilsService.collapser.serverError"
+    (collapsed)="manageServerService.utilsService.collapser.serverError = !manageServerService.utilsService.collapser.serverError">
 </app-prime-table>

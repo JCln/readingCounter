@@ -1,8 +1,8 @@
-<app-collapsable [_isCollapsed]=toolsService._isCollapsedImageAttrDetails
-    (_clicked)="toolsService._isCollapsedImageAttrDetails = !toolsService._isCollapsedImageAttrDetails">
+<app-collapsable [_isCollapsed]=toolsService.utilsService.collapser._isCollapsedImageAttrDetails
+    (_clicked)="toolsService.utilsService.collapser._isCollapsedImageAttrDetails = !toolsService.utilsService.collapser._isCollapsedImageAttrDetails">
 </app-collapsable>
 
-<section [@openClose]="toolsService._isCollapsedImageAttrDetails ? 'slideUp' : 'slideDown'">
+<section [@openClose]="toolsService.utilsService.collapser._isCollapsedImageAttrDetails ? 'slideUp' : 'slideDown'">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="_card">
             <div class="input_2" [hidden]="!zoneDictionary.length">

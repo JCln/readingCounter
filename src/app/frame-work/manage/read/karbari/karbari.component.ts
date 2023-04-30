@@ -57,9 +57,9 @@ export class KarbariComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForKarbari = this.closeTabService.saveDataForKarbari.slice(0, index).concat(this.closeTabService.saveDataForKarbari.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.readManagerService.firstConfirmDialog();
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  استان: ' + rowData['dataSource'].provinceId);
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.KarbariRemove, rowData['dataSource']);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.KarbariRemove, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }

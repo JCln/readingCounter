@@ -32,20 +32,6 @@ import { MapService } from './map.service';
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
-  isCollapsedPrfm: boolean = false;
-  isCollapsedDH: boolean = false;
-  isCollapsedLocked: boolean = false;
-  isCollapsedPreNumberShown: boolean = false;
-  isCollapsedOffKarkard: boolean = false;
-  isCollapsedMaster: boolean = false;
-  isCollapsedDaily: boolean = false;
-  isCollapsedKarkard: boolean = false;
-  isCollapsedTrv: boolean = false;
-  isCollapsedImgAttrAnlz: boolean = false;
-  isCollapsedTrvCh: boolean = false;
-  isCollapsedDetails: boolean = false;
-  isCollapsedUserKarkard: boolean = false;
-  isCollapsedImageAttrFileResult: boolean = false;
   _isOrderByDate: boolean = false;
 
   masterReq: IReadingReportReq = {

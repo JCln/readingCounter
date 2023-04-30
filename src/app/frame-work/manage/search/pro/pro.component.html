@@ -1,4 +1,4 @@
-<form #form="ngForm" [@openClose]="searchService._searchProCollapse ? 'slideUp' : 'slideDown'"
+<form #form="ngForm" [@openClose]="searchService.utilsService.collapser._searchProCollapse ? 'slideUp' : 'slideDown'"
     (ngSubmit)="connectToServer()">
     <main class="main_content">
         <section class="_toselect">
@@ -156,6 +156,6 @@
     [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'search_acme'"
     [_selectedColumnsToRemember]="'selectedListManagerPro'" (refreshedTable)="connectToServer()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)" [_hasCollapsible]=true
-    [_isCollaped]="searchService._searchProCollapse"
-    (collapsed)="searchService._searchProCollapse = !searchService._searchProCollapse">
+    [_isCollaped]="searchService.utilsService.collapser._searchProCollapse"
+    (collapsed)="searchService.utilsService.collapser._searchProCollapse = !searchService.utilsService.collapser._searchProCollapse">
 </app-prime-table>

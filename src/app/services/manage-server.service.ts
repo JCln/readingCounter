@@ -17,11 +17,10 @@ import { UtilsService } from './utils.service';
 export class ManageServerService {
 
   serverErrors: IManageServerErrors[] = serverErrors;
-  _isCollapsed: boolean = false;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,    
+    public utilsService: UtilsService,
     private jwtService: JwtService
   ) { }
 

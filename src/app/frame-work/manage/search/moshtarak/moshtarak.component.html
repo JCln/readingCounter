@@ -1,4 +1,5 @@
-<main class="main" [@openClose]="searchService._searchMoshtarakCollapse ? 'slideUp' : 'slideDown'">
+<main class="main"
+    [@openClose]="searchService.utilsService.collapser._searchMoshtarakCollapse ? 'slideUp' : 'slideDown'">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="content">
 
@@ -45,6 +46,6 @@
     [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"
     (openedBriefKardexDialog)="openBriefKardexDialog($event)" [_hasCollapsible]=true
-    [_isCollaped]="searchService._searchMoshtarakCollapse"
-    (collapsed)="searchService._searchMoshtarakCollapse = !searchService._searchMoshtarakCollapse">
+    [_isCollaped]="searchService.utilsService.collapser._searchMoshtarakCollapse"
+    (collapsed)="searchService.utilsService.collapser._searchMoshtarakCollapse = !searchService.utilsService.collapser._searchMoshtarakCollapse">
 </app-prime-table>

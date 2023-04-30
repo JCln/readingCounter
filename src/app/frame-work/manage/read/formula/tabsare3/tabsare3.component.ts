@@ -78,9 +78,9 @@ export class Tabsare3Component extends FactoryONE {
     this.toConvert();
   }
   toConvert = () => {
-    this.closeTabService.saveDataForWaterFormula =
+    this.closeTabService.saveDataForTabsare3Formula =
       Converter.convertIdsToTitles(
-        this.closeTabService.saveDataForWaterFormula,
+        this.closeTabService.saveDataForTabsare3Formula,
         {
           zoneDictionary: this.zoneDictionary,
           karbariCodeDictionary: this.karbariCodeDictionary,
@@ -98,9 +98,9 @@ export class Tabsare3Component extends FactoryONE {
   }
 
   firstConfirmDialog = async (rowData: IAbBahaFormula) => {
-    const a = await this.formulasService.firstConfirmDialog();
+    const a = await this.formulasService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId + '،  کاربری مشترکین: ' + rowData['dataSource'].karbariMoshtarakinCode);
     if (a)
-      this.removeRow(rowData['dataSource'], rowData['ri']);
+      this.removeRow(rowData['dataSource'].id, rowData['ri']);
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };

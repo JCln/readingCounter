@@ -52,12 +52,11 @@ export class CounterStateComponent extends FactoryONE {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForCounterState = this.closeTabService.saveDataForCounterState.slice(0, index).concat(this.closeTabService.saveDataForCounterState.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.readManagerService.firstConfirmDialog();
-    if (a) {
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  ناحیه: ' + rowData['dataSource'].zoneId);
+    if (a) { 
       await this.readManagerService.deleteSingleRow(ENInterfaces.counterStateRemove, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
       this.refreshTable();

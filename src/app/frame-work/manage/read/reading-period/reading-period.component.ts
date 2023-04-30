@@ -73,9 +73,9 @@ export class ReadingPeriodComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForReadingPeriodManager = this.closeTabService.saveDataForReadingPeriodManager.slice(0, index).concat(this.closeTabService.saveDataForReadingPeriodManager.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.readManagerService.firstConfirmDialog();
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  نوع دوره: ' + rowData['dataSource'].readingPeriodKindId + '،  ناحیه: ' + rowData['dataSource'].zoneId);
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodRemove, rowData['dataSource']);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodRemove, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }

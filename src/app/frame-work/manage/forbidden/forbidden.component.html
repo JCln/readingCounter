@@ -1,6 +1,7 @@
 <main>
     <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="_card" [@openClose]="forbiddenService._isCollapsedForbidden ? 'slideUp' : 'slideDown'">
+        <section class="_card"
+            [@openClose]="forbiddenService.utilsService.collapser._isCollapsedForbidden ? 'slideUp' : 'slideDown'">
 
             <div class="input_2">
                 <div class="_key">ناحیه</div>
@@ -38,7 +39,7 @@
 <app-prime-table *ngIf="closeTabService.saveDataForFNB" [dataSource]="closeTabService.saveDataForFNB"
     [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]"
     [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
-    [_isCollaped]="forbiddenService._isCollapsedForbidden"
-    (collapsed)="forbiddenService._isCollapsedForbidden = !forbiddenService._isCollapsedForbidden"
+    [_isCollaped]="forbiddenService.utilsService.collapser._isCollapsedForbidden"
+    (collapsed)="forbiddenService.utilsService.collapser._isCollapsedForbidden = !forbiddenService.utilsService.collapser._isCollapsedForbidden"
     (refreshedTable)="refreshTable()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
 </app-prime-table>

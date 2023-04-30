@@ -2,7 +2,7 @@
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="_card"
-                [@openClose]="readingReportManagerService.isCollapsedMaster ? 'slideUp' : 'slideDown'">
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedMaster ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -71,8 +71,9 @@
     <app-prime-table *ngIf="canShowTable" [dataSource]="closeTabService.saveDataForRRMaster"
         [_outputFileName]="'master'" [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true
         [_hasCollapsible]=true [_isCustomSort]=true [_hasAggregating]=true [_checkUpName]="'Kartables'"
-        (customedSort)="customSort($event)" [_isCollaped]="readingReportManagerService.isCollapsedMaster"
-        (collapsed)="readingReportManagerService.isCollapsedMaster = !readingReportManagerService.isCollapsedMaster"
+        (customedSort)="customSort($event)"
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedMaster"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedMaster = !readingReportManagerService.utilsService.collapser.isCollapsedMaster"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

@@ -6,6 +6,7 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
 import { CompositeService } from './composite.service';
 import { Location } from '@angular/common';
+import { Collapser } from '../classes/collapser';
 
 export interface IDialogMessage {
   messageTitle: string,
@@ -29,7 +30,8 @@ export class UtilsService {
     public envService: EnvService,
     public dialog: MatDialog,
     private _location: Location,
-    public snackWrapperService: SnackWrapperService
+    public snackWrapperService: SnackWrapperService,
+    public collapser: Collapser
   ) { }
 
   getSimafaImportStatus = (): ISimafaImportStatus => {

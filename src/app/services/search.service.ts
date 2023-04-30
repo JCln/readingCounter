@@ -28,9 +28,7 @@ import { ProfileService } from './profile.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService {
-  _searchProCollapse: boolean = false;
-  _searchMoshtarakCollapse: boolean = false;
+export class SearchService {  
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
   _years: ITitleValue[] = [];

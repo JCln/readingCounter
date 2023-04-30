@@ -58,9 +58,9 @@ export class ProvinceComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForProvince = this.closeTabService.saveDataForProvince.slice(0, index).concat(this.closeTabService.saveDataForProvince.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.sectorsManagerService.firstConfirmDialog();
+    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ProvinceREMOVE, rowData['dataSource']);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ProvinceREMOVE, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }

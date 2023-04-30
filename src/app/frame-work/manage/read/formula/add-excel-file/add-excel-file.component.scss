@@ -8,16 +8,12 @@
 }
 
 .content {
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  text-align: center;
-  padding: var(--font_xs) 0;
-  justify-content: space-around;
-  border-radius: $border_15;
   min-height: 20rem;
   width: 20rem;
   margin: auto;
-  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+  padding: var(--font_xs) 0;
+  text-align: center;
+  border-radius: $border_10;
 }
 
 ._desc {

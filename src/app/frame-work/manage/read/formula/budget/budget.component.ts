@@ -98,9 +98,9 @@ export class BudgetComponent extends FactoryONE {
   }
 
   firstConfirmDialog = async (rowData: IAbBahaFormula) => {
-    const a = await this.formulasService.firstConfirmDialog();
+    const a = await this.formulasService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId + '،  کاربری مشترکین: ' + rowData['dataSource'].karbariMoshtarakinCode);
     if (a)
-      this.removeRow(rowData['dataSource'], rowData['ri']);
+      this.removeRow(rowData['dataSource'].id, rowData['ri']);
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };

@@ -68,9 +68,10 @@ export class ImageAttributionComponent extends FactoryONE {
 
     if (!this.readManagerService.verificationImageAttribution(dataSource['dataSource']))
       return;
-    const confirmed = await this.readManagerService.firstConfirmDialog();
+    const text = 'عنوان: ' + dataSource['dataSource'].title;
+    const confirmed = await this.readManagerService.firstConfirmDialog(text);
     if (!confirmed) return;
-    console.log(dataSource['dataSource']);
+
     const a = await this.readManagerService.deleteSingleRowByObject(ENInterfaces.imageAttributionRemove, dataSource['dataSource']);
 
     if (a) {

@@ -42,7 +42,7 @@ export class FinishedComponent extends FactoryONE {
   backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {
     const config = {
       messageTitle: EN_messages.reason_toOffloaded,
-      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '   مامور: ' + rowDataAndIndex.counterReaderName,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '،   مامور: ' + rowDataAndIndex.counterReaderName,
       minWidth: '19rem',
       isInput: true,
       isDelete: false,

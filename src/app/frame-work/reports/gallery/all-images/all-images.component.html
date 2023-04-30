@@ -1,8 +1,8 @@
-<app-collapsable [_isCollapsed]=toolsService._isCollapsedAllImgs
-    (_clicked)=" toolsService._isCollapsedAllImgs = !toolsService._isCollapsedAllImgs">
+<app-collapsable [_isCollapsed]=toolsService.utilsService.collapser._isCollapsedAllImgs
+    (_clicked)=" toolsService.utilsService.collapser._isCollapsedAllImgs = !toolsService.utilsService.collapser._isCollapsedAllImgs">
 </app-collapsable>
 <form #form="ngForm" class="_card" (ngSubmit)="connectToServer()"
-    [@openClose]="toolsService._isCollapsedAllImgs ? 'slideUp' : 'slideDown'">
+    [@openClose]="toolsService.utilsService.collapser._isCollapsedAllImgs ? 'slideUp' : 'slideDown'">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
         <input class="_value" type="number" name="trackNumber" [(ngModel)]="toolsService.trackNumberAllImages">

@@ -38,7 +38,6 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ImportDynamicService {
-  _assessPreCollapse: boolean = false;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   importDynamicValue: IImportDynamicDefault;
   ENImportDatas = ENImportDatas;

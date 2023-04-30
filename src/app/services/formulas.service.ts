@@ -234,10 +234,11 @@ export class FormulasService {
       return false;
     return true;
   }
-  firstConfirmDialog = (): Promise<any> => {
+  firstConfirmDialog = (text: string): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
+      text: text,
       isInput: false,
       isDelete: true,
       icon: 'pi pi-trash'

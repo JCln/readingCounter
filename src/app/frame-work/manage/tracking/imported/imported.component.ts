@@ -65,7 +65,7 @@ export class ImportedComponent extends FactoryONE {
   firstConfirmDialog = async (rowDataAndIndex: object) => {
     const config = {
       messageTitle: EN_messages.reason_deleteRoute,
-      text: 'ش پیگیری: ' + rowDataAndIndex['dataSource'].trackNumber + '   مامور: ' + rowDataAndIndex['dataSource'].counterReaderName,
+      text: 'ش پیگیری: ' + rowDataAndIndex['dataSource'].trackNumber + '،   مامور: ' + rowDataAndIndex['dataSource'].counterReaderName,
       minWidth: '19rem',
       isInput: true,
       isDelete: true,
