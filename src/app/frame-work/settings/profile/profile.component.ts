@@ -24,7 +24,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
-    { label: 'کوچکتر', value: ENFontStyle.fontXXS },
+    { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
     { label: 'متوسط', value: ENFontStyle.fontSM },
     { label: 'بزرگ', value: ENFontStyle.fontS }

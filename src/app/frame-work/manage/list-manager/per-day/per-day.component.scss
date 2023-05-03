@@ -14,11 +14,10 @@
 
 ._desc {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
-  padding: var(--font_05);
   border-radius: $border_15;
 }
 
@@ -56,9 +55,8 @@
   margin-bottom: var(--font_xs);
   background: var(--secondary_1);
   place-content: center;
-  padding: var(--font_xs) 0;
+  padding: var(--font_05) 0;
   border-radius: $border_15;
-
   box-shadow: 0px 2px 6px 2px var(--secondary_7);
 }
 

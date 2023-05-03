@@ -349,6 +349,7 @@ export class TrackingManagerService {
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
+    this.allListsService.allLists_pageSign.zoneId = row.zoneId;
     this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToOffloadModify = (dataSource: ITracking) => {

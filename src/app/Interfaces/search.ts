@@ -25,6 +25,7 @@ export interface ISearchSimpleOutput {
     listNumber: string,
     insertDateJalali: string,
     zoneId: number,
+    zoneTitle: string,
     isBazdid: boolean,
     isRoosta: boolean,
     fromEshterak: string,

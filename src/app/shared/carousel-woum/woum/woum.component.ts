@@ -1,3 +1,4 @@
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
@@ -13,6 +14,7 @@ import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-woum',
@@ -21,7 +23,7 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 })
 export class WoumComponent implements OnChanges {
 
-  @Input() zoneId?: string = null;
+  @Input() zoneId?: any;
   @Input() preDate?: string;
   @Input() description?: string;
   @Input() preNumber?: number;
@@ -36,6 +38,9 @@ export class WoumComponent implements OnChanges {
   @Input() _isNotForbidden: boolean;
   // from trv & details , ..
   @Input() fulName?: string;
+  // from forbidden
+  @Input() displayName?: string;
+
 
   offloadModifyReq: IOffloadModifyReq = {
     id: '',
@@ -92,6 +97,7 @@ export class WoumComponent implements OnChanges {
     private dialogService: DialogService,
     private jwtService: JwtService,
     private envService: EnvService,
+    private dictionaryWrapperService: DictionaryWrapperService,
     public profileService: ProfileService
   ) { }
 
@@ -109,6 +115,15 @@ export class WoumComponent implements OnChanges {
 
     if (this.zoneId) {
       this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
+    }
+
+    if (!MathS.isNaN(this.zoneId)) {
+      this.zoneDictionary = await this.dictionaryWrapperService.getZoneDictionary();
+      this.zoneDictionary.find(dictionary => {
+        if (dictionary.id == this.zoneId) {
+          return this.zoneId = dictionary.title
+        }
+      });
     }
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();

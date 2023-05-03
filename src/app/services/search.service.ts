@@ -28,7 +28,7 @@ import { ProfileService } from './profile.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService {  
+export class SearchService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
   _years: ITitleValue[] = [];
@@ -319,7 +319,8 @@ export class SearchService {
   routeToLMAll = (row: ISearchSimpleOutput) => {
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.GUid = row.trackingId;
-    this.allListsService.allLists_pageSign.zoneTitle = row.zoneId.toString();
+    this.allListsService.allLists_pageSign.zoneId = row.zoneId;
+    this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.utilsService.routeToByParams(EN_Routes.wrmlall, false);
   }

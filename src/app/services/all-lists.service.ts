@@ -17,7 +17,8 @@ export class AllListsService {
     GUid: null,
     listNumber: null,
     trackNumber: null,
-    zoneTitle: ''
+    zoneTitle: '',
+    zoneId: null
   };
   modifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,

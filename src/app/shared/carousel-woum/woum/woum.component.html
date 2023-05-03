@@ -8,6 +8,14 @@
             <div class="_key">نام و نام خانوادگی</div>
             <input [readOnly]="true" class="_value" name="names" [(ngModel)]="fulName">
         </div>
+        <div class="input_2 double_size" *ngIf="displayName">
+            <div class="_key">مامور</div>
+            <input [readOnly]="true" class="_value" name="displayName" [(ngModel)]="displayName">
+        </div>
+        <div class="input_2" *ngIf="zoneId">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zoneId" [(ngModel)]="zoneId">
+        </div>
         <div class="input_2" *ngIf="eshterak">
             <div class="_key">اشتراک</div>
             <input [readOnly]="true" class="_value" name="eshterak" [(ngModel)]="eshterak">
@@ -23,6 +31,10 @@
         <div class="input_2" *ngIf="counterStateId">
             <div class="_key">وضعیت فعلی</div>
             <input [readOnly]="true" class="_value" name="counterStateId" [(ngModel)]="counterStateId">
+        </div>
+        <div class="input_2 double_size" *ngIf="description">
+            <div class="_key">توضیحات</div>
+            <input [readOnly]="true" class="_value" name="description" [(ngModel)]="description">
         </div>
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>

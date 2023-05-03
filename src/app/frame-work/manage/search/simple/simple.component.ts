@@ -72,4 +72,10 @@ export class SimpleComponent implements OnInit, OnDestroy {
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this._selectedKindId);
   }
+  routeToLMAll = ($event: any) => {
+    const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);
+    $event.zoneTitle = $event.zoneId;
+    $event.zoneId = tempZoneId.id;
+    this.searchService.routeToLMAll($event);
+  }
 }

@@ -220,7 +220,9 @@ export class CloseTabService {
   // list manager
   saveDataForLMPD: IOffLoadPerDay;
   saveDataForLMPDTrackNumber: number;
-  saveDataForLMAllReq: any;
+  saveDataForLMAllReq = {
+    GUID: ''
+  };
   saveDataForLMAll: IOnOffLoadFlat[];
   saveDataForLMModifyReq: any;
   saveDataForLMModify: IOnOffLoadFlat[];

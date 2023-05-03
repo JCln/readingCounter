@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -35,9 +34,8 @@ export class AllComponent extends AllListsFactory {
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    this.closeTabService.saveDataForLMAllReq.zoneId = parseInt(this.closeTabService.saveDataForLMAll[0].zoneId.toString());
-    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.closeTabService.saveDataForLMAllReq.zoneId);
-    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForLMAllReq.zoneId);
+    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.allLists_pageSign.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.allListsService.allLists_pageSign.zoneId);
 
     this.closeTabService.saveDataForLMAll =
       Converter.convertIdsToTitles(
@@ -48,7 +46,7 @@ export class AllComponent extends AllListsFactory {
           counterStateDictionary: this.counterStateDictionary,
           counterStateByCodeDictionary: this.counterStateByCodeDictionary,
           karbariDictionaryCode: this.karbariDictionaryCode,
-          qotrDictionary: this.qotrDictionary,
+          qotrDictionary: this.qotrDictionary
         },
         {
           hazf: 'hazf',
@@ -70,12 +68,12 @@ export class AllComponent extends AllListsFactory {
     else {
       if (canRefresh) {
         this.closeTabService.saveDataForLMAll = null;
-        this.closeTabService.saveDataForLMAllReq = null;
+        this.closeTabService.saveDataForLMAllReq.GUID = null;
       }
 
-      if (!this.closeTabService.saveDataForLMAll || this.closeTabService.saveDataForLMAllReq != this.allListsService.allLists_pageSign.GUid) {
+      if (!this.closeTabService.saveDataForLMAll || this.closeTabService.saveDataForLMAllReq.GUID != this.allListsService.allLists_pageSign.GUid) {
         this.closeTabService.saveDataForLMAll = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
-        this.closeTabService.saveDataForLMAllReq = this.allListsService.allLists_pageSign.GUid;
+        this.closeTabService.saveDataForLMAllReq.GUID = this.allListsService.allLists_pageSign.GUid;
       }
       // setDynamics should implement before new instance of dataSource create
       // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);

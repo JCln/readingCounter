@@ -20,8 +20,6 @@ export class ListSearchMoshWoumComponent implements OnInit {
 
   classWrapper = async () => {
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-    console.log(this.config.data);
-
     this.dataSource = this.config.data._data;
     this._isNotForbidden = this.config.data._isNotForbidden;
 
