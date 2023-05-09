@@ -301,6 +301,7 @@ export enum ENInterfaces {
     /* NON MANAGER INTERFACES */
     getPolicies = 'V1/Policy/Active',
     editPolicies = 'V1/Policy/Edit',
+    ipRateManager = 'V1/Ip/SpecialRules',
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
@@ -308,6 +309,8 @@ export enum ENInterfaces {
     postWaterMarkConfig = 'V1/WaterMark/AddOrEdit',
     chat = 'V1/Chat/Index?accessToken=',
     settingsLicense = 'V1/ApiSettings/License',
+    settingsExtendTime = 'V1/ApiSettings/ExtendTime',
+    settingsExpireLicense = 'V1/ApiSettings/ExtendTime',
 
     postImportData = 'V1/Import/Dynamic',
     postImportErrorsByTrackNumber = 'V1/Import/ImportErrorsByTrackNumber',

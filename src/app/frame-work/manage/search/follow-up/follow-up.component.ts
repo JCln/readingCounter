@@ -78,6 +78,7 @@ export class FollowUpComponent extends FactoryONE {
 
       this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
+
       this.makeConfigs();
 
     }
@@ -100,6 +101,7 @@ export class FollowUpComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForFollowUp) {
       this.dataSourceAUX = this.closeTabService.saveDataForFollowUpAUX;
+      console.log(this.closeTabService.saveDataForFollowUpAUX);
       this.makeConfigs();
       return;
     }
@@ -139,6 +141,8 @@ export class FollowUpComponent extends FactoryONE {
     row.listNumber = this.dataSourceAUX.listNumber;
     row.trackNumber = this.dataSourceAUX.trackNumber;
     row.zoneTitle = this.closeTabService.saveDataForFollowUp.zoneTitle;
+    row.zoneId = this.closeTabService.saveDataForFollowUp.zoneId;
+    console.log(row);
 
     this.trackingManagerService.routeToLMAll(row);
   }

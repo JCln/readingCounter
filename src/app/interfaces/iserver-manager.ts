@@ -66,3 +66,16 @@ export interface IServerOSInfo {
     isOs64: boolean,
     systemDateTime: string,
 }
+export interface IIpRule {
+    endpoint: string,
+    period: string,
+    periodTimespan: number,
+    limit: number,
+    quotaExceededResponse: number,
+    ip?: string,
+    monitorMode: boolean,
+}
+export interface IIpRules {
+    ip: string,
+    rules: IIpRule
+}

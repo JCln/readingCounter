@@ -1,6 +1,7 @@
 export interface IFollowUp {
     trackNumber: number,
     listNumber: string,
+    zoneId: number,
     zoneTitle: string,
     isBazdid: boolean,
     isRoosta: boolean,
@@ -38,6 +39,7 @@ export interface IFollowUpHistory {
     trackStatusTitle: string,
     hasDetails: boolean,
     zoneTitle?: string,
+    zoneId?: number,
     listNumber?: string,
     trackNumber?: number,
 }

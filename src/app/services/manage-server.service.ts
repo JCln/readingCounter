@@ -7,7 +7,6 @@ import { IManageServerErrors } from 'interfaces/iserver-manager';
 import { JwtService } from '../auth/jwt.service';
 import { MathS } from '../classes/math-s';
 import { serverErrors, serverTasts } from './DI/manageServer';
-import { EnvService } from './env.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
@@ -100,6 +99,21 @@ export class ManageServerService {
   }
   verificationRequestLogInput = (body: object): boolean => {
     return this.datesValidation(body);
+  }
+  validationAddIpRules = (body: any): boolean => {
+    if (MathS.isNull(body.ip)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_IP);
+      return false;
+    }
+    if (MathS.isNull(body.period)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_Period);
+      return false;
+    }
+    if (MathS.isNull(body.limit)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_limit);
+      return false;
+    }
+    return true;
   }
 
 }

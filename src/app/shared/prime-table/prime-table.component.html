@@ -30,7 +30,7 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport'"
+                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport'"
                     (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
@@ -255,7 +255,7 @@
             <td class="__columns" *ngIf="_outputFileName =='ModifyList' || _outputFileName =='searchMosh'"
                 (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">خلاصه کاردکس</span>
-                <i class="tooltip p_icons pi pi-list">
+                <i class="tooltip p_icons pi pi-folder">
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
@@ -394,7 +394,7 @@
                 </i>
             </td>
             <td class="__columns"
-                *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport' ||_checkUpName == 'dynamicReport'"
+                *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' ||_checkUpName == 'dynamicReport'"
                 class="edit_button" (click)="openEditDialog(dataSource)">
                 <span class="ui-column-title">ویرایش</span>
                 <i class="tooltip _edit pi pi-pencil">
@@ -408,7 +408,7 @@
                 </i>
             </td>
             <td class="__columns"
-                *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'excelDynamic' || _checkUpName == 'apk'"
+                *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'excelDynamic' || _checkUpName == 'apk'"
                 class="edit_button" (click)="removeRow(dataSource , ri)">
                 <span class="ui-column-title">حذف مورد</span>
                 <i class="tooltip p_icons fa fa-trash-o">

@@ -44,7 +44,7 @@ import {
   IUserKarkard,
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
-import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
+import { IIpRules, IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
 import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
@@ -283,6 +283,8 @@ export class CloseTabService {
   }
   saveDataForMsDriveInfo: IManageDrivesInfo[];
   saveDataForServerErrors: IManageServerErrorsRes[];
+  saveDataForIpSpecialRules: any;
+  // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
@@ -401,7 +403,8 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
-    { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
+    { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
+    { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
     { id: 2, value: ENEssentialsToSave.saveDataForMsDriveInfo, url: EN_Routes.driveInfo },

@@ -54,12 +54,12 @@ export class PrivacyComponent extends FactoryONE {
   }
   plusOrMinus = (value: number) => {
     if (value > this.privacyOptions.maxLength) {
-      this.openSnackBar('حداکثر تعداد 16 می‌باشد', 2000);
+      this.openSnackBar('حداکثر تعداد 16 می‌باشد', ENSnackBarTimes.threeMili);
       return;
     }
 
     if (value < this.privacyOptions.minLength) {
-      this.openSnackBar('حداقل تعداد 4 می‌باشد', 2000);
+      this.openSnackBar('حداقل تعداد 4 می‌باشد', ENSnackBarTimes.threeMili);
       return;
     }
     this.closeTabService.saveDataForPolicies.minPasswordLength = value;

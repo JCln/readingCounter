@@ -43,6 +43,15 @@ export class ColumnManager {
         { field: 'statusCode', header: 'کد', isSelected: true },
         { field: 'username', header: 'نام کاربری', isSelected: true },
     ]
+    ipSpecialRules: IObjectIteratation[] = [
+        { field: 'ip', header: 'ip', isSelected: true },
+        { field: 'endpoint', header: 'endpoint', isSelected: true },
+        { field: 'period', header: 'period', isSelected: true },
+        { field: 'periodTimespan', header: 'periodTimespan', isSelected: true, isNumber: true, ltr: true },
+        { field: 'limit', header: 'limit', isSelected: true, isNumber: true, ltr: true },
+        { field: 'quotaExceededResponse', header: 'quotaExceededResponse', isSelected: true, isNumber: true, ltr: true },
+        { field: 'monitorMode', header: 'monitorMode', isSelected: true, isBoolean: true },
+    ]
     momentLs: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: false },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true },

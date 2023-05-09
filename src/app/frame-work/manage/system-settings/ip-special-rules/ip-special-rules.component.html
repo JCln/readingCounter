@@ -1,15 +1,15 @@
 <app-prime-table     
-    [dataSource]="closeTabService.saveDataForReadingConfig"
+    [dataSource]="closeTabService.saveDataForIpSpecialRules"
     [_outputEnabled]=false
     [_hasSaveColumns]=true
-    [_checkUpName]="'readingConfig'"
-    [_outputFileName]="'readingConfigDefault'"
+    [_checkUpName]="'ipspecialrules'"
+    [_outputFileName]="'ipSpecialRules'"
     [_numberOfExtraColumns]="[1, 2]"
-    [_selectedColumnsToRemember]="'selectedReadingConfigDefault'"    
+    [_selectedColumnsToRemember]="'selectedIpspecialrules'"    
     (refreshedTable)="refreshTable()"    
     (openedAddDialog)="openAddDialog()"    
     (refreshedTable)="refreshTable()"
-    (removedRow)="removeRow($event)"
     (openedEditDialog)="openEditDialog($event)"
- > 
+    > 
 </app-prime-table>
+<!-- (removedRow)="removeRow($event)" -->

@@ -36,7 +36,6 @@ export class AllComponent extends AllListsFactory {
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.allLists_pageSign.zoneId);
     this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.allListsService.allLists_pageSign.zoneId);
-
     this.closeTabService.saveDataForLMAll =
       Converter.convertIdsToTitles(
         this.closeTabService.saveDataForLMAll,
