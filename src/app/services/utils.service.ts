@@ -14,6 +14,8 @@ export interface IDialogMessage {
   text?: string,
   minWidth: string,
   isInput: boolean,
+  inputMinLength?: number,
+  placeHolder?: string,
   isDelete: boolean,
   icon: string,
   doesNotReturnButton?: boolean,
@@ -40,6 +42,10 @@ export class UtilsService {
   getDenyTracking = (): boolean => {
     const jwtRole = this.compositeService.getAuthUser();
     return jwtRole.roles.toString().includes('denytracking') ? true : false;
+  }
+  getIsAdminRole = (): boolean => {
+    const jwtRole = this.compositeService.getAuthUser();
+    return jwtRole.roles.toString().includes('admin') ? true : false;
   }
   getYears = (): ITitleValue[] => {
     return this.envService.years;
@@ -93,6 +99,8 @@ export class UtilsService {
     this.snackWrapperService.openSnackBar(message, time, color);
   }
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
+    console.log(config);
+    
     config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -102,6 +110,8 @@ export class UtilsService {
           messageTitleTwo: config.messageTitleTwo,
           text: config.text,
           isInput: config.isInput,
+          inputMinLength: config.inputMinLength,
+          placeHolder: config.placeHolder,
           isDelete: config.isDelete,
           icon: config.icon,
           doesNotReturnButton: config.doesNotReturnButton,

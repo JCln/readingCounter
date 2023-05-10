@@ -166,6 +166,11 @@ export enum EN_messages {
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
+    confirmResetIIS = 'از ریست IIS اطمینان دارید',
+    confirmResetApp = 'از ریست APP اطمینان دارید',
+    confirmServerDelete = 'از حذف خطاها اطمینان دارید',
+    confirmExtendLicenseTime = 'از افزایش زمان اطمینان دارید',
+    confirmExpireLicense = 'از پایان زمان اطمینان دارید',
 
     confirm_userGroupChange_1 = 'تا زمان ورود مجدد، کاربران گروه',
     confirm_userGroupChange_2 = 'امکان ادامه فعالیت را نخواهند داشت. آیا از ویرایش اطمینان دارید؟',
@@ -185,6 +190,7 @@ export enum EN_messages {
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
     reason_forceOffload = 'علت اتمام قرائت(تخلیه اضطراری)',
     reason_deleteRoute = 'علت حذف مسیر',
+    insert_Key = 'کلید را وارد نمایید',
     reason_backToPrev = 'علت بازگشت به مرحله قبلی',
     toReading = 'علت بازگشت به درحال قرائت',
     reason_toOffloaded = 'علت بازگشت به بارگذاری شده',

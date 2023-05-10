@@ -1,13 +1,16 @@
+import { EN_messages } from 'interfaces/enums.enum';
 import { ENClientServerErrors, ENManageServers, IManageServer, IManageServerErrors } from 'interfaces/iserver-manager';
 
 export const serverTasts: IManageServer[] = [
 
-    { name: 'ریست IIS', icon: 'fa fa-repeat', background: '#F68038', color: '', },
-    { name: 'ریست اپلیکیشن', clickFunction: ENManageServers.resetApp, icon: 'fa fa-desktop', background: '#969696', color: '', },
-    { name: 'حذف خطاها', clickFunction: ENManageServers.serverDelete, icon: 'fa fa-eraser', background: '#006c75', color: '', },
-    { name: 'آفلاین کردن اًپ', icon: 'fa fa-stop-circle', background: '#0057a2', color: '', },
-    { name: 'Jobs', clickFunction: ENManageServers.linkToHangfire, icon: 'pi pi-clock', background: '#4b8c38', color: '', },
-    { name: 'Health', clickFunction: ENManageServers.linkToHealthCheck, icon: 'fas fa-hand-holding-heart', background: '#582940', color: '', }
+    { name: 'ریست IIS', clickFunction: ENManageServers.resetIIS, icon: 'fa fa-repeat', background: '#F68038', color: '', description: EN_messages.confirmResetIIS },
+    { name: 'ریست اپلیکیشن', clickFunction: ENManageServers.resetApp, icon: 'fa fa-desktop', background: '#969696', color: '', description: EN_messages.confirmResetApp },
+    { name: 'حذف خطاها', clickFunction: ENManageServers.serverDelete, icon: 'fa fa-eraser', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
+    { name: 'آفلاین کردن اًپ', clickFunction: ENManageServers.offlineTheAPP, icon: 'fa fa-stop-circle', background: '#0057a2', color: '' },
+    { name: 'Health', clickFunction: ENManageServers.linkToHealthCheck, icon: 'fas fa-hand-holding-heart', background: '#582940', color: '' },
+    { name: 'Jobs', clickFunction: ENManageServers.linkToHangfire, icon: 'fa fa-tasks', background: '#4b8c38', color: '' },
+    { name: 'افزایش زمان', clickFunction: ENManageServers.extendLicenseTime, icon: 'fa fa-clock-rotate-left', background: '#3c79f5', color: '', description: EN_messages.confirmExtendLicenseTime },
+    { name: 'پایان زمان', clickFunction: ENManageServers.expireLicense, icon: 'pi pi-stopwatch', background: '#f63e38', color: '', description: EN_messages.confirmExpireLicense },
 ]
 export const serverErrors: IManageServerErrors[] = [
     { name: 'خطای 400', errorType: ENClientServerErrors.cs400 },

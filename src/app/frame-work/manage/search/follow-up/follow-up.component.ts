@@ -7,7 +7,6 @@ import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { FollowUpService } from 'services/follow-up.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
@@ -43,7 +42,6 @@ export class FollowUpComponent extends FactoryONE {
   constructor(
     public trackingManagerService: TrackingManagerService,
     public closeTabService: CloseTabService,
-    private authService: AuthService,
     private followUpService: FollowUpService
   ) {
     super();
@@ -113,8 +111,7 @@ export class FollowUpComponent extends FactoryONE {
     // this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   getUserRole = (): void => {
-    const jwtRole = this.authService.getAuthUser();
-    this.shouldActive = jwtRole.roles.toString().includes('admin') ? true : false;
+    this.shouldActive = this.trackingManagerService.utilsService.getIsAdminRole();
   }
   clearUNUsables = () => {
     if (!this.shouldActive) {

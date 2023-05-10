@@ -65,22 +65,10 @@ export class AuthService {
       this.compositeService.routeTo(EN_Routes.wr);
   }
   isAuthUserLoggedIn(): boolean {
-    return (this.jwtService.hasStoredAccessAndRefreshTokens() &&
-      !this.jwtService.isAccessTokenTokenExpired());
+    return this.compositeService.isAuthUserLoggedIn();
   }
   getAuthUser(): IAuthUser | null {
-    if (!this.isAuthUserLoggedIn()) {
-      return null;
-    }
-
-    const decodedToken = this.jwtService.getDecodedAccessToken();
-    const roles = this.jwtService.getDecodedTokenRoles();
-    return Object.freeze({
-      userId: decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
-      userName: decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-      displayName: decodedToken["DisplayName"],
-      roles: roles
-    });
+    return this.compositeService.getAuthUser();
   }
 
 }

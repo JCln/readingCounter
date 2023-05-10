@@ -1,6 +1,6 @@
 <main class="_container">
     <div class="_icon">
-        <i [ngClass]="data.icon"></i>
+        <i [class]="data.icon" [ngClass]="{'_delete_color': data?.isDelete }"></i>
     </div>
     <h2>
         {{data.messageTitle}}
@@ -12,8 +12,8 @@
         {{data.text}}
     </p>
     <div class="input_box">
-        <input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
-            [(ngModel)]="userInputText">
+        <input *ngIf="data.isInput" class="input_1" type="text"
+            [placeholder]="data?.placeHolder ? data.placeHolder: 'توضیحات را وارد نمایید'" [(ngModel)]="userInputText">
     </div>
     <div *ngIf="data?.isSelectableDate">
         <div class="date_wrapper">

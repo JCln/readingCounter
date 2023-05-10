@@ -17,7 +17,7 @@ export class ApkService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    public utilsService: UtilsService
   ) { }
 
   getDataSource = (): any => {

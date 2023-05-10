@@ -24,7 +24,7 @@ export class ConfirmTextDialogComponent {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_desc);
       return;
     }
-    if (!MathS.isLowerThanMinLength(this.userInputText, 6)) {
+    if (!MathS.isLowerThanMinLength(this.userInputText, this.data.inputMinLength || 6)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalidCounts);
       return;
     }

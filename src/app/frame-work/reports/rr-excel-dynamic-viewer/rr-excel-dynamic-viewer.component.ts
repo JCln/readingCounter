@@ -4,7 +4,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -20,8 +19,7 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public readingReportManagerService: ReadingReportManagerService,
-    private outputManagerService: OutputManagerService,
-    private authService: AuthService
+    private outputManagerService: OutputManagerService
   ) {
     super();
   }
@@ -49,12 +47,8 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
       this.outputManagerService.downloadFile(res, '.xlsx');
     }
   }
-  getUserRole = (): boolean => {
-    const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.toString().includes('admin') ? true : false;
-  }
   removeRow = async (id: number) => {
-    if (this.getUserRole()) {
+    if (this.readingReportManagerService.utilsService.getIsAdminRole()) {
 
       if (await this.readingReportManagerService.firstConfirmDialogRemove()) {
         const a = await this.readingReportManagerService.postById(ENInterfaces.removeToolsDynamicExcel, id['dataSource'].id);

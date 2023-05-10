@@ -40,6 +40,13 @@ export class ManageServerService {
       })
     });
   }
+  GETQueryDataSource = (method: ENInterfaces, url: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(method, url).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   postBody = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {

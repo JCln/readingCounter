@@ -309,8 +309,8 @@ export enum ENInterfaces {
     postWaterMarkConfig = 'V1/WaterMark/AddOrEdit',
     chat = 'V1/Chat/Index?accessToken=',
     settingsLicense = 'V1/ApiSettings/License',
-    settingsExtendTime = 'V1/ApiSettings/ExtendTime',
-    settingsExpireLicense = 'V1/ApiSettings/ExtendTime',
+    settingsExtendTime = 'V1/ApiSettings/ExtendTime?key=',
+    settingsExpireLicense = 'V1/ApiSettings/ExpireLicense?key=',
 
     postImportData = 'V1/Import/Dynamic',
     postImportErrorsByTrackNumber = 'V1/Import/ImportErrorsByTrackNumber',
