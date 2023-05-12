@@ -1,12 +1,12 @@
 <app-prime-table-editable     
-    [dataSource]="closeTabService.saveDataForImageAttribution" 
+    [dataSource]="closeTabService.saveDataForDynamicTraverse" 
     [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
-    [_numberOfExtraColumns]="[1, 2]"
+    [_selectedColumns]="selectedColumns"    
     [_isInRowEditing]=true
-    [_checkUpName]="'imgattr'"    
-    [_sessionName]="'imgattr-session'"
-    [_selectedColumnsToRemember]="'selectedImageAttribution'"
+    [_checkUpName]="'dynamicTraverse'"    
+    [_numberOfExtraColumns]="[1,2]"
+    [_sessionName]="'dynamictrv-session'"
+    [_selectedColumnsToRemember]="'selectedDynamicTraverse'"
     [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
     (refreshedTable)="refreshTable()"

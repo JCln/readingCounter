@@ -101,6 +101,8 @@ export enum EN_Routes {
     'wrmtrackwoui' = '/wr/m/track/woui',
     'wr;trackNumber=' = '/wr;trackNumber=',
     'wrmms' = '/wr/m/system/ms',
+    'guild' = '/wr/m/r/guild',
+    'dynamicTraverse' = '/wr/m/r/dynamicTrv',
     'wrmmserr' = '/wr/m/system/mserr',
     'serverOSInfo' = '/wr/m/system/osInfo',
     'serverIPSpecialRules' = '/wr/m/system/IpRules',

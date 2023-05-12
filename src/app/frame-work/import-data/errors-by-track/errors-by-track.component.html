@@ -12,7 +12,9 @@
 </form>
 
 <app-prime-table [dataSource]="closeTabService.saveDataForImportErrorsByTrackNumber"
-    [_outputFileName]="'errorsByTrackNumber'" [_selectedColumnsToRemember]="'selectedErrorsByTrackNumber'"
+    [_outputFileName]="'errorsByTrackNumber'" 
+    [_sessionName]="'errbytracknumber'"
+     [_selectedColumnsToRemember]="'selectedErrorsByTrackNumber'"
     (refreshedTable)="refreshTable()" [_hasCollapsible]=true
     [_isCollaped]="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed"
     (collapsed)="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed = !closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed">

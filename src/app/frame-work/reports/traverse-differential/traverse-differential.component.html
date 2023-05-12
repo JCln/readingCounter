@@ -105,7 +105,7 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRTraverseDifferential" [_outputFileName]="'trvDiff'"
-        [_checkUpName]="'rr-traverseDiff'" [_numberOfExtraColumns]="[1]"
+        [_checkUpName]="'rr-traverseDiff'" [_numberOfExtraColumns]="[1]" [_sessionName]="'trvDiff-session'"
         [_selectedColumnsToRemember]="'selectedRRTraverseDifferential'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedTrvCh"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedTrvCh = !readingReportManagerService.utilsService.collapser.isCollapsedTrvCh"

@@ -81,7 +81,7 @@
 
     <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForRRLocked"
         [_outputFileName]="'rrLocked'" [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]"
-        [_sessionName]="'rr-locked'" [_selectedColumnsToRemember]="'selectedRRLocked'" [_isCustomSort]=true
+        [_sessionName]="'rr-locked-session'" [_selectedColumnsToRemember]="'selectedRRLocked'" [_isCustomSort]=true
         [_hasCollapsible]=true (customedSort)="listManagerService.customSort($event)"
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedLocked"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedLocked = !readingReportManagerService.utilsService.collapser.isCollapsedLocked"

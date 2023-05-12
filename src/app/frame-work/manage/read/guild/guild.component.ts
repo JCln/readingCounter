@@ -49,6 +49,7 @@ export class GuildComponent extends FactoryONE {
     return {
       id: 0,
       title: '',
+      moshtarakinId: null,
       isNew: true
     };
   }
@@ -81,7 +82,7 @@ export class GuildComponent extends FactoryONE {
       this.refreshTable();
     }
   }
-  onRowEditSave(dataSource: object) {
+  async onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
     if (!this.readManagerService.verificationGuild(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
@@ -95,7 +96,7 @@ export class GuildComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const a = this.readManagerService.addOrEditAuths(ENInterfaces.GuildManagerEdit, dataSource['dataSource']);
+      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.GuildManagerEdit, dataSource['dataSource']);
       if (a) {
         this.refreshTable();
       }

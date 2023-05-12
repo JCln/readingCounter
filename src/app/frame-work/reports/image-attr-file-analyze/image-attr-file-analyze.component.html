@@ -44,7 +44,7 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [_outputFileName]="'_imageAttrAnalyze'"
-        [_checkUpName]="'_imageAttrAnalyze'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
+        [_checkUpName]="'_imageAttrAnalyze'" [_sessionName]="'imgattrFile-session'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
         [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz = !readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
         (refreshedTable)="refreshTable()">

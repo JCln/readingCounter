@@ -37,7 +37,7 @@
 </main>
 
 <app-prime-table *ngIf="closeTabService.saveDataForFNB" [dataSource]="closeTabService.saveDataForFNB"
-    [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]"
+    [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]" [_sessionName]="'forbidden-session'"
     [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
     [_isCollaped]="forbiddenService.utilsService.collapser._isCollapsedForbidden"
     (collapsed)="forbiddenService.utilsService.collapser._isCollapsedForbidden = !forbiddenService.utilsService.collapser._isCollapsedForbidden"

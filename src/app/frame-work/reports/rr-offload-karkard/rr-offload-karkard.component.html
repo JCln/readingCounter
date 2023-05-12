@@ -90,8 +90,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRROffloadedKarkard" [_outputFileName]="'karkardOffload'"
-        [_checkUpName]="'rr-offload-karkard'" [_selectedColumnsToRemember]="'selectedRROffloadedKarkard'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard"
+        [_checkUpName]="'rr-offload-karkard'" [_sessionName]="'rrOffloadKarkard-session'"
+        [_selectedColumnsToRemember]="'selectedRROffloadedKarkard'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard = !readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard"
         (refreshedTable)="refreshTable()">
     </app-prime-table>

@@ -90,8 +90,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRFragment" [_outputFileName]="'fragmentKarkard'"
-        [_checkUpName]="'rr-fragment-karkard'" [_selectedColumnsToRemember]="'selectedRRFragment'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.rrFragmentKarkardReq.isCollapsed"
+        [_checkUpName]="'rr-fragment-karkard'" [_sessionName]="'rrFragment-session'"
+        [_selectedColumnsToRemember]="'selectedRRFragment'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.rrFragmentKarkardReq.isCollapsed"
         (collapsed)="readingReportManagerService.rrFragmentKarkardReq.isCollapsed= !readingReportManagerService.rrFragmentKarkardReq.isCollapsed"
         (refreshedTable)="refreshTable()">
     </app-prime-table>

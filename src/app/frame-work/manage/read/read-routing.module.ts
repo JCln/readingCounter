@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'formula', loadChildren: () => import('./formula/formula.module').then(formula => formula.FormulaModule) },
   { path: 'imgattr', loadChildren: () => import('./image-attribution/image-attribution.module').then(imageAttribution => imageAttribution.ImageAttributionModule) },
   { path: 'guild', loadChildren: () => import('./guild/guild.module').then(guildManager => guildManager.GuildModule) },
+  { path: 'dynamicTrv', loadChildren: () => import('./dynamic-traverse/dynamic-traverse.module').then(dynamicTraverse => dynamicTraverse.DynamicTraverseModule) },
 ];
 
 @NgModule({

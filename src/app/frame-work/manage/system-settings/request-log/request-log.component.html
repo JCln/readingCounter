@@ -37,7 +37,7 @@
 
     <section>
         <app-prime-table [dataSource]="closeTabService.saveDataForRequestLog" [_outputFileName]="'requestLog'"
-            [_checkUpName]="'requestlog'" [_selectedColumnsToRemember]="'selectedRRRequestLog'"
+            [_checkUpName]="'requestlog'" [_sessionName]="'reqlog-session'" [_selectedColumnsToRemember]="'selectedRRRequestLog'"
             (refreshedTable)="refreshTable()">
         </app-prime-table>
     </section>

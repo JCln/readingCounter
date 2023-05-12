@@ -93,7 +93,7 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForDMAAnalyze" [_outputFileName]="'analysis'"
-        [_checkUpName]="'dm-analysis'" [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
+        [_checkUpName]="'dm-analysis'" [_sessionName]="'dmanalysis-session'" [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
         [_isCollaped]="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (collapsed)="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz = !dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (refreshedTable)="refreshTable()">

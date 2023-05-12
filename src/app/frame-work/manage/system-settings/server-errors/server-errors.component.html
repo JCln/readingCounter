@@ -16,7 +16,7 @@
 </form>
 
 <app-prime-table [dataSource]="closeTabService.saveDataForServerErrors" [_outputFileName]="'serverErrors'"
-    [_numberOfExtraColumns]="[1]" [_checkUpName]="'serverErrors'" [_selectedColumnsToRemember]="'selectedServerErrors'"
+    [_numberOfExtraColumns]="[1]" [_checkUpName]="'serverErrors'" [_sessionName]="'serverErr-session'" [_selectedColumnsToRemember]="'selectedServerErrors'"
     (clickedElmah)="linkToElmah($event)" (refreshedTable)="refreshTable()" [_hasCollapsible]=true
     [_isCollaped]="manageServerService.utilsService.collapser.serverError"
     (collapsed)="manageServerService.utilsService.collapser.serverError = !manageServerService.utilsService.collapser.serverError">

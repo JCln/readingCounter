@@ -80,7 +80,7 @@ export class ImageAttributionComponent extends FactoryONE {
       this.refetchTable(dataSource['ri']);
     }
   }
-  onRowEditSave(dataSource: object) {
+  async onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
     if (!this.readManagerService.verificationImageAttribution(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
@@ -94,7 +94,7 @@ export class ImageAttributionComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const a = this.readManagerService.addOrEditAuths(ENInterfaces.imageAttributionEdit, dataSource['dataSource']);
+      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.imageAttributionEdit, dataSource['dataSource']);
       if (a) {
         this.refreshTable();
       }

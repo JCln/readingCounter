@@ -52,7 +52,8 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForUserKarkard" [_outputFileName]="'rrUserKarkard'"
-        [_checkUpName]="'rr-user-karkard'" [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
+        [_checkUpName]="'rr-user-karkard'" [_sessionName]="'userKarkard-session'"
+        [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard = !readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard"
         (refreshedTable)="refreshTable()">

@@ -107,6 +107,16 @@ export interface IImageAttribution {
 export interface IGuild {
     id: number,
     title: string,
+    moshtarakinId: number,
+    isActive?: boolean,
+    isNew?: boolean
+}
+export interface IDynamicTraverse {
+    id: number,
+    title: string,
+    storageTitle: string,
+    isChangeable: boolean,
+    defaultValue: boolean,
     isActive?: boolean,
     isNew?: boolean
 }

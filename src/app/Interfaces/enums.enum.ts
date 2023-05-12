@@ -69,6 +69,7 @@ export enum EN_messages {
     insert_listNumber = 'شماره لیست را وارد نمایید',
     no_listNumberExist = 'شماره لیستی برای نمایش بازدید وجود ندارد',
     insert_title = 'عنوان را وارد نمایید',
+    insert_LatinTitle = 'عنوان لاتین را وارد نمایید',
     insert_days = 'تعداد روز را وارد نمایید',
     insert_govermentalCode = 'کد دولتی را وارد نمایید',
     insert_logicalOrder = 'ترتیب را وارد نمایید',

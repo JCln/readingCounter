@@ -1,3 +1,4 @@
+import { IDynamicTraverse } from './../interfaces/ireads-manager';
 import { Injectable } from '@angular/core';
 import { IReadingTimeRes } from 'interfaces/data-mining';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
@@ -77,6 +78,7 @@ export class CloseTabService {
   saveDataForCounterState: ICounterState[];
   saveDataForImageAttribution: IImageAttribution[];
   saveDataForGuild: IGuild[];
+  saveDataForDynamicTraverse: IDynamicTraverse[];
   saveDataForKarbari: IKarbari[];
   saveDataForReadingConfig: IReadingConfigDefault[];
   saveDataForReadingPeriodManager: IReadingPeriod[];
@@ -333,6 +335,8 @@ export class CloseTabService {
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamicReportManager },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
+    { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild },
+    { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },

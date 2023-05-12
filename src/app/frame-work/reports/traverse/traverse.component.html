@@ -92,8 +92,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRTraverse" [_numberOfExtraColumns]="[1]"
-        [_selectedColumnsToRemember]="'selectedRRTraverse'" [_outputFileName]="'trv'" [_checkUpName]="'rr-traverse'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedTrv"
+        [_sessionName]="'trv-session'" [_selectedColumnsToRemember]="'selectedRRTraverse'" [_outputFileName]="'trv'"
+        [_checkUpName]="'rr-traverse'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedTrv"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedTrv = !readingReportManagerService.utilsService.collapser.isCollapsedTrv"
         (refreshedTable)="refreshTable()">
     </app-prime-table>

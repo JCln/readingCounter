@@ -69,9 +69,9 @@
         </form>
     </section>
     <app-prime-table *ngIf="canShowTable" [dataSource]="closeTabService.saveDataForRRMaster"
-        [_outputFileName]="'master'" [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true
-        [_hasCollapsible]=true [_isCustomSort]=true [_hasAggregating]=true [_checkUpName]="'Kartables'"
-        (customedSort)="customSort($event)"
+        [_outputFileName]="'master'" [_sessionName]="'master-session'" [_selectedColumnsToRemember]="'selectedRRMaster'"
+        [_calculableSUM]=true [_hasCollapsible]=true [_isCustomSort]=true [_hasAggregating]=true
+        [_checkUpName]="'Kartables'" (customedSort)="customSort($event)"
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedMaster"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedMaster = !readingReportManagerService.utilsService.collapser.isCollapsedMaster"
         (refreshedTable)="refreshTable()">

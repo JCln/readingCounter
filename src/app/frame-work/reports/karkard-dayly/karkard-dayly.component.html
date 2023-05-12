@@ -92,8 +92,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRkarkardDaily" [_outputFileName]="'karkardDaily'"
-        [_checkUpName]="'rr-karkardDaily'" [_selectedColumnsToRemember]="'selectedRRKarkardDaily'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDaily"
+        [_checkUpName]="'rr-karkardDaily'" [_sessionName]="'karkardDaily-session'"
+        [_selectedColumnsToRemember]="'selectedRRKarkardDaily'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDaily"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDaily = !readingReportManagerService.utilsService.collapser.isCollapsedDaily"
         (refreshedTable)="refreshTable()">
     </app-prime-table>

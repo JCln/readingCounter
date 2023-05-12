@@ -47,7 +47,7 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRDisposalHours" [_outputFileName]="'disposalHs'"
-        [_checkUpName]="'rr-disposalHs'" [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
+        [_checkUpName]="'rr-disposalHs'" [_sessionName]="'disposalHours-session'" [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDH"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDH = !readingReportManagerService.utilsService.collapser.isCollapsedDH"
         (refreshedTable)="refreshTable()">

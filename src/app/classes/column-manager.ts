@@ -1581,7 +1581,15 @@ export class ColumnManager {
     ]
     guild: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
         { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true, readonly: true, icon: '_editable' },
+    ]
+    dynamicTraverse: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'storageTitle', header: 'عنوان لاتین', isSelected: false },
+        { field: 'isChangeable', header: 'قابل تغییر', isSelected: true, isBoolean: true },
+        { field: 'defaultValue', header: 'مقدار پیشفرض', isSelected: true, isBoolean: true },
+        // { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
     ]
 
     columnSelectedMenus = (name: string): IObjectIteratation[] => {

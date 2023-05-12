@@ -30,7 +30,8 @@
         </form>
     </section>
     <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrResult" [_outputFileName]="'_imageAttrResult'"
-        [_selectedColumnsToRemember]="'selectedImageAttrResult'" [_hasCollapsible]=true
+        [_sessionName]="'imgAttrFileResult-session'" [_selectedColumnsToRemember]="'selectedImageAttrResult'"
+        [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult = !readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult"
         (refreshedTable)="refreshTable()">
