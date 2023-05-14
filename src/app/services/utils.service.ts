@@ -99,8 +99,6 @@ export class UtilsService {
     this.snackWrapperService.openSnackBar(message, time, color);
   }
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
-    console.log(config);
-    
     config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {

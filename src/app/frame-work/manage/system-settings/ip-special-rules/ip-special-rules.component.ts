@@ -12,65 +12,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
   styleUrls: ['./ip-special-rules.component.scss']
 })
 export class IpSpecialRulesComponent extends FactoryONE {
-  auxData = {
-    "ipRules": [
-      {
-        "ip": "127.0.0.1",
-        "rules": [
-          {
-            "endpoint": "*",
-            "period": "2s",
-            "periodTimespan": null,
-            "limit": 80,
-            "quotaExceededResponse": null,
-            "monitorMode": false,
-            "ip": ""
-          },
-          {
-            "endpoint": "*",
-            "period": "25m",
-            "periodTimespan": null,
-            "limit": 500,
-            "quotaExceededResponse": null,
-            "monitorMode": false,
-            "ip": ""
-          }
-        ]
-      },
-      {
-        "ip": "192.168.3.22/25",
-        "rules": [
-          {
-            "endpoint": "*",
-            "period": "1s",
-            "periodTimespan": null,
-            "limit": 5,
-            "quotaExceededResponse": null,
-            "monitorMode": false,
-            "ip": ""
-          },
-          {
-            "endpoint": "*",
-            "period": "15m",
-            "periodTimespan": null,
-            "limit": 150,
-            "quotaExceededResponse": null,
-            "monitorMode": false,
-            "ip": ""
-          },
-          {
-            "endpoint": "*",
-            "period": "12h",
-            "periodTimespan": null,
-            "limit": 500,
-            "quotaExceededResponse": null,
-            "monitorMode": false,
-            "ip": ""
-          }
-        ]
-      }
-    ]
-  }
   constructor(
     public closeTabService: CloseTabService,
     public manageServerService: ManageServerService
@@ -115,7 +56,7 @@ export class IpSpecialRulesComponent extends FactoryONE {
       });
     })
   }
-  getRulesFromDataSource = (data: any) => {
+  getRulesFromDataSource = (data: any): any[] => {
     let temp: any[] = [];
     for (let index = 0; index < data.length; index++) {
       let ip = data[index].ip;

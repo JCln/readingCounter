@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
+import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -113,7 +113,7 @@ export class MapComponent implements OnInit, OnDestroy {
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup],
     });
 
-    this.map.attributionControl.setPrefix('TarnamaSepCo');
+    this.map.attributionControl.setPrefix(ENCompanyName.title);
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {

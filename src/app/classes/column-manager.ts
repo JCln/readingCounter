@@ -46,11 +46,11 @@ export class ColumnManager {
     ipSpecialRules: IObjectIteratation[] = [
         { field: 'ip', header: 'ip', isSelected: true },
         { field: 'endpoint', header: 'endpoint', isSelected: true },
-        { field: 'period', header: 'period', isSelected: true },
-        { field: 'periodTimespan', header: 'periodTimespan', isSelected: true, isNumber: true, ltr: true },
-        { field: 'limit', header: 'limit', isSelected: true, isNumber: true, ltr: true },
-        { field: 'quotaExceededResponse', header: 'quotaExceededResponse', isSelected: true, isNumber: true, ltr: true },
-        { field: 'monitorMode', header: 'monitorMode', isSelected: true, isBoolean: true },
+        { field: 'period', header: 'مدت', isSelected: true },
+        { field: 'periodTimespan', header: 'مدت زمان', isSelected: true, isNumber: true, ltr: true },
+        { field: 'limit', header: 'حداکثر تعداد', isSelected: true, isNumber: true, ltr: true },
+        { field: 'quotaExceededResponse', header: 'کد هدر خطا', isSelected: true, isNumber: true, ltr: true },
+        { field: 'monitorMode', header: 'پایش', isSelected: true, isBoolean: true },
     ]
     momentLs: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: false },

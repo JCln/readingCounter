@@ -73,7 +73,7 @@ export class HelpWrapperService {
       return {
         title: 'جستجوی تجمیعی',
         messageOne: 'برای جستجو کامل‌تر اطلاعات، با کلیک برروی "+" نوع جستجوی خود بر اساس ناحیه را انتخاب نمایید. ',
-        messageTwo: ' قسمت های اختیاری وضعیت مصرف، گزارش کنتور، وضعیت کنتور و نوبتی ها جهت جستجوی مناسب تر درنظر گرفته شده است',
+        messageTwo: ' قسمت های اختیاری وضعیت مصرف، گزارش بازرسی، وضعیت کنتور و نوبتی ها جهت جستجوی مناسب تر درنظر گرفته شده است',
       }
     else if (currentRoute === EN_Routes.wrmzsr || currentRoute === EN_Routes.wrmzsp || currentRoute === EN_Routes.wrmzszb || currentRoute === EN_Routes.wrmzsz || currentRoute === EN_Routes.wrmzsc)
       return {
@@ -101,6 +101,12 @@ export class HelpWrapperService {
       return {
         title: 'مدیریت apk',
         messageOne: 'این بخش به دو قسمت نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود برروی دانلود فایل کلیک نمایید. برای ایجاد نسخه جدید با وارد کردن نام، کد و فایل نسخه به ایجاد نسخه جدید اقدام نمود. ',
+      }
+    else if (currentRoute === EN_Routes.dynamicTraverse)
+      return {
+        title: 'پیمایش پویا',
+        messageOne: 'جهت مدیریت مقادیر پیمایش پویا در اپلیکیشن اندروید',
+        messageTwo: 'تغییرات بطور گروهی و برای کلیه دستگاه های دارای اپلیکیشن قرائت اعمال خواهد شد.',
       }
     else if (currentRoute === EN_Routes.wrmrqtr)
       return {
