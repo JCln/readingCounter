@@ -49,6 +49,7 @@ export enum ENManageServers {
     linkToHealthCheck = 'linkToHealthCheck',
     expireLicense = 'expireLicense',
     extendLicenseTime = 'ExtendLicenseTime',
+    compressLicenseTime = 'compressLicenseTime',
     resetIIS = 'resetIIS',
     offlineTheAPP = 'offlineTheAPP',
     resetApp = 'resetApp',

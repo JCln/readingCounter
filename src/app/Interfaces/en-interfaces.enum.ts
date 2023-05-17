@@ -315,6 +315,7 @@ export enum ENInterfaces {
     settingsLicense = 'V1/ApiSettings/License',
     settingsExtendTime = 'V1/ApiSettings/ExtendTime?key=',
     settingsExpireLicense = 'V1/ApiSettings/ExpireLicense?key=',
+    settingsCompressTime = 'V1/ApiSettings/CompressTime?key=',
 
     postImportData = 'V1/Import/Dynamic',
     postImportErrorsByTrackNumber = 'V1/Import/ImportErrorsByTrackNumber',

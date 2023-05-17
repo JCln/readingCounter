@@ -273,7 +273,7 @@ export class ColumnManager {
         { field: 'variance', header: 'واریانس', isSelected: true, readonly: false },
         { field: 'standardDeviation', header: 'انحراف از معیار', isSelected: true, readonly: false },
         { field: 'median', header: 'میانه', isSelected: true, readonly: false },
-        { field: 'mode', header: 'مٌد', isSelected: true, readonly: false },
+        { field: 'mode', header: 'مُد', isSelected: true, readonly: false },
         { field: 'duration', header: 'مدت(h)', isSelected: false, readonly: false }
     ];
     master: IObjectIteratation[] = [

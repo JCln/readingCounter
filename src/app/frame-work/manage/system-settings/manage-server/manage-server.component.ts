@@ -76,6 +76,26 @@ export class ManageServerComponent implements OnInit {
       }
     }
   }
+  compressLicenseTime = async () => {
+    const config = {
+      messageTitle: EN_messages.insert_Key,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: 'کلید را وارد نمایید',
+      isDelete: false,
+      inputMinLength: 4,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (MathS.isNullTextValidation(insertedKey)) {
+      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+    }
+    else {
+      if (await this.manageServerService.GETQueryDataSource(ENInterfaces.settingsExtendTime, insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
+      }
+    }
+  }
   manageFuncs = async (clickFunction: ENManageServers, description: string) => {
     if (this.manageServerService.utilsService.getIsAdminRole()) {
       const config = {
@@ -106,6 +126,11 @@ export class ManageServerComponent implements OnInit {
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
           this.extendLicenseTime();
       }
+      if (clickFunction == ENManageServers.compressLicenseTime) {
+        config.icon = 'fas fa-compress-arrows-alt';
+        if (await this.manageServerService.utilsService.firstConfirmDialog(config))
+          this.compressLicenseTime();
+      }
       if (clickFunction == ENManageServers.expireLicense) {
         config.icon = 'pi pi-stopwatch';
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
@@ -114,12 +139,12 @@ export class ManageServerComponent implements OnInit {
       if (clickFunction == ENManageServers.resetIIS) {
         config.icon = 'fa fa-repeat';
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
-          console.log('nothing');
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.needMoreAccess);//fooling around
       }
       if (clickFunction == ENManageServers.offlineTheAPP) {
         config.icon = 'fa fa-stop-circle';
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
-          console.log('nothing');
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.needMoreAccess);//fooling around
       }
     }
     else {

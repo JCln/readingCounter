@@ -169,9 +169,11 @@ export enum EN_messages {
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
     confirmResetIIS = 'از ریست IIS اطمینان دارید',
     confirmResetApp = 'از ریست APP اطمینان دارید',
+    confirmOfflineApp = 'از آفلاین کردن APP اطمینان دارید',
     confirmServerDelete = 'از حذف خطاها اطمینان دارید',
     confirmExtendLicenseTime = 'از افزایش زمان اطمینان دارید',
     confirmExpireLicense = 'از پایان زمان اطمینان دارید',
+    compressExpireLicense = 'از کاهش زمان اطمینان دارید',
 
     confirm_userGroupChange_1 = 'تا زمان ورود مجدد، کاربران گروه',
     confirm_userGroupChange_2 = 'امکان ادامه فعالیت را نخواهند داشت. آیا از ویرایش اطمینان دارید؟',
