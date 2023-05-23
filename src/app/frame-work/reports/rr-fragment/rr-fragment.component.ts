@@ -56,8 +56,6 @@ export class RrFragmentComponent extends FactoryONE {
       this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.rrFragmentKarkardReq.zoneId);
   }
   validation = (): boolean => {
-    console.log(this.readingReportManagerService.rrFragmentKarkardReq);
-
     return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.rrFragmentKarkardReq, this.readingReportManagerService._isOrderByDate);
   }
   verification = async () => {

@@ -13,7 +13,7 @@ import {
   IImportSimafaReadingProgramsReq,
   IReadingProgramRes,
 } from 'interfaces/import-data';
-import { IAPK, IPolicies } from 'interfaces/inon-manage';
+import { IAPK} from 'interfaces/inon-manage';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import {
   IAbBahaFormula,
@@ -54,6 +54,7 @@ import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, I
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
+import { IPolicies } from './DI/privacies';
 
 @Injectable({
   providedIn: 'root'

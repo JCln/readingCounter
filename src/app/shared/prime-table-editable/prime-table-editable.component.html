@@ -230,7 +230,7 @@
             <td class="__columns" *ngIf="_checkUpName == 'generalListModify'"
                 (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">خلاصه کاردکس</span>
-                <i class="tooltip p_icons pi pi-list">
+                <i class="tooltip p_icons pi pi-folder">
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
@@ -278,7 +278,7 @@
                 <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
-                    <div class="tooltip_text">ویرایش</div>
+                    <div class="tooltip_text_right">ویرایش</div>
                 </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check">
                 </i>
@@ -292,8 +292,7 @@
             </td>
             <td class="__columns" *ngIf="_checkUpName != 'generalListModify'">
                 <span class="ui-column-title">حذف مورد</span>
-                <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource , ri)"
-                    class="tooltip p_icons fa fa-trash-o">
+                <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>
                 </i>
                 <i *ngIf="_isInRowEditing" (click)="removeRowEditing(dataSource , ri)"

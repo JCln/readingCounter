@@ -519,7 +519,7 @@ export class ReadingReportManagerService {
       const dialogRef = this.utilsService.dialog.open(ConfirmDialogExcelViewComponent,
         {
           disableClose: options.disableClose,
-          minWidth: '90%',
+          minWidth: '21rem',
           data: {
             data: res,
             title: options.title,

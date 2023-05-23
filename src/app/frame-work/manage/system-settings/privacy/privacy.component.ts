@@ -1,12 +1,11 @@
 import { EN_messages } from 'interfaces/enums.enum';
 import { Component, ViewChild } from '@angular/core';
-import { MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
-import { IPrivacy } from 'interfaces/inon-manage';
 import { ENSnackBarTimes, ENSnackBarColors } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { IPrivacy } from 'services/DI/privacies';
 
 @Component({
   selector: 'app-privacy',
@@ -16,7 +15,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class PrivacyComponent extends FactoryONE {
   @ViewChild('#ref_true') ref;
   privacyOptions: IPrivacy;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   auxDataSource = {
     enableXSSProtection: true,
     enableObscureHeaderInfo: true,
@@ -33,7 +31,6 @@ export class PrivacyComponent extends FactoryONE {
     autoClearData: true,
   }
   constructor(
-
     public securityService: SecurityService,
     public closeTabService: CloseTabService,
     private snackWrapperService: SnackWrapperService
@@ -45,7 +42,6 @@ export class PrivacyComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForPolicies.id = null;
     }
-
     if (!this.closeTabService.saveDataForPolicies.id) {
       this.closeTabService.saveDataForPolicies = await this.securityService.getPolicy();
     }
@@ -64,6 +60,54 @@ export class PrivacyComponent extends FactoryONE {
     }
     this.closeTabService.saveDataForPolicies.minPasswordLength = value;
 
+  }
+  lockInvalidAttemps = (value: number) => {
+    if (value > this.privacyOptions.max_LockInvalidAttemps) {
+      this.openSnackBar('حداکثر تعداد 10 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+
+    if (value < this.privacyOptions.min_LockInvalidAttemps) {
+      this.openSnackBar('حداقل تعداد 1 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.saveDataForPolicies.lockInvalidAttempts = value;
+  }
+  lockMin = (value: number) => {
+    if (value > this.privacyOptions.max_LockMin) {
+      this.openSnackBar('حداکثر تعداد 120 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+
+    if (value < this.privacyOptions.min_LockMin) {
+      this.openSnackBar('حداقل تعداد 10 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.saveDataForPolicies.lockMin = value;
+  }
+  captchaPlusMinus = (value: number) => {
+    if (value > this.privacyOptions.max_captcha) {
+      this.openSnackBar('حداکثر تعداد 10 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+
+    if (value < this.privacyOptions.min_captcha) {
+      this.openSnackBar('حداقل تعداد 2 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts = value;
+  }
+  reCaptchaPlusMinus = (value: number) => {
+    if (value > this.privacyOptions.max_ReCaptcha) {
+      this.openSnackBar('حداکثر تعداد 10 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+
+    if (value < this.privacyOptions.min_ReCaptcha) {
+      this.openSnackBar('حداقل تعداد 2 می‌باشد', ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts = value;
   }
   openSnackBar(message: string, duration: ENSnackBarTimes) {
     this.snackWrapperService.openSnackBar(message, duration, ENSnackBarColors.warn);

@@ -26,9 +26,6 @@ export class ServerErrorsComponent extends FactoryONE {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.closeTabService.saveDataForServerErrors = null;
-    }
-    if (!this.closeTabService.saveDataForServerErrors) {
       this.connectToServer();
     }
   }

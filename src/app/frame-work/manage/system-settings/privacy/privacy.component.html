@@ -20,29 +20,27 @@
                             </div>
                         </li>
                         <li class="number_vals">
-                            lockInvalidAttempts
+                            مسدودسازی درخواست مکرر
                             <div class="plus_minus">
                                 <div class="plus"
-                                    (click)="closeTabService.saveDataForPolicies.lockInvalidAttempts = closeTabService.saveDataForPolicies.lockInvalidAttempts + 1">
+                                    (click)="lockInvalidAttemps(closeTabService.saveDataForPolicies.lockInvalidAttempts + 1)">
                                     <i class="fa fa-plus"></i>
                                 </div>
-                                <div class="_value"> {{closeTabService.saveDataForPolicies.lockInvalidAttempts}}</div>
+                                <div class="_value">{{closeTabService.saveDataForPolicies.lockInvalidAttempts}}</div>
                                 <div class="minus"
-                                    (click)="closeTabService.saveDataForPolicies.lockInvalidAttempts = closeTabService.saveDataForPolicies.lockInvalidAttempts - 1">
+                                    (click)="lockInvalidAttemps(closeTabService.saveDataForPolicies.lockInvalidAttempts - 1)">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>
                         </li>
                         <li class="number_vals">
-                            lockMin
+                            مدت محدودیت مسدود سازی
                             <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="closeTabService.saveDataForPolicies.lockMin = closeTabService.saveDataForPolicies.lockMin + 1">
+                                <div class="plus" (click)="lockMin(closeTabService.saveDataForPolicies.lockMin + 1)">
                                     <i class="fa fa-plus"></i>
                                 </div>
-                                <div class="_value"> {{closeTabService.saveDataForPolicies.lockMin}}</div>
-                                <div class="minus"
-                                    (click)="closeTabService.saveDataForPolicies.lockMin = closeTabService.saveDataForPolicies.lockMin - 1">
+                                <div class="_value">{{closeTabService.saveDataForPolicies.lockMin}}</div>
+                                <div class="minus" (click)="lockMin(closeTabService.saveDataForPolicies.lockMin + -1)">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>
@@ -96,19 +94,20 @@
                             تعداد دفعات ورود با Captcha
                             <div class="plus_minus">
                                 <div class="plus"
-                                    (click)="closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts = closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts + 1">
+                                    (click)="captchaPlusMinus(closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts + 1)">
                                     <i class="fa fa-plus"></i>
                                 </div>
                                 <div class="_value">
                                     {{closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts}}</div>
                                 <div class="minus"
-                                    (click)="closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts = closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts - 1">
+                                    (click)="captchaPlusMinus(closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts - 1)">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpRecaptcha">
+                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
+                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpRecaptcha">
                                 ip مناسب در Recaptcha
                             </mat-checkbox>
                         </li>
@@ -116,13 +115,13 @@
                             recaptcha
                             <div class="plus_minus">
                                 <div class="plus"
-                                    (click)="closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts= closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts + 1">
+                                    (click)="reCaptchaPlusMinus(closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts + 1)">
                                     <i class="fa fa-plus"></i>
                                 </div>
                                 <div class="_value">
                                     {{closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts}}</div>
                                 <div class="minus"
-                                    (click)="closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts= closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts - 1">
+                                    (click)="reCaptchaPlusMinus(closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts - 1)">
                                     <i class="fa fa-minus"></i>
                                 </div>
                             </div>

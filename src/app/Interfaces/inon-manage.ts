@@ -1,39 +1,6 @@
 import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes, ENToastColors } from 'interfaces/ioverall-config';
 
-export interface IPolicies {
-    id: number,
-    enableValidIpCaptcha: boolean,
-    requireCaptchaInvalidAttempts: number,
-    enableValidIpRecaptcha: boolean,
-    requireRecaptchaInvalidAttempts: number,
-    lockInvalidAttempts: number,
-    lockMin: number,
-    minPasswordLength: number,
-    passwordContainsNumber: boolean,
-    passwordContainsLowercase: boolean,
-    passwordContainsUppercase: boolean,
-    passwordContainsNonAlphaNumeric: boolean,
-    canUpdateDeviceId: boolean,
-    enableXSSProtection?: boolean,
-    enableObscureHeaderInfo?: boolean,
-    secureCookies?: boolean,
-    DOSProtection?: boolean,
-    STEALTH?: boolean,//useSingleActiveUser true
-    useJWTDecoder?: boolean,
-    CSRFProtection?: boolean,
-    DDOSProtection?: boolean,
-    CSPProtection?: boolean,
-    HSTSProtection?: boolean,// false
-    SanitizeUserInputs?: boolean,//true
-    AES512Protection?: boolean,
-    autoClearData?: boolean,
 
-}
-export interface IPrivacy {
-    minLength: number;
-    maxLength: number;
-    minPasswordLength: number;
-}
 export interface IAPK {
     versionName: string;
     versionCode: number;
