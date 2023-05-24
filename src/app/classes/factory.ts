@@ -187,16 +187,20 @@ export class FactorySharedPrime implements OnChanges {
         });
     }
     doShowCarousel = (dataSource: any, _isNotForbidden?: boolean) => {
-        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-            data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
-            rtl: true,
-            width: '80%',
-        })
-        this.ref.onClose.subscribe(async res => {
-            if (res)
-                console.log(res);
-
-        });
+        // should not open dialog when no images exists
+        if (dataSource.imageCount) {
+            this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+                data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
+                rtl: true,
+                width: '80%',
+            })
+            this.ref.onClose.subscribe(async res => {
+                if (res)
+                    console.log(res);
+            });
+        } else {
+            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
+        }
     }
     doShowCarouselForbidden = (dataSource: any) => {
         // To make imageWrapper config Dialog for forbidden
