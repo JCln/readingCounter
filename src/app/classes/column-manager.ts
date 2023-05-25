@@ -1150,6 +1150,7 @@ export class ColumnManager {
     ];
     lMPerDayPositions: IObjectIteratation[] = [
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },

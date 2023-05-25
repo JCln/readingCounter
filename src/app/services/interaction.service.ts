@@ -32,7 +32,7 @@ export class InteractionService {
   startLoading(object: any) {
     this.loading(object);
   }
-  get getMomentLatestReads(): Observable<any> {
+  get $getMomentLatestReads(): Observable<any> {
     return this.latestReads.asObservable();
   }
 

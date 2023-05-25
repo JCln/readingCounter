@@ -326,6 +326,7 @@ export class SearchService {
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
     this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.pageSignsService.perday_pageSign.zone = row.zoneTitle;
     this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {

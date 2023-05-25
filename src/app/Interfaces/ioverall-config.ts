@@ -334,6 +334,7 @@ export enum ENHasCount {
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
+    numberOfFlashRead = 'numberOfFlashRead',
     shouldUseCarouselGallery = 'shouldUseCarouselGallery',
     shouldUseBaseOnDate = 'shouldUseBaseOnDate',
     notifyPosition = 'notifyPosition',

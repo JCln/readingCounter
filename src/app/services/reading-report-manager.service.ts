@@ -536,12 +536,13 @@ export class ReadingReportManagerService {
       })
     });
   }
-  firstConfirmDialogRemove = () => {
+  firstConfirmDialogRemove = (text?: string) => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
+      text: text,
       icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
