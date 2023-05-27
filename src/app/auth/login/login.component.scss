@@ -119,6 +119,11 @@ input:-internal-autofill-selected {
     background: var(--white);
   }
 
+  .about_us_img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
   ._info_each_item {
     position: absolute;
     overflow: auto;

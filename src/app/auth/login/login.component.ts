@@ -1,3 +1,4 @@
+import { EN_Routes } from 'interfaces/routes.enum';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -21,6 +22,7 @@ import { AuthService } from '../auth.service';
   animations: [transitionLoginHelp]
 })
 export class LoginComponent {
+  aboutUsImage = 'assets/imgs/header/logo_Atlas.png';
   userData: ICredentials = {
     username: '',
     password: '',
@@ -79,5 +81,8 @@ export class LoginComponent {
   }
   getVersionInfos = () => {
     this.infoVersionItems = infoVersion.getInfoItems();
+  }
+  gotToAbout = () => {
+    this.utilsService.compositeService.routeTo(EN_Routes.aboutUs);
   }
 }

@@ -16,6 +16,7 @@ export interface IENV {
     timeout: number,
     defaultAggregateTracks: boolean,
     version: string,
+    aboutUs: { email: string, tel: string, address: string }
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -115,6 +116,12 @@ export class simafaImportStatus {
 }
 export class version {
     static readonly version = 'build: 0.0.0';
+}
+export class aboutUs {
+    static readonly email = 'infortarnama@gmail.com';
+    static readonly tel = '031-32121764';
+    static readonly address = 'اصفهان، ارگ جهان نما، واحد 107';
+    static readonly coName = 'هیوا پرداز اطلس';
 }
 export class ENMapUrls {
     static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);
