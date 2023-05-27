@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { GlobalErrorHandlerService } from 'services/global-error-handler.service';
 
 import { InterceptorService } from '../auth/interceptor.service';
@@ -59,6 +60,7 @@ import { CaptchaComponent } from '../shared/captcha/captcha.component';
     MatSnackBarModule,
     MatDialogModule,
     SharedThreeModule,
+    EditorModule,
 
     BrowserAnimationsModule,
     ProgressSpinnerModule,
@@ -75,6 +77,7 @@ import { CaptchaComponent } from '../shared/captcha/captcha.component';
     ClockComponent,
     SharedThreeModule,
     ProgressSpinnerModule,
+    EditorModule,
     // components
     BrowserAnimationsModule,
     AnnouceNotifComponent,
