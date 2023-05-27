@@ -47,11 +47,11 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
       this.outputManagerService.downloadFile(res, '.xlsx');
     }
   }
-  removeRow = async (id: number) => {
+  removeRow = async (object: any) => {
     if (this.readingReportManagerService.utilsService.getIsAdminRole()) {
 
-      if (await this.readingReportManagerService.firstConfirmDialogRemove()) {
-        const a = await this.readingReportManagerService.postById(ENInterfaces.removeToolsDynamicExcel, id['dataSource'].id);
+      if (await this.readingReportManagerService.firstConfirmDialogRemove('عنوان: ' + object['dataSource'].title)) {
+        const a = await this.readingReportManagerService.postById(ENInterfaces.removeToolsDynamicExcel, object['dataSource'].id);
         if (a) {
           this.readingReportManagerService.successSnackMessage(a.message);
           this.refreshTable();

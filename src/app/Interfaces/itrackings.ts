@@ -38,6 +38,7 @@ export interface IEditTracking {
 }
 export interface IOffLoadPerDay {
     trackNumber: number,
+    zoneTitle?: string,
     listNumber: string,
     counterReaders: string,
     fromEshterak: string,

@@ -47,7 +47,7 @@ export class MapService {
   }
 
   constructor(
-    private browserStorageService: BrowserStorageService,
+    public browserStorageService: BrowserStorageService,
     private interfaceManagerService: InterfaceManagerService,
     public envService: EnvService
   ) { }

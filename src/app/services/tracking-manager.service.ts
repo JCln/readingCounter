@@ -342,6 +342,7 @@ export class TrackingManagerService {
   }
   routeToLMPayDay = (row: ITracking) => {
     this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.pageSignsService.perday_pageSign.zone = row.zoneTitle;
     this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToLMAll = (row: any) => {

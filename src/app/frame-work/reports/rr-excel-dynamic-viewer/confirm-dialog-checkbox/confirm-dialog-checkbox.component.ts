@@ -1,3 +1,4 @@
+import { MathS } from 'src/app/classes/math-s';
 import { Component, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';

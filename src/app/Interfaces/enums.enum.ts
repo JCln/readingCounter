@@ -42,6 +42,7 @@ export enum EN_messages {
     insert_File = 'فایلی انتخاب کنید',
     insert_Image = 'تصویری انتخاب کنید',
     imageNotExists = 'تصویر/صوت برای نمایش وجود ندارد',
+    changesOnNextRead = 'تغییر تعداد نمایش با قرائت بعدی اعمال خواهد شد',
     insert_video = 'ویدیویی انتخاب کنید',
     accedd_denied_relogin = 'دسترسی شما باطل شده است. ساعت سیستم خود را نیز بررسی و مجددا وارد شوید',
     insert_roleAccess = 'سطح دسترسی به ناحیه ای را انتخاب نمایید',

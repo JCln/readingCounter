@@ -13,3 +13,17 @@
   width: 100%;
   z-index: 3;
 }
+
+.input_2 {
+  display: flex;
+  align-items: center;
+  gap: var(--font_s);
+  margin-left: auto;
+  padding-right: 3px;
+  font-weight: 600;
+  border-radius: $border_7;
+  direction: rtl;
+  width: 16rem;
+  background: var(--white);
+  margin-bottom: 3px;
+}
