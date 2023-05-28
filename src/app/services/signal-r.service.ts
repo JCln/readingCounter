@@ -1,15 +1,12 @@
+import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
 import { ENSnackBarTimes } from 'interfaces/ioverall-config';
-import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ILatestReads } from 'interfaces/imoment';
-
-import { JwtService } from '../auth/jwt.service';
-import { SnackWrapperService } from './snack-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +15,15 @@ export class SignalRService {
   private hubConnection: signalR.HubConnection;
 
   constructor(
-    private envService: EnvService,
-    private jwtService: JwtService,
-    private snackBarService: SnackWrapperService,
+    public utilsService: UtilsService,
     private interactionService: InteractionService,
     private interfaceManagerService: InterfaceManagerService
   ) { }
 
   public startConnection = () => {
-    const authToken = { accessTokenFactory: () => this.jwtService.getAuthorizationToken() };
+    const authToken = { accessTokenFactory: () => this.utilsService.compositeService.jwtService.getAuthorizationToken() };
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(this.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
+      .withUrl(this.utilsService.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
       .withAutomaticReconnect()
       // .configureLogging(signalR.LogLevel.Information)
       // .configureLogging(signalR.LogLevel.Debug)
@@ -73,7 +68,7 @@ export class SignalRService {
 */
   private receiveMessage = () => {
     this.hubConnection.on(ENInterfaces.signalRReceiveMessage, (user: string, message: string) => {
-      this.snackBarService.openSnackBarSignal(user + '   ' + message, ENSnackBarTimes.tenMili);
+      this.utilsService.snackWrapperService.openSnackBarSignal(user + '   ' + message, ENSnackBarTimes.tenMili);
     });
   }
   private receiveTextWithTimer = () => {
@@ -86,7 +81,7 @@ export class SignalRService {
         key: 'text',
         life: a.seconds
       }
-      this.snackBarService.openToastSignal(toast);
+      this.utilsService.snackWrapperService.openToastSignal(toast);
     });
   }
   private ReceiveDirectMessage = () => {
@@ -99,7 +94,7 @@ export class SignalRService {
         icon: 'pi pi-envelope',
         key: 'text'
       }
-      this.snackBarService.openToastSignal(custom);
+      this.utilsService.snackWrapperService.openToastSignal(custom);
     });
   }
   private receiveImageWithCaptionMessage = () => {
@@ -116,7 +111,7 @@ export class SignalRService {
         caption: a.caption,
         clickName: 'openImgDialog'
       }
-      this.snackBarService.openToastSignal(custom);
+      this.utilsService.snackWrapperService.openToastSignal(custom);
     });
   }
   private receiveVideoWithCaptionMessage = () => {
@@ -133,7 +128,7 @@ export class SignalRService {
         caption: a.caption,
         clickName: 'openVideoDialog'
       }
-      this.snackBarService.openToastSignal(custom);
+      this.utilsService.snackWrapperService.openToastSignal(custom);
     });
   }
 
@@ -150,6 +145,6 @@ export class SignalRService {
 
   // private broadcastMessage = () => {
   //   this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
-  //     this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
+  //     this.utilsService.snackWrapperService.openSnackBarSignal(title + '\n' + message, time, color);
   //   });
   // }

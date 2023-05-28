@@ -21,7 +21,7 @@ export class AuthService {
     public interfaceManagerService: InterfaceManagerService,
     private jwtService: JwtService,
     private closeTabService: CloseTabService,
-    private signalRService: SignalRService,
+    public signalRService: SignalRService,
     public compositeService: CompositeService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }

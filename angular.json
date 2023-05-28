@@ -63,7 +63,8 @@
               "node_modules/leaflet/dist/leaflet.js",
               "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js",
               "node_modules/tinymce/tinymce.min.js",
-              "node_modules/tinymce/themes/silver/theme.js"
+              "node_modules/tinymce/themes/silver/theme.min.js",
+              "node_modules/tinymce/plugins/table/plugin.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

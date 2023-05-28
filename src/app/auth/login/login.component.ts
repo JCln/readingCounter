@@ -60,7 +60,7 @@ export class LoginComponent {
       else {
         // button should disable after loging
         (<HTMLInputElement>document.getElementById("btnLogin")).disabled = true;
-        const returnUrl = this.authService.compositeService.getRouteParams('returnUrl');
+        const returnUrl = this.authService.compositeService.getRouterQueryParamMap('returnUrl');
         const res = await this.authService.logging(this.userData);
 
         if (res) {

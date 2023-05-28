@@ -11,11 +11,14 @@ export class CompositeService {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private jwtService: JwtService,
+    public jwtService: JwtService,
   ) { }
 
   getRouteParams = (paramName: string): string => {
     return this.route.snapshot.paramMap.get(paramName);
+  }
+  getRouterQueryParamMap = (paramName: string): string => {
+    return this.route.snapshot.queryParamMap.get(paramName);
   }
   routeTo = (router: string) => {
     this.router.navigate([router]);

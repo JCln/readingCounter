@@ -6,7 +6,7 @@ export const light: Theme = {
         "--white": "rgb(255, 255, 255)",
         "--fix_gray_light": "rgb(248 ,249 ,250)",
         "--fix_blue": "rgb(17, 111, 255)",
-        "--thirdy_1": "rgb(64, 127, 201)",
+        "--thirdy_1": "rgb(108, 159, 214)",
         "--thirdy_2": "rgb(176, 189, 209)",
         "--thirdy_3": "rgb(89, 129, 177)",
         "--thirdy_4": "rgb(64, 127, 201)",
@@ -39,13 +39,13 @@ export const light: Theme = {
         "--sidebar_4": "rgb(64, 127, 201)",
         "--sidebar_5": "rgb(181 ,207, 236)",//hover sidebar_header
         "--fix_orange": "rgb(246, 128, 56)",
-        "--orange_500": "rgb(246, 128, 56)",
-        "--orange_600": "rgb(245, 91, 25)",
+        "--orange_500": "rgb(56, 158, 246)",
+        "--orange_600": "rgb(52, 127, 192)",
         "--green_500": "rgb(117, 188, 84)",
         "--green_600": "rgb(75, 140, 56)",
         "--red_500": "rgb(246, 62, 56)",
         "--red_600": "rgb(183, 28, 28)",
-        "--pink_500": "rgb(255, 64, 129)",
+        "--pink_500": "rgb(0, 45, 252)"
     }
 };
 export const dark: Theme = {
@@ -87,13 +87,13 @@ export const dark: Theme = {
         "--sidebar_4": " rgb(108 ,117 ,125)",
         "--sidebar_5": "rgb(21, 39, 60)",
         "--fix_orange": "rgb(246, 128, 56)",
-        "--orange_500": "rgb(246, 128, 56)",
-        "--orange_600": "rgb(245, 91, 25)",
+        "--orange_500": "rgb(160, 187, 209)",
+        "--orange_600": "rgb(125, 160, 189)",
         "--green_500": "rgb(117, 188, 84)",
         "--green_600": "rgb(75, 140, 56)",
         "--red_500": "rgb(246, 62, 56)",
         "--red_600": "rgb(246, 62, 56)",
-        "--pink_500": "rgb(255, 64, 129)",
+        "--pink_500": "rgb(132, 179, 206)",
     }
 };
 
@@ -135,10 +135,10 @@ export const purple: Theme = {
         "--sidebar_4": "rgb(89, 77, 179)",
         "--sidebar_5": "rgb(31 ,25 ,78)",
         "--fix_orange": "rgb(246, 128, 56)",
-        "--orange_500": " rgb(246, 128, 56)",
-        "--orange_600": " rgb(245, 91, 25)",
-        "--green_500": " rgb(117, 188, 84)",
-        "--green_600": " rgb(75, 140, 56)",
+        "--orange_500": "rgb(56, 240, 246)",
+        "--orange_600": "rgb(45, 178, 182)",
+        "--green_500": "rgb(117, 188, 84)",
+        "--green_600": "rgb(75, 140, 56)",
         "--red_500": " rgb(246, 62, 56)",
         "--red_600": " rgb(246, 62, 56)",
         "--pink_500": "rgb(158 ,124, 234)"

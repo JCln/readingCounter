@@ -367,17 +367,17 @@
                 _outputFileName == 'trvDiff' || 
                 _outputFileName == 'imgResultGridBased'                
             )" (click)="doShowCarousel(dataSource, true)">
-                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
-                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                    <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="(
                 _outputFileName == 'forbidden'  
             )" (click)="doShowCarouselForbidden(dataSource)">
-                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
-                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                    <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
                 </i>
             </td>
             <td class="__columns" (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'ModifyList'">
