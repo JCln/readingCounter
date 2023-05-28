@@ -23,6 +23,10 @@
             <button id="btnLogin" class="btn_1" type="submit">ورود</button>
         </form>
         <section class="info">
+            <i (click)="gotToAbout()" class="tooltip _circle_border p_icons">
+                <img class="about_us_img" [src]="aboutUsImage" alt="">
+                <div class="tooltip_text">درباره ما</div>
+            </i>
             <i (click)="showVersionInfo = !showVersionInfo" (click)="getVersionInfos()"
                 class="tooltip _circle_border p_icons pi pi-info">
                 <div [hidden]="showVersionInfo" class="tooltip_text">نمایش آخرین تغییرات</div>

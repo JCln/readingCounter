@@ -1,4 +1,5 @@
 import {
+    aboutUs,
     BrowserVersions,
     defaultAggregateTracks,
     ENActivateProvinceTitle,
@@ -33,7 +34,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
@@ -49,7 +51,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
@@ -65,7 +68,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
@@ -81,7 +85,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
@@ -97,7 +102,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
@@ -113,7 +119,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     // ZONE 6 TEHRAN
     public static readonly REY = new ActivatedProvince(
@@ -130,7 +137,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TSW = new ActivatedProvince(
         ENActivateProvinceTitle.TSW,
@@ -146,7 +154,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH1 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH1,
@@ -162,7 +171,8 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
 
     private constructor(
@@ -195,6 +205,7 @@ export class ActivatedProvince implements IENV {
         public simafaImportStatus: { hasSingle: boolean, hasBatch: boolean },
         public timeout: number,
         public version: string,
+        public aboutUs: { email: string, tel: string, address: string, coName: string },
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

@@ -20,6 +20,7 @@ export class EnvService implements IENV {
   defaultAggregateTracks = this.temp.defaultAggregateTracks;
   simafaImportStatus = this.temp.simafaImportStatus;
   version = this.temp.version;
+  aboutUs = this.temp.aboutUs;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

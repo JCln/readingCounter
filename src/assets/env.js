@@ -44,11 +44,12 @@
         { id: 5, title: 'F' }
     ];
     window.__env.hasCanclableSpinner = false;
-    window.__env.timeout = 18000;    
+    window.__env.timeout = 18000;
     window.__env.reOrderableTable = false;
     window.__env.defaultAggregateTracks = false;
     window.__env.simafaImportStatus = { hasSingle: false, hasBatch: false };
     window.__env.version = '1.0.0';
+    window.__env.aboutUs = { email: 'yourEmail', tel: 'yourPhone', address: 'yourAddress', coName: 'coName' };
 
     // Whether or not to enable debug mode
     // Setting this to false will disable console output

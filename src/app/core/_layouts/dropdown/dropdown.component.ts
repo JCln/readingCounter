@@ -13,6 +13,8 @@ export class DropdownComponent {
   @Output() isLogout = new EventEmitter<boolean>();
   routeToProfile = EN_Routes.wrprofile;
   routeToLicense = EN_Routes.wrLicense;
+  routeToAboutUs = EN_Routes.aboutUs;
+  aboutUsImage = 'assets/imgs/header/logo_Atlas.png';
 
   constructor(
     private envService: EnvService,
