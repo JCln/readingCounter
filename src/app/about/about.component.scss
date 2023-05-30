@@ -23,12 +23,13 @@ section {
 
     @media (min-width:770px) {
         width: 27rem;
-        height: 10rem;
+        height: 9rem;
     }
 }
 
 .main_content {
     display: grid;
+    align-items: center;
     width: 100%;
 }
 

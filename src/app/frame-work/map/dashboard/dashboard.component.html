@@ -52,11 +52,14 @@
     </section>
     <section class="collapse">
         <h3>نمودار</h3>
-        <app-collapsable [_isReversed]="true" [_isCollapsed]="_isCollapsedAnalyzePrfm" [_tooltipText]="'آنالیز عملکرد'"
-            (_clicked)=" _isCollapsedAnalyzePrfm=!_isCollapsedAnalyzePrfm">
+        <app-collapsable [_isReversed]="true"
+            [_isCollapsed]="dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm"
+            [_tooltipText]="'آنالیز عملکرد'"
+            (_clicked)=" dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm=!dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm">
         </app-collapsable>
     </section>
-    <main *ngIf="_isCollapsedAnalyzePrfm" class="container charts relative_pos" style="overflow: auto;">
+    <main *ngIf="dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm" class="container charts relative_pos"
+        style="overflow: auto;">
         <div class="chart_analyze_radar">
             <app-analyze (barAnalyzeEvent)=receiveAnalyzeData($event)></app-analyze>
         </div>

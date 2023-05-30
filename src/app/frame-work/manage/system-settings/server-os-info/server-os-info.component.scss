@@ -1,6 +1,7 @@
 @import 'variable';
 @import 'button.scss';
 @import 'input.scss';
+@import 'cards';
 
 .over_all {
   display: grid;
@@ -11,11 +12,7 @@
 }
 
 section {
-  display: grid;
-  background: var(--secondary_2);
-  border: 1px solid var(--secondary_4);
-  border-radius: $border_7;
-  box-shadow: 0 1px 0 0 var(--secondary_4);
+  margin: var(--font_3);
 }
 
 .title {

@@ -14,11 +14,12 @@
 
     <section class="collapse">
         <h3>نمودار</h3>
-        <app-collapsable [_isReversed]="true" [_isCollapsed]=_isCollapsedKarkard [_tooltipText]="'کارکرد'"
-            (_clicked)="_isCollapsedKarkard = !_isCollapsedKarkard">
+        <app-collapsable [_isReversed]="true" [_isCollapsed]=dashboardService.utilsService.collapser._isCollapsedKarkard
+            [_tooltipText]="'کارکرد'"
+            (_clicked)="dashboardService.utilsService.collapser._isCollapsedKarkard = !dashboardService.utilsService.collapser._isCollapsedKarkard">
         </app-collapsable>
     </section>
-    <main *ngIf="_isCollapsedKarkard" class="container _unified relative_pos">
+    <main *ngIf="dashboardService.utilsService.collapser._isCollapsedKarkard" class="container _unified relative_pos">
         <div class="chart_4 charts pie relative_pos" *ngIf="pieChartDataThree[0]">
             <div class="title">امروز</div>
             <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"

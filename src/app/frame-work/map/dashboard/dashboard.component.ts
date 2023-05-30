@@ -9,8 +9,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
-  _isCollapsedAnalyzePrfm: boolean = false;
+export class DashboardComponent {  
   _analyzer_interface: any[];
   zoneDictionary: IDictionaryManager[] = [];
 

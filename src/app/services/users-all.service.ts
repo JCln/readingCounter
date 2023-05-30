@@ -1,3 +1,4 @@
+import { ColumnManager } from 'src/app/classes/column-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -12,7 +13,6 @@ import {
 import { IAUserEditSave, IUserEditManager, IUserEditOnRole, IUserEditOnRoleManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { Observable } from 'rxjs/internal/Observable';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { MathS } from '../classes/math-s';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -36,21 +36,16 @@ export class UsersAllService {
     GUid: null,
   };
 
-  private _userRoles = [
-    { field: 'title', header: 'عنوان', isSelected: true },
-    // { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
-    { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isBoolean: true },
-    { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true }
-  ]
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
+    private columnManager: ColumnManager
   ) { }
 
   /* COLUMNS */
   columnUserRoles = (): IObjectIteratation[] => {
-    return this._userRoles;
+    return this.columnManager._userRoles;
   }
   customizeSelectedColumns = (_selectCols: any[]) => {
     return _selectCols.filter(items => {

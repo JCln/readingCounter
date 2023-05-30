@@ -1560,6 +1560,12 @@ export class ColumnManager {
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false },
         { field: 'deviceId', header: 'سریال', isSelected: false }
     ]
+    _userRoles = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        // { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
+        { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isBoolean: true },
+        { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true }
+    ]
     errors: IObjectIteratation[] = [
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isNumber: true },

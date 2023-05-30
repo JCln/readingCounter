@@ -9,13 +9,8 @@
   gap: var(--font_05);
 }
 
-.content {
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  text-align: center;
-  padding: var(--font_xs) 0;
-  border-radius: $border_15;
-  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+._card {
+  width: 100%;
 }
 
 .title {

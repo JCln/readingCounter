@@ -10,8 +10,7 @@ import { DashboardService } from 'services/dashboard.service';
   templateUrl: './dash-karkard.component.html',
   styleUrls: ['./dash-karkard.component.scss']
 })
-export class DashKarkardComponent implements OnInit {
-  _isCollapsedKarkard: boolean = false;
+export class DashKarkardComponent implements OnInit {  
   karkardDataSource: IDashboardKarkardTimed;
   doughnutTemp: any[] = [];
 
@@ -112,7 +111,7 @@ export class DashKarkardComponent implements OnInit {
   /* END PIE CHART CONFIGS*/
 
   constructor(
-    private dashboardService: DashboardService
+    public dashboardService: DashboardService
   ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();

@@ -1,3 +1,4 @@
+import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
@@ -15,7 +16,8 @@ export class DashboardService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    public utilsService: UtilsService
   ) { }
 
   /* COLUMNS */
