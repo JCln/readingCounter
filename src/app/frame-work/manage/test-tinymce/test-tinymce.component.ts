@@ -24,6 +24,8 @@ export class TestTinymceComponent implements OnInit, AfterViewInit {
     this.tinymce.init({
       selector: 'testTinySelector',
       schema: 'text',
+      directionality: 'rtl',
+      language: 'fa',
       setup: ed => {
         ed.on('init', ed2 => {
           if (this.innerValue) ed2.target.setContent(this.innerValue);

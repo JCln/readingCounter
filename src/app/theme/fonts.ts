@@ -59,7 +59,7 @@ export const fontXS: Theme = {
         "--font_35": "3rem",
         "--font_335": "3.3rem",
         "--font_45": "3.5rem",
-        "--font_5": "3.35rem",
+        "--font_5": "4rem",
         "--font_52": "4.5rem",
         "--font_55": "5rem",
     }
