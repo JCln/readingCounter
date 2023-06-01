@@ -1,6 +1,6 @@
 import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 import { TestTinymceComponent } from './test-tinymce.component';
-import { EditorModule } from '@tinymce/tinymce-angular';
+// import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgModule } from '@angular/core';
 
 import { TestTinymceRoutingModule } from './test-tinymce-routing.module';
@@ -12,7 +12,7 @@ import { TestTinymceRoutingModule } from './test-tinymce-routing.module';
   ],
   imports: [
     SharedTwoModule,
-    EditorModule,
+    // EditorModule,
     TestTinymceRoutingModule
   ]
 })

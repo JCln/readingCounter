@@ -26,7 +26,7 @@
                 <ng-template #elseTemplate>
                     <ng-container *ngIf="mainDatas.isSelectOption;else selectOption">
                         <div class="input_2" [ngClass]="{coloring_border: mainDatas.borderize}">
-                            <div class="_key">مامور جدید</div>
+                            <div class="_key">قرائت کننده جدید</div>
                             <div class="_value">
                                 <p-dropdown [options]="allCounterReaders" name="newCounterReaderName"
                                     [(ngModel)]="selectedCounterReader" filter="true" placeholder="انتخاب مورد"

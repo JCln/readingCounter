@@ -14,6 +14,10 @@
   z-index: 3;
 }
 
+._key {
+  color: var(--primary_5);
+}
+
 .input_2 {
   display: flex;
   align-items: center;
@@ -26,4 +30,5 @@
   width: 16rem;
   background: var(--white);
   margin-bottom: 3px;
+  border: 1px solid;
 }

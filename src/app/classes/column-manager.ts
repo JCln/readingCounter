@@ -56,7 +56,7 @@ export class ColumnManager {
         // { field: 'id', header: 'id', isSelected: false },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
         { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false },
@@ -77,7 +77,7 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false, readonly: true },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false, readonly: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: false },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: true },
@@ -102,7 +102,7 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true },
@@ -127,7 +127,7 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true },
@@ -152,7 +152,7 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true },
@@ -177,7 +177,7 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true },
@@ -202,7 +202,7 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true },
@@ -228,7 +228,7 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, ltr: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true },
@@ -285,7 +285,7 @@ export class ColumnManager {
     ]
     _imageAttrResult: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'itemTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: false },
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
@@ -316,9 +316,9 @@ export class ColumnManager {
         { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, isNumber: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
-        { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        // { field: 'insertDateTime', header: 'مامور', isSelected: true, readonly: true },
+        // { field: 'insertDateTime', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
         { field: 'isRoosta', header: 'روستا', isSelected: false, isBoolean: true },
         { field: 'year', header: 'سال', isSelected: false, readonly: false },
@@ -342,7 +342,7 @@ export class ColumnManager {
     ]
     rrDetails: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
         { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: true },
         { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
@@ -362,7 +362,7 @@ export class ColumnManager {
     ]
     trv: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
         { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
         { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
@@ -386,7 +386,7 @@ export class ColumnManager {
     ]
     trvDiff: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
         { field: 'eshterak', header: 'اشتراک', isSelected: true },
         { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true },
@@ -400,7 +400,7 @@ export class ColumnManager {
     karkard: IObjectIteratation[] = [
         // { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectOption: true, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         // { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
         // { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
@@ -416,7 +416,7 @@ export class ColumnManager {
     ]
     karkardDaily: IObjectIteratation[] = [
         { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
         { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
         { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
@@ -435,7 +435,7 @@ export class ColumnManager {
         // { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         // { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
         // { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
         { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
@@ -455,7 +455,7 @@ export class ColumnManager {
         // { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         // { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
         // { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
         { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
@@ -473,7 +473,7 @@ export class ColumnManager {
     ]
     disposalHs: IObjectIteratation[] = [
         { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
         { field: '_8To10', header: '8 - 10', isSelected: true, readonly: true },
         { field: '_10To12', header: '10 - 12', isSelected: true, readonly: true },
@@ -485,9 +485,9 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
     ];
     rrPreNumber: IObjectIteratation[] = [
-        { field: 'counterReaderName', header: 'مامور', isSelected: false },
-        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: false },
@@ -553,9 +553,9 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ]
     rrLocked: IObjectIteratation[] = [
-        { field: 'counterReaderName', header: 'مامور', isSelected: false },
-        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: false },
@@ -622,9 +622,9 @@ export class ColumnManager {
     ]
     searchPro: IObjectIteratation[] =
         [
-            { field: 'counterReaderName', header: 'مامور', isSelected: false },
-            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+            { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+            { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
             { field: 'listNumber', header: 'ش لیست', isSelected: true },
@@ -689,9 +689,9 @@ export class ColumnManager {
         ];
     searchMosh: IObjectIteratation[] =
         [
-            { field: 'counterReaderName', header: 'مامور', isSelected: false },
-            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+            { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+            { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
             { field: 'listNumber', header: 'ش لیست', isSelected: true },
@@ -756,10 +756,10 @@ export class ColumnManager {
         ];
     searchMoshDialog: IObjectIteratation[] =
         [
-            { field: 'counterReaderName', header: 'مامور', isSelected: false },
-            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+            { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
-            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
+            { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
             { field: 'listNumber', header: 'ش لیست', isSelected: false },
             { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -836,9 +836,9 @@ export class ColumnManager {
         ];
     assess_pre: IObjectIteratation[] =
         [
-            { field: 'counterReaderName', header: 'مامور', isSelected: false },
-            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+            { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+            { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
             { field: 'listNumber', header: 'ش لیست', isSelected: false },
@@ -906,7 +906,7 @@ export class ColumnManager {
     simpleSearch: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, isNumber: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, isNumber: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true },
@@ -1009,7 +1009,7 @@ export class ColumnManager {
         { field: 'isSidebar', header: 'در سایدبار', isSelected: false, isBoolean: true }
     ];
     analysis: IObjectIteratation[] = [
-        { field: 'counterReader', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'counterReader', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'overalCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
         { field: 'maxBetweenTwoMinute', header: 'حداکثر زمان بین دو', isSelected: true, readonly: true },
         { field: 'minBetweenTwoMinute', header: 'حداقل زمان بین دو', isSelected: true, readonly: true },
@@ -1022,7 +1022,7 @@ export class ColumnManager {
     ]
     forbidden: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true },
-        { field: 'displayName', header: 'مامور', isSelected: true },
+        { field: 'displayName', header: 'قرائت کننده', isSelected: true },
         { field: 'preEshterak', header: 'اشتراک قبلی', isSelected: true },
         { field: 'nextEshterak', header: 'اشتراک بعدی', isSelected: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
@@ -1094,7 +1094,7 @@ export class ColumnManager {
         { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
         { field: 'insertTime', header: 'زمان', isSelected: true },
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
         { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
         // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
@@ -1116,8 +1116,8 @@ export class ColumnManager {
     importedListDetails: IObjectIteratation[] = [
         { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
         { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true },
-        { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
-        { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },
+        { field: 'counterReaderName', header: 'قرائت کننده فعلی', isSelected: true, readonly: true },
+        { field: 'newCounterReaderName', header: 'قرائت کننده جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
@@ -1136,7 +1136,7 @@ export class ColumnManager {
     ];
     // For Follow UP component
     LMPerDayFollowUpPositions: IObjectIteratation[] = [
-        { field: 'counterReaders', header: 'مامور', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        { field: 'counterReaders', header: 'قرائت کننده', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
         { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
         { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
@@ -1152,7 +1152,7 @@ export class ColumnManager {
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-        { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'counterReaders', header: 'قرائت کننده(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
@@ -1177,9 +1177,9 @@ export class ColumnManager {
         { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true }
     ];
     allLists: IObjectIteratation[] = [
-        { field: 'counterReaderName', header: 'مامور', isSelected: false },
-        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: false },
@@ -1308,9 +1308,9 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true }
     ]
     generalGroupModify: IObjectIteratation[] = [
-        { field: 'counterReaderName', header: 'مامور', isSelected: false },
-        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true, icon: '' },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true, readonly: true, icon: '' },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true, icon: '' },
@@ -1375,9 +1375,9 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, readonly: false, enableTooltip: true, icon: '_editable' }
     ]
     ModifyList: IObjectIteratation[] = [
-        { field: 'counterReaderName', header: 'مامور', isSelected: false },
-        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
-        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, ltr: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: false },
@@ -1450,7 +1450,7 @@ export class ColumnManager {
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
         { field: 'firstName', header: 'نام', isSelected: true },
         { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
         { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
         { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true },
         { field: 'imageAttrTitle', header: 'آیتم', isSelected: true },

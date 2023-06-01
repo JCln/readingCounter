@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProfileService } from 'services/profile.service';
-
 @Component({
   selector: 'app-image-viewer',
   templateUrl: './image-viewer.component.html',
-  styleUrls: ['./image-viewer.component.scss']
+  styleUrls: ['./image-viewer.component.scss'],
+
 })
 export class ImageViewerComponent implements OnInit, AfterViewInit {
   imageURL: string = '';

@@ -15,7 +15,6 @@ import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { MathS } from 'src/app/classes/math-s';
-
 @Component({
   selector: 'app-woum',
   templateUrl: './woum.component.html',

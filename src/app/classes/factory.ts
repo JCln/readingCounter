@@ -263,10 +263,12 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
         });
     }
     routeToOffload = (event: object) => {
-        console.log(event); // not exactly why but without console.log modify carousel not working on next and previous clicked on first glance of allComponent(modifyCompnent) view
-        this.carouselDataSource = event['dataSource'];
-        this.rowIndex = event['ri'];
-        this.showCarousel = true;
+        setTimeout(() => {
+            console.log(event); // not exactly why but without console.log modify carousel not working on next and previous clicked on first glance of allComponent(modifyCompnent) view
+            this.carouselDataSource = event['dataSource'];
+            this.rowIndex = event['ri'];
+            this.showCarousel = true;
+        }, 0);
     }
     carouselNextItem = () => {
         this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;

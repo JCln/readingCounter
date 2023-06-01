@@ -38,7 +38,7 @@ export class OffloadedGroupComponent extends FactoryONE {
   downloadOutputSingle = async (row: ITracking) => {
     const config = {
       messageTitle: EN_messages.downloadPermit,
-      text: 'ش پیگیری: ' + row.trackNumber + '،   مامور: ' + row.counterReaderName,
+      text: 'ش پیگیری: ' + row.trackNumber + '،   قرائت کننده: ' + row.counterReaderName,
       minWidth: '19rem',
       isInput: false,
       isDelete: false,
@@ -60,7 +60,7 @@ export class OffloadedGroupComponent extends FactoryONE {
   backToReading = async (rowDataAndIndex: ITracking) => {
     const config = {
       messageTitle: EN_messages.toReading,
-      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '،   مامور: ' + rowDataAndIndex.counterReaderName,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '،   قرائت کننده: ' + rowDataAndIndex.counterReaderName,
       minWidth: '19rem',
       isInput: true,
       isDelete: false,

@@ -325,7 +325,7 @@ export interface IOffloadModifyType {
     modifyeType: ENOffloadModifyType
 }
 export enum ENCompanyName {
-    title = 'HivaPardazAtlas'
+    title = 'HiwaPardazAtlas'
 }
 export enum ENHasCount {
     hasCount = 'true',

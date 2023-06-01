@@ -64,7 +64,7 @@ export class ImportDynamicService {
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
     { field: 'orderDigit', header: 'ترتیب عددی', isSelected: false, readonly: true },
     { field: 'orderPersian', header: 'ترتیب', isSelected: false, readonly: true },
-    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }
+    { field: 'routeAndReaderIds', header: 'قرائت کننده', isSelected: true, readonly: false, isSelectOption: true }
   ]
 
   importDynamicReq: IImportDynamicDefault = {

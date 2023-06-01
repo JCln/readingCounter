@@ -87,7 +87,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
       { field: 'offloadDayalali', header: 'روز', isSelected: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
-      { field: 'counterReaderName', header: 'مامور', isSelected: true },
+      { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
       { field: 'duration', header: 'زمان', isSelected: false, isNumber: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
