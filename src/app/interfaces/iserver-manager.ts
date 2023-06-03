@@ -16,6 +16,15 @@ export enum ENClientServerErrors {
     'cs502' = 502,
     'cs504' = 504,
 }
+export interface IRequestLogInput {
+    jalaliDay: string
+    toTime: string,
+    fromTimeH: any,
+    fromTimeM: string,
+    fromTime: string,
+    toTimeH: string,
+    toTimeM: string,
+}
 export interface IRequestLog {
     id: number,
     userDisplayName: string,

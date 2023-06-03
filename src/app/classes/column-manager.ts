@@ -340,6 +340,24 @@ export class ColumnManager {
         { field: 'requestTime', header: 'زمان', isSelected: true },
         { field: 'ip', header: 'IP', isSelected: true },
     ]
+    requestLogAnonymous: IObjectIteratation[] = [
+        // { field: 'id', header: 'id', isSelected: true },        
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        { field: 'path', header: 'path', isSelected: true, ltr: true },
+        { field: 'controllerAction', header: 'action', isSelected: true, ltr: true },
+        { field: 'requestDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'requestTime', header: 'زمان', isSelected: true },
+        { field: 'ip', header: 'IP', isSelected: true },
+    ]
+    requestLogListUser: IObjectIteratation[] = [
+        // { field: 'id', header: 'id', isSelected: true },        
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        { field: 'path', header: 'path', isSelected: true, ltr: true },
+        { field: 'controllerAction', header: 'action', isSelected: true, ltr: true },
+        { field: 'requestDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'requestTime', header: 'زمان', isSelected: true },
+        { field: 'ip', header: 'IP', isSelected: true },
+    ]
     rrDetails: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },

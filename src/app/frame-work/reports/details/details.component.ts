@@ -1,4 +1,3 @@
-import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';

@@ -234,14 +234,17 @@ export enum ENInterfaces {
     signalRReceiveMessage = 'receiveMessage',
 
     serverManagerDelete = 'V1/Server/Delete',
-    serverManagerErrors = 'V1/Server/Errors',
     serverManagerHangFire = '/main/admin/hangFire?access_token=',
     serverManagerHealthCheck = '/healthchecks-ui',
     serverManagerErrorsElmah = '/elmah/detail/',
     serverManagerResetApp = 'V1/Server/ResetApp',
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
-    serverManagerRequestLog = 'V1/RequestLog/List',
     serverManagerOSInfo = 'V1/Server/OsInfo',
+
+    serverManagerRequestLog = 'V1/RequestLog/List',
+    requestLogUser = 'V1/RequestLog/List/User',
+    requestLogAnonymous = 'V1/RequestLog/List/Anonymous',
+    serverManagerErrors = 'V1/Server/Errors',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

@@ -45,7 +45,7 @@ import {
   IUserKarkard,
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
-import { IIpRules, IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
+import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInput, IServerOSInfo } from 'interfaces/iserver-manager';
 import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
@@ -254,7 +254,27 @@ export class CloseTabService {
   saveDataForDMAAnalyze: IReadingTimeRes[];
   saveDataForRRDetails: IReadingReportDetails[];
   saveDataForRequestLog: IRequestLog[];
+  saveDataForRequestLogListUser: IRequestLog[];
+  saveDataForRequestLogAnonymous: IRequestLog[];
   saveDataForRequestLogReq: any = {
+    jalaliDay: '',
+    fromTimeH: '',
+    fromTimeM: '',
+    fromTime: '',
+    toTimeH: '',
+    toTimeM: '',
+    toTime: ''
+  }
+  saveDataForRequestLogListUserReq: IRequestLogInput = {
+    jalaliDay: '',
+    fromTimeH: '',
+    fromTimeM: '',
+    fromTime: '',
+    toTimeH: '',
+    toTimeM: '',
+    toTime: ''
+  }
+  saveDataForRequestLogAnonymousReq: IRequestLogInput = {
     jalaliDay: '',
     fromTimeH: '',
     fromTimeM: '',
@@ -407,6 +427,8 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
+    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
+    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
     { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
