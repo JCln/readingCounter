@@ -4,6 +4,7 @@
 @import '_mat.scss';
 @import 'tooltip.scss';
 @import 'choose-files.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
@@ -16,7 +17,6 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
   gap: var(--font_05);
   align-items: center;
 }
@@ -25,36 +25,32 @@ section.content {
   margin: var(--font_05) 0;
 }
 
-section.dynamic_content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
-  gap: var(--font_05);
-  align-items: center;
-  border: .15rem solid var(--thirdy_3);
-  box-shadow: 1px 1px 3px 1px var(--thirdy_3);
-  border-radius: $border_15;
-  padding: var(--font_xxs);
-  margin: var(--font_xs) 0;
-}
-
 .static_part {
+  margin: auto;
   background: var(--white);
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
   padding: var(--font_xxs);
+  width: 19rem;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+
+  @media (min-width: 550px) {
+    width: 23rem;
+  }
+
+  @media (min-width: 700px) {
+    width: 29rem;
+  }
 }
+
 
 .check_boxes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 9rem));
   align-items: center;
-  gap: var(--font_05);
-}
-
-._key,
-._value {
-  font-size: var(--font_m);
-  font-weight: 800;
+  gap: var(--font_02);
+  padding: 0;
+  margin-top: var(--font_02);
 }
 
 ._value {
@@ -68,32 +64,15 @@ section.dynamic_content {
   width: 100%;
 }
 
-h2 {
-  color: var(--secondary_6);
-  margin-left: var(--font_5);
-}
-
 footer {
   margin-top: var(--font_2);
-  text-align: center;
+  // overridden to textAlign right from footer_with_background class
+  text-align: center !important;
 
   button {
     margin: var(--font_01) 0;
   }
 }
-
-.order_by {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-hr {
-  margin: 0 auto;
-  background-color: var(--primary_5);
-  height: var(--font_02);
-  margin-bottom: var(--font_xxs);
-}
-
 
 [hidden] {
   display: none;

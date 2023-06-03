@@ -1,71 +1,75 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="content">
-            <div class="input_2">
-                <div class="_key">ناحیه</div>
-                <p-dropdown name="zones" [options]="zoneDictionary"
-                    [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId" placeholder="انتخاب مورد"
-                    [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
-                </p-dropdown>
-            </div>
-            <div class="input_2">
-                <div class="_key">از</div>
-                <div class="_value">
-                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
-                        [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.fromDate">
-                    </app-date-jalali>
+        <section class="_card"
+            [@openClose]="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed ? 'slideUp' : 'slideDown'">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId"
+                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
                 </div>
-            </div>
-            <div class="input_2">
-                <div class="_key">تا</div>
-                <div class="_value">
-                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
-                        [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.toDate">
-                    </app-date-jalali>
+                <div class="input_2">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.fromDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
-            </div>
+                <div class="input_2">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.toDate">
+                        </app-date-jalali>
+                    </div>
+                </div>
 
-            <button type="submit" class="btn_1">
-                مشاهده لیست
-                <i class="pi pi-list"></i>
-            </button>
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
 
+            </section>
         </section>
-
-
     </form>
 
     <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForUserKarkardSummary" [paginator]="true"
         [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-        [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-        stateStorage="session" stateKey="karkard-allstates"
-        [resizableColumns]="trackingManagerService.getLocalResizable()"
-        [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
+        [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl"
+        styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
+        stateKey="karkard-allstates" [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
-                [filter]="true" showClear="true">
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
             <div class="header_icons_wrap">
                 <div class="right_side">
                 </div>
                 <div class="left_side">
+                    <app-collapsable [_isCollapsed]=closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed
+                        (_clicked)="closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed = !closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed">
+                    </app-collapsable>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
 
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                     <p-sortIcon field="{{col.field}}"></p-sortIcon>
                     {{col.header}}
                 </th>
             </tr>
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns">
                     <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                     </p-columnFilter>
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
@@ -76,7 +80,7 @@
 
         <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
             <tr>
-                <td *ngFor="let col of columns">
+                <td class="__columns" *ngFor="let col of columns">
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isBoolean; else simple">
                         <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">

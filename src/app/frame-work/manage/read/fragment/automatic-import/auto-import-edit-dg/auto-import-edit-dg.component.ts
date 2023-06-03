@@ -19,7 +19,7 @@ export class AutoImportEditDgComponent {
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AutoImportEditDgComponent>,
-    private fragmentManagerService: FragmentManagerService,
+    public fragmentManagerService: FragmentManagerService,
   ) {
     console.log(data);
     this.readingPeriodKindDictionary = data.dictionary;

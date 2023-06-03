@@ -46,9 +46,9 @@ export class CountryComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForCountry = this.closeTabService.saveDataForCountry.slice(0, index).concat(this.closeTabService.saveDataForCountry.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.sectorsManagerService.firstConfirmDialog();
+    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData['dataSource']);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }

@@ -1,4 +1,5 @@
 import {
+    aboutUs,
     BrowserVersions,
     defaultAggregateTracks,
     ENActivateProvinceTitle,
@@ -12,11 +13,11 @@ import {
     IENV,
     IENV_BROWSER_SETUP,
     reorderableTable,
-    resizableTable,
+    simafaImportStatus,
     timeout,
 } from 'interfaces/build';
 
-import { version } from './../interfaces/build';
+import { version } from '../interfaces/build';
 
 export class ActivatedProvince implements IENV {
     public static readonly DEFAULT = new ActivatedProvince(
@@ -24,7 +25,6 @@ export class ActivatedProvince implements IENV {
         ENURLs.DEFAULT,
         ENMapUrls.DEFAULT.value,
         ENHasNextBazdid.DEFAULT.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.DEFAULT.value,
@@ -32,88 +32,95 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
         ENURLs.ESF,
         ENMapUrls.ESF.value,
         ENHasNextBazdid.ESF.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.ESF.value,
-        BrowserVersions.ESF.value,
-        ENYears.ESF.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
         ENURLs.TEH_ZONE4,
         ENMapUrls.TEH_ZONE4.value,
         ENHasNextBazdid.TEH_ZONE4.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.TEH_ZONE4.value,
-        BrowserVersions.TEH_ZONE4.value,
-        ENYears.TEH_ZONE4.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
         ENURLs.TEH_SE,
         ENMapUrls.TEH_SE.value,
         ENHasNextBazdid.TEH_SE.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.TEH_SE.value,
-        BrowserVersions.TEH_SE.value,
-        ENYears.TEH_SE.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
         ENURLs.TEH_SE_LOCAL,
         ENMapUrls.TEH_SE_LOCAL.value,
         ENHasNextBazdid.TEH_SE_LOCAL.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.TEH_SE_LOCAL.value,
-        BrowserVersions.TEH_SE_LOCAL.value,
-        ENYears.TEH_SE_LOCAL.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
         ENURLs.KERMANSHAH,
         ENMapUrls.KERMANSHAH.value,
         ENHasNextBazdid.KERMANSHAH.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.KERMANSHAH.value,
-        BrowserVersions.KERMANSHAH.value,
-        ENYears.KERMANSHAH.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     // ZONE 6 TEHRAN
     public static readonly REY = new ActivatedProvince(
@@ -121,7 +128,6 @@ export class ActivatedProvince implements IENV {
         ENURLs.REY,
         ENMapUrls.REY.value,
         ENHasNextBazdid.REY.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.REY.value,
@@ -129,15 +135,16 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TSW = new ActivatedProvince(
         ENActivateProvinceTitle.TSW,
         ENURLs.TSW,
         ENMapUrls.REY.value,
         ENHasNextBazdid.REY.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.TSW.value,
@@ -145,15 +152,16 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
     public static readonly TEH1 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH1,
         ENURLs.TEH1,
         ENMapUrls.DEFAULT.value,
         ENHasNextBazdid.DEFAULT.value,
-        resizableTable.DEFAULT.value,
         reorderableTable.DEFAULT.value,
         defaultAggregateTracks.DEFAULT.value,
         ENMapCenter.DEFAULT.value,
@@ -161,8 +169,10 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
         timeout.time,
-        version.version
+        version.version,
+        aboutUs,
     );
 
     private constructor(
@@ -170,7 +180,6 @@ export class ActivatedProvince implements IENV {
         public readonly API_URL: string,
         public readonly mapUrls: { title: string, url: string }[],
         public readonly hasNextBazdid: boolean,
-        public readonly reSizableTable: boolean,
         public readonly reOrderableTable: boolean,
         public readonly defaultAggregateTracks: boolean,
         public readonly mapCenter: [number, number],
@@ -193,8 +202,10 @@ export class ActivatedProvince implements IENV {
         public readonly years: { title: string, value: number }[],
         public readonly getDeleteDictionary: { id: number, title: string }[],
         public readonly hasCanclableSpinner: boolean,
+        public simafaImportStatus: { hasSingle: boolean, hasBatch: boolean },
         public timeout: number,
         public version: string,
+        public aboutUs: { email: string, tel: string, address: string, coName: string },
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

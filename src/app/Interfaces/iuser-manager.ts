@@ -162,6 +162,45 @@ export interface appItems {
         }
     ]
 }
+export interface IUserEditOnRoleManager {
+    appItems: [
+        {
+            title: string,
+            cssClass: string,
+            logicalOrder: number,
+            moduleItems: [
+                {
+                    title: string,
+                    cssClass: string,
+                    logicalOrder: number,
+                    controllerItems: [
+                        {
+                            title: string,
+                            cssClass: string,
+                            logicalOrder: number,
+                            actionItems: [
+                                {
+                                    title: string,
+                                    cssClass: string,
+                                    logicalOrder: number,
+                                    value: string,
+                                    isSelected: boolean
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    roleItems: [
+        {
+            id: number,
+            title: string,
+            isSelected: boolean
+        }
+    ]
+}
 export interface IUserEditOnRole {
     roleId: number,
     selectedActions: string[]

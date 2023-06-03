@@ -4,7 +4,8 @@ import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
 
-  temp = ActivatedProvince.DEFAULT;
+  temp = ActivatedProvince.TEH1;
+
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
   mapUrls = this.temp.mapUrls;
@@ -15,10 +16,11 @@ export class EnvService implements IENV {
   getDeleteDictionary = this.temp.getDeleteDictionary;
   hasCanclableSpinner = this.temp.hasCanclableSpinner;
   timeout = this.temp.timeout;
-  reSizableTable = this.temp.reSizableTable;
   reOrderableTable = this.temp.reOrderableTable;
   defaultAggregateTracks = this.temp.defaultAggregateTracks;
+  simafaImportStatus = this.temp.simafaImportStatus;
   version = this.temp.version;
+  aboutUs = this.temp.aboutUs;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

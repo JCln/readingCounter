@@ -1,6 +1,6 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="closeTabService.saveDataForUserSearch.provinceItems">
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForUserSearch.provinceItems">
         <form *ngIf="closeTabService.saveDataForUserSearch.provinceItems"
             [formGroup]="closeTabService.saveDataForUserSearch.provinceItems">
             <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
@@ -9,35 +9,35 @@
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="closeTabService.saveDataForUserSearch.appItems">
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForUserSearch.appItems">
         <ng-template *ngIf="closeTabService.saveDataForUserSearch.appItems" matStepLabel>سطح دسترسی به
             خدمات</ng-template>
         <app-select-action [userAddData]="closeTabService.saveDataForUserSearch.appItems"></app-select-action>
     </mat-step>
 
-    <mat-step [stepControl]="closeTabService.saveDataForUserSearch.roleItems">
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForUserSearch.roleItems">
         <form *ngIf="closeTabService.saveDataForUserSearch.roleItems" formGroup="roleItemsData">
             <ng-template matStepLabel>گروه دسترسی</ng-template>
             <app-select-roles [roleItems]="closeTabService.saveDataForUserSearch.roleItems"></app-select-roles>
         </form>
     </mat-step>
 
-    <mat-step>
+    <mat-step [completed]="false">
         <ng-template matStepLabel>نمایش</ng-template>
         <section class="accept">
             <button class="btn_2 _special" (click)="searchUsers()">نمایش کاربران</button>
             <button class="btn_2" matStepperPrevious>صفحه قبل</button>
         </section>
 
+
+        <app-prime-table [dataSource]="closeTabService.saveDataForUserSearchRes" [_numberOfExtraColumns]="[1 , 2 , 3]"
+            [_sessionName]="'user-search-session'" [_sortMode]="'multiple'" [_outputFileName]="'userSearch'"
+            [_selectedColumnsToRemember]="'selectedUsersSearch'" [_checkUpName]="'userSearch'"
+            (refreshedTable)="searchUsers()" (routedToEditPage)="usersAllService.routeToEditPage($event)"
+            (routedToLoggs)="userLogginsService.updateUserLogginsInfo($event)"
+            (showedExactConfig)="showExactConfig($event)" (ActivatedUser)="ActivateUser($event)"
+            (DeActivatedUser)="DeActivateUser($event)" (resetedPasswordUser)="resetPasswordUser($event)">
+        </app-prime-table>
     </mat-step>
 
 </mat-horizontal-stepper>
-
-
-<app-prime-table [dataSource]="closeTabService.saveDataForUserSearchRes" [_numberOfExtraColumns]="[1 , 2 , 3]"
-    [_sessionName]="'user-search-session'" [_sortMode]="'multiple'" [_outputFileName]="'userSearch'"
-    [_selectedColumnsToRemember]="'selectedUsersSearch'" [_checkUpName]="'userSearch'" (refreshedTable)="searchUsers()"
-    (routedToEditPage)="usersAllService.routeToEditPage($event)"
-    (routedToLoggs)="userLogginsService.updateUserLogginsInfo($event)" (showedExactConfig)="showExactConfig($event)"
-    (ActivatedUser)="ActivateUser($event)" (DeActivatedUser)="DeActivateUser($event)"
-    (resetedPasswordUser)="resetPasswordUser($event)"></app-prime-table>

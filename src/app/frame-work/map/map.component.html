@@ -15,7 +15,7 @@
         <input type="radio" id="_dash" name="radio">
     </div>
 
-    <app-locations (sendlocations)="showCounterReadersLocations($event)"></app-locations>
+    <app-locations [hidden]="!isShowMap" (sendlocations)="showCounterReadersLocations($event)"></app-locations>
     <section class="_options">
         <div class="_flex_dr_ric" [hidden]="!canShowOptionsButton || !isShowMap">
             <button class="polyline_switch tooltip" (click)="isShowMapConfig = !isShowMapConfig">
@@ -25,7 +25,7 @@
             <p>تنظیمات نقشه</p>
         </div>
         <div class="_flex_dr_ric" [hidden]="!isShowMap">
-            <button style="z-index: 1;" (click)="mapService.backToPreviousPage()"
+            <button style="z-index: 1;" (click)="utilsService.backToPreviousPage()"
                 class="_circle_border p_icons tooltip">
                 <i class="pi pi-arrow-left"></i>
                 <div class="tooltip_text">بازگشت به صفحه قبلی</div>
@@ -40,7 +40,7 @@
         <h3>زمان نمایش (ms) : {{polyline_configs}}</h3>
         <p-slider [(ngModel)]="polyline_configs" [max]=3000></p-slider>
         <article>
-            <h3>ترتیب براساس :</h3>
+            <h3 class="_config_title">ترتیب براساس :</h3>
             <div *ngFor="let orderType of orderGroup">
                 <div class="p-field-radiobutton">
                     <p-radioButton name="orderByDate" [value]="orderType.value" [(ngModel)]="_selectedOrderId"
@@ -49,7 +49,7 @@
                     <label [for]="orderType.title">{{orderType.header}}</label>
                 </div>
             </div>
-            <h3>به ترتیب صعودی؟</h3>
+            <h3 class="_config_title">به ترتیب صعودی؟</h3>
             <mat-checkbox name="orderInAsc" [(ngModel)]="_isOrderInAsc">بلی</mat-checkbox>
             <br>
         </article>

@@ -8,8 +8,8 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class SnackWrapperService {
 
-  private snackBar = new BehaviorSubject<ISnackBar>({ message: '', duration: 0, backColor: ENSnackBarColors.danger });
-  private snackBarSignal = new BehaviorSubject<ISnackBarSignal>({ message: '', duration: 0, backColor: ENSnackBarColors.danger });
+  private snackBar = new BehaviorSubject<ISnackBar>({ message: '', duration: ENSnackBarTimes.zero, backColor: ENSnackBarColors.danger });
+  private snackBarSignal = new BehaviorSubject<ISnackBarSignal>({ message: '', duration: ENSnackBarTimes.zero, backColor: ENSnackBarColors.danger });
   private signalToast = new BehaviorSubject<any>({});
 
   get snackStatus(): Observable<ISnackBar> {

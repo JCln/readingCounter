@@ -10,7 +10,7 @@ import { MathS } from '../classes/math-s';
 })
 export class JwtService {
   constructor(
-    private browserStorageService: BrowserStorageService    
+    private browserStorageService: BrowserStorageService
   ) { }
 
   getDecodedAccessToken(): any {
@@ -86,5 +86,8 @@ export class JwtService {
   removeAuthLocalStorage = () => {
     this.browserStorageService.removeLocal(ENAuthTokenType.access_token);
     this.browserStorageService.removeLocal(ENAuthTokenType.refresh_token);
+  }
+  removeAllExceptAuths = () => {
+    this.browserStorageService.removeAllExceptAuths();
   }
 }

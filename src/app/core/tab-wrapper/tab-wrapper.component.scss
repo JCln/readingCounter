@@ -18,16 +18,21 @@ li {
   justify-content: center;
   align-items: center;
   margin: 0.04rem;
-  min-width: var(--font_35);
+  min-width: 6rem;
   border: 1.5px solid;
   border-radius: 10px;
-  color: var(--primary_5);
+  color: var(--sidebar_1);
   list-style-type: none;
   font-size: var(--font_ss);
   font-weight: 600;
   background: var(--secondary_4);
   cursor: pointer;
   padding: var(--font_02);
+  z-index: 1;
+
+  @media (min-width:550px) {
+    min-width: var(--font_35);
+  }
 
   @media (min-width: 700px) {
     padding: var(--font_02) 0 0;
@@ -50,6 +55,10 @@ li {
     color: var(--secondary_6);
     opacity: 0;
     transition: opacity 50ms ease-in-out;
+
+    @media (max-width:550px) {
+      opacity: 1;
+    }
 
     &:hover {
       color: var(--thirdy_1);
@@ -75,14 +84,18 @@ li {
       color: var(--red_500);
       background: var(--secondary_4);
     }
+
+    @media (max-width:550px) {
+      opacity: 1;
+    }
   }
 
   &:hover {
     background: var(--secondary_3);
+    color: var(--primary_4);
 
     .fa {
       opacity: 1;
-
     }
   }
 
@@ -113,8 +126,7 @@ li.active::before {
 ._remove_all {
   margin: 0 auto 0 var(--font_03);
   cursor: pointer;
-  max-width: var(--font_s);
-  max-height: var(--font_s);
+  padding: var(--font_01);
 
   span {
     border-radius: $border_50;
@@ -140,6 +152,3 @@ li.active::before {
   bottom: -150% !important;
   left: 4rem !important;
 }
-
-@include media_wrapper(780px, '._remove_all', max-width, 2rem);
-@include media_wrapper(780px, '._remove_all', min-width, 2rem);

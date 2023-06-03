@@ -1,3 +1,4 @@
+<!-- auth4 means 'افزودن موردی' -->
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForCounterReport" 
     [_checkUpName]="'auth4'"
@@ -5,6 +6,7 @@
     [_dictionaryName]="'zoneId'"
     [dictionary]="zoneDictionary"    
     [_numberOfExtraColumns]="[1, 2]"
+    [_sessionName]="'counterreport-session'"
     [_selectedColumnsToRemember]="'selectedCounterReport'"
     (refreshedTable)="refreshTable()"
     (openedAddDialog)="openAddDialog()"

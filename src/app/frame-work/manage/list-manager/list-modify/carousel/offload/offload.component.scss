@@ -65,3 +65,8 @@ section._container {
 .header_icons_wrap {
   margin-bottom: var(--font_05);
 }
+
+.tooltip:hover .tooltip_text {
+  visibility: visible;
+  transform: translate(50%, -30%);
+}

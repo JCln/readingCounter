@@ -40,9 +40,9 @@ export class TxtOutputComponent extends FactoryONE {
   refetchTable = (index: number) => this.closeTabService.saveDataForTextOutput = this.closeTabService.saveDataForTextOutput.slice(0, index).concat(this.closeTabService.saveDataForTextOutput.slice(index + 1));
   removeRow = async (rowData: object) => {
     this.newRowLimit = 1;
-    const a = await this.readManagerService.firstConfirmDialog();
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].itemTitle + '،  ناحیه: ' + rowData['dataSource'].zoneId);
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.textOutputRemove, rowData['dataSource']);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.textOutputRemove, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }

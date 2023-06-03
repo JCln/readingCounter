@@ -7,7 +7,6 @@ import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
 
@@ -59,8 +58,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     public utilsService: UtilsService,
     public config: PrimeNGConfig,
     public dialogService: DialogService,
-    public profileService: ProfileService,
-    public authService: AuthService
+    public profileService: ProfileService
   ) {
     super(
       browserStorageService,
@@ -68,8 +66,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
       columnManager,
       config,
       dialogService,
-      profileService,
-      authService
+      profileService
     );
   }
   clickedDropDowns = (event: any, element: string, dataId: any) => {
@@ -87,7 +84,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   onRowEditInit = (dataSource: object) => {
     this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
-    console.log(this.onRowEditing);
     this.onRowEditedInit.emit(dataSource);
   }
   onRowEditSave = (dataSource: object, ri: number) => {

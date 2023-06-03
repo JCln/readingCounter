@@ -12,10 +12,11 @@
         [_hasSaveColumns]=false
         [newRow]="newRow()"
         [newRowLimit]="newRowLimit"
-        [_selectedColumnsToRemember]="'selectedRRMaster'"
         [_sessionName]="'fragmentmaster-session'"
+        [_selectedColumnsToRemember]="'selectedRRMaster'"
         (newedRowChangedStatus)="testChangedValue()"
         (refreshedTable)="refreshTable()"     
+        (dropDownChanges)="closeTabService.saveDataForFragmentNOB['zoneId']"
         (removedRowEditing)="removeFragmentMaster($event)"        
         (onRowEditedSave)="onRowEditSave($event, $event)"
         (showedInMapSingle)="getIsValidateRow($event)"

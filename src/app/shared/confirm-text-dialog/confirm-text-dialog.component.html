@@ -1,0 +1,37 @@
+<main class="_container">
+    <div class="_icon">
+        <i [class]="data.icon" [ngClass]="{'_delete_color': data?.isDelete }"></i>
+    </div>
+    <h2>
+        {{data.messageTitle}}
+    </h2>
+    <h2 class="_title_2">
+        {{data.messageTitleTwo}}
+    </h2>
+    <p>
+        {{data.text}}
+    </p>
+    <div class="input_box">
+        <input *ngIf="data.isInput" class="input_1" type="text"
+            [placeholder]="data?.placeHolder ? data.placeHolder: 'توضیحات را وارد نمایید'" [(ngModel)]="userInputText">
+    </div>
+    <div *ngIf="data?.isSelectableDate">
+        <div class="date_wrapper">
+            <app-date-jalali name="date" (dateJalEvent)="receiveFromDateJalali($event)">
+            </app-date-jalali>
+        </div>
+    </div>
+
+    <mat-dialog-actions>
+        <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel()">
+            <i class="pi pi-times"></i>
+        </button>
+        <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
+            (click)="confirm()">تایید
+        </button>
+        <button *ngIf="!data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
+            (click)="confirmWithoutText()">تایید
+        </button>
+    </mat-dialog-actions>
+
+</main>

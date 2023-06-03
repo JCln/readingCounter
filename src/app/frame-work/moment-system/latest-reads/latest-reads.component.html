@@ -1,15 +1,18 @@
 <div class="map-frame">
     <div id="map2"></div>
 </div>
-<app-prime-table     
-    [dataSource]="closeTabService.saveDataForMomentLastRead" 
-    [_outputFileName]="'momentLs'"
-    [_checkUpName]="'moment-ls'"    
-    [_isSortable]= false
-    [_numberOfExtraColumns]="[1,2,3]"
-    (showedPictures)="getReadingReportTitles($event)"
-    (showedWOUIAsCarousel)="doShowCarousel($event)"
-    (showedInMapSingle)="openMapDialog($event)"    
- > 
+<div class="input_2">
+    <div class="_key">حداکثر سطر جدول</div>
+    <div class="_value">
+        <p-dropdown (onChange)="onNextReadViewable()" name="zones" [options]="atMostNumbers"
+            [(ngModel)]="_selectedMostNumbers" placeholder="انتخاب مورد" optionValue="val" optionLabel="title"
+            filter="true">
+        </p-dropdown>
+    </div>
+</div>
+<app-prime-table [dataSource]="closeTabService.saveDataForMomentLastRead" [_outputFileName]="'momentLs'"
+    [_checkUpName]="'moment-ls'" [_isSortable]=false [_hasRefreshTable]=false [_numberOfExtraColumns]="[1,2,3]"
+    (showedPictures)="getReadingReportTitles($event)" (showedWOUIAsCarousel)="doShowCarousel($event)"
+    (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>
 <!-- state saving correctly but for default sortField it may not happenning -->

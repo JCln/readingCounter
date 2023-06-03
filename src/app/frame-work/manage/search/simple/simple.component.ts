@@ -6,11 +6,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-simple',
   templateUrl: './simple.component.html',
-  styleUrls: ['./simple.component.scss']
+  styleUrls: ['./simple.component.scss'],
+  animations: [transitionAnimation]
 })
 export class SimpleComponent implements OnInit, OnDestroy {
   _years: ITitleValue[] = [];
@@ -69,5 +71,11 @@ export class SimpleComponent implements OnInit, OnDestroy {
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this._selectedKindId);
+  }
+  routeToLMAll = ($event: any) => {
+    const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);
+    $event.zoneTitle = $event.zoneId;
+    $event.zoneId = tempZoneId.id;
+    this.searchService.routeToLMAll($event);
   }
 }

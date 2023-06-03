@@ -20,7 +20,7 @@ export class ImportListDgComponent implements OnInit {
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     private cdr: ChangeDetectorRef,
     private dictionaryWrapperService: DictionaryWrapperService
   ) {
@@ -28,7 +28,7 @@ export class ImportListDgComponent implements OnInit {
   counterWrapper = async () => {
     this.allCounterReaders = await this.dictionaryWrapperService.getUserCounterReaderDictionary(this.config.data.zoneId);
     this.dataSource = this.config.data;
-    this._selectedDatas = this.trackingManagerService.getImportedListDetails();
+    this._selectedDatas = this.trackingManagerService.columnManager.columnSelectedMenus('importedListDetails');
     this.cdr.detectChanges();
   }
   ngOnInit(): void {

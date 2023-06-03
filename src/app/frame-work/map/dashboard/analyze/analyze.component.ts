@@ -44,7 +44,7 @@ export class AnalyzeComponent implements OnInit {
       bodyFontStyle: 'bold'
     }
   };
-  public radarChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانه', 'مٌد'];
+  public radarChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانه', 'مُد'];
 
   public radarChartData: ChartDataSets[] = [];
   public radarChartType: ChartType = 'radar';

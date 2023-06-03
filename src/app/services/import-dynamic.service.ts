@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
@@ -39,7 +38,6 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ImportDynamicService {
-  _assessPreCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   importDynamicValue: IImportDynamicDefault;
   ENImportDatas = ENImportDatas;
@@ -66,7 +64,7 @@ export class ImportDynamicService {
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
     { field: 'orderDigit', header: 'ترتیب عددی', isSelected: false, readonly: true },
     { field: 'orderPersian', header: 'ترتیب', isSelected: false, readonly: true },
-    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }
+    { field: 'routeAndReaderIds', header: 'قرائت کننده', isSelected: true, readonly: false, isSelectOption: true }
   ]
 
   importDynamicReq: IImportDynamicDefault = {
@@ -87,8 +85,6 @@ export class ImportDynamicService {
   constructor(
     public utilsService: UtilsService,
     private allImportsService: AllImportsService,
-    private dialog: MatDialog,
-    private router: Router,
     private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService
@@ -174,7 +170,7 @@ export class ImportDynamicService {
     return true;
   }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
-    this.router.navigate([EN_Routes.wrimpsimafardpgsingle, object]);
+    this.utilsService.compositeService.routeToExtras([EN_Routes.wrimpsimafardpgsingle, object]);
   }
   routeToSimafaBatch = (object: IReadingProgramRes) => {
     this.allImportsService.allImports_batch.readingProgramId = object.id;
@@ -185,7 +181,7 @@ export class ImportDynamicService {
     this.allImportsService.allImports_batch.year = object.year;
     this.allImportsService.allImports_batch.readingPeriodId = object.readingPeriodId;
     this.allImportsService.allImports_batch.canContinue = object.canContinue;
-    this.router.navigate([EN_Routes.wrimpsimafardpgbatch]);
+    this.utilsService.routeTo(EN_Routes.wrimpsimafardpgbatch);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     return this.validationNull(searchReq);
@@ -238,8 +234,6 @@ export class ImportDynamicService {
       return false;
     }
     if (!_isOrderByDate) {
-      console.log(1);
-
       if (!this.validationOnNull(val.readingPeriodId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_reading_time);
         return false;
@@ -487,10 +481,10 @@ export class ImportDynamicService {
   showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogComponent,
         {
           disableClose: disableClose,
-          minWidth: '65vw',
+          minWidth: '21rem',
           data: {
             data: res,
             title: title,
@@ -510,7 +504,7 @@ export class ImportDynamicService {
   showCheckboxDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',
@@ -679,9 +673,6 @@ export class ImportDynamicService {
   }
   snackMessage = (message: EN_messages) => {
     this.utilsService.snackBarMessageWarn(message);
-  }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();

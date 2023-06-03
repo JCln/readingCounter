@@ -6,20 +6,22 @@
 
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="allImportsService.allImports_batch.zoneId"
-                        name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="allImportsService.allImports_batch.zoneId"
+                            name="zoneId">
+                            <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
 
-                <div class="input_2 this">
+                <div class="input_2">
                     <div class="_key">درصد علی‌الحساب</div>
                     <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
                         [(ngModel)]="allImportsService.allImports_batch.alalHesabPercent">
                 </div>
-                <div class="input_2 this">
+                <div class="input_2">
                     <div class="_key">درصد تصویر</div>
                     <input class="_value" min="0" max="100" type="number" name="imagePercent"
                         [(ngModel)]="allImportsService.allImports_batch.imagePercent">
@@ -27,17 +29,17 @@
 
             </section>
 
-            <div class="check_boxes">
+            <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
                 <mat-checkbox name="hasPreNumber" [(ngModel)]="allImportsService.allImports_batch.hasPreNumber">
                     شماره قبلی
                 </mat-checkbox>
 
                 <mat-checkbox name="displayBillId" [(ngModel)]="allImportsService.allImports_batch.displayBillId">
-                    نمایش شناسه قبض
+                    شناسه قبض
                 </mat-checkbox>
 
                 <mat-checkbox name="displayRadif" [(ngModel)]="allImportsService.allImports_batch.displayRadif">
-                    نمایش ش.پرونده
+                    ش.پرونده
                 </mat-checkbox>
 
             </div>
@@ -50,17 +52,16 @@
         <p-table id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForSimafaBatch"
             [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
             currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-            [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive"
-            [responsive]="true" stateStorage="session" stateKey="simafa-batchsession" dataKey="id"
-            [resizableColumns]="importDynamicService.getLocalResizable()"
+            [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl"
+            styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
+            stateKey="simafa-batchsession" dataKey="id"
             [reorderableColumns]="importDynamicService.getLocalReOrderable()">
 
             <ng-template pTemplate="caption">
-                <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+                <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                     name="selectOptions" optionLabel="header"
                     (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables.selectedSimafaBatch ,$event)"
-                    selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
-                    [filter]="true" showClear="true">
+                    selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
                 </p-multiSelect>
                 <div class="header_icons_wrap">
                     <div class="right_side">
@@ -71,7 +72,7 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
+                    <th class="__headers" pReorderableColumn *ngFor="let col of columns">
                         {{col.header}}
                     </th>
                 </tr>
@@ -79,7 +80,7 @@
 
             <ng-template hidden="!dataSource" pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
                 <tr>
-                    <td *ngFor="let col of columns">
+                    <td class="__columns" *ngFor="let col of columns">
                         <span class="ui-column-title">{{col.header}}</span>
                         <ng-container *ngIf="col.isBoolean; else dropdown">
                             <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">
@@ -91,8 +92,8 @@
                                 <div *ngIf="!dataSource.counterReaderName">
                                     <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
                                         [(ngModel)]="allImportsService.allImports_batch.routeAndReaderIds[ri].counterReaderId"
-                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
-                                        optionValue="id" optionLabel="title" [filter]="true" [showClear]="true">
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" [filter]="true"
+                                        [showClear]="true">
                                     </p-dropdown>
                                 </div>
                             </ng-container>

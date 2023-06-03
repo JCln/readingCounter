@@ -37,8 +37,8 @@ export class PerDayComponent extends FactoryONE {
     })
   }
   private insertSelectedColumns = () => {
-    this._selectMainDatas = this.listManagerService.getLMPerDayPositions();
-    this._selectCols = this.listManagerService.getLMPerDay();
+    this._selectMainDatas = this.listManagerService.columnManager.columnSelectedMenus('lMPerDayPositions');
+    this._selectCols = this.listManagerService.columnManager.columnSelectedMenus('lMPerDay');
     this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
     this.dateJalaliService.sortByDate(this.closeTabService.saveDataForLMPD.offLoadPerDayHistory, 'day');
   }
@@ -66,6 +66,7 @@ export class PerDayComponent extends FactoryONE {
       if (this.closeTabService.saveDataForLMPDTrackNumber != this.PageSignsService.perday_pageSign.trackNumber || !this.closeTabService.saveDataForLMPD) {
         this.closeTabService.saveDataForLMPD = await this.listManagerService.getLM(ENInterfaces.ListOffloadedPERDAY, this.PageSignsService.perday_pageSign.trackNumber);
         this.closeTabService.saveDataForLMPDTrackNumber = this.PageSignsService.perday_pageSign.trackNumber;
+        this.closeTabService.saveDataForLMPD.zoneTitle = this.PageSignsService.perday_pageSign.zone;
       }
       this.setGetRanges();
       this.setDynamicPartRanges();

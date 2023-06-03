@@ -7,7 +7,7 @@
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
-            <input [readOnly]="true" class="_value _bigger_input" name="listNumber"
+            <input [readOnly]="true" class="_value" name="listNumber"
                 [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.listNumber">
         </div>
         <div class="input_2">
@@ -33,17 +33,16 @@
     <p-table id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
         [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
-        dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session"
+        dir="rtl" styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
         (onFilter)="filteredTableEvent($event.filteredValue)" (sortFunction)="listManagerService.customSort($event)"
-        [stateKey]="_sessionName" editMode="row" dataKey="id" [resizableColumns]="getLocalResizable()"
+        [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
         [reorderableColumns]="getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 optionLabel="header"
-                (ngModelChange)="columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
-                [filter]="true" showClear="true">
+                (ngModelChange)="listManagerService.columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
 
             <div class="header_icons_wrap">
@@ -72,7 +71,8 @@
                         <label class="font_family"
                             for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}}) نمایش قرائت شده
                             ها</label>
-                        <p-checkbox [(ngModel)]="columnManager._generalGroupHeaderCheckbox" [binary]="true">
+                        <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox"
+                            [binary]="true">
                         </p-checkbox>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
@@ -86,14 +86,14 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                     <p-sortIcon field="{{col.field}}"></p-sortIcon>
                     {{col.header}}
                 </th>
-                <th style="width: var(--font_25)" *ngFor="let item of _numberOfExtraColumns"></th>
+                <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
             </tr>
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns">
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="contains" type="text"
                         field="{{col.field}}">
@@ -101,7 +101,7 @@
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
                         field="counterStateId" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
+                            <p-multiSelect [maxSelectedLabels]="1" [ngModel]="value"
                                 [options]="counterStateByZoneDictionary" (onChange)="filterOptions($event, 'first')"
                                 optionLabel="title" optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
@@ -115,7 +115,7 @@
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
                         field="counterStateId" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
+                            <p-multiSelect [maxSelectedLabels]="1" [ngModel]="value"
                                 [options]="counterStateByCodeDictionary" (onChange)="filterOptions($event, 'second')"
                                 optionLabel="title" optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
@@ -127,24 +127,26 @@
                         </ng-template>
                     </p-columnFilter>
                 </th>
-                <th pResizableColumn pReorderableColumn style="width: var(--font_25)"
-                    *ngFor="let item of _numberOfExtraColumns"></th>
+                <th pReorderableColumn style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns">
+                </th>
             </tr>
         </ng-template>
 
         <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing"
             let-columns="columns" let-ri=rowIndex>
             <tr [ngClass]="{'has_error': dataSource.editedErrorDescription}">
-                <td pEditableColumn *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr, '_editable': col.icon}">
+                <td class="__columns" pEditableColumn *ngFor="let col of columns"
+                    [ngClass]="{'d_ltr': col.ltr, '_editable': col.icon}">
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isSelectOption;else selectOption">
                         <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
+
                         <ng-container *ngIf="(col.field == 'modifyType'); else secondDict">
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown name="modify" [options]="modifyType" [(ngModel)]="dataSource[col.field]"
-                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
-                                        [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                        [placeholder]="dataSource.modifyType" [ngClass]="{'p-dropdown-editable': true}"
+                                        optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], 'modifyType' , dataSource.id)">
                                     </p-dropdown>
                                 </ng-template>
@@ -157,11 +159,10 @@
                             <ng-container>
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                        <p-dropdown [options]="counterStateByZoneDictionary"
-                                            [(ngModel)]="dataSource[col.field]" placeholder="انتخاب مورد"
-                                            [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
-                                            optionLabel="title"
-                                            (onChange)="clickedDropDowns(dataSource[col.field], 'counterStateId' , dataSource.id)">
+                                        <p-dropdown name="drops" [options]="counterStateByZoneDictionary"
+                                            [(ngModel)]="dataSource[col.field]" [placeholder]="dataSource[col.field]"
+                                            [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                            (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
                                         </p-dropdown>
                                     </ng-template>
                                     <ng-template pTemplate="output">
@@ -263,38 +264,38 @@
                         </ng-template>
                     </ng-template>
                 </td>
-                <td (click)="openMoshtarakinDialog(dataSource)">
+                <td class="__columns" (click)="openMoshtarakinDialog(dataSource)">
                     <span class="ui-column-title">مشاهده سابقه</span>
                     <i class="tooltip p_icons pi pi-users">
                         <div class="tooltip_text">مشاهده سابقه</div>
                     </i>
                 </td>
-                <td (click)="openBriefKardexDialog(dataSource)">
+                <td class="__columns" (click)="openBriefKardexDialog(dataSource)">
                     <span class="ui-column-title">خلاصه کاردکس</span>
-                    <i class="tooltip p_icons pi pi-list">
+                    <i class="tooltip p_icons pi pi-folder">
                         <div class="tooltip_text">خلاصه کاردکس</div>
                     </i>
                 </td>
-                <td (click)="openMapDialog(dataSource)">
+                <td class="__columns" (click)="openMapDialog(dataSource)">
                     <span class="ui-column-title">مشاهده روی نقشه</span>
                     <i class="tooltip p_icons pi pi-map-marker">
                         <div class="tooltip_text_right">مشاهده روی نقشه</div>
                     </i>
                 </td>
-                <td>
+                <td class="__columns">
                     <span class="ui-column-title">نمایش گزارش بازرسی</span>
                     <i (click)="getReadingReportTitles(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                         <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                     </i>
                 </td>
                 <!-- for making readable and compatible singleton dataType -->
-                <td (click)="doShowCarousel(dataSource)">
+                <td class="__columns" (click)="doShowCarousel(dataSource)">
                     <span class="ui-column-title">بررسی عکس/صوت</span>
-                    <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons fas fa-camera">
+                    <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons pi pi-camera">
                         <div class="tooltip_text_right">بررسی عکس/صوت</div>
                     </i>
                 </td>
-                <td class="error_info">
+                <td class="__columns" class="error_info">
                     <i *ngIf="dataSource.editedErrorDescription == '' && !dataSource.isResponseHasError"
                         class="pi-check tooltip p_icons pi pi-check-circle"></i>
                     <i *ngIf="dataSource.isResponseHasError" class="info_icon tooltip p_icons pi pi-info-circle">

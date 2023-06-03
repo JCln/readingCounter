@@ -1,7 +1,5 @@
 @mixin _borders {
   border-radius: 0;
-  border-right: 1px solid var(--secondary_3);
-  padding-right: .87rem;
 }
 
 ._theme_mode {
@@ -16,7 +14,7 @@
   ._color_palete {
     display: flex;
     position: relative;
-    border-radius: 100vmax;
+    border-radius: $border_100vmax;
     padding: .4rem;
     font-size: var(--font_m);
     place-content: center;

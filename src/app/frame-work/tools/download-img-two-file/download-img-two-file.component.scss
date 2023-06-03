@@ -1,33 +1,18 @@
 @import 'primeNG';
 @import 'input';
 @import 'button';
+@import 'cards';
 
-.input_2 {
-  direction: rtl;
-}
 
-._value {
-  border: none;
-}
-
-.btn_1 {
-  max-width: 16rem;
+.static_part {
+  display: grid;
+  justify-content: center;
 }
 
 ._container {
   position: relative;
   margin: auto var(--font_3);
 }
-
-.content {
-  display: grid;
-  direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
-  justify-content: center;
-  gap: var(--font_05);
-  background: var(--secondary_1);
-}
-
 
 .center_footer {
   text-align: center;

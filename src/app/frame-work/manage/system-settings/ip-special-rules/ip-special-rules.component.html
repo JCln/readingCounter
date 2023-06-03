@@ -1,0 +1,16 @@
+<app-prime-table     
+    [dataSource]="closeTabService.saveDataForIpSpecialRules"
+    [_outputEnabled]=false
+    [_hasSaveColumns]=true
+    [_checkUpName]="'ipspecialrules'"
+    [_outputFileName]="'ipSpecialRules'"
+    [_numberOfExtraColumns]="[1, 2]"
+    [_sessionName]="'ipSpecialRules-session'"
+    [_selectedColumnsToRemember]="'selectedIpspecialrules'"    
+    (refreshedTable)="refreshTable()"    
+    (openedAddDialog)="openAddDialog()"    
+    (refreshedTable)="refreshTable()"
+    (openedEditDialog)="openEditDialog($event)"
+    > 
+</app-prime-table>
+<!-- (removedRow)="removeRow($event)" -->

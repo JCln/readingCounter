@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>
+    <i [ngClass]="data.isConfirm ? 'pi pi-question' : 'pi pi-check'" class="p_icons _circle_border"></i>
+
     <div class="_text">
         {{data.title}}
     </div>
-
-    <i [ngClass]="data.isConfirm ? 'pi pi-question' : 'pi pi-check'" class="p_icons _circle_border"></i>
 </h2>
 
 <mat-dialog-content>
@@ -20,7 +20,7 @@
         <div class="_value"><strong>{{data.data.errorCount}}</strong></div>
     </div>
     <div class="_key_value" *ngIf="!data.isConfirm">
-        <div class="_key">مامور</div>
+        <div class="_key">قرائت کننده</div>
         <div class="_value"><strong>{{data.data.counterReaderName}}</strong></div>
     </div>
     <div class="_key_value" *ngIf="!data.isConfirm">
@@ -30,6 +30,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="btn_2" (click)="cancel()">بازگشت</button>
+    <button class="close_dg" type="button" (click)="cancel()">
+        <i class="pi pi-times"></i>
+    </button>
     <button *ngIf="data.isConfirm" class="btn_2 _custom" (click)="confirm()">تایید</button>
 </mat-dialog-actions>

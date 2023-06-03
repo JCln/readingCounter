@@ -1,4 +1,4 @@
-@import 'primeNG';
+@import 'primeNG.scss';
 @import 'tooltip';
 @import 'input.scss';
 @import '_mat.scss';
@@ -26,7 +26,6 @@
 }
 
 .info_icon {
-  padding: var(--font_05);
   background-color: var(--red_600);
   color: var(--white);
   border-radius: $border_50;
@@ -48,4 +47,13 @@
 
 ._haveimage {
   color: var(--pink_500);
+}
+
+// Override primeNG for editables
+:host ::ng-deep {
+
+  .p-multiselect,
+  .p-dropdown {
+    min-width: 100%;
+  }
 }

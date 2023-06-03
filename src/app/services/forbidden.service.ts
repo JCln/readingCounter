@@ -16,7 +16,6 @@ import { DictionaryWrapperService } from './dictionary-wrapper.service';
 })
 export class ForbiddenService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  _isCollapsedForbidden: boolean = false;
 
   forbiddenReq: IMostReportInput = {
     zoneId: 0,
@@ -32,7 +31,7 @@ export class ForbiddenService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService
+    public utilsService: UtilsService
   ) { }
 
   /* API CALL */

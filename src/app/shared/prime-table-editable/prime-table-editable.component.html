@@ -3,14 +3,13 @@
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
     (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
-    editMode="row" dataKey="id" [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable #dtable>
+    editMode="row" dataKey="id" [reorderableColumns]=_reOrderableTable #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
+        <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها" [filter]="true"
-            showClear="true">
+            selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
         </p-multiSelect>
 
         <div class="header_icons_wrap">
@@ -77,26 +76,26 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th pResizableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th pResizableColumn style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
-            <th pResizableColumn *ngFor="let col of columns">
+            <th *ngFor="let col of columns">
                 <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th pResizableColumn style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing" let-columns="columns"
         let-ri=rowIndex>
         <tr [pEditableRow]="dataSource">
-            <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
+            <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
                     <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
@@ -106,8 +105,7 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
-                                    [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
-                                    optionLabel="title"
+                                    [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                     (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                     [filter]="true" [showClear]="true">
                                 </p-dropdown>
@@ -122,8 +120,8 @@
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
-                                        [placeholder]="dataSource[col.field]" [style]="{'width':'100%'}"
-                                        [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                        [placeholder]="dataSource[col.field]" [ngClass]="{'p-dropdown-editable': true}"
+                                        optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                         [filter]="true">
                                     </p-dropdown>
@@ -222,49 +220,52 @@
                     </ng-template>
                 </ng-template>
             </td>
-            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openMoshtarakinDialog(dataSource)">
+            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'"
+                (click)="openMoshtarakinDialog(dataSource)">
                 <span class="ui-column-title">مشاهده سابقه</span>
                 <i class="tooltip p_icons pi pi-users">
                     <div class="tooltip_text">مشاهده سابقه</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openBriefKardexDialog(dataSource)">
+            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'"
+                (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">خلاصه کاردکس</span>
-                <i class="tooltip p_icons pi pi-list">
+                <i class="tooltip p_icons pi pi-folder">
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
+            <td class="__columns" *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right">مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'generalListModify'" (click)="showWOUIAsCarousel(dataSource,ri)">
-                <span class="ui-column-title">بررسی عکس/صوت</span>
-                <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
-                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'"
+                (click)="showWOUIAsCarousel(dataSource,ri)">
+                <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
+                <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
+                    <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'generalListModify'">
+            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'">
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'fragmentMaster'">
+            <td class="__columns" *ngIf="_checkUpName == 'fragmentMaster'">
                 <span class="ui-column-title">مدیریت مسیرها</span>
                 <i *ngIf="!editing" (click)="customSort(dataSource.id)" class="tooltip p_icons pi pi-info">
                     <div class="tooltip_text_right">مدیریت مسیرها</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'fragmentMaster'">
+            <td class="__columns" *ngIf="_checkUpName == 'fragmentMaster'">
                 <span class="ui-column-title">صدور لیست خودکار</span>
                 <i *ngIf="!editing" (click)="showPictures(dataSource)" class="tooltip p_icons pi pi-directions-alt">
                     <div class="tooltip_text">صدور لیست خودکار</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'fragmentMaster'">
+            <td class="__columns" *ngIf="_checkUpName == 'fragmentMaster'">
                 <span class="ui-column-title">تایید نوبتی</span>
                 <i *ngIf="!editing" class="tooltip p_icons"
                     [ngClass]="dataSource.isValidated ? 'pi pi-check-circle' : 'pi pi-info-circle'"
@@ -273,11 +274,11 @@
                     </div>
                 </i>
             </td>
-            <td>
+            <td class="__columns">
                 <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
-                    <div class="tooltip_text">ویرایش</div>
+                    <div class="tooltip_text_right">ویرایش</div>
                 </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check">
                 </i>
@@ -289,10 +290,9 @@
                     class="_cancel pi pi-times">
                 </i>
             </td>
-            <td *ngIf="_checkUpName != 'generalListModify'">
+            <td class="__columns" *ngIf="_checkUpName != 'generalListModify'">
                 <span class="ui-column-title">حذف مورد</span>
-                <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource.id , ri)"
-                    class="tooltip p_icons fa fa-trash-o">
+                <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>
                 </i>
                 <i *ngIf="_isInRowEditing" (click)="removeRowEditing(dataSource , ri)"

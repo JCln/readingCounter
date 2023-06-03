@@ -21,7 +21,7 @@ export class OffloadedComponent extends FactoryONE {
 
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    public outputManagerService: OutputManagerService,    
+    public outputManagerService: OutputManagerService,
     private envService: EnvService
   ) {
     super();
@@ -37,7 +37,15 @@ export class OffloadedComponent extends FactoryONE {
     }
   }
   downloadOutputSingle = async (row: ITracking) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.downloadPermit, false, false);
+    const config = {
+      messageTitle: EN_messages.downloadPermit,
+      text: 'ش پیگیری: ' + row.trackNumber + '،   قرائت کننده: ' + row.counterReaderName,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: false,
+      icon: 'pi pi-download'
+    }
+    const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
       if (this.envService.hasNextBazdid) {
         this.hasNextBazdid(row);
@@ -64,10 +72,18 @@ export class OffloadedComponent extends FactoryONE {
     }
   }
 
-  backToReading = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.toReading, true, false);
+  backToReading = async (rowDataAndIndex: ITracking) => {
+    const config = {
+      messageTitle: EN_messages.toReading,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '،   قرائت کننده: ' + rowDataAndIndex.counterReaderName,
+      minWidth: '19rem',
+      isInput: true,
+      isDelete: false,
+      icon: 'pi pi-step-backward'
+    }
+    const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex['dataSource'], desc);
+      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex.id, desc);
       this.refreshTable();
     }
   }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMessage, INotifyDirectImage, IToastColor } from 'interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ENToastColors } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
-import { broadcastMessages, colors, times, toastColors } from './DI/messages';
+import { broadcastMessages, times, toastColors } from './DI/messages';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class MessageService {
   message: IMessage = {
     title: '',
     message: '',
-    color: ENSnackBarColors.info,
+    color: ENToastColors.info,
     seconds: ENSnackBarTimes.tenMili,
     canSave: true
   };
@@ -39,7 +39,6 @@ export class MessageService {
 
   getMessages = () => { return broadcastMessages; }
 
-  getColors = () => { return colors; }
   getToastColors = (): IToastColor[] => { return toastColors; }
 
   verificationBroadcastMessage = (body: IMessage) => {

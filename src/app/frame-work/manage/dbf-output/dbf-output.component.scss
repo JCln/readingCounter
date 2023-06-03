@@ -3,48 +3,8 @@
 @import 'input.scss';
 @import 'mixins.scss';
 @import '_mat.scss';
-
-section {
-  display: grid;
-  justify-content: center;
-  direction: rtl;
-  margin: auto;
-  padding: var(--font_xs);
-  width: 18rem;
-  background: var(--secondary_1);
-  border-radius: $border_15;
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-}
-
-.input_2 {
-  text-align: center;
-  width: 15rem;
-}
+@import 'cards';
 
 .btn_1 {
-  margin-top: var(--font_l);  
-}
-
-._key,
-._value {
-  font-size: var(--font_m);
-  font-weight: 800;
-}
-
-._value {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  direction: ltr;
-  border: none;
-  color: var(--primary_5);
-  text-align: center;
-}
-
-._key {
-  white-space: nowrap;
-}
-
-input {
-  border: none;
+  margin-top: var(--font_l);
 }

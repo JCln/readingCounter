@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <form class="content" #form="ngForm" (ngSubmit)="connectToServer()">
+    <form #form="ngForm" (ngSubmit)="connectToServer()" class="_card">
         <div class="input_2">
             <div class="_key">قرمز</div>
             <input class="_value" (keyup)="textColorState()" type="number" name="red" [(ngModel)]=" this.rgba[0]">

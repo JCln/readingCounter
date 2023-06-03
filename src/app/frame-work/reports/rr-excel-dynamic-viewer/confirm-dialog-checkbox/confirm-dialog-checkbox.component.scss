@@ -6,18 +6,19 @@
 @import 'mixins.scss';
 
 .mat-dialog-content {
-  grid-template-columns: 1fr 1fr;
   color: var(--secondary_7);
   font-size: var(--font_s);
   text-align: right;
   direction: rtl;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
 }
 
 form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
   justify-content: center;
-  gap: var(--font_03);
+  gap: var(--font_025);
 }
 
 h2 {

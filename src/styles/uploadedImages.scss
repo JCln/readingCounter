@@ -9,7 +9,7 @@
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
   text-align: center;
-  padding: var(--font_xs) 0;
+  padding: 0;
   border-radius: $border_15;
 }
 
@@ -42,8 +42,6 @@
 }
 
 .__img_bound {
-  // height: 17rem;
-  // width: 17rem;
   padding: var(--font_05);
   margin: auto;
 }
@@ -116,7 +114,7 @@ img {
 }
 
 hr {
-  margin-bottom: var(--font_xs);
+  margin-bottom: var(--font_05);
 }
 
 .not_found_header {

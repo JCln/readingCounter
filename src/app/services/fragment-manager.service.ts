@@ -6,7 +6,6 @@ import {
   ENSnackBarColors,
   ENSnackBarTimes,
   IDictionaryManager,
-  IObjectIteratation,
   IResponses,
 } from 'interfaces/ioverall-config';
 import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';
@@ -29,17 +28,11 @@ export class FragmentManagerService {
     GUid: null
   };
 
-  columnSelectedFragmentMaster = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('_fragmentMaster');
-  }
-  columnSelectedFragmentDetails = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('fragmentDetails');
-  }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
-    private columnManager: ColumnManager
+    public utilsService: UtilsService,
+    public columnManager: ColumnManager
   ) { }
 
   getDataSourceByQuote = (method: ENInterfaces, id: string): Promise<any> => {
@@ -137,17 +130,18 @@ export class FragmentManagerService {
 
   /* VERIFICATION */
 
-  firstConfirmDialog = (): Promise<any> => {
+  firstConfirmDialog = (text?: string): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
+      text: text,
       minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
   }
   masterValidation = (body: IFragmentMaster): boolean => {
-    console.log(body);
     if (MathS.isNull(body.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;

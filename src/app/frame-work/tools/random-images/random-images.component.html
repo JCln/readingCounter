@@ -1,62 +1,83 @@
-<section [hidden]="toolsService._isCollapsedRandomImages">
+<app-collapsable [_isCollapsed]=toolsService.utilsService.collapser._isCollapsedRandomImages
+    (_clicked)="toolsService.utilsService.collapser._isCollapsedRandomImages = !toolsService.utilsService.collapser._isCollapsedRandomImages">
+</app-collapsable>
+
+<section>
     <form #form="ngForm" (ngSubmit)="connectToServer()">
-        <section class="static_part">
-            <section class="content">
-                <div class="input_2" [hidden]="!zoneDictionary.length">
-                    <div class="_key">ناحیه</div>
-                    <div class="_value">
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="toolsService.randomImages.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true" (click)="verificationACounterReaderId()">
-                        </p-dropdown>
-                    </div>
+        <section class="_card"
+            [@openClose]="toolsService.utilsService.collapser._isCollapsedRandomImages ? 'slideUp' : 'slideDown'">
+            <div class="input_2" [hidden]="!zoneDictionary.length">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="toolsService.randomImages.zoneId"
+                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                        (click)="verificationACounterReaderId()">
+                    </p-dropdown>
                 </div>
-                <div class="input_2" [hidden]="!userCounterReader.length">
-                    <div class="_key">مامور</div>
-                    <p-dropdown [style]="{'minWidth': '10rem', 'width': '100%'}" name="counterreader" #counterreader
-                        [options]="userCounterReader" name="counter-reader"
+            </div>
+            <div class="input_2" [hidden]="!userCounterReader.length">
+                <div class="_key">قرائت کننده</div>
+                <div class="_value">
+                    <p-dropdown name="counterreader" #counterreader [options]="userCounterReader" name="counter-reader"
                         [(ngModel)]="toolsService.randomImages.userId" optionLabel="title" [filter]="true"
                         filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
                     </p-dropdown>
                 </div>
-                <div class="input_2">
-                    <div class="_key">تاریخ</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="toolsService.receiveFromDateJalali($event)"
-                            [dateObject]="toolsService.randomImages.day">
-                        </app-date-jalali>
-                    </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">تاریخ</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="toolsService.receiveFromDateJalali($event)"
+                        [dateObject]="toolsService.randomImages.day">
+                    </app-date-jalali>
                 </div>
-                <div class="input_2">
-                    <div class="_key">تعداد</div>
-
-                    <p-dropdown [style]="{'minWidth': '10rem', 'width': '100%'}" name="quantity" [filter]="true"
-                        placeholder="تعداد تصاویر" [options]="_quantity"
+            </div>
+            <div class="input_2">
+                <div class="_key">تعداد</div>
+                <div class="_value">
+                    <p-dropdown name="quantity" [filter]="true" placeholder="تعداد تصاویر" [options]="_quantity"
                         [(ngModel)]="toolsService.randomImages.quantity" [editable]="true" optionValue="value"
                         optionLabel="title">
                     </p-dropdown>
                 </div>
-
-            </section>
-        </section>
-        <footer class="center_footer">
+            </div>
             <button type="submit" class="btn_1">
                 مشاهده
                 <i class="pi pi-image"></i>
             </button>
-        </footer>
+
+        </section>
     </form>
 </section>
+<section class="_card" *ngIf="allImagesDataSource">
+    <h1 class="title">فیلتر نمایش</h1>
+    <div class="input_2">
+        <div class="_key">جستجو براساس</div>
+        <div class="_value">
+            <p-dropdown #drop name="zones" [options]="toolsService.searchInOrder" placeholder="ش پرونده"
+                optionValue="value" optionLabel="name" filter="true" (onChange)="userInputValue = drop.selectedOption">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="input_2">
+        <div class="_key">{{userInputValue.name}}</div>
+        <input class="_value" type="{{userInputValue.type}}" name="searchInOrder"
+            [(ngModel)]="userInputValue.insertedValue" placeholder="{{userInputValue.name}} را وارد نمایید"
+            (ngModelChange)="showItemOnSearch(userInputValue.value)">
+    </div>
+</section>
+
 
 <main *ngIf="allImagesDataSource" style="position: relative;">
 
-    <div class="content">
-        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
+    <div class="img_content">
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images"
+            [ngClass]="closeTabService.saveDataForRandomImgsRSFirst.imageUrlAndInfos[ri].canShow ? 'showImg': 'hiddenImg'">
 
-            <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
-                <img src="{{imgsOriginUrl[ri]}}" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
-                    alt="تصویر" loading="lazy" (click)="routeToOffload(item , ri, imgsOriginUrl[ri])">
+            <div *ngIf="closeTabService.saveDataForRandomImgs[ri]" class="__img_bound_real">
+                <img src="{{closeTabService.saveDataForRandomImgs[ri]}}"
+                    onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر" loading="lazy"
+                    (click)="routeToOffload(item , ri, closeTabService.saveDataForRandomImgs[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>اش:{{item.eshterak}}</p>
                     <p>{{item.zoneTitle}}</p>

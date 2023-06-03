@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
-@import '~material-design-icons/iconfont/material-icons.css';
 
 @font-face {
   font-family: BLotus;
@@ -23,7 +22,6 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
-  // outline: none;
 }
 
 h1,
@@ -35,6 +33,28 @@ h6,
 p {
   margin: 0;
   font-weight: 600;
+}
+
+.hr_1 {
+  width: 70%;
+  margin-bottom: var(--font_l);
+  height: .4rem;
+  border-radius: 30px;
+}
+
+.hr_2 {
+  opacity: .7;
+  width: 70%;
+  margin: var(--font_25) auto;
+  height: var(--font_02);
+  border-radius: 30px;
+}
+
+hr {
+  width: 80%;
+  border: 0;
+  height: .14rem;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary_4), rgba(0, 0, 0, 0));
 }
 
 :root {
@@ -126,13 +146,19 @@ li {
   padding: var(--font_03) !important;
 }
 
+.p-dialog .p-dialog-header {
+  background: var(--secondary_1) !important;
+}
+
 .p-dialog .p-dialog-header .p-dialog-header-icon {
+  background: var(--secondary_1) !important;
   z-index: 100 !important;
 }
 
 .p-dialog .p-dialog-content {
   padding: 0 var(--font_05) !important;
   margin-top: -1.7rem !important; // it's not dynamic because button width & hight are statics
+  background: var(--secondary_1) !important;
 }
 
 // ts config
@@ -159,78 +185,22 @@ input[type=number] {
   font-weight: 600;
 }
 
-:host ::ng-deep {
-
-  .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
-  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: var(--pink_500);
-  }
+::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
 }
 
-:host ::ng-deep {
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 
-  .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
-    display: none;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
 
-  .p-dropdown .p-dropdown-label {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: var(--font_xs);
-    font-weight: 600;
-  }
-
-  .p-dropdown {
-    height: 2.8rem;
-    border-radius: 10px;
-    background: var(--white);
-  }
-
-  .p-dropdown-panel .p-dropdown-header {
-    background: var(--secondary_3);
-    color: var(--secondary_8);
-  }
-
-  .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
-  .p-dropdown .p-dropdown-label.p-placeholder,
-  .p-multiselect .p-multiselect-label.p-placeholder,
-  .p-multiselect-label,
-  .p-multiselect-items {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif !important;
-    font-size: var(--font_s);
-    font-weight: 600 !important;
-    background: var(--secondary_3);
-    color: var(--secondary_8);
-  }
-
-  .p-dropdown .p-dropdown-label.p-placeholder {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: var(--font_s);
-    font-weight: 600;
-  }
-
-  .p-dropdown.p-dropdown-clearable .p-dropdown-label {
-    padding-right: var(--font_025);
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: var(--font_ss);
-    font-weight: 600;
-  }
-
-  .p-dropdown-item {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-weight: 600;
-  }
-
-  .p-dropdown-panel .p-dropdown-items {
-    background: var(--secondary_1);
-  }
-
-  .p-dropdown .p-dropdown-clear-icon {
-    right: 0.357rem;
-  }
-
-  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
-    background: var(--secondary_1);
-    color: var(--secondary_8);
-  }
-
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

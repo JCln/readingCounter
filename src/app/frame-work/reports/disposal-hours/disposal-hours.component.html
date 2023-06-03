@@ -1,16 +1,18 @@
 <main class="main" *ngIf="route.children.length === 0">
-    <section [hidden]="readingReportManagerService.isCollapsedDH">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedDH ? 'slideUp' : 'slideDown'">
 
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.disposalhoursReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.disposalhoursReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">از</div>
@@ -31,7 +33,7 @@
                         </div>
                     </div>
                     <button id="grid_view" type="submit" class="btn_1">
-                        مشاهده لیست
+                        مشاهده
                         <i class="pi pi-list"></i>
                     </button>
                     <button id="chart_view" type="submit" class="btn_1">
@@ -45,9 +47,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRDisposalHours" [_outputFileName]="'disposalHs'"
-        [_checkUpName]="'rr-disposalHs'" [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedDH"
-        (collapsed)="readingReportManagerService.isCollapsedDH = !readingReportManagerService.isCollapsedDH"
+        [_checkUpName]="'rr-disposalHs'" [_sessionName]="'disposalHours-session'" [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDH"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDH = !readingReportManagerService.utilsService.collapser.isCollapsedDH"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

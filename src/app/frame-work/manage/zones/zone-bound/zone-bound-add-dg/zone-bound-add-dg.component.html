@@ -13,13 +13,15 @@
             <input class="_value" formControlName="title">
         </div>
 
-       <div class="input_2">
+        <div class="input_2">
             <div class="_key">ناحیه</div>
-            <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
         </div>
         <div class="input_2">
             <div class="_key">کد دولتی</div>
@@ -61,7 +63,9 @@
     </main>
 
     <mat-dialog-actions>
-        <button class="btn_2" (click)="close()" type="button">بازگشت</button>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
         <button class="btn_2 _custom" type="submit">ذخیره</button>
     </mat-dialog-actions>
 </form>

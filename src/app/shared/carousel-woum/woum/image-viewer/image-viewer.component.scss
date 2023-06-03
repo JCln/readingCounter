@@ -1,11 +1,6 @@
 @import 'variable';
 @import 'tooltip.scss';
 
-.tooltip {
-  position: sticky;
-  top: 0;
-}
-
 .viewer_container {
   display: flex;
   justify-content: center;
@@ -17,6 +12,11 @@ img {
   border-radius: 10px;
 }
 
+.tooltip {
+  position: sticky;
+  top: 0;
+}
+
 i {
   color: var(--thirdy_1);
   font-size: var(--font_m);
@@ -25,4 +25,13 @@ i {
   padding: var(--font_05);
   background-color: var(--secondary_1);
   cursor: pointer;
+}
+
+.__special_tooltip_bottom:hover .tooltip_text_bottom {
+  width: 12rem;
+  transform: translate(0, 80%);
+
+  &::after {
+    right: 85%;
+  }
 }

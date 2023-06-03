@@ -63,9 +63,18 @@ export class ImportedComponent extends FactoryONE {
     });
   }
   firstConfirmDialog = async (rowDataAndIndex: object) => {
-    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_deleteRoute, true, true);
+    const config = {
+      messageTitle: EN_messages.reason_deleteRoute,
+      text: 'ش پیگیری: ' + rowDataAndIndex['dataSource'].trackNumber + '،   قرائت کننده: ' + rowDataAndIndex['dataSource'].counterReaderName,
+      minWidth: '19rem',
+      isInput: true,
+      isDelete: true,
+      icon: 'pi pi-trash'
+    }
+
+    const a = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (a) {
-      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowDataAndIndex['dataSource'], a);
+      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowDataAndIndex['dataSource'].id, a);
       this.refreshTable();
     }
   }

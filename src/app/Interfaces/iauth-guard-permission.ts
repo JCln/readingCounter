@@ -1,7 +1,10 @@
 export interface ICredentials {
-    username: string;
-    password: string;
-    appVersion: string;
+    username: string,
+    password: string,
+    appVersion: string,
+    dntCaptchaText: string,
+    dntCaptchaToken: string,
+    dntCaptchaInputText: string
 }
 export enum ENAuthTokenType {
     access_token = 'access_token',

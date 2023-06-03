@@ -6,19 +6,18 @@
 
 .content {
   background: var(--secondary_1);
-  box-shadow: 1px 2px 3px 1px var(--primary_2);
   text-align: center;
   justify-content: space-around;
   border-radius: $border_15;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
 }
 
 ._desc {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
-  padding: var(--font_xs) var(--font_05);
   border-radius: $border_15;
 }
 
@@ -30,24 +29,15 @@
 .title {
   color: var(--primary_3);
   text-align: center;
-  margin: var(--font_xs) var(--font_05);
+  margin: var(--font_05);
   font-size: var(--font_l2);
-}
-
-.mt-s {
-  margin-top: var(--font_s);
-}
-
-input {
-  color: var(--secondary_5);
-  margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }
 
 .check_boxes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
   justify-content: center;
+  direction: rtl;
   gap: var(--font_025);
   box-shadow: none;
   background: inherit;
@@ -65,16 +55,14 @@ input {
   margin-bottom: var(--font_xs);
   background: var(--secondary_1);
   place-content: center;
-  padding: var(--font_xs) 0;
+  padding: var(--font_05) 0;
   border-radius: $border_15;
-
-  box-shadow: 1px 2px 3px 1px var(--primary_2);
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
 }
 
 .card__content {
   white-space: nowrap;
   direction: inherit;
-  border: 1px solid var(--secondary_3_spec);
   border-radius: $border_7;
 }
 
@@ -105,13 +93,4 @@ input {
 
 .input_2 {
   margin: 0;
-}
-
-.header_icons_wrap {
-  position: relative;
-
-  .left_side {
-    position: absolute;
-    top: 50%;
-  }
 }

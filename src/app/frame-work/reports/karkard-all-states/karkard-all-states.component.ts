@@ -3,14 +3,17 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { IKarkardAllStatesDto } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
+import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-karkard-all-states',
   templateUrl: './karkard-all-states.component.html',
-  styleUrls: ['./karkard-all-states.component.scss']
+  styleUrls: ['./karkard-all-states.component.scss'],
+  animations: [transitionAnimation]
 })
 export class KarkardAllStatesComponent extends FactoryONE {
   tempData: IKarkardAllStatesDto[] = [];
@@ -29,6 +32,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
     public closeTabService: CloseTabService,
+    public outputManagerService: OutputManagerService,
     private columnManager: ColumnManager
   ) {
     super();
@@ -83,7 +87,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
       { field: 'offloadDayalali', header: 'روز', isSelected: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
-      { field: 'counterReaderName', header: 'مامور', isSelected: true },
+      { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
       { field: 'duration', header: 'زمان', isSelected: false, isNumber: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false },

@@ -111,7 +111,7 @@ export class OfflineModeService {
       this.snackWrapperService.openSnackBar(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
-    if (MathS.isNull(this.fileUploadSingle.item.trim())) {
+    if (MathS.isNull(this.fileUploadSingle.item.toString().trim())) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_value, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
@@ -130,7 +130,6 @@ export class OfflineModeService {
       this.snackWrapperService.openSnackBar(EN_messages.should_insert_JPG, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
-    // return true;
   }
   getOfflineManual = (userName: string): Promise<any> => {
     return new Promise((resolve) => {

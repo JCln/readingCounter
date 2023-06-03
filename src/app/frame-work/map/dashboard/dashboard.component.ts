@@ -2,15 +2,14 @@ import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
 import { InteractionService } from 'services/interaction.service';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
-  _isCollapsedAnalyzePrfm: boolean = false;
+export class DashboardComponent {  
   _analyzer_interface: any[];
   zoneDictionary: IDictionaryManager[] = [];
 

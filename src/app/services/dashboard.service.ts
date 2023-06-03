@@ -1,3 +1,4 @@
+import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
@@ -15,14 +16,15 @@ export class DashboardService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    public utilsService: UtilsService
   ) { }
 
   /* COLUMNS */
   columnDashboardUserOverall = (): IObjectIteratation[] => {
     return [
       { field: 'all', header: 'مجموع', isSelected: true, readonly: true },
-      { field: 'counterReaders', header: 'ماموران', isSelected: true, readonly: true },
+      { field: 'counterReaders', header: 'قرائت کننده‌ها', isSelected: true, readonly: true },
       { field: 'readingSupervisors', header: 'ناظران', isSelected: true, readonly: true },
       { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, readonly: false }
     ];

@@ -4,11 +4,13 @@
     <main class="_contents">
         <div class="input_2">
             <div class="_key">ناحیه</div>
-            <mat-select placeholder="انتخاب مورد" [(value)]="selected" name="zoneId">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.title">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" [(value)]="selected" name="zoneId">
+                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.title">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
         </div>
         <div class="input_2">
             <div class="_key">علی‌الحساب پیشفرض</div>
@@ -93,13 +95,15 @@
 
         <mat-checkbox formControlName="defaultHasPreNumber">شماره قبلی</mat-checkbox>
         <mat-checkbox formControlName="isOnQeraatCode">کد قرائت</mat-checkbox>
-        <mat-checkbox formControlName="displayBillId">نمایش قبض</mat-checkbox>
-        <mat-checkbox formControlName="displayRadif">نمایش ش.پرونده</mat-checkbox>
+        <mat-checkbox formControlName="displayBillId">شناسه قبض</mat-checkbox>
+        <mat-checkbox formControlName="displayRadif">ش.پرونده</mat-checkbox>
 
     </main>
 
     <mat-dialog-actions>
-        <button class="btn_2" (click)="close()" type="button">بازگشت</button>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
         <button class="btn_2 _custom" type="submit">ذخیره</button>
         <!--[mat-dialog-close]="form"-->
     </mat-dialog-actions>

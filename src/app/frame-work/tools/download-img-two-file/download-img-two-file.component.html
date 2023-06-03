@@ -1,18 +1,13 @@
-<app-collapsable [_isCollapsed]=toolsService._isCollapseFileDownloadImageTwo
-    (_clicked)=" toolsService._isCollapseFileDownloadImageTwo = !toolsService._isCollapseFileDownloadImageTwo">
-</app-collapsable>
-
-<section [hidden]="toolsService._isCollapseFileDownloadImageTwo">
+<section>
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="static_part">
-            <section class="content">
+            <section class="_card">
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="toolsService.fileDownloadAllImagesTwo2.zoneId" placeholder="انتخاب مورد"
-                            [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title"
-                            filter="true">
+                            optionValue="id" optionLabel="title" filter="true">
                         </p-dropdown>
                     </div>
                 </div>
@@ -32,13 +27,14 @@
                         </app-date-jalali>
                     </div>
                 </div>
+
+                <footer class="center_footer">
+                    <button type="submit" class="btn_1">
+                        دانلود تصاویر
+                        <i class="fa fa-file-zip-o"></i>
+                    </button>
+                </footer>
             </section>
         </section>
-        <footer class="center_footer">
-            <button type="submit" class="btn_1">
-                دانلود تصاویر
-                <i class="fa fa-file-zip-o"></i>
-            </button>
-        </footer>
     </form>
 </section>

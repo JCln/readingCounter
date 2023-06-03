@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { ENCompanyName, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
@@ -54,7 +54,7 @@ export class MapDgComponent implements OnInit {
       maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
     });
-
+    this.map.attributionControl.setPrefix(ENCompanyName.title);
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   ngOnInit(): void {

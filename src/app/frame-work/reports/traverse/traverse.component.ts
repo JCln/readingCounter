@@ -5,11 +5,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-traverse',
   templateUrl: './traverse.component.html',
-  styleUrls: ['./traverse.component.scss']
+  styleUrls: ['./traverse.component.scss'],
+  animations: [transitionAnimation]
 })
 export class TraverseComponent extends FactoryONE {
   _selectedKindId: string = '';

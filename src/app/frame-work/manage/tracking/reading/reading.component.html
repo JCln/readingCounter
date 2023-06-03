@@ -1,8 +1,8 @@
 <app-prime-table     
     [dataSource]="closeTabService.saveDataForTrackReading" 
     [_outputFileName]="'reading'"
-    [_checkUpName]="'reading'"    
-    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3,4]"
+    [_checkUpName]="'Kartables'"    
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4,5]"
     [_sessionName]="'reading-session'"
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
     [_calculableSUM]=true    
@@ -14,6 +14,7 @@
     (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
     (routedToLMPayDay)="trackingManagerService.routeToLMPayDay($event)"
     (routedToLMAll)="trackingManagerService.routeToLMAll($event)"
+    (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"
  > 
 </app-prime-table>
 <!-- state saving correctly but for default sortField it may not happenning -->

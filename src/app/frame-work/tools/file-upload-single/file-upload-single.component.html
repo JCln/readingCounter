@@ -3,25 +3,34 @@
     <h1 class="title">ارسال تصویر تکی</h1>
 
 
-    <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
+    <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="_card">
         <div class="_desc">
 
             <div class="input_2">
                 <div class="_key">نوع جستجو</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="offlineModeService.fileUploadSingle.searchBy"
-                    name="searchType">
-                    <mat-option (click)="_searchByInfo = truefalse.searchBy"
-                        *ngFor="let truefalse of offlineModeService.fileUploadSingle.searchType" [value]="truefalse.id">
-                        {{truefalse.searchBy}}
-                    </mat-option>
-                </mat-select>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="offlineModeService.fileUploadSingle.searchBy"
+                        name="searchType">
+                        <mat-option (click)="_searchByInfo = truefalse.searchBy"
+                            *ngFor="let truefalse of offlineModeService.fileUploadSingle.searchType"
+                            [value]="truefalse.id">
+                            {{truefalse.searchBy}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
 
-            <input class="input_1" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
-                [(ngModel)]="offlineModeService.fileUploadSingle.item" autofocus>
+            <div class="input_2">
+                <div class="_key">{{_searchByInfo}}</div>
+                <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
+                    [(ngModel)]="offlineModeService.fileUploadSingle.item" autofocus>
+            </div>
 
-            <input class="input_1" type="text" placeholder="توضیحات" name="description"
-                [(ngModel)]="offlineModeService.fileUploadSingleReq.description">
+            <div class="input_2">
+                <div class="_key">توضیحات</div>
+                <input class="_value" placeholder="توضیحات" name="description"
+                    [(ngModel)]="offlineModeService.fileUploadSingleReq.description">
+            </div>
 
             <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="تصویری انتخاب نشده است">
                 <span class="icon_android fa fa-image"></span>
@@ -38,7 +47,7 @@
             <progress *ngIf="progress > 0" id="progress" [value]="progress" min="0" max="100">{{progress}}</progress>
 
             <div class="change_pass">
-                <button *ngIf="progress == 0" class="btn_2" type="submit">
+                <button *ngIf="progress == 0" class="btn_1" type="submit">
                     <div class="fa fa-upload"></div>
                     ارسال
                 </button>

@@ -92,9 +92,9 @@ export class ReadingConfigComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForReadingConfig = this.closeTabService.saveDataForReadingConfig.slice(0, index).concat(this.closeTabService.saveDataForReadingConfig.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.readManagerService.firstConfirmDialog();
+    const a = await this.readManagerService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId);
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource']);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }

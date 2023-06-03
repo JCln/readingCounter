@@ -3,16 +3,20 @@ export interface IENV {
     API_URL: string,
     mapUrls: { title: string, url: string }[],
     hasNextBazdid: boolean,
-    reSizableTable: boolean,
     reOrderableTable: boolean,
     mapCenter: [number, number],
     browserVersions: IBrowserVersions,
     years: { title: string, value: number }[],
     getDeleteDictionary: { id: number, title: string }[],
+    simafaImportStatus: {
+        hasSingle: boolean,
+        hasBatch: boolean
+    }
     hasCanclableSpinner: boolean,
     timeout: number,
     defaultAggregateTracks: boolean,
     version: string,
+    aboutUs: { email: string, tel: string, address: string }
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -103,8 +107,21 @@ export class timeout {
     // static time = 18000;
     static time = 2000;
 }
+export class simafaImportStatus {
+    // interface is simafaImportStatus
+    static simafaImportStatus = {
+        hasSingle: true,
+        hasBatch: true
+    }
+}
 export class version {
     static readonly version = 'build: 0.0.0';
+}
+export class aboutUs {
+    static readonly email = 'infortarnama@gmail.com';
+    static readonly tel = '031-32121764';
+    static readonly address = 'اصفهان، ارگ جهان نما، واحد 107';
+    static readonly coName = 'هیوا پرداز اطلس';
 }
 export class ENMapUrls {
     static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);
@@ -121,6 +138,7 @@ export class ENMapUrls {
 }
 export class ENYears {
     static readonly DEFAULT = new ENYears([
+        { title: '1402', value: 1402 },
         { title: '1401', value: 1401 },
         { title: '1400', value: 1400 },
         { title: '1399', value: 1399 },
@@ -128,67 +146,7 @@ export class ENYears {
         { title: '1397', value: 1397 },
         { title: '1396', value: 1396 },
         { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly ESF = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH_ZONE4 = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH_SE = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly TEH_SE_LOCAL = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ]);
-    static readonly KERMANSHAH = new ENYears([
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
+        { title: '1403', value: 1403 },
     ]);
 
     private constructor(public readonly value: { title: string, value: number }[]) {
@@ -205,7 +163,7 @@ export class getDeleteDictionary {
     }
 }
 export class ENHasNextBazdid {
-    static readonly DEFAULT = new ENHasNextBazdid(false);
+    static readonly DEFAULT = new ENHasNextBazdid(true);
     static readonly ESF = new ENHasNextBazdid(false);
     static readonly TEH = new ENHasNextBazdid(true);
     static readonly TEH_ZONE4 = new ENHasNextBazdid(true);
@@ -249,102 +207,6 @@ export class ENHasCanclableSpinner {
 }
 export class BrowserVersions {
     static readonly DEFAULT = new BrowserVersions({
-        Desktop: {
-            Chrome: { alert: 70, normal: 86 },
-            Firefox: { alert: 72, normal: 83 },
-            IE: { alert: 0, normal: 0 },
-            opera: { alert: 73, normal: 78 },
-            safari: { alert: 10, normal: 10 },
-        },
-        Touch: {
-            Chrome: { alert: 10, normal: 10 },
-            Firefox: { alert: 10, normal: 10 },
-            IE: { alert: 10, normal: 10 },
-            opera: { alert: 55, normal: 63 },
-            safari: { alert: 11, normal: 13 },
-        }
-    });
-    static readonly ESF = new BrowserVersions({
-        Desktop: {
-            Chrome: { alert: 70, normal: 86 },
-            Firefox: { alert: 72, normal: 83 },
-            IE: { alert: 0, normal: 0 },
-            opera: { alert: 73, normal: 78 },
-            safari: { alert: 10, normal: 10 },
-        },
-        Touch: {
-            Chrome: { alert: 10, normal: 10 },
-            Firefox: { alert: 10, normal: 10 },
-            IE: { alert: 10, normal: 10 },
-            opera: { alert: 55, normal: 63 },
-            safari: { alert: 11, normal: 13 },
-        }
-    });
-    static readonly TEH = new BrowserVersions({
-        Desktop: {
-            Chrome: { alert: 70, normal: 86 },
-            Firefox: { alert: 72, normal: 83 },
-            IE: { alert: 0, normal: 0 },
-            opera: { alert: 73, normal: 78 },
-            safari: { alert: 10, normal: 10 },
-        },
-        Touch: {
-            Chrome: { alert: 10, normal: 10 },
-            Firefox: { alert: 10, normal: 10 },
-            IE: { alert: 10, normal: 10 },
-            opera: { alert: 55, normal: 63 },
-            safari: { alert: 11, normal: 13 },
-        }
-    });
-    static readonly TEH_ZONE4 = new BrowserVersions({
-        Desktop: {
-            Chrome: { alert: 70, normal: 86 },
-            Firefox: { alert: 72, normal: 83 },
-            IE: { alert: 0, normal: 0 },
-            opera: { alert: 73, normal: 78 },
-            safari: { alert: 10, normal: 10 },
-        },
-        Touch: {
-            Chrome: { alert: 10, normal: 10 },
-            Firefox: { alert: 10, normal: 10 },
-            IE: { alert: 10, normal: 10 },
-            opera: { alert: 55, normal: 63 },
-            safari: { alert: 11, normal: 13 },
-        }
-    });
-    static readonly TEH_SE = new BrowserVersions({
-        Desktop: {
-            Chrome: { alert: 70, normal: 86 },
-            Firefox: { alert: 72, normal: 83 },
-            IE: { alert: 0, normal: 0 },
-            opera: { alert: 73, normal: 78 },
-            safari: { alert: 10, normal: 10 },
-        },
-        Touch: {
-            Chrome: { alert: 10, normal: 10 },
-            Firefox: { alert: 10, normal: 10 },
-            IE: { alert: 10, normal: 10 },
-            opera: { alert: 55, normal: 63 },
-            safari: { alert: 11, normal: 13 },
-        }
-    });
-    static readonly TEH_SE_LOCAL = new BrowserVersions({
-        Desktop: {
-            Chrome: { alert: 70, normal: 86 },
-            Firefox: { alert: 72, normal: 83 },
-            IE: { alert: 0, normal: 0 },
-            opera: { alert: 73, normal: 78 },
-            safari: { alert: 10, normal: 10 },
-        },
-        Touch: {
-            Chrome: { alert: 10, normal: 10 },
-            Firefox: { alert: 10, normal: 10 },
-            IE: { alert: 10, normal: 10 },
-            opera: { alert: 55, normal: 63 },
-            safari: { alert: 11, normal: 13 },
-        }
-    });
-    static readonly KERMANSHAH = new BrowserVersions({
         Desktop: {
             Chrome: { alert: 70, normal: 86 },
             Firefox: { alert: 72, normal: 83 },

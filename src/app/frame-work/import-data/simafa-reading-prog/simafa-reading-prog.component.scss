@@ -2,24 +2,13 @@
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
   background: var(--secondary_1);
   padding: var(--font_05);
   border-radius: $border_15;
-  border: .15rem solid var(--secondary_2);
-}
-
-section.content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
-  gap: var(--font_05);
-  align-items: center;
-}
-
-.tooltip {
-  cursor: pointer;
 }
 
 .input_1 {
@@ -28,10 +17,11 @@ section.content {
 }
 
 .btn_1 {
-  font-family: $font_family;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  font-family: $font_family;
+  max-width: 100%;
 }
 
 h2 {

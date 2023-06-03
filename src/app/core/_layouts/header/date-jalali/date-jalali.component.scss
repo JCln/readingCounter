@@ -67,4 +67,8 @@
   dp-calendar-nav .dp-calendar-nav-left::before {
     transform: rotate(45deg) !important;
   }
+
+  .dp-popup {
+    transform: translateX(-33%);
+  }
 }

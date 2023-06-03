@@ -41,6 +41,8 @@ export enum ENEssentialsToSave {
     saveDataForWaterMark = 'saveDataForWaterMark',
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',
+    saveDataForGuild = 'saveDataForGuild',
+    saveDataForDynamicTraverse = 'saveDataForDynamicTraverse',
     saveDataForImageAttrResult = 'saveDataForImageAttrResult',
     saveDataForImageAttrAnalyze = 'saveDataForImageAttrAnalyze',
     saveDataForCounterState = 'saveDataForCounterState',
@@ -130,8 +132,7 @@ export enum ENEssentialsToSave {
     saveDataForLMGeneralModify = 'saveDataForLMGeneralModify',
     saveDataForLMGeneralModifyReq = 'saveDataForLMGeneralModifyReq',
     saveDataForLMGeneralGroupModifyReq = 'saveDataForLMGeneralGroupModifyReq',
-    saveDataForLMGeneralGroupModify = 'saveDataForLMGeneralGroupModify',
-    saveDataForOffloadModify = 'saveDataForOffloadModify',
+    saveDataForLMGeneralGroupModify = 'saveDataForLMGeneralGroupModify',    
     saveDataForLMModifyReq = 'saveDataForLMModifyReq',
     saveDataForLMModify = 'saveDataForLMModify',
     saveDataForLMAll = 'saveDataForLMAll',
@@ -151,6 +152,7 @@ export enum ENEssentialsToSave {
     saveDataForRequestLog = 'saveDataForRequestLog',
     saveDataForRequestLogReq = 'saveDataForRequestLogReq',
     saveDataForServerErrors = 'saveDataForServerErrors',
+    saveDataForIpSpecialRules = 'saveDataForIpSpecialRules',
     saveDataForOSInfo = 'saveDataForOSInfo',
     license = 'license',
     saveDataForMsDriveInfo = 'saveDataForMsDriveInfo',
@@ -162,6 +164,10 @@ export interface ITestSidebar {
     isClosable: boolean;
     isRefreshable: boolean;
     sid_isOpenItems: boolean;
+}
+export interface ISimafaImportStatus {
+    hasSingle: boolean,
+    hasBatch: boolean
 }
 export interface ISnackBar {
     message: string;
@@ -199,6 +205,7 @@ export enum ENSnackBarColorsExact {
     info = 'rgb(17, 111, 255)',
 }
 export enum ENSnackBarTimes {
+    zero = 0,
     threeMili = 3000,
     fourMili = 4000,
     fiveMili = 5000,
@@ -317,6 +324,9 @@ export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
 }
+export enum ENCompanyName {
+    title = 'HiwaPardazAtlas'
+}
 export enum ENHasCount {
     hasCount = 'true',
     hasNotCount = 'false'
@@ -324,13 +334,13 @@ export enum ENHasCount {
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
+    numberOfFlashRead = 'numberOfFlashRead',
     shouldUseCarouselGallery = 'shouldUseCarouselGallery',
     shouldUseBaseOnDate = 'shouldUseBaseOnDate',
     notifyPosition = 'notifyPosition',
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
     fontStyle = 'fontStyle',
-    reSizableTable = 'reSizableTable',
     reOrderableTable = 'reOrderableTable',
     defaultAggregateTracks = 'defaultAggregateTracks',
 }
@@ -389,9 +399,12 @@ export enum ENSelectedColumnVariables {
     selectedTabsare3Formulas = 'tabsare3',
     selectedCounterReport = 'counterReport',
     selectedReadingConfigDefault = 'readingConfigDefault',
+    selectedIpspecialrules = 'ipspecialrules',
     selectedReadingPeriod = 'readingPeriod',
     selectedReadingPeriodKind = 'periodKind',
     selectedImageAttribution = 'imgattr',
+    selectedImageGuild = 'guild',
+    selectedDynamicTraverse = 'dynamicTraverse',
     selectedTextOutput = 'textOutput',
     selectedKarbari = 'karbari',
     selectedQotr = 'qotr',
@@ -402,6 +415,7 @@ export enum ENSelectedColumnVariables {
     selectedSimafaReadingProgram = 'simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
+    selectAOption = 'انتخاب کنید',
     callAnnounce = 'اعلام تلفنی',
     blueScreenLight = 'اشتباه در قرائت',
     intenseLight = 'نور صفحه آبی',

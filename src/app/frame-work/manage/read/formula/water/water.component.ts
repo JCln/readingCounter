@@ -56,7 +56,7 @@ export class WaterComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          minWidth: '65vw',
+          minWidth: '21rem',
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
@@ -113,9 +113,11 @@ export class WaterComponent extends FactoryONE {
   }
 
   firstConfirmDialog = async (rowData: object) => {
-    const a = await this.formulasService.firstConfirmDialog();
+    console.log(rowData);
+    
+    const a = await this.formulasService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId + '،  کاربری مشترکین: ' + rowData['dataSource'].karbariMoshtarakinCode);
     if (a)
-      this.removeRow(rowData['dataSource'], rowData['ri']);
+      this.removeRow(rowData['dataSource'].id, rowData['ri']);
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };

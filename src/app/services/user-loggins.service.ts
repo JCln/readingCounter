@@ -1,5 +1,5 @@
+import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserLogginInfo, IUserLoggins, IUserManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -11,7 +11,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 export class UserLogginsService {
 
   constructor(
-    private router: Router,
+    public utilsService: UtilsService,
     private interfaceManagerService: InterfaceManagerService
   ) { }
 
@@ -28,10 +28,7 @@ export class UserLogginsService {
     this.userLoggins_pageSign.userName = e.username;
     this.userLoggins_pageSign.displayName = e.displayName;
 
-    this.router.navigate([EN_Routes.wrmuallloggins]);
-  }
-  backToUserAll = () => {
-    this.router.navigate([EN_Routes.wrmuall]);
+    this.utilsService.routeTo(EN_Routes.wrmuallloggins);
   }
   getLogsDataSource = (UUID: string): Promise<any> => {
     return new Promise((resolve) => {

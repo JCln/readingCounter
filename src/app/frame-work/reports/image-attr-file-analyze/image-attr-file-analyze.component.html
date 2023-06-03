@@ -1,16 +1,18 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.isCollapsedImgAttrAnlz">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz ? 'slideUp' : 'slideDown'">
 
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.imgAttrAnalyzeReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.imgAttrAnalyzeReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">از</div>
@@ -32,7 +34,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn_1">
-                        مشاهده لیست
+                        مشاهده
                         <i class="pi pi-list"></i>
                     </button>
 
@@ -42,9 +44,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [_outputFileName]="'_imageAttrAnalyze'"
-        [_checkUpName]="'_imageAttrAnalyze'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedImgAttrAnlz"
-        (collapsed)="readingReportManagerService.isCollapsedImgAttrAnlz = !readingReportManagerService.isCollapsedImgAttrAnlz"
+        [_checkUpName]="'_imageAttrAnalyze'" [_sessionName]="'imgattrFile-session'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz = !readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

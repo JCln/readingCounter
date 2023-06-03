@@ -4,14 +4,15 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-image-attr-file-result',
   templateUrl: './image-attr-file-result.component.html',
-  styleUrls: ['./image-attr-file-result.component.scss']
+  styleUrls: ['./image-attr-file-result.component.scss'],
+  animations: [transitionAnimation]
 })
 export class ImageAttrFileResultComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   chartColors: any;
   _isOrderByDate: boolean = true;
 

@@ -2,6 +2,7 @@
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
@@ -14,8 +15,7 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
-  gap: var(--font_05);
+  gap: var(--font_02);
   align-items: center;
 }
 
@@ -34,16 +34,20 @@ section.dynamic_content {
 }
 
 .static_part {
+  width: 21rem;
+  margin: auto;
   background: var(--white);
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
-  padding: var(--font_xxs);
+  padding: var(--font_05);
 }
 
 .check_boxes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 8rem));
   gap: var(--font_05);
+  padding: 0;
+  margin-top: 0;
 }
 
 ._key,
@@ -83,6 +87,10 @@ hr {
   background-color: var(--primary_5);
   height: var(--font_02);
   margin-bottom: var(--font_xxs);
+}
+
+.btn_1 {
+  max-width: 100%;
 }
 
 [hidden] {

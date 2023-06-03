@@ -1,30 +1,16 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
+import { transitionSideBar } from 'src/app/directives/animation.directive';
 
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss'],
-  animations: [
-    trigger('openClose', [
-      state('closeSubItems', style({
-        minHeight: 'var(--font_33)',
-        height: 'var(--font_33)',
-      })),
-      state('openSubItems', style({
-        minHeight: '8rem',
-        height: 'auto',
-      })),
-      transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
-    ])
-  ]
+  animations: [transitionSideBar]
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent {
   @Input() sid_isSmall: boolean;
-  @Output() sidebarEvent = new EventEmitter<boolean>();
-  smallScreen: boolean = false;
   currentRoute: any;
 
   constructor(
@@ -40,25 +26,17 @@ export class SideBarComponent implements OnInit {
     // this.currentRoute = this.currentRoute.items;
 
   }
-  ngOnInit(): void {
-    if (screen.width <= 550) {
-      this.smallScreen = true;
-    }
-  }
   toggleSubItems = (item: any): void => {
-    let a = document.querySelectorAll('.pi-angle-up');
+    let a = document.querySelectorAll('.pi-angle-down');
     this.currentRoute.forEach((aItem, i) => {
       if (item.title !== aItem.title) {
         aItem.isOpen = false;
-        a[i].classList.remove('tsConfig');
+        a[i].classList.remove('_toggle_angule');
       }
       else {
         aItem.isOpen = !aItem.isOpen;
-        a[i].classList.toggle('tsConfig');
+        a[i].classList.toggle('_toggle_angule');
       }
     })
-  }
-  setSidebar = () => {
-    this.sidebarEvent.emit(!this.sid_isSmall);
   }
 }

@@ -32,7 +32,7 @@ export class AutoImportDgComponent implements OnInit {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private cdr: ChangeDetectorRef,
-    private fragmentManagerService: FragmentManagerService,
+    public fragmentManagerService: FragmentManagerService,
   ) { }
   ngOnInit(): void {
     this.readingPeriodKindDictionary = this.config.data.dictionary;
@@ -51,9 +51,6 @@ export class AutoImportDgComponent implements OnInit {
         this.ref.close(this.dataReq);
       }
     }
-  }
-  close() {
-    this.ref.close();
   }
   receiveStartDayJalali = (event: string) => {
     this.dataReq.startDay = event;

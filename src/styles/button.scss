@@ -1,11 +1,11 @@
 .btn_1 {
   max-width: 19rem;
   width: 100%;
-  height: var(--font_3);
+  height: var(--font_26);
   text-align: center;
   background: var(--thirdy_1);
   color: var(--white);
-  border-radius: 2rem;
+  border-radius: $border_100vmax;
   font-size: var(--font_m);
   font-weight: 600;
   border: none;
@@ -15,16 +15,16 @@
   &:focus,
   &:active {
     background: var(--primary_4);
-    box-shadow: 0px 0px 2px 1px var(--primary_4);
+    box-shadow: 0px 0px 5px 0px var(--primary_4)
   }
 }
 
 .btn_2 {
   max-width: 19rem;
   width: 8rem;
-  height: var(--font_3);
+  height: var(--font_26);
   text-align: center;
-  border-radius: $border_15;
+  border-radius: $border_100vmax;
   font-size: var(--font_m);
   font-weight: 600;
   border: none;
@@ -41,9 +41,9 @@
 .btn_2_o {
   max-width: 19rem;
   width: 8rem;
-  height: var(--font_3);
+  height: var(--font_26);
   text-align: center;
-  border-radius: $border_15;
+  border-radius: $border_100vmax;
   font-size: var(--font_m);
   font-weight: 600;
   border: none;

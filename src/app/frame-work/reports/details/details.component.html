@@ -1,54 +1,65 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.isCollapsedDetails">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedDetails ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.detailsReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true" (onChange)="getFragmentByZone()"
-                            (onChange)="readingReportManagerService.detailsReq.fragmentMasterIds = []">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.detailsReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
+                                (onChange)="readingReportManagerService.detailsReq.fragmentMasterIds = []">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">نوبتی</div>
-                        <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
-                            [(ngModel)]="readingReportManagerService.detailsReq.fragmentMasterIds"
-                            optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                            [style]="{minWidth: '150px'}" placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
+                                [(ngModel)]="readingReportManagerService.detailsReq.fragmentMasterIds"
+                                optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
-                            <mat-option (click)="getReadingPeriod()"
-                                *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                                <mat-option (click)="getReadingPeriod()"
+                                    *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2"
                         [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.detailsReq.readingPeriodId" name="readingPeriodId">
-                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.detailsReq.readingPeriodId"
+                                name="readingPeriodId">
+                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">سال</div>
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.detailsReq.year"
-                            name="year">
-                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.detailsReq.year" name="year">
+                                <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                         <div class="_key">از</div>
@@ -70,7 +81,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn_1">
-                        مشاهده لیست
+                        مشاهده
                         <i class="pi pi-list"></i>
                     </button>
 
@@ -80,9 +91,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRDetails" [_outputFileName]="'rrDetails'"
-        [_checkUpName]="'rr-details'" [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedRRDetails'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedDetails"
-        (collapsed)="readingReportManagerService.isCollapsedDetails = !readingReportManagerService.isCollapsedDetails"
+        [_checkUpName]="'rr-details'" [_numberOfExtraColumns]="[1]" [_sessionName]="'details-session'" [_selectedColumnsToRemember]="'selectedRRDetails'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDetails"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDetails = !readingReportManagerService.utilsService.collapser.isCollapsedDetails"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

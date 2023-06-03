@@ -1,16 +1,13 @@
-import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import {
-    IReadingReportGISReq,
-    IReadingReportReq,
-    IReadingReportTraverseDifferentialReq,
-    IUserKarkardInput,
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
+  IUserKarkardInput,
 } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -21,12 +18,12 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import {
-    ConfirmDialogExcelViewComponent,
+  ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { JwtService } from './../auth/jwt.service';
-import { EnvService } from './env.service';
+import { MapService } from './map.service';
 
 
 @Injectable({
@@ -35,22 +32,7 @@ import { EnvService } from './env.service';
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
-  trackNumberAllImages: number;
-  isCollapsedPrfm: boolean = false;
-  isCollapsedDH: boolean = false;
-  isCollapsedLocked: boolean = false;
-  isCollapsedPreNumberShown: boolean = false;
-  isCollapsedOffKarkard: boolean = false;
-  isCollapsedMaster: boolean = false;
-  isCollapsedDaily: boolean = false;
-  isCollapsedKarkard: boolean = false;
-  isCollapsedTrv: boolean = false;
-  isCollapsedImgAttrAnlz: boolean = false;
-  isCollapsedTrvCh: boolean = false;
-  isCollapsedDetails: boolean = false;
-  isCollapsedUserKarkard: boolean = false;
   _isOrderByDate: boolean = false;
-  _isCollapsedAllImgs: boolean = true;
 
   masterReq: IReadingReportReq = {
     fromDate: '',
@@ -268,14 +250,11 @@ export class ReadingReportManagerService {
       return this.utilsService.getSearchInOrderTo;
     }
   }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
-  }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
   }
   getApiUrl = (): string => {
-    return this.envService.API_URL;
+    return this.utilsService.envService.API_URL;
   }
   getAuthToken = (): string => {
     return this.jwtService.getAuthorizationToken();
@@ -292,23 +271,13 @@ export class ReadingReportManagerService {
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private dialog: MatDialog,
-    private _location: Location,
-    private router: Router,
-    private envService: EnvService,
     private jwtService: JwtService,
+    private mapService: MapService,
     private profileService: ProfileService
   ) { }
 
   // CALL APIs
 
-  getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
-        resolve(res)
-      })
-    });
-  }
   postDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTById(method, id).subscribe((res) => {
@@ -499,22 +468,22 @@ export class ReadingReportManagerService {
     this.utilsService.routeTo(route);
   }
   linkToStimulsoftAdd = () => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftEdit = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftView = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
-  routeToByObject = (router: string, val: object) => {
-    this.router.navigate([router, val]);
-  }
-  backToPreviousPage = () => {
-    this._location.back();
-  }
-  routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
-    this.router.navigate([EN_Routes.wr, readingReportGISReq]);
+  routeToMapGIS = async (readingReportGISReq: any) => {
+    // insert into gis request and should valiation before route to map     
+    const temp = await this.portRRTest(ENInterfaces.ListToGis, readingReportGISReq);
+    this.mapService.gisReqAux = readingReportGISReq;
+    this.mapService.responseGisAux.value = temp;
+
+    if (temp.length)
+      this.utilsService.compositeService.routeToExtras([EN_Routes.wr, readingReportGISReq]);
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
@@ -526,7 +495,7 @@ export class ReadingReportManagerService {
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',
@@ -547,10 +516,10 @@ export class ReadingReportManagerService {
   showResDialogDynamic = (res: any, options: any): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogExcelViewComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogExcelViewComponent,
         {
           disableClose: options.disableClose,
-          minWidth: '90%',
+          minWidth: '21rem',
           data: {
             data: res,
             title: options.title,
@@ -567,12 +536,14 @@ export class ReadingReportManagerService {
       })
     });
   }
-  firstConfirmDialogRemove = () => {
+  firstConfirmDialogRemove = (text?: string) => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      text: text,
+      icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
   }
@@ -582,24 +553,6 @@ export class ReadingReportManagerService {
   }
   snackWarn = (message: string) => {
     this.utilsService.snackBarMessageWarn(message);
-  }
-  private followUPValidation = (id: number): boolean => {
-    if (MathS.isNull(id)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_trackNumber);
-      return false;
-    }
-    if (MathS.isNaN(id)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumber);
-      return false;
-    }
-    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumbersLength);
-      return false;
-    }
-    return true;
-  }
-  verificationFollowUPTrackNumber = (id: number): boolean => {
-    return this.followUPValidation(id);
   }
   showInMapSingleValidation = (dataSource: any): boolean => {
     if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {

@@ -1,13 +1,11 @@
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
-import { Location } from '@angular/common';
-import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { Injectable } from '@angular/core';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
-import { ListManagerService } from 'services/list-manager.service';
-
 
 declare let L;
 
@@ -31,12 +29,27 @@ L.Marker.prototype.options.icon = defaultIcon;
 })
 export class MapService {
   private map: L.Map;
+  public gisReqAux = {
+    zoneId: null,
+    isCounterState: false,
+    counterStateId: null,
+    isKarbariChange: false,
+    isAhadChange: false,
+    isForbidden: false,
+    readingPeriodId: null,
+    year: null,
+    fromDate: '',
+    toDate: '',
+    fragmentMasterIds: []
+  };
+  public responseGisAux = {
+    value: null
+  }
 
   constructor(
-    private listManagerService: ListManagerService,
-    private browserStorageService: BrowserStorageService,
-    private _location: Location,
-    private envService: EnvService
+    public browserStorageService: BrowserStorageService,
+    private interfaceManagerService: InterfaceManagerService,
+    public envService: EnvService
   ) { }
 
   getFirstItemUrl = (): any => {
@@ -95,15 +108,6 @@ export class MapService {
   serviceInstantiate = (map: L.Map) => {
     this.map = map;
   }
-  backToPreviousPage = () => {
-    this._location.back();
-  }
-  getPointerMarks = (a: object): Promise<any> => {
-    return this.listManagerService.postBodyDataSource(ENInterfaces.ListPerDayXY, a);
-  }
-  getXY = (a: string): Promise<any> => {
-    return this.listManagerService.postById(ENInterfaces.ListXY, parseInt(a));
-  }
   validateGISAccuracy = (temp: any[]): boolean => {
     let bol: boolean = false;
     temp.find(item => {
@@ -111,5 +115,45 @@ export class MapService {
     })
 
     return bol;
+  }
+  postDataSource = (method: ENInterfaces, val: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res) => {
+        resolve(res)
+      })
+    });
+  }
+  postDataSourceGisSpecial = (method: ENInterfaces, val: any): Promise<any> => {
+    if (
+      this.responseGisAux.value &&
+      this.gisReqAux.zoneId == val.zoneId &&
+      this.gisReqAux.counterStateId == val.counterStateId &&
+      this.gisReqAux.fromDate == val.fromDate &&
+      this.gisReqAux.toDate == val.toDate &&
+      this.gisReqAux.isKarbariChange == val.isKarbariChange &&
+      this.gisReqAux.isForbidden == val.isForbidden &&
+      this.gisReqAux.isAhadChange == val.isAhadChange
+    ) {
+      return this.responseGisAux.value;
+    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res) => {
+        this.responseGisAux.value = res;
+        resolve(res);
+      })
+    })
+  }
+  postById = (method: ENInterfaces, id?: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+  getPointerMarks = (a: object): Promise<any> => {
+    return this.postDataSource(ENInterfaces.ListPerDayXY, a);
+  }
+  getXY = (a: string): Promise<any> => {
+    return this.postById(ENInterfaces.ListXY, parseInt(a));
   }
 }

@@ -23,7 +23,6 @@ export class ExcelFileComponent extends FactoryONE {
 
   _showAlalHesabPercent: boolean = false;
   _showimagePercent: boolean = false;
-  canShowEditButton: boolean = false;
   _years: ITitleValue[] = [];
   kindId: number = 0;
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
@@ -65,21 +64,15 @@ export class ExcelFileComponent extends FactoryONE {
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
-  private showEditButton = () => {
-    if (this.readingConfigDefault)
-      this.canShowEditButton = true;
-  }
   verificationACounterReaderId = async () => {
     if (!MathS.isNull(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId)) {
 
       this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId);
-      console.log(this.readingConfigDefault);
 
       this.verificationReadingPeriod();
       this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId);
 
       this.insertReadingConfigDefaults(this.readingConfigDefault);
-      this.showEditButton();
     }
   }
   verificationReadingPeriod = async () => {

@@ -221,6 +221,7 @@ export interface IReadingReportTraverseDifferentialRes {
     offloadDateJalali: string,
     description: string,
     value: string,
+    code: string,
     newValue: string
 }
 export interface IReadingReportTraverseDifferentialReq {

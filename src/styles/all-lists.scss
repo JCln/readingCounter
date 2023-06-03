@@ -1,15 +1,11 @@
 .overall-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
   gap: var(--font_025);
   direction: rtl;
 
   @media (min-width: 550px) {
     justify-content: center;
-  }
-
-  ._bigger_input {
-    min-width: 11rem;
   }
 
   ._value {
@@ -24,7 +20,7 @@
   display: flex;
   flex-wrap: wrap;
   direction: rtl;
-  gap: var(--font_xxs);
+  gap: var(--font_03);
 }
 
 .under_zero {
@@ -36,7 +32,8 @@
 .p-field-radiobutton {
   display: flex;
   align-items: center;
-  margin-left: var(--font_xs);
+  /*has collision with primeNG margin left so should implement important */
+  margin-left: .2rem !important;
 
   label {
     font-size: var(--font_s);

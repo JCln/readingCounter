@@ -5,11 +5,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-image-attr-file-analyze',
   templateUrl: './image-attr-file-analyze.component.html',
-  styleUrls: ['./image-attr-file-analyze.component.scss']
+  styleUrls: ['./image-attr-file-analyze.component.scss'],
+  animations: [transitionAnimation]
 })
 export class ImageAttrFileAnalyzeComponent extends FactoryONE {
   chartColors: any[];

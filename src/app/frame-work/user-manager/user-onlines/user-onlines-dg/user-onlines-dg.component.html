@@ -15,15 +15,18 @@
     <div class="color">
         <h3>رنگ</h3>
         <div class="c_separator">
-            <p-selectButton name="colors" [options]="colors" [(ngModel)]="toastMessageReq.color" optionLabel="text"
-                optionValue="value">
+            <p-selectButton class="_colors_button" name="colors" [options]="colors" [(ngModel)]="toastMessageReq.color"
+                optionLabel="text" optionValue="value">
             </p-selectButton>
         </div>
         <hr class="hr_2">
     </div>
 
     <div class="send">
-        <button type="submit" class="btn_2">ارسال پیام</button>
+        <button type="submit" class="btn_1">
+            <div class="fa fa-upload"></div>
+            ارسال پیام
+        </button>
     </div>
 
 </form>

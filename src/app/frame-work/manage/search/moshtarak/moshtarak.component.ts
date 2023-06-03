@@ -8,13 +8,15 @@ import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { Search } from 'src/app/classes/search';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 import { BriefKardexComponent } from '../../list-manager/brief-kardex/brief-kardex.component';
 
 @Component({
   selector: 'app-moshtarak',
   templateUrl: './moshtarak.component.html',
-  styleUrls: ['./moshtarak.component.scss']
+  styleUrls: ['./moshtarak.component.scss'],
+  animations: [transitionAnimation]
 })
 
 export class MoshtarakComponent extends AllListsFactory {

@@ -1,3 +1,4 @@
+import { ColumnManager } from 'src/app/classes/column-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -9,10 +10,9 @@ import {
   IObjectIteratation,
   IResponses,
 } from 'interfaces/ioverall-config';
-import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
+import { IAUserEditSave, IUserEditManager, IUserEditOnRole, IUserEditOnRoleManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { Observable } from 'rxjs/internal/Observable';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { MathS } from '../classes/math-s';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -22,32 +22,30 @@ import { UtilsService } from './utils.service';
 export interface IUserEditNessessities {
   GUid: string
 }
+interface IIDTitle {
+  id: number,
+  title: string
+}
 @Injectable({
   providedIn: 'root'
 })
 export class UsersAllService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  userEditOnRoleRoleVal: number;
+  userEditOnRoleRoleVal: IIDTitle;
   userEdit_pageSign: IUserEditNessessities = {
     GUid: null,
   };
 
-  private _userRoles = [
-    { field: 'title', header: 'عنوان', isSelected: true },
-    // { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
-    { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isBoolean: true },
-    { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true }
-  ]
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
+    private columnManager: ColumnManager
   ) { }
 
   /* COLUMNS */
   columnUserRoles = (): IObjectIteratation[] => {
-    return this._userRoles;
+    return this.columnManager._userRoles;
   }
   customizeSelectedColumns = (_selectCols: any[]) => {
     return _selectCols.filter(items => {
@@ -64,7 +62,7 @@ export class UsersAllService {
     });
   }
   snackBarMessageSuccess = (res: IResponses) => {
-    this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
   changeUserStatus = (method: ENInterfaces, UUID: string) => {
     this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
@@ -100,14 +98,16 @@ export class UsersAllService {
       })
     });
   }
-  firstConfirmDialog = (reason: EN_messages, reasonTwo?: EN_messages, doesNotReturnButton?: boolean): Promise<any> => {
+  firstConfirmDialog = (dialogConfig: any): Promise<any> => {
     const a = {
-      messageTitle: reason,
-      messageTitle2: reasonTwo,
+      messageTitle: dialogConfig.messageTitle,
+      messageTitleTwo: dialogConfig.messageTitleTwo,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
-      doesNotReturnButton: doesNotReturnButton
+      text: dialogConfig.text,
+      icon: dialogConfig.icon ? dialogConfig.icon : 'fas fa-user-lock',
+      doesNotReturnButton: dialogConfig.doesNotReturnButton
     }
     return this.utilsService.firstConfirmDialog(a);
   }
@@ -141,14 +141,14 @@ export class UsersAllService {
       return [0];
     return a;
   }
-  private addAUserActions = (actionItems: any): string[] => {
+  private addAUserActions = (items: any): string[] => {
     let selectedActions: string[] = [];
-    actionItems.map(appIt => {
+    items.map(appIt => {
       appIt.moduleItems.map(moduleIt => {
         moduleIt.controllerItems.map(ctrlIt => {
           ctrlIt.actionItems.map(actionIt => {
             if (actionIt.isSelected) {
-              selectedActions.push(actionIt.value)
+              selectedActions.push(actionIt.value);
             }
           })
         })
@@ -206,8 +206,8 @@ export class UsersAllService {
   }
   private connectToServerEdit = async (vals: IAUserEditSave) => {
     if (this.vertification(vals)) {
-
-      if (await this.firstConfirmDialog(EN_messages.confirm_userChange)) {
+      const text = EN_messages.confirm_userChange + ' ' + vals.displayName + ' ' + EN_messages.confirm_userChange_2;
+      if (await this.firstConfirmDialog({ messageTitle: text })) {
         this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
           if (res) {
             this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
@@ -249,33 +249,42 @@ export class UsersAllService {
       });
     });
   }
-  private verificationEditOnRole = (dataSource: IUserEditOnRole) => {
-    if (MathS.isNull(dataSource.roleId)) {
+  private verificationEditOnRoleGroupAccess = (dataSource: any) => {
+    if (MathS.isNull(dataSource)) {
       this.utilsService.snackBarMessage(EN_messages.insert_group_access, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
+    return true;
+  }
+  private verificationEditOnRole = (dataSource: IUserEditOnRole) => {
     if (MathS.isNull(dataSource.selectedActions[0])) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
       return false;
     }
-
     return true;
   }
-  userEditOnRole = async (dataSource: IAddUserManager) => {
-    const val: IUserEditOnRole = {
-      roleId: this.userEditOnRoleRoleVal,
-      selectedActions: this.addAUserActions(dataSource.appItems),
-    }
-    if (!this.verificationEditOnRole(val))
-      return;
-    if (await this.firstConfirmDialog(EN_messages.confirm_userGroupChange)) {
-      const res = await this.postDataSource(ENInterfaces.userEditOnRole, val);
-      if (res)
-        this.snackBarMessageSuccess(res);
+  userEditOnRole = async (dataSource: IUserEditOnRoleManager) => {
+    if (this.verificationEditOnRoleGroupAccess(this.userEditOnRoleRoleVal)) {
+
+      const val: IUserEditOnRole = {
+        roleId: this.userEditOnRoleRoleVal.id,
+        selectedActions: this.addAUserActions(dataSource.appItems)
+      }
+
+      if (this.verificationEditOnRole(val)) {
+        const text = EN_messages.confirm_userGroupChange_1 + ' ' + this.userEditOnRoleRoleVal.title + ' ' + EN_messages.confirm_userGroupChange_2;
+        if (await this.firstConfirmDialog({ messageTitle: text })) {
+          const res = await this.postDataSource(ENInterfaces.userEditOnRole, val);
+          if (res)
+            this.snackBarMessageSuccess(res);
+        }
+      }
     }
   }
   userEditOnRoleInsertRole = (val: any) => {
     this.userEditOnRoleRoleVal = val;
+    console.log(this.userEditOnRoleRoleVal);
+
   }
   postNotifyDirectImage = (filesList: any, val: INotifyDirectImage): Observable<any> => {
     const formData: FormData = new FormData();
@@ -300,11 +309,11 @@ export class UsersAllService {
   checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage): boolean => {
 
     if (MathS.isNull(val.caption)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_caption, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
       return false;
     }
     if (MathS.isNull(fileForm)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_Image);
       return false;
     }
     if (
@@ -315,7 +324,7 @@ export class UsersAllService {
       return true;
     }
     else {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_JPG, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_JPG);
       return false;
     }
     // return true;
@@ -323,11 +332,11 @@ export class UsersAllService {
   checkVertiticationNotifDirectVideo = (fileForm: FileList, val: INotifyDirectImage): boolean => {
 
     if (MathS.isNull(val.caption)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_caption, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
       return false;
     }
     if (MathS.isNull(fileForm)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_video, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_video);
       return false;
     }
     if (
@@ -338,7 +347,7 @@ export class UsersAllService {
       return true;
     }
     else {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_video, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_video);
       return false;
     }
     // return true;

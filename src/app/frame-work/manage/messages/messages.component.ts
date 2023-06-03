@@ -29,7 +29,7 @@ export class MessagesComponent extends FactoryONE {
   }
   classWrapper = async (canRefresh?: boolean) => {
     this.times = this.messageService.getTimes();
-    this.colors = this.messageService.getColors();
+    this.colors = this.messageService.getToastColors();
     this.allMessages = this.messageService.getMessages();
   }
   copyPreMessageToCurrent = (name: IMessage) => {

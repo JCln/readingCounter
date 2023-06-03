@@ -4,7 +4,8 @@ export class OffloadModify {
     static readonly callAnnounce = new OffloadModify(0, ENOffloadModifyType.callAnnounce, false);
     static readonly wrongReading = new OffloadModify(2, ENOffloadModifyType.wrongReading, false);
     static readonly bazresi = new OffloadModify(3, ENOffloadModifyType.bazresi, false);
-
+    static readonly selectAOption = new OffloadModify(null, ENOffloadModifyType.selectAOption, false);
+    
     static readonly blueScreenLight = new OffloadModify(10, ENOffloadModifyType.blueScreenLight, false);
     static readonly intenseLight = new OffloadModify(11, ENOffloadModifyType.intenseLight, false);
     static readonly longDistance = new OffloadModify(12, ENOffloadModifyType.longDistance, false);

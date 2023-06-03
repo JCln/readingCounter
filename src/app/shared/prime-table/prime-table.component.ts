@@ -9,7 +9,6 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
 
@@ -27,7 +26,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
   @Input() _isSortable: boolean = true;
-  @Input() _hasCollapsible: boolean = false;  
+  @Input() _hasCollapsible: boolean = false;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
   @Input() _hasAggregating: boolean = false;
@@ -80,7 +79,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public dialogService: DialogService,
     public readingReportManagerService: ReadingReportManagerService,
     public profileService: ProfileService,
-    public authService: AuthService,
     public interactionService: InteractionService
   ) {
     super(
@@ -89,8 +87,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
       columnManager,
       config,
       dialogService,
-      profileService,
-      authService
+      profileService
     );
   }
   ngOnChanges(): void {
@@ -106,14 +103,14 @@ export class PrimeTableComponent extends FactorySharedPrime {
   filterEventTable(e: Table) {
     this.filteredEvent.emit(e.filteredValue);
   }
-  forceOffload = (dataSource: object, ri: number) => {
-    this.forcedOffload.emit({ dataSource, ri });
+  forceOffload = (dataSource: object) => {
+    this.forcedOffload.emit(dataSource);
   }
   customSort = (dataSource: any) => {
     this.customedSort.emit(dataSource);
   }
-  backToImportedConfirmDialog = (dataSource: object, ri: number) => {
-    this.backedToImportedConfirmDialog.emit({ dataSource, ri });
+  backToImportedConfirmDialog = (dataSource: object) => {
+    this.backedToImportedConfirmDialog.emit(dataSource);
   }
   routeToLMPayDay = (dataSource: object) => {
     this.routedToLMPayDay.emit(dataSource);
@@ -151,8 +148,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToOffloadGeneralModify = (dataSource: object) => {
     this.routedToOffloadGeneralModify.emit(dataSource);
   }
-  backToReading = (dataSource: object, ri: number) => {
-    this.backedToReading.emit({ dataSource, ri });
+  backToReading = (dataSource: object) => {
+    this.backedToReading.emit(dataSource);
   }
   backToPrevious = () => {
     this.backedToPrevious.emit(true);
@@ -247,16 +244,16 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
 
   doAggregate = () => {
-    const _agg = this.profileService._agg.flag;
+    const _aggFlag = this.profileService._agg.flag;
 
-    if (_agg) {
+    if (_aggFlag && this._checkUpName == 'Kartables') {
       this._sortField = this.profileService._agg.selectedAggregate;
       this.updateRowGroupMetaData(this.profileService._agg.selectedAggregate);
     }
     else {
       this.updateRowGroupMetaData('');
     }
-  } 
+  }
   doCustomSort = (event: any) => {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];

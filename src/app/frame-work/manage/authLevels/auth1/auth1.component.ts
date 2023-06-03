@@ -46,9 +46,9 @@ export class Auth1Component extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel1 = this.closeTabService.saveDataForAppLevel1.slice(0, index).concat(this.closeTabService.saveDataForAppLevel1.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.authsManagerService.firstConfirmDialog();
+    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title);
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel1REMOVE, rowDataAndIndex['dataSource']);
+      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel1REMOVE, rowDataAndIndex['dataSource'].id);
       this.refetchTable(rowDataAndIndex['ri']);
     }
   }

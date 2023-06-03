@@ -4,7 +4,7 @@ export class Converter {
     static convertIdsToTitles = <T>(dataSource: T[], dictionaries: object, toConvert: object): T[] => {
         for (let dictionaryIndex = 0; dictionaryIndex < Object.keys(dictionaries).length; dictionaryIndex++) {
             let objectValue = Object.values(dictionaries)[dictionaryIndex];
-            let toConvertTemp = Object.keys(toConvert)[dictionaryIndex]
+            let toConvertTemp = Object.keys(toConvert)[dictionaryIndex];
 
             for (let index = 0; index < dataSource.length; index++) {
                 for (let j = 0; j < objectValue.length; j++) {
@@ -33,7 +33,7 @@ export class Converter {
         });
     }
     static convertTitleToIdByName = (name: any, dictionary: IDictionaryManager[]): any => {
-        return dictionary.map(dictionary => {
+        return dictionary.find(dictionary => {
             if (dictionary.title == name)
                 return dictionary.id;
         });

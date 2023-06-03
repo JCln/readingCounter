@@ -1,25 +1,27 @@
 <main class="main">
-    <section [hidden]="toolsService._isCollapsedImageAttrGridBased">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
+            <section class="_card"
+                [@openClose]="toolsService.utilsService.collapser._isCollapsedImageAttrGridBased ? 'slideUp' : 'slideDown'">
                 <section class="content">
                     <div class="input_2" [hidden]="!zoneDictionary.length">
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="toolsService.imgResultDetailsGridBased.zoneId" placeholder="انتخاب مورد"
-                                [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title"
-                                filter="true">
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
                     <div class="input_2" *ngIf="imageAttrAllDictionary.length">
                         <div class="_key">توصیف تصویر</div>
-                        <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
-                            [(ngModel)]="toolsService.imgResultDetailsGridBased.imageAttributionIds" optionLabel="title"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '200px'}"
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="imageAttrAllDictionary" name="imgAttr"
+                                [(ngModel)]="toolsService.imgResultDetailsGridBased.imageAttributionIds"
+                                optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">از تاریخ</div>
@@ -39,15 +41,13 @@
                             </app-date-jalali>
                         </div>
                     </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
 
                 </section>
             </section>
-            <footer class="center_footer">
-                <button type="submit" class="btn_1">
-                    مشاهده
-                    <i class="pi pi-list"></i>
-                </button>
-            </footer>
         </form>
     </section>
 
@@ -55,8 +55,8 @@
         [_outputFileName]="'imgResultGridBased'" [_checkUpName]="'imgResultGridBased'"
         [_sessionName]="'imgResultGridBased-session'" [_numberOfExtraColumns]="[1]"
         [_selectedColumnsToRemember]="'selectedToolsImgRDGridBased'" [_hasCollapsible]=true
-        [_isCollaped]="toolsService._isCollapsedImageAttrGridBased"
-        (collapsed)="toolsService._isCollapsedImageAttrGridBased = !toolsService._isCollapsedImageAttrGridBased"
+        [_isCollaped]="toolsService.utilsService.collapser._isCollapsedImageAttrGridBased"
+        (collapsed)="toolsService.utilsService.collapser._isCollapsedImageAttrGridBased = !toolsService.utilsService.collapser._isCollapsedImageAttrGridBased"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 

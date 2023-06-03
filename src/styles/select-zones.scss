@@ -54,6 +54,7 @@ main {
     margin-bottom: var(--font_02);
     font-size: var(--font_l);
     font-weight: 600;
+    border-radius: $border_7;
   }
 }
 
@@ -62,6 +63,7 @@ main {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(6, 1fr);
   background: var(--white);
+  border-radius: $border_7;
 
   .l_3 {
     font-size: var(--font_s);

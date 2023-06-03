@@ -1,3 +1,4 @@
+import { EN_messages } from "./enums.enum";
 
 export enum ENClientServerErrors {
     'cs400' = 400,
@@ -40,12 +41,18 @@ export interface IManageServer {
     background: string;
     color?: string;
     clickFunction?: ENManageServers;
+    description?: EN_messages
 }
 export enum ENManageServers {
     serverDelete = 'serverDelete',
     linkToHangfire = 'linkToHangfire',
     linkToHealthCheck = 'linkToHealthCheck',
-    resetApp = 'resetApp'
+    expireLicense = 'expireLicense',
+    extendLicenseTime = 'ExtendLicenseTime',
+    compressLicenseTime = 'compressLicenseTime',
+    resetIIS = 'resetIIS',
+    offlineTheAPP = 'offlineTheAPP',
+    resetApp = 'resetApp',
 }
 export interface IManageDrivesInfo {
     driveName: string,
@@ -65,4 +72,17 @@ export interface IServerOSInfo {
     elapsedDateTime: string,
     isOs64: boolean,
     systemDateTime: string,
+}
+export interface IIpRule {
+    endpoint: string,
+    period: string,
+    periodTimespan: number,
+    limit: number,
+    quotaExceededResponse: number,
+    ip?: string,
+    monitorMode: boolean,
+}
+export interface IIpRules {
+    ip: string,
+    rules: IIpRule
 }

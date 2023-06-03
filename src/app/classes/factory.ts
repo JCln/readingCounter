@@ -9,7 +9,6 @@ import { BrowserStorageService } from 'services/browser-storage.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
@@ -46,7 +45,6 @@ export class FactorySharedPrime implements OnChanges {
 
     _showSavedColumnButton: boolean;
     _reOrderableTable: boolean;
-    _reSizebleTable: boolean;
     tempOriginDataSource: any[] = [];
     ref: DynamicDialogRef;
 
@@ -69,6 +67,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _multiSelectEnable: boolean = true;
     @Input() _isCustomSort: boolean = false;
     @Input() _hasSaveColumns: boolean = true;
+    @Input() _hasRefreshTable: boolean = true;
 
     constructor(
         public browserStorageService: BrowserStorageService,
@@ -76,8 +75,7 @@ export class FactorySharedPrime implements OnChanges {
         public columnManager: ColumnManager,
         public config: PrimeNGConfig,
         public dialogService: DialogService,
-        public profileService: ProfileService,
-        public authService: AuthService
+        public profileService: ProfileService
     ) {
         this.setTraslateToPrimeNgTable();
         this.getResizReOrderable();
@@ -95,7 +93,7 @@ export class FactorySharedPrime implements OnChanges {
         if (this._checkUpName == 'allComponent') {
             let temp: any[] = [];
             // should be false on initial(_primeNGHeaderCheckbox) because filter on DataSource happen
-            if (this.columnManager._primeNGHeaderCheckbox) {
+            if (this.profileService.columnManager._primeNGHeaderCheckbox) {
                 this.tempOriginDataSource = JSON.parse(JSON.stringify(this.dataSource));
                 for (let index = 0; index < this.dataSource.length; index++) {
                     if (this.dataSource[index].counterStateId !== null)
@@ -136,10 +134,10 @@ export class FactorySharedPrime implements OnChanges {
                 this._showSavedColumnButton = false;
             }
             else {
-                this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+                this._selectCols = this.profileService.columnManager.columnSelectedMenus(this._outputFileName);
                 this._showSavedColumnButton = true;
             }
-            this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+            this._selectedColumns = this.profileService.columnManager.customizeSelectedColumns(this._selectCols);
         }
     }
     resetSavedColumns = () => {
@@ -189,28 +187,30 @@ export class FactorySharedPrime implements OnChanges {
         });
     }
     doShowCarousel = (dataSource: any, _isNotForbidden?: boolean) => {
-        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-            data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
-            rtl: true,
-            width: '80%',
-        })
-        this.ref.onClose.subscribe(async res => {
-            if (res)
-                console.log(res);
-
-        });
+        // should not open dialog when no images exists
+        if (dataSource.imageCount) {
+            this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+                data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
+                rtl: true,
+                width: '80%',
+            })
+            this.ref.onClose.subscribe(async res => {
+                if (res)
+                    console.log(res);
+            });
+        } else {
+            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
+        }
     }
     doShowCarouselForbidden = (dataSource: any) => {
         // To make imageWrapper config Dialog for forbidden
         this.doShowCarousel(dataSource, false);
     }
     getResizReOrderable = () => {
-        this._reSizebleTable = this.profileService.getLocalResizable();
         this._reOrderableTable = this.profileService.getLocalReOrderable();
     }
     denyTracking = (): boolean => {
-        const jwtRole = this.authService.getAuthUser();
-        return jwtRole.roles.toString().includes('denytracking') ? true : false;
+        return this.utilsService.getDenyTracking();
     }
 
 }
@@ -263,9 +263,12 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
         });
     }
     routeToOffload = (event: object) => {
-        this.carouselDataSource = event['dataSource'];
-        this.rowIndex = event['ri'];
-        this.showCarousel = true;
+        setTimeout(() => {
+            console.log(event); // not exactly why but without console.log modify carousel not working on next and previous clicked on first glance of allComponent(modifyCompnent) view
+            this.carouselDataSource = event['dataSource'];
+            this.rowIndex = event['ri'];
+            this.showCarousel = true;
+        }, 0);
     }
     carouselNextItem = () => {
         this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;

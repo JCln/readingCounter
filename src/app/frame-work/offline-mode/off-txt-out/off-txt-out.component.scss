@@ -2,18 +2,8 @@
 @import 'button.scss';
 @import 'input.scss';
 @import 'choose-files.scss';
+@import 'cards';
 
-
-section {
-  display: grid;
-  direction: rtl;
-  margin: auto;
-  padding: var(--font_xs);
-  width: 18rem;
-  background: var(--secondary_1);
-  border-radius: $border_15;
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-}
 
 input {
   text-align: center;

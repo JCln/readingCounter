@@ -1,26 +1,23 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ProfileService } from 'services/profile.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
-
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { OffloadModify } from '../classes/offload-modify-type';
+
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
-import { OffloadModify } from './../classes/offload-modify-type';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { EnvService } from './env.service';
+import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
 
@@ -39,18 +36,6 @@ export class TrackingManagerService {
     zoneId: 0
   };
 
-  getColumnDefColumns = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('defColumns');
-  }
-  getFollowUpView = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('followUpView');
-  }
-  getImportedListDetails = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('importedListDetails');
-  }
-  getLMPerDayFollowUpPositions = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
-  }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
       OffloadModify.callAnnounce,
@@ -77,29 +62,18 @@ export class TrackingManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private dialog: MatDialog,
     private allListsService: AllListsService,
-    private envService: EnvService,
     private jwtService: JwtService,
-    private columnManager: ColumnManager,
+    public columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
     private profileService: ProfileService,
-    private authService: AuthService
+    private followUpService: FollowUpService,
   ) { }
 
-  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
-    const a = {
-      messageTitle: message,
-      minWidth: '19rem',
-      isInput: isInput,
-      isDelete: isDelete
-    }
-    return this.utilsService.firstConfirmDialog(a);
-  }
   getApiUrl = (): string => {
-    return this.envService.API_URL;
+    return this.utilsService.envService.API_URL;
   }
   getAuthToken = (): string => {
     return this.jwtService.getAuthorizationToken();
@@ -206,20 +180,15 @@ export class TrackingManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '21rem',
-        data: {
-          title: message,
-          isSelectableDate: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: message,
+      minWidth: '21rem',
+      icon: 'pi pi-calendar-times',
+      isInput: false,
+      isDelete: false,
+      isSelectableDate: true,
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
@@ -294,8 +263,7 @@ export class TrackingManagerService {
     return false;
   }
   denyTracking = (): boolean => {
-    const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+    return this.utilsService.getDenyTracking();
   }
   checkVertificationDBF = (dataSource: IOutputManager): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {
@@ -365,11 +333,16 @@ export class TrackingManagerService {
   verificationTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
   }
+  routeToFollowUp = (row: ITracking) => {
+    this.followUpService.setTrackNumber(row.trackNumber);
+    this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
+  }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
   routeToLMPayDay = (row: ITracking) => {
     this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.pageSignsService.perday_pageSign.zone = row.zoneTitle;
     this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToLMAll = (row: any) => {
@@ -377,6 +350,7 @@ export class TrackingManagerService {
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
+    this.allListsService.allLists_pageSign.zoneId = row.zoneId;
     this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
@@ -428,9 +402,6 @@ export class TrackingManagerService {
       return false;
     }
     return true;
-  }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();

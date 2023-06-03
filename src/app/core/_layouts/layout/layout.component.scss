@@ -1,10 +1,14 @@
 .ma {
-  display: flex;
-  // width: 99%;
+  display: block;
 
-  &router-outlet {
-    width: 95%;
+  @media (min-width: 375px) {
+    display: flex;
   }
+
+}
+
+app-frame-work {
+  flex-grow: 1;
 }
 
 app-header {
@@ -14,12 +18,151 @@ app-header {
   z-index: 30;
 }
 
+._sidebar_container {
+  position: fixed;
+  top: 2.8rem;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  z-index: 20;
+  min-width: 85%;
+  transition: min-width cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
+
+  @media (min-width: 375px) {
+    min-width: 75%;
+  }
+
+  @media (min-width: 550px) {
+    position: sticky;
+    top: 0;
+    min-width: 29%;
+  }
+
+  @media (min-width: 700px) {
+    min-width: 24%;
+  }
+
+  @media (min-width: 850px) {
+    min-width: 22%;
+  }
+
+  @media (min-width: 1000px) {
+    min-width: 18%;
+  }
+
+  @media (min-width: 1200px) {
+    min-width: 14%;
+  }
+}
+
+app-side-bar {
+  position: fixed;
+  top: 5.5rem;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  box-shadow:
+    0px 11px 10px 0px rgba(0, 0, 0, .14),
+    0px 18px 18px 0px rgba(0, 0, 0, .12),
+    0px 5px 5px -1px rgba(0, 0, 0, .2);
+
+  @media (min-width: 550px) {
+    min-width: 29%;
+    width: 29%;
+  }
+
+  @media (min-width: 700px) {
+    min-width: 24%;
+    width: 24%;
+  }
+
+  @media (min-width: 850px) {
+    min-width: 22%;
+    width: 22%;
+  }
+
+  @media (min-width: 1000px) {
+    min-width: 18%;
+    width: 18%;
+  }
+
+  @media (min-width: 1200px) {
+    min-width: 14%;
+    width: 14%;
+  }
+}
+
+._sidebar_small_screen_toggle {
+  // for mobile view, small sidebar should not showing
+  visibility: hidden;
+  opacity: 0;
+  width: 0;
+
+  @media (min-width: 550px) {
+    visibility: visible;
+    opacity: 1;
+    min-width: 4rem;
+    width: 4rem;
+  }
+
+  @media (min-width: 700px) {
+    min-width: 5rem;
+    width: 5rem;
+  }
+
+  app-side-bar {
+    @media (min-width: 550px) {
+      min-width: 4rem;
+      width: 4rem;
+    }
+
+    @media (min-width: 700px) {
+      min-width: 5rem;
+      width: 5rem;
+    }
+  }
+
+  &:hover {
+    overflow: visible;
+
+    app-side-bar {
+      right: 0;
+      box-shadow:
+        0px 11px 10px 0px rgba(0, 0, 0, .14),
+        0px 18px 18px 0px rgba(0, 0, 0, .12),
+        0px 5px 5px -1px rgba(0, 0, 0, .2);
+
+      animation: absolute_animation 250ms both;
+
+    }
+  }
+}
+
+@keyframes absolute_animation {
+
+  from {
+    width: 5rem;
+    min-width: 5rem;
+  }
+
+  to {
+    width: 13rem;
+    min-width: 13rem;
+  }
+}
+
 app-tab-wrapper {
   object-fit: cover;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 67%;
+  width: 99%;
   border-radius: 0 0 15px 15px;
 
   @media (min-width: 700px) {
@@ -29,87 +172,4 @@ app-tab-wrapper {
   @media (min-width: 1000px) {
     width: 90%;
   }
-}
-
-app-side-bar {
-  position: fixed;
-  right: 0;
-  top: 6rem;
-  width: 0%;
-  min-height: 75vh;
-  height: 85vh;
-  z-index: 25;
-  transition: all ease-in-out 150ms;
-
-  @media (min-width: 550px) {
-    width: 29%;
-  }
-
-  @media (min-width: 700px) {
-    width: 22%;
-  }
-
-  @media (min-width: 1000px) {
-    width: 20%;
-  }
-
-  @media (min-width: 1200px) {
-    width: 15%;
-  }
-
-}
-
-app-frame-work {
-  width: 100%;
-  transition: all ease-in-out 150ms;
-
-  @media (min-width: 550px) {
-    width: 71%;
-  }
-
-  @media (min-width: 700px) {
-    width: 78%;
-  }
-
-  @media (min-width: 1000px) {
-    width: 80%;
-  }
-
-  @media (min-width: 1200px) {
-    width: 85%;
-  }
-}
-
-//ts config
-// .page_conf_4 {
-//   width: 4.5%;
-// }
-
-.page_conf_6 {
-  width: 6.5%;
-}
-
-.page_conf_8 {
-  width: 8%;
-}
-
-.page_conf_13 {
-  width: 13%;
-
-  @media (max-width: 550px) {
-    height: 98vh;
-    width: 80%;
-    overflow-x: auto;
-    top: var(--font_xs);
-    bottom: 0;
-    border-radius: 15px;
-  }
-}
-
-.framework_conf_s {
-  width: 95%;
-}
-
-.tabWrapper_conf {
-  width: 92%;
 }

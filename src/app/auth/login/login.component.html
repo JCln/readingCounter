@@ -13,10 +13,20 @@
                         minlength="1" maxlength="20" name="password" [(ngModel)]="userData.password" required>
                     <i class="fa fa-lock"></i>
                 </div>
+
+                <app-captcha #appDntCaptcha [(inputText)]="userData.dntCaptchaInputText"
+                    [(text)]="userData.dntCaptchaText" [(token)]="userData.dntCaptchaToken" [apiUrl]="captchaApiShow"
+                    [backColor]="'#f7f3f3'" [fontName]="'Tahoma'" [fontSize]="18" [foreColor]="'#111111'" [max]="9000"
+                    [min]="1" [placeholder]="'عبارت تصویر امنیتی را وارد نمایید'">
+                </app-captcha>
             </section>
-            <button class="btn_1" type="submit">ورود</button>
+            <button id="btnLogin" class="btn_1" type="submit">ورود</button>
         </form>
         <section class="info">
+            <i (click)="gotToAbout()" class="tooltip _circle_border p_icons">
+                <img class="about_us_img" [src]="aboutUsImage" alt="">
+                <div class="tooltip_text">درباره ما</div>
+            </i>
             <i (click)="showVersionInfo = !showVersionInfo" (click)="getVersionInfos()"
                 class="tooltip _circle_border p_icons pi pi-info">
                 <div [hidden]="showVersionInfo" class="tooltip_text">نمایش آخرین تغییرات</div>

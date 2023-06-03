@@ -27,7 +27,6 @@ export class ImportDynamicComponent extends FactoryONE {
 
   _showAlalHesabPercent: boolean = false;
   _showimagePercent: boolean = false;
-  canShowEditButton: boolean = false;
   _showDynamicCount: boolean;
 
   kindId: number = 0;
@@ -61,7 +60,6 @@ export class ImportDynamicComponent extends FactoryONE {
       }
       this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportData, this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
       this.resetToDefaultFormStatus();
-      this._canShowAddButton = false;
     }
     else {
       this.importDynamicService.snackMessage(EN_messages.insert_zone);
@@ -75,11 +73,6 @@ export class ImportDynamicComponent extends FactoryONE {
     this.importDynamicService.importDynamicReq.alalHesabPercent = rcd.defaultAlalHesab;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
-  }
-  private showEditButton = () => {
-    if (!this.readingConfigDefault)
-      return;
-    this.canShowEditButton = true;
   }
   verificationACounterReaderId = async () => {
     if (!MathS.isNull(this.importDynamicService.importDynamicReq.zoneId)) {
@@ -96,7 +89,6 @@ export class ImportDynamicComponent extends FactoryONE {
         return;
       }
       this.insertReadingConfigDefaults(this.readingConfigDefault);
-      this.showEditButton();
     }
   }
   verificationReadingPeriod = async () => {
@@ -129,7 +121,6 @@ export class ImportDynamicComponent extends FactoryONE {
   private resetToDefaultFormStatus = () => {
     this._showAlalHesabPercent = false;
     this._showimagePercent = false;
-    this.canShowEditButton = false;
 
     this.kindId = 0;
     this.readingPeriodDictionary = [];

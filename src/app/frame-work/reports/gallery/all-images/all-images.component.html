@@ -1,21 +1,39 @@
-<app-collapsable [_isReversed]="true" [_isCollapsed]=readingReportManagerService._isCollapsedAllImgs
-    (_clicked)=" readingReportManagerService._isCollapsedAllImgs = !readingReportManagerService._isCollapsedAllImgs">
+<app-collapsable [_isCollapsed]=toolsService.utilsService.collapser._isCollapsedAllImgs
+    (_clicked)=" toolsService.utilsService.collapser._isCollapsedAllImgs = !toolsService.utilsService.collapser._isCollapsedAllImgs">
 </app-collapsable>
-<form #form="ngForm" *ngIf="readingReportManagerService._isCollapsedAllImgs" class="insert_track"
-    (ngSubmit)="connectToServer()">
+<form #form="ngForm" class="_card" (ngSubmit)="connectToServer()"
+    [@openClose]="toolsService.utilsService.collapser._isCollapsedAllImgs ? 'slideUp' : 'slideDown'">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
-        <input class="_value" type="number" name="trackNumber"
-            [(ngModel)]="readingReportManagerService.trackNumberAllImages">
+        <input class="_value" type="number" name="trackNumber" [(ngModel)]="toolsService.trackNumberAllImages">
     </div>
-    <button type="submit" class="btn_1">مشاهده</button>
+    <button type="submit" class="btn_1">
+        مشاهده
+    </button>
 </form>
+<section class="_card" *ngIf="allImagesDataSource">
+    <h1 class="title">فیلتر نمایش</h1>
+    <div class="input_2">
+        <div class="_key">جستجو براساس</div>
+        <div class="_value">
+            <p-dropdown #drop name="zones" [options]="toolsService.searchInOrder" placeholder="ش پرونده"
+                optionValue="value" optionLabel="name" filter="true" (onChange)="userInputValue = drop.selectedOption">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="input_2">
+        <div class="_key">{{userInputValue.name}}</div>
+        <input class="_value" type="{{userInputValue.type}}" name="searchInOrder"
+            [(ngModel)]="userInputValue.insertedValue" placeholder="{{userInputValue.name}} را وارد نمایید"
+            (ngModelChange)="showItemOnSearch(userInputValue.value)">
+    </div>
+</section>
 
 <section *ngIf="allImagesDataSource" class="_descriptions">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
         <input readonly="true" class="_value" type="number" name="trackNumber"
-            [(ngModel)]="readingReportManagerService.trackNumberAllImages">
+            [(ngModel)]="toolsService.trackNumberAllImages">
     </div>
     <div class="input_2">
         <div class="_key">ناحیه</div>
@@ -35,19 +53,20 @@
         <input readonly="true" class="_value" name="itemCount" [(ngModel)]="allImagesDataSource.itemCount">
     </div>
     <div class="input_2">
-        <div class="_key">مامور</div>
+        <div class="_key">قرائت کننده</div>
         <input readonly="true" class="_value" name="counterReader" [(ngModel)]="allImagesDataSource.counterReaderName">
     </div>
 </section>
+
 <main *ngIf="allImagesDataSource" style="position: relative;">
+    <div class="img_content">
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images"
+            [ngClass]="closeTabService.saveDataForRRGalleryRSFirst.imageUrlAndInfos[ri].canShow ? 'showImg': 'hiddenImg'">
 
-    <div class="content">
-        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
-
-            <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
-                <img loading="lazy" src="{{imgsOriginUrl[ri]}}"
+            <div *ngIf="closeTabService.saveDataForRRGallery[ri]" class="__img_bound_real">
+                <img loading="lazy" src="{{closeTabService.saveDataForRRGallery[ri]}}"
                     onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر"
-                    (click)="routeToOffload(item , ri,imgsOriginUrl[ri])">
+                    (click)="routeToOffload(item , ri,closeTabService.saveDataForRRGallery[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>اش:{{item.eshterak}}</p>
                     <p>{{item.zoneTitle}}</p>
@@ -58,7 +77,6 @@
                     <p>{{item.imageDescription}}</p>
                 </div>
             </div>
-
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 <section *ngIf="dataSource">
 
     <h1 class="title">ویرایش لیست صادر شده</h1>
+    <hr>
     <form #form="ngForm" (ngSubmit)="editCloseData()" class="content">
         <div class="_desc">
             <div *ngFor="let mainDatas of _selectedDatas">
@@ -13,7 +14,7 @@
                         </mat-checkbox>
                     </ng-container>
                     <ng-template #editableCheckboxes>
-                        <div class="check_boxes">
+                        <div class="check_boxes" *ngIf="!trackingManagerService.utilsService.getDenyTracking()">
                             <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
                                 [(ngModel)]="dataSource[mainDatas.field]">
                                 {{mainDatas.header}}
@@ -25,10 +26,9 @@
                 <ng-template #elseTemplate>
                     <ng-container *ngIf="mainDatas.isSelectOption;else selectOption">
                         <div class="input_2" [ngClass]="{coloring_border: mainDatas.borderize}">
-                            <div class="_key">مامور جدید</div>
+                            <div class="_key">قرائت کننده جدید</div>
                             <div class="_value">
-                                <p-dropdown [style]="{'minWidth': '10rem','width': '100%'}"
-                                    [options]="allCounterReaders" name="newCounterReaderName"
+                                <p-dropdown [options]="allCounterReaders" name="newCounterReaderName"
                                     [(ngModel)]="selectedCounterReader" filter="true" placeholder="انتخاب مورد"
                                     optionLabel="title" [showClear]="true">
                                 </p-dropdown>

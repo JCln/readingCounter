@@ -21,7 +21,7 @@ export class UserLogginsComponent extends FactoryONE {
 
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.userLogginsService.userLoggins_pageSign.GUid) {
-      this.userLogginsService.backToUserAll();
+      this.userLogginsService.utilsService.backToPreviousPage();
     }
     else {
       this.dataSource = await this.userLogginsService.getLogsDataSource(this.userLogginsService.userLoggins_pageSign.GUid);

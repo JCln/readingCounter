@@ -3,7 +3,7 @@
   border: 2px solid var(--primary_2);
   color: var(--primary_2);
   text-align: center;
-  border-radius: 100vmax;
+  border-radius: $border_100vmax;
   margin-bottom: var(--font_xs);
 }
 
@@ -18,7 +18,7 @@
   padding: var(--font_05);
   background-color: var(--white);
   color: var(--secondary_6);
-  font-size: var(--font_m);
+  font-size: var(--font_s);
   font-weight: 600;
   cursor: pointer;
   box-shadow: 1px 1px 2px 0px var(--secondary_4);
@@ -81,19 +81,12 @@ progress {
 .title {
   color: var(--primary_3);
   text-align: center;
-  margin: var(--font_xs) var(--font_05);
+  margin: var(--font_05);
   font-size: var(--font_l2);
 }
 
-input {
-  text-align: center;
-  color: var(--secondary_5);
-  margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px var(--secondary_4);
-}
-
 input[type="file"] {
-  // display: none;
+  display: none;
   position: absolute;
   left: -99999rem;
 }

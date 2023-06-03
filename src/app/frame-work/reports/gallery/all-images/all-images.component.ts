@@ -1,41 +1,43 @@
+import { ToolsService } from 'services/tools.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
-import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/interfaces/ireports';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
+import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'interfaces/ireports';
 
 @Component({
   selector: 'app-all-images',
   templateUrl: './all-images.component.html',
-  styleUrls: ['./all-images.component.scss']
+  styleUrls: ['./all-images.component.scss'],
+  animations: [transitionAnimation]
 })
 export class AllImagesComponent extends FactoryONE {
 
   allImagesDataSource: IImageUrlInfoWrapper;
-  imgsOriginUrl: any[] = [];
 
   carouselImage: IImageUrlAndInfos;
   showCarousel: boolean = false;
   rowIndex: number = 0;
+  userInputValue: any = { name: 'شماره پرونده', value: 'radif', type: 'number', insertedValue: '' };
 
   constructor(
-    private closeTabService: CloseTabService,
-    public readingReportManagerService: ReadingReportManagerService
+    public closeTabService: CloseTabService,
+    public toolsService: ToolsService
   ) {
     super();
   }
 
   connectToServer = async () => {
-    if (!this.readingReportManagerService.verificationFollowUPTrackNumber(this.readingReportManagerService.trackNumberAllImages))
+    if (!this.toolsService.verificationFollowUPTrackNumber(this.toolsService.trackNumberAllImages))
       return;
-    this.imgsOriginUrl = [];
     this.allImagesDataSource = null;
 
-    this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.readingReportManagerService.trackNumberAllImages);
+    this.allImagesDataSource = await this.toolsService.getDataSource(ENInterfaces.ListAllImages, this.toolsService.trackNumberAllImages);
     this.closeTabService.saveDataForRRGalleryRSFirst = this.allImagesDataSource;
-    this.closeTabService.saveDataForRRGalleryReq = this.readingReportManagerService.trackNumberAllImages;
+    this.closeTabService.saveDataForRRGalleryReq = this.toolsService.trackNumberAllImages;
     this.showAllImgs();
+    this.addCanShowElementToImages();
   }
   classWrapper = async (canRefresh?: boolean) => {
     /* TODO: 
@@ -47,23 +49,20 @@ export class AllImagesComponent extends FactoryONE {
       this.closeTabService.saveDataForRRGalleryRSFirst = null;
     }
     if (this.closeTabService.saveDataForRRGallery) {
-      this.imgsOriginUrl = this.closeTabService.saveDataForRRGallery;
       this.allImagesDataSource = this.closeTabService.saveDataForRRGalleryRSFirst;
     }
     if (this.closeTabService.saveDataForRRGalleryReq) {
-      this.readingReportManagerService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
+      this.toolsService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
     }
 
   }
   getExactImg = async (id: string, index: number) => {
-    this.imgsOriginUrl[index] = this.readingReportManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.readingReportManagerService.getAuthToken();
+    this.closeTabService.saveDataForRRGallery[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();
   }
   showAllImgs = () => {
     this.allImagesDataSource.imageUrlAndInfos.forEach((item, i) => {
       this.getExactImg(item.fileRepositorayId, i);
     })
-    // to save data
-    this.closeTabService.saveDataForRRGallery = this.imgsOriginUrl;
   }
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrig: any) => {
     this.carouselImage = dataSource;
@@ -74,15 +73,39 @@ export class AllImagesComponent extends FactoryONE {
   carouselNextItem = () => {
     this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
-    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
+    this.carouselImage.imageUrl = this.closeTabService.saveDataForRRGallery[this.rowIndex];
   }
   carouselPrevItem = () => {
     this.rowIndex < 1 ? this.rowIndex = this.allImagesDataSource.imageUrlAndInfos.length - 1 : this.rowIndex--;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
-    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
+    this.carouselImage.imageUrl = this.closeTabService.saveDataForRRGallery[this.rowIndex];
   }
   carouselCancelClicked = () => {
     this.showCarousel = false;
+  }
+  addCanShowElementToImages = () => {
+    for (let index = 0; index <= this.closeTabService.saveDataForRRGalleryRSFirst.imageUrlAndInfos.length; index++)
+      this.closeTabService.saveDataForRRGalleryRSFirst.imageUrlAndInfos[index].canShow = true;
+  }
+  showItemOnSearch = (searchInOrder: string) => {
+    const origin = this.closeTabService.saveDataForRRGalleryRSFirst.imageUrlAndInfos;
+    if (origin) {
+      for (let index = 0; index < origin.length; index++) {
+        // if anything exist for filter images
+        if (this.userInputValue.insertedValue) {
+          if (origin[index][searchInOrder].toString().includes(this.userInputValue.insertedValue)) {
+            origin[index].canShow = true;
+          }
+          else {
+            origin[index].canShow = false;
+          }
+        }
+        else {
+          origin[index].canShow = true;
+        }
+
+      }
+    }
   }
 
 }

@@ -3,6 +3,7 @@
 @import 'mixins.scss';
 @import 'input.scss';
 @import 'mat.scss';
+@import 'cards';
 
 .over_all {
   display: grid;
@@ -10,13 +11,6 @@
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
-}
-
-.content {
-  background: var(--secondary_1);
-  border-radius: $border_15;
-  margin: auto;
-  padding: var(--font_xs);
 }
 
 .text {
@@ -27,15 +21,16 @@
 
 textarea {
   background: var(--secondary_3);
-  font-size: var(--font_m);
-  color: var(--primary_4);
+  font-size: var(--font_s);
   font-weight: 600;
   text-align: right;
   direction: rtl;
   border: none;
   outline: none;
-  padding: var(--font_xxs);
-  height: 8rem;
+  padding: var(--font_05);
+  height: 6rem;
+  min-width: 13rem;
+  max-width: 19rem;
   border-radius: $border_15;
   font-family: inherit;
 }
@@ -67,8 +62,7 @@ textarea {
   text-align: center;
   margin: var(--font_2) 0 var(--font_05);
 
-  .btn_2 {
-    color: var(--primary_2);
+  .btn_1 {
     width: 10.5rem;
   }
 }
@@ -77,6 +71,32 @@ textarea {
 .time,
 .color {
   margin-bottom: var(--font_xs);
+}
+
+:host ::ng-deep {
+
+  .p-selectbutton .p-button.p-highlight {
+    box-shadow: 0 3px var(--secondary_1), 0 3px 2px 2px var(--thirdy_4);
+  }
+
+  ._colors_button {
+    .p-buttonset .p-button:first-of-type {
+      background: rgb(5, 88, 124) !important;
+    }
+
+    :nth-child(2) {
+      background: rgb(71, 123, 71) !important;
+    }
+
+    :nth-child(3) {
+      background: rgb(188, 136, 39) !important;
+    }
+
+    :nth-child(4) {
+      background: rgb(192, 26, 26) !important;
+    }
+  }
+
 }
 
 // ///// local storage content
@@ -137,7 +157,8 @@ textarea {
 h1 {
   text-align: center;
   color: var(--primary_3);
-  margin-bottom: var(--font_l);
+  margin-bottom: var(--font_m);
+  font-size: var(--font_l);
 }
 
 h2 {
@@ -152,7 +173,6 @@ h2 {
     width: 100%;
     border: none;
     border-radius: $border_15;
-    color: var(--primary_4);
     background: var(--secondary_3);
   }
 

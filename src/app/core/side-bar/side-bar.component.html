@@ -1,51 +1,20 @@
-<ul class="ul" [hidden]="sid_isSmall || smallScreen">
-    <li *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)" routerLinkActive="active"
-        [@openClose]="item.isOpen ? 'openSubItems' : 'closeSubItems'">
-        <a class="btn">
-            <div class="ul_items">
-                <i class="{{item.cssClass}} icons"></i>
-                <div class="on_show">
-                    {{item.title}}
-                    <i class="pi pi-angle-up"></i>
+<ul [ngClass]="{'_ul_not_show': sid_isSmall}">
+    <li *ngFor="let item of currentRoute" routerLinkActive="active_list">
+        <div class="_list_out">
+            <div class="_list_show_details" (click)="toggleSubItems(item)">
+                <div class="_list_header">
+                    <i class="{{item.cssClass}} icons"></i>
+                    <div class="_list_title">{{item.title}}</div>
+                    <i class="pi pi-angle-down"></i>
                 </div>
-            </div>
-        </a>
-        <div *ngIf="item.isOpen">
-            <div class="sub_item_1" *ngFor="let subItem of item.subItems" (click)="$event.stopPropagation()"
-                [routerLink]="subItem.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                {{subItem.title}}
-            </div>
-        </div>
-    </li>
-</ul>
-
-<ul class="ul_2" *ngIf="sid_isSmall">
-    <li class="li_2" *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)"
-        routerLinkActive="active_2">
-        <div class="btn_2">
-            <i class="{{item.cssClass}} icons _small_notshow"></i>
-
-            <div class="_small_show">
-                <i class="pi pi-angle-up"></i>
-                <div class="title _small_show">{{item.title}}</div>
-                <i class="{{item.cssClass}} icons _small_show"></i>
-            </div>
-            <div class="_test_show">
-                <div class="sub_item_1" *ngFor="let subItem of item.subItems" (click)="setSidebar()"
-                    (click)="$event.stopPropagation()" [routerLink]="subItem.route" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }" [hidden]="!item.isOpen">
-                    {{subItem.title}}
-                </div>
-            </div>
-            <div class="_show _small_notshow">
-                <h3>{{item.title}}</h3>
-                <hr>
-                <div class="sub_item_2" *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    {{subItem.title}}
+                <div [@openClose]="!item.isOpen ? 'closeSubItems' : 'openSubItems'" class="__list_items_out">
+                    <div class="__list_items_in" *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        (click)="$event.stopPropagation()">
+                        {{subItem.title}}
+                    </div>
                 </div>
             </div>
         </div>
-
     </li>
 </ul>

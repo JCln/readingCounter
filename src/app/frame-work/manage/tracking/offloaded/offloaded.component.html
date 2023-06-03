@@ -1,8 +1,8 @@
 <app-prime-table
     [dataSource]="closeTabService.saveDataForTrackOffloaded" 
     [_outputFileName]="'offloaded'"
-    [_checkUpName]="'offloaded'"
-    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4]: [1,2,3,4,5]"
+    [_checkUpName]="'Kartables'"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4,5]: [1,2,3,4,5,6]"
     [_calculableSUM]=true
     [_hasAggregating] = true
     [_isCustomSort]=true
@@ -15,5 +15,6 @@
     (routedToOffloadGeneralModify)="routeToOffloadGeneralModify($event)"        
     (backedToReading)="backToReading($event)"
     (routedToLMAll)="routeToAssessPre($event)"        
+    (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"
  > 
 </app-prime-table>

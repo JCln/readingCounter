@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
@@ -17,6 +18,8 @@ declare let L;
 export class LatestReadsComponent extends AllListsFactory {
   private layerGroup2 = new L.FeatureGroup();
   private map2: L.Map;
+  atMostNumbers = [];
+  _selectedMostNumbers: number = 0;
 
   constructor(
     private interactionService: InteractionService,
@@ -57,23 +60,54 @@ export class LatestReadsComponent extends AllListsFactory {
       maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup2]
     });
-
+    this.map2.attributionControl.setPrefix(ENCompanyName.title);
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map2);
+  }
+  private dropdownAvailableNumbers = () => {
+    this.atMostNumbers = [
+      { title: ENRandomNumbers.five, val: ENRandomNumbers.five },
+      { title: ENRandomNumbers.ten, val: ENRandomNumbers.ten },
+      { title: ENRandomNumbers.thirdy, val: ENRandomNumbers.thirdy },
+      { title: ENRandomNumbers.fifty, val: ENRandomNumbers.fifty },
+      { title: ENRandomNumbers.oneHundred, val: ENRandomNumbers.oneHundred },
+    ];
   }
 
   classWrapper = async (canRefresh?: boolean) => {
     this.initMap();
+    this.numberOfSelectedMostNumber();
+    this.dropdownAvailableNumbers();
     if (this.closeTabService.saveDataForMomentLastRead) {
       this.markMultipleLocations(this.closeTabService.saveDataForMomentLastRead);
     }
-    this.interactionService.getMomentLatestReads.subscribe(res => {
+    this.subscription.push(this.interactionService.$getMomentLatestReads.subscribe(res => {
       this.closeTabService.saveDataForMomentLastRead.unshift(res);
-      console.log(this.closeTabService.saveDataForMomentLastRead);
-
-      if (this.closeTabService.saveDataForMomentLastRead.length > ENRandomNumbers.twenty)
-        this.closeTabService.saveDataForMomentLastRead.pop();
+      if (this.closeTabService.saveDataForMomentLastRead.length > this._selectedMostNumbers) {
+        // more than atMostNumbers is in table, should pop from top
+        for (let index = 0; index < this.closeTabService.saveDataForMomentLastRead.length; index++) {
+          if (this.closeTabService.saveDataForMomentLastRead.length > this._selectedMostNumbers)
+            this.closeTabService.saveDataForMomentLastRead.pop();
+        }
+      }
       this.updateTableData();
-    })
+    }))
+  }
+  onNextReadViewable = () => {
+    this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, this._selectedMostNumbers);
+    this.listManagerService.utilsService.snackBarMessageWarn(EN_messages.changesOnNextRead);
+  }
+  numberOfSelectedMostNumber = () => {
+    if (this.mapService.browserStorageService.isExists(ENLocalStorageNames.numberOfFlashRead)) {
+      this._selectedMostNumbers = this.mapService.browserStorageService.get(ENLocalStorageNames.numberOfFlashRead);
+    }
+    else {
+      this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, ENRandomNumbers.ten);
+    }
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil    
+    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
 
 }

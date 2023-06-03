@@ -26,9 +26,8 @@ export class FinishedComponent extends FactoryONE {
   }
 
   refetchTable = (index: number) => this.closeTabService.saveDataForTrackFinished = this.closeTabService.saveDataForTrackFinished.slice(0, index).concat(this.closeTabService.saveDataForTrackFinished.slice(index + 1));
-  private rowToOffloaded = async (row: string, desc: string, rowIndex: number) => {
+  private rowToOffloaded = async (row: string, desc: string) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row, desc);
-    this.refetchTable(rowIndex);
     this.refreshTable();
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
@@ -40,10 +39,19 @@ export class FinishedComponent extends FactoryONE {
       this.closeTabService.saveDataForTrackFinished = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
     }
   }
-  backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
-    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_toOffloaded, true, false);
+  backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {
+    const config = {
+      messageTitle: EN_messages.reason_toOffloaded,
+      text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '،   قرائت کننده: ' + rowDataAndIndex.counterReaderName,
+      minWidth: '19rem',
+      isInput: true,
+      isDelete: false,
+      icon: 'pi pi-step-backward'
+    }
+
+    const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
+      this.rowToOffloaded(rowDataAndIndex.id, desc);
     }
   }
   reDownloadOutputSingle = async (row: ITracking) => {

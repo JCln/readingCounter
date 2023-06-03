@@ -1,6 +1,6 @@
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { NgModule } from '@angular/core';
 import { SharedCollapseModule } from 'src/app/shared/shared-collapse.module';
-import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 
 import { AllImagesRoutingModule } from './all-images-routing.module';
 import { AllImagesComponent } from './all-images.component';
@@ -15,8 +15,8 @@ import { GalleryCarouselComponent } from './gallery-carousel/gallery-carousel.co
     GalleryAllDetailsComponent
   ],
   imports: [
-    SharedTwoModule,
     SharedCollapseModule,
+    SharedPrimeNgModule,
     AllImagesRoutingModule
   ]
 })

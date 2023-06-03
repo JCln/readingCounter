@@ -1,16 +1,3 @@
-.insert_track {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  direction: rtl;
-  margin: auto;
-  padding: 2rem;
-  background: var(--secondary_1);
-  border-radius: $border_15;
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-}
-
 .input_1 {
   text-align: center;
   border-color: var(--primary_4);
@@ -20,14 +7,16 @@
   }
 }
 
-.content {
+.img_content {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
   justify-content: center;
   gap: var(--font_05);
   margin-top: var(--font_xs);
   background: var(--secondary_1);
+  border-radius: $border_7;
+  padding: var(--font_05);
 }
 
 ._images {
@@ -60,8 +49,8 @@
 
       p {
         color: var(--primary_3);
-        font-size: var(--font_m);
-        padding-right: var(--font_xxs);
+        font-size: var(--font_ss);
+        padding-right: var(--font_05);
       }
     }
 
@@ -93,6 +82,10 @@
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   direction: rtl;
   gap: var(--font_05);
+  margin-top: var(--font_xs);
+  background: var(--secondary_1);
+  padding: var(--font_05);
+  border-radius: $border_7;
 }
 
 .input_2 {
@@ -101,10 +94,6 @@
 
 ._value {
   border: none;
-}
-
-.btn_1 {
-  max-width: 16rem;
 }
 
 ._container {
@@ -122,5 +111,21 @@
   color: var(--primary_4);
   font-size: var(--font_m);
   background: var(--white);
-  border-radius: 100vmax;
+  border-radius: $border_100vmax;
+}
+
+.title {
+  direction: ltr;
+  color: var(--primary_3);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_m);
+}
+
+.hiddenImg {
+  display: none;
+}
+
+.showImg {
+  display: block;
 }

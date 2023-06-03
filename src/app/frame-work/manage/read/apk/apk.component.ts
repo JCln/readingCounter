@@ -7,7 +7,6 @@ import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -31,8 +30,7 @@ export class ApkComponent extends FactoryONE {
   constructor(
     private apkService: ApkService,
     public closeTabService: CloseTabService,
-    private outputManagerService: OutputManagerService,
-    private authService: AuthService
+    private outputManagerService: OutputManagerService
   ) {
     super();
   }
@@ -85,13 +83,11 @@ export class ApkComponent extends FactoryONE {
     }
   }
   getUserRole = (): boolean => {
-    const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.toString().includes('admin') ? true : false;
+    return this.apkService.utilsService.getIsAdminRole();
   }
   removeRow = async (dataSource: number) => {
     if (this.getUserRole()) {
-
-      if (await this.apkService.firstConfirmDialog()) {
+      if (await this.apkService.firstConfirmDialog('نام نسخه: ' + dataSource['dataSource'].versionName + '،  نسخه: ' + dataSource['dataSource'].versionCode)) {
         const a = await this.apkService.postById(ENInterfaces.APKRemove, dataSource['dataSource'].id);
         if (a) {
           this.apkService.showSuccessMessage(a.message, ENSnackBarColors.success);

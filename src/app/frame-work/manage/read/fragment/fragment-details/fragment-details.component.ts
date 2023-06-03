@@ -59,7 +59,7 @@ export class FragmentDetailsComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnSelectedFragmentDetails();
+    this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus('fragmentDetails');
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {
@@ -81,12 +81,13 @@ export class FragmentDetailsComponent extends FactoryONE {
       this.closeTabService.saveDataForFragmentNOBDetails.shift();
     return;
   }
-  removeRow = async (dataSource: object) => {
+  removeRow = async (dataSource: any) => {
     this.newRowLimit = 1;
 
     if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource']))
       return;
-    const confirmed = await this.fragmentManagerService.firstConfirmDialog();
+    const textMessage = 'از اشتراک: ' + dataSource['dataSource'].fromEshterak + ' تا اشتراک: ' + dataSource['dataSource'].toEshterak;
+    const confirmed = await this.fragmentManagerService.firstConfirmDialog(textMessage);
     if (!confirmed) return;
     const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
     if (a) {

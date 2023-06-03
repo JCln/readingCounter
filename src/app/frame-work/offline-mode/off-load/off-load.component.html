@@ -1,22 +1,25 @@
 <h2 class="title">دریافت فایل تکست</h2>
 
 <form #form="ngForm" (ngSubmit)="downloadTextFile()">
-    <section>
+    <section class="_card">
 
         <span class="input_2">
             <div class="_key">ناحیه</div>
-            <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId [options]="zoneDictionary"
-                [(ngModel)]="offlineModeService.loadForm.zoneId" optionLabel="title" [filter]="true" filterBy="title"
-                optionValue="id" [showClear]="true" placeholder="انتخاب مورد" (onChange)="getCounterReader()">
-            </p-dropdown>
+            <div class="_value">
+                <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
+                    [(ngModel)]="offlineModeService.loadForm.zoneId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" placeholder="انتخاب مورد" (onChange)="getCounterReader()">
+                </p-dropdown>
+            </div>
         </span>
-        <div class="input_2 this">
-            <div class="_key">مامور</div>
-            <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
-                [options]="userCounterReaderDictionary" [(ngModel)]="offlineModeService.loadForm.counterReaderId"
-                optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                placeholder="انتخاب مورد">
-            </p-dropdown>
+        <div class="input_2">
+            <div class="_key">قرائت کننده</div>
+            <div class="_value">
+                <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                    [(ngModel)]="offlineModeService.loadForm.counterReaderId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" placeholder="انتخاب مورد">
+                </p-dropdown>
+            </div>
         </div>
 
         <div class="change_pass">

@@ -16,7 +16,8 @@ export interface ISearchSimpleReq {
     fromDate: string,
     toDate: string,
     readingPeriodId: string,
-    year: number
+    year: number,
+    isCollapsed?: boolean
 }
 export interface ISearchSimpleOutput {
     trackingId: string,
@@ -24,6 +25,7 @@ export interface ISearchSimpleOutput {
     listNumber: string,
     insertDateJalali: string,
     zoneId: number,
+    zoneTitle: string,
     isBazdid: boolean,
     isRoosta: boolean,
     fromEshterak: string,

@@ -1,3 +1,4 @@
+import { IDynamicTraverse } from './../interfaces/ireads-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -5,7 +6,7 @@ import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'inter
 
 import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
-import { ICounterState, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
+import { ICounterState, IGuild, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
@@ -22,12 +23,9 @@ export class ReadManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
-    private columnManager: ColumnManager
+    public columnManager: ColumnManager
   ) { }
 
-  columnSelectedMenuDefault = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('counterStateDto');
-  }
   /* API CALLS */
   getProvinceDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getProvinceDictionary();
@@ -99,6 +97,24 @@ export class ReadManagerService {
     }
     return true;
   }
+  verificationGuild = (dataSource: IGuild): boolean => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    return true;
+  }
+  verificationDynamicTraverse = (dataSource: IDynamicTraverse): boolean => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    if (MathS.isNull(dataSource.storageTitle)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_LatinTitle);
+      return false;
+    }
+    return true;
+  }
   verificationCounterState = (dataSource: ICounterState): boolean => {
     if (!this.counterStateVertification(dataSource))
       return false;
@@ -121,12 +137,14 @@ export class ReadManagerService {
       })
     });
   }
-  firstConfirmDialog = (): Promise<any> => {
+  firstConfirmDialog = (text: string): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      text: text,
+      icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
   }
@@ -139,6 +157,14 @@ export class ReadManagerService {
     });
   }
   deleteSingleRowByObject = (place: ENInterfaces, object: object) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(place, object).subscribe((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(true);
+      })
+    });
+  }
+  deleteSingleRowByObjectSpecial = (place: string ,object: object) => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(place, object).subscribe((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);

@@ -4,10 +4,10 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 25rem));
   direction: rtl;
   justify-content: center;
-  gap: var(--font_2);
+  gap: var(--font_s);
 }
 
 main {
@@ -45,8 +45,8 @@ main {
 }
 
 .content {
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  background: var(--white);
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
   text-align: center;
   padding: var(--font_xxs);
   justify-content: space-around;
@@ -54,35 +54,77 @@ main {
   min-height: var(--font_5);
 }
 
+:host ::ng-deep ._notify_position {
+  .p-buttonset .p-button {
+    position: relative;
+
+    &:nth-child(n) ::after {
+      content: '';
+      position: absolute;
+      background-color: var(--white);
+      width: 0.3rem;
+      height: 0.3rem;
+      border-radius: 50%;
+    }
+
+    &:nth-child(1) ::after {
+      top: .3rem;
+      right: .3rem;
+    }
+
+    &:nth-child(2) ::after {
+      top: 0.3rem;
+      left: .3rem;
+    }
+
+    &:nth-child(3) ::after {
+      bottom: 0.3rem;
+      right: .3rem;
+    }
+
+    &:nth-child(4) ::after {
+      bottom: 0.3rem;
+      left: .3rem;
+    }
+
+    &:nth-child(5) ::after {
+      top: 0.3rem;
+      left: 50%;
+    }
+
+    &:nth-child(6) ::after {
+      bottom: 0.3rem;
+      left: 50%;
+    }
+
+    &:nth-child(7) ::after {
+      display: none;
+    }
+
+
+  }
+}
 ._desc {
   display: grid;
   margin: auto;
   padding: var(--font_xs) 0;
   width: 100%;
-  max-width: 19rem;
   border-radius: $border_15;
 }
 
 .title {
   color: var(--primary_3);
   text-align: center;
-  margin: var(--font_05);
   font-size: var(--font_l2);
-}
-
-h2.title {
-  color: var(--primary_4);
-  text-align: center;
-  margin: var(--font_05);
-  font-size: var(--font_l);
 }
 
 .change_pass {
   text-align: center;
 
-  button {
-    background: var(--primary_2);
-    margin: var(--font_2);
+  ._full_width {
+    max-width: 100%;
+    width: 100%;
+    margin-top: var(--font_05);
     color: var(--white);
   }
 }
@@ -94,6 +136,10 @@ h2.title {
   box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }
 
-.btn_2 {
+.btn_1 {
   width: 19rem;
+}
+
+.small_button {
+  width: 7rem;
 }

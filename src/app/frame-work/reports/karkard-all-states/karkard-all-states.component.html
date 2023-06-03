@@ -1,55 +1,66 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section>
+            <section class="_card"
+                [@openClose]="readingReportManagerService.offKarkardAllStatesReq.isCollapsed ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.zoneId"
-                            placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id"
-                            optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
-                            (onChange)="readingReportManagerService.offKarkardAllStatesReq.fragmentMasterIds = []">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                (onChange)="getFragmentByZone()"
+                                (onChange)="readingReportManagerService.offKarkardAllStatesReq.fragmentMasterIds = []">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">نوبتی</div>
-                        <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
-                            [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.fragmentMasterIds"
-                            optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                            [style]="{minWidth: '150px'}" placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
+                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.fragmentMasterIds"
+                                optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
-                            <mat-option (click)="getReadingPeriod()"
-                                *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                                <mat-option (click)="getReadingPeriod()"
+                                    *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2"
                         [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.readingPeriodId"
-                            name="readingPeriodId">
-                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.readingPeriodId"
+                                name="readingPeriodId">
+                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">سال</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.year" name="year">
-                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.year" name="year">
+                                <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
 
                     <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
@@ -72,7 +83,7 @@
                     </div>
 
                     <button type="submit" class="btn_1">
-                        مشاهده لیست
+                        مشاهده
                         <i class="pi pi-list"></i>
                     </button>
 
@@ -86,34 +97,47 @@
     <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForKarkardAllStates" [paginator]="true"
         [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-        [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-        stateStorage="session" stateKey="karkard-allstates"
-        [resizableColumns]="readingReportManagerService.getLocalResizable()"
-        [reorderableColumns]="readingReportManagerService.getLocalReOrderable()">
+        [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl"
+        styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
+        stateKey="karkard-allstates" [reorderableColumns]="readingReportManagerService.getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
-                [filter]="true" showClear="true">
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
             </p-multiSelect>
             <div class="header_icons_wrap">
                 <div class="right_side">
+                    <i (click)="outputManagerService.exportPDF(closeTabService.saveDataForKarkardAllStates, _selectCols, 'offKarkardAllStates')"
+                        class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
+                        <div class="tooltip_text">دریافت pdf</div>
+                    </i>
+                    <i (click)="outputManagerService.export(closeTabService.saveDataForKarkardAllStates, _selectCols, 'offKarkardAllStates', 'xlsx')"
+                        class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                        <div class="tooltip_text">دریافت Excel</div>
+                    </i>
+                    <i (click)="outputManagerService.export(closeTabService.saveDataForKarkardAllStates, _selectCols, 'offKarkardAllStates', 'csv')"
+                        class="tooltip _circle_border p_icons fas fa-file-csv _csv">
+                        <div class="tooltip_text">دریافت CSV</div>
+                    </i>
                 </div>
                 <div class="left_side">
+                    <app-collapsable [_isCollapsed]=readingReportManagerService.offKarkardAllStatesReq.isCollapsed
+                        (_clicked)="readingReportManagerService.offKarkardAllStatesReq.isCollapsed = !readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
+                    </app-collapsable>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
 
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                     <p-sortIcon field="{{col.field}}"></p-sortIcon>
                     {{col.header}}
                 </th>
             </tr>
             <tr>
-                <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns">
                     <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                     </p-columnFilter>
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
@@ -124,7 +148,7 @@
 
         <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
             <tr>
-                <td *ngFor="let col of columns">
+                <td class="__columns" *ngFor="let col of columns">
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isBoolean; else simple">
                         <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">

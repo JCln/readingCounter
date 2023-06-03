@@ -111,7 +111,7 @@ export class TrvchChartComponent implements OnInit {
     this.insertToPieChartRegion();
   }
   backToPrevious = () => {
-    this.readingReportManagerService.backToPreviousPage();
+    this.readingReportManagerService.utilsService.backToPreviousPage();
   }
   ngOnInit(): void {
     this.connectToServer();

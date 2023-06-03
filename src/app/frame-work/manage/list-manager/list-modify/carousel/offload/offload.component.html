@@ -16,19 +16,24 @@
                 </div>
                 <div class="input_2 coloring_border" [hidden]="!counterStatesDictionary.length">
                     <div class="_key">وضعیت کنتور</div>
-                    <mat-select placeholder="انتخاب مورد" [(value)]="counterStateId" name="counterState">
-                        <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.title">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(value)]="counterStateId" name="counterState">
+                            <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.title">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2 coloring_border">
                     <div class="_key">نوع اصلاح</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType" name="modifyType">
-                        <mat-option *ngFor="let truefalse of modifyType" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType"
+                            name="modifyType">
+                            <mat-option *ngFor="let truefalse of modifyType" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="input_2">
                     <div class="_key">تاریخ قبلی</div>
@@ -58,7 +63,7 @@
                     </div>
                 </div>
                 <div class="input_2">
-                    <div class="_key">توضیح مامور</div>
+                    <div class="_key">توضیح قرائت کننده</div>
                     <div class="_value">
                         {{description}}
                     </div>

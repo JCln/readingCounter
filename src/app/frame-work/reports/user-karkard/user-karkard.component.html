@@ -1,23 +1,26 @@
 <main class="main">
-    <section [hidden]="readingReportManagerService.isCollapsedUserKarkard">
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
-                <hr>
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard ? 'slideUp' : 'slideDown'">
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.userKarkardReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.userKarkardReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">وضعیت کارتابل</div>
-                        <p-dropdown name="trackingStates" [options]="trackingStatesDictionary"
-                            [(ngModel)]="readingReportManagerService.userKarkardReq.statusId" placeholder="انتخاب مورد"
-                            [style]="{'width':'7.5rem'}" optionValue="id" optionLabel="title" filter="true">
-                        </p-dropdown>
+                        <div class="_value">
+                            <p-dropdown name="trackingStates" [options]="trackingStatesDictionary"
+                                [(ngModel)]="readingReportManagerService.userKarkardReq.statusId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">از</div>
@@ -39,7 +42,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn_1">
-                        مشاهده لیست
+                        مشاهده
                         <i class="pi pi-list"></i>
                     </button>
 
@@ -49,9 +52,10 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForUserKarkard" [_outputFileName]="'rrUserKarkard'"
-        [_checkUpName]="'rr-user-karkard'" [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedUserKarkard"
-        (collapsed)="readingReportManagerService.isCollapsedUserKarkard = !readingReportManagerService.isCollapsedUserKarkard"
+        [_checkUpName]="'rr-user-karkard'" [_sessionName]="'userKarkard-session'"
+        [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard = !readingReportManagerService.utilsService.collapser.isCollapsedUserKarkard"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

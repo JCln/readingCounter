@@ -50,9 +50,6 @@ export class FragmentComponent extends FactoryONE {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  getLocalResizable = (): boolean => {
-    return this.profileService.getLocalResizable();
-  }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
   }
@@ -67,11 +64,10 @@ export class FragmentComponent extends FactoryONE {
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');
     this.defaultAddStatus();
-    if (this.closeTabService.saveDataForFragmentNOB.length)
-      this.insertSelectedColumns();
+    this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnSelectedFragmentMaster();
+    this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus('_fragmentMaster');
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   defaultAddStatus = () => this.newRowLimit = 1;
@@ -95,16 +91,23 @@ export class FragmentComponent extends FactoryONE {
     1- Make first item of dictionary if no value inserted on new row
     2- eshteraks should convert to english numbers
     */
-
     dataSource.fromEshterak = Converter.persianToEngNumbers(dataSource.fromEshterak);
     dataSource.toEshterak = Converter.persianToEngNumbers(dataSource.toEshterak);
 
-    if (MathS.isNull(dataSource.zoneId)) {
-      dataSource.zoneId = this.convertTitleToId(this.zoneDictionary[0].title).title;
+    if (dataSource.zoneId == null) {
+      dataSource.zoneId = this.zoneDictionary[0];
     }
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
+    }
+
     if (this.fragmentManagerService.masterValidation(dataSource)) {
       // convert a zone to id
-      dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
 
       if (dataSource.isNew) {
         const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
@@ -138,9 +141,11 @@ export class FragmentComponent extends FactoryONE {
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
     dataSource = dataSource['dataSource'];
-    dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
+
+    const textMessage = 'ناحیه: ' + dataSource.zoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
     if (this.fragmentManagerService.masterValidation(dataSource)) {
-      if (await this.fragmentManagerService.firstConfirmDialog()) {
+      if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
+        dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
         if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, dataSource))
           this.refreshTable();
       }
@@ -151,7 +156,8 @@ export class FragmentComponent extends FactoryONE {
     dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
 
     if (this.fragmentManagerService.masterValidation(dataSource)) {
-      this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, dataSource);
+      if (this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, dataSource))
+        this.refreshTable();
     }
   }
   @Input() get selectedColumns(): any[] {

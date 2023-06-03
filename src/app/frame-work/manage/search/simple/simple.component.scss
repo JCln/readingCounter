@@ -2,21 +2,20 @@
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
   padding: var(--font_05);
   border-radius: $border_15;
-  border: 1px solid var(--primary_2);
+  width: 21rem;
+  margin: auto;
+  margin-bottom: var(--font_02);
 }
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 14rem));
-  gap: var(--font_05);
-  justify-content: center;
+  gap: var(--font_02);
   align-items: center;
 }
 
@@ -36,13 +35,15 @@ section.content {
 }
 
 .btn_1 {
-  width: 14rem;
-  margin-top: var(--font_l);
+  max-width: 100%;
+  margin-top: var(--font_xxs);
 }
 
 h2 {
-  color: var(--secondary_6);
   white-space: nowrap;
+  color: var(--primary_3);
+  margin-left: var(--font_05);
+  font-size: var(--font_s);
 }
 
 h3 {

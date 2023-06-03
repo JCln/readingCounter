@@ -7,7 +7,6 @@ import { IManageServerErrors } from 'interfaces/iserver-manager';
 import { JwtService } from '../auth/jwt.service';
 import { MathS } from '../classes/math-s';
 import { serverErrors, serverTasts } from './DI/manageServer';
-import { EnvService } from './env.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
@@ -17,12 +16,10 @@ import { UtilsService } from './utils.service';
 export class ManageServerService {
 
   serverErrors: IManageServerErrors[] = serverErrors;
-  _isCollapsed: boolean = false;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
-    private envService: EnvService,
+    public utilsService: UtilsService,
     private jwtService: JwtService
   ) { }
 
@@ -43,6 +40,13 @@ export class ManageServerService {
       })
     });
   }
+  GETQueryDataSource = (method: ENInterfaces, url: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(method, url).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   postBody = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
@@ -59,13 +63,13 @@ export class ManageServerService {
     });
   }
   linkToElmah = (body: string) => {
-    window.open(this.envService.API_URL + ENInterfaces.serverManagerErrorsElmah + body, '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerErrorsElmah + body, '_blank');
   }
   linkToHangFire = () => {
-    window.open(this.envService.API_URL + ENInterfaces.serverManagerHangFire + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHangFire + this.jwtService.getAuthorizationToken(), '_blank');
   }
   linkToHealthCheck = () => {
-    window.open(this.envService.API_URL + ENInterfaces.serverManagerHealthCheck, '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHealthCheck, '_blank');
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
     this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);
@@ -102,6 +106,21 @@ export class ManageServerService {
   }
   verificationRequestLogInput = (body: object): boolean => {
     return this.datesValidation(body);
+  }
+  validationAddIpRules = (body: any): boolean => {
+    if (MathS.isNull(body.ip)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_IP);
+      return false;
+    }
+    if (MathS.isNull(body.period)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_Period);
+      return false;
+    }
+    if (MathS.isNull(body.limit)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_limit);
+      return false;
+    }
+    return true;
   }
 
 }

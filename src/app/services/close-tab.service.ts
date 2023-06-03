@@ -1,3 +1,4 @@
+import { IDynamicTraverse } from './../interfaces/ireads-manager';
 import { Injectable } from '@angular/core';
 import { IReadingTimeRes } from 'interfaces/data-mining';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
@@ -21,6 +22,7 @@ import {
   ICounterState,
   IFragmentDetails,
   IFragmentMaster,
+  IGuild,
   IImageAttribution,
   IKarbari,
   IReadingPeriod,
@@ -42,17 +44,17 @@ import {
   IRRChartResWrapper,
   IUserKarkard,
 } from 'interfaces/ireports';
-import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
+import { IFollowUp } from 'interfaces/isearchs';
+import { IIpRules, IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
 import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
+import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
 import { IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
-import { ICountryManager, IProvinceManager } from 'interfaces/izones';
+import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-
-import { IOffLoadPerDay, ITracking } from './../interfaces/itrackings';
-import { IRegionManager, IZoneBoundManager, IZoneManager } from './../interfaces/izones';
+import { IPolicies } from './DI/privacies';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +78,8 @@ export class CloseTabService {
 
   saveDataForCounterState: ICounterState[];
   saveDataForImageAttribution: IImageAttribution[];
+  saveDataForGuild: IGuild[];
+  saveDataForDynamicTraverse: IDynamicTraverse[];
   saveDataForKarbari: IKarbari[];
   saveDataForReadingConfig: IReadingConfigDefault[];
   saveDataForReadingPeriodManager: IReadingPeriod[];
@@ -111,7 +115,8 @@ export class CloseTabService {
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
     fromDate: '',
-    toDate: ''
+    toDate: '',
+    _isCollapsed: false
   };
   saveDataForUserKarkardSummary: any;
   saveDataForUserKarkardSummaryTwo: any;
@@ -123,12 +128,11 @@ export class CloseTabService {
   }
   saveDataForTrackFinished: ITracking[];
   saveDataForLastStates: any;
-  saveDataForOffloadModify: any;
-  saveDataForFollowUp: any;
+  saveDataForFollowUp: IFollowUp;
   saveDataForFollowUpReq = {
     trackNumber: null,
     canShowGraph: false,
-    _isCollapsed: true
+    _isCollapsed: false
   }
   saveDataForFollowUpAUX: any;
   // import dynamic
@@ -138,7 +142,7 @@ export class CloseTabService {
   saveDataForImportErrorsByTrackNumber: any;
   saveDataForImportErrorsByTrackNumberReq = {
     trackNumber: null,
-    _isCollapsed: true
+    _isCollapsed: false
   }
   saveDataForSimafaBatch: IFragmentDetails[];
   allImports_batch: IImportSimafaBatchReq = {
@@ -163,7 +167,8 @@ export class CloseTabService {
     zoneId: 0,
     readingPeriodId: 0,
     year: this.utilsService.getFirstYear(),
-    kindId: null
+    kindId: null,
+    _isCollapsed: false
   }
   saveDataForImportDataFileExcel: any;
   saveDataForImportDataFileExcelReq: IFileExcelReq = {
@@ -217,7 +222,9 @@ export class CloseTabService {
   // list manager
   saveDataForLMPD: IOffLoadPerDay;
   saveDataForLMPDTrackNumber: number;
-  saveDataForLMAllReq: any;
+  saveDataForLMAllReq = {
+    GUID: ''
+  };
   saveDataForLMAll: IOnOffLoadFlat[];
   saveDataForLMModifyReq: any;
   saveDataForLMModify: IOnOffLoadFlat[];
@@ -278,6 +285,8 @@ export class CloseTabService {
   }
   saveDataForMsDriveInfo: IManageDrivesInfo[];
   saveDataForServerErrors: IManageServerErrorsRes[];
+  saveDataForIpSpecialRules: any;
+  // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
@@ -288,17 +297,31 @@ export class CloseTabService {
   saveDataForTextOutput: ITextOutput[];
   saveDataForToolsExcelViewer: IDynamicExcelReq[];
   saveDataForDynamicReports: IDynamicReportsRes[];
-  saveDataForPolicies: any;
+  saveDataForPolicies: IPolicies = {
+    id: 0,
+    enableValidIpCaptcha: false,
+    requireCaptchaInvalidAttempts: 0,
+    enableValidIpRecaptcha: false,
+    requireRecaptchaInvalidAttempts: 0,
+    lockInvalidAttempts: 0,
+    lockMin: 0,
+    minPasswordLength: 0,
+    passwordContainsNumber: false,
+    passwordContainsLowercase: false,
+    passwordContainsUppercase: false,
+    passwordContainsNonAlphaNumeric: false,
+    canUpdateDeviceId: false
+  };
   saveDataForFNB: IForbiddenManager[];
   saveDataForProfile: any;
   saveDataForMomentLastRead: ILatestReads[] = [];
-  saveDataForRRGallery: any;
+  saveDataForRRGallery = [];
   saveDataForRRGalleryRSFirst: any;
   saveDataForRRGalleryReq: any;
-  saveDataForRandomImgs: any;
+  saveDataForRandomImgs = [];
   saveDataForImgResultDetailsGridBased: IImageUrlAndInfos[];
   saveDataForRandomImgsRSFirst: any;
-  saveDataForImgResultDetailsRes: any;
+  saveDataForImgResultDetailsRes = [];
   saveDataForImgResultDetailsResFirst: any;
 
   private val: ISidebarVals[] = [
@@ -310,14 +333,16 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralGModify },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
-    { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamicReportManager },
+    { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
+    { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild },
+    { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.wrmrkar },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs },
-    { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqr },
+    { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqtr },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: EN_Routes.wrmrrpt },
     { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: EN_Routes.wrmrnob },
     { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.wrmrnobautoImport },
@@ -382,16 +407,15 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
-    { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
+    { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
+    { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
     { id: 2, value: ENEssentialsToSave.saveDataForMsDriveInfo, url: EN_Routes.driveInfo },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
     { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, url: EN_Routes.userKarkardSummary },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },
-    { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
-    { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes.wrmlallfalse },
     { id: 2, req: ENEssentialsToSave.saveDataForLMModifyReq, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
     { id: 2, req: ENEssentialsToSave.saveDataForEditUsersGUID, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },

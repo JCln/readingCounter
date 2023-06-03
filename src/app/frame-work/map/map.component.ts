@@ -2,19 +2,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
+import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
-import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
-import { IGisXYResponse } from 'src/app/interfaces/idashboard-map';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
+import { IGisXYResponse } from 'interfaces/idashboard-map';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 
 declare let L;
@@ -94,11 +92,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
   constructor(
     public mapService: MapService,
-    private readingReportManagerService: ReadingReportManagerService,
     public route: ActivatedRoute,
     private router: Router,
-    private utilsService: UtilsService,
-    private envService: EnvService,
+    public utilsService: UtilsService,
     private dateJalaliService: DateJalaliService
   ) { }
 
@@ -110,13 +106,14 @@ export class MapComponent implements OnInit, OnDestroy {
   initMap = () => {
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
-      center: this.envService.mapCenter,
+      center: this.mapService.envService.mapCenter,
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup],
     });
 
+    this.map.attributionControl.setPrefix(ENCompanyName.title);
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {
@@ -152,11 +149,20 @@ export class MapComponent implements OnInit, OnDestroy {
     this.mapConfigOptions(this.mapService.getFromLocalStorage(), true);
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
+    let numberOfFragmentMasterIds = [];
+    const fragmentMaster = this.route.snapshot.paramMap.get('fragmentMasterIds');
+    if (fragmentMaster.length) {
+      for (let index = 0; index < this.route.snapshot.paramMap.get('fragmentMasterIds').split(',').length; index++) {
+        numberOfFragmentMasterIds.push(this.route.snapshot.paramMap.get('fragmentMasterIds').split(',')[index])
+      }
+    }
+
     return {
       zoneId: parseInt(this.route.snapshot.paramMap.get('zoneId')),
       isCounterState: this.route.snapshot.paramMap.get('isCounterState') === 'true' ? true : false,
       counterStateId: parseInt(this.route.snapshot.paramMap.get('counterStateId')),
       isKarbariChange: this.route.snapshot.paramMap.get('isKarbariChange') === 'true' ? true : false,
+      fragmentMasterIds: numberOfFragmentMasterIds,
       isAhadChange: this.route.snapshot.paramMap.get('isAhadChange') === 'true' ? true : false,
       isForbidden: this.route.snapshot.paramMap.get('isForbidden') === 'true' ? true : false,
       readingPeriodId: parseInt(this.route.snapshot.paramMap.get('readingPeriodId')),
@@ -167,7 +173,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   private classWrapperCluster = async () => {
-    this.extraDataSourceRes = await this.readingReportManagerService.portRRTest(ENInterfaces.ListToGis, this.makeClusterRouteObject());
+    this.extraDataSourceRes = await this.mapService.postDataSourceGisSpecial(ENInterfaces.ListToGis, this.makeClusterRouteObject());
 
     if (this.extraDataSourceRes.length === 0) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
@@ -269,7 +275,7 @@ export class MapComponent implements OnInit, OnDestroy {
     })
   }
   private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
-    this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
+    this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 12);
     xyData.map((items) => {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
@@ -277,7 +283,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private getXYMarkerClusterPosition = (xyData: any) => {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
-      this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 11);
+      this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
         .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
         ));

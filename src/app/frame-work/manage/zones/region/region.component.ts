@@ -58,10 +58,10 @@ export class RegionComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForRegion = this.closeTabService.saveDataForRegion.slice(0, index).concat(this.closeTabService.saveDataForRegion.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.sectorsManagerService.firstConfirmDialog();
+    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  استان: ' + rowDataAndIndex['dataSource'].provinceId);
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource']);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource'].id);
       this.refreshTable();
     }
   }

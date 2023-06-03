@@ -1,6 +1,8 @@
 $border_5: 5px;
 $border_7: 7px;
+$border_10: 10px;
 $border_15: 15px;
+$border_100vmax: 100vmax;
 $border_50: 50%;
 
 $font_family: BLotus,
@@ -8,38 +10,16 @@ $font_family: BLotus,
 tahoma,
 Sans-Serif;
 
-hr {
-  width: 80%;
-  border: 0;
-  height: .14rem;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary_4), rgba(0, 0, 0, 0));
-}
-
-.hr_1 {
-  width: 70%;
-  margin-bottom: var(--font_l);
-  height: .4rem;
-  border-radius: 30px;
-}
-
 .font_family {
   font-family: $font_family;
 }
 
-.hr_2 {
-  opacity: .7;
-  width: 70%;
-  margin: var(--font_25) auto;
-  height: var(--font_02);
-  border-radius: 30px;
-}
-
 .d_rtl {
-  direction: rtl;
+  direction: rtl !important;
 }
 
 .d_ltr {
-  direction: ltr;
+  direction: ltr !important;
 }
 
 // unique shape on hover and focus
@@ -48,96 +28,6 @@ a:focus,
 a:active {
   outline: none;
 }
-
-:host ::ng-deep,
-::ng-deep,
-:host {
-  .mat-select-placeholder {
-    color: var(--secondary_8);
-    font-size: var(--font_ss);
-  }
-
-  .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
-  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: var(--pink_500);
-  }
-
-  .mat-dialog-container {
-    background: var(--white);
-    color: var(--primary_7);
-  }
-
-  .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
-    display: none;
-  }
-
-  .p-dropdown .p-dropdown-label {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: var(--font_s);
-    font-weight: 600;
-  }
-
-  .p-dropdown {
-    height: var(--font_28);
-    border-radius: 10px;
-    background: var(--white);
-  }
-
-  .p-dropdown-panel .p-dropdown-header {
-    background: var(--secondary_3);
-    color: var(--secondary_8);
-  }
-
-  .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
-  .p-dropdown .p-dropdown-label.p-placeholder,
-  .p-multiselect .p-multiselect-label.p-placeholder,
-  .p-multiselect-label,
-  .p-multiselect-items {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif !important;
-    font-size: var(--font_s);
-    font-weight: 600 !important;
-    background: var(--secondary_3);
-    color: var(--secondary_8);
-  }
-
-  .p-dropdown .p-dropdown-label.p-placeholder {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: var(--font_s);
-    font-weight: 600;
-  }
-
-  .p-dropdown.p-dropdown-clearable .p-dropdown-label {
-    padding-right: var(--font_025);
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: var(--font_ss);
-    font-weight: 600;
-  }
-
-  .p-dropdown-item {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-weight: 600;
-  }
-
-  .p-dropdown-panel .p-dropdown-items {
-    background: var(--secondary_1);
-  }
-
-  .p-dropdown .p-dropdown-clear-icon {
-    right: 0.357rem;
-  }
-
-  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
-    background: var(--secondary_1);
-    color: var(--secondary_8);
-  }
-
-  .mat-dialog-actions {
-    display: flex;
-    direction: rtl;
-    justify-content: flex-start;
-  }
-}
-
 
 .coloring_border {
   border: 1.5px dashed var(--orange_600);
@@ -166,7 +56,7 @@ a:active {
 }
 
 ._pdf {
-  background: var(--red_500);
+  background: var(--red_500) !important;
 }
 
 ._save_columns {
@@ -187,11 +77,17 @@ a:active {
   cursor: pointer;
 }
 
+footer.footer_with_background {
+  background: var(--white);
+  padding: var(--font_05);
+  border-radius: $border_7;
+}
+
 ._circle_border {
   display: grid !important;
   place-content: center;
-  width: var(--font_25);
-  height: var(--font_25);
+  width: var(--font_22);
+  height: var(--font_22);
   border-radius: 50%;
   border: 1.5px solid;
   cursor: pointer;

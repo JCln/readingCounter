@@ -48,12 +48,14 @@ export class AuthsManagerService {
       })
     });
   }
-  firstConfirmDialog = (): Promise<any> => {
+  firstConfirmDialog = (text: string): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
       minWidth: '19rem',
+      text: text,
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
   }

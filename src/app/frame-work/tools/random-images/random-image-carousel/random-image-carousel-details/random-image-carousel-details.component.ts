@@ -4,7 +4,7 @@ import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config
 import { ProfileService } from 'services/profile.service';
 import { ToolsService } from 'services/tools.service';
 import { Converter } from 'src/app/classes/converter';
-import { ImageAttributionFile } from 'src/app/interfaces/tools';
+import { ImageAttributionFile } from 'interfaces/tools';
 
 @Component({
   selector: 'app-random-image-carousel-details',

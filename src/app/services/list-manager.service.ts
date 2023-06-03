@@ -16,7 +16,6 @@ import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { Converter } from '../classes/converter';
@@ -44,10 +43,8 @@ export class ListManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
-    private dialog: MatDialog,
-    private authService: AuthService,
-    private columnManager: ColumnManager
+    public utilsService: UtilsService,
+    public columnManager: ColumnManager
   ) { }
 
   routeToLMPDXY = (dataSource: IOffLoadPerDay, day: string) => {
@@ -60,14 +57,7 @@ export class ListManagerService {
     this.utilsService.routeToByUrl(EN_Routes.wrmtrackoffloaded);
   }
   denyTracking = (): boolean => {
-    const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.toString().includes('denytracking') ? true : false;
-  }
-  getLMPerDay = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('lMPerDay');
-  }
-  getLMPerDayPositions = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('lMPerDayPositions');
+    return this.utilsService.getDenyTracking();
   }
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
@@ -144,19 +134,19 @@ export class ListManagerService {
   /*OTHER */
   // setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
   //   console.log('do nothing for now');
-    // dataSource.forEach(item => {
-    //   if (item.newRate > 0)
-    //     item.newRate = parseFloat(MathS.getRange(item.newRate))
-    //   item.preAverage = +MathS.getRange(item.preAverage);
-    //   item.x = MathS.getRange(item.x);
-    //   item.y = MathS.getRange(item.y);
-    //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
-    // })
+  // dataSource.forEach(item => {
+  //   if (item.newRate > 0)
+  //     item.newRate = parseFloat(MathS.getRange(item.newRate))
+  //   item.preAverage = +MathS.getRange(item.preAverage);
+  //   item.x = MathS.getRange(item.x);
+  //   item.y = MathS.getRange(item.y);
+  //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
+  // })
   // }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',
@@ -220,6 +210,7 @@ export class ListManagerService {
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
+      OffloadModify.selectAOption,
       OffloadModify.callAnnounce,
       OffloadModify.wrongReading,
       OffloadModify.bazresi

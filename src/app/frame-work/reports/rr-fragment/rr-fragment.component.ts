@@ -5,11 +5,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-rr-fragment',
   templateUrl: './rr-fragment.component.html',
-  styleUrls: ['./rr-fragment.component.scss']
+  styleUrls: ['./rr-fragment.component.scss'],
+  animations: [transitionAnimation]
 })
 export class RrFragmentComponent extends FactoryONE {
   _selectedKindId: string = '';
@@ -54,8 +56,6 @@ export class RrFragmentComponent extends FactoryONE {
       this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.rrFragmentKarkardReq.zoneId);
   }
   validation = (): boolean => {
-    console.log(this.readingReportManagerService.rrFragmentKarkardReq);
-
     return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.rrFragmentKarkardReq, this.readingReportManagerService._isOrderByDate);
   }
   verification = async () => {

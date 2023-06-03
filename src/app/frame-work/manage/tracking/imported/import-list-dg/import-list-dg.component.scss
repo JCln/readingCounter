@@ -1,19 +1,15 @@
 @import 'primeNG.scss';
 @import 'input.scss';
 @import 'button.scss';
-@import 'mat';
+@import '_mat';
 
 section {
   font-family: $font_family;
 }
 
 .content {
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_2);
-  text-align: center;
-  padding: var(--font_05);
-  margin-bottom: var(--font_xs);
-  justify-content: space-around;
+  background: var(--secondary_1);  
+  text-align: center;  
   border-radius: $border_15;
 }
 
@@ -35,7 +31,6 @@ section {
 .title {
   color: var(--thirdy_1);
   text-align: center;
-  margin: var(--font_xs) var(--font_05);
   font-size: var(--font_l2);
 }
 
@@ -51,7 +46,7 @@ input {
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: var(--thirdy_1);
+    background: var(--secondary_1);
     direction: rtl;
   }
 }

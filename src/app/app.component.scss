@@ -13,7 +13,7 @@
 }
 
 .pinkyBackground::after {
-  background: url('/assets/imgs/framework/bbpink.jpg');
+  background: #CAD2C5;
 }
 
 .corporateBackground::after {
@@ -35,7 +35,7 @@
 }
 
 .pinkyBackground::before {
-  background: var(--primary_2);
+  background: linear-gradient(58deg, #2F3E46, #526C7A);
 }
 
 .corporateBackground::before {

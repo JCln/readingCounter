@@ -29,7 +29,6 @@ import { ProfileService } from './profile.service';
   providedIn: 'root'
 })
 export class SearchService {
-  _searchProCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
   _years: ITitleValue[] = [];
@@ -48,7 +47,8 @@ export class SearchService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: this.utilsService.getFirstYear()
+    year: this.utilsService.getFirstYear(),
+    isCollapsed: false
   }
 
   private _searchProExcel: IObjectIteratation[] = [
@@ -64,7 +64,6 @@ export class SearchService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
     private allListsService: AllListsService,
-    private dialog: MatDialog,
     private pageSignsService: PageSignsService,
     private profileService: ProfileService
   ) { }
@@ -320,12 +319,14 @@ export class SearchService {
   routeToLMAll = (row: ISearchSimpleOutput) => {
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.GUid = row.trackingId;
-    this.allListsService.allLists_pageSign.zoneTitle = row.zoneId.toString();
+    this.allListsService.allLists_pageSign.zoneId = row.zoneId;
+    this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.utilsService.routeToByParams(EN_Routes.wrmlall, false);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
     this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.pageSignsService.perday_pageSign.zone = row.zoneTitle;
     this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {
@@ -338,7 +339,7 @@ export class SearchService {
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+      const dialogRef = this.utilsService.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '65vw',

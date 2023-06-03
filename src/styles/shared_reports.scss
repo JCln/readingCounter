@@ -2,33 +2,38 @@
 @import '_mat.scss';
 @import 'input.scss';
 @import 'button.scss';
+@import 'cards';
 
 .main {
   direction: rtl;
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  padding: var(--font_05);
+  padding: var(--font_03);
   border-radius: $border_15;
   min-height: 35rem;
 }
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
-  gap: var(--font_05);
+  gap: var(--font_03);
   align-items: center;
 }
 
 .static_part {
+  width: 20rem;
+  margin: var(--font_02) auto;
   background: var(--white);
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
   padding: var(--font_05);
 }
 
+.input_2 {
+  margin: 0;
+}
+
 ._key,
 ._value {
-  font-size: var(--font_m);
   font-weight: 800;
 }
 
@@ -58,14 +63,14 @@ footer {
 
 hr {
   margin: 0 auto;
-  background-color: var(--primary_5);
   height: var(--font_02);
-  margin-bottom: var(--font_xxs);
+  margin-bottom: var(--font_05);
 }
 
 .order_by {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 }
 

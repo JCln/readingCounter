@@ -4,7 +4,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ManageRoutingModule } from './manage-routing.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     SharedModule,
     ManageRoutingModule

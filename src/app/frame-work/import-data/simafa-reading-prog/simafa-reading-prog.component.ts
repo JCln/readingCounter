@@ -7,11 +7,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-simafa-reading-prog',
   templateUrl: './simafa-reading-prog.component.html',
-  styleUrls: ['./simafa-reading-prog.component.scss']
+  styleUrls: ['./simafa-reading-prog.component.scss'],
+  animations: [transitionAnimation]
 })
 export class SimafaReadingProgComponent extends FactoryONE {
   _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {

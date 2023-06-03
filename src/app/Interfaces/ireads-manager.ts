@@ -9,9 +9,9 @@ export interface IKarbari {
     isSaxt: boolean,
     hasReadingVibrate: boolean
 }
-export interface IQotr {
+// export interface IQotr {
 
-}
+// }
 export interface IReadingPeriod {
     id: number,
     title: string,
@@ -36,7 +36,8 @@ export interface ICounterReport {
     isKarbari: boolean,
     canNumberBeLessThanPre: boolean,
     isTavizi: boolean,
-    clientOrder: number
+    clientOrder: number,
+    hasImage: boolean
 }
 
 // fragment manager 
@@ -76,7 +77,7 @@ export interface IAutomaticImport {
 }
 export interface IFragmentMaster {
     id?: string,
-    zoneId: number | string,
+    zoneId: any,
     zoneTempId?: number,
     routeTitle: string,
     fromEshterak: string,
@@ -101,6 +102,22 @@ export interface IFragmentDetails {
 export interface IImageAttribution {
     id?: number,
     title: string,
+    isNew?: boolean
+}
+export interface IGuild {
+    id: number,
+    title: string,
+    moshtarakinId: number,
+    isActive?: boolean,
+    isNew?: boolean
+}
+export interface IDynamicTraverse {
+    id: number,
+    title: string,
+    storageTitle: string,
+    isChangeable: boolean,
+    defaultValue: boolean,
+    isActive?: boolean,
     isNew?: boolean
 }
 export interface ICounterState {

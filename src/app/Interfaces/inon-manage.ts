@@ -1,25 +1,6 @@
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes, ENToastColors } from 'interfaces/ioverall-config';
 
-export interface IPolicies {
-    id: number,
-    enableValidIpCaptcha: boolean,
-    requireCaptchaInvalidAttempts: number,
-    enableValidIpRecaptcha: boolean,
-    requireRecaptchaInvalidAttempts: number,
-    lockInvalidAttempts: number,
-    lockMin: number,
-    minPasswordLength: number,
-    passwordContainsNumber: boolean,
-    passwordContainsLowercase: boolean,
-    passwordContainsUppercase: boolean,
-    passwordContainsNonAlphaNumeric: boolean,
-    canUpdateDeviceId: boolean
-}
-export interface IPrivacy {
-    minLength: number;
-    maxLength: number;
-    minPasswordLength: number;
-}
+
 export interface IAPK {
     versionName: string;
     versionCode: number;
@@ -37,7 +18,7 @@ export interface IUploadAPK {
 export interface IMessage {
     title: string;
     message: string;
-    color: ENSnackBarColors;
+    color: ENToastColors;
     seconds: ENSnackBarTimes;
     canSave: boolean;
     text?: ENRandomNumbers;

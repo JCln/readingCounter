@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ENAuthTokenType } from 'interfaces/iauth-guard-permission';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,13 @@ export class BrowserStorageService {
     for (const key in this.localStorage) {
       if (this.localStorage.hasOwnProperty(key))
         this.removeLocal(key);
+    }
+  }
+  removeAllExceptAuths = () => {
+    for (const key in this.localStorage) {
+      if (this.localStorage.hasOwnProperty(key) && key !== ENAuthTokenType.refresh_token && key !== ENAuthTokenType.access_token) {
+        this.removeLocal(key);
+      }
     }
   }
   // is local storage supported by the browser

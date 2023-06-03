@@ -1,6 +1,5 @@
 @import 'variable.scss';
 @import 'mixins.scss';
-@import 'media.scss';
 @import 'hamburger';
 @import 'theme';
 @import 'tooltip';
@@ -26,19 +25,19 @@ ul {
 
   @media (min-width:550px) {
     padding-right: 2rem;
-    width: 84%;
   }
+
 }
 
 li {
   display: flex;
   align-items: center;
   margin: 0 var(--font_025);
-  border-radius: 15px;
   color: var(--secondary_7);
   text-align: center;
   list-style-type: none;
   cursor: pointer;
+  border: none;
 
   font-size: var(--font_m);
   font-weight: 600;
@@ -46,10 +45,20 @@ li {
 
 ._name {
   margin-left: auto;
-  font-size: var(--font_xxs);
+  padding-right: 0;
+  font-size: var(--font_ss);
   color: var(--primary_5);
   cursor: auto;
   @include _borders();
+
+  @media (min-width:550px) {
+    font-size: var(--font_ss);
+    padding-right: 0.87rem;
+  }
+
+  @media (min-width:780px) {
+    font-size: var(--font_m);
+  }
 }
 
 .menu_toggle {
@@ -58,17 +67,28 @@ li {
   border-radius: $border_50;
   background-color: var(--secondary_3);
   cursor: pointer;
+  transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
 
   &:hover,
   &:focus,
   &:active {
     box-shadow: 0px 0px 1px 1px var(--thirdy_1);
   }
-
 }
 
-._borders {
-  @include _borders();
+.__rotate_sidebar_toggler {
+  transform: rotate(90deg);
+}
+
+::ng-deep {
+
+  ._borders {
+    @include _borders();
+
+    .dp-popup {
+      transform: translateX(0);
+    }
+  }
 }
 
 ._status {
@@ -106,8 +126,5 @@ li {
 .btn_2_o {
   height: inherit;
   width: var(--font_5);
-  font-size: var(--font_xs);
+  font-size: var(--font_ss);
 }
-
-@include media_wrapper(550px, '._name', font-size, var(--font_xs));
-@include media_wrapper(780px, '._name', font-size, var(--font_m));
