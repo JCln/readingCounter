@@ -37,13 +37,15 @@ export class ListAnonymousComponent extends FactoryONE {
     }
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRequestLogAnonymous = await this.manageServerService.postBody(ENInterfaces.serverManagerRequestLog, this.closeTabService.saveDataForRequestLogAnonymousReq);
+    this.closeTabService.saveDataForRequestLogAnonymous = await this.manageServerService.postBody(ENInterfaces.requestLogAnonymous, this.closeTabService.saveDataForRequestLogAnonymousReq);
   }
   verification = async () => {
 
     // join input values time 
     this.closeTabService.saveDataForRequestLogAnonymousReq.fromTime = this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH + ':' + this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeM;
     this.closeTabService.saveDataForRequestLogAnonymousReq.toTime = this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH + ':' + this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeM;
+    console.log(1);
+    console.log(this.closeTabService.saveDataForRequestLogAnonymousReq);
 
     const temp = this.manageServerService.verificationRequestLogInput(this.closeTabService.saveDataForRequestLogAnonymousReq);
     if (temp)
@@ -51,10 +53,6 @@ export class ListAnonymousComponent extends FactoryONE {
   }
   receiveFromDateJalali = ($event: string) => {
     this.closeTabService.saveDataForRequestLogAnonymousReq.jalaliDay = $event;
-  }
-
-  refreshTable = () => {
-    this.verification();
   }
 
 }

@@ -149,8 +149,6 @@ export enum ENEssentialsToSave {
     saveDataForRandomImgsRSFirst = 'saveDataForRandomImgsRSFirst',
     saveDataForRRGalleryRSFirst = 'saveDataForRRGalleryRSFirst',
     saveDataForRRGalleryReq = 'saveDataForRRGalleryReq',
-    saveDataForRequestLog = 'saveDataForRequestLog',
-    saveDataForRequestLogReq = 'saveDataForRequestLogReq',
     saveDataForRequestLogListUser = 'saveDataForRequestLogListUser',
     saveDataForRequestLogAnonymous = 'saveDataForRequestLogAnonymous',
     saveDataForRequestLogListUserReq = 'saveDataForRequestLogListUserReq',

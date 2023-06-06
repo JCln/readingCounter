@@ -342,9 +342,7 @@ export class ColumnManager {
     ]
     requestLogAnonymous: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true },        
-        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
         { field: 'path', header: 'path', isSelected: true, ltr: true },
-        { field: 'controllerAction', header: 'action', isSelected: true, ltr: true },
         { field: 'requestDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'requestTime', header: 'زمان', isSelected: true },
         { field: 'ip', header: 'IP', isSelected: true },
@@ -352,9 +350,9 @@ export class ColumnManager {
     requestLogListUser: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true },        
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
-        { field: 'path', header: 'path', isSelected: true, ltr: true },
-        { field: 'controllerAction', header: 'action', isSelected: true, ltr: true },
+        { field: 'path', header: 'path', isSelected: true },
         { field: 'requestDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'readablePath', header: 'مکان', isSelected: true },
         { field: 'requestTime', header: 'زمان', isSelected: true },
         { field: 'ip', header: 'IP', isSelected: true },
     ]

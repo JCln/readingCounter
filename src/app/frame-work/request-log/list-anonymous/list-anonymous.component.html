@@ -38,7 +38,7 @@
     <section>
         <app-prime-table [dataSource]="closeTabService.saveDataForRequestLogAnonymous"
             [_outputFileName]="'requestLogAnonymous'" [_sessionName]="'reqlogAnonymous-session'"
-            [_selectedColumnsToRemember]="'requestLogAnonymous'" (refreshedTable)="refreshTable()">
+            [_selectedColumnsToRemember]="'selectedRRRequestLogAnonymous'" (refreshedTable)="verification()">
         </app-prime-table>
     </section>
 

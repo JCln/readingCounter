@@ -29,6 +29,7 @@ export interface IRequestLog {
     id: number,
     userDisplayName: string,
     path: string,
+    readablePath: string,
     controllerAction: string,
     requestDateJalali: string,
     requestTime: string,

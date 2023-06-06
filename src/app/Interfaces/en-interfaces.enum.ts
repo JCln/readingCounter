@@ -241,7 +241,6 @@ export enum ENInterfaces {
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
     serverManagerOSInfo = 'V1/Server/OsInfo',
 
-    serverManagerRequestLog = 'V1/RequestLog/List',
     requestLogUser = 'V1/RequestLog/List/User',
     requestLogAnonymous = 'V1/RequestLog/List/Anonymous',
     serverManagerErrors = 'V1/Server/Errors',
