@@ -70,7 +70,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
       this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-      this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
+      this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
@@ -110,7 +110,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralGroupModifyReq = null;
       }
 
-      if (!this.closeTabService.saveDataForLMGeneralGroupModify || this.closeTabService.saveDataForLMGeneralGroupModifyReq != this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
+      if (!this.closeTabService.saveDataForLMGeneralGroupModify || this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid != this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
         this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
       }
       if (this.browserStorageService.isExists(this._outputFileName)) {
@@ -192,9 +192,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     let tempDataSource2: any[] = [];
     tempDataSource2 = this.filterHelp2(tempDataSource);
 
-    if (!MathS.isNull(tempDataSource2)) {
-      this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource2;
-    }
+    this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource2;
     if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
       this.closeTabService.saveDataForLMGeneralGroupModify = this.tempMainDataSource.data;
     }

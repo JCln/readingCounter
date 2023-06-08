@@ -230,7 +230,7 @@ export class CloseTabService {
   saveDataForLMModify: IOnOffLoadFlat[];
   saveDataForLMGeneralModifyReq: any;
   saveDataForLMGeneralModify: IOnOffLoadFlat[];
-  saveDataForLMGeneralGroupModifyReq: any = {
+  saveDataForLMGeneralGroupModifyReq = {
     GUid: '',
     counterStateValue: null
   };
