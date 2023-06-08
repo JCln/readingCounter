@@ -67,10 +67,12 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   updateOnChangedCounterState = async (val: number) => {
     if (val) {
-      this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
-      this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
+      if (!this.closeTabService.saveDataForLMGeneralGroupModify || this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid != this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
+        this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
+        this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
+        this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
+      }
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-      this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
@@ -103,6 +105,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
     }
     else {
+      // to show counterStates radioButtons
       this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       this.counterStateForModifyDictionary = await this.listManagerService.getCounterStateForModifyDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       if (canRefresh) {
@@ -110,9 +113,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralGroupModifyReq = null;
       }
 
-      if (!this.closeTabService.saveDataForLMGeneralGroupModify || this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid != this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
-        this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
-      }
+      this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
       } else {
@@ -165,12 +166,12 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         return tempDataSource2;
       }
       else {
-        this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource;
+        return tempDataSource;
       }
     }
     // if tempDataSource is null but filter is not null
     else {
-      this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource;
+      return tempDataSource;
     }
   }
   filterOptions = (e: any, filterValid: string) => {
@@ -186,13 +187,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
       this.tempMainDataSource.totalNum = 1;
     }
-    let tempDataSource: any[] = [];
-    tempDataSource = this.filterHelper();
 
-    let tempDataSource2: any[] = [];
-    tempDataSource2 = this.filterHelp2(tempDataSource);
+    this.closeTabService.saveDataForLMGeneralGroupModify = this.filterHelp2(this.filterHelper());
 
-    this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource2;
     if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
       this.closeTabService.saveDataForLMGeneralGroupModify = this.tempMainDataSource.data;
     }
@@ -375,6 +372,11 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
+  }
+  ngOnDestroy(): void {
+    console.log(this.tempMainDataSource);
+    console.log(this.closeTabService.saveDataForLMGeneralGroupModify);
+
   }
 
 }

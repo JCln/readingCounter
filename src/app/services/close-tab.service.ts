@@ -232,7 +232,9 @@ export class CloseTabService {
   saveDataForLMGeneralModify: IOnOffLoadFlat[];
   saveDataForLMGeneralGroupModifyReq = {
     GUid: '',
-    counterStateValue: null
+    counterStateValue: null,
+    multiSelectCounterStateId: null,
+    multiSelectPreCounterStateCode: null
   };
   saveDataForLMGeneralGroupModify: IOnOffLoadFlat[] = [];
   // dbf output manager
