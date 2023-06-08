@@ -154,6 +154,8 @@ export enum ENEssentialsToSave {
     saveDataForRequestLogListUserReq = 'saveDataForRequestLogListUserReq',
     saveDataForRequestLogAnonymousReq = 'saveDataForRequestLogAnonymousReq',
     saveDataForServerErrors = 'saveDataForServerErrors',
+    saveDataForServerUserActivation = 'saveDataForServerUserActivation',
+    saveDataForServerUserActivationReq = 'saveDataForServerUserActivationReq',
     saveDataForIpSpecialRules = 'saveDataForIpSpecialRules',
     saveDataForOSInfo = 'saveDataForOSInfo',
     license = 'license',
@@ -416,6 +418,7 @@ export enum ENSelectedColumnVariables {
     selectedErrors = 'errors',
     selectedErrorsByTrackNumber = 'errorsByTrackNumber',
     selectedServerErrors = 'serverErrors',
+    selectedServerUserActivation = 'userActivation',
     selectedSimafaReadingProgram = 'simafaReadingProgram',
 }
 export enum ENOffloadModifyType {

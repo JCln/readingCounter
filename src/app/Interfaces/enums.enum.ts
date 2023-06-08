@@ -26,6 +26,7 @@ export enum EN_messages {
     insert_without_decimal = 'شماره نسخه را بدون اعشار وارد نمایید',
     insert_reading_time = 'دوره قرائتی ایجاد و سپس امتحان نمایید',
     insert_reader = 'یک قرائت کننده انتخاب نمایید',
+    insert_ActivationUser = 'نوع فعالیتی انتخاب نمایید',
     insert_karbaricode = 'کد کاربری را وارد نمایید',
     insert_assessAdd = 'حداقل یکی از موارد باید انتخاب شود',
     insert_karbari = 'نام کاربری را وارد نمایید',

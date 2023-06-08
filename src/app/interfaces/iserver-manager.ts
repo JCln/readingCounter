@@ -41,6 +41,33 @@ export interface IManageServerErrorsRes {
     statusCode: number,
     username: string
 }
+export interface IUserActivationREQ {
+    fromDate: string,
+    toDate: string,
+    userActivationLogTypes: number[]
+}
+export interface IUserActivation {
+    id: string,
+    targetUserId: string,
+    userId: string,
+    description: string,
+    changeDateTime: string,
+    changeDateJalali: string,
+    changeTime: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    userDisplayName: string,
+    targetUserDisplayName: string
+}
 export interface IManageServerErrors {
     name: string,
     errorType: ENClientServerErrors

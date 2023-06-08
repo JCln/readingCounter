@@ -356,6 +356,26 @@ export class ColumnManager {
         { field: 'requestTime', header: 'زمان', isSelected: true },
         { field: 'ip', header: 'IP', isSelected: true },
     ]
+    userActivation: IObjectIteratation[] = [
+        // { field: 'id', header: 'id', isSelected: true },        
+        { field: 'description', header: 'توضیحات', isSelected: true },
+        { field: 'changeDateTime', header: 'زمان', isSelected: true },
+        { field: 'changeDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'changeTime', header: 'تغییر زمان', isSelected: true },
+        { field: 'ip', header: 'IP', isSelected: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
+        { field: 'browserTitle', header: 'عنوان مرورگر', isSelected: true },
+        { field: 'browserShortTitle', header: 'عنوان مرورگر', isSelected: false },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false },
+        { field: 'osVersion', header: 'OS Version', isSelected: true },
+        { field: 'osTitle', header: 'OS', isSelected: true },
+        { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
+        // { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },                
+        { field: 'userAgent', header: 'userAgent', isSelected: false },
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        { field: 'targetUserDisplayName', header: 'نام کاربر هدف', isSelected: true },
+    ]
     rrDetails: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
