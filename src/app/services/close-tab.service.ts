@@ -45,7 +45,7 @@ import {
   IUserKarkard,
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
-import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInput, IServerOSInfo } from 'interfaces/iserver-manager';
+import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInput, IServerOSInfo, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
 import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
@@ -55,12 +55,15 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 import { IPolicies } from './DI/privacies';
+import { ENReadingReports } from 'interfaces/reading-reports';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CloseTabService {
-  constructor(private utilsService: UtilsService) { }
+  ENReadingReports = ENReadingReports;
+
+  constructor(public utilsService: UtilsService) { }
   /* TAB WRAPPER */
   tabs: ITabs[] = [];
 
@@ -297,6 +300,12 @@ export class CloseTabService {
   }
   saveDataForMsDriveInfo: IManageDrivesInfo[];
   saveDataForServerErrors: IManageServerErrorsRes[];
+  saveDataForServerUserActivation: IUserActivation[];
+  saveDataForServerUserActivationReq: IUserActivationREQ = {
+    fromDate: '',
+    toDate: '',
+    userActivationLogTypes: []
+  };
   saveDataForIpSpecialRules: any;
   // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
@@ -421,6 +430,7 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
+    { id: 2, req: ENEssentialsToSave.saveDataForServerUserActivationReq, value: ENEssentialsToSave.saveDataForServerUserActivation, url: EN_Routes.userActivation },
     { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
@@ -484,6 +494,12 @@ export class CloseTabService {
         }
       }
     })
+  }
+  receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
+    this[variable].fromDate = $event;
+  }
+  receiveToDateJalali = (variable: ENReadingReports, $event: string) => {
+    this[variable].toDate = $event;
   }
 
 }

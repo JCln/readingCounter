@@ -30,6 +30,7 @@ export class Collapser {
     _searchMoshtarakCollapse: boolean = false;
     isCollapsedCranlz: boolean = false;
     serverError: boolean = false;
+    _userActivation: boolean = false;
     _isCollapsedKarkard: boolean = false;
     _isCollapsedAnalyzePrfm: boolean = false;
 }

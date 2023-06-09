@@ -44,7 +44,7 @@ export class SecurityService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
     }
     else {
-      if (insertedKey == 'jesus') {
+      if (insertedKey == 'XML') {
 
         return new Promise((resolve) => {
           this.interfaceManagerService.POSTBODY(ENInterfaces.editPolicies, policies).toPromise().then((res: IResponses) => {
