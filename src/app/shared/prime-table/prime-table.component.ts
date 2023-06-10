@@ -93,7 +93,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   ngOnChanges(): void {
     if (this.dataSource) {
       this.restoreLatestColumnChanges();
-      this.filterCounterState();
+      this.hasBeenReadsToggler();
       this.doAggregate();
     }
   }

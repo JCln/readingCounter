@@ -28,7 +28,6 @@ import { GeneralGroupInfoResComponent } from './general-group-info-res/general-g
   styleUrls: ['./general-group-list-modify.component.scss']
 })
 export class GeneralGroupListModifyComponent extends AllListsFactory {
-  tempOriginDataSource: any[] = [];
   // should place only in component because overright totalNum needs for dynamic use
   tempMainDataSource = { totalNum: 0, data: [] };
 
@@ -65,13 +64,23 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   ) {
     super(dialogService, listManagerService);
   }
-  updateOnChangedCounterState = async (val: number) => {
+  makeDefaultValCheckbox = () => {
+    this.listManagerService.columnManager._generalGroupHeaderCheckbox = false;
+  }
+  updateOnChangedCounterState = async (val: number, shouldCallApi?: boolean) => {
     if (val) {
-      if (!this.closeTabService.saveDataForLMGeneralGroupModify || this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid != this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
+      if (
+        !this.closeTabService.saveDataForLMGeneralGroupModify ||
+        this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid !=
+        this.allListsService.generalModifyListsGrouped_pageSign.GUid ||
+        shouldCallApi
+      ) {
         this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
+        this.closeTabService.AUXSaveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
         this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
         this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
       }
+      this.makeDefaultValCheckbox();
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
@@ -122,7 +131,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this._selectedColumns = this.listManagerService.columnManager.customizeSelectedColumns(this._selectCols);
       this.insertSelectedColumns();
       // setDynamics should implement before new instance of dataSource create      
-      this.closeTabService.saveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
+      // this.closeTabService.saveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
     }
   }
   refreshTable = () => {
@@ -191,7 +200,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     this.closeTabService.saveDataForLMGeneralGroupModify = this.filterHelp2(this.filterHelper());
 
     if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
-      this.closeTabService.saveDataForLMGeneralGroupModify = this.tempMainDataSource.data;
+      this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
     }
   }
   // have problem on SHOWING Without this Code for DropDowns
@@ -313,12 +322,11 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         console.log(res);
     });
   }
-  filterCounterState = () => {
+  hasBeenReadsToggler = () => {
     // if OnOffloadComponent rendering
     let temp: any[] = [];
     // should be false on initial(_generalGroupHeaderCheckbox) because filter on DataSource happen
     if (this.listManagerService.columnManager._generalGroupHeaderCheckbox) {
-      this.tempOriginDataSource = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
       for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
         if (this.closeTabService.saveDataForLMGeneralGroupModify[index].counterStateId !== null)
           temp.push(this.closeTabService.saveDataForLMGeneralGroupModify[index]);
@@ -326,8 +334,10 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.closeTabService.saveDataForLMGeneralGroupModify = temp;
     }
     else {
-      if (!MathS.isNull(this.tempOriginDataSource))
-        this.closeTabService.saveDataForLMGeneralGroupModify = this.tempOriginDataSource;
+      if (!MathS.isNull(this.closeTabService.AUXSaveDataForLMGeneralGroupModify)) {
+        this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
+        this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
+      }
     }
   }
   getExcel = async () => {
@@ -374,7 +384,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     return this.profileService.getLocalReOrderable();
   }
   ngOnDestroy(): void {
-    console.log(this.tempMainDataSource);
+    console.log(this.closeTabService.AUXSaveDataForLMGeneralGroupModify);
+    console.log(this.tempMainDataSource.data);
     console.log(this.closeTabService.saveDataForLMGeneralGroupModify);
 
   }

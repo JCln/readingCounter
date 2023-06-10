@@ -133,6 +133,7 @@ export enum ENEssentialsToSave {
     saveDataForLMGeneralModifyReq = 'saveDataForLMGeneralModifyReq',
     saveDataForLMGeneralGroupModifyReq = 'saveDataForLMGeneralGroupModifyReq',
     saveDataForLMGeneralGroupModify = 'saveDataForLMGeneralGroupModify',
+    AUXSaveDataForLMGeneralGroupModify = 'AUXSaveDataForLMGeneralGroupModify',
     saveDataForLMModifyReq = 'saveDataForLMModifyReq',
     saveDataForLMModify = 'saveDataForLMModify',
     saveDataForLMAll = 'saveDataForLMAll',
