@@ -60,25 +60,34 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public utilsService: UtilsService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    public spinnerWrapperService: SpinnerWrapperService
   ) {
     super(dialogService, listManagerService);
   }
   makeDefaultValCheckbox = () => {
     this.listManagerService.columnManager._generalGroupHeaderCheckbox = false;
   }
-  updateOnChangedCounterState = async (val: number, shouldCallApi?: boolean) => {
+  updateOnChangedCounterState = async (val: number, shouldCallApi: boolean) => {
     if (val) {
-      if (
+      // TODO: if from same listNumber, no need to call api, check BY GROUP ID
+      if ((
         !this.closeTabService.saveDataForLMGeneralGroupModify ||
-        this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid !=
-        this.allListsService.generalModifyListsGrouped_pageSign.GUid ||
+        (
+          this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid !=
+          this.allListsService.generalModifyListsGrouped_pageSign.GUid
+        ) &&
+        (
+          this.closeTabService.saveDataForLMGeneralGroupModifyReq.groupId !=
+          this.allListsService.generalModifyListsGrouped_pageSign.groupId
+        ) ||
         shouldCallApi
-      ) {
+      )) {
         this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
         this.closeTabService.AUXSaveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
         this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
         this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
+        this.closeTabService.saveDataForLMGeneralGroupModifyReq.groupId = this.allListsService.generalModifyListsGrouped_pageSign.groupId;
       }
       this.makeDefaultValCheckbox();
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
@@ -122,7 +131,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralGroupModifyReq = null;
       }
 
-      this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
+      this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
       } else {
@@ -136,7 +145,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   refreshTable = () => {
     if (!MathS.isNull(this.listManagerService.counterStateValue))
-      this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
+      this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }
@@ -184,23 +193,33 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   filterOptions = (e: any, filterValid: string) => {
-    if (MathS.isNull(e.value)) {
-      this.tempFilter[filterValid] = [];
-    }
-    if (!this.tempFilter[filterValid].includes(e.value)) {
-      this.tempFilter[filterValid] = e.value;
+    try {
+      this.spinnerWrapperService.startPending();
+      if (MathS.isNull(e.value)) {
+        this.tempFilter[filterValid] = [];
+      }
+      if (!this.tempFilter[filterValid].includes(e.value)) {
+        this.tempFilter[filterValid] = e.value;
+      }
+
+      if (this.tempMainDataSource.totalNum == 0) {
+        // for single use only on each 'component init'
+        this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
+        this.tempMainDataSource.totalNum = 1;
+      }
+
+      this.closeTabService.saveDataForLMGeneralGroupModify = this.filterHelp2(this.filterHelper());
+
+      if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
+        this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
+        // TODO: update rows that need to dictionaries
+        this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
+      }
     }
 
-    if (this.tempMainDataSource.totalNum == 0) {
-      // for single use only on each 'component init'
-      this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
-      this.tempMainDataSource.totalNum = 1;
-    }
-
-    this.closeTabService.saveDataForLMGeneralGroupModify = this.filterHelp2(this.filterHelper());
-
-    if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
-      this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
+    catch (e: any) { }
+    finally {
+      this.spinnerWrapperService.stopPending();
     }
   }
   // have problem on SHOWING Without this Code for DropDowns
@@ -336,7 +355,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     else {
       if (!MathS.isNull(this.closeTabService.AUXSaveDataForLMGeneralGroupModify)) {
         this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
-        this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
+        this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
       }
     }
   }
@@ -382,12 +401,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
-  }
-  ngOnDestroy(): void {
-    console.log(this.closeTabService.AUXSaveDataForLMGeneralGroupModify);
-    console.log(this.tempMainDataSource.data);
-    console.log(this.closeTabService.saveDataForLMGeneralGroupModify);
-
   }
 
 }

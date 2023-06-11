@@ -235,6 +235,7 @@ export class CloseTabService {
   saveDataForLMGeneralModify: IOnOffLoadFlat[];
   saveDataForLMGeneralGroupModifyReq = {
     GUid: '',
+    groupId: '',
     counterStateValue: null,
     multiSelectCounterStateId: null,
     multiSelectPreCounterStateCode: null
