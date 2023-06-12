@@ -66,8 +66,8 @@ export class ReadingPeriodComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForReadingPeriodManager) {
       this.closeTabService.saveDataForReadingPeriodManager = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodAll);
     }
-    this.zoneDictionary = await this.readManagerService.getZoneDictionary();
-    this.readingPeriodKindDictionary = await this.readManagerService.getReadingPeriodKindDictionary();
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.readManagerService.dictionaryWrapperService.getPeriodKindDictionary();
 
     this.toConvert();
   }

@@ -33,7 +33,7 @@ export class RandomImagesComponent extends FactoryONE {
   }
 
   classWrapper = async () => {
-    this.zoneDictionary = await this.toolsService.getZoneDictionary();
+    this.zoneDictionary = await this.toolsService.dictionaryWrapperService.getZoneDictionary();
     this._quantity = this.toolsService.getQuantity();
     this.verificationACounterReaderId();
     if (this.closeTabService.saveDataForRandomImgs) {
@@ -43,7 +43,7 @@ export class RandomImagesComponent extends FactoryONE {
   verificationACounterReaderId = async () => {
     let temp: IDictionaryManager[] = [];
     if (!MathS.isNull(this.toolsService.randomImages.zoneId)) {
-      temp = await this.toolsService.getUserCounterReaders(this.toolsService.randomImages.zoneId);
+      temp = await this.toolsService.dictionaryWrapperService.getUserCounterReaderDictionary(this.toolsService.randomImages.zoneId);
       if (!MathS.isNull(temp)) {
         this.userCounterReader = temp;
       }

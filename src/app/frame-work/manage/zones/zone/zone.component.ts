@@ -52,7 +52,7 @@ export class ZoneComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForZone) {
       this.closeTabService.saveDataForZone = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ZoneGET);
     }
-    this.regionDictionary = await this.sectorsManagerService.getRegionDictionary();
+    this.regionDictionary = await this.sectorsManagerService.dictionaryWrapperService.getRegionDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'regionId');
   }

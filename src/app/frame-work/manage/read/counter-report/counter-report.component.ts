@@ -51,7 +51,7 @@ export class CounterReportComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForCounterReport) {
       this.closeTabService.saveDataForCounterReport = await this.readManagerService.getDataSource(ENInterfaces.CounterReportAll);
     }
-    this.zoneDictionary = await this.readManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'zoneId');
   }

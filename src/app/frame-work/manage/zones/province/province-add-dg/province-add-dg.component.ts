@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SectionsService } from 'services/sections.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
 
@@ -19,7 +18,6 @@ export class ProvinceAddDgComponent {
     private dialogRef: MatDialogRef<ProvinceAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sectionsService: SectionsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
     private sectorsManagerService: SectorsManagerService
   ) {
     data = data.di;
@@ -38,7 +36,7 @@ export class ProvinceAddDgComponent {
     if (!await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ProvinceADD, this.form.value))
       return;
 
-    this.dictionaryWrapperService.cleanSingleDictionary('provinceDictionary');
+    this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('provinceDictionary');
     this.dialogRef.close(this.form.value);
   }
   close() {

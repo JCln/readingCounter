@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
@@ -7,7 +6,6 @@ import {
   ENRandomNumbers,
   ENSelectedColumnVariables,
   IDictionaryManager,
-  IObjectIteratation,
   IResponses,
 } from 'interfaces/ioverall-config';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
@@ -42,7 +40,7 @@ export class ListManagerService {
   }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
@@ -61,33 +59,6 @@ export class ListManagerService {
   }
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
-  }
-  getLMAllZoneDictionary = async (): Promise<any> => {
-    return await this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getKarbariDictionaryCode = async (): Promise<any> => {
-    return await this.dictionaryWrapperService.getkarbariCodeDictionary();
-  }
-  getQotrDictionary = async (): Promise<any> => {
-    return await this.dictionaryWrapperService.getQotrDictionary();
-  }
-  getCounterStateDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateDictionary();
-  }
-  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
-  }
-  getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
-  }
-  getCounterStateByCodeShowAllDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(zoneId);
-  }
-  getCounterStateByZoneShowAllDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(zoneId);
-  }
-  getCounterStateForModifyDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateForModifyDictionary(zoneId);
   }
   getLM = (method: ENInterfaces | string, trackNumber: number | string): Promise<any> => {
     return new Promise((resolve) => {

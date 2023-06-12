@@ -39,20 +39,20 @@ export class KarkardDaylyComponent extends FactoryONE {
       this.setGetRanges();
     }
     this.readingReportManagerService.getSearchInOrderTo();
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone()
     this.receiveYear();
   }
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.karkardDailyReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.karkardDailyReq.zoneId);
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.karkardDailyReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this.readingReportManagerService._isOrderByDate);

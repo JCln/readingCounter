@@ -31,7 +31,7 @@ export class QotrComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForQotrManager) {
       this.closeTabService.saveDataForQotrManager = await this.readManagerService.getDataSource(ENInterfaces.QotrAll);
     }
-    this.provinceDictionary = await this.readManagerService.getProvinceDictionary();
+    this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForQotrManager, this.provinceDictionary, 'provinceId');
   }

@@ -31,11 +31,11 @@ export class AllComponent extends AllListsFactory {
   }
   dictionaryWrapps = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-    this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
-    this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.allLists_pageSign.zoneId);
-    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.allListsService.allLists_pageSign.zoneId);
+    this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
+    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.allLists_pageSign.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.allListsService.allLists_pageSign.zoneId);
     this.closeTabService.saveDataForLMAll =
       Converter.convertIdsToTitles(
         this.closeTabService.saveDataForLMAll,

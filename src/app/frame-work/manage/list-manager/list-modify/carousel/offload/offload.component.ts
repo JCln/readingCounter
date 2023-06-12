@@ -73,7 +73,7 @@ export class OffloadComponent implements OnChanges {
 
     this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.onOffloadId);
 
-    this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByIdDictionary(parseInt(this.zoneId));
+    this.counterStatesDictionary = await this.trackingManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(parseInt(this.zoneId));
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();

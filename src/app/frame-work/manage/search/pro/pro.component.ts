@@ -68,20 +68,20 @@ export class ProComponent extends AllListsFactory {
   getNesseseriesByZone = async () => {
     const _zone = this.closeTabService.saveDataForSearchProReq.zoneId;
     if (!_zone) {
-      this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
+      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateDictionary();
     }
     else {
-      this.fragmentMasterIds = await this.searchService.getFragmentMasterDictionary(_zone);
-      this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(_zone);
-      this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(_zone);
-      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(_zone);
-      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(_zone);
+      this.fragmentMasterIds = await this.searchService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(_zone);
+      this.counterReportDictionary = await this.searchService.dictionaryWrapperService.getCounterReportByZoneIdDictionary(_zone);
+      this.counterStateByZoneIdDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(_zone);
+      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(_zone);
+      this.counterStateByCodeDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByCodeDictionary(_zone);
     }
 
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.masrafState = this.searchService.getMasrafStates();
-    this.qotrDictionary = await this.searchService.getQotrDictionary();
-    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
+    this.qotrDictionary = await this.searchService.dictionaryWrapperService.getQotrDictionary();
+    this.karbariDictionaryCode = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.zoneDictionary, 'zoneId');
@@ -104,9 +104,9 @@ export class ProComponent extends AllListsFactory {
     }
     this._years = this.searchService.getYears();
     this.getReadingPeriod();
-    this.zoneDictionary = await this.searchService.getZoneDictionary();
-    this.karbariDictionary = await this.searchService.getKarbariDictionaryCode();
-    this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
+    this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
+    this.karbariDictionary = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
     this.searchService.getSearchInOrderTo();
     this.insertSelectedColumns();
   }
@@ -116,7 +116,7 @@ export class ProComponent extends AllListsFactory {
   getReadingPeriod = async () => {
     const a = this.closeTabService.saveDataForSearchProReq._selectedKindId;
     if (a)
-      this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(a);
+      this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(a);
   }
   async connectToServer() {
     if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.searchService._isOrderByDate)) {

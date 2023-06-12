@@ -30,7 +30,7 @@ export class RrInstateComponent extends FactoryONE {
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
 
 }

@@ -30,7 +30,7 @@ export class ForbiddenService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService
   ) { }
 
@@ -41,9 +41,6 @@ export class ForbiddenService {
         resolve(res);
       })
     })
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
   }
   receiveFromDateJalali = ($event: string) => {
     this.forbiddenReq.fromDate = $event;

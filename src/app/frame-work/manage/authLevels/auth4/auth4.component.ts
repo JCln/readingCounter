@@ -53,7 +53,7 @@ export class Auth4Component extends FactoryONE {
       this.closeTabService.saveDataForAppLevel4 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel4GET);
     }
 
-    this.authLevel3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
+    this.authLevel3Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev3Dictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel4 = this.closeTabService.saveDataForAppLevel4.slice(0, index).concat(this.closeTabService.saveDataForAppLevel4.slice(index + 1));

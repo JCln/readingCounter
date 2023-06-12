@@ -72,8 +72,8 @@ export class Tabsare3Component extends FactoryONE {
     if (!this.closeTabService.saveDataForTabsare3Formula) {
       this.closeTabService.saveDataForTabsare3Formula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare3All);
     }
-    this.zoneDictionary = await this.formulasService.getZoneDictionary();
-    this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
+    this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
+    this.karbariCodeDictionary = await this.formulasService.dictionaryWrapperService.getkarbariCodeDictionary();
 
     this.toConvert();
   }

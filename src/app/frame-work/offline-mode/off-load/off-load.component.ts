@@ -34,11 +34,11 @@ export class OffLoadComponent {
     }
   }
   getZoneDictionary = async () => {
-    this.zoneDictionary = await this.offlineModeService.getZoneDictionary();
+    this.zoneDictionary = await this.offlineModeService.dictionaryWrapperService.getZoneDictionary();
   }
   getCounterReader = async () => {
     if (this.offlineModeService.loadForm.zoneId) {
-      this.userCounterReaderDictionary = await this.offlineModeService.getUserCounterReaders(this.offlineModeService.loadForm.zoneId);
+      this.userCounterReaderDictionary = await this.offlineModeService.dictionaryWrapperService.getUserCounterReaderDictionary(this.offlineModeService.loadForm.zoneId);
     }
   }
 

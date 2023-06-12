@@ -509,6 +509,7 @@ export class DictionaryWrapperService {
     this.counterStateByZoneIdDictionary.zoneId = null;
     this.counterStateByCodeDictionary.dictionary = [];
     this.counterStateByCodeDictionary.zoneId = null;
+    this.userActivationLogTypes = [];
     this.counterStateForModifyDictionary.dictionary = [];
     this.counterStateForModifyDictionary.zoneId = null;
     this.readingPeriodDictionary.dictionary = [];

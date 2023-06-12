@@ -25,8 +25,8 @@ export class ImgResultDetailsGridBasedComponent extends FactoryONE {
 
   nullSavedSource = () => this.closeTabService.saveDataForImgResultDetailsGridBased = null;
   classWrapper = async (canRefresh?: boolean) => {
-    this.imageAttrAllDictionary = await this.toolsService.getImageAttributionAllDictionary();
-    this.zoneDictionary = await this.toolsService.getZoneDictionary();
+    this.imageAttrAllDictionary = await this.toolsService.dictionaryWrapperService.getImageAttrAllDictionary();
+    this.zoneDictionary = await this.toolsService.dictionaryWrapperService.getZoneDictionary();
 
     if (canRefresh) {
       this.nullSavedSource();

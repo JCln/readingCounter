@@ -61,7 +61,7 @@ export class FragmentComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForFragmentNOB) {
       this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.getDataSource(ENInterfaces.fragmentMASTERALL);
     }
-    this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');
     this.defaultAddStatus();
     this.insertSelectedColumns();

@@ -2,7 +2,7 @@ import { IDynamicTraverse } from './../interfaces/ireads-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
 
 import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
@@ -20,25 +20,12 @@ export class ReadManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
 
-  /* API CALLS */
-  getProvinceDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getProvinceDictionary();
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getImageAttrAllDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getImageAttrAllDictionary();
-  }
-  getReadingPeriodKindDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getPeriodKindDictionary();
-  }
   getDataSource = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GET(method).subscribe(res => {
@@ -164,7 +151,7 @@ export class ReadManagerService {
       })
     });
   }
-  deleteSingleRowByObjectSpecial = (place: string ,object: object) => {
+  deleteSingleRowByObjectSpecial = (place: string, object: object) => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(place, object).subscribe((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);

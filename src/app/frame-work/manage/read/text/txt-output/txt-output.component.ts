@@ -33,7 +33,7 @@ export class TxtOutputComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForTextOutput) {
       this.closeTabService.saveDataForTextOutput = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
     }
-    this.zoneDictionary = await this.readManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForTextOutput, this.zoneDictionary, 'zoneId');
   }

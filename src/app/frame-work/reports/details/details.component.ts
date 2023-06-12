@@ -34,7 +34,7 @@ export class DetailsComponent extends FactoryONE {
 
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.detailsReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.detailsReq.zoneId);
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.detailsReq.zoneId);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -43,8 +43,8 @@ export class DetailsComponent extends FactoryONE {
     }
     this.readingReportManagerService.getSearchInOrderTo();
 
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.receiveYear();
     this.getFragmentByZone();
   }
@@ -52,7 +52,7 @@ export class DetailsComponent extends FactoryONE {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.detailsReq, this.readingReportManagerService._isOrderByDate);
@@ -61,7 +61,7 @@ export class DetailsComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForRRDetails = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportManagerService.detailsReq);
-    this.karbariByCodeDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
+    this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'karbariCode');
   }

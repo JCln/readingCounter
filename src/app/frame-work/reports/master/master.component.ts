@@ -40,7 +40,7 @@ export class MasterComponent extends FactoryONE {
     }
 
     this.readingReportManagerService.getSearchInOrderTo();
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.receiveYear();
     // this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
@@ -48,7 +48,7 @@ export class MasterComponent extends FactoryONE {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.masterReq, this.readingReportManagerService._isOrderByDate);

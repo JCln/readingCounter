@@ -35,7 +35,7 @@ export class DbfOutputEqamatBaghComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh)
       this.nullSavedSource();
-    this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.trackingManagerService.dictionaryWrapperService.getZoneDictionary();
   }
 
 }

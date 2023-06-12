@@ -15,8 +15,8 @@ export class SectorsManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
+    public dictionaryWrapperService: DictionaryWrapperService,
+    public utilsService: UtilsService,
     private sectionsService: SectionsService
   ) { }
 
@@ -30,20 +30,6 @@ export class SectorsManagerService {
       })
     })
   }
-
-  getCountryDictionary = (): any => {
-    return this.dictionaryWrapperService.getCountryDictionary();
-  }
-  getRegionDictionary = (): any => {
-    return this.dictionaryWrapperService.getRegionDictionary();
-  }
-  getProvinceDictionary = (): any => {
-    return this.dictionaryWrapperService.getProvinceDictionary();
-  }
-  getZoneDictionary = (): any => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-
   sectorsAddEdit = (apiUse: ENInterfaces, value: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(apiUse, value).toPromise().then((res: IResponses) => {

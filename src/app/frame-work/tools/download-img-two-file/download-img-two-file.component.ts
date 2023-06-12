@@ -23,7 +23,7 @@ export class DownloadImgTwoFileComponent extends FactoryONE {
   }
 
   classWrapper = async () => {
-    this.zoneDictionary = await this.toolsService.getZoneDictionary();
+    this.zoneDictionary = await this.toolsService.dictionaryWrapperService.getZoneDictionary();
   }
   connectToServer = async () => {
     if (this.toolsService.validationDownloadAllImagesTwo2(this.toolsService.fileDownloadAllImagesTwo2)) {

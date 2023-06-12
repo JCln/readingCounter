@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { AuthsManagerService } from 'services/auths-manager.service';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SectionsService } from 'services/sections.service';
 
 @Component({
@@ -19,8 +18,7 @@ export class Auth3AddDgComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth3AddDgComponent>,
     private sectionsService: SectionsService,
-    public authsManagerService: AuthsManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    public authsManagerService: AuthsManagerService
   ) {
     data = data.di;
     this.form = fb.group({
@@ -43,7 +41,7 @@ export class Auth3AddDgComponent {
     if (!await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3ADD, this.form.value))
       return;
 
-    this.dictionaryWrapperService.cleanSingleDictionary('authLev3Dictionary');
+    this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev3Dictionary');
     this.dialogRef.close(this.form.value);
   }
   close() {

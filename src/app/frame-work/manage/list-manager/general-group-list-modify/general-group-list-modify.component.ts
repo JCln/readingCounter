@@ -91,10 +91,10 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       }
       this.makeDefaultValCheckbox();
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-      this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
-      this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-      this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
-      this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+      this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
+      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       this.resetDataSourceView();
 
 
@@ -124,11 +124,11 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
     else {
       // to show counterStates radioButtons
-      this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
-      this.counterStateForModifyDictionary = await this.listManagerService.getCounterStateForModifyDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.saveDataForLMGeneralGroupModify = null;
-        this.closeTabService.saveDataForLMGeneralGroupModifyReq = null;
+        this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = null;
       }
 
       this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);

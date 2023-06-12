@@ -81,8 +81,8 @@ export class AssessPreComponent extends AllListsFactory {
     this.closeTabService.saveDataForAssessPre = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
 
-    this.karbariDictionaryCode = await this.importDynamicService.getKarbariByCodeDictionary();
-    this.qotrDictionary = await this.importDynamicService.getQotrDictionary();
+    this.karbariDictionaryCode = await this.importDynamicService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.qotrDictionary = await this.importDynamicService.dictionaryWrapperService.getQotrDictionary();
 
     this.getMasterInZone();
     this.converts();
@@ -101,16 +101,16 @@ export class AssessPreComponent extends AllListsFactory {
   }
   getMasterInZone = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
+    this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
     this.masrafState = this.importDynamicService.getMasrafStates();
-    this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
+    this.karbariDictionary = await this.importDynamicService.dictionaryWrapperService.getkarbariCodeDictionary();
 
     if (this.closeTabService.saveDataForAssessPreReq.zoneId) {
-      this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.counterReportDictionary = await this.importDynamicService.getCounterReportByZoneDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.counterStateDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.counterStateByCodeDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.counterReportDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterReportByZoneIdDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
     }
   }
   editCloseData() {

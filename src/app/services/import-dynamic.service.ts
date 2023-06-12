@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
@@ -87,7 +86,7 @@ export class ImportDynamicService {
     private allImportsService: AllImportsService,
     private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    public dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   _isOrderByDate: boolean = false;
@@ -522,19 +521,6 @@ export class ImportDynamicService {
       })
     });
   }
-  /*API CALLS */
-  getKarbariDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
-  }
-  getKarbariByCodeDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
-  }
-  getCounterReportByZoneDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterReportByZoneIdDictionary(zoneId);
-  }
-  getQotrDictionary = () => {
-    return this.dictionaryWrapperService.getQotrDictionary();
-  }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
@@ -542,29 +528,11 @@ export class ImportDynamicService {
       })
     });
   }
-  getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
-  }
-  getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
-  }
-  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
-  }
-  getReadingPeriodDictionary = (kindId: string): Promise<any> => {
-    return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
-  }
   getFragmentMasterDictionary = (zoneId: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res =>
         resolve(res))
     });
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getReadingPeriodsKindDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getReadingPeriod = (zoneId: number, kindId: number): Promise<any> => {
     return new Promise((resolve) => {
@@ -579,9 +547,6 @@ export class ImportDynamicService {
         resolve(res);
       })
     });
-  }
-  getReadingConfigDefaults = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(zoneId);
   }
   getMasrafStates = () => {
     return IMasrafStates;

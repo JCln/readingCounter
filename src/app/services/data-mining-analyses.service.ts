@@ -18,7 +18,7 @@ import { UtilsService } from './utils.service';
 })
 export class DataMiningAnalysesService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  ENDataMining = ENDataMining;  
+  ENDataMining = ENDataMining;
 
   dataMiningReq: IMostReportInput = {
     zoneId: 0,
@@ -34,7 +34,7 @@ export class DataMiningAnalysesService {
     public utilsService: UtilsService,
     private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    public dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   _isOrderByDate: boolean = false;
@@ -59,15 +59,6 @@ export class DataMiningAnalysesService {
   /*API CALLS & CALLS*/
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();
-  }
-  getReadingPeriodDictionary = (kindId: string): Promise<any> => {
-    return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
-  }
-  getReadingPeriodKindDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getPeriodKindDictionary();
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
   }
   postDMManager = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {

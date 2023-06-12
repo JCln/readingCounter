@@ -35,6 +35,9 @@ export class ListAnonymousComponent extends FactoryONE {
       this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '23';
       this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH = '24';
     }
+    if (temp.toString().split(':').shift() == '10') {
+      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '09';
+    }
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForRequestLogAnonymous = await this.manageServerService.postBody(ENInterfaces.requestLogAnonymous, this.closeTabService.saveDataForRequestLogAnonymousReq);

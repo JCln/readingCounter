@@ -78,12 +78,12 @@ export class ImportDynamicComponent extends FactoryONE {
     if (!MathS.isNull(this.importDynamicService.importDynamicReq.zoneId)) {
       if (this.zoneDictionary) {
         this.verificationReadingPeriod();
-        this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamicService.importDynamicReq.zoneId);
+        this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.importDynamicService.importDynamicReq.zoneId);
       }
       if (!this.importDynamicService.validationInvalid(this.readingConfigDefault, EN_messages.thereis_no_default))
         return;
 
-      this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamicService.importDynamicReq.zoneId);
+      this.userCounterReader = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.importDynamicService.importDynamicReq.zoneId);
       if (!this.importDynamicService.validationInvalid(this.userCounterReader, EN_messages.thereis_no_reader)) {
         this.userCounterReader = [];
         return;
@@ -108,10 +108,10 @@ export class ImportDynamicComponent extends FactoryONE {
       this.resetToDefaultFormStatus();
       this.nullSavedSource();
     }
-    this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
+    this.readingPeriodKindsDictionary = await this.importDynamicService.dictionaryWrapperService.getPeriodKindDictionary();
     if (!this.importDynamicService.validationInvalid(this.readingPeriodKindsDictionary, EN_messages.thereis_no_type))
       this.readingPeriodKindsDictionary = [];
-    this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
+    this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
     if (!this.importDynamicService.validationInvalid(this.zoneDictionary, EN_messages.not_found_zoneId))
       this.zoneDictionary = [];
     this.importDynamicService.getSearchInOrderTo();

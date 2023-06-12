@@ -28,15 +28,15 @@ export class GisComponent extends FactoryONE {
 
   getCounterStateByZoneId = async () => {
     if (this.readingReportManagerService.gisReq.zoneId)
-      this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
+      this.counterStateDictionary = await this.readingReportManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
   }
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.gisReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.gisReq.zoneId);
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.getCounterStateByZoneId();
     this.receiveYear();
     this.readingReportManagerService.getSearchInOrderTo();
@@ -47,7 +47,7 @@ export class GisComponent extends FactoryONE {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
 
   changeRadio = (event: any) => {

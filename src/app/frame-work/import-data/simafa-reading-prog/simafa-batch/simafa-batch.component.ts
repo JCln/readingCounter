@@ -71,8 +71,8 @@ export class SimafaBatchComponent extends FactoryONE {
         this.allImportsService.allImports_batch.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
       }
       this.allImportsService.allImports_batch.fragmentMasterId = this.closeTabService.saveDataForSimafaBatch[0].fragmentMasterId;
-      this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.allImportsService.allImports_batch.zoneId);
-      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.allImportsService.allImports_batch.zoneId);
+      this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.allImportsService.allImports_batch.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.allImportsService.allImports_batch.zoneId);
 
       this.assingIdToRouteId();
       this.insertReadingConfigDefaults(this.readingConfigDefault);

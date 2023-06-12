@@ -63,7 +63,7 @@ export class TrackingManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private allListsService: AllListsService,
     private jwtService: JwtService,
     public columnManager: ColumnManager,
@@ -189,15 +189,6 @@ export class TrackingManagerService {
       isSelectableDate: true,
     }
     return this.utilsService.firstConfirmDialog(a);
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
-  }
-  getCounterStateByIdDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);

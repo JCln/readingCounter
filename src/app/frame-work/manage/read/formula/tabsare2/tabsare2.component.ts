@@ -53,7 +53,7 @@ export class Tabsare2Component extends FactoryONE {
     if (!this.closeTabService.saveDataForTabsare2Formula) {
       this.closeTabService.saveDataForTabsare2Formula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare2All);
     }
-    this.zoneDictionary = await this.formulasService.getZoneDictionary();
+    this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare2Formula, this.zoneDictionary, 'zoneId');
   }

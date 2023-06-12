@@ -38,15 +38,15 @@ export class DmAnalysisComponent extends FactoryONE {
       this.setRanges();
     }
     this.dataMiningAnalysesService.getSearchInOrderTo();
-    this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
-    this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.getReadingPeriodKindDictionary();
+    this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getPeriodKindDictionary();
     this.receiveYear();
   }
   receiveYear = () => {
     this._years = this.dataMiningAnalysesService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.dataMiningAnalysesService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
     const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);
@@ -56,7 +56,7 @@ export class DmAnalysisComponent extends FactoryONE {
   connectToServer = async () => {
     this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
     if (!MathS.isNull(this.closeTabService.saveDataForDMAAnalyze)) {
-      this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
+      this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
       Converter.convertIdToTitle(this.closeTabService.saveDataForDMAAnalyze, this.zoneDictionary, 'zoneId');
       this.setRanges();
     }

@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { ITracking } from 'interfaces/itrackings';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
 
@@ -21,12 +20,11 @@ export class ImportListDgComponent implements OnInit {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     public trackingManagerService: TrackingManagerService,
-    private cdr: ChangeDetectorRef,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private cdr: ChangeDetectorRef
   ) {
   }
   counterWrapper = async () => {
-    this.allCounterReaders = await this.dictionaryWrapperService.getUserCounterReaderDictionary(this.config.data.zoneId);
+    this.allCounterReaders = await this.trackingManagerService.dictionaryWrapperService.getUserCounterReaderDictionary(this.config.data.zoneId);
     this.dataSource = this.config.data;
     this._selectedDatas = this.trackingManagerService.columnManager.columnSelectedMenus('importedListDetails');
     this.cdr.detectChanges();

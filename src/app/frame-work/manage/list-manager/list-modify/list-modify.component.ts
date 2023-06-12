@@ -53,11 +53,11 @@ export class ListModifyComponent extends AllListsFactory {
       this.closeTabService.saveDataForLMModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMModify));
 
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-      this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
-      this.qotrDictionary = await this.listManagerService.getQotrDictionary();
+      this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+      this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
       const tempZone: number = parseInt(this.closeTabService.saveDataForLMModify[0].zoneId.toString());
-      this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
-      this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
+      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(tempZone);
+      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(tempZone);
 
       this.closeTabService.saveDataForLMModify =
         Converter.convertIdsToTitles(

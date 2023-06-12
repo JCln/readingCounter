@@ -85,7 +85,7 @@ export class ReadingConfigComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForReadingConfig) {
       this.closeTabService.saveDataForReadingConfig = await this.readManagerService.getDataSource(ENInterfaces.ReadingConfigALL);
     }
-    this.zoneDictionary = await this.readManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.closeTabService.saveDataForReadingConfig));
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForReadingConfig, this.zoneDictionary, 'zoneId');

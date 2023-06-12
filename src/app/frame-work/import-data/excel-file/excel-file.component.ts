@@ -67,10 +67,10 @@ export class ExcelFileComponent extends FactoryONE {
   verificationACounterReaderId = async () => {
     if (!MathS.isNull(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId)) {
 
-      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId);
 
       this.verificationReadingPeriod();
-      this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId);
+      this.userCounterReader = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId);
 
       this.insertReadingConfigDefaults(this.readingConfigDefault);
     }
@@ -85,8 +85,8 @@ export class ExcelFileComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
-    this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
+    this.readingPeriodKindsDictionary = await this.importDynamicService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
     this.verificationACounterReaderId();
     this._years = this.importDynamicService.getYears();
   }

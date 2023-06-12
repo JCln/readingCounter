@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
@@ -34,6 +34,9 @@ export class ListUserComponent extends FactoryONE {
     if (temp.toString().split(':').shift() == '0') {
       this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH = '23';
       this.closeTabService.saveDataForRequestLogListUserReq.toTimeH = '24';
+    }
+    if (temp.toString().split(':').shift() == '10') {
+      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '09';
     }
   }
   connectToServer = async () => {

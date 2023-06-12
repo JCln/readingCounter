@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SectionsService } from 'services/sections.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
 
@@ -20,7 +19,6 @@ export class ZoneAddDgComponent {
     private dialogRef: MatDialogRef<ZoneAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sectionsService: SectionsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
     private sectorsManagerService: SectorsManagerService
   ) {
     data = data.di;
@@ -40,7 +38,7 @@ export class ZoneAddDgComponent {
     if (!await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneADD, this.form.value))
       return;
 
-    this.dictionaryWrapperService.cleanSingleDictionary('zoneDictionary');
+    this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('zoneDictionary');
     this.dialogRef.close(this.form.value);
   }
   close() {

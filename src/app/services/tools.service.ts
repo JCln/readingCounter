@@ -3,7 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
 import { ENReadingReports } from 'interfaces/reading-reports';
-import { EnvService } from 'services/env.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 
 import { MathS } from '../classes/math-s';
@@ -36,7 +35,7 @@ export class ToolsService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private jwtService: JwtService
   ) { }
 
@@ -101,15 +100,6 @@ export class ToolsService {
     { id: 4, name: 'fromURI ', type: ENParamSendType.fromURI },
   ];
 
-  getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getImageAttributionAllDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getImageAttrAllDictionary();
-  }
   validationOnNull = (val: any): boolean => {
     if (MathS.isNull(val))
       return false;

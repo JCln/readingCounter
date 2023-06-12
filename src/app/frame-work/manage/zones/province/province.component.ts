@@ -52,7 +52,7 @@ export class ProvinceComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForProvince) {
       this.closeTabService.saveDataForProvince = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ProvinceGET);
     }
-    this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
+    this.countryDictionary = await this.sectorsManagerService.dictionaryWrapperService.getCountryDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
   }

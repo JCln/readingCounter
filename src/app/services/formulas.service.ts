@@ -19,7 +19,7 @@ export class FormulasService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService
   ) { }
 
@@ -68,12 +68,6 @@ export class FormulasService {
         resolve(res);
       })
     });
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getKarbariCodeDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
   postExcelFile = async (method: ENInterfaces) => {
     const formData: FormData = new FormData();

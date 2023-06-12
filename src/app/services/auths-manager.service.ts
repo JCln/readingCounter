@@ -16,7 +16,7 @@ export class AuthsManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
     private sectionsService: SectionsService
   ) { }
@@ -29,16 +29,6 @@ export class AuthsManagerService {
       })
     })
   }
-  getAuthLevel1Dictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getAuthLev1Dictionary();
-  }
-  getAuthLevel2Dictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getAuthLev2Dictionary();
-  }
-  getAuthLevel3Dictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getAuthLev3Dictionary();
-  }
-
   /* */
   addOrEditAuths = (place: ENInterfaces, result: object): Promise<any> => {
     return new Promise((resolve) => {

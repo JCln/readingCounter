@@ -71,11 +71,11 @@ export class SimafaSingleComponent extends FactoryONE {
     this.getRouteParams();
     this.selectedZoneId();
 
-    this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.simafaSingleReq.zoneId);
+    this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.simafaSingleReq.zoneId);
     this.insertReadingConfigDefaults(this.readingConfigDefault);
   }
   selectedZoneId = async () => {
-    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaSingleReq.zoneId);
+    this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.simafaSingleReq.zoneId);
   }
   private insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
     this.simafaSingleReq.hasPreNumber = rcd.defaultHasPreNumber;

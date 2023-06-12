@@ -27,8 +27,8 @@ export class UserKarkardComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForUserKarkard = null;
     }
-    this.trackingStatesDictionary = await this.readingReportManagerService.getTrackingStatesDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.trackingStatesDictionary = await this.readingReportManagerService.dictionaryWrapperService.getTrackingStatesDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
 
   }
   connectToServer = async () => {
