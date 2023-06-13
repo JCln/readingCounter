@@ -356,6 +356,32 @@ export class ColumnManager {
         { field: 'requestTime', header: 'زمان', isSelected: true },
         { field: 'ip', header: 'IP', isSelected: true },
     ]
+    policyHistory: IObjectIteratation[] = [
+        { field: 'enableValidIpCaptcha', header: 'فعال سازی captcha', isSelected: true, isBoolean: true },
+        { field: 'requireCaptchaInvalidAttempts', header: 'تعداد دفعات ورود با Captcha', isSelected: true, isNumber: true },
+        { field: 'enableValidIpRecaptcha', header: 'ip مناسب در Recaptcha', isSelected: true, isBoolean: true },
+        { field: 'requireRecaptchaInvalidAttempts', header: 'recaptcha', isSelected: true, isNumber: true },
+        { field: 'lockInvalidAttempts', header: 'مسدودسازی درخواست مکرر', isSelected: true, isNumber: true },
+        { field: 'lockMin', header: 'مدت محدودیت مسدود سازی', isSelected: true, isNumber: true },
+        { field: 'minPasswordLength', header: 'حداقل تعداد رمز عبور', isSelected: true, isNumber: true },
+        { field: 'passwordContainsNumber', header: 'گذرواژه شامل حداقل یک عدد باشد', isSelected: true, isBoolean: true },
+        { field: 'passwordContainsLowercase', header: 'گذرواژه شامل حداقل یک حرف کوچک لاتین باشد', isSelected: true, isBoolean: true },
+        { field: 'passwordContainsUppercase', header: 'گذرواژه شامل حداقل یک حرف بزرگ لاتین باشد', isSelected: true, isBoolean: true },
+        { field: 'passwordContainsNonAlphaNumeric', header: 'گذرواژه شامل حداقل یک حرف غیرالفبایی باشد', isSelected: true, isBoolean: true },
+        { field: 'canUpdateDeviceId', header: 'شناسه قابل بروز رسانی باشد', isSelected: true, isBoolean: true },
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        { field: 'ip', header: 'IP', isSelected: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
+        { field: 'browserTitle', header: 'عنوان مرورگر', isSelected: true },
+        { field: 'browserShortTitle', header: 'عنوان مرورگر', isSelected: false },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false },
+        { field: 'osVersion', header: 'OS Version', isSelected: true },
+        { field: 'osTitle', header: 'OS', isSelected: true },
+        { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
+        // { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },                
+        { field: 'userAgent', header: 'userAgent', isSelected: false }
+    ]
     userActivation: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true },        
         { field: 'description', header: 'توضیحات', isSelected: true },

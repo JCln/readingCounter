@@ -25,7 +25,18 @@ export interface IPolicies {
     SanitizeUserInputs?: boolean,//true
     AES512Protection?: boolean,
     autoClearData?: boolean,
-
+    userDisplayName: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
 }
 export interface IPrivacy {
     minLength: number;

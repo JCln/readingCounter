@@ -320,6 +320,7 @@ export class CloseTabService {
   saveDataForTextOutput: ITextOutput[];
   saveDataForToolsExcelViewer: IDynamicExcelReq[];
   saveDataForDynamicReports: IDynamicReportsRes[];
+  saveDataForPoliciesHistory: IPolicies[] = [];
   saveDataForPolicies: IPolicies = {
     id: 0,
     enableValidIpCaptcha: false,
@@ -333,7 +334,19 @@ export class CloseTabService {
     passwordContainsLowercase: false,
     passwordContainsUppercase: false,
     passwordContainsNonAlphaNumeric: false,
-    canUpdateDeviceId: false
+    canUpdateDeviceId: false,
+    userDisplayName: '',
+    ip: '',
+    browserVersion: '',
+    browserTitle: '',
+    browserShortTitle: '',
+    browserEngine: '',
+    browserType: '',
+    osVersion: '',
+    osTitle: '',
+    osPlatform: '',
+    osShortTitle: '',
+    userAgent: ''
   };
   saveDataForFNB: IForbiddenManager[];
   saveDataForProfile: any;
@@ -400,6 +413,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
     { id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg },
     { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: EN_Routes.wrpolicies },
+    { id: 1, value: ENEssentialsToSave.saveDataForPoliciesHistory, url: EN_Routes.policyHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded },

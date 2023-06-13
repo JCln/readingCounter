@@ -370,6 +370,11 @@ export class HelpWrapperService {
         messageOne: 'امنیت سامانه قابل تغییر است. حداقل تعداد رمز عبور، تنوع گذرواژه، دفعات ورود با کپچا، Session  خودکار، استفاده همزمان از یک توکن از آن جمله اند.',
         messageTwo: 'ممکن است برخی از تغییرات به دسترسی بیشتری نیاز داشته باشند.'
       }
+    else if (currentRoute === EN_Routes.policyHistory)
+      return {
+        title: 'تاریخچه تغییرات تنظیمات امنیتی',
+        messageOne: 'با تغییر در تنظیمات امنیتی برنامه، جزئیات تغییرات از جمله تغییر دهنده تنظیمات در این قسمت نمایش داده می‌شود.',
+      }
     else if (currentRoute === EN_Routes.userKarkardSummary)
       return {
         title: 'کاربر خلاصه عملکرد',

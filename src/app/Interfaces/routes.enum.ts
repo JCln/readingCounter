@@ -104,6 +104,7 @@ export enum EN_Routes {
     'driveInfo' = '/wr/m/system/msdriveinfo',
     'wrmms' = '/wr/m/system/ms',
     'wrpolicies' = '/wr/m/system/policies',
+    'policyHistory' = '/wr/m/system/policyHistory',
     'wrmmserr' = '/wr/m/system/mserr',
     'serverOSInfo' = '/wr/m/system/osInfo',
     'serverIPSpecialRules' = '/wr/m/system/ipRules',

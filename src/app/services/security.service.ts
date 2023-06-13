@@ -22,9 +22,9 @@ export class SecurityService {
   getPrivacyToggle = (): IPrivacy => {
     return privacies;
   }
-  getPolicy = (): Promise<any> => {
+  getDataSource = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.getPolicies).toPromise().then((res: IResponses) => {
+      this.interfaceManagerService.GET(method).toPromise().then((res: IResponses) => {
         resolve(res);
       })
     });
@@ -35,7 +35,7 @@ export class SecurityService {
       minWidth: '19rem',
       isInput: true,
       placeHolder: 'کلید را وارد نمایید',
-      inputMinLength: 4,
+      inputMinLength: 3,
       isDelete: false,
       icon: 'pi pi-key'
     }
