@@ -1,14 +1,18 @@
 .ma {
   display: block;
 
-  @media (min-width: 375px) {
+  @media (min-width: 550px) {
     display: flex;
   }
 
 }
 
 app-frame-work {
-  flex-grow: 1;
+  flex-grow: initial;
+
+  @media (min-width: 550px) {
+    flex-grow: 1;
+  }
 }
 
 app-header {

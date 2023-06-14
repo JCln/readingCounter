@@ -5,12 +5,12 @@
   --height: var(--font_3);
   display: flex;
   align-items: center;
-  // overflow: hidden;
   background-color: var(--white);
   height: var(--height);
   position: sticky;
   top: 0;
   box-shadow: 0 1px 5px 0px var(--primary_5);
+  z-index: 100;
 
   ._logo_content {
     width: calc(var(--height) - var(--font_05));

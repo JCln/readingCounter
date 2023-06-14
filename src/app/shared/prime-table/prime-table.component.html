@@ -252,6 +252,12 @@
                     <div class="tooltip_text">مشاهده سابقه</div>
                 </i>
             </td>
+            <td class="__columns" *ngIf="_outputFileName =='policyHistory'" (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text">مشاهده جزئیات</div>
+                </i>
+            </td>
             <td class="__columns" *ngIf="_outputFileName =='ModifyList' || _outputFileName =='searchMosh'"
                 (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">خلاصه کاردکس</span>

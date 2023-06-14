@@ -373,7 +373,7 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.policyHistory)
       return {
         title: 'تاریخچه تغییرات تنظیمات امنیتی',
-        messageOne: 'با تغییر در تنظیمات امنیتی برنامه، جزئیات تغییرات از جمله تغییر دهنده تنظیمات در این قسمت نمایش داده می‌شود.',
+        messageOne: 'با تغییر در تنظیمات امنیتی برنامه، جزئیات تغییرات داده شده در این قسمت نمایش داده می‌شود.',
       }
     else if (currentRoute === EN_Routes.userKarkardSummary)
       return {
