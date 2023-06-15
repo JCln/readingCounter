@@ -103,8 +103,9 @@
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForLMGeneralGroupModifyReq.multiSelectCounterStateId"
-                                [options]="counterStateByZoneDictionary" (onChange)="filterOptions($event, 'first')"
-                                optionLabel="title" optionValue="title" [filter]="true" showClear="true">
+                                [options]="counterStateByZoneDictionary"
+                                (onChange)="filterOptions($event.value, 'first')" optionLabel="title"
+                                optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -118,8 +119,9 @@
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForLMGeneralGroupModifyReq.multiSelectPreCounterStateCode"
-                                [options]="counterStateByCodeDictionary" (onChange)="filterOptions($event, 'second')"
-                                optionLabel="title" optionValue="title" [filter]="true" showClear="true">
+                                [options]="counterStateByCodeDictionary"
+                                (onChange)="filterOptions($event.value, 'second')" optionLabel="title"
+                                optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>

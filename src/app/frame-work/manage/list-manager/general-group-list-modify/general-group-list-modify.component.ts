@@ -144,8 +144,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   refreshTable = () => {
-    if (!MathS.isNull(this.listManagerService.counterStateValue))
-      this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
+    if (!MathS.isNull(this.listManagerService.counterStateValue)) {
+      this.updateOnChangedCounterState(this.listManagerService.counterStateValue, true);
+    }
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }
@@ -154,7 +155,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     // on each change of ChangedCounterState
     this.tempMainDataSource.totalNum = 0;
   }
-  filterHelper = (): any => {
+  filterHelper = (): any[] => {
     let tempDataSource: any[] = [];
     if (this.tempFilter.first.length > 0) {
       for (let i = 0; i < this.tempMainDataSource.data.length; i++) {
@@ -170,7 +171,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       return this.tempMainDataSource.data;
     }
   }
-  filterHelp2 = (tempDataSource: any): any => {
+  filterHelp2 = (tempDataSource: any): any[] => {
     let tempDataSource2: any[] = [];
     if (this.tempFilter.second.length > 0) {
       if (!MathS.isNull(tempDataSource)) {
@@ -192,35 +193,39 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       return tempDataSource;
     }
   }
-  filterOptions = (e: any, filterValid: string) => {
-    try {
-      this.spinnerWrapperService.startPending();
-      if (MathS.isNull(e.value)) {
-        this.tempFilter[filterValid] = [];
-      }
-      if (!this.tempFilter[filterValid].includes(e.value)) {
-        this.tempFilter[filterValid] = e.value;
-      }
+  testCallBackFun = (e: any, filterValid: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
 
-      if (this.tempMainDataSource.totalNum == 0) {
-        // for single use only on each 'component init'
-        this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
-        this.tempMainDataSource.totalNum = 1;
-      }
+        if (MathS.isNull(e)) {
+          this.tempFilter[filterValid] = [];
+        }
+        if (!this.tempFilter[filterValid].includes(e)) {
+          this.tempFilter[filterValid] = e;
+        }
 
-      this.closeTabService.saveDataForLMGeneralGroupModify = this.filterHelp2(this.filterHelper());
+        if (this.tempMainDataSource.totalNum == 0) {
+          // for single use only on each 'component init'
+          this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
+          this.tempMainDataSource.totalNum = 1;
+        }
 
-      if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
-        this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
-        // TODO: update rows that need to dictionaries
-        this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
-      }
-    }
+        this.closeTabService.saveDataForLMGeneralGroupModify = this.filterHelp2(this.filterHelper());
 
-    catch (e: any) { }
-    finally {
-      this.spinnerWrapperService.stopPending();
-    }
+        if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
+          this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
+          // TODO: update rows that need to dictionaries
+          this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
+        }
+        resolve(true)
+      }, 0)
+    });
+  }
+  filterOptions = async (e: any[], filterValid: string) => {
+    // make hackable async function to show spinner on filter event
+    this.spinnerWrapperService.startPending();
+    await this.testCallBackFun(e, filterValid);
+    this.spinnerWrapperService.stopPending();
   }
   // have problem on SHOWING Without this Code for DropDowns
   clickedDropDowns = (event: any, element: string, dataId: any) => {

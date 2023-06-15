@@ -388,6 +388,33 @@ export class ColumnManager {
         { field: 'canUpdateDeviceId', header: 'شناسه قابل بروز رسانی باشد', isSelected: false, isBoolean: true },
         // { field: 'userAgent', header: 'userAgent', isSelected: false },
     ]
+    roleHistory: IObjectIteratation[] = [
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        { field: 'ip', header: 'IP', isSelected: true },
+        { field: 'browserTitle', header: 'عنوان مرورگر', isSelected: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
+    ]
+    roleHistoryDetails: IObjectIteratation[] = [
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        { field: 'ip', header: 'IP', isSelected: true },
+        { field: 'browserTitle', header: 'عنوان مرورگر', isSelected: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true },
+        { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isBoolean: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'insertDateTime', header: 'تاریخ', isSelected: false },
+        { field: 'insertTime', header: 'زمان', isSelected: true },
+        { field: 'browserShortTitle', header: 'عنوان مرورگر', isSelected: false },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false },
+        { field: 'osTitle', header: 'سیستم عامل', isSelected: false },
+        { field: 'osVersion', header: 'نسخه سیستم عامل', isSelected: false },
+        { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
+        { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
+    ]
+
     userActivation: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true },        
         { field: 'description', header: 'توضیحات', isSelected: true },
@@ -1603,6 +1630,17 @@ export class ColumnManager {
         { field: 'hasReadingVibrate', header: 'لرزش', isSelected: true, isBoolean: true }
     ]
     userAll: IObjectIteratation[] = [
+        { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
+        { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },
+        { field: 'userCode', header: 'کد کاربری', isSelected: false, ltr: false },
+        { field: 'mobile', header: 'موبایل', isSelected: true, ltr: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
+        { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true },
+        { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, ltr: true },
+        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false },
+        { field: 'deviceId', header: 'سریال', isSelected: false }
+    ]
+    userRoleHistoryAll: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
         { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },
         { field: 'userCode', header: 'کد کاربری', isSelected: false, ltr: false },

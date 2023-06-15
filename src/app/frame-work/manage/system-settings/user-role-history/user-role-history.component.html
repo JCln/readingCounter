@@ -1,0 +1,11 @@
+<app-prime-table
+[dataSource]="closeTabService.saveDataForAllUsers"
+[_numberOfExtraColumns]="[1]"
+[_sessionName]="'userRoleHistory-session'"
+[_outputFileName]="'userRoleHistory'"
+[_selectedColumnsToRemember]="'selectedUserRoleHistory'"
+[_hasSaveColumns]=true
+(refreshedTable)="refreshTable()"
+(routedToEditPage)="usersAllService.routeToEditPage($event)"
+>
+</app-prime-table>

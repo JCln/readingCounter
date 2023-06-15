@@ -105,6 +105,8 @@ export enum EN_Routes {
     'wrmms' = '/wr/m/system/ms',
     'wrpolicies' = '/wr/m/system/policies',
     'policyHistory' = '/wr/m/system/policyHistory',
+    'roleHistory' = '/wr/m/system/roleHistory',
+    'userRoleHistory' = '/wr/m/system/userRoleHistory',
     'wrmmserr' = '/wr/m/system/mserr',
     'serverOSInfo' = '/wr/m/system/osInfo',
     'serverIPSpecialRules' = '/wr/m/system/ipRules',

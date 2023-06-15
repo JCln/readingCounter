@@ -38,6 +38,28 @@ export interface IPolicies {
     osShortTitle: string,
     userAgent: string,
 }
+export interface IRoleHistory {
+    id: number,
+    title: string,
+    titleUnicode: string,
+    needDeviceIdLogin: string,
+    description: string,
+    insertDateTime: string,
+    insertDateJalali: string,
+    insertTime: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    userDisplayName: string
+}
 export interface IPrivacy {
     minLength: number;
     maxLength: number;
