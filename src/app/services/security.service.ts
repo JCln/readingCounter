@@ -8,14 +8,19 @@ import { UtilsService } from './utils.service';
 import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 
+export interface IRoleNessessities {
+  id: string
+}
 @Injectable({
   providedIn: 'root'
 })
 export class SecurityService {
-
+  userRoleHistoryDetails_pageSign: IRoleNessessities = {
+    id: null,
+  };
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    public utilsService: UtilsService
   ) { }
 
   // API CALLS
@@ -25,6 +30,13 @@ export class SecurityService {
   getDataSource = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GET(method).toPromise().then((res: IResponses) => {
+        resolve(res);
+      })
+    });
+  }
+  getDataSourceByQuery = (method: ENInterfaces, queryString: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETID(method, queryString).toPromise().then((res: IResponses) => {
         resolve(res);
       })
     });

@@ -2,10 +2,11 @@
 [dataSource]="closeTabService.saveDataForAllUsers"
 [_numberOfExtraColumns]="[1]"
 [_sessionName]="'userRoleHistory-session'"
-[_outputFileName]="'userRoleHistory'"
+[_outputFileName]="'userRoleHistoryAll'"
+[_checkUpName]="'userRoleHistoryAll'"
 [_selectedColumnsToRemember]="'selectedUserRoleHistory'"
 [_hasSaveColumns]=true
 (refreshedTable)="refreshTable()"
-(routedToEditPage)="usersAllService.routeToEditPage($event)"
->
+(routedToLoggs)="routeToUserRoleHistory($event)"
+> 
 </app-prime-table>

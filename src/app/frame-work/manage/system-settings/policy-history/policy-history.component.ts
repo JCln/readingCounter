@@ -23,7 +23,7 @@ export class PolicyHistoryComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForPoliciesHistory = null;
+  nullSavedSource = () => this.closeTabService.saveDataForPoliciesHistory = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();

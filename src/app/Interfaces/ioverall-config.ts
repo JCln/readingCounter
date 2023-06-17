@@ -63,6 +63,7 @@ export enum ENEssentialsToSave {
     saveDataForAppLevel3 = 'saveDataForAppLevel3',
     saveDataForAppLevel4 = 'saveDataForAppLevel4',
     saveDataForAllUsers = 'saveDataForAllUsers',
+    saveDataForUserRoleHistory = 'saveDataForUserRoleHistory',
     saveDataForUserOnlines = 'saveDataForUserOnlines',
     saveDataForAddUsers = 'saveDataForAddUsers',
     saveDataForRoleManager = 'saveDataForRoleManager',
@@ -351,6 +352,8 @@ export enum ENLocalStorageNames {
     reOrderableTable = 'reOrderableTable',
     defaultAggregateTracks = 'defaultAggregateTracks',
 }
+// ENSelectedColumnVariables enum
+//  variable name must be the same as columnManagerName of the columns data
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
     selectedRRExcelView = 'excelDynamic',
@@ -361,6 +364,9 @@ export enum ENSelectedColumnVariables {
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
     selectedPolicyHistory = 'policyHistory',
+    selectedUserRoleHistoryDetails = 'userRoleHistoryDetails',
+    selectedUserRoleHistorySummary = 'userRoleHistorySummary',
+    selectedUserRoleHistory = 'userRoleHistoryAll',
     selectedRoleHistory = 'roleHistory',
     selectedToolsImgRDGridBased = 'imgResultGridBased',
     selectedTrackLoaded = 'loaded',
@@ -370,7 +376,6 @@ export enum ENSelectedColumnVariables {
     selectedTrackImported = 'imported',
     selectedlastStates = 'lastStates',
     selectedUsersAll = 'userAll',
-    selectedUserRoleHistory = 'userRoleHistory',
     selectedUserOnlines = 'userOnlines',
     selectedListManagerAll = 'allLists',
     selectedGeneralModify = 'generalListModify',

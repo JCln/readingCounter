@@ -1,3 +1,6 @@
+import { EN_Routes } from 'interfaces/routes.enum';
+import { IPolicies } from 'services/DI/privacies';
+import { SecurityService } from 'services/security.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
@@ -5,6 +8,7 @@ import { DateJalaliService } from 'services/date-jalali.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { IUserManager } from 'interfaces/iuser-manager';
 
 @Component({
   selector: 'app-user-role-history',
@@ -15,28 +19,23 @@ export class UserRoleHistoryComponent extends FactoryONE {
 
   constructor(
     public closeTabService: CloseTabService,
-    public usersAllService: UsersAllService
+    public securityService: SecurityService
   ) {
     super();
   }
 
-  // routeToLoggs(e: IUserManager) {
-  //   this.userLogginsService.updateUserLogginsInfo(e);
-  // }
+  routeToUserRoleHistory(e: IUserManager) {
+    this.securityService.userRoleHistoryDetails_pageSign.id = e.id;
+    this.securityService.utilsService.routeTo(EN_Routes.userRoleHistoryDetails);
+  }
   nullSavedSource = () => this.closeTabService.saveDataForAllUsers = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForAllUsers) {
-      this.closeTabService.saveDataForAllUsers = await this.usersAllService.connectToServer(ENInterfaces.userGET);
+      this.closeTabService.saveDataForAllUsers = await this.securityService.getDataSource(ENInterfaces.userGET);
     }
-    // this.convertLoginTime();
   }
-  // convertLoginTime = () => {
-  //   this.closeTabService.saveDataForAllUsers.forEach(item => {
-  //     item.lockTimeSpan = this.dateJalaliService.getDate(item.lockTimeSpan) + '   ' + this.dateJalaliService.getTime(item.lockTimeSpan);
-  //   })
-  // }  
 
 }

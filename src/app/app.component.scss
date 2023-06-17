@@ -76,7 +76,7 @@ app-clock {
   right: var(--font_xs);
   top: var(--font_2);
   margin: var(--font_02);
-  z-index: 23;
+  z-index: 200;
 
   @media (min-width:700px) {
     z-index: 35;
