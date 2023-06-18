@@ -60,6 +60,14 @@ export interface IRoleHistory {
     userAgent: string,
     userDisplayName: string
 }
+export interface IUserMasterHistory {
+    changeOrInsertLogId: string,
+    insertDateTime: string,
+    insertDateJalali: string,
+    insertTime: string,
+    ip: string,
+    browserTitle: string,
+}
 export interface IPrivacy {
     minLength: number;
     maxLength: number;
@@ -85,4 +93,22 @@ export const privacies: IPrivacy = {
     max_captcha: 10,
     min_ReCaptcha: 2,
     max_ReCaptcha: 10,
+}
+export interface IUserDetailsHistory {
+    description: string,
+    insertDateTime: string,
+    insertDateJalali: string,
+    insertTime: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    userDisplayName: string,
 }

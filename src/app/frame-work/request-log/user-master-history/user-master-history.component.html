@@ -1,0 +1,12 @@
+<app-prime-table
+[dataSource]="closeTabService.saveDataForUserMasterHistory"
+[_numberOfExtraColumns]="[1]"
+[_sessionName]="'userMasterHistory-session'"
+[_outputFileName]="'userMasterHistory'"
+[_checkUpName]="'userMasterHistory'"
+[_selectedColumnsToRemember]="'selectedUserRoleHistory'"
+[_hasSaveColumns]=true
+(refreshedTable)="refreshTable()"
+(openedMoshtarakinDialog)="routeToUserDetailsHistory($event)"
+> 
+</app-prime-table>

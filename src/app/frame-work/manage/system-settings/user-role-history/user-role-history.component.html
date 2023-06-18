@@ -1,6 +1,6 @@
 <app-prime-table
 [dataSource]="closeTabService.saveDataForAllUsers"
-[_numberOfExtraColumns]="[1]"
+[_numberOfExtraColumns]="[1,2]"
 [_sessionName]="'userRoleHistory-session'"
 [_outputFileName]="'userRoleHistoryAll'"
 [_checkUpName]="'userRoleHistoryAll'"
@@ -8,5 +8,6 @@
 [_hasSaveColumns]=true
 (refreshedTable)="refreshTable()"
 (routedToLoggs)="routeToUserRoleHistory($event)"
+(openedMoshtarakinDialog)="routeToUserMasterHistory($event)"
 > 
 </app-prime-table>

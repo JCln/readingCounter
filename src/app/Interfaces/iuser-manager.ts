@@ -99,6 +99,7 @@ export interface IRoleManager {
     title: string;
     isActive: boolean
     needDeviceIdLogin: boolean;
+    displaySensitiveNotification: boolean;
     titleUnicode: string;
     isNew?: boolean
 }

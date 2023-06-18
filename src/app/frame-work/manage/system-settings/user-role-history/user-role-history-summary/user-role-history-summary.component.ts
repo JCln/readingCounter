@@ -24,7 +24,6 @@ export class UserRoleHistorySummaryComponent extends FactoryONE {
   }
 
   async classWrapper(canRefresh?: boolean) {
-    console.log(this.securityService.userRoleHistoryDetails_pageSign.id);
     if (!this.securityService.userRoleHistoryDetails_pageSign.id) {
       this.securityService.utilsService.routeToByUrl(EN_Routes.userRoleHistory);
       return;
@@ -33,9 +32,8 @@ export class UserRoleHistorySummaryComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForUserRoleHistory = [];
     }
-    console.log(!this.closeTabService.saveDataForUserRoleHistory || this.closeTabService.saveDataForUserRoleHistorySumReq.id != this.securityService.userRoleHistoryDetails_pageSign.id);
     if (
-      !this.closeTabService.saveDataForUserRoleHistory ||
+      !this.closeTabService.saveDataForUserRoleHistory.length ||
       this.closeTabService.saveDataForUserRoleHistorySumReq.id !=
       this.securityService.userRoleHistoryDetails_pageSign.id
     ) {

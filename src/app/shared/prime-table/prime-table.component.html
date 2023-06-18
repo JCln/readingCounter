@@ -254,12 +254,20 @@
             </td>
             <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
                 (click)="routeToLoggs(dataSource)">
-                <span class="ui-column-title">مشاهده تاریخچه</span>
-                <i class="tooltip p_icons fas fa-user-shield">
-                    <div class="tooltip_text_right">مشاهده تاریخچه</div>
+                <span class="ui-column-title">تغییرات گروه(نقش)</span>
+                <i class="tooltip p_icons pi pi-users">
+                    <div class="tooltip_text_right">تغییرات گروه(نقش)</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory'"
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">تغییرات دسترسی</span>
+                <i class="tooltip p_icons fas fa-user-shield">
+                    <div class="tooltip_text_right">تغییرات دسترسی</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory'"
                 (click)="openMoshtarakinDialog(dataSource)">
                 <span class="ui-column-title">مشاهده جزئیات</span>
                 <i class="tooltip p_icons pi pi-info-circle">
@@ -268,9 +276,9 @@
             </td>
             <td class="__columns" *ngIf="_checkUpName =='userRoleHistorySummary'"
                 (click)="openMoshtarakinDialog(dataSource)">
-                <span class="ui-column-title">مشاهده جزئیات تغییرات دسترسی</span>
+                <span class="ui-column-title">مشاهده جزئیات امنیتی</span>
                 <i class="tooltip p_icons pi pi-info-circle">
-                    <div class="tooltip_text_right">مشاهده جزئیات تغییرات دسترسی</div>
+                    <div class="tooltip_text_right">مشاهده جزئیات امنیتی</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="_outputFileName =='ModifyList' || _outputFileName =='searchMosh'"

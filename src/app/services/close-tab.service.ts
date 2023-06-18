@@ -98,6 +98,12 @@ export class CloseTabService {
   saveDataForZone: IZoneManager[];
   saveDataForZoneBound: IZoneBoundManager[];
 
+  saveDataForUserMasterHistory: IRoleHistory[] = [];
+  saveDataForUserDetailsHistory: any = [];
+  saveDataForUserMasterDetailsHistoryReq = {
+    id: ''
+  };
+
   saveDataForUserRoleHistory: IRoleHistory[] = [];
   saveDataForUserRoleHistorySumReq = {
     id: ''
@@ -402,6 +408,8 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.userRoleHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserRoleHistory, url: EN_Routes.userRoleHistoryDetails },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserMasterHistory, url: EN_Routes.userMasterHistory },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserDetailsHistory, url: EN_Routes.userDetailsHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
     { id: 1, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },

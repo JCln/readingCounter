@@ -1,3 +1,4 @@
+import { UsersAllService } from 'services/users-all.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IResponses } from 'interfaces/ioverall-config';
@@ -9,7 +10,8 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 
 export interface IRoleNessessities {
-  id: string
+  id: string,
+  changeOrInsertUserLogId?: string
 }
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,13 @@ export class SecurityService {
   userRoleHistoryDetails_pageSign: IRoleNessessities = {
     id: null,
   };
+  userMasterDetailsHistory_pageSign: IRoleNessessities = {
+    id: null,
+    changeOrInsertUserLogId: ''
+  };
   constructor(
     private interfaceManagerService: InterfaceManagerService,
+    private usersAllService: UsersAllService,
     public utilsService: UtilsService
   ) { }
 
@@ -70,5 +77,4 @@ export class SecurityService {
       }
     }
   }
-
 }

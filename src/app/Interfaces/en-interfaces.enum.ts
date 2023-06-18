@@ -65,6 +65,8 @@ export enum ENInterfaces {
     RoleADD = 'V1/Role/Add',
     RoleHistory = 'V1/Role/History',
     UserRoleHistory = 'V1/User/UserRoleHistory',
+    UserMasterHistory = 'V1/User/UserMasterHistory',
+    UserDetailsHistory = 'V1/User/UserDetailsHistory',
 
     downloadFileGET = 'V1/Download/File',
     downloadFileInfo = 'V1/Download/File/info',
