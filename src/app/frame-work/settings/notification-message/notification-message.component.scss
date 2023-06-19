@@ -1,0 +1,120 @@
+@import 'variable';
+@import 'tooltip';
+
+section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 25rem));
+    direction: rtl;
+    gap: .5rem;
+}
+
+._icon {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    font-size: 5rem;
+    font-family: 'primeicons';
+}
+
+.__notificationMediaTypeId {
+    font-size: 3rem;
+    color: var(--primary_2);
+}
+
+._container {
+    position: relative;
+    display: flex;
+    color: var(--primary_7);
+    background: var(--white);
+    border-left: 4px solid var(--primary_2);
+    border-radius: 10px;
+    box-shadow: 0px 1px 4px 1px var(--secondary_7);
+}
+
+._content {
+
+    .__title,
+    .__sender,
+    .__insertDateTimeJalali,
+    .__deliverConfirm,
+    .__deliverDateTimeJalali {
+        font-weight: 500;
+        font-size: var(--font_s);
+    }
+
+    .__title {
+        font-size: var(--font_l);
+    }
+
+    .__sender {}
+
+    .__insertDateTimeJalali {}
+
+    .__deliverConfirm {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: absolute;
+        left: 0.5rem;
+        bottom: 0rem;
+        width: 2rem;
+        height: 2rem;
+
+        ._unreads {
+            cursor: pointer;
+        }
+
+        img {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+
+    .__deliverDateTimeJalali {}
+
+    .__alertTypeId {
+        position: absolute;
+        padding: .1rem;
+        left: .5rem;
+        top: .5rem;
+        border: 1px solid;
+        font-weight: 600;
+        border-radius: $border_10;
+    }
+
+    ._confidential {
+        color: red;
+        border-color: red
+    }
+
+    ._ordinary {
+        color: gray;
+        border-color: gray
+    }
+
+    ._sensitive {
+        color: red;
+        border-color: red
+    }
+
+    ._memory_full {
+        color: rgb(222, 102, 102);
+        border-color: rgb(222, 102, 102)
+    }
+
+    ._security {
+        color: red;
+        border-color: red
+    }
+
+    ._license {
+        color: lightseagreen;
+        border-color: lightseagreen
+    }
+
+    ._incorrect_time {
+        color: rgb(101, 173, 250);
+        border-color: rgb(101, 173, 250)
+    }
+}

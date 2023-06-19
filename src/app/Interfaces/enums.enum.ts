@@ -194,6 +194,8 @@ export enum EN_messages {
     import_NoRouteAvailable = 'مسیری برای ایجاد وجود ندارد',
     confirm_send = ' از ارسال موارد اطمینان دارید؟',
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
+    reasonBacktoImportedCaution1 = 'کاربر محترم، درصورت ارجاع این مسیر به مرحله صادر شده قرائت کننده ',
+    reasonBacktoImportedCaution2 = ' باید مطلع گردد. درصورت اختلال احتمالی، مسئولیت آن با ارجاع دهنده خواهد بود',
     reason_forceOffload = 'علت اتمام قرائت(تخلیه اضطراری)',
     reason_deleteRoute = 'علت حذف مسیر',
     insert_Key = 'کلید را وارد نمایید',

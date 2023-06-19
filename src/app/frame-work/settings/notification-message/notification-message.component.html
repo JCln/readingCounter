@@ -1,0 +1,66 @@
+<section>
+    <div class="_container" *ngFor="let item of test">
+        <div class="_icon">
+            <div class="__notificationMediaTypeId" [ngClass]="{
+                'pi pi-envelope':item.notificationMediaTypeId == 0,
+                'pi pi-image':item.notificationMediaTypeId == 1,
+                'pi pi-video':item.notificationMediaTypeId == 2,
+                'fa fa-file-audio-o':item.notificationMediaTypeId == 4                
+            }">
+            </div>
+        </div>
+        <div class="_content">
+            <!-- <div class="__title">
+                {{item.caption}}
+            </div> -->
+            <div class="__sender">
+                فرستنده:
+                {{item.sender}}
+            </div>
+            <div class="__insertDateTimeJalali">
+                تاریخ:
+                {{item.insertDateTimeJalali}}
+            </div>
+            <div class="__deliverConfirm">
+                <div *ngIf="item.deliverConfirm;else notDelivered">
+                    <i class="tooltip">
+                        <img src="assets/imgs/other/check.png" alt="">
+                        <div class="tooltip_text">خوانده شده</div>
+                    </i>
+                </div>
+                <ng-template #notDelivered>
+                    <i (click)="confirmDelivery(item)" class="tooltip pi pi-eye _unreads">
+                        <div class="tooltip_text">تغییر وضعیت به خوانده شده</div>
+                    </i>
+                </ng-template>
+            </div>
+            <div class="__deliverDateTimeJalali">
+                تاریخ دریافت:
+                {{item.deliverDateTimeJalali}}
+            </div>
+            <div class="__alertTypeId" [ngClass]="{
+                '_confidential':item.notificationMediaTypeId ==  0,
+                '_ordinary':item.notificationMediaTypeId ==  1,
+                '_sensitive':item.notificationMediaTypeId ==  2,
+                '_memory_full':item.notificationMediaTypeId ==  4,                
+                '_security':item.notificationMediaTypeId ==  8,               
+                '_license':item.notificationMediaTypeId ==  16,               
+                '_incorrect_time':item.notificationMediaTypeId ==  32             
+            }">
+                نوع پیام:
+                {{
+                item.notificationMediaTypeId == 0 ?'محرمانه'
+                :item.notificationMediaTypeId == 1 ?'عادی'
+                :item.notificationMediaTypeId == 2 ?'حساس'
+                :item.notificationMediaTypeId == 4 ?'حافظه'
+                :item.notificationMediaTypeId == 8 ?'امنیتی'
+                :item.notificationMediaTypeId == 16 ?'مجوز دسترسی'
+                :item.notificationMediaTypeId == 32?'زمان نادرست'
+                :''
+                }}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- notificationMediaTypeId -->
+<!-- alertTypeId -->

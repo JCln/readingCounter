@@ -46,7 +46,7 @@ import {
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
 import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInput, IServerOSInfo, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
-import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
+import { ILicenseInfo, INotificationMessage, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
 import { IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
@@ -322,6 +322,7 @@ export class CloseTabService {
   saveDataForIpSpecialRules: any;
   // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
+  notificationMessages: INotificationMessage[] = [];
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: IFragmentMaster[];

@@ -17,7 +17,7 @@ export class SignalRService {
   constructor(
     public utilsService: UtilsService,
     private interactionService: InteractionService,
-    private interfaceManagerService: InterfaceManagerService
+    public interfaceManagerService: InterfaceManagerService
   ) { }
 
   public startConnection = () => {

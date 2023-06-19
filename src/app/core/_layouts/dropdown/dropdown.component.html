@@ -1,5 +1,11 @@
 <div class="dropdown">
-    <button class="dropbtn"><i class="fa fa-user"></i></button>
+    <button class="dropbtn">
+        <i class="fa fa-user">
+            <i class="_message pi pi-envelope">
+                <i class="_badge">{{badgeNumber}}</i>
+            </i>
+        </i>
+    </button>
     <div class="dropdown-content">
         <a [routerLink]="[routeToProfile]">
             تنظیمات کاربری
@@ -12,6 +18,10 @@
         <a [routerLink]="[routeToAboutUs]">
             درباره ما
             <img class="about_us_img" [src]="aboutUsImage" alt="">
+        </a>
+        <a [routerLink]="[routeToMyMessages]">
+            پیام‌ها
+            <i class="far fa-bell"></i>
         </a>
         <a (click)="linkToChat()">
             گفتگو

@@ -33,6 +33,34 @@
     top: var(--font_xs);
     left: calc(-1 * var(--font_xs));
   }
+
+  ._message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    color: var(--secondary_1);
+    border-radius: 50%;
+    background-color: var(--orange_500);
+    right: -1rem;
+    bottom: -.8rem;
+  }
+
+  ._badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 1.3rem;
+    height: 1.3rem;
+    color: var(--secondary_1);
+    border-radius: 50%;
+    background-color: var(--orange_600);
+    right: -0.5rem;
+    bottom: -0.3rem;
+  }
 }
 
 .dropdown-content {
