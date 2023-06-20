@@ -238,6 +238,7 @@ export enum ENInterfaces {
     ReceiveImageWithCaption = 'ReceiveImageWithCaption',
     ReceiveVideoWithCaption = 'ReceiveVideoWithCaption',
     ReceiveDirectMessage = 'receiveDirectMessage',
+    receiveNotificationUnreadCount = 'receiveNotificationUnreadCount',
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',
 
@@ -254,7 +255,7 @@ export enum ENInterfaces {
     serverManagerErrors = 'V1/Server/Errors',
     requestLogUserActivationDictionary = 'V1/RequestLog/UserActivationLogTypes',
     requestLogUserActivation = 'V1/RequestLog/UserActivation',
-
+    requestLogUsersLogins = 'V1/User/UsersLogins',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

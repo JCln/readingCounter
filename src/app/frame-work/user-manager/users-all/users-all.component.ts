@@ -29,7 +29,7 @@ export class UsersAllComponent extends FactoryONE {
   routeToLoggs(e: IUserManager) {
     this.userLogginsService.updateUserLogginsInfo(e);
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAllUsers = null;
+  nullSavedSource = () => this.closeTabService.saveDataForAllUsers = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -39,20 +39,24 @@ export class UsersAllComponent extends FactoryONE {
     }
     this.convertLoginTime();
   }
-  ActivateUser = (dataSource: IUserManager) => {
-    this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
+  ActivateUser = async (dataSource: IUserManager) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
-  DeActivateUser = (dataSource: object) => {
-    this.usersAllService.changeUserStatus(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
+  DeActivateUser = async (dataSource: object) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
-  resetPasswordUser = (dataSource: object) => {
-    this.usersAllService.changeUserStatus(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
+  resetPasswordUser = async (dataSource: object) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
-  unLockUser = (dataSource: object) => {
-    this.usersAllService.changeUserStatus(ENInterfaces.unlockUser, dataSource['dataSource'].id);
+  unLockUser = async (dataSource: object) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.unlockUser, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
   showExactConfig = (index: number) => {

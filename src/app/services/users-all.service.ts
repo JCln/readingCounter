@@ -64,9 +64,11 @@ export class UsersAllService {
   snackBarMessageSuccess = (res: IResponses) => {
     this.utilsService.snackBarMessageSuccess(res.message);
   }
-  changeUserStatus = (method: ENInterfaces, UUID: string) => {
-    this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
-      this.snackBarMessageSuccess(res);
+  changeUserStatus = (method: ENInterfaces, UUID: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
+        resolve(res)
+      });
     });
   }
   routeToUsersAll = () => {
@@ -101,7 +103,6 @@ export class UsersAllService {
   firstConfirmDialog = (dialogConfig: any): Promise<any> => {
     const a = {
       messageTitle: dialogConfig.messageTitle,
-      messageTitleTwo: dialogConfig.messageTitleTwo,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,

@@ -60,6 +60,26 @@ export interface IRoleHistory {
     userAgent: string,
     userDisplayName: string
 }
+export interface IUsersLoginBriefInfo {
+    id: string,
+    userId: string,
+    loginDateTime: string,
+    loginIp: string,
+    wasSuccessful: true,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    wrongPassword: string,
+    appVersion: string,
+    userDisplayName: string,
+}
 export interface IUserMasterHistory {
     changeOrInsertLogId: string,
     insertDateTime: string,

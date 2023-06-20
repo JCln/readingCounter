@@ -1,5 +1,5 @@
 <section>
-    <div class="_container" *ngFor="let item of test">
+    <div class="_container" *ngFor="let item of closeTabService.notificationMessages">
         <div class="_icon">
             <div class="__notificationMediaTypeId" [ngClass]="{
                 'pi pi-envelope':item.notificationMediaTypeId == 0,
@@ -10,9 +10,6 @@
             </div>
         </div>
         <div class="_content">
-            <!-- <div class="__title">
-                {{item.caption}}
-            </div> -->
             <div class="__sender">
                 فرستنده:
                 {{item.sender}}
@@ -34,33 +31,42 @@
                     </i>
                 </ng-template>
             </div>
-            <div class="__deliverDateTimeJalali">
+            <!-- <div class="__deliverDateTimeJalali">
                 تاریخ دریافت:
                 {{item.deliverDateTimeJalali}}
-            </div>
+            </div> -->
             <div class="__alertTypeId" [ngClass]="{
-                '_confidential':item.notificationMediaTypeId ==  0,
-                '_ordinary':item.notificationMediaTypeId ==  1,
-                '_sensitive':item.notificationMediaTypeId ==  2,
-                '_memory_full':item.notificationMediaTypeId ==  4,                
-                '_security':item.notificationMediaTypeId ==  8,               
-                '_license':item.notificationMediaTypeId ==  16,               
-                '_incorrect_time':item.notificationMediaTypeId ==  32             
+                '_confidential':item.alertTypeId ==  0,
+                '_ordinary':item.alertTypeId ==  1,
+                '_sensitive':item.alertTypeId ==  2,
+                '_memory_full':item.alertTypeId ==  4,                
+                '_security':item.alertTypeId ==  8,               
+                '_license':item.alertTypeId ==  16,               
+                '_incorrect_time':item.alertTypeId ==  32             
             }">
-                نوع پیام:
+                نوع:
                 {{
-                item.notificationMediaTypeId == 0 ?'محرمانه'
-                :item.notificationMediaTypeId == 1 ?'عادی'
-                :item.notificationMediaTypeId == 2 ?'حساس'
-                :item.notificationMediaTypeId == 4 ?'حافظه'
-                :item.notificationMediaTypeId == 8 ?'امنیتی'
-                :item.notificationMediaTypeId == 16 ?'مجوز دسترسی'
-                :item.notificationMediaTypeId == 32?'زمان نادرست'
+                item.alertTypeId == 0 ?'محرمانه'
+                :item.alertTypeId == 1 ?'عادی'
+                :item.alertTypeId == 2 ?'حساس'
+                :item.alertTypeId == 4 ?'حافظه'
+                :item.alertTypeId == 8 ?'امنیتی'
+                :item.alertTypeId == 16 ?'مجوز دسترسی'
+                :item.alertTypeId == 32?'زمان نادرست'
                 :''
                 }}
+            </div>
+            <div class="__caption">
+                پیام:
+                {{item.caption}}
             </div>
         </div>
     </div>
 </section>
-<!-- notificationMediaTypeId -->
-<!-- alertTypeId -->
+
+<div *ngIf="!this.closeTabService.notificationMessages.length">
+    <div class="empty_data">
+        پیامی برای نمایش وجود ندارد
+        <i class="fa fa-envelope-open-o"></i>
+    </div>
+</div>

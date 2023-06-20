@@ -166,7 +166,9 @@ export enum ENEssentialsToSave {
   saveDataForMsDriveInfo = 'saveDataForMsDriveInfo',
   saveDataForImgResultDetailsGridBased = 'saveDataForImgResultDetailsGridBased',
   saveDataForUserMasterHistory = "saveDataForUserMasterHistory",
-  saveDataForUserDetailsHistory = "saveDataForUserDetailsHistory"
+  saveDataForUserDetailsHistory = "saveDataForUserDetailsHistory",
+  usersLoginsReq = "usersLoginsReq",
+  usersLogins = "usersLogins"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -403,6 +405,7 @@ export enum ENSelectedColumnVariables {
     selectedRRRequestLog = 'requestLog',
     selectedRRRequestLogAnonymous = 'requestLogAnonymous',
     selectedRRRequestLogListUser = 'requestLogListUser',
+    selectedRequestLogUsersLogins = 'usersLoginsDetails',
     selectedrrUserKarkard = 'rrUserKarkard',
     selectedRRTraverse = 'trv',
     selectedRRTraverseDifferential = 'trvDiff',

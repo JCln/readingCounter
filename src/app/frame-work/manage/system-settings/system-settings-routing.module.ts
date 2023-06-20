@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'msdriveinfo', loadChildren: () => import('./drives-info/drives-info.module').then(manageDriveInfos => manageDriveInfos.DrivesInfoModule) },
   { path: 'roleHistory', loadChildren: () => import('./role-history/role-history.module').then(roleHistory => roleHistory.RoleHistoryModule) },
   { path: 'userRoleHistory', loadChildren: () => import('./user-role-history/user-role-history.module').then(userRoleHistory => userRoleHistory.UserRoleHistoryModule) },
+  { path: 'usersLogins', loadChildren: () => import('./reqlog-users-logins/reqlog-users-logins.module').then(requestLogUsersLogins => requestLogUsersLogins.ReqlogUsersLoginsModule) },
 ];
 
 @NgModule({

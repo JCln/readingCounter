@@ -19,4 +19,5 @@ export enum ENReadingReports {
     imgAttrAnalyze = 'imgAttrAnalyzeReq',
     imgResultDetailsGridBased = 'imgResultDetailsGridBased',
     userActivationLog = 'saveDataForServerUserActivationReq',
+    usersLogins = 'usersLoginsReq',
 }

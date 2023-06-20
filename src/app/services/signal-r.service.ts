@@ -39,6 +39,7 @@ export class SignalRService {
     this.receiveImageWithCaptionMessage();
     this.receiveVideoWithCaptionMessage();
     this.momentAddReadingRow();
+    this.receiveNotificationUnreadCount();
   }
   public disconnectConnection = () => {
     this.hubConnection.stop();
@@ -131,9 +132,14 @@ export class SignalRService {
       this.utilsService.snackWrapperService.openToastSignal(custom);
     });
   }
+  private receiveNotificationUnreadCount = () => {
+    this.hubConnection.on(ENInterfaces.receiveNotificationUnreadCount, (a: any) => {
+      console.log(a);
+    })
+  }
 
   private momentAddReadingRow = () => {
-    this.hubConnection.on(ENInterfaces.signalRMomentSystemAddReadingRow, (r: ILatestReads) => {
+    this.hubConnection.on(ENInterfaces.signalRMomentSystemAddReadingRow, (r) => {
       this.interactionService.startLoading(r);
     })
   }

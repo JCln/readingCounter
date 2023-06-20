@@ -38,14 +38,23 @@ export class UserSearchComponent extends FactoryONE {
     let a = document.querySelectorAll('.more_configs');
     a[index].classList.toggle('showConfigs');
   }
-  ActivateUser = (dataSource: IUserManager) => {
-    this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
+  ActivateUser = async (dataSource: IUserManager) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
   }
-  DeActivateUser = (dataSource: object) => {
-    this.usersAllService.changeUserStatus(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
+  DeActivateUser = async (dataSource: object) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
   }
-  resetPasswordUser = (dataSource: object) => {
-    this.usersAllService.changeUserStatus(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
+  resetPasswordUser = async (dataSource: object) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
   }
+  unLockUser = async (dataSource: object) => {
+    const a = await this.usersAllService.changeUserStatus(ENInterfaces.unlockUser, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
+    this.refreshTable();
+  }
+
 
 }

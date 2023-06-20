@@ -116,6 +116,7 @@ export enum EN_Routes {
     'serverIPSpecialRules' = '/wr/m/system/ipRules',
     'userActivation' = '/wr/reqLog/userActivation',
     'wrmRequestLogsUser' = '/wr/reqLog/User',
+    usersLogins = '/wr/reqLog/usersLogins',
     'wrmRequestLogsAnonymous' = '/wr/reqLog/Anonymous',
     'realtimeMessage' = '/wr/m/msge',
     'wrmmrm' = '/wr/m/mrm',

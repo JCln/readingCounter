@@ -54,7 +54,7 @@ import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, I
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-import { IPolicies, IRoleHistory } from './DI/privacies';
+import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 
 @Injectable({
@@ -108,7 +108,7 @@ export class CloseTabService {
   saveDataForUserRoleHistorySumReq = {
     id: ''
   };
-  saveDataForAllUsers: IUserManager[];
+  saveDataForAllUsers: IUserManager[] = [];
   saveDataForUserOnlines: IUserOnlines[];
   saveDataForEditUsers: any;
   saveDataForEditUsersGUID: string;
@@ -119,6 +119,11 @@ export class CloseTabService {
   saveDataForAddUsers: any;
   saveDataForUserSearch: any;
   saveDataForUserSearchRes: any;
+  usersLogins: IUsersLoginBriefInfo[] = [];
+  usersLoginsReq = {
+    fromDate: '',
+    toDate: '',
+  }
 
   // track manager
   saveDataForTrackImported: ITracking[];
@@ -460,6 +465,7 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, url: EN_Routes.wrrptsgalleryai },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
+    { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.usersLogins },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },

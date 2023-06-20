@@ -8,6 +8,7 @@ import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
+import { ENReadingReports } from 'interfaces/reading-reports';
 
 export interface IRoleNessessities {
   id: string,
@@ -48,6 +49,13 @@ export class SecurityService {
       })
     });
   }
+  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+        resolve(res);
+      })
+    })
+  }
   editPolicy = async (policies: any) => {
     const config = {
       messageTitle: EN_messages.insert_Key,
@@ -64,17 +72,28 @@ export class SecurityService {
     }
     else {
       if (insertedKey == 'XML') {
-
-        return new Promise((resolve) => {
-          this.interfaceManagerService.POSTBODY(ENInterfaces.editPolicies, policies).toPromise().then((res: IResponses) => {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(res);
-          })
-        })
+        const res = await this.postDataSource(ENInterfaces.editPolicies, policies);
+        this.utilsService.snackBarMessageSuccess(res.message);
       }
       else {
         this.utilsService.snackBarMessageWarn(EN_messages.needMoreAccess)
       }
     }
   }
+  verificationUsersLogins = (dataSource: object): boolean => {
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (MathS.isNull(dataSource['fromDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (MathS.isNull(dataSource['toDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+        return false;
+      }
+    }
+    return true;
+  }
+
 }

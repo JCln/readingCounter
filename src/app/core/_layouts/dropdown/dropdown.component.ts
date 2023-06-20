@@ -17,7 +17,7 @@ export class DropdownComponent implements OnInit {
   routeToAboutUs = EN_Routes.aboutUs;
   routeToMyMessages = EN_Routes.NotificationMessages;
   aboutUsImage = 'assets/imgs/header/logo_Atlas.png';
-  badgeNumber: number;
+  badgeNumber: number = 0;
 
   constructor(
     private envService: EnvService,

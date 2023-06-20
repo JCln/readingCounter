@@ -36,7 +36,8 @@
             (refreshedTable)="searchUsers()" (routedToEditPage)="usersAllService.routeToEditPage($event)"
             (routedToLoggs)="userLogginsService.updateUserLogginsInfo($event)"
             (showedExactConfig)="showExactConfig($event)" (ActivatedUser)="ActivateUser($event)"
-            (DeActivatedUser)="DeActivateUser($event)" (resetedPasswordUser)="resetPasswordUser($event)">
+            (DeActivatedUser)="DeActivateUser($event)" (resetedPasswordUser)="resetPasswordUser($event)"
+            (unlockedUser)="unLockUser($event)">
         </app-prime-table>
     </mat-step>
 

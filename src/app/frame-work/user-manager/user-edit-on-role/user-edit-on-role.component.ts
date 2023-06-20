@@ -27,6 +27,6 @@ export class UserEditOnRoleComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForEditOnRole) {
       this.closeTabService.saveDataForEditOnRole = await this.usersAllService.connectToServer(ENInterfaces.userADD);
     }
-    this.usersAllService.firstConfirmDialog({ messageTitle: EN_messages.confirmUserGroupChange1, messageTitleTwo: EN_messages.confirmUserGroupChange2, doesNotReturnButton: false });
+    this.usersAllService.firstConfirmDialog({ messageTitle: EN_messages.confirmUserGroupChange1, doesNotReturnButton: false });
   }
 }

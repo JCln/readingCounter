@@ -3,7 +3,7 @@
 
 section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(19rem, 25rem));
+    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
     direction: rtl;
     gap: .5rem;
 }
@@ -12,7 +12,7 @@ section {
     display: grid;
     align-items: center;
     justify-content: center;
-    width: 7rem;
+    width: 5rem;
     font-size: 5rem;
     font-family: 'primeicons';
 }
@@ -25,6 +25,7 @@ section {
 ._container {
     position: relative;
     display: flex;
+    min-height: 8.5rem;
     color: var(--primary_7);
     background: var(--white);
     border-left: 4px solid var(--primary_2);
@@ -35,6 +36,7 @@ section {
 ._content {
 
     .__title,
+    .__caption,
     .__sender,
     .__insertDateTimeJalali,
     .__deliverConfirm,
@@ -75,9 +77,12 @@ section {
 
     .__alertTypeId {
         position: absolute;
-        padding: .1rem;
-        left: .5rem;
-        top: .5rem;
+        font-size: var(--font_xs);
+        line-height: 1;
+        max-width: 5rem;
+        padding: 0.1rem;
+        right: 0;
+        bottom: 0;
         border: 1px solid;
         font-weight: 600;
         border-radius: $border_10;
@@ -99,13 +104,13 @@ section {
     }
 
     ._memory_full {
-        color: rgb(222, 102, 102);
-        border-color: rgb(222, 102, 102)
+        color: #3CD7E2;
+        border-color: #3CD7E2
     }
 
     ._security {
-        color: red;
-        border-color: red
+        color: rgb(0, 69, 203);
+        border-color: rgb(0, 69, 203)
     }
 
     ._license {
@@ -116,5 +121,21 @@ section {
     ._incorrect_time {
         color: rgb(101, 173, 250);
         border-color: rgb(101, 173, 250)
+    }
+}
+
+.empty_data {
+    display: flex;
+    justify-content: center;
+    background: var(--white);
+    padding: var(--font_3);
+    border-radius: $border_15;
+    font-size: var(--font_l);
+    font-weight: 600;
+    color: var(--secondary_8);
+    gap: 1rem;
+
+    i {
+        font-size: var(--font_2);
     }
 }

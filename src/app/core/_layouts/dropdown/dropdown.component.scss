@@ -34,32 +34,21 @@
     left: calc(-1 * var(--font_xs));
   }
 
-  ._message {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  ._badge_wrapper {
     position: absolute;
-    width: 2rem;
+    max-width: 3rem;
+    width: 3rem;
     height: 2rem;
-    color: var(--secondary_1);
-    border-radius: 50%;
-    background-color: var(--orange_500);
-    right: -1rem;
-    bottom: -.8rem;
+    right: 1rem;
+    top: 1.5rem;
   }
 
   ._badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 1.3rem;
-    height: 1.3rem;
-    color: var(--secondary_1);
+    font-size: 0.7rem;
+    padding: 0.4rem;
     border-radius: 50%;
-    background-color: var(--orange_600);
-    right: -0.5rem;
-    bottom: -0.3rem;
+    color: var(--secondary_1);
+    background-color: var(--red_600);
   }
 }
 
