@@ -1770,6 +1770,16 @@ export class ColumnManager {
         { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isBoolean: true },
         { field: 'displaySensitiveNotification', header: 'اعلانهای مهم', isSelected: true, isBoolean: true }
     ]
+    notificationListByDateReq: IObjectIteratation[] = [
+        { field: 'notificationMediaTypeId', header: 'نوع پیام', isSelected: true },
+        { field: 'alertTypeId', header: 'نوع', isSelected: true },
+        { field: 'sender', header: 'فرستنده', isSelected: true },
+        { field: 'receiver', header: 'گیرنده', isSelected: true },
+        { field: 'caption', header: 'توضیحات', isSelected: false },
+        { field: 'insertDateTimeJalali', header: 'تاریخ', isSelected: true },
+        { field: 'deliverDateTimeJalali', header: 'تاریخ تایید', isSelected: true },
+        { field: 'deliverConfirm', header: 'تایید', isSelected: true, isBoolean: true },
+    ]
     errors: IObjectIteratation[] = [
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isNumber: true },

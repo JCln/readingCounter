@@ -328,6 +328,11 @@ export class CloseTabService {
   // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
   notificationMessages: INotificationMessage[] = [];
+  notificationListByDate: INotificationMessage[] = [];
+  notificationListByDateReq = {
+    fromDate: '',
+    toDate: '',
+  }
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: IFragmentMaster[];
@@ -463,6 +468,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRRMaster, url: EN_Routes.wrrptsexmmaster },
     { id: 1, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm },
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, url: EN_Routes.wrrptsgalleryai },
+    { id: 2, req: ENEssentialsToSave.notificationListByDateReq, value: ENEssentialsToSave.notificationListByDate, url: EN_Routes.NotificationListByUrl },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.usersLogins },

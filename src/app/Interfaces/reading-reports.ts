@@ -1,3 +1,4 @@
+// name of the ENReadingReports should be exactly the same with usable name of variable(usually in column manager)
 export enum ENReadingReports {
     master = 'masterReq',
     inState = 'inStateReq',
@@ -20,4 +21,5 @@ export enum ENReadingReports {
     imgResultDetailsGridBased = 'imgResultDetailsGridBased',
     userActivationLog = 'saveDataForServerUserActivationReq',
     usersLogins = 'usersLoginsReq',
+    notificationListByDateReq = 'notificationListByDateReq',
 }

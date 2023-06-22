@@ -213,17 +213,17 @@ export class SectionsService {
         return false;
       }
     }
-    if (this.dynamicValue.hasOwnProperty('toDate')) {
-      const a = this.dynamicValue;
-      if (!MathS.lengthControl(a.toDate, a.toDate, 9, 10)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
-        return false;
-      }
-    }
     if (this.dynamicValue.hasOwnProperty('fromDate')) {
       const a = this.dynamicValue;
       if (!MathS.lengthControl(a.fromDate, a.fromDate, 9, 10)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
+    }
+    if (this.dynamicValue.hasOwnProperty('toDate')) {
+      const a = this.dynamicValue;
+      if (!MathS.lengthControl(a.toDate, a.toDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
         return false;
       }
     }

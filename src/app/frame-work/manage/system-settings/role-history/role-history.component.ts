@@ -25,9 +25,6 @@ export class RoleHistoryComponent extends FactoryONE {
 
   nullSavedSource = () => this.closeTabService.saveDataForRoleHistory = [];
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(1);
-    console.log(canRefresh);
-    
     if (canRefresh) {
       this.nullSavedSource();
     }

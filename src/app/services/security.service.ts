@@ -80,7 +80,7 @@ export class SecurityService {
       }
     }
   }
-  verificationUsersLogins = (dataSource: object): boolean => {
+  verificationDates = (dataSource: object): boolean => {
     if (dataSource.hasOwnProperty('fromDate')) {
       if (MathS.isNull(dataSource['fromDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
@@ -93,7 +93,20 @@ export class SecurityService {
         return false;
       }
     }
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+        return false;
+      }
+    }
     return true;
+
   }
 
 }

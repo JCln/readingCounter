@@ -1,0 +1,49 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="securityService.utilsService.collapser._isCollapsedNotificationListByDate ? 'slideUp' : 'slideDown'">
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.notificationListByDateReq, $event)"
+                                [dateObject]="closeTabService.notificationListByDateReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.notificationListByDateReq, $event)"
+                                [dateObject]="closeTabService.notificationListByDateReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table 
+    [dataSource]="closeTabService.notificationListByDate" 
+    [_outputFileName]="'notificationListByDateReq'"    
+    [_checkUpName]="'notificationListByDateReq'" 
+    [_numberOfExtraColumns]="[1]" 
+    [_sessionName]="'notifListByDate-session'"
+    [_selectedColumnsToRemember]="'selectedRequestLogNotifListByDate'" 
+    [_hasCollapsible]=true
+    [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedNotificationListByDate"
+    (collapsed)="closeTabService.utilsService.collapser._isCollapsedNotificationListByDate = !closeTabService.utilsService.collapser._isCollapsedNotificationListByDate"
+    (refreshedTable)="refreshTable()"
+    >
+    </app-prime-table>
+</main>

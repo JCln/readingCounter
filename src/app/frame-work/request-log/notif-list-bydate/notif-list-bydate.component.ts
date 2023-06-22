@@ -1,20 +1,18 @@
-import { ReqlogUsersLoginsDetailsComponent } from './reqlog-users-logins-details/reqlog-users-logins-details.component';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { IUsersLoginBriefInfo } from 'services/DI/privacies';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
-  selector: 'app-reqlog-users-logins',
-  templateUrl: './reqlog-users-logins.component.html',
-  styleUrls: ['./reqlog-users-logins.component.scss'],
+  selector: 'app-notif-list-bydate',
+  templateUrl: './notif-list-bydate.component.html',
+  styleUrls: ['./notif-list-bydate.component.scss'],
   animations: [transitionAnimation]
 })
-export class ReqlogUsersLoginsComponent extends FactoryONE {
+export class NotifListBydateComponent extends FactoryONE {
   ref: DynamicDialogRef;
 
   constructor(
@@ -25,25 +23,18 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.usersLogins = [];
+  nullSavedSource = () => this.closeTabService.notificationListByDate = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
       this.verification();
     }
   }
-  showMoreDetails = (data: IUsersLoginBriefInfo) => {
-    this.ref = this.dialogService.open(ReqlogUsersLoginsDetailsComponent, {
-      data: data,
-      rtl: true,
-      width: '80%' 
-    })
-  }
   connectToServer = async () => {
-    this.closeTabService.usersLogins = await this.securityService.postDataSource(ENInterfaces.requestLogUsersLogins, this.closeTabService.usersLoginsReq);
+    this.closeTabService.notificationListByDate = await this.securityService.postDataSource(ENInterfaces.NotifyManagerListByDate, this.closeTabService.notificationListByDateReq);
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.usersLoginsReq);
+    const temp = this.securityService.verificationDates(this.closeTabService.notificationListByDateReq);
     if (temp)
       this.connectToServer();
   }

@@ -54,6 +54,7 @@ export enum EN_Routes {
     'wrprofile' = '/wr/settings/profile',
     'wrLicense' = '/wr/settings/license',
     'NotificationMessages' = '/wr/settings/notification',
+    'NotificationListByUrl' = '/wr/reqLog/notificationList',
     'aboutUs' = '/about',
     'wrmtrackimported' = '/wr/m/track/imported',
     'wrmtrackloaded' = '/wr/m/track/loaded',

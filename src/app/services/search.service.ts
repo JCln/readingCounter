@@ -146,6 +146,14 @@ export class SearchService {
         return false;
       }
     }
+    if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+      return false;
+    }
+    if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+      return false;
+    }
     return true;
   }
   private validationByReadingPeriod = (dataSource: ISearchProReportInput): boolean => {

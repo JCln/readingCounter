@@ -87,6 +87,18 @@ export class DataMiningAnalysesService {
         return false;
       }
     }
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+        return false;
+      }
+    }
     return true;
   }
   private periodValidations = (dataSource: object): boolean => {
