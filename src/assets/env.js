@@ -3,7 +3,7 @@
 
     // API url
     window.__env.headerProvinceTitle = 'test';
-    window.__env.API_URL = 'http://217.146.220.33:50012/kontoriNew';
+    window.__env.API_URL = 'https://37.191.92.157/kontoriNew';
     // for map instantiation    
     window.__env.mapUrls = [
         { title: 'sattelite', url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg' },
@@ -50,6 +50,21 @@
     window.__env.simafaImportStatus = { hasSingle: false, hasBatch: false };
     window.__env.version = '1.0.0';
     window.__env.aboutUs = { email: 'yourEmail', tel: 'yourPhone', address: 'yourAddress', coName: 'coName' };
+    window.__env.NotificationMediaTypeIds = {
+        text: 0,
+        image: 1,
+        video: 2,
+        audio: 4
+    }
+    window.__env.NotificationAlertTypesIds = {
+        confidential: 0,
+        ordinary: 1,
+        sensitive: 2,
+        memory_full: 4,
+        security: 8,
+        license: 16,
+        incorrect_time: 32
+    }
 
     // Whether or not to enable debug mode
     // Setting this to false will disable console output

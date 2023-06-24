@@ -1,10 +1,11 @@
+import { EnvService } from 'services/env.service';
 import { MathS } from 'src/app/classes/math-s';
-import { INotificationMessage } from 'interfaces/isettings';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { INotificationMessage } from 'interfaces/isettings';
 
 @Component({
   selector: 'app-notification-message',
@@ -12,9 +13,11 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./notification-message.component.scss']
 })
 export class NotificationMessageComponent extends FactoryONE {
+
   constructor(
     private profileService: ProfileService,
-    public closeTabService: CloseTabService
+    public closeTabService: CloseTabService,
+    public envService: EnvService
   ) {
     super();
   }
@@ -43,6 +46,22 @@ export class NotificationMessageComponent extends FactoryONE {
     if (a) {
       this.profileService.showMessage(a.message);
       object.deliverConfirm = true;
+    }
+  }
+  openNotifyType = (message: any) => {
+    switch (message.notificationMediaTypeId) {
+      case this.envService.NotificationMediaTypeIds.image:
+        this.closeTabService.utilsService.snackWrapperService.openImgDialog(message);
+        break;
+      case this.envService.NotificationMediaTypeIds.video:
+        this.closeTabService.utilsService.snackWrapperService.openVideoDialog(message);
+        break;
+      case this.envService.NotificationMediaTypeIds.text:
+        this.closeTabService.utilsService.snackWrapperService.openTextDialog(message);
+        break;
+
+      default:
+        break;
     }
   }
 

@@ -6,7 +6,7 @@ import { IMessage } from 'interfaces/inon-manage';
 import { ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { ILatestReads } from 'interfaces/imoment';
+import { NotificationMediaTypeIds } from 'interfaces/build';
 
 @Injectable({
   providedIn: 'root'
@@ -93,7 +93,8 @@ export class SignalRService {
         detail: a.text,
         sticky: true,
         icon: 'pi pi-envelope',
-        key: 'text'
+        key: 'text',
+        clickName: NotificationMediaTypeIds.text
       }
       this.utilsService.snackWrapperService.openToastSignal(custom);
     });
@@ -110,7 +111,7 @@ export class SignalRService {
         fileRepositoryId: a.fileRepositoryId,
         sender: a.sender,
         caption: a.caption,
-        clickName: 'openImgDialog'
+        clickName: NotificationMediaTypeIds.image
       }
       this.utilsService.snackWrapperService.openToastSignal(custom);
     });
@@ -127,7 +128,7 @@ export class SignalRService {
         fileRepositoryId: a.fileRepositoryId,
         sender: a.sender,
         caption: a.caption,
-        clickName: 'openVideoDialog'
+        clickName: NotificationMediaTypeIds.video
       }
       this.utilsService.snackWrapperService.openToastSignal(custom);
     });

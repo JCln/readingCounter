@@ -9,9 +9,10 @@ export const serverTasts: IManageServer[] = [
     { name: 'آفلاین کردن اَپ', clickFunction: ENManageServers.offlineTheAPP, icon: 'fa fa-stop-circle', background: '#0057a2', color: '', description: EN_messages.confirmOfflineApp },
     { name: 'Health', clickFunction: ENManageServers.linkToHealthCheck, icon: 'fas fa-hand-holding-heart', background: '#582940', color: '' },
     { name: 'Jobs', clickFunction: ENManageServers.linkToHangfire, icon: 'fa fa-tasks', background: '#4b8c38', color: '' },
-    { name: 'افزایش زمان', clickFunction: ENManageServers.extendLicenseTime, icon: 'fa fa-clock-rotate-left', background: '#3c79f5', color: '', description: EN_messages.confirmExtendLicenseTime },
+    { name: 'افزایش زمان', clickFunction: ENManageServers.extendLicenseTime, icon: 'fas fa-expand-arrows-alt', background: '#3c79f5', color: '', description: EN_messages.confirmExtendLicenseTime },
     { name: 'پایان زمان', clickFunction: ENManageServers.expireLicense, icon: 'pi pi-stopwatch', background: '#f63e38', color: '', description: EN_messages.confirmExpireLicense },
     { name: 'کاهش زمان', clickFunction: ENManageServers.compressLicenseTime, icon: 'fas fa-compress-arrows-alt', background: '#431866', color: '', description: EN_messages.compressExpireLicense },
+    { name: 'اعتبار سنجی', clickFunction: ENManageServers.checkAuthenticiy, icon: 'pi pi-check-square', background: '#914900', color: '', description: EN_messages.checkAuthenticity },
 ]
 export const serverErrors: IManageServerErrors[] = [
     { name: 'خطای 400', errorType: ENClientServerErrors.cs400 },

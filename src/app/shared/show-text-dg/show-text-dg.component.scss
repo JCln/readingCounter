@@ -1,0 +1,19 @@
+@import 'variable';
+
+.content {
+  font-family: $font_family;
+  background: var(--secondary_1);
+  text-align: center;
+  padding: var(--font_xs) 0;
+}
+
+.title {
+  color: var(--primary_3);
+  text-align: center;
+  margin: 0 0 var(--font_xs);
+  font-size: var(--font_l2);
+}
+
+hr {
+  margin-bottom: var(--font_xs);
+}

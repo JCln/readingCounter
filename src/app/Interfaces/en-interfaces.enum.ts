@@ -229,6 +229,7 @@ export enum ENInterfaces {
     signalRNotifDirectImage = 'V1/NotifyManager/Direct/Image',
     signalRNotifDirectVideo = 'V1/NotifyManager/Direct/Video',
     signalRNotifDirectText = 'V1/NotifyManager/Direct/Text',
+    NotifyDirectText = 'V1/NotifyManager/Direct/Text',
     NotifyManagerUnreadCount = 'V1/NotifyManager/Unread/Count',
     NotifyManagerUnreadGet = 'V1/NotifyManager/Unread/Get',
     NotifyManagerListByDate = 'V1/NotifyManager/List/ByDate',
@@ -242,6 +243,7 @@ export enum ENInterfaces {
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',
 
+    serverManagerCheckAuthenticity = 'V1/Server/CheckAuthenticity',
     serverManagerDelete = 'V1/Server/Delete',
     serverManagerHangFire = '/main/admin/hangFire?access_token=',
     serverManagerHealthCheck = '/healthchecks-ui',

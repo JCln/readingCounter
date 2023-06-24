@@ -90,6 +90,7 @@ export enum ENManageServers {
     resetIIS = 'resetIIS',
     offlineTheAPP = 'offlineTheAPP',
     resetApp = 'resetApp',
+    checkAuthenticiy = "checkAuthenticiy"
 }
 export interface IManageDrivesInfo {
     driveName: string,

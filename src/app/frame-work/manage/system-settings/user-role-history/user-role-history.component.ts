@@ -32,12 +32,12 @@ export class UserRoleHistoryComponent extends FactoryONE {
     this.securityService.userMasterDetailsHistory_pageSign.id = e.id;
     this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAllUsers = null;
+  nullSavedSource = () => this.closeTabService.saveDataForAllUsers = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.closeTabService.saveDataForAllUsers) {
+    if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
       this.closeTabService.saveDataForAllUsers = await this.securityService.getDataSource(ENInterfaces.userGET);
     }
   }

@@ -96,6 +96,31 @@ export class ManageServerComponent implements OnInit {
       }
     }
   }
+  checkAuthenticity = async () => {
+    const config = {
+      messageTitle: EN_messages.insert_Key,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: 'کلید را وارد نمایید',
+      inputMinLength: 3,
+      isDelete: false,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (MathS.isNullTextValidation(insertedKey)) {
+      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+    }
+    else {
+      if (insertedKey == 'XML') {
+        const res = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerCheckAuthenticity);
+        this.manageServerService.utilsService.snackBarMessageSuccess(res.message);
+      }
+      else {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey)
+      }
+    }
+
+  }
   manageFuncs = async (clickFunction: ENManageServers, description: string) => {
     if (this.manageServerService.utilsService.getIsAdminRole()) {
       const config = {
@@ -135,6 +160,11 @@ export class ManageServerComponent implements OnInit {
         config.icon = 'pi pi-stopwatch';
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
           this.expireLicense();
+      }
+      if (clickFunction == ENManageServers.checkAuthenticiy) {
+        config.icon = 'pi pi-check-square';
+        if (await this.manageServerService.utilsService.firstConfirmDialog(config))
+          this.checkAuthenticity();
       }
       if (clickFunction == ENManageServers.resetIIS) {
         config.icon = 'fa fa-repeat';

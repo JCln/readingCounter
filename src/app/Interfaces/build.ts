@@ -17,6 +17,21 @@ export interface IENV {
     defaultAggregateTracks: boolean,
     version: string,
     aboutUs: { email: string, tel: string, address: string }
+    NotificationMediaTypeIds: {
+        text: number,
+        image: number,
+        video: number,
+        audio: number
+    }
+    NotificationAlertTypesIds: {
+        confidential: number,
+        ordinary: number,
+        sensitive: number,
+        memory_full: number,
+        security: number,
+        license: number,
+        incorrect_time: number
+    }
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -122,6 +137,21 @@ export class aboutUs {
     static readonly tel = '031-32121764';
     static readonly address = 'اصفهان، ارگ جهان نما، واحد 107';
     static readonly coName = 'هیوا پرداز اطلس';
+}
+export class NotificationMediaTypeIds {
+    static text = 0;
+    static image = 1;
+    static video = 2;
+    static audio = 4;
+}
+export class NotificationAlertTypesIds {
+    static confidential = 0;
+    static ordinary = 1;
+    static sensitive = 2;
+    static memory_full = 4;
+    static security = 8;
+    static license = 16;
+    static incorrect_time = 32;
 }
 export class ENMapUrls {
     static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);

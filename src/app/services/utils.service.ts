@@ -84,7 +84,6 @@ export class UtilsService {
       key: 'period'
     }
   ]
-
   // snack bar
   snackBarMessageSuccess = (message: string) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);

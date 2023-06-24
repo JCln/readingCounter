@@ -21,6 +21,8 @@ export class EnvService implements IENV {
   simafaImportStatus = this.temp.simafaImportStatus;
   version = this.temp.version;
   aboutUs = this.temp.aboutUs;
+  NotificationMediaTypeIds = this.temp.NotificationMediaTypeIds;
+  NotificationAlertTypesIds = this.temp.NotificationAlertTypesIds;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

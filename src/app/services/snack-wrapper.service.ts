@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
 import { ENSnackBarColors, ENSnackBarTimes, ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { ShowImgDgComponent } from '../shared/show-img-dg/show-img-dg.component';
+import { ShowVideoDgComponent } from '../shared/show-video-dg/show-video-dg.component';
+import { ShowTextDgComponent } from '../shared/show-text-dg/show-text-dg.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SnackWrapperService {
+  ref: DynamicDialogRef;
+  constructor(
+    public dialogService: DialogService
+  ) { }
 
   private snackBar = new BehaviorSubject<ISnackBar>({ message: '', duration: ENSnackBarTimes.zero, backColor: ENSnackBarColors.danger });
   private snackBarSignal = new BehaviorSubject<ISnackBarSignal>({ message: '', duration: ENSnackBarTimes.zero, backColor: ENSnackBarColors.danger });
@@ -49,6 +57,41 @@ export class SnackWrapperService {
   openToastSignal(body: any) {
     this.toastSignal(body);
   }
+  openImgDialog = (body: object) => {
+    this.ref = this.dialogService.open(ShowImgDgComponent, {
+      data: { body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
 
+    });
+  }
+  openVideoDialog = (body: object) => {
+    this.ref = this.dialogService.open(ShowVideoDgComponent, {
+      data: { body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  openTextDialog = (body: object) => {
+    this.ref = this.dialogService.open(ShowTextDgComponent, {
+      data: { body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
 
 }

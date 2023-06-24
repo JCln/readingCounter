@@ -21,6 +21,8 @@ export const EnvServiceFactory = () => {
                 env[key] = window['__env'][key];
             }
         }
+        console.log(env);
+        
         return env;
     }
 };

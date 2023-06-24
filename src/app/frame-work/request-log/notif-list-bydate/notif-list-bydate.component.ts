@@ -29,6 +29,7 @@ export class NotifListBydateComponent extends FactoryONE {
       this.nullSavedSource();
       this.verification();
     }
+    // this.convertIdToTitle();
   }
   connectToServer = async () => {
     this.closeTabService.notificationListByDate = await this.securityService.postDataSource(ENInterfaces.NotifyManagerListByDate, this.closeTabService.notificationListByDateReq);
@@ -38,5 +39,18 @@ export class NotifListBydateComponent extends FactoryONE {
     if (temp)
       this.connectToServer();
   }
+  // convertIdToTitle = (): any => {
+  //   console.log(this.closeTabService.utilsService.getNotificationAlertTypesIds()[0]);
+
+  //   this.closeTabService.notificationListByDate.forEach(origin => {
+  //     this.closeTabService.utilsService.getNotificationAlertTypesIds().forEach((item, index) => {
+  //       if (origin.alertTypeId == item[index]) {
+  //         console.log(item);
+  //         origin.alertTypeId = item[index];
+  //       }
+  //     })
+  //   })
+  // }
+
 
 }
