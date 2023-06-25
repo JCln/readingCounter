@@ -125,7 +125,7 @@ export enum EN_messages {
     format_invalid_numberLengths = 'تعداد ارقام وارد شده اشتباه است',
     should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',
     should_insert_ZIP = 'فرمت ارسالی باید فایل zip باشد',
-    should_insert_JPG = 'فرمت ارسالی باید jpg و یا jpeg باشد',
+    should_insert_image = 'فایل ارسالی باید تصویر با فرمت (jpg-jpeg-png) باشد',
     should_insert_video = 'فرمت ارسالی باید ogg و یا mp4 باشد',
     format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
     format_invalid = 'فرمت ناصحیح است',

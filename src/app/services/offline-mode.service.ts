@@ -114,14 +114,14 @@ export class OfflineModeService {
       return false;
     }
     if (
-      this.fileUploadSingleForm[0].name.split('.').pop() === 'jpg'
-      || this.fileUploadSingleForm[0].name.split('.').pop() === 'JPG'
-      || this.fileUploadSingleForm[0].name.split('.').pop() === 'JPEG'
-      || this.fileUploadSingleForm[0].name.split('.').pop() === 'jpeg') {
+      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'jpg' ||
+      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'jpeg' ||
+      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'png'
+    ) {
       return true;
     }
     else {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_JPG, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.should_insert_image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
   }

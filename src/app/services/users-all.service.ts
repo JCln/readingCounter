@@ -318,14 +318,14 @@ export class UsersAllService {
       return false;
     }
     if (
-      fileForm[0].name.split('.').pop() === 'jpg'
-      || fileForm[0].name.split('.').pop() === 'JPG'
-      || fileForm[0].name.split('.').pop() === 'JPEG'
-      || fileForm[0].name.split('.').pop() === 'jpeg') {
+      fileForm[0].name.split('.').pop().toLowerCase() === 'jpg' ||
+      fileForm[0].name.split('.').pop().toLowerCase() === 'jpeg' ||
+      fileForm[0].name.split('.').pop().toLowerCase() === 'png'
+    ) {
       return true;
     }
     else {
-      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_JPG);
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_image);
       return false;
     }
     // return true;
