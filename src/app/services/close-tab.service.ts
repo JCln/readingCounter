@@ -49,7 +49,7 @@ import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInpu
 import { ILicenseInfo, INotificationMessage, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
-import { IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
+import { IAddUserInfos, IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
@@ -108,6 +108,21 @@ export class CloseTabService {
   saveDataForUserRoleHistorySumReq = {
     id: ''
   };
+  _userAddUserInfos: IAddUserInfos = {
+    userCode: null,
+    username: null,
+    password: null,
+    confirmPassword: null,
+    firstName: '',
+    sureName: '',
+    email: '',
+    mobile: '',
+    displayMobile: false,
+    displayName: '',
+    isActive: true,
+    deviceId: ''
+  };
+
   saveDataForAllUsers: IUserManager[] = [];
   saveDataForUserOnlines: IUserOnlines[];
   saveDataForEditUsers: any;
@@ -496,21 +511,21 @@ export class CloseTabService {
   cleanArrays = () => {
     this.tabs = [];
   }
-  setAll(obj, val) {
-    if (obj) {
-      if (typeof obj === 'string') {
-        obj = '';
-      }
-      if (typeof obj === 'boolean') {
-        obj = false;
-      }
-      else {
-        Object.keys(obj).forEach(function (index) {
-          obj[index] = val
-        });
-      }
-    }
-  }
+  // setAll(value, val) {
+  //   if (value) {
+  //     if (typeof value === 'string') {
+  //       value = '';
+  //     }
+  //     if (typeof value === 'boolean') {
+  //       value = false;
+  //     }
+  //     else {
+  //       Object.keys(value).forEach(function (index) {
+  //         value[index] = val
+  //       });
+  //     }
+  //   }
+  // }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
@@ -525,6 +540,7 @@ export class CloseTabService {
 */
     this.cleanArrays();
   }
+  // every component dataSource to '' value, may better implement happends
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {

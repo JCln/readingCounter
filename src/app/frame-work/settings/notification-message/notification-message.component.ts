@@ -1,6 +1,6 @@
 import { EnvService } from 'services/env.service';
 import { MathS } from 'src/app/classes/math-s';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
@@ -13,7 +13,6 @@ import { INotificationMessage } from 'interfaces/isettings';
   styleUrls: ['./notification-message.component.scss']
 })
 export class NotificationMessageComponent extends FactoryONE {
-
   constructor(
     private profileService: ProfileService,
     public closeTabService: CloseTabService,
@@ -26,16 +25,10 @@ export class NotificationMessageComponent extends FactoryONE {
   }
 
   classWrapper = (canRefresh?: boolean) => {
-    console.log(canRefresh);
-
     if (canRefresh) {
-      console.log(1);
-
       this.closeTabService.notificationMessages = [];
     }
     console.log(this.closeTabService.notificationMessages);
-    console.log(MathS.isNull(this.closeTabService.notificationMessages));
-
     if (MathS.isNull(this.closeTabService.notificationMessages)) {
       this.connectToServer();
     }

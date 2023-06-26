@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+import { INotificationAlertTypes } from 'interfaces/ioverall-config';
+import { INotificationMessage } from 'interfaces/isettings';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,12 +14,10 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class NotifListBydateComponent extends FactoryONE {
-  ref: DynamicDialogRef;
 
   constructor(
     public closeTabService: CloseTabService,
-    public securityService: SecurityService,
-    private dialogService: DialogService
+    public securityService: SecurityService
   ) {
     super();
   }
@@ -29,28 +28,39 @@ export class NotifListBydateComponent extends FactoryONE {
       this.nullSavedSource();
       this.verification();
     }
-    // this.convertIdToTitle();
+  }
+  convertIdToTitle = (dataSource: any, dictionary: INotificationAlertTypes[], toConvert: string) => {
+    dictionary.map(dictionary => {
+      dataSource.map(dataSource => {
+        if (dictionary.value == dataSource[toConvert])
+          dataSource[toConvert] = dictionary.titleUnicode;
+      })
+    });
   }
   connectToServer = async () => {
     this.closeTabService.notificationListByDate = await this.securityService.postDataSource(ENInterfaces.NotifyManagerListByDate, this.closeTabService.notificationListByDateReq);
+
+    this.convertIdToTitle(this.closeTabService.notificationListByDate, this.closeTabService.utilsService.getNotificationAlertTypes(), 'alertTypeId')
+    this.convertIdToTitle(this.closeTabService.notificationListByDate, this.closeTabService.utilsService.getNotificationMediaTypes(), 'notificationMediaTypeId')
   }
   verification = async () => {
     const temp = this.securityService.verificationDates(this.closeTabService.notificationListByDateReq);
     if (temp)
       this.connectToServer();
   }
-  // convertIdToTitle = (): any => {
-  //   console.log(this.closeTabService.utilsService.getNotificationAlertTypesIds()[0]);
+  showMoreDetails = (dataSource: any) => {
+    if (dataSource.notificationMediaTypeId == 'متن') {
+      this.closeTabService.utilsService.snackWrapperService.openTextDialog(dataSource);
+    }
+    if (dataSource.notificationMediaTypeId == 'تصویر') {
+      this.closeTabService.utilsService.snackWrapperService.openImgDialog(dataSource);
+    }
+    if (dataSource.notificationMediaTypeId == 'ویدیو') {
+      this.closeTabService.utilsService.snackWrapperService.openVideoDialog(dataSource);
+    }
+    if (dataSource.notificationMediaTypeId == 'صوت') {
 
-  //   this.closeTabService.notificationListByDate.forEach(origin => {
-  //     this.closeTabService.utilsService.getNotificationAlertTypesIds().forEach((item, index) => {
-  //       if (origin.alertTypeId == item[index]) {
-  //         console.log(item);
-  //         origin.alertTypeId = item[index];
-  //       }
-  //     })
-  //   })
-  // }
-
+    }
+  }
 
 }

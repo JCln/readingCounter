@@ -267,8 +267,15 @@
                 </i>
             </td>
             <td class="__columns"
-                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory'"
+                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory' || _checkUpName == 'usersLogins' "
                 (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده جزئیات</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'notificationListByDateReq'"
+                (click)="showMoreDetails(dataSource)">
                 <span class="ui-column-title">مشاهده جزئیات</span>
                 <i class="tooltip p_icons pi pi-info-circle">
                     <div class="tooltip_text_right">مشاهده جزئیات</div>

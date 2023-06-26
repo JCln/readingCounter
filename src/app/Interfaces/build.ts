@@ -17,12 +17,14 @@ export interface IENV {
     defaultAggregateTracks: boolean,
     version: string,
     aboutUs: { email: string, tel: string, address: string }
+    NotificationAlertTypesList: { title: string, value: number, titleUnicode: string }[]
+    NotificationMediaTypeList: { title: string, value: number, titleUnicode: string }[]
     NotificationMediaTypeIds: {
         text: number,
         image: number,
         video: number,
         audio: number
-    }
+    },
     NotificationAlertTypesIds: {
         confidential: number,
         ordinary: number,
@@ -133,10 +135,35 @@ export class version {
     static readonly version = 'build: 0.0.0';
 }
 export class aboutUs {
-    static readonly email = 'infortarnama@gmail.com';
+    static readonly email = 'info@hivapardaz.ir';
     static readonly tel = '031-32121764';
     static readonly address = 'اصفهان، ارگ جهان نما، واحد 107';
     static readonly coName = 'هیوا پرداز اطلس';
+}
+export class NotificationAlertTypesList {
+    static readonly DEFAULT = new NotificationAlertTypesList([
+        { title: 'confidential', value: 0, titleUnicode: 'محرمانه' },
+        { title: 'ordinary', value: 1, titleUnicode: 'عادی' },
+        { title: 'sensitive', value: 2, titleUnicode: 'حساس' },
+        { title: 'memory_full', value: 4, titleUnicode: 'حافظه' },
+        { title: 'security', value: 8, titleUnicode: 'امنیتی' },
+        { title: 'license', value: 16, titleUnicode: 'مجوز دسترسی' },
+        { title: 'incorrect_time', value: 32, titleUnicode: 'زمان نادرست' },
+    ]);
+
+    private constructor(public readonly value: { title: string, value: number, titleUnicode: string }[]) {
+    }
+}
+export class NotificationMediaTypeList {
+    static readonly DEFAULT = new NotificationMediaTypeList([
+        { title: 'text', value: 0, titleUnicode: 'متن' },
+        { title: 'image', value: 1, titleUnicode: 'تصویر' },
+        { title: 'video', value: 2, titleUnicode: 'ویدیو' },
+        { title: 'audio', value: 4, titleUnicode: 'صوت' },
+    ]);
+
+    private constructor(public readonly value: { title: string, value: number, titleUnicode: string }[]) {
+    }
 }
 export class NotificationMediaTypeIds {
     static text = 0;

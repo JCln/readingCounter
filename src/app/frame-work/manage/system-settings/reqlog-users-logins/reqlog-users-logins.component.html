@@ -38,6 +38,6 @@
         [_selectedColumnsToRemember]="'selectedRequestLogUsersLogins'" [_hasCollapsible]=true
         [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedUsersLogins"
         (collapsed)="closeTabService.utilsService.collapser._isCollapsedUsersLogins = !closeTabService.utilsService.collapser._isCollapsedUsersLogins"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="refreshTable()" (openedMoshtarakinDialog)="routeToUserLogginsDetails($event)">
     </app-prime-table>
 </main>

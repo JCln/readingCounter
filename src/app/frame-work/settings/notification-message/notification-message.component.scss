@@ -54,7 +54,7 @@ section {
     .__sender,
     .__insertDateTimeJalali,
     .__deliverConfirm {
-        font-weight: 500;
+        font-weight: 600;
         font-size: var(--font_s);
     }
 
@@ -73,7 +73,7 @@ section {
         align-items: center;
         justify-content: center;
         display: flex;
-        font-size: var(--font_xs);
+        font-size: var(--font_s);
         height: var(--font_l2);
         width: var(--font_5);
     }
@@ -108,7 +108,7 @@ section {
 
     .__alertTypeId {
         position: absolute;
-        font-size: var(--font_xs);
+        font-size: var(--font_ss);
         line-height: 1;
         max-width: 4.8rem;
         width: 4.8rem;

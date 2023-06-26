@@ -39,9 +39,11 @@
     [_checkUpName]="'notificationListByDateReq'"      
     [_sessionName]="'notifListByDate-session'"
     [_selectedColumnsToRemember]="'selectedRequestLogNotifListByDate'" 
+    [_numberOfExtraColumns]="[1]"
     [_hasCollapsible]=true
     [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedNotificationListByDate"
     (collapsed)="closeTabService.utilsService.collapser._isCollapsedNotificationListByDate = !closeTabService.utilsService.collapser._isCollapsedNotificationListByDate"
+    (showedMoreDetails)="showMoreDetails($event)"
     (refreshedTable)="refreshTable()"
     >
     </app-prime-table>

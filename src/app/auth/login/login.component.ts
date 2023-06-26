@@ -1,3 +1,4 @@
+import { DateJalaliService } from 'services/date-jalali.service';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { Component, ViewChild } from '@angular/core';
@@ -29,7 +30,8 @@ export class LoginComponent {
     dntCaptchaText: '',
     dntCaptchaToken: '',
     dntCaptchaInputText: '',
-    appVersion: this.utilsService.getAppVersion()
+    appVersion: this.utilsService.getAppVersion(),
+    clientDateTime: this.dateJalaliService.getGregorianDate()
   };
   showVersionInfo: boolean = false;
   infoVersionItems: IDictionaryManager[] = [];
@@ -39,7 +41,8 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private utilsService: UtilsService,
-    private browserSupportService: BrowserSupportService
+    private browserSupportService: BrowserSupportService,
+    private dateJalaliService: DateJalaliService
   ) { }
 
   convertNumbers = () => {

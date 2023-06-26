@@ -12,7 +12,7 @@ import { UserInputsComponent } from './user-inputs/user-inputs.component';
 })
 export class UserAddComponent extends FactoryONE {
 
-  @ViewChild(UserInputsComponent) userInfos: any;
+  @ViewChild(UserInputsComponent) userInfos: UserInputsComponent;
 
   constructor(
     private userAddManagerService: UserAddManagerService,
@@ -21,7 +21,7 @@ export class UserAddComponent extends FactoryONE {
     super();
   }
   addUser = () => {
-    this.userAddManagerService.userAddA(this.closeTabService.saveDataForAddUsers, this.userInfos.userInputForm);
+    this.userAddManagerService.userAddA(this.closeTabService.saveDataForAddUsers, this.userInfos.closeTabService._userAddUserInfos);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -30,6 +30,9 @@ export class UserAddComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForAddUsers) {
       this.closeTabService.saveDataForAddUsers = await this.userAddManagerService.getUserAdd();
     }
+  }
+  refreshTable = () => {
+    console.log(1);
   }
 
 }

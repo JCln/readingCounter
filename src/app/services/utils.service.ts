@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ISimafaImportStatus, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue, IObjectIteratation, ISimafaImportStatus, INotificationAlertTypes } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
@@ -84,6 +84,12 @@ export class UtilsService {
       key: 'period'
     }
   ]
+  getNotificationAlertTypes = (): INotificationAlertTypes[] => {
+    return this.envService.NotificationAlertTypesList;
+  }
+  getNotificationMediaTypes = (): INotificationAlertTypes[] => {
+    return this.envService.NotificationMediaTypeList;
+  }
   // snack bar
   snackBarMessageSuccess = (message: string) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);

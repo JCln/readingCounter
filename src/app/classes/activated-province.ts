@@ -13,7 +13,9 @@ import {
     IENV,
     IENV_BROWSER_SETUP,
     NotificationAlertTypesIds,
+    NotificationAlertTypesList,
     NotificationMediaTypeIds,
+    NotificationMediaTypeList,
     reorderableTable,
     simafaImportStatus,
     timeout,
@@ -38,6 +40,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationAlertTypesList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -57,6 +61,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -76,6 +82,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -95,6 +103,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -114,6 +124,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -133,6 +145,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -153,6 +167,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -172,6 +188,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -191,6 +209,8 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
@@ -226,6 +246,8 @@ export class ActivatedProvince implements IENV {
         public readonly timeout: number,
         public readonly version: string,
         public readonly aboutUs: { email: string, tel: string, address: string, coName: string },
+        public readonly NotificationAlertTypesList: { title: string, value: number, titleUnicode: string }[],
+        public readonly NotificationMediaTypeList: { title: string, value: number, titleUnicode: string }[],
         public readonly NotificationMediaTypeIds: {
             text: number,
             image: number,

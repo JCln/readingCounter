@@ -26,8 +26,7 @@ export class SecurityService {
     changeOrInsertUserLogId: ''
   };
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
-    private usersAllService: UsersAllService,
+    private interfaceManagerService: InterfaceManagerService,    
     public utilsService: UtilsService
   ) { }
 

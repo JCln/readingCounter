@@ -5,8 +5,10 @@ import { Converter } from 'src/app/classes/converter';
   providedIn: 'root'
 })
 export class DateJalaliService {
-  constructor() { }
 
+  getGregorianDate = (): string => {
+    return new Date().toLocaleString();
+  }
   getCurrentTime = () => {
     let persianTime = new Date().toLocaleTimeString('fa-IR', {
       hour12: false,
@@ -16,8 +18,11 @@ export class DateJalaliService {
 
     return Converter.persianToEngNumbers(persianTime);
   }
+  getJalaliDate = (): string => {
+    return new Date().toLocaleDateString('fa-IR');
+  }
   getCurrentDate = () => {
-    let persianDate = new Date().toLocaleDateString('fa-IR');
+    let persianDate = this.getJalaliDate();
 
     if (persianDate.length == 10)
       return persianDate;
@@ -38,7 +43,7 @@ export class DateJalaliService {
     return Converter.persianToEngNumbers(persianTime);
   }
   getDate = (item: any): string => {
-    let persianDate = new Date(item).toLocaleDateString('fa-IR');
+    let persianDate = this.getJalaliDate();
 
     if (persianDate.length == 10)
       return persianDate;

@@ -7,6 +7,7 @@ import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IUsersLoginBriefInfo } from 'services/DI/privacies';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Component({
   selector: 'app-reqlog-users-logins',
@@ -32,11 +33,11 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
       this.verification();
     }
   }
-  showMoreDetails = (data: IUsersLoginBriefInfo) => {
+  routeToUserLogginsDetails = (data: IUsersLoginBriefInfo) => {
     this.ref = this.dialogService.open(ReqlogUsersLoginsDetailsComponent, {
       data: data,
       rtl: true,
-      width: '80%' 
+      width: '80%'
     })
   }
   connectToServer = async () => {

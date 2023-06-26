@@ -1,3 +1,4 @@
+import { CloseTabService } from 'services/close-tab.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -11,11 +12,12 @@ import { UtilsService } from './utils.service';
 
 @Injectable()
 export class UserAddManagerService {
-  selectedPersonalInfos: IAddUserInfos;  
+  selectedPersonalInfos: IAddUserInfos;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private closeTabService: CloseTabService
   ) { }
 
   // API CALLS 
@@ -137,17 +139,34 @@ export class UserAddManagerService {
 
     return true;
   }
-
+  toDefaultValsUserAddInfos = () => {
+    this.closeTabService._userAddUserInfos = {
+      userCode: null,
+      username: null,
+      password: null,
+      confirmPassword: null,
+      firstName: '',
+      sureName: '',
+      email: '',
+      mobile: '',
+      displayMobile: false,
+      displayName: '',
+      isActive: true,
+      deviceId: ''
+    }
+  }
   private connectToServer = (vals: IAddAUserManager) => {
     if (!this.checkEmptyUserInfos(vals))
       return false;
+    console.log(vals);
 
-    this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
-      if (res) {
-        this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-        this.utilsService.routeTo(EN_Routes.wrmuall);
-      }
-    });
+    // this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
+    //   if (res) {
+    //     this.toDefaultValsUserAddInfos();
+    //     this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+    //     this.utilsService.routeTo(EN_Routes.wrmuall);
+    //   }
+    // });
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {
     const vals: IAddAUserManager = {

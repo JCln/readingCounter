@@ -121,7 +121,7 @@ export class UsersAllService {
     return true;
   }
   private getAUserProvince = (zoneItems: any): number[] => {
-    let selectedZones = [0];
+    let selectedZones: any[] = [];
     zoneItems.map(proIt => {
       proIt.regionItems.map(regionIt => {
         regionIt.zoneItems.map(zoneIt => {
@@ -182,7 +182,7 @@ export class UsersAllService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
       return false;
     }
-    if (MathS.isNull(dataSource.selectedZones[1])) {
+    if (MathS.isNull(dataSource.selectedZones)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_roleAccess);
       return false;
     }
@@ -207,15 +207,17 @@ export class UsersAllService {
   }
   private connectToServerEdit = async (vals: IAUserEditSave) => {
     if (this.vertification(vals)) {
-      const text = EN_messages.confirm_userChange + ' ' + vals.displayName + ' ' + EN_messages.confirm_userChange_2;
-      if (await this.firstConfirmDialog({ messageTitle: text })) {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
-            this.utilsService.routeToByUrl(EN_Routes.wrmuall);
-          }
-        });
-      }
+      console.log(vals);
+
+      // const text = EN_messages.confirm_userChange + ' ' + vals.displayName + ' ' + EN_messages.confirm_userChange_2;
+      // if (await this.firstConfirmDialog({ messageTitle: text })) {
+      //   this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
+      //     if (res) {
+      //       this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+      //       this.utilsService.routeToByUrl(EN_Routes.wrmuall);
+      //     }
+      //   });
+      // }
     }
 
   }
