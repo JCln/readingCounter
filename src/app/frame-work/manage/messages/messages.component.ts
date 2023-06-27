@@ -14,6 +14,7 @@ export class MessagesComponent extends FactoryONE {
   colors: IColor[] = [];
   times: ITime[] = [];
   allMessages: IMessage[];
+  _sampleBackColor: string = 'lightgray';
 
   constructor(
     readonly messageService: MessageService,
@@ -34,5 +35,27 @@ export class MessagesComponent extends FactoryONE {
   }
   copyPreMessageToCurrent = (name: IMessage) => {
     this.messageService.message = name;
+    this.changeColorTextByColorChange();
+  }
+  changeColorTextByColorChange = () => {
+    switch (this.messageService.message.color) {
+      case 'success':
+        this._sampleBackColor = '#8FB683'
+        break;
+
+      case 'warn':
+        this._sampleBackColor = '#F4AD82'
+        break;
+
+      case 'error':
+        this._sampleBackColor = '#C01A1A'
+        break;
+
+      default:
+        this._sampleBackColor = '#6AA2F9'
+        break;
+    }
+    console.log(this.messageService.message.color);
+
   }
 }
