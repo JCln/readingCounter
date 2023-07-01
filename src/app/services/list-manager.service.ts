@@ -29,7 +29,9 @@ import { UtilsService } from './utils.service';
 export class ListManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ref: DynamicDialogRef;
-  counterStateValue: number;
+  counterStateGeneralGroupList: number;
+  counterStateGeneralList: number;
+
 
   searchReqMoshDialog: ISearchMoshReqDialog = {
     // searchBy: 1  => eshterak

@@ -437,7 +437,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForUserMasterHistory, url: EN_Routes.userMasterHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserDetailsHistory, url: EN_Routes.userDetailsHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
-    { id: 1, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
+    { id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },
     { id: 1, value: ENEssentialsToSave.saveDataForEditOnRole, url: EN_Routes.wrmueor },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleHistory, url: EN_Routes.roleHistory },
@@ -526,6 +526,20 @@ export class CloseTabService {
   //     }
   //   }
   // }
+  // requestsToDefault = (innerVal: any) => {
+  //   for (const property in innerVal) {
+  //     // if value exists in property value
+  //     //  what if another number exists
+  //     if (innerVal[property]) {
+  //       if (typeof innerVal[property] === 'string') {
+  //         innerVal[property] = '';
+  //       }
+  //       if (typeof innerVal[property] === 'number') {
+  //         innerVal[property] = null;
+  //       }
+  //     }
+  //   }
+  // }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
@@ -533,7 +547,10 @@ export class CloseTabService {
       /* commented due to unValid values after refresh page
       TODO body request vals have to back to defualt values after refresh page happended
        */
-      // this.setAll(this[this.val[index].req], null);
+      // this.setAll(this[this.val[index].req], null);      
+      // console.log(1);
+
+      // this.requestsToDefault(this[this.val[index].req]);
     }
     /* TODO: make null all objects
     should separate objects and array of objects
@@ -547,6 +564,7 @@ export class CloseTabService {
         this[item.value] = '';
         this[item.value_2] = '';
         // this.setAll(this[item.req], null);
+        // this.requestsToDefault(this[item.req]);
       }
       else {
         if (url.includes(item.url)) {

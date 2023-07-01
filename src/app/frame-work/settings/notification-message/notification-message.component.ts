@@ -25,7 +25,7 @@ export class NotificationMessageComponent extends FactoryONE {
   }
 
   classWrapper = (canRefresh?: boolean) => {
-    if (canRefresh) {
+   if (canRefresh) {
       this.closeTabService.notificationMessages = [];
     }
     console.log(this.closeTabService.notificationMessages);

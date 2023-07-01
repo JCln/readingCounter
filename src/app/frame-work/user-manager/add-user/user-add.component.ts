@@ -31,8 +31,4 @@ export class UserAddComponent extends FactoryONE {
       this.closeTabService.saveDataForAddUsers = await this.userAddManagerService.getUserAdd();
     }
   }
-  refreshTable = () => {
-    console.log(1);
-  }
-
 }

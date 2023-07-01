@@ -131,7 +131,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = null;
       }
 
-      this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
+      this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
       } else {
@@ -144,8 +144,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   refreshTable = () => {
-    if (!MathS.isNull(this.listManagerService.counterStateValue)) {
-      this.updateOnChangedCounterState(this.listManagerService.counterStateValue, true);
+    if (!MathS.isNull(this.listManagerService.counterStateGeneralGroupList)) {
+      this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, true);
     }
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
@@ -215,7 +215,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
           this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
           // TODO: update rows that need to dictionaries
-          this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
+          this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
         }
         resolve(true)
       }, 0)
@@ -360,7 +360,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     else {
       if (!MathS.isNull(this.closeTabService.AUXSaveDataForLMGeneralGroupModify)) {
         this.closeTabService.saveDataForLMGeneralGroupModify = this.closeTabService.AUXSaveDataForLMGeneralGroupModify;
-        this.updateOnChangedCounterState(this.listManagerService.counterStateValue, false);
+        this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
       }
     }
   }

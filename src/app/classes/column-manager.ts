@@ -433,20 +433,14 @@ export class ColumnManager {
         { field: 'browserTitle', header: 'مرورگر', isSelected: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isBoolean: true },
-        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true }
+        { field: 'loginDateTime', header: 'زمان', isSelected: true }
     ]
     usersLoginsDetails: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
         { field: 'loginDateTime', header: 'زمان', isSelected: true },
         { field: 'loginIp', header: 'IP', isSelected: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isBoolean: true },
-        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
-        { field: 'browserTitle', header: 'مرورگر', isSelected: true },
         { field: 'browserShortTitle', header: 'مرورگر', isSelected: false },
-        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        // { field: 'insertDateTime', header: 'تاریخ', isSelected: false },
-        { field: 'insertTime', header: 'زمان', isSelected: true },
-        { field: 'ip', header: 'IP', isSelected: true },
         { field: 'browserTitle', header: 'مرورگر', isSelected: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
         { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false },
@@ -456,10 +450,8 @@ export class ColumnManager {
         { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
         { field: 'wrongPassword', header: 'گذرواژه', isSelected: false },
         { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false },
-        { field: 'description', header: 'توضیحات', isSelected: true, icon: '_double_size' },
-        { field: 'appVersion', header: 'نسخه App', isSelected: false },
-        // { field: 'userAgent', header: 'userAgent', isSelected: false },                                
-    ]
+        { field: 'appVersion', header: 'نسخه App', isSelected: false },       
+    ]   
     userRoleHistorySummary: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان گروه', isSelected: true },
         { field: 'userDisplayName', header: 'کاربر‌تغییر‌دهنده', isSelected: true },
