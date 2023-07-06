@@ -207,17 +207,15 @@ export class UsersAllService {
   }
   private connectToServerEdit = async (vals: IAUserEditSave) => {
     if (this.vertification(vals)) {
-      console.log(vals);
-
-      // const text = EN_messages.confirm_userChange + ' ' + vals.displayName + ' ' + EN_messages.confirm_userChange_2;
-      // if (await this.firstConfirmDialog({ messageTitle: text })) {
-      //   this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
-      //     if (res) {
-      //       this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
-      //       this.utilsService.routeToByUrl(EN_Routes.wrmuall);
-      //     }
-      //   });
-      // }
+      const text = EN_messages.confirm_userChange + ' ' + vals.displayName + ' ' + EN_messages.confirm_userChange_2;
+      if (await this.firstConfirmDialog({ messageTitle: text })) {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
+          if (res) {
+            this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+            this.utilsService.routeToByUrl(EN_Routes.wrmuall);
+          }
+        });
+      }
     }
 
   }

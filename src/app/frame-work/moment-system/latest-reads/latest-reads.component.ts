@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
+import { ILatestReads } from 'interfaces/imoment';
 import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -72,7 +73,15 @@ export class LatestReadsComponent extends AllListsFactory {
       { title: ENRandomNumbers.oneHundred, val: ENRandomNumbers.oneHundred },
     ];
   }
-
+  addResponseToFirst = (res: ILatestReads) => {
+    this.closeTabService.saveDataForMomentLastRead.unshift(res);
+  }
+  makeEmptyLastReadArray = () => {
+    this.closeTabService.saveDataForMomentLastRead = [];
+  }
+  pushToArray = (res: ILatestReads) => {
+    this.closeTabService.saveDataForMomentLastRead.push(res);
+  }
   classWrapper = async (canRefresh?: boolean) => {
     this.initMap();
     this.numberOfSelectedMostNumber();
@@ -81,20 +90,24 @@ export class LatestReadsComponent extends AllListsFactory {
       this.markMultipleLocations(this.closeTabService.saveDataForMomentLastRead);
     }
     this.subscription.push(this.interactionService.$getMomentLatestReads.subscribe(res => {
-      this.closeTabService.saveDataForMomentLastRead.unshift(res);
-      if (this.closeTabService.saveDataForMomentLastRead.length > this._selectedMostNumbers) {
-        // more than atMostNumbers is in table, should pop from top
-        for (let index = 0; index < this.closeTabService.saveDataForMomentLastRead.length; index++) {
-          if (this.closeTabService.saveDataForMomentLastRead.length > this._selectedMostNumbers)
-            this.closeTabService.saveDataForMomentLastRead.pop();
-        }
+      if (this.closeTabService.saveDataForMomentLastRead.length == 0) {
+        this.makeEmptyLastReadArray();
+        this.pushToArray(res);
+      }
+      else {
+        this.addResponseToFirst(res);
+      }
+      // should pop from top more than atMostNumbers is in table
+      for (let index = 0; index < this.closeTabService.saveDataForMomentLastRead.length; index++) {
+        if (this.closeTabService.saveDataForMomentLastRead.length > this._selectedMostNumbers)
+          this.closeTabService.saveDataForMomentLastRead.pop();
       }
       this.updateTableData();
     }))
   }
   onNextReadViewable = () => {
     this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, this._selectedMostNumbers);
-    this.listManagerService.utilsService.snackBarMessageWarn(EN_messages.changesOnNextRead);
+    this.listManagerService.utilsService.snackBarMessageSuccess(EN_messages.changesOnNextRead);
   }
   numberOfSelectedMostNumber = () => {
     if (this.mapService.browserStorageService.isExists(ENLocalStorageNames.numberOfFlashRead)) {
