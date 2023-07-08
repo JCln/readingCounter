@@ -239,10 +239,15 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     this.modifyType = this.listManagerService.getOffloadModifyType();
   }
   convertTitleToId = (dataSource: any): any => {
-    return this.counterStateByZoneDictionary.find(item => {
-      if (item.title === dataSource)
-        return item;
-    })
+    if (!MathS.isNull(dataSource)) {
+      return this.counterStateByZoneDictionary.find(item => {
+        if (item.title === dataSource)
+          return item;
+      })
+    }
+    else {
+      this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
+    }
   }
   convertTitleToIdByModifyType = (dataSource: any): any => {
     return this.modifyType.find(item => {

@@ -190,12 +190,13 @@ export class TrackingManagerService {
     }
     return this.utilsService.firstConfirmDialog(a);
   }
-  postOffloadModifyEdited = (body: IOffloadModifyReq) => {
+  postOffloadModifyEdited = (body: IOffloadModifyReq): Promise<any> => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
-
-    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
-      this.successSnackMessage(res.message);
-    })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
+        resolve(res);
+      })
+    });
   }
 
   // imported service control
@@ -292,7 +293,7 @@ export class TrackingManagerService {
       return false;
     }
     if (this.isValidationNull(object.counterNumber)) {
-      this.showWarnMessage(EN_messages.format_invalid_counterNumber);
+      this.showWarnMessage(EN_messages.insert_counterNumber);
       return false;
     }
     if (!MathS.lengthControl(object.counterNumber, object.counterNumber, 1, 7)) {

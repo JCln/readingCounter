@@ -1,3 +1,4 @@
+import { EN_messages } from 'interfaces/enums.enum';
 import { Component, Input, OnChanges } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
@@ -135,10 +136,19 @@ export class OffloadComponent implements OnChanges {
     const offloadItems = this.trackingManagerService.selectedItems(this.offloadItems);
     this.offloadModifyReq.checkedItems = offloadItems;
   }
+  assignToCounterState = (): boolean => {
+    if (this.counterStateId) {
+      const temp = this.convertTitleToId(this.counterStateId);
+      this.offloadModifyReq.counterStateId = temp.id;
+      return true;
+    }
+    else {
+      this.trackingManagerService.showWarnMessage(EN_messages.insert_counterState);
+      return false;
+    }
+  }
   assignToObject = () => {
     this.offloadModifyReq.id = this.id;
-    const temp = this.convertTitleToId(this.counterStateId);
-    this.offloadModifyReq.counterStateId = temp.id;
   }
   convertTitleToId = (dataSource: any): any => {
     return this.counterStatesDictionary.find(item => {
@@ -146,12 +156,15 @@ export class OffloadComponent implements OnChanges {
         return item;
     })
   }
-  connectToServer = () => {
+  connectToServer = async () => {
     this.checkItems();
     this.assignToObject();
-    const verificationCheck = this.trackingManagerService.verificationOffloadModify(this.offloadModifyReq);
-    if (verificationCheck) {
-      this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+    if (this.assignToCounterState()) {
+      const verificationCheck = this.trackingManagerService.verificationOffloadModify(this.offloadModifyReq);
+      if (verificationCheck) {
+        const res = await this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+        this.trackingManagerService.successSnackMessage(res.message);
+      }
     }
   }
 }

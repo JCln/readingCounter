@@ -89,6 +89,7 @@ export enum EN_messages {
     insert_moshtarakinId = 'کد مشترکین را وارد نمایید',
     insert_Id = 'کد را وارد نمایید',
     insert_counterState = 'وضعیت کنتور را مشخص نمایید',
+    insert_counterNumber = 'رقم فعلی(رقم کنتور) را مشخص نمایید',
     insert_desc = 'توضیحی وارد نمایید',
     insert_AcceptVerbs = 'متد قابل پذیرش را وارد نمایید',
     insert_jsonInfo = 'jsonInfo را وارد نمایید',

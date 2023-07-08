@@ -115,7 +115,7 @@
                         </ng-template>
                     </p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
-                        field="counterStateId" matchMode="in" [showMenu]="false">
+                        field="preCounterStateCode" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForLMGeneralGroupModifyReq.multiSelectPreCounterStateCode"

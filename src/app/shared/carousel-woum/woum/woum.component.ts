@@ -212,12 +212,13 @@ export class WoumComponent implements OnChanges {
         return item;
     })
   }
-  connectToServer = () => {
+  connectToServer = async () => {
     this.checkItems();
     this.assignToObject();
     const verificationCheck = this.trackingManagerService.verificationOffloadModify(this.offloadModifyReq);
     if (verificationCheck) {
-      this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+      const res = await this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+      this.trackingManagerService.successSnackMessage(res.message);
     }
   }
   onThumbnailButtonClick() {
