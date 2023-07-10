@@ -1,0 +1,202 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@font-face {
+  font-family: BLotus;
+  src: url(/assets/fonts/BLotus.woff) format("woff2"), url(/assets/fonts/BLotus) format("truetype");
+}
+body,
+html {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  position: relative;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) all 250ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.hr_1 {
+  width: 70%;
+  margin-bottom: var(--font_l);
+  height: 0.4rem;
+  border-radius: 30px;
+}
+
+.hr_2 {
+  opacity: 0.7;
+  width: 70%;
+  margin: var(--font_25) auto;
+  height: var(--font_02);
+  border-radius: 30px;
+}
+
+hr {
+  width: 80%;
+  border: 0;
+  height: 0.14rem;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary_4), rgba(0, 0, 0, 0));
+}
+
+:root {
+  --font_01: 0.1rem;
+  --font_02: 0.2rem;
+  --font_025: 0.25rem;
+  --font_03: 0.3rem;
+  --font_05: 0.5rem;
+  --font_xxs: 0.87rem;
+  --font_xs: 1rem;
+  --font_ss: 1.1rem;
+  --font_s: 1.2rem;
+  --font_m: 1.3rem;
+  --font_m2: 1.4rem;
+  --font_l: 1.5rem;
+  --font_l2: 1.6rem;
+  --font_2: 2rem;
+  --font_22: 2.2rem;
+  --font_23: 2.3rem;
+  --font_25: 2.5rem;
+  --font_26: 2.6rem;
+  --font_28: 2.8rem;
+  --font_3: 3rem;
+  --font_33: 3.3rem;
+  --font_35: 3.5rem;
+  --font_335: 3.35rem;
+  --font_45: 4.5rem;
+  --font_5: 5rem;
+  --font_52: 5.2rem;
+  --font_55: 5.5rem;
+  --white: rgb(57, 53, 50);
+  --fix_gray_light: rgb(248, 249, 250);
+  --fix_dark: rgb(10, 15, 28);
+  --fix_blue: rgb(17, 111, 255);
+  --thirdy_1: rgb(1, 24, 38);
+  --thirdy_2: rgb(26, 33, 51);
+  --thirdy_3: rgb(21, 43, 66);
+  --thirdy_4: rgb(168, 178, 189);
+  --primary_1: rgb(217, 126, 150);
+  --primary_2: rgb(131, 88, 62);
+  --primary_3: rgb(99, 83, 115);
+  --primary_4: rgb(73, 104, 134);
+  --primary_5: rgb(21, 43, 66);
+  --primary_6: rgb(26, 33, 51);
+  --primary_7: rgb(1, 24, 38);
+  --secondary_1: rgb(217, 126, 150);
+  --secondary_2: rgb(163, 101, 132);
+  --secondary_3: rgb(99, 83, 115);
+  --secondary_4: rgb(79, 62, 95);
+  --secondary_5: orange;
+  --secondary_6: rgb(125, 131, 255);
+  --secondary_7: rgb(54, 43, 130);
+  --secondary_8: #0045cb;
+  --sidebar_1: rgb(4, 78, 225);
+  --sidebar_2: lightblue;
+  --sidebar_3: rgb(50, 50, 133);
+  --sidebar_4: rgb(50, 50, 133);
+  --light_1: rgb(255, 181, 192);
+  --orange_500: rgb(246, 128, 56);
+  --orange_600: rgb(245, 91, 25);
+  --green_500: rgb(117, 188, 84);
+  --green_600: rgb(75, 140, 56);
+  --red_500: rgb(246, 62, 56);
+  --red_600: rgb(183, 28, 28);
+  --pink_500: rgb(255, 64, 129);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+li {
+  outline: none;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+}
+
+.p-dialog,
+.p-dialog-header,
+.p-dialog-title {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  padding: var(--font_03) !important;
+}
+
+.p-dialog .p-dialog-header {
+  background: var(--secondary_1) !important;
+}
+
+.p-dialog .p-dialog-header .p-dialog-header-icon {
+  background: var(--secondary_1) !important;
+  z-index: 100 !important;
+}
+
+.p-dialog .p-dialog-content {
+  padding: 0 var(--font_05) !important;
+  margin-top: -1.7rem !important;
+  background: var(--secondary_1) !important;
+}
+
+.cell_conf {
+  color: rgb(92, 92, 92);
+  font-size: var(--font_s);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.leaflet-popup-content {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  text-align: center;
+  font-size: var(--font_s);
+  font-weight: 600;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}/*# sourceMappingURL=styles.css.map */
