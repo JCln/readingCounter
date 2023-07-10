@@ -1,3 +1,4 @@
+import { DateJalaliService } from 'services/date-jalali.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -59,9 +60,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     public allListsService: AllListsService,
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
-    public utilsService: UtilsService,
     public profileService: ProfileService,
-    public spinnerWrapperService: SpinnerWrapperService
+    public spinnerWrapperService: SpinnerWrapperService,
+    private dateJalaliService: DateJalaliService
   ) {
     super(dialogService, listManagerService);
   }
@@ -120,11 +121,11 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
-      this.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
+      this.closeTabService.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
     }
     else {
       // to show counterStates radioButtons
-      this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.saveDataForLMGeneralGroupModify = null;
@@ -227,6 +228,14 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     await this.testCallBackFun(e, filterValid);
     this.spinnerWrapperService.stopPending();
   }
+  getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
+    return new Promise(async (resolve) => {
+      this.counterStateByZoneDictionary = JSON.parse(JSON.stringify(await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zone)));
+      if (this.counterStateByZoneDictionary[0].id !== 0)
+        this.counterStateByZoneDictionary.unshift({ id: null, title: 'انتخاب کنید', isSelected: true })
+      resolve(true);
+    });
+  }
   // have problem on SHOWING Without this Code for DropDowns
   clickedDropDowns = (event: any, element: string, dataId: any) => {
     for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
@@ -246,7 +255,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       })
     }
     else {
-      this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
+      this.listManagerService.showSnackWarn(EN_messages.insert_counterStateDetails);
     }
   }
   convertTitleToIdByModifyType = (dataSource: any): any => {
@@ -283,24 +292,43 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     const temp: IOffloadModifyReq[] = [];
 
     for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
-      if (!MathS.isNull(this.closeTabService.saveDataForLMGeneralGroupModify[index].modifyType)) {
 
-        temp.push({
-          id: this.closeTabService.saveDataForLMGeneralGroupModify[index].id,
-          modifyType: this.convertTitleToIdByModifyType(this.closeTabService.saveDataForLMGeneralGroupModify[index].modifyType).id,
-          checkedItems: [0],
-          counterStateId: this.convertTitleToId(this.closeTabService.saveDataForLMGeneralGroupModify[index].counterStateId).id,
-          counterNumber: this.closeTabService.saveDataForLMGeneralGroupModify[index].counterNumber,
-          jalaliDay: this.closeTabService.saveDataForLMGeneralGroupModify[index].offloadDateJalali,
-          description: this.closeTabService.saveDataForLMGeneralGroupModify[index].description
-        })
+      let tempOrigin = this.closeTabService.saveDataForLMGeneralGroupModify[index];
+
+      if (!MathS.isNull(tempOrigin.modifyType) && this.convertTitleToIdByModifyType(tempOrigin.modifyType).id != null) {
+
+        let tempCounterState = this.convertTitleToId(tempOrigin.counterStateId).id;
+        let tempModifyType = this.convertTitleToIdByModifyType(tempOrigin.modifyType).id
+
+        // because modify values could be zero(0) Maths.isNull could not be precise
+        if (tempModifyType == null) {
+          this.listManagerService.showSnackWarn(EN_messages.insert_modifyTypeShouldHaveValue);
+          return;
+        }
+        // TODO: NO Null CounterStateId is valid
+        if (tempCounterState == null) {
+          this.listManagerService.showSnackWarn(EN_messages.insert_counterStateShouldHaveValue);
+          return;
+        }
+
+        else {
+          temp.push({
+            id: tempOrigin.id,
+            modifyType: tempModifyType,
+            checkedItems: [0],
+            counterStateId: tempCounterState,
+            counterNumber: tempOrigin.counterNumber,
+            jalaliDay: tempOrigin.offloadDateJalali ? tempOrigin.offloadDateJalali : this.dateJalaliService.getCurrentDate(),
+            description: tempOrigin.description
+          })
+        }
       }
     }
     if (MathS.isNull(temp)) {
       this.listManagerService.showSnackWarn(EN_messages.no_modifyFound);
     } else {
       // TODO: Should convert Arabic Numbers to ENG to counterNumbers
-      // to upload valid data to server and get valid response
+      // to upload valid data to server and get valid response      
       this.manageModifyBatchResponse(await this.listManagerService.postArrays(ENInterfaces.trackingToOffloadedGroupModifyBatch, temp));
     }
   }
@@ -395,19 +423,19 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
 
     this.browserStorageService.set(this._outputFileName, newArray);
-    this.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
+    this.closeTabService.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
   }
   resetSavedColumns = () => {
     if (!MathS.isNull(this._outputFileName)) {
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this.browserStorageService.removeLocal(this._outputFileName);
-        this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
+        this.closeTabService.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
       } else {
-        this.utilsService.snackBarMessageSuccess(EN_messages.tableDefaultColumnOrder);
+        this.closeTabService.utilsService.snackBarMessageSuccess(EN_messages.tableDefaultColumnOrder);
       }
     }
     else
-      this.utilsService.snackBarMessageWarn(EN_messages.done);
+      this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.done);
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();

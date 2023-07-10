@@ -450,8 +450,8 @@ export class ColumnManager {
         { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
         { field: 'wrongPassword', header: 'گذرواژه', isSelected: false },
         { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false },
-        { field: 'appVersion', header: 'نسخه App', isSelected: false },       
-    ]   
+        { field: 'appVersion', header: 'نسخه App', isSelected: false },
+    ]
     userRoleHistorySummary: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان گروه', isSelected: true },
         { field: 'userDisplayName', header: 'کاربر‌تغییر‌دهنده', isSelected: true },
@@ -1778,6 +1778,7 @@ export class ColumnManager {
         { field: 'billId', header: 'شناسه قبض', isSelected: true, isNumber: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: true, isNumber: true },
         { field: 'errorDescriptoin', header: 'توضیحات', isSelected: true },
+        { field: 'importDateTime', header: 'تاریخ', isSelected: true },
         { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }
     ]
     errorsByTrackNumber: IObjectIteratation[] = [

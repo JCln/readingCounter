@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
+import { DateJalaliService } from 'services/date-jalali.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -14,6 +15,7 @@ export class ErrorsComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
+    private dateJalaliService: DateJalaliService
   ) {
     super();
   }
@@ -25,8 +27,14 @@ export class ErrorsComponent extends FactoryONE {
     }
     if (!this.closeTabService.saveDataForImportErrors) {
       this.closeTabService.saveDataForImportErrors = await this.importDynamicService.getDataSource(ENInterfaces.getImportErrros);
+      this.convertLoginTime();
     }
 
+  }
+  convertLoginTime = () => {
+    this.closeTabService.saveDataForImportErrors.forEach(item => {
+      item.importDateTime = this.dateJalaliService.getDate(item.importDateTime) + '   ' + this.dateJalaliService.getTime(item.importDateTime);
+    })
   }
 
 }

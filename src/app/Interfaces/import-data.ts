@@ -93,6 +93,7 @@ export interface IImportErrors {
     radif: number,
     errorDescriptoin: string,
     hasError: true,
+    importDateTime: string,
     warningCount?: number
 }
 export interface IReadingProgramRes {

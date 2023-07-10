@@ -158,15 +158,13 @@ export class UserAddManagerService {
   private connectToServer = (vals: IAddAUserManager) => {
     if (!this.checkEmptyUserInfos(vals))
       return false;
-    console.log(vals);
-
-    // this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
-    //   if (res) {
-    //     this.toDefaultValsUserAddInfos();
-    //     this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-    //     this.utilsService.routeTo(EN_Routes.wrmuall);
-    //   }
-    // });
+    this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
+      if (res) {
+        this.toDefaultValsUserAddInfos();
+        this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+        this.utilsService.routeTo(EN_Routes.wrmuall);
+      }
+    });
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {
     const vals: IAddAUserManager = {

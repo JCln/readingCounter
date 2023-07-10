@@ -70,7 +70,8 @@
                     <i (click)="hasBeenReadsToggler()">
                         <label class="font_family"
                             for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}})
-                            نمایش قرائت شده ها</label>
+                            نمایش قرائت شده ها
+                        </label>
                         <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox"
                             [binary]="true">
                         </p-checkbox>
@@ -144,7 +145,7 @@
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isSelectOption;else selectOption">
                         <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
-
+                        <!-- For Modify type inside Table body -->
                         <ng-container *ngIf="(col.field == 'modifyType'); else secondDict">
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
@@ -161,13 +162,17 @@
                         </ng-container>
                         <ng-template #secondDict>
                             <ng-container>
+                                <!-- For counterStateId only and should sync with generalGroupModify in columnManager.ts -->
                                 <p-cellEditor>
-                                    <ng-template pTemplate="input">
+                                    <ng-template *ngIf="col.field == 'counterStateId'" pTemplate="input">
                                         <p-dropdown name="drops" [options]="counterStateByZoneDictionary"
                                             [(ngModel)]="dataSource[col.field]" [placeholder]="dataSource[col.field]"
                                             [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                             (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
                                         </p-dropdown>
+                                    </ng-template>
+                                    <ng-template *ngIf="col.field == 'preCounterStateCode'" pTemplate="input">
+                                        {{dataSource[col.field]}}
                                     </ng-template>
                                     <ng-template pTemplate="output">
                                         {{dataSource[col.field]}}

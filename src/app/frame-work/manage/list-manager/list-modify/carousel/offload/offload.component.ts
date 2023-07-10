@@ -64,6 +64,8 @@ export class OffloadComponent implements OnChanges {
   ) { }
 
   classWrapper = async (canRefresh?: boolean) => {
+    console.log(1);
+
     this.imageFiles = [];
     this.audioFiles = [];
     this.dataSource = [];
