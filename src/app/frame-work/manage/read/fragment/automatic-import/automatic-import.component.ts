@@ -42,14 +42,14 @@ export class AutomaticImportComponent extends FactoryONE {
   }
   classWrapper = async (canRefresh?: boolean) => {
     this.closeTabService.saveDataForAutomaticImport = await this.fragmentManagerService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
-    this.readingPeriodKindDictionary = await this.fragmentManagerService.getPeriodKindDictionary();
-    this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.fragmentManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
     this.zoneDictionary.find(item => {
       if (item.title === this.zoneId)
         this.zoneId = item.id
     })
 
-    this.userCounterReader = await this.fragmentManagerService.getUserCounterReaders(this.zoneId);
+    this.userCounterReader = await this.fragmentManagerService.dictionaryWrapperService.getUserCounterReaderDictionary(this.zoneId);
   }
   removeRow = async (rowData: string) => {
     if (await this.fragmentManagerService.firstConfirmDialog()) {

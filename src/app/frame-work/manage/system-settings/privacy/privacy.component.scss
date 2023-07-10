@@ -6,7 +6,7 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);

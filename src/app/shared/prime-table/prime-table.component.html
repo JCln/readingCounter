@@ -56,7 +56,7 @@
             </div>
             <div class="left_side">
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
-                    (click)="filterCounterState()">
+                    (click)="hasBeenReadsToggler()">
                     <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
@@ -250,6 +250,42 @@
                 <span class="ui-column-title">مشاهده سابقه</span>
                 <i class="tooltip p_icons pi pi-users">
                     <div class="tooltip_text">مشاهده سابقه</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">تغییرات گروه(نقش)</span>
+                <i class="tooltip p_icons pi pi-users">
+                    <div class="tooltip_text_right">تغییرات گروه(نقش)</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">تغییرات دسترسی</span>
+                <i class="tooltip p_icons fas fa-user-shield">
+                    <div class="tooltip_text_right">تغییرات دسترسی</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory' || _checkUpName == 'usersLogins' "
+                (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده جزئیات</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'notificationListByDateReq'"
+                (click)="showMoreDetails(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده جزئیات</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistorySummary'"
+                (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات امنیتی</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده جزئیات امنیتی</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="_outputFileName =='ModifyList' || _outputFileName =='searchMosh'"

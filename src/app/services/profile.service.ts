@@ -160,6 +160,13 @@ export class ProfileService {
       });
     });
   }
+  postDataSourceByQuery = (method: ENInterfaces, id: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTSG(method, id).subscribe((res) => {
+        resolve(res)
+      });
+    });
+  }
   postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, body).subscribe((res) => {

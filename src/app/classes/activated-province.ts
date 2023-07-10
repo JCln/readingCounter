@@ -12,6 +12,10 @@ import {
     getDeleteDictionary,
     IENV,
     IENV_BROWSER_SETUP,
+    NotificationAlertTypesIds,
+    NotificationAlertTypesList,
+    NotificationMediaTypeIds,
+    NotificationMediaTypeList,
     reorderableTable,
     simafaImportStatus,
     timeout,
@@ -36,6 +40,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
@@ -53,6 +61,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
@@ -70,6 +82,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
@@ -87,6 +103,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
@@ -104,6 +124,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
@@ -121,6 +145,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     // ZONE 6 TEHRAN
     public static readonly REY = new ActivatedProvince(
@@ -139,6 +167,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     public static readonly TSW = new ActivatedProvince(
         ENActivateProvinceTitle.TSW,
@@ -156,6 +188,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
     public static readonly TEH1 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH1,
@@ -173,6 +209,10 @@ export class ActivatedProvince implements IENV {
         timeout.time,
         version.version,
         aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
     );
 
     private constructor(
@@ -202,10 +242,27 @@ export class ActivatedProvince implements IENV {
         public readonly years: { title: string, value: number }[],
         public readonly getDeleteDictionary: { id: number, title: string }[],
         public readonly hasCanclableSpinner: boolean,
-        public simafaImportStatus: { hasSingle: boolean, hasBatch: boolean },
-        public timeout: number,
-        public version: string,
-        public aboutUs: { email: string, tel: string, address: string, coName: string },
+        public readonly simafaImportStatus: { hasSingle: boolean, hasBatch: boolean },
+        public readonly timeout: number,
+        public readonly version: string,
+        public readonly aboutUs: { email: string, tel: string, address: string, coName: string },
+        public readonly NotificationAlertTypesList: { title: string, value: number, titleUnicode: string }[],
+        public readonly NotificationMediaTypeList: { title: string, value: number, titleUnicode: string }[],
+        public readonly NotificationMediaTypeIds: {
+            text: number,
+            image: number,
+            video: number,
+            audio: number
+        },
+        public readonly NotificationAlertTypesIds: {
+            confidential: number,
+            ordinary: number,
+            sensitive: number,
+            memory_full: number,
+            security: number,
+            license: number,
+            incorrect_time: number
+        }
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

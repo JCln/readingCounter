@@ -270,7 +270,7 @@ export class ReadingReportManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private jwtService: JwtService,
     private mapService: MapService,
     private profileService: ProfileService
@@ -311,44 +311,6 @@ export class ReadingReportManagerService {
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
   }
-  getReadingPeriodDictionary = (kindId: string): Promise<any> => {
-    return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
-  }
-  getKarbariDictionaryCode = (): Promise<any> => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
-  }
-  getReadingPeriodKindDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getPeriodKindDictionary();
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getFragmentMasterByZoneDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
-  }
-  getTrackingStatesDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getTrackingStatesDictionary();
-  }
-  getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
-  }
-  getTraverseDiffrentialDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getTraverseDifferentialDictionary();
-  }
-  getCounterReportByZoneDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterReportByZoneIdDictionary(zoneId);
-  }
-  getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
-  }
-  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
-  }
-  getQotrDictionary = () => {
-    return this.dictionaryWrapperService.getQotrDictionary();
-  }
-
-
   private datesValidation = (dataSource: object): boolean => {
     if (dataSource.hasOwnProperty('zoneId')) {
       if (MathS.isNull(dataSource['zoneId'])) {
@@ -367,6 +329,14 @@ export class ReadingReportManagerService {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
+    }
+    if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+      return false;
+    }
+    if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+      return false;
     }
     if (dataSource.hasOwnProperty('toDate')) {
       if (MathS.isNull(dataSource['toDate'])) {

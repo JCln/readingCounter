@@ -43,9 +43,9 @@ export class TraverseDifferentialComponent extends FactoryONE {
     }
 
     this.readingReportManagerService.getSearchInOrderTo();
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
-    this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.traverseDiffrentialDictionary = await this.readingReportManagerService.dictionaryWrapperService.getTraverseDifferentialDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
     this.receiveYear();
   }
@@ -54,13 +54,13 @@ export class TraverseDifferentialComponent extends FactoryONE {
   }
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.trvchReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.trvchReq.zoneId);
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.trvchReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportManagerService.trvchReq, this.readingReportManagerService._isOrderByDate);
@@ -71,7 +71,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForRRTraverseDifferential = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
-    this.karbariDictionaryByCode = await this.readingReportManagerService.getKarbariDictionaryCode();
+    this.karbariDictionaryByCode = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
 
     if (this.readingReportManagerService.trvchReq.traverseType == 0) {
       Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverseDifferential, this.karbariDictionaryByCode, 'newValue');

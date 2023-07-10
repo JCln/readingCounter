@@ -6,6 +6,7 @@ import { SecurityService } from 'services/security.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IPrivacy } from 'services/DI/privacies';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 
 @Component({
   selector: 'app-privacy',
@@ -42,8 +43,8 @@ export class PrivacyComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForPolicies.id = null;
     }
-    if (!this.closeTabService.saveDataForPolicies.id) {
-      this.closeTabService.saveDataForPolicies = await this.securityService.getPolicy();
+    if (this.closeTabService.saveDataForPolicies.id == 0 || this.closeTabService.saveDataForPolicies.id == null) {
+      this.closeTabService.saveDataForPolicies = await this.securityService.getDataSource(ENInterfaces.getPolicies);
     }
     this.auxDataSource.HSTSProtection = location.protocol == 'http:' ? false : true;
     this.privacyOptions = this.securityService.getPrivacyToggle();

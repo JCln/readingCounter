@@ -16,10 +16,20 @@ export enum ENClientServerErrors {
     'cs502' = 502,
     'cs504' = 504,
 }
+export interface IRequestLogInput {
+    jalaliDay: string
+    toTime: string,
+    fromTimeH: any,
+    fromTimeM: string,
+    fromTime: string,
+    toTimeH: string,
+    toTimeM: string,
+}
 export interface IRequestLog {
     id: number,
     userDisplayName: string,
     path: string,
+    readablePath: string,
     controllerAction: string,
     requestDateJalali: string,
     requestTime: string,
@@ -30,6 +40,33 @@ export interface IManageServerErrorsRes {
     message: string,
     statusCode: number,
     username: string
+}
+export interface IUserActivationREQ {
+    fromDate: string,
+    toDate: string,
+    userActivationLogTypes: number[]
+}
+export interface IUserActivation {
+    id: string,
+    targetUserId: string,
+    userId: string,
+    description: string,
+    changeDateTime: string,
+    changeDateJalali: string,
+    changeTime: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    userDisplayName: string,
+    targetUserDisplayName: string
 }
 export interface IManageServerErrors {
     name: string,
@@ -53,6 +90,7 @@ export enum ENManageServers {
     resetIIS = 'resetIIS',
     offlineTheAPP = 'offlineTheAPP',
     resetApp = 'resetApp',
+    checkAuthenticiy = "checkAuthenticiy"
 }
 export interface IManageDrivesInfo {
     driveName: string,

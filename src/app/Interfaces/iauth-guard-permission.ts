@@ -4,7 +4,8 @@ export interface ICredentials {
     appVersion: string,
     dntCaptchaText: string,
     dntCaptchaToken: string,
-    dntCaptchaInputText: string
+    dntCaptchaInputText: string,
+    clientDateTime: string,
 }
 export enum ENAuthTokenType {
     access_token = 'access_token',

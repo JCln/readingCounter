@@ -52,7 +52,7 @@ export class Auth2Component extends FactoryONE {
       this.closeTabService.saveDataForAppLevel2 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel2GET);
     }
 
-    this.authLevel1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();
+    this.authLevel1Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev1Dictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel2 = this.closeTabService.saveDataForAppLevel2.slice(0, index).concat(this.closeTabService.saveDataForAppLevel2.slice(index + 1));

@@ -19,6 +19,7 @@ export class DictionaryWrapperService {
   private zoneBoundDictionary: any = [];
   private countryDictionary: any = [];
   private authLev1Dictionary: any = [];
+  private userActivationLogTypes: any = [];
   private authLev2Dictionary: any = [];
   private authLev3Dictionary: any = [];
   private authLev4Dictionary: any = [];
@@ -128,6 +129,16 @@ export class DictionaryWrapperService {
     });
 
   }
+  getUserActivationLogTypesDictionary(): Promise<any> {
+    if (!MathS.isNull(this.userActivationLogTypes))
+      return this.userActivationLogTypes;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.requestLogUserActivationDictionary).toPromise().then(res => {
+        this.setUserActivationLogTypes(res);
+        resolve(this.userActivationLogTypes);
+      })
+    });
+  }
   getAuthLev1Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev1Dictionary))
       return this.authLev1Dictionary;
@@ -137,7 +148,6 @@ export class DictionaryWrapperService {
         resolve(this.authLev1Dictionary);
       })
     });
-
   }
   getAuthLev2Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev2Dictionary))
@@ -393,6 +403,9 @@ export class DictionaryWrapperService {
   private setAuthLev1Dictionary(v: any) {
     this.authLev1Dictionary = v;
   }
+  private setUserActivationLogTypes(v: any) {
+    this.userActivationLogTypes = v;
+  }
   private setAuthLev2Dictionary(v: any) {
     this.authLev2Dictionary = v;
   }
@@ -496,6 +509,7 @@ export class DictionaryWrapperService {
     this.counterStateByZoneIdDictionary.zoneId = null;
     this.counterStateByCodeDictionary.dictionary = [];
     this.counterStateByCodeDictionary.zoneId = null;
+    this.userActivationLogTypes = [];
     this.counterStateForModifyDictionary.dictionary = [];
     this.counterStateForModifyDictionary.zoneId = null;
     this.readingPeriodDictionary.dictionary = [];

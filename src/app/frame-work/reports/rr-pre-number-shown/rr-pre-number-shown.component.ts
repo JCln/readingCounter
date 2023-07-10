@@ -46,15 +46,15 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.converts();
     }
     this.readingReportManagerService.getSearchInOrderTo();
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.receiveYear();
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.preNumberShownReq, this.readingReportManagerService._isOrderByDate);
@@ -63,11 +63,11 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   }
   converts = async () => {
     const tempZone: number = parseInt(this.closeTabService.saveDataForRRPreNumShown[0].zoneId.toString());
-    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
-    this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
+    this.counterStateDictionary = await this.readingReportManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(tempZone);
+    this.counterStateByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(tempZone);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
-    this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
+    this.karbariDictionaryCode = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.qotrDictionary = await this.readingReportManagerService.dictionaryWrapperService.getQotrDictionary();
 
     this.closeTabService.saveDataForRRPreNumShown =
       Converter.convertIdsToTitles(

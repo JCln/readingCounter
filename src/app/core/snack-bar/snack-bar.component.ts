@@ -1,14 +1,13 @@
+import { EnvService } from 'services/env.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationMediaTypeIds } from 'interfaces/build';
 import { ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProfileService } from 'services/profile.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { MathS } from 'src/app/classes/math-s';
-import { ShowImgDgComponent } from 'src/app/shared/show-img-dg/show-img-dg.component';
-import { ShowVideoDgComponent } from 'src/app/shared/show-video-dg/show-video-dg.component';
-
 
 @Component({
   selector: 'app-snack-bar',
@@ -24,7 +23,8 @@ export class SnackBarComponent implements OnInit {
     private snackWrapperService: SnackWrapperService,
     private messageService: MessageService,
     public dialogService: DialogService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    private envService: EnvService
   ) { }
 
   openSnackBar(snack: ISnackBar) {
@@ -78,38 +78,17 @@ export class SnackBarComponent implements OnInit {
     this.snackSignal();
     this.toast();
   }
-  openImgDialog = (body: object) => {
-    this.ref = this.dialogService.open(ShowImgDgComponent, {
-      data: { body },
-      rtl: true,
-      width: '80%',
-    })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        console.log(res);
-
-    });
-  }
-  openVideoDialog = (body: object) => {
-    this.ref = this.dialogService.open(ShowVideoDgComponent, {
-      data: { body },
-      rtl: true,
-      width: '80%',
-    })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        console.log(res);
-
-    });
-  }
   openNotifyType = (message: any) => {
-
+    const envNotif = this.envService.NotificationMediaTypeIds;
     switch (message.clickName) {
-      case 'openVideoDialog':
-        this.openVideoDialog(message);
+      case envNotif.image:
+        this.snackWrapperService.openImgDialog(message);
         break;
-      case 'openImgDialog':
-        this.openImgDialog(message);
+      case envNotif.text:
+        this.snackWrapperService.openTextDialog(message);
+        break;
+      case envNotif.video:
+        this.snackWrapperService.openVideoDialog(message);
         break;
 
       default:

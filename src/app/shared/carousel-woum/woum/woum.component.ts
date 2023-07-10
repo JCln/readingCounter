@@ -113,7 +113,7 @@ export class WoumComponent implements OnChanges {
       await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.id)
 
     if (this.zoneId) {
-      this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
+      this.counterStatesDictionary = await this.trackingManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
     }
 
     if (!MathS.isNaN(this.zoneId)) {
@@ -212,12 +212,13 @@ export class WoumComponent implements OnChanges {
         return item;
     })
   }
-  connectToServer = () => {
+  connectToServer = async () => {
     this.checkItems();
     this.assignToObject();
     const verificationCheck = this.trackingManagerService.verificationOffloadModify(this.offloadModifyReq);
     if (verificationCheck) {
-      this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+      const res = await this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+      this.trackingManagerService.successSnackMessage(res.message);
     }
   }
   onThumbnailButtonClick() {

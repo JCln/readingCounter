@@ -1,0 +1,69 @@
+<section>
+    <div class="_container" *ngFor="let item of closeTabService.notificationMessages">
+        <div class="_icon">
+            <div class="__notificationMediaTypeId" [ngClass]="{
+                'pi pi-envelope':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.text,
+                'pi pi-image':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.image,
+                'pi pi-video':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.video,
+                'fa fa-file-audio-o':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.audio
+            }">
+            </div>
+        </div>
+        <div class="_content">
+            <div class="__sender">
+                فرستنده:
+                {{item.sender}}
+            </div>
+            <div class="__insertDateTimeJalali">
+                تاریخ:
+                {{item.insertDateTimeJalali}}
+            </div>
+            <div class="__deliverConfirm">
+                <div *ngIf="item.deliverConfirm;else notDelivered">
+                    <i class="tooltip">
+                        <img src="assets/imgs/other/check.png" alt="">
+                        <div class="tooltip_text_right">خوانده شده</div>
+                    </i>
+                </div>
+                <ng-template #notDelivered>
+                    <i (click)="confirmDelivery(item)" class="tooltip pi pi-eye _unreads">
+                        <div class="tooltip_text_right">تغییر وضعیت به خوانده شده</div>
+                    </i>
+                </ng-template>
+            </div>
+            <div class="__alertTypeId" [ngClass]="{
+                '_confidential':item.alertTypeId == envService.NotificationAlertTypesIds.confidential,
+                '_ordinary':item.alertTypeId == envService.NotificationAlertTypesIds.ordinary,
+                '_sensitive':item.alertTypeId == envService.NotificationAlertTypesIds.sensitive,
+                '_memory_full':item.alertTypeId == envService.NotificationAlertTypesIds.memory_full,                
+                '_security':item.alertTypeId == envService.NotificationAlertTypesIds.security,               
+                '_license':item.alertTypeId == envService.NotificationAlertTypesIds.license,               
+                '_incorrect_time':item.alertTypeId == envService.NotificationAlertTypesIds.incorrect_time
+            }">
+                نوع:
+                {{
+                item.alertTypeId == envService.NotificationAlertTypesIds.confidential ?'محرمانه'
+                :item.alertTypeId == envService.NotificationAlertTypesIds.ordinary ?'عادی'
+                :item.alertTypeId == envService.NotificationAlertTypesIds.sensitive ?'حساس'
+                :item.alertTypeId == envService.NotificationAlertTypesIds.memory_full ?'حافظه'
+                :item.alertTypeId == envService.NotificationAlertTypesIds.security ?'امنیتی'
+                :item.alertTypeId == envService.NotificationAlertTypesIds.license ?'مجوز دسترسی'
+                :item.alertTypeId == envService.NotificationAlertTypesIds.incorrect_time?'زمان نادرست'
+                :''
+                }}
+            </div>
+            <p class="__caption">
+                پیام:
+                {{item.caption}}
+            </p>
+            <button class="btn_2_o" (click)="openNotifyType(item)">مشاهده</button>
+        </div>
+    </div>
+</section>
+
+<div *ngIf="!this.closeTabService.notificationMessages.length">
+    <div class="empty_data">
+        پیامی برای نمایش وجود ندارد
+        <i class="fa fa-envelope-open-o"></i>
+    </div>
+</div>

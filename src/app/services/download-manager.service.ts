@@ -52,8 +52,11 @@ export class DownloadManagerService {
   separateImageFiles = (): IOnOffLoad[] => {
     const a = [];
     this.dataSource.filter(item => {
-      if (item.extention === '.jpg' || item.extention === '.jpeg'
-        || item.extention === '.JPG' || item.extention === '.JPEG') {
+      if (
+        item.extention.toLowerCase() === '.jpg' ||
+        item.extention.toLowerCase() === '.jpeg' ||
+        item.extention.toLowerCase() === '.png'
+      ) {
         a.push(item);
         this.overAllDetails.imageNumbers++;
       }

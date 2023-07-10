@@ -1,9 +1,7 @@
-import { MathS } from 'src/app/classes/math-s';
 import { Component, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 
 @Component({
@@ -21,7 +19,6 @@ export class ConfirmDialogExcelViewComponent {
   constructor(
     private mdDialogRef: MatDialogRef<ConfirmDialogExcelViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dictionaryWrapperService: DictionaryWrapperService,
     public readingReportManagerService: ReadingReportManagerService
   ) {
     this.disjunkElements();
@@ -45,10 +42,10 @@ export class ConfirmDialogExcelViewComponent {
   }
   private disjunkElements = async () => {
     if (this.data.data.includes('zoneId')) {
-      this.zoneDictionary = await this.dictionaryWrapperService.getZoneDictionary();
+      this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     }
     if (this.data.data.includes('karbari')) {
-      this.karbariByCodeDictionary = await this.dictionaryWrapperService.getkarbariCodeDictionary();
+      this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     }
   }
 

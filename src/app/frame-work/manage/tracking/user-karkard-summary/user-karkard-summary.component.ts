@@ -40,7 +40,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
       this._selectedColumns = this.trackingManagerService.columnManager.customizeSelectedColumns(this._selectCols);
     }
 
-    this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.trackingManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.getCounterStateHeaders(this.tempData);

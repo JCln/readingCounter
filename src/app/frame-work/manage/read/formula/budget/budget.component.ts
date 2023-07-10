@@ -72,8 +72,8 @@ export class BudgetComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForBadgetFormula) {
       this.closeTabService.saveDataForBadgetFormula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaBudgetAll);
     }
-    this.zoneDictionary = await this.formulasService.getZoneDictionary();
-    this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
+    this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
+    this.karbariCodeDictionary = await this.formulasService.dictionaryWrapperService.getkarbariCodeDictionary();
 
     this.toConvert();
   }

@@ -1,5 +1,5 @@
+import { CloseTabService } from 'services/close-tab.service';
 import { Component } from '@angular/core';
-import { IAddUserInfos } from 'interfaces/iuser-manager';
 
 @Component({
   selector: 'app-user-inputs',
@@ -7,19 +7,7 @@ import { IAddUserInfos } from 'interfaces/iuser-manager';
   styleUrls: ['./user-inputs.component.scss']
 })
 export class UserInputsComponent {
-  userInputForm: IAddUserInfos = {
-    userCode: null,
-    username: null,
-    password: null,
-    confirmPassword: null,
-    firstName: '',
-    sureName: '',
-    email: '',
-    mobile: '',
-    displayMobile: false,
-    displayName: '',
-    isActive: true,
-    deviceId: ''
-  };
-
+  constructor(
+    public closeTabService: CloseTabService
+  ) { }
 }

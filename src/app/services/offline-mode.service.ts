@@ -42,7 +42,7 @@ export class OfflineModeService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private snackWrapperService: SnackWrapperService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    public dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   getSearchTypes = (): Search[] => {
@@ -53,18 +53,12 @@ export class OfflineModeService {
       Search.billId,
     ]
   }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
   getLatestOnOffloadId = (body: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(ENInterfaces.getLatestOnOffloadId, body).toPromise().then(res => {
         resolve(res);
       })
     })
-  }
-  getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
   isNull = (): boolean => {
     if (MathS.isNull(this.fileForm)) {
@@ -120,14 +114,14 @@ export class OfflineModeService {
       return false;
     }
     if (
-      this.fileUploadSingleForm[0].name.split('.').pop() === 'jpg'
-      || this.fileUploadSingleForm[0].name.split('.').pop() === 'JPG'
-      || this.fileUploadSingleForm[0].name.split('.').pop() === 'JPEG'
-      || this.fileUploadSingleForm[0].name.split('.').pop() === 'jpeg') {
+      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'jpg' ||
+      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'jpeg' ||
+      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'png'
+    ) {
       return true;
     }
     else {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_JPG, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.should_insert_image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
   }

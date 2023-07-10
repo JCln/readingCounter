@@ -9,6 +9,7 @@ import { MathS } from '../classes/math-s';
 import { serverErrors, serverTasts } from './DI/manageServer';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class ManageServerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    public dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   getManageServerItems = () => {
@@ -55,9 +57,9 @@ export class ManageServerService {
     });
   }
 
-  postArray = (data: any[]): Promise<any> => {
+  postArray = (method: ENInterfaces, data: any): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTARRAYS(ENInterfaces.serverManagerErrors, data).toPromise().then(res => {
+      this.interfaceManagerService.POSTARRAYS(method, data).toPromise().then(res => {
         resolve(res);
       })
     });

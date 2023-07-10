@@ -35,7 +35,7 @@ export class CounterStateComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForCounterState) {
       this.closeTabService.saveDataForCounterState = await this.readManagerService.getDataSource(ENInterfaces.counterStateAll);
     }
-    this.zoneDictionary = await this.readManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }
   columnSelectedMenuDefault = () => {

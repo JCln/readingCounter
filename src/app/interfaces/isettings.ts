@@ -21,5 +21,17 @@ export interface IWaterMarkConfig {
     x: number,
     y: number,
     userDisplayName: string,
-    insertDateTime: string    
+    insertDateTime: string
+}
+export interface INotificationMessage {
+    id: string,
+    notificationMediaTypeId: number,
+    alertTypeId: number,
+    fileRepositoryId: string,
+    caption: string,
+    sender: string,
+    receiver: string,
+    insertDateTimeJalali: string,
+    deliverConfirm: true,
+    deliverDateTimeJalali: string
 }

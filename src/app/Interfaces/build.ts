@@ -17,6 +17,23 @@ export interface IENV {
     defaultAggregateTracks: boolean,
     version: string,
     aboutUs: { email: string, tel: string, address: string }
+    NotificationAlertTypesList: { title: string, value: number, titleUnicode: string }[]
+    NotificationMediaTypeList: { title: string, value: number, titleUnicode: string }[]
+    NotificationMediaTypeIds: {
+        text: number,
+        image: number,
+        video: number,
+        audio: number
+    },
+    NotificationAlertTypesIds: {
+        confidential: number,
+        ordinary: number,
+        sensitive: number,
+        memory_full: number,
+        security: number,
+        license: number,
+        incorrect_time: number
+    }
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -118,10 +135,50 @@ export class version {
     static readonly version = 'build: 0.0.0';
 }
 export class aboutUs {
-    static readonly email = 'infortarnama@gmail.com';
+    static readonly email = 'info@hivapardaz.ir';
     static readonly tel = '031-32121764';
     static readonly address = 'اصفهان، ارگ جهان نما، واحد 107';
     static readonly coName = 'هیوا پرداز اطلس';
+}
+export class NotificationAlertTypesList {
+    static readonly DEFAULT = new NotificationAlertTypesList([
+        { title: 'confidential', value: 0, titleUnicode: 'محرمانه' },
+        { title: 'ordinary', value: 1, titleUnicode: 'عادی' },
+        { title: 'sensitive', value: 2, titleUnicode: 'حساس' },
+        { title: 'memory_full', value: 4, titleUnicode: 'حافظه' },
+        { title: 'security', value: 8, titleUnicode: 'امنیتی' },
+        { title: 'license', value: 16, titleUnicode: 'مجوز دسترسی' },
+        { title: 'incorrect_time', value: 32, titleUnicode: 'زمان نادرست' },
+    ]);
+
+    private constructor(public readonly value: { title: string, value: number, titleUnicode: string }[]) {
+    }
+}
+export class NotificationMediaTypeList {
+    static readonly DEFAULT = new NotificationMediaTypeList([
+        { title: 'text', value: 0, titleUnicode: 'متن' },
+        { title: 'image', value: 1, titleUnicode: 'تصویر' },
+        { title: 'video', value: 2, titleUnicode: 'ویدیو' },
+        { title: 'audio', value: 4, titleUnicode: 'صوت' },
+    ]);
+
+    private constructor(public readonly value: { title: string, value: number, titleUnicode: string }[]) {
+    }
+}
+export class NotificationMediaTypeIds {
+    static text = 0;
+    static image = 1;
+    static video = 2;
+    static audio = 4;
+}
+export class NotificationAlertTypesIds {
+    static confidential = 0;
+    static ordinary = 1;
+    static sensitive = 2;
+    static memory_full = 4;
+    static security = 8;
+    static license = 16;
+    static incorrect_time = 32;
 }
 export class ENMapUrls {
     static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);

@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'tools', loadChildren: () => import('./tools/tools.module').then(tools => tools.ToolsModule) },
   { path: 'offline', loadChildren: () => import('./offline-mode/offline-mode.module').then(offlineMode => offlineMode.OfflineModeModule) },
   { path: 'flash', loadChildren: () => import('./moment-system/moment-system.module').then(momentSystem => momentSystem.MomentSystemModule) },
+  { path: 'reqLog', loadChildren: () => import('./request-log/request-log.module').then(requestLog => requestLog.RequestLogModule) },
 ];
 
 @NgModule({

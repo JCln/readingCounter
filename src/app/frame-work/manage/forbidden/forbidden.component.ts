@@ -30,7 +30,7 @@ export class ForbiddenComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForFNB = null;
     }
-    this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
+    this.zoneDictionary = await this.forbiddenService.dictionaryWrapperService.getZoneDictionary();
   }
   verification = async () => {
     const temp = this.forbiddenService.verificationForbidden(this.forbiddenService.forbiddenReq);

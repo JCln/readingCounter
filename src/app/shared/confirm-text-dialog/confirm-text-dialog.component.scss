@@ -19,11 +19,19 @@ h2 {
   padding: var(--font_05);
   text-align: center;
   color: var(--secondary_8);
+  white-space: pre-line;
 }
 
 ._title_2 {
   padding: 0;
-  text-align: right;
+  text-align: center;
+  font-size: var(--font_m);
+  color: var(--secondary_8);
+  width: 19rem;
+}
+
+u {
+  text-decoration: underline;
 }
 
 p {

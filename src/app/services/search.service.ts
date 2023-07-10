@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
@@ -61,7 +60,7 @@ export class SearchService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
     private allListsService: AllListsService,
     private pageSignsService: PageSignsService,
@@ -91,48 +90,12 @@ export class SearchService {
       Search.billId,
     ]
   }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getCounterReportByZoneDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterReportByZoneIdDictionary(zoneId);
-  }
-  getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
-  }
-  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
-  }
-  getCounterStateByCodeShowAllDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(zoneId);
-  }
-  getCounterStateByZoneShowAllDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(zoneId);
-  }
-  getQotrDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getQotrDictionary();
-  }
-  getReadingPeriodDictionary = (kindId: string): Promise<any> => {
-    return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
-  }
-  getReadingPeriodKindDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getPeriodKindDictionary();
-  }
-  getFragmentMasterDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
-  }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
         resolve(res);
       })
     });
-  }
-  getKarbariDictionaryCode = (): Promise<any> => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
-  }
-  getCounterStateDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateDictionary();
   }
   doSearch = (method: ENInterfaces, body: any): Promise<any> => {
     return new Promise((resolve) => {
@@ -182,6 +145,14 @@ export class SearchService {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
+    }
+    if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+      return false;
+    }
+    if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+      return false;
     }
     return true;
   }

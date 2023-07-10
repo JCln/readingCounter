@@ -33,7 +33,7 @@ export class DisposalHoursComponent extends FactoryONE {
       this.closeTabService.saveDataForRRDisposalHours = null;
       this.verification();
     }
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamdhchart);

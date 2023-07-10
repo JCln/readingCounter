@@ -1,0 +1,25 @@
+<section *ngIf="dataSource">
+
+    <h1 class="title">جزئیات تاریخچه تنظیمات امنیتی</h1>
+    <hr>
+    <form #form="ngForm" class="content">
+        <div *ngFor="let mainDatas of columnManager.columnSelectedMenus('policyHistoryDetails')">
+            <ng-container *ngIf="mainDatas.isBoolean; else checkboxes">
+                <div class="input_2">
+                    <div class="_key">{{mainDatas.header}}</div>
+                    <mat-checkbox class="_value" [disabled]="true" name="{{mainDatas.field}}"
+                        [(ngModel)]="dataSource[mainDatas.field]">
+                    </mat-checkbox>
+                </div>
+            </ng-container>
+            <ng-template #checkboxes>
+                <div class="input_2">
+                    <div class="_key">{{mainDatas.header}}</div>
+                    <input [readonly]="true" class="_value" name="{{mainDatas.field}}"
+                        [(ngModel)]="dataSource[mainDatas.field]">
+                </div>
+            </ng-template>
+        </div>
+    </form>
+
+</section>

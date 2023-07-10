@@ -45,22 +45,25 @@ import {
   IUserKarkard,
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
-import { IIpRules, IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
-import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
+import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInput, IServerOSInfo, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
+import { ILicenseInfo, INotificationMessage, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
-import { IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
+import { IAddUserInfos, IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-import { IPolicies } from './DI/privacies';
+import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
+import { ENReadingReports } from 'interfaces/reading-reports';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CloseTabService {
-  constructor(private utilsService: UtilsService) { }
+  ENReadingReports = ENReadingReports;
+
+  constructor(public utilsService: UtilsService) { }
   /* TAB WRAPPER */
   tabs: ITabs[] = [];
 
@@ -95,16 +98,47 @@ export class CloseTabService {
   saveDataForZone: IZoneManager[];
   saveDataForZoneBound: IZoneBoundManager[];
 
-  saveDataForAllUsers: IUserManager[];
+  saveDataForUserMasterHistory: IRoleHistory[] = [];
+  saveDataForUserDetailsHistory: any = [];
+  saveDataForUserMasterDetailsHistoryReq = {
+    id: ''
+  };
+
+  saveDataForUserRoleHistory: IRoleHistory[] = [];
+  saveDataForUserRoleHistorySumReq = {
+    id: ''
+  };
+  _userAddUserInfos: IAddUserInfos = {
+    userCode: null,
+    username: null,
+    password: null,
+    confirmPassword: null,
+    firstName: '',
+    sureName: '',
+    email: '',
+    mobile: '',
+    displayMobile: false,
+    displayName: '',
+    isActive: true,
+    deviceId: ''
+  };
+
+  saveDataForAllUsers: IUserManager[] = [];
   saveDataForUserOnlines: IUserOnlines[];
   saveDataForEditUsers: any;
   saveDataForEditUsersGUID: string;
   saveDataForRoleManager: IRoleManager[];
   saveDataForUserLoggins: any;
   saveDataForEditOnRole: any;
+  saveDataForRoleHistory: IRoleHistory[] = []
   saveDataForAddUsers: any;
   saveDataForUserSearch: any;
   saveDataForUserSearchRes: any;
+  usersLogins: IUsersLoginBriefInfo[] = [];
+  usersLoginsReq = {
+    fromDate: '',
+    toDate: '',
+  }
 
   // track manager
   saveDataForTrackImported: ITracking[];
@@ -230,11 +264,15 @@ export class CloseTabService {
   saveDataForLMModify: IOnOffLoadFlat[];
   saveDataForLMGeneralModifyReq: any;
   saveDataForLMGeneralModify: IOnOffLoadFlat[];
-  saveDataForLMGeneralGroupModifyReq: any = {
+  saveDataForLMGeneralGroupModifyReq = {
     GUid: '',
-    counterStateValue: null
+    groupId: '',
+    counterStateValue: null,
+    multiSelectCounterStateId: [],
+    multiSelectPreCounterStateCode: []
   };
   saveDataForLMGeneralGroupModify: IOnOffLoadFlat[] = [];
+  AUXSaveDataForLMGeneralGroupModify: IOnOffLoadFlat[] = [];
   // dbf output manager
   saveDataForOutputDBF: any;
   saveDataForOutputDBFEqamatBagh: any;
@@ -253,8 +291,18 @@ export class CloseTabService {
   saveDataForRRPerformance: IAnalyzeRes[];
   saveDataForDMAAnalyze: IReadingTimeRes[];
   saveDataForRRDetails: IReadingReportDetails[];
-  saveDataForRequestLog: IRequestLog[];
-  saveDataForRequestLogReq: any = {
+  saveDataForRequestLogListUser: IRequestLog[];
+  saveDataForRequestLogAnonymous: IRequestLog[];
+  saveDataForRequestLogListUserReq: IRequestLogInput = {
+    jalaliDay: '',
+    fromTimeH: '',
+    fromTimeM: '',
+    fromTime: '',
+    toTimeH: '',
+    toTimeM: '',
+    toTime: ''
+  }
+  saveDataForRequestLogAnonymousReq: IRequestLogInput = {
     jalaliDay: '',
     fromTimeH: '',
     fromTimeM: '',
@@ -285,9 +333,21 @@ export class CloseTabService {
   }
   saveDataForMsDriveInfo: IManageDrivesInfo[];
   saveDataForServerErrors: IManageServerErrorsRes[];
+  saveDataForServerUserActivation: IUserActivation[];
+  saveDataForServerUserActivationReq: IUserActivationREQ = {
+    fromDate: '',
+    toDate: '',
+    userActivationLogTypes: []
+  };
   saveDataForIpSpecialRules: any;
   // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
+  notificationMessages: INotificationMessage[] = [];
+  notificationListByDate: INotificationMessage[] = [];
+  notificationListByDateReq = {
+    fromDate: '',
+    toDate: '',
+  }
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: IFragmentMaster[];
@@ -297,6 +357,7 @@ export class CloseTabService {
   saveDataForTextOutput: ITextOutput[];
   saveDataForToolsExcelViewer: IDynamicExcelReq[];
   saveDataForDynamicReports: IDynamicReportsRes[];
+  saveDataForPoliciesHistory: IPolicies[] = [];
   saveDataForPolicies: IPolicies = {
     id: 0,
     enableValidIpCaptcha: false,
@@ -310,7 +371,19 @@ export class CloseTabService {
     passwordContainsLowercase: false,
     passwordContainsUppercase: false,
     passwordContainsNonAlphaNumeric: false,
-    canUpdateDeviceId: false
+    canUpdateDeviceId: false,
+    userDisplayName: '',
+    ip: '',
+    browserVersion: '',
+    browserTitle: '',
+    browserShortTitle: '',
+    browserEngine: '',
+    browserType: '',
+    osVersion: '',
+    osTitle: '',
+    osPlatform: '',
+    osShortTitle: '',
+    userAgent: ''
   };
   saveDataForFNB: IForbiddenManager[];
   saveDataForProfile: any;
@@ -331,7 +404,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrExcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterMark, url: EN_Routes.wrSettingsWaterMark },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
-    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralGModify },
+    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, value_2: ENEssentialsToSave.AUXSaveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralGModify },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
@@ -359,10 +432,15 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.wrmalcr },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall },
+    { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.userRoleHistory },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserRoleHistory, url: EN_Routes.userRoleHistoryDetails },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserMasterHistory, url: EN_Routes.userMasterHistory },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserDetailsHistory, url: EN_Routes.userDetailsHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
-    { id: 1, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
+    { id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },
     { id: 1, value: ENEssentialsToSave.saveDataForEditOnRole, url: EN_Routes.wrmueor },
+    { id: 1, value: ENEssentialsToSave.saveDataForRoleHistory, url: EN_Routes.roleHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForCountry, url: EN_Routes.wrmzsc },
     { id: 1, value: ENEssentialsToSave.saveDataForProvince, url: EN_Routes.wrmzsp },
     { id: 1, value: ENEssentialsToSave.saveDataForRegion, url: EN_Routes.wrmzsr },
@@ -377,6 +455,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
     { id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg },
     { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: EN_Routes.wrpolicies },
+    { id: 1, value: ENEssentialsToSave.saveDataForPoliciesHistory, url: EN_Routes.policyHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded },
@@ -401,13 +480,18 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRRLocked, url: EN_Routes.wrrptsmamlocked },
     { id: 1, value: ENEssentialsToSave.saveDataForRROffloadedKarkard, url: EN_Routes.wrrptsmamoffkarkard },
     { id: 1, value: ENEssentialsToSave.saveDataForRRFragment, url: EN_Routes.wrRptsMamFragment },
+    { id: 2, value: ENEssentialsToSave.notificationMessages, url: EN_Routes.NotificationMessages },
     { id: 1, value: ENEssentialsToSave.saveDataForRRMaster, url: EN_Routes.wrrptsexmmaster },
     { id: 1, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm },
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, url: EN_Routes.wrrptsgalleryai },
+    { id: 2, req: ENEssentialsToSave.notificationListByDateReq, value: ENEssentialsToSave.notificationListByDate, url: EN_Routes.NotificationListByUrl },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
-    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
+    { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.usersLogins },
+    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
+    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
+    { id: 2, req: ENEssentialsToSave.saveDataForServerUserActivationReq, value: ENEssentialsToSave.saveDataForServerUserActivation, url: EN_Routes.userActivation },
     { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
@@ -427,21 +511,35 @@ export class CloseTabService {
   cleanArrays = () => {
     this.tabs = [];
   }
-  setAll(obj, val) {
-    if (obj) {
-      if (typeof obj === 'string') {
-        obj = '';
-      }
-      if (typeof obj === 'boolean') {
-        obj = false;
-      }
-      else {
-        Object.keys(obj).forEach(function (index) {
-          obj[index] = val
-        });
-      }
-    }
-  }
+  // setAll(value, val) {
+  //   if (value) {
+  //     if (typeof value === 'string') {
+  //       value = '';
+  //     }
+  //     if (typeof value === 'boolean') {
+  //       value = false;
+  //     }
+  //     else {
+  //       Object.keys(value).forEach(function (index) {
+  //         value[index] = val
+  //       });
+  //     }
+  //   }
+  // }
+  // requestsToDefault = (innerVal: any) => {
+  //   for (const property in innerVal) {
+  //     // if value exists in property value
+  //     //  what if another number exists
+  //     if (innerVal[property]) {
+  //       if (typeof innerVal[property] === 'string') {
+  //         innerVal[property] = '';
+  //       }
+  //       if (typeof innerVal[property] === 'number') {
+  //         innerVal[property] = null;
+  //       }
+  //     }
+  //   }
+  // }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
@@ -449,19 +547,24 @@ export class CloseTabService {
       /* commented due to unValid values after refresh page
       TODO body request vals have to back to defualt values after refresh page happended
        */
-      // this.setAll(this[this.val[index].req], null);
+      // this.setAll(this[this.val[index].req], null);      
+      // console.log(1);
+
+      // this.requestsToDefault(this[this.val[index].req]);
     }
     /* TODO: make null all objects
     should separate objects and array of objects
 */
     this.cleanArrays();
   }
+  // every component dataSource to '' value, may better implement happends
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
         this[item.value] = '';
         this[item.value_2] = '';
         // this.setAll(this[item.req], null);
+        // this.requestsToDefault(this[item.req]);
       }
       else {
         if (url.includes(item.url)) {
@@ -471,6 +574,12 @@ export class CloseTabService {
         }
       }
     })
+  }
+  receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
+    this[variable].fromDate = $event;
+  }
+  receiveToDateJalali = (variable: ENReadingReports, $event: string) => {
+    this[variable].toDate = $event;
   }
 
 }

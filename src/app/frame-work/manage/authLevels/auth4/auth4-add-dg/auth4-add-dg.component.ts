@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { AuthsManagerService } from 'services/auths-manager.service';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SectionsService } from 'services/sections.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class Auth4AddDgComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth4AddDgComponent>,
     private sectionsService: SectionsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
     private authsManagerService: AuthsManagerService
   ) {
     data = data.di;
@@ -38,7 +36,7 @@ export class Auth4AddDgComponent {
 
     if (this.sectionsService.sectionVertification()) {
       if (await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel4ADD, this.form.value)) {
-        this.dictionaryWrapperService.cleanSingleDictionary('authLev4Dictionary');
+        this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev4Dictionary');
         this.dialogRef.close(this.form.value);
       }
     }

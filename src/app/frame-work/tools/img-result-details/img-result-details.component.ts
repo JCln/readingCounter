@@ -32,8 +32,8 @@ export class ImgResultDetailsComponent extends FactoryONE {
   }
 
   classWrapper = async () => {
-    this.zoneDictionary = await this.toolsService.getZoneDictionary();
-    this.imageAttrAllDictionary = await this.toolsService.getImageAttributionAllDictionary();
+    this.zoneDictionary = await this.toolsService.dictionaryWrapperService.getZoneDictionary();
+    this.imageAttrAllDictionary = await this.toolsService.dictionaryWrapperService.getImageAttrAllDictionary();
     if (this.closeTabService.saveDataForImgResultDetailsRes) {
       this.allImagesDataSource = this.closeTabService.saveDataForImgResultDetailsResFirst;
     }

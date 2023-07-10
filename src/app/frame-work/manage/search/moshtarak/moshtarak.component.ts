@@ -42,16 +42,16 @@ export class MoshtarakComponent extends AllListsFactory {
 
   converts = async () => {
     if (this.searchService.searchReqMosh.zoneId) {
-      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeShowAllDictionary(this.searchService.searchReqMosh.zoneId);
-      this.counterStateDictionary = await this.searchService.getCounterStateByZoneShowAllDictionary(this.searchService.searchReqMosh.zoneId);
+      this.counterStateByCodeDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.searchService.searchReqMosh.zoneId);
+      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.searchService.searchReqMosh.zoneId);
       Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
     else {
-      this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
+      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateDictionary();
     }
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
-    this.qotrDictionary = await this.searchService.getQotrDictionary();
+    this.karbariDictionaryCode = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.qotrDictionary = await this.searchService.dictionaryWrapperService.getQotrDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.zoneDictionary, 'zoneId');
@@ -90,7 +90,7 @@ export class MoshtarakComponent extends AllListsFactory {
     this.eslahType = this.listManagerService.getOffloadModifyTypeSimple();
   }
   getZoneDictionary = async () => {
-    this.zoneDictionary = JSON.parse(JSON.stringify(await this.searchService.getZoneDictionary()));
+    this.zoneDictionary = JSON.parse(JSON.stringify(await this.searchService.dictionaryWrapperService.getZoneDictionary()));
     if (this.zoneDictionary[0].id !== 0)
       this.zoneDictionary.unshift({ id: 0, title: 'مناطق مجاز', isSelected: true })
   }

@@ -40,11 +40,11 @@ export class ListSearchMoshDgComponent implements OnInit {
   }
   converts = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-    this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
-    this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
-    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
+    this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
+    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
+    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
 
 
     this.dataSource =

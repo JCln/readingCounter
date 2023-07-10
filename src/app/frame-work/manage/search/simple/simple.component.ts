@@ -51,8 +51,8 @@ export class SimpleComponent implements OnInit, OnDestroy {
     }
 
     this.receiveYear();
-    this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
-    this.zoneDictionary = await this.searchService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
     this.searchService.getSearchInOrderTo();
   }
   ngOnInit() {
@@ -70,7 +70,7 @@ export class SimpleComponent implements OnInit, OnDestroy {
     this._years = this.searchService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   routeToLMAll = ($event: any) => {
     const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);

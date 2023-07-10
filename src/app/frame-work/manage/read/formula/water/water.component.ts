@@ -87,8 +87,8 @@ export class WaterComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForWaterFormula) {
       this.closeTabService.saveDataForWaterFormula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaWaterAll);
     }
-    this.zoneDictionary = await this.formulasService.getZoneDictionary();
-    this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
+    this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
+    this.karbariCodeDictionary = await this.formulasService.dictionaryWrapperService.getkarbariCodeDictionary();
 
     this.toConvert();
   }
@@ -114,7 +114,7 @@ export class WaterComponent extends FactoryONE {
 
   firstConfirmDialog = async (rowData: object) => {
     console.log(rowData);
-    
+
     const a = await this.formulasService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId + '،  کاربری مشترکین: ' + rowData['dataSource'].karbariMoshtarakinCode);
     if (a)
       this.removeRow(rowData['dataSource'].id, rowData['ri']);

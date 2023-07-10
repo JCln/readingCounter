@@ -7,7 +7,7 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(21rem, auto));
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
@@ -21,6 +21,7 @@
 
 textarea {
   background: var(--secondary_3);
+  color: var(--primary_7);
   font-size: var(--font_s);
   font-weight: 600;
   text-align: right;
@@ -101,16 +102,20 @@ textarea {
 
 // ///// local storage content
 .static_height {
-  height: 80vh;
   overflow: auto;
   padding: var(--font_xs);
   background: var(--secondary_1);
   border-radius: 15px;
+  margin: .5rem 0;
 
   #btn {
     width: 10.5rem;
     color: var(--primary_2);
   }
+}
+
+._card {
+  width: 21rem;
 }
 
 .main_content {
@@ -157,7 +162,7 @@ textarea {
 h1 {
   text-align: center;
   color: var(--primary_3);
-  margin-bottom: var(--font_m);
+  margin-bottom: var(--font_05);
   font-size: var(--font_l);
 }
 
@@ -174,6 +179,91 @@ h2 {
     border: none;
     border-radius: $border_15;
     background: var(--secondary_3);
+    color: var(--primary_7);
   }
 
+}
+
+._container {
+  position: relative;
+  display: flex;
+  margin: auto;
+  min-height: 8.5rem;
+  width: 21rem;
+  color: var(--primary_8);
+  opacity: .6;
+  border-left: 4px solid var(--primary_2);
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px 1px var(--secondary_7);
+
+  @media (min-width: 550px) {
+    width: 25rem;
+  }
+
+  ._content {
+    opacity: 1;
+    margin-bottom: 1.8rem;
+  }
+
+  ._icon {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    min-width: 5rem;
+    font-size: 5rem;
+    font-family: 'primeicons';
+  }
+
+  .__notificationMediaTypeId {
+    font-size: 3rem;
+    color: var(--primary_2);
+  }
+
+  .__caption {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    padding-right: 1px;
+    margin-bottom: var(--font_05);
+    height: 6rem;
+    font-size: var(--font_s);
+  }
+
+  .__sender {
+    font-size: var(--font_m);
+  }
+
+  .__timer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    bottom: .1rem;
+    left: 0.2rem;
+    padding: .5rem;
+    border-radius: $border_7;
+    font-size: var(--font_s);
+    background: var(--primary_2);
+    color: var(--secondary_1);
+    font-weight: 600;
+  }
+
+  .__close {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    top: 0.1rem;
+    left: 0.2rem;
+    padding: 0.5rem;
+    border-radius: 7px;
+    font-size: var(--font_ss);
+  }
 }

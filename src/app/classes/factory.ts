@@ -88,7 +88,7 @@ export class FactorySharedPrime implements OnChanges {
         //restore original order
         this._selectedColumns = this._selectCols.filter(col => val.includes(col));
     }
-    filterCounterState = () => {
+    hasBeenReadsToggler = () => {
         // if OnOffloadComponent rendering
         if (this._checkUpName == 'allComponent') {
             let temp: any[] = [];
@@ -155,7 +155,7 @@ export class FactorySharedPrime implements OnChanges {
     }
     ngOnChanges(): void {
         this.restoreLatestColumnChanges();
-        this.filterCounterState();
+        this.hasBeenReadsToggler();
     }
     setTraslateToPrimeNgTable = () => {
         this.config.setTranslation({
@@ -250,17 +250,20 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
         this.filterableDataSource = e;
     }
     doShowCarousel = (dataSource: any) => {
-        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-
-            data: { _data: dataSource, _isNotForbidden: true },
-            rtl: true,
-            width: '80%'
-        })
-        this.ref.onClose.subscribe(async res => {
-            if (res)
-                console.log(res);
-
-        });
+        if (dataSource.imageCount) {
+            this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+                data: { _data: dataSource, _isNotForbidden: true },
+                rtl: true,
+                width: '80%'
+            })
+            this.ref.onClose.subscribe(async res => {
+                if (res)
+                    console.log(res);
+            });
+        }
+        else {
+            this.listManagerService.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
+        }
     }
     routeToOffload = (event: object) => {
         setTimeout(() => {

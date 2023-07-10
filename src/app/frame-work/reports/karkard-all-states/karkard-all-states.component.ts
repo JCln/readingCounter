@@ -48,10 +48,10 @@ export class KarkardAllStatesComponent extends FactoryONE {
     }
 
     this.readingReportManagerService.getSearchInOrderTo();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
 
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.receiveYear();
   }
   insertSelectedColumns = () => {
@@ -68,13 +68,13 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.offKarkardAllStatesReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.offKarkardAllStatesReq.zoneId);
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.offKarkardAllStatesReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.offKarkardAllStatesReq, this.readingReportManagerService._isOrderByDate);

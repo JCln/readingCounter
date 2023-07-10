@@ -63,7 +63,7 @@ export class TrackingManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private allListsService: AllListsService,
     private jwtService: JwtService,
     public columnManager: ColumnManager,
@@ -190,21 +190,13 @@ export class TrackingManagerService {
     }
     return this.utilsService.firstConfirmDialog(a);
   }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
-  }
-  getCounterStateByIdDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
-  }
-  postOffloadModifyEdited = (body: IOffloadModifyReq) => {
+  postOffloadModifyEdited = (body: IOffloadModifyReq): Promise<any> => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
-
-    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
-      this.successSnackMessage(res.message);
-    })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
+        resolve(res);
+      })
+    });
   }
 
   // imported service control
@@ -301,7 +293,7 @@ export class TrackingManagerService {
       return false;
     }
     if (this.isValidationNull(object.counterNumber)) {
-      this.showWarnMessage(EN_messages.format_invalid_counterNumber);
+      this.showWarnMessage(EN_messages.insert_counterNumber);
       return false;
     }
     if (!MathS.lengthControl(object.counterNumber, object.counterNumber, 1, 7)) {

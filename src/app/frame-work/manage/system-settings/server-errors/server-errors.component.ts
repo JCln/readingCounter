@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ManageServerService } from 'services/manage-server.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -22,7 +23,7 @@ export class ServerErrorsComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    this.closeTabService.saveDataForServerErrors = await this.manageServerService.postArray(this.selectedErrors);
+    this.closeTabService.saveDataForServerErrors = await this.manageServerService.postArray(ENInterfaces.serverManagerErrors, this.selectedErrors);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

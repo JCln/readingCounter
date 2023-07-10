@@ -76,6 +76,7 @@ main {
 }
 
 .version {
+  margin-left: auto;
   color: var(--primary_7);
   font-size: var(--font_m);
   font-weight: 600;
@@ -112,7 +113,7 @@ input:-internal-autofill-selected {
 .info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--font_025);
   margin-top: var(--font_2);
 
   i {

@@ -5,9 +5,13 @@ main {
     display: grid;
     justify-content: center;
     direction: rtl;
-    height: 80vh;//height of page, to show 
-    gap: .5rem;
-    margin: 1rem;
+    height: 80vh; //height of page, to show 
+    gap: var(--font_03);
+    margin: var(--font_ss) 0 0;
+
+    @media (min-width:770px) {
+        height: 70vh;
+    }
 }
 
 section {
@@ -15,6 +19,7 @@ section {
     background-color: var(--secondary_1);
     width: 21rem;
     height: 100%;
+    border-radius: $border_10;
     box-shadow: 2px 3px 2px 0px var(--secondary_2);
 
     h3 {
@@ -24,7 +29,7 @@ section {
 
     @media (min-width:770px) {
         width: 27rem;
-        height: 9rem;
+        height: 7rem;
     }
 }
 
@@ -44,10 +49,25 @@ section {
     height: inherit;
     font-weight: 600;
     font-size: 1.2rem;
+    border-radius: 0px $border_10 $border_10 0;
 
     @media (min-width:770px) {
         width: 15rem;
     }
+}
+
+.color_0 {
+    background-color: #b8c3d0;
+
+    ._logo {
+        width: 5rem;
+        height: 5rem;
+        margin: auto;
+    }
+}
+
+._email {
+    font-size: var(--font_ss);
 }
 
 .color_1 {

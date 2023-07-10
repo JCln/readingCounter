@@ -30,7 +30,7 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
       this.closeTabService.saveDataForImageAttrAnalyze = null;
       this.verification();
     }
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrAnalyzeReq, true);

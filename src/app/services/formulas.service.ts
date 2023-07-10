@@ -19,7 +19,7 @@ export class FormulasService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService
   ) { }
 
@@ -68,12 +68,6 @@ export class FormulasService {
         resolve(res);
       })
     });
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getKarbariCodeDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
   postExcelFile = async (method: ENInterfaces) => {
     const formData: FormData = new FormData();
@@ -188,17 +182,25 @@ export class FormulasService {
     return true;
   }
   private fromToValidation = (dynamicValue: any): boolean => {
-    if (dynamicValue.hasOwnProperty('toDate')) {
-      if (!MathS.lengthControl(dynamicValue.toDate, dynamicValue.toDate, 9, 10)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
+    if (dynamicValue.hasOwnProperty('fromDate')) {
+      if (!MathS.lengthControl(dynamicValue.fromDate, dynamicValue.fromDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
         return false;
       }
     }
-    if (dynamicValue.hasOwnProperty('fromDate')) {
-      if (!MathS.lengthControl(dynamicValue.fromDate, dynamicValue.fromDate, 9, 10)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
+    if (dynamicValue.hasOwnProperty('toDate')) {
+      if (!MathS.lengthControl(dynamicValue.toDate, dynamicValue.toDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
         return false;
       }
+    }
+    if (!MathS.lengthControl(dynamicValue['fromDate'], dynamicValue['fromDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+      return false;
+    }
+    if (!MathS.lengthControl(dynamicValue['toDate'], dynamicValue['toDate'], 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+      return false;
     }
     return true;
   }

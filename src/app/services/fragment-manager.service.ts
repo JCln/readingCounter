@@ -30,7 +30,7 @@ export class FragmentManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
@@ -96,17 +96,6 @@ export class FragmentManagerService {
   routeToFragmentMaster = () => {
     this.utilsService.routeTo(EN_Routes.wrmrnob);
   }
-  /**/
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getPeriodKindDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getPeriodKindDictionary();
-  }
-  getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
-  }
-
   /* VALIDATION */
   private nullValidation = (sth: string | number, message?: string): boolean => {
     if (MathS.isNull(sth)) {

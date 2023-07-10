@@ -20,7 +20,7 @@
         <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
             <div class="p-field-radiobutton">
                 <p-radioButton name="orderByDate" [value]="orderType.id"
-                    [(ngModel)]="listManagerService.counterStateValue" [inputId]="orderType.id"
+                    [(ngModel)]="listManagerService.counterStateGeneralList" [inputId]="orderType.id"
                     (onClick)="updateOnChangedCounterState(orderType.id)">
                 </p-radioButton>
                 <label [for]="orderType.id">{{orderType.title}}</label>

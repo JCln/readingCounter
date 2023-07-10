@@ -20,8 +20,8 @@
         <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
             <div class="p-field-radiobutton">
                 <p-radioButton name="orderByDate" [value]="orderType.id"
-                    [(ngModel)]="listManagerService.counterStateValue" [inputId]="orderType.id"
-                    (onClick)="updateOnChangedCounterState(orderType.id)">
+                    [(ngModel)]="listManagerService.counterStateGeneralGroupList" [inputId]="orderType.id"
+                    (onClick)="updateOnChangedCounterState(orderType.id,true)">
                 </p-radioButton>
                 <label [for]="orderType.id">{{orderType.title}}</label>
             </div>
@@ -67,10 +67,11 @@
                     </i>
                 </div>
                 <div class="left_side">
-                    <i (click)="filterCounterState()">
+                    <i (click)="hasBeenReadsToggler()">
                         <label class="font_family"
-                            for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}}) نمایش قرائت شده
-                            ها</label>
+                            for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}})
+                            نمایش قرائت شده ها
+                        </label>
                         <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox"
                             [binary]="true">
                         </p-checkbox>
@@ -101,9 +102,11 @@
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
                         field="counterStateId" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [maxSelectedLabels]="1" [ngModel]="value"
-                                [options]="counterStateByZoneDictionary" (onChange)="filterOptions($event, 'first')"
-                                optionLabel="title" optionValue="title" [filter]="true" showClear="true">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.saveDataForLMGeneralGroupModifyReq.multiSelectCounterStateId"
+                                [options]="counterStateByZoneDictionary"
+                                (onChange)="filterOptions($event.value, 'first')" optionLabel="title"
+                                optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -113,11 +116,13 @@
                         </ng-template>
                     </p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
-                        field="counterStateId" matchMode="in" [showMenu]="false">
+                        field="preCounterStateCode" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [maxSelectedLabels]="1" [ngModel]="value"
-                                [options]="counterStateByCodeDictionary" (onChange)="filterOptions($event, 'second')"
-                                optionLabel="title" optionValue="title" [filter]="true" showClear="true">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.saveDataForLMGeneralGroupModifyReq.multiSelectPreCounterStateCode"
+                                [options]="counterStateByCodeDictionary"
+                                (onChange)="filterOptions($event.value, 'second')" optionLabel="title"
+                                optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -140,7 +145,7 @@
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isSelectOption;else selectOption">
                         <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
-
+                        <!-- For Modify type inside Table body -->
                         <ng-container *ngIf="(col.field == 'modifyType'); else secondDict">
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
@@ -157,13 +162,17 @@
                         </ng-container>
                         <ng-template #secondDict>
                             <ng-container>
+                                <!-- For counterStateId only and should sync with generalGroupModify in columnManager.ts -->
                                 <p-cellEditor>
-                                    <ng-template pTemplate="input">
+                                    <ng-template *ngIf="col.field == 'counterStateId'" pTemplate="input">
                                         <p-dropdown name="drops" [options]="counterStateByZoneDictionary"
                                             [(ngModel)]="dataSource[col.field]" [placeholder]="dataSource[col.field]"
                                             [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                             (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
                                         </p-dropdown>
+                                    </ng-template>
+                                    <ng-template *ngIf="col.field == 'preCounterStateCode'" pTemplate="input">
+                                        {{dataSource[col.field]}}
                                     </ng-template>
                                     <ng-template pTemplate="output">
                                         {{dataSource[col.field]}}
@@ -290,9 +299,10 @@
                 </td>
                 <!-- for making readable and compatible singleton dataType -->
                 <td class="__columns" (click)="doShowCarousel(dataSource)">
-                    <span class="ui-column-title">بررسی عکس/صوت</span>
+                    <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                     <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons pi pi-camera">
-                        <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                        <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
+                        </div>
                     </i>
                 </td>
                 <td class="__columns" class="error_info">

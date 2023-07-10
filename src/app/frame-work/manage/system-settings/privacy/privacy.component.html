@@ -86,7 +86,8 @@
                 <span>
                     <ul>
                         <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpCaptcha">
+                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
+                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpCaptcha">
                                 فعال سازی captcha
                             </mat-checkbox>
                         </li>

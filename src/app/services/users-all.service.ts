@@ -64,9 +64,11 @@ export class UsersAllService {
   snackBarMessageSuccess = (res: IResponses) => {
     this.utilsService.snackBarMessageSuccess(res.message);
   }
-  changeUserStatus = (method: ENInterfaces, UUID: string) => {
-    this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
-      this.snackBarMessageSuccess(res);
+  changeUserStatus = (method: ENInterfaces, UUID: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
+        resolve(res)
+      });
     });
   }
   routeToUsersAll = () => {
@@ -101,7 +103,6 @@ export class UsersAllService {
   firstConfirmDialog = (dialogConfig: any): Promise<any> => {
     const a = {
       messageTitle: dialogConfig.messageTitle,
-      messageTitleTwo: dialogConfig.messageTitleTwo,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
@@ -120,7 +121,7 @@ export class UsersAllService {
     return true;
   }
   private getAUserProvince = (zoneItems: any): number[] => {
-    let selectedZones = [0];
+    let selectedZones: any[] = [];
     zoneItems.map(proIt => {
       proIt.regionItems.map(regionIt => {
         regionIt.zoneItems.map(zoneIt => {
@@ -181,7 +182,7 @@ export class UsersAllService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
       return false;
     }
-    if (MathS.isNull(dataSource.selectedZones[1])) {
+    if (MathS.isNull(dataSource.selectedZones)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_roleAccess);
       return false;
     }
@@ -317,14 +318,14 @@ export class UsersAllService {
       return false;
     }
     if (
-      fileForm[0].name.split('.').pop() === 'jpg'
-      || fileForm[0].name.split('.').pop() === 'JPG'
-      || fileForm[0].name.split('.').pop() === 'JPEG'
-      || fileForm[0].name.split('.').pop() === 'jpeg') {
+      fileForm[0].name.split('.').pop().toLowerCase() === 'jpg' ||
+      fileForm[0].name.split('.').pop().toLowerCase() === 'jpeg' ||
+      fileForm[0].name.split('.').pop().toLowerCase() === 'png'
+    ) {
       return true;
     }
     else {
-      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_JPG);
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_image);
       return false;
     }
     // return true;

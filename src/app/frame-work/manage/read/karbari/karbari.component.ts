@@ -51,7 +51,7 @@ export class KarbariComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForKarbari) {
       this.closeTabService.saveDataForKarbari = await this.readManagerService.getDataSource(ENInterfaces.KarbariAll);
     }
-    this.provinceDictionary = await this.readManagerService.getProvinceDictionary();
+    this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'provinceId');
   }
