@@ -1,0 +1,17 @@
+@import 'variable';
+@import '_mat.scss';
+@import 'button.scss';
+@import 'input.scss';
+@import 'media.scss';
+@import 'choose-files.scss';
+@import 'cards';
+
+._desc {
+  display: grid;
+}
+
+.icon_android,
+small {
+  color: var(--red_600);
+  margin: 0 .4rem;
+}

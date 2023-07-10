@@ -1,0 +1,91 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedPrfm ? 'slideUp' : 'slideDown'">
+                <app-sort-according-to></app-sort-according-to>
+                <hr>
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.anlzPrfmReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                        <div class="_key">نوع دوره</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                                <mat-option (click)="getReadingPeriod()"
+                                    *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="input_2"
+                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                        <div class="_key">دوره قرائت</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.anlzPrfmReq.readingPeriodId"
+                                name="readingPeriodId">
+                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                        <div class="_key">سال</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.anlzPrfmReq.year" name="year">
+                                <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.anlzPrfm, $event)"
+                                [dateObject]="readingReportManagerService.anlzPrfmReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.anlzPrfm, $event)"
+                                [dateObject]="readingReportManagerService.anlzPrfmReq.toDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+
+            </section>
+
+        </form>
+    </section>
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRPerformance" [_outputFileName]="'analyzePrfm'"
+        [_checkUpName]="'rr-analyzePrfm'" [_sessionName]="'prfm-session'"
+        [_selectedColumnsToRemember]="'selectedRRAnalyzeByParam'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedPrfm"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedPrfm = !readingReportManagerService.utilsService.collapser.isCollapsedPrfm"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>

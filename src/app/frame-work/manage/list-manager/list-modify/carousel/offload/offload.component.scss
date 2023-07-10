@@ -1,0 +1,72 @@
+@import 'variable';
+@import 'input.scss';
+@import 'button.scss';
+@import 'tooltip.scss';
+@import '_mat.scss';
+@import '_galleries.scss';
+
+section._container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  margin-top: var(--font_05);
+  gap: var(--font_05);
+}
+
+.__slider {
+  grid-column: 1 / -1;
+
+  @media (min-width: 550px) {
+    grid-column: 5 / 7;
+  }
+}
+
+.__readonly_s {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+
+  @media (min-width: 550px) {
+    grid-column: 1 / 2;
+  }
+}
+
+._img_content {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
+  gap: var(--font_025);
+}
+
+._key,
+._value {
+  font-size: var(--font_m);
+  font-weight: 800;
+}
+
+// slider
+.img_wrapper {
+  border-radius: $border_15;
+  border: 2px solid var(--thirdy_1);
+  position: relative;
+  margin: .4rem 0;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 1px 2px var(--thirdy_1);
+  }
+}
+
+.not_found_header {
+  color: var(--primary_4);
+}
+
+.header_icons_wrap {
+  margin-bottom: var(--font_05);
+}
+
+.tooltip:hover .tooltip_text {
+  visibility: visible;
+  transform: translate(50%, -30%);
+}

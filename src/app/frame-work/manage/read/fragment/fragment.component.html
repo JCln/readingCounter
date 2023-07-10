@@ -1,0 +1,31 @@
+<main *ngIf="route.children.length === 0 && !fragmentMasterId" class="main">
+    <app-prime-table-editable     
+        [dataSource]="closeTabService.saveDataForFragmentNOB" 
+        [_selectCols]="_selectCols" 
+        [_selectedColumns]="selectedColumns"
+        [_dictionaryName]="'zoneId'"
+        [_checkUpName]="'fragmentMaster'"
+        [dictionary]="zoneDictionary"    
+        [_numberOfExtraColumns]="[1,2,3,4,5]"
+        [_outputEnabled]=false
+        [_isInRowEditing]=true
+        [_hasSaveColumns]=false
+        [newRow]="newRow()"
+        [newRowLimit]="newRowLimit"
+        [_sessionName]="'fragmentmaster-session'"
+        [_selectedColumnsToRemember]="'selectedRRMaster'"
+        (newedRowChangedStatus)="testChangedValue()"
+        (refreshedTable)="refreshTable()"     
+        (dropDownChanges)="closeTabService.saveDataForFragmentNOB['zoneId']"
+        (removedRowEditing)="removeFragmentMaster($event)"        
+        (onRowEditedSave)="onRowEditSave($event, $event)"
+        (showedInMapSingle)="getIsValidateRow($event)"
+        (showedPictures)="routeToAutomaticImport($event)"
+        (customedSort)="fragmentManagerService.routeToFragmentDetails($event)"
+    > 
+    </app-prime-table-editable>
+</main>
+
+<app-automatic-import *ngIf="fragmentMasterId" [fragmentMasterId]="fragmentMasterId" [zoneId]="zoneId"
+    (fragmentLatestValue)="fragmentMasterId = $event">
+</app-automatic-import>

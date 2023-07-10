@@ -1,0 +1,14 @@
+@import 'variable.scss';
+@import 'button.scss';
+
+.btn_1 {
+  width: 100%;
+  height: var(--font_2);
+  font-size: var(--font_s);
+  vertical-align: middle;
+
+  @media (max-width: 780px) {
+    font-size: var(--font_xs);
+    height: auto;
+  }
+}

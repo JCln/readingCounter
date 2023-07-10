@@ -1,0 +1,80 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'button.scss';
+
+.container {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
+  gap: var(--font_03);
+}
+
+.content {
+  display: grid;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 1px 4px var(--secondary_4);
+  text-align: center;
+  padding: var(--font_s) var(--font_2);
+  min-height: 15rem;
+  border-radius: $border_15;
+
+  .double_size {
+    grid-column: auto/ span 2;
+    flex-wrap: wrap;
+
+    @media (min-width: 550px) {
+      width: 20rem;
+    }
+  }
+
+  .inner_boundry {
+    display: grid;
+    font-size: var(--font_s);
+    text-align: right;
+  }
+}
+
+
+.title {
+  top: var(--font_2);
+  font-size: var(--font_m);
+  color: var(--primary_3);
+  font-weight: 800;
+  padding: 0 var(--font_xs);
+}
+
+
+._key {
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_5);
+}
+
+._value {
+  font-size: var(--font_l);
+  font-weight: 600;
+  color: var(--primary_5);
+  border: none;
+}
+
+.input_2 {
+  min-width: 100%;
+  color: var(--secondary_5);
+  margin-bottom: var(--font_05);
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
+}
+
+.p-field-checkbox {
+  display: flex;
+  align-items: center;
+
+  label {
+    color: var(--thirdy_3);
+    font-size: var(--font_m);
+    font-weight: 600;
+  }
+}
+
+footer {
+  margin-top: var(--font_s);
+}

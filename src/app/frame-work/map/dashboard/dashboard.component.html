@@ -1,0 +1,77 @@
+<div class="input_2">
+    <div class="_key">ناحیه</div>
+    <div class="_value">
+        <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="dashboardService._selectedZone"
+            (onChange)="refreshPageToRebuild()" placeholder="انتخاب مورد" optionValue="id" optionLabel="title"
+            filter="true">
+        </p-dropdown>
+    </div>
+</div>
+
+<main class="container">
+
+    <app-line-read-daily class="chart_0 charts relative_pos"></app-line-read-daily>
+
+</main>
+
+<main class="grid_double">
+    <app-count-in-states></app-count-in-states>
+    <app-user-overall></app-user-overall>
+</main>
+
+<main class="container">
+    <app-rr-time></app-rr-time>
+    <app-dash-unread-count></app-dash-unread-count>
+    <app-read-time></app-read-time>
+    <app-media></app-media>
+    <app-forbidden></app-forbidden>
+    <app-dash-moshtarak-count></app-dash-moshtarak-count>
+    <app-dash-shown-readings></app-dash-shown-readings>
+    <app-dash-not-reader></app-dash-not-reader>
+    <app-dash-error-count></app-dash-error-count>
+    <app-dash-locked></app-dash-locked>
+    <app-dash-pack-average></app-dash-pack-average>
+    <app-dash-attempt></app-dash-attempt>
+    <app-dash-xy></app-dash-xy>
+</main>
+<section class="content">
+    <section class="collapse">
+        <h1>درخواست ها</h1>
+    </section>
+    <main class="container">
+        <app-dash-request-log-count></app-dash-request-log-count>
+        <app-dash-request-rate></app-dash-request-rate>
+        <app-dash-query-count></app-dash-query-count>
+        <app-dash-query-rate></app-dash-query-rate>
+    </main>
+</section>
+
+<section class="content">
+    <section class="collapse">
+        <h1>آنالیز عملکرد</h1>
+    </section>
+    <section class="collapse">
+        <h3>نمودار</h3>
+        <app-collapsable [_isReversed]="true"
+            [_isCollapsed]="dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm"
+            [_tooltipText]="'آنالیز عملکرد'"
+            (_clicked)=" dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm=!dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm">
+        </app-collapsable>
+    </section>
+    <main *ngIf="dashboardService.utilsService.collapser._isCollapsedAnalyzePrfm" class="container charts relative_pos"
+        style="overflow: auto;">
+        <div class="chart_analyze_radar">
+            <app-analyze (barAnalyzeEvent)=receiveAnalyzeData($event)></app-analyze>
+        </div>
+        <div class="chart_analyze_bar">
+            <app-bar-anlz-prfm [barAnalyze]="_analyzer_interface"></app-bar-anlz-prfm>
+        </div>
+    </main>
+</section>
+
+<app-dash-karkard></app-dash-karkard>
+<app-trv-time></app-trv-time>
+<app-dispersal-rate></app-dispersal-rate>
+<app-dash-date-difference></app-dash-date-difference>
+<app-dash-date-diff-unclose></app-dash-date-diff-unclose>
+<app-dash-edit-count></app-dash-edit-count>

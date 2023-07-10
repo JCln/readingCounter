@@ -1,0 +1,18 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForKarbari" 
+    [_outputEnabled]=false 
+    [_hasSaveColumns]=false   
+    [_numberOfExtraColumns]="[1, 2]"
+    [_outputFileName]="'karbari'"
+    [_checkUpName]="'karbari'"
+    [dictionary]="provinceDictionary"
+    [_dictionaryName]="'provinceId'"
+    [_sessionName]="'karbari-session'"
+    [_selectedColumnsToRemember]="'selectedKarbari'"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (removedRow)="removeRow($event)"    
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

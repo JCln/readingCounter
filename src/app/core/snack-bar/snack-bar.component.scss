@@ -1,0 +1,86 @@
+@import 'variable.scss';
+@import 'button.scss';
+
+::ng-deep {
+  .mat-simple-snackbar {
+    font-family: $font_family;
+    font-size: var(--font_s);
+    font-weight: 600;
+    color: var(--fix_gray_light);
+  }
+
+  .mat-simple-snackbar-action button {
+    position: absolute;
+    font-weight: 600;
+    color: var(--fix_gray_light);
+    font-size: var(--font_xs);
+    font-family: $font_family;
+    max-height: 36px;
+    min-width: 0;
+    left: 0;
+    top: 0;
+  }
+
+  .snack_danger {
+    background-color: var(--red_600);
+  }
+
+  .snack_warn {
+    background-color: var(--fix_orange);
+  }
+
+  .snack_success {
+    background-color: var(--green_600);
+  }
+
+  .snack_info {
+    background-color: var(--fix_blue);
+  }
+
+  .newline {
+    white-space: pre-wrap;
+  }
+
+  // toast  
+  .p-toast .p-toast-message .p-toast-message-content {
+    padding: var(--font_05);
+  }
+
+}
+
+section {
+  direction: rtl;
+}
+
+._custom_toast {
+  font-family: $font_family;
+  justify-content: center;
+  margin: 0 var(--font_s);
+  flex: 1;
+}
+
+._icon {
+  font-size: var(--font_26);
+}
+
+.btn_2_o {
+  height: var(--font_22);
+  width: var(--font_5);
+}
+
+._life {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  bottom: .1rem;
+  left: 0.2rem;
+  padding: .5rem;
+  border-radius: $border_7;
+  font-size: var(--font_s);
+  background: var(--primary_2);
+  color: var(--secondary_1);
+  font-weight: 600;
+}

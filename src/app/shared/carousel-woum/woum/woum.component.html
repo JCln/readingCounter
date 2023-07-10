@@ -1,0 +1,157 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2 double_size" *ngIf="firstName || sureName">
+            <div class="_key">نام و نام خانوادگی</div>
+            <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName.trim() + ' '+ sureName">
+        </div>
+        <div class="input_2 double_size" *ngIf="fulName">
+            <div class="_key">نام و نام خانوادگی</div>
+            <input [readOnly]="true" class="_value" name="names" [(ngModel)]="fulName">
+        </div>
+        <div class="input_2 double_size" *ngIf="displayName">
+            <div class="_key">قرائت کننده</div>
+            <input [readOnly]="true" class="_value" name="displayName" [(ngModel)]="displayName">
+        </div>
+        <div class="input_2" *ngIf="zoneId">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zoneId" [(ngModel)]="zoneId">
+        </div>
+        <div class="input_2" *ngIf="eshterak">
+            <div class="_key">اشتراک</div>
+            <input [readOnly]="true" class="_value" name="eshterak" [(ngModel)]="eshterak">
+        </div>
+        <div class="input_2" *ngIf="radif">
+            <div class="_key">ش.پرونده</div>
+            <input [readOnly]="true" class="_value" name="radif" [(ngModel)]="radif">
+        </div>
+        <div class="input_2" *ngIf="counterNumber">
+            <div class="_key">رقم فعلی</div>
+            <input [readOnly]="true" class="_value" name="counterNumber" [(ngModel)]="counterNumber">
+        </div>
+        <div class="input_2" *ngIf="counterStateId">
+            <div class="_key">وضعیت فعلی</div>
+            <input [readOnly]="true" class="_value" name="counterStateId" [(ngModel)]="counterStateId">
+        </div>
+        <div class="input_2 double_size" *ngIf="description">
+            <div class="_key">توضیحات</div>
+            <input [readOnly]="true" class="_value" name="description" [(ngModel)]="description">
+        </div>
+        <div class="input_2" *ngFor="let item of interationOnOverallInfo">
+            <div class="_key">{{item.header}}</div>
+            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                [(ngModel)]="overAllInfo[item.field]">
+        </div>
+
+    </div>
+</section>
+
+
+<main class="control_wrapper" *ngIf="!profileService.getUseCarouselMedia()">
+
+    <section class="content">
+        <h1 class="title">تصاویر ارسالی</h1>
+        <hr>
+        <div class="_main_img">
+            <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
+                <div class="__img_counter">{{i+1}}</div>
+
+                <!-- tooltip -->
+                <div *ngIf="!originImages[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+                <div *ngIf="originImages[i]" class="tooltip_text">اندازه اصلی {{i+1}}</div>
+                <!--   -->
+                <div *ngIf="originImages[i]" class="__img_bound">
+                    <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}"
+                        onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر">
+                </div>
+            </div>
+            <div class="not_found_header" *ngIf="!imageFiles.length">
+                <h2>فاقد تصویر</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="content" *ngIf="_isNotForbidden">
+        <h1 class="title">صدای ضبط شده</h1>
+        <hr>
+        <div class="_main_audio">
+            <div *ngFor="let item of audioFiles; index as i">
+                <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
+                    <i class="tooltip pi pi-cloud-download">
+                        <div class="tooltip_text">بارگیری</div>
+                    </i>
+                </button>
+                <button [hidden]="!showAudioControllers" (click)="downloadAudio()">
+                    <i class="tooltip pi pi-download">
+                        <div class="tooltip_text">ذخیره صوت</div>
+                    </i>
+                </button>
+                <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
+                    <i *ngIf="isPlaying" (click)="pauseAudio()" class="tooltip pi pi-pause">
+                        <div class="tooltip_text">توقف صوت</div>
+                    </i>
+                    <i *ngIf="!isPlaying" (click)="playAudio()" class="tooltip pi pi-play">
+                        <div class="tooltip_text">پخش صوت</div>
+                    </i>
+                </button>
+                <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
+                    <i class="tooltip pi pi-replay">
+                        <div class="tooltip_text">پخش مجدد</div>
+                    </i>
+                </button>
+            </div>
+            <div class="not_found_header" *ngIf="!audioFiles.length">
+                <h2>فاقد صوت</h2>
+            </div>
+        </div>
+    </section>
+
+</main>
+<main class="carousel_gallery" *ngIf="profileService.getUseCarouselMedia()">
+    <p-galleria #galleria [value]="originImages" [containerStyle]="{'max-width':'640px'}"
+        [containerClass]="galleriaClass()" [showItemNavigators]="true" [(activeIndex)]="activeIndex" [numVisible]="3"
+        [showThumbnails]="showThumbnails" [circular]="true">
+
+        <ng-template pTemplate="item" let-item>
+            <img class="main_img" [src]="item" [ngClass]="fullscreen ? '_is_fullcreen' : '_is_not_fullscreen'" />
+        </ng-template>
+
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img class="thumbnail_img" [src]="item" />
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer" let-item>
+            <div class="custom-galleria-footer">
+                <button class="_button pi pi-list" (click)="onThumbnailButtonClick()"></button>
+
+                <span *ngIf="originImages" class="title-container">
+                    <span>{{activeIndex + 1}}/{{originImages.length}}</span>
+                    <article *ngIf="fullscreen" class="_options">
+                        <i (click)="rotateRightImg()" class="tooltip fa fa-rotate-right">
+                            <div class="tooltip_text">چرخش به راست</div>
+                        </i>
+                        <i (click)="rotateLeftImg()" class="tooltip fa fa-rotate-left">
+                            <div class="tooltip_text">چرخش به چپ</div>
+                        </i>
+                        <i (click)="profileService.downloadImg(originImages[activeIndex])"
+                            class="tooltip pi pi-download">
+                            <div class="tooltip_text">ذخیره تصویر</div>
+                        </i>
+                    </article>
+                </span>
+
+                <button (click)="toggleFullScreen()" class="_button fullscreen-button"
+                    [ngClass]="fullscreen ? 'pi pi-window-minimize': 'pi pi-window-maximize'">
+                </button>
+            </div>
+        </ng-template>
+
+
+    </p-galleria>
+    <section *ngIf="!originImages || originImages.length === 0">
+        <tr class="empty_data">
+            تصویری پیدا نشد
+        </tr>
+    </section>
+</main>

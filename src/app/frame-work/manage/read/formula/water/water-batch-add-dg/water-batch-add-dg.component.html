@@ -1,0 +1,38 @@
+<div class="content">
+
+    <button class="btn_2" (click)="addNewItem()">+</button>
+    <button class="btn_2" (click)="removeFromItems()">-</button>
+
+    <ul *ngFor="let item of items; index as index">
+        <li class="number_vals">
+            از نرخ
+            <div class="plus_minus">
+                <div class="plus">
+                    <i class="fa fa-plus"></i>
+                </div>
+
+                <div class="_value"> {{item.toRate}}</div>                
+                <div class="minus">
+                    <i class="fa fa-minus"></i>
+                </div>
+            </div>
+        </li>
+        <li class="number_vals">
+            تا نرخ
+            <div class="plus_minus">
+                <div class="plus">
+                    <i class="fa fa-plus"></i>
+                </div>
+
+                <input class="_value" type="number" name="toRate" [(ngModel)]="item.toRate">
+
+
+                <div class="minus">
+                    <i class="fa fa-minus"></i>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+<button class="btn_2" (click)="download()">دانلود</button>

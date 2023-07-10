@@ -1,0 +1,30 @@
+@import 'variable';
+
+.ag-header-group-cell-label,
+.ag-header-cell-label {
+
+  justify-content: center;
+  margin: var(--font_02) 0;
+  text-align: center;
+  border: 2px solid var(--primary_2);
+  border-radius: $border_15;
+}
+
+.ag-theme-alpine .ag-root-wrapper {
+  border-radius: $border_15;
+  border: 2px solid var(--primary_2);
+}
+
+.ag-theme-alpine {
+
+  font-size: var(--font_s);
+  font-weight: 600;
+  font-family: $font_family;
+}
+
+// ts config
+.cell-conf {
+  color: var(--primary_2);
+  // color: var(--secondary_6);
+  font-size: var(--font_s);
+}

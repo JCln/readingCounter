@@ -1,0 +1,20 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForTextOutput" 
+    [_outputEnabled]=false 
+    [_numberOfExtraColumns]="[1, 2]"
+    [_outputFileName]="'textOutput'"
+    [_checkUpName]="'textOutput'"    
+    [dictionary]="zoneDictionary"
+    [_dictionaryName]="'zoneId'"
+    [_sessionName]="'txtout-session'"
+    [_selectedColumnsToRemember]="'selectedTextOutput'"
+    (refreshedTable)="refreshTable()"    
+    (newedRowChangedStatus)="testChangedValue()"
+    (removedRow)="removeRow($event)"    
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditCancelRowEditing)="onRowEditCancel($event)"
+    (removedRowEditing)="removeRow($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>
+<!-- [_isInRowEditing]=true -->

@@ -1,0 +1,31 @@
+<section class="grid_half_width charts">
+
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">امروز</div>
+    <canvas baseChart [datasets]="barChartDataDaily" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
+
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">هفته‌جاری</div>
+    <canvas baseChart [datasets]="barChartDataWeekly" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
+
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">ماه‌جاری</div>
+    <canvas baseChart [datasets]="barChartDataMonthly" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
+
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">سال‌جاری</div>
+    <canvas baseChart [datasets]="barChartDataYearly" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
+
+</section>

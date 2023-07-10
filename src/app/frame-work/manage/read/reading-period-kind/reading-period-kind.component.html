@@ -1,0 +1,16 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForReadingPeriodKindManager" 
+    [_outputEnabled]=false
+    [_hasSaveColumns]=false
+    [_checkUpName]="'periodKind'"    
+    [_outputFileName]="'periodKind'" 
+    [_numberOfExtraColumns]="[1, 2]"
+    [_sessionName]="'readingPKind-session'"
+    [_selectedColumnsToRemember]="'selectedReadingPeriodKind'"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (removedRow)="removeRow($event)"    
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

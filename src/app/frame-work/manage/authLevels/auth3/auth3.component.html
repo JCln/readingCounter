@@ -1,0 +1,19 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForAppLevel3" 
+    [_checkUpName]="'auth3'"
+    [_outputFileName]="'auth3'"
+    [_dictionaryName]="'authLevel2Id'"
+    [dictionary]="authLevel2Dictionary"
+    [_outputEnabled]= false
+    [_numberOfExtraColumns]="[1, 2]"
+    [_selectedColumnsToRemember]="'selectedAuth3'"
+    [_sessionName]="'auth3-session'"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (dropDownChanges)="closeTabService.saveDataForAppLevel3['authLevel2Id']"
+    (removedRow)="removeRow($event)"
+    (onRowEditedCancel)="onRowEditCancel()"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

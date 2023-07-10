@@ -1,0 +1,17 @@
+<app-prime-table-editable     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="closeTabService.saveDataForFragmentNOBDetails" 
+    [_numberOfExtraColumns]="[1, 2]"
+    [_isInRowEditing]=true
+    [_hasSaveColumns]=false
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
+    (refreshedTable)="refreshTable()"
+    (newedRowChangedStatus)="testChangedValue()"
+    (onRowEditedSave)="onRowEditSave($event)"
+    (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (removedRowEditing)="removeRow($event)"
+ > 
+</app-prime-table-editable>

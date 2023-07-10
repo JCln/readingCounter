@@ -1,0 +1,130 @@
+@import './add-edit.scss';
+@import 'tooltip.scss';
+
+main {
+  direction: rtl;
+}
+
+._content {
+  background: var(--thirdy_2);
+  padding: var(--font_02);
+  margin: var(--font_02);
+  border-radius: $border_15;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
+  grid-auto-flow: dense;
+}
+
+.l_1_c,
+.l_2,
+.l_3 {
+  border-radius: $border_15;
+  padding: var(--font_03) var(--font_02);
+}
+
+.l_1 {
+  display: grid;
+  gap: var(--font_02);
+  grid-template-columns: repeat(6, 1fr);
+
+  .l_1_c {
+    background: var(--primary_1);
+    color: var(--secondary_6);
+    font-size: var(--font_l);
+    font-weight: 600;
+    margin-bottom: var(--font_01);
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: var(--font_05);
+      border-style: solid;
+      border-color: var(--primary_2) transparent transparent transparent;
+    }
+  }
+}
+
+.l_2 {
+  .l_2_c {
+    background: var(--secondary_1);
+    margin-bottom: var(--font_02);
+    font-size: var(--font_l);
+    font-weight: 600;
+    border-radius: $border_7;
+  }
+}
+
+.l_3_c {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  background: var(--white);
+  border-radius: $border_7;
+
+  .l_3 {
+    font-size: var(--font_s);
+    font-weight: 500;
+  }
+
+}
+
+.accept {
+  display: flex;
+}
+
+.btn_2 {
+  margin: var(--font_025);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// ts config
+.toggle {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.toggle_content {
+  grid-template-columns: auto;
+}
+
+// 
+.mat-horizontal-stepper-header-container {
+  font-family: $font_family;
+}
+
+// switch buttons
+.fa_icons {
+  color: var(--pink_500);
+  display: grid;
+  place-content: center;
+  padding: .87rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: var(--font_s);
+  border: none;
+  float: left;
+
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
+}
+
+
+// edit tooltips
+.tooltip .tooltip_text::after {
+  top: auto;
+  bottom: 100%;
+  border-color: transparent transparent #F68038 transparent;
+}
+
+.tooltip_text {
+  bottom: -260% !important;
+  left: var(--font_3) !important;
+}

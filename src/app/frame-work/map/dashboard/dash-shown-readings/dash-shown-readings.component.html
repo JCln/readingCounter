@@ -1,0 +1,10 @@
+<section class="media">
+    <div class="_header">
+        <i class="fa fa-sort-numeric-asc"></i>
+        قرائت با رقم قبلی
+    </div>
+    <div class="_key_value" *ngFor="let item of _colshownReading">
+        <div class="_key">{{item.header}}</div>
+        <div class="_value">{{dataSourceShownReadings[item.field]}}</div>
+    </div>
+</section>

@@ -1,0 +1,123 @@
+@import 'shared_dialog';
+@import 'button.scss';
+@import 'input.scss';
+
+.mat-dialog-content {
+  color: var(--secondary_7);
+  font-size: var(--font_s);
+  text-align: right;
+  word-spacing: var(--font_03);
+}
+
+.mat-dialog-container {
+  position: relative;
+  padding: var(--font_2);
+}
+
+h2 {
+  font-size: var(--font_m);
+  padding: var(--font_05);
+  text-align: center;
+  color: var(--secondary_8);
+  white-space: pre-line;
+}
+
+._title_2 {
+  padding: 0;
+  text-align: center;
+  font-size: var(--font_m);
+  color: var(--secondary_8);
+  width: 19rem;
+}
+
+u {
+  text-decoration: underline;
+}
+
+p {
+  text-align: center;
+  color: var(--secondary_8);
+  font-size: var(--font_ss);
+}
+
+.date_wrapper {
+  min-height: 20rem;
+  display: grid;
+  justify-content: center;
+}
+
+.input_1 {
+  border-radius: $border_15;
+}
+
+.input_box {
+  display: flex;
+  justify-content: center;
+}
+
+._container {
+  border-radius: $border_15;
+  background-color: var(--white);
+  padding: 1.5rem 0.3rem 0;
+  box-shadow: 0 0 5px 1px var(--primary_1);
+}
+
+._icon {
+  content: "";
+  display: grid;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  top: 0;
+  left: 50%;
+  color: inherit;
+  background-color: var(--secondary_1);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 0.5rem var(--secondary_1);
+
+  i {
+    font-size: var(--font_2);
+    color: var(--primary_4);
+  }
+
+  ._delete_color {
+    color: var(--red_500);
+  }
+
+}
+
+.btn_2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 6rem;
+  margin-top: 2rem;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 2px 4px 1px var(--primary_3);
+    background-color: var(--primary_3);
+  }
+}
+
+// _delete_style is button for red buttons
+// should implement after btn_2 to affect
+._delete_style {
+  direction: rtl;
+  background-color: var(--red_500);
+  border-color: var(--red_500);
+  color: var(--white);
+  text-align: center;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 2px 4px 1px var(--red_600);
+    background-color: var(--red_500);
+  }
+}

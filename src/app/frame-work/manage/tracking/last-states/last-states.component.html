@@ -1,0 +1,16 @@
+<app-prime-table     
+    [dataSource]="closeTabService.saveDataForLastStates" 
+    [_outputFileName]="'lastStates'"
+    [_checkUpName]="'Kartables'"
+    [_calculableSUM]=true  
+    [_hasAggregating] = true
+    [_isCustomSort]=true
+    [_selectedColumnsToRemember]="'selectedlastStates'"
+    [_numberOfExtraColumns]="[1,2]"
+    [_sessionName]="'last-states-session'"
+    (customedSort)="trackingManagerService.customSort($event)"
+    (showedInMap)="showInMap($event)"   
+    (refreshedTable)="refreshTable()"    
+    (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"
+ > 
+</app-prime-table>

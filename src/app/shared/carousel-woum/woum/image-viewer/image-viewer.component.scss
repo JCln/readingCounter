@@ -1,0 +1,37 @@
+@import 'variable';
+@import 'tooltip.scss';
+
+.viewer_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+img {
+  border-radius: 10px;
+}
+
+.tooltip {
+  position: sticky;
+  top: 0;
+}
+
+i {
+  color: var(--thirdy_1);
+  font-size: var(--font_m);
+  margin: var(--font_05);
+  border-radius: $border_50;
+  padding: var(--font_05);
+  background-color: var(--secondary_1);
+  cursor: pointer;
+}
+
+.__special_tooltip_bottom:hover .tooltip_text_bottom {
+  width: 12rem;
+  transform: translate(0, 80%);
+
+  &::after {
+    right: 85%;
+  }
+}

@@ -1,0 +1,39 @@
+@import 'primeNG.scss';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+@import 'cards';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  padding: var(--font_05);
+  border-radius: $border_15;
+}
+
+.input_1 {
+  border-radius: 10px;
+  min-width: 100%;
+}
+
+.btn_1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: $font_family;
+  max-width: 100%;
+}
+
+h2 {
+  color: var(--secondary_6);
+}
+
+h3 {
+  color: var(--primary_3);
+  font-size: var(--font_m2);
+  padding: var(--font_05);
+}
+
+[hidden] {
+  display: none;
+}

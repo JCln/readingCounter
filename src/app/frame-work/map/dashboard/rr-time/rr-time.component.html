@@ -1,0 +1,11 @@
+<section class="media">
+    <div class="_header">
+        <i class="pi pi-volume-up"></i>
+        قرائت شده
+    </div>
+
+    <div class="_key_value" *ngFor="let item of _colReadingReportTimed">
+        <div class="_key">{{item.header}}</div>
+        <div class="_value">{{readingReportTimed[item.field]}}</div>
+    </div>
+</section>

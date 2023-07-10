@@ -1,0 +1,31 @@
+@import 'variable';
+
+.content {
+  font-family: $font_family;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  text-align: center;
+  padding: var(--font_xs) 0;
+  border-radius: $border_15;
+}
+
+.img_wrapper {
+  position: relative;
+  margin: .4rem 0;
+}
+
+
+.title {
+  color: var(--primary_3);
+  text-align: center;
+  margin: 0 0 var(--font_xs);
+  font-size: var(--font_l2);
+}
+
+img {
+  border-radius: $border_5;
+}
+
+hr {
+  margin-bottom: var(--font_xs);
+}

@@ -1,0 +1,130 @@
+.control_wrapper {
+  display: grid;
+  grid-template-rows: 1fr 11rem;
+  direction: rtl;
+  gap: var(--font_05);
+}
+
+.content {
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  text-align: center;
+  padding: 0;
+  border-radius: $border_15;
+}
+
+._main_audio {
+  display: grid;
+  direction: rtl;
+  gap: var(--font_02);
+}
+
+._main_img {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
+  justify-content: center;
+  direction: rtl;
+  gap: var(--font_02);
+}
+
+.img_wrapper {
+  border-radius: $border_15;
+  border: 2px solid var(--thirdy_1);
+  position: relative;
+  margin: .4rem 0;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 1px 2px var(--thirdy_1);
+  }
+}
+
+.__img_bound {
+  padding: var(--font_05);
+  margin: auto;
+}
+
+.title {
+  color: var(--primary_3);
+  text-align: center;
+  margin: 0 0 var(--font_xs);
+  font-size: var(--font_l2);
+}
+
+._img_title {
+  margin: 0 auto var(--font_2);
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: white;
+}
+
+.overall-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
+  gap: var(--font_03);
+  direction: rtl;
+  margin-bottom: var(--font_xs);
+
+  @media (min-width: 550px) {
+    justify-content: center;
+  }
+}
+
+._value {
+  border: 0;
+}
+
+button {
+  background: none;
+  border: 0;
+}
+
+.__img_counter {
+  position: absolute;
+  top: calc(-1* var(--font_s));
+  right: var(--font_05);
+  background-color: var(--primary_4);
+  color: var(--white);
+  width: var(--font_l);
+  height: var(--font_l);
+  border-radius: $border_5;
+  font-weight: 600;
+}
+
+i {
+  border-radius: $border_50;
+  padding: var(--font_s);
+  font-size: var(--font_m);
+  border: 1px solid var(--thirdy_1);
+  color: var(--thirdy_1);
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 2px 3px var(--thirdy_1);
+  }
+}
+
+img {
+  border-radius: $border_5;
+}
+
+hr {
+  margin-bottom: var(--font_05);
+}
+
+.not_found_header {
+  color: var(--primary_4);
+}
+
+.header_icons_wrap {
+  position: relative;
+
+  .left_side {
+    position: absolute;
+  }
+}

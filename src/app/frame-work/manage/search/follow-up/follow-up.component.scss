@@ -1,0 +1,49 @@
+@import 'primeNG';
+@import 'button.scss';
+@import 'input.scss';
+@import 'mixins.scss';
+@import 'tooltip.scss';
+@import '_mat.scss';
+@import 'cards.scss';
+
+.contain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 14.5rem));
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+  text-align: center;
+  gap: var(--font_05);
+  margin: 0 0 var(--font_xxs) 0;
+  background: var(--secondary_1);
+  padding: var(--font_05);
+  border-radius: $border_15;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
+
+._value {
+  border: 0;
+  border-radius: $border_7;
+  width: 97%;
+}
+
+.order_by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+  padding: var(--font_xxs);
+  background-color: var(--secondary_1);
+  border-radius: $border_7;
+}
+
+._double_width {
+  flex: 1;
+}
+
+.title {
+  color: var(--primary_3);
+  text-align: center;
+  margin: var(--font_xs) var(--font_05);
+  font-size: var(--font_l2);
+}

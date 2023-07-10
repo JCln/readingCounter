@@ -1,0 +1,256 @@
+@import 'primeNG';
+@import 'tooltip';
+@import 'input.scss';
+
+.container {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, auto));
+  align-items: center;
+  gap: var(--font_03);
+  border-radius: $border_15;
+}
+
+.input_2 {
+  margin-left: auto;
+  direction: rtl;
+  width: 14rem;
+  background: var(--white);
+}
+
+.grid_double {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--font_03);
+  margin: var(--font_025) 0;
+
+  @media (min-width:780px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.media {
+  min-width: 11rem;
+  background: var(--white);
+  text-align: center;
+  border-radius: $border_15;
+  box-shadow: 0 0 3px 2px var(--secondary_2);
+  padding: var(--font_xxs) 0;
+}
+
+._header {
+  font-size: var(--font_m);
+  color: var(--primary_3);
+  font-weight: 800;
+  text-align: center;
+  width: 100%;
+
+  i {
+    margin-left: var(--font_025);
+    font-size: var(--font_m);
+    vertical-align: middle;
+  }
+}
+
+.title {
+  top: var(--font_2);
+  position: absolute;
+  font-size: var(--font_m);
+  color: var(--primary_3);
+  font-weight: 800;
+  padding: 0 var(--font_xs);
+}
+
+._title_special {
+  color: var(--red_500);
+}
+
+._key_value {
+  columns: 2;
+}
+
+._key {
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_5);
+  text-align: center;
+}
+
+._value {
+  font-size: var(--font_l);
+  font-weight: 600;
+  color: var(--primary_5);
+  max-width: 95%;
+  direction: ltr;
+}
+
+.content {
+  border-radius: $border_15;
+  background: var(--white);
+  padding: var(--font_025) 0;
+  box-shadow: 0px 0px 2px 2px var(--secondary_2);
+  margin: var(--font_025) 0;
+}
+
+.collapse {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-gap: var(--font_m);
+  gap: var(--font_m);
+  padding: var(--font_02);
+  margin-right: var(--font_xs);
+
+  h1 {
+    font-size: 1.87rem;
+    color: var(--primary_3);
+  }
+
+  h3 {
+    font-size: var(--font_m);
+    color: var(--primary_3);
+    direction: rtl;
+    margin: var(--font_xs);
+
+    &::before {
+      content: ' - ';
+    }
+  }
+
+}
+
+.__fixature {
+  width: 100%;
+  overflow-x: auto;
+  direction: rtl;
+}
+
+/* CHARTS CONFIG*/
+
+.charts {
+  border-radius: $border_15;
+  background: var(--white);
+  min-height: 15rem;
+}
+
+.relative_pos {
+  position: relative;
+}
+
+.chart_0 {
+  grid-column: auto;
+  grid-column-start: 1;
+  grid-column-end: -1;
+}
+
+.pie {
+  min-height: 18rem;
+}
+
+.chart_1,
+.chart_2,
+.chart_3,
+.chart_4 {
+  box-shadow: none;
+}
+
+.chart_analyze_bar {
+  grid-column: 3/5;
+}
+
+.chart_analyze_radar {
+  grid-column: 1/3;
+
+}
+
+.chart_analyze {
+  display: block;
+  min-height: 18rem;
+  max-height: 25rem;
+}
+
+._unified {
+  background-color: var(--white);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, auto))
+}
+
+/* tables */
+
+table {
+  font-family: $font_family;
+  border-collapse: collapse;
+  width: 100%;
+  direction: rtl;
+  text-align: center;
+  font-size: var(--font_s);
+  font-weight: 500;
+  overflow-x: auto;
+  border: 1px solid var(--secondary_2);
+}
+
+table td,
+table th {
+  padding: var(--font_05);
+  text-align: center;
+  color: var(--secondary_8);
+  direction: ltr;
+  font-size: var(--font_m);
+  font-weight: 600;
+}
+
+table th {
+  background-color: var(--secondary_5);
+}
+
+table tr {
+  direction: rtl;
+}
+
+table tr:nth-child(even) {
+  background-color: var(--secondary_1);
+}
+
+table thead tr {
+  background-color: var(--secondary_2);
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: var(--secondary_2);
+  color: var(--secondary_8);
+}
+
+strong {
+  font-weight: 800;
+}
+
+._hide_count {
+  display: none;
+}
+
+._o_light_blue {
+  background: rgba(0, 61, 184, 0.15);
+}
+
+._o_light_orange {
+  background: rgba(246, 128, 56, 0.15);
+}
+
+._o_light_gray {
+  background: rgba(150, 148, 148, 0.15);
+}
+
+._o_light_purple {
+  background: rgba(125, 131, 255, 0.15);
+}
+
+._border_left {
+  border-left: 2px solid rgba(0, 69, 203, 0.749) !important;
+}
+
+._hours {
+  background-color: var(--secondary_4);
+}

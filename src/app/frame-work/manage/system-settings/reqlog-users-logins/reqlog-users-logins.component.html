@@ -1,0 +1,43 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="securityService.utilsService.collapser._isCollapsedUsersLogins ? 'slideUp' : 'slideDown'">
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.usersLogins, $event)"
+                                [dateObject]="closeTabService.usersLoginsReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.usersLogins, $event)"
+                                [dateObject]="closeTabService.usersLoginsReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="closeTabService.usersLogins" [_outputFileName]="'usersLogins'"
+        [_checkUpName]="'usersLogins'" [_numberOfExtraColumns]="[1]" [_sessionName]="'usersLogins-session'"
+        [_selectedColumnsToRemember]="'selectedRequestLogUsersLogins'" [_hasCollapsible]=true
+        [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedUsersLogins"
+        (collapsed)="closeTabService.utilsService.collapser._isCollapsedUsersLogins = !closeTabService.utilsService.collapser._isCollapsedUsersLogins"
+        (refreshedTable)="refreshTable()" (openedMoshtarakinDialog)="routeToUserLogginsDetails($event)">
+    </app-prime-table>
+</main>

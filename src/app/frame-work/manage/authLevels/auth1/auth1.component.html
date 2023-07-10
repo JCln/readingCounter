@@ -1,0 +1,15 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForAppLevel1"
+    [_outputEnabled]= false
+    [_checkUpName]="'auth1'" 
+    [_outputFileName]="'auth1'"   
+    [_numberOfExtraColumns]="[1, 2]"
+    [_selectedColumnsToRemember]="'selectedAuth1'"
+    [_sessionName]="'auth1-session'"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (removedRow)="removeRow($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

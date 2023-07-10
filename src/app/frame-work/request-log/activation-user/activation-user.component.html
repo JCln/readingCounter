@@ -1,0 +1,43 @@
+<form #form="ngForm" (ngSubmit)="connectToServer()" class="_card"
+    [@openClose]="manageServerService.utilsService.collapser._userActivation ? 'slideUp' : 'slideDown'">
+    <div class="input_2">
+        <div class="_key">نوع فعالیت کاربر</div>
+        <div class="_value">
+            <p-multiSelect [maxSelectedLabels]="1" [options]="userActivationLogDictionary" name="userActivationOption"
+                [(ngModel)]="closeTabService.saveDataForServerUserActivationReq.userActivationLogTypes"
+                optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                [filter]="true" showClear="true">
+            </p-multiSelect>
+        </div>
+    </div>
+    <div class="input_2">
+        <div class="_key">از</div>
+        <div class="_value">
+            <app-date-jalali name="fromDate"
+                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.userActivationLog, $event)"
+                [dateObject]="closeTabService.saveDataForServerUserActivationReq.fromDate">
+            </app-date-jalali>
+        </div>
+    </div>
+    <div class="input_2">
+        <div class="_key">تا</div>
+        <div class="_value">
+            <app-date-jalali name="toDate"
+                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.userActivationLog, $event)"
+                [dateObject]="closeTabService.saveDataForServerUserActivationReq.toDate">
+            </app-date-jalali>
+
+        </div>
+    </div>
+    <button type="submit" class="btn_1">
+        مشاهده
+        <i class="pi pi-list"></i>
+    </button>
+</form>
+
+<app-prime-table [dataSource]="closeTabService.saveDataForServerUserActivation" [_outputFileName]="'userActivation'"
+    [_sessionName]="'userActivation-session'" [_selectedColumnsToRemember]="'selectedServerUserActivation'"
+    (refreshedTable)="refreshTable()" [_hasCollapsible]=true
+    [_isCollaped]="manageServerService.utilsService.collapser._userActivation"
+    (collapsed)="manageServerService.utilsService.collapser._userActivation = !manageServerService.utilsService.collapser._userActivation">
+</app-prime-table>

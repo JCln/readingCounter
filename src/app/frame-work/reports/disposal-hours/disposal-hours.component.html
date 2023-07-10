@@ -1,0 +1,56 @@
+<main class="main" *ngIf="route.children.length === 0">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedDH ? 'slideUp' : 'slideDown'">
+
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.disposalhoursReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
+                                [dateObject]="readingReportManagerService.disposalhoursReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
+                                [dateObject]="readingReportManagerService.disposalhoursReq.toDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <button id="grid_view" type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+                    <button id="chart_view" type="submit" class="btn_1">
+                        مشاهده نمودار
+                        <i class="fa fa-pie-chart"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRDisposalHours" [_outputFileName]="'disposalHs'"
+        [_checkUpName]="'rr-disposalHs'" [_sessionName]="'disposalHours-session'" [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDH"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDH = !readingReportManagerService.utilsService.collapser.isCollapsedDH"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>
+<router-outlet></router-outlet>

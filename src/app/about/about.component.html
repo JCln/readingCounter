@@ -1,0 +1,42 @@
+<main>
+    <section class=" color_0">
+        <img class="_logo" [src]="logoAddress" alt="">
+    </section>
+    <section>
+        <div class="_headers color_1">
+            <i class="_icons fas fa-code"></i>
+        </div>
+        <div class="main_content">
+            <div class="_text">طراحی و پیاده سازی</div>
+            <h3>{{aboutUs.coName}}</h3>
+        </div>
+    </section>
+    <section>
+        <div class="_headers color_3">
+            <i class="_icons pi pi-envelope"></i>
+        </div>
+        <div class="main_content">
+            <div class="_text _email">ایمیل</div>
+            <h3>{{aboutUs.email}}</h3>
+        </div>
+    </section>
+    <section>
+        <div class="_headers color_4">
+            <i class="_icons pi pi-phone"></i>
+        </div>
+        <div class="main_content">
+            <div class="_text">تلفن</div>
+            <h3>{{aboutUs.tel}}</h3>
+        </div>
+    </section>
+    <section>
+        <div class="_headers color_2">
+            <i class="_icons fa fa-address-card"></i>
+        </div>
+        <div class="main_content">
+            <div class="_text">آدرس</div>
+            <h3>{{aboutUs.address}}</h3>
+        </div>
+    </section>
+    <button (click)="utilsService.backToPreviousPage()" class="btn_1">بازگشت به صفحه قبلی</button>
+</main>

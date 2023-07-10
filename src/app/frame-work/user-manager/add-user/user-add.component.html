@@ -1,0 +1,39 @@
+<mat-horizontal-stepper #stepper>
+
+    <mat-step [completed]="false" [stepControl]="userInfos">
+        <form [formGroup]="userInfos">
+            <ng-template matStepLabel>مشخصات کاربر</ng-template>
+            <app-user-inputs style="direction: rtl;"></app-user-inputs>
+        </form>
+    </mat-step>
+
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForAddUsers.provinceItems">
+        <form *ngIf="closeTabService.saveDataForAddUsers.provinceItems"
+            [formGroup]="closeTabService.saveDataForAddUsers.provinceItems">
+            <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
+            <app-select-zone [provinceItemsData]="closeTabService.saveDataForAddUsers.provinceItems"></app-select-zone>
+        </form>
+    </mat-step>
+
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForAddUsers.appItems">
+        <ng-template *ngIf="closeTabService.saveDataForAddUsers.appItems" matStepLabel>سطح دسترسی به خدمات</ng-template>
+        <app-select-action [userAddData]="closeTabService.saveDataForAddUsers.appItems"></app-select-action>
+    </mat-step>
+
+    <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForAddUsers.roleItems">
+        <form *ngIf="closeTabService.saveDataForAddUsers.roleItems" formGroup="roleItemsData">
+            <ng-template matStepLabel>گروه دسترسی</ng-template>
+            <app-select-roles [roleItems]="closeTabService.saveDataForAddUsers.roleItems"></app-select-roles>
+        </form>
+    </mat-step>
+
+    <mat-step [completed]="false">
+        <ng-template matStepLabel>ذخیره</ng-template>
+        <section class="accept">
+            <button class="btn_2 _special" (click)="addUser()">ذخیره تغییرات</button>
+            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+        </section>
+
+    </mat-step>
+
+</mat-horizontal-stepper>

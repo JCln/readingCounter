@@ -1,0 +1,145 @@
+<app-collapsable [_isCollapsed]=closeTabService.saveDataForFollowUpReq._isCollapsed
+    (_clicked)=" closeTabService.saveDataForFollowUpReq._isCollapsed = !closeTabService.saveDataForFollowUpReq._isCollapsed">
+</app-collapsable>
+<form #form="ngForm" class="_card"
+    [@openClose]="closeTabService.saveDataForFollowUpReq._isCollapsed ? 'slideUp' : 'slideDown'">
+    <div class="input_2">
+        <div class="_key">شماره پیگیری</div>
+        <input class="_value" type="number" name="trackNumber"
+            [(ngModel)]="closeTabService.saveDataForFollowUpReq.trackNumber" autofocus>
+    </div>
+    <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده</button>
+</form>
+
+<section class="contain" *ngIf="closeTabService.saveDataForFollowUp">
+    <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
+        <div class="_key">{{item.header}}</div>
+        <ng-container *ngIf="item.isBoolean; else elseTemplate">
+            <mat-checkbox [disabled]="true" name="{{item.field}}"
+                [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+                {{item.header}}
+            </mat-checkbox>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+        </ng-template>
+    </div>
+    <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
+        <ng-container *ngIf="item.isBoolean; else elseTemplate">
+            <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
+                {{item.header}}
+            </mat-checkbox>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <div class="_key">{{item.header}}</div>
+            <div class="tooltip _double_width">
+                <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                    [(ngModel)]="dataSourceAUX[item.field]">
+                <div *ngIf="item.enableTooltip" class="tooltip_text">
+                    درصد مانع صادر شده {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</section>
+
+<section *ngIf="closeTabService.saveDataForFollowUp" class="order_by">
+    <div *ngFor="let orderType of showInOrderTo">
+        <div class="p-field-radiobutton">
+            <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                [(ngModel)]="closeTabService.saveDataForFollowUpReq.canShowGraph" [inputId]="orderType.key">
+            </p-radioButton>
+            <label [for]="orderType.key">{{orderType.title}}</label>
+        </div>
+    </div>
+</section>
+
+<p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && closeTabService.saveDataForFollowUp"
+    sortField="insertDateJalali" [columns]="_defColumns" [value]="changeHsty" dir="rtl"
+    styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" editMode="row" dataKey="id"
+    [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
+
+    <ng-template pTemplate="caption">
+        <th>
+        </th>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+            </div>
+            <div class="left_side">
+                <i (click)="routeToLMAll(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-list">
+                    <div class="tooltip_text">مشاهده لیست قرائت</div>
+                </i>
+                <i (click)="toPreStatus(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به قبلی</div>
+                </i>
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th pReorderableColumn *ngIf="shouldActive" style="min-width: 2rem; width: 2rem"></th>
+            <th pReorderableColumn style="min-width: 2rem;width: 2rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-changeHsty let-editing="editing" let-columns="columns">
+        <tr [pEditableRow]="changeHsty">
+            <td class="__columns" *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                <ng-container *ngIf="col.field === 'seen'; else elseTemplate">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <mat-checkbox [(ngModel)]="changeHsty[col.field]"
+                                [ngClass]="{'mat-checkbox-editable': true}">
+                            </mat-checkbox>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                        </ng-template>
+                    </p-cellEditor>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{changeHsty[col.field]}}
+                </ng-template>
+            </td>
+            <td class="__columns" *ngIf="shouldActive">
+                <span class="ui-column-title">ویرایش</span>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(changeHsty)"
+                    class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(changeHsty)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
+            </td>
+            <td class="__columns" *ngIf="changeHsty.hasMap" (click)="showInMap()">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="!changeHsty.hasMap">
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" *ngIf="!closeTabService.saveDataForFollowUp">
+        <tr>
+            <td [attr.colspan]="closeTabService.saveDataForFollowUp">
+                موردی پیدا نشد
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<!-- could implement by lazy load route -->
+<app-time-line *ngIf="closeTabService.saveDataForFollowUpReq.canShowGraph"
+    [dataSource]="closeTabService.saveDataForFollowUp"></app-time-line>

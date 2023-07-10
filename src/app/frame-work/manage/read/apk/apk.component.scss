@@ -1,0 +1,35 @@
+@import 'variable';
+@import 'button.scss';
+@import 'input.scss';
+@import 'media.scss';
+@import 'choose-files.scss';
+@import 'cards';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_xs);
+}
+
+@include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(22rem, auto)));
+
+._card {
+  width: auto;
+}
+
+._desc {
+  display: grid;
+  justify-content: center;
+}
+
+.icon_android,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+:host ::ng-deep .p-datatable {
+  width: 100% !important;
+}

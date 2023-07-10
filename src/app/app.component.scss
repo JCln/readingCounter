@@ -1,0 +1,85 @@
+@import 'variable';
+
+.lightBackground::after {
+  background: url('/assets/imgs/framework/bb.jpg');
+}
+
+.darkBackground::after {
+  background: url('/assets/imgs/framework/bbd.jpg') #365475;
+}
+
+.purpleBackground::after {
+  background: url('/assets/imgs/framework/bbp.jpg');
+}
+
+.pinkyBackground::after {
+  background: #CAD2C5;
+}
+
+.corporateBackground::after {
+  background: url('/assets/imgs/framework/bb.jpg');
+}
+
+
+
+.lightBackground::before {
+  background: var(--login_right_background);
+}
+
+.darkBackground::before {
+  background-color: var(--white);
+}
+
+.purpleBackground::before {
+  background: var(--primary_1);
+}
+
+.pinkyBackground::before {
+  background: linear-gradient(58deg, #2F3E46, #526C7A);
+}
+
+.corporateBackground::before {
+  background: linear-gradient(58deg, #002e94, #3c79f5);
+}
+
+.polygon {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.polygon::after {
+  content: '';
+  position: fixed;
+  clip-path: polygon(0 0, calc(100% - 20vw) 0%, calc(100% - 70vw) 100%, 0 100%);
+  top: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+.polygon::before {
+  content: '';
+  position: fixed;
+  clip-path: polygon(calc(100% - 20vw) 0, 100% 0, 100% 100%, calc(100% - 70vw) 100%);
+  top: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+app-clock {
+  position: fixed;
+  right: var(--font_xs);
+  top: var(--font_2);
+  margin: var(--font_02);
+  z-index: 200;
+
+  @media (min-width:700px) {
+    z-index: 102;
+    top: var(--font_05);
+  }
+}

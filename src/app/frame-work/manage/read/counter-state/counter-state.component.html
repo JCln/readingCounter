@@ -1,0 +1,21 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForCounterState" 
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [_dictionaryName]="'zoneId'"
+    [_checkUpName]="'counterState'"
+    [dictionary]="zoneDictionary"    
+    [_numberOfExtraColumns]="[1, 2]"
+    [_outputEnabled]=false
+    [_isInRowEditing]=true
+    [_hasSaveColumns]=false
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
+    [_sessionName]="'counterstate-session'"
+    [_selectedColumnsToRemember]="'selectedCounterState'"
+    (newedRowChangedStatus)="testChangedValue()"
+    (refreshedTable)="refreshTable()"     
+    (removedRowEditing)="removeRow($event)"        
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

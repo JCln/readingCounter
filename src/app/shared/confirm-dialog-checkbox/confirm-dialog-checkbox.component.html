@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>
+    <div class="_text">
+        {{data.title}}
+    </div>
+</h2>
+
+<mat-dialog-content>
+    <div *ngFor="let item of data.data">
+        <mat-checkbox [disabled]="true" checked=true>{{item}}</mat-checkbox>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="close_dg" type="button" (click)="cancel()">
+        <i class="pi pi-times"></i>
+    </button>
+
+    <button *ngIf="data.buttonText" [ngStyle]="{'background-color': data.buttonColor}" class="btn_2"
+        (click)="confirm()">
+        <i class="pi pi-file-excel"></i>
+    </button>
+</mat-dialog-actions>

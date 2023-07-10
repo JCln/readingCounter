@@ -1,0 +1,14 @@
+@import 'shared_dialog';
+
+.mat-dialog-content {
+  grid-template-columns: 1fr 1fr;
+  color: var(--secondary_7);
+  font-size: var(--font_s);
+  text-align: right;
+  direction: rtl;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}

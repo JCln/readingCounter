@@ -1,0 +1,44 @@
+@import 'primeNG';
+@import 'button.scss';
+@import 'input.scss';
+@import 'mixins.scss';
+@import '_mat.scss';
+@import 'cards';
+
+// .input_2 {
+//   text-align: center;
+//   width: 15rem;
+// }
+
+.btn_1 {
+  margin-top: var(--font_2);
+}
+
+._key,
+._value {
+  font-size: var(--font_m);
+  font-weight: 800;
+}
+
+.title {
+  text-align: center;
+  color: var(--primary_3);
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
+}
+
+._key {
+  white-space: nowrap;
+}
+
+input {
+  border: none;
+}

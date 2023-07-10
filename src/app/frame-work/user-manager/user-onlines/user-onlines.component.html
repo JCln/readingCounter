@@ -1,0 +1,13 @@
+<app-prime-table     
+    [dataSource]="closeTabService.saveDataForUserOnlines" 
+    [_numberOfExtraColumns]="[1,2,3]"
+    [_outputFileName]="'userOnlines'"
+    [_checkUpName]="'userOnlines'"
+    [_sessionName]="'userOnline-session'"
+    [_selectedColumnsToRemember]="'selectedUserOnlines'"
+    (refreshedTable)="refreshTable()"    
+    (routedToLMAll)="textMessageToAContact($event)"
+    (routedToLoggs)="imageToAContact($event)"
+    (openedEditDialog)="videoToAContact($event)"
+ > 
+</app-prime-table>

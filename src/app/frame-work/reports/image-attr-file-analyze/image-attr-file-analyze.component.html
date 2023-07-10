@@ -1,0 +1,59 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz ? 'slideUp' : 'slideDown'">
+
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.imgAttrAnalyzeReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.imgAttrAnalyze, $event)"
+                                [dateObject]="readingReportManagerService.imgAttrAnalyzeReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.imgAttrAnalyze, $event)"
+                                [dateObject]="readingReportManagerService.imgAttrAnalyzeReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [_outputFileName]="'_imageAttrAnalyze'"
+        [_checkUpName]="'_imageAttrAnalyze'" [_sessionName]="'imgattrFile-session'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz = !readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>
+
+<section class="_charts" *ngIf="closeTabService.saveDataForImageAttrAnalyze[0]">
+    <app-pie-img-attr-anlz [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [chartColors]="chartColors">
+    </app-pie-img-attr-anlz>
+    <app-bar-img-attr-anlz [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [chartColors]="chartColors">
+    </app-bar-img-attr-anlz>
+</section>

@@ -1,0 +1,84 @@
+import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IResponses } from 'interfaces/ioverall-config';
+import { UtilsService } from 'services/utils.service';
+
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
+import { InterfaceManagerService } from './interface-manager.service';
+import { SectionsService } from './sections.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SectorsManagerService {
+
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    public dictionaryWrapperService: DictionaryWrapperService,
+    public utilsService: UtilsService,
+    private sectionsService: SectionsService
+  ) { }
+
+  /*API CALLS */
+  getSectorsDataSource = (method: ENInterfaces): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        if (res) {
+          resolve(res);
+        }
+      })
+    })
+  }
+  sectorsAddEdit = (apiUse: ENInterfaces, value: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(apiUse, value).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    })
+  }
+  sectorsDelete = (apiUse: ENInterfaces, id: any) => {
+    this.interfaceManagerService.POSTById(apiUse, id).subscribe((res: IResponses) => {
+      if (res) {
+        this.utilsService.snackBarMessageSuccess(res.message);
+      }
+    });
+  }
+  deleteSingleRow = (place: ENInterfaces, id: number) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(true);
+      })
+    });
+  }
+  firstConfirmDialog = (text?: string): Promise<any> => {
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      text: text,
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-trash'
+    }
+    return this.utilsService.firstConfirmDialog(a);
+  }
+  /*FOR COUNTRY */
+  addOrEditCountry = (place: ENInterfaces, result: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(place, result).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    });
+  }
+  /* VALIDATION & VERIFICATION */
+  verification = (dataSource: any): boolean => {
+    this.sectionsService.setSectionsValue(dataSource);
+    if (!this.sectionsService.sectionVertification())
+      return false;
+    return true;
+  }
+
+}

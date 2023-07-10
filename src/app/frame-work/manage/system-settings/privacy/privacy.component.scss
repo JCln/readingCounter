@@ -1,0 +1,120 @@
+@import 'variable';
+@import 'button.scss';
+@import 'input.scss';
+@import '_mat';
+@import './plus-minus';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_05);
+}
+
+.item_3 {
+  grid-row: 1 / 3;
+  grid-column: 2;
+}
+
+.content {
+  padding: var(--font_2) var(--font_02);
+  background: var(--secondary_1);
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
+
+._desc {
+  display: grid;
+  margin: auto;
+  width: 90%;
+  border-radius: $border_15;
+}
+
+.title {
+  color: var(--secondary_5);
+  text-align: center;
+  margin: var(--font_xs) var(--font_05);
+  font-size: var(--font_l2);
+}
+
+input {
+  color: var(--secondary_5);
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
+}
+
+// radio buttons
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.over_all_result {
+  color: var(--primary_2);
+  font-size: var(--font_s);
+  font-weight: 600;
+  margin-top: var(--font_2);
+}
+
+////////
+
+::ng-deep {
+
+  .example-radio-button {
+    margin: 4px;
+    background: var(--secondary_1);
+    padding: var(--font_xxs);
+    border-radius: $border_15;
+  }
+
+  .mat-checkbox-layout {
+    margin-bottom: var(--font_05);
+
+    .mat-checkbox-label {
+      margin: 0 var(--font_05);
+      font-size: var(--font_s);
+      font-weight: 600;
+      color: var(--secondary_6);
+      line-height: 2;
+      border-radius: $border_15;
+      font-family: $font_family;
+    }
+  }
+
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: var(--font_025);
+}
+
+.number_vals {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--secondary_6);
+}
+
+._checkbox {
+  text-align: right;
+}
+
+.btns {
+  margin: var(--font_xs);
+  display: flex;
+  justify-content: center;
+}
+
+.btn_1 {
+  color: var(--secondary_1);
+  margin: var(--font_05);
+}

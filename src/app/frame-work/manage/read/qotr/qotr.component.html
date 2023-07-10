@@ -1,0 +1,9 @@
+<app-prime-table     
+    [dataSource]="closeTabService.saveDataForQotrManager" 
+    [_outputFileName]="'qotr'"
+    [_checkUpName]="'qotr'"    
+    [_sessionName]="'qotr-session'"    
+    [_selectedColumnsToRemember]="'selectedQotr'"    
+    (refreshedTable)="refreshTable()"    
+ > 
+</app-prime-table>

@@ -1,0 +1,47 @@
+<main>
+    <button class="fa_icons" (click)="this.switchDisplay = !this.switchDisplay">
+        <i *ngIf="!switchDisplay" class="tooltip fa fa-list">
+            <div class="tooltip_text_right">نمایش خطی</div>
+        </i>
+        <i *ngIf="switchDisplay" class="tooltip fa fa-th-large">
+            <div class="tooltip_text_right">نمایش ستونی</div>
+        </i>
+    </button>
+    <section class="l_1">
+        <div class="l_1_c" *ngFor="let provinceIt of provinceItemsData">
+            <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
+                (change)="setAll($event.checked)" [(ngModel)]="provinceIt.isSelected" name="provinceIt">
+                {{provinceIt.title}}
+            </mat-checkbox>
+        </div>
+    </section>
+    <section class="_content" *ngFor="let provinceIt of provinceItemsData"
+        [ngClass]="switchDisplay ? 'toggle_content' : '_content'">
+        <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
+
+            <div class="l_2_c">
+                <mat-checkbox (change)="setAllL2($event.checked , regionIt)" [(ngModel)]="regionIt.isSelected"
+                    (ngModelChange)="updateAll(provinceIt)" name="regionIt">
+                    {{regionIt.title}}
+                </mat-checkbox>
+            </div>
+
+            <div class="l_3_c" [ngClass]="switchDisplay ? 'toggle' : 'l_3_c'">
+                <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
+                    <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)"
+                        name="zoneIt">
+                        {{zoneIt.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<div class="accept">
+    <button class="btn_2" matStepperNext>
+        <i class="fa fa-long-arrow-left"></i>صفحه بعد
+    </button>
+    <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+</div>

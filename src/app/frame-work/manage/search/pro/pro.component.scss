@@ -1,0 +1,147 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'tooltip.scss';
+@import 'button.scss';
+@import '_mat.scss';
+@import 'cards';
+
+._card {
+  width: auto;
+  margin: 0 var(--font_02);
+}
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: var(--font_05);
+  border-radius: $border_15;
+  border: 1px solid var(--primary_2);
+}
+
+.main_content {
+  display: grid;
+  direction: rtl;
+  margin-bottom: var(--font_05);
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+[hidden] {
+  display: none;
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
+  gap: var(--font_05);
+  padding: var(--font_025);
+  margin-top: 0;
+  box-shadow: none;
+  background: none;
+}
+
+.btn_1 {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: var(--font_05);
+  width: 10rem;
+}
+
+._toselect {
+  grid-column: 1/2;
+  background: var(--white);
+  border: $border_5;
+  border-radius: $border_7;
+  padding: var(--font_05);
+  box-shadow: 2px 2px 3px 2px var(--secondary_7);
+
+  .__content {
+    display: grid;
+    gap: var(--font_02);
+    align-items: center;
+
+    .check_boxes {
+      text-align: right;
+      margin: 0;
+    }
+  }
+
+}
+
+.input_2 {
+  margin: 0;
+}
+
+._more_options {
+  grid-column: 2/7;
+  background-color: var(--secondary_1);
+  border-radius: $border_7;
+  padding: var(--font_02);
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+
+  @media (max-width: 780px) {
+    margin-top: var(--font_xs);
+    grid-column: 1/6;
+  }
+
+  @media (max-width: 550px) {
+    margin-top: 2rem;
+  }
+
+  .__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 15rem));
+    justify-content: center;
+    gap: var(--font_02);
+  }
+}
+
+app-date-jalali {
+  width: 100%;
+  height: var(--font_26);
+  background: var(--white);
+  border-radius: 9px;
+  border: 1px solid var(--secondary_2);
+}
+
+.order_by {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+h2 {
+  white-space: nowrap;
+  color: var(--primary_3);
+  margin-left: var(--font_05);
+  font-size: var(--font_s);
+}
+
+[hidden] {
+  display: none;
+}
+
+// materials 
+
+form.bottom-form {
+  position: relative;
+  border: 1px solid var(--secondary_5);
+  border-radius: $border_15;
+  font-family: $font_family;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_2);
+}
+
+// dialog conf
+:host ::ng-deep {
+  .p-dialog .p-dialog-header {
+    background: var(--secondary_1);
+    direction: rtl;
+  }
+}

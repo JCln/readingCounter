@@ -1,0 +1,26 @@
+.spinner {
+  position: fixed;
+  font-size: var(--font_m);
+  z-index: 1000;
+
+  @media (min-width: 550px) {
+    top: var(--font_05);
+  }
+}
+
+.fa-spin,
+.fa-circle-notch {
+  animation: around2 250ms infinite linear;
+  z-index: 10000;
+  color: var(--primary_5);
+}
+
+@keyframes around2 {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

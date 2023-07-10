@@ -1,0 +1,124 @@
+@import 'primeNG';
+@import '_mat';
+@import 'button';
+@import 'input';
+@import 'tooltip.scss';
+
+/* for users all */
+
+.map-frame {
+  position: relative;
+}
+
+.more_configs {
+  opacity: 0;
+  gap: var(--font_02);
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  left: 3rem;
+  top: calc(-1 * var(--font_3));
+  z-index: 100;
+  background: var(--white);
+  margin: var(--font_xs);
+  padding: var(--font_xs) var(--font_02);
+  text-align: center;
+  border-radius: $border_15;
+  box-shadow: 0px 2px 3px 1px var(--thirdy_3);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--font_l));
+    height: var(--font_5);
+    width: 12rem;
+  }
+}
+
+.bbr {
+  padding: var(--font_05);
+  background-color: #3686c933;
+  border-radius: $border_50;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 0px 1px 1px var(--thirdy_1);
+  }
+}
+
+// ts config
+.showConfigs {
+  opacity: 1;
+  visibility: visible;
+}
+
+// 
+._map_frame_show::after {
+  position: absolute;
+  border: 1px solid blue;
+  width: 10rem;
+  height: 4rem;
+}
+
+[disabled] {
+  border: none;
+}
+
+[readOnly] {
+  outline: none;
+  border: none;
+  color: inherit;
+}
+
+._haveimage {
+  color: var(--pink_500);
+}
+
+._anything {
+  display: inline-flex;
+  min-width: 12rem;
+  margin-right: 1rem;
+  padding: 0 1rem;
+  background: var(--primary_3) !important;
+  color: var(--white) !important;
+  border-radius: $border_5;
+  font-size: var(--font_s);
+
+  td {
+    border: 0 !important;
+  }
+}
+
+._grouping {
+  display: flex;
+  align-items: center;
+  direction: rtl;
+  gap: .5rem;
+  height: 2.2rem;
+  background: var(--thirdy_2);
+  color: var(--primary_5);
+  border-radius: $border_7;
+
+  .icon_reset {
+    cursor: pointer;
+  }
+
+  ._group_label {
+    font-family: $font_family;
+    padding-right: .25rem;
+    font-size: var(--font_s);
+    font-weight: 600;
+  }
+}
+
+._tooltip_special:hover .tooltip_text {
+  transform: translate(-10%, -40%);
+
+}
+
+._tooltip_special .tooltip_text::after {
+  left: 15%;
+}

@@ -1,0 +1,18 @@
+<app-prime-table-editable     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="closeTabService.saveDataForRoleManager"     
+    [_numberOfExtraColumns]="[1, 2]"
+    [_isInRowEditing]=true
+    [_outputEnabled]=false
+    [_hasSaveColumns]=false
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
+    (refreshedTable)="refreshTable()"
+    (newedRowChangedStatus)="testChangedValue()"
+    (onRowEditedSave)="onRowEditSave($event)"
+    (onRowEditCancelRowEditing)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (removedRowEditing)="removeRow($event)"
+ > 
+</app-prime-table-editable>

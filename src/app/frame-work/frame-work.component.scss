@@ -1,0 +1,88 @@
+@import 'variable.scss';
+@import 'media';
+
+.lightBackground {
+  background-image: url('/assets/imgs/framework/bb.jpg');
+}
+
+.darkBackground {
+  background: url('/assets/imgs/framework/bbd.jpg') #365475;
+}
+
+.purpleBackground {
+  background-image: url('/assets/imgs/framework/bbp.jpg');
+}
+
+.d_flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d_grid_center {
+  display: grid;
+  place-items: center;
+}
+
+main {
+  width: auto;
+  min-height: 84vh;
+  border-radius: $border_15;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top: var(--font_02) solid var(--orange_500);
+  box-shadow: 2px 2px 5px 0px var(--secondary_4);
+  margin: 0 var(--font_025);
+  padding: var(--font_05);
+  transition: all ease-in-out 150ms;
+}
+
+.header {
+  --height: var(--font_3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: $border_15;
+  height: var(--height);
+  padding: 0 var(--font_xs);
+  margin-bottom: var(--font_05);
+  background: var(--white);
+  border-bottom: var(--font_02) solid var(--primary_6);
+
+  .title {
+    color: var(--primary_5);
+    direction: rtl;
+    font-size: var(--font_ss);
+  }
+
+  @include media_wrapper(550px, '.title', font-size, var(--font_m));
+}
+
+._logo_content {
+  width: calc(var(--height) - var(--font_05));
+  height: calc(var(--height) - var(--font_05));
+
+  img {
+    border-radius: $border_50;
+  }
+}
+
+.btn_1 {
+  background: linear-gradient(142deg, var(--orange_500), var(--orange_500), transparent);
+  margin-left: var(--font_xs);
+  width: 4rem;
+  height: var(--font_2);
+  border-radius: $border_15;
+  border: none;
+  cursor: pointer;
+
+  i {
+    color: var(--white);
+    font-size: var(--font_s);
+    font-weight: 600;
+  }
+}
+
+._screen {
+  background: var(--thirdy_3);
+}

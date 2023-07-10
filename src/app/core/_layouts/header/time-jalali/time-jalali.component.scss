@@ -1,0 +1,58 @@
+@import 'variable.scss';
+
+::ng-deep {
+  .dp-picker-input {
+    font-weight: 600;
+    font-size: var(--font_s) !important;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    width: var(--font_55) !important;
+    outline: none;
+    text-align: center;
+    padding: var(--font_ss) 0;
+    background: transparent;
+    color: var(--primary_5) !important;
+    cursor: pointer;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  #datepicker.ui-widget-content {
+    z-index: 100;
+  }
+
+  .dp-calendar-weekday {
+    font-size: 1.15rem !important;
+  }
+
+  .dp-calendar-day {
+    font-size: var(--font_s);
+    font-weight: 600;
+  }
+
+  .dp-nav-header-btn {
+    font-size: var(--font_ss);
+    font-weight: bold;
+  }
+
+  .dp-current-location-btn {
+    background: var(--red_500) !important;
+    border: 1px solid var(--red_500) !important;
+  }
+
+  .dp-calendar-nav-container-left,
+  .dp-calendar-nav-container-right {
+    padding: 0 var(--font_xs) !important;
+  }
+
+  .dp-nav-header-btn {
+    height: 27px !important;
+  }
+
+  .dp-calendar-month {
+    font-size: var(--font_xs) !important;
+    font-weight: 600;
+  }
+
+}

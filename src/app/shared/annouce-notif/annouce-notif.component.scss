@@ -1,0 +1,35 @@
+@import 'variable';
+
+.accoune_notif {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: fixed;
+  direction: rtl;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: $border_7;
+  color: var(--fix_gray_light);
+  text-align: center;
+  font-size: var(--font_ss);
+  z-index: 600;
+
+  i {
+    margin-left: var(--font_xs);
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  a {
+    transform: translateY(.17rem);
+    font-size: var(--font_ss);
+    vertical-align: middle;
+    color: white;
+  }
+
+  @media (min-width:550px) {
+    font-size: var(--font_s);
+  }
+}

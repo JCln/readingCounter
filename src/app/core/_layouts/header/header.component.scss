@@ -1,0 +1,131 @@
+@import 'variable.scss';
+@import 'mixins.scss';
+@import 'hamburger';
+@import 'theme';
+@import 'tooltip';
+@import 'button';
+
+.header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: var(--white);
+  width: 100%;
+  padding: var(--font_01);
+  box-shadow: 0 1px 5px 0px var(--primary_5);
+  z-index: 100;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width:550px) {
+    padding-right: 2rem;
+  }
+
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin: 0 var(--font_025);
+  color: var(--secondary_7);
+  text-align: center;
+  list-style-type: none;
+  cursor: pointer;
+  border: none;
+
+  font-size: var(--font_m);
+  font-weight: 600;
+}
+
+._name {
+  margin-left: auto;
+  padding-right: 0;
+  font-size: var(--font_ss);
+  color: var(--primary_5);
+  cursor: auto;
+  @include _borders();
+
+  @media (min-width:550px) {
+    font-size: var(--font_ss);
+    padding-right: 0.87rem;
+  }
+
+  @media (min-width:780px) {
+    font-size: var(--font_m);
+  }
+}
+
+.menu_toggle {
+  display: block;
+  padding: var(--font_05);
+  border-radius: $border_50;
+  background-color: var(--secondary_3);
+  cursor: pointer;
+  transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 0px 1px 1px var(--thirdy_1);
+  }
+}
+
+.__rotate_sidebar_toggler {
+  transform: rotate(90deg);
+}
+
+::ng-deep {
+
+  ._borders {
+    @include _borders();
+
+    .dp-popup {
+      transform: translateX(0);
+    }
+  }
+}
+
+._status {
+  .tooltip .tooltip_text_bottom {
+    width: 10rem;
+    font-size: var(--font_ss);
+  }
+
+  i {
+    font-size: var(--font_l);
+    vertical-align: middle;
+  }
+
+  .pi-spinner {
+    color: var(--fix_gray_light);
+  }
+
+  .pi-check-circle {
+    color: var(--green_600);
+  }
+
+  .pi-times-circle {
+    color: var(--red_600);
+  }
+
+  .Disconnecting {
+    color: var(--orange_600);
+  }
+
+  .Reconnecting {
+    color: var(--orange_500);
+  }
+}
+
+.btn_2_o {
+  height: inherit;
+  width: var(--font_5);
+  font-size: var(--font_ss);
+}

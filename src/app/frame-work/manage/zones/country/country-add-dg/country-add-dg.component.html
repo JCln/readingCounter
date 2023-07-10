@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>افزودن کاربر</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+
+    <main class="_contents">
+
+        <div class="input_2">
+            <div class="_key">کد</div>
+            <input class="_value" type="number" formControlName="id">
+        </div>
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
+
+    </main>
+
+    <mat-dialog-actions>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+    </mat-dialog-actions>
+
+</form>

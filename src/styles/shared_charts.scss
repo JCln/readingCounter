@@ -1,0 +1,46 @@
+@import 'variable.scss';
+@import 'tooltip.scss';
+
+.container_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 19rem));
+  direction: rtl;
+  gap: var(--font_05);
+
+  @media (min-width: 550px) {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
+  }
+}
+
+.charts {
+  position: relative;
+  box-shadow: 0px 1px 2px 2px var(--secondary_4);
+  border-radius: $border_15;
+  background: var(--secondary_1);
+  min-height: 15rem;
+  padding: var(--font_xs);
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 30rem;
+}
+
+//  header options 
+.header_options {
+  background-color: var(--secondary_1);
+  padding: var(--font_05) var(--font_s);
+  border-radius: $border_15;
+  margin-bottom: var(--font_05);
+}
+
+.title {
+  position: absolute;
+  right: var(--font_xs);
+  font-family: inherit;
+  color: var(--secondary_6);
+  font-size: var(--font_s);
+  font-weight: 600;
+
+}

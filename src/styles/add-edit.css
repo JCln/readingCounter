@@ -1,0 +1,716 @@
+.font_family {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+}
+
+.d_rtl {
+  direction: rtl !important;
+}
+
+.d_ltr {
+  direction: ltr !important;
+}
+
+a:hover,
+a:focus,
+a:active {
+  outline: none;
+}
+
+.coloring_border {
+  border: 1.5px dashed var(--orange_600);
+  animation: pulse-new-button 500ms;
+}
+
+._xlsx,
+._csv,
+._pdf {
+  color: var(--secondary_1) !important;
+}
+
+._xlsx {
+  background: var(--green_600);
+}
+
+._xlsx_download {
+  background: var(--green_500);
+  color: var(--white);
+  font-size: var(--font_m);
+}
+
+._csv {
+  background: var(--green_600);
+}
+
+._pdf {
+  background: var(--red_500) !important;
+}
+
+._save_columns {
+  background-color: var(--thirdy_4);
+  color: var(--white) !important;
+}
+
+._custom {
+  background: var(--primary_4);
+  color: var(--secondary_1);
+}
+
+/* BACK ARROW ICON */
+.p_icons {
+  color: var(--thirdy_1);
+  font-size: var(--font_m);
+  cursor: pointer;
+}
+
+footer.footer_with_background {
+  background: var(--white);
+  padding: var(--font_05);
+  border-radius: 7px;
+}
+
+._circle_border {
+  display: grid !important;
+  place-content: center;
+  width: var(--font_22);
+  height: var(--font_22);
+  border-radius: 50%;
+  border: 1.5px solid;
+  cursor: pointer;
+}
+._circle_border:hover, ._circle_border:focus, ._circle_border:active {
+  box-shadow: 0px 0px 1px 1px;
+}
+
+.btn_1 {
+  max-width: 19rem;
+  width: 100%;
+  height: var(--font_26);
+  text-align: center;
+  background: var(--thirdy_1);
+  color: var(--white);
+  border-radius: 100vmax;
+  font-size: var(--font_m);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.btn_1:hover, .btn_1:focus, .btn_1:active {
+  background: var(--primary_4);
+  box-shadow: 0px 0px 5px 0px var(--primary_4);
+}
+
+.btn_2 {
+  max-width: 19rem;
+  width: 8rem;
+  height: var(--font_26);
+  text-align: center;
+  border-radius: 100vmax;
+  font-size: var(--font_m);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 4px 0px var(--secondary_4);
+}
+.btn_2:hover, .btn_2:focus, .btn_2:active {
+  box-shadow: 0px 2px 4px 1px var(--secondary_4);
+}
+
+.btn_2_o {
+  max-width: 19rem;
+  width: 8rem;
+  height: var(--font_26);
+  text-align: center;
+  border-radius: 100vmax;
+  font-size: var(--font_m);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px 0px var(--secondary_4);
+  background-color: var(--orange_500);
+  color: var(--white);
+}
+.btn_2_o:hover, .btn_2_o:focus, .btn_2_o:active {
+  background: var(--orange_600);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  z-index: 10;
+}
+.tooltip .tooltip_text,
+.tooltip .tooltip_text_right,
+.tooltip .tooltip_text_bottom {
+  position: absolute;
+  pointer-events: none;
+  direction: rtl;
+  visibility: hidden;
+  background-color: var(--orange_500);
+  color: var(--white);
+  border-radius: 6px;
+  z-index: 4;
+  font-weight: 600;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: var(--font_s);
+  text-align: center;
+  line-break: auto;
+  padding: 5px 2px;
+  transition: all ease-in-out 100ms;
+}
+
+.tooltip_text {
+  width: 9rem;
+  bottom: 80%;
+  left: 50%;
+  transform: translate(-50%, 10%);
+}
+
+.tooltip_text_right {
+  width: 9rem;
+  left: 100%;
+  bottom: 50%;
+  transform: translate(-10%, 50%);
+}
+
+.tooltip_text_bottom {
+  width: 15rem;
+  left: 50%;
+  transform: translate(-50%, 40%);
+  top: 50%;
+}
+.tooltip_text_bottom::after {
+  content: "";
+  position: absolute;
+  right: 45%;
+  top: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--orange_500);
+}
+
+.tooltip_text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--orange_500) transparent transparent transparent;
+}
+
+.tooltip_text_right::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: -5px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent var(--orange_500) transparent transparent;
+}
+
+.tooltip:hover .tooltip_text {
+  visibility: visible;
+  transform: translate(-50%, -30%);
+}
+
+.tooltip:hover .tooltip_text_right {
+  visibility: visible;
+  transform: translate(10%, 50%);
+}
+
+.tooltip:hover .tooltip_text_bottom {
+  visibility: visible;
+  transform: translate(-50%, 80%);
+}
+
+.input_1 {
+  min-width: 19rem;
+  height: var(--font_28);
+  background: var(--white);
+  padding: 0 3px;
+  margin: 2px 0;
+  text-align: center;
+  font-size: var(--font_s);
+  color: var(--primary_4);
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1px solid;
+  font-family: inherit;
+}
+@media (max-width: 550px) {
+  .input_1 {
+    min-width: 15rem;
+  }
+}
+
+.input_2 {
+  background: var(--secondary_3);
+  color: var(--secondary_3);
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  height: var(--font_28);
+  border: 1px solid var(--secondary_3_spec);
+  border-radius: 7px;
+}
+
+._key {
+  text-align: left;
+  padding-right: 3px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  min-width: var(--font_3);
+  text-align: center;
+  margin-left: auto;
+}
+
+._value {
+  margin: 2px;
+  width: 100%;
+  flex: 1;
+  text-align: center;
+  background: var(--white);
+  border: 0;
+  border-radius: inherit;
+}
+
+._key,
+._value {
+  display: grid;
+  align-items: center;
+  height: var(--font_26);
+  min-height: 85%;
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_4);
+}
+
+:host .mat-select-value,
+:host ::ng-deep .mat-select-value,
+::ng-deep .mat-select-value {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: var(--font_s);
+  color: var(--secondary_7);
+  font-weight: 600;
+}
+:host .mat-select-value-text,
+:host ::ng-deep .mat-select-value-text,
+::ng-deep .mat-select-value-text {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: var(--font_s);
+  color: var(--secondary_8);
+}
+:host .mat-select-placeholder,
+:host ::ng-deep .mat-select-placeholder,
+::ng-deep .mat-select-placeholder {
+  color: var(--secondary_8);
+  font-size: var(--font_ss);
+}
+:host .mat-dialog-container,
+:host ::ng-deep .mat-dialog-container,
+::ng-deep .mat-dialog-container {
+  position: relative;
+  background: var(--secondary_1);
+  color: var(--primary_7);
+  direction: rtl;
+}
+:host .mat-dialog-actions,
+:host ::ng-deep .mat-dialog-actions,
+::ng-deep .mat-dialog-actions {
+  display: flex;
+  justify-content: flex-start;
+  direction: rtl;
+  min-height: 1rem;
+  margin-bottom: 0;
+}
+:host .close_dg,
+:host ::ng-deep .close_dg,
+::ng-deep .close_dg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+  border: none;
+  right: var(--font_03);
+  top: var(--font_03);
+  padding: 13px;
+  width: 1.7rem;
+  height: 1.7rem;
+  line-height: 14px;
+  border-radius: 50%;
+  background: var(--secondary_1);
+  color: var(--secondary_8);
+}
+:host .close_dg:hover, :host .close_dg:active,
+:host ::ng-deep .close_dg:hover,
+:host ::ng-deep .close_dg:active,
+::ng-deep .close_dg:hover,
+::ng-deep .close_dg:active {
+  color: var(--primary_2);
+  border-color: transparent;
+  background: var(--secondary_4);
+}
+:host .close_dg:focus,
+:host ::ng-deep .close_dg:focus,
+::ng-deep .close_dg:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  background: var(--secondary_4);
+  box-shadow: 0 0 0 0.15rem var(--primary_3);
+}
+:host .mat-select,
+:host ::ng-deep .mat-select,
+::ng-deep .mat-select {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-weight: 600;
+  text-align: center;
+}
+:host .mat-select-arrow,
+:host ::ng-deep .mat-select-arrow,
+::ng-deep .mat-select-arrow {
+  color: var(--primary_3);
+}
+:host .mat-select-panel .mat-optgroup-label,
+:host .mat-select-panel .mat-option,
+:host ::ng-deep .mat-select-panel .mat-optgroup-label,
+:host ::ng-deep .mat-select-panel .mat-option,
+::ng-deep .mat-select-panel .mat-optgroup-label,
+::ng-deep .mat-select-panel .mat-option {
+  font-size: var(--font_s);
+  line-height: 3em;
+  height: 3em;
+  text-align: right;
+  font-family: inherit;
+  font-weight: 600;
+}
+:host .mat-option-text,
+:host ::ng-deep .mat-option-text,
+::ng-deep .mat-option-text {
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_6);
+}
+:host .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+:host .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+:host ::ng-deep .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+:host ::ng-deep .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+::ng-deep .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+::ng-deep .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+  background-color: var(--pink_500);
+}
+:host .mat-checkbox-layout .mat-checkbox-label,
+:host ::ng-deep .mat-checkbox-layout .mat-checkbox-label,
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  margin: 0 var(--font_05);
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--secondary_8);
+  line-height: 2;
+  border-radius: 10px;
+}
+:host .mat-input-element,
+:host ::ng-deep .mat-input-element,
+::ng-deep .mat-input-element {
+  color: var(--primary_5);
+}
+:host .mat-checkbox-frame,
+:host ::ng-deep .mat-checkbox-frame,
+::ng-deep .mat-checkbox-frame {
+  border-color: var(--secondary_5);
+}
+:host .mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame,
+:host ::ng-deep .mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame,
+::ng-deep .mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame {
+  border-color: var(--secondary_8);
+}
+:host .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+:host .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
+:host .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+:host ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+:host ::ng-deep .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+::ng-deep .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--pink_500);
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.check_boxes {
+  border-radius: 10px;
+  background: var(--white);
+  padding: var(--font_05);
+  margin-top: 3px;
+}
+
+form._user-input {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  gap: var(--font_02);
+}
+
+.btn_1 {
+  color: var(--secondary_1);
+}
+
+._key,
+._value {
+  border: 0;
+  font-weight: 800;
+  font-size: var(--font_ss);
+}
+
+input::-moz-placeholder {
+  font-size: var(--font_ss);
+}
+
+input::placeholder {
+  font-size: var(--font_ss);
+}
+
+.accept {
+  display: flex;
+}
+
+.btn_2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--font_25);
+  margin: var(--font_01) var(--font_025);
+  padding: var(--font_025);
+  background-color: var(--thirdy_2);
+  color: var(--primary_5);
+}
+
+._special {
+  background-color: var(--primary_3);
+  color: var(--secondary_1);
+}
+._special:hover, ._special:focus, ._special:active {
+  background: var(--primary_2);
+}
+
+/* actions */
+.auth_1 {
+  direction: rtl;
+}
+
+.auth_1_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
+  gap: var(--font_025);
+  direction: rtl;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--white);
+  box-shadow: 0px 0px 2px 2px var(--thirdy_2);
+}
+.auth_1_container .auth_1_item {
+  display: grid;
+  place-content: center;
+  padding: var(--font_02);
+  border-radius: 100vmax;
+  font-size: var(--font_l);
+  font-weight: 600;
+  background: var(--thirdy_2);
+  color: var(--primary_5);
+  box-shadow: 1px 1px 3px 0px var(--thirdy_2);
+  border: 1px solid var(--secondary_3);
+  cursor: pointer;
+}
+.auth_1_container .auth_1_item:hover, .auth_1_container .auth_1_item:focus, .auth_1_container .auth_1_item:active {
+  background: var(--primary_4);
+  color: var(--white);
+}
+@media (max-width: 550px) {
+  .auth_1_container {
+    grid-template-columns: repeat(auto-fit, minmax(var(--font_5), auto));
+  }
+  .auth_1_container .auth_1_item {
+    font-size: var(--font_xs);
+  }
+}
+
+.active_tab {
+  background-color: var(--primary_4) !important;
+  color: var(--secondary_1) !important;
+}
+
+.auth_2 {
+  padding: 0 var(--font_05);
+  margin-bottom: var(--font_2);
+  border-radius: 10px;
+}
+
+.auth_3 {
+  margin: 0;
+  padding: var(--font_025);
+  border-radius: 10px;
+  box-shadow: 0px 1px 3px 1.5px var(--secondary_4);
+}
+
+@media (min-width: 550px) {
+  .auth_3 {
+    margin: 0 4rem var(--font_05) var(--font_xxs);
+  }
+}
+.auth_4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  gap: var(--font_03);
+  background: var(--white);
+  border: 1px solid var(--secondary_1);
+  border-radius: 5px;
+  margin: var(--font_05);
+}
+.auth_4 .checkboxes {
+  display: flex;
+  border-radius: 15px;
+  padding: var(--font_025);
+}
+
+.text {
+  padding: 0 var(--font_05);
+  color: var(--primary_4);
+  font-size: var(--font_l);
+  font-weight: 600;
+}
+
+.text_btn {
+  max-width: 11rem;
+  width: auto;
+  text-align: center;
+  padding: var(--font_05);
+  border-radius: 10px;
+  margin-bottom: 0;
+  font-size: var(--font_m);
+  font-weight: 600;
+  color: var(--primary_4);
+  background: var(--secondary_3);
+}
+
+.accept {
+  display: flex;
+  box-shadow: 0 -3px 2px -1px var(--thirdy_2);
+}
+
+._double_size {
+  grid-column: auto;
+}
+
+@media (min-width: 550px) {
+  ._double_size {
+    grid-column: auto/span 2;
+  }
+}
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--primary_4);
+}
+
+.separator:not(:empty)::after {
+  margin-left: 0.25em;
+}
+
+.tooltip .tooltip_text {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rem;
+}
+
+.tooltip:hover .tooltip_text_bottom {
+  transform: translate(-50%, 60%);
+}
+
+.roles {
+  background: var(--thirdy_2);
+  border-radius: 5px;
+  padding: var(--font_02);
+}
+
+.role_items {
+  direction: rtl;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
+  gap: var(--font_02);
+  padding: var(--font_05);
+  border-radius: 10px;
+  margin-bottom: var(--font_2);
+  background: var(--secondary_1);
+}
+
+h2 {
+  color: var(--primary_5);
+  text-align: right;
+}
+
+/* materials */
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  margin: 0 var(--font_05);
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_3);
+  line-height: 2;
+  border-radius: 10px;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+}
+::ng-deep .mat-step-header {
+  height: 100%;
+}
+::ng-deep .mat-stepper-horizontal,
+::ng-deep .mat-stepper-vertical {
+  background: var(--secondary_1);
+}
+::ng-deep .mat-horizontal-stepper-header-container {
+  height: var(--font_35);
+  direction: rtl;
+  border: 2px solid var(--primary_5);
+  border-radius: 6rem;
+  padding: var(--font_05);
+  margin-bottom: var(--font_025);
+}
+::ng-deep .mat-step-text-label {
+  font-size: var(--font_s);
+  padding-right: var(--font_05);
+  font-weight: 600;
+  color: var(--secondary_8);
+}
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
+  font-size: var(--font_s);
+  font-weight: 600;
+}
+::ng-deep .mat-horizontal-content-container {
+  min-height: 50vh;
+  padding: 0 !important;
+}
+
+.mat-stepper-horizontal {
+  width: 95%;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  padding: var(--font_05);
+  border-radius: 7px;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+  color: var(--primary_5);
+}/*# sourceMappingURL=add-edit.css.map */

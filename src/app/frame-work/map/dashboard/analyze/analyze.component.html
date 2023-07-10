@@ -1,0 +1,8 @@
+<div *ngIf="radarChartData.length" class="chart_analyze">    
+    <canvas baseChart
+      [datasets]="radarChartData"
+      [options]="radarChartOptions"
+      [labels]="radarChartLabels"
+      [chartType]="radarChartType">
+    </canvas>
+  </div>

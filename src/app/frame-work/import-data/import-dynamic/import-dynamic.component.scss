@@ -1,0 +1,79 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: var(--font_xxs);
+  border-radius: $border_15;
+  min-height: 35rem;
+}
+
+.static_part {
+  background: var(--white);
+  border: .15rem solid var(--secondary_2);
+  border-radius: $border_15;
+  padding: var(--font_05);
+  width: 20rem;
+  margin: auto;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+
+  @media (min-width: 700px) {
+    width: 29rem;
+  }
+
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 9rem));
+  gap: var(--font_02);
+  padding: 0;
+}
+
+.content_inline {
+  display: flex;
+  justify-content: center;
+  gap: var(--font_02);
+}
+
+.input_2 {
+  width: 100%;
+}
+
+h2 {
+  white-space: nowrap;
+  color: var(--primary_3);
+  margin-left: var(--font_05);
+  font-size: var(--font_s);
+}
+
+.order_by {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+hr {
+  margin: 0 auto;
+  height: var(--font_02);
+  margin-bottom: var(--font_02);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin: var(--font_xs) 0;
+  flex-wrap: wrap;
+
+  @media (min-width: 780px) {
+    flex-wrap: nowrap;
+  }
+}
+
+[hidden] {
+  display: none;
+}

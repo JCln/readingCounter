@@ -1,0 +1,122 @@
+@import 'primeNG.scss';
+@import 'button.scss';
+@import '_mat.scss';
+@import 'input.scss';
+
+._contents {
+  display: grid;
+  min-width: 16rem;
+  gap: var(--font_02);
+  direction: rtl;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 550px) {
+    min-width: 20rem;
+  }
+
+  @media (min-width: 780px) {
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 14rem));
+    gap: var(--font_05);
+  }
+
+  ._key,
+  ._value {
+    border: 0;
+    font-weight: 800;
+  }
+}
+
+.mat-dialog-actions {
+  display: flex;
+  direction: rtl;
+  justify-content: flex-start;
+  gap: var(--font_xs);
+}
+
+.check_boxes {
+  display: flex;
+  gap: var(--font_05);
+}
+
+.mat-checkbox {
+  direction: rtl;
+  margin-bottom: 0;
+}
+
+.mat-option {
+  font-family: $font_family;
+  font-weight: 600;
+  text-align: right;
+  direction: rtl;
+}
+
+.btn_1,
+.btn_2 {
+  width: 50%;
+  max-width: 8rem;
+  font-size: var(--font_s);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: var(--secondary_5);
+    box-shadow: 0px 2px 1px 1px var(--secondary_4);
+  }
+}
+
+._custom {
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--primary_1);
+    background: var(--primary_3);
+    box-shadow: 0px 2px 4px 1px var(--primary_3);
+  }
+}
+
+h2 {
+  text-align: right;
+  font-family: $font_family;
+  font-size: var(--font_l);
+  font-weight: 600;
+  color: var(--primary_4);
+  border-radius: 15px;
+  margin-bottom: 0;
+  padding: var(--font_05);
+}
+
+.mat-dialog-container {
+  position: relative;
+  border: 1px solid var(--primary_2);
+}
+
+._blue_dark {
+  color: var(--primary_5);
+  border: 2px solid var(--primary_5);
+}
+
+button._blue_dark {
+  background-color: var(--primary_5);
+  color: var(--secondary_1);
+}
+
+._double_size {
+  grid-column: auto/ span 2;
+}
+
+._triple_size {
+  grid-column: auto/ span 3;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,32 @@
+<section>
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="_card">
+                <div class="input_2" [hidden]="!zoneDictionary.length">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="toolsService.fileDownloadAllImages.zoneId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="date" (dateJalEvent)="toolsService.receiveDateJalali($event)"
+                            [dateObject]="toolsService.fileDownloadAllImages.day">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <footer class="center_footer">
+                    <button type="submit" class="btn_1">
+                        دانلود تصاویر
+                        <i class="fa fa-file-zip-o"></i>
+                    </button>
+                </footer>
+
+            </section>
+        </section>
+    </form>
+</section>

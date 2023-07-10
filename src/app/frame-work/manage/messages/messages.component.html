@@ -1,0 +1,70 @@
+<div class="over_all">
+    <main>
+        <div class="_card">
+            <h1>جزئیات پیام</h1>
+            <div class="_save_this">
+                <h2>عنوان</h2>
+                <input type="text" class="input_1" [(ngModel)]=" messageService.message.title">
+            </div>
+            <div class="text">
+                <h2>متن</h2>
+                <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="messageService.message.message">
+                </textarea>
+            </div>
+            <div class=" time">
+                <h2>زمان (ثانیه)</h2>
+                <div class="t_separator">
+                    <p-selectButton [options]="times" [(ngModel)]="messageService.message.seconds" optionLabel="title"
+                        optionValue="value">
+                    </p-selectButton>
+                </div>
+                <div class="color">
+                    <h2>رنگ</h2>
+                    <div class="c_separator">
+                        <p-selectButton class="_colors_button" [options]="colors"
+                            [(ngModel)]="messageService.message.color" (onChange)="changeColorTextByColorChange()"
+                            optionLabel="text" optionValue="value">
+                        </p-selectButton>
+                    </div>
+                </div>
+                <div class="send">
+                    <button (click)="connectToServer()" class="btn_1">ارسال و مشاهده</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main>
+        <div class="_container" [ngStyle]="{'background-color':_sampleBackColor}">
+            <div class="_icon">
+                <div class="__notificationMediaTypeId pi pi-info"></div>
+            </div>
+            <div class="_content">
+                <p class="__sender">
+                    {{messageService.message.title || 'عنوانی وارد نمایید!'}}
+                </p>
+                <p class="__insertDateTimeJalali __caption">
+                    {{messageService.message.message || 'متنی وارد نمایید!'}}
+                </p>
+                <p class="__timer">
+                    {{messageService.message.seconds / 1000}}
+                </p>
+                <i class="__close pi pi-times"></i>
+            </div>
+        </div>
+
+        <div class="static_height">
+            <h1>استفاده از پیام های پیش‌فرض</h1>
+            <div class="main_content" *ngFor="let item of allMessages"
+                [ngStyle]="{'border': '.15rem solid'+item.exactColor}">
+                <div class="_text" [ngStyle]="{'color': item.exactColor}">{{item.message}}</div>
+                <div class="_details">
+                    <div class="__time">
+                        {{item.text}}
+                        ثانیه
+                    </div>
+                    <button class="btn_2" (click)="copyPreMessageToCurrent(item)">استفاده</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,11 @@
+<section class="media">
+    <div class="_header">
+        <i class="pi pi-chart-bar"></i>
+        گزارش ها
+    </div>
+
+    <div class="_key_value" *ngFor="let item of _colReadTimed">
+        <div class="_key">{{item.header}}</div>
+        <div class="_value">{{readTimed[item.field]}}</div>
+    </div>
+</section>

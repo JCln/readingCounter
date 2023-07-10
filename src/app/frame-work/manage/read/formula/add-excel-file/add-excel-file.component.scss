@@ -1,0 +1,47 @@
+@import 'variable';
+@import 'button.scss';
+@import 'input.scss';
+@import 'choose-files.scss';
+
+.container {
+  direction: rtl;
+}
+
+.content {
+  min-height: 20rem;
+  width: 20rem;
+  margin: auto;
+  padding: var(--font_xs) 0;
+  text-align: center;
+  border-radius: $border_10;
+}
+
+._desc {
+  margin: var(--font_xs) auto;
+  border-radius: $border_15;
+}
+
+.input_1 {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 19rem;
+  text-align: center;
+}
+
+.__custom {
+  height: var(--font_25);
+  border: 1px solid var(--primary_2);
+  width: auto;
+  color: var(--primary_2);
+  min-width: 4rem;
+}
+
+span,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+span {
+  font-size: var(--font_25);
+}

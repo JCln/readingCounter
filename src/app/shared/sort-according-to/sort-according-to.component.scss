@@ -1,0 +1,13 @@
+.order_by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+h2 {
+  white-space: nowrap;
+  color: var(--primary_3);
+  margin-left: var(--font_05);
+  font-size: var(--font_s);
+}

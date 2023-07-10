@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>افزودن تبصره 3</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <main class="_contents">
+
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <div class="input_2">
+            <div class="_key">کاربری مشترکین</div>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" formControlName="karbariMoshtarakinCode">
+                    <mat-option *ngFor="let truefalse of data.karbariCodeDic" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <div class="input_2" dir="rtl">
+            <div class="_key">از</div>
+            <div class="_value">
+                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+
+        <div class="input_2" dir="rtl">
+            <div class="_key">تا</div>
+            <div class="_value">
+                <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+
+        <div class="input_2">
+            <div class="_key">از نرخ</div>
+            <input class="_value" formControlName="fromRate">
+        </div>
+
+        <div class="input_2">
+            <div class="_key">تا نرخ</div>
+            <input class="_value" formControlName="toRate">
+        </div>
+        <div class="input_2">
+            <div class="_key">فرمول آب</div>
+            <input class="_value" formControlName="abFormula">
+        </div>
+        <div class="input_2">
+            <div class="_key">فرمول فاضلاب</div>
+            <input class="_value" formControlName="fazelabFormula">
+        </div>
+        <div class="input_2">
+            <div class="_key">فرمول</div>
+            <input class="_value" formControlName="formula">
+        </div>
+
+    </main>
+
+    <mat-dialog-actions>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+    </mat-dialog-actions>
+</form>

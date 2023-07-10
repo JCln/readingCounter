@@ -1,0 +1,111 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+@import 'tooltip.scss';
+@import 'choose-files.scss';
+@import 'cards';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: var(--font_s);
+  border-radius: $border_15;
+  min-height: 35rem;
+}
+
+section.content {
+  display: grid;
+  gap: var(--font_05);
+  align-items: center;
+}
+
+.date_section {
+  margin: var(--font_05) 0;
+}
+
+.static_part {
+  margin: auto;
+  background: var(--white);
+  border: .15rem solid var(--secondary_2);
+  border-radius: $border_15;
+  padding: var(--font_xxs);
+  width: 19rem;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+
+  @media (min-width: 550px) {
+    width: 23rem;
+  }
+
+  @media (min-width: 700px) {
+    width: 29rem;
+  }
+}
+
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 9rem));
+  align-items: center;
+  gap: var(--font_02);
+  padding: 0;
+  margin-top: var(--font_02);
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
+  width: 100%;
+}
+
+footer {
+  margin-top: var(--font_2);
+  // overridden to textAlign right from footer_with_background class
+  text-align: center !important;
+
+  button {
+    margin: var(--font_01) 0;
+  }
+}
+
+[hidden] {
+  display: none;
+}
+
+.icon_android,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+.__custom {
+  height: var(--font_25);
+  border: 1px solid var(--primary_2);
+  width: auto;
+  color: var(--primary_2);
+  min-width: 4rem;
+}
+
+span,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+span {
+  font-size: var(--font_25);
+}
+
+.double_size {
+  grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
+}

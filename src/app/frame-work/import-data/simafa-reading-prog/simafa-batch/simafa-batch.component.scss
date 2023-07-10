@@ -1,0 +1,114 @@
+@import 'primeNG';
+@import 'tooltip';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: var(--font_s);
+  border-radius: $border_15;
+  min-height: 35rem;
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
+  gap: var(--font_05);
+  align-items: center;
+}
+
+.date_section {
+  margin: var(--font_05) 0;
+}
+
+section.dynamic_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  gap: var(--font_05);
+  align-items: center;
+  border: .15rem solid var(--thirdy_3);
+  box-shadow: 1px 1px 3px 1px var(--thirdy_3);
+  border-radius: $border_15;
+  padding: var(--font_xxs);
+  margin: var(--font_xs) 0;
+}
+
+.static_part {
+  background: var(--white);
+  border: .15rem solid var(--secondary_2);
+  border-radius: $border_15;
+  padding: var(--font_05);
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+  margin-bottom: var(--font_03);
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 9rem));
+  gap: var(--font_05);
+  padding: 0;
+  margin-top: 0;
+}
+
+._key,
+._value {
+  font-size: var(--font_m);
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
+  width: 100%;
+}
+
+h2 {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+
+  padding: var(--font_xs);
+  margin: var(--font_05);
+  background: var(--white);
+  color: var(--green_500);
+  border: 1px solid var(--green_500);
+  border-radius: $border_5;
+
+  i {
+    margin-left: var(--font_xs);
+  }
+}
+
+h3 {
+  color: var(--secondary_6);
+  margin-left: var(--font_5);
+}
+
+footer {
+  margin-top: var(--font_2);
+  text-align: center;
+}
+
+.order_by {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+hr {
+  margin: 0 auto;
+  background-color: var(--primary_5);
+  height: var(--font_02);
+  margin-bottom: var(--font_xxs);
+}
+
+[hidden] {
+  display: none;
+}

@@ -1,0 +1,64 @@
+$border_15: 10px;
+
+.input_1 {
+  min-width: 19rem;
+  height: var(--font_28);
+  background: var(--white);
+  padding: 0 3px;
+  margin: 2px 0;
+  text-align: center;
+  font-size: var(--font_s);
+  color: var(--primary_4);
+  border-radius: $border_15;
+  font-weight: 600;
+  border: 1px solid;
+  font-family: inherit;
+
+  @media (max-width: 550px) {
+    min-width: 15rem;
+  }
+}
+
+// key value input
+.input_2 {
+  background: var(--secondary_3);
+  color: var(--secondary_3);
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  height: var(--font_28);
+  border: 1px solid var(--secondary_3_spec);
+  border-radius: $border_7;
+}
+
+._key {
+  text-align: left;
+  padding-right: 3px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  min-width: var(--font_3);
+  text-align: center;
+  margin-left: auto;
+}
+
+._value {
+  margin: 2px;
+  width: 100%;
+  flex: 1;
+  text-align: center;
+  background: var(--white);
+  border: 0;
+  border-radius: inherit;
+}
+
+._key,
+._value {
+  display: grid;
+  align-items: center;
+  height: var(--font_26);
+  min-height: 85%;
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_4);
+}

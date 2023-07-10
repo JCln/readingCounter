@@ -1,0 +1,19 @@
+<!-- auth4 means 'افزودن موردی' -->
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForCounterReport" 
+    [_checkUpName]="'auth4'"
+    [_outputFileName]="'counterReport'"
+    [_dictionaryName]="'zoneId'"
+    [dictionary]="zoneDictionary"    
+    [_numberOfExtraColumns]="[1, 2]"
+    [_sessionName]="'counterreport-session'"
+    [_selectedColumnsToRemember]="'selectedCounterReport'"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (dropDownChanges)="closeTabService.saveDataForCounterReport['counterReport']"
+    (removedRow)="removeRow($event)"
+    (onRowEditedCancel)="onRowEditCancel()"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

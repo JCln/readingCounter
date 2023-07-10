@@ -1,0 +1,10 @@
+<section class="media">
+    <div class="_header">
+        <i class="pi pi-lock"></i>
+        اشتراک های قفل شده
+    </div>
+    <div class="_key_value" *ngFor="let item of _colshownReading">
+        <div class="_key">{{item.header}}</div>
+        <div class="_value">{{dataSourceLocked[item.field]}}</div>
+    </div>
+</section>

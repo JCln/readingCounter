@@ -1,0 +1,58 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+@import 'cards';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  padding: var(--font_05);
+  border-radius: $border_15;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+  margin-bottom: var(--font_03);
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  gap: var(--font_025);
+  align-items: center;
+}
+
+.tooltip {
+  cursor: pointer;
+}
+
+.input_1 {
+  border-radius: 10px;
+  min-width: 100%;
+}
+
+.btn_1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+h2 {
+  color: var(--secondary_6);
+}
+
+h3 {
+  color: var(--primary_3);
+  font-size: var(--font_m2);
+  padding: var(--font_05);
+}
+
+.check_boxes {
+  padding: var(--font_03);
+  margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+[hidden] {
+  display: none;
+}

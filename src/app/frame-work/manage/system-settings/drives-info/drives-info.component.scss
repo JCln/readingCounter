@@ -1,0 +1,51 @@
+@import 'shared_reports';
+@import 'cards';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 21rem));
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_05);
+}
+
+._card {
+  width: 100%;
+}
+
+.title {
+  direction: ltr;
+  color: var(--primary_3);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_m);
+}
+
+._charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: var(--font_05);
+}
+
+._key_value {
+  columns: 2;
+}
+
+._key {
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_5);
+  text-align: center;
+}
+
+._value {
+  font-size: var(--font_l);
+  font-weight: 600;
+  color: var(--primary_5);
+  max-width: 95%;
+  direction: ltr;
+}
+
+.charts {
+  min-height: 8rem;
+}

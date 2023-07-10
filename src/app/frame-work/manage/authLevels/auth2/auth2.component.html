@@ -1,0 +1,19 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForAppLevel2" 
+    [_checkUpName]="'auth2'"
+    [_outputFileName]="'auth2'"
+    [_dictionaryName]="'authLevel1Id'"
+    [dictionary]="authLevel1Dictionary"
+    [_outputEnabled]= false    
+    [_numberOfExtraColumns]="[1, 2]"
+    [_selectedColumnsToRemember]="'selectedAuth2'"
+    [_sessionName]="'auth2-session'"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (dropDownChanges)="closeTabService.saveDataForAppLevel2['authLevel1Id']"
+    (removedRow)="removeRow($event)"
+    (onRowEditedCancel)="onRowEditCancel()"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

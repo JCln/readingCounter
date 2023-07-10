@@ -1,0 +1,145 @@
+@import 'variable';
+@import 'uploadedImages.scss';
+@import 'input.scss';
+@import 'tooltip.scss';
+
+.test_displary_thumbs {
+  display: grid;
+  justify-content: center;
+}
+
+.double_size {
+  grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
+}
+
+.thumbnail_img {
+  max-height: 8rem;
+}
+
+.main_img {
+  height: 40vh;
+  width: 100%;
+  min-width: 40rem;
+}
+
+._is_fullcreen {
+  width: 70%;
+  height: 80vh;
+  margin-top: var(--font_3);
+}
+
+._is_not_fullscreen {
+  height: 40vh;
+  width: 100%;
+  min-width: 40rem;
+}
+
+main.carousel_gallery {
+  display: grid;
+  justify-content: center;
+
+  p-galleria {
+    box-shadow: 0 0 2px 2px var(--secondary_4);
+  }
+}
+
+:host ::ng-deep .custom-galleria {
+  &.p-galleria {
+    &.fullscreen {
+      display: flex;
+      flex-direction: column;
+
+      .p-galleria-content {
+        flex-grow: 1;
+        justify-content: center;
+      }
+    }
+
+    .p-galleria-content {
+      position: relative;
+    }
+
+    .p-galleria-thumbnail-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .p-galleria-thumbnail-items-container {
+      width: 100%;
+    }
+
+    .custom-galleria-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      background-color: rgba(0, 0, 0, .9);
+      color: var(--secondary_4);
+      padding-bottom: var(--font_xs);
+
+      >button {
+        background-color: transparent;
+        color: var(--secondary_4);
+        border: 0 none;
+        font-size: var(--font_m);
+        font-weight: 600;
+        border-radius: 0;
+        margin: var(--font_02) 0;
+        cursor: pointer;
+
+        &.fullscreen-button {
+          margin-left: auto;
+        }
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      article._options {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+
+        i {
+          color: var(--secondary_4);
+          border: var(--secondary_4);
+          font-size: var(--font_xs);
+          margin: var(--font_025);
+        }
+      }
+    }
+
+    .title-container {
+      >span {
+        font-size: .9rem;
+        padding-left: .829rem;
+
+        &.title {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.tooltip .tooltip_text {
+  bottom: 105%;
+}
+
+.empty_data {
+  display: flex;
+  justify-content: center;
+  background: var(--white);
+  padding: var(--font_3);
+  border-radius: $border_15;
+  font-size: var(--font_l);
+  font-weight: 600;
+  color: var(--secondary_8);
+}

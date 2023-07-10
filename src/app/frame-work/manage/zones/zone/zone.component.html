@@ -1,0 +1,19 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForZone" 
+    [_checkUpName]="'zone'"
+    [_dictionaryName]="'regionId'"
+    [_outputFileName]="'zone'"
+    [_multiSelectEnable]=false
+    [_outputEnabled]= false    
+    [_hasSaveColumns]= false
+    [_numberOfExtraColumns]="[1, 2]"
+    [dictionary]="regionDictionary"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (dropDownChanges)="closeTabService.saveDataForZone['regionId']"
+    (removedRow)="removeRow($event)"
+    (onRowEditedCancel)="onRowEditCancel()"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

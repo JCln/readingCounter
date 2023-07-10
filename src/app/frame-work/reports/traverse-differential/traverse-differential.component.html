@@ -1,0 +1,115 @@
+<main class="main" *ngIf="route.children.length === 0">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedTrvCh ? 'slideUp' : 'slideDown'">
+                <app-sort-according-to></app-sort-according-to>
+                <hr>
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="readingReportManagerService.trvchReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
+                                (onChange)="readingReportManagerService.trvchReq.fragmentMasterIds = []">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">نوبتی</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
+                                [(ngModel)]="readingReportManagerService.trvchReq.fragmentMasterIds"
+                                optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">نوع پیمایش</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.trvchReq.traverseType" name="traverseID">
+                                <mat-option *ngFor="let truefalse of traverseDiffrentialDictionary"
+                                    [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                        <div class="_key">نوع دوره</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                                <mat-option (click)="getReadingPeriod()"
+                                    *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="input_2"
+                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                        <div class="_key">دوره قرائت</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.trvchReq.readingPeriodId"
+                                name="readingPeriodId">
+                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                        <div class="_key">سال</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.trvchReq.year" name="year">
+                                <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.trvch, $event)"
+                                [dateObject]="readingReportManagerService.trvchReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.trvch, $event)"
+                                [dateObject]="readingReportManagerService.trvchReq.toDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <button id="grid_view" type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+                    <button id="chart_view" type="submit" class="btn_1">
+                        مشاهده نمودار
+                        <i class="fa fa-pie-chart"></i>
+                    </button>
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRTraverseDifferential" [_outputFileName]="'trvDiff'"
+        [_checkUpName]="'rr-traverseDiff'" [_numberOfExtraColumns]="[1]" [_sessionName]="'trvDiff-session'"
+        [_selectedColumnsToRemember]="'selectedRRTraverseDifferential'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedTrvCh"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedTrvCh = !readingReportManagerService.utilsService.collapser.isCollapsedTrvCh"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>
+<router-outlet></router-outlet>

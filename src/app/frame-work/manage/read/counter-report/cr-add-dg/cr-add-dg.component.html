@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>افزودن گزارش بازرسی</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <main class="_contents">
+
+        <div class="input_2">
+            <div class="_key">کد مشترکین</div>
+            <input class="_value" type="number" formControlName="moshtarakinId">
+        </div>
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <div class="input_2">
+            <div class="_key">ترتیب</div>
+            <input class="_value" type="number" formControlName="clientOrder">
+        </div>
+
+        <mat-checkbox formControlName="forProvince">همه نواحی</mat-checkbox>
+        <mat-checkbox formControlName="isAhad">آحاد</mat-checkbox>
+        <mat-checkbox formControlName="isKarbari">کاربری</mat-checkbox>
+        <mat-checkbox formControlName="canNumberBeLessThanPre">فعلی کمتر از قبلی</mat-checkbox>
+        <mat-checkbox formControlName="isTavizi">تعویضی</mat-checkbox>
+
+    </main>
+
+    <mat-dialog-actions>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+    </mat-dialog-actions>
+</form>

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>افزودن کنترلر</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <main class="_contents">
+
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
+        <div class="input_2">
+            <div class="_key">کلاس css</div>
+            <input class="_value d_ltr" formControlName="cssClass">
+        </div>
+        <div class="input_2">
+            <div class="_key">ماژول</div>
+            <div class="_value">
+                <mat-select placeholder="انتخاب مورد" formControlName="authLevel2Id">
+                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="input_2">
+            <div class="_key">ترتیب</div>
+            <input class="_value" type="number" formControlName="logicalOrder">
+        </div>
+        <div class="input_2 _double_size">
+            <div class="_key">مسیر</div>
+            <input class="_value d_ltr" formControlName="route">
+        </div>
+
+        <mat-checkbox formControlName="inSidebar">سایدبار</mat-checkbox>
+        <mat-checkbox formControlName="isRefreshable">قابل refresh</mat-checkbox>
+        <mat-checkbox formControlName="isClosable">قابل بستن</mat-checkbox>
+
+    </main>
+
+    <mat-dialog-actions>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+    </mat-dialog-actions>
+</form>

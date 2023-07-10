@@ -1,0 +1,330 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2">
+            <div class="_key">ش.پیگیری</div>
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.trackNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ش.لیست</div>
+            <input [readOnly]="true" class="_value" name="listNumber"
+                [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.listNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zone"
+                [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.zoneTitle">
+        </div>
+    </div>
+    <div class="radios">
+        <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
+            <div class="p-field-radiobutton">
+                <p-radioButton name="orderByDate" [value]="orderType.id"
+                    [(ngModel)]="listManagerService.counterStateGeneralGroupList" [inputId]="orderType.id"
+                    (onClick)="updateOnChangedCounterState(orderType.id,true)">
+                </p-radioButton>
+                <label [for]="orderType.id">{{orderType.title}}</label>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main style="position: relative; ">
+    <p-table id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
+        [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
+        dir="rtl" styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
+        (onFilter)="filteredTableEvent($event.filteredValue)" (sortFunction)="listManagerService.customSort($event)"
+        [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
+        [reorderableColumns]="getLocalReOrderable()">
+
+        <ng-template pTemplate="caption">
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
+                optionLabel="header"
+                (ngModelChange)="listManagerService.columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
+            </p-multiSelect>
+
+            <div class="header_icons_wrap">
+                <div class="right_side">
+                    <i (click)="outputManagerService.export(closeTabService.saveDataForLMGeneralGroupModify, _selectCols, _outputFileName, 'xlsx')"
+                        class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                        <div class="tooltip_text">دریافت Excel</div>
+                    </i>
+                    <i (click)="outputManagerService.export(closeTabService.saveDataForLMGeneralGroupModify, _selectCols, _outputFileName, 'csv')"
+                        class="tooltip _circle_border p_icons fas fa-file-csv _csv">
+                        <div class="tooltip_text">دریافت CSV</div>
+                    </i>
+                    <i (click)="getExcel()" class="tooltip _circle_border _xlsx_download pi pi-download">
+                        <div class="tooltip_text">دانلود فایل Excel</div>
+                    </i>
+                    <i (click)="saveColumns()" class="tooltip fa_icons _circle_border p_icons _save_columns fa fa-save">
+                        <div class="tooltip_text">ذخیره ستونها</div>
+                    </i>
+                    <i (click)="resetSavedColumns()"
+                        class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
+                        <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
+                    </i>
+                </div>
+                <div class="left_side">
+                    <i (click)="hasBeenReadsToggler()">
+                        <label class="font_family"
+                            for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}})
+                            نمایش قرائت شده ها
+                        </label>
+                        <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox"
+                            [binary]="true">
+                        </p-checkbox>
+                    </i>
+                    <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                        <div class="tooltip_text">بارگیری مجدد جدول</div>
+                    </i>
+                    <i (click)="uploadAll()" class="tooltip _circle_border _save_all pi_icons pi pi-save">
+                        <div class="tooltip_text">ذخیره همه تغییرات</div>
+                    </i>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                    <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                    {{col.header}}
+                </th>
+                <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            </tr>
+            <tr>
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns">
+                    <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="contains" type="text"
+                        field="{{col.field}}">
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
+                        field="counterStateId" matchMode="in" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.saveDataForLMGeneralGroupModifyReq.multiSelectCounterStateId"
+                                [options]="counterStateByZoneDictionary"
+                                (onChange)="filterOptions($event.value, 'first')" optionLabel="title"
+                                optionValue="title" [filter]="true" showClear="true">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
+                        field="preCounterStateCode" matchMode="in" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.saveDataForLMGeneralGroupModifyReq.multiSelectPreCounterStateCode"
+                                [options]="counterStateByCodeDictionary"
+                                (onChange)="filterOptions($event.value, 'second')" optionLabel="title"
+                                optionValue="title" [filter]="true" showClear="true">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                </th>
+                <th pReorderableColumn style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns">
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing"
+            let-columns="columns" let-ri=rowIndex>
+            <tr [ngClass]="{'has_error': dataSource.editedErrorDescription}">
+                <td class="__columns" pEditableColumn *ngFor="let col of columns"
+                    [ngClass]="{'d_ltr': col.ltr, '_editable': col.icon}">
+                    <span class="ui-column-title">{{col.header}}</span>
+                    <ng-container *ngIf="col.isSelectOption;else selectOption">
+                        <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
+                        <!-- For Modify type inside Table body -->
+                        <ng-container *ngIf="(col.field == 'modifyType'); else secondDict">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown name="modify" [options]="modifyType" [(ngModel)]="dataSource[col.field]"
+                                        [placeholder]="dataSource.modifyType" [ngClass]="{'p-dropdown-editable': true}"
+                                        optionLabel="title"
+                                        (onChange)="clickedDropDowns(dataSource[col.field], 'modifyType' , dataSource.id)">
+                                    </p-dropdown>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{dataSource.modifyType}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </ng-container>
+                        <ng-template #secondDict>
+                            <ng-container>
+                                <!-- For counterStateId only and should sync with generalGroupModify in columnManager.ts -->
+                                <p-cellEditor>
+                                    <ng-template *ngIf="col.field == 'counterStateId'" pTemplate="input">
+                                        <p-dropdown name="drops" [options]="counterStateByZoneDictionary"
+                                            [(ngModel)]="dataSource[col.field]" [placeholder]="dataSource[col.field]"
+                                            [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                            (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
+                                        </p-dropdown>
+                                    </ng-template>
+                                    <ng-template *ngIf="col.field == 'preCounterStateCode'" pTemplate="input">
+                                        {{dataSource[col.field]}}
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{dataSource[col.field]}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </ng-container>
+                        </ng-template>
+                    </ng-container>
+                    <ng-template #selectOption>
+                        <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <mat-checkbox [disabled]="col.readonly"
+                                        [ngClass]="{'mat-checkbox-editable': !col.readonly}"
+                                        [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                                </ng-template>
+                            </p-cellEditor>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <ng-container *ngIf="col.field == 'masrafStateId'; else digits">
+                                <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
+                                    <div class="tooltip_text">عادی</div>
+                                </i>
+                                <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
+                                    <div class="tooltip_text">پایین</div>
+                                </i>
+                                <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
+                                    <div class="tooltip_text">بالا</div>
+                                </i>
+                                <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">صفر
+                                    <div class="tooltip_text">صفر</div>
+                                </i>
+                                <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
+                                    <div class="tooltip_text">غیرقابل محاسبه</div>
+                                </i>
+                            </ng-container>
+
+                            <ng-template #digits>
+                                <ng-container
+                                    *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'; else dateForm">
+                                    {{dataSource[col.field]}}
+                                </ng-container>
+                            </ng-template>
+
+                            <ng-template #dateForm>
+                                <ng-container *ngIf="col.field == 'offloadDateJalali'; else editableForm">
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <app-date-jalali [ngClass]="{'date-editable': !col.readonly}" name="date"
+                                                (dateJalEvent)="receiveDateJalali($event, dataSource.id)"
+                                                [dateObject]="dataSource[col.field]">
+                                            </app-date-jalali>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{dataSource[col.field]}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </ng-container>
+                            </ng-template>
+
+                            <ng-template #editableForm>
+                                <ng-container *ngIf="col.enableTooltip; else simpleText">
+                                    <div *ngIf="col.icon">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText [(ngModel)]="dataSource[col.field]">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{dataSource[col.field]}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </div>
+                                    <div *ngIf="!col.icon">
+                                        <div class="tooltip">
+                                            {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                            dataSource[col.field].toString().split(' ')[0] :
+                                            ''}}
+                                            <div class="tooltip_text">{{dataSource[col.field]}}</div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-template #simpleText>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText [type]="col.isNumber ? 'number': 'text'"
+                                                [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{dataSource[col.field]}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </ng-template>
+
+                            </ng-template>
+                        </ng-template>
+                    </ng-template>
+                </td>
+                <td class="__columns" (click)="openMoshtarakinDialog(dataSource)">
+                    <span class="ui-column-title">مشاهده سابقه</span>
+                    <i class="tooltip p_icons pi pi-users">
+                        <div class="tooltip_text">مشاهده سابقه</div>
+                    </i>
+                </td>
+                <td class="__columns" (click)="openBriefKardexDialog(dataSource)">
+                    <span class="ui-column-title">خلاصه کاردکس</span>
+                    <i class="tooltip p_icons pi pi-folder">
+                        <div class="tooltip_text">خلاصه کاردکس</div>
+                    </i>
+                </td>
+                <td class="__columns" (click)="openMapDialog(dataSource)">
+                    <span class="ui-column-title">مشاهده روی نقشه</span>
+                    <i class="tooltip p_icons pi pi-map-marker">
+                        <div class="tooltip_text_right">مشاهده روی نقشه</div>
+                    </i>
+                </td>
+                <td class="__columns">
+                    <span class="ui-column-title">نمایش گزارش بازرسی</span>
+                    <i (click)="getReadingReportTitles(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
+                        <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                    </i>
+                </td>
+                <!-- for making readable and compatible singleton dataType -->
+                <td class="__columns" (click)="doShowCarousel(dataSource)">
+                    <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
+                    <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons pi pi-camera">
+                        <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
+                        </div>
+                    </i>
+                </td>
+                <td class="__columns" class="error_info">
+                    <i *ngIf="dataSource.editedErrorDescription == '' && !dataSource.isResponseHasError"
+                        class="pi-check tooltip p_icons pi pi-check-circle"></i>
+                    <i *ngIf="dataSource.isResponseHasError" class="info_icon tooltip p_icons pi pi-info-circle">
+                        <div class="tooltip_text_right">{{dataSource.editedErrorDescription}}</div>
+                    </i>
+                </td>
+            </tr>
+
+        </ng-template>
+
+    </p-table>
+    <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+    </app-carousel-woum>
+
+    <section
+        *ngIf="!closeTabService.saveDataForLMGeneralGroupModify || closeTabService.saveDataForLMGeneralGroupModify.length === 0">
+        <tr class="empty_data">
+            موردی پیدا نشد
+        </tr>
+    </section>
+</main>

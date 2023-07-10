@@ -1,0 +1,55 @@
+@import 'variable';
+@import 'button.scss';
+@import 'input.scss';
+@import 'cards';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 20rem));
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_xs);
+}
+
+section {
+  margin: var(--font_3);
+}
+
+.title {
+  display: grid;
+  align-items: center;
+  color: var(--secondary_5);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l2);
+}
+
+h1 {
+  i {
+    font-size: var(--font_3);
+  }
+}
+
+h2.title {
+  color: var(--primary_4);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l);
+}
+
+// @Override values value
+._value {
+  min-height: var(--font_5);
+  height: auto;
+  max-width: 98%;
+  color: var(--primary_3);
+  font-size: var(--font_22);
+}
+
+._smaller {
+  font-size: var(--font_l2);
+}
+
+.eng_lang {
+  font-family: initial;
+}

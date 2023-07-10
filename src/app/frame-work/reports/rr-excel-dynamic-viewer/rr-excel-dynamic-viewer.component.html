@@ -1,0 +1,13 @@
+<app-prime-table     
+    [_selectCols]="_selectCols" 
+    [dataSource]="closeTabService.saveDataForToolsExcelViewer" 
+    [_outputFileName]="'excelDynamic'"
+    [_numberOfExtraColumns]="[1,2]"
+    [_checkUpName]="'excelDynamic'"    
+    [_sessionName]="'rrExcelDynamicViewer-session'"
+    [_selectedColumnsToRemember]="'selectedRRExcelView'"    
+    (refreshedTable)="refreshTable()"    
+    (downloadedExcel)="downloadExcel($event)"
+    (removedRow)="removeRow($event)"    
+ > 
+</app-prime-table>

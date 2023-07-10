@@ -1,0 +1,21 @@
+@import 'variable';
+@import 'button.scss';
+@import 'input.scss';
+@import 'choose-files.scss';
+@import 'cards';
+
+
+input {
+  text-align: center;
+  width: 19rem;
+}
+
+.btn_1 {
+  margin-top: var(--font_2);
+}
+
+.icon_android,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}

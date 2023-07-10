@@ -1,0 +1,30 @@
+@import 'variable';
+@import 'button.scss';
+@import 'mixins.scss';
+
+main {
+  display: grid;
+  text-align: center;
+  width: 21rem;
+  margin: var(--font_5) auto;
+  padding: var(--font_xs);
+  min-height: 15rem;
+
+  border-radius: $border_15;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+button {
+  min-width: 13rem;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  justify-content: center;
+}
+
+.title {
+  color: var(--secondary_8);
+}

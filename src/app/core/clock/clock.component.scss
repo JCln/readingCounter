@@ -1,0 +1,73 @@
+@import 'variable.scss';
+@import 'mixins.scss';
+
+.analog-clock {
+  display: none;
+  position: relative;
+  width: var(--font_35);
+  height: var(--font_35);
+  background: url('/assets/imgs/clock/2.jpg');
+  background-size: cover;
+  border-radius: 50%;
+  top: var(--font_01);
+
+  @media (min-width: 780px) {
+    display: grid;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+.hand {
+  @include d_grid_center();
+  border-radius: 3px 3px 0 0;
+  position: absolute;
+  top: 50%;
+  transform-origin: 50% 100%;
+}
+
+.hour {
+  width: .27rem;
+  height: var(--font_xxs);
+  background: var(--primary_5);
+
+  @media (min-width: 500px) {
+    height: var(--font_xs);
+  }
+
+  @media (min-width: 780px) {
+    height: var(--font_s);
+  }
+}
+
+.minute {
+  width: var(--font_03);
+  height: var(--font_m);
+  background: var(--primary_5);
+
+  @media (min-width: 500px) {
+    height: var(--font_m);
+  }
+
+  @media (min-width: 780px) {
+    height: var(--font_l);
+  }
+}
+
+.center-circle {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  width: var(--font_05);
+  height: var(--font_05);
+  background-color: var(--primary_5);
+  border-radius: 50%;
+  vertical-align: middle;
+
+  @media (min-width: 780px) {
+    width: var(--font_05);
+    height: var(--font_05);
+  }
+}

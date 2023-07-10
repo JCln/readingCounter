@@ -1,0 +1,96 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'button.scss';
+@import 'tooltip.scss';
+@import '_mat.scss';
+
+.content {
+  background: var(--secondary_1);
+  text-align: center;
+  justify-content: space-around;
+  border-radius: $border_15;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
+
+._desc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_05);
+  border-radius: $border_15;
+}
+
+._value {
+  border: 0;
+  width: 100%;
+}
+
+.title {
+  color: var(--primary_3);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l2);
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
+  justify-content: center;
+  direction: rtl;
+  gap: var(--font_025);
+  box-shadow: none;
+  background: inherit;
+  margin-top: 0;
+  padding: var(--font_05);
+}
+
+/* card content */
+
+.card_wrapper {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 11rem));
+  gap: var(--font_05);
+  margin-bottom: var(--font_xs);
+  background: var(--secondary_1);
+  place-content: center;
+  padding: var(--font_05) 0;
+  border-radius: $border_15;
+  box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
+
+.card__content {
+  white-space: nowrap;
+  direction: inherit;
+  border-radius: $border_7;
+}
+
+.disable_grid_temp {
+  text-align: center;
+  margin: auto 0;
+
+  &.card_wrapper {
+    display: inline !important;
+    grid-template-columns: none !important;
+  }
+
+  .btn_1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: var(--font_xs);
+    background: var(--orange_500);
+    color: var(--white);
+    width: 100%;
+    max-width: 100%;
+
+    i {
+      color: var(--white);
+    }
+  }
+}
+
+.input_2 {
+  margin: 0;
+}

@@ -1,0 +1,26 @@
+<section class="header_options">
+    <i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+        <div class="tooltip_text_right">بازگشت به جستجو پیمایش،تغییرات</div>
+    </i>
+</section>
+
+<main class="container_wrapper" *ngIf="dataSource">
+    <div class="charts">
+        <div class="title">{{dataSource.inProvince.areaTitle}}</div>
+        <canvas baseChart [data]="pieChartDataProvince" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="charts">
+        <div class="title">{{dataSource.inRegion.areaTitle}}</div>
+        <canvas baseChart [data]="pieChartDataRegion" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="charts">
+        <div class="title">{{dataSource.inZone.areaTitle}}</div>
+        <canvas baseChart [data]="pieChartDataZone" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+</main>

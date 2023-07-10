@@ -1,0 +1,10 @@
+<div *ngIf="lineChartData.length">
+    <div class="title" style="top: 0">قرائت دو ماهه</div>
+    <div class="chart_analyze">
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+            [chartType]="lineChartType" [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+    <h3>در 60 روز گذشته تعداد {{overAllReads}} قرائت انجام گردیده است.</h3>
+</div>

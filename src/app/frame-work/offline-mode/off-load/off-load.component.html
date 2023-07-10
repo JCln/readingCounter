@@ -1,0 +1,33 @@
+<h2 class="title">دریافت فایل تکست</h2>
+
+<form #form="ngForm" (ngSubmit)="downloadTextFile()">
+    <section class="_card">
+
+        <span class="input_2">
+            <div class="_key">ناحیه</div>
+            <div class="_value">
+                <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
+                    [(ngModel)]="offlineModeService.loadForm.zoneId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" placeholder="انتخاب مورد" (onChange)="getCounterReader()">
+                </p-dropdown>
+            </div>
+        </span>
+        <div class="input_2">
+            <div class="_key">قرائت کننده</div>
+            <div class="_value">
+                <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                    [(ngModel)]="offlineModeService.loadForm.counterReaderId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" placeholder="انتخاب مورد">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="change_pass">
+            <button class="btn_1" type="submit">
+                <div class="fa fa-download"></div>
+                دریافت
+            </button>
+        </div>
+
+    </section>
+</form>

@@ -1,0 +1,17 @@
+<app-prime-table     
+    [dataSource]="closeTabService.saveDataForTrackFinished" 
+    [_outputFileName]="'finished'"
+    [_checkUpName]="'Kartables'"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3]"
+    [_calculableSUM]=true
+    [_hasAggregating] = true
+    [_isCustomSort]=true
+    [_selectedColumnsToRemember]="'selectedTrackFinished'"
+    [_sessionName]="'finished-session'"
+    (customedSort)="trackingManagerService.customSort($event)"
+    (refreshedTable)="refreshTable()"
+    (downloadedOutputSingle)="reDownloadOutputSingle($event)"
+    (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
+    (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"
+ > 
+</app-prime-table>

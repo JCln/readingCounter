@@ -1,0 +1,15 @@
+@import 'primeNG';
+@import 'button.scss';
+@import 'input.scss';
+@import '_mat.scss';
+@import 'cards';
+
+._collapsable {
+  position: absolute;
+  left: var(--font_02);
+  top: 0;
+}
+
+._card {
+  margin-bottom: .1rem;
+}

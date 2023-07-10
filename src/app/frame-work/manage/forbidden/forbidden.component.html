@@ -1,0 +1,45 @@
+<main>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <section class="_card"
+            [@openClose]="forbiddenService.utilsService.collapser._isCollapsedForbidden ? 'slideUp' : 'slideDown'">
+
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="forbiddenService.forbiddenReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                        optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="forbiddenService.receiveFromDateJalali($event)"
+                        [dateObject]="forbiddenService.forbiddenReq.fromDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">تا</div>
+                <div class="_value">
+                    <app-date-jalali name="toDate" (dateJalEvent)="forbiddenService.receiveToDateJalali($event)"
+                        [dateObject]="forbiddenService.forbiddenReq.toDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <button type="submit" class="btn_1">
+                مشاهده
+                <i class="pi pi-list"></i>
+            </button>
+        </section>
+    </form>
+</main>
+
+<app-prime-table *ngIf="closeTabService.saveDataForFNB" [dataSource]="closeTabService.saveDataForFNB"
+    [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]" [_sessionName]="'forbidden-session'"
+    [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
+    [_isCollaped]="forbiddenService.utilsService.collapser._isCollapsedForbidden"
+    (collapsed)="forbiddenService.utilsService.collapser._isCollapsedForbidden = !forbiddenService.utilsService.collapser._isCollapsedForbidden"
+    (refreshedTable)="refreshTable()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
+</app-prime-table>

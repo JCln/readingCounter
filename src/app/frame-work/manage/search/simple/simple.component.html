@@ -1,0 +1,94 @@
+<main class="main _card" [@openClose]="searchService._searchSimpleReq.isCollapsed ? 'slideUp' : 'slideDown'">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="order_by">
+            <h2>جستجو بر اساس :</h2>
+            <div *ngFor="let orderType of searchService.utilsService.getSearchInOrderTo">
+                <div class="p-field-radiobutton">
+                    <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                        [(ngModel)]="searchService._isOrderByDate" [inputId]="orderType.key">
+                    </p-radioButton>
+                    <label [for]="orderType.key">{{orderType.title}}</label>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="content">
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="searchService._searchSimpleReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                        optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="input_2" [hidden]="searchService._isOrderByDate">
+                <div class="_key">نوع دوره</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
+                            [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="input_2" [hidden]="!readingPeriodDictionary.length || searchService._isOrderByDate">
+                <div class="_key">دوره قرائت</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="input_2" [hidden]="searchService._isOrderByDate">
+                <div class="_key">سال</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="input_2" [hidden]="!searchService._isOrderByDate">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate"
+                        (dateJalEvent)="searchService.receiveFromDateJalali(searchService.ENSearchs.simple, $event)"
+                        [dateObject]="searchService._searchSimpleReq.fromDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <div class="input_2" [hidden]="!searchService._isOrderByDate">
+                <div class="_key">تا</div>
+                <div class="_value">
+                    <app-date-jalali name="toDate"
+                        (dateJalEvent)="searchService.receiveToDateJalali(searchService.ENSearchs.simple, $event)"
+                        [dateObject]="searchService._searchSimpleReq.toDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+        </section>
+
+        <button type="submit" class="tooltip btn_1">
+            <i class="pi pi-search"></i>
+            جستجو
+        </button>
+    </form>
+</main>
+
+<app-prime-table [dataSource]="closeTabService.saveDataForSearchSimple" [_outputFileName]="'simpleSearch'"
+    [_checkUpName]="'simpleSearch'" [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
+    [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
+    (routedToLMAll)="routeToLMAll($event)" (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
+    (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)"
+    [_hasCollapsible]=true [_isCollaped]="searchService._searchSimpleReq.isCollapsed"
+    (collapsed)="searchService._searchSimpleReq.isCollapsed = !searchService._searchSimpleReq.isCollapsed">
+</app-prime-table>

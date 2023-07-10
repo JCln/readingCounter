@@ -1,0 +1,11 @@
+<section>
+    <div 
+    class="items" 
+    *ngFor="let tasks of manageTasks" 
+    [ngStyle]="{'background': tasks.background}"
+    (click)="manageFuncs(tasks.clickFunction, tasks.description)"
+    >
+    <div *ngIf="tasks.icon" class="icons {{tasks.icon}}"></div>
+    <h2>{{tasks.name}}</h2>
+    </div>
+</section>

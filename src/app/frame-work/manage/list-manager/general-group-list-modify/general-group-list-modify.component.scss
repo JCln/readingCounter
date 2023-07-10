@@ -1,0 +1,59 @@
+@import 'primeNG.scss';
+@import 'tooltip';
+@import 'input.scss';
+@import '_mat.scss';
+@import 'all-lists.scss';
+
+.has_error {
+  position: relative;
+  border: 2px solid var(--red_500);
+  border-radius: $border_15;
+}
+
+.has_success {
+  position: relative;
+  border: none;
+}
+
+
+.error_info {
+  position: absolute;
+  display: flex;
+  padding: 0 !important;
+  left: 0;
+  z-index: 100;
+  border-radius: $border_15;
+}
+
+.info_icon {
+  background-color: var(--red_600);
+  color: var(--white);
+  border-radius: $border_50;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 0px 1px 1px var(--thirdy_1);
+  }
+}
+
+._save_all {
+  width: 4rem;
+  border-radius: 5px;
+  border: 2px solid;
+  background-color: var(--primary_3);
+  color: var(--secondary_1);
+}
+
+._haveimage {
+  color: var(--pink_500);
+}
+
+// Override primeNG for editables
+:host ::ng-deep {
+
+  .p-multiselect,
+  .p-dropdown {
+    min-width: 100%;
+  }
+}

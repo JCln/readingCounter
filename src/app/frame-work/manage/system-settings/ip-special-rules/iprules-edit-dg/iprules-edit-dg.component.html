@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>ویرایش IP</h2>
+
+<form [formGroup]="form" dir="rtl" (ngSubmit)="save()">
+    <main class="_contents">
+        <div class="input_2">
+            <div class="_key">ip</div>
+            <input class="_value" formControlName="ip">
+        </div>
+        <div class="input_2">
+            <div class="_key">مدت</div>
+            <input class="_value" formControlName="period">
+        </div>
+        <div class="input_2">
+            <div class="_key">endpoint</div>
+            <input class="_value" formControlName="endpoint">
+        </div>
+        <div class="input_2">
+            <div class="_key">مدت زمان</div>
+            <input class="_value" type="number" formControlName="periodTimespan">
+        </div>
+        <div class="input_2">
+            <div class="_key">حداکثر تعداد</div>
+            <input class="_value" type="number" formControlName="limit">
+        </div>
+        <div class="input_2">
+            <div class="_key">کد هدر خطا</div>
+            <input class="_value" type="number" formControlName="quotaExceededResponse">
+        </div>
+        <mat-checkbox formControlName="monitorMode">پایش</mat-checkbox>
+
+    </main>
+
+    <mat-dialog-actions>
+        <button class="close_dg" type="button" (click)="close()">
+            <i class="pi pi-times"></i>
+        </button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+        <!--[mat-dialog-close]="form"-->
+    </mat-dialog-actions>
+</form>

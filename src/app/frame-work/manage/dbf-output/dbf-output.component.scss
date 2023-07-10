@@ -1,0 +1,10 @@
+@import 'primeNG';
+@import 'button.scss';
+@import 'input.scss';
+@import 'mixins.scss';
+@import '_mat.scss';
+@import 'cards';
+
+.btn_1 {
+  margin-top: var(--font_l);
+}

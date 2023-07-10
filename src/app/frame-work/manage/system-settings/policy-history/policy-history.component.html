@@ -1,0 +1,10 @@
+<app-prime-table     
+    [dataSource]="closeTabService.saveDataForPoliciesHistory" 
+    [_outputFileName]="'policyHistory'"    
+    [_numberOfExtraColumns]="[1]"
+    [_sessionName]="'policyHistory-session'"
+    [_selectedColumnsToRemember]="'selectedPolicyHistory'"    
+    (refreshedTable)="refreshTable()"
+    (openedMoshtarakinDialog)="showMoreDetails($event)"
+ > 
+</app-prime-table>

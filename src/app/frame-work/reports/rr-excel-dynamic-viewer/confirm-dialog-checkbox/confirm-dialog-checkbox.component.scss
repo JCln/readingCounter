@@ -1,0 +1,71 @@
+@import 'shared_dialog';
+@import 'variable.scss';
+@import 'button.scss';
+@import 'input.scss';
+@import '_mat.scss';
+@import 'mixins.scss';
+
+.mat-dialog-content {
+  color: var(--secondary_7);
+  font-size: var(--font_s);
+  text-align: right;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+form {
+  display: grid;
+  justify-content: center;
+  gap: var(--font_025);
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+
+}
+
+section {
+  display: grid;
+  justify-content: center;
+  direction: rtl;
+  margin: auto;
+  padding: var(--font_xs);
+  width: 18rem;
+  background: var(--secondary_1);
+  border-radius: $border_15;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+.input_2 {
+  text-align: center;
+  width: 15rem;
+}
+
+.btn_2_o {
+  width: 100%;
+  color: var(--white);
+  background-color: var(--orange_500);
+}
+
+._key,
+._value {
+  font-size: var(--font_m);
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
+}
+
+._key {
+  white-space: nowrap;
+}

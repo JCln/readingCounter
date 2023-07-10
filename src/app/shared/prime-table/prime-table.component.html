@@ -1,0 +1,570 @@
+<p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
+    (sortFunction)="customSortFunction($event)" [reorderableColumns]=_reOrderableTable
+    (onFilter)="filterEventTable($event)">
+
+    <ng-template pTemplate="caption" *ngIf="_captionEnabled">
+        <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" optionLabel="header"
+            (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
+        </p-multiSelect>
+
+        <div class="header_icons_wrap">
+            <div class="right_side">
+                <i *ngIf="_outputEnabled"
+                    (click)="outputManagerService.exportPDF(dataSource, _selectCols, _outputFileName)"
+                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
+                    <div class="tooltip_text">دریافت pdf</div>
+                </i>
+                <i *ngIf="_outputEnabled"
+                    (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'xlsx')"
+                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                    <div class="tooltip_text">دریافت Excel</div>
+                </i>
+                <i *ngIf="_outputEnabled"
+                    (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'csv')"
+                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
+                    <div class="tooltip_text">دریافت CSV</div>
+                </i>
+                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport'"
+                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
+                </i>
+                <i *ngIf="_hasSaveColumns" (click)="saveColumns()"
+                    class="tooltip fa_icons _circle_border p_icons _save_columns fa fa-save">
+                    <div class="tooltip_text">ذخیره ستونها</div>
+                </i>
+                <i *ngIf="_hasSaveColumns" (click)="resetSavedColumns()"
+                    class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
+                    <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
+                </i>
+                <section *ngIf="_hasAggregating && profileService._agg.flag" class="_grouping">
+                    <div class="_group_label">گروه‌بندی</div>
+                    <p-dropdown name="zones" [options]="_selectedColumns"
+                        [(ngModel)]="profileService._agg.selectedAggregate" placeholder="انتخاب مورد"
+                        [style]="{'height': '2rem'}" optionValue="field" optionLabel="header" filter="true"
+                        (onChange)="doAggregate()">
+                    </p-dropdown>
+                    <i (click)="resetAggregation()" class="icon_reset pi pi-refresh tooltip">
+                        <div class="tooltip_text">بدون گروه‌بندی</div>
+                    </i>
+                </section>
+            </div>
+            <div class="left_side">
+                <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
+                    (click)="hasBeenReadsToggler()">
+                    <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
+                    <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
+                    </p-checkbox>
+                </i>
+                <i *ngIf="_hasRefreshTable" (click)="refreshTable()"
+                    class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
+                </i>
+                <i *ngIf="_hasCollapsible" (click)="collapse()" class="tooltip _circle_border p_icons"
+                    [ngClass]="_isCollaped ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
+                    <div class="tooltip_text_right">{{_isCollaped? 'نمایش': 'بستن'}}</div>
+                </i>
+                <i *ngIf="_backToPreviousEnabled" (click)="backToPrevious()"
+                    class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text_right"> {{_backToPreviousText}}</div>
+                </i>
+                <i *ngIf="_checkUpName== 'apk'" (click)="downloadAPK()"
+                    class="tooltip _circle_border p_icons fa fa-inbox">
+                    <div class="tooltip_text_right">دانلود آخرین فایل</div>
+                </i>
+            </div>
+        </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns *ngIf="_isSortable">
+        <tr>
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}"
+                pSortableColumnDisabled="{{col.readonly}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th pReorderableColumn style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns">
+            </th>
+        </tr>
+        <tr>
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+            </th>
+            <th pReorderableColumn style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns">
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns *ngIf="!_isSortable">
+        <tr>
+            <th class="__headers" pReorderableColumn pSortableColumn="{{col.field}}" *ngFor="let col of columns">
+                {{col.header}}</th>
+            <th pReorderableColumn style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns">
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
+        <tr class="_anything"
+            *ngIf="_hasAggregating && profileService._agg.flag && profileService._agg.rowGroupMetadata[dataSource[profileService._agg.selectedAggregate]].index === ri">
+            <td>
+                <span>{{dataSource[profileService._agg.selectedAggregate]}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
+                <span class="ui-column-title">{{col.header}}</span>
+                <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                    <ng-container *ngIf="col.field !== 'isSelected'; else editableBooleans">
+                        <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    </ng-container>
+                    <ng-template #editableBooleans>
+                        <mat-checkbox name="editableCheckbox" [checked]="true" [(ngModel)]="dataSource[col.field]">
+                        </mat-checkbox>
+                    </ng-template>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <ng-container *ngIf="col.field == 'masrafStateId'; else showText">
+                        <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
+                            <div class="tooltip_text">عادی</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
+                            <div class="tooltip_text">پایین</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
+                            <div class="tooltip_text">بالا</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">صفر
+                            <div class="tooltip_text">صفر</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
+                            <div class="tooltip_text">غیرقابل محاسبه</div>
+                        </i>
+                    </ng-container>
+                    <ng-template #showText>
+                        <div class="tooltip" *ngIf="col.enableTooltip">
+                            {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                            dataSource[col.field].toString().split(' ')[0]
+                            : ''}}
+                            <div class="tooltip_text">
+                                {{dataSource[col.field]}}
+                            </div>
+                        </div>
+                        <div *ngIf="!col.enableTooltip">
+                            {{dataSource[col.field]}}
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName== 'reading' && !denyTracking()"
+                (click)="forceOffload(dataSource)">
+                <span class="ui-column-title">اتمام قرائت</span>
+                <i class="tooltip p_icons pi pi-ban _important">
+                    <div class="tooltip_text">اتمام قرائت</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName== 'reading' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource)">
+                <span class="ui-column-title">بازگشت به صادر شده</span>
+                <i class="tooltip p_icons pi pi-fast-backward">
+                    <div class="tooltip_text">بازگشت به صادر شده</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName== 'reading'" (click)="routeToLMPayDay(dataSource)">
+                <span class="ui-column-title">اطلاعات روزانه</span>
+                <i class="tooltip p_icons pi pi-folder-open">
+                    <div class="tooltip_text">اطلاعات روزانه</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="
+            _checkUpName == 'simpleSearch' ||
+            _outputFileName== 'imported' || 
+            _outputFileName== 'loaded' ||
+             _outputFileName== 'reading' ||
+             _outputFileName== 'offloaded'||
+             _outputFileName== 'finished' ||
+             _outputFileName== 'lastStates' ||
+             _outputFileName== 'offloadedGroup'
+              " (click)="routeToFollowUp(dataSource)">
+                <span class="ui-column-title">مشاهده در پیگیری موردی</span>
+                <i class="tooltip p_icons pi pi-search-plus">
+                    <div class="tooltip_text_right">مشاهده در پیگیری موردی</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'simpleSearch'" (click)="routeToLMPayDay(dataSource)">
+                <span class="ui-column-title">اطلاعات روزانه</span>
+                <i class="tooltip p_icons pi pi-folder-open">
+                    <div class="tooltip_text_right">اطلاعات روزانه</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported' || _checkUpName == 'simpleSearch'"
+                (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">مشاهده لیست قرائت</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text_right">مشاهده لیست قرائت</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName== 'loaded' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource)">
+                <span class="ui-column-title">بازگشت به صادر شده</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به صادر شده</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'imported'" (click)="showMoreDetails(dataSource)">
+                <span class="ui-column-title">{{_tooltipText}}</span>
+                <i class="tooltip p_icons pi pi-pencil">
+                    <div class="tooltip_text">{{_tooltipText}}</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'imported' && !denyTracking()"
+                (click)="firstConfirmDialog(dataSource, ri)">
+                <span class="ui-column-title">حذف مسیر</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف مسیر</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'serverErrors'"
+                (click)="connectToElmah(dataSource.errorId)">
+                <span class="ui-column-title">نمایش</span>
+                <i class="tooltip p_icons pi pi-link">
+                    <div class="tooltip_text_right">نمایش</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'automaticImport'"
+                (click)="firstConfirmDialog(dataSource, ri)">
+                <span class="ui-column-title">حذف نوبتی</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف نوبتی</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName =='ModifyList'" (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده سابقه</span>
+                <i class="tooltip p_icons pi pi-users">
+                    <div class="tooltip_text">مشاهده سابقه</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">تغییرات گروه(نقش)</span>
+                <i class="tooltip p_icons pi pi-users">
+                    <div class="tooltip_text_right">تغییرات گروه(نقش)</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">تغییرات دسترسی</span>
+                <i class="tooltip p_icons fas fa-user-shield">
+                    <div class="tooltip_text_right">تغییرات دسترسی</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory' || _checkUpName == 'usersLogins' "
+                (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده جزئیات</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'notificationListByDateReq'"
+                (click)="showMoreDetails(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده جزئیات</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistorySummary'"
+                (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده جزئیات امنیتی</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده جزئیات امنیتی</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName =='ModifyList' || _outputFileName =='searchMosh'"
+                (click)="openBriefKardexDialog(dataSource)">
+                <span class="ui-column-title">خلاصه کاردکس</span>
+                <i class="tooltip p_icons pi pi-folder">
+                    <div class="tooltip_text">خلاصه کاردکس</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="
+             _checkUpName == 'allComponent' ||
+             _checkUpName =='forbidden' ||             
+             _checkUpName =='moment-ls'" (click)=" showInMapSingle(dataSource)">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="dataSource.hasMap &&( _outputFileName == 'lastStates' || _checkUpName == 'simpleSearch')"
+                (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="!dataSource.hasMap && (_outputFileName == 'lastStates' || _checkUpName == 'desc' || _checkUpName == 'simpleSearch')">
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'finished' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource)">
+                <span class="ui-column-title">بازگشت به بارگذاری شده</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text">بازگشت به بارگذاری شده</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'finished'" (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود مجدد فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text_right">دانلود مجدد فایل</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded'" (click)="routeToOffloadModify(dataSource)">
+                <span class="ui-column-title">اصلاح لیست</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">اصلاح لیست</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded'"
+                (click)="routeToOffloadGeneralModify(dataSource)">
+                <span class="ui-column-title">اصلاح کلی لیست</span>
+                <i class="tooltip p_icons pi pi-info">
+                    <div class="tooltip_text_right">اصلاح کلی لیست</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded' && !denyTracking()"
+                (click)="backToReading(dataSource)">
+                <span class="ui-column-title">بازگشت به درحال قرائت</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded'" (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">دانلود فایل</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded'" (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">بازدید</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text_right">بازدید</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloadedGroup'"
+                (click)="routeToOffloadGeneralModify(dataSource)">
+                <span class="ui-column-title">اصلاح کلی لیست(دسته‌ای)</span>
+                <i class="tooltip p_icons pi pi-info">
+                    <div class="tooltip_text_right">اصلاح کلی لیست(دسته‌ای)</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloadedGroup' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource)">
+                <span class="ui-column-title">بازگشت به درحال قرائت</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloadedGroup'"
+                (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">دانلود فایل</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloadedGroup'" (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">بازدید</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text">بازدید</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="                
+                _checkUpName == 'moment-ls' ||                 
+                _checkUpName == 'allComponent' ">
+                <span class=" ui-column-title">نمایش گزارش بازرسی</span>
+                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
+                    <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="(
+                _checkUpName == 'allComponent' ||                                                       
+                _outputFileName == 'momentLs' || 
+                _outputFileName == 'rrDetails' ||
+                _outputFileName == 'trv' ||
+                _outputFileName == 'trvDiff' || 
+                _outputFileName == 'imgResultGridBased'                
+            )" (click)="doShowCarousel(dataSource, true)">
+                <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
+                <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
+                    <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="(
+                _outputFileName == 'forbidden'  
+            )" (click)="doShowCarouselForbidden(dataSource)">
+                <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
+                <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
+                    <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
+                </i>
+            </td>
+            <td class="__columns" (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'ModifyList'">
+                <span class="ui-column-title">اصلاح</span>
+                <i class="tooltip p_icons pi pi-pencil">
+                    <div class="tooltip_text_right">اصلاح</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'dynamicReport'" class="edit_button"
+                (click)="downloadExcel(dataSource)">
+                <span class="ui-column-title">مشاهده</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text_right">مشاهده</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' ||_checkUpName == 'dynamicReport'"
+                class="edit_button" (click)="openEditDialog(dataSource)">
+                <span class="ui-column-title">ویرایش</span>
+                <i class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName== 'dynamicReport'" (click)="showMoreDetails(dataSource)">
+                <span class="ui-column-title">حذف</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'excelDynamic' || _checkUpName == 'apk'"
+                class="edit_button" (click)="removeRow(dataSource , ri)">
+                <span class="ui-column-title">حذف مورد</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف مورد</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'excelDynamic'" class="edit_button"
+                (click)="downloadExcel(dataSource)">
+                <span class="ui-column-title">دانلود Excel</span>
+                <i class="tooltip p_icons pi pi-file-excel">
+                    <div class="tooltip_text_right">دانلود Excel</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (click)="routeToEditPage(dataSource.id)">
+                <span class="ui-column-title">مشاهده/ویرایش کاربر</span>
+                <i class="tooltip p_icons pi pi-user-edit">
+                    <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">مشاهده ورودها</span>
+                <i class="tooltip p_icons pi pi-sign-in">
+                    <div class="tooltip_text">مشاهده ورودها</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (mouseover)="showExactConfig(ri)" (mouseout)="showExactConfig(ri)">
+                <span class="ui-column-title">تغییر وضعیت</span>
+                <i class="tooltip _tooltip_special _map_frame_show p_icons pi pi-ellipsis-h">
+                    <div class="tooltip_text">تغییر وضعیت</div>
+                </i>
+                <div class="map-frame">
+                    <div class="more_configs">
+                        <i class="bbr tooltip p_icons pi pi-lock-open" (click)="ActivateUser(dataSource,ri)">
+                            <div class="tooltip_text">فعال</div>
+                        </i>
+                        <i class="bbr tooltip p_icons pi pi-unlock" (click)="DeActivateUser(dataSource,ri)">
+                            <div class="tooltip_text">غیر فعال</div>
+                        </i>
+                        <i class="bbr tooltip p_icons pi pi-refresh" (click)="resetPasswordUser(dataSource,ri)">
+                            <div class="tooltip_text">بازنشانی گذرواژه</div>
+                        </i>
+                        <i class="bbr tooltip p_icons pi pi-check" (click)="unLockUser(dataSource,ri)">
+                            <div class="tooltip_text">Unlock</div>
+                        </i>
+                    </div>
+                </div>
+            </td>
+            <td class="__columns"
+                *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasSingle && dataSource.canContinue"
+                (click)="routeToSingle(dataSource)">
+                <span class="ui-column-title">تکی</span>
+                <i class="tooltip p_icons pi pi-minus">
+                    <div class="tooltip_text_right">تکی</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_checkUpName == 'simafa-readingProg' && utilsService.getSimafaImportStatus().hasBatch && dataSource.canContinue"
+                (click)="routeToBatch(dataSource)">
+                <span class="ui-column-title">دسته‌ای</span>
+                <i class="tooltip p_icons pi pi-th-large">
+                    <div class="tooltip_text_right">دسته‌ای</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasSingle && !dataSource.canContinue">
+                <span class="ui-column-title">لیست قبلا صادر شده</span>
+                <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
+                    <div class="tooltip_text">لیست قبلا صادر شده</div>
+                </i>
+            </td>
+            <td class="__columns"
+                *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasBatch && !dataSource.canContinue">
+                <span class="ui-column-title">لیست قبلا صادر شده</span>
+                <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
+                    <div class="tooltip_text_right">لیست قبلا صادر شده</div>
+                </i>
+            </td>
+            <!-- Just then name to triger Event  -->
+            <td class="__columns" *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">ارسال پیام</span>
+                <i class="tooltip p_icons pi pi-envelope">
+                    <div class="tooltip_text_right">ارسال پیام</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">ارسال تصویر</span>
+                <i class="tooltip p_icons pi pi-image">
+                    <div class="tooltip_text_right">ارسال تصویر</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'userOnlines'" (click)="openEditDialog(dataSource)">
+                <span class="ui-column-title">ارسال ویدیو</span>
+                <i class="tooltip p_icons pi pi-video">
+                    <div class="tooltip_text_right">ارسال ویدیو</div>
+                </i>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template let-dataSource pTemplate="footer">
+        <tr *ngIf="_calculableSUM">
+            <td class="__columns" *ngFor="let col of dataSource">
+                <div *ngIf="col.field == 'itemQuantity'">
+                    جمع:
+                    {{calcSums('itemQuantity')}}
+                </div>
+                <div *ngIf="col.field == 'itemCount'">
+                    جمع:
+                    {{calcSums('itemCount')}}
+                </div>
+            </td>
+            <td class="__columns" *ngFor="let item of _numberOfExtraColumns"></td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<section *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="empty_data">
+        موردی پیدا نشد
+    </tr>
+</section>

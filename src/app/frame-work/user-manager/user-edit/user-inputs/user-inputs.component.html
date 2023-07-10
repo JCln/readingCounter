@@ -1,0 +1,41 @@
+<form class="_user-input" #form="ngForm">
+    <div class="input_2">
+        <div class="_key">نام</div>
+        <input class="_value" [(ngModel)]="editInfo.firstName" name="firstName">
+    </div>
+    <div class="input_2">
+        <div class="_key">نام خانوادگی</div>
+        <input class="_value" [(ngModel)]="editInfo.sureName" name="sureName">
+    </div>
+    <div class="input_2 _double_size">
+        <div class="_key">ایمیل</div>
+        <input class="_value" [(ngModel)]="editInfo.email" name="email">
+    </div>
+    <div class="input_2">
+        <div class="_key">شماره موبایل</div>
+        <input class="_value d_ltr" [(ngModel)]="editInfo.mobile" name="mobile" maxlength=11 minlength=11>
+    </div>
+    <div class="input_2 _double_size tooltip">
+        <div class="_key">نام نمایش</div>
+        <input class="_value" [(ngModel)]="editInfo.displayName" name="displayName">
+        <div class="tooltip_text_bottom">این فیلد جهت نمایش نام کاربر در برنامه استفاده می‌شود</div>
+    </div>
+    <div class="input_2">
+        <div class="_key">شناسه دستگاه</div>
+        <input class="_value d_ltr" [(ngModel)]="editInfo.deviceId" name="deviceId">
+    </div>
+    <div class="input_2">
+        <div class="_key">کد</div>
+        <input class="_value d_ltr" [(ngModel)]="editInfo.userCode" name="userCode" readonly>
+    </div>
+
+    <div class="checkbox_s">
+        <mat-checkbox name="displayMobile" [(ngModel)]="editInfo.displayMobile">موبایل نمایش داده شود؟
+        </mat-checkbox>
+        <mat-checkbox name="isActive" [(ngModel)]="editInfo.isActive">کاربر فعال باشد؟
+        </mat-checkbox>
+    </div>
+
+</form>
+<button type="submit" class="btn_2" matStepperNext>
+    <i class="fa fa-long-arrow-left"></i>صفحه بعد</button>

@@ -1,0 +1,62 @@
+<section class="top_info">
+    <div class="unit">
+        <label (click)="showDashboard(false)" class="clickable_map tooltip" for="_map">
+            <i class="fa fa-dashboard"></i>
+            <div class="tooltip_text">داشبورد</div>
+        </label>
+        <input type="radio" id="_map" name="radio">
+
+        <button class="unit_toggle"></button>
+
+        <label (click)="showDashboard(true)" class="clickable_dash tooltip" for="_dash">
+            <i class="fa fa-map-o"></i>
+            <div class="tooltip_text">نقشه</div>
+        </label>
+        <input type="radio" id="_dash" name="radio">
+    </div>
+
+    <app-locations [hidden]="!isShowMap" (sendlocations)="showCounterReadersLocations($event)"></app-locations>
+    <section class="_options">
+        <div class="_flex_dr_ric" [hidden]="!canShowOptionsButton || !isShowMap">
+            <button class="polyline_switch tooltip" (click)="isShowMapConfig = !isShowMapConfig">
+                <i class="pi pi-cog"></i>
+                <div class="tooltip_text">تنظیمات نقشه</div>
+            </button>
+            <p>تنظیمات نقشه</p>
+        </div>
+        <div class="_flex_dr_ric" [hidden]="!isShowMap">
+            <button style="z-index: 1;" (click)="utilsService.backToPreviousPage()"
+                class="_circle_border p_icons tooltip">
+                <i class="pi pi-arrow-left"></i>
+                <div class="tooltip_text">بازگشت به صفحه قبلی</div>
+            </button>
+        </div>
+    </section>
+
+</section>
+
+<div class="map-frame" [hidden]="!isShowMap || route.children.length !== 0">
+    <div *ngIf="isShowMapConfig" [hidden]="!canShowOptionsButton" class="polyline_config">
+        <h3>زمان نمایش (ms) : {{polyline_configs}}</h3>
+        <p-slider [(ngModel)]="polyline_configs" [max]=3000></p-slider>
+        <article>
+            <h3 class="_config_title">ترتیب براساس :</h3>
+            <div *ngFor="let orderType of orderGroup">
+                <div class="p-field-radiobutton">
+                    <p-radioButton name="orderByDate" [value]="orderType.value" [(ngModel)]="_selectedOrderId"
+                        [inputId]="orderType.title">
+                    </p-radioButton>
+                    <label [for]="orderType.title">{{orderType.header}}</label>
+                </div>
+            </div>
+            <h3 class="_config_title">به ترتیب صعودی؟</h3>
+            <mat-checkbox name="orderInAsc" [(ngModel)]="_isOrderInAsc">بلی</mat-checkbox>
+            <br>
+        </article>
+        <!--is first time to drawXY positions-->
+        <button class="btn_2" (click)="mapConfigOptions(polyline_configs, false)"
+            (click)="isShowMapConfig = false">نمایش</button>
+    </div>
+    <div id="map"></div>
+</div>
+<router-outlet></router-outlet>

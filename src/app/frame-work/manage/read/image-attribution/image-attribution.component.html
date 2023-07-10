@@ -1,0 +1,20 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.saveDataForImageAttribution" 
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [_numberOfExtraColumns]="[1, 2]"
+    [_isInRowEditing]=true
+    [_checkUpName]="'imgattr'"    
+    [_sessionName]="'imgattr-session'"
+    [_selectedColumnsToRemember]="'selectedImageAttribution'"
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
+    (refreshedTable)="refreshTable()"
+    (newedRowChangedStatus)="testChangedValue()"
+    (onRowEditedSave)="onRowEditSave($event)"
+    (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (removedRowEditing)="removeRow($event)"
+ > 
+</app-prime-table-editable>
+<!-- [_outputFileName]="'imgattr'" on prime table editable accur table not show data -->

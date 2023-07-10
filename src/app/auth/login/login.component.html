@@ -1,0 +1,42 @@
+<section class="content">
+    <main role="main">
+        <h1 class="title">ورود</h1>
+        <form #form="ngForm" (ngSubmit)="logging()">
+            <section class="_inputs">
+                <div class="input__icons">
+                    <input type="text" class="input_1" placeholder="نام کاربری" title="لطفا نام کاربری را وارد نمایید"
+                        minlength="1" maxlength="20" name="username" [(ngModel)]="userData.username" autofocus required>
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="input__icons">
+                    <input type="password" class="input_1" placeholder="گذرواژه" title="لطفا گذرواژه را وارد نمایید"
+                        minlength="1" maxlength="20" name="password" [(ngModel)]="userData.password" required>
+                    <i class="fa fa-lock"></i>
+                </div>
+
+                <app-captcha #appDntCaptcha [(inputText)]="userData.dntCaptchaInputText"
+                    [(text)]="userData.dntCaptchaText" [(token)]="userData.dntCaptchaToken" [apiUrl]="captchaApiShow"
+                    [backColor]="'#f7f3f3'" [fontName]="'Tahoma'" [fontSize]="18" [foreColor]="'#111111'" [max]="9000"
+                    [min]="1" [placeholder]="'عبارت تصویر امنیتی را وارد نمایید'">
+                </app-captcha>
+            </section>
+            <button id="btnLogin" class="btn_1" type="submit">ورود</button>
+        </form>
+        <section class="info">
+            <i (click)="gotToAbout()" class="tooltip _circle_border p_icons">
+                <img class="about_us_img" [src]="aboutUsImage" alt="">
+                <div class="tooltip_text">درباره ما</div>
+            </i>
+            <i (click)="showVersionInfo = !showVersionInfo" (click)="getVersionInfos()"
+                class="tooltip _circle_border p_icons pi pi-info">
+                <div [hidden]="showVersionInfo" class="tooltip_text">نمایش آخرین تغییرات</div>
+            </i>
+            <section class="_info_each_item" [@openClose]="showVersionInfo ? 'openSubItems' : 'closeSubItems'">
+                <div *ngFor="let item of infoVersionItems">
+                    {{item.title}}
+                </div>
+            </section>
+            <div class="version">{{userData.appVersion}} نسخه نرم افزار</div>
+        </section>
+    </main>
+</section>

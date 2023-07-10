@@ -1,0 +1,39 @@
+@import 'variable';
+@import '_mat.scss';
+@import 'button.scss';
+@import 'input.scss';
+@import 'choose-files.scss';
+
+.over_all {
+  display: grid;
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_xs);
+  font-family: $font_family;
+}
+
+.content {
+  direction: rtl;
+  text-align: center;
+  min-height: 25rem;
+  width: 20rem;
+  background: var(--secondary_1);
+  padding: var(--font_05);
+  border-radius: $border_15;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+._desc {
+  display: grid;
+  justify-content: center;
+}
+
+input {
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
+}
+
+.icon_android,
+small {
+  color: var(--red_600);
+  margin: 0 .4rem;
+}

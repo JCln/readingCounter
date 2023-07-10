@@ -1,0 +1,35 @@
+<div class="dropdown">
+    <button class="dropbtn">
+        <i class="fa fa-user">
+            <div class="_badge_wrapper">
+                <i class="_badge">{{badgeNumber}}</i>
+            </div>
+        </i>
+    </button>
+    <div class="dropdown-content">
+        <a [routerLink]="[routeToProfile]">
+            تنظیمات کاربری
+            <i class="pi pi-user"></i>
+        </a>
+        <a [routerLink]="[routeToLicense]">
+            مجوز
+            <i class="fas fa-certificate"></i>
+        </a>
+        <a [routerLink]="[routeToAboutUs]">
+            درباره ما
+            <img class="about_us_img" [src]="aboutUsImage" alt="">
+        </a>
+        <a [routerLink]="[routeToMyMessages]">
+            پیام‌ها
+            <i class="far fa-bell"></i>
+        </a>
+        <!-- <a (click)="linkToChat()">
+            گفتگو
+            <i class="fa fa-wechat"></i>
+        </a> -->
+        <a (click)="logout()">
+            خروج
+            <i class="pi pi-sign-out"></i>
+        </a>
+    </div>
+</div>

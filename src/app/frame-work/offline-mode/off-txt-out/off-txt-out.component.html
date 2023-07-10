@@ -1,0 +1,25 @@
+<h2 class="title">ارسال فایل</h2>
+
+<form #form="ngForm" (ngSubmit)="uploadFile(form)" class="_card">
+    <section>
+        <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
+            <span class="icon_android fa fa-file-zip-o"></span>
+            فایل <small>zip</small> انتخاب نمایید
+        </label>
+        <label *ngIf="choosenFileName" class="label_choose_file" for="files">
+            {{choosenFileName}}
+        </label>
+        <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file" name="screenshot"
+            (change)="onChange($event)" id="files">
+
+        <!-- porgress bar -->
+        <label for="progress"></label>
+        <progress *ngIf="progress > 0" id="progress" [value]="progress" min="0" max="100">{{progress}}</progress>
+
+        <button *ngIf="progress == 0" class="btn_1" type="submit">
+            <div class="fa fa-upload"></div>
+            ارسال
+        </button>
+
+    </section>
+</form>
