@@ -887,7 +887,8 @@ export class ColumnManager {
             { field: 'postalCode', header: 'کد پستی', isSelected: false },
             { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
             { field: 'newRate', header: 'میانگین فعلی', isSelected: false },
-            { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
+            { field: 'preCounterStateTitle', header: 'وضعیت قبلی', isSelected: false },
+            // { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },// if no zone insert number shows so PreCounterStateTitle implemented
             // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
             { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
             { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
