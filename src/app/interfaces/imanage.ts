@@ -80,7 +80,6 @@ export interface IOnOffLoadFlat {
     zoneId: number | string,
     counterNumber: number,
     counterStateId: any,
-    preCounterStateTitle: string,
     tempCounterState: IDictionaryManager;
     counterStateCode: number,
     possibleAddress: string,
