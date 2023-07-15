@@ -4,7 +4,6 @@ import { IReadingTimeRes } from 'interfaces/data-mining';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
 import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
-import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
 import { ILatestReads } from 'interfaces/imoment';
 import {
   IFileExcelReq,
@@ -56,6 +55,7 @@ import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
+import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
 
 @Injectable({
   providedIn: 'root'
