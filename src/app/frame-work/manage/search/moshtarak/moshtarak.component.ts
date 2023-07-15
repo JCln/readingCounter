@@ -27,7 +27,6 @@ export class MoshtarakComponent extends AllListsFactory {
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
-  counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
 
@@ -42,9 +41,7 @@ export class MoshtarakComponent extends AllListsFactory {
 
   converts = async () => {
     if (this.searchService.searchReqMosh.zoneId) {
-      this.counterStateByCodeDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.searchService.searchReqMosh.zoneId);
       this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.searchService.searchReqMosh.zoneId);
-      Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
     else {
       this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateDictionary();

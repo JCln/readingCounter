@@ -4,7 +4,6 @@ import { IReadingTimeRes } from 'interfaces/data-mining';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
 import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
-import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
 import { ILatestReads } from 'interfaces/imoment';
 import {
   IFileExcelReq,
@@ -45,8 +44,6 @@ import {
   IUserKarkard,
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
-import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInput, IServerOSInfo, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
-import { ILicenseInfo, INotificationMessage, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
 import { IAddUserInfos, IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
@@ -56,6 +53,9 @@ import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
+import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
+import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
+import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
 
 @Injectable({
   providedIn: 'root'
