@@ -68,6 +68,7 @@ export interface IOnOffLoadFlat {
     preDate: string,
     preAverage: number,
     preCounterStateCode: number,
+    preCounterStateTitle: string,
     counterSerial: string,
     counterInstallDate: string,
     tavizDate: string,
