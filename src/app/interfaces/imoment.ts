@@ -1,0 +1,16 @@
+export interface ILatestReads {
+    id: string,
+    zoneTitle: string,
+    counterReaderName: string,
+    counterNumber: number,
+    counterStateTitle: string,
+    gisAccuracy: string,
+    x: string,
+    y: string,
+    billId: string,
+    radif: number,
+    eshterak: string,
+    qeraatCode: string,
+    firstName: string,
+    sureName: string,
+}
