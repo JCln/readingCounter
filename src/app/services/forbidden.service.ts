@@ -85,9 +85,11 @@ export class ForbiddenService {
     this.utilsService.routeToByParams(EN_Routes.wr, {
       x: dataSource.x,
       y: dataSource.y,
+      zoneId: dataSource.zoneId,
+      insertDateJalali: dataSource.insertDateJalali,
+      displayName: dataSource.displayName,
+      description: dataSource.description,
       postalCode: dataSource.postalCode,
-      preEshterak: dataSource.preEshterak,
-      nextEshterak: dataSource.nextEshterak,
       isSingle: true,
       isForbidden: true
     });

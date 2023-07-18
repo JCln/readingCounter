@@ -1201,9 +1201,7 @@ export class ColumnManager {
         { field: 'y', header: 'Y', isSelected: false },
         { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false },
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true },
-        { field: 'activate', header: 'فعال شود', isBoolean: true, isSelected: false },
-        // { field: 'userId', header: 'کاربری', isSelected: true },    
-        // { field: 'insertDateTime', header: 'توضیحات', isSelected: false }    
+        { field: 'activate', header: 'فعال', isBoolean: true, isSelected: false },
     ]
     abBaha: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },

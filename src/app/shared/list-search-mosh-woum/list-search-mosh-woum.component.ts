@@ -9,7 +9,7 @@ import { ListManagerService } from 'services/list-manager.service';
   styleUrls: ['./list-search-mosh-woum.component.scss']
 })
 export class ListSearchMoshWoumComponent implements OnInit {
-  dataSource: any;
+  auxDataSource: any;
   zoneDictionary: IDictionaryManager[] = [];
   _isNotForbidden: boolean;
 
@@ -20,30 +20,30 @@ export class ListSearchMoshWoumComponent implements OnInit {
 
   classWrapper = async () => {
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
-    this.dataSource = this.config.data._data;
+    this.auxDataSource = JSON.parse(JSON.stringify(this.config.data._data));
     this._isNotForbidden = this.config.data._isNotForbidden;
 
     // for gridBased which doesn't have id should assign fileRepositorayId
-    if (!this.dataSource.id) {
-      this.dataSource.id = this.dataSource['onOffLoadId'];
+    if (!this.auxDataSource.id) {
+      this.auxDataSource.id = this.auxDataSource['onOffLoadId'];
     }
 
     // for latest reads component there is no zoneId element so The ifElse needed
-    if (this.dataSource.zoneId || this.dataSource.zoneTitle) {
-      if (this.dataSource.zoneId) {
-        this.dataSource.zoneId = this.convertTitleToId(this.dataSource.zoneId).id;
+    if (this.auxDataSource.zoneId || this.auxDataSource.zoneTitle) {
+      if (this.auxDataSource.zoneId) {
+        this.auxDataSource.zoneId = this.convertTitleToId(this.auxDataSource.zoneId).id;
       }
       else {
-        this.dataSource.zoneId = this.convertTitleToId(this.dataSource.zoneTitle).id;
+        this.auxDataSource.zoneId = this.convertTitleToId(this.auxDataSource.zoneTitle).id;
       }
     }
   }
   ngOnInit(): void {
     this.classWrapper();
   }
-  convertTitleToId = (dataSource: any): any => {
+  convertTitleToId = (auxDataSource: any): any => {
     return this.zoneDictionary.find(item => {
-      if (item.title === dataSource)
+      if (item.title === auxDataSource)
         return item;
     })
   }

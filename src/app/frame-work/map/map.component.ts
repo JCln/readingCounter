@@ -182,10 +182,21 @@ export class MapComponent implements OnInit, OnDestroy {
     this._isCluster ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
   }
   private forbiddenMarkSingleLocation = (x: string, y: string) => {
+    const zone = this.route.snapshot.paramMap.get('zoneId');
+    const insertDateJalali = this.route.snapshot.paramMap.get('insertDateJalali');
+    const displayName = this.route.snapshot.paramMap.get('displayName');
+    const description = this.route.snapshot.paramMap.get('description');
     const postalCode = this.route.snapshot.paramMap.get('postalCode');
-    const nextEshterak = this.route.snapshot.paramMap.get('nextEshterak');
-    const preEshterak = this.route.snapshot.paramMap.get('preEshterak');
-    this.markSingleForbidden({ x: x, y: y, postalCode: postalCode, preEshterak: preEshterak, nextEshterak: nextEshterak });
+
+    this.markSingleForbidden({
+      x: x,
+      y: y,
+      description: description,
+      displayName: displayName,
+      insertDateJalali: insertDateJalali,
+      zone: zone,
+      postalCode: postalCode
+    });
   }
   private simpleMarkSingleLocation = (x: string, y: string) => {
     const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
@@ -386,7 +397,11 @@ export class MapComponent implements OnInit, OnDestroy {
     this.flyToDes(items.y, items.x, 12);
     L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
-        `${'کد پستی :' + items.postalCode} <br>` + `${'اشتراک قبلی :' + items.preEshterak} <br> ${'اشتراک بعدی :' + items.nextEshterak}`
+        `${'ناحیه :' + items.zone} <br>` +
+        `${'توضیحات :' + items.description} <br>` +
+        `${'تاریخ :' + items.insertDateJalali} <br>` +
+        `${'قرائت کننده :' + items.displayName} <br>` +
+        `${'کد پستی :' + items.postalCode}`
       );
   }
   private findMyLocationLeaflet = (e) => {
