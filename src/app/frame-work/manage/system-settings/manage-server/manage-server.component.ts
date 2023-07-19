@@ -147,7 +147,7 @@ export class ManageServerComponent implements OnInit {
           this.resetApp();
       }
       if (clickFunction == ENManageServers.extendLicenseTime) {
-        config.icon = 'fa fa-clock-rotate-left';
+        config.icon = 'fas fa-expand-arrows-alt';
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
           this.extendLicenseTime();
       }

@@ -48,7 +48,7 @@ export class ReadingComponent extends FactoryONE {
   forceOffload = async (rowDataAndIndex: ITracking) => {
     const config = {
       messageTitle: EN_messages.reason_forceOffload,
-      messageTitleTwo: EN_messages.reasonBacktoImportedCaution1 + rowDataAndIndex.counterReaderName + EN_messages.reasonBacktoImportedCaution2,
+      messageTitleTwo: EN_messages.reasonForceOffloadCaution1 + rowDataAndIndex.counterReaderName + EN_messages.reasonForceOffloadCaution2,
       text: 'ش پیگیری: ' + rowDataAndIndex.trackNumber + '،   قرائت کننده: ' + rowDataAndIndex.counterReaderName,
       minWidth: '19rem',
       isInput: true,
