@@ -45,7 +45,7 @@ export enum ENURLs {
     REY = 'http://85.133.190.221:4121/kontoriNew',
     TSW = 'http://81.90.148.25:880/kontoriNew',
     TEH1 = 'http://217.146.220.33:50012/kontoriNew',
-
+    TEH5 = 'http://178.252.151.147/kontoriNew',
 }
 export enum ENOSMUrls {
     DEFAULT = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
