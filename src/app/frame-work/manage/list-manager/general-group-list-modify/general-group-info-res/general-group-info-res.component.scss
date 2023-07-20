@@ -17,6 +17,7 @@ h3 {
   display: flex;
   justify-content: center;
   margin-bottom: var(--font_l);
+  color: var(--primary_2);
 }
 
 ._key_value {
@@ -30,9 +31,6 @@ h3 {
 ._key,
 ._value {
   font-weight: 600;
-}
-
-._key {
   color: var(--primary_4);
 }
 
