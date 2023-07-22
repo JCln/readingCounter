@@ -241,6 +241,9 @@ h2 {
   }
 
   .mat-horizontal-stepper-header-container {
+    // display grid & grid-auto-flow make the width to fix content
+    display: grid;
+    grid-auto-flow: column;
     height: var(--font_35);
     direction: rtl;
     border: 2px solid var(--primary_5);
@@ -268,7 +271,6 @@ h2 {
 }
 
 .mat-stepper-horizontal {
-  width: 95%;
   font-family: $font_family;
   padding: var(--font_05);
   border-radius: $border_7;

@@ -24,10 +24,14 @@ h2 {
 
 ._title_2 {
   padding: 0;
+  width: 16rem;
   text-align: center;
   font-size: var(--font_m);
   color: var(--secondary_8);
-  width: 19rem;
+
+  @media (min-width:550px) {
+    width: 19rem;
+  }
 }
 
 u {
