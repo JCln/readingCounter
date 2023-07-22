@@ -107,6 +107,7 @@ app-side-bar {
   visibility: hidden;
   opacity: 0;
   width: 0;
+  width: 0;
 
   @media (min-width: 550px) {
     visibility: visible;
