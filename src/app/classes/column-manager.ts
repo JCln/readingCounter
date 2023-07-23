@@ -489,9 +489,9 @@ export class ColumnManager {
     userActivation: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true },        
         { field: 'description', header: 'توضیحات', isSelected: true },
-        { field: 'changeDateTime', header: 'زمان', isSelected: true },
+        // { field: 'changeDateTime', header: 'زمان', isSelected: true },
         { field: 'changeDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'changeTime', header: 'تغییر زمان', isSelected: true },
+        { field: 'changeTime', header: 'زمان تغییر', isSelected: true },
         { field: 'ip', header: 'IP', isSelected: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
         { field: 'browserTitle', header: 'مرورگر', isSelected: true },

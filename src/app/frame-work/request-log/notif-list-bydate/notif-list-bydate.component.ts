@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { INotificationAlertTypes } from 'interfaces/ioverall-config';
-import { INotificationMessage } from 'interfaces/isettings';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';

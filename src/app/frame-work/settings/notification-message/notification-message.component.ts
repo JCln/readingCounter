@@ -1,6 +1,6 @@
 import { EnvService } from 'services/env.service';
 import { MathS } from 'src/app/classes/math-s';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
@@ -25,7 +25,7 @@ export class NotificationMessageComponent extends FactoryONE {
   }
 
   classWrapper = (canRefresh?: boolean) => {
-   if (canRefresh) {
+    if (canRefresh) {
       this.closeTabService.notificationMessages = [];
     }
     console.log(this.closeTabService.notificationMessages);
