@@ -26,17 +26,20 @@ export class ListAnonymousComponent extends FactoryONE {
     this.insertToTimes();
   }
   insertToTimes = () => {
-    const temp = this.DateJalaliService.getCurrentTime();
-    this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeM = temp.toString().split(':').pop();
-    this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = temp.toString().split(':').shift() - 1;
-    this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeM = temp.toString().split(':').pop();
-    this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH = temp.toString().split(':').shift();
-    if (temp.toString().split(':').shift() == '0') {
-      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '23';
-      this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH = '24';
+    let temp = this.DateJalaliService.getCurrentTime();
+    const hour = temp.split(':').shift();
+    const minute = temp.split(':').pop();
+
+    this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeM = minute;
+    this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = hour - 1;
+    this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeM = minute;
+    this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH = hour;
+    // add zero before single digits even if it is zero
+    if (this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH < 10) {
+      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '0'.concat(this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH.toString());
     }
-    if (temp.toString().split(':').shift() == '10') {
-      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '09';
+    if (hour == '00') {
+      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '23';
     }
   }
   connectToServer = async () => {

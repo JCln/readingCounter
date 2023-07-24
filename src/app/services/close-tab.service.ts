@@ -487,7 +487,7 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.notificationListByDateReq, value: ENEssentialsToSave.notificationListByDate, url: EN_Routes.NotificationListByUrl },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
-    { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.usersLogins },
+    { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },

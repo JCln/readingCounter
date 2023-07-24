@@ -36,18 +36,20 @@
 
   ._badge_wrapper {
     position: absolute;
-    max-width: 3rem;
-    width: 3rem;
-    height: 2rem;
-    right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 1.5rem;
     top: 1.5rem;
   }
 
   ._badge {
-    font-size: 0.7rem;
-    padding: 0.4rem;
-    border-radius: 50%;
+    font-size: var(--font_s);
+    padding: .3rem;
+    font-weight: 600;
+    border-radius: $border_50;
     color: var(--secondary_1);
+    font-family: $font_family;
     background-color: var(--red_600);
   }
 }

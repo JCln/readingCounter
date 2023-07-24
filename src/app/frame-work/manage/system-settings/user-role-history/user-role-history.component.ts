@@ -1,11 +1,8 @@
 import { EN_Routes } from 'interfaces/routes.enum';
-import { IPolicies } from 'services/DI/privacies';
 import { SecurityService } from 'services/security.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
-import { DateJalaliService } from 'services/date-jalali.service';
-import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { IUserManager } from 'interfaces/iuser-manager';

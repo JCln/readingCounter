@@ -84,7 +84,8 @@ export enum ENActivateProvinceTitle {
     KERMANSHAH = 'کرمانشاه',
     REY = 'منطقه 6 تهران',
     TSW = 'جنوب غربی تهران',
-    TEH1 = 'منطقه 1 تهران'
+    TEH1 = 'منطقه 1 تهران',
+    TEH5 = 'منطقه 5 تهران'
 }
 export interface IENV_BROWSER_SETUP {
     alert: number,

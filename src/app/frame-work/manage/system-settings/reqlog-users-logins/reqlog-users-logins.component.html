@@ -33,11 +33,18 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="closeTabService.usersLogins" [_outputFileName]="'usersLogins'"
-        [_checkUpName]="'usersLogins'" [_numberOfExtraColumns]="[1]" [_sessionName]="'usersLogins-session'"
-        [_selectedColumnsToRemember]="'selectedRequestLogUsersLogins'" [_hasCollapsible]=true
-        [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedUsersLogins"
-        (collapsed)="closeTabService.utilsService.collapser._isCollapsedUsersLogins = !closeTabService.utilsService.collapser._isCollapsedUsersLogins"
-        (refreshedTable)="refreshTable()" (openedMoshtarakinDialog)="routeToUserLogginsDetails($event)">
+    <app-prime-table 
+    [dataSource]="closeTabService.usersLogins"
+    [_outputFileName]="'usersLogins'"
+    [_checkUpName]="'usersLogins'"
+    [_numberOfExtraColumns]="[1]"
+    [_sessionName]="'usersLogins-session'"
+    [_selectedColumnsToRemember]="'selectedRequestLogUsersLogins'"
+    [_hasCollapsible]=true        
+    [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedUsersLogins"
+    (collapsed)="closeTabService.utilsService.collapser._isCollapsedUsersLogins = !closeTabService.utilsService.collapser._isCollapsedUsersLogins"
+    (refreshedTable)="refreshTable()"
+    (openedMoshtarakinDialog)="routeToUserLogginsDetails($event)"
+    >
     </app-prime-table>
 </main>

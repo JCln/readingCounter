@@ -18,9 +18,6 @@ export class TimeJalaliComponent implements AfterViewInit {
   }
 
   sendDateJal = ($event) => {
-    console.log($event.inputElementValue);
-    console.log(this.timeObject);
-
     if (!this.timeObject || this.timeObject.length === 0) {
       this.timeObject = this.dateJalaliService.getCurrentTime();
 
@@ -33,8 +30,6 @@ export class TimeJalaliComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     if (!this.timeObject || this.timeObject.length === 0) {
       this.timeObject = this.dateJalaliService.getCurrentTime();
-      console.log(this.timeObject);
-
       return;
     }
   }

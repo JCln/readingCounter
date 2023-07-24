@@ -64,8 +64,6 @@ export class OffloadComponent implements OnChanges {
   ) { }
 
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(1);
-
     this.imageFiles = [];
     this.audioFiles = [];
     this.dataSource = [];
@@ -75,8 +73,10 @@ export class OffloadComponent implements OnChanges {
       return;
 
     this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.onOffloadId);
+    if (this.zoneId) {
+      this.counterStatesDictionary = await this.trackingManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(parseInt(this.zoneId));
+    }
 
-    this.counterStatesDictionary = await this.trackingManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(parseInt(this.zoneId));
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
@@ -153,10 +153,12 @@ export class OffloadComponent implements OnChanges {
     this.offloadModifyReq.id = this.id;
   }
   convertTitleToId = (dataSource: any): any => {
-    return this.counterStatesDictionary.find(item => {
-      if (item.title === dataSource)
-        return item;
-    })
+    if (this.counterStatesDictionary) {
+      return this.counterStatesDictionary.find(item => {
+        if (item.title === dataSource)
+          return item;
+      })
+    }
   }
   connectToServer = async () => {
     this.checkItems();

@@ -26,17 +26,20 @@ export class ListUserComponent extends FactoryONE {
     this.insertToTimes();
   }
   insertToTimes = () => {
-    const temp = this.dateJalaliService.getCurrentTime();
-    this.closeTabService.saveDataForRequestLogListUserReq.fromTimeM = temp.toString().split(':').pop();
-    this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH = temp.toString().split(':').shift() - 1;
-    this.closeTabService.saveDataForRequestLogListUserReq.toTimeM = temp.toString().split(':').pop();
-    this.closeTabService.saveDataForRequestLogListUserReq.toTimeH = temp.toString().split(':').shift();
-    if (temp.toString().split(':').shift() == '0') {
-      this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH = '23';
-      this.closeTabService.saveDataForRequestLogListUserReq.toTimeH = '24';
+    let temp = this.dateJalaliService.getCurrentTime();
+    const hour = temp.split(':').shift();
+    const minute = temp.split(':').pop();
+
+    this.closeTabService.saveDataForRequestLogListUserReq.fromTimeM = minute;
+    this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH = hour - 1;
+    this.closeTabService.saveDataForRequestLogListUserReq.toTimeM = minute;
+    this.closeTabService.saveDataForRequestLogListUserReq.toTimeH = hour;
+    // add zero before single digits even if it is zero
+    if (this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH < 10) {
+      this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH = '0'.concat(this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH.toString());
     }
-    if (temp.toString().split(':').shift() == '10') {
-      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '09';
+    if (hour == '00') {
+      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '23';
     }
   }
   connectToServer = async () => {
