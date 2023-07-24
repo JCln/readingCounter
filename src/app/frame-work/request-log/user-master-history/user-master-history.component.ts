@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { IUserMasterHistory } from 'services/DI/privacies';

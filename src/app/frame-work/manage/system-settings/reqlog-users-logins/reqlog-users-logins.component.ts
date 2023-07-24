@@ -1,3 +1,4 @@
+import { DateJalaliService } from 'services/date-jalali.service';
 import { ReqlogUsersLoginsDetailsComponent } from './reqlog-users-logins-details/reqlog-users-logins-details.component';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -7,7 +8,6 @@ import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IUsersLoginBriefInfo } from 'services/DI/privacies';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
-import { EN_Routes } from 'interfaces/routes.enum';
 
 @Component({
   selector: 'app-reqlog-users-logins',
@@ -21,7 +21,8 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public securityService: SecurityService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private dateJalaliService: DateJalaliService
   ) {
     super();
   }
@@ -42,11 +43,17 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.usersLogins = await this.securityService.postDataSource(ENInterfaces.requestLogUsersLogins, this.closeTabService.usersLoginsReq);
+    this.convertLoginTime();
   }
   verification = async () => {
     const temp = this.securityService.verificationDates(this.closeTabService.usersLoginsReq);
     if (temp)
       this.connectToServer();
+  }
+  convertLoginTime = () => {
+    this.closeTabService.usersLogins.forEach(item => {
+      item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
+    })
   }
 
 }

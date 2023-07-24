@@ -1,5 +1,5 @@
 import { EN_messages } from 'interfaces/enums.enum';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
