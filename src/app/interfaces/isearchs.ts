@@ -43,3 +43,9 @@ export interface IFollowUpHistory {
     listNumber?: string,
     trackNumber?: number,
 }
+export interface ISingleReadingCounterReq {
+    searchBy: number,
+    item: string,
+    searchType: any,
+    _isCollapsed: boolean,
+}

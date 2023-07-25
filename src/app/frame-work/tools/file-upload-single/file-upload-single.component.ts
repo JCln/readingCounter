@@ -1,6 +1,7 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { OfflineModeService } from 'services/offline-mode.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class FileUploadSingleComponent {
   }
 
   getLatestOnOffloadId = async () => {
-    await this.offlineModeService.getLatestOnOffloadId(
+    await this.offlineModeService.postDataSource(ENInterfaces.getLatestOnOffloadId,
       {
         searchBy: this.offlineModeService.fileUploadSingle.searchBy,
         item: this.offlineModeService.fileUploadSingle.item

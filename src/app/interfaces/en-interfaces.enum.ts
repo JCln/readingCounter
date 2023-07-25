@@ -309,6 +309,7 @@ export enum ENInterfaces {
     offloadManual = 'V1/Manual/OffLoad',
     fileUploadSingle = 'V1/Upload/Single',
     loadManual = `V1/Load/Manual`,
+    offlineSingleReadingCounter = 'addANEW',
 
     QotrAll = 'V1/Qotr/All',
     QotrDictionary = 'V1/Qotr/Dictionary',
