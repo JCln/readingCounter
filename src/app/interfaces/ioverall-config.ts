@@ -172,7 +172,9 @@ export enum ENEssentialsToSave {
   notificationListByDate = "notificationListByDate",
   notificationListByDateReq = "notificationListByDateReq",
   notificationMessages = "notificationMessages",
-  _userAddUserInfos = "_userAddUserInfos"
+  _userAddUserInfos = "_userAddUserInfos",
+  offlineSingleReadingCounterReq = "offlineSingleReadingCounterReq",
+  offlineSingleReadingCounter = "offlineSingleReadingCounter"
 }
 export interface ITestSidebar {
     routerUrl: string;

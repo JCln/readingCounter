@@ -139,7 +139,13 @@ export class CloseTabService {
     fromDate: '',
     toDate: '',
   }
-
+  offlineSingleReadingCounterReq = {
+    searchBy: 1,
+    item: '',
+    searchType: [],
+    _isCollapsed: false
+  }
+  offlineSingleReadingCounter: IOnOffLoadFlat[];
   // track manager
   saveDataForTrackImported: ITracking[];
   saveDataForTrackLoaded: ITracking[];
@@ -494,6 +500,7 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForServerUserActivationReq, value: ENEssentialsToSave.saveDataForServerUserActivation, url: EN_Routes.userActivation },
     { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
+    { id: 13, req: ENEssentialsToSave.offlineSingleReadingCounterReq, value: ENEssentialsToSave.offlineSingleReadingCounter, url: EN_Routes.offlineSingleReading },
     { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
     { id: 2, value: ENEssentialsToSave.saveDataForMsDriveInfo, url: EN_Routes.driveInfo },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },

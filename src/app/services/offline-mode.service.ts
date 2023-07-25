@@ -1,3 +1,4 @@
+import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -9,6 +10,7 @@ import { Search } from '../classes/search';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
+import { ISingleReadingCounterReq } from 'interfaces/isearchs';
 
 interface IUploadForm {
   file: any,
@@ -41,7 +43,7 @@ export class OfflineModeService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService,
+    private utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
@@ -53,23 +55,23 @@ export class OfflineModeService {
       Search.billId,
     ]
   }
-  getLatestOnOffloadId = (body: object): Promise<any> => {
+  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.getLatestOnOffloadId, body).toPromise().then(res => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
         resolve(res);
       })
     })
   }
   isNull = (): boolean => {
     if (MathS.isNull(this.fileForm)) {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_ZIP, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
   isZIPOfflineTxtOut = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'zip') {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_ZIP, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -83,11 +85,11 @@ export class OfflineModeService {
   }
   vertificationLoadManual = (): boolean => {
     if (MathS.isNull(this.loadForm.zoneId)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_zone, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
     if (MathS.isNull(this.loadForm.counterReaderId)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_CounterReader, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
 
@@ -102,15 +104,15 @@ export class OfflineModeService {
   }
   checkVertiticationFileUploadSingle = (): boolean => {
     if (MathS.isNull(this.fileUploadSingle.searchBy)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
     if (MathS.isNull(this.fileUploadSingle.item.toString().trim())) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_value, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_value, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
     if (MathS.isNull(this.fileUploadSingleForm)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
     if (
@@ -121,7 +123,7 @@ export class OfflineModeService {
       return true;
     }
     else {
-      this.snackWrapperService.openSnackBar(EN_messages.should_insert_image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
   }
@@ -132,8 +134,19 @@ export class OfflineModeService {
       })
     });
   }
+  vertificationSingleReadingRequest = (dataSource: ISingleReadingCounterReq): boolean => {
+    if (MathS.isNull(dataSource.searchBy)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
+      return false;
+    }
+    if (MathS.isNull(dataSource.item)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+      return false;
+    }
+    return true;
+  }
   showSuccessMessage = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+    this.utilsService.snackBarMessage(message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
   }
   postTicketOfflineTxtOut = (): Observable<any> => {
     const formData: FormData = new FormData();

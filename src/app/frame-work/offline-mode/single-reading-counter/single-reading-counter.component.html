@@ -1,0 +1,39 @@
+<app-collapsable [_isCollapsed]=closeTabService.offlineSingleReadingCounterReq._isCollapsed
+    (_clicked)=" closeTabService.offlineSingleReadingCounterReq._isCollapsed = !closeTabService.offlineSingleReadingCounterReq._isCollapsed">
+</app-collapsable>
+
+<section>
+    <h1 class="title">قرائت تکی</h1>
+    <form #form="ngForm" (ngSubmit)="connectToServer()" class="_card"
+        [@openClose]="closeTabService.offlineSingleReadingCounterReq._isCollapsed ? 'slideUp' : 'slideDown'">
+        <div class="_desc">
+
+            <div class="input_2">
+                <div class="_key">نوع جستجو</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.offlineSingleReadingCounterReq.searchBy" name="searchType">
+                        <mat-option (click)="_searchByInfo = truefalse.searchBy"
+                            *ngFor="let truefalse of closeTabService.offlineSingleReadingCounterReq.searchType"
+                            [value]="truefalse.id">
+                            {{truefalse.searchBy}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="input_2">
+                <div class="_key">{{_searchByInfo}}</div>
+                <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
+                    [(ngModel)]="closeTabService.offlineSingleReadingCounterReq.item" autofocus>
+            </div>
+
+            <button class="btn_1" type="submit">
+                <i class="pi pi-search"></i>
+                جستجو
+            </button>
+        </div>
+
+    </form>
+
+</section>
