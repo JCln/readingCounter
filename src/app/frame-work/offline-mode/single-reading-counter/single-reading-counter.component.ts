@@ -19,6 +19,8 @@ export class SingleReadingCounterComponent implements OnInit {
   connectToServer = async () => {
     if (this.offlineModeService.vertificationSingleReadingRequest(this.closeTabService.offlineSingleReadingCounterReq)) {
       this.closeTabService.offlineSingleReadingCounter = await this.offlineModeService.postDataSource(ENInterfaces.offlineSingleReadingCounter, this.closeTabService.offlineSingleReadingCounterReq);
+      console.log(this.closeTabService.offlineSingleReadingCounter);
+      
     }
   }
   ngOnInit(): void {
