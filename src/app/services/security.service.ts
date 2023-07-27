@@ -1,14 +1,11 @@
-import { UsersAllService } from 'services/users-all.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IResponses } from 'interfaces/ioverall-config';
-
 import { IPrivacy, privacies } from './DI/privacies';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
-import { ENReadingReports } from 'interfaces/reading-reports';
 
 export interface IRoleNessessities {
   id: string,
@@ -26,7 +23,7 @@ export class SecurityService {
     changeOrInsertUserLogId: ''
   };
   constructor(
-    private interfaceManagerService: InterfaceManagerService,    
+    private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService
   ) { }
 
