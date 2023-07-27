@@ -9,7 +9,6 @@ import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
-import { SnackWrapperService } from './snack-wrapper.service';
 import { ISingleReadingCounterReq } from 'interfaces/isearchs';
 
 interface IUploadForm {
