@@ -33,7 +33,60 @@
                 جستجو
             </button>
         </div>
-
+        <!-- <section class="_more_options">
+            <div class="__container">
+                <div class="input_2" *ngIf="masrafState">
+                    <div class="_key">وضعیت مصرف</div>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="masrafState" name="masraf"
+                            [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
+                            optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                            [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
+                </div>
+                <div class="input_2" *ngIf="dictionaryWrapperService.counterReportDictionary.length">
+                    <div class="_key">گزارش بازرسی</div>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="dictionaryWrapperService.counterReportDictionary" name="counterReport"
+                            [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds" optionLabel="title"
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                            [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
+                </div>
+                <div class="input_2" *ngIf="counterStateByZoneIdDictionary.length">
+                    <div class="_key">وضعیت کنتور</div>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="counterStateByZoneIdDictionary"
+                            name="counterState" [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds"
+                            optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
+                </div>
+                <div class="input_2" *ngIf="karbariDictionary.length">
+                    <div class="_key">کاربری</div>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="karbari"
+                            [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                            [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
+                </div>
+                <div class="input_2" *ngIf="fragmentMasterIds.length">
+                    <div class="_key">نوبتی ها</div>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentMasterIds" name="fragmentId"
+                            [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds"
+                            optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
+                </div>
+            </div>
+        </section> -->
     </form>
 
 </section>
