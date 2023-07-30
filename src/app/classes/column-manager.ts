@@ -526,6 +526,26 @@ export class ColumnManager {
         { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true },
         { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, readonly: true }
     ]
+    rrGuildsParams: IObjectIteratation[] = [
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
+        { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
+        { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: true },
+        { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
+        { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
+        { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: true },
+        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, readonly: true },
+        { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: true, readonly: true },
+        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
+        { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: true },
+        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, readonly: true },
+        { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
+        { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: true },
+        { field: 'reportTitle', header: 'گزارش', isSelected: true, readonly: true },
+        { field: 'offloadDateJalali', header: 'روز', isSelected: true, readonly: true },
+        { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true },
+        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, readonly: true }
+    ]
     trv: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
@@ -551,10 +571,13 @@ export class ColumnManager {
         { field: 'guildTitle', header: 'صنف', isSelected: false, readonly: true }
     ]
     trvDiff: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
         { field: 'eshterak', header: 'اشتراک', isSelected: true },
+        { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
+        { field: 'siphonInstallDate', header: 'تاریخ نصب سیفون', isSelected: false },
         { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true },
         { field: 'address', header: 'آدرس', isSelected: false },
         { field: 'offloadDateJalali', header: 'روز', isSelected: true },

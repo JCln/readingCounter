@@ -147,6 +147,26 @@ export interface IReadingReportDetails {
     counterSerial: string,
     possibleCounterSerial: string
 }
+export interface IReadingGuildReportOutput {
+    id: string,
+    zoneId: number,
+    zoneTitle: string,
+    code: string,
+    title: string,
+    billId: string,
+    radif: number,
+    eshterak: string,
+    fulName: string,
+    address: string,
+    offloadDateJalali: string,
+    description: string,
+    counterReaderName: string,
+    counterInstallDate: string,
+    siphonInstallDate: string,
+    ahadMaskooniOrAsli: number,
+    ahadTejariOrFari: number,
+    ahadSaierOrAbBaha: number
+}
 export interface IReadingReportTraverse {
     id: string
     billId: string,
@@ -213,6 +233,9 @@ export interface IReadingReportChartReq {
 }
 export interface IReadingReportTraverseDifferentialRes {
     id: string,
+    zoneId: number,
+    zoneTitle: string,
+    counterReaderName: string,
     billId: string,
     radif: number,
     eshterak: string,
@@ -222,6 +245,8 @@ export interface IReadingReportTraverseDifferentialRes {
     description: string,
     value: string,
     code: string,
+    counterInstallDate: string,
+    siphonInstallDate: string
     newValue: string
 }
 export interface IReadingReportTraverseDifferentialReq {

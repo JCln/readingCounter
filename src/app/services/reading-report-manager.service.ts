@@ -76,6 +76,16 @@ export class ReadingReportManagerService {
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: []
   }
+  guildsWithParamsReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
+  }
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',

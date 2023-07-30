@@ -17,6 +17,7 @@ export class Collapser {
     isCollapsedImgAttrAnlz: boolean = false;
     isCollapsedTrvCh: boolean = false;
     isCollapsedDetails: boolean = false;
+    _isCollapsedGuilsWithParams: boolean = false;
     _isCollapsedUsersLogins: boolean = false;
     _isCollapsedNotificationListByDate: boolean = false;
     isCollapsedUserKarkard: boolean = false;
