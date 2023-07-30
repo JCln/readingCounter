@@ -174,7 +174,8 @@ export enum ENEssentialsToSave {
   notificationMessages = "notificationMessages",
   _userAddUserInfos = "_userAddUserInfos",
   offlineSingleReadingCounterReq = "offlineSingleReadingCounterReq",
-  offlineSingleReadingCounter = "offlineSingleReadingCounter"
+  offlineSingleReadingCounter = "offlineSingleReadingCounter",
+  RRGuildsWithParam = "RRGuildsWithParam"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -413,6 +414,7 @@ export enum ENSelectedColumnVariables {
     selectedDMAnalyze = 'analysis',
     selectedRRMaster = '_fragmentMaster',
     selectedRRDetails = 'rrDetails',
+    selectedRRGuildsParams = 'rrGuildsParams',
     selectedRRRequestLog = 'requestLog',
     selectedRRRequestLogAnonymous = 'requestLogAnonymous',
     selectedRRRequestLogListUser = 'requestLogListUser',

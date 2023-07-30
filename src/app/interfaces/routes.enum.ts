@@ -83,6 +83,7 @@ export enum EN_Routes {
     'wrrptsgalleryai' = '/wr/rpts/gallery/ai',
     'wrmdmacranlz' = '/wr/m/dma/cranlz',
     'wrrptsexmdetails' = '/wr/rpts/exm/details',
+    guildsWithParam = '/wr/rpts/exm/paramGuilds',
     'userOnlines' = '/wr/mu/userOnlines',
     'wrrptsexmuserKarkard' = '/wr/rpts/exm/userKarkard',
     wrRptsInState = '/wr/rpts/inState',

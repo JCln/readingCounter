@@ -222,6 +222,7 @@ export enum ENInterfaces {
     KarbariEdit = 'V1/Karbari/Edit',
     KarbariAdd = 'V1/Karbari/Add',
     rrInStatePost = 'V1/List/Offloaded/InState',
+    postRRGuildWithParams = 'V1/List/Guilds/WithParam',
 
     signalRStartConnection = '/notifyHub',
     // signalRBroadcastMessage = 'broadcast',
