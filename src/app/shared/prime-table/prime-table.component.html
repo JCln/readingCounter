@@ -397,15 +397,22 @@
             </td>
             <td class="__columns" *ngIf="(
                 _checkUpName == 'allComponent' ||                                                       
-                _outputFileName == 'momentLs' || 
-                _outputFileName == 'rrDetails' ||
-                _outputFileName == 'trv' ||
-                _outputFileName == 'trvDiff' || 
-                _outputFileName == 'imgResultGridBased'                
-            )" (click)="doShowCarousel(dataSource, true)">
+                _outputFileName == 'rrDetails'                        
+            )" (click)="doShowImageDialog(dataSource, true)">
                 <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="(
+                _outputFileName == 'momentLs' ||                                 
+                _outputFileName == 'trvDiff' || 
+                _outputFileName == 'imgResultGridBased'||
+                _outputFileName == 'trv'      
+            )" (click)="doShowImageDialogWithoutImageCount(dataSource, true)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <i class="tooltip p_icons pi pi-camera">
+                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="(
