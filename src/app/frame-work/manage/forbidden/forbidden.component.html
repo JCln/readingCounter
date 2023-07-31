@@ -6,7 +6,7 @@
             <div class="input_2">
                 <div class="_key">ناحیه</div>
                 <div class="_value">
-                    <p-dropdown name="zones" [options]="zoneDictionary"
+                    <p-dropdown name="zones" [options]="fbnZoneDictionary"
                         [(ngModel)]="forbiddenService.forbiddenReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
                         optionLabel="title" filter="true">
                     </p-dropdown>
@@ -37,8 +37,8 @@
 </main>
 
 <app-prime-table *ngIf="closeTabService.saveDataForFNB" [dataSource]="closeTabService.saveDataForFNB"
-    [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]" [_sessionName]="'forbidden-session'"
-    [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
+    [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]"
+    [_sessionName]="'forbidden-session'" [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
     [_isCollaped]="forbiddenService.utilsService.collapser._isCollapsedForbidden"
     (collapsed)="forbiddenService.utilsService.collapser._isCollapsedForbidden = !forbiddenService.utilsService.collapser._isCollapsedForbidden"
     (refreshedTable)="refreshTable()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">

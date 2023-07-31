@@ -50,10 +50,6 @@ export class ForbiddenService {
   }
   /* VALIDATION */
   private datesValidationForbidden = (): boolean => {
-    if (MathS.isNull(this.forbiddenReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
     if (MathS.isNull(this.forbiddenReq.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
