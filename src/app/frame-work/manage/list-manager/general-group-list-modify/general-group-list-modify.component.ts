@@ -231,7 +231,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
     return new Promise(async (resolve) => {
       this.counterStateByZoneDictionary = JSON.parse(JSON.stringify(await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zone)));
-      if (this.counterStateByZoneDictionary[0].id !== 0)
+      if (this.counterStateByZoneDictionary[0].id !== null)
         this.counterStateByZoneDictionary.unshift({ id: null, title: 'انتخاب کنید', isSelected: true })
       resolve(true);
     });

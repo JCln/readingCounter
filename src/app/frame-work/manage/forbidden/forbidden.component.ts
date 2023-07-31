@@ -13,7 +13,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class ForbiddenComponent extends FactoryONE {
-  zoneDictionary: IDictionaryManager[] = [];
+  fbnZoneDictionary: IDictionaryManager[] = [];
 
   constructor(
     public forbiddenService: ForbiddenService,
@@ -23,14 +23,16 @@ export class ForbiddenComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForFNB = await this.forbiddenService.getDataSource();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForFNB, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForFNB, this.fbnZoneDictionary, 'zoneId');
     this.forbiddenService.setDynamicPartRanges(this.closeTabService.saveDataForFNB);
   }
   classWrapper = async (canRefresh: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForFNB = null;
     }
-    this.zoneDictionary = await this.forbiddenService.dictionaryWrapperService.getZoneDictionary();
+    this.fbnZoneDictionary = await JSON.parse(JSON.stringify(this.forbiddenService.dictionaryWrapperService.getZoneDictionary()));
+    if (this.fbnZoneDictionary[0].id !== 0)
+      this.fbnZoneDictionary.unshift({ id: 0, title: 'نامشخص', isSelected: true })
   }
   verification = async () => {
     const temp = this.forbiddenService.verificationForbidden(this.forbiddenService.forbiddenReq);
