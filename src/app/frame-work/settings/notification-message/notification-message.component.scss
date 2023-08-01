@@ -1,6 +1,8 @@
-@import 'variable';
+@import 'primeNG';
 @import 'tooltip';
 @import 'button';
+@import 'input';
+@import 'cards';
 
 section {
     display: grid;
@@ -171,4 +173,8 @@ section {
     i {
         font-size: var(--font_2);
     }
+}
+
+[hidden] {
+    display: none;
 }

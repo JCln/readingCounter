@@ -33,5 +33,6 @@ export interface INotificationMessage {
     receiver: string,
     insertDateTimeJalali: string,
     deliverConfirm: true,
-    deliverDateTimeJalali: string
+    deliverDateTimeJalali: string,
+    canShow?: boolean
 }
