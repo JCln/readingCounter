@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { NotificationMessageRoutingModule } from './notification-message-routing.module';
 import { NotificationMessageComponent } from './notification-message.component';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 
 @NgModule({
@@ -10,7 +10,7 @@ import { NotificationMessageComponent } from './notification-message.component';
     NotificationMessageComponent
   ],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     NotificationMessageRoutingModule
   ]
 })

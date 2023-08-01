@@ -143,6 +143,7 @@ export class aboutUs {
 }
 export class NotificationAlertTypesList {
     static readonly DEFAULT = new NotificationAlertTypesList([
+        { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
         { title: 'confidential', value: 0, titleUnicode: 'محرمانه' },
         { title: 'ordinary', value: 1, titleUnicode: 'عادی' },
         { title: 'sensitive', value: 2, titleUnicode: 'حساس' },
@@ -157,6 +158,7 @@ export class NotificationAlertTypesList {
 }
 export class NotificationMediaTypeList {
     static readonly DEFAULT = new NotificationMediaTypeList([
+        { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
         { title: 'text', value: 0, titleUnicode: 'متن' },
         { title: 'image', value: 1, titleUnicode: 'تصویر' },
         { title: 'video', value: 2, titleUnicode: 'ویدیو' },

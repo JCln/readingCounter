@@ -1,5 +1,27 @@
+<div class="_card">
+    <h1 class="title">فیلتر نمایش</h1>
+    <div class="input_2">
+        <div class="_key">جستجو براساس</div>
+        <div class="_value">
+            <p-dropdown #drop name="zones" [options]="profileService.searchInOrderNotificationMessages"
+                placeholder="نوع پیام" optionValue="value" optionLabel="name" filter="true"
+                (onChange)="userInputValue = drop.selectedOption" (onChange)="insertToEdgeDictionary(userInputValue)">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="input_2">
+        <div class="_key">{{userInputValue.name}}</div>
+        <p-dropdown name="zones" [options]="edgeFilterDictionary" [(ngModel)]="userInputType" placeholder="انتخاب مورد"
+            optionValue="value" optionLabel="titleUnicode" filter="true" (onChange)="showItemOnSearch()"
+            placeholder="{{userInputValue.name}} را وارد نمایید">
+        </p-dropdown>
+
+    </div>
+</div>
+
 <section>
-    <div class="_container" *ngFor="let item of closeTabService.notificationMessages">
+    <div class="_container" *ngFor="let item of closeTabService.notificationMessages; index as ri"
+        [hidden]="!closeTabService.notificationMessages[ri].canShow">
         <div class="_icon">
             <div class="__notificationMediaTypeId" [ngClass]="{
                 'pi pi-envelope':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.text,

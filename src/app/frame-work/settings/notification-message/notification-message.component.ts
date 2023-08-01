@@ -13,8 +13,12 @@ import { INotificationMessage } from 'interfaces/isettings';
   styleUrls: ['./notification-message.component.scss']
 })
 export class NotificationMessageComponent extends FactoryONE {
+  edgeFilterDictionary = [];
+  userInputValue: any = { name: 'نوع پیام', value: 'notificationMediaTypeId', insertedValue: '' };
+  userInputType: number = -1;
+
   constructor(
-    private profileService: ProfileService,
+    public profileService: ProfileService,
     public closeTabService: CloseTabService,
     public envService: EnvService
   ) {
@@ -22,13 +26,14 @@ export class NotificationMessageComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.notificationMessages = await this.profileService.getMyInfoDataSource(ENInterfaces.NotifyManagerUnreadGet);
+    this.insertToEdgeDictionary(this.profileService.searchInOrderNotificationMessages[0]);
+    this.showItemOnSearch();
   }
 
   classWrapper = (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.notificationMessages = [];
     }
-    console.log(this.closeTabService.notificationMessages);
     if (MathS.isNull(this.closeTabService.notificationMessages)) {
       this.connectToServer();
     }
@@ -57,5 +62,36 @@ export class NotificationMessageComponent extends FactoryONE {
         break;
     }
   }
+  insertToEdgeDictionary = (number: any) => {
+    if (this.userInputValue.value == 'notificationMediaTypeId') {
+      this.edgeFilterDictionary = this.envService.NotificationMediaTypeList;
+    }
+    else {
+      this.edgeFilterDictionary = this.envService.NotificationAlertTypesList;
+    }
+  }
+  showItemOnSearch = () => {
+    const origin = this.closeTabService.notificationMessages;
+    if (origin) {
+      for (let index = 0; index < origin.length; index++) {
+        // if anything exist for filter
+
+        if (this.userInputType == -1) {
+          // no value inserted to filter and should show all
+          origin[index].canShow = true;
+        }
+        else {
+          if (origin[index][this.userInputValue.value].toString().includes(this.userInputType)) {
+            origin[index].canShow = true;
+          }
+          else {
+            origin[index].canShow = false;
+          }
+        }
+
+      }
+    }
+  }
+
 
 }
