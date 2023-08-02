@@ -74,8 +74,6 @@ export class NotificationMessageComponent extends FactoryONE {
     const origin = this.closeTabService.notificationMessages;
     if (origin) {
       for (let index = 0; index < origin.length; index++) {
-        // if anything exist for filter
-
         if (this.userInputType == -1) {
           // no value inserted to filter and should show all
           origin[index].canShow = true;
