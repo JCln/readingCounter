@@ -57,6 +57,7 @@ import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
+import { feedbackType } from 'interfaces/imobile-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -405,7 +406,13 @@ export class CloseTabService {
   saveDataForImgResultDetailsRes = [];
   saveDataForImgResultDetailsResFirst: any;
 
+  mobileManagerFeedbackTypeIsComplaint: feedbackType[] = [];
+  mobileManagerFeedbackTypeIsNotComplaint: feedbackType[] = [];
+
   private val: ISidebarVals[] = [
+    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackIsComplaint },
+    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsNotComplaint, url: EN_Routes.mobileFeedbackIsNotComplaint },
+
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },
