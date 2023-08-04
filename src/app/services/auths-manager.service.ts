@@ -1,11 +1,10 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { SectionsService } from 'services/sections.service';
 
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -15,29 +14,12 @@ export class AuthsManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
-    private sectionsService: SectionsService
+    public utilsService: UtilsService,
+    private sectionsService: SectionsService,
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
-  /* API CALSS */
-  getAPIDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe(res => {
-        resolve(res);
-      })
-    })
-  }
-  /* */
-  addOrEditAuths = (place: ENInterfaces, result: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(place, result).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    });
-  }
   firstConfirmDialog = (text: string): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
@@ -48,14 +30,6 @@ export class AuthsManagerService {
       icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
-  }
-  deleteSingleRow = (place: ENInterfaces, id: number) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(true);
-      })
-    });
   }
   /* VERIFICATION & VALIDATION */
   verification = (dataSource: any): boolean => {

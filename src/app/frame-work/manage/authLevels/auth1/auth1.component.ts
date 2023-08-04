@@ -41,15 +41,18 @@ export class Auth1Component extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForAppLevel1) {
-      this.closeTabService.saveDataForAppLevel1 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel1GET);
+      this.closeTabService.saveDataForAppLevel1 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel1GET);
     }
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel1 = this.closeTabService.saveDataForAppLevel1.slice(0, index).concat(this.closeTabService.saveDataForAppLevel1.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title);
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel1REMOVE, rowDataAndIndex['dataSource'].id);
-      this.refetchTable(rowDataAndIndex['ri']);
+      const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel1REMOVE, rowDataAndIndex['dataSource'].id)
+      if (res) {
+        this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+        this.refetchTable(rowDataAndIndex['ri']);
+      }
     }
   }
   onRowEditInit(dataSource: any) {
@@ -60,7 +63,8 @@ export class Auth1Component extends FactoryONE {
       this.closeTabService.saveDataForAppLevel1[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1EDIT, dataSource['dataSource']);
+    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel1EDIT, dataSource['dataSource']);
+    this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
   }
 
 }
