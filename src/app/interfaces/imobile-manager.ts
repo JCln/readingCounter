@@ -1,6 +1,7 @@
-export interface feedbackType {
+export interface IFeedbackType {
     id: number,
     title: string,
     isComplaint: boolean,
-    isActive: boolean
+    isActive: boolean,
+    isNew?: boolean
 }

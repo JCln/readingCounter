@@ -57,7 +57,7 @@ import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
-import { feedbackType } from 'interfaces/imobile-manager';
+import { IFeedbackType } from 'interfaces/imobile-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -406,8 +406,8 @@ export class CloseTabService {
   saveDataForImgResultDetailsRes = [];
   saveDataForImgResultDetailsResFirst: any;
 
-  mobileManagerFeedbackTypeIsComplaint: feedbackType[] = [];
-  mobileManagerFeedbackTypeIsNotComplaint: feedbackType[] = [];
+  mobileManagerFeedbackTypeIsComplaint: IFeedbackType[] = [];
+  mobileManagerFeedbackTypeIsNotComplaint: IFeedbackType[] = [];
 
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackIsComplaint },

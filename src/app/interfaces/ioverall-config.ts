@@ -371,7 +371,7 @@ export enum ENLocalStorageNames {
     defaultAggregateTracks = 'defaultAggregateTracks',
 }
 // ENSelectedColumnVariables enum
-//  variable name must be the same as columnManagerName of the columns data
+//  variable name MUST be the same as columnManagerName of the columns data
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
     selectedRRExcelView = 'excelDynamic',
@@ -444,6 +444,8 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = 'periodKind',
     selectedImageAttribution = 'imgattr',
     selectedImageGuild = 'guild',
+    selectedFeedbackComplaint = 'feedbackComplaint',
+    selectedFeedbackNotComplaint = 'feedbackNotComplaint',
     selectedDynamicTraverse = 'dynamicTraverse',
     selectedTextOutput = 'textOutput',
     selectedKarbari = 'karbari',

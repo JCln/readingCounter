@@ -8,6 +8,17 @@ export class ColumnManager {
     _primeNGHeaderCheckbox: boolean = false;
     _generalGroupHeaderCheckbox: boolean = false;
 
+
+    feedbackComplaint: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
+    ]
+    feedbackNotComplaint: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
+    ]
+
+
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'description', header: 'توضیحات', isSelected: true, enableTooltip: true },

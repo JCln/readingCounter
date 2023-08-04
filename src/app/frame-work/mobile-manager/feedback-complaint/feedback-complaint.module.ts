@@ -1,5 +1,5 @@
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { FeedbackComplaintRoutingModule } from './feedback-complaint-routing.module';
 import { FeedbackComplaintComponent } from './feedback-complaint.component';
@@ -10,7 +10,7 @@ import { FeedbackComplaintComponent } from './feedback-complaint.component';
     FeedbackComplaintComponent
   ],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     FeedbackComplaintRoutingModule
   ]
 })
