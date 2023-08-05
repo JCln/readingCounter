@@ -27,7 +27,7 @@ export class AjaxReqWrapperService {
   }
   postDataSourceById = (place: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(place, id).subscribe((res: any) => {
+      this.interfaceManagerService.POSTById(place, id).toPromise().then((res: any) => {
         resolve(res);
       })
     });

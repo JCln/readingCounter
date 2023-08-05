@@ -4,6 +4,7 @@ import { IFeedbackType } from 'interfaces/imobile-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { MobileAppService } from 'services/mobile-app.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-feedback-complaint',
@@ -31,8 +32,8 @@ export class FeedbackComplaintComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.closeTabService.mobileManagerFeedbackTypeIsComplaint) {
-      this.closeTabService.mobileManagerFeedbackTypeIsComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.feedbackTypeManagerGet, this.isComplaint);
+    if (MathS.isNull(this.closeTabService.mobileManagerFeedbackTypeIsComplaint)) {
+      this.closeTabService.mobileManagerFeedbackTypeIsComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSource(ENInterfaces.feedbackTypeManagerGetC);
     }
     this.defaultAddStatus();
     this.insertSelectedColumns();
@@ -75,9 +76,10 @@ export class FeedbackComplaintComponent extends FactoryONE {
     const confirmed = await this.mobileAppService.firstConfirmDialog('عنوان: ' + dataSource['dataSource'].title);
     if (!confirmed) return;
 
-    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerRemove, dataSource['dataSource']);
+    const res = await this.mobileAppService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.feedbackTypeManagerRemoveC, dataSource['dataSource'].id);
 
-    if (a) {
+    if (res) {
+      this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
       this.closeTabService.mobileManagerFeedbackTypeIsComplaint[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       delete this.closeTabService.mobileManagerFeedbackTypeIsComplaint[dataSource['dataSource'].id];
       this.refetchTable(dataSource['ri']);
@@ -91,15 +93,16 @@ export class FeedbackComplaintComponent extends FactoryONE {
         this.closeTabService.mobileManagerFeedbackTypeIsComplaint.shift();
         return;
       }
-      this.closeTabService.mobileManagerFeedbackTypeIsComplaint[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.mobileManagerFeedbackTypeIsComplaint[dataSource['ri']] =
+        this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (!dataSource['dataSource'].id) {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerEdit, dataSource['dataSource']);
-      if (a) {
+      const res = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerEditC, dataSource['dataSource']);
+      if (res) {
         this.refreshTable();
       }
       else {
@@ -108,7 +111,7 @@ export class FeedbackComplaintComponent extends FactoryONE {
     }
   }
   private async onRowAdd(dataSource: IFeedbackType, rowIndex: number) {
-    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAdd, dataSource);
+    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAddC, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();

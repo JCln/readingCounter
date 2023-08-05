@@ -393,9 +393,13 @@ export enum ENInterfaces {
 
 
     // New Mobile App
-    feedbackManagerRegister = 'V1/FeedbackMobile/Register',
-    feedbackTypeManagerGet = 'V1/Feedback/All',
-    feedbackTypeManagerEdit = 'V1/Feedback/Edit',
-    feedbackTypeManagerAdd = 'V1/Feedback/Add',
-    feedbackTypeManagerRemove = 'V1/Feedback/Remove'
+    feedbackTypeManagerGetC = 'V1/FeedbackType/AllC',
+    feedbackTypeManagerEditC = 'V1/FeedbackType/EditC',
+    feedbackTypeManagerAddC = 'V1/FeedbackType/AddC',
+    feedbackTypeManagerRemoveC = 'V1/FeedbackType/RemoveC',
+
+    feedbackTypeManagerGetS = 'V1/FeedbackType/AllS',
+    feedbackTypeManagerEditS = 'V1/FeedbackType/EditS',
+    feedbackTypeManagerAddS = 'V1/FeedbackType/AddS',
+    feedbackTypeManagerRemoveS = 'V1/FeedbackType/RemoveS'
 }

@@ -35,7 +35,7 @@ export class Auth2AddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2ADD, this.form.value))
+    if (!await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel2ADD, this.form.value))
       return;
 
     this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev2Dictionary');

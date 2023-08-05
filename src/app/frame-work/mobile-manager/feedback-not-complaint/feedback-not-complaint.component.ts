@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFeedbackType } from 'interfaces/imobile-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { MobileAppService } from 'services/mobile-app.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-feedback-not-complaint',
@@ -31,8 +32,8 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint) {
-      this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.feedbackTypeManagerGet, this.isComplaint);
+    if (MathS.isNull(this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint)) {
+      this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSource(ENInterfaces.feedbackTypeManagerGetS);
     }
     this.defaultAddStatus();
     this.insertSelectedColumns();
@@ -76,12 +77,12 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
     const confirmed = await this.mobileAppService.firstConfirmDialog('عنوان: ' + dataSource['dataSource'].title);
     if (!confirmed) return;
 
-    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerRemove, dataSource['dataSource']);
+    const res = await this.mobileAppService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.feedbackTypeManagerRemoveS, dataSource['dataSource'].id);
 
-    if (a) {
+    if (res) {
+      this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
       this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       delete this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint[dataSource['dataSource'].id];
-      this.refetchTable(dataSource['ri']);
       this.refreshTable();
     }
   }
@@ -99,7 +100,7 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerEdit, dataSource['dataSource']);
+      const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerEditS, dataSource['dataSource']);
       if (a) {
         this.refreshTable();
       }
@@ -109,7 +110,7 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
     }
   }
   private async onRowAdd(dataSource: IFeedbackType, rowIndex: number) {
-    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAdd, dataSource);
+    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAddS, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();
