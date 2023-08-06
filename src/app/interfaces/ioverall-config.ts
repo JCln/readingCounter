@@ -177,7 +177,11 @@ export enum ENEssentialsToSave {
     offlineSingleReadingCounter = "offlineSingleReadingCounter",
     RRGuildsWithParam = "RRGuildsWithParam",
     mobileManagerFeedbackTypeIsComplaint = "mobileManagerFeedbackTypeIsComplaint",
-    mobileManagerFeedbackTypeIsNotComplaint = "mobileManagerFeedbackTypeIsNotComplaint"
+    mobileManagerFeedbackTypeIsNotComplaint = "mobileManagerFeedbackTypeIsNotComplaint",
+    mobileManagerFeedbackAllC = "mobileManagerFeedbackAllC",
+    mobileManagerFeedbackAllS = "mobileManagerFeedbackAllS",
+    mobileManagerFeedbackAllCReq = "mobileManagerFeedbackAllCReq",
+    mobileManagerFeedbackAllSReq = "mobileManagerFeedbackAllSReq"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -377,6 +381,8 @@ export enum ENSelectedColumnVariables {
     selectedRRExcelView = 'excelDynamic',
     selectedRAutoImport = 'automaticImport',
     selectedImageAttrResult = '_imageAttrResult',
+    selectedFeedbackC = 'feedbackAllComplaint',
+    selectedFeedbackS = 'feedbackAllSuggest',
     selectedImageAttrAnalyze = '_imageAttrAnalyze',
     selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',

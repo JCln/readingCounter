@@ -401,5 +401,8 @@ export enum ENInterfaces {
     feedbackTypeManagerGetS = 'V1/FeedbackType/AllS',
     feedbackTypeManagerEditS = 'V1/FeedbackType/EditS',
     feedbackTypeManagerAddS = 'V1/FeedbackType/AddS',
-    feedbackTypeManagerRemoveS = 'V1/FeedbackType/RemoveS'
+    feedbackTypeManagerRemoveS = 'V1/FeedbackType/RemoveS',
+
+    feedbackManagerAllC = 'V1/Feedback/All/true',
+    feedbackManagerAllS = 'V1/Feedback/All/false',
 }
