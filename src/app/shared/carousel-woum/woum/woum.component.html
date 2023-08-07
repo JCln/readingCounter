@@ -32,9 +32,25 @@
             <div class="_key">وضعیت فعلی</div>
             <input [readOnly]="true" class="_value" name="counterStateId" [(ngModel)]="counterStateId">
         </div>
+        <div class="input_2" *ngIf="_feedbackTypeTitle">
+            <div class="_key">عنوان</div>
+            <input [readOnly]="true" class="_value" name="feedbackTypeTitle" [(ngModel)]="_feedbackTypeTitle">
+        </div>
+        <div class="input_2" *ngIf="_insertDayJalali">
+            <div class="_key">تاریخ</div>
+            <input [readOnly]="true" class="_value" name="insertDayJalali" [(ngModel)]="_insertDayJalali">
+        </div>
+        <div class="input_2" *ngIf="_mobile">
+            <div class="_key">موبایل</div>
+            <input [readOnly]="true" class="_value" name="mobile" [(ngModel)]="_mobile">
+        </div>
+        <div class="input_2" *ngIf="_solution">
+            <div class="_key">راهکار</div>
+            <input [readOnly]="true" class="_value" name="solution" [(ngModel)]="_solution">
+        </div>
         <div class="input_2 double_size" *ngIf="description">
             <div class="_key">توضیحات</div>
-            <input [readOnly]="true" class="_value" name="description" [(ngModel)]="description">
+            <input [readOnly]="true" class="_value _smaller" name="description" [(ngModel)]="description">
         </div>
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>
