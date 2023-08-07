@@ -390,19 +390,4 @@ export enum ENInterfaces {
     getDashboardPackageAverage = 'V1/Tracking/Dashboard/Tracking/PackAverage',
     getDashboardXY = 'V1/List/Dashboard/XY/Timed',
     getDashboardDateDiffUnClose = 'V1/List/Dashboard/DateDifferenceUnClosed/Timed',
-
-
-    // New Mobile App
-    feedbackTypeManagerGetC = 'V1/FeedbackType/AllC',
-    feedbackTypeManagerEditC = 'V1/FeedbackType/EditC',
-    feedbackTypeManagerAddC = 'V1/FeedbackType/AddC',
-    feedbackTypeManagerRemoveC = 'V1/FeedbackType/RemoveC',
-
-    feedbackTypeManagerGetS = 'V1/FeedbackType/AllS',
-    feedbackTypeManagerEditS = 'V1/FeedbackType/EditS',
-    feedbackTypeManagerAddS = 'V1/FeedbackType/AddS',
-    feedbackTypeManagerRemoveS = 'V1/FeedbackType/RemoveS',
-
-    feedbackManagerAllC = 'V1/Feedback/All/true',
-    feedbackManagerAllS = 'V1/Feedback/All/false',
 }

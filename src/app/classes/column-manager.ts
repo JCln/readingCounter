@@ -8,37 +8,6 @@ export class ColumnManager {
     _primeNGHeaderCheckbox: boolean = false;
     _generalGroupHeaderCheckbox: boolean = false;
 
-
-    feedbackComplaint: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان', isSelected: true },
-        { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
-    ]
-    feedbackNotComplaint: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان', isSelected: true },
-        { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
-    ]
-    feedbackAllComplaint: IObjectIteratation[] = [
-        { field: 'feedbackTypeTitle', header: 'عنوان', isSelected: false },
-        { field: 'insertDayJalali', header: 'تاریخ', isSelected: true },
-        // { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
-        { field: 'mobile', header: 'موبایل', isSelected: false },
-        { field: 'solution', header: 'راهکار', isSelected: true },
-        { field: 'mediaCount', header: 'تصویر', isSelected: false, isNumber: true },
-        { field: 'description', header: 'توضیحات', isSelected: true },
-    ]
-    feedbackAllSuggest: IObjectIteratation[] = [
-        { field: 'feedbackTypeTitle', header: 'عنوان', isSelected: false },
-        { field: 'insertDayJalali', header: 'تاریخ', isSelected: true },
-        // { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
-        { field: 'mobile', header: 'موبایل', isSelected: false },
-        { field: 'solution', header: 'راهکار', isSelected: true },
-        { field: 'mediaCount', header: 'تصویر', isSelected: false, isNumber: true },
-        { field: 'description', header: 'توضیحات', isSelected: true },
-    ]
-
-
-
-
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'description', header: 'توضیحات', isSelected: true, enableTooltip: true },

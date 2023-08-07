@@ -34,10 +34,6 @@ export class WoumComponent implements OnChanges {
   @Input() firstName?: string;
   @Input() sureName?: string;
   @Input() radif: number;
-  @Input() _insertDayJalali: string;
-  @Input() _feedbackTypeTitle: string;
-  @Input() _mobile: string;
-  @Input() _solution: string;
   @Input() _isNotForbidden: boolean;
   // from trv & details , ..
   @Input() fulName?: string;

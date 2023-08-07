@@ -35,7 +35,7 @@ export class Auth4AddDgComponent {
     this.sectionsService.setSectionsValue(this.form.value);
 
     if (this.sectionsService.sectionVertification()) {
-      if (await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel4ADD, this.form.value)) {
+      if (await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel4ADD, this.form.value)) {
         this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev4Dictionary');
         this.dialogRef.close(this.form.value);
       }

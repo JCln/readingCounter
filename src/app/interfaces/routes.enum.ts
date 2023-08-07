@@ -137,9 +137,4 @@ export enum EN_Routes {
     'login' = '/login',
     'wrmusearch' = '/wr/mu/search',
     'wr' = '/wr',
-
-    mobileFeedbackComplaint = '/wr/app/complaint',
-    mobileFeedbackSuggest = '/wr/app/suggest',
-    mobileFeedbackAllC = '/wr/app/listC',
-    mobileFeedbackAllS = '/wr/app/listS',
 }

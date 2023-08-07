@@ -55,9 +55,8 @@ import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
-import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
-import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IRequestLogInput, IServerOSInfo, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
-import { ILicenseInfo, INotificationMessage, IWaterMarkConfig } from 'interfaces/isettings';
+import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
+import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -406,26 +405,7 @@ export class CloseTabService {
   saveDataForImgResultDetailsRes = [];
   saveDataForImgResultDetailsResFirst: any;
 
-  mobileManagerFeedbackTypeIsComplaint: IFeedbackType[] = [];
-  mobileManagerFeedbackTypeIsNotComplaint: IFeedbackType[] = [];
-  mobileManagerFeedbackAllC: IFeedbackList[] = [];
-  mobileManagerFeedbackAllCReq: IFeedbackListReq = {
-    fromDate: '',
-    toDate: ''
-  };
-  mobileManagerFeedbackAllSReq: IFeedbackListReq = {
-    fromDate: '',
-    toDate: ''
-  };
-  mobileManagerFeedbackAllS: IFeedbackList[] = [];
-
   private val: ISidebarVals[] = [
-    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackComplaint },
-    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsNotComplaint, url: EN_Routes.mobileFeedbackSuggest },
-    { id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllCReq, value: ENEssentialsToSave.mobileManagerFeedbackAllC, url: EN_Routes.mobileFeedbackAllC },
-    { id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllSReq, value: ENEssentialsToSave.mobileManagerFeedbackAllS, url: EN_Routes.mobileFeedbackAllS },
-
-
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },

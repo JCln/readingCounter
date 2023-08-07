@@ -22,8 +22,6 @@ export class Collapser {
     _isCollapsedNotificationListByDate: boolean = false;
     isCollapsedUserKarkard: boolean = false;
     isCollapsedImageAttrFileResult: boolean = false;
-    _isCollapsedFeedbackC: boolean = false;
-    _isCollapsedFeedbackS: boolean = false;
     _isCollapsedAllImgs: boolean = false;
     _isCollapsedRandomImgCarouDetails: boolean = true;
     _isCollapsedRandomImages: boolean = false;

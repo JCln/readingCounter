@@ -38,7 +38,7 @@ export class Auth3AddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3ADD, this.form.value))
+    if (!await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3ADD, this.form.value))
       return;
 
     this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev3Dictionary');

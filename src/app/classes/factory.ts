@@ -202,21 +202,6 @@ export class FactorySharedPrime implements OnChanges {
             this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
         }
     }
-    doShowImageMobileApp = (dataSource: any) => {
-        if (dataSource.mediaCount) {
-            this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-                data: { _data: dataSource },
-                rtl: true,
-                width: '80%',
-            })
-            this.ref.onClose.subscribe(async res => {
-                if (res)
-                    console.log(res);
-            });
-        } else {
-            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
-        }
-    }
     doShowImageDialogWithoutImageCount = (dataSource: any, _isNotForbidden?: boolean) => {
         // should not open dialog when no images exists
         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
