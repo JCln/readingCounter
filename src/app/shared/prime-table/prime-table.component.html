@@ -404,6 +404,15 @@
                     <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
                 </i>
             </td>
+            <td class="__columns" *ngIf="(                
+                _outputFileName == 'feedbackAllComplaint' || 
+                _outputFileName == 'feedbackAllSuggest'
+            )" (click)="doShowImageMobileApp(dataSource)">
+                <span class="ui-column-title">{{dataSource.mediaCount ? 'بررسی عکس' : '× بدون عکس'}}</span>
+                <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.mediaCount}">
+                    <div class="tooltip_text_right">{{dataSource.mediaCount ? 'بررسی عکس' : '× بدون عکس'}}</div>
+                </i>
+            </td>
             <td class="__columns" *ngIf="(
                 _outputFileName == 'momentLs' ||                                 
                 _outputFileName == 'trvDiff' || 

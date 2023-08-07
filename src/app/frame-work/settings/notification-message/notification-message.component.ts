@@ -14,7 +14,8 @@ import { INotificationMessage } from 'interfaces/isettings';
 })
 export class NotificationMessageComponent extends FactoryONE {
   edgeFilterDictionary = [];
-  userInputValue: any = { name: 'نوع پیام', value: 'notificationMediaTypeId', insertedValue: '' };
+  userInputValue: any = { titleUnicode: 'نوع پیام', title: '', value: 'notificationMediaTypeId', insertedValue: '' };
+  messageType: any;
   userInputType: number = -1;
 
   constructor(
@@ -26,8 +27,8 @@ export class NotificationMessageComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.notificationMessages = await this.profileService.getMyInfoDataSource(ENInterfaces.NotifyManagerUnreadGet);
-    this.insertToEdgeDictionary(this.profileService.searchInOrderNotificationMessages[0]);
-    this.showItemOnSearch();
+    // this.insertToEdgeDictionary();
+    // this.showItemOnSearch();
   }
 
   classWrapper = (canRefresh?: boolean) => {
@@ -62,34 +63,53 @@ export class NotificationMessageComponent extends FactoryONE {
         break;
     }
   }
-  insertToEdgeDictionary = (number: any) => {
-    if (this.userInputValue.value == 'notificationMediaTypeId') {
-      this.edgeFilterDictionary = this.envService.NotificationMediaTypeList;
-    }
-    else {
-      this.edgeFilterDictionary = this.envService.NotificationAlertTypesList;
-    }
-  }
-  showItemOnSearch = () => {
-    const origin = this.closeTabService.notificationMessages;
-    if (origin) {
-      for (let index = 0; index < origin.length; index++) {
-        if (this.userInputType == -1) {
-          // no value inserted to filter and should show all
-          origin[index].canShow = true;
-        }
-        else {
-          if (origin[index][this.userInputValue.value].toString().includes(this.userInputType)) {
-            origin[index].canShow = true;
-          }
-          else {
-            origin[index].canShow = false;
-          }
-        }
+  // insertToEdgeDictionary = () => {
+  //   console.log(this.userInputValue);
 
-      }
-    }
-  }
+  //   if (this.userInputValue.value == 'notificationMediaTypeId') {
+  //     this.edgeFilterDictionary = this.envService.NotificationMediaTypeList;
+  //     this.userInputValue.value = 'notificationMediaTypeId';
+  //   }
+  //   else {
+  //     this.edgeFilterDictionary = this.envService.NotificationAlertTypesList;
+  //     this.userInputValue.value = 'alertTypeId';
+  //   }
+  // }
+  // doFilter = (selectedIdValue: number): Promise<boolean> => {
+  //   const origin = this.closeTabService.notificationMessages;
+  //   return new Promise((resolve) => {
+  //     console.log(selectedIdValue);
+  //     console.log(this.messageType);
+  //     console.log(origin[0][this.messageType] == selectedIdValue);
+  //     console.log(origin[1][this.messageType] == selectedIdValue);
+
+  //     setTimeout(() => {
+  //       if (origin) {
+  //         for (let index = 0; index < origin.length; index++) {
+  //           if (this.userInputType == -1) {
+  //             // no value inserted to filter and should show all
+  //             origin[index].canShow = true;
+  //           }
+  //           else {
+  //             if (origin[index][this.messageType] == selectedIdValue) {
+  //               origin[index].canShow = true;
+  //             }
+  //             else {
+  //               origin[index].canShow = false;
+  //             }
+  //           }
+  //         }
+  //       }
+  //       resolve(true);
+  //     }, 0);
+  //   });
+  // }
+  // showItemOnSearch = async (val?: any, selectedIdValue?: any) => {
+  //   console.log(val);
+  //   console.log(selectedIdValue);
+
+  //   await this.doFilter(selectedIdValue.value);
+  // }
 
 
 }
