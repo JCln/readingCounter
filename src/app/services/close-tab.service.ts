@@ -1,4 +1,3 @@
-import { IDynamicTraverse } from './../interfaces/ireads-manager';
 import { Injectable } from '@angular/core';
 import { IReadingTimeRes } from 'interfaces/data-mining';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
@@ -19,6 +18,7 @@ import {
   IAutomaticImport,
   ICounterReport,
   ICounterState,
+  IDynamicTraverse,
   IFragmentDetails,
   IFragmentMaster,
   IGuild,
@@ -55,8 +55,9 @@ import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
-import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
+import { IFeedbackType } from 'interfaces/imobile-manager';
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
+import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
 
 @Injectable({
   providedIn: 'root'
@@ -405,7 +406,13 @@ export class CloseTabService {
   saveDataForImgResultDetailsRes = [];
   saveDataForImgResultDetailsResFirst: any;
 
+  mobileManagerFeedbackTypeIsComplaint: IFeedbackType[] = [];
+  mobileManagerFeedbackTypeIsNotComplaint: IFeedbackType[] = [];
+
   private val: ISidebarVals[] = [
+    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackIsComplaint },
+    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsNotComplaint, url: EN_Routes.mobileFeedbackIsNotComplaint },
+
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },
