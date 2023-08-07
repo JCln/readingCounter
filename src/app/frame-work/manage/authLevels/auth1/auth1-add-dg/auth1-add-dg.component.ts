@@ -32,7 +32,7 @@ export class Auth1AddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1ADD, this.form.value))
+    if (!await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel1ADD, this.form.value))
       return;
 
     this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev1Dictionary');

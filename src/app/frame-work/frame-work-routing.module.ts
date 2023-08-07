@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'offline', loadChildren: () => import('./offline-mode/offline-mode.module').then(offlineMode => offlineMode.OfflineModeModule) },
   { path: 'flash', loadChildren: () => import('./moment-system/moment-system.module').then(momentSystem => momentSystem.MomentSystemModule) },
   { path: 'reqLog', loadChildren: () => import('./request-log/request-log.module').then(requestLog => requestLog.RequestLogModule) },
+  { path: 'app', loadChildren: () => import('./mobile-manager/mobile-manager.module').then(mobileManager => mobileManager.MobileManagerModule) },
 ];
 
 @NgModule({

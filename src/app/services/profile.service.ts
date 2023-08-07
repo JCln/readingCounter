@@ -44,9 +44,9 @@ export class ProfileService {
     private downloadManagerService: DownloadManagerService
   ) { }
   searchInOrderNotificationMessages: any[] = [
-    { name: 'بدون فیلتر', value: '', type: 'number' },
-    { name: 'نوع پیام', value: 'notificationMediaTypeId', type: 'number' },
-    { name: 'نوع اعلان', value: 'alertTypeId', type: 'number' }
+    { titleUnicode: 'بدون فیلتر', value: '', title: '' },
+    { titleUnicode: 'نوع پیام', value: 'notificationMediaTypeId', title: 'notificationMediaTypeId' },
+    { titleUnicode: 'نوع اعلان', value: 'alertTypeId', title: 'alertTypeId' }
   ]
   getToken = (): string => {
     return this.jwtService.getAuthorizationToken();
