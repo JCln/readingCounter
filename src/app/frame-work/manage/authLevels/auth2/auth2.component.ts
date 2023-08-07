@@ -49,7 +49,7 @@ export class Auth2Component extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForAppLevel2) {
-      this.closeTabService.saveDataForAppLevel2 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel2GET);
+      this.closeTabService.saveDataForAppLevel2 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel2GET);
     }
 
     this.authLevel1Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev1Dictionary();
@@ -59,9 +59,12 @@ export class Auth2Component extends FactoryONE {
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  app: ' + rowDataAndIndex['dataSource'].authLevel1Id);
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel2REMOVE, rowDataAndIndex['dataSource'].id);
-      this.refetchTable(rowDataAndIndex['ri']);
-      this.refreshTable();
+      const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel2REMOVE, rowDataAndIndex['dataSource'].id);
+      if (res) {
+        this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+        this.refetchTable(rowDataAndIndex['ri']);
+        this.refreshTable();
+      }
     }
   }
   onRowEditInit(dataSource: object) {
@@ -80,7 +83,8 @@ export class Auth2Component extends FactoryONE {
     } else {
       dataSource['dataSource'].authLevel1Id = dataSource['dataSource'].authLevel1Id['id'];
     }
-    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2EDIT, dataSource['dataSource']);
+    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel2EDIT, dataSource['dataSource']);
+    this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
   }
   onRowEditCancel() {

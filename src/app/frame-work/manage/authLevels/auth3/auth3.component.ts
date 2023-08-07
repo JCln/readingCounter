@@ -50,7 +50,7 @@ export class Auth3Component extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForAppLevel3) {
-      this.closeTabService.saveDataForAppLevel3 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel3GET);
+      this.closeTabService.saveDataForAppLevel3 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel3GET);
     }
 
     this.authLevel2Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev2Dictionary();
@@ -60,8 +60,11 @@ export class Auth3Component extends FactoryONE {
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ماژول: ' + rowDataAndIndex['dataSource'].authLevel2Id);
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel3REMOVE, rowDataAndIndex['dataSource'].id);
-      this.refetchTable(rowDataAndIndex['ri']);
+      const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel3REMOVE, rowDataAndIndex['dataSource'].id);
+      if (res) {
+        this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+        this.refetchTable(rowDataAndIndex['ri']);
+      }
     }
   }
   onRowEditInit(dataSource: any) {
@@ -80,7 +83,8 @@ export class Auth3Component extends FactoryONE {
     } else {
       dataSource['dataSource'].authLevel2Id = dataSource['dataSource'].authLevel2Id['id'];
     }
-    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3EDIT, dataSource['dataSource']);
+    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3EDIT, dataSource['dataSource']);
+    this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'authLevel2Id');
   }
   onRowEditCancel() {

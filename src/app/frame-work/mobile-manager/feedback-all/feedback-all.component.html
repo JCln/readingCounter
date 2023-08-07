@@ -1,0 +1,39 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="closeTabService.utilsService.collapser._isCollapsedFeedbackC ? 'slideUp' : 'slideDown'">
+                <div class="input_2">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.feedbackAllCReq, $event)"
+                            [dateObject]="closeTabService.mobileManagerFeedbackAllCReq.fromDate">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate"
+                            (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.feedbackAllCReq, $event)"
+                            [dateObject]="closeTabService.mobileManagerFeedbackAllCReq.toDate">
+                        </app-date-jalali>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
+            </section>
+        </form>
+    </section>
+    <app-prime-table [dataSource]="closeTabService.mobileManagerFeedbackAllC" [_outputFileName]="'feedbackAllComplaint'"
+        [_sessionName]="'feedbackAllC-session'" [_selectedColumnsToRemember]="'selectedFeedbackComplaint'"
+        [_numberOfExtraColumns]="[1]" [_hasCollapsible]=true
+        [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedFeedbackC"
+        (collapsed)="closeTabService.utilsService.collapser._isCollapsedFeedbackC = !closeTabService.utilsService.collapser._isCollapsedFeedbackC"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>

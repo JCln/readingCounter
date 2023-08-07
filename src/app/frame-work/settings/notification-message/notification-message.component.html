@@ -1,23 +1,24 @@
-<div class="_card">
+<!-- <div class="_card">
     <h1 class="title">فیلتر نمایش</h1>
     <div class="input_2">
         <div class="_key">جستجو براساس</div>
         <div class="_value">
-            <p-dropdown #drop name="zones" [options]="profileService.searchInOrderNotificationMessages"
-                placeholder="نوع پیام" optionValue="value" optionLabel="name" filter="true"
-                (onChange)="userInputValue = drop.selectedOption" (onChange)="insertToEdgeDictionary(userInputValue)">
+            <p-dropdown #drop1 name="notiftype" [options]="profileService.searchInOrderNotificationMessages"
+                placeholder="نوع پیام" [(ngModel)]="messageType" optionValue="value" optionLabel="titleUnicode"
+                filter="true" (onChange)="userInputValue = drop1.selectedOption" (onChange)="insertToEdgeDictionary()">
             </p-dropdown>
         </div>
     </div>
     <div class="input_2">
         <div class="_key">{{userInputValue.name}}</div>
-        <p-dropdown name="zones" [options]="edgeFilterDictionary" [(ngModel)]="userInputType" placeholder="انتخاب مورد"
-            optionValue="value" optionLabel="titleUnicode" filter="true" (onChange)="showItemOnSearch()"
+        <p-dropdown #drop2 name="mediaType" [options]="edgeFilterDictionary" [(ngModel)]="userInputType"
+            placeholder="انتخاب مورد" optionValue="value" optionLabel="titleUnicode" filter="true"
+            (onChange)="showItemOnSearch(userInputValue, drop2.selectedOption)"
             placeholder="{{userInputValue.name}} را وارد نمایید">
         </p-dropdown>
 
     </div>
-</div>
+</div> -->
 
 <section>
     <div class="_container" *ngFor="let item of closeTabService.notificationMessages; index as ri"

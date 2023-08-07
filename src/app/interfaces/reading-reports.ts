@@ -23,4 +23,6 @@ export enum ENReadingReports {
     userActivationLog = 'saveDataForServerUserActivationReq',
     usersLogins = 'usersLoginsReq',
     notificationListByDateReq = 'notificationListByDateReq',
+    feedbackAllCReq = 'mobileManagerFeedbackAllCReq',
+    feedbackAllSReq = 'mobileManagerFeedbackAllSReq',
 }

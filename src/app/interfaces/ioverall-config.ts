@@ -177,7 +177,11 @@ export enum ENEssentialsToSave {
     offlineSingleReadingCounter = "offlineSingleReadingCounter",
     RRGuildsWithParam = "RRGuildsWithParam",
     mobileManagerFeedbackTypeIsComplaint = "mobileManagerFeedbackTypeIsComplaint",
-    mobileManagerFeedbackTypeIsNotComplaint = "mobileManagerFeedbackTypeIsNotComplaint"
+    mobileManagerFeedbackTypeIsNotComplaint = "mobileManagerFeedbackTypeIsNotComplaint",
+    mobileManagerFeedbackAllC = "mobileManagerFeedbackAllC",
+    mobileManagerFeedbackAllS = "mobileManagerFeedbackAllS",
+    mobileManagerFeedbackAllCReq = "mobileManagerFeedbackAllCReq",
+    mobileManagerFeedbackAllSReq = "mobileManagerFeedbackAllSReq"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -371,12 +375,14 @@ export enum ENLocalStorageNames {
     defaultAggregateTracks = 'defaultAggregateTracks',
 }
 // ENSelectedColumnVariables enum
-//  variable name must be the same as columnManagerName of the columns data
+//  variable name MUST be the same as columnManagerName of the columns data
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
     selectedRRExcelView = 'excelDynamic',
     selectedRAutoImport = 'automaticImport',
     selectedImageAttrResult = '_imageAttrResult',
+    selectedFeedbackC = 'feedbackAllComplaint',
+    selectedFeedbackS = 'feedbackAllSuggest',
     selectedImageAttrAnalyze = '_imageAttrAnalyze',
     selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',
@@ -444,6 +450,8 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = 'periodKind',
     selectedImageAttribution = 'imgattr',
     selectedImageGuild = 'guild',
+    selectedFeedbackComplaint = 'feedbackComplaint',
+    selectedFeedbackNotComplaint = 'feedbackNotComplaint',
     selectedDynamicTraverse = 'dynamicTraverse',
     selectedTextOutput = 'textOutput',
     selectedKarbari = 'karbari',
