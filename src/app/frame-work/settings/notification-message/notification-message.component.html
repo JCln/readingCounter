@@ -19,7 +19,11 @@
 
     </div>
 </div> -->
+
+<section>
+    <div class="_container" *ngFor="let item of closeTabService.notificationMessages; index as ri"
         [hidden]="!closeTabService.notificationMessages[ri].canShow">
+        <div class="_icon">
             <div class="__notificationMediaTypeId" [ngClass]="{
                 'pi pi-envelope':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.text,
                 'pi pi-image':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.image,
