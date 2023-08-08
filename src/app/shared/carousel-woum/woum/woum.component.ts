@@ -39,6 +39,7 @@ export class WoumComponent implements OnChanges {
   @Input() _mobile: string;
   @Input() _solution: string;
   @Input() _isNotForbidden: boolean;
+  @Input() _imgFeedback: boolean;
   // from trv & details , ..
   @Input() fulName?: string;
   // from forbidden
@@ -112,9 +113,15 @@ export class WoumComponent implements OnChanges {
     if (!this.id)
       return;
 
-    this.dataSource = this._isNotForbidden ?
-      await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id) :
-      await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.id)
+    if (this._imgFeedback) {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.feedbackMobileDictionary, this.id);
+    }
+    if (this._isNotForbidden) {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id);
+    }
+    else {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.id);
+    }
 
     if (this.zoneId) {
       this.counterStatesDictionary = await this.trackingManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(parseInt(this.zoneId));

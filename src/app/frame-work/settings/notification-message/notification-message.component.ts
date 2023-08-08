@@ -14,7 +14,7 @@ import { INotificationMessage } from 'interfaces/isettings';
 })
 export class NotificationMessageComponent extends FactoryONE {
   edgeFilterDictionary = [];
-  userInputValue: any = { titleUnicode: 'نوع پیام', title: '', value: 'notificationMediaTypeId', insertedValue: '' };
+  // userInputValue: any = { titleUnicode: 'نوع پیام', title: '', value: 'notificationMediaTypeId', insertedValue: '' };
   messageType: any;
   userInputType: number = -1;
 

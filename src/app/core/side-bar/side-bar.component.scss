@@ -17,6 +17,7 @@ ul {
   ._list_out {}
 
   ._list_show_details {
+    pointer-events: none;
     padding: 0;
     font-weight: 600;
   }
@@ -28,6 +29,7 @@ ul {
     border-radius: $border_100vmax $border_5 $border_5 $border_100vmax;
     padding: 8px 3px;
     cursor: pointer;
+    pointer-events: all;
 
     .icons {
       font-size: var(--font_m2);
@@ -60,7 +62,7 @@ ul {
     padding: 2px 6px;
     margin: 0.13rem var(--font_02);
     text-align: right;
-
+    pointer-events: all;
     border-radius: $border_100vmax;
     color: var(--sidebar_1);
     font-size: var(--font_ss);

@@ -397,6 +397,7 @@ export enum ENInterfaces {
     feedbackTypeManagerEditC = 'V1/FeedbackType/EditC',
     feedbackTypeManagerAddC = 'V1/FeedbackType/AddC',
     feedbackTypeManagerRemoveC = 'V1/FeedbackType/RemoveC',
+    feedbackMobileDictionary = 'V1/Download/File/FeedbackMobile',
 
     feedbackTypeManagerGetS = 'V1/FeedbackType/AllS',
     feedbackTypeManagerEditS = 'V1/FeedbackType/EditS',

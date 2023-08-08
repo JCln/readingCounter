@@ -205,7 +205,7 @@ export class FactorySharedPrime implements OnChanges {
     doShowImageMobileApp = (dataSource: any) => {
         if (dataSource.mediaCount) {
             this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-                data: { _data: dataSource },
+                data: { _data: dataSource, _imgFeedback:true  },
                 rtl: true,
                 width: '80%',
             })
