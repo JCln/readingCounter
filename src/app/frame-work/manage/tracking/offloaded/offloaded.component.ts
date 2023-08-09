@@ -33,7 +33,7 @@ export class OffloadedComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTrackOffloaded) {
-      this.closeTabService.saveDataForTrackOffloaded = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
+      this.closeTabService.saveDataForTrackOffloaded = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOFFLOADED);
     }
   }
   downloadOutputSingle = async (row: ITracking) => {
@@ -83,7 +83,8 @@ export class OffloadedComponent extends FactoryONE {
     }
     const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex.id, desc);
+      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingToREADING, { trackingId: rowDataAndIndex.id, description: desc });
+      this.trackingManagerService.successSnackMessage(res.message);
       this.refreshTable();
     }
   }

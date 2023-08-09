@@ -27,7 +27,8 @@ export class FinishedComponent extends FactoryONE {
 
   refetchTable = (index: number) => this.closeTabService.saveDataForTrackFinished = this.closeTabService.saveDataForTrackFinished.slice(0, index).concat(this.closeTabService.saveDataForTrackFinished.slice(index + 1));
   private rowToOffloaded = async (row: string, desc: string) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row, desc);
+    const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingToOFFLOADED, { trackingId: row, description: desc });
+    this.trackingManagerService.successSnackMessage(res.message);
     this.refreshTable();
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
@@ -36,7 +37,7 @@ export class FinishedComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTrackFinished) {
-      this.closeTabService.saveDataForTrackFinished = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
+      this.closeTabService.saveDataForTrackFinished = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingFINISHED);
     }
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {

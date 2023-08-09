@@ -29,7 +29,7 @@ export class LoadedComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTrackLoaded) {
-      this.closeTabService.saveDataForTrackLoaded = await this.trackingManagerService.getDataSource(ENInterfaces.trackingLOADED);
+      this.closeTabService.saveDataForTrackLoaded = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingLOADED);
     }
 
   }
@@ -44,7 +44,8 @@ export class LoadedComponent extends FactoryONE {
     }
     const a = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (a) {
-      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToImportedFromLoad, rowDataAndIndex.id, a);
+      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingToImportedFromLoad, { trackingId: rowDataAndIndex.id, description: a });
+      this.trackingManagerService.successSnackMessage(res.message);
       this.refreshTable();
     }
   }

@@ -33,14 +33,29 @@ export class ImportedComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTrackImported) {
-      this.closeTabService.saveDataForTrackImported = await this.trackingManagerService.getDataSource(ENInterfaces.trackingIMPORTED);
+      this.closeTabService.saveDataForTrackImported = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingIMPORTED);
     }
   }
   onRowEditInit(product: any) {
     console.log(product);
   }
-  private onRowEditSave(rowData: IEditTracking) {
-    this.trackingManagerService.postEditingTrack(rowData);
+  // imported service control
+  private selectSpecialParameters = (rowData: IEditTracking): IEditTracking => {
+    const a: IEditTracking = {
+      id: rowData.id,
+      alalHesabPercent: rowData.alalHesabPercent,
+      imagePercent: rowData.imagePercent,
+      hasPreNumber: rowData.hasPreNumber,
+      displayBillId: rowData.displayBillId,
+      displayRadif: rowData.displayRadif,
+      counterReaderId: rowData.counterReaderId
+    }
+    return a;
+  }
+  //  
+  private async onRowEditSave(rowData: IEditTracking) {
+    const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingEDIT, this.selectSpecialParameters(rowData));
+    this.trackingManagerService.successSnackMessage(res.message);
     this.refreshTable();
   }
   ngOnDestroy(): void {
@@ -74,7 +89,8 @@ export class ImportedComponent extends FactoryONE {
 
     const a = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (a) {
-      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowDataAndIndex['dataSource'].id, a);
+      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingREMOVE, { trackingId: rowDataAndIndex['dataSource'].id, description: a });
+      this.trackingManagerService.successSnackMessage(res.message);
       this.refreshTable();
     }
   }

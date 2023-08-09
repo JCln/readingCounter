@@ -91,7 +91,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
   }
   connectToServer = async () => {
 
-    this.tempData = await this.trackingManagerService.postBody(ENInterfaces.postUserKarkardSummary, this.closeTabService.saveDataForUserKarkardSummaryReq);
+    this.tempData = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postUserKarkardSummary, this.closeTabService.saveDataForUserKarkardSummaryReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForUserKarkardSummary = this.getCounterStateData(this.tempData);
   }

@@ -60,7 +60,8 @@ export class FollowUpComponent extends FactoryONE {
 
     const a = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (a) {
-      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingPRE, dataSource.id, a);
+      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingPRE, { trackingId: dataSource.id, description: a });
+      this.trackingManagerService.successSnackMessage(res.message);
     }
   }
   private makeConfigs = async () => {
@@ -70,11 +71,11 @@ export class FollowUpComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.trackingManagerService.verificationTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
-      this.closeTabService.saveDataForFollowUp = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
+      this.closeTabService.saveDataForFollowUp = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
       if (this.trackingManagerService.isValidationNull(this.closeTabService.saveDataForFollowUp))
         return;
 
-      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
+      this.dataSourceAUX = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedPERDAY, this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
 
       this.makeConfigs();
@@ -105,7 +106,8 @@ export class FollowUpComponent extends FactoryONE {
     }
   }
   onRowEditSave = async (dataSource: IFollowUpHistory) => {
-    await this.trackingManagerService.postEditState(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
+    const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
+    this.trackingManagerService.successSnackMessage(res.message);
   }
   onRowEditInit(dataSource: any) {
     // this.clonedProducts[dataSource.id] = { ...dataSource };

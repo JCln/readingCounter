@@ -27,7 +27,7 @@ export class ReadingComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTrackReading) {
-      this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.getDataSource(ENInterfaces.trackingREADING);
+      this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingREADING);
     }
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {
@@ -42,7 +42,8 @@ export class ReadingComponent extends FactoryONE {
     }
     const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, rowDataAndIndex.id, desc);
+      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingToIMPORTED, { trackingId: rowDataAndIndex.id, description: desc });
+      this.trackingManagerService.successSnackMessage(res.message);
     }
   }
   forceOffload = async (rowDataAndIndex: ITracking) => {
@@ -57,7 +58,8 @@ export class ReadingComponent extends FactoryONE {
     }
     const desc = await this.trackingManagerService.utilsService.firstConfirmDialog(config);
     if (desc) {
-      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex.id, desc);
+      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingFinishReadiED, { trackingId: rowDataAndIndex.id, description: desc });
+      this.trackingManagerService.successSnackMessage(res.message);
       this.refreshTable();
     }
   }

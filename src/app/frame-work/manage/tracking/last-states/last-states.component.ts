@@ -26,7 +26,7 @@ export class LastStatesComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForLastStates) {
-      this.closeTabService.saveDataForLastStates = await this.trackingManagerService.getDataSource(ENInterfaces.trackingLASTSTATES);
+      this.closeTabService.saveDataForLastStates = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingLASTSTATES);
     }
   }
   showInMap = (trackNumberAndDate: object) => {

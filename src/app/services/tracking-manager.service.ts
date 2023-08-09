@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -14,7 +15,7 @@ import { Converter } from 'src/app/classes/converter';
 import { MathS } from '../classes/math-s';
 import { OffloadModify } from '../classes/offload-modify-type';
 
-import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
+import { IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { FollowUpService } from './follow-up.service';
@@ -70,6 +71,7 @@ export class TrackingManagerService {
     private pageSignsService: PageSignsService,
     private profileService: ProfileService,
     private followUpService: FollowUpService,
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
   getApiUrl = (): string => {
@@ -79,56 +81,6 @@ export class TrackingManagerService {
     return this.jwtService.getAuthorizationToken();
   }
 
-  getDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe(res => {
-        resolve(res);
-      });
-    });
-  }
-  getDataSourceByQuote = (method: ENInterfaces, insertedInput: number | string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, insertedInput).subscribe(res => {
-        resolve(res)
-      })
-    });
-  }
-  postEditingTrack = (rowData: IEditTracking) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingEDIT, this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
-      if (res)
-        this.successSnackMessage(res.message);
-    });
-  }
-  getLMPD = (trackNumber: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber).subscribe(res => {
-        resolve(res);
-      })
-    })
-  }
-  postBody = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise(resolve => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
-        resolve(res);
-      })
-    });
-  }
-  migrateOrRemoveTask = (method: ENInterfaces, trackNumber: string, desc: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, { trackingId: trackNumber, description: desc }).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    });
-  }
-  postEditState = (method: ENInterfaces, val: object) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    });
-  }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking | IOutputManager): Promise<any> => {
     dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);
@@ -199,20 +151,6 @@ export class TrackingManagerService {
     });
   }
 
-  // imported service control
-  private selectSpecialParameters = (rowData: IEditTracking): IEditTracking => {
-    const a: IEditTracking = {
-      id: rowData.id,
-      alalHesabPercent: rowData.alalHesabPercent,
-      imagePercent: rowData.imagePercent,
-      hasPreNumber: rowData.hasPreNumber,
-      displayBillId: rowData.displayBillId,
-      displayRadif: rowData.displayRadif,
-      counterReaderId: rowData.counterReaderId
-    }
-    return a;
-  }
-  //  
   selectedItems = (_selectors: any[]): any[] => {
     const a = [];
     _selectors.filter(items => {
