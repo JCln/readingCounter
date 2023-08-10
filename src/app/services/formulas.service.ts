@@ -3,12 +3,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IResponses } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { IAbBahaFormula, ITabsare2Formula } from '../interfaces/ireads-manager';
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,56 +18,25 @@ export class FormulasService {
   private desc: any;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService
   ) { }
 
   /* API CALLS */
-  postFormulaEdit = (method: ENInterfaces, body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  postFormulaEdit = async (method: ENInterfaces, body: object): Promise<any> => {
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, body);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
-  postFormulaAdd = (method: ENInterfaces, dataSource: object) => {
+  postFormulaAdd = async (method: ENInterfaces, dataSource: object) => {
     dataSource['fromDate'] = Converter.persianToEngNumbers(dataSource['fromDate']);
     dataSource['toDate'] = Converter.persianToEngNumbers(dataSource['toDate']);
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, dataSource).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, dataSource);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
-  postFormulaRemove = (method: ENInterfaces, UUID: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getFormulaAll = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).toPromise().then(res => {
-        resolve(res);
-      })
-    });
+  postFormulaRemove = async (method: ENInterfaces, UUID: string): Promise<any> => {
+    const res = await this.ajaxReqWrapperService.postDataSourceByIdStringly(method, UUID);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
   postExcelFile = async (method: ENInterfaces) => {
     const formData: FormData = new FormData();
@@ -75,16 +44,8 @@ export class FormulasService {
     formData.append('file', this.fileForm[0]);
     formData.append('rows', this.desc.rows);
 
-    this.interfaceManagerService.POSTBODY(method, formData).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
-  }
-  getExcelSample = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(method).toPromise().then(res => {
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, formData);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
   /* VALIDATION */
   isNull = (): boolean => {

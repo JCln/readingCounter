@@ -74,7 +74,7 @@ export class IpSpecialRulesComponent extends FactoryONE {
     }
     // multiple requests send to server bug have seen
     if (!this.closeTabService.saveDataForIpSpecialRules) {
-      this.closeTabService.saveDataForIpSpecialRules = await this.manageServerService.GETDataServer(ENInterfaces.ipRateManager);
+      this.closeTabService.saveDataForIpSpecialRules = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ipRateManager);
       this.closeTabService.saveDataForIpSpecialRules = this.getRulesFromDataSource(this.closeTabService.saveDataForIpSpecialRules.ipRules);
       console.log(this.closeTabService.saveDataForIpSpecialRules);
 

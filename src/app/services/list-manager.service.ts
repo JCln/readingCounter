@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -5,15 +6,13 @@ import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import {
   ENRandomNumbers,
   ENSelectedColumnVariables,
-  IDictionaryManager,
-  IResponses,
+  IDictionaryManager
 } from 'interfaces/ioverall-config';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { Converter } from '../classes/converter';
@@ -41,7 +40,7 @@ export class ListManagerService {
     similar: false
   }
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
     public columnManager: ColumnManager
@@ -61,48 +60,6 @@ export class ListManagerService {
   }
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
-  }
-  getLM = (method: ENInterfaces | string, trackNumber: number | string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, trackNumber).toPromise().then(res => {
-        resolve(res);
-      })
-    })
-  }
-  postBodyDataSource = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  postById = (method: ENInterfaces, id?: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  getExcel = (method: ENInterfaces, groupId: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETBlobById(method, groupId).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  postArrays = (method: ENInterfaces, array: any[]): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTARRAYS(method, array).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  postByQueue = (method: ENInterfaces, id: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTSG(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
   }
   /*OTHER */
   // setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
@@ -169,17 +126,13 @@ export class ListManagerService {
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq): Promise<any> => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
-
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        console.log(res);
-
-        resolve(res);
-      }).catch(() => {
-        resolve(false);
-      })
-    });
+    return new Promise(async (resolve) => {
+      const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingPostOffloadModify, body)
+        .catch(() => {
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(false);
+        });
+    })
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
@@ -260,7 +213,7 @@ export class ListManagerService {
     })
   }
   getReadingReportTitles = async ($event) => {
-    const a = await this.postById(ENInterfaces.ReadingReportTitles, $event)
+    const a = await this.ajaxReqWrapperService.postDataSourceById(ENInterfaces.ReadingReportTitles, $event)
     if (a.length) {
       this.showResDialog(a, false, EN_messages.insert_rrDetails);
       return;

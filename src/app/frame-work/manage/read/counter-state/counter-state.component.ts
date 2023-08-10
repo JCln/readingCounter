@@ -33,7 +33,7 @@ export class CounterStateComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForCounterState) {
-      this.closeTabService.saveDataForCounterState = await this.readManagerService.getDataSource(ENInterfaces.counterStateAll);
+      this.closeTabService.saveDataForCounterState = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateAll);
     }
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
@@ -56,7 +56,7 @@ export class CounterStateComponent extends FactoryONE {
   refetchTable = (index: number) => this.closeTabService.saveDataForCounterState = this.closeTabService.saveDataForCounterState.slice(0, index).concat(this.closeTabService.saveDataForCounterState.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  ناحیه: ' + rowData['dataSource'].zoneId);
-    if (a) { 
+    if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.counterStateRemove, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
       this.refreshTable();
@@ -91,13 +91,13 @@ export class CounterStateComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      await this.readManagerService.addOrEditAuths(ENInterfaces.counterStateEdit, dataSource['dataSource']);
+      await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.counterStateEdit, dataSource['dataSource']);
       this.refreshTable();
     }
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }
   private async onRowAdd(dataSource: ICounterState, rowIndex: number) {
-    const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.counterStateAdd, dataSource);
+    const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.counterStateAdd, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();

@@ -98,7 +98,7 @@ export class ImportDynamicComponent extends FactoryONE {
       this.readingPeriodDictionary = [];
       return;
     }
-    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.importDynamicService.importDynamicReq.zoneId, this.kindId);
+    this.readingPeriodDictionary = await this.importDynamicService.ajaxReqWrapperService.getDataSourceByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, this.importDynamicService.importDynamicReq.zoneId, this.kindId);
     this.importDynamicService.validationInvalid(this.readingPeriodDictionary, EN_messages.not_found_period);
 
   }

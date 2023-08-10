@@ -70,7 +70,7 @@ export class BudgetComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForBadgetFormula) {
-      this.closeTabService.saveDataForBadgetFormula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaBudgetAll);
+      this.closeTabService.saveDataForBadgetFormula = await this.formulasService.ajaxReqWrapperService.getDataSource(ENInterfaces.FormulaBudgetAll);
     }
     this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -131,6 +131,6 @@ export class BudgetComponent extends FactoryONE {
   }
   onRowEditCancel() { }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaBudgetExcelSample), 'budgetSample');
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.ajaxReqWrapperService.getBlob(ENInterfaces.FormulaBudgetExcelSample), 'budgetSample');
   }
 }

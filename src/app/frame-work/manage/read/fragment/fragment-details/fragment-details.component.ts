@@ -50,7 +50,11 @@ export class FragmentDetailsComponent extends FactoryONE {
         this.closeTabService.fragmentNOBDetailsGUID != this.fragmentManagerService.fragmentDetails_pageSign.GUid ||
         !this.closeTabService.saveDataForFragmentNOBDetails
       ) {
-        this.closeTabService.saveDataForFragmentNOBDetails = await this.fragmentManagerService.getFragmentDetails(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
+        if (this.fragmentManagerService.fragmentDetails_pageSign.GUid.length < 6) {
+          this.fragmentManagerService.routeToFragmentMaster();
+          return;
+        }
+        this.closeTabService.saveDataForFragmentNOBDetails = await this.fragmentManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.fragmentDETAILSDETAILS, this.fragmentManagerService.fragmentDetails_pageSign.GUid);
         this.closeTabService.fragmentNOBDetailsGUID = this.fragmentManagerService.fragmentDetails_pageSign.GUid;
       }
       this.defaultAddStatus();

@@ -37,7 +37,7 @@ export class RpmAddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodAdd, this.form.value))
+    if (!await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.readingPeriodAdd, this.form.value))
       return;
 
     this.dialogRef.close(this.form.value);

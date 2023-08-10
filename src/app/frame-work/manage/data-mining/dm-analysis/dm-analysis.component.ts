@@ -54,7 +54,7 @@ export class DmAnalysisComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
+    this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
     if (!MathS.isNull(this.closeTabService.saveDataForDMAAnalyze)) {
       this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
       Converter.convertIdToTitle(this.closeTabService.saveDataForDMAAnalyze, this.zoneDictionary, 'zoneId');

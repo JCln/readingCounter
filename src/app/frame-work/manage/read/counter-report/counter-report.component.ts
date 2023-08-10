@@ -49,7 +49,7 @@ export class CounterReportComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForCounterReport) {
-      this.closeTabService.saveDataForCounterReport = await this.readManagerService.getDataSource(ENInterfaces.CounterReportAll);
+      this.closeTabService.saveDataForCounterReport = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.CounterReportAll);
     }
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
 
@@ -81,7 +81,7 @@ export class CounterReportComponent extends FactoryONE {
     } else {
       dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportEdit, dataSource['dataSource']);
+    await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.CounterReportEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'zoneId');
     this.refreshTable();
   }

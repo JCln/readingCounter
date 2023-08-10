@@ -41,7 +41,7 @@ export class AutomaticImportComponent extends FactoryONE {
     this.fragmentLatestValue.emit(this.fragmentMasterId);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.closeTabService.saveDataForAutomaticImport = await this.fragmentManagerService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
+    this.closeTabService.saveDataForAutomaticImport = await this.fragmentManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
     this.readingPeriodKindDictionary = await this.fragmentManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
     this.zoneDictionary.find(item => {
@@ -53,7 +53,8 @@ export class AutomaticImportComponent extends FactoryONE {
   }
   removeRow = async (rowData: string) => {
     if (await this.fragmentManagerService.firstConfirmDialog()) {
-      await this.fragmentManagerService.postByQuote(ENInterfaces.automaticImportRemove, rowData['dataSource'].id);
+      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.automaticImportRemove, rowData['dataSource'].id);
+      this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
       this.refreshTable();
     }
   }

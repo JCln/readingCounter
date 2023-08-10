@@ -25,12 +25,12 @@ export class ErrorsByTrackComponent extends FactoryONE {
       this.closeTabService.saveDataForImportErrorsByTrackNumber = null;
     }
     if (!this.closeTabService.saveDataForImportErrorsByTrackNumber && this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber) {
-      this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.getById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber);
+      this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber.toString());
     }
   }
   connectToServer = async () => {
     if (this.importDynamicService.verificationTrackNumber(this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber)) {
-      this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.getById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber);
+      this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber.toString());
     }
   }
 

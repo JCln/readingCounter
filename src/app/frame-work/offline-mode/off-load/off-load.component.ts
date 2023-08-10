@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { OfflineModeService } from 'services/offline-mode.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -29,7 +30,7 @@ export class OffLoadComponent {
 
   downloadTextFile = async () => {
     if (this.offlineModeService.vertificationLoadManual()) {
-      const a = await this.offlineModeService.getOfflineManual(this.offlineModeService.loadForm.counterReaderId);
+      const a = await this.offlineModeService.ajaxReqWrapperService.getBlob(ENInterfaces.loadManual + '?userId=' + this.offlineModeService.loadForm.counterReaderId);
       this.outputManagerService.downloadFile(a, '.txt');
     }
   }

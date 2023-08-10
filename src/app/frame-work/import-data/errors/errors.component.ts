@@ -26,7 +26,7 @@ export class ErrorsComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForImportErrors) {
-      this.closeTabService.saveDataForImportErrors = await this.importDynamicService.getDataSource(ENInterfaces.getImportErrros);
+      this.closeTabService.saveDataForImportErrors = await this.importDynamicService.ajaxReqWrapperService.getDataSource(ENInterfaces.getImportErrros);
       this.convertLoginTime();
     }
 

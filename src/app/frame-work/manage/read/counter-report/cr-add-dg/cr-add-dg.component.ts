@@ -34,7 +34,7 @@ export class CrAddDgComponent {
   async save() {
     if (!this.readManagerService.verification(this.form.value))
       return;
-    if (!await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportAdd, this.form.value))
+    if (!await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.CounterReportAdd, this.form.value))
       return;
     this.dialogRef.close(this.form.value);
   }

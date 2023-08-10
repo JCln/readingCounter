@@ -26,7 +26,7 @@ export class ActivationUserComponent extends FactoryONE {
   connectToServer = async () => {
     console.log(this.closeTabService.saveDataForServerUserActivationReq);
     if (this.closeTabService.saveDataForServerUserActivationReq.userActivationLogTypes.length) {
-      this.closeTabService.saveDataForServerUserActivation = await this.manageServerService.postArray(ENInterfaces.requestLogUserActivation, this.closeTabService.saveDataForServerUserActivationReq);
+      this.closeTabService.saveDataForServerUserActivation = await this.manageServerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.requestLogUserActivation, this.closeTabService.saveDataForServerUserActivationReq);
     }
     else {
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.insert_ActivationUser);

@@ -77,7 +77,7 @@ export class ExcelFileComponent extends FactoryONE {
   }
   verificationReadingPeriod = async () => {
     if (this.closeTabService.saveDataForImportDataFileExcelReq.zoneId || this.kindId) {
-      this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId, this.kindId);
+      this.readingPeriodDictionary = await this.importDynamicService.ajaxReqWrapperService.getDataSourceByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, this.closeTabService.saveDataForImportDataFileExcelReq.zoneId, this.kindId);
     }
   }
   nullSavedSource = () => this.closeTabService.saveDataForImportDataFileExcel = null;
@@ -109,7 +109,7 @@ export class ExcelFileComponent extends FactoryONE {
     }
   }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.importDynamicService.getExcelSample(ENInterfaces.getImportDataFileExcelSample), 'importDataFSample');
+    this.outputManagerService.saveAsExcelABuffer(await this.importDynamicService.ajaxReqWrapperService.getBlob(ENInterfaces.getImportDataFileExcelSample), 'importDataFSample');
   }
 
 }

@@ -21,7 +21,7 @@ export class ManageServerComponent implements OnInit {
     this.manageTasks = this.manageServerService.getManageServerItems();
   }
   serverDelete = async () => {
-    const temp: any = await this.manageServerService.postDataServer(ENInterfaces.serverManagerDelete);
+    const temp: any = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerDelete);
     if (temp)
       this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
   }
@@ -32,7 +32,7 @@ export class ManageServerComponent implements OnInit {
     this.manageServerService.linkToHealthCheck();
   }
   resetApp = async () => {
-    const temp = await this.manageServerService.postDataServer(ENInterfaces.serverManagerResetApp);
+    const temp = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerResetApp);
     if (temp)
       this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
   }
@@ -51,7 +51,7 @@ export class ManageServerComponent implements OnInit {
       this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
     }
     else {
-      if (await this.manageServerService.GETQueryDataSource(ENInterfaces.settingsExpireLicense, insertedKey)) {
+      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote.GETQueryDataSource(ENInterfaces.settingsExpireLicense, insertedKey)) {
         this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
       }
     }
@@ -71,7 +71,7 @@ export class ManageServerComponent implements OnInit {
       this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
     }
     else {
-      if (await this.manageServerService.GETQueryDataSource(ENInterfaces.settingsExtendTime, insertedKey)) {
+      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExtendTime, insertedKey)) {
         this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
       }
     }
@@ -91,7 +91,7 @@ export class ManageServerComponent implements OnInit {
       this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
     }
     else {
-      if (await this.manageServerService.GETQueryDataSource(ENInterfaces.settingsExtendTime, insertedKey)) {
+      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExtendTime, insertedKey)) {
         this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
       }
     }
@@ -112,7 +112,7 @@ export class ManageServerComponent implements OnInit {
     }
     else {
       if (insertedKey == 'XML') {
-        const res = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerCheckAuthenticity);
+        const res = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerCheckAuthenticity);
         this.manageServerService.utilsService.snackBarMessageSuccess(res.message);
       }
       else {

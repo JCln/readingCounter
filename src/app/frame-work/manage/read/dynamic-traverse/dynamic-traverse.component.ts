@@ -31,7 +31,7 @@ export class DynamicTraverseComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForDynamicTraverse) {
-      this.closeTabService.saveDataForDynamicTraverse = await this.readManagerService.getDataSource(ENInterfaces.dynamicTraverseAll);
+      this.closeTabService.saveDataForDynamicTraverse = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.dynamicTraverseAll);
     }
     this.defaultAddStatus();
     this.insertSelectedColumns();
@@ -101,14 +101,14 @@ export class DynamicTraverseComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource']);
     }
     else {
-      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.dynamicTraverseEdit, dataSource['dataSource']);
+      const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.dynamicTraverseEdit, dataSource['dataSource']);
       if (a) {
         this.refreshTable();
       }
     }
   }
   private async onRowAdd(dataSource: IDynamicTraverse) {
-    const a = await this.readManagerService.addOrEditAuths(ENInterfaces.dynamicTraverseAdd, dataSource);
+    const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.dynamicTraverseAdd, dataSource);
     if (a) {
       this.refreshTable();
     }

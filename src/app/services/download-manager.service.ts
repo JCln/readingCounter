@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
-import { InterfaceManagerService } from 'services/interface-manager.service';
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,26 +23,12 @@ export class DownloadManagerService {
     audioNumbers: 0
   }
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
-
-  // calls
+  
   downloadFileInfo = (method: ENInterfaces, targetId: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(method, targetId).subscribe(res => {
-        resolve(res)
-      })
-    });
+    return this.ajaxReqWrapperService.getDataSourceById(method, targetId);
   }
-  downloadFile = (fileRepositoryId: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETBlobById(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
-        resolve(res)
-      });
-    })
-  }
-
-  // 
   getOverAllSize = () => {
     this.dataSource.filter(item => {
       this.overAllDetails.sizeInKB += item.sizeInByte;

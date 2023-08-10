@@ -84,7 +84,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         ) ||
         shouldCallApi
       )) {
-        this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
+        this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
         this.closeTabService.AUXSaveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
         this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
         this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
@@ -329,7 +329,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     } else {
       // TODO: Should convert Arabic Numbers to ENG to counterNumbers
       // to upload valid data to server and get valid response      
-      this.manageModifyBatchResponse(await this.listManagerService.postArrays(ENInterfaces.trackingToOffloadedGroupModifyBatch, temp));
+      this.manageModifyBatchResponse(await this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, temp));
     }
   }
   receiveDateJalali = (event: any, dataId: string) => {
@@ -398,7 +398,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   getExcel = async () => {
-    const res = await this.listManagerService.getExcel(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyListsGrouped_pageSign.groupId);
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyListsGrouped_pageSign.groupId);
     this.outputManagerService.downloadFile(res, '.xlsx');
   }
   @Input() get selectedColumns(): any[] {

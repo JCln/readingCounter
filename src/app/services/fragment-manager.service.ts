@@ -17,6 +17,7 @@ import { MathS } from 'src/app/classes/math-s';
 
 import { IFragmentDetails, IFragmentMaster } from '../interfaces/ireads-manager';
 import { EN_Routes } from '../interfaces/routes.enum';
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,57 +30,15 @@ export class FragmentManagerService {
   };
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
 
-  getDataSourceByQuote = (method: ENInterfaces, id: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, id).subscribe(res => {
-        resolve(res);
-      })
-    })
-  }
-  getDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe(res => {
-        resolve(res);
-      })
-    })
-  }
-  postBody = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).subscribe((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    })
-  }
-  postByQuote = (method: ENInterfaces, id: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTSG(method, id).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    })
-  }
-  /* Details */
-  getFragmentDetails = (masterId: string): Promise<any> => {
-    if (masterId.length < 6) {
-      this.routeToFragmentMaster();
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETID(ENInterfaces.fragmentDETAILSDETAILS, masterId).subscribe(res => {
-          resolve(res);
-        })
-      })
-    } catch (error) {
-      console.error(e => e);
-    }
+  postBody = async (method: ENInterfaces, body: object): Promise<any> => {
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, body);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
   getRouteParams = () => {
     return this.utilsService.getRouteBySplit('/');

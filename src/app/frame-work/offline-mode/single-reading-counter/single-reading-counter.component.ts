@@ -56,7 +56,7 @@ export class SingleReadingCounterComponent extends FactoryONE {
   
   connectToServer = async () => {
     if (this.offlineModeService.vertificationSingleReadingRequest(this.closeTabService.offlineSingleReadingCounterReq)) {
-      this.closeTabService.offlineSingleReadingCounter = await this.offlineModeService.postDataSource(ENInterfaces.offlineSingleReadingCounter, this.closeTabService.offlineSingleReadingCounterReq);
+      this.closeTabService.offlineSingleReadingCounter = await this.offlineModeService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offlineSingleReadingCounter, this.closeTabService.offlineSingleReadingCounterReq);
       console.log(this.closeTabService.offlineSingleReadingCounter);
 
     }

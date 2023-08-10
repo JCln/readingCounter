@@ -1,10 +1,10 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
-import { ENLocalStorageNames, IResponses } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames } from 'interfaces/ioverall-config';
 import { DownloadManagerService } from 'services/download-manager.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
@@ -36,7 +36,7 @@ export class ProfileService {
   }
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     private utilsService: UtilsService,
     public columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
@@ -139,10 +139,9 @@ export class ProfileService {
     }
     if (this.verification(password)) {
       if (await this.utilsService.firstConfirmDialog(a)) {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
-          if (res)
-            this.showMessage(res.message);
-        });
+        const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.changePassword, password);
+        if (res)
+          this.showMessage(res.message);
       }
     }
   }
@@ -156,27 +155,6 @@ export class ProfileService {
     }
     if (await this.utilsService.firstConfirmDialog(a))
       this.jwtService.removeAllExceptAuths();
-  }
-  getMyInfoDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe((res) => {
-        resolve(res)
-      });
-    });
-  }
-  postDataSourceByQuery = (method: ENInterfaces, id: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTSG(method, id).subscribe((res) => {
-        resolve(res)
-      });
-    });
-  }
-  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).subscribe((res) => {
-        resolve(res)
-      });
-    });
   }
   // TODO: get access aggregating from trackingManager(کارتابل)
   _agg = {

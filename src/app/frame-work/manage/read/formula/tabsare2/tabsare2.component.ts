@@ -51,7 +51,7 @@ export class Tabsare2Component extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTabsare2Formula) {
-      this.closeTabService.saveDataForTabsare2Formula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare2All);
+      this.closeTabService.saveDataForTabsare2Formula = await this.formulasService.ajaxReqWrapperService.getDataSource(ENInterfaces.FormulaTabsare2All);
     }
     this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
 

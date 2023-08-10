@@ -19,7 +19,7 @@ export class LicenseComponent extends FactoryONE {
 
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.closeTabService.license)
-      this.closeTabService.license = await this.profileService.getMyInfoDataSource(ENInterfaces.settingsLicense);
+      this.closeTabService.license = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.settingsLicense);
   }
   ngOnInit(): void {
     this.classWrapper();

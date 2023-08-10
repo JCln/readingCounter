@@ -24,12 +24,12 @@ export class RrDynamicReportComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForDynamicReports) {
-      this.closeTabService.saveDataForDynamicReports = await this.readingReportManagerService.dataSourceGET(ENInterfaces.dynamicReportManagerAll);
+      this.closeTabService.saveDataForDynamicReports = await this.readingReportManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.dynamicReportManagerAll);
     }
   }
   removeRow = async (dataSource: any) => {
     if (await this.readingReportManagerService.firstConfirmDialogRemove()) {
-      const a = await this.readingReportManagerService.postDataSource(ENInterfaces.dynamicReportManagerRemove, dataSource['id']);
+      const a = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.dynamicReportManagerRemove, dataSource['id']);
       this.readingReportManagerService.successSnackMessage(a.message);
       this.refreshTable();
     }

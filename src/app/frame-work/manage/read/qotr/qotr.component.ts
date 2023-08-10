@@ -29,7 +29,7 @@ export class QotrComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForQotrManager) {
-      this.closeTabService.saveDataForQotrManager = await this.readManagerService.getDataSource(ENInterfaces.QotrAll);
+      this.closeTabService.saveDataForQotrManager = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.QotrAll);
     }
     this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
 

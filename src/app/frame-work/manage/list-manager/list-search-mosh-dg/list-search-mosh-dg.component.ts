@@ -73,7 +73,7 @@ export class ListSearchMoshDgComponent implements OnInit {
   connectToServer = async () => {
     if (!this.listManagerService.verificationMosh(this.listManagerService.searchReqMoshDialog))
       return;
-    this.dataSource = await this.listManagerService.postBodyDataSource(ENInterfaces.ListSearchMoshtarak, this.listManagerService.searchReqMoshDialog);
+    this.dataSource = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchMoshtarak, this.listManagerService.searchReqMoshDialog);
     this.converts();
     this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
   }

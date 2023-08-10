@@ -59,7 +59,7 @@ export class FragmentComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForFragmentNOB) {
-      this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.getDataSource(ENInterfaces.fragmentMASTERALL);
+      this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.fragmentMASTERALL);
     }
     this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');

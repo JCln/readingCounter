@@ -26,7 +26,7 @@ export class NotificationMessageComponent extends FactoryONE {
     super();
   }
   connectToServer = async () => {
-    this.closeTabService.notificationMessages = await this.profileService.getMyInfoDataSource(ENInterfaces.NotifyManagerUnreadGet);
+    this.closeTabService.notificationMessages = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadGet);
     // this.insertToEdgeDictionary();
     // this.showItemOnSearch();
   }
@@ -41,7 +41,7 @@ export class NotificationMessageComponent extends FactoryONE {
 
   }
   confirmDelivery = async (object: INotificationMessage) => {
-    const a = await this.profileService.postDataSourceByQuery(ENInterfaces.NotifyManagerConfirmDelivery, object.id);
+    const a = await this.profileService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.NotifyManagerConfirmDelivery, object.id);
     if (a) {
       this.profileService.showMessage(a.message);
       object.deliverConfirm = true;

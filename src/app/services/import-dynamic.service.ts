@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -23,7 +24,6 @@ import {
 } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ProfileService } from 'services/profile.service';
 
 import { MathS } from '../classes/math-s';
@@ -85,7 +85,7 @@ export class ImportDynamicService {
     public utilsService: UtilsService,
     private allImportsService: AllImportsService,
     private profileService: ProfileService,
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
@@ -300,14 +300,10 @@ export class ImportDynamicService {
     formData.append('skipErrors', value.skipErrors);
     formData.append('file', fileForm[0]);
 
-    console.log(formData);
-
-    this.interfaceManagerService.POSTBODY(method, formData).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, formData);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
   checkExcelFileVertification = (val: IFileExcelReq): boolean => {
-
     if (!MathS.persentCheck(val.alalHesabPercent)) {
       this.utilsService.snackBarMessageWarn(EN_messages.percent_alalhesab);
       return false;
@@ -521,73 +517,17 @@ export class ImportDynamicService {
       })
     });
   }
-  postById = (method: ENInterfaces, id: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  getFragmentMasterDictionary = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res =>
-        resolve(res))
-    });
-  }
-  getReadingPeriod = (zoneId: number, kindId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, zoneId, kindId).subscribe(res => {
-        resolve(res);
-      })
-    });
-  }
-  getExcelSample = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(method).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
   getMasrafStates = () => {
     return IMasrafStates;
-  }
-  postBodyServer = (method: ENInterfaces, object: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, object).toPromise().then(res => {
-        resolve(res);
-      })
-    });
   }
   postImportDynamicData = (method: ENInterfaces, importDynamic: IImportDynamicDefault): Promise<any> => {
     importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
     importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, importDynamic).toPromise().then(res => {
-        resolve(res)
-      })
-    });
+
+    return this.ajaxReqWrapperService.postDataSourceByObject(method, importDynamic);
   }
-  postImportSimafaRDPG = (method: ENInterfaces, body: IImportSimafaReadingProgramsReq): Promise<any> => {
+  insertToSimafaRdpgReq = (body: IImportSimafaReadingProgramsReq) => {
     this.simafaRDPGReq = body;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-        resolve(res)
-      })
-    });
-  }
-  getDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).toPromise().then(res => {
-        resolve(res);
-      })
-    })
-  }
-  getById = (method: ENInterfaces, id: number) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(method, id.toString()).subscribe(res => {
-        resolve(res);
-      })
-    })
   }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();

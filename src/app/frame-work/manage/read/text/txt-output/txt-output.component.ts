@@ -31,7 +31,7 @@ export class TxtOutputComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTextOutput) {
-      this.closeTabService.saveDataForTextOutput = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
+      this.closeTabService.saveDataForTextOutput = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.textOutputGET);
     }
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
 
@@ -68,7 +68,7 @@ export class TxtOutputComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      await this.readManagerService.addOrEditAuths(ENInterfaces.textOutputEdit, dataSource['dataSource']);
+      await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.textOutputEdit, dataSource['dataSource']);
     }
     Converter.convertIdToTitle(this.closeTabService.saveDataForTextOutput, this.zoneDictionary, 'zoneId');
   }
@@ -95,7 +95,7 @@ export class TxtOutputComponent extends FactoryONE {
     this.newRowLimit = 2;
   }
   private async onRowAdd(dataSource: ITextOutput, rowIndex: number) {
-    const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputAdd, dataSource);
+    const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.textOutputAdd, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();

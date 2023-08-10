@@ -18,7 +18,7 @@ export class BriefKardexComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.dataSource = await this.listManagerService.postByQueue(ENInterfaces.trackingBriefKardex, 'BriefKardex?zoneId=' + this.config.data.zoneId + '&radif=' + this.config.data.radif);
+    this.dataSource = await this.listManagerService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.trackingBriefKardex, 'BriefKardex?zoneId=' + this.config.data.zoneId + '&radif=' + this.config.data.radif);
   }
   ngOnInit(): void {
     this.classWrapper();
