@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -8,7 +9,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { InterfaceManagerService } from './interface-manager.service';
 import { ISingleReadingCounterReq } from 'interfaces/isearchs';
 
 interface IUploadForm {
@@ -41,7 +41,7 @@ export class OfflineModeService {
   }
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     private utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService
   ) { }
@@ -53,13 +53,6 @@ export class OfflineModeService {
       Search.readCode,
       Search.billId,
     ]
-  }
-  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-        resolve(res);
-      })
-    })
   }
   isNull = (): boolean => {
     if (MathS.isNull(this.fileForm)) {
@@ -126,13 +119,6 @@ export class OfflineModeService {
       return false;
     }
   }
-  getOfflineManual = (userName: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(ENInterfaces.loadManual + '?userId=' + userName).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
   vertificationSingleReadingRequest = (dataSource: ISingleReadingCounterReq): boolean => {
     if (MathS.isNull(dataSource.searchBy)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
@@ -151,8 +137,7 @@ export class OfflineModeService {
     const formData: FormData = new FormData();
 
     formData.append('file', this.fileForm[0]);
-
-    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.offloadManual, formData);
+    return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.offloadManual, formData);
   }
   postTicketFileUploadSingle = (filesList: FileList): Observable<any> => {
     const formData: FormData = new FormData();
@@ -161,7 +146,7 @@ export class OfflineModeService {
     formData.append('onOffLoadId', this.fileUploadSingleReq.onOffLoadId);
     formData.append('description', this.fileUploadSingleReq.description);
 
-    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.fileUploadSingle, formData);
+    return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.fileUploadSingle, formData);
   }
 
 }

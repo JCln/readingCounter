@@ -25,4 +25,5 @@ export enum ENReadingReports {
     notificationListByDateReq = 'notificationListByDateReq',
     feedbackAllCReq = 'mobileManagerFeedbackAllCReq',
     feedbackAllSReq = 'mobileManagerFeedbackAllSReq',
+    forbidden = 'forbiddenReq',
 }

@@ -57,7 +57,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
 
   updateOnChangedCounterState = async (val: any) => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val);
+    this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val);
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -222,7 +222,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
     });
   }
   getExcel = async () => {
-    const res = await this.listManagerService.getExcel(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyLists_pageSign.groupId);
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyLists_pageSign.groupId);
     this.outputManagerService.downloadFile(res, '.xlsx');
   }
 

@@ -177,7 +177,7 @@ export class WoumComponent implements OnChanges {
     this.showAudioControllers = true;
   }
   getExactAudio = async (id: string) => {
-    const res = await this.downloadManagerService.downloadFile(id)
+    const res = await this.downloadManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.downloadFileGET, id)
     this.downloadURL = window.URL.createObjectURL(res);
     this.testAudio.src = this.downloadURL;
     this.isShowAudioControllers();

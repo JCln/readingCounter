@@ -109,7 +109,7 @@ export class RdAddDgComponent {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
     }
     else {
-      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, this.form.value)
+      const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.ReadingConfigADD, this.form.value)
       if (a) {
         this.dialogRef.close(this.form.value);
       }

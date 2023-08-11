@@ -54,7 +54,7 @@ import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
-import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
+import { IForbiddenManager, IMostReportInput, IOnOffLoadFlat } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
@@ -394,6 +394,16 @@ export class CloseTabService {
     osShortTitle: '',
     userAgent: ''
   };
+  forbiddenReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    zoneIds: [0]
+  }
   saveDataForFNB: IForbiddenManager[];
   saveDataForProfile: any;
   saveDataForMomentLastRead: ILatestReads[] = [];

@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { IDynamicTraverse } from './../interfaces/ireads-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -8,7 +9,6 @@ import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
 import { ICounterState, IGuild, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
 import { UtilsService } from './utils.service';
 
@@ -19,27 +19,22 @@ export class ReadManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
 
-  getDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe(res => {
-        resolve(res);
-      })
-    })
+  postObjectWithSuccessMessage = async (method: ENInterfaces, body: object): Promise<any> => {
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, body);
+    this.utilsService.snackBarMessageSuccess(res.message);
+    return res;
   }
-  postTextOutputDATA = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    });
+  postObjectWithSuccessMessageBol = async (method: ENInterfaces, body: object): Promise<any> => {
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, body);
+    this.utilsService.snackBarMessageSuccess(res.message);
+    return true;
   }
   /* VERIFICATION & VALIDATION */
   counterStateVertification = (dataSource: ICounterState): boolean => {
@@ -115,15 +110,6 @@ export class ReadManagerService {
       return false;
     return true;
   }
-  /* OTHER */
-  addOrEditAuths = (place: ENInterfaces, result: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(place, result).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    });
-  }
   firstConfirmDialog = (text: string): Promise<any> => {
     const a = {
       messageTitle: EN_messages.confirm_remove,
@@ -135,29 +121,15 @@ export class ReadManagerService {
     }
     return this.utilsService.firstConfirmDialog(a);
   }
-  deleteSingleRow = (place: ENInterfaces, id: number) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(true);
-      })
-    });
+  deleteSingleRow = async (place: ENInterfaces, id: number) => {
+    const res = await this.ajaxReqWrapperService.postDataSourceById(place, id);
+    this.utilsService.snackBarMessageSuccess(res.message);
+    return true;
   }
-  deleteSingleRowByObject = (place: ENInterfaces, object: object) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(place, object).subscribe((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(true);
-      })
-    });
-  }
-  deleteSingleRowByObjectSpecial = (place: string, object: object) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(place, object).subscribe((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(true);
-      })
-    });
+  deleteSingleRowByObjectSpecial = async (place: string, object: object) => {
+    const res = await this.ajaxReqWrapperService.postDataSourceStringByObject(place, object);
+    this.utilsService.snackBarMessageSuccess(res.message);
+    return true;
   }
   customizeSelectedColumns = (_selectCols: any[]) => {
     return _selectCols.filter(items => {

@@ -23,7 +23,7 @@ export class ServerErrorsComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    this.closeTabService.saveDataForServerErrors = await this.manageServerService.postArray(ENInterfaces.serverManagerErrors, this.selectedErrors);
+    this.closeTabService.saveDataForServerErrors = await this.manageServerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.serverManagerErrors, this.selectedErrors);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

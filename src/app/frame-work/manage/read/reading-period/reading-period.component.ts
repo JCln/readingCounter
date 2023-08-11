@@ -64,7 +64,7 @@ export class ReadingPeriodComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForReadingPeriodManager) {
-      this.closeTabService.saveDataForReadingPeriodManager = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodAll);
+      this.closeTabService.saveDataForReadingPeriodManager = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodAll);
     }
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readManagerService.dictionaryWrapperService.getPeriodKindDictionary();
@@ -103,7 +103,7 @@ export class ReadingPeriodComponent extends FactoryONE {
     } else {
       dataSource['dataSource'].readingPeriodKindId = dataSource['dataSource'].readingPeriodKindId['id'];
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource['dataSource']);
+    await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.readingPeriodEdit, dataSource['dataSource']);
     this.toConvert();
   }
 

@@ -69,7 +69,7 @@ export class ReadingConfigComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          if (await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigEDIT, result)) {
+          if (await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.ReadingConfigEDIT, result)) {
             this.refreshTable();
           }
         }
@@ -83,7 +83,7 @@ export class ReadingConfigComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForReadingConfig) {
-      this.closeTabService.saveDataForReadingConfig = await this.readManagerService.getDataSource(ENInterfaces.ReadingConfigALL);
+      this.closeTabService.saveDataForReadingConfig = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ReadingConfigALL);
     }
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.closeTabService.saveDataForReadingConfig));

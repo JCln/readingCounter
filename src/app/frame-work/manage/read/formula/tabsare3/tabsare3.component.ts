@@ -70,7 +70,7 @@ export class Tabsare3Component extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForTabsare3Formula) {
-      this.closeTabService.saveDataForTabsare3Formula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare3All);
+      this.closeTabService.saveDataForTabsare3Formula = await this.formulasService.ajaxReqWrapperService.getDataSource(ENInterfaces.FormulaTabsare3All);
     }
     this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -132,6 +132,6 @@ export class Tabsare3Component extends FactoryONE {
   }
   onRowEditCancel() { }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaTabsare3ExcelSample), 'tabsare3Sample');
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.ajaxReqWrapperService.getBlob(ENInterfaces.FormulaTabsare3ExcelSample), 'tabsare3Sample');
   }
 }

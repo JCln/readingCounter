@@ -32,7 +32,7 @@ export class WaterMarkComponent extends FactoryONE {
       this.closeTabService.saveDataForWaterMark.g = this.rgba[1];
       this.closeTabService.saveDataForWaterMark.b = this.rgba[2];
       this.closeTabService.saveDataForWaterMark.a = this.rgba[3];
-      const response = await this.profileService.postDataSource(ENInterfaces.postWaterMarkConfig, this.closeTabService.saveDataForWaterMark);
+      const response = await this.profileService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postWaterMarkConfig, this.closeTabService.saveDataForWaterMark);
       if (response) {//Hard Coded!
         this.closeTabService.saveDataForWaterMark = response.targetObject;
         this.profileService.showMessage(response.message);
@@ -43,7 +43,7 @@ export class WaterMarkComponent extends FactoryONE {
     this.textColorState();
 
     if (!this.closeTabService.saveDataForWaterMark.id) {
-      this.closeTabService.saveDataForWaterMark = await this.profileService.getMyInfoDataSource(ENInterfaces.getWaterMarkConfig);
+      this.closeTabService.saveDataForWaterMark = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getWaterMarkConfig);
 
       if (this.closeTabService.saveDataForWaterMark.id) {
         this.changeTextColorByServerRes();

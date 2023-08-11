@@ -55,7 +55,7 @@ export class SimafaSingleComponent extends FactoryONE {
     const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaSingleReq);
     if (!validation)
       return;
-    const a = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaSingle, this.simafaSingleReq);
+    const a = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaSingle, this.simafaSingleReq);
     if (a) {
 
       this.importDynamicService.showResDialog(a, false, EN_messages.importDynamic_created);

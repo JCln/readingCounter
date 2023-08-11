@@ -28,7 +28,7 @@ export class FileUploadSingleComponent {
   }
 
   getLatestOnOffloadId = async () => {
-    await this.offlineModeService.postDataSource(ENInterfaces.getLatestOnOffloadId,
+    await this.offlineModeService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getLatestOnOffloadId,
       {
         searchBy: this.offlineModeService.fileUploadSingle.searchBy,
         item: this.offlineModeService.fileUploadSingle.item

@@ -44,7 +44,7 @@ export class ListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMModifyReq = null;
       }
       if (this.closeTabService.saveDataForLMModifyReq != this.allListsService.modifyLists_pageSign.GUid || !this.closeTabService.saveDataForLMModify) {
-        this.closeTabService.saveDataForLMModify = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
+        this.closeTabService.saveDataForLMModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
         this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMModify);
         this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
       }

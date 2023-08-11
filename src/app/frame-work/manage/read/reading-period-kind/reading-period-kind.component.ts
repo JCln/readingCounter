@@ -42,7 +42,7 @@ export class ReadingPeriodKindComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForReadingPeriodKindManager) {
-      this.closeTabService.saveDataForReadingPeriodKindManager = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodKindAll);
+      this.closeTabService.saveDataForReadingPeriodKindManager = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodKindAll);
     }
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForReadingPeriodKindManager = this.closeTabService.saveDataForReadingPeriodKindManager.slice(0, index).concat(this.closeTabService.saveDataForReadingPeriodKindManager.slice(index + 1));
@@ -61,7 +61,7 @@ export class ReadingPeriodKindComponent extends FactoryONE {
       this.closeTabService.saveDataForReadingPeriodKindManager['ri'] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindEdit, dataSource['dataSource']);
+    await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.readingPeriodKindEdit, dataSource['dataSource']);
   }
 
 }

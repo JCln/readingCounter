@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -11,7 +12,6 @@ import {
 } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
 
@@ -278,45 +278,19 @@ export class ReadingReportManagerService {
 
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private jwtService: JwtService,
     private mapService: MapService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
-  // CALL APIs
-
-  postDataSource = (method: ENInterfaces, id: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(method, id).subscribe((res) => {
-        resolve(res)
-      })
-    });
-  }
-  dataSourceGET = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe((res) => {
-        resolve(res)
-      })
-    });
-  }
   portRRTest = (method: ENInterfaces, val: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
-        if (MathS.isNull(res))
-          this.emptyMessage();
-        resolve(res)
-      })
-    });
-  }
-  postExcel = (method: ENInterfaces, body: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOB(method, body).toPromise().then(res => {
-        resolve(res);
-      })
-    });
+    const res = this.ajaxReqWrapperService.postDataSourceByObject(method, val);
+    if (MathS.isNull(res))
+      this.emptyMessage();
+    return res;
   }
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
@@ -464,13 +438,6 @@ export class ReadingReportManagerService {
 
     if (temp.length)
       this.utilsService.compositeService.routeToExtras([EN_Routes.wr, readingReportGISReq]);
-  }
-  postById = (method: ENInterfaces, id: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

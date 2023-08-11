@@ -31,7 +31,7 @@ export class ImageAttributionComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForImageAttribution) {
-      this.closeTabService.saveDataForImageAttribution = await this.readManagerService.getDataSource(ENInterfaces.imageAttributionGet);
+      this.closeTabService.saveDataForImageAttribution = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.imageAttributionGet);
     }
     this.defaultAddStatus();
     this.insertSelectedColumns();
@@ -72,7 +72,7 @@ export class ImageAttributionComponent extends FactoryONE {
     const confirmed = await this.readManagerService.firstConfirmDialog(text);
     if (!confirmed) return;
 
-    const a = await this.readManagerService.deleteSingleRowByObject(ENInterfaces.imageAttributionRemove, dataSource['dataSource']);
+    const a = await this.readManagerService.postObjectWithSuccessMessageBol(ENInterfaces.imageAttributionRemove, dataSource['dataSource']);
 
     if (a) {
       this.closeTabService.saveDataForImageAttribution[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
@@ -94,14 +94,14 @@ export class ImageAttributionComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.imageAttributionEdit, dataSource['dataSource']);
+      const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.imageAttributionEdit, dataSource['dataSource']);
       if (a) {
         this.refreshTable();
       }
     }
   }
   private async onRowAdd(dataSource: IImageAttribution, rowIndex: number) {
-    const a = await this.readManagerService.addOrEditAuths(ENInterfaces.imageAttributionAdd, dataSource);
+    const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.imageAttributionAdd, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();

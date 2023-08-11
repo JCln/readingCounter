@@ -85,7 +85,7 @@ export class WaterComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForWaterFormula) {
-      this.closeTabService.saveDataForWaterFormula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaWaterAll);
+      this.closeTabService.saveDataForWaterFormula = await this.formulasService.ajaxReqWrapperService.getDataSource(ENInterfaces.FormulaWaterAll);
     }
     this.zoneDictionary = await this.formulasService.dictionaryWrapperService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -149,6 +149,6 @@ export class WaterComponent extends FactoryONE {
   }
   onRowEditCancel() { }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaWaterExcelSample), 'waterSample');
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.ajaxReqWrapperService.getBlob(ENInterfaces.FormulaWaterExcelSample), 'waterSample');
   }
 }

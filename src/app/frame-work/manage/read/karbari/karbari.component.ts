@@ -49,7 +49,7 @@ export class KarbariComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForKarbari) {
-      this.closeTabService.saveDataForKarbari = await this.readManagerService.getDataSource(ENInterfaces.KarbariAll);
+      this.closeTabService.saveDataForKarbari = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariAll);
     }
     this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
 
@@ -79,7 +79,7 @@ export class KarbariComponent extends FactoryONE {
     } else {
       dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariEdit, dataSource['dataSource']);
+    await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.KarbariEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'provinceId');
   }
 

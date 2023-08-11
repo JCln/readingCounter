@@ -107,7 +107,7 @@ export class ProfileComponent extends FactoryONE {
       this.myInfoDataSource = this.closeTabService.saveDataForProfile;
     }
     else {
-      this.myInfoDataSource = await this.profileService.getMyInfoDataSource(ENInterfaces.getMyProfile);
+      this.myInfoDataSource = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getMyProfile);
       this.closeTabService.saveDataForProfile = this.myInfoDataSource;
     }
 

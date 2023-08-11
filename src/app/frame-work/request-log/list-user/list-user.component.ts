@@ -43,7 +43,7 @@ export class ListUserComponent extends FactoryONE {
     }
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRequestLogListUser = await this.manageServerService.postBody(ENInterfaces.requestLogUser, this.closeTabService.saveDataForRequestLogListUserReq);
+    this.closeTabService.saveDataForRequestLogListUser = await this.manageServerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogUser, this.closeTabService.saveDataForRequestLogListUserReq);
   }
   verification = async () => {
 

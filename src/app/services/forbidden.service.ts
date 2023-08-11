@@ -3,13 +3,13 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables } from 'interfaces/ioverall-config';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,44 +17,19 @@ import { DictionaryWrapperService } from './dictionary-wrapper.service';
 export class ForbiddenService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
-  forbiddenReq: IMostReportInput = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: this.utilsService.getFirstYear(),
-    zoneIds: [0]
-  }
-
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService
   ) { }
 
-  /* API CALL */
-  getDataSource = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.forbidden, this.forbiddenReq).subscribe(res => {
-        resolve(res);
-      })
-    })
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.forbiddenReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.forbiddenReq.toDate = $event;
-  }
   /* VALIDATION */
-  private datesValidationForbidden = (): boolean => {
-    if (MathS.isNull(this.forbiddenReq.fromDate)) {
+  private datesValidationForbidden = (data: IMostReportInput): boolean => {
+    if (MathS.isNull(data.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
-    if (MathS.isNull(this.forbiddenReq.toDate)) {
+    if (MathS.isNull(data.toDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
@@ -65,7 +40,7 @@ export class ForbiddenService {
   verificationForbidden = (forbidden: IMostReportInput) => {
     forbidden.fromDate = Converter.persianToEngNumbers(forbidden.fromDate);
     forbidden.toDate = Converter.persianToEngNumbers(forbidden.toDate);
-    return this.datesValidationForbidden();
+    return this.datesValidationForbidden(forbidden);
   }
   setDynamicPartRanges = (dataSource: IForbiddenManager[]) => {
     dataSource.forEach(item => {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
@@ -22,7 +23,7 @@ export class ForbiddenComponent extends FactoryONE {
     super();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForFNB = await this.forbiddenService.getDataSource();
+    this.closeTabService.saveDataForFNB = await this.forbiddenService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.forbidden, this.closeTabService.forbiddenReq);
     Converter.convertIdToTitle(this.closeTabService.saveDataForFNB, this.fbnZoneDictionary, 'zoneId');
     this.forbiddenService.setDynamicPartRanges(this.closeTabService.saveDataForFNB);
   }
@@ -35,7 +36,7 @@ export class ForbiddenComponent extends FactoryONE {
       this.fbnZoneDictionary.unshift({ id: 0, title: 'نامشخص', isSelected: true })
   }
   verification = async () => {
-    const temp = this.forbiddenService.verificationForbidden(this.forbiddenService.forbiddenReq);
+    const temp = this.forbiddenService.verificationForbidden(this.closeTabService.forbiddenReq);
     if (temp)
       this.connectToServer();
   }

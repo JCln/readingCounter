@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENDataMining } from 'interfaces/data-mining';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -33,7 +34,7 @@ export class DataMiningAnalysesService {
   constructor(
     public utilsService: UtilsService,
     private profileService: ProfileService,
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
@@ -59,13 +60,6 @@ export class DataMiningAnalysesService {
   /*API CALLS & CALLS*/
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();
-  }
-  postDMManager = (method: ENInterfaces, val: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
-        resolve(res)
-      })
-    });
   }
   /* VALIDATIONS AND VERIFICATIONS*/
   private datesValidation = (dataSource: object): boolean => {

@@ -18,7 +18,7 @@ export class DrivesInfoComponent implements OnInit {
 
   classWrapper = async () => {
     if (!this.closeTabService.saveDataForMsDriveInfo) {
-      this.closeTabService.saveDataForMsDriveInfo = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerDrivesInfo);
+      this.closeTabService.saveDataForMsDriveInfo = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerDrivesInfo);
     }
     this.doSth();
   }

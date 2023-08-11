@@ -64,7 +64,7 @@ export class PerDayComponent extends FactoryONE {
         this.closeTabService.saveDataForLMPDTrackNumber = null;
       }
       if (this.closeTabService.saveDataForLMPDTrackNumber != this.PageSignsService.perday_pageSign.trackNumber || !this.closeTabService.saveDataForLMPD) {
-        this.closeTabService.saveDataForLMPD = await this.listManagerService.getLM(ENInterfaces.ListOffloadedPERDAY, this.PageSignsService.perday_pageSign.trackNumber);
+        this.closeTabService.saveDataForLMPD = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedPERDAY, this.PageSignsService.perday_pageSign.trackNumber);
         this.closeTabService.saveDataForLMPDTrackNumber = this.PageSignsService.perday_pageSign.trackNumber;
         this.closeTabService.saveDataForLMPD.zoneTitle = this.PageSignsService.perday_pageSign.zone;
       }

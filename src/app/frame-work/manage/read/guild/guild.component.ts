@@ -31,7 +31,7 @@ export class GuildComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForGuild) {
-      this.closeTabService.saveDataForGuild = await this.readManagerService.getDataSource(ENInterfaces.GuildManagerAll);
+      this.closeTabService.saveDataForGuild = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.GuildManagerAll);
     }
     this.defaultAddStatus();
     this.insertSelectedColumns();
@@ -73,7 +73,7 @@ export class GuildComponent extends FactoryONE {
     const confirmed = await this.readManagerService.firstConfirmDialog('عنوان: ' + dataSource['dataSource'].title);
     if (!confirmed) return;
 
-    const a = await this.readManagerService.deleteSingleRowByObject(ENInterfaces.GuildManagerRemove, dataSource['dataSource']);
+    const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.GuildManagerRemove, dataSource['dataSource']);
 
     if (a) {
       this.closeTabService.saveDataForGuild[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
@@ -96,7 +96,7 @@ export class GuildComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.GuildManagerEdit, dataSource['dataSource']);
+      const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.GuildManagerEdit, dataSource['dataSource']);
       if (a) {
         this.refreshTable();
       }
@@ -106,7 +106,7 @@ export class GuildComponent extends FactoryONE {
     }
   }
   private async onRowAdd(dataSource: IGuild, rowIndex: number) {
-    const a = await this.readManagerService.addOrEditAuths(ENInterfaces.GuildManagerAdd, dataSource);
+    const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.GuildManagerAdd, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();

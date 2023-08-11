@@ -39,7 +39,8 @@ export class SimafaReadingProgComponent extends FactoryONE {
   connectToServer = async () => {
     if (this.importDynamicService.checkSimafaVertification(this.closeTabService.importSimafaReadingProgramReq)) {
       // Save and send data to service
-      this.closeTabService.saveDataForSimafaReadingPrograms = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
+      this.importDynamicService.insertToSimafaRdpgReq(this.closeTabService.importSimafaReadingProgramReq);
+      this.closeTabService.saveDataForSimafaReadingPrograms = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
       Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
     }
   }

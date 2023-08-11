@@ -205,7 +205,7 @@ export class FactorySharedPrime implements OnChanges {
     doShowImageMobileApp = (dataSource: any) => {
         if (dataSource.mediaCount) {
             this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-                data: { _data: dataSource, _imgFeedback:true  },
+                data: { _data: dataSource, _imgFeedback: true },
                 rtl: true,
                 width: '80%',
             })
@@ -325,7 +325,7 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
         });
     }
     getReadingReportTitles = async ($event) => {
-        const a = await this.listManagerService.postById(ENInterfaces.ReadingReportTitles, $event)
+        const a = await this.listManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.ReadingReportTitles, $event)
         if (a.length) {
             this.listManagerService.showResDialog(a, false, EN_messages.insert_rrDetails);
             return;

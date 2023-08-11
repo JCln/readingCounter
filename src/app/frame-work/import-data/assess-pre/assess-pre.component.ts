@@ -78,7 +78,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService.setDynamicPartRanges(this.closeTabService.saveDataForAssessPre);
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForAssessPre = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
+    this.closeTabService.saveDataForAssessPre = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
 
     this.karbariDictionaryCode = await this.importDynamicService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -130,13 +130,13 @@ export class AssessPreComponent extends AllListsFactory {
     if (this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService._assessAddReq)) {
       this.getOnOffLoadIdsFromDataSource();
       if (this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq)) {
-        this.importDynamicService.showResDialog(await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
+        this.importDynamicService.showResDialog(await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
         this._canShowAssessButton = false;
       }
     }
   }
   getReadingReportTitles = async ($event) => {
-    const a = await this.importDynamicService.postById(ENInterfaces.ReadingReportTitles, $event)
+    const a = await this.importDynamicService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.ReadingReportTitles, $event)
     if (a.length) {
       this.importDynamicService.showCheckboxDialog(a, false, EN_messages.insert_rrDetails);
       return;

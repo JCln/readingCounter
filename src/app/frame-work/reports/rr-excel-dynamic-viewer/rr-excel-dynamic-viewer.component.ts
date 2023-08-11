@@ -30,7 +30,7 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForToolsExcelViewer) {
-      this.closeTabService.saveDataForToolsExcelViewer = await this.readingReportManagerService.dataSourceGET(ENInterfaces.getToolsDynamicExcel);
+      this.closeTabService.saveDataForToolsExcelViewer = await this.readingReportManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.getToolsDynamicExcel);
     }
   }
   downloadExcel = async (body) => {
@@ -43,7 +43,7 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
 
     const temp: object = await this.readingReportManagerService.showResDialogDynamic(body.jsonInfo, options);
     if (temp) {
-      const res = await this.readingReportManagerService.postExcel(body.url, temp);
+      const res = await this.readingReportManagerService.ajaxReqWrapperService.postBlob(body.url, temp);
       this.outputManagerService.downloadFile(res, '.xlsx');
     }
   }
@@ -51,7 +51,7 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
     if (this.readingReportManagerService.utilsService.getIsAdminRole()) {
 
       if (await this.readingReportManagerService.firstConfirmDialogRemove('عنوان: ' + object['dataSource'].title)) {
-        const a = await this.readingReportManagerService.postById(ENInterfaces.removeToolsDynamicExcel, object['dataSource'].id);
+        const a = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.removeToolsDynamicExcel, object['dataSource'].id);
         if (a) {
           this.readingReportManagerService.successSnackMessage(a.message);
           this.refreshTable();

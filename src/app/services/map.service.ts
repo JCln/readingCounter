@@ -2,10 +2,10 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { Injectable } from '@angular/core';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service.js';
 
 declare let L;
 
@@ -48,7 +48,7 @@ export class MapService {
 
   constructor(
     public browserStorageService: BrowserStorageService,
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public envService: EnvService
   ) { }
 
@@ -116,14 +116,7 @@ export class MapService {
 
     return bol;
   }
-  postDataSource = (method: ENInterfaces, val: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res) => {
-        resolve(res)
-      })
-    });
-  }
-  postDataSourceGisSpecial = (method: ENInterfaces, val: any): Promise<any> => {
+  postDataSourceGisSpecial = async (method: ENInterfaces, val: any): Promise<any> => {
     if (
       this.responseGisAux.value &&
       this.gisReqAux.zoneId == val.zoneId &&
@@ -136,24 +129,14 @@ export class MapService {
     ) {
       return this.responseGisAux.value;
     }
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res) => {
-        this.responseGisAux.value = res;
-        resolve(res);
-      })
-    })
-  }
-  postById = (method: ENInterfaces, id?: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, val);
+    this.responseGisAux.value = res;
+    return res;
   }
   getPointerMarks = (a: object): Promise<any> => {
-    return this.postDataSource(ENInterfaces.ListPerDayXY, a);
+    return this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListPerDayXY, a);
   }
   getXY = (a: string): Promise<any> => {
-    return this.postById(ENInterfaces.ListXY, parseInt(a));
+    return this.ajaxReqWrapperService.postDataSourceById(ENInterfaces.ListXY, parseInt(a));
   }
 }

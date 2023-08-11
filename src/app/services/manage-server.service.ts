@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -7,7 +8,6 @@ import { IManageServerErrors } from 'interfaces/iserver-manager';
 import { JwtService } from '../auth/jwt.service';
 import { MathS } from '../classes/math-s';
 import { serverErrors, serverTasts } from './DI/manageServer';
-import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
@@ -19,7 +19,7 @@ export class ManageServerService {
   serverErrors: IManageServerErrors[] = serverErrors;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public utilsService: UtilsService,
     private jwtService: JwtService,
     public dictionaryWrapperService: DictionaryWrapperService
@@ -27,42 +27,6 @@ export class ManageServerService {
 
   getManageServerItems = () => {
     return serverTasts;
-  }
-  postDataServer = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  GETDataServer = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  GETQueryDataSource = (method: ENInterfaces, url: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, url).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  postBody = (method: ENInterfaces, val: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
-        resolve(res)
-      })
-    });
-  }
-
-  postArray = (method: ENInterfaces, data: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTARRAYS(method, data).toPromise().then(res => {
-        resolve(res);
-      })
-    });
   }
   linkToElmah = (body: string) => {
     window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerErrorsElmah + body, '_blank');
