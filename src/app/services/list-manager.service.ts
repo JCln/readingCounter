@@ -127,9 +127,10 @@ export class ListManagerService {
   postOffloadModifyEdited = (body: IOffloadModifyReq): Promise<any> => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
     return new Promise(async (resolve) => {
-      const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingPostOffloadModify, body)
-        .catch(() => {
-          this.utilsService.snackBarMessageSuccess(res.message);
+      const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingPostOffloadModify, body).then(res =>
+        this.utilsService.snackBarMessageSuccess(res.message)
+      )
+        .catch(() => {       
           resolve(false);
         });
     })
