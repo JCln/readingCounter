@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IResponses } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 
@@ -27,16 +26,19 @@ export class FormulasService {
   postFormulaEdit = async (method: ENInterfaces, body: object): Promise<any> => {
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, body);
     this.utilsService.snackBarMessageSuccess(res.message);
+    return res;
   }
   postFormulaAdd = async (method: ENInterfaces, dataSource: object) => {
     dataSource['fromDate'] = Converter.persianToEngNumbers(dataSource['fromDate']);
     dataSource['toDate'] = Converter.persianToEngNumbers(dataSource['toDate']);
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, dataSource);
     this.utilsService.snackBarMessageSuccess(res.message);
+    return res;
   }
   postFormulaRemove = async (method: ENInterfaces, UUID: string): Promise<any> => {
     const res = await this.ajaxReqWrapperService.postDataSourceByIdStringly(method, UUID);
     this.utilsService.snackBarMessageSuccess(res.message);
+    return res;
   }
   postExcelFile = async (method: ENInterfaces) => {
     const formData: FormData = new FormData();
@@ -46,6 +48,7 @@ export class FormulasService {
 
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, formData);
     this.utilsService.snackBarMessageSuccess(res.message);
+    return (res);
   }
   /* VALIDATION */
   isNull = (): boolean => {

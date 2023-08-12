@@ -51,7 +51,7 @@ export class ManageServerComponent implements OnInit {
       this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
     }
     else {
-      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote.GETQueryDataSource(ENInterfaces.settingsExpireLicense, insertedKey)) {
+      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExpireLicense, insertedKey)) {
         this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
       }
     }
