@@ -1,9 +1,9 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
@@ -16,26 +16,10 @@ export class ApkService {
   private desc: any;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public utilsService: UtilsService
   ) { }
 
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.APKPreList).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
-  getlastAPK = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(ENInterfaces.APKLast).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
   isNull = (): boolean => {
     if (MathS.isNull(this.desc.versionName)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_versionName);
@@ -82,13 +66,6 @@ export class ApkService {
       return false;
     return true;
   }
-  postById = (method: ENInterfaces, id: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
   postTicket = (): Observable<any> => {
     const formData: FormData = new FormData();
 
@@ -97,7 +74,7 @@ export class ApkService {
     formData.append('versionName', this.desc.versionName);
     formData.append('description', this.desc.description);
 
-    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.APKUpload, formData);
+    return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.APKUpload, formData);
   }
   showSuccessMessage = (message: string, color: ENSnackBarColors) => {
     this.utilsService.snackBarMessage(message, ENSnackBarTimes.sevenMili, color);

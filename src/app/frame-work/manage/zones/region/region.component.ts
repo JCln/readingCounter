@@ -50,7 +50,7 @@ export class RegionComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForRegion) {
-      this.closeTabService.saveDataForRegion = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.RegionGET);
+      this.closeTabService.saveDataForRegion = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionGET);
     }
     this.provinceDictionary = await this.sectorsManagerService.dictionaryWrapperService.getProvinceDictionary();
 
@@ -61,7 +61,7 @@ export class RegionComponent extends FactoryONE {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  استان: ' + rowDataAndIndex['dataSource'].provinceId);
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource'].id);
+      await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource'].id);
       this.refreshTable();
     }
   }
@@ -82,7 +82,7 @@ export class RegionComponent extends FactoryONE {
       dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
 
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource['dataSource']);
+    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.RegionEDIT, dataSource['dataSource']);
     this.refetchTable(dataSource['ri']);
     Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
   }

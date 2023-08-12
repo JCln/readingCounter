@@ -1,5 +1,5 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
@@ -12,7 +12,6 @@ import {
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
@@ -58,7 +57,7 @@ export class SearchService {
   ]
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
@@ -89,31 +88,6 @@ export class SearchService {
       Search.readCode,
       Search.billId,
     ]
-  }
-  postById = (method: ENInterfaces, id: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  doSearch = (method: ENInterfaces, body: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  getProExcel = (method: ENInterfaces, body: any): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBLOB(method, body).toPromise().then(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
   }
   /*VALIDATION*/
   private validationNullMosh = (dataSource: ISearchMoshReq): boolean => {

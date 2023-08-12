@@ -42,7 +42,7 @@ export class ZoneBoundAddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneBoundADD, this.form.value))
+    if (!await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneBoundADD, this.form.value))
       return;
 
     this.dialogRef.close(this.form.value);

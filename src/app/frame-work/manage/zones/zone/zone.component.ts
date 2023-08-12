@@ -50,7 +50,7 @@ export class ZoneComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForZone) {
-      this.closeTabService.saveDataForZone = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ZoneGET);
+      this.closeTabService.saveDataForZone = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneGET);
     }
     this.regionDictionary = await this.sectorsManagerService.dictionaryWrapperService.getRegionDictionary();
 
@@ -61,7 +61,7 @@ export class ZoneComponent extends FactoryONE {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  منطقه: ' + rowDataAndIndex['dataSource'].regionId);
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneREMOVE, rowDataAndIndex['dataSource'].id);
+      await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.ZoneREMOVE, rowDataAndIndex['dataSource'].id);
       this.refetchTable(rowDataAndIndex['ri']);
     }
   }
@@ -81,7 +81,7 @@ export class ZoneComponent extends FactoryONE {
     } else {
       dataSource['dataSource'].regionId = dataSource['dataSource'].regionId['id'];
     }
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneEDIT, dataSource['dataSource']);
+    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneEDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'regionId');
   }
   onRowEditCancel() {

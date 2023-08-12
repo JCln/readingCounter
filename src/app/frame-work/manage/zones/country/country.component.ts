@@ -41,14 +41,14 @@ export class CountryComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForCountry) {
-      this.closeTabService.saveDataForCountry = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.CountryGET);
+      this.closeTabService.saveDataForCountry = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.CountryGET);
     }
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForCountry = this.closeTabService.saveDataForCountry.slice(0, index).concat(this.closeTabService.saveDataForCountry.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData['dataSource'].id);
+      await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.CountryREMOVE, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }
@@ -60,7 +60,7 @@ export class CountryComponent extends FactoryONE {
       this.closeTabService.saveDataForCountry[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryEDIT, dataSource['dataSource']);
+    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.CountryEDIT, dataSource['dataSource']);
   }
   onRowEditCancel() {
     // this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];

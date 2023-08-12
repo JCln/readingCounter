@@ -35,7 +35,7 @@ export class ZoneAddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneADD, this.form.value))
+    if (!await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneADD, this.form.value))
       return;
 
     this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('zoneDictionary');

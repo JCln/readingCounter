@@ -36,7 +36,7 @@ export class ApkComponent extends FactoryONE {
   }
 
   downloadAPK = async () => {
-    const a = await this.apkService.getlastAPK();
+    const a = await this.apkService.ajaxReqWrapperService.getBlob(ENInterfaces.APKLast);
     this.outputManagerService.downloadFile(a, '.apk');
   }
   onChange(event) {
@@ -79,7 +79,7 @@ export class ApkComponent extends FactoryONE {
       this.closeTabService.saveDataForAPKManager = null;
 
     if (this.closeTabService.saveDataForAPKManager === null || !this.closeTabService.saveDataForAPKManager) {
-      this.closeTabService.saveDataForAPKManager = await this.apkService.getDataSource();
+      this.closeTabService.saveDataForAPKManager = await this.apkService.ajaxReqWrapperService.getDataSource(ENInterfaces.APKPreList);
     }
   }
   getUserRole = (): boolean => {
@@ -88,7 +88,7 @@ export class ApkComponent extends FactoryONE {
   removeRow = async (dataSource: number) => {
     if (this.getUserRole()) {
       if (await this.apkService.firstConfirmDialog('نام نسخه: ' + dataSource['dataSource'].versionName + '،  نسخه: ' + dataSource['dataSource'].versionCode)) {
-        const a = await this.apkService.postById(ENInterfaces.APKRemove, dataSource['dataSource'].id);
+        const a = await this.apkService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.APKRemove, dataSource['dataSource'].id);
         if (a) {
           this.apkService.showSuccessMessage(a.message, ENSnackBarColors.success);
           this.refreshTable();

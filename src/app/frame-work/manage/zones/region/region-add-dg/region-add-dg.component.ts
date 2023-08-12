@@ -32,7 +32,7 @@ export class RegionAddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionADD, this.form.value))
+    if (!await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.RegionADD, this.form.value))
       return;
 
     this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('regionDictionary');

@@ -51,7 +51,7 @@ export class ZoneBoundComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForZoneBound) {
-      this.closeTabService.saveDataForZoneBound = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ZoneBoundGET);
+      this.closeTabService.saveDataForZoneBound = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneBoundGET);
     }
     this.zoneDictionary = await this.sectorsManagerService.dictionaryWrapperService.getZoneDictionary();
 
@@ -62,7 +62,7 @@ export class ZoneBoundComponent extends FactoryONE {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].zoneId);
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneBoundREMOVE, rowDataAndIndex['dataSource'].id);
+      await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.ZoneBoundREMOVE, rowDataAndIndex['dataSource'].id);
       this.refetchTable(rowDataAndIndex['ri']);
     }
   }
@@ -82,7 +82,7 @@ export class ZoneBoundComponent extends FactoryONE {
     } else {
       dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
+    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel() {

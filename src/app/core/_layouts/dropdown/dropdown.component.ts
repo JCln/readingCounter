@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { EnvService } from 'services/env.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class DropdownComponent implements OnInit {
   constructor(
     private envService: EnvService,
     private jwtService: JwtService,
-    private interfaceManagerService: InterfaceManagerService
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
   logout = () => {
@@ -31,12 +31,9 @@ export class DropdownComponent implements OnInit {
   linkToChat = () => {
     window.open(this.envService.API_URL + '/' + ENInterfaces.chat + this.jwtService.getAuthorizationToken(), '_blank');
   }
-  getNotificationBadge = (): Promise<number> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.NotifyManagerUnreadCount).toPromise().then((res: any) =>
-        resolve(res.count)//object response                      
-      );
-    });
+  getNotificationBadge = async (): Promise<number> => {
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
+    return res.count;
   }
   getNotification = async () => {
     this.badgeNumber = await this.getNotificationBadge();

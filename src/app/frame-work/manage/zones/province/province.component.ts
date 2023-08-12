@@ -50,7 +50,7 @@ export class ProvinceComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForProvince) {
-      this.closeTabService.saveDataForProvince = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ProvinceGET);
+      this.closeTabService.saveDataForProvince = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ProvinceGET);
     }
     this.countryDictionary = await this.sectorsManagerService.dictionaryWrapperService.getCountryDictionary();
 
@@ -60,7 +60,7 @@ export class ProvinceComponent extends FactoryONE {
   removeRow = async (rowData: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ProvinceREMOVE, rowData['dataSource'].id);
+      await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.ProvinceREMOVE, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
     }
   }
@@ -81,7 +81,7 @@ export class ProvinceComponent extends FactoryONE {
       dataSource['dataSource'].countryId = dataSource['dataSource'].countryId['id'];
     }
 
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource['dataSource']);
+    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ProvinceEDIT, dataSource['dataSource']);
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
   }

@@ -36,7 +36,7 @@ export class SimpleComponent implements OnInit, OnDestroy {
     this.closeTabService.saveDataForSearchSimple = [];
     if (!this.searchService.verificationSimpleSearch(this.searchService._searchSimpleReq))
       return;
-    this.closeTabService.saveDataForSearchSimple = await this.searchService.doSearch(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
+    this.closeTabService.saveDataForSearchSimple = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
     if (this.closeTabService.saveDataForSearchSimple.length) {
       this.converts();
     }

@@ -29,7 +29,7 @@ export class CountryAddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryADD, this.form.value))
+    if (!await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.CountryADD, this.form.value))
       return;
 
     this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('countryDictionary');

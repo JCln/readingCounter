@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -5,7 +6,6 @@ import { IResponses } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
 
 @Injectable({
@@ -14,44 +14,16 @@ import { SectionsService } from './sections.service';
 export class SectorsManagerService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
     private sectionsService: SectionsService
   ) { }
 
-  /*API CALLS */
-  getSectorsDataSource = (method: ENInterfaces): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
-  sectorsAddEdit = (apiUse: ENInterfaces, value: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(apiUse, value).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    })
-  }
-  sectorsDelete = (apiUse: ENInterfaces, id: any) => {
-    this.interfaceManagerService.POSTById(apiUse, id).subscribe((res: IResponses) => {
-      if (res) {
-        this.utilsService.snackBarMessageSuccess(res.message);
-      }
-    });
-  }
-  deleteSingleRow = (place: ENInterfaces, id: number) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(true);
-      })
-    });
+  postByIdSuccessBool = async (method: ENInterfaces, id: number) => {
+    const res = await this.ajaxReqWrapperService.postDataSourceById(method, id);
+    this.utilsService.snackBarMessageSuccess(res.message);
+    return true;
   }
   firstConfirmDialog = (text?: string): Promise<any> => {
     const a = {
@@ -64,14 +36,10 @@ export class SectorsManagerService {
     }
     return this.utilsService.firstConfirmDialog(a);
   }
-  /*FOR COUNTRY */
-  addOrEditCountry = (place: ENInterfaces, result: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(place, result).toPromise().then((res: IResponses) => {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        resolve(res);
-      })
-    });
+  postObjectBySuccessMessage = async (method: ENInterfaces, result: object): Promise<any> => {
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, result);
+    this.utilsService.snackBarMessageSuccess(res.message);
+    return res;
   }
   /* VALIDATION & VERIFICATION */
   verification = (dataSource: any): boolean => {

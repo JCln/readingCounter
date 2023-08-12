@@ -33,7 +33,7 @@ export class ProvinceAddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ProvinceADD, this.form.value))
+    if (!await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ProvinceADD, this.form.value))
       return;
 
     this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('provinceDictionary');

@@ -50,7 +50,7 @@ export class ProComponent extends AllListsFactory {
 
   callApi = async () => {
     if (this.closeTabService.saveDataForSearchProReq.zoneId) {
-      this.closeTabService.saveDataForSearchPro = await this.searchService.doSearch(ENInterfaces.ListSearchPro, this.closeTabService.saveDataForSearchProReq);
+      this.closeTabService.saveDataForSearchPro = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchPro, this.closeTabService.saveDataForSearchProReq);
       this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
       this.getNesseseriesByZone();
     }
@@ -121,7 +121,7 @@ export class ProComponent extends AllListsFactory {
   async connectToServer() {
     if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.searchService._isOrderByDate)) {
       if (document.activeElement.id == 'excel_download') {
-        this.outputManagerService.saveAsExcelABuffer(await this.searchService.getProExcel(ENInterfaces.ListGetProExcel, this.closeTabService.saveDataForSearchProReq), this.dateJalaliService.getCurrentDate());
+        this.outputManagerService.saveAsExcelABuffer(await this.searchService.ajaxReqWrapperService.postBlob(ENInterfaces.ListGetProExcel, this.closeTabService.saveDataForSearchProReq), this.dateJalaliService.getCurrentDate());
       }
       else {
         this.callApi();
