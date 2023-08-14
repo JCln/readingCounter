@@ -42,7 +42,7 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
     })
   }
   connectToServer = async () => {
-    this.closeTabService.usersLogins = await this.securityService.postDataSource(ENInterfaces.requestLogUsersLogins, this.closeTabService.usersLoginsReq);
+    this.closeTabService.usersLogins = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogUsersLogins, this.closeTabService.usersLoginsReq);
     this.convertLoginTime();
   }
   verification = async () => {

@@ -25,7 +25,7 @@ export class UserEditOnRoleComponent extends FactoryONE {
       this.closeTabService.saveDataForEditOnRole = '';
     }
     if (!this.closeTabService.saveDataForEditOnRole) {
-      this.closeTabService.saveDataForEditOnRole = await this.usersAllService.connectToServer(ENInterfaces.userADD);
+      this.closeTabService.saveDataForEditOnRole = await this.usersAllService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
     }
     this.usersAllService.firstConfirmDialog({ messageTitle: EN_messages.confirmUserGroupChange1, doesNotReturnButton: false });
   }

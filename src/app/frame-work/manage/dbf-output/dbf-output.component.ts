@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IZoneManager } from 'interfaces/izones';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -25,7 +26,7 @@ export class DbfOutputComponent extends FactoryONE {
 
   connectToServer = async () => {
     if (this.trackingManagerService.checkVertificationDBF(this.trackingManagerService.dbfOutput)) {
-      const res = await this.trackingManagerService.downloadOutputDBF(this.trackingManagerService.dbfOutput);
+      const res = await this.trackingManagerService.downloadOutputDBF(ENInterfaces.OutputDBF, this.trackingManagerService.dbfOutput);
       this.outputManagerService.downloadFile(res, '.dbf');
     }
   }

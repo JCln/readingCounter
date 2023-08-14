@@ -25,12 +25,12 @@ export class UserSearchComponent extends FactoryONE {
   searchUsers = async () => {
     const temp = this.userAddManagerService.userSearchConnectToServer(this.closeTabService.saveDataForUserSearch);
     if (!MathS.isNull(temp)) {
-      this.closeTabService.saveDataForUserSearchRes = await this.userAddManagerService.postUserBody(ENInterfaces.userSearch, temp);
+      this.closeTabService.saveDataForUserSearchRes = await this.userAddManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userSearch, temp);
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.closeTabService.saveDataForUserSearchRes) {
-      this.closeTabService.saveDataForUserSearch = await this.userAddManagerService.getUserAdd();
+      this.closeTabService.saveDataForUserSearch = await this.userAddManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
     }
 
   }
@@ -39,19 +39,19 @@ export class UserSearchComponent extends FactoryONE {
     a[index].classList.toggle('showConfigs');
   }
   ActivateUser = async (dataSource: IUserManager) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
   }
   DeActivateUser = async (dataSource: object) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
   }
   resetPasswordUser = async (dataSource: object) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
   }
   unLockUser = async (dataSource: object) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.unlockUser, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.unlockUser, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }

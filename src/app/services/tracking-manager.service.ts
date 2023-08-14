@@ -4,10 +4,9 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
@@ -62,7 +61,6 @@ export class TrackingManagerService {
   }
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private allListsService: AllListsService,
@@ -82,7 +80,7 @@ export class TrackingManagerService {
   }
 
   // Output manager 
-  downloadOutputDBF = (dbfData: ITracking | IOutputManager): Promise<any> => {
+  downloadOutputDBF = (method: ENInterfaces, dbfData: ITracking | IOutputManager): Promise<any> => {
     dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);
     dbfData.toDate = Converter.persianToEngNumbers(dbfData.toDate);
     const a: IOutputManager = {
@@ -91,7 +89,7 @@ export class TrackingManagerService {
       toDate: dbfData.toDate
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputDBF, a).toPromise().then(res => {
+      this.ajaxReqWrapperService.interfaceManagerService.POSTBLOB(method, a).toPromise().then(res => {
         resolve(res);
       }).catch(() => {
         this.utilsService.snackBarMessageFailed(EN_messages.server_noDataFounded);
@@ -100,7 +98,7 @@ export class TrackingManagerService {
   }
   downloadOutputDBFEqamatBagh = (method: ENInterfaces, dbfData: any): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOB(method, dbfData).toPromise().then(res => {
+      this.ajaxReqWrapperService.interfaceManagerService.POSTBLOB(method, dbfData).toPromise().then(res => {
         resolve(res);
       }).catch(() => {
         this.utilsService.snackBarMessageFailed(EN_messages.server_noDataFounded);
@@ -111,22 +109,14 @@ export class TrackingManagerService {
     const a: any = {
       trackingId: single.id
     }
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).toPromise().then(res => {
-        resolve(res);
-      })
-    });
+    return this.ajaxReqWrapperService.postBlobObserve(method, a);
   }
   downloadOutputSingleWithENV = (method: ENInterfaces, single: ITracking, inputData: string): Promise<any> => {
     const a: any = {
       trackingId: single.id,
       description: inputData
     }
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).subscribe(res => {
-        resolve(res)
-      })
-    })
+    return this.ajaxReqWrapperService.postBlobObserve(method, a);
   }
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
@@ -142,13 +132,9 @@ export class TrackingManagerService {
     }
     return this.utilsService.firstConfirmDialog(a);
   }
-  postOffloadModifyEdited = (body: IOffloadModifyReq): Promise<any> => {
+  postOffloadModifyEdited = (method: ENInterfaces, body: IOffloadModifyReq): Promise<any> => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
-        resolve(res);
-      })
-    });
+    return this.ajaxReqWrapperService.postDataSourceByObject(method, body)
   }
 
   selectedItems = (_selectors: any[]): any[] => {

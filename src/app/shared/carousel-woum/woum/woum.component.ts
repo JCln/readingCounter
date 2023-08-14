@@ -228,7 +228,7 @@ export class WoumComponent implements OnChanges {
     this.assignToObject();
     const verificationCheck = this.trackingManagerService.verificationOffloadModify(this.offloadModifyReq);
     if (verificationCheck) {
-      const res = await this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+      const res = await this.trackingManagerService.postOffloadModifyEdited(ENInterfaces.trackingPostOffloadModify, this.offloadModifyReq);
       this.trackingManagerService.successSnackMessage(res.message);
     }
   }

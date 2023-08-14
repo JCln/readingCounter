@@ -1,8 +1,8 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IResponses } from 'interfaces/ioverall-config';
 import { IPrivacy, privacies } from './DI/privacies';
-import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
@@ -23,34 +23,13 @@ export class SecurityService {
     changeOrInsertUserLogId: ''
   };
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public utilsService: UtilsService
   ) { }
 
   // API CALLS
   getPrivacyToggle = (): IPrivacy => {
     return privacies;
-  }
-  getDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).toPromise().then((res: IResponses) => {
-        resolve(res);
-      })
-    });
-  }
-  getDataSourceByQuery = (method: ENInterfaces, queryString: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(method, queryString).toPromise().then((res: IResponses) => {
-        resolve(res);
-      })
-    });
-  }
-  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
-        resolve(res);
-      })
-    })
   }
   editPolicy = async (policies: any) => {
     const config = {
@@ -68,7 +47,7 @@ export class SecurityService {
     }
     else {
       if (insertedKey == 'XML') {
-        const res = await this.postDataSource(ENInterfaces.editPolicies, policies);
+        const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.editPolicies, policies);
         this.utilsService.snackBarMessageSuccess(res.message);
       }
       else {

@@ -40,7 +40,7 @@ export class ImgResultDetailsComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.toolsService.verificationImageResultDetails(this.toolsService.imgResultDetails)) {
-      this.allImagesDataSource = await this.toolsService.postDataSource(ENInterfaces.postImgAttrResultDetails, this.toolsService.imgResultDetails);
+      this.allImagesDataSource = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postImgAttrResultDetails, this.toolsService.imgResultDetails);
       if (this.allImagesDataSource.imageCount == ENRandomNumbers.zero) {
         this.toolsService.showSnack(EN_messages.notFound, ENSnackBarColors.warn);
       }

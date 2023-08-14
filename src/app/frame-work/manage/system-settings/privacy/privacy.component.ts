@@ -44,7 +44,7 @@ export class PrivacyComponent extends FactoryONE {
       this.closeTabService.saveDataForPolicies.id = null;
     }
     if (this.closeTabService.saveDataForPolicies.id == 0 || this.closeTabService.saveDataForPolicies.id == null) {
-      this.closeTabService.saveDataForPolicies = await this.securityService.getDataSource(ENInterfaces.getPolicies);
+      this.closeTabService.saveDataForPolicies = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.getPolicies);
     }
     this.auxDataSource.HSTSProtection = location.protocol == 'http:' ? false : true;
     this.privacyOptions = this.securityService.getPrivacyToggle();

@@ -35,7 +35,7 @@ export class AjaxReqWrapperService {
   }
   getDataSourceById = (method: ENInterfaces, id: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(method, id).subscribe(res => {
+      this.interfaceManagerService.GETID(method, id).toPromise().then(res => {
         resolve(res);
       })
     })
@@ -104,9 +104,16 @@ export class AjaxReqWrapperService {
   }
   postBlob = (method: ENInterfaces, body: any): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOB(method, body).subscribe(res => {
+      this.interfaceManagerService.POSTBLOB(method, body).toPromise().then(res => {
         resolve(res);
       })
     });
+  }
+  postBlobObserve = (method: ENInterfaces, body: any) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOBOBSERVE(method, body).subscribe(res => {
+        resolve(res)
+      })
+    })
   }
 }

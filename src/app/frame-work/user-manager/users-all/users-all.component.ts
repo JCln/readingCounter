@@ -35,27 +35,27 @@ export class UsersAllComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
-      this.closeTabService.saveDataForAllUsers = await this.usersAllService.connectToServer(ENInterfaces.userGET);
+      this.closeTabService.saveDataForAllUsers = await this.usersAllService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
     }
     this.convertLoginTime();
   }
   ActivateUser = async (dataSource: IUserManager) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
   DeActivateUser = async (dataSource: object) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
   resetPasswordUser = async (dataSource: object) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
   unLockUser = async (dataSource: object) => {
-    const a = await this.usersAllService.changeUserStatus(ENInterfaces.unlockUser, dataSource['dataSource'].id);
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.unlockUser, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }

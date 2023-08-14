@@ -4,6 +4,7 @@ import { UserAddManagerService } from 'services/user-add-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { UserInputsComponent } from './user-inputs/user-inputs.component';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 
 @Component({
   selector: 'app-user-add',
@@ -28,7 +29,7 @@ export class UserAddComponent extends FactoryONE {
       this.closeTabService.saveDataForAddUsers = null;
     }
     if (!this.closeTabService.saveDataForAddUsers) {
-      this.closeTabService.saveDataForAddUsers = await this.userAddManagerService.getUserAdd();
+      this.closeTabService.saveDataForAddUsers = await this.userAddManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
     }
   }
 }

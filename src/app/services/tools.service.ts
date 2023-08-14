@@ -1,5 +1,5 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
 import { ENReadingReports } from 'interfaces/reading-reports';
@@ -17,7 +17,6 @@ import {
 } from '../interfaces/itools';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from '../interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -33,7 +32,7 @@ export class ToolsService {
   ]
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private jwtService: JwtService
@@ -148,25 +147,6 @@ export class ToolsService {
   }
   getApiUrl = (): string => {
     return this.utilsService.envService.API_URL;
-  }
-  postDataSource = (api: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(api, body).toPromise().then(res =>
-        resolve(res))
-    });
-  }
-  getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
-        resolve(res)
-      })
-    });
-  }
-  getDataSourceById = (api: ENInterfaces, body: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(api, body).toPromise().then(res =>
-        resolve(res))
-    });
   }
   validationDownloadAllImages = (dataSource: IDownloadFileAllImages): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {

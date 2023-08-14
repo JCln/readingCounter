@@ -44,7 +44,7 @@ export class ImgResultDetailsCarouselComponent implements OnChanges, AfterViewIn
 
   getImageAttributionFile = async () => {
     if (this.fileRepositoryId)
-      this.dictionary = (await this.toolsService.getDataSourceById(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
+      this.dictionary = (await this.toolsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
   }
   ngOnChanges(): void {
     this.getImageAttributionFile();
@@ -54,7 +54,7 @@ export class ImgResultDetailsCarouselComponent implements OnChanges, AfterViewIn
     this._addOrEdit.fileRepositoryId = this.fileRepositoryId;
     this._addOrEdit.imageAttributionIds = Converter.customizeSelectedOptionsId(this.dictionary);
 
-    const res = await this.toolsService.postDataSource(ENInterfaces.getImageAttributionAddOrEdit, this._addOrEdit);
+    const res = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getImageAttributionAddOrEdit, this._addOrEdit);
     if (res)
       this.toolsService.showSnack(res.message, ENSnackBarColors.success);
 

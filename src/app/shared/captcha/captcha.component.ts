@@ -1,5 +1,5 @@
+import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DNTCaptchaApiResponse } from 'src/app/classes/captcha-base';
 
@@ -33,23 +33,16 @@ export class CaptchaComponent implements OnInit {
   @Input() min: number;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
   ngOnInit() {
     this.doShow();
   }
 
-  getCaptchaShow(method: ENInterfaces): Promise<any> {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).toPromise().then(res => {
-        resolve(res)
-      })
-    })
-  }
   doShow = async () => {
     this.inputText = '';
-    const data = await this.getCaptchaShow(ENInterfaces.AuthsCaptchaApiShow);
+    const data = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthsCaptchaApiShow);
     this.apiResponse = data;
     this.text = data.dntCaptchaTextValue;
     this.onTextChange();

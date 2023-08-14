@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
@@ -5,7 +6,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
 import { ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { InteractionService } from 'services/interaction.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { NotificationMediaTypeIds } from 'interfaces/build';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class SignalRService {
   constructor(
     public utilsService: UtilsService,
     private interactionService: InteractionService,
-    public interfaceManagerService: InterfaceManagerService
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
   public startConnection = () => {
@@ -49,9 +49,7 @@ export class SignalRService {
   }
   sendBroadcastMessage = (method: ENInterfaces, val: IMessage) => {
     const a = { seconds: val.seconds, title: val.title, text: val.message, color: val.color };
-    return new Promise(() => {
-      this.interfaceManagerService.POSTBODY(method, a).toPromise();
-    });
+    return this.ajaxReqWrapperService.postDataSourceByObject(method, a);
   }
   getConnectionStatus = (): any => {
     return this.hubConnection.state;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserLoggins } from 'interfaces/iuser-manager';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { UserLogginsService } from 'services/user-loggins.service';
@@ -24,7 +25,7 @@ export class UserLogginsComponent extends FactoryONE {
       this.userLogginsService.utilsService.backToPreviousPage();
     }
     else {
-      this.dataSource = await this.userLogginsService.getLogsDataSource(this.userLogginsService.userLoggins_pageSign.GUid);
+      this.dataSource = await this.userLogginsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userLOGINS, this.userLogginsService.userLoggins_pageSign.GUid);
       this.convertLoginTime();
     }
   }

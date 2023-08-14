@@ -33,7 +33,7 @@ export class AllImagesComponent extends FactoryONE {
       return;
     this.allImagesDataSource = null;
 
-    this.allImagesDataSource = await this.toolsService.getDataSource(ENInterfaces.ListAllImages, this.toolsService.trackNumberAllImages);
+    this.allImagesDataSource = await this.toolsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListAllImages, this.toolsService.trackNumberAllImages);
     this.closeTabService.saveDataForRRGalleryRSFirst = this.allImagesDataSource;
     this.closeTabService.saveDataForRRGalleryReq = this.toolsService.trackNumberAllImages;
     this.showAllImgs();

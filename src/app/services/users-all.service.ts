@@ -1,3 +1,4 @@
+import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -15,7 +16,6 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { MathS } from '../classes/math-s';
-import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
 import { UtilsService } from './utils.service';
 
@@ -37,7 +37,7 @@ export class UsersAllService {
   };
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
     private columnManager: ColumnManager
@@ -53,23 +53,8 @@ export class UsersAllService {
         return items
     })
   }
-  /* API CALLS */
-  connectToServer = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
   snackBarMessageSuccess = (res: IResponses) => {
     this.utilsService.snackBarMessageSuccess(res.message);
-  }
-  changeUserStatus = (method: ENInterfaces, UUID: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
-        resolve(res)
-      });
-    });
   }
   routeToUsersAll = () => {
     this.utilsService.routeTo(EN_Routes.wrmuall);
@@ -92,13 +77,10 @@ export class UsersAllService {
       })
     })
   }
-  deleteSingleRow = (place: ENInterfaces, id: number) => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
-        this.snackBarMessageSuccess(res);
-        resolve(true);
-      })
-    });
+  deleteSingleRow = async (place: ENInterfaces, id: number) => {
+    const res = await this.ajaxReqWrapperService.postDataSourceById(place, id);
+    this.snackBarMessageSuccess(res);
+    return true;
   }
   firstConfirmDialog = (dialogConfig: any): Promise<any> => {
     const a = {
@@ -209,12 +191,11 @@ export class UsersAllService {
     if (this.vertification(vals)) {
       const text = EN_messages.confirm_userChange + ' ' + vals.displayName + ' ' + EN_messages.confirm_userChange_2;
       if (await this.firstConfirmDialog({ messageTitle: text })) {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
-            this.utilsService.routeToByUrl(EN_Routes.wrmuall);
-          }
-        });
+        const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userEDIT, vals);
+        if (res) {
+          this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+          this.utilsService.routeToByUrl(EN_Routes.wrmuall);
+        }
       }
     }
 
@@ -235,20 +216,6 @@ export class UsersAllService {
       isActive: dataSource.userInfo.isActive
     }
     this.connectToServerEdit(vals);
-  }
-  getUserInfoByGUID = (guid: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(ENInterfaces.userEDIT, guid).toPromise().then(res => {
-        resolve(res);
-      });
-    })
-  }
-  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise(resolve => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: any) => {
-        resolve(res);
-      });
-    });
   }
   private verificationEditOnRoleGroupAccess = (dataSource: any) => {
     if (MathS.isNull(dataSource)) {
@@ -275,7 +242,7 @@ export class UsersAllService {
       if (this.verificationEditOnRole(val)) {
         const text = EN_messages.confirm_userGroupChange_1 + ' ' + this.userEditOnRoleRoleVal.title + ' ' + EN_messages.confirm_userGroupChange_2;
         if (await this.firstConfirmDialog({ messageTitle: text })) {
-          const res = await this.postDataSource(ENInterfaces.userEditOnRole, val);
+          const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userEditOnRole, val);
           if (res)
             this.snackBarMessageSuccess(res);
         }
@@ -294,7 +261,7 @@ export class UsersAllService {
     formData.append('userId', val.userId);
     formData.append('file', filesList[0]);
 
-    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectImage, formData);
+    return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.signalRNotifDirectImage, formData);
 
   }
   postNotifyDirectVideo = (filesList: any, val: INotifyDirectImage): Observable<any> => {
@@ -304,7 +271,7 @@ export class UsersAllService {
     formData.append('userId', val.userId);
     formData.append('file', filesList[0]);
 
-    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectVideo, formData);
+    return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.signalRNotifDirectVideo, formData);
 
   }
   checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage): boolean => {

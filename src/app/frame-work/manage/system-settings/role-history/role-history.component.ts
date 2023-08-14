@@ -30,7 +30,7 @@ export class RoleHistoryComponent extends FactoryONE {
     }
     console.log(this.closeTabService.saveDataForRoleHistory.length);
     if (!this.closeTabService.saveDataForRoleHistory.length) {
-      this.closeTabService.saveDataForRoleHistory = await this.securityService.getDataSource(ENInterfaces.RoleHistory);
+      this.closeTabService.saveDataForRoleHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleHistory);
     }
   }
   showMoreDetails = (data: IRoleHistory) => {

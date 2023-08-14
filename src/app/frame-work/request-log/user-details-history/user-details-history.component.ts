@@ -24,7 +24,7 @@ export class UserDetailsHistoryComponent extends FactoryONE {
       this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
     }
     else {
-      this.closeTabService.saveDataForUserDetailsHistory = await this.securityService.getDataSourceByQuery(ENInterfaces.UserDetailsHistory, this.securityService.userMasterDetailsHistory_pageSign.id + `/${this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId}`);
+      this.closeTabService.saveDataForUserDetailsHistory = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.UserDetailsHistory, this.securityService.userMasterDetailsHistory_pageSign.id + `/${this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId}`);
       this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id = this.securityService.userMasterDetailsHistory_pageSign.id;
     }
   }

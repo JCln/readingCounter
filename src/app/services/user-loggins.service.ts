@@ -1,9 +1,8 @@
+import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IUserLogginInfo, IUserLoggins, IUserManager } from 'interfaces/iuser-manager';
+import { IUserLogginInfo, IUserManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class UserLogginsService {
 
   constructor(
     public utilsService: UtilsService,
-    private interfaceManagerService: InterfaceManagerService
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
   userLoggins_pageSign: IUserLogginInfo = {
@@ -29,13 +28,6 @@ export class UserLogginsService {
     this.userLoggins_pageSign.displayName = e.displayName;
 
     this.utilsService.routeTo(EN_Routes.wrmuallloggins);
-  }
-  getLogsDataSource = (UUID: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(ENInterfaces.userLOGINS, UUID).subscribe((res: IUserLoggins[]) => {
-        resolve(res)
-      });
-    });
   }
 
 }

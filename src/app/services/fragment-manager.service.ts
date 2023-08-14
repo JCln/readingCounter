@@ -5,12 +5,10 @@ import {
   ENRandomNumbers,
   ENSnackBarColors,
   ENSnackBarTimes,
-  IDictionaryManager,
-  IResponses,
+  IDictionaryManager
 } from 'interfaces/ioverall-config';
 import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { MathS } from 'src/app/classes/math-s';

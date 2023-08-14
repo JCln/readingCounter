@@ -1,13 +1,13 @@
+import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems, ISearchUsersManager } from 'interfaces/iuser-manager';
 
 import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../interfaces/routes.enum';
-import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
 @Injectable()
@@ -15,26 +15,11 @@ export class UserAddManagerService {
   selectedPersonalInfos: IAddUserInfos;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     private utilsService: UtilsService,
     private closeTabService: CloseTabService
   ) { }
 
-  // API CALLS 
-  getUserAdd = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.userADD).toPromise().then(res => {
-        resolve(res);
-      });
-    })
-  }
-  postUserBody = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-        resolve(res);
-      });
-    })
-  }
   addAUserPersonalInfo = (personalItems: any) => {
     this.selectedPersonalInfos = personalItems.value;
   }
@@ -155,16 +140,15 @@ export class UserAddManagerService {
       deviceId: ''
     }
   }
-  private connectToServer = (vals: IAddAUserManager) => {
+  private connectToServer = async (vals: IAddAUserManager) => {
     if (!this.checkEmptyUserInfos(vals))
       return false;
-    this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
-      if (res) {
-        this.toDefaultValsUserAddInfos();
-        this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-        this.utilsService.routeTo(EN_Routes.wrmuall);
-      }
-    });
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
+    if (res) {
+      this.toDefaultValsUserAddInfos();
+      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+      this.utilsService.routeTo(EN_Routes.wrmuall);
+    }
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {
     const vals: IAddAUserManager = {

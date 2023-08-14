@@ -37,7 +37,7 @@ export class UserRoleHistorySummaryComponent extends FactoryONE {
       this.closeTabService.saveDataForUserRoleHistorySumReq.id !=
       this.securityService.userRoleHistoryDetails_pageSign.id
     ) {
-      this.closeTabService.saveDataForUserRoleHistory = await this.securityService.getDataSourceByQuery(ENInterfaces.UserRoleHistory, this.securityService.userRoleHistoryDetails_pageSign.id);
+      this.closeTabService.saveDataForUserRoleHistory = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.UserRoleHistory, this.securityService.userRoleHistoryDetails_pageSign.id);
       this.closeTabService.saveDataForUserRoleHistorySumReq.id = this.securityService.userRoleHistoryDetails_pageSign.id;
     }
 

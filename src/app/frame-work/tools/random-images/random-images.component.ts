@@ -51,7 +51,7 @@ export class RandomImagesComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.toolsService.verificationImageCarousel(this.toolsService.randomImages)) {
-      this.allImagesDataSource = await this.toolsService.postDataSource(ENInterfaces.postToolsRandomImages, this.toolsService.randomImages);
+      this.allImagesDataSource = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postToolsRandomImages, this.toolsService.randomImages);
       this.closeTabService.saveDataForRandomImgsRSFirst = this.allImagesDataSource;
       this.showAllImgs();
       this.addCanShowElementToImages();

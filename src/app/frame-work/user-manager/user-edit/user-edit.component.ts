@@ -1,3 +1,4 @@
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { Component } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { UsersAllService } from 'services/users-all.service';
@@ -33,7 +34,7 @@ export class UserEditComponent extends FactoryONE {
         !this.closeTabService.saveDataForEditUsers ||
         this.closeTabService.saveDataForEditUsersGUID !== this.usersAllService.userEdit_pageSign.GUid
       ) {
-        this.closeTabService.saveDataForEditUsers = await this.usersAllService.getUserInfoByGUID(this.usersAllService.userEdit_pageSign.GUid);
+        this.closeTabService.saveDataForEditUsers = await this.usersAllService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userEDIT, this.usersAllService.userEdit_pageSign.GUid);
         this.closeTabService.saveDataForEditUsersGUID = this.usersAllService.userEdit_pageSign.GUid;
       }
 

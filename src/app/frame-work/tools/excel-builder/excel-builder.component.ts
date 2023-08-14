@@ -26,7 +26,7 @@ export class ExcelBuilderComponent implements OnInit {
   ngOnInit(): void {
   }
   connectToServer = async () => {
-    const a = await this.toolsService.postDataSource(ENInterfaces.addToolsDynamicExcel, this.toolsService.dynamicReq);
+    const a = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.addToolsDynamicExcel, this.toolsService.dynamicReq);
     this.toolsService.showSnack(a.message, ENSnackBarColors.success);
   }
   verification = () => {

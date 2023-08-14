@@ -1,9 +1,9 @@
+import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { MathS } from '../classes/math-s';
 import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../interfaces/idashboard-map';
@@ -15,7 +15,7 @@ export class DashboardService {
   _selectedZone: number = 0;
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     private dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService
   ) { }
@@ -39,37 +39,19 @@ export class DashboardService {
   }
 
   /* CALL API */
-  getDashboardDataSource = (method: ENInterfaces): Promise<any> => {
+  getDashboardDataSource = async (method: ENInterfaces): Promise<any> => {
     if (MathS.isNull(this._selectedZone)) {
-
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(method).toPromise().then(res => {
-          resolve(res);
-        })
-      })
+      return await this.ajaxReqWrapperService.getDataSource(method);
     } else {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(method, '?zoneId=' + this._selectedZone).toPromise().then(res => {
-          resolve(res);
-        })
-      })
+      return await this.ajaxReqWrapperService.getDataSourceByQuote(method, '?zoneId=' + this._selectedZone);
     }
   }
-  postDashboardAnalyzePerformance = (): Promise<any> => {
+  postDashboardAnalyzePerformance = async (): Promise<any> => {
     if (MathS.isNull(this._selectedZone)) {
-
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POST(ENInterfaces.postDashboardAnalyzePerformance).subscribe(res => {
-          resolve(res);
-        })
-      })
+      return await this.ajaxReqWrapperService.postDataServer(ENInterfaces.postDashboardAnalyzePerformance);
     }
     else {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.postDashboardAnalyzePerformance, '?zoneId=' + this._selectedZone).toPromise().then(res => {
-          resolve(res);
-        })
-      })
+      return await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.postDashboardAnalyzePerformance, '?zoneId=' + this._selectedZone);
     }
   }
   getZoneDictionary = (): Promise<any> => {

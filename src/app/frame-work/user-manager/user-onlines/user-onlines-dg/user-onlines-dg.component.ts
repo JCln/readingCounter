@@ -41,7 +41,7 @@ export class UserOnlinesDgComponent implements OnInit {
   }
   postDataSource = async () => {
     if (this.messageService.verificationDirectMessage(this.toastMessageReq)) {
-      const a = await this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.toastMessageReq);
+      const a = await this.userService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.signalRNotifDirectText, this.toastMessageReq);
       if (a)
         this.userService.snackBarMessageSuccess(a);
     }

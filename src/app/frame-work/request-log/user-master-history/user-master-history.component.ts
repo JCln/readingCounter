@@ -40,7 +40,7 @@ export class UserMasterHistoryComponent extends FactoryONE {
       this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id !=
       this.securityService.userMasterDetailsHistory_pageSign.id
     ) {
-      this.closeTabService.saveDataForUserMasterHistory = await this.securityService.getDataSourceByQuery(ENInterfaces.UserMasterHistory, this.securityService.userMasterDetailsHistory_pageSign.id);
+      this.closeTabService.saveDataForUserMasterHistory = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.UserMasterHistory, this.securityService.userMasterDetailsHistory_pageSign.id);
       this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id = this.securityService.userMasterDetailsHistory_pageSign.id;
     }
   }

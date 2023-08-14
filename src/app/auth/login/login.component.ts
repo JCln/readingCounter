@@ -24,6 +24,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
   aboutUsImage = 'assets/imgs/header/logo_Atlas.png';
+  btnLoginId: string = 'btnLogin';
   userData: ICredentials = {
     username: '',
     password: '',
@@ -62,7 +63,7 @@ export class LoginComponent {
       }
       else {
         // button should disable after loging
-        (<HTMLInputElement>document.getElementById("btnLogin")).disabled = true;
+        (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = true;
         const returnUrl = this.authService.compositeService.getRouterQueryParamMap('returnUrl');
         const res = await this.authService.logging(this.userData);
 
@@ -72,7 +73,7 @@ export class LoginComponent {
         }
         else {
           // if loggin failed refresh captcha, enable loginButton needs
-          (<HTMLInputElement>document.getElementById("btnLogin")).disabled = false;
+          (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = false;
           this.userData.dntCaptchaInputText = '';
           this.appDntCaptcha.doShow();
         }

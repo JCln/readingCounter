@@ -37,7 +37,7 @@ export class NotifListBydateComponent extends FactoryONE {
     });
   }
   connectToServer = async () => {
-    this.closeTabService.notificationListByDate = await this.securityService.postDataSource(ENInterfaces.NotifyManagerListByDate, this.closeTabService.notificationListByDateReq);
+    this.closeTabService.notificationListByDate = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.NotifyManagerListByDate, this.closeTabService.notificationListByDateReq);
 
     this.convertIdToTitle(this.closeTabService.notificationListByDate, this.closeTabService.utilsService.getNotificationAlertTypes(), 'alertTypeId')
     this.convertIdToTitle(this.closeTabService.notificationListByDate, this.closeTabService.utilsService.getNotificationMediaTypes(), 'notificationMediaTypeId')

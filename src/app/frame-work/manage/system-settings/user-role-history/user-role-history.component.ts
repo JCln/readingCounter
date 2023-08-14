@@ -35,7 +35,7 @@ export class UserRoleHistoryComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
-      this.closeTabService.saveDataForAllUsers = await this.securityService.getDataSource(ENInterfaces.userGET);
+      this.closeTabService.saveDataForAllUsers = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
     }
   }
 

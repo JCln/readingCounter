@@ -1,7 +1,6 @@
+import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { InterfaceManagerService } from 'services/interface-manager.service';
-
 import { MathS } from '../classes/math-s';
 
 @Injectable({
@@ -10,7 +9,7 @@ import { MathS } from '../classes/math-s';
 export class DictionaryWrapperService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
   private provinceDictionary: any = [];
@@ -74,311 +73,209 @@ export class DictionaryWrapperService {
     kindId: null
   }
 
-  getkarbariCodeDictionary(): Promise<any> {
+  async getkarbariCodeDictionary(): Promise<any> {
     if (!MathS.isNull(this.karbariCodeDictionary))
       return this.karbariCodeDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.KarbariDictionaryCode).subscribe(res => {
-        this.setKarbariDictionaryCode(res);
-        resolve(this.karbariCodeDictionary);
-      })
-    });
-
+    const res = this.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariDictionaryCode);
+    this.setKarbariDictionaryCode(res);
+    return this.karbariCodeDictionary;
   }
-  getProvinceDictionary(): Promise<any> {
+  async getProvinceDictionary(): Promise<any> {
     if (!MathS.isNull(this.provinceDictionary))
       return this.provinceDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.ProvinceDICTIONARY).subscribe(res => {
-        this.setProvinceDictionary(res);
-        resolve(this.provinceDictionary);
-      })
-    });
-
+    const res = this.ajaxReqWrapperService.getDataSource(ENInterfaces.ProvinceDICTIONARY);
+    this.setProvinceDictionary(res);
+    return this.provinceDictionary;
   }
   getRegionDictionary(): Promise<any> {
     if (!MathS.isNull(this.regionDictionary))
       return this.regionDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.RegionDICTIONARY).subscribe(res => {
-        this.setRegionDictionary(res);
-        resolve(this.regionDictionary);
-      })
-    });
-
+    const res = this.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionDICTIONARY);
+    this.setRegionDictionary(res);
+    return this.regionDictionary;
   }
-  getZoneDictionary(): Promise<any> {
+  async getZoneDictionary(): Promise<any> {
     if (!MathS.isNull(this.zoneDictionary))
       return this.zoneDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.ZoneDICTIONARY).subscribe(res => {
-        this.setZoneDictionary(res);
-        resolve(this.zoneDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneDICTIONARY);
+    this.setZoneDictionary(res);
+    return this.zoneDictionary;
   }
-  getCountryDictionary(): Promise<any> {
+  async getCountryDictionary(): Promise<any> {
     if (!MathS.isNull(this.countryDictionary))
       return this.countryDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.CountryDICTIONARY).subscribe(res => {
-        this.setCountryDictionary(res);
-        resolve(this.countryDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.CountryDICTIONARY);
+    this.setCountryDictionary(res);
+    return this.countryDictionary;
   }
-  getUserActivationLogTypesDictionary(): Promise<any> {
+  async getUserActivationLogTypesDictionary(): Promise<any> {
     if (!MathS.isNull(this.userActivationLogTypes))
       return this.userActivationLogTypes;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.requestLogUserActivationDictionary).toPromise().then(res => {
-        this.setUserActivationLogTypes(res);
-        resolve(this.userActivationLogTypes);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.requestLogUserActivationDictionary);
+    this.setUserActivationLogTypes(res);
+    return this.userActivationLogTypes;
   }
-  getAuthLev1Dictionary(): Promise<any> {
+  async getAuthLev1Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev1Dictionary))
       return this.authLev1Dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.AuthLevel1DICTIONARY).subscribe(res => {
-        this.setAuthLev1Dictionary(res);
-        resolve(this.authLev1Dictionary);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel1DICTIONARY);
+    this.setAuthLev1Dictionary(res);
+    return this.authLev1Dictionary;
   }
-  getAuthLev2Dictionary(): Promise<any> {
+  async getAuthLev2Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev2Dictionary))
       return this.authLev2Dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.AuthLevel2DICTIONARY).subscribe(res => {
-        this.setAuthLev2Dictionary(res);
-        resolve(this.authLev2Dictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel2DICTIONARY);
+    this.setAuthLev2Dictionary(res);
+    return this.authLev2Dictionary;
   }
-  getAuthLev3Dictionary(): Promise<any> {
+  async getAuthLev3Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev3Dictionary))
       return this.authLev3Dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.AuthLevel3DICTIONARY).subscribe(res => {
-        this.setAuthLev3Dictionary(res);
-        resolve(this.authLev3Dictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel3DICTIONARY);
+    this.setAuthLev3Dictionary(res);
+    return this.authLev3Dictionary;
   }
-  getAuthLev4Dictionary(): Promise<any> {
+  async getAuthLev4Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev4Dictionary))
       return this.authLev4Dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.AuthLevel4DICTIONARY).subscribe(res => {
-        this.setAuthLev4Dictionary(res);
-        resolve(this.authLev4Dictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel4DICTIONARY);
+    this.setAuthLev4Dictionary(res);
+    return this.authLev4Dictionary;
   }
-  getImageAttrAllDictionary(): Promise<any> {
+  async getImageAttrAllDictionary(): Promise<any> {
     if (!MathS.isNull(this.imageAttributionAllDictionary))
       return this.imageAttributionAllDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.imageAttributionGet).subscribe(res => {
-        this.setImgAttributionDictionary(res);
-        resolve(this.imageAttributionAllDictionary);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.imageAttributionGet);
+    this.setImgAttributionDictionary(res);
+    return this.imageAttributionAllDictionary;
   }
-  getTrackingStatesDictionary(): Promise<any> {
+  async getTrackingStatesDictionary(): Promise<any> {
     if (!MathS.isNull(this.trackingStatesDictionary))
       return this.trackingStatesDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.trackingStatesDictionary).subscribe(res => {
-        this.setTrackingStatesDictionary(res);
-        resolve(this.trackingStatesDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingStatesDictionary);
+    this.setTrackingStatesDictionary(res);
+    return this.trackingStatesDictionary;
   }
-  getTraverseDifferentialDictionary(): Promise<any> {
+  async getTraverseDifferentialDictionary(): Promise<any> {
     if (!MathS.isNull(this.traverseDifferentialDictionary))
       return this.traverseDifferentialDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.ListTraverseDifferentialDictionary).subscribe(res => {
-        this.setTraverseDiffDictionary(res);
-        resolve(this.traverseDifferentialDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.ListTraverseDifferentialDictionary);
+    this.setTraverseDiffDictionary(res);
+    return this.traverseDifferentialDictionary;
   }
-  getCounterReportDictionary(): Promise<any> {
+  async getCounterReportDictionary(): Promise<any> {
     if (!MathS.isNull(this.counterReportDictionary))
       return this.counterReportDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.CounterReportDICTIONARY).subscribe(res => {
-        this.setCounterReportDictionary(res);
-        resolve(this.counterReportDictionary);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.CounterReportDICTIONARY);
+    this.setCounterReportDictionary(res);
+    return this.counterReportDictionary;
   }
-  getCounterReportByZoneIdDictionary(zoneId: number): Promise<any> {
+  async getCounterReportByZoneIdDictionary(zoneId: number): Promise<any> {
     if (this.counterReportByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.counterReportByZoneDictionary.dictionary))
       return this.counterReportByZoneDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId).subscribe(res => {
-        this.setCounterReportByZoneDictionary(res, zoneId);
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId);
+    this.setCounterReportByZoneDictionary(res, zoneId);
+    return res;
   }
-  getUserCounterReaderDictionary = (zoneId: number): Promise<any> => {
+  getUserCounterReaderDictionary = async (zoneId: number): Promise<any> => {
     if (this.userCounterReadersByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.userCounterReadersByZoneDictionary.dictionary))
       return this.userCounterReadersByZoneDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res => {
-        this.setUserCounterReadersByZoneDictionary(res, zoneId);
-        resolve(res)
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterReadersByZoneId, zoneId);
+    this.setUserCounterReadersByZoneDictionary(res, zoneId);
+    return res;
   }
-  getReadingConfigDefaultByZoneIdDictionary = (zoneId: number): Promise<any> => {
+  getReadingConfigDefaultByZoneIdDictionary = async (zoneId: number): Promise<any> => {
     if (this.readingConfigDefaultByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.readingConfigDefaultByZoneDictionary.dictionary))
       return this.readingConfigDefaultByZoneDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId).subscribe(res => {
-        this.setReadingConfigDefaultByZoneDictionary(res, zoneId);
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId);
+    this.setReadingConfigDefaultByZoneDictionary(res, zoneId);
+    return res;
   }
-  getFragmentMasterByZoneIdDictionary = (zoneId: number): Promise<any> => {
+  getFragmentMasterByZoneIdDictionary = async (zoneId: number): Promise<any> => {
     if (this.fragmentMasterByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.fragmentMasterByZoneDictionary.dictionary))
       return this.fragmentMasterByZoneDictionary.dictionary;
 
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res => {
-        this.setFragmentMasterByZoneDictionary(res, zoneId);
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.fragmentMasterInZone, zoneId);
+    this.setFragmentMasterByZoneDictionary(res, zoneId);
+    return res;
   }
-  getCounterStateDictionary(): Promise<any> {
+  async getCounterStateDictionary(): Promise<any> {
     if (!MathS.isNull(this.counterStateDictionary))
       return this.counterStateDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.counterStateDictionary).subscribe(res => {
-        this.setCounterStateDictionary(res);
-        resolve(this.counterStateDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateDictionary);
+    this.setCounterStateDictionary(res);
+    return this.counterStateDictionary;
   }
-  getCounterStateForModifyDictionary(zoneId: number): Promise<any> {
+  async getCounterStateForModifyDictionary(zoneId: number): Promise<any> {
     if (this.counterStateForModifyDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateForModifyDictionary.dictionary))
       return this.counterStateForModifyDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryForModify, zoneId).subscribe(res => {
-        this.setCounterStateForModifyDictionary(res, zoneId);
-        resolve(res);
-      })
-    })
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryForModify, zoneId);
+    this.setCounterStateForModifyDictionary(res, zoneId);
+    return res;
   }
-  getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
+  async getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByZoneIdDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneIdDictionary.dictionary))
       return this.counterStateByZoneIdDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId).subscribe(res => {
-        this.setCounterStateByZoneIdDictionary(res, zoneId);
-        resolve(res);
-      })
-    })
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId);
+    this.setCounterStateByZoneIdDictionary(res, zoneId);
+    return res;
   }
-  getCounterStateByCodeShowAllDictionary(zoneId: number): Promise<any> {
+  async getCounterStateByCodeShowAllDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByCodeShowAllDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeShowAllDictionary.dictionary))
       return this.counterStateByCodeShowAllDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId + '?showAll=true').subscribe(res => {
-        this.setCounterStateByCodeShowAllDictionary(res, zoneId);
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId + '?showAll=true');
+    this.setCounterStateByCodeShowAllDictionary(res, zoneId);
+    return res;
   }
-  getCounterStateByZoneShowAllDictionary(zoneId: number): Promise<any> {
+  async getCounterStateByZoneShowAllDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByZoneShowAllDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneShowAllDictionary.dictionary))
       return this.counterStateByZoneShowAllDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId + '?showAll=true').subscribe(res => {
-        this.setCounterStateByZoneShowAllDictionary(res, zoneId);
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId + '?showAll=true');
+    this.setCounterStateByZoneShowAllDictionary(res, zoneId);
+    return res;
   }
-  getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
+  async getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByCodeDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeDictionary.dictionary))
       return this.counterStateByCodeDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
-        this.setCounterStateByCodeDictionary(res, zoneId);
-        resolve(res);
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId);
+    this.setCounterStateByCodeDictionary(res, zoneId);
+    return res;
   }
-  getPeriodKindDictionary(): Promise<any> {
+  async getPeriodKindDictionary(): Promise<any> {
     if (!MathS.isNull(this.periodKindDictionary))
       return this.periodKindDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.readingPeriodKindDictionary).subscribe(res => {
-        this.setPeriodKindDictionary(res);
-        resolve(this.periodKindDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodKindDictionary);
+    this.setPeriodKindDictionary(res);
+    return this.periodKindDictionary;
   }
-  getReadingPeriodDictionary = (kindId: string): Promise<any> => {
+  getReadingPeriodDictionary = async (kindId: string): Promise<any> => {
     if (this.readingPeriodDictionary.kindId == kindId && !MathS.isNull(this.readingPeriodDictionary.dictionary))
       return this.readingPeriodDictionary.dictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId).toPromise().then((res: any) => {
-        this.setReadingPeriodDictionary(res, +kindId);
-        resolve(res)
-      })
-    });
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId);
+    this.setReadingPeriodDictionary(res, +kindId);
+    return res;
   }
-  getQotrDictionary(): Promise<any> {
+  async getQotrDictionary(): Promise<any> {
     if (!MathS.isNull(this.qotrDictionary))
       return this.qotrDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.QotrDictionary).subscribe(res => {
-        this.setQotrDictionary(res);
-        resolve(this.qotrDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.QotrDictionary);
+    this.setQotrDictionary(res);
+    return this.qotrDictionary;
   }
-  getRoleDictionary(): Promise<any> {
+  async getRoleDictionary(): Promise<any> {
     if (!MathS.isNull(this.roleDictionary))
       return this.roleDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.RoleDICTIONARY).subscribe(res => {
-        this.setRoleDictionary(res);
-        resolve(this.roleDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleDICTIONARY);
+    this.setRoleDictionary(res);
+    return this.roleDictionary;
   }
-  getZoneBoundDictionary(): Promise<any> {
+  async getZoneBoundDictionary(): Promise<any> {
     if (!MathS.isNull(this.zoneBoundDictionary))
       return this.zoneBoundDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.ZoneBoundDICTIONARY).subscribe(res => {
-        this.setZoneBoundDictionary(res);
-        resolve(this.zoneBoundDictionary);
-      })
-    });
-
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneBoundDICTIONARY);
+    this.setZoneBoundDictionary(res);
+    return this.zoneBoundDictionary;
   }
 
 

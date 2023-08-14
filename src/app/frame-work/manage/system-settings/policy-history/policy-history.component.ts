@@ -29,7 +29,7 @@ export class PolicyHistoryComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForPoliciesHistory.length) {
-      this.closeTabService.saveDataForPoliciesHistory = await this.securityService.getDataSource(ENInterfaces.policiesHistory);
+      this.closeTabService.saveDataForPoliciesHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.policiesHistory);
     }
   }
   showMoreDetails = (data: IPrivacy) => {

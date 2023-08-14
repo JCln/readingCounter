@@ -6,7 +6,8 @@ import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import {
   ENRandomNumbers,
   ENSelectedColumnVariables,
-  IDictionaryManager
+  IDictionaryManager,
+  IResponses
 } from 'interfaces/ioverall-config';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -126,14 +127,14 @@ export class ListManagerService {
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq): Promise<any> => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
-    return new Promise(async (resolve) => {
-      await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingPostOffloadModify, body).then(res =>
-        this.utilsService.snackBarMessageSuccess(res.message)
-      )
-        .catch(() => {
-          resolve(false);
-        });
-    })
+    return new Promise((resolve) => {
+      this.ajaxReqWrapperService.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      }).catch(() => {
+        resolve(false);
+      })
+    });
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [

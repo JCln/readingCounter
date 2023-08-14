@@ -35,7 +35,7 @@ export class UserRoleComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForRoleManager) {
-      this.closeTabService.saveDataForRoleManager = await this.userService.connectToServer(ENInterfaces.RoleGET);
+      this.closeTabService.saveDataForRoleManager = await this.userService.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleGET);
     }
     this.insertSelectedColumns();
   }
@@ -72,12 +72,12 @@ export class UserRoleComponent extends FactoryONE {
       return;
     }
     if (dataSource['dataSource'].isNew) {
-      const res = await this.userService.postDataSource(ENInterfaces.RoleADD, dataSource['dataSource']);
+      const res = await this.userService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.RoleADD, dataSource['dataSource']);
       if (res)
         this.userService.snackBarMessageSuccess(res);
     }
     else {
-      const res = await this.userService.postDataSource(ENInterfaces.RoleEDIT, dataSource['dataSource']);
+      const res = await this.userService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.RoleEDIT, dataSource['dataSource']);
       if (res)
         this.userService.snackBarMessageSuccess(res);
     }

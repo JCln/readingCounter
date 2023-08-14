@@ -33,7 +33,7 @@ export class UserOnlinesComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForUserOnlines) {
-      this.closeTabService.saveDataForUserOnlines = await this.userService.connectToServer(ENInterfaces.userOnlines);
+      this.closeTabService.saveDataForUserOnlines = await this.userService.ajaxReqWrapperService.getDataSource(ENInterfaces.userOnlines);
     }
     this.convertLoginTime();
   }

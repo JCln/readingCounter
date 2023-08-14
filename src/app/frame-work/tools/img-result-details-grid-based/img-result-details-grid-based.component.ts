@@ -35,7 +35,7 @@ export class ImgResultDetailsGridBasedComponent extends FactoryONE {
 
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForImgResultDetailsGridBased = await this.toolsService.postDataSource(ENInterfaces.postImgAttrResultDetailsGridBased, this.toolsService.imgResultDetailsGridBased);
+    this.closeTabService.saveDataForImgResultDetailsGridBased = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postImgAttrResultDetailsGridBased, this.toolsService.imgResultDetailsGridBased);
   }
   verification = () => {
     const temp = this.toolsService.verificationImageResultDetails(this.toolsService.imgResultDetailsGridBased);

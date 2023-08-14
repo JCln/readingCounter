@@ -20,7 +20,7 @@
                     [min]="1" [placeholder]="'عبارت تصویر امنیتی را وارد نمایید'">
                 </app-captcha>
             </section>
-            <button id="btnLogin" class="btn_1" type="submit">ورود</button>
+            <button [id]="btnLoginId" class="btn_1" type="submit">ورود</button>
         </form>
         <section class="info">
             <i (click)="gotToAbout()" class="tooltip _circle_border p_icons">

@@ -1,7 +1,6 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENDataMining } from 'interfaces/data-mining';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -10,7 +9,6 @@ import { IReadingReportReq } from 'interfaces/ireports';
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { InterfaceManagerService } from './interface-manager.service';
 import { ProfileService } from './profile.service';
 import { UtilsService } from './utils.service';
 
