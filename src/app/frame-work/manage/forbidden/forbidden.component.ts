@@ -31,7 +31,7 @@ export class ForbiddenComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForFNB = null;
     }
-    this.fbnZoneDictionary = await JSON.parse(JSON.stringify(this.forbiddenService.dictionaryWrapperService.getZoneDictionary()));
+    this.fbnZoneDictionary = JSON.parse(JSON.stringify(await this.forbiddenService.dictionaryWrapperService.getZoneDictionary()));
     if (this.fbnZoneDictionary[0].id !== 0)
       this.fbnZoneDictionary.unshift({ id: 0, title: 'نامشخص', isSelected: true })
   }

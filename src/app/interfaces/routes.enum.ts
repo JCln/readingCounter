@@ -142,4 +142,5 @@ export enum EN_Routes {
     mobileFeedbackSuggest = '/wr/app/suggest',
     mobileFeedbackAllC = '/wr/app/listC',
     mobileFeedbackAllS = '/wr/app/listS',
+    mobileForbiddenType = '/wr/app/fbnType',
 }

@@ -298,6 +298,7 @@
             <td class="__columns" *ngIf="
              _checkUpName == 'allComponent' ||
              _checkUpName =='forbidden' ||             
+             _checkUpName =='forbiddenByParamWithType' ||             
              _checkUpName =='moment-ls'" (click)=" showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
@@ -425,7 +426,8 @@
                 </i>
             </td>
             <td class="__columns" *ngIf="(
-                _outputFileName == 'forbidden'  
+                _outputFileName == 'forbidden' || 
+                _outputFileName == 'forbiddenByParamWithType' 
             )" (click)="doShowCarouselForbidden(dataSource)">
                 <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">

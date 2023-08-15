@@ -11,11 +11,13 @@ export interface IForbiddenManager {
     nextEshterak: string,
     postalCode: string,
     preEshterak: string,
-    tedadVahed: number
+    tedadVahed: number,
     userId: string,
-    x: string
-    y: string
-    zoneId: string
+    x: string,
+    y: string,
+    zoneId: string,
+    activate: boolean,
+    type: string,
 }
 export interface IMostReportInput {
     zoneId: number,

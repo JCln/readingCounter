@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'suggest', loadChildren: () => import('./feedback-not-complaint/feedback-not-complaint.module').then(feedbackIsNotComplaint => feedbackIsNotComplaint.FeedbackNotComplaintModule) },
   { path: 'listC', loadChildren: () => import('./feedback-all/feedback-all.module').then(feedbackAllComplaint => feedbackAllComplaint.FeedbackAllModule) },
   { path: 'listS', loadChildren: () => import('./feedback-all-s/feedback-all-s.module').then(feedbackAllSuggests => feedbackAllSuggests.FeedbackAllSModule) },
+  { path: 'fbnType', loadChildren: () => import('./forbidden-with-type/forbidden-with-type.module').then(forbiddenByParamWithType => forbiddenByParamWithType.ForbiddenWithTypeModule) },
 ];
 
 @NgModule({

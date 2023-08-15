@@ -5,6 +5,11 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
 import { EN_messages } from 'interfaces/enums.enum';
+import { IMostReportInput } from 'interfaces/imanage';
+import { Converter } from '../classes/converter';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +19,7 @@ export class MobileAppService {
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public columnManager: ColumnManager,
+    public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService
   ) { }
 
@@ -57,6 +63,37 @@ export class MobileAppService {
       icon: 'pi pi-trash'
     }
     return this.utilsService.firstConfirmDialog(a);
+  }
+  verificationForbiddenWithType = (forbidden: IMostReportInput): boolean => {
+    forbidden.fromDate = Converter.persianToEngNumbers(forbidden.fromDate);
+    forbidden.toDate = Converter.persianToEngNumbers(forbidden.toDate);
+
+    if (MathS.isNull(forbidden.fromDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(forbidden.toDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    return true;
+  }
+  showInMapSingle = (dataSource: any) => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return;
+    }
+    this.utilsService.routeToByParams(EN_Routes.wr, {
+      x: dataSource.x,
+      y: dataSource.y,
+      zoneId: dataSource.zoneId,
+      insertDateJalali: dataSource.insertDateJalali,
+      displayName: dataSource.displayName,
+      description: dataSource.description,
+      postalCode: dataSource.postalCode,
+      isSingle: true,
+      isForbidden: true
+    });
   }
 
 }

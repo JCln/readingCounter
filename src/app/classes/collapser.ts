@@ -38,4 +38,5 @@ export class Collapser {
     _userActivation: boolean = false;
     _isCollapsedKarkard: boolean = false;
     _isCollapsedAnalyzePrfm: boolean = false;
+    _isCollapsedForbiddenByType: boolean = false;
 }

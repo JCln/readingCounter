@@ -26,4 +26,5 @@ export enum ENReadingReports {
     feedbackAllCReq = 'mobileManagerFeedbackAllCReq',
     feedbackAllSReq = 'mobileManagerFeedbackAllSReq',
     forbidden = 'forbiddenReq',
+    forbiddenTypeReq = 'mobileManagerforbiddenTypeReq',
 }

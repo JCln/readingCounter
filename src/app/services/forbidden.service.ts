@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables } from 'interfaces/ioverall-config';
@@ -7,9 +6,9 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
-import { EN_Routes } from '../interfaces/routes.enum';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'

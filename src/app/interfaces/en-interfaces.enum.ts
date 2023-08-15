@@ -147,6 +147,7 @@ export enum ENInterfaces {
     OutputSINGLE = 'V1/Output/single',
     OutputDELAYED = 'V1/Output/Delayed',
     forbidden = 'V1/Forbidden/ByParam',
+    forbiddenByParamWithType = 'V1/Forbidden/ByParamWithType',
 
     trackingIMPORTED = 'V1/Tracking/Imported',
     trackingLOADED = 'V1/Tracking/Loaded',

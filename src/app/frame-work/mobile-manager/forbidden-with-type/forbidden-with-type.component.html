@@ -1,0 +1,48 @@
+<main>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <section class="_card"
+            [@openClose]="mobileAppService.utilsService.collapser._isCollapsedForbiddenByType ? 'slideUp' : 'slideDown'">
+
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="fbnWithTypeZoneDictionary"
+                        [(ngModel)]="closeTabService.mobileManagerforbiddenTypeReq.zoneId" placeholder="انتخاب مورد"
+                        optionValue="id" optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate"
+                        (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.forbiddenTypeReq,$event)"
+                        [dateObject]="closeTabService.mobileManagerforbiddenTypeReq.fromDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">تا</div>
+                <div class="_value">
+                    <app-date-jalali name="toDate"
+                        (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.forbiddenTypeReq,$event)"
+                        [dateObject]="closeTabService.mobileManagerforbiddenTypeReq.toDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <button type="submit" class="btn_1">
+                مشاهده
+                <i class="pi pi-list"></i>
+            </button>
+        </section>
+    </form>
+</main>
+
+<app-prime-table *ngIf="closeTabService.mobileManagerforbiddenType"
+    [dataSource]="closeTabService.mobileManagerforbiddenType" [_outputFileName]="'forbiddenByParamWithType'"
+    [_checkUpName]="'forbiddenByParamWithType'" [_numberOfExtraColumns]="[1,2]"
+    [_sessionName]="'forbiddenWithParamType-session'" [_selectedColumnsToRemember]="'selectedForbiddenWithType'"
+    [_hasCollapsible]=true [_isCollaped]="mobileAppService.utilsService.collapser._isCollapsedForbiddenByType"
+    (collapsed)="mobileAppService.utilsService.collapser._isCollapsedForbiddenByType = !mobileAppService.utilsService.collapser._isCollapsedForbiddenByType"
+    (refreshedTable)="refreshTable()" (showedInMapSingle)="mobileAppService.showInMapSingle($event)">
+</app-prime-table>

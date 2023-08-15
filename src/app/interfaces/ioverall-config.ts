@@ -181,7 +181,9 @@ export enum ENEssentialsToSave {
     mobileManagerFeedbackAllC = "mobileManagerFeedbackAllC",
     mobileManagerFeedbackAllS = "mobileManagerFeedbackAllS",
     mobileManagerFeedbackAllCReq = "mobileManagerFeedbackAllCReq",
-    mobileManagerFeedbackAllSReq = "mobileManagerFeedbackAllSReq"
+    mobileManagerFeedbackAllSReq = "mobileManagerFeedbackAllSReq",
+    mobileManagerforbiddenTypeReq = 'mobileManagerforbiddenTypeReq',
+    mobileManagerforbiddenType = 'mobileManagerforbiddenType',
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -457,6 +459,7 @@ export enum ENSelectedColumnVariables {
     selectedKarbari = 'karbari',
     selectedQotr = 'qotr',
     selectedForbidden = 'forbidden',
+    selectedForbiddenWithType = 'forbiddenByParamWithType',
     selectedErrors = 'errors',
     selectedErrorsByTrackNumber = 'errorsByTrackNumber',
     selectedServerErrors = 'serverErrors',
