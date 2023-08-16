@@ -20,8 +20,8 @@ export class ListSearchMoshWoumComponent implements OnInit {
   classWrapper = async () => {
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
     this.auxDataSource = JSON.parse(JSON.stringify(this.config.data._data));
-    this.auxDataSource._isNotForbidden = this.config.data._isNotForbidden;
-    this.auxDataSource._imgFeedback = this.config.data._imgFeedback;
+    // Define type as value        
+    this.auxDataSource._type = this.config.data._type;
 
     // for gridBased which doesn't have id should assign fileRepositorayId
     if (!this.auxDataSource.id) {

@@ -293,6 +293,11 @@ export enum ENRandomNumbers {
     oneHundred = 100,
     twoHundred = 200,
 }
+export enum ENImageTypes {
+    typical = 1,
+    forbidden = 2,
+    mobileApp = 3,
+}
 
 export const ENBrowserInfo = {
     Chrome: { title: 'Google Chrome', url: 'https://browser-update.org/fa/update-browser.html' },

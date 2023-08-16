@@ -399,7 +399,7 @@
             <td class="__columns" *ngIf="(
                 _checkUpName == 'allComponent' ||                                                       
                 _outputFileName == 'rrDetails'                        
-            )" (click)="doShowImageDialog(dataSource, true)">
+            )" (click)="showImageDialogImageCount(dataSource)">
                 <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
@@ -408,7 +408,7 @@
             <td class="__columns" *ngIf="(                
                 _outputFileName == 'feedbackAllComplaint' || 
                 _outputFileName == 'feedbackAllSuggest'
-            )" (click)="doShowImageMobileApp(dataSource)">
+            )" (click)="showImageMobileApp(dataSource)">
                 <span class="ui-column-title">{{dataSource.mediaCount ? 'بررسی عکس' : '× بدون عکس'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.mediaCount}">
                     <div class="tooltip_text_right">{{dataSource.mediaCount ? 'بررسی عکس' : '× بدون عکس'}}</div>
@@ -419,7 +419,7 @@
                 _outputFileName == 'trvDiff' || 
                 _outputFileName == 'imgResultGridBased'||
                 _outputFileName == 'trv'      
-            )" (click)="doShowImageDialogWithoutImageCount(dataSource, true)">
+            )" (click)="showTypicalImageDialog(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons pi pi-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
@@ -428,7 +428,7 @@
             <td class="__columns" *ngIf="(
                 _outputFileName == 'forbidden' || 
                 _outputFileName == 'forbiddenByParamWithType' 
-            )" (click)="doShowCarouselForbidden(dataSource)">
+            )" (click)="showCarouselForbidden(dataSource)">
                 <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>

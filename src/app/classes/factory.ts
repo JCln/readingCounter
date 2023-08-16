@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -14,6 +14,7 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
 import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
+import { ENImageTypes } from 'interfaces/ioverall-config';
 
 @Component({
     template: ''
@@ -158,69 +159,11 @@ export class FactorySharedPrime implements OnChanges {
         this.hasBeenReadsToggler();
     }
     setTraslateToPrimeNgTable = () => {
-        this.config.setTranslation({
-            'accept': 'تایید',
-            'reject': 'بازگشت',
-            'startsWith': ' شروع با',
-            'contains': 'شامل باشد',
-            'notContains': ' شامل نباشد',
-            'endsWith': ' پایان با',
-            'equals': 'برابر',
-            'notEquals': 'نا برابر',
-            'lt': ' کمتر از',
-            'lte': 'کمتر یا برابر',
-            'gt': 'بزرگتر',
-            'gte': 'بزرگتر یا برابر',
-            'is': 'باشد',
-            'isNot': 'نباشد',
-            'before': 'قبل',
-            'after': 'بعد',
-            'clear': 'پاک کردن',
-            'apply': 'تایید',
-            'matchAll': 'مطابقت با همه',
-            'matchAny': ' مطابقت',
-            'addRule': 'جستجو براساس',
-            'removeRule': 'حذف جستجو',
-            'choose': ' انتخاب',
-            'upload': 'ارسال',
-            'cancel': 'بازگشت'
-        });
+        this.config.setTranslation(ENPrimeNGTranslator);
     }
-    doShowImageDialog = (dataSource: any, _isNotForbidden?: boolean) => {
-        // should not open dialog when no images exists
-        if (dataSource.imageCount) {
-            this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-                data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
-                rtl: true,
-                width: '80%',
-            })
-            this.ref.onClose.subscribe(async res => {
-                if (res)
-                    console.log(res);
-            });
-        } else {
-            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
-        }
-    }
-    doShowImageMobileApp = (dataSource: any) => {
-        if (dataSource.mediaCount) {
-            this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-                data: { _data: dataSource, _imgFeedback: true },
-                rtl: true,
-                width: '80%',
-            })
-            this.ref.onClose.subscribe(async res => {
-                if (res)
-                    console.log(res);
-            });
-        } else {
-            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
-        }
-    }
-    doShowImageDialogWithoutImageCount = (dataSource: any, _isNotForbidden?: boolean) => {
-        // should not open dialog when no images exists
+    doShowImageDialog = (dataSource: any, type: ENImageTypes) => {
         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-            data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
+            data: { _data: dataSource, _type: type },
             rtl: true,
             width: '80%',
         })
@@ -229,9 +172,31 @@ export class FactorySharedPrime implements OnChanges {
                 console.log(res);
         });
     }
-    doShowCarouselForbidden = (dataSource: any) => {
+    showTypicalImageDialog = (dataSource: any) => {
+        this.doShowImageDialog(dataSource, ENImageTypes.typical);
+    }
+    showImageDialogImageCount = (dataSource: any) => {
+        // should not open dialog when no images exists
+        if (dataSource.imageCount) {
+            this.showTypicalImageDialog(dataSource);
+        } else {
+            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
+        }
+    }
+    showImageMobileApp = (dataSource: any) => {
+        if (dataSource.mediaCount) {
+            this.doShowImageDialog(dataSource, ENImageTypes.mobileApp);
+        } else {
+            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
+        }
+    }
+    showCarouselForbidden = (dataSource: any) => {
         // To make imageWrapper config Dialog for forbidden
-        this.doShowImageDialog(dataSource, false);
+        if (dataSource.imageCount) {
+            this.doShowImageDialog(dataSource, ENImageTypes.forbidden);
+        } else {
+            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
+        }
     }
     getResizReOrderable = () => {
         this._reOrderableTable = this.profileService.getLocalReOrderable();

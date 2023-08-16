@@ -2,7 +2,7 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENRandomNumbers, IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENImageTypes, ENRandomNumbers, IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Galleria } from 'primeng/galleria';
 import { DownloadManagerService } from 'services/download-manager.service';
@@ -21,6 +21,7 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./woum.component.scss']
 })
 export class WoumComponent implements OnChanges {
+  ENImageTypes = ENImageTypes;
 
   @Input() zoneId?: any;
   @Input() preDate?: string;
@@ -38,8 +39,8 @@ export class WoumComponent implements OnChanges {
   @Input() _feedbackTypeTitle: string;
   @Input() _mobile: string;
   @Input() _solution: string;
-  @Input() _isNotForbidden: boolean;
-  @Input() _imgFeedback: boolean;
+  @Input() _type: ENImageTypes;
+  @Input() _reportTitle: string;
   // from trv & details , ..
   @Input() fulName?: string;
   // from forbidden
@@ -113,14 +114,17 @@ export class WoumComponent implements OnChanges {
     if (!this.id)
       return;
 
-    if (this._imgFeedback) {
-      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.feedbackMobileDictionary, this.id);
-    }
-    if (this._isNotForbidden) {
+    // typical
+    if (this._type == ENImageTypes.typical) {
       this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id);
     }
-    else {
+    // forbidden
+    if (this._type == ENImageTypes.forbidden) {
       this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.id);
+    }
+    // mobileApp
+    if (this._type == ENImageTypes.mobileApp) {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.feedbackMobileDictionary, this.id);
     }
 
     if (this.zoneId) {

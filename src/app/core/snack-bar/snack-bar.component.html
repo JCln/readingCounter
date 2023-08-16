@@ -8,7 +8,8 @@
                 <h3>{{message.summary}}</h3>
                 <p>{{message.detail}}</p>
                 <div *ngIf="message.life" class="_life">{{_notifTimer}}</div>
-                <button class="btn_2_o" (click)="openNotifyType(message)">مشاهده</button>
+                <!-- FORNow: dialog interval timer not show when group messaging -->
+                <button *ngIf="!message.life" class="btn_2_o" (click)="openNotifyType(message)">مشاهده</button>
             </div>
         </ng-template>
     </p-toast>

@@ -150,6 +150,15 @@
     margin: var(--font_l) 0;
     width: 18rem;
   }
+
+  // show button
+  .btn_2 {
+    height: var(--font_22);
+    margin-top: var(--font_03);
+    background: var(--thirdy_1);
+    color: var(--secondary_1);
+    box-shadow: none;
+  }
 }
 
 article {
@@ -201,6 +210,8 @@ app-locations {
   margin: 0;
 
   label {
+    font-size: var(--font_s);
+    color: var(--secondary_8);
     font-weight: 600;
     margin-right: var(--font_xs);
   }

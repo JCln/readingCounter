@@ -52,6 +52,10 @@
             <div class="_key">توضیحات</div>
             <input [readOnly]="true" class="_value _smaller" name="description" [(ngModel)]="description">
         </div>
+        <div class="input_2 double_size" *ngIf="_reportTitle">
+            <div class="_key">گزارش</div>
+            <input [readOnly]="true" class="_value _smaller" name="_reportTitle" [(ngModel)]="_reportTitle">
+        </div>
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>
             <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
@@ -86,7 +90,7 @@
         </div>
     </section>
 
-    <section class="content" *ngIf="_isNotForbidden">
+    <section class="content" *ngIf="_type == ENImageTypes.forbidden">
         <h1 class="title">صدای ضبط شده</h1>
         <hr>
         <div class="_main_audio">
