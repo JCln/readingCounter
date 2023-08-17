@@ -6,6 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { INotificationMessage } from 'interfaces/isettings';
+import { NotificationMediaTypeIds, NotificationMediaTypeList } from 'interfaces/build';
 
 @Component({
   selector: 'app-notification-message',
@@ -14,7 +15,6 @@ import { INotificationMessage } from 'interfaces/isettings';
 })
 export class NotificationMessageComponent extends FactoryONE {
   edgeFilterDictionary = [];
-  // userInputValue: any = { titleUnicode: 'نوع پیام', title: '', value: 'notificationMediaTypeId', insertedValue: '' };
   messageType: any;
   userInputType: number = -1;
 
@@ -63,47 +63,53 @@ export class NotificationMessageComponent extends FactoryONE {
         break;
     }
   }
-  // insertToEdgeDictionary = () => {
-  //   console.log(this.userInputValue);
+  addEmptyValueToMediaTypeList = () => {//: any[]
+    console.log(this.envService.NotificationMediaTypeList);
 
-  //   if (this.userInputValue.value == 'notificationMediaTypeId') {
-  //     this.edgeFilterDictionary = this.envService.NotificationMediaTypeList;
-  //     this.userInputValue.value = 'notificationMediaTypeId';
-  //   }
-  //   else {
-  //     this.edgeFilterDictionary = this.envService.NotificationAlertTypesList;
-  //     this.userInputValue.value = 'alertTypeId';
-  //   }
-  // }
-  // doFilter = (selectedIdValue: number): Promise<boolean> => {
-  //   const origin = this.closeTabService.notificationMessages;
-  //   return new Promise((resolve) => {
-  //     console.log(selectedIdValue);
-  //     console.log(this.messageType);
-  //     console.log(origin[0][this.messageType] == selectedIdValue);
-  //     console.log(origin[1][this.messageType] == selectedIdValue);
+    // return this.envService.NotificationMediaTypeList.unshift(
+    //   { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
+    // );
+  }
+  addEmptyValueToAlertTypeList = () => {//: any[]
+    console.log(this.envService.NotificationMediaTypeList);
 
-  //     setTimeout(() => {
-  //       if (origin) {
-  //         for (let index = 0; index < origin.length; index++) {
-  //           if (this.userInputType == -1) {
-  //             // no value inserted to filter and should show all
-  //             origin[index].canShow = true;
-  //           }
-  //           else {
-  //             if (origin[index][this.messageType] == selectedIdValue) {
-  //               origin[index].canShow = true;
-  //             }
-  //             else {
-  //               origin[index].canShow = false;
-  //             }
-  //           }
-  //         }
-  //       }
-  //       resolve(true);
-  //     }, 0);
-  //   });
-  // }
+    // return this.envService.NotificationAlertTypesList.unshift(
+    //   { title: '', value: -1, titleUnicode: 'بدون فیلتر' },        
+    // );
+  }
+  insertToEdgeDictionary = () => {
+
+    if (this.messageType == NotificationMediaTypeIds) {
+      this.addEmptyValueToMediaTypeList();
+    }
+    else {
+      this.addEmptyValueToAlertTypeList();
+    }
+  }
+  doFilter = (selectedIdValue: number): Promise<boolean> => {
+    const origin = this.closeTabService.notificationMessages;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (origin) {
+          for (let index = 0; index < origin.length; index++) {
+            if (this.userInputType == -1) {
+              // no value inserted to filter and should show all
+              origin[index].canShow = true;
+            }
+            else {
+              if (origin[index][this.messageType] == selectedIdValue) {
+                origin[index].canShow = true;
+              }
+              else {
+                origin[index].canShow = false;
+              }
+            }
+          }
+        }
+        resolve(true);
+      }, 0);
+    });
+  }
   // showItemOnSearch = async (val?: any, selectedIdValue?: any) => {
   //   console.log(val);
   //   console.log(selectedIdValue);
