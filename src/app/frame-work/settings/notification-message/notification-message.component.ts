@@ -6,7 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { INotificationMessage } from 'interfaces/isettings';
-import { NotificationMediaTypeIds, NotificationMediaTypeList } from 'interfaces/build';
+import { NotificationMediaTypeList } from 'interfaces/build';
 
 @Component({
   selector: 'app-notification-message',
@@ -16,7 +16,9 @@ import { NotificationMediaTypeIds, NotificationMediaTypeList } from 'interfaces/
 export class NotificationMessageComponent extends FactoryONE {
   edgeFilterDictionary = [];
   messageType: any;
-  userInputType: number = -1;
+  userInputType: any;
+  // _updateObjectDropdown is just for change name interactively
+  _updateObjectDropdown;
 
   constructor(
     public profileService: ProfileService,
@@ -63,31 +65,51 @@ export class NotificationMessageComponent extends FactoryONE {
         break;
     }
   }
-  addEmptyValueToMediaTypeList = () => {//: any[]
+  addEmptyValueToMediaTypeList = (): any[] => {
     console.log(this.envService.NotificationMediaTypeList);
-
+    return [
+      { title: 'text', value: 0, titleUnicode: 'متن' },
+      { title: 'image', value: 1, titleUnicode: 'تصویر' },
+      { title: 'video', value: 2, titleUnicode: 'ویدیو' },
+      { title: 'audio', value: 4, titleUnicode: 'صوت' },
+    ]
     // return this.envService.NotificationMediaTypeList.unshift(
     //   { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
     // );
   }
-  addEmptyValueToAlertTypeList = () => {//: any[]
+  addEmptyValueToAlertTypeList = (): any[] => {
     console.log(this.envService.NotificationMediaTypeList);
-
+    return [
+      { title: 'confidential', value: 0, titleUnicode: 'محرمانه' },
+      { title: 'ordinary', value: 1, titleUnicode: 'عادی' },
+      { title: 'sensitive', value: 2, titleUnicode: 'حساس' },
+      { title: 'memory_full', value: 4, titleUnicode: 'حافظه' },
+      { title: 'security', value: 8, titleUnicode: 'امنیتی' },
+      { title: 'license', value: 16, titleUnicode: 'مجوز دسترسی' },
+      { title: 'incorrect_time', value: 32, titleUnicode: 'زمان نادرست' },
+    ]
     // return this.envService.NotificationAlertTypesList.unshift(
     //   { title: '', value: -1, titleUnicode: 'بدون فیلتر' },        
     // );
   }
   insertToEdgeDictionary = () => {
+    // -1 mean witout filter then filter should ignored and all data should showed
+    console.log(this.messageType);
 
-    if (this.messageType == NotificationMediaTypeIds) {
-      this.addEmptyValueToMediaTypeList();
+    if (this.messageType == -1) {
+
+    }
+    if (this.messageType == 'notificationMediaTypeId') {
+      this.edgeFilterDictionary = this.addEmptyValueToMediaTypeList();
     }
     else {
-      this.addEmptyValueToAlertTypeList();
+      this.edgeFilterDictionary = this.addEmptyValueToAlertTypeList();
     }
   }
   doFilter = (selectedIdValue: number): Promise<boolean> => {
     const origin = this.closeTabService.notificationMessages;
+    console.log(this.userInputType);
+
     return new Promise((resolve) => {
       setTimeout(() => {
         if (origin) {
@@ -110,12 +132,11 @@ export class NotificationMessageComponent extends FactoryONE {
       }, 0);
     });
   }
-  // showItemOnSearch = async (val?: any, selectedIdValue?: any) => {
-  //   console.log(val);
-  //   console.log(selectedIdValue);
+  showItemOnSearch = async (val?: any, selectedIdValue?: any) => {
+    console.log(selectedIdValue);
 
-  //   await this.doFilter(selectedIdValue.value);
-  // }
+    await this.doFilter(selectedIdValue.value);
+  }
 
 
 }

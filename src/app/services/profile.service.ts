@@ -44,7 +44,7 @@ export class ProfileService {
     private downloadManagerService: DownloadManagerService
   ) { }
   searchInOrderNotificationMessages: any[] = [
-    { titleUnicode: 'بدون فیلتر', value: '', title: '' },
+    { titleUnicode: 'بدون فیلتر', value: -1, title: '' },
     { titleUnicode: 'نوع پیام', value: 'notificationMediaTypeId', title: 'notificationMediaTypeId' },
     { titleUnicode: 'نوع اعلان', value: 'alertTypeId', title: 'alertTypeId' }
   ]
