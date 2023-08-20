@@ -15,10 +15,9 @@ import { NotificationMediaTypeList } from 'interfaces/build';
 })
 export class NotificationMessageComponent extends FactoryONE {
   edgeFilterDictionary = [];
-  messageType: any;
-  userInputType: any;
-  // _updateObjectDropdown is just for change name interactively
-  _updateObjectDropdown;
+  edgeFilterDictionaryTwo = [];
+  messageType: any = -1;
+  userInputType: any = -1;
 
   constructor(
     public profileService: ProfileService,
@@ -29,8 +28,8 @@ export class NotificationMessageComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.notificationMessages = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadGet);
-    // this.insertToEdgeDictionary();
-    // this.showItemOnSearch();
+    this.insertToEdgeDictionary();
+    this.showItemOnSearch(-1);
   }
 
   classWrapper = (canRefresh?: boolean) => {
@@ -65,61 +64,55 @@ export class NotificationMessageComponent extends FactoryONE {
         break;
     }
   }
-  addEmptyValueToMediaTypeList = (): any[] => {
+  addEmptyValueToMediaTypeList = (): any => {
     console.log(this.envService.NotificationMediaTypeList);
-    return [
-      { title: 'text', value: 0, titleUnicode: 'متن' },
-      { title: 'image', value: 1, titleUnicode: 'تصویر' },
-      { title: 'video', value: 2, titleUnicode: 'ویدیو' },
-      { title: 'audio', value: 4, titleUnicode: 'صوت' },
-    ]
-    // return this.envService.NotificationMediaTypeList.unshift(
-    //   { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
-    // );
+    if (this.envService.NotificationMediaTypeList[0].value == -1)
+      return this.envService.NotificationMediaTypeList;
+    else {
+      return this.envService.NotificationMediaTypeList.unshift(
+        { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
+      );
+    }
   }
-  addEmptyValueToAlertTypeList = (): any[] => {
-    console.log(this.envService.NotificationMediaTypeList);
-    return [
-      { title: 'confidential', value: 0, titleUnicode: 'محرمانه' },
-      { title: 'ordinary', value: 1, titleUnicode: 'عادی' },
-      { title: 'sensitive', value: 2, titleUnicode: 'حساس' },
-      { title: 'memory_full', value: 4, titleUnicode: 'حافظه' },
-      { title: 'security', value: 8, titleUnicode: 'امنیتی' },
-      { title: 'license', value: 16, titleUnicode: 'مجوز دسترسی' },
-      { title: 'incorrect_time', value: 32, titleUnicode: 'زمان نادرست' },
-    ]
-    // return this.envService.NotificationAlertTypesList.unshift(
-    //   { title: '', value: -1, titleUnicode: 'بدون فیلتر' },        
-    // );
+  addEmptyValueToAlertTypeList = (): any => {
+    if (this.envService.NotificationAlertTypesList[0].value == -1)
+      return this.envService.NotificationAlertTypesList;
+    else {
+      return this.envService.NotificationAlertTypesList.unshift(
+        { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
+      );
+    }
   }
   insertToEdgeDictionary = () => {
     // -1 mean witout filter then filter should ignored and all data should showed
-    console.log(this.messageType);
-
     if (this.messageType == -1) {
-
+      this.edgeFilterDictionary = [];
     }
-    if (this.messageType == 'notificationMediaTypeId') {
+    if (this.messageType == 1) {
       this.edgeFilterDictionary = this.addEmptyValueToMediaTypeList();
     }
-    else {
-      this.edgeFilterDictionary = this.addEmptyValueToAlertTypeList();
+    if (this.messageType == 2) {
+      this.edgeFilterDictionaryTwo = this.addEmptyValueToAlertTypeList();
     }
+    console.log(this.edgeFilterDictionary);
+    console.log(this.edgeFilterDictionaryTwo);
+
   }
-  doFilter = (selectedIdValue: number): Promise<boolean> => {
+  doFilter = (selectedIdValue: any): Promise<boolean> => {
     const origin = this.closeTabService.notificationMessages;
+    console.log(selectedIdValue);
     console.log(this.userInputType);
 
     return new Promise((resolve) => {
       setTimeout(() => {
         if (origin) {
           for (let index = 0; index < origin.length; index++) {
-            if (this.userInputType == -1) {
+            if (selectedIdValue == -1) {
               // no value inserted to filter and should show all
               origin[index].canShow = true;
             }
             else {
-              if (origin[index][this.messageType] == selectedIdValue) {
+              if (origin[index][selectedIdValue] == this.userInputType) {
                 origin[index].canShow = true;
               }
               else {
@@ -132,10 +125,8 @@ export class NotificationMessageComponent extends FactoryONE {
       }, 0);
     });
   }
-  showItemOnSearch = async (val?: any, selectedIdValue?: any) => {
-    console.log(selectedIdValue);
-
-    await this.doFilter(selectedIdValue.value);
+  showItemOnSearch = async (selectedIdValue?: any) => {
+    await this.doFilter(selectedIdValue);
   }
 
 

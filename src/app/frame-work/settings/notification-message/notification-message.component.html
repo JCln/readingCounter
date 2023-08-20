@@ -3,26 +3,35 @@
     <div class="input_2">
         <div class="_key">جستجو براساس</div>
         <div class="_value">
-            <p-dropdown #drop1 name="notiftype" [options]="profileService.searchInOrderNotificationMessages"
-                placeholder="نوع پیام" [(ngModel)]="messageType" optionValue="value" optionLabel="titleUnicode"
-                filter="true" (onChange)="_updateObjectDropdown = drop1.selectedOption" (onChange)="insertToEdgeDictionary()">
+            <p-dropdown name="notiftype" [options]="profileService.searchInOrderNotificationMessages"
+                [(ngModel)]="messageType" optionValue="value" optionLabel="titleUnicode"
+                (onChange)="insertToEdgeDictionary()">
             </p-dropdown>
         </div>
     </div>
-    <div class="input_2">
-        <div class="_key">{{_updateObjectDropdown.name}}</div>
-        <p-dropdown #drop2 name="mediaType" [options]="edgeFilterDictionary" [(ngModel)]="userInputType"
-            placeholder="انتخاب مورد" optionValue="value" optionLabel="titleUnicode" filter="true"
-            (onChange)="showItemOnSearch(_updateObjectDropdown, drop2.selectedOption)"
-            placeholder="{{_updateObjectDropdown.name}} را وارد نمایید">
-        </p-dropdown>
-
+    <div class="input_2" *ngIf="messageType == 1">
+        <div class="_key">نوع پیام</div>
+        <div class="_value">
+            <p-dropdown name="mediaType" [options]="edgeFilterDictionary" [(ngModel)]="userInputType"
+                placeholder="انتخاب مورد" optionValue="value" optionLabel="titleUnicode"
+                (onChange)="showItemOnSearch('notificationMediaTypeId')" placeholder="انتخاب کنید">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="input_2" *ngIf="messageType == 2">
+        <div class="_key">نوع اعلان</div>
+        <div class="_value">
+            <p-dropdown name="alertType" [options]="edgeFilterDictionaryTwo" [(ngModel)]="userInputType"
+                placeholder="انتخاب مورد" optionValue="value" optionLabel="titleUnicode"
+                (onChange)="showItemOnSearch('alertTypeId')" placeholder="انتخاب کنید">
+            </p-dropdown>
+        </div>
     </div>
 </div>
 
 <section>
-    <div class="_container" *ngFor="let item of closeTabService.notificationMessages; index as ri">
-        <!--[hidden]="!closeTabService.notificationMessages[ri].canShow"-->
+    <div class="_container" *ngFor="let item of closeTabService.notificationMessages; index as ri"
+        [hidden]="!closeTabService.notificationMessages[ri].canShow">
         <div class="_icon">
             <div class="__notificationMediaTypeId" [ngClass]="{
                 'pi pi-envelope':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.text,
