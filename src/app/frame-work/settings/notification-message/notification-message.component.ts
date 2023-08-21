@@ -34,6 +34,7 @@ export class NotificationMessageComponent extends FactoryONE {
       this.closeTabService.notificationMessages = [];
     }
     this.insertToEdgeDictionary();
+    this.searchInOrderChanged();
     if (MathS.isNull(this.closeTabService.notificationMessages)) {
       this.connectToServer();
     }
@@ -63,7 +64,7 @@ export class NotificationMessageComponent extends FactoryONE {
     }
   }
   addEmptyValueToMediaTypeList = (): void => {
-    const find = this.envService.NotificationMediaTypeList.find(item => item.value == -1);
+    const find = this.notifFilterDictionaryMedia.find(item => item.value == -1);
     if (find)
       this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
     else {
