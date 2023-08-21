@@ -6,7 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { INotificationMessage } from 'interfaces/isettings';
-import { NotificationMediaTypeList } from 'interfaces/build';
+import { NotificationAlertTypesList, NotificationMediaTypeList } from 'interfaces/build';
 
 @Component({
   selector: 'app-notification-message',
@@ -14,10 +14,8 @@ import { NotificationMediaTypeList } from 'interfaces/build';
   styleUrls: ['./notification-message.component.scss']
 })
 export class NotificationMessageComponent extends FactoryONE {
-  edgeFilterDictionary = [];
-  edgeFilterDictionaryTwo = [];
-  messageType: any = -1;
-  userInputType: any = -1;
+  notifFilterDictionaryMedia = [];
+  notifFilterDictionaryType = [];
 
   constructor(
     public profileService: ProfileService,
@@ -28,7 +26,6 @@ export class NotificationMessageComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.notificationMessages = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadGet);
-    this.insertToEdgeDictionary();
     this.showItemOnSearch(-1);
   }
 
@@ -36,6 +33,7 @@ export class NotificationMessageComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.notificationMessages = [];
     }
+    this.insertToEdgeDictionary();
     if (MathS.isNull(this.closeTabService.notificationMessages)) {
       this.connectToServer();
     }
@@ -64,45 +62,34 @@ export class NotificationMessageComponent extends FactoryONE {
         break;
     }
   }
-  addEmptyValueToMediaTypeList = (): any => {
-    console.log(this.envService.NotificationMediaTypeList);
-    if (this.envService.NotificationMediaTypeList[0].value == -1)
-      return this.envService.NotificationMediaTypeList;
+  addEmptyValueToMediaTypeList = (): void => {
+    const find = this.envService.NotificationMediaTypeList.find(item => item.value == -1);
+    if (find)
+      this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
     else {
-      return this.envService.NotificationMediaTypeList.unshift(
+      this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
+      this.notifFilterDictionaryMedia.unshift(
         { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
       );
     }
   }
-  addEmptyValueToAlertTypeList = (): any => {
-    if (this.envService.NotificationAlertTypesList[0].value == -1)
-      return this.envService.NotificationAlertTypesList;
+  addEmptyValueToAlertTypeList = (): void => {
+    const find = this.notifFilterDictionaryType.find(item => item.value == -1);
+    if (find)
+      this.notifFilterDictionaryType = this.envService.NotificationAlertTypesList;
     else {
-      return this.envService.NotificationAlertTypesList.unshift(
-        { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
-      );
+      this.notifFilterDictionaryType = this.envService.NotificationAlertTypesList;
+      this.notifFilterDictionaryType.unshift(
+        { title: '', value: -1, titleUnicode: 'بدون فیلتر' }
+      )
     }
   }
   insertToEdgeDictionary = () => {
-    // -1 mean witout filter then filter should ignored and all data should showed
-    if (this.messageType == -1) {
-      this.edgeFilterDictionary = [];
-    }
-    if (this.messageType == 1) {
-      this.edgeFilterDictionary = this.addEmptyValueToMediaTypeList();
-    }
-    if (this.messageType == 2) {
-      this.edgeFilterDictionaryTwo = this.addEmptyValueToAlertTypeList();
-    }
-    console.log(this.edgeFilterDictionary);
-    console.log(this.edgeFilterDictionaryTwo);
-
+    this.addEmptyValueToMediaTypeList();
+    this.addEmptyValueToAlertTypeList();
   }
   doFilter = (selectedIdValue: any): Promise<boolean> => {
     const origin = this.closeTabService.notificationMessages;
-    console.log(selectedIdValue);
-    console.log(this.userInputType);
-
     return new Promise((resolve) => {
       setTimeout(() => {
         if (origin) {
@@ -112,7 +99,7 @@ export class NotificationMessageComponent extends FactoryONE {
               origin[index].canShow = true;
             }
             else {
-              if (origin[index][selectedIdValue] == this.userInputType) {
+              if (origin[index][selectedIdValue] == this.closeTabService.notificationMessagesReq.userInputType) {
                 origin[index].canShow = true;
               }
               else {
@@ -128,6 +115,9 @@ export class NotificationMessageComponent extends FactoryONE {
   showItemOnSearch = async (selectedIdValue?: any) => {
     await this.doFilter(selectedIdValue);
   }
-
+  searchInOrderChanged = () => {
+    // if type of search change, notificationType should be update or the value should be -1 to better UX
+    this.closeTabService.notificationMessagesReq.userInputType = -1;
+  }
 
 }

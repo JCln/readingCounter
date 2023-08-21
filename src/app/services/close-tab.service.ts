@@ -352,10 +352,14 @@ export class CloseTabService {
   // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
   notificationMessages: INotificationMessage[] = [];
+  notificationMessagesReq = {
+    messageType: -1,
+    userInputType: -1
+  }
   notificationListByDate: INotificationMessage[] = [];
   notificationListByDateReq = {
     fromDate: '',
-    toDate: '',
+    toDate: ''
   }
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;

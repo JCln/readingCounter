@@ -4,26 +4,28 @@
         <div class="_key">جستجو براساس</div>
         <div class="_value">
             <p-dropdown name="notiftype" [options]="profileService.searchInOrderNotificationMessages"
-                [(ngModel)]="messageType" optionValue="value" optionLabel="titleUnicode"
-                (onChange)="insertToEdgeDictionary()">
+                [(ngModel)]="closeTabService.notificationMessagesReq.messageType" optionValue="value"
+                optionLabel="titleUnicode" (onChange)="searchInOrderChanged()">
             </p-dropdown>
         </div>
     </div>
-    <div class="input_2" *ngIf="messageType == 1">
+    <div class="input_2" *ngIf="closeTabService.notificationMessagesReq.messageType == 1">
         <div class="_key">نوع پیام</div>
         <div class="_value">
-            <p-dropdown name="mediaType" [options]="edgeFilterDictionary" [(ngModel)]="userInputType"
-                placeholder="انتخاب مورد" optionValue="value" optionLabel="titleUnicode"
-                (onChange)="showItemOnSearch('notificationMediaTypeId')" placeholder="انتخاب کنید">
+            <p-dropdown name="mediaType" [options]="notifFilterDictionaryMedia"
+                [(ngModel)]="closeTabService.notificationMessagesReq.userInputType" placeholder="انتخاب مورد"
+                optionValue="value" optionLabel="titleUnicode" (onChange)="showItemOnSearch('notificationMediaTypeId')"
+                placeholder="انتخاب کنید">
             </p-dropdown>
         </div>
     </div>
-    <div class="input_2" *ngIf="messageType == 2">
+    <div class="input_2" *ngIf="closeTabService.notificationMessagesReq.messageType == 2">
         <div class="_key">نوع اعلان</div>
         <div class="_value">
-            <p-dropdown name="alertType" [options]="edgeFilterDictionaryTwo" [(ngModel)]="userInputType"
-                placeholder="انتخاب مورد" optionValue="value" optionLabel="titleUnicode"
-                (onChange)="showItemOnSearch('alertTypeId')" placeholder="انتخاب کنید">
+            <p-dropdown name="alertType" [options]="notifFilterDictionaryType"
+                [(ngModel)]="closeTabService.notificationMessagesReq.userInputType" placeholder="انتخاب مورد"
+                optionValue="value" optionLabel="titleUnicode" (onChange)="showItemOnSearch('alertTypeId')"
+                placeholder="انتخاب کنید">
             </p-dropdown>
         </div>
     </div>
