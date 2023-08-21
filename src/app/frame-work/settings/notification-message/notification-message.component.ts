@@ -64,7 +64,7 @@ export class NotificationMessageComponent extends FactoryONE {
     }
   }
   addEmptyValueToMediaTypeList = (): void => {
-    const find = this.notifFilterDictionaryMedia.find(item => item.value == -1);
+    const find = this.envService.NotificationMediaTypeList.find(item => item.value == -1);
     if (find)
       this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
     else {
@@ -75,7 +75,7 @@ export class NotificationMessageComponent extends FactoryONE {
     }
   }
   addEmptyValueToAlertTypeList = (): void => {
-    const find = this.notifFilterDictionaryType.find(item => item.value == -1);
+    const find = this.envService.NotificationAlertTypesList.find(item => item.value == -1);
     if (find)
       this.notifFilterDictionaryType = this.envService.NotificationAlertTypesList;
     else {
@@ -90,6 +90,9 @@ export class NotificationMessageComponent extends FactoryONE {
     this.addEmptyValueToAlertTypeList();
   }
   doFilter = (selectedIdValue: any): Promise<boolean> => {
+    if (!selectedIdValue) {
+      selectedIdValue = -1;
+    }
     const origin = this.closeTabService.notificationMessages;
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -114,11 +117,17 @@ export class NotificationMessageComponent extends FactoryONE {
     });
   }
   showItemOnSearch = async (selectedIdValue?: any) => {
+    if (this.closeTabService.notificationMessagesReq.messageType == -1 ||
+      this.closeTabService.notificationMessagesReq.userInputType == -1) {
+      selectedIdValue = -1;
+    }
+
     await this.doFilter(selectedIdValue);
   }
   searchInOrderChanged = () => {
     // if type of search change, notificationType should be update or the value should be -1 to better UX
     this.closeTabService.notificationMessagesReq.userInputType = -1;
+    this.showItemOnSearch();
   }
 
 }
