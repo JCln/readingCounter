@@ -44,7 +44,6 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
 })
 export class FactorySharedPrime implements OnChanges {
 
-    _showSavedColumnButton: boolean;
     _reOrderableTable: boolean;
     tempOriginDataSource: any[] = [];
     ref: DynamicDialogRef;
@@ -124,28 +123,24 @@ export class FactorySharedPrime implements OnChanges {
 
         this.browserStorageService.set(this._outputFileName, newArray);
         this.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
-        if (!this.browserStorageService.isExists(this._outputFileName))
-            this._showSavedColumnButton = true;
     }
     restoreLatestColumnChanges = () => {
         if (!MathS.isNull(this._outputFileName)) {
 
             if (this.browserStorageService.isExists(this._outputFileName)) {
                 this._selectCols = this.browserStorageService.get(this._outputFileName);
-                this._showSavedColumnButton = false;
             }
             else {
                 this._selectCols = this.profileService.columnManager.columnSelectedMenus(this._outputFileName);
-                this._showSavedColumnButton = true;
             }
             this._selectedColumns = this.profileService.columnManager.customizeSelectedColumns(this._selectCols);
         }
     }
     resetSavedColumns = () => {
         if (!MathS.isNull(this._outputFileName)) {
+            // columns was saved on local host and should going to remove
             if (this.browserStorageService.isExists(this._outputFileName)) {
                 this.browserStorageService.removeLocal(this._outputFileName);
-                this._showSavedColumnButton = true;
                 this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
             } else {
                 this.utilsService.snackBarMessageSuccess(EN_messages.tableDefaultColumnOrder);

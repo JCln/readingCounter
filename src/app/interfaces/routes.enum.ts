@@ -132,7 +132,6 @@ export enum EN_Routes {
     'wrmal' = '/wr/m/al/',
     'wrmuedit' = '/wr/mu/edit',
     'userKarkardSummary' = '/wr/m/track/userSummary',
-    'wrmtrack' = '/wr/m/track',
     'wrmuallloggins' = '/wr/mu/all/loggins',
     'login' = '/login',
     'wrmusearch' = '/wr/mu/search',
