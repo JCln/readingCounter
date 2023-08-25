@@ -1,3 +1,4 @@
+import { InteractionService } from 'services/interaction.service';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
@@ -75,7 +76,8 @@ export class FactorySharedPrime implements OnChanges {
         public columnManager: ColumnManager,
         public config: PrimeNGConfig,
         public dialogService: DialogService,
-        public profileService: ProfileService
+        public profileService: ProfileService,
+        public interactionService: InteractionService
     ) {
         this.setTraslateToPrimeNgTable();
         this.getResizReOrderable();
@@ -93,7 +95,7 @@ export class FactorySharedPrime implements OnChanges {
         if (this._checkUpName == 'allComponent') {
             let temp: any[] = [];
             // should be false on initial(_primeNGHeaderCheckbox) because filter on DataSource happen
-            if (this.profileService.columnManager._primeNGHeaderCheckbox) {
+            if (this.columnManager._primeNGHeaderCheckbox) {
                 this.tempOriginDataSource = JSON.parse(JSON.stringify(this.dataSource));
                 for (let index = 0; index < this.dataSource.length; index++) {
                     if (this.dataSource[index].counterStateId !== null)
@@ -124,6 +126,11 @@ export class FactorySharedPrime implements OnChanges {
         this.browserStorageService.set(this._outputFileName, newArray);
         this.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
     }
+    convertToOrigin = () => {
+        for (let index = 0; index < this._selectCols.length; index++) {
+            this._selectCols[index].isSelected = this._selectCols[index].isSelectedOrigin;
+        }
+    }
     restoreLatestColumnChanges = () => {
         if (!MathS.isNull(this._outputFileName)) {
 
@@ -131,20 +138,26 @@ export class FactorySharedPrime implements OnChanges {
                 this._selectCols = this.browserStorageService.get(this._outputFileName);
             }
             else {
-                this._selectCols = this.profileService.columnManager.columnSelectedMenus(this._outputFileName);
+                this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
             }
             this._selectedColumns = this.profileService.columnManager.customizeSelectedColumns(this._selectCols);
         }
     }
     resetSavedColumns = () => {
         if (!MathS.isNull(this._outputFileName)) {
+            // if origin columns not exists, it means contact did not clicked on save columns
+            // working when data exists in local host and reset button clicked now          
             // columns was saved on local host and should going to remove
             if (this.browserStorageService.isExists(this._outputFileName)) {
                 this.browserStorageService.removeLocal(this._outputFileName);
+                this.convertToOrigin();
                 this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
             } else {
+                this.convertToOrigin();
                 this.utilsService.snackBarMessageSuccess(EN_messages.tableDefaultColumnOrder);
             }
+            const url = this.utilsService.compositeService.getRouterUrl();
+            this.interactionService.setRefresh(url);
         }
         else
             this.utilsService.snackBarMessageWarn(EN_messages.done);

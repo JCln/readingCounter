@@ -339,6 +339,7 @@ export interface IObjectIteratation {
     field: string;
     header: string;
     isSelected: boolean;
+    isSelectedOrigin?: boolean;
     ltr?: boolean;
     readonly?: boolean;
     borderize?: boolean;

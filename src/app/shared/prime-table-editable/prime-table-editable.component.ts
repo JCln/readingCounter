@@ -4,6 +4,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
+import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
@@ -58,7 +59,8 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     public utilsService: UtilsService,
     public config: PrimeNGConfig,
     public dialogService: DialogService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    public interactionService: InteractionService
   ) {
     super(
       browserStorageService,
@@ -66,7 +68,8 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
       columnManager,
       config,
       dialogService,
-      profileService
+      profileService,
+      interactionService
     );
   }
   clickedDropDowns = (event: any, element: string, dataId: any) => {

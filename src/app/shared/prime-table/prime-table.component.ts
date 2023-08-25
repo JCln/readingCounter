@@ -79,7 +79,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public dialogService: DialogService,
     public readingReportManagerService: ReadingReportManagerService,
     public profileService: ProfileService,
-    public interactionService: InteractionService
+    public interactionService: InteractionService,
   ) {
     super(
       browserStorageService,
@@ -87,7 +87,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
       columnManager,
       config,
       dialogService,
-      profileService
+      profileService,
+      interactionService
     );
   }
   ngOnChanges(): void {
