@@ -19,24 +19,24 @@ export class TimeLineComponent implements AfterViewInit {
 
   columnTimeLine = (): IObjectIteratation[] => {
     return [
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true, icon: 'grid-column: auto/ span 2;' },
-      { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
-      { field: 'year', header: 'سال', isSelected: false, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true },
-      { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
-      { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
-      { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, isNumber: true },
-      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, isNumber: true },
-      { field: 'counterReaderName', header: 'قرائت کننده فعلی', isSelected: true, readonly: true },
-      { field: 'newCounterReaderName', header: 'قرائت کننده جدید', isSelected: false, readonly: false },
-      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
+      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, readonly: true },
+      { field: 'listNumber', header: 'ش لیست', isSelected: false, isSelectedOrigin: false, readonly: true, icon: 'grid-column: auto/ span 2;' },
+      { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, isSelectedOrigin: false, readonly: true },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, readonly: true },
+      { field: 'year', header: 'سال', isSelected: false, isSelectedOrigin: false, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isSelectedOrigin: false, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isSelectedOrigin: false, readonly: true, ltr: true },
+      { field: 'fromDate', header: 'از', isSelected: false, isSelectedOrigin: false, readonly: true },
+      { field: 'toDate', header: 'تا', isSelected: false, isSelectedOrigin: false, readonly: true },
+      { field: 'itemQuantity', header: 'تعداد', isSelected: false, isSelectedOrigin: false, readonly: true },
+      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true },
+      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true },
+      { field: 'counterReaderName', header: 'قرائت کننده فعلی', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'newCounterReaderName', header: 'قرائت کننده جدید', isSelected: false, isSelectedOrigin: false, readonly: false },
+      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, isSelectedOrigin: true, readonly: false, isBoolean: true },
+      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, isSelectedOrigin: true, readonly: false, isBoolean: true },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, readonly: true, isBoolean: true },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, isSelectedOrigin: false, readonly: true, isBoolean: true }
     ];
   }
   customizeSelectedColumns = () => {

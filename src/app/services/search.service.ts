@@ -50,10 +50,10 @@ export class SearchService {
   }
 
   private _searchProExcel: IObjectIteratation[] = [
-    { field: 'billId', header: 'شناسه قبض', isSelected: true },
-    { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
-    { field: 'radif', header: 'شناسه قبض', isSelected: true },
-    { field: 'eshterak', header: 'شناسه قبض', isSelected: true },
+    { field: 'billId', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
+    { field: 'trackNumber', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
+    { field: 'radif', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
+    { field: 'eshterak', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
   ]
 
   constructor(

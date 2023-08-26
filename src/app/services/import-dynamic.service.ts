@@ -57,12 +57,12 @@ export class ImportDynamicService {
   private _simafaSingleReq: IReadingProgramRes;
 
   private _simafaBatch: IObjectIteratation[] = [
-    { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
-    { field: 'orderDigit', header: 'ترتیب عددی', isSelected: false, readonly: true },
-    { field: 'orderPersian', header: 'ترتیب', isSelected: false, readonly: true },
-    { field: 'routeAndReaderIds', header: 'قرائت کننده', isSelected: true, readonly: false, isSelectOption: true }
+    { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false },
+    { field: 'orderDigit', header: 'ترتیب عددی', isSelected: false, isSelectedOrigin: false, readonly: true },
+    { field: 'orderPersian', header: 'ترتیب', isSelected: false, isSelectedOrigin: false, readonly: true },
+    { field: 'routeAndReaderIds', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: false, isSelectOption: true }
   ]
 
   importDynamicReq: IImportDynamicDefault = {

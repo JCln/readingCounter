@@ -108,8 +108,8 @@ export class SimafaBatchComponent extends FactoryONE {
     })
   }
   insertColumnsToTableAfterSuccess = () => {
-    this.importDynamicService.columnSetSimafaBatch({ field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, readonly: true })
-    this.importDynamicService.columnSetSimafaBatch({ field: 'count', header: 'تعداد', isSelected: true, readonly: true })
+    this.importDynamicService.columnSetSimafaBatch({ field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true })
+    this.importDynamicService.columnSetSimafaBatch({ field: 'count', header: 'تعداد', isSelected: true, isSelectedOrigin: true, readonly: true })
   }
   columnsToDefault = () => {
     this.importDynamicService.columnRemoveSimafaBatch();

@@ -23,18 +23,18 @@ export class DashboardService {
   /* COLUMNS */
   columnDashboardUserOverall = (): IObjectIteratation[] => {
     return [
-      { field: 'all', header: 'مجموع', isSelected: true, readonly: true },
-      { field: 'counterReaders', header: 'قرائت کننده‌ها', isSelected: true, readonly: true },
-      { field: 'readingSupervisors', header: 'ناظران', isSelected: true, readonly: true },
-      { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, readonly: false }
+      { field: 'all', header: 'مجموع', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'counterReaders', header: 'قرائت کننده‌ها', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'readingSupervisors', header: 'ناظران', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, isSelectedOrigin: true, readonly: false }
     ];
   }
   columnDashboards = (): IObjectIteratation[] => {
     return [
-      { field: 'inDayCount', header: 'امروز', isSelected: true, readonly: true },
-      { field: 'inWeekCount', header: 'هفته‌جاری', isSelected: true, readonly: true },
-      { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, readonly: true },
-      { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, readonly: false }
+      { field: 'inDayCount', header: 'امروز', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'inWeekCount', header: 'هفته‌جاری', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, isSelectedOrigin: true, readonly: false }
     ];
   }
 

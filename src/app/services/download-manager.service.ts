@@ -10,9 +10,9 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 export class DownloadManagerService {
   getDownloadListInfo = (): IObjectIteratation[] => {
     return [
-      { field: 'sizeInKB', header: 'حجم (KB)', isSelected: true, readonly: true },
-      { field: 'imageNumbers', header: 'تعداد تصویر', isSelected: true, readonly: true },
-      { field: 'audioNumbers', header: 'تعداد صوت', isSelected: true, readonly: true }
+      { field: 'sizeInKB', header: 'حجم (KB)', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'imageNumbers', header: 'تعداد تصویر', isSelected: true, isSelectedOrigin: true, readonly: true },
+      { field: 'audioNumbers', header: 'تعداد صوت', isSelected: true, isSelectedOrigin: true, readonly: true }
     ];
   }
   dataSource: IOnOffLoad[] = [];
@@ -25,7 +25,7 @@ export class DownloadManagerService {
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
-  
+
   downloadFileInfo = (method: ENInterfaces, targetId: string): Promise<any> => {
     return this.ajaxReqWrapperService.getDataSourceById(method, targetId);
   }
