@@ -124,6 +124,7 @@ export class NotificationMessageComponent extends FactoryONE {
 
     await this.doFilter(selectedIdValue);
   }
+
   searchInOrderChanged = () => {
     // if type of search change, notificationType should be update or the value should be -1 to better UX
     this.closeTabService.notificationMessagesReq.userInputType = -1;
