@@ -6,7 +6,6 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { INotificationMessage } from 'interfaces/isettings';
-import { NotificationAlertTypesList, NotificationMediaTypeList } from 'interfaces/build';
 
 @Component({
   selector: 'app-notification-message',
@@ -16,6 +15,7 @@ import { NotificationAlertTypesList, NotificationMediaTypeList } from 'interface
 export class NotificationMessageComponent extends FactoryONE {
   notifFilterDictionaryMedia = [];
   notifFilterDictionaryType = [];
+  private noFilter: number = -1;
 
   constructor(
     public profileService: ProfileService,
@@ -26,7 +26,7 @@ export class NotificationMessageComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.notificationMessages = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadGet);
-    this.showItemOnSearch(-1);
+    this.showItemOnSearch(this.noFilter);
   }
 
   classWrapper = (canRefresh?: boolean) => {
@@ -64,24 +64,24 @@ export class NotificationMessageComponent extends FactoryONE {
     }
   }
   addEmptyValueToMediaTypeList = (): void => {
-    const find = this.envService.NotificationMediaTypeList.find(item => item.value == -1);
+    const find = this.envService.NotificationMediaTypeList.find(item => item.value == this.noFilter);
     if (find)
       this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
     else {
       this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
       this.notifFilterDictionaryMedia.unshift(
-        { title: '', value: -1, titleUnicode: 'بدون فیلتر' },
+        { title: '', value: this.noFilter, titleUnicode: 'بدون فیلتر' },
       );
     }
   }
   addEmptyValueToAlertTypeList = (): void => {
-    const find = this.envService.NotificationAlertTypesList.find(item => item.value == -1);
+    const find = this.envService.NotificationAlertTypesList.find(item => item.value == this.noFilter);
     if (find)
       this.notifFilterDictionaryType = this.envService.NotificationAlertTypesList;
     else {
       this.notifFilterDictionaryType = this.envService.NotificationAlertTypesList;
       this.notifFilterDictionaryType.unshift(
-        { title: '', value: -1, titleUnicode: 'بدون فیلتر' }
+        { title: '', value: this.noFilter, titleUnicode: 'بدون فیلتر' }
       )
     }
   }
@@ -91,14 +91,14 @@ export class NotificationMessageComponent extends FactoryONE {
   }
   doFilter = (selectedIdValue: any): Promise<boolean> => {
     if (!selectedIdValue) {
-      selectedIdValue = -1;
+      selectedIdValue = this.noFilter;
     }
     const origin = this.closeTabService.notificationMessages;
     return new Promise((resolve) => {
       setTimeout(() => {
         if (origin) {
           for (let index = 0; index < origin.length; index++) {
-            if (selectedIdValue == -1) {
+            if (selectedIdValue == this.noFilter) {
               // no value inserted to filter and should show all
               origin[index].canShow = true;
             }
@@ -117,9 +117,9 @@ export class NotificationMessageComponent extends FactoryONE {
     });
   }
   showItemOnSearch = async (selectedIdValue?: any) => {
-    if (this.closeTabService.notificationMessagesReq.messageType == -1 ||
-      this.closeTabService.notificationMessagesReq.userInputType == -1) {
-      selectedIdValue = -1;
+    if (this.closeTabService.notificationMessagesReq.messageType == this.noFilter ||
+      this.closeTabService.notificationMessagesReq.userInputType == this.noFilter) {
+      selectedIdValue = this.noFilter;
     }
 
     await this.doFilter(selectedIdValue);
@@ -127,7 +127,7 @@ export class NotificationMessageComponent extends FactoryONE {
 
   searchInOrderChanged = () => {
     // if type of search change, notificationType should be update or the value should be -1 to better UX
-    this.closeTabService.notificationMessagesReq.userInputType = -1;
+    this.closeTabService.notificationMessagesReq.userInputType = this.noFilter;
     this.showItemOnSearch();
   }
 
