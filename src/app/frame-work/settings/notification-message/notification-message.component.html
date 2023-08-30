@@ -14,7 +14,7 @@
         <div class="_value">
             <p-dropdown name="mediaType" [options]="notifFilterDictionaryMedia"
                 [(ngModel)]="closeTabService.notificationMessagesReq.userInputType" placeholder="انتخاب مورد"
-                optionValue="value" optionLabel="titleUnicode" (onChange)="showItemOnSearch('notificationMediaTypeId')"
+                optionValue="value" optionLabel="titleUnicode" (onChange)="showItemOnSearch('alertTypeId')"
                 placeholder="انتخاب کنید">
             </p-dropdown>
         </div>
@@ -24,7 +24,7 @@
         <div class="_value">
             <p-dropdown name="alertType" [options]="notifFilterDictionaryType"
                 [(ngModel)]="closeTabService.notificationMessagesReq.userInputType" placeholder="انتخاب مورد"
-                optionValue="value" optionLabel="titleUnicode" (onChange)="showItemOnSearch('alertTypeId')"
+                optionValue="value" optionLabel="titleUnicode" (onChange)="showItemOnSearch('notificationMediaTypeId')"
                 placeholder="انتخاب کنید">
             </p-dropdown>
         </div>

@@ -16,6 +16,7 @@ export class NotificationMessageComponent extends FactoryONE {
   notifFilterDictionaryMedia = [];
   notifFilterDictionaryType = [];
   private noFilter: number = -1;
+  readonly noFilterValue = { title: '', value: this.noFilter, titleUnicode: 'بدون فیلتر' };
 
   constructor(
     public profileService: ProfileService,
@@ -64,25 +65,23 @@ export class NotificationMessageComponent extends FactoryONE {
     }
   }
   addEmptyValueToMediaTypeList = (): void => {
-    const find = this.envService.NotificationMediaTypeList.find(item => item.value == this.noFilter);
+    const mediaList = this.envService.NotificationMediaTypeList;
+    const find = mediaList.find(item => item.value == this.noFilter);
     if (find)
-      this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
+      this.notifFilterDictionaryMedia = mediaList;
     else {
-      this.notifFilterDictionaryMedia = this.envService.NotificationMediaTypeList;
-      this.notifFilterDictionaryMedia.unshift(
-        { title: '', value: this.noFilter, titleUnicode: 'بدون فیلتر' },
-      );
+      this.notifFilterDictionaryMedia = mediaList;
+      this.notifFilterDictionaryMedia.unshift(this.noFilterValue);
     }
   }
   addEmptyValueToAlertTypeList = (): void => {
-    const find = this.envService.NotificationAlertTypesList.find(item => item.value == this.noFilter);
+    const alertList = this.envService.NotificationAlertTypesList;
+    const find = alertList.find(item => item.value == this.noFilter);
     if (find)
-      this.notifFilterDictionaryType = this.envService.NotificationAlertTypesList;
+      this.notifFilterDictionaryType = alertList;
     else {
-      this.notifFilterDictionaryType = this.envService.NotificationAlertTypesList;
-      this.notifFilterDictionaryType.unshift(
-        { title: '', value: this.noFilter, titleUnicode: 'بدون فیلتر' }
-      )
+      this.notifFilterDictionaryType = alertList;
+      this.notifFilterDictionaryType.unshift(this.noFilterValue);
     }
   }
   insertToEdgeDictionary = () => {
