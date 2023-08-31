@@ -29,7 +29,6 @@ export class NotificationMessageComponent extends FactoryONE {
     this.closeTabService.notificationMessages = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadGet);
     this.showItemOnSearch(this.noFilter);
   }
-
   classWrapper = (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.notificationMessages = [];
@@ -39,7 +38,6 @@ export class NotificationMessageComponent extends FactoryONE {
     if (MathS.isNull(this.closeTabService.notificationMessages)) {
       this.connectToServer();
     }
-
   }
   confirmDelivery = async (object: INotificationMessage) => {
     const a = await this.profileService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.NotifyManagerConfirmDelivery, object.id);
@@ -123,7 +121,6 @@ export class NotificationMessageComponent extends FactoryONE {
 
     await this.doFilter(selectedIdValue);
   }
-
   searchInOrderChanged = () => {
     // if type of search change, notificationType should be update or the value should be -1 to better UX
     this.closeTabService.notificationMessagesReq.userInputType = this.noFilter;
