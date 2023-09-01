@@ -1768,6 +1768,18 @@ export class ColumnManager {
         { field: 'isSaxt', header: 'ساخت', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'hasReadingVibrate', header: 'لرزش', isSelected: true, isSelectedOrigin: true, isBoolean: true }
     ]
+    dashboardUserAll: IObjectIteratation[] = [
+        { field: 'all', header: 'مجموع', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'counterReaders', header: 'قرائت کننده‌ها', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'readingSupervisors', header: 'ناظران', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, isSelectedOrigin: true, readonly: false }
+    ]
+    dashboards: IObjectIteratation[] = [
+        { field: 'inDayCount', header: 'امروز', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'inWeekCount', header: 'هفته‌جاری', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, isSelectedOrigin: true, readonly: false }
+    ]
     userAll: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'username', header: 'نام کاربری', isSelected: true, isSelectedOrigin: true, ltr: false },

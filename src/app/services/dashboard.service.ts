@@ -7,6 +7,7 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 
 import { MathS } from '../classes/math-s';
 import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../interfaces/idashboard-map';
+import { ColumnManager } from '../classes/column-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +18,16 @@ export class DashboardService {
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    private columnManager: ColumnManager
   ) { }
 
   /* COLUMNS */
   columnDashboardUserOverall = (): IObjectIteratation[] => {
-    return [
-      { field: 'all', header: 'مجموع', isSelected: true, isSelectedOrigin: true, readonly: true },
-      { field: 'counterReaders', header: 'قرائت کننده‌ها', isSelected: true, isSelectedOrigin: true, readonly: true },
-      { field: 'readingSupervisors', header: 'ناظران', isSelected: true, isSelectedOrigin: true, readonly: true },
-      { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, isSelectedOrigin: true, readonly: false }
-    ];
+    return this.columnManager.columnSelectedMenus('dashboardUserAll');
   }
   columnDashboards = (): IObjectIteratation[] => {
-    return [
-      { field: 'inDayCount', header: 'امروز', isSelected: true, isSelectedOrigin: true, readonly: true },
-      { field: 'inWeekCount', header: 'هفته‌جاری', isSelected: true, isSelectedOrigin: true, readonly: true },
-      { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, isSelectedOrigin: true, readonly: true },
-      { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, isSelectedOrigin: true, readonly: false }
-    ];
+    return this.columnManager.columnSelectedMenus('dashboards');
   }
 
   /* CALL API */

@@ -26,7 +26,6 @@ export interface IDialogMessage {
 })
 export class UtilsService {
 
-
   constructor(
     public compositeService: CompositeService,
     public envService: EnvService,

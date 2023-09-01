@@ -54,8 +54,6 @@ export class AjaxReqWrapperService {
       });
     })
   }
-
-
   postDataServer = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POST(method).toPromise().then(res => {
