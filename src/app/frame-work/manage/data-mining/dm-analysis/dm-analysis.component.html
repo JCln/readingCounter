@@ -65,7 +65,7 @@
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="dataMiningAnalysesService.receiveFromDateJalali(dataMiningAnalysesService.ENDataMining.dataMining, $event)"
+                                (dateJalEvent)="dataMiningAnalysesService.receiveFromDateJalali(dataMiningAnalysesService.ENReadingReports.dataMining, $event)"
                                 [dateObject]="dataMiningAnalysesService.dataMiningReq.fromDate">
                             </app-date-jalali>
                         </div>
@@ -74,7 +74,7 @@
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="dataMiningAnalysesService.receiveToDateJalali(dataMiningAnalysesService.ENDataMining.dataMining, $event)"
+                                (dateJalEvent)="dataMiningAnalysesService.receiveToDateJalali(dataMiningAnalysesService.ENReadingReports.dataMining, $event)"
                                 [dateObject]="dataMiningAnalysesService.dataMiningReq.toDate">
                             </app-date-jalali>
                         </div>

@@ -1,8 +1,8 @@
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
-import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -22,7 +22,7 @@ export class DmAnalysisComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
-    public dataMiningAnalysesService: DataMiningAnalysesService,
+    public dataMiningAnalysesService: ReadingReportManagerService,
     public closeTabService: CloseTabService
   ) {
     super();
@@ -49,7 +49,7 @@ export class DmAnalysisComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);
+    const temp = this.dataMiningAnalysesService.verificationRRShared(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }

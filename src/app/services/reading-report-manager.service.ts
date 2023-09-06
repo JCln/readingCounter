@@ -192,6 +192,16 @@ export class ReadingReportManagerService {
     fragmentMasterIds: [],
     isCollapsed: false
   }
+  dataMiningReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    zoneIds: null
+  }
   trvchReq: IReadingReportTraverseDifferentialReq = {
     zoneId: 0,
     fromDate: '',
@@ -313,18 +323,18 @@ export class ReadingReportManagerService {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
-    }
-    if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
-      return false;
-    }
-    if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
-      return false;
+      if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
     }
     if (dataSource.hasOwnProperty('toDate')) {
       if (MathS.isNull(dataSource['toDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+        return false;
+      }
+      if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
         return false;
       }
     }

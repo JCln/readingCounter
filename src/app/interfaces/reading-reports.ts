@@ -10,6 +10,7 @@ export enum ENReadingReports {
     karkard = 'karkardReq',
     karkardAllStates = 'offKarkardAllStatesReq',
     Locked = 'lockedReq',
+    dataMining = 'dataMiningReq',
     preNumShown = 'preNumberShownReq',
     offloadKarkard = 'karkardOffloadReq',
     fragmentKarkard = 'rrFragmentKarkardReq',

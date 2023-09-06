@@ -10,6 +10,3 @@ export interface IReadingTimeRes {
     disconnectRate: number,
     medianBetweenTwoMinute: number
 }
-export enum ENDataMining {
-    dataMining = 'dataMiningReq'
-}
