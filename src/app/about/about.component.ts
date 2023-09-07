@@ -1,12 +1,12 @@
-import { UtilsService } from './../services/utils.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
   logoAddress = '/assets/imgs/header/logo_Atlas.png';
   aboutUs: { email: string, tel: string, address: string, coName: string };
 
@@ -14,9 +14,6 @@ export class AboutComponent implements OnInit {
     public utilsService: UtilsService
   ) {
     this.aboutUs = this.utilsService.envService.aboutUs;
-  }
-
-  ngOnInit(): void {
   }
 
 }
