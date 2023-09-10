@@ -45,13 +45,11 @@ export class MapService {
   public responseGisAux = {
     value: null
   }
-
   constructor(
     public browserStorageService: BrowserStorageService,
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public envService: EnvService
   ) { }
-
   getFirstItemUrl = (): any => {
     return L.tileLayer(this.envService.mapUrls[0].url);
   }

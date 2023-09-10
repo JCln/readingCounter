@@ -84,7 +84,6 @@ export class OfflineModeService {
       this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
-
     return true;
   }
   checkVertiticationOfflineTxtOut = (filesList: FileList, data: any): boolean => {
