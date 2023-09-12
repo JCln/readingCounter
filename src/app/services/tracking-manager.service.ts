@@ -78,7 +78,6 @@ export class TrackingManagerService {
   getAuthToken = (): string => {
     return this.jwtService.getAuthorizationToken();
   }
-
   // Output manager 
   downloadOutputDBF = (method: ENInterfaces, dbfData: ITracking | IOutputManager): Promise<any> => {
     dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);
@@ -241,7 +240,6 @@ export class TrackingManagerService {
     }
     return true;
   }
-
   /* VERIFICATION */
   verificationOffloadModify = (object: IOffloadModifyReq): boolean => {
     return this.offloadModifyValidation(object);
