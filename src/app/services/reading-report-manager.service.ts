@@ -72,6 +72,7 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: []

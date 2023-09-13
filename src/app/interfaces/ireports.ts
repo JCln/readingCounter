@@ -36,6 +36,7 @@ export interface IReadingReportReq {
     readingPeriodId: number,
     reportCode: number,
     year: number,
+    _selectedKindId?: string,
     _selectedAggregate?: string,
     beginFromImported?: boolean,
     isCollapsed?: boolean,

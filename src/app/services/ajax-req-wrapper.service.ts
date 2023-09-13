@@ -93,13 +93,6 @@ export class AjaxReqWrapperService {
       })
     });
   }
-  postDataSourceStringByObject = (place: string, object: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(place, object).toPromise().then((res: any) => {
-        resolve(true);
-      })
-    });
-  }
   postBlob = (method: ENInterfaces, body: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBLOB(method, body).toPromise().then(res => {

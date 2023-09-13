@@ -74,15 +74,9 @@ export class DynamicTraverseComponent extends FactoryONE {
 
     const confirmed = await this.readManagerService.firstConfirmDialog('عنوان: ' + dataSource['dataSource'].title);
     if (!confirmed) return;
-    console.log(dataSource['dataSource'].id);
-    const route = ENInterfaces.dynamicTraverseRemove + dataSource['dataSource'].id;
-    const a = await this.readManagerService.deleteSingleRowByObjectSpecial(route, dataSource['dataSource']);
-
-    if (a) {
-      this.closeTabService.saveDataForDynamicTraverse[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      delete this.closeTabService.saveDataForDynamicTraverse[dataSource['dataSource'].id];
+    const route = ENInterfaces.dynamicTraverseRemove;
+    if (await this.readManagerService.postObjectWithSuccessMessage(route, dataSource['dataSource']))
       this.refreshTable();
-    }
   }
   async onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
@@ -91,9 +85,6 @@ export class DynamicTraverseComponent extends FactoryONE {
         this.closeTabService.saveDataForDynamicTraverse.shift();
         return;
       }
-      console.log(this.closeTabService.saveDataForDynamicTraverse[dataSource['ri']]);
-      console.log(this.clonedProducts[dataSource['dataSource'].id]);
-
       this.closeTabService.saveDataForDynamicTraverse[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }

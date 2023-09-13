@@ -45,7 +45,8 @@ export class SimafaReadingProgComponent extends FactoryONE {
     }
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.importSimafaReadingProgramReq.kindId);
+    if (this.closeTabService.importSimafaReadingProgramReq.kindId)
+      this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.importSimafaReadingProgramReq.kindId);
   }
   nullSavedSource = () => this.closeTabService.saveDataForSimafaReadingPrograms = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -53,11 +54,9 @@ export class SimafaReadingProgComponent extends FactoryONE {
       this.nullSavedSource();
     }
     this.closeTabService.importSimafaReadingProgramReq = this.importDynamicService.columnGetSimafaRDPG();
-    if (this.closeTabService.saveDataForSimafaReadingPrograms) {
-      this.getReadingPeriod();
-    }
     this.readingPeriodKindsDictionary = await this.importDynamicService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
+    this.getReadingPeriod();
     this._years = this.importDynamicService.getYears();
     Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
   }

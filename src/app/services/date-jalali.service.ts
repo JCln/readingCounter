@@ -18,6 +18,9 @@ export class DateJalaliService {
 
     return Converter.persianToEngNumbers(persianTime);
   }
+  getConvertedJalaliDate = (item: any): string => {
+    return new Date(item).toLocaleDateString('fa-IR');
+  }
   getJalaliDate = (): string => {
     return new Date().toLocaleDateString('fa-IR');
   }
@@ -43,7 +46,7 @@ export class DateJalaliService {
     return Converter.persianToEngNumbers(persianTime);
   }
   getDate = (item: any): string => {
-    let persianDate = this.getJalaliDate();
+    let persianDate = this.getConvertedJalaliDate(item);
 
     if (persianDate.length == 10)
       return persianDate;

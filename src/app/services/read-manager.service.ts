@@ -126,11 +126,6 @@ export class ReadManagerService {
     this.utilsService.snackBarMessageSuccess(res.message);
     return true;
   }
-  deleteSingleRowByObjectSpecial = async (place: string, object: object) => {
-    const res = await this.ajaxReqWrapperService.postDataSourceStringByObject(place, object);
-    this.utilsService.snackBarMessageSuccess(res.message);
-    return true;
-  }
   customizeSelectedColumns = (_selectCols: any[]) => {
     return _selectCols.filter(items => {
       if (items.isSelected)

@@ -307,7 +307,7 @@ export enum ENInterfaces {
     dynamicTraverseAll = 'V1/DynamicTraverse/All',
     dynamicTraverseEdit = 'V1/DynamicTraverse/Edit',
     dynamicTraverseAdd = 'V1/DynamicTraverse/Add',
-    dynamicTraverseRemove = 'V1/DynamicTraverse/Remove/',
+    dynamicTraverseRemove = 'V1/DynamicTraverse/Remove',
     offloadManual = 'V1/Manual/OffLoad',
     fileUploadSingle = 'V1/Upload/Single',
     loadManual = `V1/Load/Manual`,

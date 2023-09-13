@@ -29,7 +29,9 @@
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="this.readingReportManagerService.detailsReq._selectedKindId"
+                                name="_selectedKindId">
                                 <mat-option (click)="getReadingPeriod()"
                                     *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
                                     {{truefalse.title}}
@@ -91,8 +93,9 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRDetails" [_outputFileName]="'rrDetails'"
-        [_checkUpName]="'rr-details'" [_numberOfExtraColumns]="[1]" [_sessionName]="'details-session'" [_selectedColumnsToRemember]="'selectedRRDetails'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDetails"
+        [_checkUpName]="'rr-details'" [_numberOfExtraColumns]="[1]" [_sessionName]="'details-session'"
+        [_selectedColumnsToRemember]="'selectedRRDetails'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDetails"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDetails = !readingReportManagerService.utilsService.collapser.isCollapsedDetails"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
