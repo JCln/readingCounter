@@ -41,7 +41,9 @@
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="readingReportManagerService.trvchReq._selectedKindId"
+                                name="_selectedKindId">
                                 <mat-option (click)="getReadingPeriod()"
                                     *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
                                     {{truefalse.title}}
@@ -67,7 +69,7 @@
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
                                 [(ngModel)]="readingReportManagerService.trvchReq.year" name="year">
-                                <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                     {{truefalse.title}}
                                 </mat-option>
                             </mat-select>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -14,12 +14,8 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class RrFragmentComponent extends FactoryONE {
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
-
   zoneDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
-
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
@@ -42,14 +38,10 @@ export class RrFragmentComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
-    this.receiveYear();
-  }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    if (this._selectedKindId)
-      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    if (this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId);
   }
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.rrFragmentKarkardReq.zoneId)

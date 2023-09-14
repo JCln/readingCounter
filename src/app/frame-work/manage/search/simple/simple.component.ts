@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
@@ -14,14 +13,10 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   styleUrls: ['./simple.component.scss'],
   animations: [transitionAnimation]
 })
-export class SimpleComponent implements OnInit, OnDestroy {
-  _years: ITitleValue[] = [];
-  subscription: Subscription[] = [];
-
+export class SimpleComponent implements OnInit {
   zoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  _selectedKindId: string = '';
 
   constructor(
     public closeTabService: CloseTabService,
@@ -50,7 +45,6 @@ export class SimpleComponent implements OnInit, OnDestroy {
       this.converts();
     }
 
-    this.receiveYear();
     this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
     this.searchService.getSearchInOrderTo();
@@ -58,19 +52,11 @@ export class SimpleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.classWrapper();
   }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   refreshTable = () => {
     this.connectToServer();
   }
-  receiveYear = () => {
-    this._years = this.searchService.getYears();
-  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(this.searchService._searchSimpleReq._selectedKindId);
   }
   routeToLMAll = ($event: any) => {
     const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);

@@ -31,7 +31,7 @@
                 <div class="input_2" [hidden]="searchService._isOrderByDate">
                     <div class="_key">سال</div>
                     <div class="_value">
-                        <p-dropdown #year [options]="_years" name="year"
+                        <p-dropdown #year [options]="closeTabService.years" name="year"
                             [(ngModel)]="closeTabService.saveDataForSearchProReq.year" optionLabel="title"
                             [filter]="true" filterBy="value" optionValue="value" [showClear]="true"
                             placeholder="انتخاب مورد">

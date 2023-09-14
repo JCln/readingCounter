@@ -95,6 +95,7 @@ export interface IReadingReportGISReq {
     isAhadChange: boolean,
     isForbidden: boolean,
     readingPeriodId: number,
+    _selectedKindId?: string,
     year: number,
     fromDate: string,
     toDate: string,
@@ -255,6 +256,7 @@ export interface IReadingReportTraverseDifferentialReq {
     fromDate: string,
     toDate: string,
     readingPeriodId: number,
+    _selectedKindId: string,
     year: number,
     traverseType: number,
     zoneIds: [

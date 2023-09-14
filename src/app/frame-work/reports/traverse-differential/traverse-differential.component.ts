@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -18,8 +18,6 @@ import { EN_Routes } from 'interfaces/routes.enum';
 export class TraverseDifferentialComponent extends FactoryONE {
   karbariDictionaryByCode: IDictionaryManager[] = [];
 
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   traverseDiffrentialDictionary: IDictionaryManager[] = [];
@@ -47,7 +45,6 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.dictionaryWrapperService.getTraverseDifferentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
-    this.receiveYear();
   }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamtrvchchart);
@@ -56,11 +53,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
     if (this.readingReportManagerService.trvchReq.zoneId)
       this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.trvchReq.zoneId);
   }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
-  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.trvchReq._selectedKindId);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportManagerService.trvchReq, this.readingReportManagerService._isOrderByDate);

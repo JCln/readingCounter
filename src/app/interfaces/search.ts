@@ -16,6 +16,7 @@ export interface ISearchSimpleReq {
     fromDate: string,
     toDate: string,
     readingPeriodId: string,
+    _selectedKindId: string,
     year: number,
     isCollapsed?: boolean
 }

@@ -39,10 +39,12 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     _selectedAggregate: ''// Default group by
   };
+  // inStateReq doesn't need _isSeletedKind
   imgAttrResultReq: IReadingReportReq = {
     fromDate: '',
     toDate: '',
@@ -51,6 +53,7 @@ export class ReadingReportManagerService {
     reportCode: 0,
     year: this.utilsService.getFirstYear()
   };
+  // inStateReq doesn't need _isSeletedKind
   imgAttrAnalyzeReq: IReadingReportReq = {
     zoneId: null,
     fromDate: '',
@@ -83,10 +86,12 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: []
   }
+  // inStateReq doesn't need _isSeletedKind
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
@@ -102,6 +107,7 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: []
@@ -111,6 +117,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     counterReaderId: '',
+    _selectedKindId: '',
     readingPeriodId: null,
     reportCode: 0,
     year: this.utilsService.getFirstYear()
@@ -121,6 +128,7 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear()
   }
@@ -130,6 +138,7 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     isCollapsed: false,
@@ -141,6 +150,7 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: []
@@ -152,6 +162,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
+    _selectedKindId: '',
     beginFromImported: true,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: []
@@ -165,6 +176,7 @@ export class ReadingReportManagerService {
     isForbidden: false,
     fromDate: '',
     toDate: '',
+    _selectedKindId: '',
     readingPeriodId: null,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: [],
@@ -177,6 +189,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
+    _selectedKindId: '',
     year: this.utilsService.getFirstYear(),
     zoneIds: [0]
   }
@@ -188,6 +201,7 @@ export class ReadingReportManagerService {
     readingPeriodId: null,
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
+    _selectedKindId: '',
     zoneIds: [0],
     beginFromImported: false,
     fragmentMasterIds: [],
@@ -199,6 +213,7 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     zoneIds: null
@@ -208,6 +223,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     year: this.utilsService.getFirstYear(),
     traverseType: 0,
     zoneIds: null,
@@ -219,10 +235,12 @@ export class ReadingReportManagerService {
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: []
   }
+  // inStateReq doesn't need _isSeletedKind
   inStateReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
@@ -425,9 +443,6 @@ export class ReadingReportManagerService {
   }
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
-  }
-  getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);

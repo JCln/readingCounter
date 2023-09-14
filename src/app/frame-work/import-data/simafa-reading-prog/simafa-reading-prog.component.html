@@ -40,7 +40,7 @@
                 <div class="_value">
                     <mat-select placeholder="انتخاب مورد"
                         [(ngModel)]="closeTabService.importSimafaReadingProgramReq.year" name="year">
-                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                        <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>

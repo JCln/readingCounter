@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -15,8 +15,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class MasterComponent extends FactoryONE {
   rowGroupMetadata: any;
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   aggregateOptions = [
@@ -41,14 +39,10 @@ export class MasterComponent extends FactoryONE {
 
     this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.receiveYear();
     // this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
-  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.masterReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.masterReq, this.readingReportManagerService._isOrderByDate);

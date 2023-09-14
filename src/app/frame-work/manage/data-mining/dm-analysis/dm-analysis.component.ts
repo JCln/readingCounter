@@ -1,7 +1,7 @@
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -15,8 +15,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class DmAnalysisComponent extends FactoryONE {
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -40,13 +38,9 @@ export class DmAnalysisComponent extends FactoryONE {
     this.dataMiningAnalysesService.getSearchInOrderTo();
     this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.receiveYear();
-  }
-  receiveYear = () => {
-    this._years = this.dataMiningAnalysesService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionary(this.dataMiningAnalysesService.dataMiningReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.dataMiningAnalysesService.verificationRRShared(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);

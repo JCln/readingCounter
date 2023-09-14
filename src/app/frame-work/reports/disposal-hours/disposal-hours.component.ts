@@ -16,8 +16,6 @@ import { EN_Routes } from 'interfaces/routes.enum';
   animations: [transitionAnimation]
 })
 export class DisposalHoursComponent extends FactoryONE {
-  _isOrderByDate: boolean = true;
-  _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
 
   constructor(

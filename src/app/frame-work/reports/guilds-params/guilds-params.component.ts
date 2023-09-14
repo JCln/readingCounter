@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -14,8 +14,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class GuildsParamsComponent extends FactoryONE {
 
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   // karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
@@ -43,14 +41,10 @@ export class GuildsParamsComponent extends FactoryONE {
 
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
-    this.receiveYear();
     this.getFragmentByZone();
   }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
-  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.guildsWithParamsReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.guildsWithParamsReq, this.readingReportManagerService._isOrderByDate);

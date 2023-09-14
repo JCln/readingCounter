@@ -26,6 +26,7 @@ export interface IMostReportInput {
     counterReaderId: string,
     readingPeriodId: number,
     year: number,
+    _selectedKindId?: string,
     reportCode: number,
     zoneIds: [
         number

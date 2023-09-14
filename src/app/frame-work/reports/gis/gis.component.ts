@@ -1,6 +1,6 @@
+import { CloseTabService } from 'services/close-tab.service';
 import { Component } from '@angular/core';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportGISResponse } from 'interfaces/ireports';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -10,10 +10,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./gis.component.scss']
 })
 export class GisComponent extends FactoryONE {
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
-
-
   zoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -21,6 +17,7 @@ export class GisComponent extends FactoryONE {
   fragmentByZoneDictionary: IDictionaryManager[] = [];
 
   constructor(
+    public closeTabService: CloseTabService,
     public readingReportManagerService: ReadingReportManagerService
   ) {
     super();
@@ -38,16 +35,12 @@ export class GisComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.getCounterStateByZoneId();
-    this.receiveYear();
     this.readingReportManagerService.getSearchInOrderTo();
     this.getFragmentByZone();
   }
 
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
-  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.gisReq._selectedKindId);
   }
 
   changeRadio = (event: any) => {

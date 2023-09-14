@@ -45,6 +45,7 @@ export class SearchService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
+    _selectedKindId: '',
     year: this.utilsService.getFirstYear(),
     isCollapsed: false
   }
@@ -240,9 +241,6 @@ export class SearchService {
         item.newRate = parseFloat(MathS.getRange(item.newRate))
       item.preAverage = +MathS.getRange(item.preAverage);
     })
-  }
-  getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
   }
   getMasrafStates = () => {
     return IMasrafStates;

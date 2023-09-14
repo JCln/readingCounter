@@ -528,9 +528,6 @@ export class ImportDynamicService {
   insertToSimafaRdpgReq = (body: IImportSimafaReadingProgramsReq) => {
     this.simafaRDPGReq = body;
   }
-  getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
-  }
   customizeSelectedColumns = (_selectCols: any) => {
     return _selectCols.filter(items => {
       if (items.isSelected)

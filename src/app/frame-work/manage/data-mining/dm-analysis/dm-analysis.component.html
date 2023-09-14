@@ -28,7 +28,9 @@
                     <div class="input_2" [hidden]="dataMiningAnalysesService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="dataMiningAnalysesService.dataMiningReq._selectedKindId"
+                                name="_selectedKindId">
                                 <mat-option (click)="getReadingPeriod()"
                                     *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
                                     {{truefalse.title}}
@@ -54,7 +56,7 @@
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
                                 [(ngModel)]="dataMiningAnalysesService.dataMiningReq.year" name="year">
-                                <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                     {{truefalse.title}}
                                 </mat-option>
                             </mat-select>
@@ -93,7 +95,8 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForDMAAnalyze" [_outputFileName]="'analysis'"
-        [_checkUpName]="'dm-analysis'" [_sessionName]="'dmanalysis-session'" [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
+        [_checkUpName]="'dm-analysis'" [_sessionName]="'dmanalysis-session'"
+        [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
         [_isCollaped]="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (collapsed)="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz = !dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (refreshedTable)="refreshTable()">

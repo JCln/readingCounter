@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { IKarkardAllStatesDto } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -19,8 +19,6 @@ export class KarkardAllStatesComponent extends FactoryONE {
   tempData: IKarkardAllStatesDto[] = [];
   header: any[] = [];
 
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -52,7 +50,6 @@ export class KarkardAllStatesComponent extends FactoryONE {
     this.getFragmentByZone();
 
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.receiveYear();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.getCounterStateHeaders(this.tempData);
@@ -70,11 +67,8 @@ export class KarkardAllStatesComponent extends FactoryONE {
     if (this.readingReportManagerService.offKarkardAllStatesReq.zoneId)
       this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.offKarkardAllStatesReq.zoneId);
   }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
-  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.offKarkardAllStatesReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.offKarkardAllStatesReq, this.readingReportManagerService._isOrderByDate);

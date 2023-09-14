@@ -3,7 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IFileExcelReq } from 'interfaces/import-data';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -23,7 +23,6 @@ export class ExcelFileComponent extends FactoryONE {
 
   _showAlalHesabPercent: boolean = false;
   _showimagePercent: boolean = false;
-  _years: ITitleValue[] = [];
   kindId: number = 0;
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -88,7 +87,6 @@ export class ExcelFileComponent extends FactoryONE {
     this.readingPeriodKindsDictionary = await this.importDynamicService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
     this.verificationACounterReaderId();
-    this._years = this.importDynamicService.getYears();
   }
 
   onChange(event) {

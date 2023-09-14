@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -16,7 +16,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class DetailsComponent extends FactoryONE {
 
-  _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
@@ -45,11 +44,7 @@ export class DetailsComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getReadingPeriod();
-    this.receiveYear();
     this.getFragmentByZone();
-  }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
     if (this.readingReportManagerService.detailsReq._selectedKindId)

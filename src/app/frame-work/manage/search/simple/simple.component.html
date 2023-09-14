@@ -26,7 +26,8 @@
             <div class="input_2" [hidden]="searchService._isOrderByDate">
                 <div class="_key">نوع دوره</div>
                 <div class="_value">
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq._selectedKindId"
+                        name="_selectedKindId">
                         <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
                             [value]="truefalse.id">
                             {{truefalse.title}}
@@ -51,7 +52,7 @@
                 <div class="_key">سال</div>
                 <div class="_value">
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.year" name="year">
-                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                        <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>

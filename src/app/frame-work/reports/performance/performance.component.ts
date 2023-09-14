@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -15,8 +15,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class PerformanceComponent extends FactoryONE {
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -37,13 +35,9 @@ export class PerformanceComponent extends FactoryONE {
     this.readingReportManagerService.getSearchInOrderTo();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.receiveYear();
-  }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.anlzPrfmReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRAnalyzePerformance(this.readingReportManagerService.anlzPrfmReq, this.readingReportManagerService._isOrderByDate);

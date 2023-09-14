@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -17,9 +17,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class RrLockedComponent extends AllListsFactory {
-  _selectedKindId: string = '';
-  _years: ITitleValue[] = [];
-
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -48,7 +45,6 @@ export class RrLockedComponent extends AllListsFactory {
     this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
-    this.receiveYear();
   }
   converts = async () => {
     const tempZone: number = parseInt(this.closeTabService.saveDataForRRLocked[0].zoneId.toString());
@@ -80,11 +76,8 @@ export class RrLockedComponent extends AllListsFactory {
 
     // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
   }
-  receiveYear = () => {
-    this._years = this.readingReportManagerService.getYears();
-  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.lockedReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.lockedReq, this.readingReportManagerService._isOrderByDate);

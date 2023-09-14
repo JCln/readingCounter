@@ -12,7 +12,7 @@ import {
   IReadingProgramRes,
 } from 'interfaces/import-data';
 import { IAPK } from 'interfaces/inon-manage';
-import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
+import { ENEssentialsToSave, ISidebarVals, ITabs, ITitleValue } from 'interfaces/ioverall-config';
 import {
   IAbBahaFormula,
   IAutomaticImport,
@@ -65,10 +65,11 @@ import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces
 export class CloseTabService {
   ENReadingReports = ENReadingReports;
 
-  constructor(public utilsService: UtilsService) { }
+  constructor(public utilsService: UtilsService) {
+  }
   /* TAB WRAPPER */
   tabs: ITabs[] = [];
-
+  years: ITitleValue[] = this.utilsService.getYears();
   // Formular s 
   saveDataForWaterFormula: IAbBahaFormula[];
   saveDataForBadgetFormula: IAbBahaFormula[];

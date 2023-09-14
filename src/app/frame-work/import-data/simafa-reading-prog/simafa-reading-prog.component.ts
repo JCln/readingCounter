@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
@@ -22,8 +22,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
     zoneId: null
   };
 
-  _empty_message: string = '';
-  _years: ITitleValue[] = [];
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -57,7 +55,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
     this.readingPeriodKindsDictionary = await this.importDynamicService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
     this.getReadingPeriod();
-    this._years = this.importDynamicService.getYears();
     Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
   }
   refreshTable = () => {
