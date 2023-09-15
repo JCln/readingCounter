@@ -2,7 +2,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IDictionaryManager, ITHV, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITHV } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
