@@ -47,7 +47,6 @@ export class FollowUpComponent extends FactoryONE {
     super();
     this.classWrapper();
   }
-
   toPreStatus = async (dataSource: IFollowUpHistory) => {
     const config = {
       messageTitle: EN_messages.reason_backToPrev,
@@ -79,7 +78,6 @@ export class FollowUpComponent extends FactoryONE {
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
 
       this.makeConfigs();
-
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
@@ -140,9 +138,8 @@ export class FollowUpComponent extends FactoryONE {
     row.listNumber = this.dataSourceAUX.listNumber;
     row.trackNumber = this.dataSourceAUX.trackNumber;
     row.zoneTitle = this.closeTabService.saveDataForFollowUp.zoneTitle;
-    row.zoneId = this.closeTabService.saveDataForFollowUp.zoneId;
-    console.log(row);
-
+    row.zoneId = this.closeTabService.saveDataForFollowUp.zoneId;    
+    
     this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }
