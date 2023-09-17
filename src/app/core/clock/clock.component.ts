@@ -20,14 +20,12 @@ export class ClockComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.timerId = this.getTime();
   }
-
   animateAnalogClock() {
     this.hourHand.nativeElement.style.transform
       = `translateY(-100%) rotate(${(this.hour * 30) + (this.minute * 0.5) + (this.second * (0.5 / 60))}deg)`;
     this.minuteHand.nativeElement.style.transform
       = `translateY(-100%) rotate(${(this.minute * 6) + (this.second * 0.1)}deg)`;
   }
-
   getTime() {
     return setInterval(() => {
       this.date = new Date();
@@ -37,7 +35,6 @@ export class ClockComponent implements AfterViewInit {
 
       this.animateAnalogClock();
     }, 1000);
-
   }
 
 }
