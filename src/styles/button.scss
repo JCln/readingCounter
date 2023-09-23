@@ -12,7 +12,7 @@
   cursor: pointer;
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     background: var(--primary_4);
     box-shadow: 0px 0px 5px 0px var(--primary_4)
@@ -32,7 +32,7 @@
   box-shadow: 0px 0px 4px 0px var(--secondary_4);
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     box-shadow: 0px 2px 4px 1px var(--secondary_4);
   }
@@ -53,7 +53,7 @@
   color: var(--white);
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     background: var(--orange_600);
   }

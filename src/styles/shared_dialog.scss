@@ -58,7 +58,7 @@
   font-size: var(--font_s);
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     background: var(--secondary_5);
     box-shadow: 0px 2px 1px 1px var(--secondary_4);
@@ -68,7 +68,7 @@
 ._custom {
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     color: var(--primary_1);
     background: var(--primary_3);

@@ -16,7 +16,7 @@ section {
   cursor: pointer;
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     outline: 2px solid var(--primary_3);
   }

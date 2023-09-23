@@ -103,7 +103,7 @@ p {
 
   &:hover,
   &:active,
-  &:focus {
+  &:focus-visible {
     box-shadow: 0px 2px 4px 1px var(--primary_3);
     background-color: var(--primary_3);
   }
@@ -120,7 +120,7 @@ p {
 
   &:hover,
   &:active,
-  &:focus {
+  &:focus-visible {
     box-shadow: 0px 2px 4px 1px var(--red_600);
     background-color: var(--red_500);
   }

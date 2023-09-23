@@ -58,7 +58,7 @@
       background: var(--secondary_4);
     }
 
-    &:focus {
+    &:focus-visible {
       outline: 0 none;
       outline-offset: 0;
       background: var(--secondary_4);

@@ -24,7 +24,7 @@ Sans-Serif;
 
 // unique shape on hover and focus
 a:hover,
-a:focus,
+a:focus-visible,
 a:active {
   outline: none;
 }
@@ -93,7 +93,7 @@ footer.footer_with_background {
   cursor: pointer;
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     box-shadow: 0px 0px 1px 1px;
   }

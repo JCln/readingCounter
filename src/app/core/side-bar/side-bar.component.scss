@@ -38,7 +38,7 @@ ul {
     }
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       box-shadow: 0 0px 0px 1px var(--sidebar_5);
     }
   }
@@ -70,7 +70,7 @@ ul {
     cursor: pointer;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       background: var(--primary_4);
       color: var(--white);
       border-color: var(--primary_4);

@@ -23,7 +23,7 @@
   font-size: var(--font_s);
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     color: var(--primary_1);
     background: var(--primary_4);

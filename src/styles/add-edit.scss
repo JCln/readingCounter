@@ -46,7 +46,7 @@ input::placeholder {
   color: var(--secondary_1);
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &:active {
     background: var(--primary_2);
   }
@@ -83,7 +83,7 @@ input::placeholder {
     cursor: pointer;
 
     &:hover,
-    &:focus,
+    &:focus-visible,
     &:active {
       background: var(--primary_4);
       color: var(--white);
