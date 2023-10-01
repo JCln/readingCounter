@@ -53,7 +53,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _selectCols: any = [];
     @Input() _selectedColumns: any[];
     @Input() _outputFileName: string;
-    @Input() _rowsPerPage: number[] = [10, 100, 1000, 5000];
+    @Input() _rowsPerPage: number[] = [10, 20, 50, 100];
     @Input() _tooltipText: string;
     @Input() _numberOfExtraColumns: number[];
     @Input() _sessionName: string;

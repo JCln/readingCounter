@@ -32,8 +32,9 @@
 <main style="position: relative; ">
     <p-table id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
         [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
-        dir="rtl" styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
+        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
+        styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
         (onFilter)="filteredTableEvent($event.filteredValue)" (sortFunction)="listManagerService.customSort($event)"
         [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
         [reorderableColumns]="getLocalReOrderable()">

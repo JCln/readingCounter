@@ -68,6 +68,7 @@ export class CloseTabService {
   constructor(public utilsService: UtilsService) {
   }
   /* TAB WRAPPER */
+  readonly _rowsPerPage: number[] = [10, 20, 50, 100];
   tabs: ITabs[] = [];
   years: ITitleValue[] = this.utilsService.getYears();
   // Formular s 

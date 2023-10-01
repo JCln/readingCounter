@@ -1,0 +1,42 @@
+@mixin _borders {
+    border-radius: 0;
+}
+
+._theme_mode {
+    margin-left: 0;
+    font-size: var(--font_m);
+    cursor: pointer;
+}
+
+
+.info {
+
+    ._color_palete {
+        display: flex;
+        position: relative;
+        border-radius: $border_100vmax;
+        padding: .4rem;
+        font-size: var(--font_m);
+        place-content: center;
+        color: var(--primary_5);
+        background: var(--primary_1);
+    }
+
+    .test {
+        display: grid;
+        position: absolute;
+        gap: var(--font_025);
+        top: 2rem;
+        left: 0;
+        grid-template-columns: repeat(2, 1fr);
+        background: var(--primary_1);
+        border-radius: $border_15;
+    }
+
+    ._info_each_item {
+        height: 2rem;
+        width: 2rem;
+        border-radius: $border_50;
+        border: 1px solid var(--primary_7);
+    }
+}

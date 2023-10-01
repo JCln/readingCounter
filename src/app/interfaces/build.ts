@@ -37,6 +37,7 @@ export interface IENV {
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
+    TEH = 'http://85.133.245.143/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
     TEH_ZONE4 = 'http://81.12.106.167:8081/kontoriNew',
     TEH_SE = 'http://46.209.181.2:9098/kontoriNew',

@@ -31,8 +31,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   // should place only in component because overright totalNum needs for dynamic use
   tempMainDataSource = { totalNum: 0, data: [] };
 
-  _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];
-  _rowsPerPage: number[] = [10, 100, 1000, 5000];
+  _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];  
   _selectedColumnsToRemember: string = 'selectedGeneralGroupModify';
   _sessionName: string = 'generalGroupModify';
   _outputFileName: string = 'generalGroupModify';

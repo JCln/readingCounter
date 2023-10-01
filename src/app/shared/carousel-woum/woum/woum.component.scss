@@ -17,7 +17,7 @@
 }
 
 ._smaller {
-  font-size: var(--font_xs);
+  font-size: calc(var(--font_xs) + 5px);
 }
 
 .thumbnail_img {

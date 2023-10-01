@@ -41,7 +41,7 @@
     <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForUserKarkardSummary" [paginator]="true"
         [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-        [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl"
+        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
         styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
         stateKey="karkard-allstates" [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 

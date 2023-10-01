@@ -19,7 +19,7 @@ export class SimafaBatchComponent extends FactoryONE {
   userCounterReaderDictionary: IDictionaryManager[] = [];
   _batchResponse: IBatchImportDataResponse[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  readingConfigDefault: IReadingConfigDefault;
+  readingConfigDefault: IReadingConfigDefault;  
   _selectCols: any = [];
   _selectedColumns: any[];
   _successImportBatchMessage: string = '';

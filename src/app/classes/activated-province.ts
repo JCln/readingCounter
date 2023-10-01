@@ -66,6 +66,27 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
     );
+    public static readonly TEH = new ActivatedProvince(
+        ENActivateProvinceTitle.TEH,
+        ENURLs.TEH,
+        ENMapUrls.TEH.value,
+        ENHasNextBazdid.TEH.value,
+        reorderableTable.DEFAULT.value,
+        defaultAggregateTracks.DEFAULT.value,
+        ENMapCenter.TEH.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
+        getDeleteDictionary.DEFAULT.value,
+        ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
+        timeout.time,
+        version.version,
+        aboutUs,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
+    );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
         ENURLs.TEH_ZONE4,
