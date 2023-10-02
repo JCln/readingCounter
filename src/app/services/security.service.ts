@@ -1,11 +1,12 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IResponses } from 'interfaces/ioverall-config';
 import { IPrivacy, privacies } from './DI/privacies';
 import { UtilsService } from './utils.service';
 import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
+import { IUserLogginInfo, IUserManager } from 'interfaces/iuser-manager';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 export interface IRoleNessessities {
   id: string,
@@ -15,6 +16,13 @@ export interface IRoleNessessities {
   providedIn: 'root'
 })
 export class SecurityService {
+  userLoggins_pageSign: IUserLogginInfo = {
+    GUid: null,
+    userCode: null,
+    userName: null,
+    displayName: ''
+  };
+
   userRoleHistoryDetails_pageSign: IRoleNessessities = {
     id: null,
   };
@@ -54,6 +62,14 @@ export class SecurityService {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
       }
     }
+  }
+  updateUserLogginsInfo = (e: IUserManager) => {
+    this.userLoggins_pageSign.GUid = e.id;
+    this.userLoggins_pageSign.userCode = e.userCode;
+    this.userLoggins_pageSign.userName = e.username;
+    this.userLoggins_pageSign.displayName = e.displayName;
+
+    this.utilsService.routeTo(EN_Routes.userLoggins);
   }
   verificationDates = (dataSource: object): boolean => {
     if (dataSource.hasOwnProperty('fromDate')) {

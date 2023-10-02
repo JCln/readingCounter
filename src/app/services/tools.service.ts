@@ -143,7 +143,7 @@ export class ToolsService {
     ];
   }
   getAuthToken = (): string => {
-    return this.jwtService.getAuthorizationToken();
+    return this.jwtService.getAccessToken();
   }
   getApiUrl = (): string => {
     return this.utilsService.envService.API_URL;

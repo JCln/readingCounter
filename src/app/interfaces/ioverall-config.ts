@@ -278,6 +278,7 @@ export enum ENBrowserStatus {
 export enum ENRandomNumbers {
     zero = 0,
     one = 1,
+    two = 2,
     three = 3,
     four = 4,
     five = 5,
@@ -285,12 +286,14 @@ export enum ENRandomNumbers {
     ten = 10,
     eleven = 11,
     fifteen = 15,
+    sixteen = 16,
     eighteen = 18,
     twenty = 20,
     thirdy = 30,
     forthy = 40,
     fifty = 50,
     oneHundred = 100,
+    oneHundredAndTwenty = 120,
     twoHundred = 200,
 }
 export enum ENImageTypes {

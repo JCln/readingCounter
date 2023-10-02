@@ -640,7 +640,7 @@ export class HelpWrapperService {
         title: 'خطای صدور',
         messageOne: 'خطاها مواردی هستند که باعث میشن یک اشتراک قرائت نشه مثل، خالی بودن همزمان تاریخ قرائت قبلی و تاریخ نصب . برای اطلاع از خطاهای صادر شده با استفاده از شماره پیگیری(مربوط به یک لیست/مسیر) این قسمت ارائه شده است.',
       }
-    else if (currentRoute === EN_Routes.wrmuallloggins)
+    else if (currentRoute === EN_Routes.userLoggins)
       return {
         title: 'ورود های کاربران',
         messageOne: 'اطلاعات ورود کابران با جزئیات بیشتر قابل مشاهده است ',

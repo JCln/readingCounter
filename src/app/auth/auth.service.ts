@@ -44,17 +44,20 @@ export class AuthService {
   private clearAllSavedData = () => this.closeTabService.cleanAllData();
   private clearDictionaries = () => this.dictionaryWrapperService.cleanDictionaries();
   logout = async () => {
-    const refreshToken = this.jwtService.getRefreshToken();
     this.clearAllSavedData();
     this.clearDictionaries();
+    console.log(this.jwtService.getAuthorizationToken());
     this.signalRService.disconnectConnection();
-    await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthsAccountLogout, { refreshToken });
+    await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthsAccountLogout,
+      this.jwtService.getAuthorizationToken()
+    );
     this.jwtService.removeAuthLocalStorage();
     this.compositeService.routeTo(EN_Routes.login);
   }
   saveTolStorage = (token: IAuthTokenType) => {
     this.jwtService.saveToLocalStorage(token.access_token);
     this.jwtService.saveToLocalStorageRefresh(token.refresh_token);
+    this.jwtService.saveToLocalStorageLoginId(token.login_id);
   }
   routeToReturnUrl = (returnUrl: string) => {
     if (!MathS.isNull(returnUrl))

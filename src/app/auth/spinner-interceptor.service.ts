@@ -16,6 +16,7 @@ export enum EN_Mess {
   youHaveNotAccess = 'شما به این قسمت دسترسی ندارید',
   dataNotFound = 'اطلاعاتی پیدا نشد، لطفا داده ورودی را بدقت وارد نمایید',
   timeOut = 'زمان ارسال درخواست به سرویس دهنده به اتمام رسید، احتمالا شبکه کُند و یا قطع است، لطفا دقایقی دیگر امتحان نمایید',
+  threshold = 'به حداکثر تعداد درخواست رسیده‌اید',
   dataNotFoundOrDeleted = 'چنین آیتمی پیدا نشد، یا قبلاً حذف شده است',
   checkNetwork = 'از دسترسی به شبکه اطمینان حاصل نمایید',
   serviceError = 'خطای سرویس دهنده',
@@ -41,7 +42,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
             if (error.status === ENClientServerErrors.cs400 && !(error.error instanceof Blob)) {
               if (error.error.message) {
-                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fifteenMili, ENSnackBarColors.danger);
+                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
               }
               else
                 this.snackWrapperService.openSnackBar(EN_Mess.checkValuesAndTryAgain, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
@@ -72,6 +73,12 @@ export class SpinnerInterceptorService implements HttpInterceptor {
                 break;
               case ENClientServerErrors.cs422:
                 this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs429:
+                if (error.error.message)
+                  this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                else
+                  this.snackWrapperService.openSnackBar(EN_Mess.threshold, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs0:
                 this.snackWrapperService.openSnackBar(EN_Mess.checkNetwork, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);

@@ -484,11 +484,24 @@ export class ColumnManager {
         { field: 'appVersion', header: 'نسخه App', isSelected: false, isSelectedOrigin: false },
     ]
     userRoleHistorySummary: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان گروه', isSelected: true, isSelectedOrigin: true },
+        { field: 'title', header: 'عنوان گروه', isSelected: false, isSelectedOrigin: true },
+        { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true, isSelectedOrigin: true },
         { field: 'userDisplayName', header: 'کاربر‌تغییر‌دهنده', isSelected: true, isSelectedOrigin: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, isSelectedOrigin: false },
+        // { field: 'insertDateTime', header: 'تاریخ', isSelected: false,isSelectedOrigin:false },
+        { field: 'insertTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'osTitle', header: 'سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osPlatform', header: 'پلتفرم', isSelected: false, isSelectedOrigin: false },
+        { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
     ]
     roleHistory: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
@@ -1795,7 +1808,8 @@ export class ColumnManager {
         { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'username', header: 'نام کاربری', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'userCode', header: 'کد کاربری', isSelected: false, isSelectedOrigin: false, ltr: false },
-        { field: 'mobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'lastActivityDateTime', header: 'آخرین تغییر', isSelected: true, isSelectedOrigin: true },
+        { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, isSelectedOrigin: false, ltr: true },

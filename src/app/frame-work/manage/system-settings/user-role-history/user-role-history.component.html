@@ -1,13 +1,14 @@
 <app-prime-table
 [dataSource]="closeTabService.saveDataForAllUsers"
-[_numberOfExtraColumns]="[1,2]"
+[_numberOfExtraColumns]="[1,2,3]"
 [_sessionName]="'userRoleHistory-session'"
 [_outputFileName]="'userRoleHistoryAll'"
 [_checkUpName]="'userRoleHistoryAll'"
 [_selectedColumnsToRemember]="'selectedUserRoleHistory'"
 [_hasSaveColumns]=true
 (refreshedTable)="refreshTable()"
-(routedToLoggs)="routeToUserRoleHistory($event)"
+(routedToLoggs)="routeToLoggs($event)"
+(openedEditDialog)="routeToUserRoleHistory($event)"
 (openedMoshtarakinDialog)="routeToUserMasterHistory($event)"
 > 
 </app-prime-table>

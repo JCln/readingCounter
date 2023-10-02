@@ -23,9 +23,8 @@ export class RrInstateComponent extends FactoryONE {
 
   connectToServer = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.inStateReq, true);
-
     if (temp) {
-      const res = await this.readingReportManagerService.ajaxReqWrapperService.interfaceManagerService.POSTBLOB(ENInterfaces.rrInStatePost, this.readingReportManagerService.inStateReq);
+      const res = await this.readingReportManagerService.ajaxReqWrapperService.postBlob(ENInterfaces.rrInStatePost, this.readingReportManagerService.inStateReq);
       this.outputManagerService.downloadFile(res, '.xlsx');
     }
   }

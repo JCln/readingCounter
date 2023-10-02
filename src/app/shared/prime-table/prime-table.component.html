@@ -253,7 +253,7 @@
                 </i>
             </td>
             <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
-                (click)="routeToLoggs(dataSource)">
+                (click)="openEditDialog(dataSource)">
                 <span class="ui-column-title">تغییرات گروه(نقش)</span>
                 <i class="tooltip p_icons pi pi-users">
                     <div class="tooltip_text_right">تغییرات گروه(نقش)</div>
@@ -483,11 +483,11 @@
                     <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+            <td class="__columns" *ngIf="_checkUpName == 'userRoleHistoryAll' " class="edit_button"
                 (click)="routeToLoggs(dataSource)">
                 <span class="ui-column-title">مشاهده ورودها</span>
                 <i class="tooltip p_icons pi pi-sign-in">
-                    <div class="tooltip_text">مشاهده ورودها</div>
+                    <div class="tooltip_text_right">مشاهده ورودها</div>
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"

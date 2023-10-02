@@ -76,7 +76,7 @@ export class TrackingManagerService {
     return this.utilsService.envService.API_URL;
   }
   getAuthToken = (): string => {
-    return this.jwtService.getAuthorizationToken();
+    return this.jwtService.getAccessToken();
   }
   // Output manager 
   downloadOutputDBF = (method: ENInterfaces, dbfData: ITracking | IOutputManager): Promise<any> => {

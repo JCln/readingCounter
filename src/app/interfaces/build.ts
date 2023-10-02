@@ -124,8 +124,8 @@ export class ENMapCenter {
     }
 }
 export class timeout {
-    // static time = 18000;
-    static time = 2000;
+    static time = 18000;
+    // static time = 2000;
 }
 export class simafaImportStatus {
     // interface is simafaImportStatus

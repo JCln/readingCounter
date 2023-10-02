@@ -32,7 +32,7 @@ export class ManageServerService {
     window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerErrorsElmah + body, '_blank');
   }
   linkToHangFire = () => {
-    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHangFire + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHangFire + this.jwtService.getAccessToken(), '_blank');
   }
   linkToHealthCheck = () => {
     window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHealthCheck, '_blank');

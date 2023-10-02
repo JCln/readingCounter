@@ -21,7 +21,7 @@ export class SignalRService {
   ) { }
 
   public startConnection = () => {
-    const authToken = { accessTokenFactory: () => this.utilsService.compositeService.jwtService.getAuthorizationToken() };
+    const authToken = { accessTokenFactory: () => this.utilsService.compositeService.jwtService.getAccessToken() };
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.utilsService.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
       .withAutomaticReconnect()
@@ -144,12 +144,12 @@ export class SignalRService {
   }
 }
 // To Send Data to Server ACross WebSocket
-  // sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
-  //   this.hubConnection.send(method, data.time, data.title, data.message, data.color);
-  // }
+// sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
+//   this.hubConnection.send(method, data.time, data.title, data.message, data.color);
+// }
 
-  // private broadcastMessage = () => {
-  //   this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
-  //     this.utilsService.snackWrapperService.openSnackBarSignal(title + '\n' + message, time, color);
-  //   });
-  // }
+// private broadcastMessage = () => {
+//   this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
+//     this.utilsService.snackWrapperService.openSnackBarSignal(title + '\n' + message, time, color);
+//   });
+// }

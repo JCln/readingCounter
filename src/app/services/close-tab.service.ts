@@ -126,7 +126,6 @@ export class CloseTabService {
     isActive: true,
     deviceId: ''
   };
-
   saveDataForAllUsers: IUserManager[] = [];
   saveDataForUserOnlines: IUserOnlines[];
   saveDataForEditUsers: any;
@@ -561,7 +560,7 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes.wrmlallfalse },
     { id: 2, req: ENEssentialsToSave.saveDataForLMModifyReq, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
     { id: 2, req: ENEssentialsToSave.saveDataForEditUsersGUID, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },
-    { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.wrmuallloggins },
+    { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.userLoggins },
     { id: 2, req: ENEssentialsToSave.fragmentNOBDetailsGUID, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: EN_Routes.wrmrnob },
     { id: 13, req: ENEssentialsToSave.rSearchMoshtarakinReq, value: ENEssentialsToSave.saveDataForSearchMoshtarakin, url: EN_Routes.wrmssearchMosh },
   ]

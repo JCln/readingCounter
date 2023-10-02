@@ -296,7 +296,7 @@ export class ReadingReportManagerService {
     return this.utilsService.envService.API_URL;
   }
   getAuthToken = (): string => {
-    return this.jwtService.getAuthorizationToken();
+    return this.jwtService.getAccessToken();
   }
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
     this[variable].fromDate = $event;
@@ -459,11 +459,14 @@ export class ReadingReportManagerService {
   routeToMapGIS = async (readingReportGISReq: any) => {
     // insert into gis request and should valiation before route to map     
     const temp = await this.portRRTest(ENInterfaces.ListToGis, readingReportGISReq);
-    this.mapService.gisReqAux = readingReportGISReq;
-    this.mapService.responseGisAux.value = temp;
-
-    if (temp.length)
+    if (temp.length) {
+      this.mapService.gisReqAux = readingReportGISReq;
+      this.mapService.responseGisAux.value = temp;
       this.utilsService.compositeService.routeToExtras([EN_Routes.wr, readingReportGISReq]);
+    }
+    else {
+      this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+    }
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

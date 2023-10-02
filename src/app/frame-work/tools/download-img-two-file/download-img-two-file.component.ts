@@ -27,7 +27,7 @@ export class DownloadImgTwoFileComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.toolsService.validationDownloadAllImagesTwo2(this.toolsService.fileDownloadAllImagesTwo2)) {
-      window.open(this.envService.API_URL + '/' + ENInterfaces.downloadFileAllImagesTWO + this.jwtService.getAuthorizationToken() + '&zoneId=' + this.toolsService.fileDownloadAllImagesTwo2.zoneId + '&fromDay=' + this.toolsService.fileDownloadAllImagesTwo2.fromDay + '&toDay=' + this.toolsService.fileDownloadAllImagesTwo2.toDay, '_blank');
+      window.open(this.envService.API_URL + '/' + ENInterfaces.downloadFileAllImagesTWO + this.jwtService.getAccessToken() + '&zoneId=' + this.toolsService.fileDownloadAllImagesTwo2.zoneId + '&fromDay=' + this.toolsService.fileDownloadAllImagesTwo2.fromDay + '&toDay=' + this.toolsService.fileDownloadAllImagesTwo2.toDay, '_blank');
     }
   }
 

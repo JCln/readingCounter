@@ -4,7 +4,6 @@ import { IUserManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { UserLogginsService } from 'services/user-loggins.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -18,7 +17,6 @@ export class UsersAllComponent extends FactoryONE {
   @ViewChild(Table) UsersAllComponent: Table;
 
   constructor(
-    private userLogginsService: UserLogginsService,
     public closeTabService: CloseTabService,
     public usersAllService: UsersAllService,
     private dateJalaliService: DateJalaliService
@@ -26,9 +24,6 @@ export class UsersAllComponent extends FactoryONE {
     super();
   }
 
-  routeToLoggs(e: IUserManager) {
-    this.userLogginsService.updateUserLogginsInfo(e);
-  }
   nullSavedSource = () => this.closeTabService.saveDataForAllUsers = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

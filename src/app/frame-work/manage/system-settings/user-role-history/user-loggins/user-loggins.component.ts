@@ -1,8 +1,8 @@
+import { SecurityService } from 'services/security.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserLoggins } from 'interfaces/iuser-manager';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { UserLogginsService } from 'services/user-loggins.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -14,18 +14,18 @@ export class UserLogginsComponent extends FactoryONE {
   dataSource: IUserLoggins[];
 
   constructor(
-    public userLogginsService: UserLogginsService,
+    public securityService: SecurityService,
     private dateJalaliService: DateJalaliService
   ) {
     super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.userLogginsService.userLoggins_pageSign.GUid) {
-      this.userLogginsService.utilsService.backToPreviousPage();
+    if (!this.securityService.userLoggins_pageSign.GUid) {
+      this.securityService.utilsService.backToPreviousPage();
     }
     else {
-      this.dataSource = await this.userLogginsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userLOGINS, this.userLogginsService.userLoggins_pageSign.GUid);
+      this.dataSource = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userLOGINS, this.securityService.userLoggins_pageSign.GUid);
       this.convertLoginTime();
     }
   }

@@ -5,7 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', component: UserRoleHistoryComponent },
-  { path: 'details', component: UserRoleHistorySummaryComponent }
+  { path: 'details', component: UserRoleHistorySummaryComponent },
+  { path: 'loggins', loadChildren: () => import('./user-loggins/user-loggins.module').then(userLoggins => userLoggins.UserLogginsModule) }
 ];
 
 @NgModule({

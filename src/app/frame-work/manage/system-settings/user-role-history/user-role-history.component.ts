@@ -6,6 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { IUserManager } from 'interfaces/iuser-manager';
+import { DateJalaliService } from 'services/date-jalali.service';
 
 @Component({
   selector: 'app-user-role-history',
@@ -16,11 +17,15 @@ export class UserRoleHistoryComponent extends FactoryONE {
 
   constructor(
     public closeTabService: CloseTabService,
-    public securityService: SecurityService
+    public securityService: SecurityService,
+    private dateJalaliService: DateJalaliService
   ) {
     super();
   }
 
+  routeToLoggs(e: IUserManager) {
+    this.securityService.updateUserLogginsInfo(e);
+  }
   routeToUserRoleHistory(e: IUserManager) {
     this.securityService.userRoleHistoryDetails_pageSign.id = e.id;
     this.securityService.utilsService.routeTo(EN_Routes.userRoleHistoryDetails);
@@ -29,6 +34,11 @@ export class UserRoleHistoryComponent extends FactoryONE {
     this.securityService.userMasterDetailsHistory_pageSign.id = e.id;
     this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
   }
+  convertLoginTime = () => {
+    this.closeTabService.saveDataForAllUsers.forEach(item => {
+      item.lastActivityDateTime = this.dateJalaliService.getDate(item.lastActivityDateTime) + '   ' + this.dateJalaliService.getTime(item.lastActivityDateTime);
+    })
+  }
   nullSavedSource = () => this.closeTabService.saveDataForAllUsers = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -36,6 +46,7 @@ export class UserRoleHistoryComponent extends FactoryONE {
     }
     if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
       this.closeTabService.saveDataForAllUsers = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
+      this.convertLoginTime();
     }
   }
 

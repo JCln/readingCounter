@@ -252,7 +252,7 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     doShowCarousel = (dataSource: any) => {
         if (dataSource.imageCount) {
             this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-                data: { _data: dataSource, _isNotForbidden: true },
+                data: { _data: dataSource, _type: ENImageTypes.typical },
                 rtl: true,
                 width: '80%'
             })

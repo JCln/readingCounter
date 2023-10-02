@@ -49,7 +49,7 @@ export class ProfileService {
     { title: 'alertTypeId', value: 2, titleUnicode: 'نوع اعلان' }
   ]
   getToken = (): string => {
-    return this.jwtService.getAuthorizationToken();
+    return this.jwtService.getAccessToken();
   }
   getUseCarouselMedia = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, false);

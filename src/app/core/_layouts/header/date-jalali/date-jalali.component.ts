@@ -10,10 +10,10 @@ import { DateJalaliService } from 'services/date-jalali.service';
 export class DateJalaliComponent implements AfterViewInit {
   datePickerConfig = {
     format: 'YYYY/MM/DD',
-    locale: 'fa',
+    locale: 'fa'
   }
   @Output() dateJalEvent = new EventEmitter<any>();
-  @Input() dateObject: string;
+  @Input() dateObject: string;  
 
   constructor(private dateJalaliService: DateJalaliService) {
   }

@@ -30,11 +30,10 @@
         </section>
 
 
-        <app-prime-table [dataSource]="closeTabService.saveDataForUserSearchRes" [_numberOfExtraColumns]="[1 , 2 , 3]"
+        <app-prime-table [dataSource]="closeTabService.saveDataForUserSearchRes" [_numberOfExtraColumns]="[1 , 2]"
             [_sessionName]="'user-search-session'" [_sortMode]="'multiple'" [_outputFileName]="'userSearch'"
             [_selectedColumnsToRemember]="'selectedUsersSearch'" [_checkUpName]="'userSearch'"
             (refreshedTable)="searchUsers()" (routedToEditPage)="usersAllService.routeToEditPage($event)"
-            (routedToLoggs)="userLogginsService.updateUserLogginsInfo($event)"
             (showedExactConfig)="showExactConfig($event)" (ActivatedUser)="ActivateUser($event)"
             (DeActivatedUser)="DeActivateUser($event)" (resetedPasswordUser)="resetPasswordUser($event)"
             (unlockedUser)="unLockUser($event)">

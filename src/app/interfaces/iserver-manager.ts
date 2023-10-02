@@ -10,6 +10,7 @@ export enum ENClientServerErrors {
     'cs409' = 409,
     'cs410' = 410,
     'cs422' = 422,
+    'cs429' = 429,
     'cs0' = 0,
     'cs500' = 500,
     'cs501' = 501,

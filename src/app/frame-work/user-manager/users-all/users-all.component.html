@@ -1,6 +1,6 @@
 <app-prime-table
 [dataSource]="closeTabService.saveDataForAllUsers"
-[_numberOfExtraColumns]="[1 , 2 , 3]"
+[_numberOfExtraColumns]="[1 , 2]"
 [_sessionName]="'user-all-session'"
 [_sortMode]="'multiple'"
 [_outputFileName]="'userAll'"
@@ -9,7 +9,6 @@
 [_checkUpName]="'userAll'"
 (refreshedTable)="refreshTable()"
 (routedToEditPage)="usersAllService.routeToEditPage($event)"
-(routedToLoggs)="routeToLoggs($event)"
 (showedExactConfig)="showExactConfig($event)"
 (unlockedUser)="unLockUser($event)"
 (ActivatedUser)="ActivateUser($event)"

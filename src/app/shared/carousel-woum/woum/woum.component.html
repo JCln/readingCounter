@@ -90,7 +90,7 @@
         </div>
     </section>
 
-    <section class="content" *ngIf="_type == ENImageTypes.forbidden">
+    <section class="content" *ngIf="_type !== ENImageTypes.forbidden">
         <h1 class="title">صدای ضبط شده</h1>
         <hr>
         <div class="_main_audio">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ENAuthTokenType } from 'interfaces/iauth-guard-permission';
+import { ENAuthTokenType, IAuthTokenLogoutType } from 'interfaces/iauth-guard-permission';
 import * as jwt_decode from 'jwt-decode';
 import { BrowserStorageService } from 'services/browser-storage.service';
 
@@ -56,15 +56,14 @@ export class JwtService {
   saveToLocalStorageRefresh = (refreshToken: string): void => {
     this.browserStorageService.set(ENAuthTokenType.refresh_token, refreshToken);
   }
-  getAuthorizationToken = (): string => {
-    try {
-      const a = this.browserStorageService.get(ENAuthTokenType.access_token);
-      if (!a) {
-        return null;
-      }
-      return a;
-    } catch (error) {
-      console.error(error);
+  saveToLocalStorageLoginId = (loginId: string): void => {
+    this.browserStorageService.set(ENAuthTokenType.login_id, loginId);
+  }
+  getAuthorizationToken = (): IAuthTokenLogoutType => {
+    return {
+      accessToken: this.browserStorageService.get(ENAuthTokenType.access_token),
+      refreshToken: this.browserStorageService.get(ENAuthTokenType.refresh_token),
+      loginId: this.browserStorageService.get(ENAuthTokenType.login_id)
     }
   }
   getRefreshToken = (): string => {
@@ -77,8 +76,19 @@ export class JwtService {
       console.error(error);
     }
   }
+  getAccessToken = (): string => {
+    try {
+      const a = this.browserStorageService.get(ENAuthTokenType.access_token);
+      if (!a) {
+        return null;
+      }
+      return a;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   hasStoredAccessAndRefreshTokens(): boolean {
-    const accessToken = this.getAuthorizationToken();
+    const accessToken = this.getAccessToken();
     const refreshToken = this.getRefreshToken();
     return (!MathS.isEmptyString(accessToken) && !MathS.isEmptyString(refreshToken));
   }
@@ -86,6 +96,7 @@ export class JwtService {
   removeAuthLocalStorage = () => {
     this.browserStorageService.removeLocal(ENAuthTokenType.access_token);
     this.browserStorageService.removeLocal(ENAuthTokenType.refresh_token);
+    this.browserStorageService.removeLocal(ENAuthTokenType.login_id);
   }
   removeAllExceptAuths = () => {
     this.browserStorageService.removeAllExceptAuths();

@@ -57,20 +57,6 @@ export class WoumComponent implements OnChanges {
     description: ''
   }
   dataSource: IOnOffLoad[] = [];
-  responsiveOptions: any[] = [
-    {
-      breakpoint: '1024px',
-      numVisible: 5
-    },
-    {
-      breakpoint: '768px',
-      numVisible: 3
-    },
-    {
-      breakpoint: '560px',
-      numVisible: 1
-    }
-  ];
   testAudio = new Audio();
   audioFiles: IOnOffLoad[] = [];
   downloadURL: string = '';
@@ -156,7 +142,7 @@ export class WoumComponent implements OnChanges {
     this.offloadModifyReq.jalaliDay = $event;
   }
   callApiImgs = async (id: string, index: number) => {
-    this.tempCarousels[index] = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.jwtService.getAuthorizationToken();
+    this.tempCarousels[index] = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.jwtService.getAccessToken();
   }
   showAllImgs = () => {
     this.imageFiles.forEach((item, i) => {

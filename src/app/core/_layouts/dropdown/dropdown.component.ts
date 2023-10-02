@@ -29,7 +29,7 @@ export class DropdownComponent implements OnInit {
     this.isLogout.emit(true);
   }
   linkToChat = () => {
-    window.open(this.envService.API_URL + '/' + ENInterfaces.chat + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + '/' + ENInterfaces.chat + this.jwtService.getAccessToken(), '_blank');
   }
   getNotificationBadge = async (): Promise<number> => {
     const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);

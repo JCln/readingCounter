@@ -12,7 +12,7 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.wrmlalltrue, title: 'اصلاح', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmlGeneralModify, title: 'اصلاح کلی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrimpsimafardpgbatch, title: 'صدور دسته‌ای', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: EN_Routes.wrmuallloggins, title: 'ورود', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.userLoggins, title: 'ورود', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmlGeneralGModify, title: 'اصلاح کلی(دسته‌ای)', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmuedit, title: 'ویرایش', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmlpd, title: 'اطلاعات روزانه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },

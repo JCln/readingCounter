@@ -19,7 +19,7 @@ export class ShowVideoDgComponent implements OnInit {
   ) { }
 
   callApiImgs = async () => {
-    this.originImage = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + this.config.data.body['fileRepositoryId'] + '?access_token=' + this.jwtService.getAuthorizationToken();
+    this.originImage = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + this.config.data.body['fileRepositoryId'] + '?access_token=' + this.jwtService.getAccessToken();
   }
 
   ngOnInit(): void {

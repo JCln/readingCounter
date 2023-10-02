@@ -62,7 +62,7 @@ export class LoginComponent {
         this.utilsService.snackBarMessageWarn(EN_messages.userPassEnterCaptcha);
       }
       else {
-        // button should disable after loging
+        // button should disable after logging
         (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = true;
         const returnUrl = this.authService.compositeService.getRouterQueryParamMap('returnUrl');
         const res = await this.authService.logging(this.userData);

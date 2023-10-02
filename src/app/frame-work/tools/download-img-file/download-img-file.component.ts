@@ -28,7 +28,7 @@ export class DownloadImgFileComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.toolsService.validationDownloadAllImages(this.toolsService.fileDownloadAllImages)) {
-      window.open(this.envService.API_URL + '/' + ENInterfaces.downloadFileAllImages + this.jwtService.getAuthorizationToken() + '&zoneId=' + this.toolsService.fileDownloadAllImages.zoneId + '&day=' + this.toolsService.fileDownloadAllImages.day, '_blank');
+      window.open(this.envService.API_URL + '/' + ENInterfaces.downloadFileAllImages + this.jwtService.getAccessToken() + '&zoneId=' + this.toolsService.fileDownloadAllImages.zoneId + '&day=' + this.toolsService.fileDownloadAllImages.day, '_blank');
     }
   }
 
