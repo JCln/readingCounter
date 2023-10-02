@@ -1808,7 +1808,7 @@ export class ColumnManager {
         { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'username', header: 'نام کاربری', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'userCode', header: 'کد کاربری', isSelected: false, isSelectedOrigin: false, ltr: false },
-        { field: 'lastActivityDateTime', header: 'آخرین تغییر', isSelected: true, isSelectedOrigin: true },
+        { field: 'lastActivityDateTime', header: 'آخرین فعالیت', isSelected: true, isSelectedOrigin: true },
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
