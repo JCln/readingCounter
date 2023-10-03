@@ -42,10 +42,7 @@ export class WaterMarkComponent extends FactoryONE {
 
     if (!this.closeTabService.saveDataForWaterMark.id) {
       this.closeTabService.saveDataForWaterMark = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getWaterMarkConfig);
-
-      if (this.closeTabService.saveDataForWaterMark.id) {
-        this.changeTextColorByServerRes();
-      }
+      this.changeTextColorByServerRes();
     }
 
   }
