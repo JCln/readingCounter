@@ -34,8 +34,10 @@ export interface IENV {
         license: number,
         incorrect_time: number
     }
+    getLogoutReasonDictionary: { id: number, title: string }[],
 }
 export enum ENURLs {
+    LOCAL = 'http://192.168.100.18:7529',
     DEFAULT = 'https://37.191.92.157/kontoriNew',
     TEH = 'http://85.133.245.143/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
@@ -77,6 +79,7 @@ export enum ENSatelliteToken {
     REY = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
 }
 export enum ENActivateProvinceTitle {
+    LOCAL = 'LOCAL',
     DEFAULT = '',
     ESF = 'اصفهان',
     TEH = 'تهران',
@@ -210,6 +213,17 @@ export class ENYears {
     ]);
 
     private constructor(public readonly value: { title: string, value: number }[]) {
+    }
+}
+export class getLogoutReasonDictionary {
+    static readonly DEFAULT = new getLogoutReasonDictionary([
+        { id: 0, title: 'خروج از برنامه' },
+        { id: 1, title: 'ویرایش شده' },
+        { id: 2, title: 'تغییر گذرواژه' },
+        { id: 3, title: 'لاگین همزمان' },
+        { id: 4, title: 'غیرفعال شده' }
+    ]);
+    private constructor(public readonly value: { id: number, title: string }[]) {
     }
 }
 export class getDeleteDictionary {

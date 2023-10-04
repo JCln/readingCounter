@@ -4,7 +4,7 @@ import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
 
-  temp = ActivatedProvince.DEFAULT;
+  temp = ActivatedProvince.LOCAL;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
@@ -25,6 +25,7 @@ export class EnvService implements IENV {
   NotificationMediaTypeList = this.temp.NotificationMediaTypeList;
   NotificationMediaTypeIds = this.temp.NotificationMediaTypeIds;
   NotificationAlertTypesIds = this.temp.NotificationAlertTypesIds;
+  getLogoutReasonDictionary = this.temp.getLogoutReasonDictionary;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

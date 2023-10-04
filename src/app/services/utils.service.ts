@@ -49,6 +49,9 @@ export class UtilsService {
   getYears = (): ITitleValue[] => {
     return this.envService.years;
   }
+  getLogoutReason = (): any[] => {
+    return this.envService.getLogoutReasonDictionary;
+  }
   getAppVersion = (): string => {
     return this.envService.version;
   }

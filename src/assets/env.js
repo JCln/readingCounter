@@ -44,6 +44,13 @@
         { id: 3, title: 'حذف موقت' },
         { id: 5, title: 'حذف موقت' }
     ];
+    window.__env.getLogoutReason = [
+        { id: 0, title: 'خروج از برنامه' },
+        { id: 1, title: 'ویرایش شده' },
+        { id: 2, title: 'تغییر گذرواژه' },
+        { id: 3, title: 'لاگین همزمان' },
+        { id: 4, title: 'غیرفعال شده' }
+    ];
     window.__env.hasCanclableSpinner = false;
     window.__env.timeout = 18000;
     window.__env.reOrderableTable = false;
@@ -72,7 +79,7 @@
         video: 2,
         audio: 4
     }
-   window.__env.NotificationAlertTypesIds = {
+    window.__env.NotificationAlertTypesIds = {
         confidential: 0,
         ordinary: 1,
         sensitive: 2,

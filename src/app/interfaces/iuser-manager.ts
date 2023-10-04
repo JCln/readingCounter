@@ -338,6 +338,8 @@ export interface IUserLoggins {
     userId: string,
     loginDateTime: string,
     loginIp: string,
+    logoutReasonId: number,
+    logoutDateTime: string,
     wasSuccessful: boolean,
     browserVersion: string,
     browserTitle: string,

@@ -10,6 +10,7 @@ import {
     ENURLs,
     ENYears,
     getDeleteDictionary,
+    getLogoutReasonDictionary,
     IENV,
     IENV_BROWSER_SETUP,
     NotificationAlertTypesIds,
@@ -24,6 +25,28 @@ import {
 import { version } from '../interfaces/build';
 
 export class ActivatedProvince implements IENV {
+    public static readonly LOCAL = new ActivatedProvince(
+        ENActivateProvinceTitle.LOCAL,
+        ENURLs.LOCAL,
+        ENMapUrls.DEFAULT.value,
+        ENHasNextBazdid.DEFAULT.value,
+        reorderableTable.DEFAULT.value,
+        defaultAggregateTracks.DEFAULT.value,
+        ENMapCenter.DEFAULT.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
+        getDeleteDictionary.DEFAULT.value,
+        ENHasCanclableSpinner.DEFAULT.value,
+        simafaImportStatus.simafaImportStatus,
+        timeout.time,
+        version.version,
+        aboutUs,
+        NotificationMediaTypeList.DEFAULT.value,
+        NotificationAlertTypesList.DEFAULT.value,
+        NotificationMediaTypeIds,
+        NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value,
+    );
     public static readonly DEFAULT = new ActivatedProvince(
         ENActivateProvinceTitle.DEFAULT,
         ENURLs.DEFAULT,
@@ -44,6 +67,7 @@ export class ActivatedProvince implements IENV {
         NotificationAlertTypesList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value,
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
@@ -65,6 +89,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value,
     );
     public static readonly TEH = new ActivatedProvince(
         ENActivateProvinceTitle.TEH,
@@ -86,6 +111,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value,
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
@@ -107,6 +133,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
@@ -128,6 +155,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
@@ -149,6 +177,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
@@ -170,6 +199,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
     // ZONE 6 TEHRAN
     public static readonly REY = new ActivatedProvince(
@@ -192,6 +222,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
     public static readonly TSW = new ActivatedProvince(
         ENActivateProvinceTitle.TSW,
@@ -213,6 +244,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
     public static readonly TEH1 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH1,
@@ -234,6 +266,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
     public static readonly TEH5 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH5,
@@ -255,6 +288,7 @@ export class ActivatedProvince implements IENV {
         NotificationMediaTypeList.DEFAULT.value,
         NotificationMediaTypeIds,
         NotificationAlertTypesIds,
+        getLogoutReasonDictionary.DEFAULT.value
     );
 
     private constructor(
@@ -304,7 +338,8 @@ export class ActivatedProvince implements IENV {
             security: number,
             license: number,
             incorrect_time: number
-        }
+        },
+        public readonly getLogoutReasonDictionary: { id: number, title: string }[],
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

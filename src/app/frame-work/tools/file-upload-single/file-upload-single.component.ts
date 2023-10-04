@@ -59,8 +59,10 @@ export class FileUploadSingleComponent {
             case HttpEventType.UploadProgress:
               this.progress = Math.round(event.loaded / event.total * 100);
               break;
-            case HttpEventType.Response:
+            case HttpEventType.Response: {
+              console.log(event.body);
               this.offlineModeService.showSuccessMessage(event.body.message);
+            }
               setTimeout(() => {
                 this.progress = 0;
               }, 1500);
