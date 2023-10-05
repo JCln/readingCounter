@@ -1,28 +1,71 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 
-import { MathS } from '../classes/math-s';
 import { AuthService } from './auth.service';
 import { JwtService } from './jwt.service';
+import { ENClientServerErrors } from 'interfaces/iserver-manager';
+import { UtilsService } from 'services/utils.service';
+import { EN_Mess } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
   private authorizationHeader = "Authorization";
+  private bearer = `Bearer `;
 
   constructor(
     private jwtService: JwtService,
     private authService: AuthService,
-    private snackWrapperService: SnackWrapperService
+    private utilsService: UtilsService
   ) { }
 
+  accessDenied_401 = async () => {
+    const config = {
+      messageTitle: EN_Mess.access_denied401,
+      text: EN_Mess.youHaveNotAccessMsg,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-ban'
+    }
+    await this.utilsService.firstConfirmDialog(config);
+  }
+  accessDeniedLogin_401 = async () => {
+    const config = {
+      messageTitle: EN_Mess.access_denied401,
+      text: EN_Mess.youHaveNotAccessMsg,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-ban'
+    }
+    await this.utilsService.firstConfirmDialog(config);
+  }
+  private showProperMessage = async (error: any) => {
+    // if (error.error.message)
+    //   this.utilsService.noAccessMessage(error.error.message);
+    // else {
+    await this.accessDenied_401();
+    this.authService.logout();
+    // }
+  }
+  private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
+    const url = this.utilsService.compositeService.getRouterUrl();
+    const nothing = '';
+    if (url === EN_Routes.login) {
+      return req.clone({
+        headers: req.headers.set(this.authorizationHeader, nothing)
+      });
+    }
+    return req.clone({
+      headers: req.headers.set(this.authorizationHeader, this.bearer + token)
+    });
+  }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.jwtService.getAccessToken();
     if (authToken)
@@ -42,13 +85,13 @@ export class InterceptorService implements HttpInterceptor {
       .pipe(
         catchError((error => {
           if (error instanceof HttpErrorResponse) {
-            if (error.status === 401) {
+            if (error.status === ENClientServerErrors.cs401) {
               if (req.url.includes('login')) {
                 this.showProperMessage(error);
                 return;
               }
               if (!this.authService.isAuthUserLoggedIn()) {
-                this.goOutInMessage();
+                this.utilsService.goOutInMessage();
                 this.authService.logout();
               }
               else {
@@ -72,7 +115,7 @@ export class InterceptorService implements HttpInterceptor {
                     statusText: error.statusText,
                     url: error.url
                   }));
-                  this.snackMessage(errmsg.message);
+                  this.utilsService.snackMessage(errmsg.message);
                 } catch (e) {
                   reject(error);
                 }
@@ -87,29 +130,6 @@ export class InterceptorService implements HttpInterceptor {
         }))
       )
   }
-  private showProperMessage = (error: any) => {
-    if (error.error.message)
-      this.noAccessMessage(error.error.message);
-    else
-      this.noAccessMessage();
-  }
-  private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
-    return req.clone({
-      headers: req.headers.set(this.authorizationHeader, `Bearer ` + token)
-    });
-  }
 
-  noAccessMessage = (errorMessage?: string) => {
-    if (MathS.isNull(errorMessage))
-      this.snackWrapperService.openSnackBar(EN_messages.access_denied, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
-    else
-      this.snackWrapperService.openSnackBar(errorMessage, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
-  }
-  goOutInMessage = () => {
-    this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
-  }
-  snackMessage = (message: EN_messages) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.twentyMili, ENSnackBarColors.danger);
-  }
 }
 

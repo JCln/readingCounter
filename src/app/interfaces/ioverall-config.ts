@@ -503,3 +503,18 @@ export const IMasrafStates: ITHV[] = [
     { title: 'zero', header: 'صفر', value: 3 },
     { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
 ]
+export enum EN_Mess {
+    checkValuesAndTryAgain = 'مقادیر را بررسی و مجددا امتحان نمایید',
+    access_deniedLogin401 = '',
+    access_denied401 = 'مجوز های دسترسی شما باطل شده است',
+    access_denied401Msg = 'لطفا از ابتدا وارد سامانه شوید',
+    youHaveNotAccess = 'دسترسی غیر مجاز',
+    youHaveNotAccessMsg = 'از دسترسی خود به این قسمت اطمینان حاصل نمایید',
+    dataNotFound = 'اطلاعاتی پیدا نشد، لطفا داده ورودی را بدقت وارد نمایید',
+    timeOut = 'زمان ارسال درخواست به سرویس دهنده به اتمام رسید، احتمالا شبکه کُند و یا قطع است، لطفا دقایقی دیگر امتحان نمایید',
+    threshold = 'به حداکثر تعداد درخواست رسیده‌اید',
+    dataNotFoundOrDeleted = 'چنین آیتمی پیدا نشد، یا قبلاً حذف شده است',
+    checkNetwork = 'از دسترسی به شبکه اطمینان حاصل نمایید',
+    serviceError = 'خطای سرویس دهنده',
+    notResponse = 'پاسخی دریافت نشد'
+  }

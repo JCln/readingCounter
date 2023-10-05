@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ShowImgDgComponent } from '../shared/show-img-dg/show-img-dg.component';
 import { ShowVideoDgComponent } from '../shared/show-video-dg/show-video-dg.component';
 import { ShowTextDgComponent } from '../shared/show-text-dg/show-text-dg.component';
+import { MathS } from '../classes/math-s';
+import { EN_messages } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ import { ShowTextDgComponent } from '../shared/show-text-dg/show-text-dg.compone
 export class SnackWrapperService {
   ref: DynamicDialogRef;
   constructor(
-    public dialogService: DialogService
+    public dialogService: DialogService,
   ) { }
 
   private snackBar = new BehaviorSubject<ISnackBar>({ message: '', duration: ENSnackBarTimes.zero, backColor: ENSnackBarColors.danger });

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue, IObjectIteratation, ISimafaImportStatus, INotificationAlertTypes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
 import { CompositeService } from './composite.service';
 import { Location } from '@angular/common';
 import { Collapser } from '../classes/collapser';
+import { MathS } from '../classes/math-s';
+import { EN_messages } from 'interfaces/enums.enum';
 
 export interface IDialogMessage {
   messageTitle: string,
@@ -104,6 +106,12 @@ export class UtilsService {
   }
   snackBarMessage = (message: string, time: ENSnackBarTimes, color: ENSnackBarColors) => {
     this.snackWrapperService.openSnackBar(message, time, color);
+  }
+  goOutInMessage = () => {
+    this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+  }
+  snackMessage = (message: EN_messages) => {
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.twentyMili, ENSnackBarColors.danger);
   }
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
     config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true

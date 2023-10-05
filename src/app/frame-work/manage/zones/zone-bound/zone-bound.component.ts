@@ -82,8 +82,9 @@ export class ZoneBoundComponent extends FactoryONE {
     } else {
       dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
-    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'zoneId');
+    const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
+    if (res)
+      Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel() {
     // this.closeTabService.saveDataForZoneBound[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];

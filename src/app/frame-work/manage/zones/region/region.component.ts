@@ -82,9 +82,11 @@ export class RegionComponent extends FactoryONE {
       dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
 
-    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.RegionEDIT, dataSource['dataSource']);
-    this.refetchTable(dataSource['ri']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
+    const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.RegionEDIT, dataSource['dataSource']);
+    if (res) {
+      this.refetchTable(dataSource['ri']);
+      Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
+    }
   }
   onRowEditCancel() {
     // this.closeTabService.saveDataForRegion[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
