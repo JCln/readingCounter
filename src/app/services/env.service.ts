@@ -26,6 +26,7 @@ export class EnvService implements IENV {
   NotificationMediaTypeIds = this.temp.NotificationMediaTypeIds;
   NotificationAlertTypesIds = this.temp.NotificationAlertTypesIds;
   getLogoutReasonDictionary = this.temp.getLogoutReasonDictionary;
+  getInvalidLoginReasonDictionary = this.temp.getInvalidLoginReasonDictionary;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

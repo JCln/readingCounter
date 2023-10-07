@@ -28,7 +28,7 @@ export class GuardService implements CanActivate {
   }
 
   private routeToLogin(returnUrl: string) {
-    this.authService.compositeService.routeToByExtras(EN_Routes.login, { queryParams: { returnUrl: returnUrl } });
+    this.authService.compositeService.routeToByExtras(EN_Routes.loginSlash, { queryParams: { returnUrl: returnUrl } });
   }
   private hasAuthUserAccessToThisRoute(returnUrl: string): boolean {
     if (!this.authService.isAuthUserLoggedIn()) {

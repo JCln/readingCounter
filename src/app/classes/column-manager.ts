@@ -365,17 +365,28 @@ export class ColumnManager {
     requestLog: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true,isSelectedOrigin:true },        
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
-        { field: 'path', header: 'path', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'controllerAction', header: 'action', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'requestDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
         { field: 'requestTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
+        { field: 'path', header: 'path', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
     ]
     requestLogAnonymous: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true,isSelectedOrigin:true },        
         { field: 'path', header: 'path', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'requestDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'readablePath', header: 'مکان', isSelected: true, isSelectedOrigin: true },
         { field: 'requestTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+    ]
+    requestLogUnAuthorized: IObjectIteratation[] = [
+        // { field: 'id', header: 'id', isSelected: true,isSelectedOrigin:true },        
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
+        { field: 'requestDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'tokenFailureReason', header: 'علت', isSelected: true, isSelectedOrigin: true },
+        { field: 'requestTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
+        { field: 'readablePath', header: 'مکان', isSelected: true, isSelectedOrigin: true },
+        { field: 'path', header: 'path', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
     ]
     requestLogListUser: IObjectIteratation[] = [
@@ -1154,7 +1165,10 @@ export class ColumnManager {
     userLogs: IObjectIteratation[] = [
         { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'username', header: 'نام کاربری', isSelected: true, isSelectedOrigin: true },
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         { field: 'logoutReasonId', header: 'علت خروج', isSelected: true, isSelectedOrigin: true },
         { field: 'logoutDateTime', header: 'زمان خروج', isSelected: true, isSelectedOrigin: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },

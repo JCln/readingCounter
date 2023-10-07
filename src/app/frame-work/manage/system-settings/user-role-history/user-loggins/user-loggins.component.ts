@@ -15,6 +15,7 @@ import { Converter } from 'src/app/classes/converter';
 export class UserLogginsComponent extends FactoryONE {
   dataSource: IUserLoggins[];
   logoutReasonDictionary: IDictionaryManager[] = [];
+  invalidLoginReasonDictionary: IDictionaryManager[] = [];
 
   constructor(
     public securityService: SecurityService,
@@ -30,15 +31,18 @@ export class UserLogginsComponent extends FactoryONE {
     else {
       this.dataSource = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userLOGINS, this.securityService.userLoggins_pageSign.GUid);
       this.logoutReasonDictionary = this.securityService.utilsService.getLogoutReason();
+      this.invalidLoginReasonDictionary = this.securityService.utilsService.getInvalidLoginReason();
       this.convertLoginTime();
       Converter.convertIdToTitle(this.dataSource, this.logoutReasonDictionary, 'logoutReasonId');
+      Converter.convertIdToTitle(this.dataSource, this.logoutReasonDictionary, 'invalidLoginReasonId');
     }
   }
 
   convertLoginTime = () => {
     this.dataSource.forEach(item => {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
-      item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
+      if (item.logoutDateTime)
+        item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
     })
   }
 

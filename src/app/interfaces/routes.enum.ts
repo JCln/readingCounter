@@ -121,6 +121,7 @@ export enum EN_Routes {
     'wrmRequestLogsUser' = '/wr/reqLog/User',
     reqLogUsersLogins = '/wr/m/system/usersLogins',
     'wrmRequestLogsAnonymous' = '/wr/reqLog/Anonymous',
+    requestLogsUnAuthorized = '/wr/reqLog/unAuthorized',
     'realtimeMessage' = '/wr/m/msge',
     'wrmmrm' = '/wr/m/mrm',
     'wrmrrpk' = '/wr/m/r/rpk',
@@ -133,7 +134,8 @@ export enum EN_Routes {
     'wrmuedit' = '/wr/mu/edit',
     'userKarkardSummary' = '/wr/m/track/userSummary',
     userLoggins = '/wr/m/system/userRoleHistory/loggins',
-    'login' = '/login',
+    loginSlash = '/login',
+    login = 'login',
     'wrmusearch' = '/wr/mu/search',
     'wr' = '/wr',
 

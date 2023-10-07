@@ -303,6 +303,7 @@ export class CloseTabService {
   RRGuildsWithParam: IReadingGuildReportOutput[];
   saveDataForRequestLogListUser: IRequestLog[];
   saveDataForRequestLogAnonymous: IRequestLog[];
+  requestLogUnAuthorized: IRequestLog[];
   saveDataForRequestLogListUserReq: IRequestLogInput = {
     jalaliDay: '',
     fromTimeH: '',
@@ -313,6 +314,15 @@ export class CloseTabService {
     toTime: ''
   }
   saveDataForRequestLogAnonymousReq: IRequestLogInput = {
+    jalaliDay: '',
+    fromTimeH: '',
+    fromTimeM: '',
+    fromTime: '',
+    toTimeH: '',
+    toTimeM: '',
+    toTime: ''
+  }
+  requestLogUnAuthorizedReq: IRequestLogInput = {
     jalaliDay: '',
     fromTimeH: '',
     fromTimeM: '',
@@ -546,6 +556,7 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
+    { id: 2, req: ENEssentialsToSave.requestLogUnAuthorizedReq, value: ENEssentialsToSave.requestLogUnAuthorized, url: EN_Routes.requestLogsUnAuthorized },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
     { id: 2, req: ENEssentialsToSave.saveDataForServerUserActivationReq, value: ENEssentialsToSave.saveDataForServerUserActivation, url: EN_Routes.userActivation },
     { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },

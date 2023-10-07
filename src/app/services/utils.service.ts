@@ -54,6 +54,9 @@ export class UtilsService {
   getLogoutReason = (): any[] => {
     return this.envService.getLogoutReasonDictionary;
   }
+  getInvalidLoginReason = (): any[] => {
+    return this.envService.getInvalidLoginReasonDictionary;
+  }
   getAppVersion = (): string => {
     return this.envService.version;
   }

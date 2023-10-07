@@ -184,6 +184,8 @@ export enum ENEssentialsToSave {
     mobileManagerFeedbackAllSReq = "mobileManagerFeedbackAllSReq",
     mobileManagerforbiddenTypeReq = 'mobileManagerforbiddenTypeReq',
     mobileManagerforbiddenType = 'mobileManagerforbiddenType',
+    requestLogUnAuthorizedReq = "requestLogUnAuthorizedReq",
+    requestLogUnAuthorized = "requestLogUnAuthorized"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -436,6 +438,7 @@ export enum ENSelectedColumnVariables {
     selectedRRGuildsParams = 'rrGuildsParams',
     selectedRRRequestLog = 'requestLog',
     selectedRRRequestLogAnonymous = 'requestLogAnonymous',
+    selectedRRRequestLogUnAuthorized = 'requestLogUnAuthorized',
     selectedRRRequestLogListUser = 'requestLogListUser',
     selectedRequestLogUsersLogins = 'usersLoginsDetails',
     selectedRequestLogNotifListByDate = 'notificationListByDateReq',
@@ -517,4 +520,4 @@ export enum EN_Mess {
     checkNetwork = 'از دسترسی به شبکه اطمینان حاصل نمایید',
     serviceError = 'خطای سرویس دهنده',
     notResponse = 'پاسخی دریافت نشد'
-  }
+}

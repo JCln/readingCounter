@@ -4,7 +4,7 @@
     // API url
     window.__env.headerProvinceTitle = '';
     // window.__env.API_URL = 'http://127.0.0.1/kontoriNew';
-    window.__env.API_URL = 'https://37.191.92.157/kontoriNew';
+    window.__env.API_URL = 'http://192.168.100.18:7529';
     // for map instantiation    
     window.__env.mapUrls = [
         { title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
@@ -45,11 +45,19 @@
         { id: 5, title: 'حذف موقت' }
     ];
     window.__env.getLogoutReason = [
-        { id: 0, title: 'خروج از برنامه' },
-        { id: 1, title: 'ویرایش شده' },
-        { id: 2, title: 'تغییر گذرواژه' },
-        { id: 3, title: 'لاگین همزمان' },
-        { id: 4, title: 'غیرفعال شده' }
+        { id: 0, title: 'خروج از dddبرنامه' },
+        { id: 1, title: 'ویراddیش شده' },
+        { id: 2, title: 'تغییر گddذرواژه' },
+        { id: 3, title: 'لاگین22 همزمان' },
+        { id: 4, title: 'غیرفddعال شده' }
+    ];
+    window.__env.getInvalidLoginReasonDictionary = [
+        { id: 1, title: 'کاربر غیdرمجاز' },
+        { id: 2, title: 'گذرواژهd نادرست' },
+        { id: 3, title: 'مسدودسازی درخواdست مکرر' },
+        { id: 4, title: 'کاربdر غیرفعال' },
+        { id: 5, title: 'کاربdر قفل شده' },
+        { id: 6, title: 'شماره dسریال نادرست' }
     ];
     window.__env.hasCanclableSpinner = false;
     window.__env.timeout = 18000;
@@ -92,5 +100,5 @@
     // Whether or not to enable debug mode
     // Setting this to false will disable console output
     window.__env.enableDebug = true;
-    window.__env.enableENV = false;
+    window.__env.enableENV = true;
 }(this));

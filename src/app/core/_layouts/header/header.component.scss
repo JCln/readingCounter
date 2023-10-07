@@ -11,6 +11,7 @@
   position: relative;
   background-color: var(--white);
   width: 100%;
+  height: var(--font_33);
   padding: var(--font_01);
   box-shadow: 0 1px 5px 0px var(--primary_5);
   z-index: 100;
@@ -19,13 +20,15 @@
 ul {
   display: flex;
   align-items: center;
+  gap: .25rem;
   height: 100%;
-  width: 90%;
+  width: 82%;
   margin: 0;
   padding: 0;
 
   @media (min-width:550px) {
     padding-right: 2rem;
+    padding-left: 2rem;
   }
 
 }
@@ -62,11 +65,38 @@ li {
   }
 }
 
+.notif {
+  position: relative;
+}
+
+._badge_wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0.6rem;
+  top: 0.4rem;
+}
+
+._badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font_s);
+  max-height: 1.87rem;
+  min-width: 1.5rem;
+  padding: 0 0.3rem;
+  font-weight: 600;
+  border-radius: 100vmax;
+  color: var(--secondary_1);
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  background-color: var(--red_600);
+}
+
 .menu_toggle {
   display: block;
   padding: var(--font_05);
   border-radius: $border_50;
-  background-color: var(--secondary_3);
   cursor: pointer;
   transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
 

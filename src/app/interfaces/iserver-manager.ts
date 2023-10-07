@@ -35,6 +35,7 @@ export interface IRequestLog {
     requestDateJalali: string,
     requestTime: string,
     ip: string
+    tokenFailureReason: string
 }
 export interface IManageServerErrorsRes {
     errorId: string,

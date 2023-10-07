@@ -2,9 +2,15 @@
     <li class="_theme_mode">
         <app-color-palette></app-color-palette>
     </li>
+    <li class="_borders">
+        <app-date-jalali></app-date-jalali>
+    </li>
     <ul>
-        <li class="_borders">
-            <app-date-jalali></app-date-jalali>
+        <li class="notif" [routerLink]="[routeToMyMessages]">
+            <div class="_badge_wrapper">
+                <i class="_badge">{{badgeNumber}}</i>
+            </div>
+            <i class="far fa-bell"></i>
         </li>
         <li>
             <app-dropdown (isLogout)="logout()"></app-dropdown>
@@ -35,6 +41,9 @@
                 <div class="tooltip_text_bottom">{{ENHubMessages.Connected}}</div>
             </div>
         </li>
+        <li>
+            <app-small-spinner></app-small-spinner>
+        </li>
         <li class="_name">
             {{displayName}}
         </li>
@@ -43,9 +52,7 @@
             <span></span>
             <span></span>
         </li>
-        <li>
-            <app-small-spinner></app-small-spinner>
-        </li>
     </ul>
+
 
 </div>

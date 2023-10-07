@@ -226,6 +226,18 @@ export class getLogoutReasonDictionary {
     private constructor(public readonly value: { id: number, title: string }[]) {
     }
 }
+export class getInvalidLoginReasonDictionary {
+    static readonly DEFAULT = new getInvalidLoginReasonDictionary([
+        { id: 1, title: 'کاربر غیرمجاز' },
+        { id: 2, title: 'گذرواژه نادرست' },
+        { id: 3, title: 'مسدودسازی درخواست مکرر' },
+        { id: 4, title: 'کاربر غیرفعال' },
+        { id: 5, title: 'کاربر قفل شده' },
+        { id: 6, title: 'شماره سریال نادرست' }
+    ]);
+    private constructor(public readonly value: { id: number, title: string }[]) {
+    }
+}
 export class getDeleteDictionary {
     static readonly DEFAULT = new getDeleteDictionary([
         { id: 0, title: 'حذف دائم' },

@@ -10,14 +10,12 @@ import { JwtService } from 'src/app/auth/jwt.service';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent {
   @Output() isLogout = new EventEmitter<boolean>();
   routeToProfile = EN_Routes.wrprofile;
   routeToLicense = EN_Routes.wrLicense;
   routeToAboutUs = EN_Routes.aboutUs;
-  routeToMyMessages = EN_Routes.NotificationMessages;
   aboutUsImage = 'assets/imgs/header/logo_Atlas.png';
-  badgeNumber: number = 0;
 
   constructor(
     private envService: EnvService,
@@ -30,16 +28,6 @@ export class DropdownComponent implements OnInit {
   }
   linkToChat = () => {
     window.open(this.envService.API_URL + '/' + ENInterfaces.chat + this.jwtService.getAccessToken(), '_blank');
-  }
-  getNotificationBadge = async (): Promise<number> => {
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
-    return res.count;
-  }
-  getNotification = async () => {
-    this.badgeNumber = await this.getNotificationBadge();
-  }
-  ngOnInit(): void {
-    this.getNotification();
   }
 
 }

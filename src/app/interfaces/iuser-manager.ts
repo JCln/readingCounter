@@ -340,6 +340,7 @@ export interface IUserLoggins {
     loginIp: string,
     logoutReasonId: number,
     logoutDateTime: string,
+    invalidLoginReasonId: string,
     wasSuccessful: boolean,
     browserVersion: string,
     browserTitle: string,
@@ -351,6 +352,8 @@ export interface IUserLoggins {
     osPlatform: string,
     osShortTitle: string,
     userAgent: string,
+    userDisplayName: string,
+    username: string,
     wrongPassword: string,
     appVersion: string,
 }

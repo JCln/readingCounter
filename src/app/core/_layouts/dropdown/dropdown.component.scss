@@ -7,7 +7,6 @@
   width: var(--font_23);
   height: var(--font_23);
   border-radius: 50%;
-  background: var(--secondary_3);
   font-size: var(--font_m);
 
   &:hover,
@@ -22,7 +21,6 @@
   background: none;
   border: none;
   font-size: var(--font_l);
-  color: var(--primary_5);
   cursor: pointer;
 
   &:hover::after {
@@ -32,25 +30,6 @@
     height: var(--font_23);
     top: var(--font_xs);
     left: calc(-1 * var(--font_xs));
-  }
-
-  ._badge_wrapper {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: 1.5rem;
-    top: 1.5rem;
-  }
-
-  ._badge {
-    font-size: var(--font_s);
-    padding: .3rem;
-    font-weight: 600;
-    border-radius: $border_50;
-    color: var(--secondary_1);
-    font-family: $font_family;
-    background-color: var(--red_600);
   }
 }
 

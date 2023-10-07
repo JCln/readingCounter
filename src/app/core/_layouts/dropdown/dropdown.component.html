@@ -1,15 +1,11 @@
 <div class="dropdown">
     <button class="dropbtn">
-        <i class="fa fa-user">
-            <div class="_badge_wrapper">
-                <i class="_badge">{{badgeNumber}}</i>
-            </div>
-        </i>
+        <i class="pi pi-user"></i>
     </button>
     <div class="dropdown-content">
         <a [routerLink]="[routeToProfile]">
             تنظیمات کاربری
-            <i class="pi pi-user"></i>
+            <i class="pi pi-cog"></i>
         </a>
         <a [routerLink]="[routeToLicense]">
             مجوز
@@ -19,16 +15,12 @@
             درباره ما
             <img class="about_us_img" [src]="aboutUsImage" alt="">
         </a>
-        <a [routerLink]="[routeToMyMessages]">
-            پیام‌ها
-            <i class="far fa-bell"></i>
-        </a>
         <!-- <a (click)="linkToChat()">
             گفتگو
             <i class="fa fa-wechat"></i>
         </a> -->
         <a (click)="logout()">
-            خروج
+            خروج از سامانه
             <i class="pi pi-sign-out"></i>
         </a>
     </div>

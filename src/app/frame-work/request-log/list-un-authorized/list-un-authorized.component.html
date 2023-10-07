@@ -1,0 +1,45 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="closeTabService.requestLogUnAuthorizedReq.jalaliDay">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="t_input_2">
+                    <div class="t_key">از زمان</div>
+                    <input class="t_value" name="fromTimeM" min="1" max="60" maxlength="2"
+                        [(ngModel)]="closeTabService.requestLogUnAuthorizedReq.fromTimeM">
+                    <div class="_colon">:</div>
+                    <input class="t_value" name="fromTimeH" min="1" max="24" maxlength="2"
+                        [(ngModel)]="closeTabService.requestLogUnAuthorizedReq.fromTimeH">
+                </div>
+                <div class="t_input_2">
+                    <div class="t_key">تا زمان</div>
+                    <input class="t_value" name="toTimeM" min="1" max="60" maxlength="2"
+                        [(ngModel)]="closeTabService.requestLogUnAuthorizedReq.toTimeM">
+                    <div class="_colon">:</div>
+                    <input class="t_value" name="toTimeH" min="1" max="24" maxlength="2"
+                        [(ngModel)]="closeTabService.requestLogUnAuthorizedReq.toTimeH">
+                </div>
+                <button type="submit" class="btn_1">
+                    <i class="pi pi-list"></i>
+                    مشاهده
+                </button>
+
+            </section>
+        </form>
+    </section>
+
+    <section>
+        <app-prime-table [dataSource]="closeTabService.requestLogUnAuthorized"
+            [_outputFileName]="'requestLogUnAuthorized'" [_sessionName]="'reqlogUnAuthorized-session'"
+            [_selectedColumnsToRemember]="'selectedRRRequestLogUnAuthorized'" (refreshedTable)="verification()">
+        </app-prime-table>
+    </section>
+
+</main>

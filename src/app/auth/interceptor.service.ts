@@ -10,6 +10,7 @@ import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { UtilsService } from 'services/utils.service';
 import { EN_Mess } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class InterceptorService implements HttpInterceptor {
   accessDenied_401 = async () => {
     const config = {
       messageTitle: EN_Mess.access_denied401,
-      text: EN_Mess.youHaveNotAccessMsg,
+      text: EN_Mess.access_denied401Msg,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
@@ -35,29 +36,21 @@ export class InterceptorService implements HttpInterceptor {
     }
     await this.utilsService.firstConfirmDialog(config);
   }
-  accessDeniedLogin_401 = async () => {
-    const config = {
-      messageTitle: EN_Mess.access_denied401,
-      text: EN_Mess.youHaveNotAccessMsg,
-      minWidth: '19rem',
-      isInput: false,
-      isDelete: true,
-      icon: 'pi pi-ban'
-    }
-    await this.utilsService.firstConfirmDialog(config);
+  // when on login page, no dialog should open
+  private showLoginMessage = async (error: any) => {
+    this.utilsService.snackBarMessageFailed(error.error.message);
   }
-  private showProperMessage = async (error: any) => {
-    // if (error.error.message)
-    //   this.utilsService.noAccessMessage(error.error.message);
-    // else {
+  private showDialog = async () => {
     await this.accessDenied_401();
     this.authService.logout();
-    // }
   }
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
-    const url = this.utilsService.compositeService.getRouterUrl();
     const nothing = '';
-    if (url === EN_Routes.login) {
+    const urlPath = new URL(req.url).pathname.slice(1);
+    console.log(urlPath);
+
+    // url path should not have slash (/)
+    if (urlPath === EN_Routes.login || urlPath === ENInterfaces.AuthsCaptchaApiShow || urlPath === ENInterfaces.AuthsAccountLogout) {
       return req.clone({
         headers: req.headers.set(this.authorizationHeader, nothing)
       });
@@ -71,23 +64,13 @@ export class InterceptorService implements HttpInterceptor {
     if (authToken)
       req = this.addToken(req, authToken);
 
-    // this.interactionService.getNetRequestStatus$().subscribe(res => {
-    //   if (res == true) {
-    //     console.log(res);
-    //     setTimeout(() => {
-    //       this.interactionService.setNetRequestStatus(false);
-    //     }, 2000);
-    //     return EMPTY;
-    //   }
-    // })
-
     return next.handle(req)
       .pipe(
         catchError((error => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === ENClientServerErrors.cs401) {
               if (req.url.includes('login')) {
-                this.showProperMessage(error);
+                this.showLoginMessage(error);
                 return;
               }
               if (!this.authService.isAuthUserLoggedIn()) {
@@ -95,7 +78,7 @@ export class InterceptorService implements HttpInterceptor {
                 this.authService.logout();
               }
               else {
-                this.showProperMessage(error);
+                this.showDialog();
               }
             }
           }

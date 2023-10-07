@@ -46,13 +46,12 @@ export class AuthService {
   logout = async () => {
     this.clearAllSavedData();
     this.clearDictionaries();
-    console.log(this.jwtService.getAuthorizationToken());
     this.signalRService.disconnectConnection();
     await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthsAccountLogout,
       this.jwtService.getAuthorizationToken()
     );
     this.jwtService.removeAuthLocalStorage();
-    this.compositeService.routeTo(EN_Routes.login);
+    this.compositeService.routeTo(EN_Routes.loginSlash);
   }
   saveTolStorage = (token: IAuthTokenType) => {
     this.jwtService.saveToLocalStorage(token.access_token);

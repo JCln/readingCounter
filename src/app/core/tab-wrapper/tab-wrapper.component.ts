@@ -181,7 +181,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   }
   addDashboardTab = () => {
     return {
-      route: EN_Routes.wr, title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
+      route: EN_Routes.wr, title: 'نقشه/ داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
     };
   }
   addProfileTab = () => {
