@@ -38,6 +38,10 @@ export interface IPolicies {
     osShortTitle: string,
     userAgent: string,
 }
+export interface IPoliciesCompare {
+    previous: IPolicies,
+    this: IPolicies
+}
 export interface IRoleHistory {
     id: number,
     title: string,

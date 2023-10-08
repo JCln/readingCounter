@@ -326,6 +326,7 @@ export enum ENInterfaces {
     getPolicies = 'V1/Policy/Active',
     editPolicies = 'V1/Policy/Edit',
     policiesHistory = 'V1/Policy/History',
+    policiesCompare = 'V1/Policy/Compare',
     ipRateManager = 'V1/Ip/SpecialRules',
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',

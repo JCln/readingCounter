@@ -1,11 +1,12 @@
 import { PolicyHistoryDetailsComponent } from './policy-history-details/policy-history-details.component';
 import { IPrivacy } from 'services/DI/privacies';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { PhCompareComponent } from './ph-compare/ph-compare.component';
 
 @Component({
   selector: 'app-policy-history',
@@ -34,6 +35,13 @@ export class PolicyHistoryComponent extends FactoryONE {
   }
   showMoreDetails = (data: IPrivacy) => {
     this.ref = this.dialogService.open(PolicyHistoryDetailsComponent, {
+      data: data,
+      rtl: true,
+      width: '80%'
+    })
+  }
+  showCompare = (data: IPrivacy) => {
+    this.ref = this.dialogService.open(PhCompareComponent, {
       data: data,
       rtl: true,
       width: '80%'

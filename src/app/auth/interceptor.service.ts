@@ -47,8 +47,6 @@ export class InterceptorService implements HttpInterceptor {
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     const nothing = '';
     const urlPath = new URL(req.url).pathname.slice(1);
-    console.log(urlPath);
-
     // url path should not have slash (/)
     if (urlPath === EN_Routes.login || urlPath === ENInterfaces.AuthsCaptchaApiShow || urlPath === ENInterfaces.AuthsAccountLogout) {
       return req.clone({

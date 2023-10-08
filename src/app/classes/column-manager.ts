@@ -430,6 +430,45 @@ export class ColumnManager {
         { field: 'canUpdateDeviceId', header: 'شناسه قابل بروز رسانی باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },
     ]
+    policyCompare: IObjectIteratation[] = [
+        // enableXSSProtection
+        // enableObscureHeaderInfo
+        // secureCookies
+        // DOSProtection
+        // STEALTH
+        // useJWTDecoder
+        // CSRFProtection
+        // DDOSProtection
+        // CSPProtection
+        // HSTSProtection
+        // SanitizeUserInputs
+        // AES512Protection
+        // autoClearData
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'enableValidIpCaptcha', header: 'فعال سازی captcha', isSelected: false, isSelectedOrigin: false, isBoolean: true, icon: '' },
+        { field: 'requireCaptchaInvalidAttempts', header: 'تعداد دفعات ورود با Captcha', isSelected: false, isSelectedOrigin: false, isNumber: true, icon: '' },
+        { field: 'enableValidIpRecaptcha', header: 'ip مناسب در Recaptcha', isSelected: true, isSelectedOrigin: true, isBoolean: true, icon: '' },
+        { field: 'requireRecaptchaInvalidAttempts', header: 'recaptcha', isSelected: true, isSelectedOrigin: true, isNumber: true, icon: '' },
+        { field: 'browserShortTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'osTitle', header: 'سیستم‌عامل', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'osPlatform', header: 'پلتفرم', isSelected: true, isSelectedOrigin: true, icon: '' },
+        { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false, icon: '' },
+        { field: 'lockInvalidAttempts', header: 'مسدودسازی درخواست مکرر', isSelected: false, isSelectedOrigin: false, isNumber: true, icon: '' },
+        { field: 'lockMin', header: 'مدت محدودیت مسدود سازی', isSelected: false, isSelectedOrigin: false, isNumber: true, icon: '' },
+        { field: 'minPasswordLength', header: 'حداقل تعداد رمز عبور', isSelected: false, isSelectedOrigin: false, isNumber: true, icon: '' },
+        { field: 'passwordContainsNumber', header: 'گذرواژه شامل حداقل یک عدد باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true, icon: '' },
+        { field: 'passwordContainsLowercase', header: 'گذرواژه شامل حداقل یک حرف کوچک لاتین باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true, icon: '' },
+        { field: 'passwordContainsUppercase', header: 'گذرواژه شامل حداقل یک حرف بزرگ لاتین باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true, icon: '' },
+        { field: 'passwordContainsNonAlphaNumeric', header: 'گذرواژه شامل حداقل یک حرف غیرالفبایی باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true, icon: '' },
+        { field: 'canUpdateDeviceId', header: 'شناسه قابل بروز رسانی باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true, icon: '' },
+        // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false ,icon: ''},
+    ]
     userRoleHistoryDetails: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان گروه', isSelected: true, isSelectedOrigin: true },
         { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true, isSelectedOrigin: true },

@@ -1,4 +1,4 @@
-<p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
+<p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
@@ -119,7 +119,7 @@
             </td>
         </tr>
         <tr>
-            <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
+            <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr,'_editable': col.icon}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isBoolean; else elseTemplate">
                     <ng-container *ngIf="col.field !== 'isSelected'; else editableBooleans">
@@ -293,6 +293,13 @@
                 <span class="ui-column-title">خلاصه کاردکس</span>
                 <i class="tooltip p_icons pi pi-folder">
                     <div class="tooltip_text">خلاصه کاردکس</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'policyHistory'"
+                (click)="openBriefKardexDialog(dataSource)">
+                <span class="ui-column-title">مقایسه تغییرات</span>
+                <i class="tooltip p_icons pi pi-folder">
+                    <div class="tooltip_text">مقایسه تغییرات</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="
