@@ -7,6 +7,7 @@ import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PhCompareComponent } from './ph-compare/ph-compare.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-policy-history',
@@ -29,7 +30,7 @@ export class PolicyHistoryComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.closeTabService.saveDataForPoliciesHistory.length) {
+    if (MathS.isNull(this.closeTabService.saveDataForPoliciesHistory)) {
       this.closeTabService.saveDataForPoliciesHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.policiesHistory);
     }
   }

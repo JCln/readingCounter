@@ -295,11 +295,11 @@
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_outputFileName == 'policyHistory'"
+            <td class="__columns" *ngIf="_outputFileName == 'policyHistory' || _outputFileName == 'roleHistory'"
                 (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">مقایسه تغییرات</span>
                 <i class="tooltip p_icons pi pi-folder">
-                    <div class="tooltip_text">مقایسه تغییرات</div>
+                    <div class="tooltip_text_right">مقایسه تغییرات</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="

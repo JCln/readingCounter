@@ -1,11 +1,12 @@
 import { RoleHistoryDetailsComponent } from './role-history-details/role-history-details.component';
-import { IRoleHistory } from 'services/DI/privacies';
+import { IRoleDto, IRoleHistory } from 'services/DI/privacies';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+import { RoleCompareComponent } from './role-compare/role-compare.component';
 
 @Component({
   selector: 'app-role-history',
@@ -35,6 +36,13 @@ export class RoleHistoryComponent extends FactoryONE {
   }
   showMoreDetails = (data: IRoleHistory) => {
     this.ref = this.dialogService.open(RoleHistoryDetailsComponent, {
+      data: data,
+      rtl: true,
+      width: '80%'
+    })
+  }
+  showCompare = (data: IRoleDto) => {
+    this.ref = this.dialogService.open(RoleCompareComponent, {
       data: data,
       rtl: true,
       width: '80%'

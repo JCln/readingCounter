@@ -1,10 +1,12 @@
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENHubMessages } from 'interfaces/ioverall-config';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENHubMessages, EN_Mess } from 'interfaces/ioverall-config';
 import { ENThemeColor } from 'interfaces/istyles';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SignalRService } from 'services/signal-r.service';
 import { ThemeService } from 'services/theme.service';
+import { UtilsService } from 'services/utils.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -26,19 +28,35 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
   constructor(
     private authService: AuthService,
     public themeService: ThemeService,
-    public signalRService: SignalRService
+    public signalRService: SignalRService,
+    private utilsService: UtilsService
   ) { }
 
+  configShouldIChangePass = async() => {
+    const config = {
+      messageTitle: EN_messages.passwordShouldChange,
+      
+      text: EN_messages.passwordShouldChangeReason,
+      isInput: false,
+      isDelete: false,
+      icon: 'pi pi-unlock',
+      minWidth: '20rem',
+    }
+    // if (await this.utilsService.firstConfirmDialog(config))
+    
+  }
   setSidebar = () => {
     this.sideBar = !this.sideBar;
     this.sidebarEvent.emit(this.sideBar);
   }
-  getNotificationBadge = async (): Promise<number> => {
-    const res = await this.signalRService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
-    return res.count;
-  }
   getNotification = async () => {
-    this.badgeNumber = await this.getNotificationBadge();
+    // getNotification
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
+    this.badgeNumber = res.count;
+    const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.getShouldIChangePassword);
+    if (shouldIChangePass) {
+
+    }
   }
   hubConnect = () => {
     this.signalRService.startConnection();

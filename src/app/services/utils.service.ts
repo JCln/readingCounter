@@ -7,8 +7,8 @@ import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confir
 import { CompositeService } from './composite.service';
 import { Location } from '@angular/common';
 import { Collapser } from '../classes/collapser';
-import { MathS } from '../classes/math-s';
 import { EN_messages } from 'interfaces/enums.enum';
+import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 
 export interface IDialogMessage {
   messageTitle: string,
@@ -34,6 +34,7 @@ export class UtilsService {
     public dialog: MatDialog,
     private _location: Location,
     public snackWrapperService: SnackWrapperService,
+    public ajaxReqWrapperService: AjaxReqWrapperService,
     public collapser: Collapser
   ) { }
 

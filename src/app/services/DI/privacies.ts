@@ -64,6 +64,17 @@ export interface IRoleHistory {
     userAgent: string,
     userDisplayName: string
 }
+export interface IRoleDto {
+    id?: number;
+    title: string;
+    titleUnicode: string;
+    needDeviceIdLogin: boolean;
+    displaySensitiveNotification: boolean;
+}
+export interface IRoleReqLogCompare {
+    previous: IRoleDto,
+    this: IRoleDto
+}
 export interface IUsersLoginBriefInfo {
     id: string,
     userId: string,

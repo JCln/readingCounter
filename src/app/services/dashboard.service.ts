@@ -14,6 +14,8 @@ import { ColumnManager } from '../classes/column-manager';
 })
 export class DashboardService {
   _selectedZone: number = 0;
+  private dashboardUserAllColumns: string = 'dashboardUserAll';
+  private dashboardsColumns: string = 'dashboards'
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
@@ -24,10 +26,10 @@ export class DashboardService {
 
   /* COLUMNS */
   columnDashboardUserOverall = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('dashboardUserAll');
+    return this.columnManager.columnSelectedMenus(this.dashboardUserAllColumns);
   }
   columnDashboards = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('dashboards');
+    return this.columnManager.columnSelectedMenus(this.dashboardsColumns);
   }
 
   /* CALL API */

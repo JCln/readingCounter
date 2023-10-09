@@ -1,6 +1,8 @@
 export enum EN_messages {
     passwords_notFetch = 'تعداد ارقام گذرواژه با تایید آن برابر نیست',
     password_notExactly = 'گذرواژه با تایید آن باید یکی باشند',
+    passwordShouldChange = 'لطفا گذرواژه را تغییر دهید',
+    passwordShouldChangeReason = 'جهت تامین امنیت حساب کاربری خود، گذرواژه باید تغییر کند.',
     sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشند',
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     sameLength_notValid = 'مقادیر ابتدا و انتهایی را وارد نمایید',

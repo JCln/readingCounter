@@ -508,6 +508,12 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, icon: '_double_size' },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },                        
     ]
+    roleCompare: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true, isSelectedOrigin: true },
+        { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displaySensitiveNotification', header: 'اعلانهای مهم', isSelected: true, isSelectedOrigin: true, isBoolean: true }
+    ]
     usersLogins: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
