@@ -194,6 +194,20 @@ export interface ITestSidebar {
     isRefreshable: boolean;
     sid_isOpenItems: boolean;
 }
+export interface IDialogMessage {
+    messageTitle: string,
+    messageTitleTwo?: string,
+    text?: string,
+    minWidth: string,
+    isInput: boolean,
+    inputMinLength?: number,
+    placeHolder?: string,
+    isDelete: boolean,
+    icon: string,
+    doesNotReturnButton?: boolean,
+    isSelectableDate?: boolean,
+    changePassword?: boolean
+}
 export interface ISimafaImportStatus {
     hasSingle: boolean,
     hasBatch: boolean
@@ -284,6 +298,7 @@ export enum ENRandomNumbers {
     three = 3,
     four = 4,
     five = 5,
+    six = 6,
     eight = 8,
     ten = 10,
     eleven = 11,

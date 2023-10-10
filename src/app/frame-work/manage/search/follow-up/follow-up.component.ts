@@ -20,6 +20,9 @@ export class FollowUpComponent extends FactoryONE {
   shouldActive: boolean = false;
   _showDesc: IObjectIteratation[] = [];
   _defColumns: any[];
+  private listManagerPerdayFollowColumns: string = 'LMPerDayFollowUpPositions';
+  private followupViewColumns: string = 'followUpView';
+  private defColumns: string = 'defColumns';
   showInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'گراف',
@@ -125,10 +128,10 @@ export class FollowUpComponent extends FactoryONE {
   insertToDesc = () => {
     if (this.dataSourceAUX) {
       this.trackingManagerService.setGetRanges(this.dataSourceAUX);
-      this._selectColumnsAUX = this.trackingManagerService.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
+      this._selectColumnsAUX = this.trackingManagerService.columnManager.columnSelectedMenus(this.listManagerPerdayFollowColumns);
     }
-    this._showDesc = this.trackingManagerService.columnManager.columnSelectedMenus('followUpView');
-    this._defColumns = this.trackingManagerService.columnManager.columnSelectedMenus('defColumns');
+    this._showDesc = this.trackingManagerService.columnManager.columnSelectedMenus(this.followupViewColumns);
+    this._defColumns = this.trackingManagerService.columnManager.columnSelectedMenus(this.defColumns);
     this.clearUNUsables();
   }
   showInMap = () => {
@@ -138,8 +141,8 @@ export class FollowUpComponent extends FactoryONE {
     row.listNumber = this.dataSourceAUX.listNumber;
     row.trackNumber = this.dataSourceAUX.trackNumber;
     row.zoneTitle = this.closeTabService.saveDataForFollowUp.zoneTitle;
-    row.zoneId = this.closeTabService.saveDataForFollowUp.zoneId;    
-    
+    row.zoneId = this.closeTabService.saveDataForFollowUp.zoneId;
+
     this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }

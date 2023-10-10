@@ -14,10 +14,11 @@ import { TableModule } from 'primeng/table';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
 import { ImageViewerComponent } from './carousel-woum/woum/image-viewer/image-viewer.component';
-import { ConfirmTextDialogComponent } from './confirm-text-dialog/confirm-text-dialog.component';
 import { PrimeTableEditableComponent } from './prime-table-editable/prime-table-editable.component';
 import { PrimeTableComponent } from './prime-table/prime-table.component';
 import { AddRowDirective } from '../directives/add-row.directive';
+import { ConfirmTextDialogComponent } from './confirm-text-dialog/confirm-text-dialog.component';
+import { SharedChangePassModule } from './shared-change-pass.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AddRowDirective } from '../directives/add-row.directive';
     RadioButtonModule,
     SelectButtonModule,
     SharedThreeModule,
+    SharedChangePassModule,
     // mat-dialog-module for confirmTextDialog component added
     MatDialogModule,
   ],
@@ -59,7 +61,7 @@ import { AddRowDirective } from '../directives/add-row.directive';
     ReactiveFormsModule,
     RadioButtonModule,
     SelectButtonModule,
-    SharedThreeModule,
+    SharedThreeModule
   ],
   entryComponents: [
     ImageViewerComponent,

@@ -13,6 +13,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class GuildComponent extends FactoryONE {
   newRowLimit: number = 1;
 
+  private guildColumns: string = 'guild';
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
@@ -38,7 +39,7 @@ export class GuildComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus('guild');
+    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus(this.guildColumns);
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {

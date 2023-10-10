@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
@@ -10,19 +10,6 @@ import { Collapser } from '../classes/collapser';
 import { EN_messages } from 'interfaces/enums.enum';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 
-export interface IDialogMessage {
-  messageTitle: string,
-  messageTitleTwo?: string,
-  text?: string,
-  minWidth: string,
-  isInput: boolean,
-  inputMinLength?: number,
-  placeHolder?: string,
-  isDelete: boolean,
-  icon: string,
-  doesNotReturnButton?: boolean,
-  isSelectableDate?: boolean
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -119,9 +106,13 @@ export class UtilsService {
   }
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
     config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true
+    config.changePassword = !!config.changePassword ? true : false
+    console.log(config.changePassword);
+
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: config.minWidth,
+        disableClose: config.doesNotReturnButton,
         data: {
           messageTitle: config.messageTitle,
           messageTitleTwo: config.messageTitleTwo,
@@ -132,7 +123,8 @@ export class UtilsService {
           isDelete: config.isDelete,
           icon: config.icon,
           doesNotReturnButton: config.doesNotReturnButton,
-          isSelectableDate: config.isSelectableDate
+          isSelectableDate: config.isSelectableDate,
+          changePassword: config.changePassword
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

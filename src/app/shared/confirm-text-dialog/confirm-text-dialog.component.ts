@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -24,7 +25,7 @@ export class ConfirmTextDialogComponent {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_desc);
       return;
     }
-    if (!MathS.isLowerThanMinLength(this.userInputText, this.data.inputMinLength || 6)) {
+    if (!MathS.isLowerThanMinLength(this.userInputText, this.data.inputMinLength || ENRandomNumbers.six)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalidCounts);
       return;
     }

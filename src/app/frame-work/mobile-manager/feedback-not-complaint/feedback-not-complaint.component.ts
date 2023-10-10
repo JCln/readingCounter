@@ -14,6 +14,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class FeedbackNotComplaintComponent extends FactoryONE {
   newRowLimit: number = 1;
   readonly isComplaint: boolean = false;
+  private feedbackNotComplaintColumns: string = 'feedbackNotComplaint';
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -40,7 +41,7 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.mobileAppService.columnManager.columnSelectedMenus('feedbackNotComplaint');
+    this._selectCols = this.mobileAppService.columnManager.columnSelectedMenus(this.feedbackNotComplaintColumns);
     this._selectedColumns = this.mobileAppService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {

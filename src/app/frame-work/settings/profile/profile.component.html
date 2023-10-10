@@ -12,30 +12,10 @@
     </main>
 
     <section>
-
-        <form #form="ngForm" (ngSubmit)="changePassword()" class="content">
+        <div class="content">
             <h1 class="title">تغییر گذرواژه</h1>
-
-            <div class="_desc">
-                <div class="input_2">
-                    <div class="_key">گذرواژه فعلی</div>
-                    <input class="_value" type="password" name="oldPassword" [(ngModel)]="password.oldPassword">
-                </div>
-                <div class="input_2">
-                    <div class="_key">گذرواژه جدید</div>
-                    <input class="_value" type="password" name="newPassword" [(ngModel)]="password.newPassword">
-                </div>
-                <div class="input_2">
-                    <div class="_key">تکرار گذرواژه جدید</div>
-                    <input class="_value" type="password" name="confirmPassword" [(ngModel)]="password.confirmPassword">
-                </div>
-            </div>
-
-            <div class="change_pass">
-                <button type="submit" class="btn_1 _full_width">ذخیره</button>
-            </div>
-        </form>
-
+            <app-change-password [_isFromProfile]="true"></app-change-password>
+        </div>
     </section>
 
     <section>

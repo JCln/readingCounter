@@ -26,6 +26,7 @@ export class FragmentComponent extends FactoryONE {
   _selectCols: any[];
   _selectedColumns: any[];
   isAddingNewRow: boolean = false;
+  private fragmentMasterColumns: string = '_fragmentMaster';
   clonedProducts: { [s: string]: IFragmentMaster; } = {};
 
   fragmentMasterId: string = '';
@@ -67,7 +68,7 @@ export class FragmentComponent extends FactoryONE {
     this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus('_fragmentMaster');
+    this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus(this.fragmentMasterColumns);
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   defaultAddStatus = () => this.newRowLimit = 1;

@@ -15,6 +15,7 @@ import {
   IReadingProgramRes,
 } from 'interfaces/import-data';
 import {
+  ENRandomNumbers,
   ENSelectedColumnVariables,
   IMasrafStates,
   IObjectIteratation,
@@ -466,7 +467,7 @@ export class ImportDynamicService {
       this.snackMessage(EN_messages.format_invalid_trackNumber);
       return false;
     }
-    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
+    if (!MathS.isLowerThanMinLength(id, ENRandomNumbers.two) || !MathS.isLowerThanMaxLength(id, ENRandomNumbers.ten)) {
       this.snackMessage(EN_messages.format_invalid_trackNumbersLength);
       return false;
     }

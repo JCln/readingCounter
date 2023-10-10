@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { ProfileService } from 'services/profile.service';
@@ -234,7 +234,7 @@ export class TrackingManagerService {
       this.showWarnMessage(EN_messages.format_invalid_trackNumber);
       return false;
     }
-    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
+    if (!MathS.isLowerThanMinLength(id, ENRandomNumbers.two) || !MathS.isLowerThanMaxLength(id, ENRandomNumbers.ten)) {
       this.showWarnMessage(EN_messages.format_invalid_trackNumbersLength);
       return false;
     }

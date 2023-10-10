@@ -1,7 +1,8 @@
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENHubMessages, EN_Mess } from 'interfaces/ioverall-config';
+import { IChangePassword } from 'interfaces/inon-manage';
+import { ENHubMessages, IDialogMessage } from 'interfaces/ioverall-config';
 import { ENThemeColor } from 'interfaces/istyles';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SignalRService } from 'services/signal-r.service';
@@ -32,31 +33,36 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     private utilsService: UtilsService
   ) { }
 
-  configShouldIChangePass = async() => {
-    const config = {
-      messageTitle: EN_messages.passwordShouldChange,
-      
-      text: EN_messages.passwordShouldChangeReason,
-      isInput: false,
-      isDelete: false,
-      icon: 'pi pi-unlock',
-      minWidth: '20rem',
-    }
-    // if (await this.utilsService.firstConfirmDialog(config))
-    
-  }
   setSidebar = () => {
     this.sideBar = !this.sideBar;
     this.sidebarEvent.emit(this.sideBar);
+  }
+  changePasswordFromDialog = async (): Promise<any> => {
+    const config = {
+      messageTitle: EN_messages.passwordShouldChange,
+      text: EN_messages.passwordShouldChangeReason,
+      isInput: false,
+      doesNotReturnButton: true,
+      isDelete: false,
+      changePassword: true,
+      icon: 'pi pi-unlock',
+      minWidth: '20rem',
+    }
+    const buttonSavedClicked = await this.utilsService.firstConfirmDialog(config);
+    if (buttonSavedClicked) {
+      return new Promise(async (resolve) => {
+        resolve(true);
+      });
+    }
   }
   getNotification = async () => {
     // getNotification
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
     this.badgeNumber = res.count;
     const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.getShouldIChangePassword);
-    if (shouldIChangePass) {
-
-    }
+    console.log(shouldIChangePass);
+    if (shouldIChangePass)
+      this.changePasswordFromDialog();
   }
   hubConnect = () => {
     this.signalRService.startConnection();

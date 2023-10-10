@@ -30,6 +30,7 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
 import { CaptchaComponent } from '../shared/captcha/captcha.component';
+import { SharedChangePassModule } from '../shared/shared-change-pass.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { CaptchaComponent } from '../shared/captcha/captcha.component';
     ClockComponent,
     AnnouceNotifComponent,
     SmallSpinnerComponent,
-    ColorPaletteComponent
+    ColorPaletteComponent,
   ]
   ,
   imports: [
@@ -59,7 +60,7 @@ import { CaptchaComponent } from '../shared/captcha/captcha.component';
     MatSnackBarModule,
     MatDialogModule,
     SharedThreeModule,
-
+    SharedChangePassModule,
     BrowserAnimationsModule,
     ProgressSpinnerModule,
     CoreRoutingModule
@@ -68,14 +69,15 @@ import { CaptchaComponent } from '../shared/captcha/captcha.component';
     BrowserModule,
     CommonModule,
     MatSnackBarModule,
-    SpinnerComponent,
-    SmallSpinnerComponent,
-    CaptchaComponent,
-    SnackBarComponent,
-    ClockComponent,
     SharedThreeModule,
     ProgressSpinnerModule,
+    SharedChangePassModule,
     // components
+    SmallSpinnerComponent,
+    SpinnerComponent,
+    ClockComponent,
+    CaptchaComponent,
+    SnackBarComponent,
     BrowserAnimationsModule,
     AnnouceNotifComponent,
 

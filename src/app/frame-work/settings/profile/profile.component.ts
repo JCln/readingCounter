@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/isettings';
 import { ENFontStyle } from 'interfaces/istyles';
@@ -17,7 +16,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class ProfileComponent extends FactoryONE {
 
-  password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   stateOptions: any[] = [{ label: 'تکی', value: false }, { label: 'گروهی', value: true }];
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
@@ -88,6 +86,7 @@ export class ProfileComponent extends FactoryONE {
       }
     },
   ];
+  private profileColumns: string = 'profile';
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 
@@ -120,11 +119,8 @@ export class ProfileComponent extends FactoryONE {
     this.getDefaultAggregationTrackings();
     this.getReOrderable();
   }
-  changePassword = () => {
-    this.profileService.changePassword(this.password);
-  }
   getSelectedColumns = () => {
-    this._selectCols = this.profileService.columnManager.columnSelectedMenus('profile');
+    this._selectCols = this.profileService.columnManager.columnSelectedMenus(this.profileColumns);
   }
   getValuesOfImg = () => {
     this.profileService.showStateVals.imgOptions = this.profileService.getImg();

@@ -1,7 +1,7 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { JwtService } from 'src/app/auth/jwt.service';
 
@@ -267,7 +267,7 @@ export class ToolsService {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumber);
       return false;
     }
-    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
+    if (!MathS.isLowerThanMinLength(id, ENRandomNumbers.two) || !MathS.isLowerThanMaxLength(id, ENRandomNumbers.ten)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumbersLength);
       return false;
     }

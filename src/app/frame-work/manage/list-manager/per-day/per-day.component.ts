@@ -17,6 +17,8 @@ export class PerDayComponent extends FactoryONE {
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _selectMainDatas: any[];
+  private listManagerPerDayPositions: string = 'lMPerDayPositions';
+  private listManagerPerDay: string = 'lMPerDay';
 
   constructor(
     public closeTabService: CloseTabService,
@@ -37,8 +39,8 @@ export class PerDayComponent extends FactoryONE {
     })
   }
   private insertSelectedColumns = () => {
-    this._selectMainDatas = this.listManagerService.columnManager.columnSelectedMenus('lMPerDayPositions');
-    this._selectCols = this.listManagerService.columnManager.columnSelectedMenus('lMPerDay');
+    this._selectMainDatas = this.listManagerService.columnManager.columnSelectedMenus(this.listManagerPerDayPositions);
+    this._selectCols = this.listManagerService.columnManager.columnSelectedMenus(this.listManagerPerDay);
     this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
     this.dateJalaliService.sortByDate(this.closeTabService.saveDataForLMPD.offLoadPerDayHistory, 'day');
   }

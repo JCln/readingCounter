@@ -16,6 +16,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class FragmentDetailsComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
+  private fragmentDetailsColumns: string = 'fragmentDetails';
 
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
@@ -63,7 +64,7 @@ export class FragmentDetailsComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus('fragmentDetails');
+    this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus(this.fragmentDetailsColumns);
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {

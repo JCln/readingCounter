@@ -16,6 +16,7 @@ export class CounterStateComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
 
   clonedProducts: { [s: string]: ICounterState; } = {};
+  private counterStateDto: string = 'counterStateDto';
   newRowLimit: number = 1;
   _selectCols: any[];
   _selectedColumns: any[];
@@ -39,7 +40,7 @@ export class CounterStateComponent extends FactoryONE {
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }
   columnSelectedMenuDefault = () => {
-    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus('counterStateDto');
+    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus(this.counterStateDto);
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
