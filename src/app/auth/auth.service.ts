@@ -1,15 +1,15 @@
 import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
+import { ENAuthTokenType, IAuthTokenLogoutType, IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
 import { CloseTabService } from 'services/close-tab.service';
-import { CompositeService } from 'services/composite.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SignalRService } from 'services/signal-r.service';
 
 import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { JwtService } from './jwt.service';
+import { UtilsService } from 'services/utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +21,21 @@ export class AuthService {
     private jwtService: JwtService,
     private closeTabService: CloseTabService,
     public signalRService: SignalRService,
-    public compositeService: CompositeService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
-  private getRefreshToken = (): string => {
-    return this.jwtService.getRefreshToken();
-  }
-  refreshToken = (): Promise<any> => {
-    return this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() });
+  getRefreshToken = async (): Promise<any> => {
+    const request: IAuthTokenLogoutType = {
+      refreshToken: this.jwtService.getRefreshToken(),
+      accessToken: this.jwtService.getAccessToken(),
+      loginId: this.jwtService.getLoginIdToken()
+    }
+    try {
+      return await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthsAccountRefresh, request);
+    } catch {
+      return false;
+    }
   }
   logging = (userData: ICredentials): Promise<any> => {
     return new Promise((resolve) => {
@@ -50,25 +56,28 @@ export class AuthService {
     await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthsAccountLogout,
       this.jwtService.getAuthorizationToken()
     );
-    this.jwtService.removeAuthLocalStorage();
-    this.compositeService.routeTo(EN_Routes.loginSlash);
+    this.jwtService.removeTokens();
+    this.utilsService.routeTo(EN_Routes.loginSlash);
   }
-  saveTolStorage = (token: IAuthTokenType) => {
-    this.jwtService.saveToLocalStorage(token.access_token);
-    this.jwtService.saveToLocalStorageRefresh(token.refresh_token);
-    this.jwtService.saveToLocalStorageLoginId(token.login_id);
+  saveTolStorage = (token: any) => {
+    this.jwtService.removeTokens();
+    this.jwtService.saveToStorage(token);
+  }
+  saveToSessionStorage = (token: IAuthTokenType) => {
+    this.jwtService.removeTokens();
+    this.jwtService.saveToStorage(token);
   }
   routeToReturnUrl = (returnUrl: string) => {
     if (!MathS.isNull(returnUrl))
-      this.compositeService.routeTo(returnUrl);
+      this.utilsService.routeTo(returnUrl);
     else
-      this.compositeService.routeTo(EN_Routes.wr);
+      this.utilsService.routeTo(EN_Routes.wr);
   }
   isAuthUserLoggedIn(): boolean {
-    return this.compositeService.isAuthUserLoggedIn();
+    return this.utilsService.compositeService.isAuthUserLoggedIn();
   }
   getAuthUser(): IAuthUser | null {
-    return this.compositeService.getAuthUser();
+    return this.utilsService.compositeService.getAuthUser();
   }
 
 }

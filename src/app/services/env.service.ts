@@ -27,6 +27,7 @@ export class EnvService implements IENV {
   NotificationAlertTypesIds = this.temp.NotificationAlertTypesIds;
   getLogoutReasonDictionary = this.temp.getLogoutReasonDictionary;
   getInvalidLoginReasonDictionary = this.temp.getInvalidLoginReasonDictionary;
+  shouldSaveTokensInLocal = this.temp.shouldSaveTokensInLocal;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

@@ -64,11 +64,19 @@ export class LoginComponent {
       else {
         // button should disable after logging
         (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = true;
-        const returnUrl = this.authService.compositeService.getRouterQueryParamMap('returnUrl');
+        const returnUrl = this.authService.utilsService.compositeService.getRouterQueryParamMap('returnUrl');
         const res = await this.authService.logging(this.userData);
 
         if (res) {
-          this.authService.saveTolStorage(res);
+          // TODO: Dynamic add to Local or Session Storage
+          console.log(this.utilsService.envService.shouldSaveTokensInLocal);
+
+          if (this.utilsService.envService.shouldSaveTokensInLocal) {
+            this.authService.saveTolStorage(res);
+          }
+          else {
+            this.authService.saveToSessionStorage(res);
+          }
           this.authService.routeToReturnUrl(returnUrl);
         }
         else {

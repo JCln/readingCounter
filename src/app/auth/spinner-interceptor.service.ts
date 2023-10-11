@@ -1,6 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENSnackBarColors, ENSnackBarTimes, EN_Mess } from 'interfaces/ioverall-config';
 import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { throwError } from 'rxjs/internal/observable/throwError';
@@ -18,8 +17,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   constructor(
     private spinnerWrapperService: SpinnerWrapperService,
-    private utilsService: UtilsService,
-    private router: Router
+    private utilsService: UtilsService
   ) { }
 
   accessDenied_403 = async () => {

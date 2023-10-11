@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { ProfileService } from 'services/profile.service';
-import { HeaderComponent } from 'src/app/core/_layouts/header/header.component';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
     selector: 'app-change-password',
@@ -10,43 +11,40 @@ import { HeaderComponent } from 'src/app/core/_layouts/header/header.component';
     styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent {
-    @ViewChild("appHeader") appHeader: HeaderComponent;
     @Input() _isFromProfile: boolean = false;
     @Output() closeConfirmed = new EventEmitter<any>();
 
     constructor(
         public profileService: ProfileService,
+        private authService: AuthService
     ) { }
 
     password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
 
+    onCloseConfirmed() {
+        this.closeConfirmed.emit();
+    }
     changePassword = async () => {
         if (this._isFromProfile) {
             const res = await this.profileService.changePassword(this.password);
-            console.log(res);
             this.profileService.showMessage(res.message);
             this.onCloseConfirmed();
         }
         else {
-            console.log(1);
-
             if (this.profileService.verification(this.password)) {
-                console.log(1);
                 const res = await this.profileService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.changePassword, this.password);
-                this.profileService.showMessage(res.message);
-                // const res = await this.appHeader.changePasswordFromDialog();
-                console.log(1);
-                console.log(res);
-                console.log('to logout');
-
-                // const res = await this.profileService.changePasswordFromDialog(this.password);
-                // console.log(res);
-                // this.onCloseConfirmed();
+                const refreshResponse = await this.authService.getRefreshToken();
+                if (refreshResponse) {
+                    this.authService.saveTolStorage(refreshResponse);
+                    this.profileService.showMessage(res.message);
+                    this.onCloseConfirmed();
+                }
+                else {
+                    this.profileService.showMessage(EN_messages.reLoginPlease);
+                    this.authService.logout();
+                }
             }
         }
-    }
-    onCloseConfirmed() {
-        this.closeConfirmed.emit();
     }
 
 }

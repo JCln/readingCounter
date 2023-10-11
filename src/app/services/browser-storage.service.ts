@@ -10,10 +10,16 @@ export class BrowserStorageService {
 
   constructor() {
     this.localStorage = window.localStorage;
+    this.sessionStorage = window.sessionStorage;
   }
   get(key: string): any {
     if (this.isLocalStorageSupported)
       return JSON.parse(this.localStorage.getItem(key));
+    return null;
+  }
+  getSession(key: string): any {
+    if (this.sessionStorage)
+      return JSON.parse(this.sessionStorage.getItem(key));
     return null;
   }
   getAll(): any {
@@ -33,6 +39,13 @@ export class BrowserStorageService {
   set(key: string, value: any): boolean {
     if (this.isLocalStorageSupported) {
       this.localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    }
+    return false;
+  }
+  setToSession(key: string, value: any): boolean {
+    if (this.isSessionStorageSupported) {
+      this.sessionStorage.setItem(key, JSON.stringify(value));
       return true;
     }
     return false;
@@ -57,11 +70,20 @@ export class BrowserStorageService {
       if (this.localStorage.hasOwnProperty(key))
         this.removeLocal(key);
     }
+    for (const key in this.sessionStorage) {
+      if (this.sessionStorage.hasOwnProperty(key))
+        this.removeSession(key);
+    }
   }
   removeAllExceptAuths = () => {
     for (const key in this.localStorage) {
-      if (this.localStorage.hasOwnProperty(key) && key !== ENAuthTokenType.refresh_token && key !== ENAuthTokenType.access_token) {
+      if (this.localStorage.hasOwnProperty(key) && key !== ENAuthTokenType.refresh_token && key !== ENAuthTokenType.access_token && key !== ENAuthTokenType.login_id) {
         this.removeLocal(key);
+      }
+    }
+    for (const key in this.sessionStorage) {
+      if (this.sessionStorage.hasOwnProperty(key) && key !== ENAuthTokenType.refresh_token && key !== ENAuthTokenType.access_token && key !== ENAuthTokenType.login_id) {
+        this.removeSession(key);
       }
     }
   }

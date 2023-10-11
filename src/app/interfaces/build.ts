@@ -35,6 +35,7 @@ export interface IENV {
         incorrect_time: number
     }
     getLogoutReasonDictionary: { id: number, title: string }[],
+    shouldSaveTokensInLocal: boolean,
 }
 export enum ENURLs {
     LOCAL = 'http://192.168.100.18:7529',
@@ -275,6 +276,12 @@ export class reorderableTable {
 }
 export class defaultAggregateTracks {
     static readonly DEFAULT = new defaultAggregateTracks(true);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class shouldSaveTokensInLocal {
+    static readonly DEFAULT = new shouldSaveTokensInLocal(false);
 
     private constructor(public readonly value: boolean) {
     }

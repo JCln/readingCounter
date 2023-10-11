@@ -63,6 +63,7 @@
     window.__env.timeout = 18000;
     window.__env.reOrderableTable = false;
     window.__env.defaultAggregateTracks = false;
+    window.__env.shouldSaveTokensInLocal = false;
     window.__env.simafaImportStatus = { hasSingle: false, hasBatch: false };
     window.__env.version = '1.0.0';
     window.__env.aboutUs = { email: 'info@hivapardaz.ir', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
