@@ -520,7 +520,7 @@ export class ColumnManager {
         { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
         { field: 'osTitle', header: 'سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
-        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true }        
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true }
     ]
     usersLogins: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
@@ -1238,6 +1238,9 @@ export class ColumnManager {
         // { field: 'id', header: 'کد', isSelected: false,isSelectedOrigin:false },
         { field: 'userAgent', header: 'userAgent', isSelected: false, isSelectedOrigin: false },
         { field: 'appVersion', header: 'نسخه App', isSelected: false, isSelectedOrigin: false },
+        { field: 'twoStepEnterDateTime', header: 'زمان تلاش رمز دومرحله‌ای', isSelected: true, isSelectedOrigin: true },
+        { field: 'twoStepWasSuccessful', header: 'رمز دو مرحله‌ای موفق', isSelected: true, isSelectedOrigin: true },
+        { field: 'twoStepExpireDateTime', header: 'زمان انقضای رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
     ];
     auth1: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

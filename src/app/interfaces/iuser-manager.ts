@@ -356,6 +356,9 @@ export interface IUserLoggins {
     username: string,
     wrongPassword: string,
     appVersion: string,
+    twoStepExpireDateTime: string,
+    twoStepEnterDateTime: string,
+    twoStepWasSuccessful: true
 }
 export interface IUserKarkardSummary {
     zoneTitle: string,
