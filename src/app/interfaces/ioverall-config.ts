@@ -439,6 +439,7 @@ export enum ENSelectedColumnVariables {
     selectedListManagerMosh = 'searchMosh',
     selectedListManagerMoshDialog = 'searchMoshDialog',
     selectedListManagerBriefKardexDialog = 'briefKardex',
+    selectedMyPreviousFailuresDialog = 'myPreviousFailures',
     selectedPolicyCompare = 'policyCompare',
     selectedCounterState = 'counterState',
     selectedListManagerPro = 'searchPro',

@@ -1,3 +1,4 @@
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { ErrorHandler, NgModule, Optional, SkipSelf } from '@angular/core';
@@ -31,6 +32,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
 import { CaptchaComponent } from '../shared/captcha/captcha.component';
 import { SharedChangePassModule } from '../shared/shared-change-pass.module';
+import { MyPreviousFailuresComponent } from './_layouts/header/my-previous-failures/my-previous-failures.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { SharedChangePassModule } from '../shared/shared-change-pass.module';
     AnnouceNotifComponent,
     SmallSpinnerComponent,
     ColorPaletteComponent,
+    MyPreviousFailuresComponent
   ]
   ,
   imports: [
@@ -61,6 +64,7 @@ import { SharedChangePassModule } from '../shared/shared-change-pass.module';
     MatDialogModule,
     SharedThreeModule,
     SharedChangePassModule,
+    SharedPrimeNgModule,
     BrowserAnimationsModule,
     ProgressSpinnerModule,
     CoreRoutingModule
@@ -72,6 +76,7 @@ import { SharedChangePassModule } from '../shared/shared-change-pass.module';
     SharedThreeModule,
     ProgressSpinnerModule,
     SharedChangePassModule,
+    SharedPrimeNgModule,
     // components
     SmallSpinnerComponent,
     SpinnerComponent,

@@ -38,6 +38,33 @@ export interface IPolicies {
     osShortTitle: string,
     userAgent: string,
 }
+export interface LoginBriefInfo {
+    id: string,
+    userId: string,
+    loginDateTime: string,
+    loginIp: string,
+    wasSuccessful: true,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    wrongPassword: string,
+    appVersion: string,
+    userDisplayName: string,
+    logoutDateTime: string,
+    logoutReasonId: 0,
+    username: string,
+    invalidLoginReasonId: 1,
+    twoStepExpireDateTime: string,
+    twoStepEnterDateTime: string,
+    twoStepWasSuccessful: true
+}
 export interface IPoliciesCompare {
     previous: IPolicies,
     this: IPolicies

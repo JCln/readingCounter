@@ -124,7 +124,7 @@ export class FactorySharedPrime implements OnChanges {
             }
         }
 
-        this.browserStorageService.set(this._outputFileName, newArray);
+        this.browserStorageService.setToLocal(this._outputFileName, newArray);
         this.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
     }
     convertToOrigin = () => {
@@ -136,7 +136,7 @@ export class FactorySharedPrime implements OnChanges {
         if (!MathS.isNull(this._outputFileName)) {
 
             if (this.browserStorageService.isExists(this._outputFileName)) {
-                this._selectCols = this.browserStorageService.get(this._outputFileName);
+                this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
             }
             else {
                 this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);

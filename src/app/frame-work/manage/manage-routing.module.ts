@@ -12,8 +12,7 @@ const routes: Routes = [
   { path: 'al', loadChildren: () => import('./authLevels/authlevels.module').then(authLevels => authLevels.AuthlevelsModule) },
   { path: 'dbf', loadChildren: () => import('./dbf-output/dbf-output.module').then(dbf => dbf.DbfOutputModule) },
   { path: 'fbn', loadChildren: () => import('./forbidden/forbidden.module').then(forbidden => forbidden.ForbiddenModule) },
-  { path: 'dma', loadChildren: () => import('./data-mining/data-mining.module').then(dataMining => dataMining.DataMiningModule) },
-  { path: 'tiny', loadChildren: () => import('./test-tinymce/test-tinymce.module').then(tinyMCE => tinyMCE.TestTinymceModule) },
+  { path: 'dma', loadChildren: () => import('./data-mining/data-mining.module').then(dataMining => dataMining.DataMiningModule) },  
   { path: 'dbfEB', loadChildren: () => import('./dbf-output-eqamat-bagh/dbf-output-eqamat-bagh.module').then(dbfOutputEqamatBagh => dbfOutputEqamatBagh.DbfOutputEqamatBaghModule) },
 ];
 

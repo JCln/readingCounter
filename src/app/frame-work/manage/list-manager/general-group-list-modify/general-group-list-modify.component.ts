@@ -132,7 +132,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
 
       this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
       if (this.browserStorageService.isExists(this._outputFileName)) {
-        this._selectCols = this.browserStorageService.get(this._outputFileName);
+        this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
       } else {
         this._selectCols = this.listManagerService.columnManager.columnSelectedMenus(this._outputFileName);
       }
@@ -420,7 +420,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       }
     }
 
-    this.browserStorageService.set(this._outputFileName, newArray);
+    this.browserStorageService.setToLocal(this._outputFileName, newArray);
     this.closeTabService.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
   }
   resetSavedColumns = () => {

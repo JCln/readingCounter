@@ -332,6 +332,7 @@ export enum ENInterfaces {
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
+    myPreviousFailures = 'V1/Account/MyPrevoiusFailures',
     getShouldIChangePassword = 'V1/Account/ShouldIChangePassword',
     getWaterMarkConfig = 'V1/WaterMark/Get',
     postWaterMarkConfig = 'V1/WaterMark/AddOrEdit',

@@ -1,0 +1,26 @@
+<section class="content">
+    <section class="collapse">
+        <h1>
+            تعداد ورود های 
+            <strong>ناموفق</strong>
+            قبلی
+            <strong>{{dataSource.length}}</strong>
+             بار می‌باشد
+        </h1>
+    </section>
+
+    <app-prime-table 
+    [dataSource]="dataSource" 
+    [_outputFileName]="'myPreviousFailures'"
+    [_checkUpName]="'myPreviousFailures'" 
+    [_sessionName]="'myPreviousFailures-session'"
+    [_selectedColumnsToRemember]="'selectedMyPreviousFailuresDialog'"
+    [_hasAggregating]="false"
+    [_captionEnabled]="false"
+    [_hasSaveColumns]="false"
+    [_isSortable]="false"
+    [_paginator]="false"    
+    >
+    </app-prime-table>
+
+</section>

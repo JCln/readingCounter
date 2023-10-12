@@ -66,13 +66,13 @@ export class ThemeService {
   }
 
   private saveToLocalStorage = (name: ENThemeName, color: ENThemeColor) => {
-    this.browserStorageService.set(name, color);
+    this.browserStorageService.setToLocal(name, color);
   }
   private getLastColor = (): ENThemeColor => {
-    return this.browserStorageService.get(ENThemeName.themeColor);
+    return this.browserStorageService.getLocal(ENThemeName.themeColor);
   }
   private getFromLocalStorage = (name: ENThemeName) => {
-    const a = this.browserStorageService.get(name);
+    const a = this.browserStorageService.getLocal(name);
     if (a === null) {
       this.setLightTheme();
       return;

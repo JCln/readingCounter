@@ -514,6 +514,14 @@ export class ColumnManager {
         { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displaySensitiveNotification', header: 'اعلانهای مهم', isSelected: true, isSelectedOrigin: true, isBoolean: true }
     ]
+    myPreviousFailures: IObjectIteratation[] = [
+        { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
+        { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'osTitle', header: 'سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true }        
+    ]
     usersLogins: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },

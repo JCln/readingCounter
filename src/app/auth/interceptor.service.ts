@@ -9,8 +9,6 @@ import { JwtService } from './jwt.service';
 import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { UtilsService } from 'services/utils.service';
 import { EN_Mess } from 'interfaces/ioverall-config';
-import { EN_Routes } from 'interfaces/routes.enum';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -45,14 +43,6 @@ export class InterceptorService implements HttpInterceptor {
     this.authService.logout();
   }
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
-    const nothing = '';
-    const urlPath = new URL(req.url).pathname.slice(12);//hard coded ! or 1
-    // url path should not have slash (/)
-    if (urlPath === EN_Routes.login || urlPath === ENInterfaces.AuthsCaptchaApiShow || urlPath === ENInterfaces.AuthsAccountLogout) {
-      return req.clone({
-        headers: req.headers.set(this.authorizationHeader, nothing)
-      });
-    }
     return req.clone({
       headers: req.headers.set(this.authorizationHeader, this.bearer + token)
     });

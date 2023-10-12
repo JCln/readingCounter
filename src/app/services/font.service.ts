@@ -30,7 +30,7 @@ export class FontService {
   }
 
   private saveToLocalStorage = (name: ENFontName, color: ENFontStyle) => {
-    this.browserStorageService.set(name, color);
+    this.browserStorageService.setToLocal(name, color);
   }
   private setActiveFont(theme: Theme): void {
     this.active = theme;
@@ -60,7 +60,7 @@ export class FontService {
     this.setFont(fontS, ENFontStyle.fontS);
   }
   private getLastFont = (): ENFontStyle => {
-    return this.browserStorageService.get(ENFontName.fontStyle);
+    return this.browserStorageService.getLocal(ENFontName.fontStyle);
   }
 
   setFontStyle = (colorName: ENFontStyle) => {
@@ -84,7 +84,7 @@ export class FontService {
   }
   // DEAFULT Value of Font Style set in here
   private getFromLocalStorage = (name: ENFontName) => {
-    const a = this.browserStorageService.get(name);
+    const a = this.browserStorageService.getLocal(name);
     if (a === null) {
       this.setFontXS();
       return;

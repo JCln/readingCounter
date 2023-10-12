@@ -79,13 +79,13 @@ export class MapService {
     }, 'بارگزاری مجدد نقشه').addTo(this.map);
   }
   saveToLocalStorage = (localStorageName: ENLocalStorageNames, numberLen: any) => {
-    this.browserStorageService.set(localStorageName, numberLen);
+    this.browserStorageService.setToLocal(localStorageName, numberLen);
   }
   isAnimationExistsInLocal = (): boolean => {
     return this.browserStorageService.isExists(ENLocalStorageNames.mapAnimationStartFrom);
   }
   getFromLocalStorage = (): ENRandomNumbers => {
-    const a = this.browserStorageService.get(ENLocalStorageNames.mapAnimationStartFrom);
+    const a = this.browserStorageService.getLocal(ENLocalStorageNames.mapAnimationStartFrom);
     if (a === null || a === 'undefined') {
       this.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, ENRandomNumbers.twoHundred);
       return ENRandomNumbers.twoHundred;

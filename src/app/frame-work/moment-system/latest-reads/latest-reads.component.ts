@@ -111,7 +111,7 @@ export class LatestReadsComponent extends AllListsFactory {
   }
   numberOfSelectedMostNumber = () => {
     if (this.mapService.browserStorageService.isExists(ENLocalStorageNames.numberOfFlashRead)) {
-      this._selectedMostNumbers = this.mapService.browserStorageService.get(ENLocalStorageNames.numberOfFlashRead);
+      this._selectedMostNumbers = this.mapService.browserStorageService.getLocal(ENLocalStorageNames.numberOfFlashRead);
     }
     else {
       this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, ENRandomNumbers.ten);

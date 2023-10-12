@@ -1,0 +1,16 @@
+@import 'variable';
+@import 'primeNG';
+
+.content {
+    font-family: $font_family;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary_3);
+}
+
+strong {
+    color: var(--red_500);
+}
