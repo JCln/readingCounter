@@ -17,7 +17,7 @@ export class JwtService {
 
   getDecodedAccessToken(): any {
     if (this.shouldSaveTokensInLocal()) {
-      return jwt_decode(this.browserStorageService.get(ENAuthTokenType.access_token));
+      return jwt_decode(this.browserStorageService.getLocal(ENAuthTokenType.access_token));
     }
     return jwt_decode(this.browserStorageService.getSession(ENAuthTokenType.access_token));
   }
@@ -53,9 +53,9 @@ export class JwtService {
   }
   saveToStorage = (type: IAuthTokenType): void => {
     if (this.shouldSaveTokensInLocal()) {
-      this.browserStorageService.set(ENAuthTokenType.access_token, type.access_token);
-      this.browserStorageService.set(ENAuthTokenType.refresh_token, type.refresh_token);
-      this.browserStorageService.set(ENAuthTokenType.login_id, type.login_id);
+      this.browserStorageService.setToLocal(ENAuthTokenType.access_token, type.access_token);
+      this.browserStorageService.setToLocal(ENAuthTokenType.refresh_token, type.refresh_token);
+      this.browserStorageService.setToLocal(ENAuthTokenType.login_id, type.login_id);
     }
     else {
       this.browserStorageService.setToSession(ENAuthTokenType.access_token, type.access_token);
@@ -66,9 +66,9 @@ export class JwtService {
   getAuthorizationToken = (): IAuthTokenLogoutType => {
     if (this.shouldSaveTokensInLocal()) {
       return {
-        accessToken: this.browserStorageService.get(ENAuthTokenType.access_token),
-        refreshToken: this.browserStorageService.get(ENAuthTokenType.refresh_token),
-        loginId: this.browserStorageService.get(ENAuthTokenType.login_id)
+        accessToken: this.browserStorageService.getLocal(ENAuthTokenType.access_token),
+        refreshToken: this.browserStorageService.getLocal(ENAuthTokenType.refresh_token),
+        loginId: this.browserStorageService.getLocal(ENAuthTokenType.login_id)
       }
     }
     else {
@@ -81,7 +81,7 @@ export class JwtService {
   }
   private getRefreshTokenLocal = (): string => {
     try {
-      const a = this.browserStorageService.get(ENAuthTokenType.refresh_token);
+      const a = this.browserStorageService.getLocal(ENAuthTokenType.refresh_token);
       if (!a)
         return null;
       return a;
@@ -104,7 +104,7 @@ export class JwtService {
   }
   private getAccessTokenLocal = (): string => {
     try {
-      const a = this.browserStorageService.get(ENAuthTokenType.access_token);
+      const a = this.browserStorageService.getLocal(ENAuthTokenType.access_token);
       if (!a) {
         return null;
       }
@@ -128,7 +128,7 @@ export class JwtService {
     return this.shouldSaveTokensInLocal() ? this.getAccessTokenLocal() : this.getAccessTokenSession()
   }
   private getLoginId = (): string => {
-    const a = this.browserStorageService.get(ENAuthTokenType.login_id);
+    const a = this.browserStorageService.getLocal(ENAuthTokenType.login_id);
     if (!a) {
       return null;
     }

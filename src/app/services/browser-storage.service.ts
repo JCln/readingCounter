@@ -12,7 +12,7 @@ export class BrowserStorageService {
     this.localStorage = window.localStorage;
     this.sessionStorage = window.sessionStorage;
   }
-  get(key: string): any {
+  getLocal(key: string): any {
     if (this.isLocalStorageSupported)
       return JSON.parse(this.localStorage.getItem(key));
     return null;
@@ -26,7 +26,7 @@ export class BrowserStorageService {
     const a = [];
     for (const key in this.localStorage) {
       if (this.localStorage.hasOwnProperty(key)) {
-        a.push(this.get(key));
+        a.push(this.getLocal(key));
       }
     }
     return a;
@@ -36,7 +36,7 @@ export class BrowserStorageService {
     if (this.localStorage.getItem(key) == null || this.localStorage.getItem(key) == undefined) return false;
     return true;
   }
-  set(key: string, value: any): boolean {
+  setToLocal(key: string, value: any): boolean {
     if (this.isLocalStorageSupported) {
       this.localStorage.setItem(key, JSON.stringify(value));
       return true;

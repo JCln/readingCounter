@@ -48,15 +48,9 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
       icon: 'pi pi-unlock',
       minWidth: '20rem',
     }
-    const buttonSavedClicked = await this.utilsService.firstConfirmDialog(config);
-    if (buttonSavedClicked) {
-      return new Promise(async (resolve) => {
-        resolve(true);
-      });
-    }
+    await this.utilsService.firstConfirmDialog(config);
   }
   getNotification = async () => {
-    // getNotification
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
     this.badgeNumber = res.count;
     const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.getShouldIChangePassword);
@@ -64,6 +58,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     if (shouldIChangePass)
       this.changePasswordFromDialog();
   }
+  
   hubConnect = () => {
     this.signalRService.startConnection();
     this.getNotification();
