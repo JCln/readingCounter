@@ -309,9 +309,11 @@ export enum ENRandomNumbers {
     thirdy = 30,
     forthy = 40,
     fifty = 50,
+    sixty = 60,
     oneHundred = 100,
     oneHundredAndTwenty = 120,
     twoHundred = 200,
+    fourHundredEighty = 480,
 }
 export enum ENImageTypes {
     typical = 1,

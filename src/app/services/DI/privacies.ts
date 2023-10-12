@@ -12,19 +12,7 @@ export interface IPolicies {
     passwordContainsUppercase: boolean,
     passwordContainsNonAlphaNumeric: boolean,
     canUpdateDeviceId: boolean,
-    enableXSSProtection?: boolean,
-    enableObscureHeaderInfo?: boolean,
-    secureCookies?: boolean,
-    DOSProtection?: boolean,
-    STEALTH?: boolean,//useSingleActiveUser true
-    useJWTDecoder?: boolean,
-    CSRFProtection?: boolean,
-    DDOSProtection?: boolean,
-    CSPProtection?: boolean,
     HSTSProtection?: boolean,// false
-    SanitizeUserInputs?: boolean,//true
-    AES512Protection?: boolean,
-    autoClearData?: boolean,
     userDisplayName: string,
     ip: string,
     browserVersion: string,
@@ -37,6 +25,14 @@ export interface IPolicies {
     osPlatform: string,
     osShortTitle: string,
     userAgent: string,
+    fromTimeM?: string,
+    fromTimeH?: any,
+    toTimeM?: string,
+    toTimeH?: string,
+    fromTime: string,
+    toTime: string,
+    maxLogRecords: number,
+    deactiveTerminationMinutes: number
 }
 export interface LoginBriefInfo {
     id: string,
@@ -142,6 +138,9 @@ export interface IPrivacy {
     max_captcha: number,
     min_ReCaptcha: number,
     max_ReCaptcha: number,
+    minLengthDeactiveTerminationMinutes: number,
+    maxLengthDeactiveTerminationMinutes: number,
+    minLengthMaxLogRecords: number,
 }
 export const privacies: IPrivacy = {
     minLength: 4,
@@ -155,6 +154,9 @@ export const privacies: IPrivacy = {
     max_captcha: 10,
     min_ReCaptcha: 2,
     max_ReCaptcha: 10,
+    minLengthDeactiveTerminationMinutes: 2,
+    maxLengthDeactiveTerminationMinutes: 480,
+    minLengthMaxLogRecords: 100,
 }
 export interface IUserDetailsHistory {
     description: string,

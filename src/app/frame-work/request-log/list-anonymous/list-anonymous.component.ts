@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ManageServerService } from 'services/manage-server.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 
 @Component({
   selector: 'app-list-anonymous',
@@ -35,7 +36,7 @@ export class ListAnonymousComponent extends FactoryONE {
     this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeM = minute;
     this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH = hour;
     // add zero before single digits even if it is zero
-    if (this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH < 10) {
+    if (this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH < ENRandomNumbers.ten) {
       this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '0'.concat(this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH.toString());
     }
     if (hour == '00') {

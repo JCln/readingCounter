@@ -50,6 +50,10 @@ export class PhCompareComponent implements OnInit {
       passwordContainsNonAlphaNumeric: null,//boolean
       canUpdateDeviceId: null,//boolean
       userAgent: '',
+      fromTime: '',
+      toTime: '',
+      deactiveTerminationMinutes: null,
+      maxLogRecords: null,
     }
   }
   insertSelectedColumns = () => {

@@ -7,6 +7,7 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IPrivacy } from 'services/DI/privacies';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { DateJalaliService } from 'services/date-jalali.service';
 
 const enum ENMessages {
   maxLength = 'حداکثر تعداد ',
@@ -22,24 +23,13 @@ export class PrivacyComponent extends FactoryONE {
   @ViewChild('#ref_true') ref;
   privacyOptions: IPrivacy;
   auxDataSource = {
-    enableXSSProtection: true,
-    enableObscureHeaderInfo: true,
-    secureCookies: true,
-    DOSProtection: true,
-    STEALTH: false,
-    useJWTDecoder: true,
-    CSRFProtection: true,
-    DDOSProtection: true,
-    CSPProtection: true,
     HSTSProtection: false,
-    SanitizeUserInputs: true,
-    AES512Protection: true,
-    autoClearData: true,
   }
   constructor(
     public securityService: SecurityService,
     public closeTabService: CloseTabService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private dateJalaliService: DateJalaliService
   ) {
     super();
   }
@@ -57,6 +47,7 @@ export class PrivacyComponent extends FactoryONE {
     }
     this.checkProtocol();
     this.privacyOptions = this.securityService.getPrivacyToggle();
+    this.insertToTimes();
   }
   plusOrMinus = (value: number) => {
     if (value > this.privacyOptions.maxLength) {
@@ -65,10 +56,22 @@ export class PrivacyComponent extends FactoryONE {
     }
 
     if (value < this.privacyOptions.minLength) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.four + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.eight + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
     this.closeTabService.saveDataForPolicies.minPasswordLength = value;
+  }
+  plusOrMinusDeactiveTerminationMinutes = (value: number) => {
+    if (value > this.privacyOptions.maxLengthDeactiveTerminationMinutes) {
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.fourHundredEighty + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+
+    if (value < this.privacyOptions.minLengthDeactiveTerminationMinutes) {
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.two + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes = value;
   }
   lockInvalidAttemps = (value: number) => {
     if (value > this.privacyOptions.max_LockInvalidAttemps) {
@@ -81,6 +84,13 @@ export class PrivacyComponent extends FactoryONE {
       return;
     }
     this.closeTabService.saveDataForPolicies.lockInvalidAttempts = value;
+  }
+  plusOrMinusMaxRecords = (value: number) => {
+    if (value < this.privacyOptions.minLengthMaxLogRecords) {
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.oneHundred + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.saveDataForPolicies.maxLogRecords = value;
   }
   lockMin = (value: number) => {
     if (value > this.privacyOptions.max_LockMin) {
@@ -117,6 +127,35 @@ export class PrivacyComponent extends FactoryONE {
       return;
     }
     this.closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts = value;
+  }
+  insertToTimes = () => {
+    let temp = this.dateJalaliService.getCurrentTime();
+    const hour = temp.split(':').shift();
+    const minute = temp.split(':').pop();
+
+    this.closeTabService.saveDataForPolicies.fromTimeM = minute;
+    this.closeTabService.saveDataForPolicies.fromTimeH = hour - 1;
+    this.closeTabService.saveDataForPolicies.toTimeM = minute;
+    this.closeTabService.saveDataForPolicies.toTimeH = hour;
+    // add zero before single digits even if it is zero
+    if (this.closeTabService.saveDataForPolicies.fromTimeH < ENRandomNumbers.ten) {
+      this.closeTabService.saveDataForPolicies.fromTimeH = '0'.concat(this.closeTabService.saveDataForPolicies.fromTimeH.toString());
+    }
+    if (hour == '00') {
+      this.closeTabService.saveDataForPolicies.fromTimeH = '23';
+    }
+  }
+  verification = async () => {
+    // join input values time 
+    this.closeTabService.saveDataForPolicies.fromTime = this.closeTabService.saveDataForPolicies.fromTimeH + ':' + this.closeTabService.saveDataForPolicies.fromTimeM;
+    this.closeTabService.saveDataForPolicies.toTime = this.closeTabService.saveDataForPolicies.toTimeH + ':' + this.closeTabService.saveDataForPolicies.toTimeM;
+    console.log(this.closeTabService.saveDataForPolicies);
+
+    const temp = this.securityService.verificationDates(this.closeTabService.saveDataForPolicies);
+    console.log(temp);
+
+    // if (temp)
+    //   this.securityService.editPolicy(this.closeTabService.saveDataForPolicies);
   }
   openSnackBar(message: string, duration: ENSnackBarTimes) {
     this.snackWrapperService.openSnackBar(message, duration, ENSnackBarColors.warn);

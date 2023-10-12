@@ -73,7 +73,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
   }
   private canShowPreviousFailures = async () => {
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.myPreviousFailures);
-    if (res)
+    if (res.length)
       this.openMyPreviousDialog(res);
   }
   getNotification = async () => {

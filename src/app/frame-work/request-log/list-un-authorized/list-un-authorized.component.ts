@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ManageServerService } from 'services/manage-server.service';
@@ -35,7 +36,7 @@ export class ListUnAuthorizedComponent extends FactoryONE {
     this.closeTabService.requestLogUnAuthorizedReq.toTimeM = minute;
     this.closeTabService.requestLogUnAuthorizedReq.toTimeH = hour;
     // add zero before single digits even if it is zero
-    if (this.closeTabService.requestLogUnAuthorizedReq.fromTimeH < 10) {
+    if (this.closeTabService.requestLogUnAuthorizedReq.fromTimeH < ENRandomNumbers.ten) {
       this.closeTabService.requestLogUnAuthorizedReq.fromTimeH = '0'.concat(this.closeTabService.requestLogUnAuthorizedReq.fromTimeH.toString());
     }
     if (hour == '00') {
@@ -50,7 +51,7 @@ export class ListUnAuthorizedComponent extends FactoryONE {
     // join input values time 
     this.closeTabService.requestLogUnAuthorizedReq.fromTime = this.closeTabService.requestLogUnAuthorizedReq.fromTimeH + ':' + this.closeTabService.requestLogUnAuthorizedReq.fromTimeM;
     this.closeTabService.requestLogUnAuthorizedReq.toTime = this.closeTabService.requestLogUnAuthorizedReq.toTimeH + ':' + this.closeTabService.requestLogUnAuthorizedReq.toTimeM;
-    
+
     const temp = this.manageServerService.verificationRequestLogInput(this.closeTabService.requestLogUnAuthorizedReq);
     if (temp)
       this.connectToServer();

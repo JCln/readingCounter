@@ -3,7 +3,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ICredentials } from 'interfaces/iauth-guard-permission';
+import { ICredentials, ICredentialsResponse, ILogin2 } from 'interfaces/iauth-guard-permission';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { BrowserSupportService } from 'services/browser-support.service';
 import { infoVersion } from 'services/DI/info-version';
@@ -25,6 +25,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
   aboutUsImage = 'assets/imgs/header/logo_Atlas.png';
   btnLoginId: string = 'btnLogin';
+  private readonly returnUrl: string = 'returnUrl';
   userData: ICredentials = {
     username: '',
     password: '',
@@ -33,6 +34,13 @@ export class LoginComponent {
     dntCaptchaInputText: '',
     appVersion: this.utilsService.getAppVersion(),
     clientDateTime: this.dateJalaliService.getGregorianDate()
+  };
+  userDataInput2: ILogin2 = {
+    deviceSerial: '',
+    appVersion: this.utilsService.getAppVersion(),
+    clientDateTime: this.dateJalaliService.getGregorianDate(),
+    loginId: '',
+    code: null
   };
   showVersionInfo: boolean = false;
   infoVersionItems: IDictionaryManager[] = [];
@@ -64,18 +72,22 @@ export class LoginComponent {
       else {
         // button should disable after logging
         (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = true;
-        const returnUrl = this.authService.utilsService.compositeService.getRouterQueryParamMap('returnUrl');
-        const res = await this.authService.logging(this.userData);
+        const returnUrl = this.authService.utilsService.compositeService.getRouterQueryParamMap(this.returnUrl);
+        const res: ICredentialsResponse = await this.authService.logging(this.userData);
 
         if (res) {
           // TODO: Dynamic add to Local or Session Storage
-          console.log(this.utilsService.envService.shouldSaveTokensInLocal);
-
-          if (this.utilsService.envService.shouldSaveTokensInLocal) {
-            this.authService.saveTolStorage(res);
+          // two steps vertification
+          if (res.two_steps) {
+            this.userDataInput2.loginId = res.login_id;
           }
           else {
-            this.authService.saveToSessionStorage(res);
+            if (this.utilsService.envService.shouldSaveTokensInLocal) {
+              this.authService.saveTolStorage(res);
+            }
+            else {
+              this.authService.saveToSessionStorage(res);
+            }
           }
           this.authService.routeToReturnUrl(returnUrl);
         }

@@ -29,6 +29,7 @@ ul {
     border-radius: $border_100vmax $border_5 $border_5 $border_100vmax;
     padding: 8px 3px;
     cursor: pointer;
+    user-select: none;
     pointer-events: all;
 
     .icons {
@@ -67,6 +68,7 @@ ul {
     color: var(--sidebar_1);
     font-size: var(--font_ss);
     font-weight: 600;
+    user-select: none;
     cursor: pointer;
 
     &:hover,

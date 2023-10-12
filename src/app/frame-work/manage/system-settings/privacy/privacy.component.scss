@@ -118,3 +118,41 @@ ul {
   color: var(--secondary_1);
   margin: var(--font_05);
 }
+
+.t_input_2 {
+  background: var(--secondary_3);
+  color: var(--secondary_3);
+  display: flex;
+  align-items: center;
+  margin: var(--font_025) 0;
+  height: var(--font_26);
+  min-height: 85%;
+  justify-content: center;
+  border: 1px solid var(--secondary_3_spec);
+  border-radius: $border_7;
+
+  .t_value {
+    width: var(--font_3);
+    border: 1px solid blue;
+    border-radius: $border_7;
+    text-align: center;
+    font-size: var(--font_m);
+    font-weight: 600;
+    color: var(--primary_5);
+  }
+
+  .t_key {
+    color: var(--primary_4);
+    font-size: var(--font_s);
+    font-weight: 600;
+    margin-left: var(--font_01);
+  }
+
+  ._colon {
+    font-size: var(--font_23);
+    padding: var(--font_025);
+    margin: var(--font_025);
+    color: blue;
+  }
+
+}

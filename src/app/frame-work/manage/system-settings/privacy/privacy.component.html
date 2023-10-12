@@ -75,7 +75,63 @@
                 </span>
             </section>
         </div>
-
+        <div class="content">
+            <section class="_checkbox">
+                <span>
+                    <ul>
+                        <li class="number_vals">
+                            زمان session های فعال
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="plusOrMinusDeactiveTerminationMinutes(closeTabService.saveDataForPolicies.deactiveTerminationMinutes + 1)">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="_value"> {{closeTabService.saveDataForPolicies.deactiveTerminationMinutes}}
+                                </div>
+                                <div class="minus"
+                                    (click)="plusOrMinusDeactiveTerminationMinutes(closeTabService.saveDataForPolicies.deactiveTerminationMinutes - 1)">
+                                    <i class="fa fa-minus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="number_vals">
+                            حداکثر تعداد رکوردهای لاگ
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords + 1)">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="_value">{{closeTabService.saveDataForPolicies.maxLogRecords}}</div>
+                                <div class="minus"
+                                    (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords - 1)">
+                                    <i class="fa fa-minus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="t_input_2">
+                                <div class="t_key">از زمان</div>
+                                <input class="t_value" name="fromTimeM" min="1" max="60" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeM">
+                                <div class="_colon">:</div>
+                                <input class="t_value" name="fromTimeH" min="1" max="24" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeH">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="t_input_2">
+                                <div class="t_key">تا زمان</div>
+                                <input class="t_value" name="toTimeM" min="1" max="60" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeM">
+                                <div class="_colon">:</div>
+                                <input class="t_value" name="toTimeH" min="1" max="24" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeH">
+                            </div>
+                        </li>
+                    </ul>
+                </span>
+            </section>
+        </div>
     </section>
 
     <section class="item_3">
@@ -140,81 +196,9 @@
             <span>
                 <ul>
                     <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="enableObscureHeaderInfo"
-                            [(ngModel)]="auxDataSource.enableObscureHeaderInfo">
-                            درهم ریزی HEADER
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="secureCookies"
-                            [(ngModel)]="auxDataSource.secureCookies">
-                            رمز شدن کوکی
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="STEALTH"
-                            [(ngModel)]="auxDataSource.STEALTH">
-                            استفاده همزمان از یک توکن
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="useJWTDecoder"
-                            [(ngModel)]="auxDataSource.useJWTDecoder">
-                            رمز نگاری JWT
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="DOSProtection"
-                            [(ngModel)]="auxDataSource.DOSProtection">
-                            پیشگیری از DOS
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="enableXssProtection"
-                            [(ngModel)]="auxDataSource.enableXSSProtection">
-                            پیشگیری از حملات XSS
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="CSRFProtection"
-                            [(ngModel)]="auxDataSource.CSRFProtection">
-                            پیشگیری از CSRF
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="DDOSProtection"
-                            [(ngModel)]="auxDataSource.DDOSProtection">
-                            پیشگیری از حملات DDOS
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="CSPProtection"
-                            [(ngModel)]="auxDataSource.CSPProtection">
-                            پیشگیری از HIJACKING
-                        </mat-checkbox>
-                    </li>
-                    <li>
                         <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="HSTSProtection"
                             [(ngModel)]="auxDataSource.HSTSProtection">
                             SSL اجباری
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="SanitizeUserInputs"
-                            [(ngModel)]="auxDataSource.SanitizeUserInputs">
-                            Sanitizer
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="AES512Protection"
-                            [(ngModel)]="auxDataSource.AES512Protection">
-                            رمزنگاری AES512
-                        </mat-checkbox>
-                    </li>
-                    <li>
-                        <mat-checkbox #ref_true (click)="accessDenied(ref_true)" name="autoClearData"
-                            [(ngModel)]="auxDataSource.autoClearData">
-                            حذف خودکار SESSION
                         </mat-checkbox>
                     </li>
                 </ul>
@@ -225,6 +209,6 @@
 </div>
 
 <footer class="btns footer_with_background">
-    <button (click)="securityService.editPolicy(closeTabService.saveDataForPolicies)" class="btn_1">ذخیره
+    <button (click)="verification()" class="btn_1">ذخیره
         تغییرات</button>
 </footer>

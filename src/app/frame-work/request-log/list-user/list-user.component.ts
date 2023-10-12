@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ManageServerService } from 'services/manage-server.service';
@@ -35,7 +36,7 @@ export class ListUserComponent extends FactoryONE {
     this.closeTabService.saveDataForRequestLogListUserReq.toTimeM = minute;
     this.closeTabService.saveDataForRequestLogListUserReq.toTimeH = hour;
     // add zero before single digits even if it is zero
-    if (this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH < 10) {
+    if (this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH < ENRandomNumbers.ten) {
       this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH = '0'.concat(this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH.toString());
     }
     if (hour == '00') {

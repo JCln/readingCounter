@@ -407,7 +407,15 @@ export class CloseTabService {
     osTitle: '',
     osPlatform: '',
     osShortTitle: '',
-    userAgent: ''
+    userAgent: '',
+    fromTimeM: '',
+    fromTimeH: '',
+    toTimeM: '',
+    toTimeH: '',
+    fromTime: '',
+    toTime: '',
+    maxLogRecords: 0,
+    deactiveTerminationMinutes: 0
   };
   forbiddenReq: IMostReportInput = {
     zoneId: 0,
