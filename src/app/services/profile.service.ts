@@ -27,6 +27,7 @@ export class ProfileService {
     hasCanclableSpinner: false,
     defaultFontStyle: 1,
     reOrderableTable: false,
+    twoStepsAuth: false,
     notifyPosition: 'top-right',
     imgOptions: {
       width: '40rem',
@@ -92,6 +93,10 @@ export class ProfileService {
   getLocalValue = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
   }
+  getTwoStepsAuth = (): boolean => {
+    // TODO return from server value
+    return false;
+  }
   getLocalNotifyPosition = (): string => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'top-right');
   }
@@ -143,6 +148,21 @@ export class ProfileService {
         if (res)
           this.showMessage(res.message);
       }
+    }
+  }
+  setTwoStepsStatus = async (status: boolean): Promise<any> => {
+    const messageTitle: string = status ? EN_messages.twoStepsAuthEnabledWarn : EN_messages.twoStepsAuthDisabledWarn;
+    const a = {
+      messageTitle: messageTitle,
+      title: EN_messages.areYouSure,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: false,
+      icon: 'fas fa-user-check'
+    }
+    if (await this.utilsService.firstConfirmDialog(a)) {
+      const req = { twoStepAuthenticationValue: status };
+      return await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.changePassword, req);
     }
   }
   resetAllSavedLocals = async (): Promise<any> => {

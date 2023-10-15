@@ -1,3 +1,4 @@
+import { CodeMessageDgComponent } from 'src/app/shared/code-message-dg/code-message-dg.component';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
@@ -52,7 +53,8 @@ import { MyPreviousFailuresComponent } from './_layouts/header/my-previous-failu
     AnnouceNotifComponent,
     SmallSpinnerComponent,
     ColorPaletteComponent,
-    MyPreviousFailuresComponent
+    MyPreviousFailuresComponent,
+    CodeMessageDgComponent,
   ]
   ,
   imports: [

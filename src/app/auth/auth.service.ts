@@ -1,7 +1,7 @@
 import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENAuthTokenType, IAuthTokenLogoutType, IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
+import { IAuthTokenLogoutType, IAuthTokenType, IAuthUser, ICredentials, ILogin2 } from 'interfaces/iauth-guard-permission';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SignalRService } from 'services/signal-r.service';
@@ -47,6 +47,16 @@ export class AuthService {
     });
 
   }
+  logging2 = (userData: ILogin2): Promise<any> => {
+    return new Promise((resolve) => {
+      this.ajaxReqWrapperService.interfaceManagerService.POSTBODY(ENInterfaces.AuthsLOGIN2, userData).toPromise().then((res: IAuthTokenType) => {
+        resolve(res);
+      }).catch(() => {
+        resolve(false)
+      })
+    });
+
+  }
   private clearAllSavedData = () => this.closeTabService.cleanAllData();
   private clearDictionaries = () => this.dictionaryWrapperService.cleanDictionaries();
   logout = async () => {
@@ -59,11 +69,7 @@ export class AuthService {
     this.jwtService.removeTokens();
     this.utilsService.routeTo(EN_Routes.loginSlash);
   }
-  saveTolStorage = (token: any) => {
-    this.jwtService.removeTokens();
-    this.jwtService.saveToStorage(token);
-  }
-  saveToSessionStorage = (token: IAuthTokenType) => {
+  saveToStorage = (token: IAuthTokenType) => {
     this.jwtService.removeTokens();
     this.jwtService.saveToStorage(token);
   }

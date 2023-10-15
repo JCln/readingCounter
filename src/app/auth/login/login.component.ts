@@ -14,6 +14,8 @@ import { transitionLoginHelp } from 'src/app/directives/animation.directive';
 import { CaptchaComponent } from 'src/app/shared/captcha/captcha.component';
 
 import { AuthService } from '../auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CodeMessageDgComponent } from 'src/app/shared/code-message-dg/code-message-dg.component';
 
 
 @Component({
@@ -39,6 +41,7 @@ export class LoginComponent {
     deviceSerial: '',
     appVersion: this.utilsService.getAppVersion(),
     clientDateTime: this.dateJalaliService.getGregorianDate(),
+    expire_seconds: 0,
     loginId: '',
     code: null
   };
@@ -51,13 +54,27 @@ export class LoginComponent {
     private authService: AuthService,
     private utilsService: UtilsService,
     private browserSupportService: BrowserSupportService,
-    private dateJalaliService: DateJalaliService
+    private dateJalaliService: DateJalaliService,
+    public matDialog: MatDialog
   ) { }
 
   convertNumbers = () => {
     this.userData.password = Converter.persianToEngNumbers(this.userData.password);
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
     this.userData.dntCaptchaInputText = Converter.persianToEngNumbers(this.userData.dntCaptchaInputText);
+  }
+  openCodeMessageDialog = (): Promise<any> => {
+    return new Promise((resolve) => {
+      const dialogRef = this.matDialog.open(CodeMessageDgComponent, {
+        minWidth: '20rem',
+        data: this.userDataInput2
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
+    })
   }
   logging = async () => {
     if (this.browserSupportService.isValidBrowserVersion()) {
@@ -74,22 +91,20 @@ export class LoginComponent {
         (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = true;
         const returnUrl = this.authService.utilsService.compositeService.getRouterQueryParamMap(this.returnUrl);
         const res: ICredentialsResponse = await this.authService.logging(this.userData);
-
         if (res) {
           // TODO: Dynamic add to Local or Session Storage
           // two steps vertification
           if (res.two_steps) {
             this.userDataInput2.loginId = res.login_id;
+            this.userDataInput2.expire_seconds = res.expire_seconds;
+            const bbb = await this.openCodeMessageDialog();
+            console.log(bbb);
+
           }
           else {
-            if (this.utilsService.envService.shouldSaveTokensInLocal) {
-              this.authService.saveTolStorage(res);
-            }
-            else {
-              this.authService.saveToSessionStorage(res);
-            }
+            this.authService.saveToStorage(res);
+            this.authService.routeToReturnUrl(returnUrl);
           }
-          this.authService.routeToReturnUrl(returnUrl);
         }
         else {
           // if loggin failed refresh captcha, enable loginButton needs

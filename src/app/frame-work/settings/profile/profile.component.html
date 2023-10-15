@@ -93,6 +93,15 @@
     </section>
     <section>
         <div class="content">
+            <h1 class="title">ورود دو مرحله‌ای</h1>
+            <p-selectButton [options]="stateOptionsTwoSteps" [(ngModel)]="profileService.showStateVals.twoStepsAuth"
+                optionLabel="label" optionValue="value"
+                (onChange)="setDefaultAggregateTracks(profileService.showStateVals.twoStepsAuth)">
+            </p-selectButton>
+        </div>
+    </section>
+    <section>
+        <div class="content">
             <h1 class="title">بازگشت به تنظیمات پیش‌فرض</h1>
             <button class="btn_1 _pdf small_button" (click)="profileService.resetAllSavedLocals()">
                 اعمال

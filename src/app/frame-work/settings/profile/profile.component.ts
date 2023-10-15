@@ -21,6 +21,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
@@ -118,12 +119,16 @@ export class ProfileComponent extends FactoryONE {
     this.getValueOfShowCarouselMedia();
     this.getDefaultAggregationTrackings();
     this.getReOrderable();
+    this.getTwoStepsStatus();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnManager.columnSelectedMenus(this.profileColumns);
   }
   getValuesOfImg = () => {
     this.profileService.showStateVals.imgOptions = this.profileService.getImg();
+  }
+  getTwoStepsStatus = () => {
+    this.profileService.showStateVals.twoStepsAuth = this.profileService.getTwoStepsAuth();
   }
   setValuesOfImg = (val: imageOption) => {
     this.profileService.setImg(val);
@@ -173,6 +178,12 @@ export class ProfileComponent extends FactoryONE {
   setReOrderableTable = (val: any) => {
     this.profileService.setLocalReOrderable(val);
     val ? this.profileService.showMessage(EN_messages.possibleReOrderableEnabled) : this.profileService.showMessage(EN_messages.possibleReOrderableDisabled);
+  }
+  setTwoStepsStatus = async (val: any) => {
+    const res = await this.profileService.setTwoStepsStatus(val);
+    console.log(res);
+
+    val ? this.profileService.showMessage(EN_messages.twoStepsAuthEnabled) : this.profileService.showMessage(EN_messages.twoStepsAuthDisabled);
   }
   setDefaultAggregateTracks = (val: any) => {
     this.profileService.setLocaldefaultAggregateTracks(val);

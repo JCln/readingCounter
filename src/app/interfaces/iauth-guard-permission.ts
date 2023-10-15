@@ -12,7 +12,9 @@ export interface ILogin2 {
     appVersion: string,
     clientDateTime: string,
     loginId: string,
-    code: number
+    code: number,
+    expire_seconds?: number,
+    returnUrl?: string
 }
 export interface ICredentialsResponse {
     access_token: string,
