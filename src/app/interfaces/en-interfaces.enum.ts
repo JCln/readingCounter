@@ -316,6 +316,15 @@ export enum ENInterfaces {
     loadManual = `V1/Load/Manual`,
     offlineSingleReadingCounter = 'addANEW',
 
+    // Ip Manager
+    GetIpFilter = 'V1/IpFilter/Get',
+    AddIpFilter = 'V1/IpFilter/Add',
+    EditIpFilter = 'V1/IpFilter/Edit',
+    RemoveIpFilter = 'V1/IpFilter/Remove',
+    GetIpFilterHistory = 'V1/IpFilter/History',
+    GetIpFilterCompare = 'V1/IpFilter/Compare',
+    PostIpFilterGetBlocked = 'V1/IpFilter/GetBlocked',
+
     QotrAll = 'V1/Qotr/All',
     QotrDictionary = 'V1/Qotr/Dictionary',
     QotrRemove = 'V1/Qotr/Remove',
