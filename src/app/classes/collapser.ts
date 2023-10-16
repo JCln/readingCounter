@@ -19,6 +19,7 @@ export class Collapser {
     isCollapsedDetails: boolean = false;
     _isCollapsedGuilsWithParams: boolean = false;
     _isCollapsedUsersLogins: boolean = false;
+    _isCollapsedIpFilterGetBlocked: boolean = false;
     _isCollapsedNotificationListByDate: boolean = false;
     isCollapsedUserKarkard: boolean = false;
     isCollapsedImageAttrFileResult: boolean = false;

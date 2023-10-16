@@ -23,6 +23,7 @@ export enum ENReadingReports {
     imgResultDetailsGridBased = 'imgResultDetailsGridBased',
     userActivationLog = 'saveDataForServerUserActivationReq',
     usersLogins = 'usersLoginsReq',
+    ipFilterGetBlocked = 'ipFilterGetBlockedReq',
     notificationListByDateReq = 'notificationListByDateReq',
     feedbackAllCReq = 'mobileManagerFeedbackAllCReq',
     feedbackAllSReq = 'mobileManagerFeedbackAllSReq',

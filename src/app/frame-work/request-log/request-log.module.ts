@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { RequestLogRoutingModule } from './request-log-routing.module';
 
-
 @NgModule({
   declarations: [],
   imports: [

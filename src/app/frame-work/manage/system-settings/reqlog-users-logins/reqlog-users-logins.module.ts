@@ -5,8 +5,6 @@ import { ReqlogUsersLoginsRoutingModule } from './reqlog-users-logins-routing.mo
 import { ReqlogUsersLoginsComponent } from './reqlog-users-logins.component';
 import { ReqlogUsersLoginsDetailsComponent } from './reqlog-users-logins-details/reqlog-users-logins-details.component';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
-import { SharedSortByModule } from 'src/app/shared/shared-sort-by';
-
 
 @NgModule({
   declarations: [
@@ -15,7 +13,7 @@ import { SharedSortByModule } from 'src/app/shared/shared-sort-by';
   ],
   imports: [
     SharedPrimeNgModule,
-    SharedCollapseModule,    
+    SharedCollapseModule,
     ReqlogUsersLoginsRoutingModule
   ]
 })

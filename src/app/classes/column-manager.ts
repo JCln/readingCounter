@@ -398,6 +398,26 @@ export class ColumnManager {
         { field: 'requestTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
     ]
+    ipFilter: IObjectIteratation[] = [
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'subnet', header: 'subnet', isSelected: true, isSelectedOrigin: true },
+        { field: 'isSafe', header: 'امن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'isV6', header: 'IPv6', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
+    ipFilterGetBlocked: IObjectIteratation[] = [
+        { field: 'insertDateTime', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'osTitle', header: 'سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osPlatform', header: 'پلتفرم', isSelected: false, isSelectedOrigin: false },
+        // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },      
+    ]
     policyHistory: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },

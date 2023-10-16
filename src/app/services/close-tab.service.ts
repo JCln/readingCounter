@@ -56,7 +56,7 @@ import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IMostReportInput, IOnOffLoadFlat } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
-import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ } from 'interfaces/iserver-manager';
+import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
 
 @Injectable({
@@ -86,6 +86,7 @@ export class CloseTabService {
   saveDataForCounterState: ICounterState[];
   saveDataForImageAttribution: IImageAttribution[];
   saveDataForGuild: IGuild[];
+  ipFilterRes: IBlockOrSafeIp[];
   saveDataForDynamicTraverse: IDynamicTraverse[];
   saveDataForKarbari: IKarbari[];
   saveDataForReadingConfig: IReadingConfigDefault[];
@@ -139,6 +140,11 @@ export class CloseTabService {
   saveDataForUserSearchRes: any;
   usersLogins: IUsersLoginBriefInfo[] = [];
   usersLoginsReq = {
+    fromDate: '',
+    toDate: '',
+  }
+  ipFilterGetBlocked: IGetBlocked[] = [];
+  ipFilterGetBlockedReq = {
     fromDate: '',
     toDate: '',
   }
@@ -482,6 +488,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
     { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild },
+    { id: 1, value: ENEssentialsToSave.ipFilterRes, url: EN_Routes.ipFilter },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
@@ -561,6 +568,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
+    { id: 2, req: ENEssentialsToSave.ipFilterGetBlockedReq, value: ENEssentialsToSave.ipFilterGetBlocked, url: EN_Routes.requestLogsGetBlocked },
     { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },

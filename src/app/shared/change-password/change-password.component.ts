@@ -35,7 +35,7 @@ export class ChangePasswordComponent {
                 const res = await this.profileService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.changePassword, this.password);
                 const refreshResponse = await this.authService.getRefreshToken();
                 if (refreshResponse) {
-                    this.authService.saveTolStorage(refreshResponse);
+                    this.authService.saveToStorage(refreshResponse);
                     this.profileService.showMessage(res.message);
                     this.onCloseConfirmed();
                 }

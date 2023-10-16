@@ -185,7 +185,10 @@ export enum ENEssentialsToSave {
     mobileManagerforbiddenTypeReq = 'mobileManagerforbiddenTypeReq',
     mobileManagerforbiddenType = 'mobileManagerforbiddenType',
     requestLogUnAuthorizedReq = "requestLogUnAuthorizedReq",
-    requestLogUnAuthorized = "requestLogUnAuthorized"
+    requestLogUnAuthorized = "requestLogUnAuthorized",
+    ipFilterRes = "ipFilterRes",
+    ipFilterGetBlockedReq = "ipFilterGetBlockedReq",
+    ipFilterGetBlocked = "ipFilterGetBlocked"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -460,6 +463,7 @@ export enum ENSelectedColumnVariables {
     selectedRRRequestLogUnAuthorized = 'requestLogUnAuthorized',
     selectedRRRequestLogListUser = 'requestLogListUser',
     selectedRequestLogUsersLogins = 'usersLoginsDetails',
+    selectedRequestLogIpFilterGetBlocked = 'ipFilterGetBlocked',
     selectedRequestLogNotifListByDate = 'notificationListByDateReq',
     selectedrrUserKarkard = 'rrUserKarkard',
     selectedRRTraverse = 'trv',
@@ -483,6 +487,7 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = 'periodKind',
     selectedImageAttribution = 'imgattr',
     selectedImageGuild = 'guild',
+    selectedIpFilter = 'ipFilter',
     selectedFeedbackComplaint = 'feedbackComplaint',
     selectedFeedbackNotComplaint = 'feedbackNotComplaint',
     selectedDynamicTraverse = 'dynamicTraverse',

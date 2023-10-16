@@ -11,6 +11,7 @@ import { ICounterState, IGuild, IImageAttribution, ITextOutput } from '../interf
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { SectionsService } from './sections.service';
 import { UtilsService } from './utils.service';
+import { IBlockOrSafeIp } from 'interfaces/iserver-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,17 @@ export class ReadManagerService {
   verificationGuild = (dataSource: IGuild): boolean => {
     if (MathS.isNull(dataSource.title)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    return true;
+  }
+  verificationBlockOrSafeIP = (dataSource: IBlockOrSafeIp): boolean => {
+    if (MathS.isNull(dataSource.ip)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_IP);
+      return false;
+    }
+    if (MathS.isNull(dataSource.subnet)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_subnet);
       return false;
     }
     return true;

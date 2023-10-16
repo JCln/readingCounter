@@ -1,0 +1,20 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.ipFilterRes" 
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"    
+    [_isInRowEditing]=true
+    [_checkUpName]="'ipFilter'"    
+    [_numberOfExtraColumns]="[1,2]"
+    [_sessionName]="'ipfilter-session'"
+    [_selectedColumnsToRemember]="'selectedIpFilter'"
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
+    (refreshedTable)="refreshTable()"
+    (newedRowChangedStatus)="testChangedValue()"
+    (onRowEditedSave)="onRowEditSave($event)"
+    (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (removedRowEditing)="removeRow($event)"
+ > 
+</app-prime-table-editable>
+<!-- [_outputFileName]="'imgattr'" on prime table editable accur table not show data -->

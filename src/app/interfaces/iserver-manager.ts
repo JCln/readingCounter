@@ -37,6 +37,21 @@ export interface IRequestLog {
     ip: string
     tokenFailureReason: string
 }
+export interface IGetBlocked {
+    id: number,
+    insertDateTime: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string
+}
 export interface IManageServerErrorsRes {
     errorId: string,
     message: string,
@@ -125,4 +140,12 @@ export interface IIpRule {
 export interface IIpRules {
     ip: string,
     rules: IIpRule
+}
+export interface IBlockOrSafeIp {
+    id: number,
+    ip: string,
+    subnet: string,
+    isSafe: boolean,
+    isV6: boolean,
+    isNew?: boolean
 }

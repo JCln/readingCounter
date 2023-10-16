@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'userMaster', loadChildren: () => import('./user-master-history/user-master-history.module').then(userMasterHistory => userMasterHistory.UserMasterHistoryModule) },
   { path: 'userDetails', loadChildren: () => import('./user-details-history/user-details-history.module').then(userDetailsHistory => userDetailsHistory.UserDetailsHistoryModule) },
   { path: 'notificationList', loadChildren: () => import('./notif-list-bydate/notif-list-bydate.module').then(notificationListByDate => notificationListByDate.NotifListBydateModule) },
+  { path: 'getBlocked', loadChildren: () => import('./ipfilter-getblocked/ipfilter-getblocked.module').then(IpFilterGetBlocked => IpFilterGetBlocked.IpfilterGetblockedModule) },
 ];
 
 @NgModule({
