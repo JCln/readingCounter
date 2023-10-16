@@ -1,0 +1,10 @@
+<app-prime-table     
+    [dataSource]="closeTabService.IOPolicyHistory" 
+    [_outputFileName]="'IOPolicyHistory'"    
+    [_numberOfExtraColumns]="[1]"
+    [_sessionName]="'IOPolicyHistory-session'"
+    [_selectedColumnsToRemember]="'selectedIOPolicyHistory'"    
+    (refreshedTable)="refreshTable()"    
+    (openedBriefKardexDialog)="showCompare($event)"
+ > 
+</app-prime-table>

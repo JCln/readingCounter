@@ -189,7 +189,9 @@ export enum ENEssentialsToSave {
   ipFilterRes = "ipFilterRes",
   ipFilterGetBlockedReq = "ipFilterGetBlockedReq",
   ipFilterGetBlocked = "ipFilterGetBlocked",
-  ipfilterHistory = "ipfilterHistory"
+  ipfilterHistory = "ipfilterHistory",
+  IOPolicyHistory = "IOPolicyHistory",
+  IOPolicy = "IOPolicy"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -423,6 +425,7 @@ export enum ENSelectedColumnVariables {
     selectedTrackReading = 'reading',
     selectedPolicyHistory = 'policyHistory',
     selectedIpFilterHistory = 'ipFilterHistory',
+    selectedIOPolicyHistory = 'ipFilterHistory',
     selectedUserRoleHistoryDetails = 'userRoleHistoryDetails',
     selectedUserRoleHistorySummary = 'userRoleHistorySummary',
     selectedUserRoleHistory = 'userRoleHistoryAll',

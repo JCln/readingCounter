@@ -7,6 +7,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 import { IUserLogginInfo, IUserManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { IIOPolicy, IOPolicy } from 'interfaces/iserver-manager';
 
 export interface IRoleNessessities {
   id: string,
@@ -38,6 +39,9 @@ export class SecurityService {
   // API CALLS
   getPrivacyToggle = (): IPrivacy => {
     return privacies;
+  }
+  getIOPolicyToggle = (): IIOPolicy => {
+    return IOPolicy;
   }
   editPolicy = async (policies: any) => {
     const config = {

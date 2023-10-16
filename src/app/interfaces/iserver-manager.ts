@@ -76,6 +76,60 @@ export interface IGetBlockedCompareVals {
     userAgent: string,
     isRecordAuthentic: boolean
 }
+export interface IIOPolicyHistory {
+    id: number,
+    inputExtensions: string,
+    contentType: string,
+    inputMaxSizeKb: number,
+    inputMaxCountPerUser: number,
+    inputMaxCountPerDay: number,
+    outputMaxCountPerUser: number,
+    outputMaxCountPerDay: number,
+    userDisplayName: string,
+    username: string,
+    isActive: boolean,
+    insertDateTime: string,
+    insertDateJalali: string,
+    insertTime: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    isAuthentic: boolean
+}
+export interface IIOPolicyHistoryCompare {
+    previous: IIOPolicyHistory,
+    this: IIOPolicyHistory
+}
+export interface IIOPolicy {
+    id: number,
+    inputExtensions: string,
+    contentType: string,
+    inputMaxSizeKb: number,
+    inputMaxCountPerUser: number,
+    inputMaxCountPerDay: number,
+    outputMaxCountPerUser: number,
+    outputMaxCountPerDay: number
+}
+export const IOPolicy: IIOPolicy = {
+    id: null,
+    inputExtensions: '',
+    contentType: '',
+    inputMaxSizeKb: null,
+    inputMaxCountPerUser: null,
+    inputMaxCountPerDay: null,
+    outputMaxCountPerUser: null,
+    outputMaxCountPerDay: null
+}
+
+
 export interface IIpFilterCompare {
     previous: IGetBlockedCompareVals,
     this: IGetBlockedCompareVals

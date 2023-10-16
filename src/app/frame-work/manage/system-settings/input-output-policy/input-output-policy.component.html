@@ -1,0 +1,113 @@
+<div class="over_all">
+
+    <section>
+        <div class="content">
+            <section class="_checkbox">
+                <span>
+                    <ul>
+                        <li class="number_vals">
+                            حداقل تعداد رمز عبور
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="_value"> {{closeTabService.saveDataForPolicies.minPasswordLength}}</div>
+                                <div class="minus"
+                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength - 1)">
+                                    <i class="fa fa-minus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNumber">
+                                گذرواژه شامل حداقل یک عدد باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsLowercase">
+                                گذرواژه شامل حداقل یک حرف کوچک لاتین باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsUppercase">
+                                گذرواژه شامل حداقل یک حرف بزرگ لاتین باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox
+                                [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNonAlphaNumeric">
+                                گذرواژه شامل حداقل یک حرف غیرالفبایی باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.canUpdateDeviceId">
+                                شناسه قابل بروز رسانی باشد
+                            </mat-checkbox>
+                        </li>
+                    </ul>
+                </span>
+            </section>
+        </div>
+        <div class="content">
+            <section class="_checkbox">
+                <span>
+                    <ul>
+                        <li>
+                            <div class="t_input_2">
+                                <div class="t_key">از زمان</div>
+                                <input class="t_value" name="fromTimeM" min="1" max="60" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeM">
+                                <div class="_colon">:</div>
+                                <input class="t_value" name="fromTimeH" min="1" max="24" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeH">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="t_input_2">
+                                <div class="t_key">تا زمان</div>
+                                <input class="t_value" name="toTimeM" min="1" max="60" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeM">
+                                <div class="_colon">:</div>
+                                <input class="t_value" name="toTimeH" min="1" max="24" maxlength="2"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeH">
+                            </div>
+                        </li>
+                    </ul>
+                </span>
+            </section>
+        </div>
+    </section>
+
+    <section class="item_3">
+
+        <!-- <h1 class="title">حداقل یک نویسه با مشخصات !</h1> -->
+        <div class="content">
+            <section class="_checkbox">
+                <span>
+                    <ul>
+                        <li>
+                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
+                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpCaptcha">
+                                فعال سازی captcha
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
+                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpRecaptcha">
+                                ip مناسب در Recaptcha
+                            </mat-checkbox>
+                        </li>
+                    </ul>
+                </span>
+            </section>
+        </div>
+
+    </section>
+
+</div>
+
+<footer class="btns footer_with_background">
+    <button (click)="verification()" class="btn_1">ذخیره
+        تغییرات</button>
+</footer>

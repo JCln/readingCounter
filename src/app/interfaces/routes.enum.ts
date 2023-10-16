@@ -125,6 +125,8 @@ export enum EN_Routes {
     requestLogsUnAuthorized = '/wr/reqLog/unAuthorized',
     requestLogsGetBlocked = '/wr/reqLog/getBlocked',
     ipFilterHistory = '/wr/reqLog/IPFilterhistory',
+    IOPolicy = '/wr/m/system/IOPolicy',
+    IOPolicyHistory = '/wr/reqLog/IOPolicyHistory',
     'realtimeMessage' = '/wr/m/msge',
     'wrmmrm' = '/wr/m/mrm',
     'wrmrrpk' = '/wr/m/r/rpk',

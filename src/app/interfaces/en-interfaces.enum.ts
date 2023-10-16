@@ -325,6 +325,13 @@ export enum ENInterfaces {
     GetIpFilterCompare = 'V1/IpFilter/Compare',
     PostIpFilterGetBlocked = 'V1/IpFilter/GetBlocked',
 
+    // IO policy manager
+    GetIOPolicy = 'V1/IoPolicy/Active',
+    AddIOPolicy = 'V1/IoPolicy/Add',
+    EditIOPolicy = 'V1/IoPolicy/Edit',
+    GetIOPolicyHistory = 'V1/IoPolicy/History',
+    GetIOPolicyCompare = 'V1/IoPolicy/Compare',
+
     QotrAll = 'V1/Qotr/All',
     QotrDictionary = 'V1/Qotr/Dictionary',
     QotrRemove = 'V1/Qotr/Remove',
