@@ -1,0 +1,10 @@
+<app-prime-table     
+    [dataSource]="closeTabService.ipFilterHistory" 
+    [_outputFileName]="'ipFilterHistory'"    
+    [_numberOfExtraColumns]="[1]"
+    [_sessionName]="'ipFilterHistory-session'"
+    [_selectedColumnsToRemember]="'selectedIpFilterHistory'"    
+    (refreshedTable)="refreshTable()"    
+    (openedBriefKardexDialog)="showCompare($event)"
+ > 
+</app-prime-table>

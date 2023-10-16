@@ -267,7 +267,7 @@
                 </i>
             </td>
             <td class="__columns"
-                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory' || _checkUpName == 'usersLogins' "
+                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory' || _checkUpName == 'usersLogins' || _checkUpName == 'ipFilterHistory' "
                 (click)="openMoshtarakinDialog(dataSource)">
                 <span class="ui-column-title">مشاهده جزئیات</span>
                 <i class="tooltip p_icons pi pi-info-circle">
@@ -295,7 +295,8 @@
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_outputFileName == 'policyHistory' || _outputFileName == 'roleHistory'"
+            <td class="__columns"
+                *ngIf="_outputFileName == 'policyHistory' || _outputFileName == 'roleHistory' || _outputFileName == 'ipFilterHistory'"
                 (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">مقایسه تغییرات</span>
                 <i class="tooltip p_icons pi pi-folder">

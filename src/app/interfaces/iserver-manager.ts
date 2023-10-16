@@ -52,6 +52,34 @@ export interface IGetBlocked {
     osShortTitle: string,
     userAgent: string
 }
+export interface IGetBlockedCompareVals {
+    id: number,
+    ip: string,
+    subnet: string,
+    isSafe: boolean,
+    isV6: boolean,
+    username: string,
+    userDisplayName: string,
+    description: string,
+    insertDateJalali: string,
+    insertTime: string,
+    userIp: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    isRecordAuthentic: boolean
+}
+export interface IIpFilterCompare {
+    previous: IGetBlockedCompareVals,
+    this: IGetBlockedCompareVals
+}
 export interface IManageServerErrorsRes {
     errorId: string,
     message: string,
