@@ -4,89 +4,21 @@
 @import '_mat';
 @import './plus-minus';
 
-.over_all {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
-    direction: rtl;
-    justify-content: center;
-    gap: var(--font_05);
-}
-
-.item_3 {
-    grid-row: 1 / 3;
-    grid-column: 2;
-}
 
 .content {
+    display: grid;
+    justify-content: center;
+    direction: rtl;
     padding: var(--font_2) var(--font_02);
     background: var(--secondary_1);
     border-radius: 10px;
     box-shadow: 0px 2px 6px 2px var(--secondary_7);
 }
 
-._desc {
-    display: grid;
-    margin: auto;
-    width: 90%;
-    border-radius: $border_15;
-}
-
-.title {
-    color: var(--secondary_5);
-    text-align: center;
-    margin: var(--font_xs) var(--font_05);
-    font-size: var(--font_l2);
-}
-
 input {
     color: var(--secondary_5);
     margin: 0 auto;
     box-shadow: 1px 1px 8px 1px var(--secondary_4);
-}
-
-// radio buttons
-.example-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-}
-
-.example-radio-button {
-    margin: 5px;
-}
-
-.over_all_result {
-    color: var(--primary_2);
-    font-size: var(--font_s);
-    font-weight: 600;
-    margin-top: var(--font_2);
-}
-
-////////
-
-::ng-deep {
-
-    .example-radio-button {
-        margin: 4px;
-        background: var(--secondary_1);
-        padding: var(--font_xxs);
-        border-radius: $border_15;
-    }
-
-    .mat-checkbox-layout {
-        margin-bottom: var(--font_05);
-
-        .mat-checkbox-label {
-            margin: 0 var(--font_05);
-            font-size: var(--font_s);
-            font-weight: 600;
-            color: var(--secondary_6);
-            line-height: 2;
-            border-radius: $border_15;
-            font-family: $font_family;
-        }
-    }
-
 }
 
 ul {
@@ -104,10 +36,6 @@ ul {
     color: var(--secondary_6);
 }
 
-._checkbox {
-    text-align: right;
-}
-
 .btns {
     margin: var(--font_xs);
     display: flex;
@@ -117,42 +45,28 @@ ul {
 .btn_1 {
     color: var(--secondary_1);
     margin: var(--font_05);
+    margin-top: var(--font_2) auto;
 }
 
-.t_input_2 {
-    background: var(--secondary_3);
-    color: var(--secondary_3);
+textarea {
     display: flex;
-    align-items: center;
-    margin: var(--font_025) 0;
-    height: var(--font_26);
-    min-height: 85%;
     justify-content: center;
-    border: 1px solid var(--secondary_3_spec);
-    border-radius: $border_7;
+    text-align: left;
+    direction: ltr;
+    border: none;
+    outline: none;
+    padding: var(--font_05);
+    height: 6rem;
+    width: 100%;
+    min-width: 19rem;
+    max-width: 34rem;
+    border-radius: $border_15;
+    background: var(--secondary_3);
+    color: var(--primary_7);
+    font-size: var(--font_s);
+    font-weight: 600;
 
-    .t_value {
-        width: var(--font_3);
-        border: 1px solid blue;
-        border-radius: $border_7;
-        text-align: center;
-        font-size: var(--font_m);
-        font-weight: 600;
-        color: var(--primary_5);
+    @media (max-width:549px) {
+        max-width: 21rem;
     }
-
-    .t_key {
-        color: var(--primary_4);
-        font-size: var(--font_s);
-        font-weight: 600;
-        margin-left: var(--font_01);
-    }
-
-    ._colon {
-        font-size: var(--font_23);
-        padding: var(--font_025);
-        margin: var(--font_025);
-        color: blue;
-    }
-
 }

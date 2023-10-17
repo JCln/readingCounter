@@ -103,5 +103,17 @@ export class SecurityService {
     return true;
 
   }
+  verificationIOPolicyAdd = (dataSource: object): boolean => {
+    if (MathS.isNull(dataSource['inputExtensions'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_inputExtensions);
+      return false;
+    }
+    if (MathS.isNull(dataSource['contentType'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_contentType);
+      return false;
+    }
+    return true;
+
+  }
 
 }

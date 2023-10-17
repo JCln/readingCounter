@@ -68,7 +68,7 @@ export class FragmentComponent extends FactoryONE {
     this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnManager.columnSelectedMenus(this.fragmentMasterColumns);
+    this._selectCols = this.fragmentManagerService.columnManager.getColumnsMenus(this.fragmentMasterColumns);
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   defaultAddStatus = () => this.newRowLimit = 1;

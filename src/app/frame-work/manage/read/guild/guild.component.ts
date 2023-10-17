@@ -39,7 +39,7 @@ export class GuildComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus(this.guildColumns);
+    this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.guildColumns);
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {

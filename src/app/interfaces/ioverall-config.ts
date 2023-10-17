@@ -211,6 +211,7 @@ export interface IDialogMessage {
     isDelete: boolean,
     icon: string,
     doesNotReturnButton?: boolean,
+    disableClose?:boolean,
     isSelectableDate?: boolean,
     changePassword?: boolean
 }

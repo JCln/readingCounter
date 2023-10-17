@@ -28,7 +28,7 @@ import { GeneralGroupInfoResComponent } from './general-group-info-res/general-g
   styleUrls: ['./general-group-list-modify.component.scss']
 })
 export class GeneralGroupListModifyComponent extends AllListsFactory {
-  // should place only in component because overright totalNum needs for dynamic use
+  // should place only in component because overright totalNum needs for dynamic use  
   tempMainDataSource = { totalNum: 0, data: [] };
 
   _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];  
@@ -50,6 +50,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
 
   modifyType: OffloadModify[];
   tempFilter = { first: [], second: [] };
+  public readonly routerLink: string = this.closeTabService.utilsService.compositeService.getRouterUrl();
 
   constructor(
     public listManagerService: ListManagerService,
@@ -134,7 +135,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
       } else {
-        this._selectCols = this.listManagerService.columnManager.columnSelectedMenus(this._outputFileName);
+        this._selectCols = this.listManagerService.columnManager.getColumnsMenus(this._outputFileName);
       }
       this._selectedColumns = this.listManagerService.columnManager.customizeSelectedColumns(this._selectCols);
       this.insertSelectedColumns();

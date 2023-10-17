@@ -3,17 +3,17 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENRandomNumbers, ENSnackBarTimes, ENSnackBarColors } from 'interfaces/ioverall-config';
 import { IIOPolicy } from 'interfaces/iserver-manager';
-import { IPrivacy } from 'services/DI/privacies';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
+
 
 const enum ENMessages {
   maxLength = 'حداکثر تعداد ',
   minLength = 'حداقل تعداد ',
   is = ' می‌باشد',
-
 }
 @Component({
   selector: 'app-input-output-policy',
@@ -21,9 +21,9 @@ const enum ENMessages {
   styleUrls: ['./input-output-policy.component.scss']
 })
 export class InputOutputPolicyComponent extends FactoryONE {
-  @ViewChild('#ref_true') ref;
   iOPolicyOptions: IIOPolicy;
-  
+  @ViewChild('#ref_true') ref;
+
   constructor(
     public securityService: SecurityService,
     public closeTabService: CloseTabService,
@@ -31,40 +31,74 @@ export class InputOutputPolicyComponent extends FactoryONE {
   ) {
     super();
   }
-
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForPolicies.id = null;
-    }
-    if (this.closeTabService.saveDataForPolicies.id == 0 || this.closeTabService.saveDataForPolicies.id == null) {
-      this.closeTabService.saveDataForPolicies = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.getPolicies);
-    }
     this.iOPolicyOptions = this.securityService.getIOPolicyToggle();
+    if (canRefresh) {
+      this.closeTabService.IOPolicy.id = 0;
+    }
+    if (MathS.isNull(this.closeTabService.IOPolicy.id)) {
+      this.closeTabService.IOPolicy = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicy);
+    }
   }
-  plusOrMinus = (value: number) => {
-    // if (value > this.iOPolicyOptions.maxLength) {
-    //   this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.sixteen + ENMessages.is, ENSnackBarTimes.threeMili);
-    //   return;
-    // }
 
-    // if (value < this.iOPolicyOptions.minLength) {
-    //   this.openSnackBar(ENMessages.minLength + ENRandomNumbers.eight + ENMessages.is, ENSnackBarTimes.threeMili);
-    //   return;
-    // }
-    // this.closeTabService.saveDataForPolicies.minPasswordLength = value;
+  plusOrMinusOutputMaxCountPerDay = (value: number) => {
+    if (value < this.iOPolicyOptions.outputMaxCountPerDayMinLength) {
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.IOPolicy.outputMaxCountPerDay = value;
+  }
+  plusOrMinusOutputMaxCountPerUser = (value: number) => {
+    if (value < this.iOPolicyOptions.outputMaxCountPerUserMinLength) {
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.IOPolicy.outputMaxCountPerUser = value;
+  }
+  plusOrMinusInputMaxCountPerDay = (value: number) => {
+    if (value < this.iOPolicyOptions.inputMaxCountPerDayMinLength) {
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.IOPolicy.inputMaxCountPerDay = value;
+  }
+  plusOrMinusInputMaxCountPerUser = (value: number) => {
+    if (value < this.iOPolicyOptions.inputMaxCountPerUserMinLength) {
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.IOPolicy.inputMaxCountPerUser = value;
+  }
+  plusOrMinusInputMaxSizeKb = (value: number) => {
+    if (value < this.iOPolicyOptions.inputMaxSizeKbMinLength) {
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      return;
+    }
+    this.closeTabService.IOPolicy.inputMaxSizeKb = value;
   }
 
   verification = async () => {
-    // join input values time 
-    this.closeTabService.saveDataForPolicies.fromTime = this.closeTabService.saveDataForPolicies.fromTimeH + ':' + this.closeTabService.saveDataForPolicies.fromTimeM;
-    this.closeTabService.saveDataForPolicies.toTime = this.closeTabService.saveDataForPolicies.toTimeH + ':' + this.closeTabService.saveDataForPolicies.toTimeM;
-    console.log(this.closeTabService.saveDataForPolicies);
+    // join input values time     
+    const _addOrEditInterface = MathS.isNull(this.closeTabService.IOPolicy.id) ? ENInterfaces.AddIOPolicy : ENInterfaces.EditIOPolicy
 
-    const temp = this.securityService.verificationDates(this.closeTabService.saveDataForPolicies);
-    console.log(temp);
-
-    // if (temp)
-    //   this.securityService.editPolicy(this.closeTabService.saveDataForPolicies);
+    if (this.securityService.verificationIOPolicyAdd(this.closeTabService.IOPolicy)) {
+      this.securityService.ajaxReqWrapperService.interfaceManagerService.POSTBODY(_addOrEditInterface, this.closeTabService.IOPolicy)
+        .toPromise()
+        .then((res: any) => {
+          this.securityService.utilsService.snackBarMessageSuccess(res.message);
+        }).catch(error => {
+          console.log(error);
+          const config = {
+            messageTitle: EN_messages.checkPlease,
+            text: error.message,
+            minWidth: '20rem',
+            isInput: false,
+            isDelete: false,
+            icon: 'pi pi-file-edit',
+          }
+          this.securityService.utilsService.firstConfirmDialog(config);
+        });
+    }
   }
   openSnackBar(message: string, duration: ENSnackBarTimes) {
     this.snackWrapperService.openSnackBar(message, duration, ENSnackBarColors.warn);

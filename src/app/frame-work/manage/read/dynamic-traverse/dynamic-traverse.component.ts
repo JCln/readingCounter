@@ -39,7 +39,7 @@ export class DynamicTraverseComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus(this.dynamicTraverseColumns);
+    this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.dynamicTraverseColumns);
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {

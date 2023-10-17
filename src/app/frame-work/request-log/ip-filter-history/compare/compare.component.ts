@@ -50,7 +50,7 @@ export class CompareComponent implements OnInit {
     }
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.columnManager.columnSelectedMenus(this.ipFilterColumns);
+    this._selectCols = this.columnManager.getColumnsMenus(this.ipFilterColumns);
     console.log(this._selectCols);
     console.log(this.dataSource);
     

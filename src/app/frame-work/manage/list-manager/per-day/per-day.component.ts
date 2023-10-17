@@ -39,8 +39,8 @@ export class PerDayComponent extends FactoryONE {
     })
   }
   private insertSelectedColumns = () => {
-    this._selectMainDatas = this.listManagerService.columnManager.columnSelectedMenus(this.listManagerPerDayPositions);
-    this._selectCols = this.listManagerService.columnManager.columnSelectedMenus(this.listManagerPerDay);
+    this._selectMainDatas = this.listManagerService.columnManager.getColumnsMenus(this.listManagerPerDayPositions);
+    this._selectCols = this.listManagerService.columnManager.getColumnsMenus(this.listManagerPerDay);
     this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
     this.dateJalaliService.sortByDate(this.closeTabService.saveDataForLMPD.offLoadPerDayHistory, 'day');
   }

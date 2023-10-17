@@ -9,6 +9,7 @@ import * as XLSX from 'xlsx';
 import { font } from '../../assets/pdfjs/BLotus-normal';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,23 @@ export class OutputManagerService {
   ) {
   }
 
+  canIDownloadMore = async (url: string, count: number): Promise<boolean> => {
+    const req = { url: url, count: count };
+    const res = await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.downloadIOPolicyCanIDownloadMore, req);
+    if (res) {
+      return true;
+    }
+    const config = {
+      messageTitle: EN_messages.downloadLimit,
+      text: EN_messages.downloadLimitText,
+      minWidth: '20rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-file-edit',
+    }
+    this.utilsService.firstConfirmDialog(config);
+    return false;
+  }
   // Exports
   downloadFile(data: any, type?: string) {
     if (type) {
@@ -62,7 +80,7 @@ export class OutputManagerService {
       for (let i = 0; i < validColNames.length; i++) {
         const key = validColNames[i];
         let value = currentelement[validColNames[i]];
-        
+
         newElement[key] = value != undefined && value != null ? value : '';
       }
       return Object.values(newElement);
@@ -70,7 +88,10 @@ export class OutputManagerService {
 
     return { data: newData, headers: validHeaders };
   }
-  exportPDF = (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string) => {
+  exportPDF = async (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string, routerLink: string, count: number) => {
+    if (!await this.canIDownloadMore(routerLink, count))
+      return;
+
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
       return;
@@ -119,7 +140,10 @@ export class OutputManagerService {
     }
     return true;
   }
-  export = (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: XLSX.BookType) => {
+  export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: XLSX.BookType, routerLink: string, count: number) => {
+    if (!await this.canIDownloadMore(routerLink, count))
+      return;
+
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
       return;

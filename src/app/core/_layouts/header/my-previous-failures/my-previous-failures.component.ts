@@ -32,7 +32,7 @@ export class MyPreviousFailuresComponent implements OnInit {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.columnManager.columnSelectedMenus(this.myPreviousFailuresColumns);
+    this._selectCols = this.columnManager.getColumnsMenus(this.myPreviousFailuresColumns);
   }
   ngOnInit(): void {
     console.log(this.config.data);

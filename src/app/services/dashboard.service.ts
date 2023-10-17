@@ -26,10 +26,10 @@ export class DashboardService {
 
   /* COLUMNS */
   columnDashboardUserOverall = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus(this.dashboardUserAllColumns);
+    return this.columnManager.getColumnsMenus(this.dashboardUserAllColumns);
   }
   columnDashboards = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus(this.dashboardsColumns);
+    return this.columnManager.getColumnsMenus(this.dashboardsColumns);
   }
 
   /* CALL API */

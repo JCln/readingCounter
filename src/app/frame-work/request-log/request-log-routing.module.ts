@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'notificationList', loadChildren: () => import('./notif-list-bydate/notif-list-bydate.module').then(notificationListByDate => notificationListByDate.NotifListBydateModule) },
   { path: 'getBlocked', loadChildren: () => import('./ipfilter-getblocked/ipfilter-getblocked.module').then(IpFilterGetBlocked => IpFilterGetBlocked.IpfilterGetblockedModule) },
   { path: 'IPFilterhistory', loadChildren: () => import('./ip-filter-history/ip-filter-history.module').then(IpFilterHistory => IpFilterHistory.IpFilterHistoryModule) },
+  { path: 'IOPolicyHistory', loadChildren: () => import('./input-output-policy-history/input-output-policy-history.module').then(inputOutputPolicyHistory => inputOutputPolicyHistory.InputOutputPolicyHistoryModule) },
 ];
 
 @NgModule({

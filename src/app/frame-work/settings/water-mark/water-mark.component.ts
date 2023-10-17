@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-water-mark',
@@ -40,7 +41,7 @@ export class WaterMarkComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     this.textColorState();
 
-    if (!this.closeTabService.saveDataForWaterMark.id) {
+    if (MathS.isNull(this.closeTabService.saveDataForWaterMark.id)) {
       this.closeTabService.saveDataForWaterMark = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getWaterMarkConfig);
       this.changeTextColorByServerRes();
     }

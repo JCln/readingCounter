@@ -1,113 +1,86 @@
-<div class="over_all">
+<section class="content">
+    <ul>
+        <li>
+            <h3>فرمت فایل های ورودی (extension)</h3>
+            <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="closeTabService.IOPolicy.inputExtensions">
+                        </textarea>
+        <li>
+            <h3>نوع داده (content) </h3>
+            <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="closeTabService.IOPolicy.contentType">
+                        </textarea>
+        </li>
+        <li class="number_vals">
+            <h3> حداکثر حجم فایل ورودی</h3>
+            <div class="plus_minus">
+                <div class="plus" (click)="plusOrMinusInputMaxSizeKb(closeTabService.IOPolicy.inputMaxSizeKb + 1)">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="_value"> {{closeTabService.IOPolicy.inputMaxSizeKb}}</div>
+                <div class="minus" (click)="plusOrMinusInputMaxSizeKb(closeTabService.IOPolicy.inputMaxSizeKb - 1)">
+                    <i class="fa fa-minus"></i>
+                </div>
+            </div>
+        </li>
+        <li class="number_vals">
+            <h3> حداکثر تعداد فایل قابل بارگیری(دریافت) هر کاربر</h3>
+            <div class="plus_minus">
+                <div class="plus"
+                    (click)="plusOrMinusInputMaxCountPerUser(closeTabService.IOPolicy.inputMaxCountPerUser + 1)">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="_value"> {{closeTabService.IOPolicy.inputMaxCountPerUser}}</div>
+                <div class="minus"
+                    (click)="plusOrMinusInputMaxCountPerUser(closeTabService.IOPolicy.inputMaxCountPerUser - 1)">
+                    <i class="fa fa-minus"></i>
+                </div>
+            </div>
+        </li>
+        <li class="number_vals">
+            <h3>حداکثر تعداد کل فایل های قابل بارگیری (دریافت) در روز</h3>
+            <div class="plus_minus">
+                <div class="plus"
+                    (click)="plusOrMinusInputMaxCountPerDay(closeTabService.IOPolicy.inputMaxCountPerDay + 1)">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="_value"> {{closeTabService.IOPolicy.inputMaxCountPerDay}}</div>
+                <div class="minus"
+                    (click)="plusOrMinusInputMaxCountPerDay(closeTabService.IOPolicy.inputMaxCountPerDay - 1)">
+                    <i class="fa fa-minus"></i>
+                </div>
+            </div>
+        </li>
+        <li class="number_vals">
+            <h3> حداکثر تعداد فایل قابل بارگذاری(ارسال) هر کاربر</h3>
+            <div class="plus_minus">
+                <div class="plus"
+                    (click)="plusOrMinusOutputMaxCountPerUser(closeTabService.IOPolicy.outputMaxCountPerUser + 1)">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="_value"> {{closeTabService.IOPolicy.outputMaxCountPerUser}}</div>
+                <div class="minus"
+                    (click)="plusOrMinusOutputMaxCountPerUser(closeTabService.IOPolicy.outputMaxCountPerUser - 1)">
+                    <i class="fa fa-minus"></i>
+                </div>
+            </div>
+        </li>
+        <li class="number_vals">
+            <h3>حداکثر تعداد کل فایل های قابل بارگذاری(ارسال) در روز</h3>
+            <div class="plus_minus">
+                <div class="plus"
+                    (click)="plusOrMinusOutputMaxCountPerDay(closeTabService.IOPolicy.outputMaxCountPerDay + 1)">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="_value"> {{closeTabService.IOPolicy.outputMaxCountPerDay}}</div>
+                <div class="minus"
+                    (click)="plusOrMinusOutputMaxCountPerDay(closeTabService.IOPolicy.outputMaxCountPerDay - 1)">
+                    <i class="fa fa-minus"></i>
+                </div>
+            </div>
+        </li>
+    </ul>
 
-    <section>
-        <div class="content">
-            <section class="_checkbox">
-                <span>
-                    <ul>
-                        <li class="number_vals">
-                            حداقل تعداد رمز عبور
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value"> {{closeTabService.saveDataForPolicies.minPasswordLength}}</div>
-                                <div class="minus"
-                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength - 1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNumber">
-                                گذرواژه شامل حداقل یک عدد باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsLowercase">
-                                گذرواژه شامل حداقل یک حرف کوچک لاتین باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsUppercase">
-                                گذرواژه شامل حداقل یک حرف بزرگ لاتین باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox
-                                [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNonAlphaNumeric">
-                                گذرواژه شامل حداقل یک حرف غیرالفبایی باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.canUpdateDeviceId">
-                                شناسه قابل بروز رسانی باشد
-                            </mat-checkbox>
-                        </li>
-                    </ul>
-                </span>
-            </section>
-        </div>
-        <div class="content">
-            <section class="_checkbox">
-                <span>
-                    <ul>
-                        <li>
-                            <div class="t_input_2">
-                                <div class="t_key">از زمان</div>
-                                <input class="t_value" name="fromTimeM" min="1" max="60" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeM">
-                                <div class="_colon">:</div>
-                                <input class="t_value" name="fromTimeH" min="1" max="24" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeH">
-                            </div>
-                        </li>
-                        <li>
-                            <div class="t_input_2">
-                                <div class="t_key">تا زمان</div>
-                                <input class="t_value" name="toTimeM" min="1" max="60" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeM">
-                                <div class="_colon">:</div>
-                                <input class="t_value" name="toTimeH" min="1" max="24" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeH">
-                            </div>
-                        </li>
-                    </ul>
-                </span>
-            </section>
-        </div>
-    </section>
+    <button (click)="verification()" class="btn_1">
+        ذخیره تغییرات
+    </button>
 
-    <section class="item_3">
-
-        <!-- <h1 class="title">حداقل یک نویسه با مشخصات !</h1> -->
-        <div class="content">
-            <section class="_checkbox">
-                <span>
-                    <ul>
-                        <li>
-                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
-                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpCaptcha">
-                                فعال سازی captcha
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
-                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpRecaptcha">
-                                ip مناسب در Recaptcha
-                            </mat-checkbox>
-                        </li>
-                    </ul>
-                </span>
-            </section>
-        </div>
-
-    </section>
-
-</div>
-
-<footer class="btns footer_with_background">
-    <button (click)="verification()" class="btn_1">ذخیره
-        تغییرات</button>
-</footer>
+</section>

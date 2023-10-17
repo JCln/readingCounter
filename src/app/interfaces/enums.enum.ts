@@ -52,6 +52,8 @@ export enum EN_messages {
     needMoreAccess = 'برای تغییر دراین قسمت به دسترسی های بیشتری نیاز دارید',
     insert_group_access = 'گروه دسترسی را مشخص نمایید',
     insert_again = 'مجددا مقادیر را وارد نمایید',
+    insert_inputExtensions = 'فرمت فایل های ورودی خالی است',
+    insert_contentType = 'نوع داده (content) خالی است',
     insert_fromDate = 'از تاریخ خالی است',
     insert_statusId = 'وضعیت فعلی خالی است',
     insert_counterStateShouldHaveValue = 'باید همه وضعیت های فعلی درحال اصلاح انتخاب شده باشند ',
@@ -104,6 +106,8 @@ export enum EN_messages {
     download_excel = 'دریافت فایل Excel',
     download_excelButton = 'دریافت Excel',
     downloadPermit = 'از دانلود فایل اطمینان دارید؟',
+    downloadLimit = 'شما به حداکثر موارد بارگیری در روز جاری رسیده اید',    
+    downloadLimitText = 'لطفا مجددا تلاش ننمایید',    
     insert_abFormula = 'فرمول آب را وارد نمایید',
     insert_fazelabFormula = 'فرمول فاضلاب را وارد نمایید',
     insert_formula = 'فرمول را وارد نمایید',
@@ -171,7 +175,7 @@ export enum EN_messages {
     twoStepsAuthDisabledWarn = 'شما درحال غیرفعال سازی ورود دو مرحله ای می‌باشید',
     twoStepsAuthEnabled = 'ورود دو مرحله ای فعال شد',
     twoStepsAuthDisabled = 'ورود دو مرحله ای غیرفعال شد',
-    areYouSure = 'آیا اطمینان دارید',
+    areYouSure = 'آیا اطمینان دارید؟',
     possibledefaultAggregateTracksEnabled = 'گروه‌بندی در کارتابل بطور پیشفرض فعال شد',
     possibledefaultAggregateTracksDisabled = 'گروه‌بندی در کارتابل بطور پیشفرض غیرفعال شد',
     spinnerHasCancelable = 'امکان لغو درخواست غیر فعال شد',
@@ -180,6 +184,10 @@ export enum EN_messages {
     imageOptionChanged = 'تنظیم اندازه تصاویر انجام شد',
     done = 'انجام شد',
     doneBroadcast = 'پیام مخابره شد',
+
+    // DIALOG TITLES
+    iOPolicyAddTitle = 'افزودن ورودی خروجی داده',
+    iOPolicyEditTitle = 'ویرایش ورودی خروجی داده',
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
@@ -229,6 +237,7 @@ export enum EN_messages {
 
     call_supportGroup = 'خطای سرور، با پشتیبانی تماس حاصل نمایید',
     reLoginPlease = 'لطفا یکبار دیگر وارد سامانه شوید',
+    checkPlease = 'لطفا نسبت به اصلاح مورد اقدام نمایید',
     browserSupport_alarm = 'نسخه مرورگر شما برنامه را پشتیبانی نمی‌کند',
     browserSupport_warn = 'برای پشتیبانی بهتر، مرورگر',
 }

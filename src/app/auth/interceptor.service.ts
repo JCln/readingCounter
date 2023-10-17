@@ -30,7 +30,8 @@ export class InterceptorService implements HttpInterceptor {
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
-      icon: 'pi pi-ban'
+      icon: 'pi pi-ban',
+      disableClose: true,
     }
     await this.utilsService.firstConfirmDialog(config);
   }

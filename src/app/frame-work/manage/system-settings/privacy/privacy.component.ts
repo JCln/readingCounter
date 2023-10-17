@@ -8,6 +8,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { IPrivacy } from 'services/DI/privacies';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { DateJalaliService } from 'services/date-jalali.service';
+import { MathS } from 'src/app/classes/math-s';
 
 const enum ENMessages {
   maxLength = 'حداکثر تعداد ',
@@ -40,9 +41,9 @@ export class PrivacyComponent extends FactoryONE {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.closeTabService.saveDataForPolicies.id = null;
+      this.closeTabService.saveDataForPolicies.id = 0;
     }
-    if (this.closeTabService.saveDataForPolicies.id == 0 || this.closeTabService.saveDataForPolicies.id == null) {
+    if (MathS.isNull(this.closeTabService.saveDataForPolicies.id)) {
       this.closeTabService.saveDataForPolicies = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.getPolicies);
     }
     this.checkProtocol();

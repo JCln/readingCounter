@@ -18,6 +18,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 export class KarkardAllStatesComponent extends FactoryONE {
   tempData: IKarkardAllStatesDto[] = [];
   header: any[] = [];
+  public readonly routerLink: string = this.closeTabService.utilsService.compositeService.getRouterUrl();
 
   zoneDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];

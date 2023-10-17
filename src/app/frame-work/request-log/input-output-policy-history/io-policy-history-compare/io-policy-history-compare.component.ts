@@ -54,7 +54,7 @@ export class IOPolicyHistoryCompareComponent implements OnInit {
     }
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.columnManager.columnSelectedMenus(this.IOPolicyCompareColumns);
+    this._selectCols = this.columnManager.getColumnsMenus(this.IOPolicyCompareColumns);
   }
   classWrapper = async () => {
     const res: IIOPolicyHistoryCompare = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.GetIOPolicyCompare, this.config.data.id);

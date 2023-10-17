@@ -30,7 +30,7 @@ export class InputOutputPolicyHistoryComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (MathS.isNull(this.closeTabService.IOPolicyHistory)) {
-      this.closeTabService.IOPolicyHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicy);
+      this.closeTabService.IOPolicyHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicyHistory);
     }
   }
   // showMoreDetails = (data: IPrivacy) => {

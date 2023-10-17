@@ -48,6 +48,7 @@ export class FactorySharedPrime implements OnChanges {
     _reOrderableTable: boolean;
     tempOriginDataSource: any[] = [];
     ref: DynamicDialogRef;
+    public readonly routerLink: string = this.utilsService.compositeService.getRouterUrl();
 
     @Input() dataSource: any[] = [];
     @Input() _selectCols: any = [];
@@ -139,7 +140,7 @@ export class FactorySharedPrime implements OnChanges {
                 this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
             }
             else {
-                this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+                this._selectCols = this.columnManager.getColumnsMenus(this._outputFileName);
             }
             this._selectedColumns = this.profileService.columnManager.customizeSelectedColumns(this._selectCols);
         }

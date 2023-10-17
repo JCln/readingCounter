@@ -1,6 +1,6 @@
 <form class="_user-input" #form="ngForm">
     <div class="input_2" [ngClass]="{'_double_size':item.icon}"
-        *ngFor="let item of columnManager.columnSelectedMenus('userRoleHistoryDetails_UserInfo')">
+        *ngFor="let item of columnManager.getColumnsMenus('userRoleHistoryDetails_UserInfo')">
         <div class="_key">{{item.header}}</div>
         <ng-container *ngIf="item.isBoolean; else elseTemplate">
             <mat-checkbox [disabled]=true name="{{item.field}}" [(ngModel)]="editInfo[item.field]">

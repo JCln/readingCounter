@@ -57,7 +57,7 @@ export class PhCompareComponent implements OnInit {
     }
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.columnManager.columnSelectedMenus(this.policyCompareColumns);
+    this._selectCols = this.columnManager.getColumnsMenus(this.policyCompareColumns);
   }
   classWrapper = async () => {
     const res: IPoliciesCompare = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.policiesCompare, this.config.data.id);

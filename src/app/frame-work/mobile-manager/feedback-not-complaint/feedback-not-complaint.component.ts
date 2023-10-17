@@ -41,7 +41,7 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.mobileAppService.columnManager.columnSelectedMenus(this.feedbackNotComplaintColumns);
+    this._selectCols = this.mobileAppService.columnManager.getColumnsMenus(this.feedbackNotComplaintColumns);
     this._selectedColumns = this.mobileAppService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {

@@ -96,7 +96,7 @@
             <h1 class="title">ورود دو مرحله‌ای</h1>
             <p-selectButton [options]="stateOptionsTwoSteps" [(ngModel)]="profileService.showStateVals.twoStepsAuth"
                 optionLabel="label" optionValue="value"
-                (onChange)="setDefaultAggregateTracks(profileService.showStateVals.twoStepsAuth)">
+                (onChange)="setTwoStepsStatus(profileService.showStateVals.twoStepsAuth)">
             </p-selectButton>
         </div>
     </section>

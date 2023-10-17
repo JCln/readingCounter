@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'userRoleHistory', loadChildren: () => import('./user-role-history/user-role-history.module').then(userRoleHistory => userRoleHistory.UserRoleHistoryModule) },
   { path: 'usersLogins', loadChildren: () => import('./reqlog-users-logins/reqlog-users-logins.module').then(requestLogUsersLogins => requestLogUsersLogins.ReqlogUsersLoginsModule) },
   { path: 'ipFilter', loadChildren: () => import('./ip-filter/ip-filter.module').then(BlockOrSafeIPFilter => BlockOrSafeIPFilter.IpFilterModule) },
+  { path: 'IOPolicy', loadChildren: () => import('./input-output-policy/input-output-policy.module').then(inputOutputPolicy => inputOutputPolicy.InputOutputPolicyModule) },
 ];
 
 @NgModule({

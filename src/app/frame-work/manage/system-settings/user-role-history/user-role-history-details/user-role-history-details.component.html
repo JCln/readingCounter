@@ -3,7 +3,7 @@
     <h1 class="title">جزئیات امنیتی تغییرات گروه</h1>
     <hr>
     <form #form="ngForm" class="content">
-        <div *ngFor="let mainDatas of columnManager.columnSelectedMenus('userRoleHistoryDetails')">
+        <div *ngFor="let mainDatas of columnManager.getColumnsMenus('userRoleHistoryDetails')">
             <ng-container *ngIf="mainDatas.isBoolean; else checkboxes">
                 <div class="input_2">
                     <div class="_key">{{mainDatas.header}}</div>

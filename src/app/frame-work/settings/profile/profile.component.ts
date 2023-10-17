@@ -122,13 +122,13 @@ export class ProfileComponent extends FactoryONE {
     this.getTwoStepsStatus();
   }
   getSelectedColumns = () => {
-    this._selectCols = this.profileService.columnManager.columnSelectedMenus(this.profileColumns);
+    this._selectCols = this.profileService.columnManager.getColumnsMenus(this.profileColumns);
   }
   getValuesOfImg = () => {
     this.profileService.showStateVals.imgOptions = this.profileService.getImg();
   }
   getTwoStepsStatus = () => {
-    this.profileService.showStateVals.twoStepsAuth = this.profileService.getTwoStepsAuth();
+    this.profileService.getTwoStepsAuth();
   }
   setValuesOfImg = (val: imageOption) => {
     this.profileService.setImg(val);
@@ -180,10 +180,7 @@ export class ProfileComponent extends FactoryONE {
     val ? this.profileService.showMessage(EN_messages.possibleReOrderableEnabled) : this.profileService.showMessage(EN_messages.possibleReOrderableDisabled);
   }
   setTwoStepsStatus = async (val: any) => {
-    const res = await this.profileService.setTwoStepsStatus(val);
-    console.log(res);
-
-    val ? this.profileService.showMessage(EN_messages.twoStepsAuthEnabled) : this.profileService.showMessage(EN_messages.twoStepsAuthDisabled);
+    await this.profileService.setTwoStepsStatus(val);
   }
   setDefaultAggregateTracks = (val: any) => {
     this.profileService.setLocaldefaultAggregateTracks(val);

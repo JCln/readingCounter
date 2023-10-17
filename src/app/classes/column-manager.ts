@@ -469,6 +469,15 @@ export class ColumnManager {
         { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },        
     ]
+    IOPolicy: IObjectIteratation[] = [
+        { field: 'inputExtensions', header: 'فرمت فایل های ورودی', isSelected: true, isSelectedOrigin: true },
+        { field: 'contentType', header: 'نوع داده (content)', isSelected: true, isSelectedOrigin: true },
+        { field: 'inputMaxSizeKb', header: 'حداکثر حجم فایل ورودی', isSelected: false, isSelectedOrigin: false },
+        { field: 'inputMaxCountPerUser', header: ' حداکثر تعداد فایل قابل بارگیری(دریافت) هر کاربر', isSelected: false, isSelectedOrigin: false },
+        { field: 'inputMaxCountPerDay', header: 'حداکثر تعداد کل فایل های قابل بارگیری (دریافت) در روز', isSelected: false, isSelectedOrigin: false },
+        { field: 'outputMaxCountPerUser', header: 'حداکثر تعداد فایل قابل بارگذاری(ارسال) هر کاربر', isSelected: false, isSelectedOrigin: false },
+        { field: 'outputMaxCountPerDay', header: 'حداکثر تعداد کل فایل های قابل بارگذاری(ارسال) در روز', isSelected: false, isSelectedOrigin: false },
+    ]
     IOPolicyHistory: IObjectIteratation[] = [
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'inputExtensions', header: 'inputExtensions', isSelected: true, isSelectedOrigin: true },
@@ -2095,7 +2104,7 @@ export class ColumnManager {
         // { field: 'isActive', header: 'فعال', isSelected: true,isSelectedOrigin:true, isBoolean: true },
     ]
 
-    columnSelectedMenus = (name: string): IObjectIteratation[] => {
+    getColumnsMenus = (name: string): IObjectIteratation[] => {
         return this[name];
     }
 

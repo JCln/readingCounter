@@ -33,7 +33,7 @@ export class RoleCompareComponent implements OnInit {
     }
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.columnManager.columnSelectedMenus(this.roleCompareColumns);
+    this._selectCols = this.columnManager.getColumnsMenus(this.roleCompareColumns);
   }
   classWrapper = async () => {
     const res: IRoleReqLogCompare = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.RoleReqLogCompare, this.config.data.id);

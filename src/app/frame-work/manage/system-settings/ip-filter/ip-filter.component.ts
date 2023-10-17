@@ -39,7 +39,7 @@ export class IpFilterComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnManager.columnSelectedMenus(this.ipFilterColumns);
+    this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.ipFilterColumns);
     this._selectedColumns = this.readManagerService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   testChangedValue() {

@@ -631,6 +631,8 @@
 .empty_data {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: var(--font_05);
   background: var(--white);
   padding: var(--font_3);
   border-radius: $border_15;

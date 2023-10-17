@@ -331,6 +331,7 @@ export enum ENInterfaces {
     EditIOPolicy = 'V1/IoPolicy/Edit',
     GetIOPolicyHistory = 'V1/IoPolicy/History',
     GetIOPolicyCompare = 'V1/IoPolicy/Compare',
+    downloadIOPolicyCanIDownloadMore = 'V1/IoPolicy/CanIDownloadMore',
 
     QotrAll = 'V1/Qotr/All',
     QotrDictionary = 'V1/Qotr/Dictionary',
@@ -340,6 +341,12 @@ export enum ENInterfaces {
 
     dataMiningReadingTime = 'V1/List/Offloaded/ReadingTime',
 
+    // PROFILE
+    getMyProfile = 'V1/Account/MyInfo',
+    changePassword = 'V1/Account/ChangePassword',
+    changeTwoStepAuth = 'V1/Account/ChangeTwoStepAuth',
+    getTwoStepAuth = 'V1/Account/GetTwoStepAuthState',
+
     /* NON MANAGER INTERFACES */
     getPolicies = 'V1/Policy/Active',
     editPolicies = 'V1/Policy/Edit',
@@ -347,8 +354,6 @@ export enum ENInterfaces {
     policiesCompare = 'V1/Policy/Compare',
     ipRateManager = 'V1/Ip/SpecialRules',
     getSideBar = 'V1/User/SideBar',
-    changePassword = 'V1/Account/ChangePassword',
-    getMyProfile = 'V1/Account/MyInfo',
     myPreviousFailures = 'V1/Account/MyPrevoiusFailures',
     getShouldIChangePassword = 'V1/Account/ShouldIChangePassword',
     getWaterMarkConfig = 'V1/WaterMark/Get',

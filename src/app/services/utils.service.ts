@@ -112,7 +112,7 @@ export class UtilsService {
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: config.minWidth,
-        disableClose: config.doesNotReturnButton,
+        disableClose: config.disableClose,
         data: {
           messageTitle: config.messageTitle,
           messageTitleTwo: config.messageTitleTwo,

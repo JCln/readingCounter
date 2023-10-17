@@ -88,7 +88,16 @@ export class CloseTabService {
   saveDataForGuild: IGuild[];
   ipFilterHistory: IGetBlockedCompareVals[];
   IOPolicyHistory: IIOPolicyHistory[];
-  IOPolicy: IIOPolicy[];
+  IOPolicy: IIOPolicy = {
+    id: 0,
+    inputExtensions: '',
+    contentType: '',
+    inputMaxSizeKb: null,
+    inputMaxCountPerUser: null,
+    inputMaxCountPerDay: null,
+    outputMaxCountPerUser: null,
+    outputMaxCountPerDay: null,
+  };
   ipFilterRes: IBlockOrSafeIp[];
   saveDataForDynamicTraverse: IDynamicTraverse[];
   saveDataForKarbari: IKarbari[];

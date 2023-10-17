@@ -116,7 +116,12 @@ export interface IIOPolicy {
     inputMaxCountPerUser: number,
     inputMaxCountPerDay: number,
     outputMaxCountPerUser: number,
-    outputMaxCountPerDay: number
+    outputMaxCountPerDay: number,
+    readonly inputMaxSizeKbMinLength?: number,
+    readonly inputMaxCountPerUserMinLength?: number,
+    readonly inputMaxCountPerDayMinLength?: number,
+    readonly outputMaxCountPerUserMinLength?: number,
+    readonly outputMaxCountPerDayMinLength?: number,
 }
 export const IOPolicy: IIOPolicy = {
     id: null,
@@ -126,7 +131,14 @@ export const IOPolicy: IIOPolicy = {
     inputMaxCountPerUser: null,
     inputMaxCountPerDay: null,
     outputMaxCountPerUser: null,
-    outputMaxCountPerDay: null
+    outputMaxCountPerDay: null,
+    inputMaxSizeKbMinLength: 0,
+    inputMaxCountPerUserMinLength: 0,
+    inputMaxCountPerDayMinLength: 0,
+    outputMaxCountPerUserMinLength: 0,
+    outputMaxCountPerDayMinLength: 0
+
+
 }
 
 
