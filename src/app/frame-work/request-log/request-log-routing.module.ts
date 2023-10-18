@@ -13,6 +13,8 @@ const routes: Routes = [
   { path: 'getBlocked', loadChildren: () => import('./ipfilter-getblocked/ipfilter-getblocked.module').then(IpFilterGetBlocked => IpFilterGetBlocked.IpfilterGetblockedModule) },
   { path: 'IPFilterhistory', loadChildren: () => import('./ip-filter-history/ip-filter-history.module').then(IpFilterHistory => IpFilterHistory.IpFilterHistoryModule) },
   { path: 'IOPolicyHistory', loadChildren: () => import('./input-output-policy-history/input-output-policy-history.module').then(inputOutputPolicyHistory => inputOutputPolicyHistory.InputOutputPolicyHistoryModule) },
+  { path: 'downloadAttempts', loadChildren: () => import('./download-attempts/download-attempts.module').then(downloadAttempts => downloadAttempts.DownloadAttemptsModule) },
+  { path: 'uploadAttempts', loadChildren: () => import('./upload-attempts/upload-attempts.module').then(uploadAttempts => uploadAttempts.UploadAttemptsModule) },
 ];
 
 @NgModule({

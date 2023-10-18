@@ -1,4 +1,4 @@
-import { EN_messages } from "./enums.enum";
+import { EN_messages } from "./enums.enum"
 
 export enum ENClientServerErrors {
     'cs400' = 400,
@@ -201,7 +201,7 @@ export enum ENManageServers {
     resetIIS = 'resetIIS',
     offlineTheAPP = 'offlineTheAPP',
     resetApp = 'resetApp',
-    checkAuthenticiy = "checkAuthenticiy"
+    checkAuthenticiy = 'checkAuthenticiy'
 }
 export interface IManageDrivesInfo {
     driveName: string,
@@ -242,4 +242,23 @@ export interface IBlockOrSafeIp {
     isSafe: boolean,
     isV6: boolean,
     isNew?: boolean
+}
+export interface IIOAttemptsLog {
+    id: number,
+    insertDateTime: string,
+    userDisplayName: string,
+    username: string,
+    description: string,
+    isOutput: boolean,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string
 }

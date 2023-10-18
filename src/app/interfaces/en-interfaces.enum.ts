@@ -264,6 +264,8 @@ export enum ENInterfaces {
     requestLogUserActivationDictionary = 'V1/RequestLog/UserActivationLogTypes',
     requestLogUserActivation = 'V1/RequestLog/UserActivation',
     requestLogUsersLogins = 'V1/User/UsersLogins',
+    requestLogDownloadAttempts = 'V1/RequestLog/DownloadAttempts',
+    requestLogUploadAttempts = 'V1/RequestLog/UploadAttempts',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

@@ -1,0 +1,49 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="securityService.utilsService.collapser._isCollapsedDownloadAttempts ? 'slideUp' : 'slideDown'">
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.downloadAttemptsReq, $event)"
+                                [dateObject]="closeTabService.downloadAttemptsReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.downloadAttemptsReq, $event)"
+                                [dateObject]="closeTabService.downloadAttemptsReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table 
+        [dataSource]="closeTabService.notificationListByDate" 
+        [_outputFileName]="'downloadAttemptsReq'"
+        [_checkUpName]="'downloadAttemptsReq'"
+        [_sessionName]="'downloadAttempts-session'"
+        [_selectedColumnsToRemember]="'selectedRequestLogDownloadAttempts'" 
+        [_numberOfExtraColumns]="[1]"
+        [_hasCollapsible]=true 
+        [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedDownloadAttempts"
+        (collapsed)="closeTabService.utilsService.collapser._isCollapsedDownloadAttempts = !closeTabService.utilsService.collapser._isCollapsedDownloadAttempts"
+        (refreshedTable)="refreshTable()"
+        >
+    </app-prime-table>
+</main>

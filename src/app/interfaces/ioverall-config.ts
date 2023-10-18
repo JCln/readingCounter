@@ -192,7 +192,9 @@ export enum ENEssentialsToSave {
   ipfilterHistory = "ipfilterHistory",
   IOPolicyHistory = "IOPolicyHistory",
   IOPolicy = "IOPolicy",
-  userCompare = "userCompare"
+  userCompare = "userCompare",
+  downloadAttempts = "downloadAttempts",
+  uploadAttempts = "uploadAttempts"
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -472,6 +474,8 @@ export enum ENSelectedColumnVariables {
     selectedRequestLogUsersLogins = 'usersLoginsDetails',
     selectedRequestLogIpFilterGetBlocked = 'ipFilterGetBlocked',
     selectedRequestLogNotifListByDate = 'notificationListByDateReq',
+    selectedRequestLogDownloadAttempts = 'downloadAttemptsReq',
+    selectedRequestLogUploadAttempts = 'uploadAttemptsReq',
     selectedrrUserKarkard = 'rrUserKarkard',
     selectedRRTraverse = 'trv',
     selectedRRTraverseDifferential = 'trvDiff',

@@ -25,6 +25,8 @@ export enum ENReadingReports {
     usersLogins = 'usersLoginsReq',
     ipFilterGetBlocked = 'ipFilterGetBlockedReq',
     notificationListByDateReq = 'notificationListByDateReq',
+    downloadAttemptsReq = 'downloadAttemptsReq',
+    uploadAttemptsReq = 'uploadAttemptsReq',
     feedbackAllCReq = 'mobileManagerFeedbackAllCReq',
     feedbackAllSReq = 'mobileManagerFeedbackAllSReq',
     forbidden = 'forbiddenReq',
