@@ -1,0 +1,50 @@
+@import 'add-edit';
+
+form {
+  height: 65vh;
+  overflow-x: hidden;
+}
+
+.auth_3 {
+  margin: 0;
+  box-shadow: none;
+}
+
+table {
+  direction: rtl;
+  width: 100%;
+  min-height: 20vh;
+  border-collapse: collapse;
+}
+
+td,
+td {
+  border: 1px solid var(--secondary_2);
+  text-align: right;
+  padding: 8px;
+  font-weight: 600;
+  font-size: var(--font_s);
+}
+
+tr {
+  background-color: var(--even_grid_rows);
+  color: var(--secondary_8);
+}
+
+tr:nth-child(even) {
+  background-color: var(--odd_grid_rows);
+}
+
+._head {
+  td {
+    font-size: var(--font_m2);
+  }
+}
+
+._center {
+  text-align: center;
+}
+
+._green {
+  color: var(--green_500);
+}

@@ -562,19 +562,6 @@ export class ColumnManager {
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },
     ]
     policyCompare: IObjectIteratation[] = [
-        // enableXSSProtection
-        // enableObscureHeaderInfo
-        // secureCookies
-        // DOSProtection
-        // STEALTH
-        // useJWTDecoder
-        // CSRFProtection
-        // DDOSProtection
-        // CSPProtection
-        // HSTSProtection
-        // SanitizeUserInputs
-        // AES512Protection
-        // autoClearData
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true, icon: '' },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true, icon: '' },
         { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true, icon: '' },

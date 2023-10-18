@@ -34,6 +34,10 @@ export class UserRoleHistoryComponent extends FactoryONE {
     this.securityService.userMasterDetailsHistory_pageSign.id = e.id;
     this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
   }
+  routeToUserCompare(e: IUserManager) {
+    this.securityService.userMasterDetailsHistory_pageSign.id = e.id;
+    this.securityService.utilsService.routeTo(EN_Routes.userCompare);
+  }
   convertLoginTime = () => {
     this.closeTabService.saveDataForAllUsers.forEach(item => {
       item.lastActivityDateTime = this.dateJalaliService.getDate(item.lastActivityDateTime) + '   ' + this.dateJalaliService.getTime(item.lastActivityDateTime);

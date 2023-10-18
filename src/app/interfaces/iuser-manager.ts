@@ -331,7 +331,83 @@ export interface ISearchUsersManager {
     selectedZones: number[],
     selectedActions: string[]
 }
-//
+// USER COMPARE
+export interface IUserCompareDetails {
+    provinceItems: [
+        {
+            title: string,
+            logicalOrder: number,
+            regionItems: [
+                {
+                    title: string,
+                    logicalOrder: number,
+                    zoneItems: [
+                        {
+                            title: string,
+                            logicalOrder: number,
+                            id: number,
+                            isMetro: boolean,
+                            isSelected: boolean
+                        }
+                    ],
+                    isSelected: boolean
+                }
+            ],
+            isSelected: boolean
+        }
+    ],
+    appItems: [
+        {
+            title: string,
+            cssClass: string,
+            logicalOrder: number,
+            moduleItems: [
+                {
+                    title: string,
+                    cssClass: string,
+                    logicalOrder: number,
+                    controllerItems: [
+                        {
+                            title: string,
+                            cssClass: string,
+                            logicalOrder: number,
+                            actionItems: [
+                                {
+                                    title: string,
+                                    cssClass: string,
+                                    logicalOrder: number,
+                                    value: string,
+                                    isSelected: boolean
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+    changeOrInsertLogId: string,
+    description: string,
+    insertDateTime: string,
+    insertDateJalali: string,
+    insertTime: string,
+    ip: string,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string,
+    userDisplayName: string
+}
+export interface IUserCompareManager {
+    previous: IUserCompareDetails,
+    this: IUserCompareDetails
+}
 
 export interface IUserLoggins {
     id: string,

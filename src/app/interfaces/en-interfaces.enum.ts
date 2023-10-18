@@ -69,6 +69,7 @@ export enum ENInterfaces {
     UserRoleHistory = 'V1/User/UserRoleHistory',
     UserMasterHistory = 'V1/User/UserMasterHistory',
     UserDetailsHistory = 'V1/User/UserDetailsHistory',
+    UserCompare = 'V1/User/Compare',
 
     downloadFileGET = 'V1/Download/File',
     downloadFileInfo = 'V1/Download/File/info',

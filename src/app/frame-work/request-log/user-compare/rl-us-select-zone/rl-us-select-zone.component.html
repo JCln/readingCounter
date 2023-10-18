@@ -1,0 +1,115 @@
+<!-- <main>
+    <section class="l_1">
+        <div class="l_1_c" *ngFor="let provinceIt of dataSource.previous.provinceItems">
+            <mat-checkbox [disabled]="true" class="example-margin" [(ngModel)]="provinceIt.isSelected"
+                name="provinceIt">
+                {{provinceIt.title}}
+            </mat-checkbox>
+        </div>
+    </section>
+    <section class="_content" *ngFor="let provinceIt of dataSource.previous.provinceItems">
+        <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
+
+            <div class="l_2_c">
+                <mat-checkbox [disabled]="true" [(ngModel)]="regionIt.isSelected" name="regionIt">
+                    {{regionIt.title}}
+                </mat-checkbox>
+            </div>
+
+            <div class="l_3_c">
+                <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
+                    <mat-checkbox [disabled]="true" [(ngModel)]="zoneIt.isSelected" name="zoneIt">
+                        {{zoneIt.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="_content" *ngFor="let provinceIt of dataSource.this.provinceItems">
+        <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
+
+            <div class="l_2_c">
+                <mat-checkbox [disabled]="true" [(ngModel)]="regionIt.isSelected" name="regionIt">
+                    {{regionIt.title}}
+                </mat-checkbox>
+            </div>
+
+            <div class="l_3_c">
+                <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
+                    <mat-checkbox [disabled]="true" [(ngModel)]="zoneIt.isSelected" name="zoneIt">
+                        {{zoneIt.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main> -->
+<main>
+    <!-- <section class="l_1">
+        <div class="l_1_c" *ngFor="let provinceIt of dataSource.previous.provinceItems">
+            <mat-checkbox [disabled]="true" class="example-margin" [(ngModel)]="provinceIt.isSelected"
+                name="provinceIt">
+                {{provinceIt.title}}
+            </mat-checkbox>
+        </div>
+    </section> -->
+    <section class="_content" *ngFor="let provinceIt of dataSource.previous.provinceItems">
+        <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
+
+            <div class="l_2_c">
+                <mat-checkbox [disabled]="true" [(ngModel)]="regionIt.isSelected" name="regionIt">
+                    {{regionIt.title}}
+                </mat-checkbox>
+            </div>
+
+            <div class="l_3_c">
+                <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
+                    <mat-checkbox [disabled]="true" [(ngModel)]="zoneIt.isSelected" name="zoneIt">
+                        {{zoneIt.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- <section class="l_1">
+        <div class="l_1_c" *ngFor="let provinceIt of dataSource.this.provinceItems">
+            <mat-checkbox [disabled]="true" class="example-margin" [(ngModel)]="provinceIt.isSelected"
+                name="provinceIt">
+                {{provinceIt.title}}
+            </mat-checkbox>
+        </div>
+    </section> -->
+    <section class="_content" *ngFor="let provinceIt of dataSource.this.provinceItems">
+        <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
+
+            <div class="l_2_c">
+                <mat-checkbox [disabled]="true" [(ngModel)]="regionIt.isSelected" name="regionIt">
+                    {{regionIt.title}}
+                </mat-checkbox>
+            </div>
+
+            <div class="l_3_c">
+                <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
+                    <mat-checkbox [disabled]="true" [(ngModel)]="zoneIt.isSelected" name="zoneIt">
+                        {{zoneIt.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+
+
+<div class="accept">
+    <button class="btn_2" matStepperNext>
+        <i class="fa fa-long-arrow-left"></i>صفحه بعد
+    </button>
+    <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+</div>

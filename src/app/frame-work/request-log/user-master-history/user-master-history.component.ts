@@ -24,6 +24,10 @@ export class UserMasterHistoryComponent extends FactoryONE {
     this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId = e.changeOrInsertLogId;
     this.securityService.utilsService.routeTo(EN_Routes.userDetailsHistory);
   }
+  routeToUserCompare(e: IUserMasterHistory) {
+    this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId = e.changeOrInsertLogId;
+    this.securityService.utilsService.routeTo(EN_Routes.userCompare);
+  }
   nullSavedSource = () => this.closeTabService.saveDataForUserMasterHistory = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.securityService.userMasterDetailsHistory_pageSign.id) {

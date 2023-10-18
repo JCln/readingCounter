@@ -1,0 +1,22 @@
+// @import 'select-zones';
+
+main {
+    display: flex;
+    direction: rtl;    
+}
+
+.l_3_c {
+    width: 50%;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+._content {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-column: 1/2;
+}
+
+.is-changed {
+    background-color: lightslategray;
+}

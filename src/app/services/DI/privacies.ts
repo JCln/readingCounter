@@ -159,6 +159,7 @@ export const privacies: IPrivacy = {
     minLengthMaxLogRecords: 100,
 }
 export interface IUserDetailsHistory {
+    changeOrInsertLogId: string,
     description: string,
     insertDateTime: string,
     insertDateJalali: string,

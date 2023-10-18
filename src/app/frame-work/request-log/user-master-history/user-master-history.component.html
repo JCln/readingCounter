@@ -1,6 +1,6 @@
 <app-prime-table
 [dataSource]="closeTabService.saveDataForUserMasterHistory"
-[_numberOfExtraColumns]="[1]"
+[_numberOfExtraColumns]="[1 , 2]"
 [_sessionName]="'userMasterHistory-session'"
 [_outputFileName]="'userMasterHistory'"
 [_checkUpName]="'userMasterHistory'"
@@ -8,5 +8,6 @@
 [_hasSaveColumns]=true
 (refreshedTable)="refreshTable()"
 (openedMoshtarakinDialog)="routeToUserDetailsHistory($event)"
+(openedBriefKardexDialog)="routeToUserCompare($event)"
 > 
 </app-prime-table>

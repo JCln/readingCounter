@@ -191,7 +191,8 @@ export enum ENEssentialsToSave {
   ipFilterGetBlocked = "ipFilterGetBlocked",
   ipfilterHistory = "ipfilterHistory",
   IOPolicyHistory = "IOPolicyHistory",
-  IOPolicy = "IOPolicy"
+  IOPolicy = "IOPolicy",
+  userCompare = "userCompare"
 }
 export interface ITestSidebar {
     routerUrl: string;

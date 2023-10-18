@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'userActivation', loadChildren: () => import('./activation-user/activation-user.module').then(UserActivation => UserActivation.ActivationUserModule) },
   { path: 'userMaster', loadChildren: () => import('./user-master-history/user-master-history.module').then(userMasterHistory => userMasterHistory.UserMasterHistoryModule) },
   { path: 'userDetails', loadChildren: () => import('./user-details-history/user-details-history.module').then(userDetailsHistory => userDetailsHistory.UserDetailsHistoryModule) },
+  { path: 'userCompare', loadChildren: () => import('./user-compare/user-compare.module').then(userCompareModule => userCompareModule.UserCompareModule) },
   { path: 'notificationList', loadChildren: () => import('./notif-list-bydate/notif-list-bydate.module').then(notificationListByDate => notificationListByDate.NotifListBydateModule) },
   { path: 'getBlocked', loadChildren: () => import('./ipfilter-getblocked/ipfilter-getblocked.module').then(IpFilterGetBlocked => IpFilterGetBlocked.IpfilterGetblockedModule) },
   { path: 'IPFilterhistory', loadChildren: () => import('./ip-filter-history/ip-filter-history.module').then(IpFilterHistory => IpFilterHistory.IpFilterHistoryModule) },
