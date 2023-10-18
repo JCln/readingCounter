@@ -363,12 +363,6 @@
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_outputFileName == 'offloaded'" (click)="routeToLMAll(dataSource)">
-                <span class="ui-column-title">بازدید</span>
-                <i class="tooltip p_icons pi pi-eye">
-                    <div class="tooltip_text_right">بازدید</div>
-                </i>
-            </td>
             <td class="__columns" *ngIf="_outputFileName == 'offloadedGroup'"
                 (click)="routeToOffloadGeneralModify(dataSource)">
                 <span class="ui-column-title">اصلاح کلی لیست(دسته‌ای)</span>
@@ -390,10 +384,10 @@
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_outputFileName == 'offloadedGroup'" (click)="routeToLMAll(dataSource)">
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded'" (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">بازدید</span>
                 <i class="tooltip p_icons pi pi-eye">
-                    <div class="tooltip_text">بازدید</div>
+                    <div class="tooltip_text_right">بازدید</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="                
