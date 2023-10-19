@@ -3,11 +3,13 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-download-attempts',
   templateUrl: './download-attempts.component.html',
-  styleUrls: ['./download-attempts.component.scss']
+  styleUrls: ['./download-attempts.component.scss'],
+  animations: [transitionAnimation]
 })
 export class DownloadAttemptsComponent extends FactoryONE {
 

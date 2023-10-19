@@ -9,6 +9,7 @@ import { DownloadManagerService } from 'services/download-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { ImageViewerComponent } from 'src/app/shared/carousel-woum/woum/image-viewer/image-viewer.component';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-offload',
@@ -60,6 +61,7 @@ export class OffloadComponent implements OnChanges {
   constructor(
     private downloadManagerService: DownloadManagerService,
     private trackingManagerService: TrackingManagerService,
+    private utilsService: UtilsService,
     private dialogService: DialogService
   ) { }
 
@@ -95,7 +97,7 @@ export class OffloadComponent implements OnChanges {
     this.offloadModifyReq.jalaliDay = $event;
   }
   getExactImg = async (id: string, index: number) => {
-    this.tempLoadedImgs[index] = this.trackingManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.trackingManagerService.getAuthToken();
+    this.tempLoadedImgs[index] = this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + ENInterfaces.accessTokenTile + this.utilsService.compositeService.getAccessToken();
   }
 
   /* AUDIO */

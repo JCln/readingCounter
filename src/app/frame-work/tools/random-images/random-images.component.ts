@@ -51,7 +51,7 @@ export class RandomImagesComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.toolsService.verificationImageCarousel(this.toolsService.randomImages)) {
-      this.allImagesDataSource = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postToolsRandomImages, this.toolsService.randomImages);
+      this.allImagesDataSource = await this.closeTabService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postToolsRandomImages, this.toolsService.randomImages);
       this.closeTabService.saveDataForRandomImgsRSFirst = this.allImagesDataSource;
       this.showAllImgs();
       this.addCanShowElementToImages();
@@ -64,7 +64,7 @@ export class RandomImagesComponent extends FactoryONE {
     })
   }
   getExactImg = async (id: string, index: number) => {
-    this.closeTabService.saveDataForRandomImgs[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();
+    this.closeTabService.saveDataForRandomImgs[index] = this.closeTabService.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + ENInterfaces.accessTokenTile + this.closeTabService.utilsService.compositeService.getAccessToken();
   }
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrigin: any) => {
     this.carouselImage = dataSource;

@@ -185,6 +185,9 @@ export class FactorySharedPrime implements OnChanges {
     showTypicalImageDialog = (dataSource: any) => {
         this.doShowImageDialog(dataSource, ENImageTypes.typical);
     }
+    showSingleImageDialog = (dataSource: any) => {
+        this.doShowImageDialog(dataSource, ENImageTypes.single);
+    }
     showImageDialogImageCount = (dataSource: any) => {
         // should not open dialog when no images exists
         if (dataSource.imageCount) {

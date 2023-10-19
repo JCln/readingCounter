@@ -63,4 +63,8 @@ export class CompositeService {
       roles: roles
     });
   }
+  getAccessToken = (): string => {
+    return this.jwtService.getAccessToken();
+  }
+
 }

@@ -1,6 +1,7 @@
 <form #form="ngForm" (ngSubmit)="login2()" class="_container">
-    <h2>کد تایید 4 رقمی
+    <h2>
         <i class="pi pi-check"></i>
+        کد تایید 4 رقمی
     </h2>
     <p>کد ارسال شده را وارد نمایید</p>
     <div class="input_wrapper">
@@ -10,5 +11,8 @@
     <div class="counter">
         {{data.expire_seconds}}
     </div>
+    <button class="close_dg" type="button" (click)="cancelDialog()">
+        <i class="pi pi-times"></i>
+    </button>
     <button class="btn_1" type="submit">ثبت</button>
 </form>

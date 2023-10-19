@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager } from 'interfaces/ioverall-config';
 import { ProfileService } from 'services/profile.service';
-import { ToolsService } from 'services/tools.service';
 import { Converter } from 'src/app/classes/converter';
 import { ImageAttributionFile } from 'interfaces/tools';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-random-image-carousel-details',
@@ -38,13 +38,13 @@ export class RandomImageCarouselDetailsComponent implements OnChanges, AfterView
 
 
   constructor(
-    public toolsService: ToolsService,
+    public utilsService: UtilsService,
     public profileService: ProfileService
   ) { }
 
   getImageAttributionFile = async () => {
     if (this.fileRepositoryId)
-      this.dictionary = (await this.toolsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
+      this.dictionary = (await this.utilsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
   }
   ngOnChanges(): void {
     this.getImageAttributionFile();
@@ -54,9 +54,9 @@ export class RandomImageCarouselDetailsComponent implements OnChanges, AfterView
     this._addOrEdit.fileRepositoryId = this.fileRepositoryId;
     this._addOrEdit.imageAttributionIds = Converter.customizeSelectedOptionsId(this.dictionary);
 
-    const res = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getImageAttributionAddOrEdit, this._addOrEdit);
+    const res = await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getImageAttributionAddOrEdit, this._addOrEdit);
     if (res)
-      this.toolsService.showSnack(res.message, ENSnackBarColors.success);
+      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
 
   }
   rotateRightImg = () => {

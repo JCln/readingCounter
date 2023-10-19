@@ -1,0 +1,23 @@
+<div class="_card">
+    <h1 class="title">وضعیت حافظه Log</h1>
+    <div class="_key_value">
+        <div class="_key">حداکثر تعداد رکورد Log</div>
+        <div class="_value"> {{closeTabService.logMemoryStatus.maxLogCount}}</div>
+    </div>
+    <div class="_key_value">
+        <div class="_key">تعداد رکورد</div>
+        <div class="_value">{{closeTabService.logMemoryStatus.logCount}}</div>
+    </div>
+    <div class="_key_value">
+        <div class="_key">تعداد رکورد باقیمانده</div>
+        <div class="_value">{{closeTabService.logMemoryStatus.remainedCount}}</div>
+    </div>
+    <div class="_key_value">
+        <div class="_key">زمان سیستم</div>
+        <div class="_value _smaller">{{closeTabService.logMemoryStatus.systemDateTime}}</div>
+    </div>
+
+    <section class="_charts" *ngIf="closeTabService.logMemoryStatus.systemDateTime">
+        <app-log-memory-status-pie [dataSource]="temp"></app-log-memory-status-pie>
+    </section>
+</div>

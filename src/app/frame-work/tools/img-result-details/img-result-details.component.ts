@@ -40,7 +40,7 @@ export class ImgResultDetailsComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.toolsService.verificationImageResultDetails(this.toolsService.imgResultDetails)) {
-      this.allImagesDataSource = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postImgAttrResultDetails, this.toolsService.imgResultDetails);
+      this.allImagesDataSource = await this.closeTabService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postImgAttrResultDetails, this.toolsService.imgResultDetails);
       if (this.allImagesDataSource.imageCount == ENRandomNumbers.zero) {
         this.toolsService.showSnack(EN_messages.notFound, ENSnackBarColors.warn);
       }
@@ -58,7 +58,7 @@ export class ImgResultDetailsComponent extends FactoryONE {
     })
   }
   getExactImg = async (id: string, index: number) => {
-    this.closeTabService.saveDataForImgResultDetailsRes[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();
+    this.closeTabService.saveDataForImgResultDetailsRes[index] = this.closeTabService.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + ENInterfaces.accessTokenTile + this.closeTabService.utilsService.compositeService.getAccessToken();
   }
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrigin: any) => {
     this.carouselImage = dataSource;

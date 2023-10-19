@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ToolsService } from 'services/tools.service';
 import { ENAcceptVerb, IAcceptVerb, IJsonInfo, IParamSendType } from 'interfaces/itools';
+import { UtilsService } from 'services/utils.service';
 
 
 @Component({
@@ -20,13 +21,14 @@ export class ExcelBuilderComponent implements OnInit {
   paramSendType: IParamSendType[] = this.toolsService.paramSendType;
 
   constructor(
-    public toolsService: ToolsService
+    public toolsService: ToolsService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit(): void {
   }
   connectToServer = async () => {
-    const a = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.addToolsDynamicExcel, this.toolsService.dynamicReq);
+    const a = await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.addToolsDynamicExcel, this.toolsService.dynamicReq);
     this.toolsService.showSnack(a.message, ENSnackBarColors.success);
   }
   verification = () => {

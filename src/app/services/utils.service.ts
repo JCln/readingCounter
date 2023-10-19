@@ -55,6 +55,9 @@ export class UtilsService {
   getDeleteDictionary = (): any[] => {
     return this.envService.getDeleteDictionary;
   }
+  getAPIUrl = (): string => {
+    return this.envService.API_URL;
+  }
   getSearchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -107,7 +110,6 @@ export class UtilsService {
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
     config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true
     config.changePassword = !!config.changePassword ? true : false
-    console.log(config.changePassword);
 
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -130,6 +132,9 @@ export class UtilsService {
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
           resolve(desc);
+        }
+        else {
+          resolve(false);
         }
       })
     })

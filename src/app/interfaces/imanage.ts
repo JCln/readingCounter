@@ -123,6 +123,7 @@ export interface IOnOffLoadFlat {
     modify?: any//for general group list modify,
     isResponseHasError?: boolean// to make alert in the table
     editedErrorDescription?: string// to make alert in the table
+    fileRepositoryId?: string // on single image like SinglePanel API
 }
 export interface IOutputManager {
     zoneId: number,

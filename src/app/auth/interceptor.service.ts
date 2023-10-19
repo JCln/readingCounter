@@ -23,10 +23,21 @@ export class InterceptorService implements HttpInterceptor {
     private utilsService: UtilsService
   ) { }
 
-  accessDenied_401 = async () => {
+  accessDenied_401 = async (error: EN_Mess) => {
     const config = {
-      messageTitle: EN_Mess.access_denied401,
+      messageTitle: error,
       text: EN_Mess.access_denied401Msg,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-ban',
+      disableClose: true,
+    }
+    await this.utilsService.firstConfirmDialog(config);
+  }
+  accessDeniedSpecial = async (message: EN_Mess) => {
+    const config = {
+      messageTitle: message,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
@@ -39,9 +50,15 @@ export class InterceptorService implements HttpInterceptor {
   private showLoginMessage = async (error: any) => {
     this.utilsService.snackBarMessageFailed(error.error.message);
   }
-  private showDialog = async () => {
-    await this.accessDenied_401();
-    this.authService.logout();
+  private showDialog = async (error: any) => {
+    await this.accessDenied_401(error).finally(() => {
+      this.authService.logout();
+    });
+  }
+  private showDialogSpeciall = async (error: any) => {
+    await this.accessDeniedSpecial(error.error.message).finally(() => {
+      this.authService.offlineLogout();
+    });
   }
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     return req.clone({
@@ -67,8 +84,12 @@ export class InterceptorService implements HttpInterceptor {
                 this.authService.logout();
               }
               else {
-                this.showDialog();
+                const errTxt = error.error.message ? error.error.message : EN_Mess.access_denied401;
+                this.showDialog(errTxt);
               }
+            }
+            if (error.status === ENClientServerErrors.cs428) {
+              this.showDialogSpeciall(error);
             }
           }
           if (error instanceof HttpErrorResponse && error.error instanceof Blob && error.error.type === "application/json") {

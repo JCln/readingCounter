@@ -22,6 +22,7 @@ export class Collapser {
     _isCollapsedIpFilterGetBlocked: boolean = false;
     _isCollapsedNotificationListByDate: boolean = false;
     _isCollapsedDownloadAttempts: boolean = false;
+    _isCollapsedGetUploaded: boolean = false;
     _isCollapsedUploadAttempts: boolean = false;    
     isCollapsedUserKarkard: boolean = false;
     isCollapsedImageAttrFileResult: boolean = false;

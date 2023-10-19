@@ -1,13 +1,14 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IPrivacy, privacies } from './DI/privacies';
+import { IPolicies, IPrivacy, privacies } from './DI/privacies';
 import { UtilsService } from './utils.service';
 import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 import { IUserLogginInfo, IUserManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { IIOPolicy, IOPolicy } from 'interfaces/iserver-manager';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 
 export interface IRoleNessessities {
   id: string,
@@ -75,6 +76,26 @@ export class SecurityService {
 
     this.utilsService.routeTo(EN_Routes.userLoggins);
   }
+  verificationTimes = (dataSource: object): boolean => {
+    if (MathS.isNull(dataSource['fromTime'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_startTime);
+      return false;
+    }
+    if (MathS.isNull(dataSource['toTime'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_endTime);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(dataSource['fromTime'], ENRandomNumbers.five)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(dataSource['toTime'], ENRandomNumbers.five)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
+      return false;
+    }
+
+    return true;
+  }
   verificationDates = (dataSource: object): boolean => {
     if (dataSource.hasOwnProperty('fromDate')) {
       if (MathS.isNull(dataSource['fromDate'])) {
@@ -101,7 +122,17 @@ export class SecurityService {
       }
     }
     return true;
-
+  }
+  verificationPolicy = (dataSource: IPolicies): boolean => {
+    if (MathS.isNull(dataSource.deactiveTerminationMinutes)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_deactiveTerminationMinutes);
+      return false;
+    }
+    if (MathS.isNull(dataSource.maxLogRecords)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_maxLogRecords);
+      return false;
+    }
+    return true;
   }
   verificationIOPolicyAdd = (dataSource: object): boolean => {
     if (MathS.isNull(dataSource['inputExtensions'])) {

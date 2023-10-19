@@ -6,15 +6,14 @@ import { ENImageTypes, ENRandomNumbers, IDictionaryManager } from 'interfaces/io
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Galleria } from 'primeng/galleria';
 import { DownloadManagerService } from 'services/download-manager.service';
-import { EnvService } from 'services/env.service';
 import { ProfileService } from 'services/profile.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { JwtService } from 'src/app/auth/jwt.service';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { MathS } from 'src/app/classes/math-s';
+import { UtilsService } from 'services/utils.service';
 @Component({
   selector: 'app-woum',
   templateUrl: './woum.component.html',
@@ -28,6 +27,7 @@ export class WoumComponent implements OnChanges {
   @Input() description?: string;
   @Input() preNumber?: number;
   @Input() id: string;
+  @Input() fileRepositoryId: string;
   @Input() counterStateCode?: string;
   @Input() counterNumber?: string;
   @Input() eshterak?: string;
@@ -66,7 +66,8 @@ export class WoumComponent implements OnChanges {
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
 
-  imageFiles: IOnOffLoad[] = [];
+  imageFiles: any[] = [];
+  testSingleImage: string = '';
 
   modifyType: OffloadModify[];
   offloadItems: OffloadModify[];
@@ -86,8 +87,7 @@ export class WoumComponent implements OnChanges {
     private downloadManagerService: DownloadManagerService,
     private trackingManagerService: TrackingManagerService,
     private dialogService: DialogService,
-    private jwtService: JwtService,
-    private envService: EnvService,
+    private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     public profileService: ProfileService
   ) { }
@@ -97,8 +97,8 @@ export class WoumComponent implements OnChanges {
     this.audioFiles = [];
     this.dataSource = [];
 
-    if (!this.id)
-      return;
+    console.log(this.id);
+    console.log(this.fileRepositoryId);
 
     // typical
     if (this._type == ENImageTypes.typical) {
@@ -111,6 +111,10 @@ export class WoumComponent implements OnChanges {
     // mobileApp
     if (this._type == ENImageTypes.mobileApp) {
       this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.feedbackMobileDictionary, this.id);
+    }
+    // single image, by fileRepositoryId
+    if (this._type == ENImageTypes.single) {
+      this.testSingleImage = this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + this.fileRepositoryId + ENInterfaces.accessTokenTile + this.utilsService.compositeService.getAccessToken();
     }
 
     if (this.zoneId) {
@@ -125,6 +129,8 @@ export class WoumComponent implements OnChanges {
         }
       });
     }
+    console.log(this.dataSource);
+
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
@@ -142,7 +148,7 @@ export class WoumComponent implements OnChanges {
     this.offloadModifyReq.jalaliDay = $event;
   }
   callApiImgs = async (id: string, index: number) => {
-    this.tempCarousels[index] = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.jwtService.getAccessToken();
+    this.tempCarousels[index] = this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + ENInterfaces.accessTokenTile + this.utilsService.compositeService.getAccessToken();
   }
   showAllImgs = () => {
     this.imageFiles.forEach((item, i) => {

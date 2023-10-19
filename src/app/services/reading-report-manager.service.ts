@@ -448,13 +448,13 @@ export class ReadingReportManagerService {
     this.utilsService.routeTo(route);
   }
   linkToStimulsoftAdd = () => {
-    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.getAPIUrl() + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), ENInterfaces._blank);
   }
   linkToStimulsoftEdit = (body: any) => {
-    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.getAPIUrl() + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + '/' + ENInterfaces.accessTokenTile + this.getAuthToken(), ENInterfaces._blank);
   }
   linkToStimulsoftView = (body: any) => {
-    window.open(this.utilsService.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
+    window.open(this.utilsService.getAPIUrl() + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + + '/' + ENInterfaces.accessTokenTile + this.getAuthToken(), ENInterfaces._blank);
   }
   routeToMapGIS = async (readingReportGISReq: any) => {
     // insert into gis request and should valiation before route to map     

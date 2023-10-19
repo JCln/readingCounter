@@ -105,7 +105,10 @@ export interface IOnOffLoad {
     name: string,
     extention: string,
     sizeInByte: number,
-    contentType: string
+    contentType: string,
+    userDisplayName: string,
+    username: string,
+    dateTimeReadable: string,
 }
 export interface IOverAllWOUIInfo {
     sizeInKB: number,

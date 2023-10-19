@@ -8,6 +8,8 @@ import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IUsersLoginBriefInfo } from 'services/DI/privacies';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-reqlog-users-logins',
@@ -17,6 +19,8 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class ReqlogUsersLoginsComponent extends FactoryONE {
   ref: DynamicDialogRef;
+  logoutReasonDictionary: IDictionaryManager[] = [];
+  invalidLoginReasonDictionary: IDictionaryManager[] = [];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -43,7 +47,11 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.usersLogins = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogUsersLogins, this.closeTabService.usersLoginsReq);
+    this.logoutReasonDictionary = this.securityService.utilsService.getLogoutReason();
+    this.invalidLoginReasonDictionary = this.securityService.utilsService.getInvalidLoginReason();
     this.convertLoginTime();
+    Converter.convertIdToTitle(this.closeTabService.usersLogins, this.logoutReasonDictionary, 'logoutReasonId');
+    Converter.convertIdToTitle(this.closeTabService.usersLogins, this.invalidLoginReasonDictionary, 'invalidLoginReasonId');
   }
   verification = async () => {
     const temp = this.securityService.verificationDates(this.closeTabService.usersLoginsReq);
@@ -53,6 +61,7 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
   convertLoginTime = () => {
     this.closeTabService.usersLogins.forEach(item => {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
+      item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
     })
   }
 

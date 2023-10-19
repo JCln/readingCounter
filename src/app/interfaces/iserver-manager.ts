@@ -10,6 +10,7 @@ export enum ENClientServerErrors {
     'cs409' = 409,
     'cs410' = 410,
     'cs422' = 422,
+    'cs428' = 428,
     'cs429' = 429,
     'cs0' = 0,
     'cs500' = 500,
@@ -250,6 +251,8 @@ export interface IIOAttemptsLog {
     username: string,
     description: string,
     isOutput: boolean,
+    recordCount: number,
+    isInvalid: boolean,
     ip: string,
     browserVersion: string,
     browserTitle: string,
@@ -261,4 +264,10 @@ export interface IIOAttemptsLog {
     osPlatform: string,
     osShortTitle: string,
     userAgent: string
+}
+export interface ILogMemoryStatus {
+    maxLogCount: number,
+    logCount: number,
+    remainedCount: number,
+    systemDateTime: string
 }

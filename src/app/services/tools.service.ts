@@ -1,9 +1,7 @@
-import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
 import { ENReadingReports } from 'interfaces/reading-reports';
-import { JwtService } from 'src/app/auth/jwt.service';
 
 import { MathS } from '../classes/math-s';
 import {
@@ -32,10 +30,8 @@ export class ToolsService {
   ]
 
   constructor(
-    public ajaxReqWrapperService: AjaxReqWrapperService,
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    private jwtService: JwtService
   ) { }
 
   public fileDownloadAllImages: IDownloadFileAllImages = {
@@ -141,12 +137,6 @@ export class ToolsService {
       { title: '20', value: 20 },
       { title: '30', value: 30 }
     ];
-  }
-  getAuthToken = (): string => {
-    return this.jwtService.getAccessToken();
-  }
-  getApiUrl = (): string => {
-    return this.utilsService.envService.API_URL;
   }
   validationDownloadAllImages = (dataSource: IDownloadFileAllImages): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {

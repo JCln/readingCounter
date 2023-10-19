@@ -1,138 +1,130 @@
 <div class="over_all">
 
-    <section>
-        <div class="content">
-            <section class="_checkbox">
-                <span>
-                    <ul>
-                        <li class="number_vals">
-                            حداقل تعداد رمز عبور
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value"> {{closeTabService.saveDataForPolicies.minPasswordLength}}</div>
-                                <div class="minus"
-                                    (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength - 1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
+    <div class="content">
+        <section class="_checkbox">
+            <span>
+                <ul>
+                    <li class="number_vals">
+                        حداقل تعداد رمز عبور
+                        <div class="plus_minus">
+                            <div class="plus"
+                                (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
+                                <i class="fa fa-plus"></i>
                             </div>
-                        </li>
-                        <li class="number_vals">
-                            مسدودسازی درخواست مکرر
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="lockInvalidAttemps(closeTabService.saveDataForPolicies.lockInvalidAttempts + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value">{{closeTabService.saveDataForPolicies.lockInvalidAttempts}}</div>
-                                <div class="minus"
-                                    (click)="lockInvalidAttemps(closeTabService.saveDataForPolicies.lockInvalidAttempts - 1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
+                            <div class="_value"> {{closeTabService.saveDataForPolicies.minPasswordLength}}</div>
+                            <div class="minus"
+                                (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength - 1)">
+                                <i class="fa fa-minus"></i>
                             </div>
-                        </li>
-                        <li class="number_vals">
-                            مدت محدودیت مسدود سازی
-                            <div class="plus_minus">
-                                <div class="plus" (click)="lockMin(closeTabService.saveDataForPolicies.lockMin + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value">{{closeTabService.saveDataForPolicies.lockMin}}</div>
-                                <div class="minus" (click)="lockMin(closeTabService.saveDataForPolicies.lockMin + -1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
+                        </div>
+                    </li>
+                    <li class="number_vals">
+                        مسدودسازی درخواست مکرر
+                        <div class="plus_minus">
+                            <div class="plus"
+                                (click)="lockInvalidAttemps(closeTabService.saveDataForPolicies.lockInvalidAttempts + 1)">
+                                <i class="fa fa-plus"></i>
                             </div>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNumber">
-                                گذرواژه شامل حداقل یک عدد باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsLowercase">
-                                گذرواژه شامل حداقل یک حرف کوچک لاتین باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsUppercase">
-                                گذرواژه شامل حداقل یک حرف بزرگ لاتین باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox
-                                [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNonAlphaNumeric">
-                                گذرواژه شامل حداقل یک حرف غیرالفبایی باشد
-                            </mat-checkbox>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.canUpdateDeviceId">
-                                شناسه قابل بروز رسانی باشد
-                            </mat-checkbox>
-                        </li>
-                    </ul>
-                </span>
-            </section>
-        </div>
-        <div class="content">
-            <section class="_checkbox">
-                <span>
-                    <ul>
-                        <li class="number_vals">
-                            زمان session های فعال
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="plusOrMinusDeactiveTerminationMinutes(closeTabService.saveDataForPolicies.deactiveTerminationMinutes + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value"> {{closeTabService.saveDataForPolicies.deactiveTerminationMinutes}}
-                                </div>
-                                <div class="minus"
-                                    (click)="plusOrMinusDeactiveTerminationMinutes(closeTabService.saveDataForPolicies.deactiveTerminationMinutes - 1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
+                            <div class="_value">{{closeTabService.saveDataForPolicies.lockInvalidAttempts}}</div>
+                            <div class="minus"
+                                (click)="lockInvalidAttemps(closeTabService.saveDataForPolicies.lockInvalidAttempts - 1)">
+                                <i class="fa fa-minus"></i>
                             </div>
-                        </li>
-                        <li class="number_vals">
-                            حداکثر تعداد رکوردهای لاگ
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value">{{closeTabService.saveDataForPolicies.maxLogRecords}}</div>
-                                <div class="minus"
-                                    (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords - 1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
+                        </div>
+                    </li>
+                    <li class="number_vals">
+                        مدت محدودیت مسدود سازی
+                        <div class="plus_minus">
+                            <div class="plus" (click)="lockMin(closeTabService.saveDataForPolicies.lockMin + 1)">
+                                <i class="fa fa-plus"></i>
                             </div>
-                        </li>
-                        <li>
+                            <div class="_value">{{closeTabService.saveDataForPolicies.lockMin}}</div>
+                            <div class="minus" (click)="lockMin(closeTabService.saveDataForPolicies.lockMin + -1)">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNumber">
+                            گذرواژه شامل حداقل یک عدد باشد
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsLowercase">
+                            گذرواژه شامل حداقل یک حرف کوچک لاتین باشد
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsUppercase">
+                            گذرواژه شامل حداقل یک حرف بزرگ لاتین باشد
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNonAlphaNumeric">
+                            گذرواژه شامل حداقل یک حرف غیرالفبایی باشد
+                        </mat-checkbox>
+                    </li>
+                    <li>
+                        <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.canUpdateDeviceId">
+                            شناسه قابل بروز رسانی باشد
+                        </mat-checkbox>
+                    </li>
+                </ul>
+            </span>
+        </section>
+    </div>
+    <div class="content">
+        <section class="_checkbox">
+            <span>
+                <ul>
+                    <li class="number_vals">
+                        زمان session های فعال
+                        <div class="plus_minus">
+                            <div class="plus"
+                                (click)="plusOrMinusDeactiveTerminationMinutes(closeTabService.saveDataForPolicies.deactiveTerminationMinutes + 1)">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="_value"> {{closeTabService.saveDataForPolicies.deactiveTerminationMinutes}}
+                            </div>
+                            <div class="minus"
+                                (click)="plusOrMinusDeactiveTerminationMinutes(closeTabService.saveDataForPolicies.deactiveTerminationMinutes - 1)">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="number_vals">
+                        حداکثر تعداد رکوردهای لاگ
+                        <div class="plus_minus">
+                            <div class="plus"
+                                (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords + 1)">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="_value">{{closeTabService.saveDataForPolicies.maxLogRecords}}</div>
+                            <div class="minus"
+                                (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords - 1)">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="_time_title">زمان فعالیت سامانه</p>
+                        <div class="_time">
                             <div class="t_input_2">
                                 <div class="t_key">از زمان</div>
-                                <input class="t_value" name="fromTimeM" min="1" max="60" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeM">
-                                <div class="_colon">:</div>
-                                <input class="t_value" name="fromTimeH" min="1" max="24" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTimeH">
+                                <input class="t_value" name="fromTime" maxlength="5"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.fromTime">
                             </div>
-                        </li>
-                        <li>
                             <div class="t_input_2">
                                 <div class="t_key">تا زمان</div>
-                                <input class="t_value" name="toTimeM" min="1" max="60" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeM">
-                                <div class="_colon">:</div>
-                                <input class="t_value" name="toTimeH" min="1" max="24" maxlength="2"
-                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTimeH">
+                                <input class="t_value" name="toTime" maxlength="5"
+                                    [(ngModel)]="closeTabService.saveDataForPolicies.toTime">
                             </div>
-                        </li>
-                    </ul>
-                </span>
-            </section>
-        </div>
-    </section>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+        </section>
+    </div>
 
     <section class="item_3">
 

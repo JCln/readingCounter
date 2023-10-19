@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { EnvService } from 'services/env.service';
 import { ToolsService } from 'services/tools.service';
-import { JwtService } from 'src/app/auth/jwt.service';
+import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 
@@ -16,9 +15,8 @@ export class DownloadImgFileComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
-    public toolsService: ToolsService,
-    private envService: EnvService,
-    private jwtService: JwtService
+    private utilsService: UtilsService,
+    public toolsService: ToolsService
   ) {
     super();
   }
@@ -28,7 +26,7 @@ export class DownloadImgFileComponent extends FactoryONE {
   }
   connectToServer = async () => {
     if (this.toolsService.validationDownloadAllImages(this.toolsService.fileDownloadAllImages)) {
-      window.open(this.envService.API_URL + '/' + ENInterfaces.downloadFileAllImages + this.jwtService.getAccessToken() + '&zoneId=' + this.toolsService.fileDownloadAllImages.zoneId + '&day=' + this.toolsService.fileDownloadAllImages.day, '_blank');
+      window.open(this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileAllImages + this.utilsService.compositeService.getAccessToken() + '&zoneId=' + this.toolsService.fileDownloadAllImages.zoneId + '&day=' + this.toolsService.fileDownloadAllImages.day, ENInterfaces._blank);
     }
   }
 

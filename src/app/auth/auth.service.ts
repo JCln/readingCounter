@@ -69,6 +69,13 @@ export class AuthService {
     this.jwtService.removeTokens();
     this.utilsService.routeTo(EN_Routes.loginSlash);
   }
+  offlineLogout = async () => {
+    this.clearAllSavedData();
+    this.clearDictionaries();
+    this.signalRService.disconnectConnection();
+    this.jwtService.removeTokens();
+    this.utilsService.routeTo(EN_Routes.loginSlash);
+  }
   saveToStorage = (token: IAuthTokenType) => {
     this.jwtService.removeTokens();
     this.jwtService.saveToStorage(token);

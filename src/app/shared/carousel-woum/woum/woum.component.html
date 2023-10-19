@@ -71,7 +71,7 @@
     <section class="content">
         <h1 class="title">تصاویر ارسالی</h1>
         <hr>
-        <div class="_main_img">
+        <div class="_main_img" *ngIf="_type !== ENImageTypes.single">
             <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
                 <div class="__img_counter">{{i+1}}</div>
 
@@ -86,6 +86,13 @@
             </div>
             <div class="not_found_header" *ngIf="!imageFiles.length">
                 <h2>فاقد تصویر</h2>
+            </div>
+        </div>
+
+        <div class="_main_img" *ngIf="_type == ENImageTypes.single">
+            <div *ngIf="testSingleImage" class="tooltip img_wrapper">
+                <img (click)="showBigImage(testSingleImage)" src="{{testSingleImage}}"
+                    onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر">
             </div>
         </div>
     </section>

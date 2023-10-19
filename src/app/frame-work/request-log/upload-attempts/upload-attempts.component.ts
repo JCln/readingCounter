@@ -3,11 +3,13 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-upload-attempts',
   templateUrl: './upload-attempts.component.html',
-  styleUrls: ['./upload-attempts.component.scss']
+  styleUrls: ['./upload-attempts.component.scss'],
+  animations: [transitionAnimation]
 })
 export class UploadAttemptsComponent extends FactoryONE {
 

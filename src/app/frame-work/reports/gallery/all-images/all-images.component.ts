@@ -5,6 +5,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'interfaces/ireports';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-all-images',
@@ -23,7 +24,8 @@ export class AllImagesComponent extends FactoryONE {
 
   constructor(
     public closeTabService: CloseTabService,
-    public toolsService: ToolsService
+    public toolsService: ToolsService,
+    private utilsService: UtilsService
   ) {
     super();
   }
@@ -33,7 +35,7 @@ export class AllImagesComponent extends FactoryONE {
       return;
     this.allImagesDataSource = null;
 
-    this.allImagesDataSource = await this.toolsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListAllImages, this.toolsService.trackNumberAllImages);
+    this.allImagesDataSource = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListAllImages, this.toolsService.trackNumberAllImages);
     this.closeTabService.saveDataForRRGalleryRSFirst = this.allImagesDataSource;
     this.closeTabService.saveDataForRRGalleryReq = this.toolsService.trackNumberAllImages;
     this.showAllImgs();
@@ -57,7 +59,7 @@ export class AllImagesComponent extends FactoryONE {
 
   }
   getExactImg = async (id: string, index: number) => {
-    this.closeTabService.saveDataForRRGallery[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();
+    this.closeTabService.saveDataForRRGallery[index] = this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + ENInterfaces.accessTokenTile + this.utilsService.compositeService.getAccessToken();
   }
   showAllImgs = () => {
     this.allImagesDataSource.imageUrlAndInfos.forEach((item, i) => {

@@ -67,14 +67,24 @@ export class LoginComponent {
     return new Promise((resolve) => {
       const dialogRef = this.matDialog.open(CodeMessageDgComponent, {
         minWidth: '20rem',
-        data: this.userDataInput2
+        data: this.userDataInput2,
+        disableClose: true
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
           resolve(desc);
         }
+        else {
+          this.doRefreshButtonAndCaptcha();
+        }
       })
     })
+  }
+  doRefreshButtonAndCaptcha = () => {
+    // if loggin failed refresh captcha, enable loginButton needs
+    (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = false;
+    this.userData.dntCaptchaInputText = '';
+    this.appDntCaptcha.doShow();
   }
   logging = async () => {
     if (this.browserSupportService.isValidBrowserVersion()) {
@@ -107,10 +117,7 @@ export class LoginComponent {
           }
         }
         else {
-          // if loggin failed refresh captcha, enable loginButton needs
-          (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = false;
-          this.userData.dntCaptchaInputText = '';
-          this.appDntCaptcha.doShow();
+          this.doRefreshButtonAndCaptcha();
         }
       }
     }

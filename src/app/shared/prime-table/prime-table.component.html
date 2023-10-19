@@ -384,7 +384,8 @@
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_outputFileName == 'offloaded'" (click)="routeToLMAll(dataSource)">
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded' || _outputFileName == 'offloadedGroup'"
+                (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">بازدید</span>
                 <i class="tooltip p_icons pi pi-eye">
                     <div class="tooltip_text_right">بازدید</div>
@@ -419,9 +420,17 @@
             <td class="__columns" *ngIf="(
                 _outputFileName == 'momentLs' ||                                 
                 _outputFileName == 'trvDiff' || 
-                _outputFileName == 'imgResultGridBased'||
+                _outputFileName == 'imgResultGridBased'||                
                 _outputFileName == 'trv'      
             )" (click)="showTypicalImageDialog(dataSource)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <i class="tooltip p_icons pi pi-camera">
+                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="(
+                _outputFileName == 'requestLogGetUploaded'                
+            )" (click)="showSingleImageDialog(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons pi pi-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>

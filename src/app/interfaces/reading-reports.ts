@@ -18,6 +18,7 @@ export enum ENReadingReports {
     gis = 'gisReq',
     dh = 'disposalhoursReq',
     anlzPrfm = 'anlzPrfmReq',
+    getUploadedReq = 'getUploadedReq',
     imgAttrResult = 'imgAttrResultReq',
     imgAttrAnalyze = 'imgAttrAnalyzeReq',
     imgResultDetailsGridBased = 'imgResultDetailsGridBased',

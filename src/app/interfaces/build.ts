@@ -222,7 +222,10 @@ export class getLogoutReasonDictionary {
         { id: 1, title: 'ویرایش شده' },
         { id: 2, title: 'تغییر گذرواژه' },
         { id: 3, title: 'لاگین همزمان' },
-        { id: 4, title: 'غیرفعال شده' }
+        { id: 4, title: 'غیرفعال شده' },
+        { id: 5, title: 'اتمام زمان فعالیت مجاز' },
+        { id: 6, title: 'بازنشانی گذرواژه' },
+        { id: 7, title: 'تغییر نوع ورود' }
     ]);
     private constructor(public readonly value: { id: number, title: string }[]) {
     }

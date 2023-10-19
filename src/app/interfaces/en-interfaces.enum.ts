@@ -1,4 +1,5 @@
 export enum ENInterfaces {
+    _blank = '_blank',
     AuthsAccountRefresh = 'V1/Account/Refresh',
     AuthsAccountLogin = 'V1/account/login',
     AuthsLOGIN2 = 'V1/Account/Login2',
@@ -75,6 +76,7 @@ export enum ENInterfaces {
     downloadFileInfo = 'V1/Download/File/info',
     downloadFileForbidden = 'V1/Download/File/forbidden',
     downloadFileByUrl = `V1/Download/File/ByUrl`,
+    accessTokenTile = '?access_token=',
 
     ReadingConfigALL = 'V1/ReadingConfigDefault/All',
     ReadingConfigGET = 'V1/ReadingConfigDefault/Get',
@@ -262,10 +264,12 @@ export enum ENInterfaces {
     requestLogUnAuthorized = 'V1/RequestLog/List/UnAuthorized',
     serverManagerErrors = 'V1/Server/Errors',
     requestLogUserActivationDictionary = 'V1/RequestLog/UserActivationLogTypes',
+    requestLogLogMemoryStatus = '/V1/RequestLog/LogMemoryStatus',
     requestLogUserActivation = 'V1/RequestLog/UserActivation',
     requestLogUsersLogins = 'V1/User/UsersLogins',
     requestLogDownloadAttempts = 'V1/RequestLog/DownloadAttempts',
     requestLogUploadAttempts = 'V1/RequestLog/UploadAttempts',
+    requestLogGetUploaded = 'V1/Upload/GetUploaded',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',
@@ -315,7 +319,7 @@ export enum ENInterfaces {
     dynamicTraverseAdd = 'V1/DynamicTraverse/Add',
     dynamicTraverseRemove = 'V1/DynamicTraverse/Remove',
     offloadManual = 'V1/Manual/OffLoad',
-    fileUploadSingle = 'V1/Upload/Single',
+    fileUploadSingle = 'V1/Upload/SinglePanel',
     loadManual = `V1/Load/Manual`,
     offlineSingleReadingCounter = 'addANEW',
 

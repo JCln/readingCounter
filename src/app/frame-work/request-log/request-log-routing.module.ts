@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'IOPolicyHistory', loadChildren: () => import('./input-output-policy-history/input-output-policy-history.module').then(inputOutputPolicyHistory => inputOutputPolicyHistory.InputOutputPolicyHistoryModule) },
   { path: 'downloadAttempts', loadChildren: () => import('./download-attempts/download-attempts.module').then(downloadAttempts => downloadAttempts.DownloadAttemptsModule) },
   { path: 'uploadAttempts', loadChildren: () => import('./upload-attempts/upload-attempts.module').then(uploadAttempts => uploadAttempts.UploadAttemptsModule) },
+  { path: 'getUploaded', loadChildren: () => import('./get-uploaded/get-uploaded.module').then(GetUploaded => GetUploaded.GetUploadedModule) },
+  { path: 'memoryStatus', loadChildren: () => import('./log-memory-status/log-memory-status.module').then(LogMemoryStatus => LogMemoryStatus.LogMemoryStatusModule) },
 ];
 
 @NgModule({

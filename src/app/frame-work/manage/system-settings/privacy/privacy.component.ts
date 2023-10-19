@@ -7,7 +7,6 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IPrivacy } from 'services/DI/privacies';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { DateJalaliService } from 'services/date-jalali.service';
 import { MathS } from 'src/app/classes/math-s';
 
 const enum ENMessages {
@@ -29,8 +28,7 @@ export class PrivacyComponent extends FactoryONE {
   constructor(
     public securityService: SecurityService,
     public closeTabService: CloseTabService,
-    private snackWrapperService: SnackWrapperService,
-    private dateJalaliService: DateJalaliService
+    private snackWrapperService: SnackWrapperService
   ) {
     super();
   }
@@ -48,7 +46,6 @@ export class PrivacyComponent extends FactoryONE {
     }
     this.checkProtocol();
     this.privacyOptions = this.securityService.getPrivacyToggle();
-    this.insertToTimes();
   }
   plusOrMinus = (value: number) => {
     if (value > this.privacyOptions.maxLength) {
@@ -63,8 +60,9 @@ export class PrivacyComponent extends FactoryONE {
     this.closeTabService.saveDataForPolicies.minPasswordLength = value;
   }
   plusOrMinusDeactiveTerminationMinutes = (value: number) => {
+    this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes = MathS.isNull(this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes) ? 2 : this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes;
     if (value > this.privacyOptions.maxLengthDeactiveTerminationMinutes) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.fourHundredEighty + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.oneHundredAndTwenty + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
 
@@ -87,6 +85,7 @@ export class PrivacyComponent extends FactoryONE {
     this.closeTabService.saveDataForPolicies.lockInvalidAttempts = value;
   }
   plusOrMinusMaxRecords = (value: number) => {
+    this.closeTabService.saveDataForPolicies.maxLogRecords = MathS.isNull(this.closeTabService.saveDataForPolicies.maxLogRecords) ? 15000 : this.closeTabService.saveDataForPolicies.maxLogRecords;
     if (value < this.privacyOptions.minLengthMaxLogRecords) {
       this.openSnackBar(ENMessages.minLength + ENRandomNumbers.oneHundred + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
@@ -129,34 +128,15 @@ export class PrivacyComponent extends FactoryONE {
     }
     this.closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts = value;
   }
-  insertToTimes = () => {
-    let temp = this.dateJalaliService.getCurrentTime();
-    const hour = temp.split(':').shift();
-    const minute = temp.split(':').pop();
-
-    this.closeTabService.saveDataForPolicies.fromTimeM = minute;
-    this.closeTabService.saveDataForPolicies.fromTimeH = hour - 1;
-    this.closeTabService.saveDataForPolicies.toTimeM = minute;
-    this.closeTabService.saveDataForPolicies.toTimeH = hour;
-    // add zero before single digits even if it is zero
-    if (this.closeTabService.saveDataForPolicies.fromTimeH < ENRandomNumbers.ten) {
-      this.closeTabService.saveDataForPolicies.fromTimeH = '0'.concat(this.closeTabService.saveDataForPolicies.fromTimeH.toString());
-    }
-    if (hour == '00') {
-      this.closeTabService.saveDataForPolicies.fromTimeH = '23';
-    }
-  }
   verification = async () => {
-    // join input values time 
-    this.closeTabService.saveDataForPolicies.fromTime = this.closeTabService.saveDataForPolicies.fromTimeH + ':' + this.closeTabService.saveDataForPolicies.fromTimeM;
-    this.closeTabService.saveDataForPolicies.toTime = this.closeTabService.saveDataForPolicies.toTimeH + ':' + this.closeTabService.saveDataForPolicies.toTimeM;
-    console.log(this.closeTabService.saveDataForPolicies);
+    if (!this.securityService.verificationTimes(this.closeTabService.saveDataForPolicies))
+      return;
+    if (!this.securityService.verificationDates(this.closeTabService.saveDataForPolicies))
+      return;
+    if (!this.securityService.verificationPolicy(this.closeTabService.saveDataForPolicies))
+      return;
 
-    const temp = this.securityService.verificationDates(this.closeTabService.saveDataForPolicies);
-    console.log(temp);
-
-    // if (temp)
-    //   this.securityService.editPolicy(this.closeTabService.saveDataForPolicies);
+    this.securityService.editPolicy(this.closeTabService.saveDataForPolicies);
   }
   openSnackBar(message: string, duration: ENSnackBarTimes) {
     this.snackWrapperService.openSnackBar(message, duration, ENSnackBarColors.warn);

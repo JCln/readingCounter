@@ -1,9 +1,7 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
-import { EnvService } from 'services/env.service';
-import { JwtService } from 'src/app/auth/jwt.service';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -18,16 +16,14 @@ export class DropdownComponent {
   aboutUsImage = 'assets/imgs/header/logo_Atlas.png';
 
   constructor(
-    private envService: EnvService,
-    private jwtService: JwtService,
-    public ajaxReqWrapperService: AjaxReqWrapperService
+    private utilsService: UtilsService
   ) { }
 
   logout = () => {
     this.isLogout.emit(true);
   }
   linkToChat = () => {
-    window.open(this.envService.API_URL + '/' + ENInterfaces.chat + this.jwtService.getAccessToken(), '_blank');
+    window.open(this.utilsService.getAPIUrl() + '/' + ENInterfaces.chat + this.utilsService.compositeService.getAccessToken(), ENInterfaces._blank);
   }
 
 }

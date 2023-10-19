@@ -46,7 +46,7 @@ import {
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
 import { IDynamicExcelReq } from 'interfaces/itools';
-import { IOffLoadPerDay, ITracking } from 'interfaces/itrackings';
+import { IOffLoadPerDay, IOnOffLoad, ITracking } from 'interfaces/itrackings';
 import { IAddUserInfos, IRoleManager, IUserCompareManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -56,7 +56,7 @@ import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IMostReportInput, IOnOffLoadFlat } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
-import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog } from 'interfaces/iserver-manager';
+import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
 
 @Injectable({
@@ -538,6 +538,11 @@ export class CloseTabService {
     fromDate: '',
     toDate: ''
   }
+  getUploaded: IOnOffLoad[] = [];
+  getUploadedReq = {
+    fromDate: '',
+    toDate: ''
+  };
   downloadAttempts: IIOAttemptsLog[] = [];
   downloadAttemptsReq = {
     fromDate: '',
@@ -548,6 +553,12 @@ export class CloseTabService {
     fromDate: '',
     toDate: ''
   }
+  logMemoryStatus: ILogMemoryStatus = {
+    maxLogCount: 0,
+    logCount: 0,
+    remainedCount: 0,
+    systemDateTime: ''
+  };
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: IFragmentMaster[];
@@ -584,10 +595,6 @@ export class CloseTabService {
     osPlatform: '',
     osShortTitle: '',
     userAgent: '',
-    fromTimeM: '',
-    fromTimeH: '',
-    toTimeM: '',
-    toTimeH: '',
     fromTime: '',
     toTime: '',
     maxLogRecords: 0,
@@ -646,9 +653,10 @@ export class CloseTabService {
     { id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllSReq, value: ENEssentialsToSave.mobileManagerFeedbackAllS, url: EN_Routes.mobileFeedbackAllS },
     { id: 1, req: ENEssentialsToSave.mobileManagerforbiddenTypeReq, value: ENEssentialsToSave.mobileManagerforbiddenType, url: EN_Routes.mobileForbiddenType },
 
-
+    { id: 1, value: ENEssentialsToSave.logMemoryStatus, url: EN_Routes.reqLogMemoryStatus },
     { id: 1, value: ENEssentialsToSave.downloadAttempts, url: EN_Routes.reqLogDownloadAttempts },
     { id: 1, value: ENEssentialsToSave.uploadAttempts, url: EN_Routes.reqLogUploadAttempts },
+    { id: 1, value: ENEssentialsToSave.getUploaded, url: EN_Routes.reqLogGetUploaded },
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },

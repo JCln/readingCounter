@@ -8,7 +8,6 @@ import { ENRandomNumbers, ENSelectedColumnVariables } from 'interfaces/ioverall-
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { ProfileService } from 'services/profile.service';
-import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from '../classes/math-s';
@@ -64,7 +63,6 @@ export class TrackingManagerService {
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private allListsService: AllListsService,
-    private jwtService: JwtService,
     public columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
     private profileService: ProfileService,
@@ -72,12 +70,6 @@ export class TrackingManagerService {
     public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
-  getApiUrl = (): string => {
-    return this.utilsService.envService.API_URL;
-  }
-  getAuthToken = (): string => {
-    return this.jwtService.getAccessToken();
-  }
   // Output manager 
   downloadOutputDBF = (method: ENInterfaces, dbfData: ITracking | IOutputManager): Promise<any> => {
     dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);

@@ -25,10 +25,6 @@ export interface IPolicies {
     osPlatform: string,
     osShortTitle: string,
     userAgent: string,
-    fromTimeM?: string,
-    fromTimeH?: any,
-    toTimeM?: string,
-    toTimeH?: string,
     fromTime: string,
     toTime: string,
     maxLogRecords: number,
@@ -117,6 +113,13 @@ export interface IUsersLoginBriefInfo {
     wrongPassword: string,
     appVersion: string,
     userDisplayName: string,
+    logoutDateTime: string,
+    logoutReasonId: number,
+    username: string,
+    invalidLoginReasonId: number,
+    twoStepExpireDateTime: string,
+    twoStepEnterDateTime: string,
+    twoStepWasSuccessful: true
 }
 export interface IUserMasterHistory {
     changeOrInsertLogId: string,
@@ -138,13 +141,13 @@ export interface IPrivacy {
     max_captcha: number,
     min_ReCaptcha: number,
     max_ReCaptcha: number,
-    minLengthDeactiveTerminationMinutes: number,
-    maxLengthDeactiveTerminationMinutes: number,
+    readonly minLengthDeactiveTerminationMinutes: number,
+    readonly maxLengthDeactiveTerminationMinutes: number,
     minLengthMaxLogRecords: number,
 }
 export const privacies: IPrivacy = {
-    minLength: 4,
-    maxLength: 16,
+    minLength: 8,
+    maxLength: 50,
     minPasswordLength: 6,
     min_LockInvalidAttemps: 1,
     max_LockInvalidAttemps: 10,

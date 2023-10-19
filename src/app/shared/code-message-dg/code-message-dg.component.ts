@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ILogin2 } from 'interfaces/iauth-guard-permission';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MathS } from 'src/app/classes/math-s';
@@ -34,13 +35,18 @@ export class CodeMessageDgComponent implements OnInit {
   ngOnInit(): void {
     this.setInterval();
   }
-  public confirmWithoutText = () => {
-    this.mdDialogRef.close();
-    //   this.mdDialogRef.close(this._selectedDate);
-    //   return;
-    //   this.mdDialogRef.close(true);  
+  public cancelDialog = () => {
+    this.mdDialogRef.close(false);
   }
   login2 = async () => {
+    if (MathS.isNullTextValidation(this.codeValue)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertTwoStep);
+      return;
+    }
+    if (!MathS.isExactLengthYouNeed(this.codeValue, ENRandomNumbers.four)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertTwoStepLength);
+      return;
+    }
     this.data.code = +this.codeValue;
     const res = await this.authService.logging2(this.data);
     if (res) {

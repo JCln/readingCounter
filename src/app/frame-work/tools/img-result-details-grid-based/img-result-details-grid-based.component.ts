@@ -1,3 +1,4 @@
+import { UtilsService } from 'services/utils.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -18,7 +19,8 @@ export class ImgResultDetailsGridBasedComponent extends FactoryONE {
 
   constructor(
     public closeTabService: CloseTabService,
-    public toolsService: ToolsService
+    public toolsService: ToolsService,
+    private utilsService: UtilsService
   ) {
     super();
   }
@@ -35,7 +37,7 @@ export class ImgResultDetailsGridBasedComponent extends FactoryONE {
 
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForImgResultDetailsGridBased = await this.toolsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postImgAttrResultDetailsGridBased, this.toolsService.imgResultDetailsGridBased);
+    this.closeTabService.saveDataForImgResultDetailsGridBased = await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postImgAttrResultDetailsGridBased, this.toolsService.imgResultDetailsGridBased);
   }
   verification = () => {
     const temp = this.toolsService.verificationImageResultDetails(this.toolsService.imgResultDetailsGridBased);

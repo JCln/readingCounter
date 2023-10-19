@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { EnvService } from 'services/env.service';
-import { JwtService } from 'src/app/auth/jwt.service';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-show-video-dg',
@@ -14,12 +13,11 @@ export class ShowVideoDgComponent implements OnInit {
 
   constructor(
     public config: DynamicDialogConfig,
-    private envService: EnvService,
-    private jwtService: JwtService
+    private utilsService: UtilsService
   ) { }
 
   callApiImgs = async () => {
-    this.originImage = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + this.config.data.body['fileRepositoryId'] + '?access_token=' + this.jwtService.getAccessToken();
+    this.originImage = this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + this.config.data.body['fileRepositoryId'] + ENInterfaces.accessTokenTile + this.utilsService.compositeService.getAccessToken();
   }
 
   ngOnInit(): void {
