@@ -6,6 +6,7 @@ import { DateJalaliService } from 'services/date-jalali.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Converter } from 'src/app/classes/converter';
+import { EN_messages } from 'interfaces/enums.enum';
 
 @Component({
   selector: 'app-user-loggins',
@@ -41,6 +42,7 @@ export class UserLogginsComponent extends FactoryONE {
   convertLoginTime = () => {
     this.dataSource.forEach(item => {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
+      item.twoStepType = item.twoStepExpireDateTime ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
       if (item.logoutDateTime)
         item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
     })

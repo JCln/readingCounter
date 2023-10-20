@@ -46,6 +46,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
       text: EN_messages.passwordShouldChangeReason,
       isInput: false,
       doesNotReturnButton: true,
+      disableClose: true,
       isDelete: false,
       changePassword: true,
       icon: 'pi pi-unlock',
@@ -79,7 +80,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
   getNotification = async () => {
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
     this.badgeNumber = res.count;
-    const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.getShouldIChangePassword);
+    const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.getShouldIChangePassword, this.utilsService.compositeService.getAuthUser().userId);
     console.log(shouldIChangePass);
     if (shouldIChangePass)
       this.changePasswordFromDialog();

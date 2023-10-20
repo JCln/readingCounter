@@ -416,6 +416,7 @@ export interface IUserLoggins {
     loginIp: string,
     logoutReasonId: number,
     logoutDateTime: string,
+    twoStepType?: string,
     invalidLoginReasonId: string,
     wasSuccessful: boolean,
     browserVersion: string,

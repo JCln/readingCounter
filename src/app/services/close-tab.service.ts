@@ -570,7 +570,7 @@ export class CloseTabService {
   saveDataForDynamicReports: IDynamicReportsRes[];
   saveDataForPoliciesHistory: IPolicies[] = [];
   saveDataForPolicies: IPolicies = {
-    id: 0,
+    id: null,
     enableValidIpCaptcha: false,
     requireCaptchaInvalidAttempts: 0,
     enableValidIpRecaptcha: false,

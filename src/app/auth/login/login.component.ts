@@ -63,6 +63,12 @@ export class LoginComponent {
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
     this.userData.dntCaptchaInputText = Converter.persianToEngNumbers(this.userData.dntCaptchaInputText);
   }
+  doRefreshButtonAndCaptcha = () => {
+    // if loggin failed refresh captcha, enable loginButton needs
+    (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = false;
+    this.userData.dntCaptchaInputText = '';
+    this.appDntCaptcha.doShow();
+  }
   openCodeMessageDialog = (): Promise<any> => {
     return new Promise((resolve) => {
       const dialogRef = this.matDialog.open(CodeMessageDgComponent, {
@@ -75,16 +81,12 @@ export class LoginComponent {
           resolve(desc);
         }
         else {
+          console.log(1);
+          
           this.doRefreshButtonAndCaptcha();
         }
       })
     })
-  }
-  doRefreshButtonAndCaptcha = () => {
-    // if loggin failed refresh captcha, enable loginButton needs
-    (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = false;
-    this.userData.dntCaptchaInputText = '';
-    this.appDntCaptcha.doShow();
   }
   logging = async () => {
     if (this.browserSupportService.isValidBrowserVersion()) {

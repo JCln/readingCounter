@@ -10,6 +10,7 @@ import { IUsersLoginBriefInfo } from 'services/DI/privacies';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Converter } from 'src/app/classes/converter';
+import { EN_messages } from 'interfaces/enums.enum';
 
 @Component({
   selector: 'app-reqlog-users-logins',
@@ -62,6 +63,7 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
     this.closeTabService.usersLogins.forEach(item => {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
       item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
+      item.twoStepType = item.twoStepExpireDateTime ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
     })
   }
 

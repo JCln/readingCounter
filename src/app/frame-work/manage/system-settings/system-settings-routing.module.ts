@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: 'mserr', loadChildren: () => import('./server-errors/server-errors.module').then(manageServerErrors => manageServerErrors.ServerErrorsModule) },
-  { path: 'policies', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
+  { path: 'policies', loadChildren: () => import('./privacy/privacy.module').then(policies => policies.PrivacyModule) },
   { path: 'policyHistory', loadChildren: () => import('./policy-history/policy-history.module').then(policyHistory => policyHistory.PolicyHistoryModule) },
   { path: 'osInfo', loadChildren: () => import('./server-os-info/server-os-info.module').then(osInfo => osInfo.ServerOsInfoModule) },
   { path: 'ipRules', loadChildren: () => import('./ip-special-rules/ip-special-rules.module').then(ipSpecialRules => ipSpecialRules.IpSpecialRulesModule) },

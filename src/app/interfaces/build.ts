@@ -38,7 +38,8 @@ export interface IENV {
     shouldSaveTokensInLocal: boolean,
 }
 export enum ENURLs {
-    LOCAL = 'http://192.168.100.18:7529',
+    LOCAL = 'http://192.168.99.131:7529',
+    // LOCAL = 'http://192.168.100.18:7529',
     DEFAULT = 'https://37.191.92.157/kontoriNew',
     TEH = 'http://85.133.245.143/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
@@ -218,7 +219,7 @@ export class ENYears {
 }
 export class getLogoutReasonDictionary {
     static readonly DEFAULT = new getLogoutReasonDictionary([
-        { id: 0, title: 'خروج از برنامه' },
+        { id: 0, title: 'توسط کاربر' },
         { id: 1, title: 'ویرایش شده' },
         { id: 2, title: 'تغییر گذرواژه' },
         { id: 3, title: 'لاگین همزمان' },

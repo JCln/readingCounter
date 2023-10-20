@@ -8,12 +8,12 @@
                         حداقل تعداد رمز عبور
                         <div class="plus_minus">
                             <div class="plus"
-                                (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
+                                (click)="plusOrMinusPasswordLength(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
                                 <i class="fa fa-plus"></i>
                             </div>
                             <div class="_value"> {{closeTabService.saveDataForPolicies.minPasswordLength}}</div>
                             <div class="minus"
-                                (click)="plusOrMinus(closeTabService.saveDataForPolicies.minPasswordLength - 1)">
+                                (click)="plusOrMinusPasswordLength(closeTabService.saveDataForPolicies.minPasswordLength - 1)">
                                 <i class="fa fa-minus"></i>
                             </div>
                         </div>
@@ -92,19 +92,10 @@
                             </div>
                         </div>
                     </li>
-                    <li class="number_vals">
-                        حداکثر تعداد رکوردهای لاگ
-                        <div class="plus_minus">
-                            <div class="plus"
-                                (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords + 1)">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <div class="_value">{{closeTabService.saveDataForPolicies.maxLogRecords}}</div>
-                            <div class="minus"
-                                (click)="plusOrMinusMaxRecords(closeTabService.saveDataForPolicies.maxLogRecords - 1)">
-                                <i class="fa fa-minus"></i>
-                            </div>
-                        </div>
+                    <li class="input_2">
+                        <div class="_key">حداکثر تعداد رکوردهای لاگ</div>
+                        <input class="_value" name="maxLogRecords" maxlength="7"
+                            [(ngModel)]="closeTabService.saveDataForPolicies.maxLogRecords">
                     </li>
                     <li>
                         <p class="_time_title">زمان فعالیت سامانه</p>
@@ -169,7 +160,7 @@
                                 </div>
                                 <div class="_value">
                                     {{closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts}}</div>
-                                <div class="minus"
+                                <div class="minus" غ
                                     (click)="reCaptchaPlusMinus(closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts - 1)">
                                     <i class="fa fa-minus"></i>
                                 </div>
@@ -202,5 +193,6 @@
 
 <footer class="btns footer_with_background">
     <button (click)="verification()" class="btn_1">ذخیره
-        تغییرات</button>
+        تغییرات
+    </button>
 </footer>

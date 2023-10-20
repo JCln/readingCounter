@@ -2,7 +2,7 @@
     <span class="pi pi-times" (click)="closeAllTabs()"></span>
     <div class="tooltip_text_right">حذف همه تب ها</div>
 </div>
-<section>
+<section class="__tabs_wrapper">
     <ul>
         <li *ngFor="let tab of closeTabService.tabs" [routerLink]="['/'+ tab.route]" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">

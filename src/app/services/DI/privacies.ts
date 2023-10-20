@@ -114,6 +114,7 @@ export interface IUsersLoginBriefInfo {
     appVersion: string,
     userDisplayName: string,
     logoutDateTime: string,
+    twoStepType?: string, // for two step type text controlled by client
     logoutReasonId: number,
     username: string,
     invalidLoginReasonId: number,
@@ -130,25 +131,23 @@ export interface IUserMasterHistory {
     browserTitle: string,
 }
 export interface IPrivacy {
-    minLength: number;
-    maxLength: number;
-    minPasswordLength: number;
-    min_LockInvalidAttemps: number;
-    max_LockInvalidAttemps: number;
-    min_LockMin: number,
-    max_LockMin: number,
-    min_captcha: number,
-    max_captcha: number,
-    min_ReCaptcha: number,
-    max_ReCaptcha: number,
+    readonly maxPasswordLength: number;
+    readonly minPasswordLength: number;
+    readonly min_LockInvalidAttemps: number;
+    readonly max_LockInvalidAttemps: number;
+    readonly min_LockMin: number,
+    readonly max_LockMin: number,
+    readonly min_captcha: number,
+    readonly max_captcha: number,
+    readonly min_ReCaptcha: number,
+    readonly max_ReCaptcha: number,
     readonly minLengthDeactiveTerminationMinutes: number,
     readonly maxLengthDeactiveTerminationMinutes: number,
-    minLengthMaxLogRecords: number,
+    readonly minLengthMaxLogRecords: number,
 }
 export const privacies: IPrivacy = {
-    minLength: 8,
-    maxLength: 50,
-    minPasswordLength: 6,
+    minPasswordLength: 8,
+    maxPasswordLength: 50,
     min_LockInvalidAttemps: 1,
     max_LockInvalidAttemps: 10,
     min_LockMin: 10,//minutes

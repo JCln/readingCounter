@@ -38,8 +38,12 @@ export class PrivacyComponent extends FactoryONE {
       this.auxDataSource.HSTSProtection = location.protocol == 'http:' ? false : true;
   }
   classWrapper = async (canRefresh?: boolean) => {
+    console.log(this.closeTabService.saveDataForPolicies.id);
+    console.log(MathS.isNull(this.closeTabService.saveDataForPolicies.id));
+
+
     if (canRefresh) {
-      this.closeTabService.saveDataForPolicies.id = 0;
+      this.closeTabService.saveDataForPolicies.id = null;
     }
     if (MathS.isNull(this.closeTabService.saveDataForPolicies.id)) {
       this.closeTabService.saveDataForPolicies = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.getPolicies);
@@ -47,13 +51,13 @@ export class PrivacyComponent extends FactoryONE {
     this.checkProtocol();
     this.privacyOptions = this.securityService.getPrivacyToggle();
   }
-  plusOrMinus = (value: number) => {
-    if (value > this.privacyOptions.maxLength) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.sixteen + ENMessages.is, ENSnackBarTimes.threeMili);
+  plusOrMinusPasswordLength = (value: number) => {
+    if (value > this.privacyOptions.maxPasswordLength) {
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.fifty + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
 
-    if (value < this.privacyOptions.minLength) {
+    if (value < this.privacyOptions.minPasswordLength) {
       this.openSnackBar(ENMessages.minLength + ENRandomNumbers.eight + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
@@ -83,14 +87,6 @@ export class PrivacyComponent extends FactoryONE {
       return;
     }
     this.closeTabService.saveDataForPolicies.lockInvalidAttempts = value;
-  }
-  plusOrMinusMaxRecords = (value: number) => {
-    this.closeTabService.saveDataForPolicies.maxLogRecords = MathS.isNull(this.closeTabService.saveDataForPolicies.maxLogRecords) ? 15000 : this.closeTabService.saveDataForPolicies.maxLogRecords;
-    if (value < this.privacyOptions.minLengthMaxLogRecords) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.oneHundred + ENMessages.is, ENSnackBarTimes.threeMili);
-      return;
-    }
-    this.closeTabService.saveDataForPolicies.maxLogRecords = value;
   }
   lockMin = (value: number) => {
     if (value > this.privacyOptions.max_LockMin) {
@@ -129,6 +125,10 @@ export class PrivacyComponent extends FactoryONE {
     this.closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts = value;
   }
   verification = async () => {
+    if (this.closeTabService.saveDataForPolicies.maxLogRecords < this.privacyOptions.minLengthMaxLogRecords) {
+      this.securityService.utilsService.snackBarMessageWarn(EN_messages.insert_minLengthMaxLogRecord);
+      return;
+    }
     if (!this.securityService.verificationTimes(this.closeTabService.saveDataForPolicies))
       return;
     if (!this.securityService.verificationDates(this.closeTabService.saveDataForPolicies))
@@ -146,4 +146,3 @@ export class PrivacyComponent extends FactoryONE {
     this.ref._checked = event;
   }
 }
-

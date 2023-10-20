@@ -66,5 +66,8 @@ export class CompositeService {
   getAccessToken = (): string => {
     return this.jwtService.getAccessToken();
   }
+  getLoginIdToken = (): string => {
+    return this.jwtService.getLoginIdToken();
+  }
 
 }

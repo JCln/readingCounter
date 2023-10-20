@@ -23,6 +23,7 @@ export enum EN_messages {
     highLow100 = 'مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     userPass_empty = 'نام کاربری یا گذرواژه نمیتواند خالی باشد',
     insertTwoStep = 'کد تایید را وارد نمایید',
+    timoutInterval = 'زمان ارسال کد به اتمام رسید. لطفا مجددا تلاش نمایید.',
     insertTwoStepLength = 'ارقام کد تایید اشتباه است',
     userPassEnterCaptcha = 'لطفا عبارت تصویر امنیتی را وارد نمایید',
     access_denied = 'دسترسی کافی به شما داده نشده است',
@@ -62,6 +63,7 @@ export enum EN_messages {
     insert_modifyTypeShouldHaveValue = 'باید نوع اصلاح همه سطرهای درحال ویرایش انتخاب شده باشند ',
     insert_startDay = 'روز شروع اجرا خالی است',
     insert_endDay = 'روز پایان اجرا خالی است',
+    insert_minLengthMaxLogRecord = 'تعداد رکورد های لاگ کمتر از حداقل مجاز است',
     insert_startTime = 'زمان شروع خالی است',
     insert_endTime = 'زمان پایان خالی است',
     insert_toDate = 'تا تاریخ خالی است',
@@ -163,6 +165,8 @@ export enum EN_messages {
     insert_deactiveTerminationMinutes = 'زمان session های فعال خالی است',
     insert_maxLogRecords = 'حداکثر تعداد رکوردهای لاگ خالی است',
 
+    twoStepTypeByUserPass = 'نام کاربری، گذرواژه',
+    twoStepTypeByTwo = 'دو مرحله ای',
     tableSaved = 'ذخیره ستونها انجام شد',
     tableResetSaved = 'بازنشانی ستونها انجام شد',
     ResetLocalStorage = 'از بازگشت به تنظیمات پیش‌فرض اطمینان دارید',
@@ -240,7 +244,7 @@ export enum EN_messages {
     broadMessage3 = 'همکار گرامی خسته نباشید، باتوجه به بروزرسانی نسخه نرم‌افزار درصورت بروز هرگونه مشکل با راهبر سامانه تماس حاصل نمایید',
 
     call_supportGroup = 'خطای سرور، با پشتیبانی تماس حاصل نمایید',
-    reLoginPlease = 'لطفا یکبار دیگر وارد سامانه شوید',
+    reLoginPlease = 'لطفا مجددا وارد سامانه شوید',
     checkPlease = 'لطفا نسبت به اصلاح مورد اقدام نمایید',
     browserSupport_alarm = 'نسخه مرورگر شما برنامه را پشتیبانی نمی‌کند',
     browserSupport_warn = 'برای پشتیبانی بهتر، مرورگر',
