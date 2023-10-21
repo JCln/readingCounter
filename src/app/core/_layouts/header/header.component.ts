@@ -84,7 +84,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     console.log(shouldIChangePass);
     if (shouldIChangePass)
       this.changePasswordFromDialog();
-    this.canShowPreviousFailures();
+    // this.canShowPreviousFailures();
   }
 
   hubConnect = () => {

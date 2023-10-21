@@ -1,8 +1,6 @@
 <app-prime-table     
     [dataSource]="closeTabService.saveDataForImportErrors"
-    [_hasSaveColumns]=false
-    [_outputEnabled]=false    
-    [_hasSaveColumns]=false
+    [_hasSaveColumns]=false    
     [_checkUpName]="'errors'" 
     [_outputFileName]="'errors'"    
     (refreshedTable)="refreshTable()"

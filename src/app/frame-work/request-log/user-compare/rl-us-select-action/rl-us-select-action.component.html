@@ -7,7 +7,7 @@
         </div>
     </div>
 </div> -->
-<div *ngFor="let item of userAddData.previous.appItems; index as i">
+<!-- <div *ngFor="let item of userAddData.previous.appItems; index as i">
     <div *ngFor="let item2 of userAddData.previous.appItems[i].moduleItems; index as i2">
         <div *ngFor="let item3 of userAddData.previous.appItems[i].moduleItems[i2].controllerItems; index as i3">
             <section style="display: grid; grid-template-columns: 1fr 1fr;">
@@ -26,47 +26,84 @@
 
         </div>
     </div>
-</div>
-<form #form="ngForm">
-    <section class="auth_1" *ngFor="let item of userAddData.previous.appItems">
-        <div>
-            <section class="auth_2" *ngFor="let moduleIt of item.moduleItems">
-                <div class="separator text">
-                    {{moduleIt.title}}
-                </div>
+</div> -->
+<div class="_wrapper">
+    <form #form="ngForm">
+        <section class="auth_1" *ngFor="let item of userAddData.previous.appItems; index as i">
+            <div>
+                <section class="auth_2" *ngFor="let moduleIt of item.moduleItems; index as i2">
+                    <div class="separator text">
+                        {{moduleIt.title}}
+                    </div>
 
-                <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
-                    {{controllerIt.title}}
-                    <section class="auth_4">
-                        <table>
-                            <thead class="_head">
-                                <tr>
-                                    <td>عنوان</td>
-                                    <td>قبلی</td>
-                                    <td>فعلی</td>
-                                    <td>تغییر</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let col of controllerIt.actionItems; index as i">
-                                    <td>
-                                        {{col.title}}
-                                    </td>
-                                    <td>
-                                        {{col.isSelected ? 'دارد' : 'ندارد'}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems; index as i3">
+                        {{controllerIt.title}}
+                        <section class="auth_4">
+                            <table>
+                                <thead class="_head">
+                                    <tr>
+                                        <td>عنوان</td>
+                                        <td>قبلی</td>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let col of controllerIt.actionItems; index as i4">
+                                        <td>
+                                            {{col.title}}
+                                        </td>
+                                        <td>
+                                            {{col.isSelected ? 'بله' : 'خیر'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+
                     </section>
-
                 </section>
-            </section>
-        </div>
-    </section>
-</form>
+            </div>
+        </section>
+    </form>
+    <form #form="ngForm">
+        <section class="auth_1" *ngFor="let item of userAddData.this.appItems; index as i">
+            <div>
+                <section class="auth_2" *ngFor="let moduleIt of item.moduleItems; index as i2">
+                    <div class="separator text">
+                        {{moduleIt.title}}
+                    </div>
 
-<div class="accept">
+                    <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems; index as i3">
+                        {{controllerIt.title}}
+                        <section class="auth_4">
+                            <table>
+                                <thead class="_head">
+                                    <tr>
+                                        <!-- <td>عنوان</td> -->
+                                        <td>فعلی</td>
+                                        <!-- <td>فعلی</td>
+                                        <td>تغییر</td> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let col of controllerIt.actionItems; index as i4">
+                                        <!-- <td>
+                                            {{col.title}}
+                                        </td> -->
+                                        <td>
+                                            {{col.isSelected ? 'بله' : 'خیر'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+
+                    </section>
+                </section>
+            </div>
+        </section>
+    </form>
+</div>
+<div class=" accept">
     <button class="btn_2" matStepperNext>
         <i class="fa fa-long-arrow-left"></i>
         صفحه بعد</button>

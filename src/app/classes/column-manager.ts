@@ -439,6 +439,7 @@ export class ColumnManager {
         { field: 'readablePath', header: 'مکان', isSelected: true, isSelectedOrigin: true },
         { field: 'path', header: 'path', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'token', header: 'Token', isSelected: false, isSelectedOrigin: false },
     ]
     requestLogListUser: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true,isSelectedOrigin:true },        

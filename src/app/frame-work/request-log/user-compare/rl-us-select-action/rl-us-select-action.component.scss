@@ -1,8 +1,14 @@
 @import 'add-edit';
 
+._wrapper {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: 1fr 1fr;
+}
+
 form {
-  height: 65vh;
-  overflow-x: hidden;
+  // height: 65vh;
+  // overflow-x: hidden;
 }
 
 .auth_3 {
