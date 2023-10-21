@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ILogin2 } from 'interfaces/iauth-guard-permission';
@@ -54,8 +54,8 @@ export class CodeMessageDgComponent implements OnInit {
     const res = await this.authService.logging2(this.data);
     if (res) {
       this.authService.saveToStorage(res);
-      this.authService.routeToReturnUrl(this.data.returnUrl);
       this.cancelDialog();
+      this.authService.routeToReturnUrl(this.data.returnUrl);
     }
     else {
       this.mdDialogRef.close(false);

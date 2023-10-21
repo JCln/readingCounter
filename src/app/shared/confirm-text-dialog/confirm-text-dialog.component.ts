@@ -44,8 +44,8 @@ export class ConfirmTextDialogComponent {
     }
     this.mdDialogRef.close(true);
   }
-  public cancel() {
-    this.mdDialogRef.close();
+  public cancel(val: boolean) {
+    this.mdDialogRef.close(val);
   }
   receiveFromDateJalali = ($event: string) => {
     this._selectedDate = $event;

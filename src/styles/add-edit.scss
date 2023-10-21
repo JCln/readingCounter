@@ -60,33 +60,30 @@ input::placeholder {
 
 .auth_1_container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
-  gap: var(--font_025);
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  gap: var(--font_xxs);
   direction: rtl;
   position: sticky;
   top: 0;
   z-index: 1;
+  padding: 4px 0;
   background-color: var(--white);
   box-shadow: 0px 0px 2px 2px var(--thirdy_2);
 
   .auth_1_item {
+    justify-content: center;
     display: grid;
-    place-content: center;
+    align-items: center;
     padding: var(--font_02);
-    border-radius: $border_100vmax;
-    font-size: var(--font_l);
+    border-radius: 100vmax;
     font-weight: 600;
-    background: var(--thirdy_2);
     color: var(--primary_5);
-    box-shadow: 1px 1px 3px 0px var(--thirdy_2);
-    border: 1px solid var(--secondary_3);
     cursor: pointer;
 
     &:hover,
     &:focus-visible,
     &:active {
-      background: var(--primary_4);
-      color: var(--white);
+      background: var(--thirdy_2);
     }
   }
 
@@ -102,8 +99,9 @@ input::placeholder {
 
 // active auth1 tab
 .active_tab {
-  background-color: var(--primary_4) !important;
-  color: var(--secondary_1) !important;
+  background: var(--primary_1);
+  outline: 1.5px solid var(--primary_4) !important;
+  color: var(--primary_4) !important;
 }
 
 .auth_2 {

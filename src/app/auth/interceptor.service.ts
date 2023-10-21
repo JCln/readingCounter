@@ -9,13 +9,15 @@ import { JwtService } from './jwt.service';
 import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { UtilsService } from 'services/utils.service';
 import { EN_Mess } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
-  private authorizationHeader = "Authorization";
-  private bearer = `Bearer `;
+  private readonly authorizationHeader = 'Authorization';
+  private readonly bearer = `Bearer `;
+  private readonly errorType = 'application/json';
 
   constructor(
     private jwtService: JwtService,
@@ -76,7 +78,7 @@ export class InterceptorService implements HttpInterceptor {
         catchError((error => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === ENClientServerErrors.cs401) {
-              if (req.url.includes('login')) {
+              if (req.url.includes(EN_Routes.login)) {
                 this.showLoginMessage(error);
                 return;
               }
@@ -85,6 +87,7 @@ export class InterceptorService implements HttpInterceptor {
                 this.authService.logout();
               }
               else {
+                // if user have logged in
                 const errTxt = error.error.message ? error.error.message : EN_Mess.access_denied401;
                 this.showDialog(errTxt);
               }
@@ -93,7 +96,7 @@ export class InterceptorService implements HttpInterceptor {
               this.showDialogSpeciall(error);
             }
           }
-          if (error instanceof HttpErrorResponse && error.error instanceof Blob && error.error.type === "application/json") {
+          if (error instanceof HttpErrorResponse && error.error instanceof Blob && error.error.type === this.errorType) {
             // https://github.com/angular/angular/issues/19888
             // When request of type Blob, the error is also in Blob instead of object of the json data
             return new Promise<any>((resolve, reject) => {

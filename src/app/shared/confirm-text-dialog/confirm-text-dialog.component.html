@@ -22,10 +22,10 @@
             </app-date-jalali>
         </div>
     </div>
-    <app-change-password (closeConfirmed)="cancel()" *ngIf="data?.changePassword"></app-change-password>
+    <app-change-password (closeConfirmed)="cancel($event)" *ngIf="data?.changePassword"></app-change-password>
 
     <mat-dialog-actions *ngIf="!data?.changePassword">
-        <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel()">
+        <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel($event)">
             <i class="pi pi-times"></i>
         </button>
         <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"

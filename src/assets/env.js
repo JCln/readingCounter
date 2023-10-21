@@ -2,9 +2,10 @@
     window.__env = window.__env || {};
 
     // API url
-    window.__env.headerProvinceTitle = '';
+    window.__env.headerProvinceTitle = 'ENV';
     // window.__env.API_URL = 'http://127.0.0.1/kontoriNew';
-    window.__env.API_URL = 'http://192.168.100.18:7529';
+    // window.__env.API_URL = 'http://192.168.100.18:7529';
+    window.__env.API_URL = 'https://37.191.92.157/kontoriNew'
     // for map instantiation    
     window.__env.mapUrls = [
         { title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
@@ -44,20 +45,23 @@
         { id: 3, title: 'حذف موقت' },
         { id: 5, title: 'حذف موقت' }
     ];
-    window.__env.getLogoutReason = [
-        { id: 0, title: 'خروج از dddبرنامه' },
-        { id: 1, title: 'ویراddیش شده' },
-        { id: 2, title: 'تغییر گddذرواژه' },
-        { id: 3, title: 'لاگین22 همزمان' },
-        { id: 4, title: 'غیرفddعال شده' }
+    window.__env.getLogoutReasonDictionary = [
+        { id: 0, title: 'توسط کاربر' },
+        { id: 1, title: 'ویرایش شده' },
+        { id: 2, title: 'تغییر گذرواژه' },
+        { id: 3, title: 'لاگین همزمان' },
+        { id: 4, title: 'غیرفعال شده' },
+        { id: 5, title: 'اتمام زمان فعالیت مجاز' },
+        { id: 6, title: 'بازنشانی گذرواژه' },
+        { id: 7, title: 'تغییر نوع ورود' }
     ];
     window.__env.getInvalidLoginReasonDictionary = [
-        { id: 1, title: 'کاربر غیdرمجاز' },
-        { id: 2, title: 'گذرواژهd نادرست' },
-        { id: 3, title: 'مسدودسازی درخواdست مکرر' },
-        { id: 4, title: 'کاربdر غیرفعال' },
-        { id: 5, title: 'کاربdر قفل شده' },
-        { id: 6, title: 'شماره dسریال نادرست' }
+        { id: 1, title: 'کاربر غیرمجاز' },
+        { id: 2, title: 'گذرواژه نادرست' },
+        { id: 3, title: 'مسدودسازی درخواست مکرر' },
+        { id: 4, title: 'کاربر غیرفعال' },
+        { id: 5, title: 'کاربر قفل شده' },
+        { id: 6, title: 'شماره سریال نادرست' }
     ];
     window.__env.hasCanclableSpinner = false;
     window.__env.timeout = 18000;

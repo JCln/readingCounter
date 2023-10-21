@@ -40,7 +40,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     this.sideBar = !this.sideBar;
     this.sidebarEvent.emit(this.sideBar);
   }
-  changePasswordFromDialog = async () => {
+  changePasswordFromDialog = async (): Promise<any> => {
     const config = {
       messageTitle: EN_messages.passwordShouldChange,
       text: EN_messages.passwordShouldChangeReason,
@@ -72,19 +72,16 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
         console.log(res);
     });
   }
-  private canShowPreviousFailures = async () => {
-    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.myPreviousFailures);
-    if (res.length)
-      this.openMyPreviousDialog(res);
-  }
   getNotification = async () => {
-    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
-    this.badgeNumber = res.count;
+    const myPrevious = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.myPreviousFailures);
+    if (myPrevious.length)
+      this.openMyPreviousDialog(myPrevious);
     const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.getShouldIChangePassword, this.utilsService.compositeService.getAuthUser().userId);
     console.log(shouldIChangePass);
     if (shouldIChangePass)
       this.changePasswordFromDialog();
-    // this.canShowPreviousFailures();
+    const counter = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);
+    this.badgeNumber = counter.count;
   }
 
   hubConnect = () => {

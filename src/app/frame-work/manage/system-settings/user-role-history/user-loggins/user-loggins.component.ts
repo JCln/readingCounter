@@ -35,7 +35,7 @@ export class UserLogginsComponent extends FactoryONE {
       this.invalidLoginReasonDictionary = this.securityService.utilsService.getInvalidLoginReason();
       this.convertLoginTime();
       Converter.convertIdToTitle(this.dataSource, this.logoutReasonDictionary, 'logoutReasonId');
-      Converter.convertIdToTitle(this.dataSource, this.logoutReasonDictionary, 'invalidLoginReasonId');
+      Converter.convertIdToTitle(this.dataSource, this.invalidLoginReasonDictionary, 'invalidLoginReasonId');
     }
   }
 

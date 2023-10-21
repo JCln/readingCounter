@@ -361,7 +361,7 @@ export enum ENInterfaces {
     policiesCompare = 'V1/Policy/Compare',
     ipRateManager = 'V1/Ip/SpecialRules',
     getSideBar = 'V1/User/SideBar',
-    myPreviousFailures = 'V1/Account/MyPrevoiusFailures',
+    myPreviousFailures = 'V1/Account/MyPreviousFailures',
     getShouldIChangePassword = 'V1/Account/ShouldIChangePassword',
     getWaterMarkConfig = 'V1/WaterMark/Get',
     postWaterMarkConfig = 'V1/WaterMark/AddOrEdit',

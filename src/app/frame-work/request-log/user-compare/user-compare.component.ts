@@ -96,6 +96,7 @@ export class UserCompareComponent extends FactoryONE {
       userDisplayName: ''
     }
   }
+   
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.securityService.userMasterDetailsHistory_pageSign.id) {
       this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);

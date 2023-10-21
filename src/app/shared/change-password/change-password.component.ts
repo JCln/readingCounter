@@ -21,14 +21,14 @@ export class ChangePasswordComponent {
 
     password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
 
-    onCloseConfirmed() {
-        this.closeConfirmed.emit();
+    onCloseConfirmed(val: boolean) {
+        this.closeConfirmed.emit(val);
     }
     changePassword = async () => {
         if (this._isFromProfile) {
             const res = await this.profileService.changePassword(this.password);
             this.profileService.showMessage(res.message);
-            this.onCloseConfirmed();
+            this.onCloseConfirmed(false);
         }
         else {
             if (this.profileService.verification(this.password)) {
@@ -37,7 +37,7 @@ export class ChangePasswordComponent {
                 if (refreshResponse) {
                     this.authService.saveToStorage(refreshResponse);
                     this.profileService.showMessage(res.message);
-                    this.onCloseConfirmed();
+                    this.onCloseConfirmed(true);
                 }
                 else {
                     this.profileService.showMessage(EN_messages.reLoginPlease);
