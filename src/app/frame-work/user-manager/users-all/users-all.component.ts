@@ -54,6 +54,11 @@ export class UsersAllComponent extends FactoryONE {
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
+  removeUser = async (dataSource: object) => {
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRemove, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
+    this.refreshTable();
+  }
   showExactConfig = (index: number) => {
     let a = document.querySelectorAll('.more_configs');
     a[index].classList.toggle('showConfigs');

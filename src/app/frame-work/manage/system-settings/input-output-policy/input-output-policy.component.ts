@@ -90,7 +90,7 @@ export class InputOutputPolicyComponent extends FactoryONE {
           console.log(error);
           const config = {
             messageTitle: EN_messages.checkPlease,
-            text: error.message,
+            text: error.error.message,
             minWidth: '20rem',
             isInput: false,
             isDelete: false,

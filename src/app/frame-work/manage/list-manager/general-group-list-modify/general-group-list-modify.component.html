@@ -30,7 +30,7 @@
 </section>
 
 <main style="position: relative; ">
-    <p-table id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
+    <p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
         [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
@@ -68,6 +68,9 @@
                     </i>
                 </div>
                 <div class="left_side">
+                    <input pInputText class="_general_search" type="text"
+                        (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
+
                     <i (click)="hasBeenReadsToggler()">
                         <label class="font_family"
                             for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}})

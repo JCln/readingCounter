@@ -1,5 +1,9 @@
 @import "variable.scss";
 
+i {
+  color: var(--primary_5);
+}
+
 .dropdown {
   position: relative;
   place-items: center;

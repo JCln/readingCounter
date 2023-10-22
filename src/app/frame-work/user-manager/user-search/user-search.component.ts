@@ -15,7 +15,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class UserSearchComponent extends FactoryONE {
   constructor(
     public userAddManagerService: UserAddManagerService,
-    public usersAllService: UsersAllService,    
+    public usersAllService: UsersAllService,
     public closeTabService: CloseTabService
   ) {
     super();
@@ -50,6 +50,11 @@ export class UserSearchComponent extends FactoryONE {
   }
   unLockUser = async (dataSource: object) => {
     const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.unlockUser, dataSource['dataSource'].id);
+    this.usersAllService.snackBarMessageSuccess(a);
+    this.refreshTable();
+  }
+  removeUser = async (dataSource: object) => {
+    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRemove, dataSource['dataSource'].id);
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }

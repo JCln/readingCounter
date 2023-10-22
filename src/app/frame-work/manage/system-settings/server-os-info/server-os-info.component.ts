@@ -23,7 +23,7 @@ export class ServerOsInfoComponent extends FactoryONE {
     this.closeTabService.saveDataForOSInfo = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerOSInfo);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (MathS.isNaN(this.closeTabService.saveDataForOSInfo.cpuCoreCount)) {
+    if (MathS.isNull(this.closeTabService.saveDataForOSInfo.cpuCoreCount)) {
       this.connectToServer();
     }
   }

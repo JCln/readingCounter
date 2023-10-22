@@ -109,6 +109,8 @@ export interface IOnOffLoadFlat {
     masraf: number,
     eslahType: number,
     newRate: number,
+    newRateDaily: number,
+    reteDifference: number,
     dateDifference: number,
     counterNumberShown: boolean,
     excludedForBazdid: boolean,
