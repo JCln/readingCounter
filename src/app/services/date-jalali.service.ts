@@ -7,7 +7,7 @@ import { Converter } from 'src/app/classes/converter';
 export class DateJalaliService {
 
   getGregorianDate = (): string => {
-    return new Date().toLocaleString("en-US");
+    return new Date().toLocaleString();
   }
   getCurrentTime = () => {
     let persianTime = new Date().toLocaleTimeString('en-US', {
