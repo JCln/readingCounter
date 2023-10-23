@@ -136,6 +136,7 @@ export enum EN_messages {
     insert_nextBazdidDate = 'تاریخ بازدید بعدی را مشخص نمایید',
 
     format_invalid_trackNumber = 'فرمت شماره پیگیری اشتباه است',
+    format_invalidOrWrong = 'مقدار/ مقادیر وارد شده خالی یا اشتباه است',
     format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',
     format_invalid_numberLengths = 'تعداد ارقام وارد شده اشتباه است',
     should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',

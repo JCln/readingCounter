@@ -535,14 +535,6 @@ export class ImportDynamicService {
         return items
     })
   }
-  setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
-    dataSource.forEach(item => {
-      if (item.newRate > 0)
-        item.newRate = parseFloat(MathS.getRange(item.newRate))
-      if (item.gisAccuracy)
-        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
-    })
-  }
   makeHadPicturesToBoolean = (dataSource: any) => {
     dataSource.forEach(item => {
       if (item.imageCount > 0)

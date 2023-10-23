@@ -134,13 +134,33 @@ export class SecurityService {
     }
     return true;
   }
-  verificationIOPolicyAdd = (dataSource: object): boolean => {
-    if (MathS.isNull(dataSource['inputExtensions'])) {
+  verificationIOPolicyAdd = (dataSource: IIOPolicy): boolean => {
+    if (MathS.isNull(dataSource.inputExtensions)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_inputExtensions);
       return false;
     }
-    if (MathS.isNull(dataSource['contentType'])) {
+    if (MathS.isNull(dataSource.contentType)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_contentType);
+      return false;
+    }
+    if (MathS.isNull(dataSource.inputMaxCountPerDay) || MathS.isNaN(dataSource.inputMaxCountPerDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalidOrWrong);
+      return false;
+    }
+    if (MathS.isNull(dataSource.inputMaxCountPerUser) || MathS.isNaN(dataSource.inputMaxCountPerUser)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalidOrWrong);
+      return false;
+    }
+    if (MathS.isNull(dataSource.outputMaxCountPerDay) || MathS.isNaN(dataSource.outputMaxCountPerDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalidOrWrong);
+      return false;
+    }
+    if (MathS.isNull(dataSource.outputMaxCountPerUser) || MathS.isNaN(dataSource.outputMaxCountPerUser)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalidOrWrong);
+      return false;
+    }
+    if (MathS.isNull(dataSource.inputMaxSizeKb) || MathS.isNaN(dataSource.inputMaxSizeKb)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalidOrWrong);
       return false;
     }
     return true;

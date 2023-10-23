@@ -66,11 +66,9 @@ export class ListManagerService {
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
-      item.newRate = parseFloat(MathS.getRange(item.newRate))
-      item.preAverage = parseFloat(MathS.getRange(item.preAverage));
-      item.x = MathS.getRange(item.x);
-      item.y = MathS.getRange(item.y);
-      item.gisAccuracy = MathS.getRange(item.gisAccuracy);
+      item.newRate = parseFloat(MathS.getFormatRange(item.newRate))
+      item.preAverage = parseFloat(MathS.getFormatRange(item.preAverage));
+      // item.x = item.x ? MathS.getFormatRange(item.x) : ''; format for string should be like this
     })
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {

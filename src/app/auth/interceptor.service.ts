@@ -53,10 +53,9 @@ export class InterceptorService implements HttpInterceptor {
     this.utilsService.snackBarMessageFailed(error.error.message);
   }
   private showDialog = async (error: any) => {
-    // await this.accessDenied_401(error).finally(() => {
-    //   this.authService.logout();
-    // });
-    await this.accessDenied_401(error);
+    await this.accessDenied_401(error).finally(() => {
+      this.authService.logout();
+    });
   }
   private showDialogSpeciall = async (error: any) => {
     await this.accessDeniedSpecial(error.error.message).finally(() => {

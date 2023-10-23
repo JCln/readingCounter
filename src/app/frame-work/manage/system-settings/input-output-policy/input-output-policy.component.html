@@ -10,25 +10,25 @@
             </textarea>
         </li>
         <li class="number_vals">
-            <h3> حداکثر حجم فایل ورودی</h3>
+            <h3> حداکثر حجم فایل قابل ارسال(بارگذاری)</h3>
             <div class="plus_minus">
                 <div class="plus" (click)="plusOrMinusInputMaxSizeKb(closeTabService.IOPolicy.inputMaxSizeKb + 1)">
                     <i class="fa fa-plus"></i>
                 </div>
-                <div class="_value"> {{closeTabService.IOPolicy.inputMaxSizeKb}}</div>
+                <input class="_value" type="number" [(ngModel)]="closeTabService.IOPolicy.inputMaxSizeKb">
                 <div class="minus" (click)="plusOrMinusInputMaxSizeKb(closeTabService.IOPolicy.inputMaxSizeKb - 1)">
                     <i class="fa fa-minus"></i>
                 </div>
             </div>
         </li>
         <li class="number_vals">
-            <h3> حداکثر تعداد فایل قابل بارگیری(دریافت) هر کاربر</h3>
+            <h3> حداکثر تعداد فایل قابل ارسال(بارگذاری) هر کاربر</h3>
             <div class="plus_minus">
                 <div class="plus"
                     (click)="plusOrMinusInputMaxCountPerUser(closeTabService.IOPolicy.inputMaxCountPerUser + 1)">
                     <i class="fa fa-plus"></i>
                 </div>
-                <div class="_value"> {{closeTabService.IOPolicy.inputMaxCountPerUser}}</div>
+                <input class="_value" type="number" [(ngModel)]="closeTabService.IOPolicy.inputMaxCountPerUser">
                 <div class="minus"
                     (click)="plusOrMinusInputMaxCountPerUser(closeTabService.IOPolicy.inputMaxCountPerUser - 1)">
                     <i class="fa fa-minus"></i>
@@ -36,13 +36,13 @@
             </div>
         </li>
         <li class="number_vals">
-            <h3>حداکثر تعداد کل فایل های قابل بارگیری (دریافت) در روز</h3>
+            <h3>حداکثر تعداد کل فایل های قابل ارسال (بارگذاری) در روز</h3>
             <div class="plus_minus">
                 <div class="plus"
                     (click)="plusOrMinusInputMaxCountPerDay(closeTabService.IOPolicy.inputMaxCountPerDay + 1)">
                     <i class="fa fa-plus"></i>
                 </div>
-                <div class="_value"> {{closeTabService.IOPolicy.inputMaxCountPerDay}}</div>
+                <input class="_value" type="number" [(ngModel)]="closeTabService.IOPolicy.inputMaxCountPerDay">
                 <div class="minus"
                     (click)="plusOrMinusInputMaxCountPerDay(closeTabService.IOPolicy.inputMaxCountPerDay - 1)">
                     <i class="fa fa-minus"></i>
@@ -50,13 +50,13 @@
             </div>
         </li>
         <li class="number_vals">
-            <h3> حداکثر تعداد فایل قابل بارگذاری(ارسال) هر کاربر</h3>
+            <h3> حداکثر تعداد فایل قابل دریافت(بارگیری) هر کاربر</h3>
             <div class="plus_minus">
                 <div class="plus"
                     (click)="plusOrMinusOutputMaxCountPerUser(closeTabService.IOPolicy.outputMaxCountPerUser + 1)">
                     <i class="fa fa-plus"></i>
                 </div>
-                <div class="_value"> {{closeTabService.IOPolicy.outputMaxCountPerUser}}</div>
+                <input class="_value" type="number" [(ngModel)]="closeTabService.IOPolicy.outputMaxCountPerUser">
                 <div class="minus"
                     (click)="plusOrMinusOutputMaxCountPerUser(closeTabService.IOPolicy.outputMaxCountPerUser - 1)">
                     <i class="fa fa-minus"></i>
@@ -64,13 +64,13 @@
             </div>
         </li>
         <li class="number_vals">
-            <h3>حداکثر تعداد کل فایل های قابل بارگذاری(ارسال) در روز</h3>
+            <h3>حداکثر تعداد کل فایل های قابل دریافت(بارگیری) در روز</h3>
             <div class="plus_minus">
                 <div class="plus"
                     (click)="plusOrMinusOutputMaxCountPerDay(closeTabService.IOPolicy.outputMaxCountPerDay + 1)">
                     <i class="fa fa-plus"></i>
                 </div>
-                <div class="_value"> {{closeTabService.IOPolicy.outputMaxCountPerDay}}</div>
+                <input class="_value" type="number" [(ngModel)]="closeTabService.IOPolicy.outputMaxCountPerDay">
                 <div class="minus"
                     (click)="plusOrMinusOutputMaxCountPerDay(closeTabService.IOPolicy.outputMaxCountPerDay - 1)">
                     <i class="fa fa-minus"></i>

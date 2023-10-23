@@ -91,7 +91,7 @@ export class ProComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.eslahType, 'eslahType');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
-    this.searchService.setDynamicPartRanges(this.closeTabService.saveDataForSearchPro);
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForSearchPro);
     this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
   }
   classWrapper = async (canRefresh?: boolean) => {

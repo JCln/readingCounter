@@ -58,7 +58,7 @@ export class MoshtarakComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.eslahType, 'eslahType');
 
-    this.searchService.setDynamicPartRanges(this.closeTabService.saveDataForSearchMoshtarakin);
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForSearchMoshtarakin);
   }
   connectToServer = async () => {
     if (this.searchService.verificationMosh(this.searchService.searchReqMosh)) {

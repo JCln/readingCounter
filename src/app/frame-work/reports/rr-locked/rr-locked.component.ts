@@ -73,8 +73,7 @@ export class RrLockedComponent extends AllListsFactory {
           qotrCode: 'qotrCode'
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'karbariCode');
-
-    // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.lockedReq._selectedKindId);

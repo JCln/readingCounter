@@ -77,6 +77,7 @@ export class ListModifyComponent extends AllListsFactory {
             qotrCode: 'qotrCode'
           })
       Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.karbariDictionaryCode, 'karbariCode');
+      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMModify);
     }
   }
   toPrePage = () => {

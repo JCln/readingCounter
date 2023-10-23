@@ -84,6 +84,8 @@ export class GeneralListModifyComponent extends AllListsFactory {
           qotrCode: 'qotrCode'
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.karbariDictionaryCode, 'karbariCode');
+    // after clicked on icon convert should happend because there is no data available before then
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.generalModifyLists_pageSign.GUid) {
@@ -97,8 +99,8 @@ export class GeneralListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralModifyReq = null;
       }
       this.insertSelectedColumns();
-      // setDynamics should implement before new instance of dataSource create
-      // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
+      // setDynamics should implement before new instance of dataSource create      
+      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
       this.closeTabService.saveDataForLMGeneralModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralModify));
     }
   }

@@ -15,6 +15,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
   providedIn: 'root'
 })
 export class OutputManagerService {
+  private readonly _exportType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 
   constructor(
     private utilsService: UtilsService
@@ -158,25 +159,29 @@ export class OutputManagerService {
       if (!worksheet[address]) continue;
       worksheet[address].v = datas.headers[C];
     }
-    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const workbook = {
+      Views: [
+        { RTL: true }
+      ],
+      Sheets: { 'data': worksheet },
+      SheetNames: ['data']
+    };
     const excelBuffer: any = XLSX.write(workbook, { bookType: type, type: 'array' });
     this.saveAsExcelFile(excelBuffer, fileName, '.' + type);
   }
   saveAsExcelABuffer = (buffer: any, name: string) => {
     console.log(buffer);
     import("file-saver").then(FileSaver => {
-      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
+        type: this._exportType
       });
       FileSaver.saveAs(data, name);
     })
   }
   saveAsExcelFile(buffer: any, fileName: string, EXCEL_EXTENSION: string): void {
     import("file-saver").then(FileSaver => {
-      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
+        type: this._exportType
       });
       console.log(data);
 

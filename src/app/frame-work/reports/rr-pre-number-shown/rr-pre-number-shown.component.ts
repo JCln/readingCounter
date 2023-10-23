@@ -80,8 +80,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
           qotrCode: 'qotrCode'
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.karbariDictionaryCode, 'karbariCode');
-
-    // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRPreNumShown);
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRPreNumShown);
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);

@@ -75,7 +75,7 @@ export class AssessPreComponent extends AllListsFactory {
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.karbariDictionaryCode, 'karbariCode');
 
-    this.importDynamicService.setDynamicPartRanges(this.closeTabService.saveDataForAssessPre);
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForAssessPre);
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForAssessPre = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);

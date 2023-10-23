@@ -116,6 +116,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
             qotrCode: 'qotrCode'
           })
       Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralGroupModify, this.karbariDictionaryCode, 'karbariCode');
+      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralGroupModify);
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
