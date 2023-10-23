@@ -29,7 +29,7 @@ export class AllComponent extends AllListsFactory {
   ) {
     super(dialogService, listManagerService);
   }
-  dictionaryWrapps = async () => {
+  dictionaryWrapps = async (): Promise<any> => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -57,7 +57,9 @@ export class AllComponent extends AllListsFactory {
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMAll);
-
+    return new Promise((resolve) => {
+      resolve(true);
+    });
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.allLists_pageSign.GUid) {
@@ -74,11 +76,12 @@ export class AllComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMAll = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
         this.closeTabService.saveDataForLMAllReq.GUID = this.allListsService.allLists_pageSign.GUid;
       }
-      // setDynamics should implement before new instance of dataSource create
-      // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);
-      // this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
 
-      this.dictionaryWrapps();
+      await this.dictionaryWrapps();
+      // setDynamics should implement before new instance of dataSource create
+      // this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
+      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);
+
     }
   }
 

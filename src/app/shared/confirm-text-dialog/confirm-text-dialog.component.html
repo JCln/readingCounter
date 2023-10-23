@@ -25,7 +25,7 @@
     <app-change-password (closeConfirmed)="cancel($event)" *ngIf="data?.changePassword"></app-change-password>
 
     <mat-dialog-actions *ngIf="!data?.changePassword">
-        <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel($event)">
+        <button class="close_dg" type="button" *ngIf="data.doesNotReturnButton" (click)="cancel(false)">
             <i class="pi pi-times"></i>
         </button>
         <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"

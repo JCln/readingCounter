@@ -22,6 +22,7 @@ import { OffloadModify } from '../classes/offload-modify-type';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 
 @Injectable({
   providedIn: 'root'
@@ -63,17 +64,15 @@ export class ListManagerService {
     return this.utilsService.getDeleteDictionary();
   }
   /*OTHER */
-  // setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
-  //   console.log('do nothing for now');
-  // dataSource.forEach(item => {
-  //   if (item.newRate > 0)
-  //     item.newRate = parseFloat(MathS.getRange(item.newRate))
-  //   item.preAverage = +MathS.getRange(item.preAverage);
-  //   item.x = MathS.getRange(item.x);
-  //   item.y = MathS.getRange(item.y);
-  //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
-  // })
-  // }
+  setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
+    dataSource.forEach(item => {
+      item.newRate = parseFloat(MathS.getRange(item.newRate))
+      item.preAverage = parseFloat(MathS.getRange(item.preAverage));
+      item.x = MathS.getRange(item.x);
+      item.y = MathS.getRange(item.y);
+      item.gisAccuracy = MathS.getRange(item.gisAccuracy);
+    })
+  }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
