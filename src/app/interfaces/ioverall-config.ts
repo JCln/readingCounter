@@ -413,6 +413,7 @@ export enum ENLocalStorageNames {
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
     fontStyle = 'fontStyle',
+    tablesGeneralSearch = 'tablesGeneralSearch',
     reOrderableTable = 'reOrderableTable',
     defaultAggregateTracks = 'defaultAggregateTracks',
 }

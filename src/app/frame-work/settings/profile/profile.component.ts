@@ -21,6 +21,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsGeneralSearch: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
@@ -150,6 +151,9 @@ export class ProfileComponent extends FactoryONE {
   getDefaultAggregationTrackings = () => {
     this.profileService._agg.flag = this.profileService.getLocalDefaultAggregateTracks();
   }
+  getTableGeneralSearch = () => {
+    this.profileService._agg.hasGeneralSearch = this.profileService.getTableGeneralSearch();
+  }
   getHasCanclableSpinner = () => {
     this.profileService.showStateVals.hasCanclableSpinner = this.profileService.getHasCanclableSpinner();
   }
@@ -185,6 +189,10 @@ export class ProfileComponent extends FactoryONE {
   setDefaultAggregateTracks = (val: any) => {
     this.profileService.setLocaldefaultAggregateTracks(val);
     val ? this.profileService.showMessage(EN_messages.possibledefaultAggregateTracksEnabled) : this.profileService.showMessage(EN_messages.possibledefaultAggregateTracksDisabled);
+  }
+  setTableGeneralSearch = (val: any) => {
+    this.profileService.setLocalTableGeneralSearch(val);
+    val ? this.profileService.showMessage(EN_messages.tableGeneralSearchEnabled) : this.profileService.showMessage(EN_messages.tableGeneralSearchDisabled);
   }
 
 }

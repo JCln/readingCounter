@@ -1,9 +1,9 @@
-<p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
+<p-table #dtable id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
     (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
-    editMode="row" dataKey="id" [reorderableColumns]=_reOrderableTable #dtable>
+    editMode="row" dataKey="id" [reorderableColumns]=_reOrderableTable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -60,6 +60,9 @@
                 </i>
             </div>
             <div class="left_side">
+                <input *ngIf="profileService._agg.hasGeneralSearch" pInputText class="_general_search" type="text"
+                    (input)="dtable.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
+
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>

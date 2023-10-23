@@ -15,17 +15,6 @@
   border: none;
 }
 
-._general_search {
-  font-family: $font_family;
-  font-size: var(--font_s);
-  font-weight: 600;
-  margin-left: .25rem;
-  border: 1px solid;
-  color: var(--secondary_8);
-  border-radius: 7px;
-  background: var(--white);
-}
-
 .error_info {
   position: absolute;
   display: flex;

@@ -93,6 +93,15 @@
     </section>
     <section>
         <div class="content">
+            <h1 class="title">جستجوی کلی در جدول‌ها</h1>
+            <p-selectButton [options]="stateOptionsGeneralSearch" [(ngModel)]="profileService._agg.hasGeneralSearch"
+                optionLabel="label" optionValue="value"
+                (onChange)="setTableGeneralSearch(profileService._agg.hasGeneralSearch)">
+            </p-selectButton>
+        </div>
+    </section>
+    <section>
+        <div class="content">
             <h1 class="title">ورود دو مرحله‌ای</h1>
             <p-selectButton [options]="stateOptionsTwoSteps" [(ngModel)]="profileService.showStateVals.twoStepsAuth"
                 optionLabel="label" optionValue="value"

@@ -11,11 +11,18 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
 import { LocalClientConfigsService } from './local-client-configs.service';
+import { ENFontStyle } from 'interfaces/istyles';
 
 export interface imageOption {
   width: string,
   height: string,
   objectFit: string,
+}
+export interface ITableDetails {
+  rowGroupMetadata: object
+  selectedAggregate: string,
+  flag: boolean,
+  hasGeneralSearch: boolean,
 }
 @Injectable({
   providedIn: 'root'
@@ -84,6 +91,9 @@ export class ProfileService {
   setLocaldefaultAggregateTracks = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.defaultAggregateTracks, bol);
   }
+  setLocalTableGeneralSearch = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.tablesGeneralSearch, bol);
+  }
   setCanclableSpinner = (hasCanclableSpinner: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCanclableSpinner, hasCanclableSpinner);
   }
@@ -110,7 +120,10 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.utilsService.envService.hasCanclableSpinner);
   }
   getFontStyle = (): number => {
-    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 1);
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, ENFontStyle.fontXS);
+  }
+  getTableGeneralSearch = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.tablesGeneralSearch, false);
   }
   verification = (password: IChangePassword) => {
     if (MathS.isNull(password.oldPassword)) {
@@ -178,10 +191,11 @@ export class ProfileService {
       this.jwtService.removeAllExceptAuths();
   }
   // TODO: get access aggregating from trackingManager(کارتابل)
-  _agg = {
+  _agg: ITableDetails = {
     rowGroupMetadata: {},
     selectedAggregate: 'listNumber',
-    flag: this.getLocalDefaultAggregateTracks()
+    flag: this.getLocalDefaultAggregateTracks(),
+    hasGeneralSearch: this.getTableGeneralSearch()
   }
 
 }

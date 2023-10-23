@@ -185,6 +185,8 @@ export enum EN_messages {
     twoStepsAuthDisabled = 'ورود دو مرحله ای غیرفعال شد',
     areYouSure = 'آیا اطمینان دارید؟',
     possibledefaultAggregateTracksEnabled = 'گروه‌بندی در کارتابل بطور پیشفرض فعال شد',
+    tableGeneralSearchEnabled = 'جستجوی کلی در جداول فعال شد',
+    tableGeneralSearchDisabled = 'جستجوی کلی در جداول غیرفعال شد',
     possibledefaultAggregateTracksDisabled = 'گروه‌بندی در کارتابل بطور پیشفرض غیرفعال شد',
     spinnerHasCancelable = 'امکان لغو درخواست غیر فعال شد',
     spinnerHasActive = 'امکان لغو درخواست فعال شد',
