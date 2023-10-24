@@ -1,3 +1,4 @@
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -33,6 +34,7 @@ export class SecurityService {
   };
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService
   ) { }
 

@@ -49,6 +49,8 @@ export enum EN_messages {
     insert_work = 'خدمتی را مشخص نمایید',
     insert_File = 'فایلی انتخاب کنید',
     insert_Image = 'تصویری انتخاب کنید',
+    uploadMaxCountPassed = 'حجم فایل انتخابی از حداکثر حجم قابل ارسال(آپلود) بیشتر است',
+    insertIsNotImage = 'تصویری انتخاب نشده است',
     imageNotExists = 'تصویر/صوت برای نمایش وجود ندارد',
     changesOnNextRead = 'تغییر تعداد نمایش با قرائت بعدی اعمال خواهد شد',
     insert_video = 'ویدیویی انتخاب کنید',
@@ -438,12 +440,12 @@ export enum ENEssentialsToSave {
     ipFilterGetBlocked = 'ipFilterGetBlocked',
     ipfilterHistory = 'ipfilterHistory',
     IOPolicyHistory = 'IOPolicyHistory',
-    IOPolicy = 'IOPolicy',
     userCompare = 'userCompare',
     downloadAttempts = 'downloadAttempts',
     uploadAttempts = 'uploadAttempts',
     getUploaded = 'getUploaded',
-    logMemoryStatus = "logMemoryStatus"
+    logMemoryStatus = 'logMemoryStatus',
+    iOPolicy = 'iOPolicy'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

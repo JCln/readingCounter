@@ -2,6 +2,7 @@ import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from '../classes/math-s';
+import { IIOPolicy } from 'interfaces/iserver-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,16 @@ export class DictionaryWrapperService {
   private imageAttributionAllDictionary: any = [];
   private counterReportDictionary: any = [];
   private counterStateDictionary: any = [];
+  private iOPolicy: IIOPolicy = {
+    id: null,
+    inputExtensions: '',
+    contentType: '',
+    inputMaxSizeKb: null,
+    inputMaxCountPerUser: null,
+    inputMaxCountPerDay: null,
+    outputMaxCountPerUser: null,
+    outputMaxCountPerDay: null,
+  };
 
   private counterReportByZoneDictionary = {
     dictionary: null,
@@ -192,6 +203,13 @@ export class DictionaryWrapperService {
     this.setReadingConfigDefaultByZoneDictionary(res, zoneId);
     return res;
   }
+  getIOPolicy = async (canRefresh: boolean): Promise<any> => {
+    if (!MathS.isNull(this.iOPolicy.id) && !canRefresh)
+      return this.iOPolicy;
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicy);
+    this.setIOPolicy(res);
+    return res;
+  }
   getFragmentMasterByZoneIdDictionary = async (zoneId: number): Promise<any> => {
     if (this.fragmentMasterByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.fragmentMasterByZoneDictionary.dictionary))
       return this.fragmentMasterByZoneDictionary.dictionary;
@@ -329,6 +347,9 @@ export class DictionaryWrapperService {
     this.readingConfigDefaultByZoneDictionary.dictionary = v;
     this.readingConfigDefaultByZoneDictionary.zoneId = id;
   }
+  private setIOPolicy(v: any) {
+    this.iOPolicy = v;
+  }
   private setUserCounterReadersByZoneDictionary(v: any, id: number) {
     this.userCounterReadersByZoneDictionary.dictionary = v;
     this.userCounterReadersByZoneDictionary.zoneId = id;
@@ -396,6 +417,7 @@ export class DictionaryWrapperService {
     this.traverseDifferentialDictionary = [];
     this.counterReportByZoneDictionary.dictionary = [];
     this.counterReportByZoneDictionary.zoneId = null;
+    this.iOPolicy.id = null;
     this.readingConfigDefaultByZoneDictionary.dictionary = [];
     this.readingConfigDefaultByZoneDictionary.zoneId = null;
     this.userCounterReadersByZoneDictionary.dictionary = [];

@@ -2,6 +2,7 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ENSnackBarColors } from 'interfaces/enums.enum';
+import { IIOPolicy } from 'interfaces/iserver-manager';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { MessageService } from 'services/message.service';
 import { UsersAllService } from 'services/users-all.service';
@@ -12,6 +13,7 @@ import { UsersAllService } from 'services/users-all.service';
   styleUrls: ['./user-onlines-img-dg.component.scss']
 })
 export class UserOnlinesImgDgComponent implements OnInit {
+  ioPolicy: IIOPolicy;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -43,8 +45,8 @@ export class UserOnlinesImgDgComponent implements OnInit {
     }
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
-
-      if (this.usersAllService.checkVertiticationNotifDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq)) {
+      this.ioPolicy = await this.usersAllService.dictionaryWrapperService.getIOPolicy(false);
+      if (this.usersAllService.checkVertiticationNotifDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq, this.ioPolicy)) {
         this.usersAllService.postNotifyDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq).subscribe((event: HttpEvent<any>) => {
           switch (event.type) {
             case HttpEventType.Sent:

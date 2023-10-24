@@ -33,11 +33,9 @@ export class InputOutputPolicyComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     this.iOPolicyOptions = this.securityService.getIOPolicyToggle();
     if (canRefresh) {
-      this.closeTabService.IOPolicy.id = 0;
+      this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(true);
     }
-    if (MathS.isNull(this.closeTabService.IOPolicy.id)) {
-      this.closeTabService.IOPolicy = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicy);
-    }
+    this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(false);
   }
 
   plusOrMinusOutputMaxCountPerDay = (value: number) => {
@@ -45,43 +43,43 @@ export class InputOutputPolicyComponent extends FactoryONE {
       this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
-    this.closeTabService.IOPolicy.outputMaxCountPerDay = value;
+    this.closeTabService.iOPolicy.outputMaxCountPerDay = value;
   }
   plusOrMinusOutputMaxCountPerUser = (value: number) => {
     if (value < this.iOPolicyOptions.outputMaxCountPerUserMinLength) {
       this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
-    this.closeTabService.IOPolicy.outputMaxCountPerUser = value;
+    this.closeTabService.iOPolicy.outputMaxCountPerUser = value;
   }
   plusOrMinusInputMaxCountPerDay = (value: number) => {
     if (value < this.iOPolicyOptions.inputMaxCountPerDayMinLength) {
       this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
-    this.closeTabService.IOPolicy.inputMaxCountPerDay = value;
+    this.closeTabService.iOPolicy.inputMaxCountPerDay = value;
   }
   plusOrMinusInputMaxCountPerUser = (value: number) => {
     if (value < this.iOPolicyOptions.inputMaxCountPerUserMinLength) {
       this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
-    this.closeTabService.IOPolicy.inputMaxCountPerUser = value;
+    this.closeTabService.iOPolicy.inputMaxCountPerUser = value;
   }
   plusOrMinusInputMaxSizeKb = (value: number) => {
     if (value < this.iOPolicyOptions.inputMaxSizeKbMinLength) {
       this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
-    this.closeTabService.IOPolicy.inputMaxSizeKb = value;
+    this.closeTabService.iOPolicy.inputMaxSizeKb = value;
   }
 
   verification = async () => {
     // join input values time     
-    const _addOrEditInterface = MathS.isNull(this.closeTabService.IOPolicy.id) ? ENInterfaces.AddIOPolicy : ENInterfaces.EditIOPolicy
+    const _addOrEditInterface = MathS.isNull(this.closeTabService.iOPolicy.id) ? ENInterfaces.AddIOPolicy : ENInterfaces.EditIOPolicy
 
-    if (this.securityService.verificationIOPolicyAdd(this.closeTabService.IOPolicy)) {
-      this.securityService.ajaxReqWrapperService.interfaceManagerService.POSTBODY(_addOrEditInterface, this.closeTabService.IOPolicy)
+    if (this.securityService.verificationIOPolicyAdd(this.closeTabService.iOPolicy)) {
+      this.securityService.ajaxReqWrapperService.interfaceManagerService.POSTBODY(_addOrEditInterface, this.closeTabService.iOPolicy)
         .toPromise()
         .then((res: any) => {
           this.securityService.utilsService.snackBarMessageSuccess(res.message);

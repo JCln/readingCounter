@@ -1,6 +1,8 @@
 .spinner {
   position: fixed;
   font-size: var(--font_m);
+  margin-left: 6rem;
+  margin-top: .5rem;
   z-index: 1000;
 
   @media (min-width: 550px) {

@@ -12,6 +12,8 @@ import { MathS } from '../classes/math-s';
 import { SectionsService } from './sections.service';
 import { UtilsService } from './utils.service';
 import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { IIOPolicy } from 'interfaces/iserver-manager';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 export interface IUserEditNessessities {
   GUid: string
@@ -34,6 +36,7 @@ export class UsersAllService {
     public ajaxReqWrapperService: AjaxReqWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
+    public dictionaryWrapperService: DictionaryWrapperService,
     private columnManager: ColumnManager
   ) { }
 
@@ -268,7 +271,9 @@ export class UsersAllService {
     return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.signalRNotifDirectVideo, formData);
 
   }
-  checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage): boolean => {
+  checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage, ioPolicy: IIOPolicy): boolean => {
+    const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
+    const allowedNames = ['jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG'];
 
     if (MathS.isNull(val.caption)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
@@ -278,18 +283,20 @@ export class UsersAllService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Image);
       return false;
     }
-    if (
-      fileForm[0].name.split('.').pop().toLowerCase() === 'jpg' ||
-      fileForm[0].name.split('.').pop().toLowerCase() === 'jpeg' ||
-      fileForm[0].name.split('.').pop().toLowerCase() === 'png'
-    ) {
-      return true;
-    }
-    else {
+    if (allowedNames.indexOf(fileForm[0].name.split('.').pop().toLowerCase()) == -1) {
       this.utilsService.snackBarMessageWarn(EN_messages.should_insert_image);
       return false;
     }
-    // return true;
+    if (allowedExtension.indexOf(fileForm[0].type) == -1) {
+      this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    if (fileForm[0].size / 1024 > ioPolicy.inputMaxSizeKb) {
+      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      return false;
+    }
+
+    return true;
   }
   checkVertiticationNotifDirectVideo = (fileForm: FileList, val: INotifyDirectImage): boolean => {
 

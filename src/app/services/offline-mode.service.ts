@@ -9,6 +9,7 @@ import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { ISingleReadingCounterReq } from 'interfaces/isearchs';
+import { IIOPolicy } from 'interfaces/iserver-manager';
 
 interface IUploadForm {
   file: any,
@@ -92,7 +93,10 @@ export class OfflineModeService {
       return false;
     return true;
   }
-  checkVertiticationFileUploadSingle = (): boolean => {
+  checkVertiticationFileUploadSingle = (ioPolicy: IIOPolicy): boolean => {
+    const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
+    const allowedNames = ['jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG'];
+
     if (MathS.isNull(this.fileUploadSingle.searchBy)) {
       this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
@@ -105,17 +109,20 @@ export class OfflineModeService {
       this.utilsService.snackBarMessage(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
-    if (
-      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'jpg' ||
-      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'jpeg' ||
-      this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase() === 'png'
-    ) {
-      return true;
+    if (allowedExtension.indexOf(this.fileUploadSingleForm[0].type) == -1) {
+      this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
     }
-    else {
+    if (allowedNames.indexOf(this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase()) == -1) {
       this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
+    if (this.fileUploadSingleForm[0].size / 1024 > ioPolicy.inputMaxSizeKb) {
+      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      return false;
+    }
+
+    return true;
   }
   vertificationSingleReadingRequest = (dataSource: ISingleReadingCounterReq): boolean => {
     if (MathS.isNull(dataSource.searchBy)) {

@@ -20,10 +20,11 @@ section {
 
 ._icon {
     display: grid;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 5rem;
     min-width: 5rem;
+    margin-top: 0.3rem;
     font-size: 5rem;
     font-family: 'primeicons';
 }
@@ -74,7 +75,7 @@ section {
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         padding-right: 1px;
-        margin-bottom: var(--font_05);
+        margin: var(--font_xs) -4rem var(--font_05) 0;
         height: 6rem;
     }
 

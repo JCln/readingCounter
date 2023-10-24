@@ -167,7 +167,8 @@ export class WoumComponent implements OnChanges {
     }
   }
   getDownloadListInfo = () => {
-    this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();
+    if (this._type !== ENImageTypes.single)
+      this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();
   }
   /* AUDIO */
   isShowAudioControllers = () => {

@@ -24,21 +24,21 @@ export class CodeMessageDgComponent implements OnInit {
   ) {
   }
 
+  public cancelDialog = (val: boolean) => {
+    clearInterval(this.interval);
+    this.mdDialogRef.close(val);
+  }
   setInterval = () => {
     this.interval = setInterval(() => {
       this.data.expire_seconds--;
       if (this.data.expire_seconds < 1) {
-        this.cancelDialog();
+        this.cancelDialog(false);
         this.utilsService.snackBarMessageWarn(EN_messages.timoutInterval);
       }
     }, this.delayTime);
   }
   ngOnInit(): void {
     this.setInterval();
-  }
-  public cancelDialog = () => {
-    clearInterval(this.interval);
-    this.mdDialogRef.close(false);
   }
   login2 = async () => {
     if (MathS.isNullTextValidation(this.codeValue)) {
@@ -53,11 +53,11 @@ export class CodeMessageDgComponent implements OnInit {
     const res = await this.authService.logging2(this.data);
     if (res) {
       this.authService.saveToStorage(res);
-      this.cancelDialog();
+      this.cancelDialog(true);
       this.authService.routeToReturnUrl(this.data.returnUrl);
     }
     else {
-      this.mdDialogRef.close(false);
+      this.cancelDialog(false);
     }
   }
 

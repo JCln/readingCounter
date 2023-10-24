@@ -89,8 +89,8 @@ export class CloseTabService {
   saveDataForGuild: IGuild[];
   ipFilterHistory: IGetBlockedCompareVals[];
   IOPolicyHistory: IIOPolicyHistory[];
-  IOPolicy: IIOPolicy = {
-    id: 0,
+  iOPolicy: IIOPolicy = {
+    id: null,
     inputExtensions: '',
     contentType: '',
     inputMaxSizeKb: null,
@@ -752,7 +752,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
     { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
-    { id: 2, value: ENEssentialsToSave.IOPolicy, url: EN_Routes.IOPolicy },
+    { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
     { id: 2, req: ENEssentialsToSave.ipFilterGetBlockedReq, value: ENEssentialsToSave.ipFilterGetBlocked, url: EN_Routes.requestLogsGetBlocked },
     { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },

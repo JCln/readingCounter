@@ -2,6 +2,7 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IIOPolicy } from 'interfaces/iserver-manager';
 import { OfflineModeService } from 'services/offline-mode.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class FileUploadSingleComponent {
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
   progress: number = 0;
+  ioPolicy: IIOPolicy;
 
   _searchByInfo: string = 'اشتراک';
 
@@ -48,7 +50,8 @@ export class FileUploadSingleComponent {
     if (fileInput.files) {
 
       this.offlineModeService.fileUploadSingleForm = fileInput.files;
-      if (this.offlineModeService.checkVertiticationFileUploadSingle()) {
+      this.ioPolicy = await this.offlineModeService.dictionaryWrapperService.getIOPolicy(false);
+      if (this.offlineModeService.checkVertiticationFileUploadSingle(this.ioPolicy)) {
         await this.getLatestOnOffloadId();
         this.offlineModeService.postTicketFileUploadSingle(fileInput.files).subscribe((event: HttpEvent<any>) => {
           switch (event.type) {

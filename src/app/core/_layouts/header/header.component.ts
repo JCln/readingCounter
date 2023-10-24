@@ -75,7 +75,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     const myPrevious = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.myPreviousFailures);
     if (myPrevious.length)
       this.openMyPreviousDialog(myPrevious);
-    const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.getShouldIChangePassword, this.utilsService.compositeService.getAuthUser().userId);
+    const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.getShouldIChangePassword);
     console.log(shouldIChangePass);
     if (shouldIChangePass)
       this.changePasswordFromDialog();

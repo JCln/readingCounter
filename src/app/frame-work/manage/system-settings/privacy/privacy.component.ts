@@ -44,7 +44,7 @@ export class PrivacyComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForPolicies.id = null;
     }
-    if (MathS.isNull(this.closeTabService.saveDataForPolicies.id)) {
+    if (!this.closeTabService.saveDataForPolicies.id) {
       this.closeTabService.saveDataForPolicies = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.getPolicies);
     }
     this.checkProtocol();

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
-import { DateJalaliService } from 'services/date-jalali.service';
 import { SecurityService } from 'services/security.service';
 
 @Component({
@@ -21,8 +20,12 @@ export class LogMemoryStatusComponent implements OnInit {
     this.temp.push(this.closeTabService.logMemoryStatus.remainedCount);
     this.temp.push(this.closeTabService.logMemoryStatus.logCount);
   }
-  classWrapper = async () => {
-    if (!this.closeTabService.logMemoryStatus.systemDateTime.length) {
+  classWrapper = async (canRefresh?: boolean) => {
+    console.log(this.closeTabService.logMemoryStatus.systemDateTime);
+    if (canRefresh) {
+      this.closeTabService.logMemoryStatus.systemDateTime = '';
+    }
+    if (!this.closeTabService.logMemoryStatus.systemDateTime) {
       this.closeTabService.logMemoryStatus = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.requestLogLogMemoryStatus);
       console.log(this.closeTabService.logMemoryStatus);
     }
