@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { ILatestReads } from 'interfaces/imoment';
-import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';

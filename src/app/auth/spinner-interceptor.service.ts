@@ -1,6 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ENSnackBarColors, ENSnackBarTimes, EN_Mess } from 'interfaces/ioverall-config';
 import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -9,6 +8,7 @@ import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 
 import { EN_Routes } from '../interfaces/routes.enum';
 import { UtilsService } from 'services/utils.service';
+import { EN_Mess, ENSnackBarTimes, ENSnackBarColors } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'

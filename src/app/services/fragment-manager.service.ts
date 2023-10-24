@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import {
-  ENRandomNumbers,
-  ENSnackBarColors,
-  ENSnackBarTimes,
   IDictionaryManager
 } from 'interfaces/ioverall-config';
 import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';

@@ -4,11 +4,10 @@ import { Injectable } from '@angular/core';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { Converter } from '../classes/converter';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 
 @Injectable({

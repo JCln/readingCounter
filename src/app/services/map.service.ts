@@ -2,10 +2,10 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { Injectable } from '@angular/core';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
+import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/enums.enum';
 
 declare let L;
 

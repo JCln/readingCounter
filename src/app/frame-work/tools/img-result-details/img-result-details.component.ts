@@ -1,12 +1,12 @@
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ENRandomNumbers, ENSnackBarColors } from 'interfaces/ioverall-config';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ToolsService } from 'services/tools.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 @Component({
   selector: 'app-img-result-details',

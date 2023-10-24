@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENSnackBarColors } from 'interfaces/enums.enum';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FragmentManagerService } from 'services/fragment-manager.service';

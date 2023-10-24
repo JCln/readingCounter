@@ -96,9 +96,9 @@
         </form>
     </section>
 
-    <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForKarkardAllStates" [paginator]="true"
-        [rows]="10" [showCurrentPageReport]="true"
-        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    <p-table *ngIf="closeTabService.saveDataForKarkardAllStates" [columns]="selectedColumns"
+        [value]="closeTabService.saveDataForKarkardAllStates" [paginator]="true" [rows]="10"
+        [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
         styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
         stateKey="karkard-allstates" [reorderableColumns]="readingReportManagerService.getLocalReOrderable()">

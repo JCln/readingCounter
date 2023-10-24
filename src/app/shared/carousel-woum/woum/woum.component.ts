@@ -2,7 +2,7 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENImageTypes, ENRandomNumbers, IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Galleria } from 'primeng/galleria';
 import { DownloadManagerService } from 'services/download-manager.service';
@@ -14,6 +14,7 @@ import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { MathS } from 'src/app/classes/math-s';
 import { UtilsService } from 'services/utils.service';
+import { ENImageTypes, ENRandomNumbers } from 'interfaces/enums.enum';
 @Component({
   selector: 'app-woum',
   templateUrl: './woum.component.html',

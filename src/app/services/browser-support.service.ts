@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ENBrowserInfo, ENBrowserStatus } from 'interfaces/ioverall-config';
+import { ENBrowserStatus } from 'interfaces/enums.enum';
+import { ENBrowserInfo } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 
 @Injectable({

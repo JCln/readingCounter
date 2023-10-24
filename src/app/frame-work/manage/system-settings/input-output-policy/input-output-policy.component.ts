@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENRandomNumbers, ENSnackBarTimes, ENSnackBarColors } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';

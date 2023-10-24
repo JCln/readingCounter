@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
-import { ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { InteractionService } from 'services/interaction.service';
 import { NotificationMediaTypeIds } from 'interfaces/build';
+import { ENSnackBarTimes } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'

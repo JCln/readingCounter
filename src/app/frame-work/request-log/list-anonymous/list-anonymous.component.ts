@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ManageServerService } from 'services/manage-server.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { ENRandomNumbers } from 'interfaces/enums.enum';
 
 @Component({
   selector: 'app-list-anonymous',

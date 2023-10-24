@@ -2,9 +2,7 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { IDynamicTraverse } from './../interfaces/ireads-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
-
+import { ENSelectedColumnVariables, EN_messages } from 'interfaces/enums.enum';
 import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
 import { ICounterState, IGuild, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';

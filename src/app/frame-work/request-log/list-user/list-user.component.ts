@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { ENRandomNumbers } from 'interfaces/enums.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ManageServerService } from 'services/manage-server.service';

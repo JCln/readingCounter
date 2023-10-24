@@ -1,9 +1,8 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSelectedColumnVariables, EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import {
   IReadingReportGISReq,
   IReadingReportReq,
@@ -24,6 +23,7 @@ import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { JwtService } from './../auth/jwt.service';
 import { MapService } from './map.service';
+import { ISearchInOrderTo } from 'interfaces/ioverall-config';
 
 
 @Injectable({

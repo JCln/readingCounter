@@ -1,11 +1,9 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSelectedColumnVariables, EN_messages } from 'interfaces/enums.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import {
-  ENRandomNumbers,
-  ENSelectedColumnVariables,
   IDictionaryManager,
   IResponses
 } from 'interfaces/ioverall-config';

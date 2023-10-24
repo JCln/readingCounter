@@ -1,8 +1,7 @@
 import { MathS } from 'src/app/classes/math-s';
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { ENManageServers, IManageServer } from 'interfaces/iserver-manager';
 import { ManageServerService } from 'services/manage-server.service';
 

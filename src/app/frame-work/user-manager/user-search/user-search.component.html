@@ -10,8 +10,9 @@
     </mat-step>
 
     <mat-step [completed]="false" [stepControl]="closeTabService.saveDataForUserSearch.appItems">
-        <ng-template *ngIf="closeTabService.saveDataForUserSearch.appItems" matStepLabel>سطح دسترسی به
-            خدمات</ng-template>
+        <ng-template *ngIf="closeTabService.saveDataForUserSearch.appItems" matStepLabel>
+            سطح دسترسی به خدمات
+        </ng-template>
         <app-select-action [userAddData]="closeTabService.saveDataForUserSearch.appItems"></app-select-action>
     </mat-step>
 

@@ -1,9 +1,8 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSelectedColumnVariables, EN_messages, IMasrafStates } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
   ENImportDatas,
   IFileExcelReq,
@@ -15,12 +14,8 @@ import {
   IReadingProgramRes,
 } from 'interfaces/import-data';
 import {
-  ENRandomNumbers,
-  ENSelectedColumnVariables,
-  IMasrafStates,
   IObjectIteratation,
   ISearchInOrderTo,
-  ITitleValue,
 } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';

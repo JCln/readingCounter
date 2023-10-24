@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
 import { IMessage, INotifyDirectImage, IToastColor } from 'interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes, ENToastColors } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 

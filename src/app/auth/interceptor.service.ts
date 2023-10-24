@@ -8,8 +8,8 @@ import { AuthService } from './auth.service';
 import { JwtService } from './jwt.service';
 import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { UtilsService } from 'services/utils.service';
-import { EN_Mess } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { EN_Mess } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'

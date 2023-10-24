@@ -1,7 +1,6 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, EN_messages } from 'interfaces/enums.enum';
 import { SectionsService } from 'services/sections.service';
 
 import { DictionaryWrapperService } from './dictionary-wrapper.service';

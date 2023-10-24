@@ -12,7 +12,7 @@ import {
   IReadingProgramRes,
 } from 'interfaces/import-data';
 import { IAPK } from 'interfaces/inon-manage';
-import { ENEssentialsToSave, ISidebarVals, ITabs, ITitleValue } from 'interfaces/ioverall-config';
+import { ISidebarVals, ITabs, ITitleValue } from 'interfaces/ioverall-config';
 import {
   IAbBahaFormula,
   IAutomaticImport,
@@ -58,6 +58,7 @@ import { IForbiddenManager, IMostReportInput, IOnOffLoadFlat } from 'interfaces/
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
+import { ENEssentialsToSave } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'

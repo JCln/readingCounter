@@ -1,7 +1,7 @@
 import { InteractionService } from 'services/interaction.service';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
+import { ENImageTypes, ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -15,7 +15,6 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
 import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
-import { ENImageTypes } from 'interfaces/ioverall-config';
 
 @Component({
     template: ''

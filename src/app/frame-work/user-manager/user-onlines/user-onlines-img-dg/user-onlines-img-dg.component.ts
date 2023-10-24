@@ -1,7 +1,7 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ENSnackBarColors } from 'interfaces/ioverall-config';
+import { ENSnackBarColors } from 'interfaces/enums.enum';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { MessageService } from 'services/message.service';
 import { UsersAllService } from 'services/users-all.service';

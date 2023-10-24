@@ -1,4 +1,4 @@
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { ENRandomNumbers } from "interfaces/enums.enum";
 
 export class MathS {
 

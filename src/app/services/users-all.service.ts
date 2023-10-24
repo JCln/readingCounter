@@ -2,15 +2,8 @@ import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENSelectedColumnVariables, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { INotifyDirectImage } from 'interfaces/inon-manage';
-import {
-  ENSelectedColumnVariables,
-  ENSnackBarColors,
-  ENSnackBarTimes,
-  IObjectIteratation,
-  IResponses,
-} from 'interfaces/ioverall-config';
 import { IAUserEditSave, IUserEditManager, IUserEditOnRole, IUserEditOnRoleManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { Observable } from 'rxjs/internal/Observable';
@@ -18,6 +11,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { MathS } from '../classes/math-s';
 import { SectionsService } from './sections.service';
 import { UtilsService } from './utils.service';
+import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 
 export interface IUserEditNessessities {
   GUid: string

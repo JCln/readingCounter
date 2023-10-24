@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
+import { ENCompanyName, ENLocalStorageNames, ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -13,6 +12,7 @@ import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 import { IGisXYResponse } from 'interfaces/idashboard-map';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { ITHV } from 'interfaces/ioverall-config';
 
 
 declare let L;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { Observable } from 'rxjs';
 import { BrowserSupportService } from 'services/browser-support.service';
 

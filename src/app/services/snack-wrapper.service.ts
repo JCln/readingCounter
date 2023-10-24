@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ENSnackBarColors, ENSnackBarTimes, ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { ShowImgDgComponent } from '../shared/show-img-dg/show-img-dg.component';
 import { ShowVideoDgComponent } from '../shared/show-video-dg/show-video-dg.component';
 import { ShowTextDgComponent } from '../shared/show-text-dg/show-text-dg.component';
-import { MathS } from '../classes/math-s';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarTimes, ENSnackBarColors } from 'interfaces/enums.enum';
+import { ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

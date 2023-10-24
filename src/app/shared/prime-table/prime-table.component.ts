@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables } from 'interfaces/enums.enum';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';

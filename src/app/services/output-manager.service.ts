@@ -16,6 +16,8 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 })
 export class OutputManagerService {
   private readonly _exportType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  private readonly contentDisposition = 'content-disposition';
+  // XLSX = require('sheetjs-style'); to do recognize sheet styling
 
   constructor(
     private utilsService: UtilsService
@@ -49,7 +51,7 @@ export class OutputManagerService {
       link.click();
       return;
     }
-    const fileName = data.headers.get('content-disposition').split('filename=')[1].split(';')[0]
+    const fileName = data.headers.get(this.contentDisposition).split('filename=')[1].split(';')[0]
     import("file-saver").then(FileSaver => {
       const blob = new Blob([data.body], { type: data.body.type });
       console.log(blob);
@@ -142,8 +144,8 @@ export class OutputManagerService {
     return true;
   }
   export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: XLSX.BookType, routerLink: string, count: number) => {
-    if (!await this.canIDownloadMore(routerLink, count))
-      return;
+    // if (!await this.canIDownloadMore(routerLink, count))
+    //   return;
 
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
@@ -164,8 +166,26 @@ export class OutputManagerService {
         { RTL: true }
       ],
       Sheets: { 'data': worksheet },
-      SheetNames: ['data']
+      SheetNames: ['data'],
     };
+    console.log(worksheet);
+
+    // worksheet['A1'].v = {
+    //   font: {
+    //     name: "Calibri",
+    //     sz: 24,
+    //     bold: true,
+    //     color: { rgb: "red" },
+    //   },
+    // };
+    // worksheet['A1'].s = {
+    //   font: {
+    //     name: "Calibri",
+    //     sz: 24,
+    //     bold: true,
+    //     color: { rgb: 'blue' },
+    //   },
+    // };
     const excelBuffer: any = XLSX.write(workbook, { bookType: type, type: 'array' });
     this.saveAsExcelFile(excelBuffer, fileName, '.' + type);
   }

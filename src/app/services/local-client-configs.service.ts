@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ENLocalStorageNames } from 'interfaces/ioverall-config';
-
 import { BrowserStorageService } from './browser-storage.service';
+import { ENLocalStorageNames } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'

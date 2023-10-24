@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { ILogin2 } from 'interfaces/iauth-guard-permission';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MathS } from 'src/app/classes/math-s';

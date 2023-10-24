@@ -666,7 +666,6 @@ export class HelpWrapperService {
     this.messageToShow.messageThree = currentVal.messageThree;
 
     this.utilsService.dialog.open(AddNewComponent, {
-      minWidth: '65vw',
       data: currentVal
     });
   }

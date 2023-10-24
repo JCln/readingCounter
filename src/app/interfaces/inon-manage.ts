@@ -1,5 +1,4 @@
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes, ENToastColors } from 'interfaces/ioverall-config';
-
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes, ENToastColors } from "./enums.enum";
 
 export interface IAPK {
     versionName: string;

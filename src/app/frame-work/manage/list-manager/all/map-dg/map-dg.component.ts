@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ENCompanyName, ENRandomNumbers } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENCompanyName } from 'interfaces/enums.enum';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';

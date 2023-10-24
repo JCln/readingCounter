@@ -1,4 +1,4 @@
-import { ENSearch } from 'interfaces/ioverall-config';
+import { ENSearch } from "interfaces/enums.enum";
 
 export class Search {
     static readonly eshterak = new Search(1, ENSearch.eshterak);

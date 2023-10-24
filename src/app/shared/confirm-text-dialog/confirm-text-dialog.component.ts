@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 

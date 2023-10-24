@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ToolsService } from 'services/tools.service';
 import { ENAcceptVerb, IAcceptVerb, IJsonInfo, IParamSendType } from 'interfaces/itools';
 import { UtilsService } from 'services/utils.service';
+import { ENSnackBarColors } from 'interfaces/enums.enum';
 
 
 @Component({

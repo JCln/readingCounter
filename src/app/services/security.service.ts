@@ -3,12 +3,11 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IPolicies, IPrivacy, privacies } from './DI/privacies';
 import { UtilsService } from './utils.service';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 import { IUserLogginInfo, IUserManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { IIOPolicy, IOPolicy } from 'interfaces/iserver-manager';
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
 
 export interface IRoleNessessities {
   id: string,

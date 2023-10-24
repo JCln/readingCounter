@@ -1,10 +1,8 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENSelectedColumnVariables, EN_messages, IMasrafStates } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENSelectedColumnVariables,
-  IMasrafStates,
   IObjectIteratation,
   ISearchInOrderTo,
   ITitleValue,

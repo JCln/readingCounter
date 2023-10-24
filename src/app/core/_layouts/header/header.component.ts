@@ -1,7 +1,6 @@
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENHubMessages } from 'interfaces/ioverall-config';
+import { ENHubMessages, EN_messages } from 'interfaces/enums.enum';
 import { ENThemeColor } from 'interfaces/istyles';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';

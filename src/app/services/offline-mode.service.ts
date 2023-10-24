@@ -2,8 +2,7 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { MathS } from '../classes/math-s';

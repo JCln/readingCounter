@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ENToastColors } from 'interfaces/enums.enum';
 import { IToastColor } from 'interfaces/inon-manage';
-import { ENToastColors } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { MessageService } from 'services/message.service';
 import { UsersAllService } from 'services/users-all.service';

@@ -2,8 +2,7 @@ import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems, ISearchUsersManager } from 'interfaces/iuser-manager';
 
 import { MathS } from '../classes/math-s';

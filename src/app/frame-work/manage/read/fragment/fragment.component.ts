@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentMaster } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSelectedColumnVariables, EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 

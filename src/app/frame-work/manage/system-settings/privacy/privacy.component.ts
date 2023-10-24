@@ -1,6 +1,5 @@
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { Component, ViewChild } from '@angular/core';
-import { ENSnackBarTimes, ENSnackBarColors, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { ENReadingReports } from 'interfaces/reading-reports';
 
 import { MathS } from '../classes/math-s';
@@ -16,6 +15,7 @@ import {
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from '../interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
+import { ITitleValue } from 'interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

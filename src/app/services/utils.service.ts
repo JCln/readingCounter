@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage } from 'interfaces/ioverall-config';
+import { ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
 import { CompositeService } from './composite.service';
 import { Location } from '@angular/common';
 import { Collapser } from '../classes/collapser';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 
 @Injectable({

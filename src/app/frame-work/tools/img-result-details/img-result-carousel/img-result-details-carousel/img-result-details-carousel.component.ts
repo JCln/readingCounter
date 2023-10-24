@@ -1,10 +1,11 @@
 import { UtilsService } from 'services/utils.service';
 import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager } from 'interfaces/ioverall-config';
 import { ImageAttributionFile } from 'interfaces/tools';
 import { ProfileService } from 'services/profile.service';
 import { Converter } from 'src/app/classes/converter';
+import { ENSnackBarTimes, ENSnackBarColors } from 'interfaces/enums.enum';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 @Component({
   selector: 'app-img-result-details-carousel',

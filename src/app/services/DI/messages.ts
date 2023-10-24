@@ -1,12 +1,5 @@
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColorsExact, ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
 import { IMessage, ITime, IToastColor } from 'interfaces/inon-manage';
-import {
-    ENRandomNumbers,
-    ENSnackBarColorsExact,
-    ENSnackBarTimes,
-    ENToastColors,
-} from 'interfaces/ioverall-config';
-
 export enum ENColorText {
     blue = 'آبی',
     green = 'سبز',

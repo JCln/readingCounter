@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENLocalStorageNames, EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
-import { ENLocalStorageNames, IDictionaryManager, ITrueFalse } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITrueFalse } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { LocalClientConfigsService } from 'services/local-client-configs.service';

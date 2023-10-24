@@ -1,9 +1,8 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENLocalStorageNames, EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
-import { ENLocalStorageNames } from 'interfaces/ioverall-config';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { JwtService } from 'src/app/auth/jwt.service';
