@@ -23,6 +23,7 @@ export class DictionaryWrapperService {
   private authLev2Dictionary: any = [];
   private authLev3Dictionary: any = [];
   private authLev4Dictionary: any = [];
+  private userAllDictionary: any = [];
   private trackingStatesDictionary: any = [];
   private periodKindDictionary: any = [];
   private qotrDictionary: any = [];
@@ -125,6 +126,13 @@ export class DictionaryWrapperService {
     const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.requestLogUserActivationDictionary);
     this.setUserActivationLogTypes(res);
     return this.userActivationLogTypes;
+  }
+  async getUserAllDictionary(): Promise<any> {
+    if (!MathS.isNull(this.userAllDictionary))
+      return this.userAllDictionary;
+    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.userAllDictionary);
+    this.setUserAllDictionary(res);
+    return this.userAllDictionary;
   }
   async getAuthLev1Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev1Dictionary))
@@ -330,6 +338,9 @@ export class DictionaryWrapperService {
   private setAuthLev4Dictionary(v: any) {
     this.authLev4Dictionary = v;
   }
+  private setUserAllDictionary(v: any) {
+    this.userAllDictionary = v;
+  }
   private setImgAttributionDictionary(v: any) {
     this.imageAttributionAllDictionary = v;
   }
@@ -429,6 +440,7 @@ export class DictionaryWrapperService {
     this.counterStateByCodeDictionary.dictionary = [];
     this.counterStateByCodeDictionary.zoneId = null;
     this.userActivationLogTypes = [];
+    this.userAllDictionary = [];
     this.counterStateForModifyDictionary.dictionary = [];
     this.counterStateForModifyDictionary.zoneId = null;
     this.readingPeriodDictionary.dictionary = [];

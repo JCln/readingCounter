@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IBlockOrSafeIp } from 'interfaces/iserver-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -16,6 +17,7 @@ export class IpFilterComponent extends FactoryONE {
   private ipFilterColumns: string = 'ipFilter';
   _selectCols: any[] = [];
   _selectedColumns: any[];
+  userAllDictionary: IDictionaryManager[] = [];
 
   clonedProducts: { [s: string]: IBlockOrSafeIp; } = {};
 
@@ -36,6 +38,7 @@ export class IpFilterComponent extends FactoryONE {
     }
     this.defaultAddStatus();
     this.insertSelectedColumns();
+    this.userAllDictionary = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.userAllDictionary);
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
@@ -51,6 +54,7 @@ export class IpFilterComponent extends FactoryONE {
       id: 0,
       ip: '',
       subnet: '',
+      userId: '',
       isSafe: false,
       isV6: false,
       isNew: true
