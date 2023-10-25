@@ -173,12 +173,6 @@
     }
   }
 
-  [disabled] {
-    background: var(--secondary_1);
-    opacity: 0;
-    visibility: hidden;
-  }
-
   p-multiselect.p-multiselect-clearable .p-multiselect-clear-icon {
     // break default value
     left: 2.357rem;
@@ -581,6 +575,12 @@
     }
 
   }
+}
+
+[disabled] {
+  background: var(--secondary_1);
+  opacity: 0;
+  visibility: hidden;
 }
 
 .tooltip {

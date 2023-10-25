@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_Mess, EN_messages } from 'interfaces/enums.enum';
 import { IUserManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
@@ -54,10 +55,21 @@ export class UsersAllComponent extends FactoryONE {
     this.usersAllService.snackBarMessageSuccess(a);
     this.refreshTable();
   }
-  removeUser = async (dataSource: object) => {
-    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRemove, dataSource['dataSource'].id);
-    this.usersAllService.snackBarMessageSuccess(a);
-    this.refreshTable();
+  removeUser = async (dataSource: IUserManager) => {
+    const config = {
+      messageTitle: EN_messages.confirm_removeingUser1 + dataSource['dataSource'].displayName + EN_messages.confirm_removeingUser2 + dataSource['dataSource'].username + EN_messages.confirm_IS,
+      text: EN_messages.confirm_removeUser,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-user-minus'
+    }
+    const confirmed = await this.closeTabService.utilsService.firstConfirmDialog(config);
+    if (confirmed) {
+      const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRemove, dataSource['dataSource'].id);
+      this.usersAllService.snackBarMessageSuccess(a);
+      this.refreshTable();
+    }
   }
   showExactConfig = (index: number) => {
     let a = document.querySelectorAll('.more_configs');
