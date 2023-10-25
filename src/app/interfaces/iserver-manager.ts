@@ -242,6 +242,7 @@ export interface IBlockOrSafeIp {
     subnet: string,
     isSafe: boolean,
     isV6: boolean,
+    userId: string,
     isNew?: boolean
 }
 export interface IIOAttemptsLog {

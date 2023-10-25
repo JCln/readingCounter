@@ -129,6 +129,7 @@ export enum ENInterfaces {
     userDEACTIVATE = 'V1/User/Deactivate',
     userOnlines = 'V1/User/Onlines',
     postUserKarkardSummary = 'V1/Tracking/UserKarkardSummary',
+    userAllDictionary = 'V1/User/AllDictionary',
 
     fragmentMASTERALL = 'V1/Fragment/Master/All',
     fragmentMASTERREMOVE = 'V1/Fragment/Master/Remove',
@@ -332,6 +333,7 @@ export enum ENInterfaces {
     GetIpFilterHistory = 'V1/IpFilter/History',
     GetIpFilterCompare = 'V1/IpFilter/Compare',
     PostIpFilterGetBlocked = 'V1/IpFilter/GetBlocked',
+    GetIpFilterBlockedByUserId = 'V1/IpFilter/GetBlockedByUserId',
 
     // IO policy manager
     GetIOPolicy = 'V1/IoPolicy/Active',

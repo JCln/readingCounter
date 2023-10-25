@@ -15,10 +15,9 @@ table {
     border-collapse: collapse;
 }
 
-td,
 td {
     border: 1px solid var(--secondary_2);
-    text-align: right;
+    text-align: center;
     padding: 8px;
     font-weight: 600;
     font-size: var(--font_s);

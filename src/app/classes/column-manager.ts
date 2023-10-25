@@ -455,6 +455,7 @@ export class ColumnManager {
         { field: 'subnet', header: 'subnet', isSelected: true, isSelectedOrigin: true },
         { field: 'isSafe', header: 'مجاز', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'isV6', header: 'IPv6', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'userId', header: 'کاربر', isSelected: true, isSelectedOrigin: true },
     ]
     ipFilterGetBlocked: IObjectIteratation[] = [
         { field: 'insertDateTime', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
