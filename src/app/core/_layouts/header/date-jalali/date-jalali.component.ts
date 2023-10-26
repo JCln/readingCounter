@@ -14,6 +14,8 @@ export class DateJalaliComponent implements AfterViewInit {
   }
   @Output() dateJalEvent = new EventEmitter<any>();
   @Input() dateObject: string;  
+  @Input() readonly _mode: string = 'day';
+  @Input() readonly _disabled: boolean = false;
 
   constructor(private dateJalaliService: DateJalaliService) {
   }

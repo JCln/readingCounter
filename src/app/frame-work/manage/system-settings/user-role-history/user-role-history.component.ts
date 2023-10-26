@@ -50,8 +50,8 @@ export class UserRoleHistoryComponent extends FactoryONE {
     }
     if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
       this.closeTabService.saveDataForAllUsers = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
-      this.convertLoginTime();
     }
+    this.convertLoginTime();
   }
 
 }

@@ -10,6 +10,7 @@ export interface IUserManager {
     defaultZoneTitle: string;
     deviceId: string;
     lastActivityDateTime: string;
+    hasTwoStepAuthentication: boolean
 }
 export interface IUserLogginInfo {
     GUid: string,

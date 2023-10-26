@@ -56,3 +56,11 @@
     min-width: 100%;
   }
 }
+
+[readOnly] {
+  border-color: transparent !important;
+  user-select: none !important;
+  color: inherit !important;
+  outline: none !important;
+  background-color: transparent;
+}
