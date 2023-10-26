@@ -6,7 +6,6 @@ import { UserRoleHistoryComponent } from './user-role-history.component';
 import { UserRoleHistoryDetailsComponent } from './user-role-history-details/user-role-history-details.component';
 import { UserRoleHistorySummaryComponent } from './user-role-history-summary/user-role-history-summary.component';
 
-
 @NgModule({
   declarations: [
     UserRoleHistoryComponent,

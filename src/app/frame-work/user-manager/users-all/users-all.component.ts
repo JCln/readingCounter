@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IBlockOrSafeIp } from 'interfaces/iserver-manager';
 import { IUserManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
@@ -7,6 +8,7 @@ import { DateJalaliService } from 'services/date-jalali.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { UserBlockingComponent } from 'src/app/shared/user-blocking/user-blocking.component';
 
 @Component({
   selector: 'app-users-all',
@@ -69,5 +71,22 @@ export class UsersAllComponent extends FactoryONE {
     })
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAllUsers = this.closeTabService.saveDataForAllUsers.slice(0, index).concat(this.closeTabService.saveDataForAllUsers.slice(index + 1));
+  openAddDialog = (dataSource: any) => {
+    dataSource.userId = dataSource.id;
+    dataSource.id = 0;
+    return new Promise(() => {
+      const dialogRef = this.closeTabService.utilsService.dialog.open(UserBlockingComponent, {
+        disableClose: true,
+        minWidth: '65vw',
+        data: {
+          di: dataSource
+        }
+      });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result)
+          this.refreshTable();
+      });
+    });
+  }
 
 }

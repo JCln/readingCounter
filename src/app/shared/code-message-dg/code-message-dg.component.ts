@@ -45,6 +45,10 @@ export class CodeMessageDgComponent implements OnInit {
       this.utilsService.snackBarMessageWarn(EN_messages.insertTwoStep);
       return;
     }
+    if (MathS.isNaN(this.codeValue)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertTwoStep2);
+      return;
+    }
     if (!MathS.isExactLengthYouNeed(this.codeValue, ENRandomNumbers.four)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insertTwoStepLength);
       return;

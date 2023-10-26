@@ -19,6 +19,8 @@ import { PrimeTableComponent } from './prime-table/prime-table.component';
 import { AddRowDirective } from '../directives/add-row.directive';
 import { ConfirmTextDialogComponent } from './confirm-text-dialog/confirm-text-dialog.component';
 import { SharedChangePassModule } from './shared-change-pass.module';
+import { UserBlockingComponent } from './user-blocking/user-blocking.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { SharedChangePassModule } from './shared-change-pass.module';
     PrimeTableComponent,
     PrimeTableEditableComponent,
     ImageViewerComponent,
-    ConfirmTextDialogComponent
+    ConfirmTextDialogComponent,
+    UserBlockingComponent,
   ],
   imports: [
     CommonModule,
@@ -42,12 +45,15 @@ import { SharedChangePassModule } from './shared-change-pass.module';
     SelectButtonModule,
     SharedThreeModule,
     SharedChangePassModule,
+    ReactiveFormsModule,
+    MaterialModule,
     // mat-dialog-module for confirmTextDialog component added
     MatDialogModule,
   ],
   exports: [
     PrimeTableComponent,
     PrimeTableEditableComponent,
+    UserBlockingComponent,
     CommonModule,
     FormsModule,
     TableModule,
@@ -58,7 +64,6 @@ import { SharedChangePassModule } from './shared-change-pass.module';
     SliderModule,
     DynamicDialogModule,
     AddRowDirective,
-    ReactiveFormsModule,
     RadioButtonModule,
     SelectButtonModule,
     SharedThreeModule

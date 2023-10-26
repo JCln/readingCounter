@@ -25,6 +25,7 @@ export enum EN_messages {
     highLow100 = 'مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     userPass_empty = 'نام کاربری یا گذرواژه نمیتواند خالی باشد',
     insertTwoStep = 'کد تایید را وارد نمایید',
+    insertTwoStep2 = 'کد تایید اشتباه است',
     timoutInterval = 'زمان ارسال کد به اتمام رسید. لطفا مجددا تلاش نمایید.',
     insertTwoStepLength = 'ارقام کد تایید اشتباه است',
     userPassEnterCaptcha = 'لطفا عبارت تصویر امنیتی را وارد نمایید',
@@ -682,7 +683,7 @@ export const IMasrafStates: ITHV[] = [
 ]
 export enum EN_Mess {
     checkValuesAndTryAgain = 'مقادیر را بررسی و مجددا امتحان نمایید',
-    access_deniedLogin401 = '',
+    access_denied451LegalReasons = 'بدلیل موارد امنیتی دسترسی شما به سامانه باطل شده است',
     access_denied401 = 'مجوز های دسترسی شما باطل شده است',
     access_denied401Msg = 'لطفا مجددا وارد سامانه شوید',
     youHaveNotAccess = 'دسترسی غیر مجاز',

@@ -6,7 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', component: UserRoleHistoryComponent },
   { path: 'details', component: UserRoleHistorySummaryComponent },
-  { path: 'loggins', loadChildren: () => import('./user-loggins/user-loggins.module').then(userLoggins => userLoggins.UserLogginsModule) }
+  { path: 'loggins', loadChildren: () => import('./user-loggins/user-loggins.module').then(userLoggins => userLoggins.UserLogginsModule) },
+  { path: 'blockedUsers', loadChildren: () => import('./blocked-users/blocked-users.module').then(blockedUsers => blockedUsers.BlockedUsersModule) }
 ];
 
 @NgModule({

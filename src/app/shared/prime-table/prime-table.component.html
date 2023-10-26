@@ -530,6 +530,13 @@
                     </div>
                 </div>
             </td>
+            <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'ipFilter' " class="edit_button"
+                (click)="showPictures(dataSource)">
+                <span class="ui-column-title">blockAUser</span>
+                <i class="tooltip p_icons pi pi-ban">
+                    <div class="tooltip_text_right">blockAUser</div>
+                </i>
+            </td>
             <td class="__columns"
                 *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasSingle && dataSource.canContinue"
                 (click)="routeToSingle(dataSource)">

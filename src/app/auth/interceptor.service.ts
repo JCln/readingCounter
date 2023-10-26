@@ -91,8 +91,13 @@ export class InterceptorService implements HttpInterceptor {
                 this.showDialog(errTxt);
               }
             }
+            // system time
             if (error.status === ENClientServerErrors.cs428) {
               this.showDialogSpeciall(error);
+            }
+            // block IP
+            if (error.status === ENClientServerErrors.cs451) {
+              this.showDialogSpeciall(EN_Mess.access_denied451LegalReasons);
             }
           }
           if (error instanceof HttpErrorResponse && error.error instanceof Blob && error.error.type === this.errorType) {

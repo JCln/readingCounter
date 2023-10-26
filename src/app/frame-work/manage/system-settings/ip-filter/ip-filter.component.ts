@@ -4,7 +4,9 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IBlockOrSafeIp } from 'interfaces/iserver-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { UserBlockingComponent } from 'src/app/shared/user-blocking/user-blocking.component';
 
 @Component({
   selector: 'app-ip-filter',
@@ -90,6 +92,8 @@ export class IpFilterComponent extends FactoryONE {
     }
   }
   async onRowEditSave(dataSource: object) {
+    console.log(dataSource);
+
     this.newRowLimit = 1;
     if (!this.readManagerService.verificationBlockOrSafeIP(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
@@ -103,6 +107,8 @@ export class IpFilterComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
+      console.log(dataSource);
+
       const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.EditIpFilter, dataSource['dataSource']);
       if (a) {
         this.refreshTable();
@@ -112,12 +118,38 @@ export class IpFilterComponent extends FactoryONE {
       }
     }
   }
+  convertTitleToId = (dataSource: any): any => {
+    if (this.userAllDictionary) {
+      return this.userAllDictionary.find(item => {
+        if (item.title === dataSource)
+          return item;
+      })
+    }
+  }
   private async onRowAdd(dataSource: IBlockOrSafeIp, rowIndex: number) {
-    const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.AddIpFilter, dataSource);
-    if (a) {
-      this.refetchTable(rowIndex);
+    console.log(dataSource);
+    const tempId = this.convertTitleToId(dataSource.userId);
+    dataSource.userId = tempId.id;
+    console.log(dataSource);
+
+    if (await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.AddIpFilter, dataSource)) {
       this.refreshTable();
     }
+  }
+  openAddDialog = (dataSource: IBlockOrSafeIp) => {
+    return new Promise(() => {
+      const dialogRef = this.closeTabService.utilsService.dialog.open(UserBlockingComponent, {
+        disableClose: true,
+        minWidth: '65vw',
+        data: {
+          di: dataSource
+        }
+      });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result)
+          this.refreshTable();
+      });
+    });
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

@@ -86,11 +86,11 @@ export class ReadManagerService {
     return true;
   }
   verificationBlockOrSafeIP = (dataSource: IBlockOrSafeIp): boolean => {
-    if (MathS.isNull(dataSource.ip)) {
+    if (MathS.isNullTextValidation(dataSource.ip)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_IP);
       return false;
     }
-    if (MathS.isNull(dataSource.subnet)) {
+    if (MathS.isNullTextValidation(dataSource.subnet)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_subnet);
       return false;
     }
