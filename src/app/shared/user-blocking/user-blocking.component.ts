@@ -31,7 +31,7 @@ export class UserBlockingComponent implements OnInit {
       ip: data.ip || '',
       subnet: data.subnet || '',
       isSafe: data.isSafe || false,
-      isV6: data.ipV6 || false,
+      isV6: data.isV6 || false,
       userId: data.userId || '',
       isNew: data.isNew
     })

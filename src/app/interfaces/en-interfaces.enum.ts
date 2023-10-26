@@ -260,6 +260,8 @@ export enum ENInterfaces {
     serverManagerResetApp = 'V1/Server/ResetApp',
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
     serverManagerOSInfo = 'V1/Server/OsInfo',
+    serverManagerGetAuthenticity = 'V1/Server/GetAuthenticity',
+    serverManagerGetAuthenticityBrief = 'V1/Server/GetAuthenticityBrief',
 
     requestLogUser = 'V1/RequestLog/List/User',
     requestLogAnonymous = 'V1/RequestLog/List/Anonymous',

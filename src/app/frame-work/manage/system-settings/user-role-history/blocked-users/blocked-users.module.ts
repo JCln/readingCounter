@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { BlockedUsersRoutingModule } from './blocked-users-routing.module';
 import { BlockedUsersComponent } from './blocked-users.component';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 
 @NgModule({
@@ -10,7 +10,7 @@ import { BlockedUsersComponent } from './blocked-users.component';
     BlockedUsersComponent
   ],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     BlockedUsersRoutingModule
   ]
 })

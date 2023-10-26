@@ -1,1 +1,11 @@
-<p>blocked-users works!</p>
+<app-prime-table 
+[dataSource]="closeTabService.ipFilterBlockedUsers"
+[_outputFileName]="'ipFilterBlockedUsers'"
+[_checkUpName]="'ipFilterBlockedUsers'"    
+[_sessionName]="'ipFilterBlockedUsers-session'"
+[_selectedColumnsToRemember]="'selectedRequestLogIpFilterBlockedUsers'"
+[_isCollaped]="closeTabService.utilsService.collapser._isCollapsedIpFilterGetBlocked"
+(collapsed)="closeTabService.utilsService.collapser._isCollapsedIpFilterGetBlocked = !closeTabService.utilsService.collapser._isCollapsedIpFilterGetBlocked"
+(refreshedTable)="refreshTable()"    
+>
+</app-prime-table>

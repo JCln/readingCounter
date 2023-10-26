@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Converter } from 'src/app/classes/converter';
+import { MathS } from '../classes/math-s';
 
 @Injectable({
   providedIn: 'root'
@@ -40,12 +41,18 @@ export class DateJalaliService {
     return Converter.persianToEngNumbers(persianDate);
   }
   getTime = (item: any) => {
+    if (MathS.isNull(item))
+      return '';
+
     let persianTime = new Date(item).toLocaleTimeString('fa-IR');
     if (persianTime.length == 7)
       return Converter.persianToEngNumbers(persianTime = 0 + persianTime);
     return Converter.persianToEngNumbers(persianTime);
   }
   getDate = (item: any): string => {
+    if (MathS.isNull(item))
+      return '';
+
     let persianDate = this.getConvertedJalaliDate(item);
 
     if (persianDate.length == 10)

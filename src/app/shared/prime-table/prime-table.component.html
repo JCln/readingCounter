@@ -269,6 +269,13 @@
                     <div class="tooltip_text_right">تغییرات دسترسی</div>
                 </i>
             </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="routeToBatch(dataSource)">
+                <span class="ui-column-title">Ip های مسدود شده</span>
+                <i class="tooltip p_icons pi pi-ban _red_500">
+                    <div class="tooltip_text_right">Ip های مسدود شده</div>
+                </i>
+            </td>
             <td class="__columns"
                 *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory' || _checkUpName == 'usersLogins' || _checkUpName == 'ipFilterHistory' "
                 (click)="openMoshtarakinDialog(dataSource)">
@@ -500,7 +507,7 @@
             <td class="__columns" *ngIf="_checkUpName == 'userRoleHistoryAll' " class="edit_button"
                 (click)="routeToLoggs(dataSource)">
                 <span class="ui-column-title">مشاهده ورودها</span>
-                <i class="tooltip p_icons pi pi-sign-in">
+                <i class="tooltip p_icons pi pi-sign-in _green_600">
                     <div class="tooltip_text_right">مشاهده ورودها</div>
                 </i>
             </td>
@@ -512,7 +519,8 @@
                 </i>
                 <div class="map-frame">
                     <div class="more_configs">
-                        <i class="bbr tooltip p_icons pi pi-user-minus _red_500" (click)="firstConfirmDialog(dataSource,ri)">
+                        <i class="bbr tooltip p_icons pi pi-user-minus _red_500"
+                            (click)="firstConfirmDialog(dataSource,ri)">
                             <div class="tooltip_text_right">حذف کاربر</div>
                         </i>
                         <i class="bbr tooltip p_icons pi pi-lock-open" (click)="ActivateUser(dataSource,ri)">
@@ -532,9 +540,9 @@
             </td>
             <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'ipFilter' " class="edit_button"
                 (click)="showPictures(dataSource)">
-                <span class="ui-column-title">blockAUser</span>
-                <i class="tooltip p_icons pi pi-ban">
-                    <div class="tooltip_text_right">blockAUser</div>
+                <span class="ui-column-title">مسدود کردن کاربر</span>
+                <i class="tooltip p_icons pi pi-ban _red_500">
+                    <div class="tooltip_text_right">مسدود کردن کاربر</div>
                 </i>
             </td>
             <td class="__columns"

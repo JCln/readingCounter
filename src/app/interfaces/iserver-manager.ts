@@ -41,6 +41,8 @@ export interface IRequestLog {
 }
 export interface IGetBlocked {
     id: number,
+    targetUserDisplayName: string,
+    targetUsername: string,
     insertDateTime: string,
     ip: string,
     browserVersion: string,
@@ -205,6 +207,12 @@ export enum ENManageServers {
     resetApp = 'resetApp',
     checkAuthenticiy = 'checkAuthenticiy'
 }
+export interface IServerAuthenticityBrief {
+    invalidCount: number,
+    isAuthentic: boolean,
+    overalCount: number,
+    section: string
+}
 export interface IManageDrivesInfo {
     driveName: string,
     volumeLabel: string,
@@ -244,6 +252,8 @@ export interface IBlockOrSafeIp {
     isSafe: boolean,
     isV6: boolean,
     userId: string,
+    targetUserDisplayName: string,
+    targetUsername: string,
     isNew?: boolean
 }
 export interface IIOAttemptsLog {

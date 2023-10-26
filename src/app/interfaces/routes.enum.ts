@@ -120,6 +120,8 @@ export enum EN_Routes {
     'wrmmserr' = '/wr/m/system/mserr',
     'serverOSInfo' = '/wr/m/system/osInfo',
     'serverIPSpecialRules' = '/wr/m/system/ipRules',
+    // serverAuthenticity = '/wr/m/system/authenticity',
+    serverAuthenticityBrief = '/wr/m/system/briefAuthenticity',
     'userActivation' = '/wr/reqLog/userActivation',
     'wrmRequestLogsUser' = '/wr/reqLog/User',
     reqLogUsersLogins = '/wr/m/system/usersLogins',

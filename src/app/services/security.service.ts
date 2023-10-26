@@ -24,6 +24,12 @@ export class SecurityService {
     userName: null,
     displayName: ''
   };
+  blockedUsers_pageSign: IUserLogginInfo = {
+    GUid: null,
+    userCode: null,
+    userName: null,
+    displayName: ''
+  };
 
   userRoleHistoryDetails_pageSign: IRoleNessessities = {
     id: null,
@@ -76,6 +82,11 @@ export class SecurityService {
     this.userLoggins_pageSign.displayName = e.displayName;
 
     this.utilsService.routeTo(EN_Routes.userLoggins);
+  }
+  updateBlockedUser = (e: IUserManager) => {
+    this.blockedUsers_pageSign.GUid = e.id;
+
+    this.utilsService.routeTo(EN_Routes.reqLogBlockedUsers);
   }
   verificationTimes = (dataSource: object): boolean => {
     if (MathS.isNull(dataSource['fromTime'])) {

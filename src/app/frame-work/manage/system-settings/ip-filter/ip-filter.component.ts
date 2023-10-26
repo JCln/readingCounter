@@ -56,6 +56,8 @@ export class IpFilterComponent extends FactoryONE {
       id: 0,
       ip: '',
       subnet: '',
+      targetUserDisplayName: '',
+      targetUsername: '',
       userId: '',
       isSafe: false,
       isV6: false,

@@ -1,6 +1,6 @@
 <app-prime-table
 [dataSource]="closeTabService.saveDataForAllUsers"
-[_numberOfExtraColumns]="[1,2,3]"
+[_numberOfExtraColumns]="[1,2,3,4]"
 [_sessionName]="'userRoleHistory-session'"
 [_outputFileName]="'userRoleHistoryAll'"
 [_checkUpName]="'userRoleHistoryAll'"
@@ -10,5 +10,6 @@
 (routedToLoggs)="routeToLoggs($event)"
 (openedEditDialog)="routeToUserRoleHistory($event)"
 (openedMoshtarakinDialog)="routeToUserMasterHistory($event)"
+(routedToBatch)="securityService.updateBlockedUser($event)"
 > 
 </app-prime-table>

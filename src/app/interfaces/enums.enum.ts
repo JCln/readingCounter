@@ -225,7 +225,7 @@ export enum EN_messages {
     confirm_remove = 'از حذف  مورد اطمینان دارید؟',
     confirm_removeingUser1 = 'شما درحال حذف کاربر «',
     confirm_removeingUser2 = '» با نام کاربری «',
-    confirm_IS = '» می‌باشید',    
+    confirm_IS = '» می‌باشید',
     confirm_removeUser = 'از حذف  کاربر اطمینان دارید؟',
     confirm_createList = ' لیست صادر شود؟',
     isNotValidatedFragment = 'نوبتی تایید نشده است',
@@ -450,7 +450,10 @@ export enum ENEssentialsToSave {
     uploadAttempts = 'uploadAttempts',
     getUploaded = 'getUploaded',
     logMemoryStatus = 'logMemoryStatus',
-    iOPolicy = 'iOPolicy'
+    iOPolicy = 'iOPolicy',
+    ipFilterBlockedUsers = 'ipFilterBlockedUsers',
+    serverAuthenticityBrief = 'serverAuthenticityBrief',
+    // serverAuthenticity = 'serverAuthenticity'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -572,6 +575,7 @@ export enum ENSelectedColumnVariables {
     selectedTrackReading = 'reading',
     selectedPolicyHistory = 'policyHistory',
     selectedIpFilterHistory = 'ipFilterHistory',
+    selectedServerAuthenticityBrief = 'serverAuthenticityBrief',
     selectedIOPolicyHistory = 'ipFilterHistory',
     selectedUserRoleHistoryDetails = 'userRoleHistoryDetails',
     selectedUserRoleHistorySummary = 'userRoleHistorySummary',
@@ -616,6 +620,7 @@ export enum ENSelectedColumnVariables {
     selectedRRRequestLogListUser = 'requestLogListUser',
     selectedRequestLogUsersLogins = 'usersLoginsDetails',
     selectedRequestLogIpFilterGetBlocked = 'ipFilterGetBlocked',
+    selectedRequestLogIpFilterBlockedUsers = 'ipFilterBlockedUsers',
     selectedRequestLogNotifListByDate = 'notificationListByDateReq',
     selectedRequestLogDownloadAttempts = 'downloadAttemptsReq',
     selectedRequestLogGetUploaded = 'requestLogGetUploaded',
