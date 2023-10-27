@@ -84,7 +84,7 @@ export class RegionComponent extends FactoryONE {
 
     const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.RegionEDIT, dataSource['dataSource']);
     if (res) {
-      this.refetchTable(dataSource['ri']);
+      this.refreshTable();
       Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
     }
   }

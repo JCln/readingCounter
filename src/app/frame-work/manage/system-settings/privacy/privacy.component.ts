@@ -27,7 +27,6 @@ export class PrivacyComponent extends FactoryONE {
   constructor(
     public securityService: SecurityService,
     public closeTabService: CloseTabService,
-    private snackWrapperService: SnackWrapperService
   ) {
     super();
   }
@@ -138,10 +137,10 @@ export class PrivacyComponent extends FactoryONE {
     this.securityService.editPolicy(this.closeTabService.saveDataForPolicies);
   }
   openSnackBar(message: string, duration: ENSnackBarTimes) {
-    this.snackWrapperService.openSnackBar(message, duration, ENSnackBarColors.warn);
+    this.closeTabService.utilsService.snackBarMessage(message, duration, ENSnackBarColors.warn);
   }
   accessDenied(event) {
-    this.snackWrapperService.openSnackBar(EN_messages.needMoreAccess, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
+    this.closeTabService.utilsService.snackBarMessage(EN_messages.needMoreAccess, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
     this.ref._checked = event;
   }
 }

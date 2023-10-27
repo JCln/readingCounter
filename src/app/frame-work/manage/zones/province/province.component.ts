@@ -81,9 +81,10 @@ export class ProvinceComponent extends FactoryONE {
       dataSource['dataSource'].countryId = dataSource['dataSource'].countryId['id'];
     }
 
-    await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ProvinceEDIT, dataSource['dataSource']);
-
-    Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
+    if (await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ProvinceEDIT, dataSource['dataSource'])) {
+      this.refreshTable();
+      Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
+    }
   }
   onRowEditCancel() {
     // this.closeTabService.saveDataForProvince[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];

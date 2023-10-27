@@ -36,6 +36,18 @@ export class UtilsService {
     const jwtRole = this.compositeService.getAuthUser();
     return jwtRole.roles.toString().includes('admin') ? true : false;
   }
+  getNotificationAlertTypesList = () => {
+    return this.envService.NotificationAlertTypesList;
+  }
+  getNotificationAlertTypesIds = () => {
+    return this.envService.NotificationAlertTypesIds;
+  }
+  getNotificationMediaTypeList = () => {
+    return this.envService.NotificationMediaTypeList;
+  }
+  getNotificationMediaTypeIds = () => {
+    return this.envService.NotificationMediaTypeIds;
+  }
   getYears = (): ITitleValue[] => {
     return this.envService.years;
   }

@@ -53,22 +53,27 @@ export class FileUploadSingleComponent {
       this.ioPolicy = await this.offlineModeService.dictionaryWrapperService.getIOPolicy(false);
       if (this.offlineModeService.checkVertiticationFileUploadSingle(this.ioPolicy)) {
         await this.getLatestOnOffloadId();
-        this.offlineModeService.postTicketFileUploadSingle(fileInput.files).subscribe((event: HttpEvent<any>) => {
-          switch (event.type) {
-            case HttpEventType.Sent:
-              break;
-            case HttpEventType.ResponseHeader:
-              break;
-            case HttpEventType.UploadProgress:
-              this.progress = Math.round(event.loaded / event.total * 100);
-              break;
-            case HttpEventType.Response: {
-              console.log(event.body);
-              this.offlineModeService.showSuccessMessage(event.body.message);
+        this.offlineModeService.postTicketFileUploadSingle(fileInput.files).subscribe({
+          next: (event: HttpEvent<any>) => {
+            switch (event.type) {
+              case HttpEventType.Sent:
+                break;
+              case HttpEventType.ResponseHeader:
+                break;
+              case HttpEventType.UploadProgress:
+                this.progress = Math.round(event.loaded / event.total * 100);
+                break;
+              case HttpEventType.Response: {
+                console.log(event.body);
+                this.offlineModeService.showSuccessMessage(event.body.message);
+              }
+                setTimeout(() => {
+                  this.progress = 0;
+                }, 1500);
             }
-              setTimeout(() => {
-                this.progress = 0;
-              }, 1500);
+          },
+          error: () => {
+            this.progress = 0
           }
         })
       }

@@ -1,32 +1,3 @@
-<!-- <div *ngFor="let item of userAddData.previous.appItems">
-    <div *ngFor="let item2 of item.moduleItems">
-        <div *ngFor="let item3 of item2.controllerItems">
-            <p *ngFor="let item4 of item3.actionItems">
-                {{item4.title}}
-            </p>
-        </div>
-    </div>
-</div> -->
-<!-- <div *ngFor="let item of userAddData.previous.appItems; index as i">
-    <div *ngFor="let item2 of userAddData.previous.appItems[i].moduleItems; index as i2">
-        <div *ngFor="let item3 of userAddData.previous.appItems[i].moduleItems[i2].controllerItems; index as i3">
-            <section style="display: grid; grid-template-columns: 1fr 1fr;">
-                <p
-                    *ngFor="let item4 of userAddData.previous.appItems[i].moduleItems[i2].controllerItems[i3].actionItems">
-                    {{item4.title}} + {{item4.isSelected}}
-                </p>
-                <p *ngFor="let item4 of userAddData.this.appItems[i].moduleItems[i2].controllerItems[i3].actionItems">
-                    {{item4.title}} + {{item4.isSelected}}
-                </p>
-                <p *ngIf="userAddData.this.appItems[i].moduleItems[i2].controllerItems[i3].actionItems !== 
-                userAddData.previous.appItems[i].moduleItems[i2].controllerItems[i3].actionItems">
-                    hi
-                </p>
-            </section>
-
-        </div>
-    </div>
-</div> -->
 <div class="_wrapper">
     <form #form="ngForm">
         <section class="auth_1" *ngFor="let item of userAddData.previous.appItems; index as i">
@@ -43,7 +14,7 @@
                                 <thead class="_head">
                                     <tr>
                                         <td>عنوان</td>
-                                        <td>قبلی</td>                                        
+                                        <td>قبلی</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,17 +49,11 @@
                             <table>
                                 <thead class="_head">
                                     <tr>
-                                        <!-- <td>عنوان</td> -->
                                         <td>فعلی</td>
-                                        <!-- <td>فعلی</td>
-                                        <td>تغییر</td> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let col of controllerIt.actionItems; index as i4">
-                                        <!-- <td>
-                                            {{col.title}}
-                                        </td> -->
                                         <td>
                                             {{col.isSelected ? 'بله' : 'خیر'}}
                                         </td>

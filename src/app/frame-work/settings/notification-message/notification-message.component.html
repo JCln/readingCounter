@@ -36,10 +36,10 @@
         [hidden]="!closeTabService.notificationMessages[ri].canShow">
         <div class="_icon">
             <div class="__notificationMediaTypeId" [ngClass]="{
-                'pi pi-envelope':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.text,
-                'pi pi-image':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.image,
-                'pi pi-video':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.video,
-                'fa fa-file-audio-o':item.notificationMediaTypeId == envService.NotificationMediaTypeIds.audio
+                'pi pi-envelope':item.notificationMediaTypeId == closeTabService.utilsService.getNotificationMediaTypeIds().text,
+                'pi pi-image':item.notificationMediaTypeId == closeTabService.utilsService.getNotificationMediaTypeIds().image,
+                'pi pi-video':item.notificationMediaTypeId == closeTabService.utilsService.getNotificationMediaTypeIds().video,
+                'fa fa-file-audio-o':item.notificationMediaTypeId == closeTabService.utilsService.getNotificationMediaTypeIds().audio
             }">
             </div>
         </div>
@@ -66,23 +66,24 @@
                 </ng-template>
             </div>
             <div class="__alertTypeId" [ngClass]="{
-                '_confidential':item.alertTypeId == envService.NotificationAlertTypesIds.confidential,
-                '_ordinary':item.alertTypeId == envService.NotificationAlertTypesIds.ordinary,
-                '_sensitive':item.alertTypeId == envService.NotificationAlertTypesIds.sensitive,
-                '_memory_full':item.alertTypeId == envService.NotificationAlertTypesIds.memory_full,                
-                '_security':item.alertTypeId == envService.NotificationAlertTypesIds.security,               
-                '_license':item.alertTypeId == envService.NotificationAlertTypesIds.license,               
-                '_incorrect_time':item.alertTypeId == envService.NotificationAlertTypesIds.incorrect_time
+                '_confidential':item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().confidential,
+                '_ordinary':item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().ordinary,
+                '_sensitive':item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().sensitive,
+                '_memory_full':item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().memory_full,                
+                '_security':item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().security,               
+                '_license':item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().license,               
+                '_incorrect_time':item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().incorrect_time
             }">
                 نوع:
                 {{
-                item.alertTypeId == envService.NotificationAlertTypesIds.confidential ?'محرمانه'
-                :item.alertTypeId == envService.NotificationAlertTypesIds.ordinary ?'عادی'
-                :item.alertTypeId == envService.NotificationAlertTypesIds.sensitive ?'حساس'
-                :item.alertTypeId == envService.NotificationAlertTypesIds.memory_full ?'حافظه'
-                :item.alertTypeId == envService.NotificationAlertTypesIds.security ?'امنیتی'
-                :item.alertTypeId == envService.NotificationAlertTypesIds.license ?'مجوز دسترسی'
-                :item.alertTypeId == envService.NotificationAlertTypesIds.incorrect_time?'زمان نادرست'
+                item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().confidential ?'محرمانه'
+                :item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().ordinary ?'عادی'
+                :item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().sensitive ?'حساس'
+                :item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().memory_full ?'حافظه'
+                :item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().security ?'امنیتی'
+                :item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().license ?'مجوز دسترسی'
+                :item.alertTypeId == closeTabService.utilsService.getNotificationAlertTypesIds().incorrect_time?'زمان
+                نادرست'
                 :''
                 }}
             </div>

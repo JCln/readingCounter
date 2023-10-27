@@ -56,20 +56,27 @@ export class ApkComponent extends FactoryONE {
     if (!this.apkService.checkVertitication(fileInput.files, form.value))
       return;
 
-    this.apkService.postTicket().subscribe((event: HttpEvent<any>) => {
-      switch (event.type) {
-        case HttpEventType.Sent:
-          break;
-        case HttpEventType.ResponseHeader:
-          break;
-        case HttpEventType.UploadProgress:
-          this.progress = Math.round(event.loaded / event.total * 100);
-          break;
-        case HttpEventType.Response:
-          this.apkService.showSuccessMessage(event.body.message, ENSnackBarColors.success);
-          setTimeout(() => {
-            this.progress = 0;
-          }, 1500);
+    this.apkService.postTicket().subscribe({
+      next: (event: HttpEvent<any>) => {
+        switch (event.type) {
+          case HttpEventType.Sent:
+            break;
+          case HttpEventType.ResponseHeader:
+            break;
+          case HttpEventType.UploadProgress:
+            this.progress = Math.round(event.loaded / event.total * 100);
+            break;
+          case HttpEventType.Response: {
+            this.apkService.showSuccessMessage(event.body.message, ENSnackBarColors.success);
+          }
+            setTimeout(() => {
+              this.progress = 0;
+            }, 1500);
+        }
+
+      },
+      error: () => {
+        this.progress = 0
       }
     })
   }

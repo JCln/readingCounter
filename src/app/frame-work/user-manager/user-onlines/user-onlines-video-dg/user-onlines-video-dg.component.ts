@@ -45,20 +45,26 @@ export class UserOnlinesVideoDgComponent implements OnInit {
     if (fileInput.files) {
 
       if (this.usersAllService.checkVertiticationNotifDirectVideo(fileInput.files, this.messageService.toastVideoWithCaptionReq)) {
-        this.usersAllService.postNotifyDirectVideo(fileInput.files, this.messageService.toastVideoWithCaptionReq).subscribe((event: HttpEvent<any>) => {
-          switch (event.type) {
-            case HttpEventType.Sent:
-              break;
-            case HttpEventType.ResponseHeader:
-              break;
-            case HttpEventType.UploadProgress:
-              this.progress = Math.round(event.loaded / event.total * 100);
-              break;
-            case HttpEventType.Response:
-              this.messageService.showSnack(event.body.message, ENSnackBarColors.success);
-              setTimeout(() => {
-                this.progress = 0;
-              }, 1500);
+        this.usersAllService.postNotifyDirectVideo(fileInput.files, this.messageService.toastVideoWithCaptionReq).subscribe({
+          next: (event: HttpEvent<any>) => {
+            switch (event.type) {
+              case HttpEventType.Sent:
+                break;
+              case HttpEventType.ResponseHeader:
+                break;
+              case HttpEventType.UploadProgress:
+                this.progress = Math.round(event.loaded / event.total * 100);
+                break;
+              case HttpEventType.Response: {
+                this.messageService.showSnack(event.body.message, ENSnackBarColors.success);
+              }
+                setTimeout(() => {
+                  this.progress = 0;
+                }, 1500);
+            }
+          },
+          error: () => {
+            this.progress = 0
           }
         })
       }

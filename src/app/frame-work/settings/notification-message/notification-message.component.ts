@@ -1,4 +1,3 @@
-import { EnvService } from 'services/env.service';
 import { MathS } from 'src/app/classes/math-s';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -20,8 +19,7 @@ export class NotificationMessageComponent extends FactoryONE {
 
   constructor(
     public profileService: ProfileService,
-    public closeTabService: CloseTabService,
-    public envService: EnvService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -48,13 +46,13 @@ export class NotificationMessageComponent extends FactoryONE {
   }
   openNotifyType = (message: any) => {
     switch (message.notificationMediaTypeId) {
-      case this.envService.NotificationMediaTypeIds.image:
+      case this.closeTabService.utilsService.getNotificationMediaTypeIds().image:
         this.closeTabService.utilsService.snackWrapperService.openImgDialog(message);
         break;
-      case this.envService.NotificationMediaTypeIds.video:
+      case this.closeTabService.utilsService.getNotificationMediaTypeIds().video:
         this.closeTabService.utilsService.snackWrapperService.openVideoDialog(message);
         break;
-      case this.envService.NotificationMediaTypeIds.text:
+      case this.closeTabService.utilsService.getNotificationMediaTypeIds().text:
         this.closeTabService.utilsService.snackWrapperService.openTextDialog(message);
         break;
 
@@ -63,7 +61,7 @@ export class NotificationMessageComponent extends FactoryONE {
     }
   }
   addEmptyValueToMediaTypeList = (): void => {
-    const mediaList = this.envService.NotificationMediaTypeList;
+    const mediaList = this.closeTabService.utilsService.getNotificationMediaTypeList();
     const find = mediaList.find(item => item.value == this.noFilter);
     if (find)
       this.notifFilterDictionaryMedia = mediaList;
@@ -73,7 +71,7 @@ export class NotificationMessageComponent extends FactoryONE {
     }
   }
   addEmptyValueToAlertTypeList = (): void => {
-    const alertList = this.envService.NotificationAlertTypesList;
+    const alertList = this.closeTabService.utilsService.getNotificationAlertTypesList();
     const find = alertList.find(item => item.value == this.noFilter);
     if (find)
       this.notifFilterDictionaryType = alertList;

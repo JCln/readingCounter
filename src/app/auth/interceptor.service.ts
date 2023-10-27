@@ -25,7 +25,9 @@ export class InterceptorService implements HttpInterceptor {
     private utilsService: UtilsService
   ) { }
 
-  accessDenied_401 = async (error: EN_Mess) => {
+  accessDenied_401 = async (error: string) => {
+    console.log(error);
+
     const config = {
       messageTitle: error,
       text: EN_Mess.access_denied401Msg,
@@ -37,7 +39,7 @@ export class InterceptorService implements HttpInterceptor {
     }
     await this.utilsService.firstConfirmDialog(config);
   }
-  accessDeniedSpecial = async (message: EN_Mess) => {
+  accessDeniedSpecial = async (message: string) => {
     const config = {
       messageTitle: message,
       minWidth: '19rem',
@@ -53,12 +55,10 @@ export class InterceptorService implements HttpInterceptor {
     this.utilsService.snackBarMessageFailed(error.error.message);
   }
   private showDialog = async (error: any) => {
-    await this.accessDenied_401(error).finally(() => {
-      this.authService.logout();
-    });
+    await this.accessDenied_401(error);
   }
   private showDialogSpeciall = async (error: any) => {
-    await this.accessDeniedSpecial(error.error.message).finally(() => {
+    await this.accessDeniedSpecial(error).finally(() => {
       this.authService.offlineLogout();
     });
   }
@@ -89,11 +89,12 @@ export class InterceptorService implements HttpInterceptor {
                 // if user have logged in
                 const errTxt = error.error.message ? error.error.message : EN_Mess.access_denied401;
                 this.showDialog(errTxt);
+                this.authService.logout();
               }
             }
             // system time
             if (error.status === ENClientServerErrors.cs428) {
-              this.showDialogSpeciall(error);
+              this.showDialogSpeciall(error.error.message);
             }
             // block IP
             if (error.status === ENClientServerErrors.cs451) {

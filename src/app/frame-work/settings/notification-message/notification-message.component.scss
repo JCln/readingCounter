@@ -75,8 +75,8 @@ section {
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         padding-right: 1px;
-        margin: var(--font_xs) -4rem var(--font_05) 0;
-        height: 6rem;
+        margin: var(--font_xs) -4rem var(--font_05) var(--font_05);
+        height: 5rem;
     }
 
     .btn_2_o {

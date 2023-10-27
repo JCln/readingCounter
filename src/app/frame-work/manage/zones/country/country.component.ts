@@ -61,6 +61,7 @@ export class CountryComponent extends FactoryONE {
       return;
     }
     await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.CountryEDIT, dataSource['dataSource']);
+    this.refreshTable();
   }
   onRowEditCancel() {
     // this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];

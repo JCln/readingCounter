@@ -47,20 +47,26 @@ export class UserOnlinesImgDgComponent implements OnInit {
     if (fileInput.files) {
       this.ioPolicy = await this.usersAllService.dictionaryWrapperService.getIOPolicy(false);
       if (this.usersAllService.checkVertiticationNotifDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq, this.ioPolicy)) {
-        this.usersAllService.postNotifyDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq).subscribe((event: HttpEvent<any>) => {
-          switch (event.type) {
-            case HttpEventType.Sent:
-              break;
-            case HttpEventType.ResponseHeader:
-              break;
-            case HttpEventType.UploadProgress:
-              this.progress = Math.round(event.loaded / event.total * 100);
-              break;
-            case HttpEventType.Response:
-              this.messageService.showSnack(event.body.message, ENSnackBarColors.success);
-              setTimeout(() => {
-                this.progress = 0;
-              }, 1500);
+        this.usersAllService.postNotifyDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq).subscribe({
+          next: (event: HttpEvent<any>) => {
+            switch (event.type) {
+              case HttpEventType.Sent:
+                break;
+              case HttpEventType.ResponseHeader:
+                break;
+              case HttpEventType.UploadProgress:
+                this.progress = Math.round(event.loaded / event.total * 100);
+                break;
+              case HttpEventType.Response: {
+                this.messageService.showSnack(event.body.message, ENSnackBarColors.success);
+              }
+                setTimeout(() => {
+                  this.progress = 0;
+                }, 1500);
+            }
+          },
+          error: () => {
+            this.progress = 0
           }
         })
       }
