@@ -8,7 +8,7 @@ import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 import { IUserLogginInfo, IUserManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { IIOPolicy, IOPolicy } from 'interfaces/iserver-manager';
+import { IIOPolicy, IOPolicy, IUserActivation } from 'interfaces/iserver-manager';
 
 export interface IRoleNessessities {
   id: string,
@@ -25,6 +25,12 @@ export class SecurityService {
     displayName: ''
   };
   blockedUsers_pageSign: IUserLogginInfo = {
+    GUid: null,
+    userCode: null,
+    userName: null,
+    displayName: ''
+  };
+  userActivationByUserId_pageSign: IUserLogginInfo = {
     GUid: null,
     userCode: null,
     userName: null,
@@ -85,8 +91,11 @@ export class SecurityService {
   }
   updateBlockedUser = (e: IUserManager) => {
     this.blockedUsers_pageSign.GUid = e.id;
-
     this.utilsService.routeTo(EN_Routes.reqLogBlockedUsers);
+  }
+  routeToUserActivationByUserId = (e: IUserActivation) => {
+    this.userActivationByUserId_pageSign.GUid = e.id;
+    this.utilsService.routeTo(EN_Routes.userActivationByuserId);
   }
   verificationTimes = (dataSource: object): boolean => {
     if (MathS.isNull(dataSource['fromTime'])) {

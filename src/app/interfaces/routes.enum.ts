@@ -123,6 +123,7 @@ export enum EN_Routes {
     // serverAuthenticity = '/wr/m/system/authenticity',
     serverAuthenticityBrief = '/wr/m/system/briefAuthenticity',
     'userActivation' = '/wr/reqLog/userActivation',
+    userActivationByuserId = '/wr/m/system/userRoleHistory/byUserId',
     'wrmRequestLogsUser' = '/wr/reqLog/User',
     reqLogUsersLogins = '/wr/m/system/usersLogins',
     reqLogDownloadAttempts = '/wr/reqLog/downloadAttempts',

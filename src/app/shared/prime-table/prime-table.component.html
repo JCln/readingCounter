@@ -60,7 +60,7 @@
 
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="hasBeenReadsToggler()">
-                    <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
+                    <label class="font_family" for="binary">({{dataSource.length}})فقط قرائت شده</label>
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
                 </i>
@@ -274,6 +274,13 @@
                 <span class="ui-column-title">Ip های مسدود شده</span>
                 <i class="tooltip p_icons pi pi-ban _red_500">
                     <div class="tooltip_text_right">Ip های مسدود شده</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="routeToSingle(dataSource)">
+                <span class="ui-column-title">تغییرات حساب کاربر</span>
+                <i class="tooltip p_icons pi pi-user">
+                    <div class="tooltip_text_right">تغییرات حساب کاربر</div>
                 </i>
             </td>
             <td class="__columns"

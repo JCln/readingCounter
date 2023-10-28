@@ -219,16 +219,17 @@ export class ENYears {
 }
 export class getLogoutReasonDictionary {
     static readonly DEFAULT = new getLogoutReasonDictionary([
-        { id: 0, title: 'توسط کاربر' },
-        { id: 1, title: 'ویرایش شده' },
-        { id: 2, title: 'تغییر گذرواژه' },
-        { id: 3, title: 'لاگین همزمان' },
-        { id: 4, title: 'غیرفعال شده' },
-        { id: 5, title: 'اتمام زمان نشست' },
-        { id: 6, title: 'بازنشانی گذرواژه' },
-        { id: 7, title: 'تغییر نوع ورود' }
+        { id: 0, field: 'SelfLogout', title: 'توسط کاربر' },
+        { id: 1, field: 'Edit', title: 'ویرایش شده' },
+        { id: 2, field: 'ChangePassword', title: 'تغییر گذرواژه' },
+        { id: 3, field: 'ConcurrentLogin', title: 'لاگین همزمان' },
+        { id: 4, field: 'Deactivation', title: 'غیرفعال شده' },
+        { id: 5, field: 'InActiveSession', title: 'اتمام زمان نشست' },
+        { id: 6, field: 'ResetPassword', title: 'بازنشانی گذرواژه' },
+        { id: 7, field: 'ChangeTwoStep', title: 'تغییر نوع ورود' }
     ]);
-    private constructor(public readonly value: { id: number, title: string }[]) {
+    private constructor(public readonly value: { id: number, title: string, field: string }[]) {
+
     }
 }
 export class getInvalidLoginReasonDictionary {
@@ -242,6 +243,7 @@ export class getInvalidLoginReasonDictionary {
         { id: 7, field: 'TwoStepExpiredTime', title: 'دومرحله‌ای زمان منقضی شده' },
         { id: 8, field: 'TwoStepInvalidCode', title: 'دومرحله‌ای کد نامعتبر' },
         { id: 9, field: 'TwoStepUsedCode', title: 'دومرحله‌ای کد تکراری' },
+        { id: 9, field: 'IpIsBlocked', title: 'IP مسدود شده' },
     ]);
     private constructor(public readonly value: { id: number, title: string, field: string }[]) {
     }

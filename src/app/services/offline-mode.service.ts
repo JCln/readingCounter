@@ -95,7 +95,7 @@ export class OfflineModeService {
   }
   checkVertiticationFileUploadSingle = (ioPolicy: IIOPolicy): boolean => {
     const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
-    const allowedNames = ['jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG'];
+    const allowedNames = ['jpeg', 'jpg', 'png'];
 
     if (MathS.isNull(this.fileUploadSingle.searchBy)) {
       this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);

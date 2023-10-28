@@ -2133,7 +2133,7 @@ export class ColumnManager {
         { field: 'username', header: 'نام کاربری', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'userCode', header: 'کد کاربری', isSelected: false, isSelectedOrigin: false, ltr: false },
         { field: 'mobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, ltr: true },
-        // { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false, isSelectedOrigin: false },
@@ -2150,6 +2150,26 @@ export class ColumnManager {
         { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false, isSelectedOrigin: false },
         { field: 'deviceId', header: 'سریال', isSelected: false, isSelectedOrigin: false }
+    ]
+    reqLogUserActivationByUserId: IObjectIteratation[] = [
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
+        { field: 'targetUserDisplayName', header: 'نام کاربر هدف', isSelected: true, isSelectedOrigin: true },
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        // { field: 'id', header: 'id', isSelected: true,isSelectedOrigin:true },        
+        // { field: 'changeDateTime', header: 'زمان', isSelected: true,isSelectedOrigin:true },
+        { field: 'changeDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'changeTime', header: 'زمان تغییر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'osTitle', header: 'سیستم‌عامل', isSelected: true, isSelectedOrigin: true },
+        { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: true, isSelectedOrigin: true },
+        { field: 'osPlatform', header: 'نوع سیستم', isSelected: false, isSelectedOrigin: false },
+        // { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false,isSelectedOrigin:false },                
+        { field: 'userAgent', header: 'userAgent', isSelected: false, isSelectedOrigin: false },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
     ]
     userMasterDetailsAll: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },
@@ -2179,7 +2199,7 @@ export class ColumnManager {
         { field: 'username', header: 'نام کاربری', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'userCode', header: 'کد کاربری', isSelected: false, isSelectedOrigin: false, ltr: false },
         { field: 'mobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, ltr: true },
-        // { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false, isSelectedOrigin: false },
         { field: 'deviceId', header: 'سریال', isSelected: false, isSelectedOrigin: false }

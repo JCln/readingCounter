@@ -9,7 +9,7 @@ import { DownloadManagerService } from 'services/download-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
+import { IOverAllWOUIInfo } from 'interfaces/itrackings';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { MathS } from 'src/app/classes/math-s';
@@ -46,6 +46,9 @@ export class WoumComponent implements OnChanges {
   @Input() fulName?: string;
   // from forbidden
   @Input() displayName?: string;
+  @Input() _audioExtention?: string; // getUploaded content type
+  @Input() userDisplayName?: string; // getUploaded content type
+  @Input() sizeInByte?: string; // getUploaded content type
 
 
   offloadModifyReq: IOffloadModifyReq = {
@@ -57,12 +60,13 @@ export class WoumComponent implements OnChanges {
     jalaliDay: '',
     description: ''
   }
-  dataSource: IOnOffLoad[] = [];
+  dataSource: any[] = [];
   testAudio = new Audio();
-  audioFiles: IOnOffLoad[] = [];
+  audioFiles: any[] = [];
   downloadURL: string = '';
   showAudioControllers: boolean = false;
   isPlaying: boolean = false;
+
   ref: DynamicDialogRef;
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
@@ -93,57 +97,13 @@ export class WoumComponent implements OnChanges {
     public profileService: ProfileService
   ) { }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    this.imageFiles = [];
-    this.audioFiles = [];
-    this.dataSource = [];
 
-    console.log(this.id);
-    console.log(this.fileRepositoryId);
-
-    // typical
-    if (this._type == ENImageTypes.typical) {
-      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id);
-    }
-    // forbidden
-    if (this._type == ENImageTypes.forbidden) {
-      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.id);
-    }
-    // mobileApp
-    if (this._type == ENImageTypes.mobileApp) {
-      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.feedbackMobileDictionary, this.id);
-    }
-    // single image, by fileRepositoryId
-    if (this._type == ENImageTypes.single) {
-      this.testSingleImage = this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + this.fileRepositoryId + ENInterfaces.accessTokenTile + this.utilsService.compositeService.getAccessToken();
-    }
-
-    if (this.zoneId) {
-      this.counterStatesDictionary = await this.trackingManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
-    }
-
-    if (!MathS.isNaN(this.zoneId)) {
-      this.zoneDictionary = await this.dictionaryWrapperService.getZoneDictionary();
-      this.zoneDictionary.find(dictionary => {
-        if (dictionary.id == this.zoneId) {
-          return this.zoneId = dictionary.title
-        }
-      });
-    }
-    console.log(this.dataSource);
-
-    this.downloadManagerService.assignToDataSource(this.dataSource);
-    this.audioFiles = this.downloadManagerService.separateAudioFiles();
-    this.imageFiles = this.downloadManagerService.separateImageFiles();
-    this.modifyType = this.trackingManagerService.getOffloadModifyType();
-    this.offloadItems = this.trackingManagerService.getOffloadItems();
-
-    this.overAllInfo = this.downloadManagerService.getOverAllInfo();
-    this.getDownloadListInfo();
-    this.showAllImgs();
+  showSingleAudio = () => {
+    this.audioFiles.push(this.dataSource);
+    this.getExactAudio(this.fileRepositoryId);
   }
-  ngOnChanges(): void {
-    this.classWrapper();
+  showSingleImage = () => {
+    this.testSingleImage = this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + this.fileRepositoryId + ENInterfaces.accessTokenTile + this.utilsService.compositeService.getAccessToken();
   }
   receiveFromDateJalali = ($event: string) => {
     this.offloadModifyReq.jalaliDay = $event;
@@ -171,14 +131,14 @@ export class WoumComponent implements OnChanges {
       this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();
   }
   /* AUDIO */
-  isShowAudioControllers = () => {
+  canShowAudioControllers = () => {
     this.showAudioControllers = true;
   }
   getExactAudio = async (id: string) => {
-    const res = await this.downloadManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.downloadFileGET, id)
+    const res = await this.downloadManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.downloadFileGET, id);
     this.downloadURL = window.URL.createObjectURL(res);
     this.testAudio.src = this.downloadURL;
-    this.isShowAudioControllers();
+    this.canShowAudioControllers();
   }
   downloadAudio = () => {
     const link = document.createElement('a');
@@ -229,6 +189,55 @@ export class WoumComponent implements OnChanges {
       const res = await this.trackingManagerService.postOffloadModifyEdited(ENInterfaces.trackingPostOffloadModify, this.offloadModifyReq);
       this.trackingManagerService.successSnackMessage(res.message);
     }
+  }
+  classWrapper = async (canRefresh?: boolean) => {
+    this.imageFiles = [];
+    this.audioFiles = [];
+    this.dataSource = [];
+
+    // typical
+    if (this._type == ENImageTypes.typical) {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id);
+    }
+    // forbidden
+    if (this._type == ENImageTypes.forbidden) {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.id);
+    }
+    // mobileApp
+    if (this._type == ENImageTypes.mobileApp) {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.feedbackMobileDictionary, this.id);
+    }
+    // single image, by fileRepositoryId
+    if (this._type == ENImageTypes.single) {
+      const audioValidExtention = ['.ogg'];
+      audioValidExtention.indexOf(this._audioExtention) == -1 ? this.showSingleImage() : this.showSingleAudio();
+      return;
+    }
+
+    if (this.zoneId) {
+      this.counterStatesDictionary = await this.trackingManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
+    }
+
+    if (!MathS.isNaN(this.zoneId)) {
+      this.zoneDictionary = await this.dictionaryWrapperService.getZoneDictionary();
+      this.zoneDictionary.find(dictionary => {
+        if (dictionary.id == this.zoneId) {
+          return this.zoneId = dictionary.title
+        }
+      });
+    }
+    this.downloadManagerService.assignToDataSource(this.dataSource);
+    this.audioFiles = this.downloadManagerService.separateAudioFiles();
+    this.imageFiles = this.downloadManagerService.separateImageFiles();
+    this.modifyType = this.trackingManagerService.getOffloadModifyType();
+    this.offloadItems = this.trackingManagerService.getOffloadItems();
+
+    this.overAllInfo = this.downloadManagerService.getOverAllInfo();
+    this.getDownloadListInfo();
+    this.showAllImgs();
+  }
+  ngOnChanges(): void {
+    this.classWrapper();
   }
   onThumbnailButtonClick() {
     this.showThumbnails = !this.showThumbnails;

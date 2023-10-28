@@ -270,6 +270,7 @@ export enum ENInterfaces {
     requestLogUserActivationDictionary = 'V1/RequestLog/UserActivationLogTypes',
     requestLogLogMemoryStatus = '/V1/RequestLog/LogMemoryStatus',
     requestLogUserActivation = 'V1/RequestLog/UserActivation',
+    requestLogUserActivationByUserId = 'V1/RequestLog/UserActivationByUserId',
     requestLogUsersLogins = 'V1/User/UsersLogins',
     requestLogDownloadAttempts = 'V1/RequestLog/DownloadAttempts',
     requestLogUploadAttempts = 'V1/RequestLog/UploadAttempts',
@@ -335,7 +336,7 @@ export enum ENInterfaces {
     GetIpFilterHistory = 'V1/IpFilter/History',
     GetIpFilterCompare = 'V1/IpFilter/Compare',
     PostIpFilterGetBlocked = 'V1/IpFilter/GetBlocked',
-    GetIpFilterBlockedByUserId = 'V1/IpFilter/GetBlockedByUserId',
+    GetIpFilterBlockedByUserId = 'V1/IpFilter/GetBlockedByUserId',    
 
     // IO policy manager
     GetIOPolicy = 'V1/IoPolicy/Active',

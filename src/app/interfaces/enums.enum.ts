@@ -51,7 +51,7 @@ export enum EN_messages {
     insert_File = 'فایلی انتخاب کنید',
     insert_Image = 'تصویری انتخاب کنید',
     uploadMaxCountPassed = 'حجم فایل انتخابی از حداکثر حجم قابل ارسال(آپلود) بیشتر است',
-    insertIsNotImage = 'تصویری انتخاب نشده است',
+    insertIsNotImage = 'فرمت ارسالی باید تصویر باشد',
     imageNotExists = 'تصویر/صوت برای نمایش وجود ندارد',
     changesOnNextRead = 'تغییر تعداد نمایش با قرائت بعدی اعمال خواهد شد',
     insert_video = 'ویدیویی انتخاب کنید',
@@ -453,7 +453,7 @@ export enum ENEssentialsToSave {
     iOPolicy = 'iOPolicy',
     ipFilterBlockedUsers = 'ipFilterBlockedUsers',
     serverAuthenticityBrief = 'serverAuthenticityBrief',
-    // serverAuthenticity = 'serverAuthenticity'
+    reqLogUserActivationByUserId = 'reqLogUserActivationByUserId'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -621,6 +621,7 @@ export enum ENSelectedColumnVariables {
     selectedRequestLogUsersLogins = 'usersLoginsDetails',
     selectedRequestLogIpFilterGetBlocked = 'ipFilterGetBlocked',
     selectedRequestLogIpFilterBlockedUsers = 'ipFilterBlockedUsers',
+    selectedRequestLogUserActivationByUserId = 'reqLogUserActivationByUserId',
     selectedRequestLogNotifListByDate = 'notificationListByDateReq',
     selectedRequestLogDownloadAttempts = 'downloadAttemptsReq',
     selectedRequestLogGetUploaded = 'requestLogGetUploaded',

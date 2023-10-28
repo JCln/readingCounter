@@ -305,6 +305,7 @@ export class CloseTabService {
     toDate: '',
   }
   ipFilterBlockedUsers: IGetBlocked[] = [];
+  reqLogUserActivationByUserId: IUserActivation[] = [];
   ipFilterGetBlocked: IGetBlocked[] = [];
   ipFilterGetBlockedReq = {
     fromDate: '',
@@ -758,6 +759,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
     { id: 2, req: ENEssentialsToSave.ipFilterGetBlockedReq, value: ENEssentialsToSave.ipFilterGetBlocked, url: EN_Routes.requestLogsGetBlocked },
     { id: 2, value: ENEssentialsToSave.ipFilterBlockedUsers, url: EN_Routes.reqLogBlockedUsers },
+    { id: 2, value: ENEssentialsToSave.reqLogUserActivationByUserId, url: EN_Routes.userActivationByuserId },
     { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },

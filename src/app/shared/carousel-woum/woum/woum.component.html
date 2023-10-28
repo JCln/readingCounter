@@ -12,6 +12,10 @@
             <div class="_key">قرائت کننده</div>
             <input [readOnly]="true" class="_value" name="displayName" [(ngModel)]="displayName">
         </div>
+        <div class="input_2 double_size" *ngIf="userDisplayName">
+            <div class="_key">نام کاربر</div>
+            <input [readOnly]="true" class="_value" name="userDisplayName" [(ngModel)]="userDisplayName">
+        </div>
         <div class="input_2" *ngIf="zoneId">
             <div class="_key">ناحیه</div>
             <input [readOnly]="true" class="_value" name="zoneId" [(ngModel)]="zoneId">
@@ -47,6 +51,10 @@
         <div class="input_2" *ngIf="_solution">
             <div class="_key">راهکار</div>
             <input [readOnly]="true" class="_value" name="solution" [(ngModel)]="_solution">
+        </div>
+        <div class="input_2" *ngIf="sizeInByte">
+            <div class="_key">اندازه (بایت)</div>
+            <input [readOnly]="true" class="_value" name="sizeInByte" [(ngModel)]="sizeInByte">
         </div>
         <div class="input_2 double_size" *ngIf="description">
             <div class="_key">توضیحات</div>
@@ -96,7 +104,6 @@
             </div>
         </div>
     </section>
-
     <section class="content" *ngIf="_type !== ENImageTypes.forbidden">
         <h1 class="title">صدای ضبط شده</h1>
         <hr>
