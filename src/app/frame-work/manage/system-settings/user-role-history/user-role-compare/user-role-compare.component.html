@@ -1,0 +1,23 @@
+<section class="content">
+    <section class="collapse">
+        <h1>مقایسه تغییرات</h1>
+    </section>
+
+    <table>
+        <tbody>
+            <tr>
+                <td class="_head">قبلی</td>
+                <td *ngFor="let item of dataSource.previous">
+                    {{item.titleUnicode}}
+                </td>
+            </tr>
+            <tr>
+                <td class="_head">فعلی</td>
+                <td *ngFor="let item of dataSource.this">
+                    {{item.titleUnicode}}
+                <td>
+            </tr>
+        </tbody>
+
+    </table>
+</section>

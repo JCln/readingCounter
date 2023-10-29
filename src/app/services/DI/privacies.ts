@@ -66,6 +66,8 @@ export interface IRoleHistory {
     title: string,
     titleUnicode: string,
     needDeviceIdLogin: string,
+    changeOrInsertLogId: string,
+    displaySensitiveNotification: boolean,
     description: string,
     insertDateTime: string,
     insertDateJalali: string,

@@ -1,0 +1,7 @@
+@import 'variable';
+@import 'compare';
+
+._head {
+    background-color: var(--secondary_8);
+    color: var(--white);
+}

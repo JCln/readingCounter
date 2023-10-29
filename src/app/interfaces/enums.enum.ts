@@ -124,7 +124,7 @@ export enum EN_messages {
     insert_versionCode = 'شماره نسخه را وارد نمایید',
     insert_APK = 'لطفا یک فایل apk انتخاب نمایید',
     insert_IP = 'IP را وارد نمایید',
-    insert_subnet = 'Subnet را وارد نمایید',
+    insert_subnet = 'تا IP را وارد نمایید',
     insert_Period = 'مدت را وارد نمایید',
     insert_limit = 'حداکثر تعداد را وارد نمایید',
     insert_trackNumber = 'شماره پیگیری را وارد نمایید',

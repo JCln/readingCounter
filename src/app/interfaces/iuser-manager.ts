@@ -10,7 +10,8 @@ export interface IUserManager {
     defaultZoneTitle: string;
     deviceId: string;
     lastActivityDateTime: string;
-    hasTwoStepAuthentication: boolean
+    hasTwoStepAuthentication: boolean,
+    changeOrInsertUserLogId: string // for display user Role compare
 }
 export interface IUserLogginInfo {
     GUid: string,
@@ -405,13 +406,20 @@ export interface IUserCompareDetails {
     userAgent: string,
     userDisplayName: string
 }
+export interface IUserRoleCompareDetails {
+    id: number,
+    title: string,
+    titleUnicode: string,
+    needDeviceIdLogin: boolean,
+    displaySensitiveNotification: boolean
+}
 export interface IUserCompareManager {
     previous: IUserCompareDetails,
     this: IUserCompareDetails
 }
 export interface IUserRoleCompare {
-    previous: IUserCompareDetails,
-    this: IUserCompareDetails
+    previous: IUserRoleCompareDetails,
+    this: IUserRoleCompareDetails
 }
 
 

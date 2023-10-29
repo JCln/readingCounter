@@ -30,7 +30,7 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport'"
+                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport' || _checkUpName == 'ipFilter'"
                     (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
@@ -312,9 +312,14 @@
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
-            <td class="__columns"
-                *ngIf="_outputFileName == 'policyHistory' || _outputFileName == 'roleHistory' || _outputFileName == 'ipFilterHistory' || _outputFileName == 'IOPolicyHistory' || _checkUpName == 'userMasterHistory'"
-                (click)="openBriefKardexDialog(dataSource)">
+            <td class="__columns" *ngIf="
+                _outputFileName == 'policyHistory' 
+                || _outputFileName == 'roleHistory' 
+                || _outputFileName == 'ipFilterHistory' 
+                || _outputFileName == 'IOPolicyHistory'             
+                || _checkUpName == 'userMasterHistory' 
+                || _checkUpName == 'userRoleHistorySummary'
+                " (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">مقایسه تغییرات</span>
                 <i class="tooltip p_icons fas fa-balance-scale-left">
                     <div class="tooltip_text_right">مقایسه تغییرات</div>
@@ -483,7 +488,8 @@
                     <div class="tooltip_text">ویرایش</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName== 'dynamicReport'" (click)="showMoreDetails(dataSource)">
+            <td class="__columns" *ngIf="_checkUpName== 'dynamicReport' || _checkUpName == 'ipFilter'"
+                (click)="showMoreDetails(dataSource)">
                 <span class="ui-column-title">حذف</span>
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف</div>
@@ -547,9 +553,9 @@
             </td>
             <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'ipFilter' " class="edit_button"
                 (click)="showPictures(dataSource)">
-                <span class="ui-column-title">مسدود کردن کاربر</span>
-                <i class="tooltip p_icons pi pi-ban _red_500">
-                    <div class="tooltip_text_right">مسدود کردن کاربر</div>
+                <span class="ui-column-title">ویرایش مسدود سازی IP</span>
+                <i class="tooltip p_icons pi pi-user-edit _red_500">
+                    <div class="tooltip_text_right">ویرایش مسدود سازی IP</div>
                 </i>
             </td>
             <td class="__columns"

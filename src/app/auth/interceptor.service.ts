@@ -26,8 +26,6 @@ export class InterceptorService implements HttpInterceptor {
   ) { }
 
   accessDenied_401 = async (error: string) => {
-    console.log(error);
-
     const config = {
       messageTitle: error,
       text: EN_Mess.access_denied401Msg,
@@ -67,7 +65,29 @@ export class InterceptorService implements HttpInterceptor {
       headers: req.headers.set(this.authorizationHeader, this.bearer + token)
     });
   }
+  // httpGet(theUrl) {
+  //   console.log(theUrl);
+  //   var xmlHttp = new XMLHttpRequest();
+  //   xmlHttp.open("GET", theUrl, false); // false for synchronous request
+  //   xmlHttp.send(null);
+  //   return xmlHttp.responseText;
+  // }
+  // httpGetAsync(theUrl, callback) {
+  //   var xmlHttp = new XMLHttpRequest();
+  //   xmlHttp.onreadystatechange = function () {
+  //     if (xmlHttp.readyState == 4)
+  //       callback(xmlHttp.responseText);
+  //   }
+  //   console.log(callback);
+
+  //   xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+  //   xmlHttp.send(null);
+  // }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // this.httpGet('https://37.191.92.157/kontoriNew/V1/User/All');
+    // console.log(this.httpGet('https://37.191.92.157/kontoriNew/V1/User/All'));
+    // // this.httpGetAsync();
+
     const authToken = this.jwtService.getAccessToken();
     if (authToken)
       req = this.addToken(req, authToken);
@@ -97,9 +117,9 @@ export class InterceptorService implements HttpInterceptor {
               this.showDialogSpeciall(error.error.message);
             }
             // block IP
-            if (error.status === ENClientServerErrors.cs451) {
-              this.showDialogSpeciall(EN_Mess.access_denied451LegalReasons);
-            }
+            // if (error.status === ENClientServerErrors.cs451) {
+            //   this.showDialogSpeciall(EN_Mess.access_denied451LegalReasons);
+            // }
           }
           if (error instanceof HttpErrorResponse && error.error instanceof Blob && error.error.type === this.errorType) {
             // https://github.com/angular/angular/issues/19888

@@ -27,7 +27,7 @@ export class UserRoleHistoryComponent extends FactoryONE {
     this.securityService.updateUserLogginsInfo(e);
   }
   routeToUserRoleHistory(e: IUserManager) {
-    this.securityService.userRoleHistoryDetails_pageSign.id = e.id;
+    this.securityService.userRoleHistoryDetails_pageSign.id = e.id;    
     this.securityService.utilsService.routeTo(EN_Routes.userRoleHistoryDetails);
   }
   routeToUserMasterHistory(e: IUserManager) {

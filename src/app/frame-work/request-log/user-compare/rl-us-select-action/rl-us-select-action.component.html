@@ -23,7 +23,9 @@
                                             {{col.title}}
                                         </td>
                                         <td>
-                                            {{col.isSelected ? 'بله' : 'خیر'}}
+                                            <i
+                                                [ngClass]="col.isSelected ? 'pi pi-check-square _green' : 'pi pi-times-circle red_500'">
+                                            </i>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -55,7 +57,9 @@
                                 <tbody>
                                     <tr *ngFor="let col of controllerIt.actionItems; index as i4">
                                         <td>
-                                            {{col.isSelected ? 'بله' : 'خیر'}}
+                                            <i
+                                                [ngClass]="col.isSelected ? 'pi pi-check-square _green' : 'pi pi-times-circle red_500'">
+                                            </i>
                                         </td>
                                     </tr>
                                 </tbody>

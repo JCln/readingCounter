@@ -3,11 +3,12 @@
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"    
     [_checkUpName]="'ipFilter'" 
-    [_outputFileName]="'ipFilter'"   
-    [_numberOfExtraColumns]="[1]"
+    [_outputFileName]="'ipFilter'"    
+    [_numberOfExtraColumns]="[1,2]"
     [_sessionName]="'ipfilter-session'"
     [_selectedColumnsToRemember]="'selectedIpFilter'"
     (refreshedTable)="refreshTable()"    
     (showedPictures)="openAddDialog($event)"
+    (showedMoreDetails)="removeRow($event)"
  > 
 </app-prime-table>

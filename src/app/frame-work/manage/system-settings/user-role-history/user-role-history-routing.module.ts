@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'details', component: UserRoleHistorySummaryComponent },
   { path: 'loggins', loadChildren: () => import('./user-loggins/user-loggins.module').then(userLoggins => userLoggins.UserLogginsModule) },
   { path: 'blockedUsers', loadChildren: () => import('./blocked-users/blocked-users.module').then(blockedUsers => blockedUsers.BlockedUsersModule) },
-  { path: 'byUserId', loadChildren: () => import('./byuserid/byuserid.module').then(userActivationByUserId => userActivationByUserId.ByuseridModule) }
+  { path: 'byUserId', loadChildren: () => import('./byuserid/byuserid.module').then(userActivationByUserId => userActivationByUserId.ByuseridModule) },
 ];
 
 @NgModule({

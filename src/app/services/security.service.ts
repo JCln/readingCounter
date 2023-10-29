@@ -39,6 +39,7 @@ export class SecurityService {
 
   userRoleHistoryDetails_pageSign: IRoleNessessities = {
     id: null,
+    changeOrInsertUserLogId: ''
   };
   userMasterDetailsHistory_pageSign: IRoleNessessities = {
     id: null,

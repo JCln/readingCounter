@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 import { FactoryONE } from 'src/app/classes/factory';
 import { UserRoleHistoryDetailsComponent } from '../user-role-history-details/user-role-history-details.component';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+import { UserRoleCompareComponent } from '../user-role-compare/user-role-compare.component';
+import { IRoleHistory } from 'services/DI/privacies';
 
 @Component({
   selector: 'app-user-role-history-summary',
@@ -44,6 +46,14 @@ export class UserRoleHistorySummaryComponent extends FactoryONE {
   }
   showMoreDetails = (data: any) => {
     this.ref = this.dialogService.open(UserRoleHistoryDetailsComponent, {
+      data: data,
+      rtl: true,
+      width: '80%'
+    })
+  }
+  showCompare = (data: IRoleHistory) => {
+    this.securityService.userRoleHistoryDetails_pageSign.changeOrInsertUserLogId = data.changeOrInsertLogId;
+    this.ref = this.dialogService.open(UserRoleCompareComponent, {
       data: data,
       rtl: true,
       width: '80%'

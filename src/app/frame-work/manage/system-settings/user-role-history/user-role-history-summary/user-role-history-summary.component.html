@@ -2,10 +2,11 @@
     [dataSource]="closeTabService.saveDataForUserRoleHistory" 
     [_outputFileName]="'userRoleHistorySummary'"    
     [_checkUpName]="'userRoleHistorySummary'"    
-    [_numberOfExtraColumns]="[1]"
+    [_numberOfExtraColumns]="[1,2]"
     [_sessionName]="'userRoleHistorySummary-session'"
     [_selectedColumnsToRemember]="'selectedUserRoleHistorySummary'"    
     (refreshedTable)="refreshTable()"
     (openedMoshtarakinDialog)="showMoreDetails($event)"
+    (openedBriefKardexDialog)="showCompare($event)"
  > 
 </app-prime-table>

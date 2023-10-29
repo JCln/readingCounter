@@ -38,20 +38,24 @@ export class UserBlockingComponent implements OnInit {
   }
   async save() {
     console.log(this.form.value);
+    console.log(this.selected);
 
-    if (!this.readManagerService.verificationBlockOrSafeIP(this.form.value))
-      return;
-       
-    if (!await this.readManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AddIpFilter, this.form.value))
-      return;
+    // if (!this.readManagerService.verificationBlockOrSafeIP(this.form.value))
+    //   return;
 
-    this.dialogRef.close(this.form.value);
+    // if (!await this.readManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AddIpFilter, this.form.value))
+    //   return;
+
+    // this.dialogRef.close(this.form.value);
   }
   close() {
     this.dialogRef.close();
   }
   classWrapper = async () => {
     this.userAllDictionary = await this.readManagerService.dictionaryWrapperService.getUserAllDictionary();
+    // if deep copy not happenning then this dictionary will affected on allover of website
+    if (this.userAllDictionary[0].id !== null)
+      this.userAllDictionary.unshift({ id: null, title: 'فقط IP (بدون مقدار)', isSelected: true })
   }
   ngOnInit(): void {
     this.classWrapper();
