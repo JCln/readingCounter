@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IUserCompareManager, IUserRoleCompare } from 'interfaces/iuser-manager';
+import { IUserRoleCompare } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
