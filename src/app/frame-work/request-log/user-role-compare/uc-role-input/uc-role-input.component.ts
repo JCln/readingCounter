@@ -4,13 +4,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 @Component({
-  selector: 'app-rl-us-select-input',
-  templateUrl: './rl-us-select-input.component.html',
-  styleUrls: ['./rl-us-select-input.component.scss']
+  selector: 'app-uc-role-input',
+  templateUrl: './uc-role-input.component.html',
+  styleUrls: ['./uc-role-input.component.scss']
 })
-export class RlUsSelectInputComponent {
+export class UcRoleInputComponent {
   @Input() dataSource: IUserCompareManager;
-  policyCompareColumns: string = 'userRoleHistoryDetails_UserInfo';
+  policyCompareColumns: string = 'userRoleCompare_UserInfo';
   _selectCols = this.columnManager.getColumnsMenus(this.policyCompareColumns);
 
   constructor(

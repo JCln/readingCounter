@@ -71,6 +71,7 @@ export enum ENInterfaces {
     UserMasterHistory = 'V1/User/UserMasterHistory',
     UserDetailsHistory = 'V1/User/UserDetailsHistory',
     UserCompare = 'V1/User/Compare',
+    UserRoleCompare = 'V1/User/CompareUserRole',
 
     downloadFileGET = 'V1/Download/File',
     downloadFileInfo = 'V1/Download/File/info',
@@ -336,7 +337,7 @@ export enum ENInterfaces {
     GetIpFilterHistory = 'V1/IpFilter/History',
     GetIpFilterCompare = 'V1/IpFilter/Compare',
     PostIpFilterGetBlocked = 'V1/IpFilter/GetBlocked',
-    GetIpFilterBlockedByUserId = 'V1/IpFilter/GetBlockedByUserId',    
+    GetIpFilterBlockedByUserId = 'V1/IpFilter/GetBlockedByUserId',
 
     // IO policy manager
     GetIOPolicy = 'V1/IoPolicy/Active',

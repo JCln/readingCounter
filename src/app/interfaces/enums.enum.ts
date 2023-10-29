@@ -453,7 +453,8 @@ export enum ENEssentialsToSave {
     iOPolicy = 'iOPolicy',
     ipFilterBlockedUsers = 'ipFilterBlockedUsers',
     serverAuthenticityBrief = 'serverAuthenticityBrief',
-    reqLogUserActivationByUserId = 'reqLogUserActivationByUserId'
+    reqLogUserActivationByUserId = 'reqLogUserActivationByUserId',
+    userRoleCompare = 'userRoleCompare'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

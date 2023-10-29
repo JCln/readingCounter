@@ -409,6 +409,11 @@ export interface IUserCompareManager {
     previous: IUserCompareDetails,
     this: IUserCompareDetails
 }
+export interface IUserRoleCompare {
+    previous: IUserCompareDetails,
+    this: IUserCompareDetails
+}
+
 
 export interface IUserLoggins {
     id: string,

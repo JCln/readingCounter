@@ -266,6 +266,154 @@ export class CloseTabService {
       userDisplayName: ''
     }
   };
+  userRoleCompare: IUserCompareManager = {
+    previous:
+    {
+      provinceItems: [
+        {
+          title: '',
+          logicalOrder: null,
+          regionItems: [
+            {
+              title: '',
+              logicalOrder: null,
+              zoneItems: [
+                {
+                  title: '',
+                  logicalOrder: null,
+                  id: null,
+                  isMetro: true,
+                  isSelected: true
+                }
+              ],
+              isSelected: true
+            }
+          ],
+          isSelected: true
+        }
+      ],
+      appItems: [
+        {
+          title: '',
+          cssClass: '',
+          logicalOrder: null,
+          moduleItems: [
+            {
+              title: '',
+              cssClass: '',
+              logicalOrder: null,
+              controllerItems: [
+                {
+                  title: '',
+                  cssClass: '',
+                  logicalOrder: null,
+                  actionItems: [
+                    {
+                      title: '',
+                      cssClass: '',
+                      logicalOrder: null,
+                      value: '',
+                      isSelected: true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      changeOrInsertLogId: '',
+      description: '',
+      insertDateTime: '',
+      insertDateJalali: '',
+      insertTime: '',
+      ip: '',
+      browserVersion: '',
+      browserTitle: '',
+      browserShortTitle: '',
+      browserEngine: '',
+      browserType: '',
+      osVersion: '',
+      osTitle: '',
+      osPlatform: '',
+      osShortTitle: '',
+      userAgent: '',
+      userDisplayName: ''
+    }
+    , this:
+    {
+      provinceItems: [
+        {
+          title: '',
+          logicalOrder: null,
+          regionItems: [
+            {
+              title: '',
+              logicalOrder: null,
+              zoneItems: [
+                {
+                  title: '',
+                  logicalOrder: null,
+                  id: null,
+                  isMetro: true,
+                  isSelected: true
+                }
+              ],
+              isSelected: true
+            }
+          ],
+          isSelected: true
+        }
+      ],
+      appItems: [
+        {
+          title: '',
+          cssClass: '',
+          logicalOrder: null,
+          moduleItems: [
+            {
+              title: '',
+              cssClass: '',
+              logicalOrder: null,
+              controllerItems: [
+                {
+                  title: '',
+                  cssClass: '',
+                  logicalOrder: null,
+                  actionItems: [
+                    {
+                      title: '',
+                      cssClass: '',
+                      logicalOrder: null,
+                      value: '',
+                      isSelected: true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      changeOrInsertLogId: '',
+      description: '',
+      insertDateTime: '',
+      insertDateJalali: '',
+      insertTime: '',
+      ip: '',
+      browserVersion: '',
+      browserTitle: '',
+      browserShortTitle: '',
+      browserEngine: '',
+      browserType: '',
+      osVersion: '',
+      osTitle: '',
+      osPlatform: '',
+      osShortTitle: '',
+      userAgent: '',
+      userDisplayName: ''
+    }
+  };
   saveDataForUserMasterDetailsHistoryReq = {
     id: ''
   };
@@ -702,6 +850,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForUserMasterHistory, url: EN_Routes.userMasterHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserDetailsHistory, url: EN_Routes.userDetailsHistory },
     { id: 1, value: ENEssentialsToSave.userCompare, url: EN_Routes.userCompare },
+    { id: 1, value: ENEssentialsToSave.userRoleCompare, url: EN_Routes.userRoleCompare },
     { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
     { id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },

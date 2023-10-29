@@ -725,6 +725,24 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, icon: '_double_size' },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },                        
     ]
+    userRoleCompare_UserInfo: IObjectIteratation[] = [
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        // { field: 'insertDateTime', header: 'تاریخ', isSelected: false,isSelectedOrigin:false },
+        { field: 'insertTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'osTitle', header: 'سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osPlatform', header: 'نوع سیستم', isSelected: false, isSelectedOrigin: false },
+        { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, icon: '_double_size' },
+        // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },                        
+    ]
     roleCompare: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true, isSelectedOrigin: true },

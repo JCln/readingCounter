@@ -1,0 +1,48 @@
+<section class="content">
+    <section class="collapse">
+        <h1>مقایسه تغییرات</h1>
+    </section>
+
+    <table>
+        <thead class="_head">
+            <tr>
+                <td>عنوان</td>
+                <td>قبلی</td>
+                <td>فعلی</td>
+                <td>تغییر</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let col of _selectCols">
+                <td>
+                    {{col.header}}
+                <td>
+                    <div>
+                        <div *ngIf="col.isBoolean && dataSource.previous[col.field]">بله</div>
+                        <div *ngIf="col.isBoolean && !dataSource.previous[col.field]">خیر</div>
+                        <div *ngIf="!col.isBoolean">{{dataSource.previous[col.field]}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <div *ngIf="col.isBoolean && dataSource.this[col.field]">بله</div>
+                        <div *ngIf="col.isBoolean && !dataSource.this[col.field]">خیر</div>
+                        <div *ngIf="!col.isBoolean">{{dataSource.this[col.field]}}</div>
+                    </div>
+                </td>
+
+                <td class="_center">
+                    <div *ngIf="dataSource.previous[col.field] !== dataSource.this[col.field]">
+                        <i class="pi pi-check-square _green"></i>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</section>
+
+<button type="submit" class="btn_2" matStepperNext>
+    <i class="fa fa-long-arrow-left"></i>
+    صفحه بعد
+</button>
