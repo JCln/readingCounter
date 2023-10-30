@@ -440,7 +440,13 @@ export class CloseTabService {
   saveDataForLMAll: IOnOffLoadFlat[];
   saveDataForLMModifyReq: any;
   saveDataForLMModify: IOnOffLoadFlat[];
-  saveDataForLMGeneralModifyReq: any;
+  saveDataForLMGeneralModifyReq = {
+    GUid: '',
+    groupId: '',
+    counterStateValue: null,
+    multiSelectCounterStateId: [],
+    multiSelectPreCounterStateCode: []
+  };
   saveDataForLMGeneralModify: IOnOffLoadFlat[];
   saveDataForLMGeneralGroupModifyReq = {
     GUid: '',
@@ -701,7 +707,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForUserRoleHistory, url: EN_Routes.userRoleHistoryDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForUserMasterHistory, url: EN_Routes.userMasterHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserDetailsHistory, url: EN_Routes.userDetailsHistory },
-    { id: 1, value: ENEssentialsToSave.userCompare, url: EN_Routes.userCompare },    
+    { id: 1, value: ENEssentialsToSave.userCompare, url: EN_Routes.userCompare },
     { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
     { id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },

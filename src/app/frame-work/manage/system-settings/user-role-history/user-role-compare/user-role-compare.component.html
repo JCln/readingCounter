@@ -5,18 +5,26 @@
 
     <table>
         <tbody>
-            <tr>
-                <td class="_head">قبلی</td>
-                <td *ngFor="let item of dataSource.previous">
-                    {{item.titleUnicode}}
-                </td>
-            </tr>
-            <tr>
-                <td class="_head">فعلی</td>
-                <td *ngFor="let item of dataSource.this">
-                    {{item.titleUnicode}}
-                <td>
-            </tr>
+            <div>
+                <tr>
+                    <td class="_head">قبلی</td>
+                </tr>
+                <tr *ngFor="let item of dataSource.previous">
+                    <td>
+                        {{item.titleUnicode}}
+                    </td>
+                </tr>
+            </div>
+            <div>
+                <tr>
+                    <td class="_head">فعلی</td>
+                </tr>
+                <tr *ngFor="let item of dataSource.this">
+                    <td>
+                        {{item.titleUnicode}}
+                    <td>
+                </tr>
+            </div>
         </tbody>
 
     </table>

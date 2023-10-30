@@ -1,7 +1,20 @@
 @import 'variable';
 @import 'compare';
 
+tbody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 ._head {
     background-color: var(--secondary_8);
     color: var(--white);
+}
+
+tr {
+    width: 100%;
+}
+
+td {
+    width: 10%;
 }

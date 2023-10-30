@@ -56,12 +56,16 @@
         { id: 7, title: 'تغییر نوع ورود' }
     ];
     window.__env.getInvalidLoginReasonDictionary = [
-        { id: 1, title: 'کاربر غیرمجاز' },
-        { id: 2, title: 'گذرواژه نادرست' },
-        { id: 3, title: 'مسدودسازی درخواست مکرر' },
-        { id: 4, title: 'کاربر غیرفعال' },
-        { id: 5, title: 'کاربر قفل شده' },
-        { id: 6, title: 'شماره سریال نادرست' }
+        { id: 1, field: 'InvalidUser', title: 'کاربر غیرمجاز' },
+        { id: 2, field: 'InvalidPassword', title: 'گذرواژه نادرست' },
+        { id: 3, field: 'InvalidLoginAttemptCount', title: 'مسدودسازی درخواست مکرر' },
+        { id: 4, field: 'UserIsDeActived', title: 'کاربر غیرفعال' },
+        { id: 5, field: 'UserIsLocked', title: 'کاربر قفل شده' },
+        { id: 6, field: 'InvalidDeviceSerial', title: 'شماره سریال نادرست' },
+        { id: 7, field: 'TwoStepExpiredTime', title: 'دومرحله‌ای زمان منقضی شده' },
+        { id: 8, field: 'TwoStepInvalidCode', title: 'دومرحله‌ای کد نامعتبر' },
+        { id: 9, field: 'TwoStepUsedCode', title: 'دومرحله‌ای کد تکراری' },
+        { id: 10, field: 'IpIsBlocked', title: 'IP مسدود شده' },
     ];
     window.__env.hasCanclableSpinner = false;
     window.__env.timeout = 18000;

@@ -64,8 +64,8 @@ export class ListManagerService {
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
-      item.newRate = parseFloat(MathS.getFormatRange(item.newRate))
-      item.preAverage = parseFloat(MathS.getFormatRange(item.preAverage));
+      item.newRate = item.newRate ? parseFloat(MathS.getFormatRange(item.newRate)) : null
+      item.preAverage = item.preAverage ? parseFloat(MathS.getFormatRange(item.preAverage)) : null
       // item.x = item.x ? MathS.getFormatRange(item.x) : ''; format for string should be like this
     })
   }

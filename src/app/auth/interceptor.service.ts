@@ -65,29 +65,7 @@ export class InterceptorService implements HttpInterceptor {
       headers: req.headers.set(this.authorizationHeader, this.bearer + token)
     });
   }
-  // httpGet(theUrl) {
-  //   console.log(theUrl);
-  //   var xmlHttp = new XMLHttpRequest();
-  //   xmlHttp.open("GET", theUrl, false); // false for synchronous request
-  //   xmlHttp.send(null);
-  //   return xmlHttp.responseText;
-  // }
-  // httpGetAsync(theUrl, callback) {
-  //   var xmlHttp = new XMLHttpRequest();
-  //   xmlHttp.onreadystatechange = function () {
-  //     if (xmlHttp.readyState == 4)
-  //       callback(xmlHttp.responseText);
-  //   }
-  //   console.log(callback);
-
-  //   xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-  //   xmlHttp.send(null);
-  // }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // this.httpGet('https://37.191.92.157/kontoriNew/V1/User/All');
-    // console.log(this.httpGet('https://37.191.92.157/kontoriNew/V1/User/All'));
-    // // this.httpGetAsync();
-
     const authToken = this.jwtService.getAccessToken();
     if (authToken)
       req = this.addToken(req, authToken);

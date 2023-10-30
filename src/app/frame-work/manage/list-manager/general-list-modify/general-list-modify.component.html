@@ -21,7 +21,7 @@
             <div class="p-field-radiobutton">
                 <p-radioButton name="orderByDate" [value]="orderType.id"
                     [(ngModel)]="listManagerService.counterStateGeneralList" [inputId]="orderType.id"
-                    (onClick)="updateOnChangedCounterState(orderType.id)">
+                    (onClick)="updateOnChangedCounterState(orderType.id,true)">
                 </p-radioButton>
                 <label [for]="orderType.id">{{orderType.title}}</label>
             </div>

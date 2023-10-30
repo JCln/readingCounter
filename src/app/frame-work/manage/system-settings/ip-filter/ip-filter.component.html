@@ -1,7 +1,5 @@
 <app-prime-table     
     [dataSource]="closeTabService.ipFilterRes" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"    
     [_checkUpName]="'ipFilter'" 
     [_outputFileName]="'ipFilter'"    
     [_numberOfExtraColumns]="[1,2]"
@@ -10,5 +8,6 @@
     (refreshedTable)="refreshTable()"    
     (showedPictures)="openAddDialog($event)"
     (showedMoreDetails)="removeRow($event)"
+    (openedAddDialog)="openAddDialog(emptyObject)"
  > 
 </app-prime-table>

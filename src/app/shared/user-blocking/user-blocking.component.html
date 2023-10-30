@@ -13,18 +13,15 @@
         </div>
         <div class="input_2">
             <div class="_key">کاربر</div>
-            <!-- <p-dropdown name="userId" [options]="userAllDictionary"
-                [(ngModel)]="data.userId" placeholder="انتخاب مورد"
-                optionValue="id" optionLabel="title" filter="true">
-            </p-dropdown> -->
             <div class="_value">
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="selected" name="userId">
+                <mat-select placeholder="انتخاب مورد" formControlName="userId">
                     <mat-option *ngFor="let truefalse of userAllDictionary" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>
                 </mat-select>
             </div>
         </div>
+        <div></div> <!--Make ip filter dialog better UI through linear checkboxes-->
 
         <mat-checkbox formControlName="isSafe">مجاز</mat-checkbox>
         <mat-checkbox formControlName="isV6">IPv6</mat-checkbox>

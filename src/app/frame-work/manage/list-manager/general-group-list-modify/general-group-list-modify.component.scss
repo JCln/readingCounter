@@ -57,10 +57,12 @@
   }
 }
 
-[readOnly] {
-  border-color: transparent !important;
-  user-select: none !important;
-  color: inherit !important;
-  outline: none !important;
-  background-color: transparent;
+p-table {
+  [readOnly] {
+    border-color: transparent !important;
+    user-select: none !important;
+    color: inherit !important;
+    outline: none !important;
+    background-color: transparent;
+  }
 }

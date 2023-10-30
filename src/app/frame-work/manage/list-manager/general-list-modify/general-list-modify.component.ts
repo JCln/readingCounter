@@ -24,7 +24,6 @@ import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mo
 })
 export class GeneralListModifyComponent extends AllListsFactory {
   clonedProducts: { [s: string]: object; } = {};
-  counterStateValue: number;
 
   deleteDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -55,16 +54,31 @@ export class GeneralListModifyComponent extends AllListsFactory {
     super(dialogService, listManagerService);
   }
 
-  updateOnChangedCounterState = async (val: any) => {
-    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val);
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
-    this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
-    this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
-    this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
-    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
-
+  updateOnChangedCounterState = async (val: any, shouldCallApi: boolean) => {
+    if (!val)
+      return;
+    if ((
+      !this.closeTabService.saveDataForLMGeneralModify ||
+      (
+        this.closeTabService.saveDataForLMGeneralModifyReq.GUid !=
+        this.allListsService.generalModifyLists_pageSign.GUid
+      ) &&
+      (
+        this.closeTabService.saveDataForLMGeneralModifyReq.groupId !=
+        this.allListsService.generalModifyLists_pageSign.groupId
+      ) ||
+      shouldCallApi
+    )) {
+      this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+      this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val);
+      this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
+      this.closeTabService.saveDataForLMGeneralModifyReq.GUid = this.allListsService.generalModifyLists_pageSign.GUid;
+      this.closeTabService.saveDataForLMGeneralModifyReq.groupId = this.allListsService.generalModifyLists_pageSign.groupId;
+      this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+      this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
+      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
+      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
+    }
 
     this.closeTabService.saveDataForLMGeneralModify =
       Converter.convertIdsToTitles(
@@ -96,8 +110,9 @@ export class GeneralListModifyComponent extends AllListsFactory {
       this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.saveDataForLMGeneralModify = null;
-        this.closeTabService.saveDataForLMGeneralModifyReq = null;
+        this.closeTabService.saveDataForLMGeneralModifyReq.GUid = null;
       }
+      this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralList, false);
       this.insertSelectedColumns();
       // setDynamics should implement before new instance of dataSource create      
       this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
@@ -105,8 +120,8 @@ export class GeneralListModifyComponent extends AllListsFactory {
     }
   }
   refreshTable = () => {
-    if (!MathS.isNull(this.counterStateValue))
-      this.updateOnChangedCounterState(this.counterStateValue);
+    if (!MathS.isNull(this.listManagerService.counterStateGeneralList))
+      this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralList, true);
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }

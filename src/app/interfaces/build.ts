@@ -243,7 +243,7 @@ export class getInvalidLoginReasonDictionary {
         { id: 7, field: 'TwoStepExpiredTime', title: 'دومرحله‌ای زمان منقضی شده' },
         { id: 8, field: 'TwoStepInvalidCode', title: 'دومرحله‌ای کد نامعتبر' },
         { id: 9, field: 'TwoStepUsedCode', title: 'دومرحله‌ای کد تکراری' },
-        { id: 9, field: 'IpIsBlocked', title: 'IP مسدود شده' },
+        { id: 10, field: 'IpIsBlocked', title: 'IP مسدود شده' },
     ]);
     private constructor(public readonly value: { id: number, title: string, field: string }[]) {
     }
