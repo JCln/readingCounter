@@ -283,4 +283,27 @@ export class PrimeTableComponent extends FactorySharedPrime {
     this.profileService._agg.selectedAggregate = '';
     this.doAggregate();
   }
+  toggleSubMenu = (event: any) => {
+    let tableRow = document.querySelectorAll('.tr_expandable');
+    let auxIndex = JSON.parse(JSON.stringify(event.index));
+    console.log(tableRow);
+
+    console.log(event); //{index: 72, size: 43}
+    for (let counter = 0; counter < event.size; counter++, auxIndex++) {
+      tableRow[auxIndex].classList.toggle('_hide_rows');
+    }
+  }
 }
+
+// let a = document.querySelectorAll('.pi-angle-down');
+//     this.currentRoute.forEach((aItem, i) => {
+//       if (item.title !== aItem.title) {
+//         aItem.isOpen = false;
+//         a[i].classList.remove('_toggle_angule');
+//       }
+//       else {
+//         aItem.isOpen = !aItem.isOpen;
+//         a[i].classList.toggle('_toggle_angule');
+//       }
+//     })
+//   }

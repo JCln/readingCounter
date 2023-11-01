@@ -79,6 +79,8 @@
 
 ._anything {
   display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   min-width: 12rem;
   margin-right: 1rem;
   padding: 0 1rem;
@@ -89,6 +91,12 @@
 
   td {
     border: 0 !important;
+  }
+
+  i {
+    border: 1px solid var(--white);
+    border-radius: 50%;
+    padding: .1rem;
   }
 }
 
@@ -121,6 +129,10 @@
 
 ._tooltip_special .tooltip_text::after {
   left: 15%;
+}
+
+._hide_rows {
+  background-color: lightblue !important;
 }
 
 ._red_500 {
