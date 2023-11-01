@@ -83,14 +83,15 @@ export class UsersAllComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAllUsers = this.closeTabService.saveDataForAllUsers.slice(0, index).concat(this.closeTabService.saveDataForAllUsers.slice(index + 1));
   openAddDialog = (dataSource: any) => {
-    dataSource.userId = dataSource.id;
-    dataSource.id = 0;
+    const deepCopy = JSON.parse(JSON.stringify(dataSource));
+    deepCopy.userId = dataSource.id;
+    deepCopy.id = 0;
     return new Promise(() => {
       const dialogRef = this.closeTabService.utilsService.dialog.open(UserBlockingComponent, {
         disableClose: true,
         minWidth: '65vw',
         data: {
-          di: dataSource
+          di: deepCopy
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
