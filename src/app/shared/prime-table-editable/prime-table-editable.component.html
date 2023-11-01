@@ -1,5 +1,5 @@
-<p-table #dtable *ngIf="dataSource" id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true"
-    [rows]=_rowsNumbers [showCurrentPageReport]="true"
+<p-table #dtable *ngIf="dataSource && dataSource.length > 0" id="tdm" [columns]="selectedColumns" [value]="dataSource"
+    [paginator]="true" [rows]=_rowsNumbers [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
     dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session"
     (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"

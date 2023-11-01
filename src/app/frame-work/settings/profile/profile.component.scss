@@ -2,6 +2,10 @@
 @import 'button.scss';
 @import 'input.scss';
 
+p-tabview {
+  direction: rtl;
+}
+
 .over_all {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 25rem));
@@ -10,26 +14,27 @@
   gap: var(--font_s);
 }
 
-main {
+._profile_img {
+  margin-bottom: var(--font_2);
+}
 
-  ._profile_img {
-    margin-bottom: var(--font_2);
-  }
+.fa-user {
+  font-size: 4rem;
+  color: var(--secondary_4);
+  background: var(--white);
+  border-radius: $border_50;
+  height: 7rem;
+  width: 7rem;
+  padding: var(--font_2);
+  margin: auto;
 
-  .fa-user {
-    font-size: 4rem;
-    color: var(--secondary_4);
-    background: var(--white);
-    border-radius: $border_50;
-    height: 7rem;
-    width: 7rem;
-    padding: var(--font_2);
-    margin: auto;
+  display: grid;
+  place-content: center;
+}
 
-    display: grid;
-    place-content: center;
-  }
-
+._key,
+._value {
+  font-family: $font_family;
 }
 
 ._key {
@@ -104,6 +109,7 @@ main {
 
   }
 }
+
 ._desc {
   display: grid;
   margin: auto;
@@ -113,6 +119,7 @@ main {
 }
 
 .title {
+  font-family: $font_family;
   color: var(--primary_3);
   text-align: center;
   font-size: var(--font_l2);
@@ -131,4 +138,8 @@ main {
 
 .small_button {
   width: 7rem;
+}
+
+._icon {
+  padding-left: .5rem;
 }

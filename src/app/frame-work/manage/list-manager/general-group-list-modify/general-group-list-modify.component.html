@@ -30,7 +30,9 @@
 </section>
 
 <main style="position: relative; ">
-    <p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
+    <p-table #datatableG
+        *ngIf="closeTabService.saveDataForLMGeneralGroupModify && closeTabService.saveDataForLMGeneralGroupModify.length > 0"
+        id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
         [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"

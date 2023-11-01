@@ -21,6 +21,8 @@ import { ConfirmTextDialogComponent } from './confirm-text-dialog/confirm-text-d
 import { SharedChangePassModule } from './shared-change-pass.module';
 import { UserBlockingComponent } from './user-blocking/user-blocking.component';
 import { MaterialModule } from './material.module';
+import { TabViewModule } from 'primeng/tabview';
+
 
 @NgModule({
   declarations: [
@@ -39,9 +41,10 @@ import { MaterialModule } from './material.module';
     MultiSelectModule,
     CheckboxModule,
     DropdownModule,
-    SliderModule,
+    SliderModule,    
     DynamicDialogModule,
     RadioButtonModule,
+    TabViewModule,
     SelectButtonModule,
     SharedThreeModule,
     SharedChangePassModule,
@@ -56,7 +59,8 @@ import { MaterialModule } from './material.module';
     UserBlockingComponent,
     CommonModule,
     FormsModule,
-    TableModule,
+    TableModule,   
+    TabViewModule, 
     MatCheckboxModule,
     MultiSelectModule,
     CheckboxModule,

@@ -1,121 +1,164 @@
-<div class="over_all">
-    <main>
-        <div class="content">
-            <h1 class="title">مشخصات کاربری</h1>
-            <div class="_desc">
-                <div *ngFor="let item of _selectCols" class="input_2">
-                    <div class="_key">{{item.header}}</div>
-                    <div class="_value">{{myInfoDataSource[item.field]}}</div>
+<p-tabView styleClass="tabview-custom">
+    <p-tabPanel>
+        <ng-template pTemplate="header" [selected]="true">
+            <i class="_icon pi pi-cog"></i>
+            <span>کاربری</span>
+        </ng-template>
+        <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">مشخصات کاربری</h1>
+                    <div class="_desc">
+                        <div *ngFor="let item of _selectCols" class="input_2">
+                            <div class="_key">{{item.header}}</div>
+                            <div class="_value">{{myInfoDataSource[item.field]}}</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </main>
+    </p-tabPanel>
 
-    <section>
-        <div class="content">
-            <h1 class="title">تغییر گذرواژه</h1>
-            <app-change-password [_isFromProfile]="true"></app-change-password>
+    <p-tabPanel>
+        <ng-template pTemplate="header">
+            <i class="_icon pi pi-key"></i>
+            <span>امنیت</span>
+        </ng-template>
+        <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">تغییر گذرواژه</h1>
+                    <app-change-password [_isFromProfile]="true"></app-change-password>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">ورود دو مرحله‌ای</h1>
+                    <p-selectButton [options]="stateOptionsTwoSteps"
+                        [(ngModel)]="profileService.showStateVals.twoStepsAuth" optionLabel="label" optionValue="value"
+                        (onChange)="setTwoStepsStatus(profileService.showStateVals.twoStepsAuth)">
+                    </p-selectButton>
+                </div>
+            </section>
         </div>
-    </section>
+    </p-tabPanel>
 
-    <section>
-        <div class="content">
-            <h1 class="title">نمایش تصاویر</h1>
-            <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs"
-                optionLabel="label" optionValue="value"
-                (onChange)="setValueOfShowCarouselMedia(profileService.showStateVals.groupImgs)">
-            </p-selectButton>
-            <hr>
-            <h1 class="title">اندازه تصاویر</h1>
-            <p-selectButton [options]="stateOptionsImageOption" [(ngModel)]="profileService.showStateVals.imgOptions"
-                optionLabel="label" optionValue="value"
-                (onChange)="setValuesOfImg(profileService.showStateVals.imgOptions)">
-            </p-selectButton>
+    <p-tabPanel>
+        <ng-template pTemplate="header">
+            <i class="_icon pi pi-images"></i>
+            <span>تصاویر/ مدیا</span>
+        </ng-template>
+        <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">نمایش تصاویر</h1>
+                    <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs"
+                        optionLabel="label" optionValue="value"
+                        (onChange)="setValueOfShowCarouselMedia(profileService.showStateVals.groupImgs)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">اندازه تصاویر</h1>
+                    <p-selectButton [options]="stateOptionsImageOption"
+                        [(ngModel)]="profileService.showStateVals.imgOptions" optionLabel="label" optionValue="value"
+                        (onChange)="setValuesOfImg(profileService.showStateVals.imgOptions)">
+                    </p-selectButton>
+                </div>
+            </section>
         </div>
-    </section>
+    </p-tabPanel>
 
-    <section>
-        <div class="content">
-            <h1 class="title">جستجو براساس</h1>
-            <p-selectButton [options]="stateOptionsSearchType"
-                [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label" optionValue="value"
-                (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
-            </p-selectButton>
+    <p-tabPanel>
+        <ng-template pTemplate="header">
+            <i class="_icon pi pi-table"></i>
+            <span>جدول</span>
+        </ng-template>
+        <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">جستجو براساس</h1>
+                    <p-selectButton [options]="stateOptionsSearchType"
+                        [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label"
+                        optionValue="value" (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">امکان جابجایی ستونها در جدول</h1>
+                    <p-selectButton [options]="stateOptionsReordersableTable"
+                        [(ngModel)]="profileService.showStateVals.reOrderableTable" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setReOrderableTable(profileService.showStateVals.reOrderableTable)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">گروه‌بندی پیشفرض در کارتابل</h1>
+                    <p-selectButton [options]="stateOptionsAggregateTracks" [(ngModel)]="profileService._agg.flag"
+                        optionLabel="label" optionValue="value"
+                        (onChange)="setDefaultAggregateTracks(profileService._agg.flag)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">جستجوی کلی در جدول‌ها</h1>
+                    <p-selectButton [options]="stateOptionsGeneralSearch"
+                        [(ngModel)]="profileService._agg.hasGeneralSearch" optionLabel="label" optionValue="value"
+                        (onChange)="setTableGeneralSearch(profileService._agg.hasGeneralSearch)">
+                    </p-selectButton>
+                </div>
+            </section>
         </div>
-    </section>
+    </p-tabPanel>
 
-    <section>
-        <div class="content">
-            <h1 class="title">امکان لغو درخواست</h1>
-            <p-selectButton [options]="stateOptionsSpinner"
-                [(ngModel)]="profileService.showStateVals.hasCanclableSpinner" optionLabel="label" optionValue="value"
-                (onChange)="setCanclableSpinner(profileService.showStateVals.hasCanclableSpinner)">
-            </p-selectButton>
+    <p-tabPanel>
+        <ng-template pTemplate="header">
+            <i class="_icon pi pi-sitemap"></i>
+            <span>برنامه</span>
+        </ng-template>
+        <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">اندازه فونت</h1>
+                    <p-selectButton [options]="stateFontStyleOptions"
+                        [(ngModel)]="profileService.showStateVals.defaultFontStyle" optionLabel="label"
+                        optionValue="value" (onChange)="setFontStyle(profileService.showStateVals.defaultFontStyle)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">امکان لغو درخواست</h1>
+                    <p-selectButton [options]="stateOptionsSpinner"
+                        [(ngModel)]="profileService.showStateVals.hasCanclableSpinner" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setCanclableSpinner(profileService.showStateVals.hasCanclableSpinner)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">مکان اعلان پیام ها</h1>
+                    <p-selectButton class="_notify_position" [options]="notifyPositionOptions"
+                        [(ngModel)]="profileService.showStateVals.notifyPosition" optionLabel="label"
+                        optionValue="value" (onChange)="setNotifyPosition(profileService.showStateVals.notifyPosition)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">بازگشت به تنظیمات پیش‌فرض</h1>
+                    <button class="btn_1 _pdf small_button" (click)="profileService.resetAllSavedLocals()">
+                        اعمال
+                    </button>
+                </div>
+            </section>
         </div>
-    </section>
+    </p-tabPanel>
 
-    <section>
-        <div class="content">
-            <h1 class="title">اندازه فونت</h1>
-            <p-selectButton [options]="stateFontStyleOptions"
-                [(ngModel)]="profileService.showStateVals.defaultFontStyle" optionLabel="label" optionValue="value"
-                (onChange)="setFontStyle(profileService.showStateVals.defaultFontStyle)">
-            </p-selectButton>
-        </div>
-    </section>
-    <section>
-        <div class="content">
-            <h1 class="title">مکان اعلان پیام ها</h1>
-            <p-selectButton class="_notify_position" [options]="notifyPositionOptions"
-                [(ngModel)]="profileService.showStateVals.notifyPosition" optionLabel="label" optionValue="value"
-                (onChange)="setNotifyPosition(profileService.showStateVals.notifyPosition)">
-            </p-selectButton>
-        </div>
-    </section>
-
-    <section>
-        <div class="content">
-            <h1 class="title">امکان جابجایی ستونها در جدول</h1>
-            <p-selectButton [options]="stateOptionsReordersableTable"
-                [(ngModel)]="profileService.showStateVals.reOrderableTable" optionLabel="label" optionValue="value"
-                (onChange)="setReOrderableTable(profileService.showStateVals.reOrderableTable)">
-            </p-selectButton>
-        </div>
-    </section>
-    <section>
-        <div class="content">
-            <h1 class="title">گروه‌بندی پیشفرض در کارتابل</h1>
-            <p-selectButton [options]="stateOptionsAggregateTracks" [(ngModel)]="profileService._agg.flag"
-                optionLabel="label" optionValue="value"
-                (onChange)="setDefaultAggregateTracks(profileService._agg.flag)">
-            </p-selectButton>
-        </div>
-    </section>
-    <section>
-        <div class="content">
-            <h1 class="title">جستجوی کلی در جدول‌ها</h1>
-            <p-selectButton [options]="stateOptionsGeneralSearch" [(ngModel)]="profileService._agg.hasGeneralSearch"
-                optionLabel="label" optionValue="value"
-                (onChange)="setTableGeneralSearch(profileService._agg.hasGeneralSearch)">
-            </p-selectButton>
-        </div>
-    </section>
-    <section>
-        <div class="content">
-            <h1 class="title">ورود دو مرحله‌ای</h1>
-            <p-selectButton [options]="stateOptionsTwoSteps" [(ngModel)]="profileService.showStateVals.twoStepsAuth"
-                optionLabel="label" optionValue="value"
-                (onChange)="setTwoStepsStatus(profileService.showStateVals.twoStepsAuth)">
-            </p-selectButton>
-        </div>
-    </section>
-    <section>
-        <div class="content">
-            <h1 class="title">بازگشت به تنظیمات پیش‌فرض</h1>
-            <button class="btn_1 _pdf small_button" (click)="profileService.resetAllSavedLocals()">
-                اعمال
-            </button>
-        </div>
-    </section>
-
-</div>
+</p-tabView>
