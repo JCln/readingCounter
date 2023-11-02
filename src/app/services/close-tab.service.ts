@@ -56,7 +56,7 @@ import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IMostReportInput, IOnOffLoadFlat } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
-import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief } from 'interfaces/iserver-manager';
+import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
 import { ENEssentialsToSave } from 'interfaces/enums.enum';
 
@@ -527,7 +527,7 @@ export class CloseTabService {
     systemDateTime: '',
   }
   saveDataForMsDriveInfo: IManageDrivesInfo[];
-  // serverAuthenticity: any[] = [];
+  serverGetAuthenticity: IServerGetAuthenticity[] = [];
   serverAuthenticityBrief: IServerAuthenticityBrief[] = [];
   saveDataForServerErrors: IManageServerErrorsRes[];
   saveDataForServerUserActivation: IUserActivation[];
@@ -777,7 +777,7 @@ export class CloseTabService {
     { id: 13, req: ENEssentialsToSave.offlineSingleReadingCounterReq, value: ENEssentialsToSave.offlineSingleReadingCounter, url: EN_Routes.offlineSingleReading },
     { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
     { id: 2, value: ENEssentialsToSave.saveDataForMsDriveInfo, url: EN_Routes.driveInfo },
-    // { id: 2, value: ENEssentialsToSave.serverAuthenticity, url: EN_Routes.serverAuthenticity },
+    { id: 2, value: ENEssentialsToSave.serverGetAuthenticity, url: EN_Routes.serverGetAuthenticity },
     { id: 2, value: ENEssentialsToSave.serverAuthenticityBrief, url: EN_Routes.serverAuthenticityBrief },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
     { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, url: EN_Routes.userKarkardSummary },

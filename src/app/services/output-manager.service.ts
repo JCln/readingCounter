@@ -10,6 +10,7 @@ import { font } from '../../assets/pdfjs/BLotus-normal';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import * as XLSXStyle from 'src/assets/xlsx-js-style-master/dist/xlsx.min.js';
 
 @Injectable({
   providedIn: 'root'
@@ -144,15 +145,39 @@ export class OutputManagerService {
     return true;
   }
   export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: XLSX.BookType, routerLink: string, count: number) => {
-    if (!await this.canIDownloadMore(routerLink, count))
-      return;
+    // if (!await this.canIDownloadMore(routerLink, count))
+    //   return;
 
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
       return;
 
-    const datas = this.getValidatedTableData(dataSource, _selectCols);
+    // STEP 1: Create a new workbook
+    const wb = XLSX.utils.book_new();
 
+    // STEP 2: Create data rows and styles
+    let row = [
+      { v: "Courier: 24", t: "s", s: { font: { name: "Courier", sz: 24 } } },
+      { v: "bold & color", t: "s", s: { font: { bold: true, color: { rgb: "FF0000" } } } },
+      { v: "fill: color", t: "s", s: { fill: { fgColor: { rgb: "E9E9E9" } } } },
+      { v: "fill: color", t: "s", s: { alignment: { wrapText: true } } },
+    ];
+    if (wb.Workbook) {
+      wb.Workbook.Views[0]['RTL'] = true;
+    } else {
+      wb.Workbook = {};
+      wb.Workbook['Views'] = [{ RTL: true }];
+    }
+    // STEP 3: Create worksheet with rows; Add worksheet to workbook
+    const ws = XLSX.utils.aoa_to_sheet([row]);
+    XLSX.utils.book_append_sheet(wb, ws, "readme demo");
+
+    // STEP 4: Write Excel file to browser
+    XLSX.writeFile(wb, "xlsx-js-style-demo.xlsx");
+
+
+
+    const datas = this.getValidatedTableData(dataSource, _selectCols);
     const worksheet = XLSX.utils.json_to_sheet(datas.data);
     var range = XLSX.utils.decode_range(worksheet['!ref']);
 
@@ -161,16 +186,14 @@ export class OutputManagerService {
       if (!worksheet[address]) continue;
       worksheet[address].v = datas.headers[C];
     }
+    // const XLSXStyleWorkBook = XLSX.utils.book_new();
     const workbook = {
-      Views: [
-        { RTL: true }
-      ],
       Sheets: { 'data': worksheet },
       SheetNames: ['data'],
     };
     console.log(worksheet);
 
-    // worksheet['A1'].v = {
+    // XLSXStyle['A1'].v = {
     //   font: {
     //     name: "Calibri",
     //     sz: 24,
@@ -179,6 +202,14 @@ export class OutputManagerService {
     //   },
     // };
     // worksheet['A1'].s = {
+    //   font: {
+    //     name: "Calibri",
+    //     sz: 24,
+    //     bold: true,
+    //     color: { rgb: 'blue' },
+    //   },
+    // };
+    // XLSXStyleWorkBook['A1'].s = {
     //   font: {
     //     name: "Calibri",
     //     sz: 24,

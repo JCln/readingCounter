@@ -121,6 +121,8 @@ export interface IOnOffLoadFlat {
     readingReportTitles: string,
     mobiles: string,
     balance: number,
+    locationDateTime: string,
+    phoneDateTime: string,
     modifyType?: any//for general list modify
     modify?: any//for general group list modify,
     isResponseHasError?: boolean// to make alert in the table

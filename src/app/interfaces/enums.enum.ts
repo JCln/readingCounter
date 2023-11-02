@@ -454,7 +454,8 @@ export enum ENEssentialsToSave {
     ipFilterBlockedUsers = 'ipFilterBlockedUsers',
     serverAuthenticityBrief = 'serverAuthenticityBrief',
     reqLogUserActivationByUserId = 'reqLogUserActivationByUserId',
-    userRoleCompare = 'userRoleCompare'
+    userRoleCompare = 'userRoleCompare',
+    serverGetAuthenticity = 'serverGetAuthenticity'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -577,6 +578,7 @@ export enum ENSelectedColumnVariables {
     selectedPolicyHistory = 'policyHistory',
     selectedIpFilterHistory = 'ipFilterHistory',
     selectedServerAuthenticityBrief = 'serverAuthenticityBrief',
+    selectedServerGetAuthenticity = 'serverAuthenticityResult',
     selectedIOPolicyHistory = 'ipFilterHistory',
     selectedUserRoleHistoryDetails = 'userRoleHistoryDetails',
     selectedUserRoleHistorySummary = 'userRoleHistorySummary',

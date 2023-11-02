@@ -207,6 +207,11 @@ export enum ENManageServers {
     resetApp = 'resetApp',
     checkAuthenticiy = 'checkAuthenticiy'
 }
+export interface IServerGetAuthenticity {
+    dbId: string,
+    isAuthentic: boolean,
+    description: string
+}
 export interface IServerAuthenticityBrief {
     invalidCount: number,
     isAuthentic: boolean,

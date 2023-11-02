@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'ipFilter', loadChildren: () => import('./ip-filter/ip-filter.module').then(BlockOrSafeIPFilter => BlockOrSafeIPFilter.IpFilterModule) },
   { path: 'IOPolicy', loadChildren: () => import('./input-output-policy/input-output-policy.module').then(inputOutputPolicy => inputOutputPolicy.InputOutputPolicyModule) },
   { path: 'briefAuthenticity', loadChildren: () => import('./authenticity-brief/authenticity-brief.module').then(authenticityBrief => authenticityBrief.AuthenticityBriefModule) },
+  { path: 'authenticityResult', loadChildren: () => import('./authenticity-result/authenticity-result.module').then(AuthenticityResultGet => AuthenticityResultGet.AuthenticityBriefModule) },
 ];
 
 @NgModule({

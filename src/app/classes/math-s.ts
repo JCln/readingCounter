@@ -37,7 +37,7 @@ export class MathS {
     }
     static getFormatRange = (val: any): string => {
         if (parseInt(val) > 0)
-            return parseFloat(val).toFixed(3);
+            return parseFloat(val).toFixed(2);
     }
     static isExactEqual = (first: string, second: any): boolean => {
         if (first.trim() === second.trim())

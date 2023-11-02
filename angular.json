@@ -49,7 +49,7 @@
               "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/primeicons/primeicons.css"              
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -58,7 +58,8 @@
             },
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
-              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"
+              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js",
+              "src/assets/xlsx-js-style-master/dist/xlsx.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

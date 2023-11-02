@@ -526,6 +526,13 @@
                     <div class="tooltip_text_right">مشاهده ورودها</div>
                 </i>
             </td>
+            <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'ipFilter' " class="edit_button"
+                (click)="showPictures(dataSource)">
+                <span class="ui-column-title">ویرایش مسدود سازی IP</span>
+                <i class="tooltip p_icons pi pi-user-edit _red_500">
+                    <div class="tooltip_text_right">ویرایش مسدود سازی IP</div>
+                </i>
+            </td>
             <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
                 (mouseover)="showExactConfig(ri)" (mouseout)="showExactConfig(ri)">
                 <span class="ui-column-title">تغییر وضعیت</span>
@@ -552,13 +559,6 @@
                         </i>
                     </div>
                 </div>
-            </td>
-            <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'ipFilter' " class="edit_button"
-                (click)="showPictures(dataSource)">
-                <span class="ui-column-title">ویرایش مسدود سازی IP</span>
-                <i class="tooltip p_icons pi pi-user-edit _red_500">
-                    <div class="tooltip_text_right">ویرایش مسدود سازی IP</div>
-                </i>
             </td>
             <td class="__columns"
                 *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasSingle && dataSource.canContinue"

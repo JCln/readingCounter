@@ -121,6 +121,7 @@ export enum EN_Routes {
     'serverOSInfo' = '/wr/m/system/osInfo',
     'serverIPSpecialRules' = '/wr/m/system/ipRules',    
     serverAuthenticityBrief = '/wr/m/system/briefAuthenticity',
+    serverGetAuthenticity = '/wr/m/system/authenticityResult',
     'userActivation' = '/wr/reqLog/userActivation',
     userActivationByuserId = '/wr/m/system/userRoleHistory/byUserId',    
     'wrmRequestLogsUser' = '/wr/reqLog/User',

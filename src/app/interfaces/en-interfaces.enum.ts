@@ -253,7 +253,6 @@ export enum ENInterfaces {
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',
 
-    serverManagerCheckAuthenticity = 'V1/Server/CheckAuthenticity',
     serverManagerDelete = 'V1/Server/Delete',
     serverManagerHangFire = '/main/admin/hangFire?access_token=',
     serverManagerHealthCheck = '/healthchecks-ui',
@@ -261,6 +260,7 @@ export enum ENInterfaces {
     serverManagerResetApp = 'V1/Server/ResetApp',
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
     serverManagerOSInfo = 'V1/Server/OsInfo',
+    serverManagerCheckAuthenticity = 'V1/Server/CheckAuthenticity',
     serverManagerGetAuthenticity = 'V1/Server/GetAuthenticity',
     serverManagerGetAuthenticityBrief = 'V1/Server/GetAuthenticityBrief',
 

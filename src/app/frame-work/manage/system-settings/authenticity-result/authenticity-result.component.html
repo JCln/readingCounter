@@ -1,0 +1,8 @@
+<app-prime-table     
+    [dataSource]="closeTabService.serverGetAuthenticity" 
+    [_outputFileName]="'serverAuthenticityResult'"    
+    [_sessionName]="'serverAuthenticityResult-session'"
+    [_selectedColumnsToRemember]="'selectedServerGetAuthenticity'"    
+    (refreshedTable)="refreshTable()"        
+    > 
+</app-prime-table>
