@@ -10,7 +10,6 @@ import { font } from '../../assets/pdfjs/BLotus-normal';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import * as XLSXStyle from 'src/assets/xlsx-js-style-master/dist/xlsx.min.js';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +62,7 @@ export class OutputManagerService {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
     const validColNames = [];
     const validHeaders = [];
+    const s = { font: { bold: true, color: { rgb: "FF0000" } } }
     const firstItem = dataSource[0];
 
     const keys = Object.keys(firstItem);
@@ -74,7 +74,7 @@ export class OutputManagerService {
 
         if (key === colName && colnames[j].sel) {
           validColNames.push(colName);
-          validHeaders.push(colnames[j].header);
+          validHeaders.push(colnames[j].header, s);
         }
       }
     }
@@ -152,6 +152,9 @@ export class OutputManagerService {
     if (!this.isNullData(dataSource))
       return;
 
+    // const datas = this.getValidatedTableData(dataSource, _selectCols);
+    // console.log(datas);
+
     // STEP 1: Create a new workbook
     const wb = XLSX.utils.book_new();
 
@@ -162,13 +165,15 @@ export class OutputManagerService {
       { v: "fill: color", t: "s", s: { fill: { fgColor: { rgb: "E9E9E9" } } } },
       { v: "fill: color", t: "s", s: { alignment: { wrapText: true } } },
     ];
-    if (wb.Workbook) {
-      wb.Workbook.Views[0]['RTL'] = true;
-    } else {
-      wb.Workbook = {};
-      wb.Workbook['Views'] = [{ RTL: true }];
-    }
+    // if (wb.Workbook) {
+    //   wb.Workbook.Views[0]['RTL'] = true;
+    // } else {
+    //   wb.Workbook = {};
+    //   wb.Workbook['Views'] = [{ RTL: true }];
+    // }
     // STEP 3: Create worksheet with rows; Add worksheet to workbook
+    console.log(row);
+
     const ws = XLSX.utils.aoa_to_sheet([row]);
     XLSX.utils.book_append_sheet(wb, ws, "readme demo");
 
@@ -177,48 +182,23 @@ export class OutputManagerService {
 
 
 
-    const datas = this.getValidatedTableData(dataSource, _selectCols);
-    const worksheet = XLSX.utils.json_to_sheet(datas.data);
-    var range = XLSX.utils.decode_range(worksheet['!ref']);
 
-    for (var C = range.s.r; C <= range.e.c; ++C) {
-      var address = XLSX.utils.encode_col(C) + "1"; // <-- first row, column number C
-      if (!worksheet[address]) continue;
-      worksheet[address].v = datas.headers[C];
-    }
-    // const XLSXStyleWorkBook = XLSX.utils.book_new();
-    const workbook = {
-      Sheets: { 'data': worksheet },
-      SheetNames: ['data'],
-    };
-    console.log(worksheet);
+    // const worksheet = XLSX.utils.json_to_sheet(datas.data);
+    // var range = XLSX.utils.decode_range(worksheet['!ref']);
 
-    // XLSXStyle['A1'].v = {
-    //   font: {
-    //     name: "Calibri",
-    //     sz: 24,
-    //     bold: true,
-    //     color: { rgb: "red" },
-    //   },
+    // for (var C = range.s.r; C <= range.e.c; ++C) {
+    //   var address = XLSX.utils.encode_col(C) + "1"; // <-- first row, column number C
+    //   if (!worksheet[address]) continue;
+    //   worksheet[address].v = datas.headers[C];
+    // }
+    // // const XLSXStyleWorkBook = XLSX.utils.book_new();
+    // const workbook = {
+    //   Sheets: { 'data': worksheet },
+    //   SheetNames: ['data'],
     // };
-    // worksheet['A1'].s = {
-    //   font: {
-    //     name: "Calibri",
-    //     sz: 24,
-    //     bold: true,
-    //     color: { rgb: 'blue' },
-    //   },
-    // };
-    // XLSXStyleWorkBook['A1'].s = {
-    //   font: {
-    //     name: "Calibri",
-    //     sz: 24,
-    //     bold: true,
-    //     color: { rgb: 'blue' },
-    //   },
-    // };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: type, type: 'array' });
-    this.saveAsExcelFile(excelBuffer, fileName, '.' + type);
+    // console.log(worksheet);
+    // const excelBuffer: any = XLSX.write(workbook, { bookType: type, type: 'array' });
+    // this.saveAsExcelFile(excelBuffer, fileName, '.' + type);
   }
   saveAsExcelABuffer = (buffer: any, name: string) => {
     console.log(buffer);

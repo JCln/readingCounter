@@ -58,8 +58,7 @@
             },
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
-              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js",
-              "src/assets/xlsx-js-style-master/dist/xlsx.min.js"
+              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"              
             ],
             "vendorChunk": true,
             "extractLicenses": false,
