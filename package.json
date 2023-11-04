@@ -28,6 +28,7 @@
     "browserslist": "^4.21.5",
     "caniuse-lite": "^1.0.30001457",
     "chart.js": "^2.9.4",
+    "exceljs": "^4.4.0",
     "font-awesome": "^4.7.0",
     "jalali-moment": "^3.3.10",
     "jspdf": "^2.3.1",
