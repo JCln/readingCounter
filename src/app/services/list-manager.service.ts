@@ -29,15 +29,7 @@ import { Search } from '../classes/search';
 export class ListManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ref: DynamicDialogRef;
-  getOffloadModifyType = (): OffloadModify[] => {
-    return [
-      OffloadModify.selectAOption,
-      OffloadModify.callAnnounce,
-      OffloadModify.wrongReading,
-      OffloadModify.bazresi
-    ]
-  }
-  modifyType: OffloadModify[] = this.getOffloadModifyType();
+  modifyType: OffloadModify[] = [];
   counterStateGeneralGroupList: number;
   counterStateGeneralList: number;
 
@@ -208,6 +200,14 @@ export class ListManagerService {
       Search.billId,
     ]
   }
+  getOffloadModifyType = (): any[] => {
+    return [
+      OffloadModify.selectAOption,
+      OffloadModify.callAnnounce,
+      OffloadModify.wrongReading,
+      OffloadModify.bazresi
+    ]
+  }
   verificationMosh = (searchReq: ISearchMoshReqDialog): boolean => {
     return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
   }
@@ -244,14 +244,17 @@ export class ListManagerService {
   //   }
   // }
   vertificationLatestInfoModifyBatchReq = (body: IOffloadModifyReq): boolean => {
-    if (MathS.isNull(body.modifyType)) {
+    console.log(body);
+    if (MathS.isNullZero(body.modifyType)) {
       this.showSnackWarn(EN_messages.insert_modifyTypeSingle);
       return false;
     }
-    if (this.convertTitleToIdByModifyType(body.modifyType).id == null) {
-      this.showSnackWarn(EN_messages.call_supportGroup);
+    if (MathS.isNullZero(body.counterStateId)) {
+      this.showSnackWarn(EN_messages.insert_counterState);
       return false;
     }
+
+    console.log(1);
     return true;
   }
   makeHadPicturesToBoolean = (dataSource: any) => {

@@ -615,7 +615,7 @@ export class CloseTabService {
     searchBy: null,
     item: '',
   }
-  listLatestInfo: IOnOffLoadFlat = {
+  listLatestInfo: any = {
     id: '',
     trackNumber: null,
     billId: '',
@@ -650,7 +650,7 @@ export class CloseTabService {
     hazf: null,
     hasError: false,
     errorDescription: '',
-    zoneId: '',
+    zoneId: null,
     counterNumber: null,
     counterStateId: '',
     tempCounterState: null,

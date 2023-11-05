@@ -367,7 +367,7 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.wrpolicies)
       return {
         title: 'تنظیمات امنیتی',
-        messageOne: 'امنیت سامانه قابل تغییر است. حداقل تعداد رمز عبور، تنوع گذرواژه، دفعات ورود با کپچا، Session  خودکار، استفاده همزمان از یک توکن از آن جمله اند.',
+        messageOne: 'امنیت سامانه قابل تغییر است. حداقل نویسه گذرواژه، تنوع گذرواژه، دفعات ورود با کپچا، Session  خودکار، استفاده همزمان از یک توکن از آن جمله اند.',
         messageTwo: 'ممکن است برخی از تغییرات به دسترسی بیشتری نیاز داشته باشند.'
       }
     else if (currentRoute === EN_Routes.policyHistory)

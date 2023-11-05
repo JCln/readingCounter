@@ -5,7 +5,7 @@
             <span>
                 <ul>
                     <li class="number_vals">
-                        حداقل تعداد رمز عبور
+                        حداقل نویسه گذرواژه
                         <div class="plus_minus">
                             <div class="plus"
                                 (click)="plusOrMinusPasswordLength(closeTabService.saveDataForPolicies.minPasswordLength + 1)">
@@ -19,7 +19,7 @@
                         </div>
                     </li>
                     <li class="number_vals">
-                        مسدودسازی درخواست مکرر
+                        آستانه مسدود شدن
                         <div class="plus_minus">
                             <div class="plus"
                                 (click)="lockInvalidAttemps(closeTabService.saveDataForPolicies.lockInvalidAttempts + 1)">
@@ -33,7 +33,7 @@
                         </div>
                     </li>
                     <li class="number_vals">
-                        مدت محدودیت مسدود سازی
+                        مدت مسدود شدن (دقیقه)
                         <div class="plus_minus">
                             <div class="plus" (click)="lockMin(closeTabService.saveDataForPolicies.lockMin + 1)">
                                 <i class="fa fa-plus"></i>

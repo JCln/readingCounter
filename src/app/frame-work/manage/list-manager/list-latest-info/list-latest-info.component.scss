@@ -21,12 +21,17 @@
     background-color: var(--light_1);
 }
 
-footer.btn_1 {
+._search_button {
+    max-width: 100%;
+}
+
+footer {
     display: flex;
     justify-content: center;
-    max-width: 100%;
-    width: 19rem;
-    margin: auto;
+}
+
+.btn_1 {
+    margin-top: var(--font_2);
 }
 
 ._desc {

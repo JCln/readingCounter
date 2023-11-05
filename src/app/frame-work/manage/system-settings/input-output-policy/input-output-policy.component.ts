@@ -32,10 +32,10 @@ export class InputOutputPolicyComponent extends FactoryONE {
   }
   classWrapper = async (canRefresh?: boolean) => {
     this.iOPolicyOptions = this.securityService.getIOPolicyToggle();
-    if (canRefresh) {
-      this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(true);
-    }
-    this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(false);
+    // if (canRefresh) {
+    this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(true);
+    // }
+    // this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(false);
   }
 
   plusOrMinusOutputMaxCountPerDay = (value: number) => {
