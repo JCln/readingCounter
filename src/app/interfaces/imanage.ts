@@ -46,6 +46,10 @@ export interface IBriefKardex {
     amount: number,
     counterStateTitle: string
 }
+export interface IListLatestInfoReq {
+    searchBy: number,
+    item: string
+}
 export interface IOnOffLoadFlat {
     id: string,
     trackNumber: number,

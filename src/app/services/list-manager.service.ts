@@ -20,7 +20,8 @@ import { OffloadModify } from '../classes/offload-modify-type';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
+import { IListLatestInfoReq, IOnOffLoadFlat } from 'interfaces/imanage';
+import { Search } from '../classes/search';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,15 @@ import { IOnOffLoadFlat } from 'interfaces/imanage';
 export class ListManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ref: DynamicDialogRef;
+  getOffloadModifyType = (): OffloadModify[] => {
+    return [
+      OffloadModify.selectAOption,
+      OffloadModify.callAnnounce,
+      OffloadModify.wrongReading,
+      OffloadModify.bazresi
+    ]
+  }
+  modifyType: OffloadModify[] = this.getOffloadModifyType();
   counterStateGeneralGroupList: number;
   counterStateGeneralList: number;
 
@@ -131,14 +141,6 @@ export class ListManagerService {
       })
     });
   }
-  getOffloadModifyType = (): OffloadModify[] => {
-    return [
-      OffloadModify.selectAOption,
-      OffloadModify.callAnnounce,
-      OffloadModify.wrongReading,
-      OffloadModify.bazresi
-    ]
-  }
   getOffloadModifyTypeSimple = (): IDictionaryManager[] => {
     return [
       { id: OffloadModify.callAnnounce.id, title: OffloadModify.callAnnounce.title, isSelected: false },
@@ -198,8 +200,59 @@ export class ListManagerService {
     }
     return true;
   }
+  getSearchTypes = (): Search[] => {
+    return [
+      Search.eshterak,
+      Search.radif,
+      Search.readCode,
+      Search.billId,
+    ]
+  }
   verificationMosh = (searchReq: ISearchMoshReqDialog): boolean => {
     return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
+  }
+  verificationLatestInfo = (searchReq: IListLatestInfoReq): boolean => {
+    if (searchReq.hasOwnProperty('searchBy')) {
+      if (MathS.isNull(searchReq.searchBy)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
+        return false;
+      }
+    }
+    if (searchReq.hasOwnProperty('item')) {
+      if (MathS.isNull(searchReq.item)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+        return false;
+      }
+    }
+    return true;
+  }
+  convertTitleToIdByModifyType = (dataSource: any): any => {
+    return this.modifyType.find(item => {
+      if (item.title === dataSource)
+        return item;
+    })
+  }
+  // convertTitleToId = (dataSource: any): any => {
+  //   if (!MathS.isNull(dataSource)) {
+  //     return this.counterStateByZoneDictionary.find(item => {
+  //       if (item.title === dataSource)
+  //         return item;
+  //     })
+  //   }
+  //   else {
+  //     this.showSnackWarn(EN_messages.insert_counterStateDetails);
+  //   }
+  // }
+  vertificationLatestInfoModifyBatchReq = (body: IOffloadModifyReq): boolean => {
+    if (MathS.isNull(body.modifyType)) {
+      this.showSnackWarn(EN_messages.insert_modifyTypeSingle);
+      return false;
+    }
+    if (this.convertTitleToIdByModifyType(body.modifyType).id == null) {
+      this.showSnackWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    return true;
   }
   makeHadPicturesToBoolean = (dataSource: any) => {
     dataSource.forEach(item => {

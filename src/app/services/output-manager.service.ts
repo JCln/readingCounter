@@ -1,10 +1,12 @@
+import { DateJalaliService } from './date-jalali.service';
 import 'jspdf-autotable';
 
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENExportTableTranslationName, EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
+import * as ExcelJs from "exceljs/dist/exceljs.min.js";
 
 import { font } from '../../assets/pdfjs/BLotus-normal';
 import { MathS } from '../classes/math-s';
@@ -17,10 +19,10 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 export class OutputManagerService {
   private readonly _exportType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   private readonly contentDisposition = 'content-disposition';
-  // XLSX = require('sheetjs-style'); to do recognize sheet styling
 
   constructor(
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dateJalaliService: DateJalaliService
   ) {
   }
 
@@ -62,7 +64,6 @@ export class OutputManagerService {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
     const validColNames = [];
     const validHeaders = [];
-    const s = { font: { bold: true, color: { rgb: "FF0000" } } }
     const firstItem = dataSource[0];
 
     const keys = Object.keys(firstItem);
@@ -74,7 +75,40 @@ export class OutputManagerService {
 
         if (key === colName && colnames[j].sel) {
           validColNames.push(colName);
-          validHeaders.push(colnames[j].header, s);
+          validHeaders.push(colnames[j].header);
+        }
+      }
+    }
+
+    const newData = dataSource.map(function (currentelement) {
+      const newElement = {};
+      for (let i = 0; i < validColNames.length; i++) {
+        const key = validColNames[i];
+        let value = currentelement[validColNames[i]];
+
+        newElement[key] = value != undefined && value != null ? value : '';
+      }
+      return Object.values(newElement);
+    });
+
+    return { data: newData, headers: validHeaders };
+  }
+  getValidatedTableDataExcelJs = (dataSource: any[], _selectCols: any[]): any => {
+    const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
+    const validColNames = [];
+    const validHeaders: any[] = [];
+    const firstItem = dataSource[0];
+
+    const keys = Object.keys(firstItem);
+    for (let j = 0; j < colnames.length; j++) {
+      const colName = colnames[j].name;
+
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+
+        if (key === colName && colnames[j].sel) {
+          validColNames.push(colName);
+          validHeaders.push({ name: colnames[j].header });
         }
       }
     }
@@ -151,54 +185,47 @@ export class OutputManagerService {
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
       return;
+    const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols);
+    const workbook = new ExcelJs.Workbook();
+    const worksheet = workbook.addWorksheet(
+      "Sheet1",
+      { views: [{ state: 'frozen', ySplit: 1, rightToLeft: true }] }
+    );
+    worksheet.properties.defaultColWidth = 13;
 
-    // const datas = this.getValidatedTableData(dataSource, _selectCols);
-    // console.log(datas);
+    // TABLE
+    worksheet.addTable({
+      name: 'MyTable',
+      ref: 'A1',
+      headerRow: true,
+      style: {
+        theme: 'TableStyleMedium2',
+        showRowStripes: true,
+      },
+      columns: datas.headers,
+      rows: datas.data
+    });
+    let rowIndex = 1;
+    for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
+      worksheet.getRow(rowIndex).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+    }
+    worksheet.getRow(1).font = { name: 'Calibri', size: 14, color: { argb: 'ffffff' }, bold: true, wrapText: true };
 
-    // STEP 1: Create a new workbook
-    const wb = XLSX.utils.book_new();
-
-    // STEP 2: Create data rows and styles
-    let row = [
-      { v: "Courier: 24", t: "s", s: { font: { name: "Courier", sz: 24 } } },
-      { v: "bold & color", t: "s", s: { font: { bold: true, color: { rgb: "FF0000" } } } },
-      { v: "fill: color", t: "s", s: { fill: { fgColor: { rgb: "E9E9E9" } } } },
-      { v: "fill: color", t: "s", s: { alignment: { wrapText: true } } },
-    ];
-    // if (wb.Workbook) {
-    //   wb.Workbook.Views[0]['RTL'] = true;
-    // } else {
-    //   wb.Workbook = {};
-    //   wb.Workbook['Views'] = [{ RTL: true }];
-    // }
-    // STEP 3: Create worksheet with rows; Add worksheet to workbook
-    console.log(row);
-
-    const ws = XLSX.utils.aoa_to_sheet([row]);
-    XLSX.utils.book_append_sheet(wb, ws, "readme demo");
-
-    // STEP 4: Write Excel file to browser
-    XLSX.writeFile(wb, "xlsx-js-style-demo.xlsx");
-
-
-
-
-    // const worksheet = XLSX.utils.json_to_sheet(datas.data);
-    // var range = XLSX.utils.decode_range(worksheet['!ref']);
-
-    // for (var C = range.s.r; C <= range.e.c; ++C) {
-    //   var address = XLSX.utils.encode_col(C) + "1"; // <-- first row, column number C
-    //   if (!worksheet[address]) continue;
-    //   worksheet[address].v = datas.headers[C];
-    // }
-    // // const XLSXStyleWorkBook = XLSX.utils.book_new();
-    // const workbook = {
-    //   Sheets: { 'data': worksheet },
-    //   SheetNames: ['data'],
-    // };
-    // console.log(worksheet);
-    // const excelBuffer: any = XLSX.write(workbook, { bookType: type, type: 'array' });
-    // this.saveAsExcelFile(excelBuffer, fileName, '.' + type);
+    workbook.xlsx.writeBuffer().then((data: any) => {
+      const blob = new Blob([data], {
+        type:
+          this._exportType
+      });
+      let url = window.URL.createObjectURL(blob);
+      let a = document.createElement("a");
+      document.body.appendChild(a);
+      a.setAttribute("style", "display: none");
+      a.href = url;
+      a.download = ENExportTableTranslationName[fileName] + this.dateJalaliService.getGregorianDate(), '.' + type;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    });
   }
   saveAsExcelABuffer = (buffer: any, name: string) => {
     console.log(buffer);

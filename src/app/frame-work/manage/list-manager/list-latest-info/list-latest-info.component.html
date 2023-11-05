@@ -1,0 +1,65 @@
+<form class="_req_content" #form="ngForm" (ngSubmit)="verification()">
+    <div class="input_2">
+        <div class="_key">نوع جستجو</div>
+        <div class="_value">
+            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.listLatestInfoReq.searchBy"
+                name="searchType">
+                <mat-option (click)="_searchByInfo = truefalse.searchBy" *ngFor="let truefalse of searchType"
+                    [value]="truefalse.id">
+                    {{truefalse.searchBy}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </div>
+    <div class="input_2">
+        <div class="_key">مقدار</div>
+        <input class="input_1" placeholder="{{_searchByInfo}} را وارد نمایید " name="counterNumber"
+            [(ngModel)]="closeTabService.listLatestInfoReq.item" autofocus>
+    </div>
+
+    <button type="submit" class="tooltip btn_1">
+        <i class="pi pi-search"></i>
+        جستجو
+    </button>
+</form>
+
+<section>
+    <!-- listLatestInfo -->
+    <form #form="ngForm" (ngSubmit)="uploadSingleToModifyBatch()" class="content">
+        <div class="_desc">
+            <div *ngFor="let col of _selectCols" [ngClass]="{'_changables': !col.readonly}">
+                <ng-container *ngIf="col.isSelectOption;else selectOption">
+                    <div class="input_2" *ngIf="col.field == 'modifyType'" [ngClass]="{coloring_border: col.borderize}">
+                        <div class="_key">modifyType name</div>
+                        <div class="_value">
+                            <p-dropdown [options]="listManagerService.modifyType" name="modifyType"
+                                [(ngModel)]="editModifyReq.modifyType" filter="true" placeholder="انتخاب مورد"
+                                optionLabel="title" [showClear]="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2" *ngIf="col.field == 'counterStateId'"
+                        [ngClass]="{coloring_border: col.borderize}">
+                        <div class="_key">counterState name</div>
+                        <div class="_value">
+                            <p-dropdown [options]="counterStateDictionary" name="modifyType"
+                                [(ngModel)]="editModifyReq.counterStateId" filter="true" placeholder="انتخاب مورد"
+                                optionLabel="title" optionValue="id" [showClear]="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #selectOption>
+                    <div class="input_2" [ngClass]="{coloring_border: col.borderize}">
+                        <div class="_key">{{col.header}}</div>
+                        <input [readonly]="col.readonly" class="_value" name="{{col.field}}"
+                            [(ngModel)]="closeTabService.listLatestInfo[col.field]">
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <footer>
+            <button class="btn_1" type="submit">ویرایش اشتراک</button>
+        </footer>
+    </form>
+</section>

@@ -36,7 +36,7 @@ export class Collapser {
     _assessPreCollapse: boolean = false;
     _isCollapsedForbidden: boolean = false;
     _searchProCollapse: boolean = false;
-    _searchMoshtarakCollapse: boolean = false;
+    _searchMoshtarakCollapse: boolean = false;    
     isCollapsedCranlz: boolean = false;
     serverError: boolean = false;
     _userActivation: boolean = false;

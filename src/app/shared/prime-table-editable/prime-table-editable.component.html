@@ -38,11 +38,11 @@
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i *ngIf="_outputEnabled"
+                <!-- <i *ngIf="_outputEnabled"
                     (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'csv',routerLink, dataSource.length)"
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
-                </i>
+                </i> -->
                 <i *ngIf="_outputEnabled && (_outputFileName == 'abBaha' || _outputFileName == 'Budget' || _outputFileName == 'tabsare3')"
                     (click)="getExcelSample()" class="tooltip _circle_border _xlsx_download pi pi-download">
                     <div class="tooltip_text">دانلود نمونه فایل Excel</div>
