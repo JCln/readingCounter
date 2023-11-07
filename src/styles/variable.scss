@@ -6,9 +6,9 @@ $border_100vmax: 100vmax;
 $border_50: 50%;
 
 $font_family: BLotus,
-"Blotus",
-tahoma,
-Sans-Serif;
+  "Blotus",
+  tahoma,
+  Sans-Serif;
 
 .font_family {
   font-family: $font_family;
@@ -89,7 +89,7 @@ footer.footer_with_background {
   width: var(--font_22);
   height: var(--font_22);
   border-radius: 50%;
-  border: 1.5px solid;
+  outline: 1.5px solid;
   cursor: pointer;
 
   &:hover,

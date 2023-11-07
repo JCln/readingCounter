@@ -72,7 +72,6 @@
                 <div class="left_side">
                     <input pInputText class="_general_search" type="text"
                         (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
-
                     <i (click)="hasBeenReadsToggler()">
                         <label class="font_family"
                             for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}})
@@ -81,6 +80,9 @@
                         <p-checkbox [(ngModel)]="listManagerService.columnManager._generalGroupHeaderCheckbox"
                             [binary]="true">
                         </p-checkbox>
+                    </i>
+                    <i (click)="clearFilters(datatableG)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                        <div class="tooltip_text_right">حذف فیلترها</div>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                         <div class="tooltip_text">بارگیری مجدد جدول</div>

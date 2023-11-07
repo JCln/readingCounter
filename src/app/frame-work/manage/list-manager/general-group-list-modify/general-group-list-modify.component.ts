@@ -21,6 +21,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 import { GeneralGroupInfoResComponent } from './general-group-info-res/general-group-info-res.component';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-general-group-list-modify',
@@ -31,7 +32,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   // should place only in component because overright totalNum needs for dynamic use  
   tempMainDataSource = { totalNum: 0, data: [] };
 
-  _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];  
+  _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];
   _selectedColumnsToRemember: string = 'selectedGeneralGroupModify';
   _sessionName: string = 'generalGroupModify';
   _outputFileName: string = 'generalGroupModify';
@@ -439,6 +440,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
+  }
+  clearFilters(table: Table) {
+    this.closeTabService.utilsService.clearFilters(table);
   }
 
 }

@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import { Collapser } from '../classes/collapser';
 import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
+import { Table } from 'primeng/table';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,11 @@ export class UtilsService {
   }
   getAPIUrl = (): string => {
     return this.envService.API_URL;
+  }
+  clearFilters(session: Table): void {
+    session.filters = {};
+    this.compositeService.jwtService.browserStorageService.removeSession(session.stateKey);
+    session.reset();
   }
   getSearchInOrderTo: ISearchInOrderTo[] = [
     {

@@ -60,20 +60,13 @@ export class BrowserStorageService {
   removeSession = (key: string) => {
     if (this.isSessionStorageSupported) {
       sessionStorage.removeItem(key);
-      sessionStorage.clear();
       return true;
     }
     return false;
   }
   removeAll = () => {
-    for (const key in this.localStorage) {
-      if (this.localStorage.hasOwnProperty(key))
-        this.removeLocal(key);
-    }
-    for (const key in this.sessionStorage) {
-      if (this.sessionStorage.hasOwnProperty(key))
-        this.removeSession(key);
-    }
+    sessionStorage.clear();
+    localStorage.clear();
   }
   removeAllExceptAuths = () => {
     for (const key in this.localStorage) {

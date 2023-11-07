@@ -57,12 +57,14 @@
             <div class="left_side">
                 <input *ngIf="profileService._agg.hasGeneralSearch" pInputText class="_general_search" type="text"
                     (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
-
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="hasBeenReadsToggler()">
                     <label class="font_family" for="binary">({{dataSource.length}})فقط قرائت شده</label>
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
+                </i>
+                <i (click)="clearFilters(datatableG)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                    <div class="tooltip_text_right">حذف فیلترها</div>
                 </i>
                 <i *ngIf="_hasRefreshTable" (click)="refreshTable()"
                     class="tooltip _circle_border p_icons pi pi-refresh">

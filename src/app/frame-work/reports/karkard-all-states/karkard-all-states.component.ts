@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { IKarkardAllStatesDto } from 'interfaces/ireports';
+import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -135,6 +136,9 @@ export class KarkardAllStatesComponent extends FactoryONE {
           old.isSelected = true;
       })
     })
+  }
+  clearFilters(table: Table) {
+    this.closeTabService.utilsService.clearFilters(table);
   }
 
 }

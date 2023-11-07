@@ -95,7 +95,7 @@
 
         </form>
     </section>
-    <p-table
+    <p-table #dtable
         *ngIf="closeTabService.saveDataForKarkardAllStates &&  closeTabService.saveDataForKarkardAllStates.length > 0"
         [columns]="selectedColumns" [value]="closeTabService.saveDataForKarkardAllStates" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
@@ -127,6 +127,9 @@
                     <app-collapsable [_isCollapsed]=readingReportManagerService.offKarkardAllStatesReq.isCollapsed
                         (_clicked)="readingReportManagerService.offKarkardAllStatesReq.isCollapsed = !readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
                     </app-collapsable>
+                    <i (click)="clearFilters(dtable)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                        <div class="tooltip_text_right">حذف فیلترها</div>
+                    </i>
                 </div>
             </div>
         </ng-template>

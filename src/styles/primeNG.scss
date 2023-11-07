@@ -51,7 +51,7 @@
     margin-left: .25rem;
     border: 1px solid;
     color: var(--secondary_8);
-    border-radius: 7px;
+    border-radius: $border_7;
     background: var(--white);
   }
 
@@ -463,6 +463,7 @@
 
       i {
         margin: 0 var(--font_025);
+        border-radius: $border_7;
       }
     }
   }

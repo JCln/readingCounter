@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { IUserKarkardSummary } from 'interfaces/iuser-manager';
+import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -114,6 +115,9 @@ export class UserKarkardSummaryComponent extends FactoryONE {
           old.isSelected = true;
       })
     })
+  }
+  clearFilters(table: Table) {
+    this.closeTabService.utilsService.clearFilters(table);
   }
 
 }

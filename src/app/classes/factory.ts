@@ -15,6 +15,7 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
 import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
+import { Table } from 'primeng/table';
 
 @Component({
     template: ''
@@ -215,6 +216,9 @@ export class FactorySharedPrime implements OnChanges {
     }
     denyTracking = (): boolean => {
         return this.utilsService.getDenyTracking();
+    }
+    clearFilters(session: Table) {
+        this.utilsService.clearFilters(session);
     }
 
 }

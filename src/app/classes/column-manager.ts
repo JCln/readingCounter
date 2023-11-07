@@ -411,13 +411,13 @@ export class ColumnManager {
     ]
     uploadAttemptsReq: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
-        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
-        // { field: 'insertDateTime', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        // { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'insertDateTime', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
         { field: 'username', header: 'نام کاربری', isSelected: false, isSelectedOrigin: false },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
         // { field: 'isOutput', header: 'isOutput', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         // { field: 'isInvalid', header: 'ناموفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'recordCount', header: 'تعداد سطر', isSelected: true, isSelectedOrigin: true },
+        // { field: 'recordCount', header: 'تعداد سطر', isSelected: true, isSelectedOrigin: true },
         { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
         { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
@@ -427,7 +427,7 @@ export class ColumnManager {
         { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
         { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
         { field: 'osPlatform', header: 'نوع سیستم', isSelected: false, isSelectedOrigin: false },
-        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, readonly: true },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },   
     ]
     requestLogUnAuthorized: IObjectIteratation[] = [

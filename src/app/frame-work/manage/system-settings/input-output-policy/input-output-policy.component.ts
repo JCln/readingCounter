@@ -20,6 +20,8 @@ const enum ENMessages {
   styleUrls: ['./input-output-policy.component.scss']
 })
 export class InputOutputPolicyComponent extends FactoryONE {
+  readonly inputExtensionsPlaceholder: string = '.jpg;.txt;.jpeg';
+  readonly contentTypePlaceholder: string = 'image/png;image/jpeg';
   iOPolicyOptions: IIOPolicy;
   @ViewChild('#ref_true') ref;
 
