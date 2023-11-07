@@ -52,7 +52,7 @@ export class ListLatestInfoComponent extends FactoryONE {
   uploadSingleToModifyBatch = async () => {
 
     if (this.listManagerService.vertificationLatestInfoModifyBatchReq(this.editModifyReq)) {
-      this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, this.editModifyReq);
+      this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, [this.editModifyReq]);
 
     }
     // TODO: Should convert Arabic Numbers to ENG to counterNumbers
