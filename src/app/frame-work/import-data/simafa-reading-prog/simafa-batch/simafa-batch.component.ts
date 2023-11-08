@@ -43,6 +43,7 @@ export class SimafaBatchComponent extends FactoryONE {
     }
     else {
       const validation = this.importDynamicService.verificationSimafaBatch(this.allImportsService.allImports_batch);
+
       if (validation) {
         this._batchResponse = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
         this.insertColumnsToTableAfterSuccess();
@@ -59,6 +60,10 @@ export class SimafaBatchComponent extends FactoryONE {
     })
   }
   classWrapper = async (canRefresh?: boolean) => {
+    if (!this.allImportsService.allImports_batch.readingProgramId) {
+      this.importDynamicService.routeToSimafa();
+      return;
+    }
     this.closeTabService.saveDataForSimafaBatch = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSByEshterak,
       {
         fromEshterak: this.allImportsService.allImports_batch.fromEshterak,

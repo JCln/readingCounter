@@ -2014,7 +2014,7 @@ export class ColumnManager {
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'newRate', header: 'میانگین فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'newRateDaily', header: 'میانگین روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },
-        { field: 'reteDifference', header: 'اختلاف میانگین', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },
+        { field: 'reteDifference', header: 'اختلاف میانگین', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true },
         { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'preDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '_editable' },

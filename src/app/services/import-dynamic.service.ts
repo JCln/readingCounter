@@ -166,6 +166,9 @@ export class ImportDynamicService {
   routeToSimafaSingle = (object: IReadingProgramRes) => {
     this.utilsService.compositeService.routeToExtras([EN_Routes.wrimpsimafardpgsingle, object]);
   }
+  routeToSimafa = () => {
+    this.utilsService.compositeService.routeTo(EN_Routes.wrimpsimafardpg);
+  }
   routeToSimafaBatch = (object: IReadingProgramRes) => {
     this.allImportsService.allImports_batch.readingProgramId = object.id;
     this.allImportsService.allImports_batch.zoneId = object.zoneId;
