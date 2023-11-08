@@ -10,7 +10,7 @@ export class AllImportsService {
   constructor(private utilsService: UtilsService) { }
 
   allImports_batch: IImportSimafaBatchReq = {
-    routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
+    routeAndReaderIds: [],
     canContinue: false,
     fromEshterak: '',
     id: '',

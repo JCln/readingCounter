@@ -357,6 +357,9 @@ export class CloseTabService {
     _isCollapsed: false
   }
   saveDataForSimafaBatch: IFragmentDetails[];
+  saveDataForSimafaBatchReq = {
+    GUid: ''
+  }
   allImports_batch: IImportSimafaBatchReq = {
     routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
     canContinue: false,

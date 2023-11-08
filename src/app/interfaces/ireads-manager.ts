@@ -94,7 +94,7 @@ export interface IFragmentDetails {
     orderDigit?: number,
     orderPersian?: string,
     isNew?: boolean
-    // for batch
+    // for batch   
     trackNumber?: number,
     count?: number,
     counterReaderName?: string

@@ -460,6 +460,7 @@
     .left_side {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
 
       i {
         margin: 0 var(--font_025);

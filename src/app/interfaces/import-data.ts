@@ -45,12 +45,7 @@ export interface IImportDataResponse {
     warningCount: number
 }
 export interface IImportSimafaBatchReq {
-    routeAndReaderIds: [
-        {
-            routeId: string,
-            counterReaderId: string | number
-        }
-    ],
+    routeAndReaderIds: any[],
     readingProgramId: string,
     fragmentMasterId: string,
     zoneId: number,

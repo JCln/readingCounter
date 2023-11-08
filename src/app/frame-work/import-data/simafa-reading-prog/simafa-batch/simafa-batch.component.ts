@@ -43,7 +43,6 @@ export class SimafaBatchComponent extends FactoryONE {
     }
     else {
       const validation = this.importDynamicService.verificationSimafaBatch(this.allImportsService.allImports_batch);
-
       if (validation) {
         this._batchResponse = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
         this.insertColumnsToTableAfterSuccess();
@@ -55,35 +54,50 @@ export class SimafaBatchComponent extends FactoryONE {
     }
   }
   assingIdToRouteId = () => {
-    this.closeTabService.saveDataForSimafaBatch.forEach((item, index) => {
-      this.allImportsService.allImports_batch.routeAndReaderIds[index].routeId = item.id;
-    })
+    for (let index = 0; index < this.closeTabService.saveDataForSimafaBatch.length; index++) {
+      this.allImportsService.allImports_batch.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
+      this.allImportsService.allImports_batch.routeAndReaderIds[index].routeId = this.closeTabService.saveDataForSimafaBatch[index].id;
+    }
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allImportsService.allImports_batch.readingProgramId) {
       this.importDynamicService.routeToSimafa();
       return;
     }
-    this.closeTabService.saveDataForSimafaBatch = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSByEshterak,
-      {
-        fromEshterak: this.allImportsService.allImports_batch.fromEshterak,
-        toEshterak: this.allImportsService.allImports_batch.toEshterak,
-        zoneId: this.allImportsService.allImports_batch.zoneId
+    // TODO: if from same listNumber, no need to call api, check BY GROUP ID
+    console.log(this.allImportsService.allImports_batch.routeAndReaderIds);
+    if (
+      !this.closeTabService.saveDataForSimafaBatch ||
+      (
+        this.closeTabService.saveDataForSimafaBatchReq.GUid !=
+        this.allImportsService.allImports_batch.id
+      )
+    ) {
+      //  if data is not the same as previous      
+      this.closeTabService.saveDataForSimafaBatch = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSByEshterak,
+        {
+          fromEshterak: this.allImportsService.allImports_batch.fromEshterak,
+          toEshterak: this.allImportsService.allImports_batch.toEshterak,
+          zoneId: this.allImportsService.allImports_batch.zoneId
+        }
+      );
+      if (this.closeTabService.saveDataForSimafaBatch) {
+        this.assingIdToRouteId();
+        this.allImportsService.allImports_batch.fragmentMasterId = this.closeTabService.saveDataForSimafaBatch[0].fragmentMasterId;
+        this.closeTabService.saveDataForSimafaBatchReq.GUid = this.allImportsService.allImports_batch.id; // for less use of network when same data entered
       }
-    );
-    if (this.closeTabService.saveDataForSimafaBatch) {
-      for (let index = 1; index < this.closeTabService.saveDataForSimafaBatch.length && this.allImportsService.allImports_batch.routeAndReaderIds.length < this.closeTabService.saveDataForSimafaBatch.length; index++) {
-        this.allImportsService.allImports_batch.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
-      }
-      this.allImportsService.allImports_batch.fragmentMasterId = this.closeTabService.saveDataForSimafaBatch[0].fragmentMasterId;
-      this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.allImportsService.allImports_batch.zoneId);
-      this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.allImportsService.allImports_batch.zoneId);
-
-      this.assingIdToRouteId();
-      this.insertReadingConfigDefaults(this.readingConfigDefault);
-      this.insertSelectedColumns();
     }
+    this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.allImportsService.allImports_batch.zoneId);
+    this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.allImportsService.allImports_batch.zoneId);
+    console.log(this.allImportsService.allImports_batch.routeAndReaderIds);
+
+    this.insertReadingConfigDefaults(this.readingConfigDefault);
+    this.insertSelectedColumns();
   }
+  clickedDropDowns = (event: any, dataSource: any, index: number) => {
+    this.allImportsService.allImports_batch.routeAndReaderIds[index].counterReaderId = event.value;
+  }
+
   ngOnInit() {
     this.columnsToDefault();
     this.classWrapper();
@@ -120,8 +134,6 @@ export class SimafaBatchComponent extends FactoryONE {
     this.importDynamicService.columnRemoveSimafaBatch();
   }
   private insertReadingConfigDefaults = (rcd: any) => {
-    console.log(rcd);
-
     this.allImportsService.allImports_batch.hasPreNumber = rcd.defaultHasPreNumber;
     this.allImportsService.allImports_batch.displayBillId = rcd.displayBillId;
     this.allImportsService.allImports_batch.displayRadif = rcd.displayRadif;
