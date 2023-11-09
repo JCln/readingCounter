@@ -18,10 +18,12 @@ import { PrimeTableEditableComponent } from './prime-table-editable/prime-table-
 import { PrimeTableComponent } from './prime-table/prime-table.component';
 import { AddRowDirective } from '../directives/add-row.directive';
 import { ConfirmTextDialogComponent } from './confirm-text-dialog/confirm-text-dialog.component';
+import {AccordionModule} from 'primeng/accordion';
 import { SharedChangePassModule } from './shared-change-pass.module';
 import { UserBlockingComponent } from './user-blocking/user-blocking.component';
 import { MaterialModule } from './material.module';
 import { TabViewModule } from 'primeng/tabview';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { TabViewModule } from 'primeng/tabview';
     MultiSelectModule,
     CheckboxModule,
     DropdownModule,
-    SliderModule,    
+    InputMaskModule,
+    AccordionModule,
+    SliderModule,
     DynamicDialogModule,
     RadioButtonModule,
     TabViewModule,
@@ -59,12 +63,14 @@ import { TabViewModule } from 'primeng/tabview';
     UserBlockingComponent,
     CommonModule,
     FormsModule,
-    TableModule,   
-    TabViewModule, 
+    TableModule,
+    TabViewModule,
     MatCheckboxModule,
     MultiSelectModule,
     CheckboxModule,
     DropdownModule,
+    InputMaskModule,
+    AccordionModule,
     SliderModule,
     DynamicDialogModule,
     AddRowDirective,

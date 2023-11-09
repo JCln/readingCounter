@@ -7,19 +7,23 @@ import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confir
 import { CompositeService } from './composite.service';
 import { Location } from '@angular/common';
 import { Collapser } from '../classes/collapser';
-import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENImageTypes, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Table } from 'primeng/table';
+import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
+  ref: DynamicDialogRef;
 
   constructor(
     public compositeService: CompositeService,
     public envService: EnvService,
     public dialog: MatDialog,
+    public dialogService: DialogService,
     private _location: Location,
     public snackWrapperService: SnackWrapperService,
     public ajaxReqWrapperService: AjaxReqWrapperService,
@@ -75,6 +79,46 @@ export class UtilsService {
     session.filters = {};
     this.compositeService.jwtService.browserStorageService.removeSession(session.stateKey);
     session.reset();
+  }
+  doShowImageDialog = (dataSource: any, type: ENImageTypes) => {
+    this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+      data: { _data: dataSource, _type: type },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+    });
+  }
+  showTypicalImageDialog = (dataSource: any) => {
+    this.doShowImageDialog(dataSource, ENImageTypes.typical);
+  }
+  showSingleImageDialog = (dataSource: any) => {
+    this.doShowImageDialog(dataSource, ENImageTypes.single);
+  }
+  showImageDialogImageCount = (dataSource: any) => {
+    // should not open dialog when no images exists
+    if (dataSource.imageCount) {
+      this.showTypicalImageDialog(dataSource);
+    } else {
+      this.snackBarMessageWarn(EN_messages.imageNotExists);
+    }
+  }
+  showImageMobileApp = (dataSource: any) => {
+    if (dataSource.mediaCount) {
+      this.doShowImageDialog(dataSource, ENImageTypes.mobileApp);
+    } else {
+      this.snackBarMessageWarn(EN_messages.imageNotExists);
+    }
+  }
+  showCarouselForbidden = (dataSource: any) => {
+    // To make imageWrapper config Dialog for forbidden
+    if (dataSource.imageCount) {
+      this.doShowImageDialog(dataSource, ENImageTypes.forbidden);
+    } else {
+      this.snackBarMessageWarn(EN_messages.imageNotExists);
+    }
   }
   getSearchInOrderTo: ISearchInOrderTo[] = [
     {

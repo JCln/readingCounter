@@ -22,11 +22,10 @@
         جستجو
     </button>
 </form>
-
 <section *ngIf="closeTabService.listLatestInfo.id && closeTabService.listLatestInfo.id.length > 0">
     <form #form="ngForm" (ngSubmit)="uploadSingleToModifyBatch()" class="content">
         <div class="_desc">
-            <div *ngFor="let col of _selectCols" [ngClass]="{'_changables': !col.readonly}">
+            <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon,'_changables': !col.readonly}">
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
                     <div class="input_2" *ngIf="col.field == 'modifyType'" [ngClass]="{coloring_border: col.borderize}">
                         <div class="_key">اصلاح</div>
@@ -61,7 +60,82 @@
                     </div>
                 </ng-template>
             </div>
+            <div (click)="openMapDialog(closeTabService.listLatestInfo)">
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_bottom">مشاهده روی نقشه</div>
+                </i>
+            </div>
+            <span class=" ui-column-title">نمایش گزارش بازرسی</span>
+            <div (click)="getReadingReportTitles(closeTabService.listLatestInfo.id)"
+                class="tooltip p_icons pi pi-chart-bar">
+                <div class="tooltip_text_bottom">نمایش گزارش بازرسی</div>
+            </div>
+            <div (click)="closeTabService.utilsService.showImageDialogImageCount(closeTabService.listLatestInfo)">
+                <span class="ui-column-title">
+                    {{closeTabService.listLatestInfo.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
+                </span>
+                <i class="tooltip p_icons pi pi-camera"
+                    [ngClass]="{'_haveimage':closeTabService.listLatestInfo.imageCount}">
+                    <div class="tooltip_text_bottom">
+                        {{closeTabService.listLatestInfo.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
+                    </div>
+                </i>
+            </div>
         </div>
+        <p-accordion>
+            <p-accordionTab header="سایر جزئیات">
+                <div class="_desc">
+                    <div *ngFor="let col of _selectColsAccordion"
+                        [ngClass]="{'double_size':col.icon,'_changables': !col.readonly}">
+                        <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                            <div class="check_boxes">
+                                <mat-checkbox [disabled]="true" [(ngModel)]="closeTabService.listLatestInfo[col.field]">
+                                    {{col.header}}
+                                </mat-checkbox>
+                            </div>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <ng-container *ngIf="col.isSelectOption;else selectOption">
+                                <div class="input_2" *ngIf="col.field == 'modifyType'"
+                                    [ngClass]="{coloring_border: col.borderize}">
+                                    <div class="_key">اصلاح</div>
+                                    <div class="_value">
+                                        <p-dropdown [options]="modifyType" name="modifyType"
+                                            [(ngModel)]="editModifyReq.modifyType" filter="true"
+                                            placeholder="انتخاب مورد" optionLabel="title" optionValue="id"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="input_2" *ngIf="col.field == 'counterStateId'"
+                                    [ngClass]="{coloring_border: col.borderize}">
+                                    <div class="_key">وضعیت فعلی</div>
+                                    <div class="_value">
+                                        <p-dropdown [options]="counterStateDictionary" name="counterState"
+                                            [(ngModel)]="editModifyReq.counterStateId" filter="true"
+                                            placeholder="انتخاب مورد" optionLabel="title" optionValue="id"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-template #selectOption>
+                                <div *ngIf="col.readonly" class="input_2" [ngClass]="{coloring_border: col.borderize}">
+                                    <div class="_key">{{col.header}}</div>
+                                    <input [readonly]="col.readonly" class="_value" name="{{col.field}}"
+                                        [(ngModel)]="closeTabService.listLatestInfo[col.field]">
+                                </div>
+                                <div *ngIf="!col.readonly" class="input_2" [ngClass]="{coloring_border: col.borderize}">
+                                    <div class="_key">{{col.header}}</div>
+                                    <input [readonly]="col.readonly" class="_value" name="{{col.field}}"
+                                        [(ngModel)]="editModifyReq[col.field]">
+                                </div>
+                            </ng-template>
+                        </ng-template>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
         <footer>
             <button class="btn_1" type="submit">ویرایش اشتراک</button>
         </footer>

@@ -1177,17 +1177,13 @@ export class ColumnManager {
     ]
     listLatestInfo: IObjectIteratation[] =
         [
-            //         modifyType
-            // checkedItems
-            // counterStateId
-            // counterNumber
-            // jalaliDay
-            // description
+            { field: 'preCounterStateTitle', header: 'وضعیت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
             { field: 'modifyType', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, isSelectOption: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true },
             { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
-            { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-            { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, readonly: true },
+            { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2" },
+            { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: "grid-column: auto/ span 2" },
             { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -1199,12 +1195,8 @@ export class ColumnManager {
             { field: 'qeraatCode', header: 'قرائت', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true },
             { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true },
-            { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true },
-            { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true },
-            { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true },
             { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true },
-            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true },
             { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -1212,17 +1204,23 @@ export class ColumnManager {
             { field: 'newRateDaily', header: 'میانگین روزانه', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'reteDifference', header: 'اختلاف میانگین', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false, isSelectedOrigin: false, readonly: true },
-            { field: 'preDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true, isSelectedOrigin: true, readonly: true },
-            { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true },
+            { field: 'preDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, readonly: true },
+            { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true },
+            { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true },
+        ];
+    listLatestInfoAccordion: IObjectIteratation[] =
+        [
+            { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true },
+            { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: "grid-column: auto/ span 2" },
             { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true },
+            { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isSelectedOrigin: true, readonly: true },
             // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false,isSelectedOrigin:false ,readonly: true},
             { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true },
-            { field: 'preCounterStateTitle', header: 'وضعیت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true },
             // { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false,isSelectedOrigin:false ,readonly: true},// if no zone insert number shows so PreCounterStateTitle implemented
             // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false,isSelectedOrigin:false ,readonly: true},            
             { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -1252,7 +1250,6 @@ export class ColumnManager {
             { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, readonly: true },
             { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false, readonly: true },
-            { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true },
         ];
     searchPro: IObjectIteratation[] =
         [

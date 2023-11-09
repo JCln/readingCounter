@@ -6,13 +6,15 @@
   src: url(/assets/fonts/BLotus.woff) format("woff2"), url(/assets/fonts/BLotus) format("truetype");
 }
 
+$font_family: BLotus, "Blotus", tahoma, Sans-Serif;
+
 body,
 html {
   padding: 0;
   margin: 0;
   min-height: 100%;
   position: relative;
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) all 250ms;
@@ -136,13 +138,13 @@ button,
 input,
 li {
   outline: none;
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
 }
 
 .p-dialog,
 .p-dialog-header,
 .p-dialog-title {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
   padding: var(--font_03) !important;
 }
 
@@ -161,6 +163,14 @@ li {
   background: var(--secondary_1) !important;
 }
 
+/* ACCORDION */
+.p-accordion p-accordiontab .p-accordion-tab {
+  font-family: $font_family;
+  direction: rtl;
+  text-align: right;
+}
+
+/* END ACCORDION */
 // ts config
 .cell_conf {
   color: rgb(92, 92, 92);
@@ -179,7 +189,7 @@ input[type=number] {
 }
 
 .leaflet-popup-content {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
   text-align: center;
   font-size: var(--font_s);
   font-weight: 600;

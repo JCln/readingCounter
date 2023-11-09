@@ -171,46 +171,6 @@ export class FactorySharedPrime implements OnChanges {
     setTraslateToPrimeNgTable = () => {
         this.config.setTranslation(ENPrimeNGTranslator);
     }
-    doShowImageDialog = (dataSource: any, type: ENImageTypes) => {
-        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-            data: { _data: dataSource, _type: type },
-            rtl: true,
-            width: '80%',
-        })
-        this.ref.onClose.subscribe(async res => {
-            if (res)
-                console.log(res);
-        });
-    }
-    showTypicalImageDialog = (dataSource: any) => {
-        this.doShowImageDialog(dataSource, ENImageTypes.typical);
-    }
-    showSingleImageDialog = (dataSource: any) => {
-        this.doShowImageDialog(dataSource, ENImageTypes.single);
-    }
-    showImageDialogImageCount = (dataSource: any) => {
-        // should not open dialog when no images exists
-        if (dataSource.imageCount) {
-            this.showTypicalImageDialog(dataSource);
-        } else {
-            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
-        }
-    }
-    showImageMobileApp = (dataSource: any) => {
-        if (dataSource.mediaCount) {
-            this.doShowImageDialog(dataSource, ENImageTypes.mobileApp);
-        } else {
-            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
-        }
-    }
-    showCarouselForbidden = (dataSource: any) => {
-        // To make imageWrapper config Dialog for forbidden
-        if (dataSource.imageCount) {
-            this.doShowImageDialog(dataSource, ENImageTypes.forbidden);
-        } else {
-            this.utilsService.snackBarMessageWarn(EN_messages.imageNotExists);
-        }
-    }
     getResizReOrderable = () => {
         this._reOrderableTable = this.profileService.getLocalReOrderable();
     }

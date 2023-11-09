@@ -1,7 +1,8 @@
-@import 'variable';
+@import 'primeNG';
 @import 'input';
 @import 'button';
 @import '_mat';
+@import 'tooltip';
 
 ._req_content {
     display: grid;
@@ -43,4 +44,8 @@ footer {
     align-items: center;
     border-radius: $border_15;
     text-align: right;
+}
+
+.check_boxes {
+    direction: ltr;
 }
