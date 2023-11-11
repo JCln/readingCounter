@@ -35,7 +35,7 @@
         [_sessionName]="'generalListModify'" [_selectedColumnsToRemember]="'selectedGeneralModify'"
         [_dictionaryName]="'counterStateId'" [dictionary]="counterStateByZoneDictionary"
         [_secondDictionaryName]="'modifyType'" [secondDictionary]="modifyType" [_numberOfExtraColumns]="[1,2,3,4,5,6]"
-        [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isInRowEditing]="true"
+        [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت'" [_isInRowEditing]="true"
         (receivedDateJalali)="receiveTableDate($event)"
         (dropDownChanges)="closeTabService.saveDataForLMGeneralModify['counterStateId']"
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"

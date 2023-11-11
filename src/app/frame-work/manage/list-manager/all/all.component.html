@@ -22,7 +22,7 @@
     <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForLMAll"
         [_outputFileName]="'allLists'" [_checkUpName]="'allComponent'" [_sessionName]="'allLists'"
         [_selectedColumnsToRemember]="'selectedListManagerAll'" [_numberOfExtraColumns]="[1,2,3]"
-        [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isCustomSort]=true
+        [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت'" [_isCustomSort]=true
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
         (backedToPrevious)="listManagerService.utilsService.backToPreviousPage()" (filteredEvent)="filteredTableEvent($event)"
         (routedToOffload)="routeToOffload($event)" (showedPictures)="getReadingReportTitles($event)"

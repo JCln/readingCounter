@@ -246,9 +246,19 @@ export class PrimeTableComponent extends FactorySharedPrime {
         }
       }
     }
+    console.log(tempRowGroupMeta);
+
     this.profileService._agg.rowGroupMetadata = tempRowGroupMeta;
   }
+  sortAndAggregate = () => {
+    const agg = this.profileService._agg.selectedAggregate;
+    const map = new Map<string, number>(this.dataSource
+      .filter(x => x.section === agg)
+      .map(x => [x.name, x.total]));
 
+    return this.dataSource.slice()
+      .sort((a, b) => map.get(a.name) - map.get(b.name));
+  }
   doAggregate = () => {
     const _aggFlag = this.profileService._agg.flag;
 
@@ -281,8 +291,10 @@ export class PrimeTableComponent extends FactorySharedPrime {
     });
   }
   customSortFunction(event: any) {
-    this.doCustomSort(event);
-    this.doAggregate();
+    this._hasAggregating ?
+      (console.log(this.sortAndAggregate()), this.doCustomSort(event),
+        this.doAggregate()) :
+      this.doCustomSort(event)
   }
   resetAggregation = () => {
     this.profileService._agg.selectedAggregate = '';

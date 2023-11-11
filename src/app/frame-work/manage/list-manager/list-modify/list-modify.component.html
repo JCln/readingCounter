@@ -22,7 +22,7 @@
     <app-prime-table [dataSource]="closeTabService.saveDataForLMModify" [_outputFileName]="'ModifyList'" [_checkUpName]="'allComponent'"
         [_sessionName]="'modifyLists'" [_selectedColumnsToRemember]="'selectedListManagerModify'"
         [_numberOfExtraColumns]="[1,2,3,4,5,6]" [_backToPreviousEnabled]=true
-        [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isCustomSort]=true
+        [_backToPreviousText]="'بازگشت'" [_isCustomSort]=true
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
         (backedToPrevious)="toPrePage()" (routedToOffload)="routeToOffload($event)"
         (filteredEvent)="filteredTableEvent($event)" (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
