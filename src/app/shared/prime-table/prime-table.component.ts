@@ -246,19 +246,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
         }
       }
     }
-    console.log(tempRowGroupMeta);
-
     this.profileService._agg.rowGroupMetadata = tempRowGroupMeta;
   }
-  sortAndAggregate = () => {
-    const agg = this.profileService._agg.selectedAggregate;
-    const map = new Map<string, number>(this.dataSource
-      .filter(x => x.section === agg)
-      .map(x => [x.name, x.total]));
 
-    return this.dataSource.slice()
-      .sort((a, b) => map.get(a.name) - map.get(b.name));
-  }
   doAggregate = () => {
     const _aggFlag = this.profileService._agg.flag;
 
@@ -291,10 +281,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
     });
   }
   customSortFunction(event: any) {
-    this._hasAggregating ?
-      (console.log(this.sortAndAggregate()), this.doCustomSort(event),
-        this.doAggregate()) :
-      this.doCustomSort(event)
+    this.doCustomSort(event);
+    this.doAggregate();
   }
   resetAggregation = () => {
     this.profileService._agg.selectedAggregate = '';
@@ -311,16 +299,3 @@ export class PrimeTableComponent extends FactorySharedPrime {
     }
   }
 }
-
-// let a = document.querySelectorAll('.pi-angle-down');
-//     this.currentRoute.forEach((aItem, i) => {
-//       if (item.title !== aItem.title) {
-//         aItem.isOpen = false;
-//         a[i].classList.remove('_toggle_angule');
-//       }
-//       else {
-//         aItem.isOpen = !aItem.isOpen;
-//         a[i].classList.toggle('_toggle_angule');
-//       }
-//     })
-//   }

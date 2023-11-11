@@ -9,6 +9,7 @@
     [_selectedColumnsToRemember]="'selectedTrackOffloaded'"
     [_sessionName]="'offloaded-session'"
     (refreshedTable)="refreshTable()"
+    (customedSort)="trackingManagerService.customSort($event)"
     (downloadedOutputSingle)="downloadOutputSingle($event)"        
     (routeedToOffloadModify)="routeToOffloadModify($event)"        
     (routedToOffloadGeneralModify)="routeToOffloadGeneralModify($event)"        

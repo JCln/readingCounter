@@ -6,7 +6,8 @@
     [_calculableSUM]=true    
     [_hasAggregating] = true
     [_isCustomSort]=true
-    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"    
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"
+    (customedSort)="trackingManagerService.customSort($event)"
     [_sessionName]="'imported-session'"
     [_selectedColumnsToRemember]="'selectedTrackImported'"
     (refreshedTable)="refreshTable()"

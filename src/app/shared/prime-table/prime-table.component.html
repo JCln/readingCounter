@@ -4,8 +4,7 @@
     dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session" [stateKey]="_sessionName"
     [sortField]="_sortField" [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort"
     (sortFunction)="customSort($event)" (sortFunction)="customSortFunction($event)"
-    [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)" (onSort)="doAggregate()"
-    [dataKey]="profileService._agg.selectedAggregate">
+    [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)">
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -56,7 +55,7 @@
                 </section>
             </div>
             <div class="left_side">
-                <input *ngIf="profileService._agg.hasGeneralSearch" class="_general_search"
+                <input *ngIf="profileService._agg.hasGeneralSearch" pInputText class="_general_search" type="text"
                     (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="hasBeenReadsToggler()">
@@ -117,18 +116,16 @@
         </tr>
     </ng-template>
 
-    <ng-template *ngIf="_hasAggregating" pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
         <tr class="_anything"
+            (click)="toggleSubMenu(profileService._agg.rowGroupMetadata[dataSource[profileService._agg.selectedAggregate]])"
             *ngIf="_hasAggregating && profileService._agg.flag && profileService._agg.rowGroupMetadata[dataSource[profileService._agg.selectedAggregate]].index === ri">
             <td>
                 <span>{{dataSource[profileService._agg.selectedAggregate]}}</span>
-                <i [pRowToggler]="dataSource" [ngClass]="dataSource ? 'pi pi-chevron-down' : 'pi pi-chevron-left'"></i>
             </td>
+            <i class="pi pi-angle-left"></i>
         </tr>
-    </ng-template>
-    <ng-template [pTemplate]="_hasAggregating ?  'rowexpansion': 'body'" let-dataSource let-columns="columns"
-        let-ri=rowIndex>
-        <tr>
+        <tr class="tr_expandable">
             <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr,'_editable': col.icon}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isBoolean; else elseTemplate">
