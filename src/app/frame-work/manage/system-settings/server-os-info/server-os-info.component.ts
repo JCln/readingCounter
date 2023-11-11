@@ -3,7 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ManageServerService } from 'services/manage-server.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-server-os-info',
@@ -19,13 +18,10 @@ export class ServerOsInfoComponent extends FactoryONE {
     super();
   }
 
-  connectToServer = async () => {
-    this.closeTabService.saveDataForOSInfo = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerOSInfo);
-  }
   classWrapper = async (canRefresh?: boolean) => {
-    if (MathS.isNull(this.closeTabService.saveDataForOSInfo.cpuCoreCount)) {
-      this.connectToServer();
-    }
+    this.closeTabService.saveDataForOSInfo = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerOSInfo);
+    // if (MathS.isNull(this.closeTabService.saveDataForOSInfo.cpuCoreCount)) {
+    // }
   }
 
 }

@@ -21,14 +21,14 @@ export class LogMemoryStatusComponent implements OnInit {
     this.temp.push(this.closeTabService.logMemoryStatus.logCount);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.closeTabService.logMemoryStatus.systemDateTime);
-    if (canRefresh) {
-      this.closeTabService.logMemoryStatus.systemDateTime = '';
-    }
-    if (!this.closeTabService.logMemoryStatus.systemDateTime) {
-      this.closeTabService.logMemoryStatus = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.requestLogLogMemoryStatus);
-      console.log(this.closeTabService.logMemoryStatus);
-    }
+    // console.log(this.closeTabService.logMemoryStatus.systemDateTime);
+    // if (canRefresh) {
+    //   this.closeTabService.logMemoryStatus.systemDateTime = '';
+    // }
+    // if (!this.closeTabService.logMemoryStatus.systemDateTime) {
+    this.closeTabService.logMemoryStatus = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.requestLogLogMemoryStatus);
+    //   console.log(this.closeTabService.logMemoryStatus);
+    // }
     this.doSth();
   }
   ngOnInit(): void {
