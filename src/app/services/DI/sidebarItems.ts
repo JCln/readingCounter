@@ -22,7 +22,8 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.wrmrnobDetail, title: 'جزئیات نوبتی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.userRoleHistoryDetails, title: 'تغییرات گروه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.userMasterHistory, title: 'تغییرات دسترسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: EN_Routes.userDetailsHistory, title: 'جزئیات تغییرات دسترسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }
+                { route: EN_Routes.userDetailsHistory, title: 'جزئیات تغییرات دسترسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.userActivationByuserId, title: 'تغییرات حساب کاربر', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
             ]
         }
     ]

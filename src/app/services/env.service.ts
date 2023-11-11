@@ -4,7 +4,7 @@ import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
 
-  temp = ActivatedProvince.TEH1;
+  temp = ActivatedProvince.DEFAULT;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
