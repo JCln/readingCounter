@@ -263,6 +263,7 @@ export interface IBlockOrSafeIp {
 }
 export interface IIOAttemptsLog {
     id: number,
+    insertDateJalali: string,
     insertDateTime: string,
     userDisplayName: string,
     username: string,

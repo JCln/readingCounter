@@ -63,6 +63,8 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
     this.closeTabService.usersLogins.forEach(item => {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
       item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
+      item.twoStepEnterDateTime = this.dateJalaliService.getDate(item.twoStepEnterDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepEnterDateTime);
+      item.twoStepExpireDateTime = this.dateJalaliService.getDate(item.twoStepExpireDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepExpireDateTime);
       item.twoStepType = item.twoStepExpireDateTime ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
     })
   }

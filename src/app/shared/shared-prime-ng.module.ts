@@ -18,12 +18,13 @@ import { PrimeTableEditableComponent } from './prime-table-editable/prime-table-
 import { PrimeTableComponent } from './prime-table/prime-table.component';
 import { AddRowDirective } from '../directives/add-row.directive';
 import { ConfirmTextDialogComponent } from './confirm-text-dialog/confirm-text-dialog.component';
-import {AccordionModule} from 'primeng/accordion';
+import { AccordionModule } from 'primeng/accordion';
 import { SharedChangePassModule } from './shared-change-pass.module';
 import { UserBlockingComponent } from './user-blocking/user-blocking.component';
 import { MaterialModule } from './material.module';
 import { TabViewModule } from 'primeng/tabview';
 import { InputMaskModule } from 'primeng/inputmask';
+import { SharedCarouselModule } from './shared_carousel';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     SharedChangePassModule,
     ReactiveFormsModule,
     MaterialModule,
+    SharedCarouselModule,
     // mat-dialog-module for confirmTextDialog component added
     MatDialogModule,
   ],
@@ -74,6 +76,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     SliderModule,
     DynamicDialogModule,
     AddRowDirective,
+    SharedCarouselModule,
     RadioButtonModule,
     SelectButtonModule,
     SharedThreeModule

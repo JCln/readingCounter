@@ -40,7 +40,7 @@ export class UserMasterHistoryComponent extends FactoryONE {
     }
 
     if (
-      !this.closeTabService.saveDataForUserMasterHistory.length ||
+      !this.closeTabService.saveDataForUserMasterHistory ||
       this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id !=
       this.securityService.userMasterDetailsHistory_pageSign.id
     ) {

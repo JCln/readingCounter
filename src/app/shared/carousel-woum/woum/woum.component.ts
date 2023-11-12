@@ -191,11 +191,14 @@ export class WoumComponent implements OnChanges {
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
+    console.log(this._type);
     this.imageFiles = [];
     this.audioFiles = [];
     this.dataSource = [];
 
     // typical
+    console.log(this._type);
+
     if (this._type == ENImageTypes.typical) {
       this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id);
     }

@@ -87,7 +87,7 @@ export class CloseTabService {
   saveDataForCounterState: ICounterState[];
   saveDataForImageAttribution: IImageAttribution[];
   saveDataForGuild: IGuild[];
-  ipFilterHistory: IGetBlockedCompareVals[];
+  ipFilterHistory: IGetBlockedCompareVals[] = [];
   IOPolicyHistory: IIOPolicyHistory[];
   iOPolicy: IIOPolicy = {
     id: null,

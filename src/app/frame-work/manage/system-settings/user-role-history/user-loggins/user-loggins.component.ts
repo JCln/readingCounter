@@ -43,8 +43,9 @@ export class UserLogginsComponent extends FactoryONE {
     this.dataSource.forEach(item => {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
       item.twoStepType = item.twoStepExpireDateTime ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
-      if (item.logoutDateTime)
-        item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
+      item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
+      item.twoStepEnterDateTime = this.dateJalaliService.getDate(item.twoStepEnterDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepEnterDateTime);
+      item.twoStepExpireDateTime = this.dateJalaliService.getDate(item.twoStepExpireDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepExpireDateTime);
     })
   }
 
