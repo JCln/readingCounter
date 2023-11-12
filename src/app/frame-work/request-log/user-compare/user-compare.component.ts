@@ -38,13 +38,13 @@ export class UserCompareComponent extends FactoryONE {
                   logicalOrder: null,
                   id: null,
                   isMetro: true,
-                  isSelected: true
+                  isSelected: false
                 }
               ],
-              isSelected: true
+              isSelected: false
             }
           ],
-          isSelected: true
+          isSelected: false
         }
       ],
       appItems: [
@@ -68,7 +68,7 @@ export class UserCompareComponent extends FactoryONE {
                       cssClass: '',
                       logicalOrder: null,
                       value: '',
-                      isSelected: true
+                      isSelected: false
                     }
                   ]
                 }
@@ -96,19 +96,23 @@ export class UserCompareComponent extends FactoryONE {
       userDisplayName: ''
     }
   }
-   
+
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.securityService.userMasterDetailsHistory_pageSign.id) {
+      console.log(1);
       this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
     }
     else {
       const res: IUserCompareManager = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.UserCompare, this.securityService.userMasterDetailsHistory_pageSign.id + `/${this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId}`);
+      console.log(res);
       this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id = this.securityService.userMasterDetailsHistory_pageSign.id;
 
-      if (MathS.isNull(res.previous)) {
+      if (MathS.isNull(res.previous.ip) && MathS.isNull(res.previous.appItems)) {
+        console.log(1);
         this.assignToPrevious();
       }
       else {
+        console.log(1);
         this.closeTabService.userCompare.previous = res.previous;
       }
       this.closeTabService.userCompare.this = res.this;

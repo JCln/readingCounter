@@ -20,8 +20,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   // changeDetection: ChangeDetectionStrategy.OnPush // commented => cause sideEffect to dictionary Wrapper response when data need to change after converted dictionary
 })
 export class PrimeTableComponent extends FactorySharedPrime {
-  ENSelectedColumnVariables = ENSelectedColumnVariables;
-  canShowTable: boolean = true;
+  ENSelectedColumnVariables = ENSelectedColumnVariables;  
 
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
@@ -298,4 +297,5 @@ export class PrimeTableComponent extends FactorySharedPrime {
       tableRow[auxIndex].classList.toggle('_hide_rows');
     }
   }
+  
 }

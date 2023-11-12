@@ -621,6 +621,7 @@ export class ColumnManager {
         { field: 'enableValidIpRecaptcha', header: 'ip مناسب در Recaptcha', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'maxLogRecords', header: 'حداکثر تعداد رکوردهای لاگ', isSelected: true, isSelectedOrigin: true },
         { field: 'deactiveTerminationMinutes', header: 'زمان session های فعال', isSelected: true, isSelectedOrigin: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
         { field: 'fromTime', header: 'از زمان', isSelected: false, isSelectedOrigin: false },
         { field: 'toTime', header: 'تا زمان', isSelected: false, isSelectedOrigin: false },
         { field: 'canUpdateDeviceId', header: 'شناسه قابل بروز رسانی باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true },

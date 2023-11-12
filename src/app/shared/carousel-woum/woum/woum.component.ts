@@ -22,6 +22,7 @@ import { ENImageTypes, ENRandomNumbers } from 'interfaces/enums.enum';
 })
 export class WoumComponent implements OnChanges {
   ENImageTypes = ENImageTypes;
+  ref: DynamicDialogRef;
 
   @Input() zoneId?: any;
   @Input() preDate?: string;
@@ -65,9 +66,7 @@ export class WoumComponent implements OnChanges {
   audioFiles: any[] = [];
   downloadURL: string = '';
   showAudioControllers: boolean = false;
-  isPlaying: boolean = false;
-
-  ref: DynamicDialogRef;
+  isPlaying: boolean = false;  
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
 
@@ -95,7 +94,10 @@ export class WoumComponent implements OnChanges {
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     public profileService: ProfileService
-  ) { }
+  ) {
+    console.log(1);
+    
+   }
 
 
   showSingleAudio = () => {

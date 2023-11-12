@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ListManagerService } from 'services/list-manager.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-list-search-mosh-woum',
@@ -17,6 +18,12 @@ export class ListSearchMoshWoumComponent implements OnInit {
     public config: DynamicDialogConfig,
   ) { }
 
+  convertTitleToId = (auxDataSource: any): any => {
+    return this.zoneDictionary.find(item => {
+      if (item.title === auxDataSource)
+        return item;
+    })
+  }
   classWrapper = async () => {
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
     this.auxDataSource = JSON.parse(JSON.stringify(this.config.data._data));
@@ -29,6 +36,9 @@ export class ListSearchMoshWoumComponent implements OnInit {
     }
 
     // for latest reads component there is no zoneId element so The ifElse needed
+    if (!MathS.isNaN(this.auxDataSource.zoneId))
+      return;
+
     if (this.auxDataSource.zoneId || this.auxDataSource.zoneTitle) {
       if (this.auxDataSource.zoneId) {
         this.auxDataSource.zoneId = this.convertTitleToId(this.auxDataSource.zoneId).id;
@@ -40,12 +50,6 @@ export class ListSearchMoshWoumComponent implements OnInit {
   }
   ngOnInit(): void {
     this.classWrapper();
-  }
-  convertTitleToId = (auxDataSource: any): any => {
-    return this.zoneDictionary.find(item => {
-      if (item.title === auxDataSource)
-        return item;
-    })
   }
 
 

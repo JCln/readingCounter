@@ -59,28 +59,8 @@ export class SecurityService {
     return IOPolicy;
   }
   editPolicy = async (policies: any) => {
-    const config = {
-      messageTitle: EN_messages.insert_Key,
-      minWidth: '19rem',
-      isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
-      inputMinLength: 3,
-      isDelete: false,
-      icon: 'pi pi-key'
-    }
-    const insertedKey = await this.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      if (insertedKey == 'XML') {
-        const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.editPolicies, policies);
-        this.utilsService.snackBarMessageSuccess(res.message);
-      }
-      else {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
-      }
-    }
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.editPolicies, policies);
+    this.utilsService.snackBarMessageSuccess(res.message);
   }
   updateUserLogginsInfo = (e: IUserManager) => {
     this.userLoggins_pageSign.GUid = e.id;

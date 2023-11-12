@@ -5,6 +5,7 @@ import { IUserMasterHistory } from 'services/DI/privacies';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-user-master-history',
@@ -40,7 +41,7 @@ export class UserMasterHistoryComponent extends FactoryONE {
     }
 
     if (
-      !this.closeTabService.saveDataForUserMasterHistory ||
+      MathS.isNull(this.closeTabService.saveDataForUserMasterHistory) ||
       this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id !=
       this.securityService.userMasterDetailsHistory_pageSign.id
     ) {
