@@ -4,10 +4,13 @@
             {{title}}
         </div>
 
-        <i class="p_icons _circle_border pi pi-check"></i>
+        <i *ngIf="!data.isLatestInfo" class="p_icons _circle_border pi pi-check"></i>
+        <i *ngIf="data.isLatestInfo" [ngClass]="data.doneCount > 0 ? 'pi pi-check green_500' : 'pi pi-times red_500'"
+            class="p_icons _circle_border">
+        </i>
     </h3>
 
-    <section>
+    <section *ngIf="!data.isLatestInfo">
         <div class="_key_value">
             <div class="_key">تعداد خطاها</div>
             <div class="_value"><strong>{{data.errorCount}}</strong></div>
@@ -16,5 +19,8 @@
             <div class="_key">انجام شده</div>
             <div class="_value"><strong>{{data.doneCount}}</strong></div>
         </div>
+    </section>
+    <section *ngIf="data.isLatestInfo">
+        <h3 class="_value">{{data.doneCount > 0 ? successMessageSingle : errorDesc}}</h3>
     </section>
 </main>

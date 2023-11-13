@@ -134,6 +134,7 @@ export enum EN_messages {
     no_modifyFound = 'نوع اصلاح مشخص نشده است',
     modifySearchType = 'نوع جستجو مشخص نشده است',
     abbrMessage = 'خلاصه تغییرات بصورت زیر است',
+    abbrMessageLatestInfo = 'نتیجه اصلاح',
     insert_number = 'مقدار عددی وارد نمایید',
     insert_fromEshterak = 'از اشتراک را وارد نمایید',
     insert_ToEshterak = 'تا اشتراک را وارد نمایید',
@@ -200,6 +201,7 @@ export enum EN_messages {
     notifyPositionChange = 'مکان اعلان پیام‌ها تغییر نمود',
     imageOptionChanged = 'تنظیم اندازه تصاویر انجام شد',
     done = 'انجام شد',
+    doneSingleListModify = 'اصلاح لیست انجام شد',
     doneBroadcast = 'پیام مخابره شد',
 
     // DIALOG TITLES

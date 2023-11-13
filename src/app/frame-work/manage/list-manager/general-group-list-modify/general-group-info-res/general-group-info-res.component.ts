@@ -11,6 +11,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 export class GeneralGroupInfoResComponent implements OnInit {
   data: IBatchModifyRes;
   title: string = EN_messages.abbrMessage;
+  errorDesc: string = '';
+  readonly successMessageSingle: string = EN_messages.doneSingleListModify;
 
   constructor(
     public ref: DynamicDialogRef,
@@ -19,6 +21,12 @@ export class GeneralGroupInfoResComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.config.data;
+    console.log(this.data);
+
+    if (this.data.isLatestInfo) {
+      this.title = EN_messages.abbrMessageLatestInfo;
+      this.errorDesc = this.data.detailsInfo[0].errorDescription;
+    }
     console.log(this.data);
   }
 

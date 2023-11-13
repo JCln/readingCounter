@@ -41,3 +41,13 @@ h3 {
 section {
   padding: 0 var(--font_05);
 }
+
+.green_500 {
+  color: var(--green_500);
+  border: 2px solid var(--green_500);
+}
+
+.red_500 {
+  color: var(--red_500);
+  border: 2px solid var(--red_500);
+}

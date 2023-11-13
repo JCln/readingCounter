@@ -71,5 +71,6 @@ export interface IBatchModifyRes {
             hasError: boolean,
             errorDescription: string
         }
-    ]
+    ],
+    isLatestInfo: boolean
 }

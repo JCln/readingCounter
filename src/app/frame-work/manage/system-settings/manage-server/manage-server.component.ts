@@ -20,20 +20,78 @@ export class ManageServerComponent implements OnInit {
     this.manageTasks = this.manageServerService.getManageServerItems();
   }
   serverDelete = async () => {
-    const temp: any = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerDelete);
-    if (temp)
-      this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+    const config = {
+      messageTitle: EN_messages.insert_Key,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: 'کلید را وارد نمایید',
+      isDelete: false,
+      inputMinLength: 4,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (MathS.isNullTextValidation(insertedKey)) {
+      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+    }
+    else {
+      const temp: any = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerDelete);
+      if (temp)
+        this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+    }
   }
-  linkToHangfire = () => {
-    this.manageServerService.linkToHangFire();
+  linkToHangfire = async () => {
+    const config = {
+      messageTitle: EN_messages.insert_Key,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: 'کلید را وارد نمایید',
+      isDelete: false,
+      inputMinLength: 4,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (MathS.isNullTextValidation(insertedKey)) {
+      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+    }
+    else {
+      this.manageServerService.linkToHangFire();
+    }
   }
-  linkToHealthCheck = () => {
+  linkToHealthCheck = async () => {
+    const config = {
+      messageTitle: EN_messages.insert_Key,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: 'کلید را وارد نمایید',
+      isDelete: false,
+      inputMinLength: 4,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (MathS.isNullTextValidation(insertedKey)) {
+      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+    }
     this.manageServerService.linkToHealthCheck();
   }
   resetApp = async () => {
-    const temp = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerResetApp);
-    if (temp)
-      this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+    const config = {
+      messageTitle: EN_messages.insert_Key,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: 'کلید را وارد نمایید',
+      isDelete: false,
+      inputMinLength: 4,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (MathS.isNullTextValidation(insertedKey)) {
+      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+    }
+    else {
+      const temp = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerResetApp);
+      if (temp)
+        this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+    }
   }
   expireLicense = async () => {
     const config = {
