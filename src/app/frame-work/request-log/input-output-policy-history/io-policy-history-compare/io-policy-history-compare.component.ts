@@ -14,7 +14,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class IOPolicyHistoryCompareComponent implements OnInit {
   dataSource: IIOPolicyHistory[] = [];
   _selectCols: any = [];
-  IOPolicyCompareColumns: string = 'IOPolicyCompare';
+  readonly IOPolicyCompareColumns: string = 'IOPolicyHistoryCompare';
 
   constructor(
     private securityService: SecurityService,

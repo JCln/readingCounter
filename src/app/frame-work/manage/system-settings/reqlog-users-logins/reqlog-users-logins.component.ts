@@ -11,6 +11,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Converter } from 'src/app/classes/converter';
 import { EN_messages } from 'interfaces/enums.enum';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-reqlog-users-logins',
@@ -65,7 +66,7 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
       item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
       item.twoStepEnterDateTime = this.dateJalaliService.getDate(item.twoStepEnterDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepEnterDateTime);
       item.twoStepExpireDateTime = this.dateJalaliService.getDate(item.twoStepExpireDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepExpireDateTime);
-      item.twoStepType = item.twoStepExpireDateTime ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
+      item.twoStepType = MathS.isBoolean(item.twoStepWasSuccessful) ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
     })
   }
 

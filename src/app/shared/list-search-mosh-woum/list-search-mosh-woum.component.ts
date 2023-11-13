@@ -18,11 +18,22 @@ export class ListSearchMoshWoumComponent implements OnInit {
     public config: DynamicDialogConfig,
   ) { }
 
-  convertTitleToId = (auxDataSource: any): any => {
+  convertTitleToId = (value: any): any => {
     return this.zoneDictionary.find(item => {
-      if (item.title === auxDataSource)
+      if (item.title === value)
         return item;
     })
+  }
+  checkConvertZoneToId = () => {
+    // convert title to appropriate id
+    if (this.auxDataSource.zoneId || this.auxDataSource.zoneTitle) {
+      if (this.auxDataSource.zoneId) {
+        this.auxDataSource.zoneId = this.convertTitleToId(this.auxDataSource.zoneId).id;
+      }
+      else {
+        this.auxDataSource.zoneId = this.convertTitleToId(this.auxDataSource.zoneTitle).id;
+      }
+    }
   }
   classWrapper = async () => {
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
@@ -39,14 +50,7 @@ export class ListSearchMoshWoumComponent implements OnInit {
     if (!MathS.isNaN(this.auxDataSource.zoneId))
       return;
 
-    if (this.auxDataSource.zoneId || this.auxDataSource.zoneTitle) {
-      if (this.auxDataSource.zoneId) {
-        this.auxDataSource.zoneId = this.convertTitleToId(this.auxDataSource.zoneId).id;
-      }
-      else {
-        this.auxDataSource.zoneId = this.convertTitleToId(this.auxDataSource.zoneTitle).id;
-      }
-    }
+    this.checkConvertZoneToId();
   }
   ngOnInit(): void {
     this.classWrapper();

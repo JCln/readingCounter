@@ -36,16 +36,16 @@ export class PrivacyComponent extends FactoryONE {
       this.auxDataSource.HSTSProtection = location.protocol == 'http:' ? false : true;
   }
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.closeTabService.saveDataForPolicies.id);
-    console.log(MathS.isNull(this.closeTabService.saveDataForPolicies.id));
+    // console.log(this.closeTabService.saveDataForPolicies.id);
+    // console.log(MathS.isNull(this.closeTabService.saveDataForPolicies.id));
 
 
-    if (canRefresh) {
-      this.closeTabService.saveDataForPolicies.id = null;
-    }
-    if (!this.closeTabService.saveDataForPolicies.id) {
-      this.closeTabService.saveDataForPolicies = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.getPolicies);
-    }
+    // if (canRefresh) {
+    //   this.closeTabService.saveDataForPolicies.id = null;
+    // }
+    // if (!this.closeTabService.saveDataForPolicies.id) {
+    this.closeTabService.saveDataForPolicies = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.getPolicies);
+    // }
     this.checkProtocol();
     this.privacyOptions = this.securityService.getPrivacyToggle();
   }
@@ -133,8 +133,9 @@ export class PrivacyComponent extends FactoryONE {
       return;
     if (!this.securityService.verificationPolicy(this.closeTabService.saveDataForPolicies))
       return;
-
-    this.securityService.editPolicy(this.closeTabService.saveDataForPolicies);
+    this.closeTabService.utilsService.getIsAdminRole() ?
+      this.securityService.editPolicy(this.closeTabService.saveDataForPolicies) :
+      this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.needMoreAccess);
   }
   openSnackBar(message: string, duration: ENSnackBarTimes) {
     this.closeTabService.utilsService.snackBarMessage(message, duration, ENSnackBarColors.warn);

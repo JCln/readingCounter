@@ -86,10 +86,6 @@ export class UtilsService {
       rtl: true,
       width: '80%',
     })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        console.log(res);
-    });
   }
   showTypicalImageDialog = (dataSource: any) => {
     this.doShowImageDialog(dataSource, ENImageTypes.typical);

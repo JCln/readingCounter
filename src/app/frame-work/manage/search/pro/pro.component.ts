@@ -33,7 +33,7 @@ export class ProComponent extends AllListsFactory {
   counterStateByZoneIdDictionary: IDictionaryManager[] = [];
   counterReportDictionary: IDictionaryManager[] = [];
   fragmentMasterIds: IDictionaryManager[] = [];
-  masrafState: ITHV[] = []  
+  masrafState: ITHV[] = []
   eslahType: any[] = [];
 
   constructor(
@@ -100,7 +100,8 @@ export class ProComponent extends AllListsFactory {
     }
     if (this.closeTabService.saveDataForSearchMoshtarakin) {
       this.getNesseseriesByZone();
-    }    
+    }
+    this.getNesseseriesByZone();
     this.getReadingPeriod();
     this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
     this.karbariDictionary = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();

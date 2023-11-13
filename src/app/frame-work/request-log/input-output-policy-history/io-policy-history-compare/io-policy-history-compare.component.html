@@ -18,33 +18,42 @@
                     {{col.header}}
                 <td>
                     <div *ngIf="dataSource[0]">
-                        <div *ngIf="col.isBoolean && dataSource[0][col.field]">بله</div>
-                        <div *ngIf="col.isBoolean && !dataSource[0][col.field] && col.field !== 'isRecordAuthentic'">
-                            خیر
+                        <div *ngIf="col.field == 'isAuthentic'">
+                            <div *ngIf="!dataSource[0][col.field]">
+                                <i class=" pi pi-times-circle red_500"></i>
+                            </div>
+                            <div *ngIf="dataSource[0][col.field]">
+                                <i class="pi pi-check-circle green_500"></i>
+                            </div>
                         </div>
-                        <div *ngIf="col.isBoolean && !dataSource[0][col.field] && col.field == 'isRecordAuthentic'">
-                            <i class="pi pi-times-circle red_500"></i>
+                        <div *ngIf="col.field != 'isAuthentic'">
+                            <div *ngIf="col.isBoolean && dataSource[0][col.field]">بله</div>
+                            <div *ngIf="col.isBoolean && !dataSource[0][col.field]">خیر</div>
+                            <div *ngIf="!col.isBoolean">{{dataSource[0][col.field]}}</div>
                         </div>
-                        <div *ngIf="!col.isBoolean">{{dataSource[0][col.field]}}</div>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="dataSource[1]">
-                        <div *ngIf="col.isBoolean && dataSource[1][col.field]">بله</div>
-                        <div *ngIf="col.isBoolean && !dataSource[1][col.field] && col.field !== 'isRecordAuthentic'">
-                            خیر
+                        <div *ngIf="col.field == 'isAuthentic'">
+                            <div *ngIf="!dataSource[1][col.field]">
+                                <i class=" pi pi-times-circle red_500"></i>
+                            </div>
+                            <div *ngIf="dataSource[1][col.field]">
+                                <i class="pi pi-check-circle green_500"></i>
+                            </div>
                         </div>
-                        <div *ngIf="col.isBoolean && !dataSource[1][col.field] && col.field == 'isRecordAuthentic'">
-                            <i class="pi pi-times-circle red_500"></i>
+                        <div *ngIf="col.field != 'isAuthentic'">
+                            <div *ngIf="col.isBoolean && dataSource[1][col.field]">بله</div>
+                            <div *ngIf="col.isBoolean && !dataSource[1][col.field]">خیر</div>
+                            <div *ngIf="!col.isBoolean">{{dataSource[1][col.field]}}</div>
                         </div>
-                        <div *ngIf="!col.isBoolean">{{dataSource[1][col.field]}}</div>
                     </div>
                 </td>
-                <!-- || dataSource[0] === null && dataSource[1] !== null -->
 
                 <td class="_center">
                     <div *ngIf="dataSource[1][col.field] !== dataSource[0][col.field]">
-                        <i class="pi pi-check-square _green"></i>
+                        <i class="pi pi-check-square green_500"></i>
                     </div>
                 </td>
             </tr>

@@ -59,6 +59,8 @@ import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobi
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
 import { ENEssentialsToSave } from 'interfaces/enums.enum';
+import { MathS } from '../classes/math-s';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -87,7 +89,15 @@ export class CloseTabService {
   saveDataForCounterState: ICounterState[];
   saveDataForImageAttribution: IImageAttribution[];
   saveDataForGuild: IGuild[];
+
   ipFilterHistory: IGetBlockedCompareVals[] = [];
+  getIpFilterHisotry = async (canRefresh: boolean): Promise<any> => {
+    if (!MathS.isNull(this.ipFilterHistory) && !canRefresh)
+      return this.ipFilterHistory;
+    this.ipFilterHistory = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilterHistory);
+    console.log(this.ipFilterHistory);
+  }
+
   IOPolicyHistory: IIOPolicyHistory[];
   iOPolicy: IIOPolicy = {
     id: null,
@@ -754,7 +764,6 @@ export class CloseTabService {
     { id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllCReq, value: ENEssentialsToSave.mobileManagerFeedbackAllC, url: EN_Routes.mobileFeedbackAllC },
     { id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllSReq, value: ENEssentialsToSave.mobileManagerFeedbackAllS, url: EN_Routes.mobileFeedbackAllS },
     { id: 1, req: ENEssentialsToSave.mobileManagerforbiddenTypeReq, value: ENEssentialsToSave.mobileManagerforbiddenType, url: EN_Routes.mobileForbiddenType },
-
     { id: 1, value: ENEssentialsToSave.logMemoryStatus, url: EN_Routes.reqLogMemoryStatus },
     { id: 1, value: ENEssentialsToSave.downloadAttempts, url: EN_Routes.reqLogDownloadAttempts },
     { id: 1, value: ENEssentialsToSave.uploadAttempts, url: EN_Routes.reqLogUploadAttempts },
@@ -885,6 +894,7 @@ export class CloseTabService {
 
   cleanArrays = () => {
     this.tabs = [];
+    this.ipFilterHistory = [];
   }
   // setAll(value, val) {
   //   if (value) {
@@ -938,6 +948,7 @@ export class CloseTabService {
       if (item.url === url) {
         this[item.value] = '';
         this[item.value_2] = '';
+        this.ipFilterHistory = [];
         // this.setAll(this[item.req], null);
         // this.requestsToDefault(this[item.req]);
       }

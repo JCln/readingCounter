@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { IPrivacy } from 'services/DI/privacies';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
 import { CompareComponent } from './compare/compare.component';
 
 @Component({
@@ -24,14 +22,8 @@ export class IpFilterHistoryComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.ipFilterHistory = [];
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (MathS.isNull(this.closeTabService.ipFilterHistory)) {
-      this.closeTabService.ipFilterHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilterHistory);
-    }
+    await this.closeTabService.getIpFilterHisotry(canRefresh ? canRefresh : false);
   }
   // showMoreDetails = (data: IPrivacy) => {
   //   this.ref = this.dialogService.open(PolicyHistoryDetailsComponent, {

@@ -524,7 +524,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: true },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },        
     ]
-    IOPolicyCompare: IObjectIteratation[] = [
+    IOPolicyHistoryCompare: IObjectIteratation[] = [
         { field: 'username', header: 'نام کاربری', isSelected: false, isSelectedOrigin: false },
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },

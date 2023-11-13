@@ -7,6 +7,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Converter } from 'src/app/classes/converter';
 import { EN_messages } from 'interfaces/enums.enum';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-user-loggins',
@@ -42,7 +43,7 @@ export class UserLogginsComponent extends FactoryONE {
   convertLoginTime = () => {
     this.dataSource.forEach(item => {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
-      item.twoStepType = item.twoStepExpireDateTime ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
+      item.twoStepType = MathS.isBoolean(item.twoStepWasSuccessful) ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
       item.logoutDateTime = this.dateJalaliService.getDate(item.logoutDateTime) + '   ' + this.dateJalaliService.getTime(item.logoutDateTime);
       item.twoStepEnterDateTime = this.dateJalaliService.getDate(item.twoStepEnterDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepEnterDateTime);
       item.twoStepExpireDateTime = this.dateJalaliService.getDate(item.twoStepExpireDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepExpireDateTime);
