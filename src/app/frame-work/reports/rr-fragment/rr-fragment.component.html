@@ -93,7 +93,7 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRFragment" [_outputFileName]="'fragmentKarkard'"
         [_checkUpName]="'rr-fragment-karkard'" [_sessionName]="'rrFragment-session'"
-        [_selectedColumnsToRemember]="'selectedRRFragment'" [_hasCollapsible]=true
+        [_selectedColumnsToRemember]="'selectedRRFragment'" [_hasCollapsible]=true [_calculableSUM]="true"
         [_isCollaped]="readingReportManagerService.rrFragmentKarkardReq.isCollapsed"
         (collapsed)="readingReportManagerService.rrFragmentKarkardReq.isCollapsed= !readingReportManagerService.rrFragmentKarkardReq.isCollapsed"
         (refreshedTable)="refreshTable()">

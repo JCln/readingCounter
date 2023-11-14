@@ -1,7 +1,7 @@
 import { DialogService } from 'primeng/dynamicdialog';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOffloadModifyReq } from 'interfaces/inon-manage';
+import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
@@ -10,6 +10,7 @@ import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { Search } from 'src/app/classes/search';
+import { GeneralGroupInfoResComponent } from '../general-group-list-modify/general-group-info-res/general-group-info-res.component';
 
 @Component({
   selector: 'app-list-latest-info',
@@ -55,8 +56,8 @@ export class ListLatestInfoComponent extends AllListsFactory {
   uploadSingleToModifyBatch = async () => {
 
     if (this.listManagerService.vertificationLatestInfoModifyBatchReq(this.editModifyReq)) {
-      this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, [this.editModifyReq]);
-
+      const res = await this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, [this.editModifyReq]);
+      this.openEditedModifyBatch(res);
     }
     // TODO: Should convert Arabic Numbers to ENG to counterNumbers
     // to upload valid data to server and get valid response      
@@ -87,8 +88,6 @@ export class ListLatestInfoComponent extends AllListsFactory {
     }
   }
   dictionaryWrapper = async () => {
-    console.log(1);
-
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
@@ -104,7 +103,8 @@ export class ListLatestInfoComponent extends AllListsFactory {
 
     this.listManagerService.setDynamicPartRanges([this.closeTabService.listLatestInfo]);
   }
-  connectToServer = async () => {
+  connectToServer = async (canRefresh?: boolean) => {
+    await this.closeTabService.getListLatestInfo(canRefresh ? canRefresh : false);
     this.closeTabService.listLatestInfo = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getLatestOnOffloadInfo, this.closeTabService.listLatestInfoReq);
     this.dictionaryWrapper();
     this.insertSelectedColumns();
@@ -113,17 +113,14 @@ export class ListLatestInfoComponent extends AllListsFactory {
     this.insertToModifyReq();
 
   }
-  verification = async () => {
+  verification = async (canRefresh?: boolean) => {
     const temp = this.listManagerService.verificationLatestInfo(this.closeTabService.listLatestInfoReq);
     if (temp)
-      this.connectToServer();
+      this.connectToServer(canRefresh);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.closeTabService.listLatestInfo.id);
-
     if (canRefresh) {
-      this.closeTabService.listLatestInfo.id = null;
-      this.verification();
+      this.verification(canRefresh);
     }
     if (this.closeTabService.listLatestInfo.zoneId) {
       await this.getCounterStateDictionaryAndAddSelectable(this.closeTabService.listLatestInfo.zoneId);
@@ -132,6 +129,17 @@ export class ListLatestInfoComponent extends AllListsFactory {
     }
     this.insertSelectedColumns();
     console.log(this.searchType);
+  }
+  openEditedModifyBatch = (data: IBatchModifyRes) => {
+    this.ref = this.dialogService.open(GeneralGroupInfoResComponent, {
+      data: {
+        doneCount: data.doneCount, errorCount: data.errorCount, isLatestInfo: true, detailsInfo: [{ errorDescription: data.detailsInfo[0].errorDescription }]
+      },
+      rtl: true,
+      width: '60%',
+      showHeader: true,
+      closable: true
+    })
   }
 
 }

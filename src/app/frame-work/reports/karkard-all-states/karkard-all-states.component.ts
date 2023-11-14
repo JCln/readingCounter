@@ -84,7 +84,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
-      { field: 'duration', header: 'زمان', isSelected: false, isNumber: true },
+      { field: 'duration', header: 'مدت', isSelected: false, isNumber: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true }
@@ -122,6 +122,17 @@ export class KarkardAllStatesComponent extends FactoryONE {
     this.tempData = await this.readingReportManagerService.portRRTest(ENInterfaces.postKarkardAllStates, this.readingReportManagerService.offKarkardAllStatesReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForKarkardAllStates = this.getCounterStateData(this.tempData);
+    console.log(this.closeTabService.saveDataForKarkardAllStates);
+
+  }
+  calcSums(param: string): number {
+    if (this.closeTabService.saveDataForKarkardAllStates) {
+      let total: number = 0;
+      for (let index = 0; index < this.closeTabService.saveDataForKarkardAllStates.length; index++) {
+        total += this.closeTabService.saveDataForKarkardAllStates[index][param];
+      }
+      return total;
+    }
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

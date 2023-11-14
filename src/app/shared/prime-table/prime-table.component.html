@@ -1,4 +1,4 @@
-<p-table #datatableG *ngIf="dataSource && dataSource.length > 0" id="tdm" [columns]="selectedColumns"
+<p-table #datatableG *ngIf="dataSource && dataSource.length > 0 || isAddableTable" id="tdm" [columns]="selectedColumns"
     [value]="dataSource" [paginator]="_paginator" [rows]=_rowsNumbers [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
     dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session" [stateKey]="_sessionName"
@@ -30,8 +30,7 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i> -->
-                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport' || _checkUpName == 'ipFilter'"
-                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                <i *ngIf="isAddableTable" (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
                 <i *ngIf="_hasSaveColumns" (click)="saveColumns()"
@@ -528,8 +527,9 @@
                     <div class="tooltip_text_right">مشاهده ورودها</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'ipFilter' " class="edit_button"
-                (click)="showPictures(dataSource)">
+            <td class="__columns"
+                *ngIf="_checkUpName == 'userAll' || _checkUpName == 'ipFilter'|| _checkUpName == 'userSearch' "
+                class="edit_button" (click)="showPictures(dataSource)">
                 <span class="ui-column-title">ویرایش مسدود سازی IP</span>
                 <i class="tooltip p_icons pi pi-user-edit _red_500">
                     <div class="tooltip_text_right">ویرایش مسدود سازی IP</div>
@@ -623,6 +623,34 @@
                 <div *ngIf="col.field == 'itemCount'">
                     جمع:
                     {{calcSums('itemCount')}}
+                </div>
+                <div *ngIf="col.field == 'overalCount'">
+                    جمع:
+                    {{calcSums('overalCount')}}
+                </div>
+                <div *ngIf="col.field == 'adiCount'">
+                    جمع:
+                    {{calcSums('adiCount')}}
+                </div>
+                <div *ngIf="col.field == 'faqedCount'">
+                    جمع:
+                    {{calcSums('faqedCount')}}
+                </div>
+                <div *ngIf="col.field == 'maneCount'">
+                    جمع:
+                    {{calcSums('maneCount')}}
+                </div>
+                <div *ngIf="col.field == 'xarabCount'">
+                    جمع:
+                    {{calcSums('xarabCount')}}
+                </div>
+                <div *ngIf="col.field == 'tavizCount'">
+                    جمع:
+                    {{calcSums('tavizCount')}}
+                </div>
+                <div *ngIf="col.field == 'saierCount'">
+                    جمع:
+                    {{calcSums('saierCount')}}
                 </div>
             </td>
             <td class="__columns" *ngFor="let item of _numberOfExtraColumns"></td>

@@ -59,7 +59,8 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _tooltipText: string;
     @Input() _numberOfExtraColumns: number[];
     @Input() _sessionName: string;
-    @Input() _rowsNumbers = 10;
+    @Input() readonly _rowsNumbers = 10;
+    @Input() readonly isAddableTable: boolean = false;
     @Input() _selectedColumnsToRemember: string;
     @Input() _backToPreviousText: string;
     @Input() _captionEnabled: boolean = true;

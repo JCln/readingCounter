@@ -96,7 +96,7 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRKarkard" [_outputFileName]="'karkard'"
         [_checkUpName]="'rr-karkard'" [_sessionName]="'karkard-session'"
-        [_selectedColumnsToRemember]="'selectedRRKarkard'" [_hasCollapsible]=true
+        [_selectedColumnsToRemember]="'selectedRRKarkard'" [_calculableSUM]="true" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedKarkard"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedKarkard = !readingReportManagerService.utilsService.collapser.isCollapsedKarkard"
         (refreshedTable)="refreshTable()">

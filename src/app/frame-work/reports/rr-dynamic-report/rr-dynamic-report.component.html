@@ -1,7 +1,8 @@
 <app-prime-table     
     [dataSource]="closeTabService.saveDataForDynamicReports" 
     [_outputFileName]="'dynamicReport'"
-    [_checkUpName]="'dynamicReport'"    
+    [_checkUpName]="'dynamicReport'"   
+    [isAddableTable]="true" 
     [_tooltipText]="''"
     [_numberOfExtraColumns]="[1, 2 , 3]"
     [_sessionName]="'rrDynamicReport-session'"

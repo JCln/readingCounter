@@ -165,7 +165,67 @@
                 </td>
             </tr>
         </ng-template>
-
+        <ng-template let-dataSource pTemplate="footer">
+            <tr>
+                <td class="__columns" *ngFor="let col of dataSource">
+                    <div *ngIf="col.field == 'overalCount'">
+                        جمع:
+                        {{calcSums('overalCount')}}
+                    </div>
+                    <div *ngIf="col.field == 'c0'">
+                        جمع:
+                        {{calcSums('c0')}}
+                    </div>
+                    <div *ngIf="col.field == 'c1'">
+                        جمع:
+                        {{calcSums('c1')}}
+                    </div>
+                    <div *ngIf="col.field == 'c2'">
+                        جمع:
+                        {{calcSums('c2')}}
+                    </div>
+                    <div *ngIf="col.field == 'c3'">
+                        جمع:
+                        {{calcSums('c3')}}
+                    </div>
+                    <div *ngIf="col.field == 'c4'">
+                        جمع:
+                        {{calcSums('c4')}}
+                    </div>
+                    <div *ngIf="col.field == 'c5'">
+                        جمع:
+                        {{calcSums('c5')}}
+                    </div>
+                    <div *ngIf="col.field == 'c6'">
+                        جمع:
+                        {{calcSums('c6')}}
+                    </div>
+                    <div *ngIf="col.field == 'c7'">
+                        جمع:
+                        {{calcSums('c7')}}
+                    </div>
+                    <div *ngIf="col.field == 'c8'">
+                        جمع:
+                        {{calcSums('c8')}}
+                    </div>
+                    <div *ngIf="col.field == 'c9'">
+                        جمع:
+                        {{calcSums('c9')}}
+                    </div>
+                    <div *ngIf="col.field == 'c10'">
+                        جمع:
+                        {{calcSums('c10')}}
+                    </div>
+                    <div *ngIf="col.field == 'c11'">
+                        جمع:
+                        {{calcSums('c11')}}
+                    </div>
+                    <div *ngIf="col.field == 'c12'">
+                        جمع:
+                        {{calcSums('c12')}}
+                    </div>
+            </tr>
+        </ng-template>
     </p-table>
 
     <section *ngIf="!closeTabService.saveDataForKarkardAllStates">

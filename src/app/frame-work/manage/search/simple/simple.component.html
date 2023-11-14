@@ -85,11 +85,24 @@
     </form>
 </main>
 
-<app-prime-table [dataSource]="closeTabService.saveDataForSearchSimple" [_outputFileName]="'simpleSearch'"
-    [_checkUpName]="'simpleSearch'" [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
-    [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
-    (routedToLMAll)="routeToLMAll($event)" (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
-    (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)"
-    [_hasCollapsible]=true [_isCollaped]="searchService._searchSimpleReq.isCollapsed"
-    (collapsed)="searchService._searchSimpleReq.isCollapsed = !searchService._searchSimpleReq.isCollapsed">
+<app-prime-table 
+[dataSource]="closeTabService.saveDataForSearchSimple" 
+[_outputFileName]="'simpleSearch'"    
+[_checkUpName]="'simpleSearch'" 
+[_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
+[_numberOfExtraColumns]="[1,2,3,4]"
+[_calculableSUM]="true"    
+[_sessionName]="'simpleSearch-session'"
+(refreshedTable)="refreshTable()"
+(routedToLMAll)="routeToLMAll($event)" 
+(routedToLMPayDay)="searchService.routeToLMPayDay($event)"
+(routedToFollowUp)="searchService.routeToFollowUp($event)" 
+(showedInMap)="searchService.showInMap($event)"
+[_hasCollapsible]=true 
+[_isCollaped]="searchService._searchSimpleReq.isCollapsed"
+(collapsed)="searchService._searchSimpleReq.isCollapsed = !searchService._searchSimpleReq.isCollapsed">
 </app-prime-table>
+<!-- [_calculableSUM]="true"    
+[_isCustomSort]="true"
+[_hasAggregating]="true"
+ -->

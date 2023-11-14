@@ -95,7 +95,6 @@ export class CloseTabService {
     if (!MathS.isNull(this.ipFilterHistory) && !canRefresh)
       return this.ipFilterHistory;
     this.ipFilterHistory = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilterHistory);
-    console.log(this.ipFilterHistory);
   }
 
   IOPolicyHistory: IIOPolicyHistory[];
@@ -711,7 +710,11 @@ export class CloseTabService {
     editedErrorDescription: '',
     fileRepositoryId: '',
   };
-
+  getListLatestInfo = async (canRefresh: boolean) => {
+    if (!MathS.isNull(this.listLatestInfo.id) && !canRefresh)
+      return this.listLatestInfo;
+    this.listLatestInfo = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicy);
+  }
   forbiddenReq: IMostReportInput = {
     zoneId: 0,
     fromDate: '',
