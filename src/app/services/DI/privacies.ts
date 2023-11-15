@@ -158,7 +158,7 @@ export const privacies: IPrivacy = {
     max_captcha: 10,
     min_ReCaptcha: 2,
     max_ReCaptcha: 10,
-    minLengthDeactiveTerminationMinutes: 2,
+    minLengthDeactiveTerminationMinutes: 3,
     maxLengthDeactiveTerminationMinutes: 480,
     minLengthMaxLogRecords: 100,
 }

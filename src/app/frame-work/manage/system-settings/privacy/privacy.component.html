@@ -61,7 +61,7 @@
                     </li>
                     <li>
                         <mat-checkbox [(ngModel)]="closeTabService.saveDataForPolicies.passwordContainsNonAlphaNumeric">
-                            گذرواژه شامل حداقل یک حرف غیرالفبایی باشد
+                            گذرواژه شامل حداقل یک حرف غیرالفبایی و غیرعددی باشد
                         </mat-checkbox>
                     </li>
                     <li>
@@ -116,63 +116,6 @@
             </span>
         </section>
     </div>
-
-    <section class="item_3">
-
-        <!-- <h1 class="title">حداقل یک نویسه با مشخصات !</h1> -->
-        <div class="content">
-            <section class="_checkbox">
-                <span>
-                    <ul>
-                        <li>
-                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
-                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpCaptcha">
-                                فعال سازی captcha
-                            </mat-checkbox>
-                        </li>
-                        <li class="number_vals">
-                            تعداد دفعات ورود با Captcha
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="captchaPlusMinus(closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value">
-                                    {{closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts}}</div>
-                                <div class="minus"
-                                    (click)="captchaPlusMinus(closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts - 1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- <li>
-                            <mat-checkbox #ref_true (click)="accessDenied(ref_true)"
-                                [(ngModel)]="closeTabService.saveDataForPolicies.enableValidIpRecaptcha">
-                                ip مناسب در Recaptcha
-                            </mat-checkbox>
-                        </li>
-                        <li class="number_vals">
-                            recaptcha
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="reCaptchaPlusMinus(closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts + 1)">
-                                    <i class="fa fa-plus"></i>
-                                </div>
-                                <div class="_value">
-                                    {{closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts}}</div>
-                                <div class="minus"
-                                    (click)="reCaptchaPlusMinus(closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts - 1)">
-                                    <i class="fa fa-minus"></i>
-                                </div>
-                            </div>
-                        </li> -->
-
-                    </ul>
-                </span>
-            </section>
-        </div>
-
-    </section>
 
     <section class="content">
         <section class="_checkbox">

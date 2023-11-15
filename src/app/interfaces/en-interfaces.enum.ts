@@ -337,6 +337,7 @@ export enum ENInterfaces {
     GetIpFilterHistory = 'V1/IpFilter/History',
     GetIpFilterCompare = 'V1/IpFilter/Compare',
     PostIpFilterGetBlocked = 'V1/IpFilter/GetBlocked',
+    PostIpFilterGetInvalidTime = 'V1/IpFilter/GetInvalidTime',
     GetIpFilterBlockedByUserId = 'V1/IpFilter/GetBlockedByUserId',
 
     // IO policy manager

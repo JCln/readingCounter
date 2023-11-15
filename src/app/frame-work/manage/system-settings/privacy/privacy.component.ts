@@ -69,7 +69,7 @@ export class PrivacyComponent extends FactoryONE {
     }
 
     if (value < this.privacyOptions.minLengthDeactiveTerminationMinutes) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.two + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.three + ENMessages.is, ENSnackBarTimes.threeMili);
       return;
     }
     this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes = value;

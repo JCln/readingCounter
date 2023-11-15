@@ -134,6 +134,7 @@ export enum EN_Routes {
     wrmRequestLogsAnonymous = '/wr/reqLog/Anonymous',
     requestLogsUnAuthorized = '/wr/reqLog/unAuthorized',
     requestLogsGetBlocked = '/wr/reqLog/getBlocked',
+    requestLogsGetInvalidTime = '/wr/reqLog/getInvalidTime',
     ipFilterHistory = '/wr/reqLog/IPFilterhistory',
     IOPolicy = '/wr/m/system/IOPolicy',
     IOPolicyHistory = '/wr/reqLog/IOPolicyHistory',

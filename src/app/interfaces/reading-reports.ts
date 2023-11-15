@@ -25,6 +25,7 @@ export enum ENReadingReports {
     userActivationLog = 'saveDataForServerUserActivationReq',
     usersLogins = 'usersLoginsReq',
     ipFilterGetBlocked = 'ipFilterGetBlockedReq',
+    ipFilterGetInvalidTime = 'ipFilterGetInvalidTimeReq',
     notificationListByDateReq = 'notificationListByDateReq',
     downloadAttemptsReq = 'downloadAttemptsReq',
     uploadAttemptsReq = 'uploadAttemptsReq',

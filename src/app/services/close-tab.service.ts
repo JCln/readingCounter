@@ -320,6 +320,11 @@ export class CloseTabService {
     fromDate: '',
     toDate: '',
   }
+  ipFilterGetInvalidTime: IGetBlocked[] = [];
+  ipFilterGetInvalidTimeReq = {
+    fromDate: '',
+    toDate: '',
+  }
   offlineSingleReadingCounterReq = {
     searchBy: 1,
     item: '',
@@ -868,6 +873,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
     { id: 2, req: ENEssentialsToSave.ipFilterGetBlockedReq, value: ENEssentialsToSave.ipFilterGetBlocked, url: EN_Routes.requestLogsGetBlocked },
+    { id: 2, req: ENEssentialsToSave.ipFilterGetInvalidTimeReq, value: ENEssentialsToSave.ipFilterGetInvalidTime, url: EN_Routes.requestLogsGetInvalidTime },
     { id: 2, value: ENEssentialsToSave.ipFilterBlockedUsers, url: EN_Routes.reqLogBlockedUsers },
     { id: 2, value: ENEssentialsToSave.reqLogUserActivationByUserId, url: EN_Routes.userActivationByuserId },
     { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },

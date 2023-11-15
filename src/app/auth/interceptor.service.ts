@@ -81,13 +81,13 @@ export class InterceptorService implements HttpInterceptor {
               }
               if (!this.authService.isAuthUserLoggedIn()) {
                 this.utilsService.goOutInMessage();
-                this.authService.logout();
+                this.authService.offlineLogout();
               }
               else {
                 // if user have logged in
                 const errTxt = error.error.message ? error.error.message : EN_Mess.access_denied401;
                 this.showDialog(errTxt);
-                this.authService.logout();
+                this.authService.offlineLogout();
               }
             }
             // system time

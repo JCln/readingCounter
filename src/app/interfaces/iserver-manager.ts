@@ -154,7 +154,8 @@ export interface IManageServerErrorsRes {
     errorId: string,
     message: string,
     statusCode: number,
-    username: string
+    username: string,
+    insertDateTime: string
 }
 export interface IUserActivationREQ {
     fromDate: string,

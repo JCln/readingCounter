@@ -38,8 +38,8 @@ export interface IENV {
     shouldSaveTokensInLocal: boolean,
 }
 export enum ENURLs {
-    LOCAL = 'http://192.168.99.131:7529',
-    // LOCAL = 'http://192.168.100.18:7529',
+    // LOCAL = 'http://192.168.99.131:7529',
+    LOCAL = 'http://192.168.100.18:7529',
     DEFAULT = 'https://37.191.92.157/kontoriNew',
     TEH = 'http://85.133.245.143/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
