@@ -54,7 +54,7 @@
                 </section>
             </div>
             <div class="left_side">
-                <input *ngIf="profileService._agg.hasGeneralSearch" pInputText class="_general_search" type="text"
+                <input *ngIf="profileService._agg.hasGeneralSearch" class="_general_search"
                     (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="hasBeenReadsToggler()">

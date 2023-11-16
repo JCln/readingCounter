@@ -41,10 +41,10 @@ export class WaterMarkComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     this.textColorState();
 
-    if (MathS.isNull(this.closeTabService.saveDataForWaterMark.id)) {
-      this.closeTabService.saveDataForWaterMark = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getWaterMarkConfig);
-      this.changeTextColorByServerRes();
-    }
+    // if (MathS.isNull(this.closeTabService.saveDataForWaterMark.id)) {
+    this.closeTabService.saveDataForWaterMark = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getWaterMarkConfig);
+    this.changeTextColorByServerRes();
+    // }
 
   }
   changeXPosition = (val: any) => {

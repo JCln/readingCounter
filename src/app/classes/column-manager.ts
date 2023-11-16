@@ -376,7 +376,7 @@ export class ColumnManager {
         // { field: 'id', header: 'id', isSelected: true,isSelectedOrigin:true },        
         { field: 'path', header: 'path', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'requestDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
-        { field: 'readablePath', header: 'مکان', isSelected: true, isSelectedOrigin: true },
+        // { field: 'readablePath', header: 'مکان', isSelected: true, isSelectedOrigin: true },
         { field: 'requestTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
     ]
@@ -786,7 +786,7 @@ export class ColumnManager {
         { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: false, isSelectedOrigin: false },
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         // { field: 'twoStepExpireDateTime', header: 'زمان انقضای رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
         { field: 'twoStepType', header: 'نحوه ورود', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepEnterDateTime', header: 'زمان تلاش رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
@@ -831,14 +831,14 @@ export class ColumnManager {
         { field: 'appVersion', header: 'نسخه App', isSelected: false, isSelectedOrigin: false },
     ]
     userRoleHistorySummary: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان گروه', isSelected: false, isSelectedOrigin: true },
+        { field: 'title', header: 'عنوان گروه', isSelected: false, isSelectedOrigin: false },
         { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true, isSelectedOrigin: true },
         { field: 'userDisplayName', header: 'کاربر‌تغییر‌دهنده', isSelected: true, isSelectedOrigin: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'insertTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: false, isSelectedOrigin: false, isBoolean: true },
-        { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, isSelectedOrigin: false },
         // { field: 'insertDateTime', header: 'تاریخ', isSelected: false,isSelectedOrigin:false },
-        { field: 'insertTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
         { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
         { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
@@ -1600,7 +1600,7 @@ export class ColumnManager {
     ]
     userLogs: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
-        { field: 'username', header: 'نام کاربری', isSelected: true, isSelectedOrigin: true },
+        { field: 'username', header: 'نام کاربری', isSelected: false, isSelectedOrigin: false },
         { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },

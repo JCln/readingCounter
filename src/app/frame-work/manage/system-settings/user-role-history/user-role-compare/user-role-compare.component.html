@@ -1,6 +1,6 @@
 <section class="content">
     <section class="collapse">
-        <h1>مقایسه تغییرات</h1>
+        <h1>مقایسه تغییرات گروه دسترسی</h1>
     </section>
 
     <table>
@@ -10,9 +10,7 @@
                     <td class="_head">قبلی</td>
                 </tr>
                 <tr *ngFor="let item of dataSource.previous">
-                    <td>
-                        {{item.titleUnicode}}
-                    </td>
+                    {{item.titleUnicode}}
                 </tr>
             </div>
             <div>
@@ -20,9 +18,7 @@
                     <td class="_head">فعلی</td>
                 </tr>
                 <tr *ngFor="let item of dataSource.this">
-                    <td>
-                        {{item.titleUnicode}}
-                    <td>
+                    {{item.titleUnicode}}
                 </tr>
             </div>
         </tbody>

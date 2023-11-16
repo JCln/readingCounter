@@ -53,16 +53,17 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               }
               else
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkValuesAndTryAgain, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
-
             }
+
+            const messageText = error.error.message ? error.error.message : '';
             //401 handling in authService
             switch (error.status) {
               case ENClientServerErrors.cs403:
                 this.accessDenied_403();
                 break;
               case ENClientServerErrors.cs404:
-                if (error.error.message)
-                  this.utilsService.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                if (messageText)
+                  this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
                 else
                   this.utilsService.snackWrapperService.openSnackBar(EN_Mess.dataNotFound, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
                 break;
@@ -73,17 +74,17 @@ export class SpinnerInterceptorService implements HttpInterceptor {
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.timeOut, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs409:
-                this.utilsService.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs410:
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.dataNotFoundOrDeleted, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs422:
-                this.utilsService.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs429:
-                if (error.error.message)
-                  this.utilsService.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                if (messageText)
+                  this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
                 else
                   this.utilsService.snackWrapperService.openSnackBar(EN_Mess.threshold, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
                 break;
@@ -101,8 +102,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
                 break;
 
               default:
-                this.utilsService.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fifteenMili, ENSnackBarColors.danger);
+                const messageLength: number = messageText?.length * ENSnackBarTimes.snackTimeMultipleTo;
+                this.utilsService.snackWrapperService.openSnackBar(messageText, messageLength, ENSnackBarColors.danger);
                 break;
+
             }
             this.spinnerWrapperService.stopPending();
             this.spinnerWrapperService.stopLoadingSmallSpinner();

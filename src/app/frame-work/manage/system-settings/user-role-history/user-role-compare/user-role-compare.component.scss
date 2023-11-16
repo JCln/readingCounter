@@ -12,9 +12,8 @@ tbody {
 }
 
 tr {
-    width: 100%;
-}
-
-td {
-    width: 10%;
+    display: grid;
+    text-align: center;
+    font-weight: 600;
+    font-size: var(--font_s);
 }

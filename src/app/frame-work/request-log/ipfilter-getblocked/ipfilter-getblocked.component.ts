@@ -4,11 +4,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-ipfilter-getblocked',
   templateUrl: './ipfilter-getblocked.component.html',
-  styleUrls: ['./ipfilter-getblocked.component.scss']
+  styleUrls: ['./ipfilter-getblocked.component.scss'],
+  animations: [transitionAnimation]
 })
 export class IpfilterGetblockedComponent extends FactoryONE {
 

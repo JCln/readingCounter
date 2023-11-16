@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { IPolicies } from 'services/DI/privacies';
 import { ColumnManager } from 'src/app/classes/column-manager';
@@ -8,7 +8,7 @@ import { ColumnManager } from 'src/app/classes/column-manager';
   templateUrl: './user-role-history-details.component.html',
   styleUrls: ['./user-role-history-details.component.scss']
 })
-export class UserRoleHistoryDetailsComponent  implements OnInit {
+export class UserRoleHistoryDetailsComponent implements AfterViewInit {
   dataSource: IPolicies;
 
   constructor(
@@ -20,7 +20,7 @@ export class UserRoleHistoryDetailsComponent  implements OnInit {
   classWrapper = async () => {
     this.dataSource = this.config.data;
   }
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.classWrapper();
   }
 

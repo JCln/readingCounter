@@ -21,13 +21,18 @@ thead td {
     word-break: normal;
 }
 
+tr,
+td {
+    border-radius: $border_5;
+}
+
 td {
     word-break: break-word;
     border: 1px solid var(--secondary_2);
     text-align: center;
     padding: 8px;
     font-weight: 600;
-    font-size: var(--font_s);
+    font-size: var(--font_m);
 }
 
 tr {

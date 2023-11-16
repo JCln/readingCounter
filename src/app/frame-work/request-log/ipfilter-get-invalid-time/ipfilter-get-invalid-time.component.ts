@@ -4,11 +4,13 @@ import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { SecurityService } from 'services/security.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
   selector: 'app-ipfilter-get-invalid-time',
   templateUrl: './ipfilter-get-invalid-time.component.html',
-  styleUrls: ['./ipfilter-get-invalid-time.component.scss']
+  styleUrls: ['./ipfilter-get-invalid-time.component.scss'],
+  animations: [transitionAnimation]
 })
 export class IpfilterGetInvalidTimeComponent extends FactoryONE {
 
