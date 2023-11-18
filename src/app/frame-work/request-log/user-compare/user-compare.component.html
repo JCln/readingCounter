@@ -1,14 +1,14 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [completed]="false" [stepControl]="closeTabService.userCompare">
-        <form>
+    <mat-step [completed]="false">
+        <form *ngIf="closeTabService.userCompare.this.ip">
             <ng-template matStepLabel>مشخصات کلاینت</ng-template>
             <app-rl-us-select-input [dataSource]="closeTabService.userCompare" style="direction: rtl;">
             </app-rl-us-select-input>
         </form>
     </mat-step>
 
-    <mat-step [completed]="false" [stepControl]="closeTabService.userCompare">
+    <mat-step [completed]="false">
         <form>
             <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
             <app-rl-us-select-zone [dataSource]="closeTabService.userCompare">
@@ -16,7 +16,7 @@
         </form>
     </mat-step>
 
-    <mat-step [completed]="false" [stepControl]="closeTabService.userCompare">
+    <mat-step [completed]="false">
         <ng-template matStepLabel>سطح دسترسی به خدمات</ng-template>
         <app-rl-us-select-action [userAddData]="closeTabService.userCompare">
         </app-rl-us-select-action>

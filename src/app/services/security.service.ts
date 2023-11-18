@@ -2,7 +2,7 @@ import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IPolicies, IPrivacy, privacies } from './DI/privacies';
+import { IPolicies, IPrivacy, IUserMasterHistory, privacies } from './DI/privacies';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
@@ -51,6 +51,13 @@ export class SecurityService {
     displayName: '',
     defaultZoneTitle: ''
   };
+  userCompare_pageSign: IRoleNessessities = {
+    id: null,
+    changeOrInsertUserLogId: '',
+    username: '',
+    displayName: '',
+    defaultZoneTitle: ''
+  };
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
@@ -75,6 +82,10 @@ export class SecurityService {
     this.userLoggins_pageSign.displayName = e.displayName;
 
     this.utilsService.routeTo(EN_Routes.userLoggins);
+  }
+  routeToUserCompare = (e: IUserMasterHistory) => {
+    this.userCompare_pageSign.changeOrInsertUserLogId = e.changeOrInsertLogId;
+    this.utilsService.routeTo(EN_Routes.userCompare);
   }
   updateBlockedUser = (e: IUserManager) => {
     this.blockedUsers_pageSign.GUid = e.id;

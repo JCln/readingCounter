@@ -38,13 +38,15 @@ export class UserRoleHistoryComponent extends FactoryONE {
     this.securityService.userMasterDetailsHistory_pageSign.username = e.username;
     this.securityService.userMasterDetailsHistory_pageSign.displayName = e.displayName;
     this.securityService.userMasterDetailsHistory_pageSign.defaultZoneTitle = e.defaultZoneTitle;
+    // for user compare
+    this.securityService.userCompare_pageSign.id = e.id;
+    this.securityService.userCompare_pageSign.username = e.username;
+    this.securityService.userCompare_pageSign.displayName = e.displayName;
+    this.securityService.userCompare_pageSign.defaultZoneTitle = e.defaultZoneTitle;
     this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
   }
   routeToUserCompare(e: IUserManager) {
-    this.securityService.userMasterDetailsHistory_pageSign.id = e.id;
-    this.securityService.userMasterDetailsHistory_pageSign.username = e.username;
-    this.securityService.userMasterDetailsHistory_pageSign.displayName = e.displayName;
-    this.securityService.userMasterDetailsHistory_pageSign.defaultZoneTitle = e.defaultZoneTitle;
+    this.securityService.userCompare_pageSign.changeOrInsertUserLogId = e.changeOrInsertUserLogId;
     this.securityService.utilsService.routeTo(EN_Routes.userCompare);
   }
   convertLoginTime = () => {

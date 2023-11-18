@@ -272,7 +272,7 @@ export enum ENInterfaces {
     requestLogUnAuthorized = 'V1/RequestLog/List/UnAuthorized',
     serverManagerErrors = 'V1/Server/Errors',
     requestLogUserActivationDictionary = 'V1/RequestLog/UserActivationLogTypes',
-    requestLogLogMemoryStatus = '/V1/RequestLog/LogMemoryStatus',
+    requestLogLogMemoryStatus = 'V1/RequestLog/LogMemoryStatus',
     requestLogUserActivation = 'V1/RequestLog/UserActivation',
     requestLogUserActivationByUserId = 'V1/RequestLog/UserActivationByUserId',
     requestLogUsersLogins = 'V1/User/UsersLogins',

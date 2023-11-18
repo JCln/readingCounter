@@ -1,9 +1,9 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IUserCompareManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
+import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
@@ -11,13 +11,13 @@ import { MathS } from 'src/app/classes/math-s';
   templateUrl: './user-compare.component.html',
   styleUrls: ['./user-compare.component.scss']
 })
-export class UserCompareComponent implements AfterViewInit {
-
+export class UserCompareComponent extends FactoryONE {
   constructor(
     private securityService: SecurityService,
     public closeTabService: CloseTabService
-
-  ) { }
+  ) {
+    super();
+  }
 
   assignToPrevious = () => {
     this.closeTabService.userCompare.previous = {
@@ -95,25 +95,14 @@ export class UserCompareComponent implements AfterViewInit {
   }
 
   classWrapper = async (canRefresh?: boolean) => {
-    if (MathS.isNull(this.securityService.userMasterDetailsHistory_pageSign.id)) {
+    if (MathS.isNull(this.securityService.userCompare_pageSign.id) || MathS.isNullTextValidation(this.securityService.userCompare_pageSign.id)) {
       this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
     }
     else {
-      const res: IUserCompareManager = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.UserCompare, this.securityService.userMasterDetailsHistory_pageSign.id + `/${this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId}`);
-      this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id = this.securityService.userMasterDetailsHistory_pageSign.id;
-
-      if (MathS.isNull(res.previous.ip) && MathS.isNull(res.previous.appItems)) {
-        this.assignToPrevious();
-      }
-      else {
-        this.closeTabService.userCompare.previous = res.previous;
-      }
-      this.closeTabService.userCompare.this = res.this;
+      this.closeTabService.userCompare = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.UserCompare, this.securityService.userCompare_pageSign.id + `/${this.securityService.userCompare_pageSign.changeOrInsertUserLogId}`);
+      this.closeTabService.saveDataForUserCompareReq.id = this.securityService.userCompare_pageSign.id;
     }
 
-  }
-  ngAfterViewInit(): void {
-    this.classWrapper();
   }
 
 }

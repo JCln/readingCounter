@@ -22,10 +22,6 @@ export class UserMasterHistoryComponent implements AfterViewInit {
     this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId = e.changeOrInsertLogId;
     this.securityService.utilsService.routeTo(EN_Routes.userDetailsHistory);
   }
-  routeToUserCompare(e: IUserMasterHistory) {
-    this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId = e.changeOrInsertLogId;
-    this.securityService.utilsService.routeTo(EN_Routes.userCompare);
-  }
   nullSavedSource = () => this.closeTabService.saveDataForUserMasterHistory = [];
   classWrapper = async (canRefresh?: boolean) => {
     if (MathS.isNull(this.securityService.userMasterDetailsHistory_pageSign.id)) {

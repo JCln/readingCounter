@@ -200,8 +200,8 @@ export class CloseTabService {
       osShortTitle: '',
       userAgent: '',
       userDisplayName: ''
-    }
-    , this:
+    },
+    this:
     {
       provinceItems: [
         {
@@ -276,6 +276,9 @@ export class CloseTabService {
     }
   };
   saveDataForUserMasterDetailsHistoryReq = {
+    id: ''
+  };
+  saveDataForUserCompareReq = {
     id: ''
   };
 
