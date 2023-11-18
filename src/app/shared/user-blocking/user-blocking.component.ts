@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -36,10 +36,17 @@ export class UserBlockingComponent implements OnInit {
     if (!this.readManagerService.verificationBlockOrSafeIP(this.form.value))
       return;
 
-    if (!await this.readManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AddIpFilter, this.form.value))
-      return;
+    if (this.form.value.isNew) {
+      const added = await this.readManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.EditIpFilter, this.form.value)
+      this.readManagerService.utilsService.snackBarMessageSuccess(added.message);
+      this.dialogRef.close(this.form.value);
+    }
+    else {
+      const edited = await this.readManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AddIpFilter, this.form.value);
+      this.readManagerService.utilsService.snackBarMessageSuccess(edited.message);
+      this.dialogRef.close(this.form.value);
+    }
 
-    this.dialogRef.close(this.form.value);
   }
   close() {
     this.dialogRef.close();

@@ -15,8 +15,9 @@
 <app-prime-table     
     [dataSource]="dataSource"
     [_outputFileName]="'userLogs'"
+    [_selectedColumnsToRemember]="'selectedUserLoggins'"    
+    [_sessionName]="'userLoggins-session'"
     [_outputEnabled]=false
-    [_hasSaveColumns]=false
     [_backToPreviousEnabled]=true
     [_checkUpName]= "'user-loggins'"
     [_sortOrder]= -1

@@ -28,14 +28,23 @@ export class UserRoleHistoryComponent extends FactoryONE {
   }
   routeToUserRoleHistory(e: IUserManager) {
     this.securityService.userRoleHistoryDetails_pageSign.id = e.id;
+    this.securityService.userRoleHistoryDetails_pageSign.username = e.username;
+    this.securityService.userRoleHistoryDetails_pageSign.displayName = e.displayName;
+    this.securityService.userRoleHistoryDetails_pageSign.defaultZoneTitle = e.defaultZoneTitle;
     this.securityService.utilsService.routeTo(EN_Routes.userRoleHistoryDetails);
   }
-  routeToUserMasterHistory(e: IUserManager) {
+  routeToUserMasterHistory(e: IUserManager) { //user change accesses
     this.securityService.userMasterDetailsHistory_pageSign.id = e.id;
+    this.securityService.userMasterDetailsHistory_pageSign.username = e.username;
+    this.securityService.userMasterDetailsHistory_pageSign.displayName = e.displayName;
+    this.securityService.userMasterDetailsHistory_pageSign.defaultZoneTitle = e.defaultZoneTitle;
     this.securityService.utilsService.routeTo(EN_Routes.userMasterHistory);
   }
   routeToUserCompare(e: IUserManager) {
     this.securityService.userMasterDetailsHistory_pageSign.id = e.id;
+    this.securityService.userMasterDetailsHistory_pageSign.username = e.username;
+    this.securityService.userMasterDetailsHistory_pageSign.displayName = e.displayName;
+    this.securityService.userMasterDetailsHistory_pageSign.defaultZoneTitle = e.defaultZoneTitle;
     this.securityService.utilsService.routeTo(EN_Routes.userCompare);
   }
   convertLoginTime = () => {

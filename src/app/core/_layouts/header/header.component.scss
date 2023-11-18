@@ -29,6 +29,7 @@ ul {
   @media (min-width:550px) {
     padding-right: 2rem;
     padding-left: 2rem;
+    gap: .5rem;
   }
 
 }
@@ -75,8 +76,25 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 0.6rem;
-  top: 0.4rem;
+  right: 1.3rem;
+  top: .87rem;
+}
+
+._notif_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--font_23);
+  height: var(--font_23);
+  border-radius: 50%;
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    --thirdy_opacity: rgba(108, 159, 214, 0.3);
+    box-shadow: 0px 0px 1px 1px var(--thirdy_1);
+    background-color: var(--thirdy_opacity);
+  }
 }
 
 ._badge {
@@ -104,7 +122,9 @@ li {
   &:hover,
   &:focus-visible,
   &:active {
+    --thirdy_opacity: rgba(108, 159, 214, 0.3);
     box-shadow: 0px 0px 1px 1px var(--thirdy_1);
+    background-color: var(--thirdy_opacity);
   }
 }
 

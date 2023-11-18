@@ -21,7 +21,7 @@ export class ReadManagerService {
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
 

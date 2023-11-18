@@ -23,7 +23,7 @@ export class IpFilterComponent extends FactoryONE {
     userId: '',
     isSafe: false,
     isV6: false,
-    isNew: true
+    isNew: false
   }
 
   constructor(
@@ -54,7 +54,8 @@ export class IpFilterComponent extends FactoryONE {
       }
     }
   }
-  openAddDialog = (dataSource: IBlockOrSafeIp) => {
+  openAddDialog = (dataSource: IBlockOrSafeIp, isNew: boolean) => {
+    dataSource.isNew = isNew;
     return new Promise(() => {
       const dialogRef = this.closeTabService.utilsService.dialog.open(UserBlockingComponent, {
         disableClose: true,

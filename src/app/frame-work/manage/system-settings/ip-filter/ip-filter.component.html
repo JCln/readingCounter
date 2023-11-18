@@ -7,8 +7,8 @@
     [_sessionName]="'ipfilter-session'"
     [_selectedColumnsToRemember]="'selectedIpFilter'"
     (refreshedTable)="refreshTable()"    
-    (showedPictures)="openAddDialog($event)"
+    (showedPictures)="openAddDialog($event, true)"
     (showedMoreDetails)="removeRow($event)"
-    (openedAddDialog)="openAddDialog(emptyObject)"
+    (openedAddDialog)="openAddDialog(emptyObject, false)"
  > 
 </app-prime-table>

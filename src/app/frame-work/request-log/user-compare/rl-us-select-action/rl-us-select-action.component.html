@@ -1,6 +1,6 @@
 <div class="_wrapper">
     <form #form="ngForm">
-        <section class="auth_1" *ngFor="let item of userAddData.previous.appItems; index as i">
+        <section class="auth_1" *ngFor="let item of userAddData.this.appItems; index as i">
             <div>
                 <section class="auth_2" *ngFor="let moduleIt of item.moduleItems; index as i2">
                     <div class="separator text">
@@ -14,7 +14,6 @@
                                 <thead class="_head">
                                     <tr>
                                         <td>عنوان</td>
-                                        <td>قبلی</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -22,6 +21,36 @@
                                         <td>
                                             {{col.title}}
                                         </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+
+                    </section>
+                </section>
+            </div>
+        </section>
+    </form>
+
+    <form #form="ngForm">
+        <section class="auth_1" *ngFor="let item of userAddData.previous.appItems; index as i">
+            <div>
+                <section class="auth_2" *ngFor="let moduleIt of item.moduleItems; index as i2">
+                    <div class="separator text">
+                        {{moduleIt.title}}
+                    </div>
+
+                    <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems; index as i3">
+                        {{controllerIt.title}}
+                        <section class="auth_4">
+                            <table>
+                                <thead class="_head">
+                                    <tr>
+                                        <td>قبلی</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let col of controllerIt.actionItems; index as i4">
                                         <td>
                                             <i
                                                 [ngClass]="col.isSelected ? 'pi pi-check-square green_500' : 'pi pi-times-circle red_500'">

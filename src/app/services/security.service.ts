@@ -12,7 +12,10 @@ import { IIOPolicy, IOPolicy, IUserActivation } from 'interfaces/iserver-manager
 
 export interface IRoleNessessities {
   id: string,
-  changeOrInsertUserLogId?: string
+  changeOrInsertUserLogId?: string,
+  username?: string,
+  displayName?: string,
+  defaultZoneTitle?: string
 }
 @Injectable({
   providedIn: 'root'
@@ -43,7 +46,10 @@ export class SecurityService {
   };
   userMasterDetailsHistory_pageSign: IRoleNessessities = {
     id: null,
-    changeOrInsertUserLogId: ''
+    changeOrInsertUserLogId: '',
+    username: '',
+    displayName: '',
+    defaultZoneTitle: ''
   };
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,

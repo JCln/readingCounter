@@ -52,8 +52,6 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
       minWidth: '20rem',
     }
     const buttonSavedClicked = await this.utilsService.firstConfirmDialog(config);
-    console.log(buttonSavedClicked);
-
     if (buttonSavedClicked) {
       return new Promise(async (resolve) => {
         resolve(true);
@@ -76,7 +74,6 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     if (myPrevious.length)
       this.openMyPreviousDialog(myPrevious);
     const shouldIChangePass = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.getShouldIChangePassword);
-    console.log(shouldIChangePass);
     if (shouldIChangePass)
       this.changePasswordFromDialog();
     const counter = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.NotifyManagerUnreadCount);

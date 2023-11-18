@@ -261,8 +261,11 @@ export enum ENInterfaces {
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
     serverManagerOSInfo = 'V1/Server/OsInfo',
     serverManagerCheckAuthenticity = 'V1/Server/CheckAuthenticity',
+    serverManagerNTPServer = 'V1/ApiSettings/NtpServer',
     serverManagerGetAuthenticity = 'V1/Server/GetAuthenticity',
     serverManagerGetAuthenticityBrief = 'V1/Server/GetAuthenticityBrief',
+    AuthenticityLogToggleDBConnection = 'V1/Policy/ToggleDbConnection',
+    policyAuthenticityAttempts = 'V1/Policy/AuthenticityAttempts',
 
     requestLogUser = 'V1/RequestLog/List/User',
     requestLogAnonymous = 'V1/RequestLog/List/Anonymous',

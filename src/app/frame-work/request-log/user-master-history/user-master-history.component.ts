@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { IUserMasterHistory } from 'services/DI/privacies';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
-import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
@@ -12,14 +11,12 @@ import { MathS } from 'src/app/classes/math-s';
   templateUrl: './user-master-history.component.html',
   styleUrls: ['./user-master-history.component.scss']
 })
-export class UserMasterHistoryComponent extends FactoryONE {
+export class UserMasterHistoryComponent implements AfterViewInit {
 
   constructor(
     public closeTabService: CloseTabService,
     public securityService: SecurityService
-  ) {
-    super();
-  }
+  ) { }
 
   routeToUserDetailsHistory(e: IUserMasterHistory) {
     this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId = e.changeOrInsertLogId;
@@ -31,7 +28,7 @@ export class UserMasterHistoryComponent extends FactoryONE {
   }
   nullSavedSource = () => this.closeTabService.saveDataForUserMasterHistory = [];
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.securityService.userMasterDetailsHistory_pageSign.id) {
+    if (MathS.isNull(this.securityService.userMasterDetailsHistory_pageSign.id)) {
       this.securityService.utilsService.routeToByUrl(EN_Routes.userRoleHistory);
       return;
     }
@@ -50,4 +47,10 @@ export class UserMasterHistoryComponent extends FactoryONE {
     }
   }
 
+  ngAfterViewInit(): void {
+    this.classWrapper();
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
+  }
 }

@@ -39,6 +39,11 @@ export interface IRequestLog {
     ip: string
     tokenFailureReason: string
 }
+export interface IAuthenticityAttempts {
+    id: string,
+    insertDateTime: string,
+    description: string
+}
 export interface IGetBlocked {
     id: number,
     targetUserDisplayName: string,
@@ -206,7 +211,9 @@ export enum ENManageServers {
     resetIIS = 'resetIIS',
     offlineTheAPP = 'offlineTheAPP',
     resetApp = 'resetApp',
-    checkAuthenticiy = 'checkAuthenticiy'
+    checkAuthenticiy = 'checkAuthenticiy',
+    ntpServer = 'nTPServer',
+    toggleDbConnection = 'toggleDbConnection'
 }
 export interface IServerGetAuthenticity {
     dbId: string,

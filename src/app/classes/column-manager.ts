@@ -467,7 +467,7 @@ export class ColumnManager {
         { field: 'isAuthentic', header: 'معتبر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
     serverAuthenticityResult: IObjectIteratation[] = [
-        { field: 'dbId', header: 'وضعیت دیتابیس', isSelected: true, isSelectedOrigin: true },
+        { field: 'dbId', header: 'شناسه دیتابیس', isSelected: true, isSelectedOrigin: true },
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
     ]
     ipFilterGetBlocked: IObjectIteratation[] = [
@@ -485,6 +485,10 @@ export class ColumnManager {
         { field: 'osPlatform', header: 'نوع سیستم', isSelected: false, isSelectedOrigin: false },
         { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },      
+    ]
+    authenticityAttempts: IObjectIteratation[] = [
+        { field: 'insertDateTime', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
     ]
     ipFilterGetInvalidTime: IObjectIteratation[] = [
         { field: 'insertDateTime', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
@@ -786,11 +790,11 @@ export class ColumnManager {
         { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         // { field: 'twoStepExpireDateTime', header: 'زمان انقضای رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
         { field: 'twoStepType', header: 'نحوه ورود', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepEnterDateTime', header: 'زمان تلاش رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
         { field: 'twoStepWasSuccessful', header: 'دو مرحله‌ای موفق', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         { field: 'logoutDateTime', header: 'زمان خروج', isSelected: true, isSelectedOrigin: true },
         { field: 'logoutReasonId', header: 'علت خروج', isSelected: false, isSelectedOrigin: false },
         { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
@@ -811,11 +815,11 @@ export class ColumnManager {
         { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepType', header: 'نحوه ورود', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepExpireDateTime', header: 'زمان انقضای رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
         { field: 'twoStepEnterDateTime', header: 'زمان تلاش رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
         { field: 'twoStepWasSuccessful', header: 'دو مرحله‌ای موفق', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         { field: 'logoutDateTime', header: 'زمان خروج', isSelected: true, isSelectedOrigin: true },
         { field: 'logoutReasonId', header: 'علت خروج', isSelected: true, isSelectedOrigin: true },
         { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
@@ -1604,10 +1608,10 @@ export class ColumnManager {
         { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
         { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
         { field: 'wasSuccessful', header: 'موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepType', header: 'نحوه ورود', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepEnterDateTime', header: 'زمان تلاش رمز دومرحله‌ای', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepWasSuccessful', header: 'دو مرحله‌ای موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
         { field: 'twoStepExpireDateTime', header: 'زمان انقضای رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
         { field: 'logoutReasonId', header: 'علت خروج', isSelected: true, isSelectedOrigin: true },
         { field: 'logoutDateTime', header: 'زمان خروج', isSelected: true, isSelectedOrigin: true },

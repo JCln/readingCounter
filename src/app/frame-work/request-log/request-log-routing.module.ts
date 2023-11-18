@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'userCompare', loadChildren: () => import('./user-compare/user-compare.module').then(userCompareModule => userCompareModule.UserCompareModule) },
   { path: 'notificationList', loadChildren: () => import('./notif-list-bydate/notif-list-bydate.module').then(notificationListByDate => notificationListByDate.NotifListBydateModule) },
   { path: 'getBlocked', loadChildren: () => import('./ipfilter-getblocked/ipfilter-getblocked.module').then(IpFilterGetBlocked => IpFilterGetBlocked.IpfilterGetblockedModule) },
+  { path: 'authenticityAttempts', loadChildren: () => import('./authenticity-attempts/authenticity-attempts.module').then(authenticityAttempts => authenticityAttempts.AuthenticityAttemptsModule) },
   { path: 'getInvalidTime', loadChildren: () => import('./ipfilter-get-invalid-time/ipfilter-get-invalid-time.module').then(IpFilterGetInvalidTime => IpFilterGetInvalidTime.IpfilterGetInvalidTimeModule) },
   { path: 'IPFilterhistory', loadChildren: () => import('./ip-filter-history/ip-filter-history.module').then(IpFilterHistory => IpFilterHistory.IpFilterHistoryModule) },
   { path: 'IOPolicyHistory', loadChildren: () => import('./input-output-policy-history/input-output-policy-history.module').then(inputOutputPolicyHistory => inputOutputPolicyHistory.InputOutputPolicyHistoryModule) },

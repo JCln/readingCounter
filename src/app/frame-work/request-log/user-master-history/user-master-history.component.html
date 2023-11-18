@@ -1,3 +1,22 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2">
+            <div class="_key">نام نمایش</div>
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="securityService.userMasterDetailsHistory_pageSign.displayName">
+        </div>
+        <div class="input_2">
+            <div class="_key">نام کاربری</div>
+            <input [readOnly]="true" class="_value" name="listNumber"
+                [(ngModel)]="securityService.userMasterDetailsHistory_pageSign.username">
+        </div>
+        <div class="input_2">
+            <div class="_key">ناحیه پیش‌فرض</div>
+            <input [readOnly]="true" class="_value" name="zone"
+                [(ngModel)]="securityService.userMasterDetailsHistory_pageSign.defaultZoneTitle">
+        </div>
+    </div>
+</section>
 <app-prime-table
 [dataSource]="closeTabService.saveDataForUserMasterHistory"
 [_numberOfExtraColumns]="[1 , 2]"

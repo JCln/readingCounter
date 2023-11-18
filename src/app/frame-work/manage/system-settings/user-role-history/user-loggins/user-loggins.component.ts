@@ -8,6 +8,7 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Converter } from 'src/app/classes/converter';
 import { EN_messages } from 'interfaces/enums.enum';
 import { MathS } from 'src/app/classes/math-s';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Component({
   selector: 'app-user-loggins',
@@ -28,7 +29,7 @@ export class UserLogginsComponent extends FactoryONE {
 
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.securityService.userLoggins_pageSign.GUid) {
-      this.securityService.utilsService.backToPreviousPage();
+      this.securityService.utilsService.routeTo(EN_Routes.userRoleHistory);
     }
     else {
       this.dataSource = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userLOGINS, this.securityService.userLoggins_pageSign.GUid);

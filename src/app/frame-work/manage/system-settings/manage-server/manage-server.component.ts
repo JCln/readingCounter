@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { ENManageServers, IManageServer } from 'interfaces/iserver-manager';
 import { ManageServerService } from 'services/manage-server.service';
+import { DateJalaliService } from 'services/date-jalali.service';
 
 
 @Component({
@@ -13,84 +14,141 @@ import { ManageServerService } from 'services/manage-server.service';
 })
 export class ManageServerComponent implements OnInit {
   manageTasks: IManageServer[];
+  private readonly localPass: string = 'XML';
 
-  constructor(private manageServerService: ManageServerService) { }
+  constructor(
+    private manageServerService: ManageServerService,
+    private dateJalaliService: DateJalaliService
+  ) { }
 
   ngOnInit(): void {
     this.manageTasks = this.manageServerService.getManageServerItems();
   }
   serverDelete = async () => {
     const config = {
-      messageTitle: EN_messages.insert_Key,
+      messageTitle: EN_messages.insertLocalKey,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
+      placeHolder: EN_messages.insertLocalKey,
       isDelete: false,
-      inputMinLength: 4,
+      inputMinLength: 3,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      const temp: any = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerDelete);
-      if (temp)
-        this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
+      }
+      else {
+        if (insertedKey == this.localPass) {
+          const temp: any = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerDelete);
+          if (temp)
+            this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+        }
+        else
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+      }
     }
   }
   linkToHangfire = async () => {
     const config = {
-      messageTitle: EN_messages.insert_Key,
+      messageTitle: EN_messages.insertLocalKey,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
+      placeHolder: EN_messages.insertLocalKey,
       isDelete: false,
-      inputMinLength: 4,
+      inputMinLength: 3,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      this.manageServerService.linkToHangFire();
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
+      }
+      else {
+        if (insertedKey == this.localPass) {
+          this.manageServerService.linkToHangFire();
+        }
+        else {
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+        }
+      }
     }
   }
   linkToHealthCheck = async () => {
     const config = {
-      messageTitle: EN_messages.insert_Key,
+      messageTitle: EN_messages.insertLocalKey,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
+      placeHolder: EN_messages.insertLocalKey,
       isDelete: false,
-      inputMinLength: 4,
+      inputMinLength: 3,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
+      }
+      else {
+        if (insertedKey == this.localPass) {
+          this.manageServerService.linkToHealthCheck();
+        }
+        else
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+      }
     }
-    this.manageServerService.linkToHealthCheck();
+  }
+  toggleDbConnection = async () => {
+    const config = {
+      messageTitle: EN_messages.insertLocalKey,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: EN_messages.insertLocalKey,
+      isDelete: false,
+      inputMinLength: 3,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
+      }
+      else {
+        if (insertedKey == this.localPass) {
+          const temp = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.AuthenticityLogToggleDBConnection);
+          if (temp)
+            this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+        }
+        else
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+      }
+    }
   }
   resetApp = async () => {
     const config = {
-      messageTitle: EN_messages.insert_Key,
+      messageTitle: EN_messages.insertLocalKey,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
+      placeHolder: EN_messages.insertLocalKey,
       isDelete: false,
-      inputMinLength: 4,
+      inputMinLength: 3,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      const temp = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerResetApp);
-      if (temp)
-        this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
+      }
+      else {
+        if (insertedKey == this.localPass) {
+          const temp = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerResetApp);
+          if (temp)
+            this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+        }
+        else
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+      }
     }
   }
   expireLicense = async () => {
@@ -98,18 +156,20 @@ export class ManageServerComponent implements OnInit {
       messageTitle: EN_messages.insert_Key,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
-      inputMinLength: 4,
+      placeHolder: EN_messages.insert_Key,
+      inputMinLength: 3,
       isDelete: false,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExpireLicense, insertedKey)) {
-        this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+      }
+      else {
+        if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExpireLicense, insertedKey)) {
+          this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
+        }
       }
     }
   }
@@ -118,18 +178,20 @@ export class ManageServerComponent implements OnInit {
       messageTitle: EN_messages.insert_Key,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
+      placeHolder: EN_messages.insert_Key,
       isDelete: false,
-      inputMinLength: 4,
+      inputMinLength: 3,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExtendTime, insertedKey)) {
-        this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+      }
+      else {
+        if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExtendTime, insertedKey)) {
+          this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
+        }
       }
     }
   }
@@ -138,45 +200,81 @@ export class ManageServerComponent implements OnInit {
       messageTitle: EN_messages.insert_Key,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
+      placeHolder: EN_messages.insert_Key,
       isDelete: false,
-      inputMinLength: 4,
+      inputMinLength: 3,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExtendTime, insertedKey)) {
-        this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
+      }
+      else {
+        if (await this.manageServerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.settingsExtendTime, insertedKey)) {
+          this.manageServerService.utilsService.snackBarMessageSuccess(EN_messages.done);
+        }
       }
     }
   }
   checkAuthenticity = async () => {
     const config = {
-      messageTitle: EN_messages.insert_Key,
+      messageTitle: EN_messages.insertLocalKey,
       minWidth: '19rem',
       isInput: true,
-      placeHolder: 'کلید را وارد نمایید',
+      placeHolder: EN_messages.insertLocalKey,
       inputMinLength: 3,
       isDelete: false,
       icon: 'pi pi-key'
     }
     const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
-    if (MathS.isNullTextValidation(insertedKey)) {
-      this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_Key);
-    }
-    else {
-      if (insertedKey == 'XML') {
-        const res = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerCheckAuthenticity);
-        this.manageServerService.utilsService.snackBarMessageSuccess(res.message);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
       }
       else {
-        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey)
+        if (insertedKey == this.localPass) {
+          const res = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerCheckAuthenticity);
+          this.manageServerService.utilsService.snackBarMessageSuccess(res.message);
+        }
+        else {
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+        }
       }
     }
-
+  }
+  nTPServer = async () => {
+    const config = {
+      messageTitle: EN_messages.insertLocalKey,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: EN_messages.insertLocalKey,
+      inputMinLength: 3,
+      isDelete: false,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
+      }
+      else {
+        if (insertedKey == this.localPass) {
+          let res = await this.manageServerService.ajaxReqWrapperService.getDataSource(ENInterfaces.serverManagerNTPServer);
+          res = this.dateJalaliService.getDate(res) + '   ' + this.dateJalaliService.getTime(res);
+          const config = {
+            messageTitle: EN_messages.NTPResult,
+            messageTitleTwo: res,
+            minWidth: '19rem',
+            isInput: false,
+            isDelete: false,
+            icon: 'pi pi-clock'
+          }
+          this.manageServerService.utilsService.firstConfirmDialog(config);
+        } else
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+      }
+    }
   }
   manageFuncs = async (clickFunction: ENManageServers, description: string) => {
     if (this.manageServerService.utilsService.getIsAdminRole()) {
@@ -222,6 +320,16 @@ export class ManageServerComponent implements OnInit {
         config.icon = 'pi pi-check-square';
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
           this.checkAuthenticity();
+      }
+      if (clickFunction == ENManageServers.ntpServer) {
+        config.icon = 'pi pi-clock';
+        if (await this.manageServerService.utilsService.firstConfirmDialog(config))
+          this.nTPServer();
+      }
+      if (clickFunction == ENManageServers.toggleDbConnection) {
+        config.icon = 'pi pi-database';
+        if (await this.manageServerService.utilsService.firstConfirmDialog(config))
+          this.toggleDbConnection();
       }
       if (clickFunction == ENManageServers.resetIIS) {
         config.icon = 'fa fa-repeat';
