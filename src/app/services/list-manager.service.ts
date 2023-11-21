@@ -255,8 +255,11 @@ export class ListManagerService {
       this.showSnackWarn(EN_messages.insert_counterState);
       return false;
     }
+    if (MathS.isFromLowerThanTo(ENRandomNumbers.zero, body.counterNumber)) {
+      this.showSnackWarn(EN_messages.format_invalid_counterNumber);
+      return false;
+    }
 
-    console.log(1);
     return true;
   }
   makeHadPicturesToBoolean = (dataSource: any) => {

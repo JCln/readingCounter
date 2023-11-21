@@ -20,7 +20,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   // changeDetection: ChangeDetectionStrategy.OnPush // commented => cause sideEffect to dictionary Wrapper response when data need to change after converted dictionary
 })
 export class PrimeTableComponent extends FactorySharedPrime {
-  ENSelectedColumnVariables = ENSelectedColumnVariables;  
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
@@ -94,7 +94,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
     if (this.dataSource) {
       this.restoreLatestColumnChanges();
       this.hasBeenReadsToggler();
-      this.doAggregate();
+      console.log(this.profileService._agg.selectedAggregate);
+
+      // this.doAggregate();
     }
   }
   refreshTable() {
@@ -220,11 +222,11 @@ export class PrimeTableComponent extends FactorySharedPrime {
       return total;
     }
   }
-  // groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-  //   arr.reduce((groups, item) => {
-  //     (groups[key(item)] ||= []).push(item);
-  //     return groups;
-  //   }, {} as Record<K, T[]>);
+  groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
+    arr.reduce((groups, item) => {
+      (groups[key(item)] ||= []).push(item);
+      return groups;
+    }, {} as Record<K, T[]>);
   updateRowGroupMetaData(toAggregate: string) {
     let tempRowGroupMeta = {};
 
@@ -248,17 +250,29 @@ export class PrimeTableComponent extends FactorySharedPrime {
     this.profileService._agg.rowGroupMetadata = tempRowGroupMeta;
   }
 
-  doAggregate = () => {
-    const _aggFlag = this.profileService._agg.flag;
+  // doAggregate = () => {
+  //   console.log(this._hasAggregating);
 
-    if (_aggFlag && this._checkUpName == 'Kartables') {
-      this._sortField = this.profileService._agg.selectedAggregate;
-      this.updateRowGroupMetaData(this.profileService._agg.selectedAggregate);
-    }
-    else {
-      this.updateRowGroupMetaData('');
-    }
-  }
+  //   if (!this._hasAggregating)
+  //     return;
+
+  //   const _aggFlag = this.profileService._agg.flag;
+
+  //   if (_aggFlag && this._checkUpName == 'Kartables') {
+  //     // this._sortField = this.profileService._agg.selectedAggregate;
+  //     console.log(this.profileService._agg.selectedAggregate);
+
+  //     const temp = this.groupBy(this.dataSource, i => i[this.profileService._agg.selectedAggregate])
+  //     console.log(temp);      
+  //     // this.updateRowGroupMetaData(this.profileService._agg.selectedAggregate);
+  //   }
+  //   // else {
+  //   //   const empty = '';
+  //   //   this.groupBy(this.dataSource, i => empty)
+  //     // this.updateRowGroupMetaData('');
+  //   // }
+  //   console.log(this.dataSource);
+  // }
   doCustomSort = (event: any) => {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];
@@ -281,21 +295,21 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   customSortFunction(event: any) {
     this.doCustomSort(event);
-    this.doAggregate();
+    // this.doAggregate();
   }
   resetAggregation = () => {
     this.profileService._agg.selectedAggregate = '';
-    this.doAggregate();
+    // this.doAggregate();
   }
-  toggleSubMenu = (event: any) => {
-    let tableRow = document.querySelectorAll('.tr_expandable');
-    let auxIndex = JSON.parse(JSON.stringify(event.index));
-    console.log(tableRow);
+  // toggleSubMenu = (event: any) => {
+  //   let tableRow = document.querySelectorAll('.tr_expandable');
+  //   let auxIndex = JSON.parse(JSON.stringify(event.index));
+  //   console.log(tableRow);
 
-    console.log(event); //{index: 72, size: 43}
-    for (let counter = 0; counter < event.size; counter++, auxIndex++) {
-      tableRow[auxIndex].classList.toggle('_hide_rows');
-    }
-  }
-  
+  //   console.log(event); //{index: 72, size: 43}
+  //   for (let counter = 0; counter < event.size; counter++, auxIndex++) {
+  //     tableRow[auxIndex].classList.toggle('_hide_rows');
+  //   }
+  // }
+
 }

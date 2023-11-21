@@ -135,6 +135,7 @@ export interface IObjectIteratation {
     isNumber?: boolean;
     isSelectOption?: boolean;
     enableTooltip?: boolean;
+    tabIndex?: number;
 }
 export interface INotificationAlertTypes {
     title: string,

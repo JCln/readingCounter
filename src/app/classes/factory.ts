@@ -50,7 +50,7 @@ export class FactorySharedPrime implements OnChanges {
     ref: DynamicDialogRef;
     public readonly routerLink: string = this.utilsService.compositeService.getRouterUrl();
 
-    @Input() dataSource: any[] = [];
+    @Input() dataSource: any;
     @Input() _selectCols: any = [];
     @Input() _selectedColumns: any[];
     @Input() _outputFileName: string;

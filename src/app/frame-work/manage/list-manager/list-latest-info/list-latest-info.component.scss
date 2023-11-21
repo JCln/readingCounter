@@ -49,3 +49,8 @@ footer {
 .check_boxes {
     direction: ltr;
 }
+
+.input_2 ._value:active,
+.input_2 ._value:focus {
+    outline: 2px solid blue;
+}

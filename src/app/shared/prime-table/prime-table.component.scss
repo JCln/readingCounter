@@ -83,6 +83,7 @@
   justify-content: space-between;
   min-width: 12rem;
   margin-right: 1rem;
+  margin-bottom: 1px;
   padding: 0 1rem;
   background: var(--primary_3) !important;
   color: var(--white) !important;
@@ -90,13 +91,16 @@
   font-size: var(--font_s);
 
   td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 0 !important;
   }
 
   i {
-    border: 1px solid var(--white);
-    border-radius: 50%;
-    padding: .1rem;
+    padding: 0.1rem;
+    font-weight: 600;
+    font-size: var(--font_m);
   }
 }
 

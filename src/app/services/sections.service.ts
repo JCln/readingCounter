@@ -239,8 +239,6 @@ export class SectionsService {
     }
     if (this.dynamicValue.hasOwnProperty('toRate')) {
       const a = this.dynamicValue;
-      console.log(MathS.isFromLowerThanTo(a.fromRate, a.toRate));
-
       if (!MathS.isFromLowerThanTo(a.fromRate, a.toRate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
         return false;
@@ -249,9 +247,6 @@ export class SectionsService {
     return true;
   }
   private validationIsNaN = (): boolean => {
-    console.log(this.dynamicValue);
-    console.log(this.dynamicValue.endIndex);
-
     if (this.dynamicValue.hasOwnProperty('endIndex')) {
       if (MathS.isNaN(this.dynamicValue.endIndex))
         return false;
