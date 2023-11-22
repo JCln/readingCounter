@@ -4,8 +4,8 @@
     dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session" [stateKey]="_sessionName"
     [sortField]="_sortField" [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort"
     (sortFunction)="customSortFunction($event)" [reorderableColumns]=_reOrderableTable
-    (onFilter)="filterEventTable($event)" [dataKey]="profileService._agg.selectedAggregate"
-    [tableStyle]="{ 'min-width': '50rem' }">
+    (onFilter)="filterEventTable($event)" [dataKey]="profileService._agg.selectedAggregate" rowGroupMode="subheader"
+    [groupRowsBy]="profileService._agg.selectedAggregate">
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -115,16 +115,17 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex let-expanded="expanded">
+    <ng-template *ngIf="_hasAggregating && profileService._agg.flag" pTemplate="groupheader" let-dataSource
+        let-columns="columns" let-ri=rowIndex let-expanded="expanded">
         <tr class="_anything">
             <td [pRowToggler]="dataSource">
                 {{dataSource[profileService._agg.selectedAggregate]}}
-                <i class="pi pi-angle-down"></i>
+                <i [ngClass]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></i>
             </td>
         </tr>
     </ng-template>
-    <ng-template [pTemplate]="_hasAggregating ? 'rowexpansion' : 'body'" let-dataSource let-columns="columns"
-        let-ri=rowIndex>
+    <ng-template [pTemplate]="_hasAggregating && profileService._agg.flag ? 'rowexpansion' : 'body'" let-dataSource
+        let-columns="columns" let-ri=rowIndex>
         <tr>
             <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr,'_editable': col.icon}">
                 <span class="ui-column-title">{{col.header}}</span>

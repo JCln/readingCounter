@@ -92,15 +92,23 @@
 
   td {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
     align-items: center;
     border: 0 !important;
+    cursor: pointer;
+    user-select: none;
   }
 
   i {
     padding: 0.1rem;
     font-weight: 600;
-    font-size: var(--font_m);
+    font-size: var(--font_ss);
+  }
+
+  &:focus-visible,
+  &:active {
+    box-shadow: 0 0 1px 1px var(--primary_2);
   }
 }
 

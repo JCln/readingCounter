@@ -2040,7 +2040,7 @@ export class ColumnManager {
         { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },
         { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },
-        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '_editable' },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true, readonly: true, isNumber: true, icon: '_editable' },
         { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },

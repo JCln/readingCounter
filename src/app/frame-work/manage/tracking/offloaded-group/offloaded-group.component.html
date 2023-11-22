@@ -5,11 +5,10 @@
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4]: [1,2,3,4,5]"
     [_calculableSUM]=true
     [_hasAggregating]= true
-    [_isCustomSort]=true
+    [_paginator]="false"  
     [_selectedColumnsToRemember]="'selectedTrackOffloadedGroup'"
     [_sessionName]="'offloaded-group'"
-    (refreshedTable)="refreshTable()"
-    (customedSort)="trackingManagerService.customSort($event)"
+    (refreshedTable)="refreshTable()"    
     (downloadedOutputSingle)="downloadOutputSingle($event)"            
     (routedToOffloadGeneralModify)="routeToOffloadGeneralGroupModify($event)"        
     (backedToImportedConfirmDialog)="backToReading($event)"

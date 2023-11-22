@@ -5,12 +5,11 @@
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4,5]"
     [_sessionName]="'reading-session'"
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
-    [_calculableSUM]=true    
-    [_isCustomSort]=true
+    [_calculableSUM]=true        
     [_hasAggregating] = true
+    [_paginator]="false"  
     (refreshedTable)="refreshTable()"
-    (forcedOffload)="forceOffload($event)"
-    (customedSort)="trackingManagerService.customSort($event)"
+    (forcedOffload)="forceOffload($event)"    
     (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
     (routedToLMPayDay)="trackingManagerService.routeToLMPayDay($event)"
     (routedToLMAll)="trackingManagerService.routeToLMAll($event)"

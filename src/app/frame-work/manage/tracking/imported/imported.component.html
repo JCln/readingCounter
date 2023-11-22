@@ -5,9 +5,8 @@
     [_tooltipText]="'مشاهده جزئیات و ویرایش'"
     [_calculableSUM]=true    
     [_hasAggregating] = true
-    [_isCustomSort]=true
-    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"
-    (customedSort)="trackingManagerService.customSort($event)"
+    [_paginator]="false"    
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"    
     [_sessionName]="'imported-session'"
     [_selectedColumnsToRemember]="'selectedTrackImported'"
     (refreshedTable)="refreshTable()"

@@ -553,6 +553,7 @@
   app-prime-table-editable {
     .p-datatable-wrapper {
       overflow-x: unset !important;
+      overflow-y: unset !important;
     }
 
     .__columns {

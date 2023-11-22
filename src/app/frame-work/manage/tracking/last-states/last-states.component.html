@@ -4,11 +4,10 @@
     [_checkUpName]="'Kartables'"
     [_calculableSUM]=true  
     [_hasAggregating] = true
-    [_isCustomSort]=true
+    [_paginator]="false"  
     [_selectedColumnsToRemember]="'selectedlastStates'"
     [_numberOfExtraColumns]="[1,2]"
-    [_sessionName]="'last-states-session'"
-    (customedSort)="trackingManagerService.customSort($event)"
+    [_sessionName]="'last-states-session'"    
     (showedInMap)="showInMap($event)"   
     (refreshedTable)="refreshTable()"    
     (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"

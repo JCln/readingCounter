@@ -255,7 +255,7 @@ export class ListManagerService {
       this.showSnackWarn(EN_messages.insert_counterState);
       return false;
     }
-    if (MathS.isFromLowerThanTo(ENRandomNumbers.zero, body.counterNumber)) {
+    if (!MathS.isFromLowerThanTo(ENRandomNumbers.zero, body.counterNumber)) {
       this.showSnackWarn(EN_messages.format_invalid_counterNumber);
       return false;
     }

@@ -94,9 +94,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
     if (this.dataSource) {
       this.restoreLatestColumnChanges();
       this.hasBeenReadsToggler();
-      console.log(this.profileService._agg.selectedAggregate);
-
-      // this.doAggregate();
     }
   }
   refreshTable() {
@@ -227,52 +224,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
       (groups[key(item)] ||= []).push(item);
       return groups;
     }, {} as Record<K, T[]>);
-  updateRowGroupMetaData(toAggregate: string) {
-    let tempRowGroupMeta = {};
-
-    if (this.dataSource) {
-      for (let i = 0; i < this.dataSource.length; i++) {
-
-        let rowData = this.dataSource[i][toAggregate];
-
-        if (i == 0) {
-          tempRowGroupMeta[rowData] = { index: 0, size: 1 };
-        }
-        else {
-          let previousRowData = this.dataSource[i - 1][toAggregate];
-          if (rowData === previousRowData)
-            tempRowGroupMeta[rowData].size++;
-          else
-            tempRowGroupMeta[rowData] = { index: i, size: 1 };
-        }
-      }
-    }
-    this.profileService._agg.rowGroupMetadata = tempRowGroupMeta;
-  }
-
-  // doAggregate = () => {
-  //   console.log(this._hasAggregating);
-
-  //   if (!this._hasAggregating)
-  //     return;
-
-  //   const _aggFlag = this.profileService._agg.flag;
-
-  //   if (_aggFlag && this._checkUpName == 'Kartables') {
-  //     // this._sortField = this.profileService._agg.selectedAggregate;
-  //     console.log(this.profileService._agg.selectedAggregate);
-
-  //     const temp = this.groupBy(this.dataSource, i => i[this.profileService._agg.selectedAggregate])
-  //     console.log(temp);      
-  //     // this.updateRowGroupMetaData(this.profileService._agg.selectedAggregate);
-  //   }
-  //   // else {
-  //   //   const empty = '';
-  //   //   this.groupBy(this.dataSource, i => empty)
-  //     // this.updateRowGroupMetaData('');
-  //   // }
-  //   console.log(this.dataSource);
-  // }
   doCustomSort = (event: any) => {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];
@@ -295,21 +246,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   customSortFunction(event: any) {
     this.doCustomSort(event);
-    // this.doAggregate();
   }
   resetAggregation = () => {
     this.profileService._agg.selectedAggregate = '';
-    // this.doAggregate();
   }
-  // toggleSubMenu = (event: any) => {
-  //   let tableRow = document.querySelectorAll('.tr_expandable');
-  //   let auxIndex = JSON.parse(JSON.stringify(event.index));
-  //   console.log(tableRow);
-
-  //   console.log(event); //{index: 72, size: 43}
-  //   for (let counter = 0; counter < event.size; counter++, auxIndex++) {
-  //     tableRow[auxIndex].classList.toggle('_hide_rows');
-  //   }
-  // }
 
 }

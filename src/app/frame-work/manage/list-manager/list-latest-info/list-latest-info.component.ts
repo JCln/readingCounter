@@ -111,7 +111,6 @@ export class ListLatestInfoComponent extends AllListsFactory {
     console.log(this.closeTabService.listLatestInfo);
     // insert server response to modifyReq for any future user edit
     this.insertToModifyReq();
-    document.getElementsByTagName('div')[0].focus();
   }
   verification = async (canRefresh?: boolean) => {
     const temp = this.listManagerService.verificationLatestInfo(this.closeTabService.listLatestInfoReq);
@@ -128,7 +127,6 @@ export class ListLatestInfoComponent extends AllListsFactory {
       this.dictionaryWrapper();
     }
     this.insertSelectedColumns();
-    console.log(this.searchType);
   }
   openEditedModifyBatch = (data: IBatchModifyRes) => {
     this.ref = this.dialogService.open(GeneralGroupInfoResComponent, {
