@@ -57,6 +57,10 @@
   }
 }
 
+:host ::ng-deep .p-datatable table {
+  table-layout: fixed;
+}
+
 p-table {
   [readOnly] {
     border-color: transparent !important;

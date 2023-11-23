@@ -4,8 +4,7 @@
     [_checkUpName]="'Kartables'"
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3]"
     [_calculableSUM]=true
-    [_hasAggregating] = true
-    [_paginator]="false"      
+    [_hasAggregating] = true      
     [_selectedColumnsToRemember]="'selectedTrackFinished'"
     [_sessionName]="'finished-session'"    
     (refreshedTable)="refreshTable()"

@@ -21,6 +21,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 })
 export class PrimeTableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  canShowAggOptionsBool: boolean = true;
 
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
@@ -94,6 +95,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
     if (this.dataSource) {
       this.restoreLatestColumnChanges();
       this.hasBeenReadsToggler();
+      this.canShowAggregatingOptions();
+      this.canShowPaginator();
     }
   }
   refreshTable() {
@@ -247,8 +250,20 @@ export class PrimeTableComponent extends FactorySharedPrime {
   customSortFunction(event: any) {
     this.doCustomSort(event);
   }
+  canShowAggregatingOptions = () => {
+    if (this._checkUpName == 'Kartables')
+      this.canShowAggOptionsBool = this._hasAggregating && this.profileService._agg.flag;
+    else
+      this.canShowAggOptionsBool = false;
+    console.log(this.canShowAggOptionsBool);
+    
+  }
   resetAggregation = () => {
     this.profileService._agg.selectedAggregate = '';
+  }
+  canShowPaginator = () => {
+    if (this._checkUpName == 'Kartables') /*// Kartables mean aggregatable tables */
+      this._paginator = this.profileService._agg.selectedAggregate == '' ? true : false;
   }
 
 }

@@ -26,11 +26,6 @@
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i *ngIf="_outputEnabled"
-                    (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'csv',routerLink, dataSource.length)"
-                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                    <div class="tooltip_text">دریافت CSV</div>
-                </i>
                 <i *ngIf="isAddableTable" (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
@@ -42,7 +37,7 @@
                     class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
                     <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
                 </i>
-                <section *ngIf="_hasAggregating && profileService._agg.flag" class="_grouping">
+                <section *ngIf="canShowAggOptionsBool" class="_grouping">
                     <div class="_group_label">گروه‌بندی</div>
                     <p-dropdown name="zones" [options]="_selectedColumns"
                         [(ngModel)]="profileService._agg.selectedAggregate" placeholder="انتخاب مورد"
@@ -115,7 +110,7 @@
         </tr>
     </ng-template>
 
-    <ng-template *ngIf="_hasAggregating && profileService._agg.flag" pTemplate="groupheader" let-dataSource
+    <ng-template *ngIf="canShowAggOptionsBool" pTemplate="groupheader" let-dataSource
         let-columns="columns" let-ri=rowIndex let-expanded="expanded">
         <tr class="_anything">
             <td [pRowToggler]="dataSource">
@@ -124,7 +119,7 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template [pTemplate]="_hasAggregating && profileService._agg.flag ? 'rowexpansion' : 'body'" let-dataSource
+    <ng-template [pTemplate]="canShowAggOptionsBool ? 'rowexpansion' : 'body'" let-dataSource
         let-columns="columns" let-ri=rowIndex>
         <tr>
             <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr,'_editable': col.icon}">
