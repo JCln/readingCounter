@@ -81,8 +81,6 @@ export class LoginComponent {
           resolve(desc);
         }
         else {
-          console.log(1);
-          
           this.doRefreshButtonAndCaptcha();
         }
       })

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ENGroupByNames } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { SortEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -23,6 +23,7 @@ export class MasterComponent extends FactoryONE {
     { field: 'itemCount', header: 'تعداد' },
   ];
   canShowTable: boolean = true;
+  ENGroupByNames = ENGroupByNames;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,

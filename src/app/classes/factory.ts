@@ -59,7 +59,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _tooltipText: string;
     @Input() _numberOfExtraColumns: number[];
     @Input() _sessionName: string;
-    @Input() readonly _rowsNumbers = 10;
+    @Input() _rowsNumbers = 10;
     @Input() readonly isAddableTable: boolean = false;
     @Input() _selectedColumnsToRemember: string;
     @Input() _backToPreviousText: string;
@@ -164,6 +164,10 @@ export class FactorySharedPrime implements OnChanges {
         }
         else
             this.utilsService.snackBarMessageWarn(EN_messages.done);
+    }
+    refreshAggregatedTable = () => {
+        const url = this.utilsService.compositeService.getRouterUrl();
+        this.interactionService.setRefresh(url);
     }
     ngOnChanges(): void {
         this.restoreLatestColumnChanges();

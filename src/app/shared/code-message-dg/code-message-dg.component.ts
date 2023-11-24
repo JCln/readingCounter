@@ -4,6 +4,7 @@ import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { ILogin2 } from 'interfaces/iauth-guard-permission';
 import { UtilsService } from 'services/utils.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
@@ -41,6 +42,7 @@ export class CodeMessageDgComponent implements OnInit {
     this.setInterval();
   }
   login2 = async () => {
+    this.codeValue = Converter.persianToEngNumbers(this.codeValue);
     if (MathS.isNullTextValidation(this.codeValue)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insertTwoStep);
       return;

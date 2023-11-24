@@ -570,6 +570,7 @@
   ._unset_overflow_tables {
     .p-datatable-wrapper {
       overflow-x: unset !important;
+      overflow-y: unset;
     }
 
     .__columns {

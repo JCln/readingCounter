@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ENSelectedColumnVariables } from 'interfaces/enums.enum';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ENGroupByNames, ENSelectedColumnVariables } from 'interfaces/enums.enum';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
@@ -20,9 +20,10 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   // changeDetection: ChangeDetectionStrategy.OnPush // commented => cause sideEffect to dictionary Wrapper response when data need to change after converted dictionary
 })
 export class PrimeTableComponent extends FactorySharedPrime {
-  ENSelectedColumnVariables = ENSelectedColumnVariables;
-  canShowAggOptionsBool: boolean = true;
+  ENSelectedColumnVariables = ENSelectedColumnVariables;  
+  previousAggregate: string;
 
+  @ViewChild(Table) datatableG: Table;
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
   @Input() _isSortable: boolean = true;
@@ -30,6 +31,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
   @Input() _hasAggregating: boolean = false;
+  @Input() _selectedAggregatedName: ENGroupByNames = ENGroupByNames.selectedAggregate;
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -95,7 +97,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
     if (this.dataSource) {
       this.restoreLatestColumnChanges();
       this.hasBeenReadsToggler();
-      this.canShowAggregatingOptions();
       this.canShowPaginator();
     }
   }
@@ -250,20 +251,23 @@ export class PrimeTableComponent extends FactorySharedPrime {
   customSortFunction(event: any) {
     this.doCustomSort(event);
   }
-  canShowAggregatingOptions = () => {
-    if (this._checkUpName == 'Kartables')
-      this.canShowAggOptionsBool = this._hasAggregating && this.profileService._agg.flag;
-    else
-      this.canShowAggOptionsBool = false;
-    console.log(this.canShowAggOptionsBool);
-    
+  changedAggregatedOption = () => {
+    if (this.previousAggregate.length == 0)
+      this.refreshAggregatedTable();
+  }
+  previousAggregatedOption = () => {
+    this.previousAggregate = this.profileService._agg[this._selectedAggregatedName];
   }
   resetAggregation = () => {
-    this.profileService._agg.selectedAggregate = '';
+    this.profileService._agg[this._selectedAggregatedName] = '';
+    setTimeout(() => {
+      this.refreshAggregatedTable();
+      this.datatableG.reset();
+    }, 0);
   }
   canShowPaginator = () => {
-    if (this._checkUpName == 'Kartables') /*// Kartables mean aggregatable tables */
-      this._paginator = this.profileService._agg.selectedAggregate == '' ? true : false;
+    if (this._hasAggregating) /*// Kartables mean aggregatable tables */
+      this._paginator = this.profileService._agg[this._selectedAggregatedName] == '' ? true : false;
   }
 
 }

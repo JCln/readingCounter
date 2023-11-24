@@ -25,11 +25,13 @@ import { MaterialModule } from './material.module';
 import { TabViewModule } from 'primeng/tabview';
 import { InputMaskModule } from 'primeng/inputmask';
 import { SharedCarouselModule } from './shared_carousel';
+import { UnSortTableDirective } from '../directives/un-sort-table.directive';
 
 
 @NgModule({
   declarations: [
     AddRowDirective,
+    UnSortTableDirective,
     PrimeTableComponent,
     PrimeTableEditableComponent,
     ImageViewerComponent,
@@ -76,6 +78,7 @@ import { SharedCarouselModule } from './shared_carousel';
     SliderModule,
     DynamicDialogModule,
     AddRowDirective,
+    UnSortTableDirective,
     SharedCarouselModule,
     RadioButtonModule,
     SelectButtonModule,

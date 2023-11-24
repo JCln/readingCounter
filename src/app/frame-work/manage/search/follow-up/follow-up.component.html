@@ -58,7 +58,7 @@
 <p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && closeTabService.saveDataForFollowUp"
     sortField="insertDateJalali" [columns]="_defColumns" [value]="changeHsty" dir="rtl"
     styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" editMode="row" dataKey="id"
-    [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
+    [reorderableColumns]="trackingManagerService.getLocalReOrderable()" appUnSortTable>
 
     <ng-template pTemplate="caption">
         <th>

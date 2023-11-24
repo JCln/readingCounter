@@ -1,11 +1,12 @@
-<p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator"
-    [rows]=_rowsNumbers [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session" [stateKey]="_sessionName"
-    [sortField]="_sortField" [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort"
-    (sortFunction)="customSortFunction($event)" [reorderableColumns]=_reOrderableTable
-    (onFilter)="filterEventTable($event)" [dataKey]="profileService._agg.selectedAggregate" rowGroupMode="subheader"
-    [groupRowsBy]="profileService._agg.selectedAggregate">
+<p-table #datatableG *ngIf="dataSource && dataSource.length > 0 || isAddableTable || _checkUpName == 'allComponent'"
+    id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator" [rows]=_rowsNumbers
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSortFunction($event)"
+    [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)"
+    [dataKey]="profileService._agg[_selectedAggregatedName]" rowGroupMode="subheader"
+    [groupRowsBy]="profileService._agg[_selectedAggregatedName]" appUnSortTable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -37,11 +38,12 @@
                     class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
                     <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
                 </i>
-                <section *ngIf="canShowAggOptionsBool" class="_grouping">
+                <section *ngIf="_hasAggregating && profileService._agg.flag" class="_grouping">
                     <div class="_group_label">گروه‌بندی</div>
                     <p-dropdown name="zones" [options]="_selectedColumns"
-                        [(ngModel)]="profileService._agg.selectedAggregate" placeholder="انتخاب مورد"
-                        [style]="{'height': '2rem'}" optionValue="field" optionLabel="header" filter="true">
+                        [(ngModel)]="profileService._agg[_selectedAggregatedName]" placeholder="انتخاب مورد"
+                        [style]="{'height': '2rem'}" optionValue="field" optionLabel="header" filter="true"
+                        (onBlur)="previousAggregatedOption()" (onChange)="changedAggregatedOption()">
                     </p-dropdown>
                     <i (click)="resetAggregation()" class="icon_reset pi pi-refresh tooltip">
                         <div class="tooltip_text">بدون گروه‌بندی</div>
@@ -51,6 +53,7 @@
             <div class="left_side">
                 <input *ngIf="profileService._agg.hasGeneralSearch" class="_general_search"
                     (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
+
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="hasBeenReadsToggler()">
                     <label class="font_family" for="binary">({{dataSource.length}})فقط قرائت شده</label>
@@ -110,17 +113,19 @@
         </tr>
     </ng-template>
 
-    <ng-template *ngIf="canShowAggOptionsBool" pTemplate="groupheader" let-dataSource
-        let-columns="columns" let-ri=rowIndex let-expanded="expanded">
+    <ng-template
+        *ngIf="_hasAggregating && profileService._agg.flag && profileService._agg[_selectedAggregatedName].length > 0"
+        pTemplate="groupheader" let-dataSource let-columns="columns" let-ri=rowIndex let-expanded="expanded">
         <tr class="_anything">
             <td [pRowToggler]="dataSource">
-                {{dataSource[profileService._agg.selectedAggregate]}}
+                {{dataSource[profileService._agg[_selectedAggregatedName]]}}
                 <i [ngClass]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></i>
             </td>
         </tr>
     </ng-template>
-    <ng-template [pTemplate]="canShowAggOptionsBool ? 'rowexpansion' : 'body'" let-dataSource
-        let-columns="columns" let-ri=rowIndex>
+    <ng-template
+        [pTemplate]="_hasAggregating && profileService._agg.flag && profileService._agg[_selectedAggregatedName].length > 0 ? 'rowexpansion' : 'body'"
+        let-dataSource let-columns="columns" let-ri=rowIndex>
         <tr>
             <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr,'_editable': col.icon}">
                 <span class="ui-column-title">{{col.header}}</span>

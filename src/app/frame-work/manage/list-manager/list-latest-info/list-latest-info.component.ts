@@ -11,6 +11,7 @@ import { AllListsFactory } from 'src/app/classes/factory';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { Search } from 'src/app/classes/search';
 import { GeneralGroupInfoResComponent } from '../general-group-list-modify/general-group-info-res/general-group-info-res.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-list-latest-info',
@@ -71,10 +72,9 @@ export class ListLatestInfoComponent extends AllListsFactory {
     });
   }
   insertSelectedColumns = () => {
+    this.modifyType = this.listManagerService.getOffloadModifyType();
     this._selectCols = this.listManagerService.columnManager.getColumnsMenus(this._outputFileName);
     this._selectColsAccordion = this.listManagerService.columnManager.getColumnsMenus(this._outputFileNameAccordion);
-    this.searchType = this.listManagerService.getSearchTypes();
-    this.modifyType = this.listManagerService.getOffloadModifyType();
   }
   insertToModifyReq = () => {
     this.editModifyReq = {
@@ -121,7 +121,8 @@ export class ListLatestInfoComponent extends AllListsFactory {
     if (canRefresh) {
       this.verification(canRefresh);
     }
-    if (this.closeTabService.listLatestInfo.zoneId) {
+    this.searchType = this.listManagerService.getSearchTypes();
+    if (!MathS.isNull(this.closeTabService.listLatestInfo.zoneId)) {
       await this.getCounterStateDictionaryAndAddSelectable(this.closeTabService.listLatestInfo.zoneId);
       this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.closeTabService.listLatestInfo.zoneId);
       this.dictionaryWrapper();

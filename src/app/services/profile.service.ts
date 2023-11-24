@@ -18,8 +18,8 @@ export interface imageOption {
   objectFit: string,
 }
 export interface ITableDetails {
-  rowGroupMetadata: object
   selectedAggregate: string,
+  selectedAggregateMaster: string,
   flag: boolean,
   hasGeneralSearch: boolean,
 }
@@ -191,8 +191,8 @@ export class ProfileService {
   }
   // TODO: get access aggregating from trackingManager(کارتابل)
   _agg: ITableDetails = {
-    rowGroupMetadata: {},
     selectedAggregate: 'listNumber',
+    selectedAggregateMaster: 'zoneTitle',
     flag: this.getLocalDefaultAggregateTracks(),
     hasGeneralSearch: this.getTableGeneralSearch()
   }
