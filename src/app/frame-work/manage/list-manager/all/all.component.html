@@ -24,9 +24,9 @@
         [_selectedColumnsToRemember]="'selectedListManagerAll'" [_numberOfExtraColumns]="[1,2,3]"
         [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت'" [_isCustomSort]=true
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
-        (backedToPrevious)="listManagerService.utilsService.backToPreviousPage()" (filteredEvent)="filteredTableEvent($event)"
-        (routedToOffload)="routeToOffload($event)" (showedPictures)="getReadingReportTitles($event)"
-        (showedInMapSingle)="openMapDialog($event)">
+        (backedToPrevious)="listManagerService.utilsService.backToPreviousPage()"
+        (filteredEvent)="filteredTableEvent($event)" (routedToOffload)="routeToOffload($event)"
+        (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
     </app-prime-table>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"

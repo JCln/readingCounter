@@ -266,8 +266,10 @@ export class PrimeTableComponent extends FactorySharedPrime {
     }, 0);
   }
   canShowPaginator = () => {
-    if (this._hasAggregating) /*// Kartables mean aggregatable tables */
-      this._paginator = this.profileService._agg[this._selectedAggregatedName] == '' ? true : false;
+    /*// Kartables mean aggregatable tables */
+    if (this._hasAggregating) {            
+      this._paginator = this.profileService._agg[this._selectedAggregatedName] == '' || !this.profileService._agg.flag ? true : false;
+    } 
   }
 
 }

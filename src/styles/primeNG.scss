@@ -466,6 +466,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      gap: 1px;
 
       i {
         margin: 0 var(--font_025);
@@ -499,7 +500,7 @@
   .p-datatable-wrapper {
     direction: rtl;
     background-color: var(--secondary_1);
-    overflow-x: scroll;
+    overflow-x: scroll !important;
   }
 
   // .p-datatable-resizable .p-datatable-tbody>tr>td,
