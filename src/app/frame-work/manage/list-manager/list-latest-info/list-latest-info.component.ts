@@ -104,7 +104,6 @@ export class ListLatestInfoComponent extends AllListsFactory {
     this.listManagerService.setDynamicPartRanges([this.closeTabService.listLatestInfo]);
   }
   connectToServer = async (canRefresh?: boolean) => {
-    await this.closeTabService.getListLatestInfo(canRefresh ? canRefresh : false);
     this.closeTabService.listLatestInfo = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getLatestOnOffloadInfo, this.closeTabService.listLatestInfoReq);
     this.dictionaryWrapper();
     this.insertSelectedColumns();

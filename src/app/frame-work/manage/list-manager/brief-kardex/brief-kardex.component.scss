@@ -1,1 +1,5 @@
 @import 'primeNG.scss';
+
+:host ::ng-deep.p-datatable .p-datatable-header {
+    margin-top: 1rem;
+}

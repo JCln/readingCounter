@@ -84,8 +84,8 @@
                 <div class="__img_counter">{{i+1}}</div>
 
                 <!-- tooltip -->
-                <div *ngIf="!originImages[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
-                <div *ngIf="originImages[i]" class="tooltip_text">اندازه اصلی {{i+1}}</div>
+                <div *ngIf="!originImages[i]" class="tooltip_text">بارگیری تصویر</div>
+                <div *ngIf="originImages[i]" class="tooltip_text">بزرگنمایی</div>
                 <!--   -->
                 <div *ngIf="originImages[i]" class="__img_bound">
                     <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}"

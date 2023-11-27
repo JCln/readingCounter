@@ -407,7 +407,7 @@ export class ColumnManager {
         { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
         { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
         { field: 'osPlatform', header: 'نوع سیستم', isSelected: false, isSelectedOrigin: false },
-        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, readonly: true },
         // { field: 'userAgent', header: 'userAgent', isSelected: false,isSelectedOrigin:false },   
     ]
     uploadAttemptsReq: IObjectIteratation[] = [

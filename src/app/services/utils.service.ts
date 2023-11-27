@@ -76,7 +76,6 @@ export class UtilsService {
     return this.envService.API_URL;
   }
   clearFilters(session: Table): void {
-    session.filters = {};
     session.filterGlobal = null; // filter global remain in the value but not shown. this line could fix this problem
     this.compositeService.jwtService.browserStorageService.removeSession(session.stateKey);
     session.reset();

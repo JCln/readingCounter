@@ -6,6 +6,7 @@
 }
 
 h1 {
+    direction: rtl;
     color: var(--primary_2);
     text-align: center;
 }
@@ -15,6 +16,11 @@ table {
     width: 100%;
     min-height: 20vh;
     border-collapse: collapse;
+}
+
+thead {
+    position: sticky;
+    top: 0;
 }
 
 thead td {
