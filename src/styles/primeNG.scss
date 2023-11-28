@@ -118,6 +118,7 @@
     background-color: var(--secondary_3);
     color: var(--secondary_8);
     direction: ltr;
+    min-width: 4rem;
   }
 
   .__columns {
@@ -130,6 +131,11 @@
 
   span.ui-column-title {
     display: none;
+  }
+
+  .has_filters {
+    color: var(--primary_3);
+    font-weight: 600;
   }
 
   @media (max-width: 40rem) {

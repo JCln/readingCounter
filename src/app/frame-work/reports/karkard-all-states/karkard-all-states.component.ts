@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { IKarkardAllStatesDto } from 'interfaces/ireports';
@@ -16,9 +16,11 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   styleUrls: ['./karkard-all-states.component.scss'],
   animations: [transitionAnimation]
 })
-export class KarkardAllStatesComponent extends FactoryONE {
+export class KarkardAllStatesComponent extends FactoryONE implements AfterViewInit {
+  @ViewChild(Table) dtable: Table;
   tempData: IKarkardAllStatesDto[] = [];
   header: any[] = [];
+  hasFiltersInTable: boolean = false;
   public readonly routerLink: string = this.closeTabService.utilsService.compositeService.getRouterUrl();
 
   zoneDictionary: IDictionaryManager[] = [];
@@ -150,6 +152,13 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);
+    this.hasFiltersInTable = false;
+  }
+  hasFilters = () => {
+    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(this.dtable);
+  }
+  ngAfterViewInit(): void {
+    this.hasFilters();
   }
 
 }

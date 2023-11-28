@@ -38,9 +38,9 @@
         [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت'" [_isInRowEditing]="true"
         (receivedDateJalali)="receiveTableDate($event)"
         (dropDownChanges)="closeTabService.saveDataForLMGeneralModify['counterStateId']"
-        (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
-        (filteredEvent)="filteredTableEvent($event)" (showedPictures)="getReadingReportTitles($event)"
-        (showedInMapSingle)="openMapDialog($event)" (showedWOUIAsCarousel)="doShowCarousel($event.dataSource)"
+        (refreshedTable)="refreshTable()" (filteredEvent)="filteredTableEvent($event)"
+        (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"
+        (showedWOUIAsCarousel)="doShowCarousel($event.dataSource)"
         (openedMoshtarakinDialog)="openMoshtarakinDialog($event)" (onRowEditedInit)="onRowEditInit($event)"
         (onRowEditedSave)="onRowEditSave($event)" (openedBriefKardexDialog)="openBriefKardexDialog($event)"
         (onRowEditedCancelRowEditing)="onRowEditCancel($event)" (getedExcelSample)="getExcel()">

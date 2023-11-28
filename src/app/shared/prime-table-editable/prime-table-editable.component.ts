@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/enums.enum';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -16,9 +16,11 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   templateUrl: './prime-table-editable.component.html',
   styleUrls: ['./prime-table-editable.component.scss']
 })
-export class PrimeTableEditableComponent extends FactorySharedPrime {
+export class PrimeTableEditableComponent extends FactorySharedPrime implements AfterViewInit {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   onRowEditing: any;
+  @ViewChild(Table) dtable: Table;
+  hasFiltersInTable: boolean = false;
 
   @Input() _sortBy: string;
   @Input() _sortOrder: number = 1;
@@ -152,5 +154,14 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   openMoshtarakinDialog = (dataSource: object) => {
     this.openedMoshtarakinDialog.emit(dataSource);
   }
-
+  clearFilters(table: Table) {
+    this.utilsService.clearFilters(table);
+    this.hasFiltersInTable = false;
+  }
+  hasFilters = () => {
+    this.hasFiltersInTable = this.utilsService.hasFilters(this.dtable);
+  }
+  ngAfterViewInit(): void {
+    this.hasFilters();
+  }
 }

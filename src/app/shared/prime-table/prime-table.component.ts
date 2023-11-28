@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ENGroupByNames, ENSelectedColumnVariables } from 'interfaces/enums.enum';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -19,9 +19,11 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   styleUrls: ['./prime-table.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush // commented => cause sideEffect to dictionary Wrapper response when data need to change after converted dictionary
 })
-export class PrimeTableComponent extends FactorySharedPrime {
-  ENSelectedColumnVariables = ENSelectedColumnVariables;  
+export class PrimeTableComponent extends FactorySharedPrime implements AfterViewInit {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
   previousAggregate: string;
+  hasFiltersInTable: boolean = false;
+  // readonly toCalcProperties = [{ title: 'itemQuantity', value: null }];
 
   @ViewChild(Table) datatableG: Table;
   @Input() _sortOrder: number = 1;
@@ -98,7 +100,11 @@ export class PrimeTableComponent extends FactorySharedPrime {
       this.restoreLatestColumnChanges();
       this.hasBeenReadsToggler();
       this.canShowPaginator();
+
     }
+  }
+  ngAfterViewInit(): void {
+    this.hasFilters();
   }
   refreshTable() {
     this.refreshedTable.emit(true);
@@ -223,11 +229,31 @@ export class PrimeTableComponent extends FactorySharedPrime {
       return total;
     }
   }
-  groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-    arr.reduce((groups, item) => {
-      (groups[key(item)] ||= []).push(item);
-      return groups;
-    }, {} as Record<K, T[]>);
+  // calcSums(): void {
+  //   if (this.dataSource) {
+  //     let total: number = 0;
+  //     for (let propIndex = 0; propIndex < this.toCalcProperties.length; propIndex++) {
+  //       for (let index = 0; index < this.dataSource.length; index++) {
+  //         total += this.dataSource[index][this.toCalcProperties[propIndex].title];
+  //       }
+  //       // after one property done
+  //       this.toCalcProperties[propIndex].value = total;
+  //     }
+  //     console.log(this.toCalcProperties);
+  //   }
+  // }
+  clearFilters(session: Table) {
+    this.utilsService.clearFilters(session);
+    this.hasFiltersInTable = false;
+  }
+  hasFilters = () => {
+    this.hasFiltersInTable = this.utilsService.hasFilters(this.datatableG);
+  }
+  // groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
+  //   arr.reduce((groups, item) => {
+  //     (groups[key(item)] ||= []).push(item);
+  //     return groups;
+  //   }, {} as Record<K, T[]>);
   doCustomSort = (event: any) => {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];
@@ -267,9 +293,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   canShowPaginator = () => {
     /*// Kartables mean aggregatable tables */
-    if (this._hasAggregating) {            
+    if (this._hasAggregating) {
       this._paginator = this.profileService._agg[this._selectedAggregatedName] == '' || !this.profileService._agg.flag ? true : false;
-    } 
+    }
   }
 
 }

@@ -6,7 +6,7 @@
     [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSortFunction($event)"
     [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)"
     [dataKey]="profileService._agg[_selectedAggregatedName]" rowGroupMode="subheader"
-    [groupRowsBy]="profileService._agg[_selectedAggregatedName]" appUnSortTable>
+    [groupRowsBy]="profileService._agg[_selectedAggregatedName]" [resizableColumns]="true" columnResizeMode="expand" appUnSortTable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -60,7 +60,8 @@
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
                 </i>
-                <i (click)="clearFilters(datatableG)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                    class="_circle_border p_icons tooltip pi pi-filter-slash">
                     <div class="tooltip_text_right">حذف فیلترها</div>
                 </i>
                 <i *ngIf="_hasRefreshTable" (click)="refreshTable()"
@@ -86,7 +87,7 @@
 
     <ng-template pTemplate="header" let-columns *ngIf="_isSortable">
         <tr>
-            <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}"
+            <th class="__headers" pReorderableColumn pResizableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}"
                 pSortableColumnDisabled="{{col.readonly}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
@@ -95,7 +96,7 @@
             </th>
         </tr>
         <tr>
-            <th class="__headers" pReorderableColumn *ngFor="let col of columns">
+            <th class="__headers" pReorderableColumn pResizableColumn *ngFor="let col of columns">
                 <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>

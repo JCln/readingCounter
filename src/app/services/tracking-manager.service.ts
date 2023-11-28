@@ -6,7 +6,6 @@ import { ENRandomNumbers, ENSelectedColumnVariables, EN_messages } from 'interfa
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { SortEvent } from 'primeng/api/sortevent';
 import { ProfileService } from 'services/profile.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';

@@ -79,7 +79,8 @@
                             [binary]="true">
                         </p-checkbox>
                     </i>
-                    <i (click)="clearFilters(datatableG)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                    <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                        class="_circle_border p_icons tooltip pi pi-filter-slash">
                         <div class="tooltip_text_right">حذف فیلترها</div>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">

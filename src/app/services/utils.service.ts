@@ -12,6 +12,7 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Table } from 'primeng/table';
 import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { MathS } from '../classes/math-s';
 
 @Injectable({
   providedIn: 'root'
@@ -76,10 +77,32 @@ export class UtilsService {
     return this.envService.API_URL;
   }
   clearFilters(session: Table): void {
-    session.filterGlobal = null; // filter global remain in the value but not shown. this line could fix this problem
+    for (let index = 0; index < Object.keys(session.filters).length; index++) {
+      session.filters[Object.keys(session.filters)[index]]['value'] = '';
+    }
     this.compositeService.jwtService.browserStorageService.removeSession(session.stateKey);
     session.reset();
   }
+  hasFilters(session: Table): boolean {
+    if (session) {
+      for (let index = 0; index < Object.keys(session.filters).length; index++) {
+        if (!MathS.isNull(session.filters[Object.keys(session.filters)[index]]['value'])) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+  // hasFilters(session: Table): IFiltered {
+  //   if (session) {
+  //     for (let index = 0; index < Object.keys(session.filters).length; index++) {
+  //       if (!MathS.isNull(session.filters[Object.keys(session.filters)[index]]['value'])) {
+  //         return { global: session.filters['global']['value'], hasFilter: true };
+  //       }
+  //     }
+  //     return { global: session.filters['global']['value'], hasFilter: false };
+  //   }
+  // }
   doShowImageDialog = (dataSource: any, type: ENImageTypes) => {
     this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
       data: { _data: dataSource, _type: type },

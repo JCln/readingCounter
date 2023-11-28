@@ -84,13 +84,11 @@
     <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForRRPreNumShown"
         [_outputFileName]="'rrPreNumber'" [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]"
         [_sessionName]="'rr-preNumber-session'" [_selectedColumnsToRemember]="'selectedRRPreNumShown'"
-        [_isCustomSort]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedPreNumberShown"
         [_hasCollapsible]=true
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedPreNumberShown = !readingReportManagerService.utilsService.collapser.isCollapsedPreNumberShown"
-        (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
-        (showedInMapSingle)="openMapDialog($event)" (filteredEvent)="filteredTableEvent($event)"
-        (showedPictures)="getReadingReportTitles($event)">
+        (refreshedTable)="refreshTable()" (showedInMapSingle)="openMapDialog($event)"
+        (filteredEvent)="filteredTableEvent($event)" (showedPictures)="getReadingReportTitles($event)">
     </app-prime-table>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"

@@ -813,3 +813,7 @@ export enum ENGroupByNames {
     selectedAggregate = 'selectedAggregate',
     selectedAggregateMaster = 'selectedAggregateMaster'
 }
+export interface IFiltered {
+    global: string,
+    hasFilter: boolean
+}

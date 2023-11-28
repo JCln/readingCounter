@@ -55,7 +55,8 @@
                 <div class="right_side">
                 </div>
                 <div class="left_side">
-                    <i (click)="clearFilters(dtable)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                    <i (click)="clearFilters(dtable)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                        class="_circle_border p_icons tooltip pi pi-filter-slash">
                         <div class="tooltip_text_right">حذف فیلترها</div>
                     </i>
                     <app-collapsable [_isCollapsed]=closeTabService.saveDataForUserKarkardSummaryReq._isCollapsed

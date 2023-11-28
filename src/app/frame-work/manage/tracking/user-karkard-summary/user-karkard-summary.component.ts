@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { IUserKarkardSummary } from 'interfaces/iuser-manager';
@@ -14,9 +14,11 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   styleUrls: ['./user-karkard-summary.component.scss'],
   animations: [transitionAnimation]
 })
-export class UserKarkardSummaryComponent extends FactoryONE {
+export class UserKarkardSummaryComponent extends FactoryONE implements AfterViewInit {
   tempData: IUserKarkardSummary[] = [];
   header: any[] = [];
+  @ViewChild(Table) dtable: Table;
+  hasFiltersInTable: boolean = false;
 
   zoneDictionary: IDictionaryManager[] = [];
 
@@ -118,6 +120,13 @@ export class UserKarkardSummaryComponent extends FactoryONE {
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);
+    this.hasFiltersInTable = false;
+  }
+  hasFilters = () => {
+    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(this.dtable);
+  }
+  ngAfterViewInit(): void {
+    this.hasFilters();
   }
 
 }

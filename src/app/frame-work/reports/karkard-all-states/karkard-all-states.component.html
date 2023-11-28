@@ -101,7 +101,8 @@
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
         styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
-        stateKey="karkard-allstates" [reorderableColumns]="readingReportManagerService.getLocalReOrderable()" appUnSortTable>
+        stateKey="karkard-allstates" [reorderableColumns]="readingReportManagerService.getLocalReOrderable()"
+        appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -127,7 +128,8 @@
                     <app-collapsable [_isCollapsed]=readingReportManagerService.offKarkardAllStatesReq.isCollapsed
                         (_clicked)="readingReportManagerService.offKarkardAllStatesReq.isCollapsed = !readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
                     </app-collapsable>
-                    <i (click)="clearFilters(dtable)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                    <i (click)="clearFilters(dtable)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                        class="_circle_border p_icons tooltip pi pi-filter-slash">
                         <div class="tooltip_text_right">حذف فیلترها</div>
                     </i>
                 </div>

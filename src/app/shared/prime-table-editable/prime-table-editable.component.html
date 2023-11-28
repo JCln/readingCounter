@@ -63,7 +63,8 @@
                 <input *ngIf="profileService._agg.hasGeneralSearch" pInputText class="_general_search" type="text"
                     (input)="dtable.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
 
-                <i (click)="clearFilters(dtable)" class="_circle_border p_icons tooltip pi pi-filter-slash">
+                <i (click)="clearFilters(dtable)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                    class="_circle_border p_icons tooltip pi pi-filter-slash">
                     <div class="tooltip_text_right">حذف فیلترها</div>
                 </i>
 

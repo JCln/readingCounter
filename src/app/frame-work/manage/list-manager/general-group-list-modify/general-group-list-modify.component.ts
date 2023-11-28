@@ -1,6 +1,6 @@
 import { DateJalaliService } from 'services/date-jalali.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
@@ -28,9 +28,11 @@ import { Table } from 'primeng/table';
   templateUrl: './general-group-list-modify.component.html',
   styleUrls: ['./general-group-list-modify.component.scss']
 })
-export class GeneralGroupListModifyComponent extends AllListsFactory {
+export class GeneralGroupListModifyComponent extends AllListsFactory implements AfterViewInit {
   // should place only in component because overright totalNum needs for dynamic use  
   tempMainDataSource = { totalNum: 0, data: [] };
+  @ViewChild(Table) datatableG: Table;
+  hasFiltersInTable: boolean = false;
 
   _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];
   _selectedColumnsToRemember: string = 'selectedGeneralGroupModify';
@@ -443,6 +445,14 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);
+    this.hasFiltersInTable = false;
   }
+  hasFilters = () => {
+    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(this.datatableG);
+  }
+  ngAfterViewInit(): void {
+    this.hasFilters();
+  }
+
 
 }
