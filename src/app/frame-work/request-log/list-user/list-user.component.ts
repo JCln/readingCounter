@@ -39,8 +39,8 @@ export class ListUserComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH < ENRandomNumbers.ten) {
       this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH = '0'.concat(this.closeTabService.saveDataForRequestLogListUserReq.fromTimeH.toString());
     }
-    if (hour == '00') {
-      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '23';
+    if (hour == '24') {
+      this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH = '00';
     }
   }
   connectToServer = async () => {

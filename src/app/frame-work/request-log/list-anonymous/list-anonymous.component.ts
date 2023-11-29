@@ -39,8 +39,8 @@ export class ListAnonymousComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH < ENRandomNumbers.ten) {
       this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '0'.concat(this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH.toString());
     }
-    if (hour == '00') {
-      this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH = '23';
+    if (hour == '24') {
+      this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH = '00';
     }
   }
   connectToServer = async () => {

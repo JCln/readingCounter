@@ -39,8 +39,8 @@ export class ListUnAuthorizedComponent extends FactoryONE {
     if (this.closeTabService.requestLogUnAuthorizedReq.fromTimeH < ENRandomNumbers.ten) {
       this.closeTabService.requestLogUnAuthorizedReq.fromTimeH = '0'.concat(this.closeTabService.requestLogUnAuthorizedReq.fromTimeH.toString());
     }
-    if (hour == '00') {
-      this.closeTabService.requestLogUnAuthorizedReq.fromTimeH = '23';
+    if (hour == '24') {
+      this.closeTabService.requestLogUnAuthorizedReq.toTimeH = '00';
     }
   }
   connectToServer = async () => {
