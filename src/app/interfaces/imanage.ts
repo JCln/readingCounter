@@ -2,6 +2,7 @@ import { IDictionaryManager } from './ioverall-config';
 
 export interface IForbiddenManager {
     gisAccuracy: string,
+    description: string,
     id: string,
     displayName: string,
     imageCount: number,

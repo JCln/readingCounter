@@ -30,10 +30,10 @@
         </form>
     </section>
     <app-prime-table [dataSource]="closeTabService.mobileManagerFeedbackAllS" [_outputFileName]="'feedbackAllSuggest'"
-        [_sessionName]="'feedbackSuggest-session'" [_selectedColumnsToRemember]="'selectedFeedbackS'"
-        [_numberOfExtraColumns]="[1]" [_hasCollapsible]=true
+        [_checkUpName]="'feedbackAllSuggest'" [_sessionName]="'feedbackSuggest-session'"
+        [_selectedColumnsToRemember]="'selectedFeedbackS'" [_numberOfExtraColumns]="[1,2]" [_hasCollapsible]=true
         [_isCollaped]="closeTabService.utilsService.collapser._isCollapsedFeedbackS"
         (collapsed)="closeTabService.utilsService.collapser._isCollapsedFeedbackS = !closeTabService.utilsService.collapser._isCollapsedFeedbackS"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="refreshTable()" (openedMoshtarakinDialog)="showDescription($event)">
     </app-prime-table>
 </main>

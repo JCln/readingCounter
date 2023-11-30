@@ -72,6 +72,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _isCustomSort: boolean = false;
     @Input() _hasSaveColumns: boolean = true;
     @Input() _hasRefreshTable: boolean = true;
+    @Input() _virtualScroll: boolean = false;
 
     constructor(
         public browserStorageService: BrowserStorageService,
@@ -84,6 +85,7 @@ export class FactorySharedPrime implements OnChanges {
     ) {
         this.setTraslateToPrimeNgTable();
         this.getResizReOrderable();
+        this.getVirtualScrollable();
     }
 
     @Input() get selectedColumns(): any[] {
@@ -178,6 +180,9 @@ export class FactorySharedPrime implements OnChanges {
     }
     getResizReOrderable = () => {
         this._reOrderableTable = this.profileService.getLocalReOrderable();
+    }
+    getVirtualScrollable = () => {
+        this._virtualScroll = this.profileService.getLocalVirtuallScrollStatus();
     }
     denyTracking = (): boolean => {
         return this.utilsService.getDenyTracking();

@@ -34,6 +34,7 @@ export class ProfileService {
     defaultFontStyle: 1,
     reOrderableTable: false,
     twoStepsAuth: false,
+    virtualScrollStatus: false,
     notifyPosition: 'top-right',
     imgOptions: {
       width: '40rem',
@@ -87,6 +88,9 @@ export class ProfileService {
   setLocalReOrderable = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reOrderableTable, bol);
   }
+  setLocalVirtuallScrollStatus = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.virtuallScrollable, bol);
+  }
   setLocaldefaultAggregateTracks = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.defaultAggregateTracks, bol);
   }
@@ -111,6 +115,9 @@ export class ProfileService {
   }
   getLocalReOrderable = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.utilsService.envService.reOrderableTable);
+  }
+  getLocalVirtuallScrollStatus = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.virtuallScrollable, false);
   }
   getLocalDefaultAggregateTracks = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.utilsService.envService.defaultAggregateTracks);

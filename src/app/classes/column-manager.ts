@@ -24,7 +24,7 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false },
         { field: 'solution', header: 'راهکار', isSelected: true, isSelectedOrigin: true },
         { field: 'mediaCount', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true },
-        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false },
     ]
     feedbackAllSuggest: IObjectIteratation[] = [
         { field: 'feedbackTypeTitle', header: 'عنوان', isSelected: false, isSelectedOrigin: false },
@@ -33,7 +33,7 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false },
         { field: 'solution', header: 'راهکار', isSelected: true, isSelectedOrigin: true },
         { field: 'mediaCount', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true },
-        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false },
     ]
 
 
@@ -1742,7 +1742,7 @@ export class ColumnManager {
         { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
         { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false },
         { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false, isSelectedOrigin: false },
-        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false },
         { field: 'activate', header: 'فعال', isBoolean: true, isSelected: false, isSelectedOrigin: false },
     ]
     abBaha: IObjectIteratation[] = [

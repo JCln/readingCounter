@@ -115,6 +115,7 @@ export enum EN_messages {
     insert_excelRows = 'تعداد سطر های فایل Excel را وارد نمایید',
     download_excel = 'دریافت فایل Excel',
     download_excelButton = 'دریافت Excel',
+    userDesc = 'توضیحات کاربر',
     downloadPermit = 'از دانلود فایل اطمینان دارید؟',
     downloadLimit = 'شما به حداکثر موارد بارگیری در روز جاری رسیده اید',
     downloadLimitText = 'لطفا مجددا تلاش ننمایید',
@@ -186,6 +187,8 @@ export enum EN_messages {
     possibleResizableEnabled = 'تغییر اندازه ستونها فعال شد',
     possibleResizableDisabled = 'تغییر اندازه ستونها غیرفعال شد',
     possibleReOrderableEnabled = 'تغییر ترتیب ستونها فعال شد',
+    virtualScrollEnabled = 'scroll در جداول فعال شد',
+    virtualScrollDisabled = 'scroll در جداول غیر فعال شد',
     possibleReOrderableDisabled = 'تغییر ترتیب ستونها غیرفعال شد',
     twoStepsAuthEnabledWarn = 'شما درحال فعال سازی ورود دو مرحله ای می‌باشید',
     twoStepsAuthDisabledWarn = 'شما درحال غیرفعال سازی ورود دو مرحله ای می‌باشید',
@@ -657,6 +660,7 @@ export enum ENLocalStorageNames {
     fontStyle = 'fontStyle',
     tablesGeneralSearch = 'tablesGeneralSearch',
     reOrderableTable = 'reOrderableTable',
+    virtuallScrollable = 'virtuallScrollable',
     defaultAggregateTracks = 'defaultAggregateTracks',
 }
 // ENSelectedColumnVariables enum

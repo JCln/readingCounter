@@ -7,7 +7,6 @@ export enum ENFontStyle {
     fontSM = 2,
     fontS = 3,
 }
-
 export enum ENThemeName {
     themeColor = 'themeColor'
 }

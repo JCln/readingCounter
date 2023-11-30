@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IForbiddenManager } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { MobileAppService } from 'services/mobile-app.service';
@@ -41,6 +43,17 @@ export class ForbiddenWithTypeComponent extends FactoryONE {
   }
   refreshTable = () => {
     this.verification();
+  }
+  showDescription = async (rowDataAndIndex: IForbiddenManager) => {
+    const config = {
+      messageTitle: EN_messages.userDesc + '(' + rowDataAndIndex.insertDateJalali + ')',
+      messageTitleTwo: rowDataAndIndex.description,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: false,
+      icon: 'pi pi-info-circle'
+    }
+    await this.closeTabService.utilsService.firstConfirmDialog(config);
   }
 
 }

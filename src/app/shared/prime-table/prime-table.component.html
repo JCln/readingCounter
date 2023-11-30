@@ -1,12 +1,14 @@
 <p-table #datatableG *ngIf="dataSource && dataSource.length > 0 || isAddableTable || _checkUpName == 'allComponent'"
-    id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator" [rows]=_rowsNumbers
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
-    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSortFunction($event)"
-    [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)"
-    [dataKey]="profileService._agg[_selectedAggregatedName]" rowGroupMode="subheader"
-    [groupRowsBy]="profileService._agg[_selectedAggregatedName]" [resizableColumns]="true" columnResizeMode="expand" appUnSortTable>
+    id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll"
+    [rows]=_rowsNumbers [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session" [stateKey]="_sessionName"
+    [sortField]="_sortField" [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort"
+    (sortFunction)="customSortFunction($event)" [reorderableColumns]=_reOrderableTable
+    (onFilter)="filterEventTable($event)" [dataKey]="profileService._agg[_selectedAggregatedName]"
+    rowGroupMode="subheader" [scrollable]="_virtualScroll" scrollHeight="70vh" [virtualScroll]="_virtualScroll"
+    [virtualScrollItemSize]="46" [groupRowsBy]="profileService._agg[_selectedAggregatedName]" [resizableColumns]="true"
+    columnResizeMode="expand" appUnSortTable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -14,7 +16,6 @@
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
         </p-multiSelect>
-
         <div class="header_icons_wrap">
             <div class="right_side">
                 <i *ngIf="_outputEnabled"
@@ -87,8 +88,8 @@
 
     <ng-template pTemplate="header" let-columns *ngIf="_isSortable">
         <tr>
-            <th class="__headers" pReorderableColumn pResizableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}"
-                pSortableColumnDisabled="{{col.readonly}}">
+            <th class="__headers" pReorderableColumn pResizableColumn *ngFor="let col of columns"
+                pSortableColumn="{{col.field}}" pSortableColumnDisabled="{{col.readonly}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
@@ -289,9 +290,15 @@
                     <div class="tooltip_text_right">تغییرات حساب کاربر</div>
                 </i>
             </td>
-            <td class="__columns"
-                *ngIf="_outputFileName =='policyHistory' || _checkUpName == 'roleHistory' || _checkUpName == 'userMasterHistory' || _checkUpName == 'usersLogins' || _checkUpName == 'ipFilterHistory' "
-                (click)="openMoshtarakinDialog(dataSource)">
+            <td class="__columns" *ngIf="
+            _outputFileName =='policyHistory' ||
+                 _checkUpName == 'roleHistory' ||
+                 _checkUpName == 'userMasterHistory' ||
+                 _checkUpName == 'usersLogins' ||
+                 _checkUpName == 'ipFilterHistory' ||
+                 _checkUpName == 'feedbackAllComplaint' ||
+                 _checkUpName == 'feedbackAllSuggest' ||
+                 _checkUpName == 'forbiddenByParamWithType'" (click)="openMoshtarakinDialog(dataSource)">
                 <span class="ui-column-title">مشاهده جزئیات</span>
                 <i class="tooltip p_icons pi pi-info-circle">
                     <div class="tooltip_text_right">مشاهده جزئیات</div>

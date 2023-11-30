@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IFeedbackList } from 'interfaces/imobile-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { MobileAppService } from 'services/mobile-app.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -33,6 +35,17 @@ export class FeedbackAllComponent extends FactoryONE {
       this.closeTabService.mobileManagerFeedbackAllC = null;
       this.verification();
     }
+  }
+  showDescription = async (rowDataAndIndex: IFeedbackList) => {
+    const config = {
+      messageTitle: EN_messages.userDesc + '(' + rowDataAndIndex.insertDayJalali + ')',
+      messageTitleTwo: rowDataAndIndex.description,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: false,
+      icon: 'pi pi-info-circle'
+    }
+    await this.closeTabService.utilsService.firstConfirmDialog(config);
   }
 
 }

@@ -4,6 +4,8 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { CloseTabService } from 'services/close-tab.service';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
+import { IFeedbackList } from 'interfaces/imobile-manager';
+import { EN_messages } from 'interfaces/enums.enum';
 
 @Component({
   selector: 'app-feedback-all-s',
@@ -35,6 +37,17 @@ export class FeedbackAllSComponent extends FactoryONE {
 
   connectToServer = async () => {
     this.closeTabService.mobileManagerFeedbackAllS = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackManagerAllS, this.closeTabService.mobileManagerFeedbackAllSReq);
+  }
+  showDescription = async (rowDataAndIndex: IFeedbackList) => {
+    const config = {
+      messageTitle: EN_messages.userDesc + '(' + rowDataAndIndex.insertDayJalali + ')',
+      messageTitleTwo: rowDataAndIndex.description,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: false,
+      icon: 'pi pi-info-circle'
+    }
+    await this.closeTabService.utilsService.firstConfirmDialog(config);
   }
 
 }

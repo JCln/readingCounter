@@ -23,6 +23,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsGeneralSearch: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsVirtualScroll: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
@@ -121,6 +122,7 @@ export class ProfileComponent extends FactoryONE {
     this.getDefaultAggregationTrackings();
     this.getReOrderable();
     this.getTwoStepsStatus();
+    this.getVirtuallScrollStatus();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnManager.getColumnsMenus(this.profileColumns);
@@ -148,6 +150,9 @@ export class ProfileComponent extends FactoryONE {
   getReOrderable = () => {
     this.profileService.showStateVals.reOrderableTable = this.profileService.getLocalReOrderable();
   }
+  getVirtuallScrollStatus = () => {
+    this.profileService.showStateVals.virtualScrollStatus = this.profileService.getLocalVirtuallScrollStatus();
+  }
   getDefaultAggregationTrackings = () => {
     this.profileService._agg.flag = this.profileService.getLocalDefaultAggregateTracks();
   }
@@ -174,6 +179,10 @@ export class ProfileComponent extends FactoryONE {
   setFontStyle = (val: ENFontStyle) => {
     this.profileService.setFontStyle(val);
     this.fontService.setFontStyle(val);
+  }
+  setVirtualScrollStatus = (val: boolean) => {
+    this.profileService.setLocalVirtuallScrollStatus(val);
+    val ? this.profileService.showMessage(EN_messages.virtualScrollEnabled) : this.profileService.showMessage(EN_messages.virtualScrollDisabled);
   }
   setNotifyPosition = (val: string) => {
     this.profileService.setLocalNotifyPosition(val);
