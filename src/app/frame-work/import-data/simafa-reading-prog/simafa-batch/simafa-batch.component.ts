@@ -54,6 +54,7 @@ export class SimafaBatchComponent extends FactoryONE {
     }
   }
   assingIdToRouteId = () => {
+    this.allImportsService.allImports_batch.routeAndReaderIds = [];
     for (let index = 0; index < this.closeTabService.saveDataForSimafaBatch.length; index++) {
       this.allImportsService.allImports_batch.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
       this.allImportsService.allImports_batch.routeAndReaderIds[index].routeId = this.closeTabService.saveDataForSimafaBatch[index].id;
@@ -70,7 +71,7 @@ export class SimafaBatchComponent extends FactoryONE {
       !this.closeTabService.saveDataForSimafaBatch ||
       (
         this.closeTabService.saveDataForSimafaBatchReq.GUid !=
-        this.allImportsService.allImports_batch.id
+        this.allImportsService.allImports_batch.readingProgramId
       )
     ) {
       //  if data is not the same as previous      
@@ -84,7 +85,7 @@ export class SimafaBatchComponent extends FactoryONE {
       if (this.closeTabService.saveDataForSimafaBatch) {
         this.assingIdToRouteId();
         this.allImportsService.allImports_batch.fragmentMasterId = this.closeTabService.saveDataForSimafaBatch[0].fragmentMasterId;
-        this.closeTabService.saveDataForSimafaBatchReq.GUid = this.allImportsService.allImports_batch.id; // for less use of network when same data entered
+        this.closeTabService.saveDataForSimafaBatchReq.GUid = this.allImportsService.allImports_batch.readingProgramId; // for less use of network when same data entered
       }
     }
     this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.allImportsService.allImports_batch.zoneId);

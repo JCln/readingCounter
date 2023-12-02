@@ -313,6 +313,7 @@ export enum ENExportTableTranslationName {
     allLists = 'لیست ها',
     briefKardex = 'خلاصه کاردکس',
     generalListModify = 'اصلاح لیست کلی',
+    generalGroupModify = 'اصلاح لیست کلی (دسته‌ای)',
     ModifyList = 'اصلاح لیست',
     searchMoshDialog = 'جستجوی مشترک(دیالوگ)',
     apk = 'apk',

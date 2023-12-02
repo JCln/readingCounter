@@ -211,6 +211,7 @@ export class OutputManagerService {
     }
     worksheet.getRow(1).font = { name: 'Calibri', size: 14, color: { argb: 'ffffff' }, bold: true, wrapText: true };
 
+    const toExportFileName = ENExportTableTranslationName[fileName] ? ENExportTableTranslationName[fileName] : fileName;
     workbook.xlsx.writeBuffer().then((data: any) => {
       const blob = new Blob([data], {
         type:
@@ -221,7 +222,7 @@ export class OutputManagerService {
       document.body.appendChild(a);
       a.setAttribute("style", "display: none");
       a.href = url;
-      a.download = ENExportTableTranslationName[fileName] + this.dateJalaliService.getGregorianDate(), '.' + type;
+      a.download = toExportFileName + this.dateJalaliService.getGregorianDate(), '.' + type;
       a.click();
       window.URL.revokeObjectURL(url);
       a.remove();
