@@ -198,18 +198,18 @@ export class OutputManagerService {
       name: 'MyTable',
       ref: 'A1',
       headerRow: true,
-      style: {
-        theme: 'TableStyleMedium2',
-        showRowStripes: true,
-      },
+      // style: {
+      //   theme: 'TableStyleMedium2',
+      //   showRowStripes: false,
+      // },
       columns: datas.headers,
       rows: datas.data
     });
     let rowIndex = 1;
     for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
-      worksheet.getRow(rowIndex).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+      worksheet.getRow(rowIndex).alignment = { vertical: 'middle', horizontal: 'center' };//wrapText: true
     }
-    worksheet.getRow(1).font = { name: 'Calibri', size: 14, color: { argb: 'ffffff' }, bold: true, wrapText: true };
+    worksheet.getRow(1).font = { name: 'Calibri', size: 14, color: { argb: 'ffffff' }, bold: true };//wrapText: true
 
     const toExportFileName = ENExportTableTranslationName[fileName] ? ENExportTableTranslationName[fileName] : fileName;
     workbook.xlsx.writeBuffer().then((data: any) => {

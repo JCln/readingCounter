@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/enums.enum';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNGConfig, SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
@@ -36,8 +36,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime implements A
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
-  @Output() openedBriefKardexDialog = new EventEmitter<any>();
-  @Output() customedSort = new EventEmitter<any>();
+  @Output() openedBriefKardexDialog = new EventEmitter<any>();  
   @Output() receivedDateJalali = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() onRowEditedInit = new EventEmitter<any>();
@@ -143,15 +142,32 @@ export class PrimeTableEditableComponent extends FactorySharedPrime implements A
   showInMapSingle = (dataSource: object) => {
     this.showedInMapSingle.emit(dataSource);
   }
-  customSort = (dataSource: any) => {
-    this.customedSort.emit(dataSource);
+  customSort(event: SortEvent) {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
+
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+      return (event.order * result);
+    });
   }
   receiveDateJalali = (event: string, ri: number) => {
     // it may work only for General modify component
     this.dataSource[ri].offloadDateJalali = event;
     this.receivedDateJalali.emit(event);
   }
-  openMoshtarakinDialog = (dataSource: object) => {
+  openMoshtarakinDialog = (dataSource: any) => {
     this.openedMoshtarakinDialog.emit(dataSource);
   }
   clearFilters(table: Table) {

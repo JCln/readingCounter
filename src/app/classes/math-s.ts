@@ -41,7 +41,7 @@ export class MathS {
     static getFormatRange = (val: any): any => {
         return this.isNull(val) ?
             null :
-            val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+            Number(val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0])
     }
     static isExactEqual = (first: string, second: any): boolean => {
         if (first.trim() === second.trim())

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ENGroupByNames, ENSelectedColumnVariables } from 'interfaces/enums.enum';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNGConfig, SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
@@ -115,8 +115,25 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
   forceOffload = (dataSource: object) => {
     this.forcedOffload.emit(dataSource);
   }
-  customSort = (dataSource: any) => {
-    this.customedSort.emit(dataSource);
+  customSort(event: SortEvent) {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
+
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+      return (event.order * result);
+    });
   }
   backToImportedConfirmDialog = (dataSource: object) => {
     this.backedToImportedConfirmDialog.emit(dataSource);
@@ -273,9 +290,6 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
 
       return (event.order * result);
     });
-  }
-  customSortFunction(event: any) {
-    this.doCustomSort(event);
   }
   changedAggregatedOption = () => {
     if (this.previousAggregate.length == 0)
