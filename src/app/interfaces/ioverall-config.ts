@@ -137,6 +137,7 @@ export interface IObjectIteratation {
     enableTooltip?: boolean;
     tabIndex?: number;
 }
+export type BookType = 'xlsx' | 'csv' | 'xls';
 export interface INotificationAlertTypes {
     title: string,
     value: number,

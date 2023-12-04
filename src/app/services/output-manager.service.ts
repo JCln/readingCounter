@@ -3,9 +3,8 @@ import 'jspdf-autotable';
 
 import { Injectable } from '@angular/core';
 import { ENExportTableTranslationName, EN_messages } from 'interfaces/enums.enum';
-import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { BookType, IObjectIteratation } from 'interfaces/ioverall-config';
 import { jsPDF } from 'jspdf';
-import * as XLSX from 'xlsx';
 import * as ExcelJs from "exceljs/dist/exceljs.min.js";
 
 import { font } from '../../assets/pdfjs/BLotus-normal';
@@ -178,9 +177,9 @@ export class OutputManagerService {
     }
     return true;
   }
-  export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: XLSX.BookType, routerLink: string, count: number) => {
-    if (!await this.canIDownloadMore(routerLink, count))
-      return;
+  export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: BookType, routerLink: string, count: number) => {
+    // if (!await this.canIDownloadMore(routerLink, count))
+    //   return;
 
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
@@ -209,7 +208,16 @@ export class OutputManagerService {
     for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
       worksheet.getRow(rowIndex).alignment = { vertical: 'middle', horizontal: 'center' };//wrapText: true
     }
-    worksheet.getRow(1).font = { name: 'Calibri', size: 14, color: { argb: 'ffffff' }, bold: true };//wrapText: true
+
+    worksheet.getColumn(1).font = { name: 'B Koodak' }
+    worksheet.getColumn(2).font = { name: 'B Koodak' }
+    // const column = table.getColumn(1);
+    console.log(worksheet.getColumn(1));
+    console.log(worksheet._columns.length);
+    // for (let colIndex = 1; colIndex <= worksheet._columns.length; colIndex++) {
+    //   worksheet.getColumn(colIndex).style = { font: { name: 'B Koodak' } };          
+    // }
+    worksheet.getRow(1).font = { name: 'B Koodak', size: 14, color: { argb: 'ffffff' }, bold: true };//wrapText: true    
 
     const toExportFileName = ENExportTableTranslationName[fileName] ? ENExportTableTranslationName[fileName] : fileName;
     workbook.xlsx.writeBuffer().then((data: any) => {

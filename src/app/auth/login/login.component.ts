@@ -35,7 +35,7 @@ export class LoginComponent {
     dntCaptchaToken: '',
     dntCaptchaInputText: '',
     appVersion: this.utilsService.getAppVersion(),
-    clientDateTime: this.dateJalaliService.getGregorianDate()
+    clientDateTime: ''
   };
   userDataInput2: ILogin2 = {
     deviceSerial: '',
@@ -100,6 +100,7 @@ export class LoginComponent {
         // button should disable after logging
         (<HTMLInputElement>document.getElementById(this.btnLoginId)).disabled = true;
         const returnUrl = this.authService.utilsService.compositeService.getRouterQueryParamMap(this.returnUrl);
+        this.userData.clientDateTime = this.dateJalaliService.getGregorianDate();
         const res: ICredentialsResponse = await this.authService.logging(this.userData);
         if (res) {
           // TODO: Dynamic add to Local or Session Storage
