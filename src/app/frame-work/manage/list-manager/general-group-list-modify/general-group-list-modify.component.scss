@@ -70,3 +70,8 @@ p-table {
     background-color: transparent;
   }
 }
+
+._rotate {
+  transform: rotate(-90deg);
+  font-size: var(--font_ss);
+}
