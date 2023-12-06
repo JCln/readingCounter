@@ -567,8 +567,9 @@ export enum ENEssentialsToSave {
     listLatestInfo = 'listLatestInfo',
     ipFilterGetInvalidTime = 'ipFilterGetInvalidTime',
     ipFilterGetInvalidTimeReq = 'ipFilterGetInvalidTimeReq',
-    authenticityAttemptsReq = "authenticityAttemptsReq",
-    authenticityAttempts = "authenticityAttempts"
+    authenticityAttemptsReq = 'authenticityAttemptsReq',
+    authenticityAttempts = 'authenticityAttempts',
+    importedEditedRes = 'importedEditedRes'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -719,6 +720,7 @@ export enum ENSelectedColumnVariables {
     selectedDMAnalyze = 'analysis',
     selectedRRMaster = '_fragmentMaster',
     selectedRRDetails = 'rrDetails',
+    selectedImportedEdited = 'importedEdited',
     selectedRRGuildsParams = 'rrGuildsParams',
     selectedRRRequestLog = 'requestLog',
     selectedRRRequestLogAnonymous = 'requestLogAnonymous',

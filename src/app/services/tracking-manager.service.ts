@@ -206,6 +206,47 @@ export class TrackingManagerService {
     return true;
   }
   /* VERIFICATION */
+  validationImportedEdited = (dataSource: object): boolean => {
+    if (dataSource.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(dataSource['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (MathS.isNull(dataSource['fromDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+        return false;
+      }
+      if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (MathS.isNull(dataSource['toDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+        return false;
+      }
+      if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+        return false;
+      }
+      if (dataSource.hasOwnProperty('alalHesabPercent')) {
+        if (MathS.isNullZero(dataSource['alalHesabPercent'])) {
+          this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
+          return false;
+        }
+      }
+      if (dataSource.hasOwnProperty('imagePercent')) {
+        if (MathS.isNullZero(dataSource['imagePercent'])) {
+          this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
   verificationOffloadModify = (object: IOffloadModifyReq): boolean => {
     return this.offloadModifyValidation(object);
   }

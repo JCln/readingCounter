@@ -96,8 +96,9 @@
             <tr>
                 <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                     <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                    <div class="_rotate">
+                    <div class="_rotate tooltip">
                         {{col.header}}
+                        <div class="tooltip_text_bottom">{{col.header}}</div>
                     </div>
                 </th>
                 <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>

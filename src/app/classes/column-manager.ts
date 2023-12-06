@@ -104,6 +104,31 @@ export class ColumnManager {
     imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
     ];
+    importedEdited: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true, isSelectedOrigin: true, readonly: true },
+        // { field: 'zoneId', header: 'ناحیه', isSelected: false ,isSelectedOrigin: false,readonly: true},
+        { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        // { field: 'year', header: 'سال', isSelected: false ,isSelectedOrigin: false,readonly: true},
+        { field: 'isRoosta', header: 'روستایی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true },
+        { field: 'fromDate', header: 'از', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'toDate', header: 'تا', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'insertTime', header: 'زمان ثبت', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isSelectedOrigin: false, isNumber: true, readonly: true },
+        { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true, readonly: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
+
+    ];
     reading: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: true },
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -2080,7 +2105,7 @@ export class ColumnManager {
         { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },//تاریخ نصب
         { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
-        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },        
+        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },

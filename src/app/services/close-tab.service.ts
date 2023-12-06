@@ -46,7 +46,7 @@ import {
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
 import { IDynamicExcelReq } from 'interfaces/itools';
-import { IOffLoadPerDay, IOnOffLoad, ITracking } from 'interfaces/itrackings';
+import { IOffLoadPerDay, IOnOffLoad, ITracking, ITrackingSearchDto } from 'interfaces/itrackings';
 import { IAddUserInfos, IRoleManager, IUserCompareManager, IUserManager, IUserOnlines, IUserRoleCompare } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -344,6 +344,18 @@ export class CloseTabService {
   saveDataForTrackImported: ITracking[];
   saveDataForTrackLoaded: ITracking[];
   saveDataForTrackReading: ITracking[];
+  importedEditedRes: ITracking[] = [];
+  importedEditedReq: ITrackingSearchDto = {
+    fromDate: '',
+    toDate: '',
+    zoneId: null,
+    imagePercent: null,
+    alalHesabPercent: null,
+    isRoosta: false,
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+  }
   saveDataForUserKarkard: IUserKarkard[];
   saveDataForTrackOffloaded: ITracking[];
   saveDataForUserKarkardSummaryReq = {
@@ -844,6 +856,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading },
+    { id: 1, value: ENEssentialsToSave.importedEditedRes, url: EN_Routes.importedEdited },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },

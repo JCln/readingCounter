@@ -62,6 +62,7 @@ export enum EN_Routes {
     'wrmtrackimported' = '/wr/m/track/imported',
     'wrmtrackloaded' = '/wr/m/track/loaded',
     'wrmtrackreading' = '/wr/m/track/reading',
+    importedEdited = '/wr/m/track/importedEdited',
     'wrmtracklatest' = '/wr/m/track/latest',
     'wrmtrackoffloaded' = '/wr/m/track/offloaded',
     'wrmtrackoffloadedGroup' = '/wr/m/track/offloadedG',

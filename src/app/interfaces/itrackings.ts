@@ -27,6 +27,17 @@ export interface ITracking {
     fragmentDetailTitle: string,
     hasMap: boolean
 }
+export interface ITrackingSearchDto {
+    fromDate: string,
+    toDate: string,
+    zoneId: number,
+    isRoosta: boolean,
+    imagePercent: number,
+    alalHesabPercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean
+}
 export interface IEditTracking {
     id: string,
     alalHesabPercent: number,

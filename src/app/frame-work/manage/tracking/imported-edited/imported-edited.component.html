@@ -1,0 +1,76 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="_card"
+                [@openClose]="trackingManagerService.utilsService.collapser._isCollapsedImportedEdited ? 'slideUp' : 'slideDown'">
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="closeTabService.importedEditedReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true" (click)="getReadingConfigDefaults()">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.importedEdited, $event)"
+                                [dateObject]="closeTabService.importedEditedReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.importedEdited, $event)"
+                                [dateObject]="closeTabService.importedEditedReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">درصد علی‌الحساب</div>
+                        <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                            [(ngModel)]="closeTabService.importedEditedReq.alalHesabPercent">
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">درصد تصویر</div>
+                        <input class="_value" type="number" min="0" max="100" name="imagePercent"
+                            [(ngModel)]="closeTabService.importedEditedReq.imagePercent">
+                    </div>
+                    <div class="check_boxes">
+                        <mat-checkbox name="hasPreNumber" [(ngModel)]="closeTabService.importedEditedReq.hasPreNumber">
+                            شماره قبلی
+                        </mat-checkbox>
+
+                        <mat-checkbox name="displayBillId"
+                            [(ngModel)]="closeTabService.importedEditedReq.displayBillId">
+                            شناسه قبض
+                        </mat-checkbox>
+
+                        <mat-checkbox name="displayRadif" [(ngModel)]="closeTabService.importedEditedReq.displayRadif">
+                            ش.پرونده
+                        </mat-checkbox>
+
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="closeTabService.importedEditedRes" [_outputFileName]="'importedEdited'"
+        [_sessionName]="'importededited-session'" [_selectedColumnsToRemember]="'selectedImportedEdited'"
+        [_hasCollapsible]=true [_isCollaped]="trackingManagerService.utilsService.collapser._isCollapsedImportedEdited"
+        (collapsed)="trackingManagerService.utilsService.collapser._isCollapsedImportedEdited = !trackingManagerService.utilsService.collapser._isCollapsedImportedEdited"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>

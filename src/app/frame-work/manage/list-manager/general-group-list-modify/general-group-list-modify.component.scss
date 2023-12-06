@@ -72,6 +72,13 @@ p-table {
 }
 
 ._rotate {
-  transform: rotate(-90deg);
+  overflow: hidden;
+  text-wrap: nowrap;
+  direction: rtl;
+  display: block;
   font-size: var(--font_ss);
+
+  &:hover {
+    overflow: visible;
+  }
 }
