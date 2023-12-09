@@ -1,7 +1,7 @@
 @import 'variable';
 
 main {
-  font-family: $font_family;
+  font-family: var(--font-family);
   font-size: var(--font_s);
 
   padding: var(--font_05);

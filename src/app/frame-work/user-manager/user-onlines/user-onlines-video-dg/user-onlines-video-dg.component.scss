@@ -10,7 +10,7 @@
   direction: rtl;
   justify-content: center;
   gap: var(--font_xs);
-  font-family: $font_family;
+  font-family: var(--font-family);
 }
 
 .content {

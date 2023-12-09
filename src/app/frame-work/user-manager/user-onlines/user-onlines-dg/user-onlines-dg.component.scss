@@ -4,7 +4,7 @@
 
 section {
   direction: rtl;
-  font-family: $font_family;
+  font-family: var(--font-family);
   border-radius: 7px;
   background: var(--secondary_1);
   padding: .5rem;
@@ -13,7 +13,7 @@ section {
 
 .over_all {
   direction: rtl;
-  font-family: $font_family;
+  font-family: var(--font-family);
   width: 90%;
   margin: auto;
 

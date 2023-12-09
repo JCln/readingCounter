@@ -133,7 +133,7 @@ form.bottom-form {
   position: relative;
   border: 1px solid var(--secondary_5);
   border-radius: $border_15;
-  font-family: $font_family;
+  font-family: var(--font-family);
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_2);
 }

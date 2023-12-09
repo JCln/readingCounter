@@ -33,7 +33,7 @@
 
 h2 {
   text-align: right;
-  font-family: $font_family;
+  font-family: var(--font-family);
   font-size: var(--font_l);
   font-weight: 600;
   color: var(--primary_2);

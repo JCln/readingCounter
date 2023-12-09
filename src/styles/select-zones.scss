@@ -95,7 +95,7 @@ main {
 
 // 
 .mat-horizontal-stepper-header-container {
-  font-family: $font_family;
+  font-family: var(--font-family);
 }
 
 // switch buttons

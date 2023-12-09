@@ -3,12 +3,12 @@
 ._contents {
   display: grid;
   direction: rtl;
-  font-family: $font_family;
+  font-family: var(--font-family);
   grid-template-columns: repeat(auto-fit, minmax(17rem, auto));
   gap: var(--font_025);
 }
 
 h2 {
   text-align: center;
-  font-family: $font_family;
+  font-family: var(--font-family);
 }

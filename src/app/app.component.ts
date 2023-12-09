@@ -46,6 +46,7 @@ export class AppComponent {
   }
   defaultConfigs = () => {
     this.fontService.getActiveFont();
+    this.fontService.getActiveFontFamily();
   }
 
 }

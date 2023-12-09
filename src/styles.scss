@@ -2,11 +2,14 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 @font-face {
+  font-family: BKoodak;
+  src: url(/assets/fonts/BKoodak.woff) format("woff"), url(/assets/fonts/BKoodak) format("truetype");
+}
+
+@font-face {
   font-family: BLotus;
   src: url(/assets/fonts/BLotus.woff) format("woff2"), url(/assets/fonts/BLotus) format("truetype");
 }
-
-$font_family: BLotus, "Blotus", tahoma, Sans-Serif;
 
 body,
 html {
@@ -14,7 +17,7 @@ html {
   margin: 0;
   min-height: 100%;
   position: relative;
-  font-family: $font_family;
+  font-family: var(--font-family);
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) all 250ms;
@@ -87,6 +90,7 @@ hr {
   --font_5: 5rem;
   --font_52: 5.2rem;
   --font_55: 5.5rem;
+  --font-family: 'BKoodak';
 
   --white: rgb(57, 53, 50);
   --fix_gray_light: rgb(248, 249, 250);
@@ -138,13 +142,13 @@ button,
 input,
 li {
   outline: none;
-  font-family: $font_family;
+  font-family: var(--font-family);
 }
 
 .p-dialog,
 .p-dialog-header,
 .p-dialog-title {
-  font-family: $font_family;
+  font-family: var(--font-family);
   padding: var(--font_03) !important;
 }
 
@@ -165,7 +169,7 @@ li {
 
 /* ACCORDION */
 .p-accordion p-accordiontab .p-accordion-tab {
-  font-family: $font_family;
+  font-family: var(--font-family);
   direction: rtl;
   text-align: right;
 }
@@ -189,7 +193,7 @@ input[type=number] {
 }
 
 .leaflet-popup-content {
-  font-family: $font_family;
+  font-family: var(--font-family);
   text-align: center;
   font-size: var(--font_s);
   font-weight: 600;

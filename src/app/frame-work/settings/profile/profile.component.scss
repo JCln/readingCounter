@@ -34,7 +34,7 @@ p-tabview {
 
 ._key,
 ._value {
-  font-family: $font_family;
+  font-family: var(--font-family);
 }
 
 ._key {
@@ -119,7 +119,7 @@ p-tabview {
 }
 
 .title {
-  font-family: $font_family;
+  font-family: var(--font-family);
   color: var(--primary_3);
   text-align: center;
   font-size: var(--font_l2);

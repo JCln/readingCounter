@@ -128,7 +128,7 @@
   }
 
   ._group_label {
-    font-family: $font_family;
+    font-family: var(--font-family);
     padding-right: .25rem;
     font-size: var(--font_s);
     font-weight: 600;

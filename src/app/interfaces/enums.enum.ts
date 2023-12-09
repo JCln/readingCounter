@@ -660,6 +660,7 @@ export enum ENLocalStorageNames {
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
     fontStyle = 'fontStyle',
+    fontFamily = 'fontFamily',
     tablesGeneralSearch = 'tablesGeneralSearch',
     reOrderableTable = 'reOrderableTable',
     virtuallScrollable = 'virtuallScrollable',

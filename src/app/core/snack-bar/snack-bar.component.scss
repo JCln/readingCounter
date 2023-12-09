@@ -3,7 +3,7 @@
 
 ::ng-deep {
   .mat-simple-snackbar {
-    font-family: $font_family;
+    font-family: var(--font-family);
     font-size: var(--font_s);
     font-weight: 600;
     color: var(--fix_gray_light);
@@ -14,7 +14,7 @@
     font-weight: 600;
     color: var(--fix_gray_light);
     font-size: var(--font_xs);
-    font-family: $font_family;
+    font-family: var(--font-family);
     max-height: 36px;
     min-width: 0;
     left: 0;
@@ -53,7 +53,7 @@ section {
 }
 
 ._custom_toast {
-  font-family: $font_family;
+  font-family: var(--font-family);
   justify-content: center;
   margin: 0 var(--font_s);
   flex: 1;

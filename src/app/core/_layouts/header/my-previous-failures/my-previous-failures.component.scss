@@ -2,7 +2,7 @@
 @import 'primeNG';
 
 .content {
-    font-family: $font_family;
+    font-family: var(--font-family);
     padding: 2rem;
 }
 

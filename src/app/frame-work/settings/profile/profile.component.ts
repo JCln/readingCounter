@@ -3,7 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/isettings';
-import { ENFontStyle } from 'interfaces/istyles';
+import { ENFontFamily, ENFontStyle } from 'interfaces/istyles';
 import { CloseTabService } from 'services/close-tab.service';
 import { FontService } from 'services/font.service';
 import { imageOption, ProfileService } from 'services/profile.service';
@@ -29,6 +29,10 @@ export class ProfileComponent extends FactoryONE {
     { label: 'کوچک', value: ENFontStyle.fontXS },
     { label: 'متوسط', value: ENFontStyle.fontSM },
     { label: 'بزرگ', value: ENFontStyle.fontS }
+  ];
+  stateFontFamilyOptions: any[] = [
+    { label: 'B Lotus', value: ENFontFamily.BLotus },
+    { label: 'B Koodak', value: ENFontFamily.BKoodak },
   ];
   notifyPositionOptions: any[] = [
     { label: 'بالا راست', value: 'top-right' },
@@ -179,6 +183,10 @@ export class ProfileComponent extends FactoryONE {
   setFontStyle = (val: ENFontStyle) => {
     this.profileService.setFontStyle(val);
     this.fontService.setFontStyle(val);
+  }
+  setFontFamily = (val: ENFontFamily) => {
+    this.profileService.setFontFamily(val);
+    this.fontService.setFontFamily(val);
   }
   setVirtualScrollStatus = (val: boolean) => {
     this.profileService.setLocalVirtuallScrollStatus(val);

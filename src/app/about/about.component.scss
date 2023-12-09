@@ -104,7 +104,7 @@ section {
 }
 
 ._text {
-    font-family: $font_family;
+    font-family: var(--font-family);
     text-align: center;
     color: gray;
     font-size: 1.5rem;

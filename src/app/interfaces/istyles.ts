@@ -21,3 +21,10 @@ export interface Theme {
     name: string,
     properties: any
 }
+export enum ENFontFamilyName {
+    fontFamily = 'fontFamily'
+}
+export enum ENFontFamily {
+    BLotus = 'BLotus',
+    BKoodak = 'BKoodak'
+}

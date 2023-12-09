@@ -128,3 +128,16 @@ export const fontS: Theme = {
         "--font_55": "5.5rem",
     }
 };
+
+export const FontFamilyBLotus: Theme = {
+    name: "BLotus",
+    properties: {
+        "--font-family": "BLotus",
+    }
+}
+export const FontFamilyBKoodak: Theme = {
+    name: "BKoodak",
+    properties: {
+        "--font-family": "BKoodak",
+    }
+}

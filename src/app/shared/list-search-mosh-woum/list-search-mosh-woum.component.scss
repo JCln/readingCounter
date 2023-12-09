@@ -1,5 +1,5 @@
 @import 'variable';
 
 app-woum {
-  font-family: $font_family;
+  font-family: var(--font-family);
 }

@@ -77,7 +77,7 @@ input {
       color: var(--secondary_6);
       line-height: 2;
       border-radius: $border_15;
-      font-family: $font_family;
+      font-family: var(--font-family);
     }
   }
 

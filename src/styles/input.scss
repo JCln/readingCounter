@@ -12,7 +12,7 @@ $border_15: 10px;
   border-radius: $border_15;
   font-weight: 600;
   border: 1px solid;
-  font-family: $font_family;
+  font-family: var(--font-family);
 
   @media (max-width: 550px) {
     min-width: 15rem;
@@ -29,7 +29,7 @@ $border_15: 10px;
   height: var(--font_28);
   border: 1px solid var(--secondary_3_spec);
   border-radius: $border_7;
-  font-family: $font_family;
+  font-family: var(--font-family);
 }
 
 ._key {

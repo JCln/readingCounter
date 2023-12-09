@@ -4,7 +4,7 @@
 @import '_mat.scss';
 
 .main {
-  font-family: $font_family;
+  font-family: var(--font-family);
   background: var(--secondary_1);
   direction: rtl;
   margin-bottom: var(--font_025);
@@ -31,7 +31,7 @@ section.content {
 }
 
 .btn_1 {
-  font-family: $font_family;
+  font-family: var(--font-family);
   display: flex;
   align-items: center;
   justify-content: space-evenly;

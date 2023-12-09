@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-family: $font_family;
+  font-family: var(--font-family);
   max-width: 100%;
 }
 

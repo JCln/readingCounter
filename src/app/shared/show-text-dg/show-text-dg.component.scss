@@ -1,7 +1,7 @@
 @import 'variable';
 
 .content {
-  font-family: $font_family;
+  font-family: var(--font-family);
   background: var(--secondary_1);
   text-align: center;
   padding: var(--font_xs) 0;

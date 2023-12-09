@@ -179,7 +179,7 @@
 /* tables */
 
 table {
-  font-family: $font_family;
+  font-family: var(--font-family);
   border-collapse: collapse;
   width: 100%;
   direction: rtl;

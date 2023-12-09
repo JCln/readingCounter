@@ -143,6 +143,15 @@
             </section>
             <section>
                 <div class="content">
+                    <h1 class="title">نوع فونت</h1>
+                    <p-selectButton [options]="stateFontFamilyOptions"
+                        [(ngModel)]="profileService.showStateVals.defaultFontFamily" optionLabel="label"
+                        optionValue="value" (onChange)="setFontFamily(profileService.showStateVals.defaultFontFamily)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
                     <h1 class="title">امکان لغو درخواست</h1>
                     <p-selectButton [options]="stateOptionsSpinner"
                         [(ngModel)]="profileService.showStateVals.hasCanclableSpinner" optionLabel="label"

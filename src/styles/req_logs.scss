@@ -4,7 +4,7 @@
 @import '_mat';
 
 section {
-    font-family: $font_family;
+    font-family: var(--font-family);
 }
 
 .content {
@@ -68,7 +68,7 @@ input {
             color: var(--primary_5);
             line-height: 2;
             border-radius: $border_15;
-            font-family: $font_family;
+            font-family: var(--font-family);
         }
     }
 }

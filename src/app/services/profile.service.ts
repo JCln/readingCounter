@@ -10,7 +10,7 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
 import { LocalClientConfigsService } from './local-client-configs.service';
-import { ENFontStyle } from 'interfaces/istyles';
+import { ENFontFamily, ENFontStyle } from 'interfaces/istyles';
 
 export interface imageOption {
   width: string,
@@ -32,6 +32,7 @@ export class ProfileService {
     searchBasedOnDate: false,
     hasCanclableSpinner: false,
     defaultFontStyle: 1,
+    defaultFontFamily: ENFontFamily.BLotus,// value of default is sync with font.service.ts
     reOrderableTable: false,
     twoStepsAuth: false,
     virtualScrollStatus: false,
@@ -102,6 +103,9 @@ export class ProfileService {
   }
   setFontStyle = (fontStyle: number) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
+  }
+  setFontFamily = (name: string) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontFamily, name);
   }
   getLocalValue = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);

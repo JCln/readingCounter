@@ -225,7 +225,7 @@ h2 {
       color: var(--primary_3);
       line-height: 2;
       border-radius: $border_15;
-      font-family: $font_family;
+      font-family: var(--font-family);
     }
   }
 
@@ -269,7 +269,7 @@ h2 {
 }
 
 .mat-stepper-horizontal {
-  font-family: $font_family;
+  font-family: var(--font-family);
   padding: var(--font_05);
   border-radius: $border_7;
 }

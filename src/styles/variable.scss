@@ -5,13 +5,9 @@ $border_15: 15px;
 $border_100vmax: 100vmax;
 $border_50: 50%;
 
-$font_family: BLotus,
-  "Blotus",
-  tahoma,
-  Sans-Serif;
 
 .font_family {
-  font-family: $font_family;
+  font-family: var(--font-family);
 }
 
 .d_rtl {
