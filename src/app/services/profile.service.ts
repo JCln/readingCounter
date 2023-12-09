@@ -132,6 +132,9 @@ export class ProfileService {
   getFontStyle = (): number => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, ENFontStyle.fontXS);
   }
+  getFontFamily = (): ENFontFamily => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontFamily, ENFontFamily.BLotus);
+  }
   getTableGeneralSearch = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.tablesGeneralSearch, false);
   }

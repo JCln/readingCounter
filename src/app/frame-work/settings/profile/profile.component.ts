@@ -119,6 +119,7 @@ export class ProfileComponent extends FactoryONE {
 
     this.getBasedOnDate();
     this.getFontStyle();
+    this.getFontFamily();
     this.getNotifyPosition();
     this.getSelectedColumns();
     this.getHasCanclableSpinner();
@@ -168,6 +169,9 @@ export class ProfileComponent extends FactoryONE {
   }
   getFontStyle = () => {
     this.profileService.showStateVals.defaultFontStyle = this.profileService.getFontStyle();
+  }
+  getFontFamily = () => {
+    this.profileService.showStateVals.defaultFontFamily = this.profileService.getFontFamily();
   }
   getNotifyPosition = () => {
     this.profileService.showStateVals.notifyPosition = this.profileService.getLocalNotifyPosition();

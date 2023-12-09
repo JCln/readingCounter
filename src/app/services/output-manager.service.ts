@@ -178,8 +178,8 @@ export class OutputManagerService {
     return true;
   }
   export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: BookType, routerLink: string, count: number) => {
-    // if (!await this.canIDownloadMore(routerLink, count))
-    //   return;
+    if (!await this.canIDownloadMore(routerLink, count))
+      return;
 
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
