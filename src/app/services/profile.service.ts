@@ -10,12 +10,18 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
 import { LocalClientConfigsService } from './local-client-configs.service';
-import { ENFontFamily, ENFontStyle } from 'interfaces/istyles';
+import { ENFontFamily, ENFontFamilyExactName, ENFontStyle } from 'interfaces/istyles';
 
 export interface imageOption {
   width: string,
   height: string,
   objectFit: string,
+}
+export interface IOutputConfig {
+  shouldFilteredValue: boolean,
+  shouldFreezeHeader: boolean,
+  defaultColWidth: number,
+  defaultFontFamily: ENFontFamilyExactName
 }
 export interface ITableDetails {
   selectedAggregate: string,
@@ -42,6 +48,12 @@ export class ProfileService {
       height: '40rem',
       objectFit: 'contain'
     },
+    outputConfig: {
+      shouldFilteredValue: false,
+      shouldFreezeHeader: false,
+      defaultColWidth: 13,
+      defaultFontFamily: ENFontFamilyExactName.BKoodak
+    }
   }
 
   constructor(
@@ -76,6 +88,9 @@ export class ProfileService {
   }
   setImg = (imageOption: imageOption) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.imageOption, imageOption);
+  }
+  setOutputConfigs = (val: IOutputConfig) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.outputConfigs, val);
   }
   setUseCarouselMedia = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
@@ -131,6 +146,16 @@ export class ProfileService {
   }
   getFontStyle = (): number => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, ENFontStyle.fontXS);
+  }
+  getOutputConfigs = (): IOutputConfig => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.outputConfigs,
+      {
+        shouldFilteredValue: false,
+        shouldFreezeHeader: false,
+        defaultColWidth: 13,
+        defaultFontFamily: ENFontFamilyExactName.BKoodak
+      }
+    );
   }
   getFontFamily = (): ENFontFamily => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontFamily, ENFontFamily.BLotus);

@@ -11,6 +11,7 @@ import { font } from '../../assets/pdfjs/BLotus-normal';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class OutputManagerService {
 
   constructor(
     private utilsService: UtilsService,
-    private dateJalaliService: DateJalaliService
+    private dateJalaliService: DateJalaliService,
+    private profileService: ProfileService
   ) {
   }
 
@@ -92,7 +94,7 @@ export class OutputManagerService {
 
     return { data: newData, headers: validHeaders };
   }
-  getValidatedTableDataExcelJs = (dataSource: any[], _selectCols: any[]): any => {
+  getValidatedTableDataExcelJs = (dataSource: any[], _selectCols: any[], fontFamilyStyle: string): any => {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
     const validColNames = [];
     const validHeaders: any[] = [];
@@ -107,7 +109,7 @@ export class OutputManagerService {
 
         if (key === colName && colnames[j].sel) {
           validColNames.push(colName);
-          validHeaders.push({ name: colnames[j].header });
+          validHeaders.push({ name: colnames[j].header, style: { font: { name: fontFamilyStyle } } });
         }
       }
     }
@@ -184,13 +186,30 @@ export class OutputManagerService {
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
       return;
-    const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols);
+    const outputConfig = this.profileService.getOutputConfigs();
+    if (outputConfig.shouldFilteredValue) {
+      if (!!dataSource.filteredValue) { // there is sth to filter && dataSource is exsiting
+        dataSource = dataSource.filteredValue;
+      }
+      else {
+        dataSource = dataSource._value;
+      }
+    }
+    else {
+      dataSource = dataSource._value;
+    }
+
+    if (!this.isNullData(dataSource))
+      return;
+
+    const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols, outputConfig.defaultFontFamily);
     const workbook = new ExcelJs.Workbook();
+    const viewsConfig = outputConfig.shouldFreezeHeader ? { state: 'frozen', ySplit: 1, rightToLeft: true } : { rightToLeft: true }
     const worksheet = workbook.addWorksheet(
       "Sheet1",
-      { views: [{ state: 'frozen', ySplit: 1, rightToLeft: true }] }
+      { views: [viewsConfig] }
     );
-    worksheet.properties.defaultColWidth = 13;
+    worksheet.properties.defaultColWidth = outputConfig.defaultColWidth;
 
     // TABLE
     worksheet.addTable({
@@ -204,20 +223,12 @@ export class OutputManagerService {
       columns: datas.headers,
       rows: datas.data
     });
-    let rowIndex = 1;
-    for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
+
+    worksheet.getRow(1).font = { name: outputConfig.defaultFontFamily, size: 14, color: { argb: 'ffffff' } };//wrapText: true    , bold: true
+
+    for (let rowIndex = 2; rowIndex <= worksheet.rowCount; rowIndex++) {
       worksheet.getRow(rowIndex).alignment = { vertical: 'middle', horizontal: 'center' };//wrapText: true
     }
-
-    worksheet.getColumn(1).font = { name: 'B Koodak' }
-    worksheet.getColumn(2).font = { name: 'B Koodak' }
-    // const column = table.getColumn(1);
-    console.log(worksheet.getColumn(1));
-    console.log(worksheet._columns.length);
-    // for (let colIndex = 1; colIndex <= worksheet._columns.length; colIndex++) {
-    //   worksheet.getColumn(colIndex).style = { font: { name: 'B Koodak' } };          
-    // }
-    worksheet.getRow(1).font = { name: 'B Koodak', size: 14, color: { argb: 'ffffff' }, bold: true };//wrapText: true    
 
     const toExportFileName = ENExportTableTranslationName[fileName] ? ENExportTableTranslationName[fileName] : fileName;
     workbook.xlsx.writeBuffer().then((data: any) => {

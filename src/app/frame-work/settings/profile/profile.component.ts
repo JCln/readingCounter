@@ -3,10 +3,10 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/isettings';
-import { ENFontFamily, ENFontStyle } from 'interfaces/istyles';
+import { ENFontFamily, ENFontFamilyExactName, ENFontStyle, ENOutputConfigColWidth } from 'interfaces/istyles';
 import { CloseTabService } from 'services/close-tab.service';
 import { FontService } from 'services/font.service';
-import { imageOption, ProfileService } from 'services/profile.service';
+import { imageOption, IOutputConfig, ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -21,6 +21,8 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsOutputConfig: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsOutputConfigShouldFirstFreeze: any[] = [{ label: 'بله', value: true }, { label: 'خیر', value: false }];
   stateOptionsGeneralSearch: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsVirtualScroll: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
@@ -30,9 +32,15 @@ export class ProfileComponent extends FactoryONE {
     { label: 'متوسط', value: ENFontStyle.fontSM },
     { label: 'بزرگ', value: ENFontStyle.fontS }
   ];
+  stateOuputConfigDefaultColWidth: any[] = [
+    { label: '13px', value: ENOutputConfigColWidth.fontS },
+    { label: '21px', value: ENOutputConfigColWidth.fontS2 },
+    { label: '28px', value: ENOutputConfigColWidth.fontM },
+    { label: '35px', value: ENOutputConfigColWidth.fontM2 }
+  ];
   stateFontFamilyOptions: any[] = [
-    { label: 'B Lotus', value: ENFontFamily.BLotus },
-    { label: 'B Koodak', value: ENFontFamily.BKoodak },
+    { label: 'B Lotus', value: ENFontFamilyExactName.BLotus },
+    { label: 'B Koodak', value: ENFontFamilyExactName.BKoodak },
   ];
   notifyPositionOptions: any[] = [
     { label: 'بالا راست', value: 'top-right' },
@@ -128,6 +136,8 @@ export class ProfileComponent extends FactoryONE {
     this.getReOrderable();
     this.getTwoStepsStatus();
     this.getVirtuallScrollStatus();
+    this.getValuesOfImg();
+    this.getOutputConfig();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnManager.getColumnsMenus(this.profileColumns);
@@ -135,12 +145,31 @@ export class ProfileComponent extends FactoryONE {
   getValuesOfImg = () => {
     this.profileService.showStateVals.imgOptions = this.profileService.getImg();
   }
+  getOutputConfig = () => {
+    this.profileService.showStateVals.outputConfig = this.profileService.getOutputConfigs();
+  }
   getTwoStepsStatus = () => {
     this.profileService.getTwoStepsAuth();
   }
   setValuesOfImg = (val: imageOption) => {
     this.profileService.setImg(val);
     this.profileService.showMessage(EN_messages.imageOptionChanged);
+  }
+  setOutputConfigShouldFilterValue = (val: IOutputConfig) => {
+    this.profileService.setOutputConfigs(val);
+    val.shouldFilteredValue ? this.profileService.showMessage(EN_messages.shouldFilterOutputConfigEnabled) : this.profileService.showMessage(EN_messages.shouldFilterOutputConfigDisabled)
+  }
+  setOutputConfigShouldFreezeHeader = (val: IOutputConfig) => {
+    this.profileService.setOutputConfigs(val);
+    val.shouldFreezeHeader ? this.profileService.showMessage(EN_messages.shouldFreezeHeaderEnabled) : this.profileService.showMessage(EN_messages.shouldFreezeHeaderDisabled)
+  }
+  setOutputConfigDefaultColWidth = (val: IOutputConfig) => {
+    this.profileService.setOutputConfigs(val);
+    this.profileService.showMessage(EN_messages.shouldOutputConfigDefaultColWidth);
+  }
+  setOutputConfigDefaultFontFamily = (val: IOutputConfig) => {
+    this.profileService.setOutputConfigs(val);
+    this.profileService.showMessage(EN_messages.shouldOutputConfigDefaultFontFamily);
   }
   getValueOfShowCarouselMedia = () => {
     this.profileService.showStateVals.groupImgs = this.profileService.getUseCarouselMedia();

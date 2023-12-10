@@ -7,6 +7,12 @@ export enum ENFontStyle {
     fontSM = 2,
     fontS = 3,
 }
+export enum ENOutputConfigColWidth {
+    fontS = 13,
+    fontS2 = 21,
+    fontM = 28,
+    fontM2 = 35,
+}
 export enum ENThemeName {
     themeColor = 'themeColor'
 }
@@ -27,4 +33,8 @@ export enum ENFontFamilyName {
 export enum ENFontFamily {
     BLotus = 'BLotus',
     BKoodak = 'BKoodak'
+}
+export enum ENFontFamilyExactName {
+    BLotus = 'B Lotus',
+    BKoodak = 'B Koodak'
 }

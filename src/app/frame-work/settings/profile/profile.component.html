@@ -128,6 +128,54 @@
 
     <p-tabPanel>
         <ng-template pTemplate="header">
+            <i class="_icon pi pi-table"></i>
+            <span>خروجی اطلاعات</span>
+        </ng-template>
+        <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">دانلود خروجی براساس اطلاعات فیلتر شده</h1>
+                    <p-selectButton [options]="stateOptionsOutputConfig"
+                        [(ngModel)]="profileService.showStateVals.outputConfig.shouldFilteredValue" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setOutputConfigShouldFilterValue(profileService.showStateVals.outputConfig)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">همواره اولین سطر نمایش داده شود</h1>
+                    <p-selectButton [options]="stateOptionsOutputConfigShouldFirstFreeze"
+                        [(ngModel)]="profileService.showStateVals.outputConfig.shouldFreezeHeader" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setOutputConfigShouldFreezeHeader(profileService.showStateVals.outputConfig)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">حداقل عرض ستونها</h1>
+                    <p-selectButton [options]="stateOuputConfigDefaultColWidth"
+                        [(ngModel)]="profileService.showStateVals.outputConfig.defaultColWidth" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setOutputConfigDefaultColWidth(profileService.showStateVals.outputConfig)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">فونت خروجی</h1>
+                    <p-selectButton [options]="stateFontFamilyOptions"
+                        [(ngModel)]="profileService.showStateVals.outputConfig.defaultFontFamily" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setOutputConfigDefaultFontFamily(profileService.showStateVals.outputConfig)">
+                    </p-selectButton>
+                </div>
+            </section>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel>
+        <ng-template pTemplate="header">
             <i class="_icon pi pi-sitemap"></i>
             <span>برنامه</span>
         </ng-template>
