@@ -1,31 +1,14 @@
 <p-table #datatableG id="tdm"
     *ngIf="dataSource && dataSource.length > 0 || isAddableTable || _checkUpName == 'allComponent'"
-    [columns]="selectedColumns" 
-    [value]="dataSource" 
-    [paginator]="_paginator && !_virtualScroll" 
-    [rows]=_rowsNumbers    
-    [showCurrentPageReport]="true" 
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"    
-    [rowsPerPageOptions]="_rowsPerPage"
-    dir="rtl"
-    styleClass="p-datatable-responsive" 
-    [responsive]="true"
-    stateStorage="session" 
-    [stateKey]="_sessionName" 
-    [sortField]="_sortField" 
-    [sortOrder]="_sortOrder"
-    [sortMode]="_sortMode" 
-    [customSort]="_isCustomSort" 
-    (sortFunction)="customSort($event)"
-    [reorderableColumns]=_reOrderableTable
-    (onFilter)="filterEventTable($event)" 
-    [scrollable]="_virtualScroll" 
-    [scrollHeight]="_virtualScroll ? '70vh' : ''"    
-    [virtualScroll]="_virtualScroll" 
-    [resizableColumns]="true" 
-    columnResizeMode="expand" 
-    rowGroupMode="subheader"    
-    [groupRowsBy]="_hasAggregating && profileService._agg.flag ?  profileService._agg[_selectedAggregatedName] : ''"    
+    [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll" [rows]=_rowsNumbers
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
+    [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)" [scrollable]="_virtualScroll"
+    [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll" [resizableColumns]="true"
+    columnResizeMode="expand" rowGroupMode="subheader"
+    [groupRowsBy]="_hasAggregating && profileService._agg.flag ?  profileService._agg[_selectedAggregatedName] : ''"
     [dataKey]="_hasAggregating && profileService._agg.flag ? profileService._agg[_selectedAggregatedName] : ''"
     appUnSortTable>
 
@@ -182,7 +165,10 @@
                             {{dataSource[col.field] && dataSource[col.field].length > 0 ?
                             dataSource[col.field].toString().split(' ')[0]
                             : ''}}
-                            <div class="tooltip_text">
+                            <div class="tooltip_text_right" [ngClass]="
+                            {'tooltip_long2':dataSource[col.field].length > 20,
+                            'tooltip_long3':dataSource[col.field].length > 30,
+                            'tooltip_long4':dataSource[col.field].length > 40}">
                                 {{dataSource[col.field]}}
                             </div>
                         </div>
