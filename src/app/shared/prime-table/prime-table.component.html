@@ -21,12 +21,12 @@
         <div class="header_icons_wrap">
             <div class="right_side">
                 <i *ngIf="_outputEnabled"
-                    (click)="outputManagerService.exportPDF($event, _selectCols, _outputFileName,routerLink, dataSource.length)"
+                    (click)="outputManagerService.exportPDF(datatableG, _selectCols, _outputFileName,routerLink)"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
                 <i *ngIf="_outputEnabled"
-                    (click)="outputManagerService.export(datatableG, _selectCols, _outputFileName, 'xlsx',routerLink, dataSource.length)"
+                    (click)="outputManagerService.export(datatableG, _selectCols, _outputFileName,routerLink)"
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
@@ -166,9 +166,11 @@
                             dataSource[col.field].toString().split(' ')[0]
                             : ''}}
                             <div class="tooltip_text_right" [ngClass]="
-                            {'tooltip_long2':dataSource[col.field].length > 20,
-                            'tooltip_long3':dataSource[col.field].length > 30,
-                            'tooltip_long4':dataSource[col.field].length > 40}">
+                            {
+                            'tooltip_long2':dataSource[col.field]?.length >= 20,
+                            'tooltip_long3':dataSource[col.field]?.length >= 30,
+                            'tooltip_long4':dataSource[col.field]?.length >= 40
+                            }">
                                 {{dataSource[col.field]}}
                             </div>
                         </div>

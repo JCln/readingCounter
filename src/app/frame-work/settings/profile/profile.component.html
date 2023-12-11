@@ -128,7 +128,7 @@
 
     <p-tabPanel>
         <ng-template pTemplate="header">
-            <i class="_icon pi pi-table"></i>
+            <i class="_icon pi pi-file-export"></i>
             <span>خروجی اطلاعات</span>
         </ng-template>
         <div class="over_all">
@@ -144,7 +144,7 @@
             </section>
             <section>
                 <div class="content">
-                    <h1 class="title">همواره اولین سطر نمایش داده شود</h1>
+                    <h1 class="title">عناوین ستون ها همواره نمایش داده شود</h1>
                     <p-selectButton [options]="stateOptionsOutputConfigShouldFirstFreeze"
                         [(ngModel)]="profileService.showStateVals.outputConfig.shouldFreezeHeader" optionLabel="label"
                         optionValue="value"

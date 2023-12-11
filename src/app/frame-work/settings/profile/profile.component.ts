@@ -33,14 +33,16 @@ export class ProfileComponent extends FactoryONE {
     { label: 'بزرگ', value: ENFontStyle.fontS }
   ];
   stateOuputConfigDefaultColWidth: any[] = [
+    { label: '10px', value: ENOutputConfigColWidth.fontXS },
     { label: '13px', value: ENOutputConfigColWidth.fontS },
     { label: '21px', value: ENOutputConfigColWidth.fontS2 },
-    { label: '28px', value: ENOutputConfigColWidth.fontM },
-    { label: '35px', value: ENOutputConfigColWidth.fontM2 }
+    { label: '28px', value: ENOutputConfigColWidth.fontM }
   ];
   stateFontFamilyOptions: any[] = [
     { label: 'B Lotus', value: ENFontFamilyExactName.BLotus },
     { label: 'B Koodak', value: ENFontFamilyExactName.BKoodak },
+    { label: 'B Nazanin', value: ENFontFamilyExactName.BNazanin },
+    { label: 'B Yekan', value: ENFontFamilyExactName.BYekan },
   ];
   notifyPositionOptions: any[] = [
     { label: 'بالا راست', value: 'top-right' },

@@ -19,6 +19,7 @@ import { ProfileService } from './profile.service';
 export class OutputManagerService {
   private readonly _exportType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   private readonly contentDisposition = 'content-disposition';
+  private readonly excelType = 'xlsx';
 
   constructor(
     private utilsService: UtilsService,
@@ -127,13 +128,41 @@ export class OutputManagerService {
 
     return { data: newData, headers: validHeaders };
   }
-  exportPDF = async (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string, routerLink: string, count: number) => {
-    if (!await this.canIDownloadMore(routerLink, count))
-      return;
 
+  isNullData = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
+      return false;
+    }
+    return true;
+  }
+  getPerfectDataSource = (dataSource: any, outputConfig: any): any => {
+    if (outputConfig.shouldFilteredValue) {
+      if (!!dataSource.filteredValue) { // there is sth to filter && dataSource is exsiting
+        return dataSource.filteredValue;
+      }
+      else {
+        return dataSource._value;
+      }
+    }
+    else {
+      return dataSource._value;
+    }
+  }
+  exportPDF = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, routerLink: string) => {
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
       return;
+
+    const outputConfig = this.profileService.getOutputConfigs();
+    dataSource = this.getPerfectDataSource(dataSource, outputConfig);
+
+    if (!this.isNullData(dataSource))
+      return;
+
+    if (!await this.canIDownloadMore(routerLink, dataSource.length))
+      return;
+
 
     const datas = this.getValidatedTableData(dataSource, _selectCols);
 
@@ -168,38 +197,21 @@ export class OutputManagerService {
         }
       }
     )
-    const customDate = new Date();
-    doc.save(customDate.getFullYear() + '' + customDate.getDay() + '' + customDate.getDate() + fileName);
+    const toExportFileName = ENExportTableTranslationName[fileName] ? ENExportTableTranslationName[fileName] : fileName;
+    doc.save(toExportFileName + this.dateJalaliService.getGregorianDate());
   }
-
-  isNullData = (dataSource: any): boolean => {
-    if (MathS.isNull(dataSource)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
-      return false;
-    }
-    return true;
-  }
-  export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: BookType, routerLink: string, count: number) => {
-    if (!await this.canIDownloadMore(routerLink, count))
-      return;
-
+  export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, routerLink: string) => {
     /* TO CREATE DEEP COPY */
     if (!this.isNullData(dataSource))
       return;
+
     const outputConfig = this.profileService.getOutputConfigs();
-    if (outputConfig.shouldFilteredValue) {
-      if (!!dataSource.filteredValue) { // there is sth to filter && dataSource is exsiting
-        dataSource = dataSource.filteredValue;
-      }
-      else {
-        dataSource = dataSource._value;
-      }
-    }
-    else {
-      dataSource = dataSource._value;
-    }
+    dataSource = this.getPerfectDataSource(dataSource, outputConfig);
 
     if (!this.isNullData(dataSource))
+      return;
+
+    if (!await this.canIDownloadMore(routerLink, dataSource.length))
       return;
 
     const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols, outputConfig.defaultFontFamily);
@@ -241,7 +253,7 @@ export class OutputManagerService {
       document.body.appendChild(a);
       a.setAttribute("style", "display: none");
       a.href = url;
-      a.download = toExportFileName + this.dateJalaliService.getGregorianDate(), '.' + type;
+      a.download = toExportFileName + this.dateJalaliService.getGregorianDate(), this.excelType;
       a.click();
       window.URL.revokeObjectURL(url);
       a.remove();

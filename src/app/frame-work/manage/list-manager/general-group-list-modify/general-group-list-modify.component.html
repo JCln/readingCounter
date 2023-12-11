@@ -48,14 +48,10 @@
 
             <div class="header_icons_wrap">
                 <div class="right_side">
-                    <i (click)="outputManagerService.export(closeTabService.saveDataForLMGeneralGroupModify, _selectCols, _outputFileName, 'xlsx',routerLink, closeTabService.saveDataForLMGeneralGroupModify.length)"
+                    <i (click)="outputManagerService.export(datatableG, _selectCols, _outputFileName,routerLink)"
                         class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                         <div class="tooltip_text">دریافت Excel</div>
                     </i>
-                    <!-- <i (click)="outputManagerService.export(closeTabService.saveDataForLMGeneralGroupModify, _selectCols, _outputFileName, 'csv',routerLink, closeTabService.saveDataForLMGeneralGroupModify.length)"
-                        class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                        <div class="tooltip_text">دریافت CSV</div>
-                    </i> -->
                     <i (click)="getExcel()" class="tooltip _circle_border _xlsx_download pi pi-download">
                         <div class="tooltip_text">دانلود فایل Excel</div>
                     </i>
@@ -264,9 +260,9 @@
                                             dataSource[col.field].toString().split(' ')[0] :
                                             ''}}
                                             <div class="tooltip_text_right" [ngClass]="
-                                            {'tooltip_long2':dataSource[col.field].length > 20,
-                                            'tooltip_long3':dataSource[col.field].length > 30,
-                                            'tooltip_long4':dataSource[col.field].length > 40}">
+                                            {'tooltip_long2':dataSource[col.field]?.length >= 20,
+                                            'tooltip_long3':dataSource[col.field]?.length >= 30,
+                                            'tooltip_long4':dataSource[col.field]?.length >= 40}">
                                                 {{dataSource[col.field]}}</div>
                                         </div>
                                     </div>

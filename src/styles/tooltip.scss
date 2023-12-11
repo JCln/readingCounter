@@ -9,18 +9,18 @@
     // pointer-events: none; hover on child should not pups up tooltip
     position: absolute;
     pointer-events: none;
-    direction: rtl;
     visibility: hidden;
     background-color: var(--orange_500);
     color: var(--white);
     border-radius: 6px;
-    z-index: 4;
     font-weight: 600;
     font-family: var(--font-family);
     font-size: var(--font_s);
+    direction: ltr;
     text-align: center;
     line-break: auto;
     padding: 5px 2px;
+    z-index: 4;
     transition: all ease-in-out 100ms;
   }
 }

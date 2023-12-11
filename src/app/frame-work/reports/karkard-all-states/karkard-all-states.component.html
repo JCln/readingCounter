@@ -111,18 +111,14 @@
             </p-multiSelect>
             <div class="header_icons_wrap">
                 <div class="right_side">
-                    <i (click)="outputManagerService.exportPDF(closeTabService.saveDataForKarkardAllStates, _selectCols, 'offKarkardAllStates',routerLink, closeTabService.saveDataForKarkardAllStates.length)"
+                    <i (click)="outputManagerService.exportPDF(dtable, _selectCols, 'offKarkardAllStates',routerLink)"
                         class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                         <div class="tooltip_text">دریافت pdf</div>
                     </i>
-                    <i (click)="outputManagerService.export(closeTabService.saveDataForKarkardAllStates, _selectCols, 'offKarkardAllStates', 'xlsx',routerLink, closeTabService.saveDataForKarkardAllStates.length)"
+                    <i (click)="outputManagerService.export(dtable, _selectCols, 'offKarkardAllStates',routerLink)"
                         class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                         <div class="tooltip_text">دریافت Excel</div>
                     </i>
-                    <!-- <i (click)="outputManagerService.export(closeTabService.saveDataForKarkardAllStates, _selectCols, 'offKarkardAllStates', 'csv',routerLink, closeTabService.saveDataForKarkardAllStates.length)"
-                        class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                        <div class="tooltip_text">دریافت CSV</div>
-                    </i> -->
                 </div>
                 <div class="left_side">
                     <app-collapsable [_isCollapsed]=readingReportManagerService.offKarkardAllStatesReq.isCollapsed
