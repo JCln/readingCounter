@@ -92,6 +92,8 @@
 [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
 [_numberOfExtraColumns]="[1,2,3,4]"
 [_calculableSUM]="true"    
+[_hasAggregating]=true
+[_selectedAggregatedName]="ENGroupByNames.selectedAggregateSimpleSearch"
 [_sessionName]="'simpleSearch-session'"
 (refreshedTable)="refreshTable()"
 (routedToLMAll)="routeToLMAll($event)" 
@@ -102,7 +104,3 @@
 [_isCollaped]="searchService._searchSimpleReq.isCollapsed"
 (collapsed)="searchService._searchSimpleReq.isCollapsed = !searchService._searchSimpleReq.isCollapsed">
 </app-prime-table>
-<!-- [_calculableSUM]="true"    
-[_isCustomSort]="true"
-[_hasAggregating]="true"
- -->

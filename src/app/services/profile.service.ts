@@ -26,6 +26,7 @@ export interface IOutputConfig {
 export interface ITableDetails {
   selectedAggregate: string,
   selectedAggregateMaster: string,
+  selectedAggregateSimpleSearch: string,
   flag: boolean,
   hasGeneralSearch: boolean,
 }
@@ -120,6 +121,8 @@ export class ProfileService {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
   }
   setFontFamily = (name: string) => {
+    console.log(name);
+    
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontFamily, name);
   }
   getLocalValue = (): boolean => {
@@ -232,6 +235,7 @@ export class ProfileService {
   _agg: ITableDetails = {
     selectedAggregate: 'listNumber',
     selectedAggregateMaster: 'zoneTitle',
+    selectedAggregateSimpleSearch: 'listNumber',
     flag: this.getLocalDefaultAggregateTracks(),
     hasGeneralSearch: this.getTableGeneralSearch()
   }

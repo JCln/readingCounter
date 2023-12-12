@@ -45,8 +45,8 @@ export class ProfileComponent extends FactoryONE {
     { label: 'B Yekan', value: ENFontFamilyExactName.BYekan },
   ];
   stateFontFamilyOptions: any[] = [
-    { label: 'B Lotus', value: ENFontFamilyExactName.BLotus },
-    { label: 'B Koodak', value: ENFontFamilyExactName.BKoodak }    
+    { label: 'B Lotus', value: ENFontFamily.BLotus },
+    { label: 'B Koodak', value: ENFontFamily.BKoodak }
   ];
   notifyPositionOptions: any[] = [
     { label: 'بالا راست', value: 'top-right' },

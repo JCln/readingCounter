@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ENGroupByNames } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
@@ -17,6 +18,7 @@ export class SimpleComponent implements OnInit {
   zoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  ENGroupByNames = ENGroupByNames;
 
   constructor(
     public closeTabService: CloseTabService,

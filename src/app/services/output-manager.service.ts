@@ -168,7 +168,7 @@ export class OutputManagerService {
 
     const doc = new jsPDF('landscape');
 
-    (doc as any).addFileToVFS('Blotus.ttf', font);
+    (doc as any).addFileToVFS('Blotus.ttf', font);//font should be ttf
     doc.addFont('Blotus.ttf', 'font', 'normal');
 
     doc.setFont('font'); // set font    

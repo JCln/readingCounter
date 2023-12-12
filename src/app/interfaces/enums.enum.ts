@@ -825,6 +825,7 @@ export enum EN_Mess {
     notResponse = 'پاسخی دریافت نشد'
 }
 export enum ENGroupByNames {
+    selectedAggregateSimpleSearch = 'selectedAggregateSimpleSearch',
     selectedAggregate = 'selectedAggregate',
     selectedAggregateMaster = 'selectedAggregateMaster'
 }
