@@ -38,11 +38,15 @@ export class ProfileComponent extends FactoryONE {
     { label: '21px', value: ENOutputConfigColWidth.fontS2 },
     { label: '28px', value: ENOutputConfigColWidth.fontM }
   ];
-  stateFontFamilyOptions: any[] = [
+  stateOutputConfigFontFamilyOptions: any[] = [
     { label: 'B Lotus', value: ENFontFamilyExactName.BLotus },
     { label: 'B Koodak', value: ENFontFamilyExactName.BKoodak },
     { label: 'B Nazanin', value: ENFontFamilyExactName.BNazanin },
     { label: 'B Yekan', value: ENFontFamilyExactName.BYekan },
+  ];
+  stateFontFamilyOptions: any[] = [
+    { label: 'B Lotus', value: ENFontFamilyExactName.BLotus },
+    { label: 'B Koodak', value: ENFontFamilyExactName.BKoodak }    
   ];
   notifyPositionOptions: any[] = [
     { label: 'بالا راست', value: 'top-right' },

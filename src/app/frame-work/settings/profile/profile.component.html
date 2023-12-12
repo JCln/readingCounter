@@ -165,7 +165,7 @@
             <section>
                 <div class="content">
                     <h1 class="title">فونت خروجی</h1>
-                    <p-selectButton [options]="stateFontFamilyOptions"
+                    <p-selectButton [options]="stateOutputConfigFontFamilyOptions"
                         [(ngModel)]="profileService.showStateVals.outputConfig.defaultFontFamily" optionLabel="label"
                         optionValue="value"
                         (onChange)="setOutputConfigDefaultFontFamily(profileService.showStateVals.outputConfig)">
