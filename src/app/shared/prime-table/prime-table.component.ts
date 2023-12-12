@@ -23,7 +23,6 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   previousAggregate: string;
   hasFiltersInTable: boolean = false;
-  // readonly toCalcProperties = [{ title: 'itemQuantity', value: null }];
 
   @ViewChild(Table) datatableG: Table;
   @Input() _sortOrder: number = 1;
@@ -237,28 +236,24 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
   routeToSingle = (dataSource: object) => {
     this.routedToSingle.emit(dataSource);
   }
-  calcSums(param: string): number {
-    if (this.dataSource) {
+  getPerfectDataSource = (dataSource: any): any => {
+    if (!!dataSource.filteredValue) { // there is sth to filter && dataSource is exsiting
+      return dataSource.filteredValue;
+    }
+    else {
+      return dataSource._value;
+    }
+  }
+  calcSums(dataSource: any, param: string): number {
+    let average = this.getPerfectDataSource(dataSource);
+    if (average) {
       let total: number = 0;
-      for (let index = 0; index < this.dataSource.length; index++) {
-        total += this.dataSource[index][param];
+      for (let index = 0; index < average.length; index++) {
+        total += average[index][param];
       }
       return total;
     }
   }
-  // calcSums(): void {
-  //   if (this.dataSource) {
-  //     let total: number = 0;
-  //     for (let propIndex = 0; propIndex < this.toCalcProperties.length; propIndex++) {
-  //       for (let index = 0; index < this.dataSource.length; index++) {
-  //         total += this.dataSource[index][this.toCalcProperties[propIndex].title];
-  //       }
-  //       // after one property done
-  //       this.toCalcProperties[propIndex].value = total;
-  //     }
-  //     console.log(this.toCalcProperties);
-  //   }
-  // }
   clearFilters(session: Table) {
     this.utilsService.clearFilters(session);
     this.hasFiltersInTable = false;

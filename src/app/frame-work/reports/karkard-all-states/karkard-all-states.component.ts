@@ -127,11 +127,20 @@ export class KarkardAllStatesComponent extends FactoryONE implements AfterViewIn
     console.log(this.closeTabService.saveDataForKarkardAllStates);
 
   }
-  calcSums(param: string): number {
-    if (this.closeTabService.saveDataForKarkardAllStates) {
+  getPerfectDataSource = (dataSource: any): any => {
+    if (!!dataSource.filteredValue) { // there is sth to filter && dataSource is exsiting
+      return dataSource.filteredValue;
+    }
+    else {
+      return dataSource._value;
+    }
+  }
+  calcSums(dataSource: any, param: string): number {
+    let average = this.getPerfectDataSource(dataSource);
+    if (average) {
       let total: number = 0;
-      for (let index = 0; index < this.closeTabService.saveDataForKarkardAllStates.length; index++) {
-        total += this.closeTabService.saveDataForKarkardAllStates[index][param];
+      for (let index = 0; index < average.length; index++) {
+        total += average[index][param];
       }
       return total;
     }
