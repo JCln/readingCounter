@@ -8,7 +8,7 @@ import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 
 import { EN_Routes } from '../interfaces/routes.enum';
 import { UtilsService } from 'services/utils.service';
-import { EN_Mess, ENSnackBarTimes, ENSnackBarColors } from 'interfaces/enums.enum';
+import { EN_Mess, ENSnackBarColors } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -49,10 +49,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
             if (error.status === ENClientServerErrors.cs400 && !(error.error instanceof Blob)) {
               if (error.error.message) {
-                this.utilsService.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(error.error.message, ENSnackBarColors.danger);
               }
               else
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkValuesAndTryAgain, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkValuesAndTryAgain, ENSnackBarColors.warn);
             }
 
             const messageText = error.error.message ? error.error.message : '';
@@ -63,47 +63,46 @@ export class SpinnerInterceptorService implements HttpInterceptor {
                 break;
               case ENClientServerErrors.cs404:
                 if (messageText)
-                  this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                  this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
                 else
-                  this.utilsService.snackWrapperService.openSnackBar(EN_Mess.dataNotFound, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                  this.utilsService.snackWrapperService.openSnackBar(EN_Mess.dataNotFound, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs405:
-                this.utilsService.snackWrapperService.openSnackBar(error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(error.message, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs408:
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.timeOut, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.timeOut, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs409:
-                this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs410:
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.dataNotFoundOrDeleted, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.dataNotFoundOrDeleted, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs422:
-                this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs429:
                 if (messageText)
-                  this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                  this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
                 else
-                  this.utilsService.snackWrapperService.openSnackBar(EN_Mess.threshold, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                  this.utilsService.snackWrapperService.openSnackBar(EN_Mess.threshold, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs0:
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkNetwork, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkNetwork, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs500:
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs502:
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs504:
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.notResponse, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.notResponse, ENSnackBarColors.danger);
                 break;
 
               default:
-                const messageLength: number = messageText?.length * ENSnackBarTimes.snackTimeMultipleTo;
-                this.utilsService.snackWrapperService.openSnackBar(messageText, messageLength, ENSnackBarColors.danger);
+                this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
                 break;
 
             }

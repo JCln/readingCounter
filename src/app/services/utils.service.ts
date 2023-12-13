@@ -171,22 +171,22 @@ export class UtilsService {
   }
   // snack bar
   snackBarMessageSuccess = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+    this.snackWrapperService.openSnackBar(message, ENSnackBarColors.success);
   }
   snackBarMessageWarn = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+    this.snackWrapperService.openSnackBar(message, ENSnackBarColors.warn);
   }
   snackBarMessageFailed = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+    this.snackWrapperService.openSnackBar(message, ENSnackBarColors.danger);
   }
   snackBarMessage = (message: string, time: ENSnackBarTimes, color: ENSnackBarColors) => {
-    this.snackWrapperService.openSnackBar(message, time, color);
+    this.snackWrapperService.openSnackBar(message, color);
   }
   goOutInMessage = () => {
-    this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+    this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarColors.danger);
   }
   snackMessage = (message: EN_messages) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.twentyMili, ENSnackBarColors.danger);
+    this.snackWrapperService.openSnackBar(message, ENSnackBarColors.danger);
   }
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
     config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true

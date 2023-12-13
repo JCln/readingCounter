@@ -11,7 +11,7 @@ import { font } from '../../assets/pdfjs/BLotus-normal';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ProfileService } from './profile.service';
+import { IOutputConfig, ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -155,6 +155,7 @@ export class OutputManagerService {
       return;
 
     const outputConfig = this.profileService.getOutputConfigs();
+    _selectCols = outputConfig.canShowCurrentTable ? dataSource._columns : _selectCols;
     dataSource = this.getPerfectDataSource(dataSource, outputConfig);
 
     if (!this.isNullData(dataSource))
@@ -206,13 +207,17 @@ export class OutputManagerService {
       return;
 
     const outputConfig = this.profileService.getOutputConfigs();
+    
+    _selectCols = outputConfig.canShowCurrentTable ? dataSource._columns : _selectCols;
+    // getPerfectDataSource will overwrite dataSource, which mean it have only the dataSource value so must be after any configurations
     dataSource = this.getPerfectDataSource(dataSource, outputConfig);
-
+    console.log(_selectCols);
+    
     if (!this.isNullData(dataSource))
       return;
 
-    if (!await this.canIDownloadMore(routerLink, dataSource.length))
-      return;
+    // if (!await this.canIDownloadMore(routerLink, dataSource.length))
+    //   return;
 
     const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols, outputConfig.defaultFontFamily);
     const workbook = new ExcelJs.Workbook();

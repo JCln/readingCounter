@@ -286,6 +286,12 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
       return (event.order * result);
     });
   }
+  multiSelectClicked = (selectedName: any, groupedByName: any) => {
+    console.log(selectedName.itemValue);
+    console.log(groupedByName);
+    // if (selectedName.itemValue.field == groupedByName)
+
+  }
   changedAggregatedOption = () => {
     if (this.previousAggregate.length == 0)
       this.refreshAggregatedTable();

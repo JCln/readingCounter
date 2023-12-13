@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { UtilsService } from 'services/utils.service';
 
 @Injectable({
     providedIn: 'root'
@@ -2422,6 +2423,10 @@ export class ColumnManager {
         // { field: 'isActive', header: 'فعال', isSelected: true,isSelectedOrigin:true, isBoolean: true },
     ]
 
+    constructor(
+        public utilsService: UtilsService
+    ) { }
+
     getColumnsMenus = (name: string): IObjectIteratation[] => {
         return this[name];
     }
@@ -2432,19 +2437,28 @@ export class ColumnManager {
                 return items
         })
     }
-    setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-        // convert all items to false
-        this[variableName].forEach(old => {
-            old.isSelected = false;
-        })
+    setColumnsChanges = (variableName: string, newValues: any, groupedByName?: any) => {
+        console.log(groupedByName);
+        console.log(variableName);
+        console.log(newValues);
+        if (newValues.itemValue.field == groupedByName) {
+            console.log(groupedByName);
+            // this.utilsService.dialog
+            return;
+        }
 
-        // merge new values
-        this[variableName].find(old => {
-            newValues.find(newVals => {
-                if (newVals.field == old.field)
-                    old.isSelected = true;
-            })
-        })
+        // convert all items to false
+        // this[variableName].forEach(old => {
+        //     old.isSelected = false;
+        // })
+
+        // // merge new values
+        // this[variableName].find(old => {
+        //     newValues.value.find(newVals => {
+        //         if (newVals.field == old.field)
+        //             old.isSelected = true;
+        //     })
+        // })
     }
 
 }

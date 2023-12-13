@@ -39,7 +39,8 @@ export class SnackWrapperService {
   private toastSignal(snack: any) {
     this.signalToast.next(snack);
   }
-  openSnackBar(message: string, duration: ENSnackBarTimes, backColor?: ENSnackBarColors) {
+  openSnackBar(message: string, backColor?: ENSnackBarColors) {
+    const duration: number = message?.length * ENSnackBarTimes.snackTimeMultipleTo;
     const a: ISnackBar = {
       message,
       duration,

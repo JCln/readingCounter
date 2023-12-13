@@ -200,6 +200,8 @@ export enum EN_messages {
     tableGeneralSearchDisabled = 'جستجوی کلی در جداول غیرفعال شد',
     shouldFilterOutputConfigEnabled = 'دانلود خروجی براساس فیلتر انجام خواهد شد',
     shouldFilterOutputConfigDisabled = 'دانلود خروجی براساس کل اطلاعات خواهد بود',
+    OutputConfigBasedOnCurrentTable = 'دانلود خروجی براساس آخرین تغییرات ستونهای جدول خواهد بود',
+    OutputConfigBasedOnSavedOrDefault = 'دانلود خروجی براساس ستونهای ذخیره شده و یا پیشفرض خواهد بود',
     shouldFreezeHeaderEnabled = 'اولین سطر ثابت خواهد بود',
     shouldFreezeHeaderDisabled = 'اولین سطر ثابت نخواهد بود',
     shouldOutputConfigDefaultColWidth = 'حداقل عرض ستونها باموفقیت تغییر یافت',

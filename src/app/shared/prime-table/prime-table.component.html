@@ -11,11 +11,11 @@
     [groupRowsBy]="_hasAggregating && profileService._agg.flag ?  profileService._agg[_selectedAggregatedName] : ''"
     [dataKey]="_hasAggregating && profileService._agg.flag ? profileService._agg[_selectedAggregatedName] : ''"
     appUnSortTable>
-
+    <!-- (onChange)="multiSelectClicked($event, profileService._agg[_selectedAggregatedName])" -->
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+            (onChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event,profileService._agg[_selectedAggregatedName])"
             selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
         </p-multiSelect>
         <div class="header_icons_wrap">

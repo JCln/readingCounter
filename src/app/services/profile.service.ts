@@ -21,7 +21,8 @@ export interface IOutputConfig {
   shouldFilteredValue: boolean,
   shouldFreezeHeader: boolean,
   defaultColWidth: number,
-  defaultFontFamily: ENFontFamilyExactName
+  defaultFontFamily: ENFontFamilyExactName,
+  canShowCurrentTable: boolean
 }
 export interface ITableDetails {
   selectedAggregate: string,
@@ -53,7 +54,8 @@ export class ProfileService {
       shouldFilteredValue: false,
       shouldFreezeHeader: false,
       defaultColWidth: 13,
-      defaultFontFamily: ENFontFamilyExactName.BKoodak
+      defaultFontFamily: ENFontFamilyExactName.BKoodak,
+      canShowCurrentTable: false
     }
   }
 
@@ -122,7 +124,7 @@ export class ProfileService {
   }
   setFontFamily = (name: string) => {
     console.log(name);
-    
+
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontFamily, name);
   }
   getLocalValue = (): boolean => {
@@ -156,7 +158,8 @@ export class ProfileService {
         shouldFilteredValue: false,
         shouldFreezeHeader: false,
         defaultColWidth: 13,
-        defaultFontFamily: ENFontFamilyExactName.BKoodak
+        defaultFontFamily: ENFontFamilyExactName.BKoodak,
+        canShowCurrentTable: false
       }
     );
   }

@@ -134,11 +134,21 @@
         <div class="over_all">
             <section>
                 <div class="content">
-                    <h1 class="title">دانلود خروجی براساس اطلاعات فیلتر شده</h1>
+                    <h1 class="title">براساس اطلاعات فیلتر شده</h1>
                     <p-selectButton [options]="stateOptionsOutputConfig"
                         [(ngModel)]="profileService.showStateVals.outputConfig.shouldFilteredValue" optionLabel="label"
                         optionValue="value"
                         (onChange)="setOutputConfigShouldFilterValue(profileService.showStateVals.outputConfig)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">براساس آخرین تغییرات ستونها</h1>
+                    <p-selectButton [options]="stateOptionsOutputConfig"
+                        [(ngModel)]="profileService.showStateVals.outputConfig.canShowCurrentTable" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setOutputConfigCanShowCurrentTable(profileService.showStateVals.outputConfig)">
                     </p-selectButton>
                 </div>
             </section>

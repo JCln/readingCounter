@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
@@ -42,35 +42,35 @@ export class InputOutputPolicyComponent extends FactoryONE {
 
   plusOrMinusOutputMaxCountPerDay = (value: number) => {
     if (value < this.iOPolicyOptions.outputMaxCountPerDayMinLength) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is);
       return;
     }
     this.closeTabService.iOPolicy.outputMaxCountPerDay = value;
   }
   plusOrMinusOutputMaxCountPerUser = (value: number) => {
     if (value < this.iOPolicyOptions.outputMaxCountPerUserMinLength) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is);
       return;
     }
     this.closeTabService.iOPolicy.outputMaxCountPerUser = value;
   }
   plusOrMinusInputMaxCountPerDay = (value: number) => {
     if (value < this.iOPolicyOptions.inputMaxCountPerDayMinLength) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is);
       return;
     }
     this.closeTabService.iOPolicy.inputMaxCountPerDay = value;
   }
   plusOrMinusInputMaxCountPerUser = (value: number) => {
     if (value < this.iOPolicyOptions.inputMaxCountPerUserMinLength) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is);
       return;
     }
     this.closeTabService.iOPolicy.inputMaxCountPerUser = value;
   }
   plusOrMinusInputMaxSizeKb = (value: number) => {
     if (value < this.iOPolicyOptions.inputMaxSizeKbMinLength) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.zero + ENMessages.is);
       return;
     }
     this.closeTabService.iOPolicy.inputMaxSizeKb = value;
@@ -99,11 +99,11 @@ export class InputOutputPolicyComponent extends FactoryONE {
         });
     }
   }
-  openSnackBar(message: string, duration: ENSnackBarTimes) {
-    this.snackWrapperService.openSnackBar(message, duration, ENSnackBarColors.warn);
+  openSnackBar(message: string) {
+    this.snackWrapperService.openSnackBar(message, ENSnackBarColors.warn);
   }
   accessDenied(event) {
-    this.snackWrapperService.openSnackBar(EN_messages.needMoreAccess, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
+    this.snackWrapperService.openSnackBar(EN_messages.needMoreAccess, ENSnackBarColors.warn);
     this.ref._checked = event;
   }
 }

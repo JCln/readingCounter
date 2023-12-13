@@ -9,7 +9,7 @@ import { JwtService } from './jwt.service';
 import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { UtilsService } from 'services/utils.service';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { ENSnackBarColors, ENSnackBarTimes, EN_Mess } from 'interfaces/enums.enum';
+import { ENSnackBarColors, EN_Mess } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +51,7 @@ export class InterceptorService implements HttpInterceptor {
   // when on login page, no dialog should open
   private showLoginMessage = async (error: any) => {
     const messageText = error.error.message ? error.error.message : '';
-    const messageLength: number = messageText?.length * ENSnackBarTimes.snackTimeMultipleTo;
-    this.utilsService.snackWrapperService.openSnackBar(messageText, messageLength, ENSnackBarColors.danger);
+    this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
   }
   private showDialog = async (error: any) => {
     await this.accessDenied_401(error);

@@ -165,6 +165,10 @@ export class ProfileComponent extends FactoryONE {
     this.profileService.setOutputConfigs(val);
     val.shouldFilteredValue ? this.profileService.showMessage(EN_messages.shouldFilterOutputConfigEnabled) : this.profileService.showMessage(EN_messages.shouldFilterOutputConfigDisabled)
   }
+  setOutputConfigCanShowCurrentTable = (val: IOutputConfig) => {
+    this.profileService.setOutputConfigs(val);
+    val.canShowCurrentTable ? this.profileService.showMessage(EN_messages.OutputConfigBasedOnCurrentTable) : this.profileService.showMessage(EN_messages.OutputConfigBasedOnSavedOrDefault);
+  }
   setOutputConfigShouldFreezeHeader = (val: IOutputConfig) => {
     this.profileService.setOutputConfigs(val);
     val.shouldFreezeHeader ? this.profileService.showMessage(EN_messages.shouldFreezeHeaderEnabled) : this.profileService.showMessage(EN_messages.shouldFreezeHeaderDisabled)
