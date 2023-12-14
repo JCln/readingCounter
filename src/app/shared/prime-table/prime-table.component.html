@@ -11,11 +11,10 @@
     [groupRowsBy]="_hasAggregating && profileService._agg.flag ?  profileService._agg[_selectedAggregatedName] : ''"
     [dataKey]="_hasAggregating && profileService._agg.flag ? profileService._agg[_selectedAggregatedName] : ''"
     appUnSortTable>
-    <!-- (onChange)="multiSelectClicked($event, profileService._agg[_selectedAggregatedName])" -->
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
-            (onChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event,profileService._agg[_selectedAggregatedName])"
+            (onChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
         </p-multiSelect>
         <div class="header_icons_wrap">
@@ -43,7 +42,7 @@
                 </i>
                 <section *ngIf="_hasAggregating && profileService._agg.flag" class="_grouping">
                     <div class="_group_label">گروه‌بندی</div>
-                    <p-dropdown name="zones" [options]="_selectedColumns"
+                    <p-dropdown name="zones" [options]="_groupByOptions"
                         [(ngModel)]="profileService._agg[_selectedAggregatedName]" placeholder="انتخاب مورد"
                         [style]="{'height': '2rem'}" optionValue="field" optionLabel="header" filter="true"
                         (onBlur)="previousAggregatedOption()" (onChange)="changedAggregatedOption()">

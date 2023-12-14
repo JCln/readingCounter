@@ -23,6 +23,7 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   previousAggregate: string;
   hasFiltersInTable: boolean = false;
+  _groupByOptions: any[];
 
   @ViewChild(Table) datatableG: Table;
   @Input() _sortOrder: number = 1;
@@ -94,12 +95,16 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
       interactionService
     );
   }
+  makeCapsulateGroupBy = () => {
+    this._groupByOptions = JSON.parse(JSON.stringify(this._selectedColumns));
+  }
+
   ngOnChanges(): void {
     if (this.dataSource) {
       this.restoreLatestColumnChanges();
       this.hasBeenReadsToggler();
       this.canShowPaginator();
-
+      this.makeCapsulateGroupBy();
     }
   }
   ngAfterViewInit(): void {
@@ -285,12 +290,6 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
 
       return (event.order * result);
     });
-  }
-  multiSelectClicked = (selectedName: any, groupedByName: any) => {
-    console.log(selectedName.itemValue);
-    console.log(groupedByName);
-    // if (selectedName.itemValue.field == groupedByName)
-
   }
   changedAggregatedOption = () => {
     if (this.previousAggregate.length == 0)

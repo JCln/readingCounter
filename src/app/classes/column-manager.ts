@@ -2423,42 +2423,28 @@ export class ColumnManager {
         // { field: 'isActive', header: 'فعال', isSelected: true,isSelectedOrigin:true, isBoolean: true },
     ]
 
-    constructor(
-        public utilsService: UtilsService
-    ) { }
-
     getColumnsMenus = (name: string): IObjectIteratation[] => {
         return this[name];
     }
-
     customizeSelectedColumns = (_selectCols: any) => {
         return _selectCols.filter(items => {
             if (items.isSelected)
                 return items
         })
     }
-    setColumnsChanges = (variableName: string, newValues: any, groupedByName?: any) => {
-        console.log(groupedByName);
-        console.log(variableName);
-        console.log(newValues);
-        if (newValues.itemValue.field == groupedByName) {
-            console.log(groupedByName);
-            // this.utilsService.dialog
-            return;
-        }
-
+    setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
         // convert all items to false
-        // this[variableName].forEach(old => {
-        //     old.isSelected = false;
-        // })
+        this[variableName].forEach(old => {
+            old.isSelected = false;
+        })
 
-        // // merge new values
-        // this[variableName].find(old => {
-        //     newValues.value.find(newVals => {
-        //         if (newVals.field == old.field)
-        //             old.isSelected = true;
-        //     })
-        // })
+        // merge new values
+        this[variableName].find(old => {
+            newValues.find(newVals => {
+                if (newVals.field == old.field)
+                    old.isSelected = true;
+            })
+        })
     }
 
 }

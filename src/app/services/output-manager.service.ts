@@ -116,7 +116,7 @@ export class OutputManagerService {
       return dataSource._value;
     }
   }
-  makePDF = async (datas: any, fileName: string) => {
+  private makePDF = async (datas: any, fileName: string) => {
     const doc = new jsPDF('landscape');
 
     (doc as any).addFileToVFS('Blotus.ttf', font);//font should be ttf
@@ -151,7 +151,7 @@ export class OutputManagerService {
     const toExportFileName = ENExportTableTranslationName[fileName] ? ENExportTableTranslationName[fileName] : fileName;
     doc.save(toExportFileName + this.dateJalaliService.getGregorianDate());
   }
-  makeEXCEL = (datas: any, outputConfig: IOutputConfig, fileName: string) => {
+  private makeEXCEL = (datas: any, outputConfig: IOutputConfig, fileName: string) => {
     const workbook = new ExcelJs.Workbook();
     const viewsConfig = outputConfig.shouldFreezeHeader ? { state: 'frozen', ySplit: 1, rightToLeft: true } : { rightToLeft: true }
     const worksheet = workbook.addWorksheet(
