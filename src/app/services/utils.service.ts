@@ -13,6 +13,7 @@ import { Table } from 'primeng/table';
 import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MathS } from '../classes/math-s';
+import { UserConfigComponent } from '../shared/user-config/user-config.component';
 
 @Injectable({
   providedIn: 'root'
@@ -93,44 +94,6 @@ export class UtilsService {
       return false;
     }
   }
-  // hasFilters(session: Table): IFiltered {
-  //   if (session) {
-  //     for (let index = 0; index < Object.keys(session.filters).length; index++) {
-  //       if (!MathS.isNull(session.filters[Object.keys(session.filters)[index]]['value'])) {
-  //         return { global: session.filters['global']['value'], hasFilter: true };
-  //       }
-  //     }
-  //     return { global: session.filters['global']['value'], hasFilter: false };
-  //   }
-  // }
-  doShowImageDialog = (dataSource: any, type: ENImageTypes) => {
-    this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-      data: { _data: dataSource, _type: type },
-      rtl: true,
-      width: '80%',
-    })
-  }
-  showTypicalImageDialog = (dataSource: any) => {
-    this.doShowImageDialog(dataSource, ENImageTypes.typical);
-  }
-  showSingleImageDialog = (dataSource: any) => {
-    this.doShowImageDialog(dataSource, ENImageTypes.single);
-  }
-  showImageDialogImageCount = (dataSource: any) => {
-    // should not open dialog when no images exists
-    if (dataSource.imageCount) {
-      this.showTypicalImageDialog(dataSource);
-    } else {
-      this.snackBarMessageWarn(EN_messages.imageNotExists);
-    }
-  }
-  showImageMobileApp = (dataSource: any) => {
-    if (dataSource.mediaCount) {
-      this.doShowImageDialog(dataSource, ENImageTypes.mobileApp);
-    } else {
-      this.snackBarMessageWarn(EN_messages.imageNotExists);
-    }
-  }
   showCarouselForbidden = (dataSource: any) => {
     // To make imageWrapper config Dialog for forbidden
     if (dataSource.imageCount) {
@@ -188,6 +151,29 @@ export class UtilsService {
   snackMessage = (message: EN_messages) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarColors.danger);
   }
+  // routing
+  backToPreviousPage = () => {
+    this._location.back();
+  }
+  routeToByUrl = (router: string) => {
+    this.compositeService.routeToByUrl(router);
+  }
+  routeTo = (router: string) => {
+    this.compositeService.routeTo(router);
+  }
+  routeToByParams = (router: string, params: any) => {
+    this.compositeService.routeToByParams(router, params);
+  }
+  routeToByExtras = (router: string, body: object) => {
+    this.compositeService.routeToByExtras(router, body);
+  }
+  getRouteParams = (paramName: string): string => {
+    return this.compositeService.getRouteParams(paramName);
+  }
+  getRouteBySplit = (spliter: string): string => {
+    return this.compositeService.getRouteBySplit(spliter);
+  }
+  // /*DIALOGS*/
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
     config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true
     config.changePassword = !!config.changePassword ? true : false
@@ -220,27 +206,45 @@ export class UtilsService {
       })
     })
   }
-  // routing
-  backToPreviousPage = () => {
-    this._location.back();
+  doShowImageDialog = (dataSource: any, type: ENImageTypes) => {
+    this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+      data: { _data: dataSource, _type: type },
+      rtl: true,
+      width: '80%',
+    })
   }
-  routeToByUrl = (router: string) => {
-    this.compositeService.routeToByUrl(router);
+  showTypicalImageDialog = (dataSource: any) => {
+    this.doShowImageDialog(dataSource, ENImageTypes.typical);
   }
-  routeTo = (router: string) => {
-    this.compositeService.routeTo(router);
+  showSingleImageDialog = (dataSource: any) => {
+    this.doShowImageDialog(dataSource, ENImageTypes.single);
   }
-  routeToByParams = (router: string, params: any) => {
-    this.compositeService.routeToByParams(router, params);
+  showImageDialogImageCount = (dataSource: any) => {
+    // should not open dialog when no images exists
+    if (dataSource.imageCount) {
+      this.showTypicalImageDialog(dataSource);
+    } else {
+      this.snackBarMessageWarn(EN_messages.imageNotExists);
+    }
   }
-  routeToByExtras = (router: string, body: object) => {
-    this.compositeService.routeToByExtras(router, body);
+  showImageMobileApp = (dataSource: any) => {
+    if (dataSource.mediaCount) {
+      this.doShowImageDialog(dataSource, ENImageTypes.mobileApp);
+    } else {
+      this.snackBarMessageWarn(EN_messages.imageNotExists);
+    }
   }
-  getRouteParams = (paramName: string): string => {
-    return this.compositeService.getRouteParams(paramName);
+  showUserConfigDialog = (dataSource: any) => {
+    this.ref = this.dialogService.open(UserConfigComponent, {
+      data: { _data: dataSource },
+      rtl: true,
+      width: '21rem',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+    });
   }
-  getRouteBySplit = (spliter: string): string => {
-    return this.compositeService.getRouteBySplit(spliter);
-  }
+  /* END DIALOGS */
 
 }

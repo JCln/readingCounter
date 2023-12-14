@@ -6,6 +6,7 @@ import { UserAddManagerService } from 'services/user-add-manager.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { UserBlockingComponent } from 'src/app/shared/user-blocking/user-blocking.component';
 
 @Component({
   selector: 'app-user-search',
@@ -32,31 +33,26 @@ export class UserSearchComponent extends FactoryONE {
     }
 
   }
-  showExactConfig = (index: number) => {
-    let a = document.querySelectorAll('.more_configs');
-    a[index].classList.toggle('showConfigs');
+  showUserConfigDialog = (dataSource: IUserManager) => {
+    this.closeTabService.utilsService.showUserConfigDialog(dataSource);
   }
-  ActivateUser = async (dataSource: IUserManager) => {
-    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
-    this.usersAllService.snackBarMessageSuccess(a);
-  }
-  DeActivateUser = async (dataSource: object) => {
-    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
-    this.usersAllService.snackBarMessageSuccess(a);
-  }
-  resetPasswordUser = async (dataSource: object) => {
-    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
-    this.usersAllService.snackBarMessageSuccess(a);
-  }
-  unLockUser = async (dataSource: object) => {
-    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.unlockUser, dataSource['dataSource'].id);
-    this.usersAllService.snackBarMessageSuccess(a);
-    this.refreshTable();
-  }
-  removeUser = async (dataSource: object) => {
-    const a = await this.usersAllService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRemove, dataSource['dataSource'].id);
-    this.usersAllService.snackBarMessageSuccess(a);
-    this.refreshTable();
+  openAddDialog = (dataSource: any) => {
+    const deepCopy = JSON.parse(JSON.stringify(dataSource));
+    deepCopy.userId = dataSource.id;
+    deepCopy.id = 0;
+    return new Promise(() => {
+      const dialogRef = this.closeTabService.utilsService.dialog.open(UserBlockingComponent, {
+        disableClose: true,
+        minWidth: '65vw',
+        data: {
+          di: deepCopy
+        }
+      });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result)
+          this.refreshTable();
+      });
+    });
   }
 
 

@@ -552,31 +552,11 @@
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
-                (mouseover)="showExactConfig(ri)" (mouseout)="showExactConfig(ri)">
+                (click)="showExactConfig(dataSource)">
                 <span class="ui-column-title">تغییر وضعیت</span>
                 <i class="tooltip _tooltip_special _map_frame_show p_icons pi pi-ellipsis-h">
-                    <div class="tooltip_text">تغییر وضعیت</div>
+                    <div class="tooltip_text_right">تغییر وضعیت</div>
                 </i>
-                <div class="map-frame">
-                    <div class="more_configs">
-                        <i class="bbr tooltip p_icons pi pi-user-minus _red_500"
-                            (click)="firstConfirmDialog(dataSource,ri)">
-                            <div class="tooltip_text_right">حذف کاربر</div>
-                        </i>
-                        <i class="bbr tooltip p_icons pi pi-lock-open" (click)="ActivateUser(dataSource,ri)">
-                            <div class="tooltip_text">فعال</div>
-                        </i>
-                        <i class="bbr tooltip p_icons pi pi-unlock" (click)="DeActivateUser(dataSource,ri)">
-                            <div class="tooltip_text">غیر فعال</div>
-                        </i>
-                        <i class="bbr tooltip p_icons pi pi-refresh" (click)="resetPasswordUser(dataSource,ri)">
-                            <div class="tooltip_text">بازنشانی گذرواژه</div>
-                        </i>
-                        <i class="bbr tooltip p_icons pi pi-check" (click)="unLockUser(dataSource,ri)">
-                            <div class="tooltip_text">Unlock</div>
-                        </i>
-                    </div>
-                </div>
             </td>
             <td class="__columns"
                 *ngIf="_checkUpName == 'simafa-readingProg' &&  utilsService.getSimafaImportStatus().hasSingle && dataSource.canContinue"

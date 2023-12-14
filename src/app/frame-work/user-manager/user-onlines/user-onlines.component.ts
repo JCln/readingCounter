@@ -51,7 +51,6 @@ export class UserOnlinesComponent extends FactoryONE {
     this.ref.onClose.subscribe(async res => {
       if (res)
         console.log(res);
-
     });
   }
   imageToAContact = (value: any) => {
@@ -63,7 +62,6 @@ export class UserOnlinesComponent extends FactoryONE {
     this.ref.onClose.subscribe(async res => {
       if (res)
         console.log(res);
-
     });
   }
   videoToAContact = (value: any) => {
@@ -75,7 +73,6 @@ export class UserOnlinesComponent extends FactoryONE {
     this.ref.onClose.subscribe(async res => {
       if (res)
         console.log(res);
-
     });
   }
 

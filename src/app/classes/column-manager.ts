@@ -2434,6 +2434,7 @@ export class ColumnManager {
     }
     setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
         // convert all items to false
+        // variableName is the selectedColumnsToRemember
         this[variableName].forEach(old => {
             old.isSelected = false;
         })

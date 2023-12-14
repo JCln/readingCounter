@@ -65,10 +65,6 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
   @Output() routedToEditPage = new EventEmitter<any>();
   @Output() routedToLoggs = new EventEmitter<any>();
   @Output() showedExactConfig = new EventEmitter<any>();
-  @Output() ActivatedUser = new EventEmitter<any>();
-  @Output() DeActivatedUser = new EventEmitter<any>();
-  @Output() resetedPasswordUser = new EventEmitter<any>();
-  @Output() unlockedUser = new EventEmitter<any>();
   @Output() toPredStatus = new EventEmitter<any>();
   @Output() routedToSingle = new EventEmitter<any>();
   @Output() routedToBatch = new EventEmitter<any>();
@@ -205,20 +201,8 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
   routeToLoggs = (dataSource: object) => {
     this.routedToLoggs.emit(dataSource);
   }
-  showExactConfig = (dataSource: number) => {
+  showExactConfig = (dataSource: object) => {
     this.showedExactConfig.emit(dataSource);
-  }
-  ActivateUser = (dataSource: object, ri: number) => {
-    this.ActivatedUser.emit({ dataSource, ri });
-  }
-  DeActivateUser = (dataSource: object, ri: number) => {
-    this.DeActivatedUser.emit({ dataSource, ri });
-  }
-  resetPasswordUser = (dataSource: object, ri: number) => {
-    this.resetedPasswordUser.emit({ dataSource, ri });
-  }
-  unLockUser = (dataSource: object, ri: number) => {
-    this.unlockedUser.emit({ dataSource, ri });
   }
   toPreStatus = (val: any) => {
     this.toPredStatus.emit(val);

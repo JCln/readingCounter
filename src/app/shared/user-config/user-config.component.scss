@@ -1,0 +1,57 @@
+@import 'variable';
+@import 'button';
+@import 'input';
+
+._container {
+    direction: rtl;
+    font-family: var(--font-family);
+    margin: var(--font_s);
+}
+
+.title {
+    text-align: center;
+    color: var(--thirdy_3);
+}
+
+._key_value {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: .5rem;
+    gap: 1rem;
+    background: var(--white);
+    padding: var(--font_05);
+    color: var(--primary_3);
+    outline: 1px solid;
+    border-radius: $border_7;
+    font-weight: 600;
+    cursor: pointer;
+
+    i {
+        color: var(--white);
+        background: var(--primary_3);
+        border-radius: $border_7;
+        padding: .5rem;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+        box-shadow: 0px 0px 5px 0px var(--primary_4);
+    }
+}
+
+._red_500 {
+    outline: var(--red_500);
+    color: var(--red_500);
+
+    i {
+        background: var(--red_500);
+    }
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+        box-shadow: 0px 0px 5px 0px var(--red_600);
+    }
+}
