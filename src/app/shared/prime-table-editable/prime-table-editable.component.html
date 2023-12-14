@@ -28,12 +28,12 @@
                     <div class="tooltip_text">افزودن</div>
                 </i>
                 <i *ngIf="_outputEnabled"
-                    (click)="outputManagerService.exportPDF(dtable, _selectCols, _outputFileName,routerLink)"
+                    (click)="outputManagerService.EXPORT(dtable, _selectCols, _outputFileName,routerLink, true)"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
                 <i *ngIf="_outputEnabled"
-                    (click)="outputManagerService.export(dtable, _selectCols, _outputFileName,routerLink)"
+                    (click)="outputManagerService.EXPORT(dtable, _selectCols, _outputFileName,routerLink, false)"
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>

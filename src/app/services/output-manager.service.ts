@@ -62,7 +62,7 @@ export class OutputManagerService {
       FileSaver.saveAs(blob, fileName);
     })
   }
-  getValidatedTableData = (dataSource: any[], _selectCols: any[], outputConfig: IOutputConfig): any => {
+  getValidatedTableData = (dataSource: any[], _selectCols: any[], outputConfig: IOutputConfig, isPdf: boolean): any => {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
     const validColNames = [];
     const validHeaders = [];
@@ -77,40 +77,7 @@ export class OutputManagerService {
 
         if (outputConfig.canShowCurrentTable ? key === colName : key === colName && colnames[j].sel) {
           validColNames.push(colName);
-          validHeaders.push(colnames[j].header);
-        }
-      }
-    }
-
-    const newData = dataSource.map(function (currentelement) {
-      const newElement = {};
-      for (let i = 0; i < validColNames.length; i++) {
-        const key = validColNames[i];
-        let value = currentelement[validColNames[i]];
-
-        newElement[key] = value != undefined && value != null ? value : '';
-      }
-      return Object.values(newElement);
-    });
-
-    return { data: newData, headers: validHeaders };
-  }
-  getValidatedTableDataExcelJs = (dataSource: any[], _selectCols: any[], outputConfig: IOutputConfig): any => {
-    const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
-    const validColNames = [];
-    const validHeaders: any[] = [];
-    const firstItem = dataSource[0];
-
-    const keys = Object.keys(firstItem);
-    for (let j = 0; j < colnames.length; j++) {
-      const colName = colnames[j].name;
-
-      for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-
-        if (outputConfig.canShowCurrentTable ? key === colName : key === colName && colnames[j].sel) {
-          validColNames.push(colName);
-          validHeaders.push({ name: colnames[j].header, style: { font: { name: outputConfig.defaultFontFamily } } });
+          validHeaders.push(isPdf ? colnames[j].header : { name: colnames[j].header, style: { font: { name: outputConfig.defaultFontFamily } } });
         }
       }
     }
@@ -149,25 +116,7 @@ export class OutputManagerService {
       return dataSource._value;
     }
   }
-  exportPDF = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, routerLink: string) => {
-    /* TO CREATE DEEP COPY */
-    if (!this.isNullData(dataSource))
-      return;
-
-    const outputConfig = this.profileService.getOutputConfigs();
-    _selectCols = outputConfig.canShowCurrentTable ? dataSource._columns : _selectCols;
-    // getPerfectDataSource will overwrite dataSource, which mean it have only the dataSource value so must be after any configurations
-    dataSource = this.getPerfectDataSource(dataSource, outputConfig);
-
-    if (!this.isNullData(dataSource))
-      return;
-
-    if (!await this.canIDownloadMore(routerLink, dataSource.length))
-      return;
-
-
-    const datas = this.getValidatedTableData(dataSource, _selectCols, outputConfig);
-
+  makePDF = async (datas: any, fileName: string) => {
     const doc = new jsPDF('landscape');
 
     (doc as any).addFileToVFS('Blotus.ttf', font);//font should be ttf
@@ -202,24 +151,7 @@ export class OutputManagerService {
     const toExportFileName = ENExportTableTranslationName[fileName] ? ENExportTableTranslationName[fileName] : fileName;
     doc.save(toExportFileName + this.dateJalaliService.getGregorianDate());
   }
-  export = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, routerLink: string) => {
-    /* TO CREATE DEEP COPY */
-    if (!this.isNullData(dataSource))
-      return;
-
-    const outputConfig = this.profileService.getOutputConfigs();
-
-    _selectCols = outputConfig.canShowCurrentTable ? dataSource._columns : _selectCols;
-    // getPerfectDataSource will overwrite dataSource, which mean it have only the dataSource value so must be after any configurations
-    dataSource = this.getPerfectDataSource(dataSource, outputConfig);
-
-    if (!this.isNullData(dataSource))
-      return;
-
-    if (!await this.canIDownloadMore(routerLink, dataSource.length))
-      return;
-
-    const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols, outputConfig);
+  makeEXCEL = (datas: any, outputConfig: IOutputConfig, fileName: string) => {
     const workbook = new ExcelJs.Workbook();
     const viewsConfig = outputConfig.shouldFreezeHeader ? { state: 'frozen', ySplit: 1, rightToLeft: true } : { rightToLeft: true }
     const worksheet = workbook.addWorksheet(
@@ -263,6 +195,28 @@ export class OutputManagerService {
       window.URL.revokeObjectURL(url);
       a.remove();
     });
+  }
+  EXPORT = async (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, routerLink: string, isPdf: boolean) => {
+    /* TO CREATE DEEP COPY */
+    if (!this.isNullData(dataSource))
+      return;
+
+    const outputConfig = this.profileService.getOutputConfigs();
+
+    _selectCols = outputConfig.canShowCurrentTable ? dataSource._columns : _selectCols;
+    // getPerfectDataSource will overwrite dataSource, which mean it have only the dataSource value so must be after any configurations
+    dataSource = this.getPerfectDataSource(dataSource, outputConfig);
+
+    if (!this.isNullData(dataSource))
+      return;
+
+    if (!await this.canIDownloadMore(routerLink, dataSource.length))
+      return;
+
+    const datas = this.getValidatedTableData(dataSource, _selectCols, outputConfig, isPdf);
+    isPdf ?
+      this.makePDF(datas, fileName) :
+      this.makeEXCEL(datas, outputConfig, fileName)
   }
   saveAsExcelABuffer = (buffer: any, name: string) => {
     console.log(buffer);
