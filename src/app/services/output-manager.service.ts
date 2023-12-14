@@ -3,7 +3,7 @@ import 'jspdf-autotable';
 
 import { Injectable } from '@angular/core';
 import { ENExportTableTranslationName, EN_messages } from 'interfaces/enums.enum';
-import { BookType, IObjectIteratation } from 'interfaces/ioverall-config';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { jsPDF } from 'jspdf';
 import * as ExcelJs from "exceljs/dist/exceljs.min.js";
 
@@ -62,7 +62,7 @@ export class OutputManagerService {
       FileSaver.saveAs(blob, fileName);
     })
   }
-  getValidatedTableData = (dataSource: any[], _selectCols: any[]): any => {
+  getValidatedTableData = (dataSource: any[], _selectCols: any[], outputConfig: IOutputConfig): any => {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
     const validColNames = [];
     const validHeaders = [];
@@ -75,7 +75,7 @@ export class OutputManagerService {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
 
-        if (key === colName && colnames[j].sel) {
+        if (outputConfig.canShowCurrentTable ? key === colName : key === colName && colnames[j].sel) {
           validColNames.push(colName);
           validHeaders.push(colnames[j].header);
         }
@@ -95,7 +95,7 @@ export class OutputManagerService {
 
     return { data: newData, headers: validHeaders };
   }
-  getValidatedTableDataExcelJs = (dataSource: any[], _selectCols: any[], fontFamilyStyle: string): any => {
+  getValidatedTableDataExcelJs = (dataSource: any[], _selectCols: any[], outputConfig: IOutputConfig): any => {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
     const validColNames = [];
     const validHeaders: any[] = [];
@@ -108,9 +108,9 @@ export class OutputManagerService {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
 
-        if (key === colName && colnames[j].sel) {
+        if (outputConfig.canShowCurrentTable ? key === colName : key === colName && colnames[j].sel) {
           validColNames.push(colName);
-          validHeaders.push({ name: colnames[j].header, style: { font: { name: fontFamilyStyle } } });
+          validHeaders.push({ name: colnames[j].header, style: { font: { name: outputConfig.defaultFontFamily } } });
         }
       }
     }
@@ -156,6 +156,7 @@ export class OutputManagerService {
 
     const outputConfig = this.profileService.getOutputConfigs();
     _selectCols = outputConfig.canShowCurrentTable ? dataSource._columns : _selectCols;
+    // getPerfectDataSource will overwrite dataSource, which mean it have only the dataSource value so must be after any configurations
     dataSource = this.getPerfectDataSource(dataSource, outputConfig);
 
     if (!this.isNullData(dataSource))
@@ -165,7 +166,7 @@ export class OutputManagerService {
       return;
 
 
-    const datas = this.getValidatedTableData(dataSource, _selectCols);
+    const datas = this.getValidatedTableData(dataSource, _selectCols, outputConfig);
 
     const doc = new jsPDF('landscape');
 
@@ -207,19 +208,18 @@ export class OutputManagerService {
       return;
 
     const outputConfig = this.profileService.getOutputConfigs();
-    
+
     _selectCols = outputConfig.canShowCurrentTable ? dataSource._columns : _selectCols;
     // getPerfectDataSource will overwrite dataSource, which mean it have only the dataSource value so must be after any configurations
     dataSource = this.getPerfectDataSource(dataSource, outputConfig);
-    console.log(_selectCols);
-    
+
     if (!this.isNullData(dataSource))
       return;
 
-    // if (!await this.canIDownloadMore(routerLink, dataSource.length))
-    //   return;
+    if (!await this.canIDownloadMore(routerLink, dataSource.length))
+      return;
 
-    const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols, outputConfig.defaultFontFamily);
+    const datas = this.getValidatedTableDataExcelJs(dataSource, _selectCols, outputConfig);
     const workbook = new ExcelJs.Workbook();
     const viewsConfig = outputConfig.shouldFreezeHeader ? { state: 'frozen', ySplit: 1, rightToLeft: true } : { rightToLeft: true }
     const worksheet = workbook.addWorksheet(
