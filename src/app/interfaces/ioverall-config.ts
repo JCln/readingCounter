@@ -58,6 +58,16 @@ export interface IDialogMessage {
     isSelectableDate?: boolean,
     changePassword?: boolean
 }
+export interface IPrimeConfirmDialog {
+    messageTitle: string,
+    messageTitleTwo?: string,
+    text?: string,
+    width: string,
+    isInput: boolean,    
+    icon: string,
+    isImportant?: boolean,
+    closable?: boolean,
+}
 export interface ISimafaImportStatus {
     hasSingle: boolean,
     hasBatch: boolean

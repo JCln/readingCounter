@@ -1,0 +1,119 @@
+@import 'shared_dialog';
+@import 'button.scss';
+@import 'input.scss';
+
+h2 {
+  font-size: var(--font_m);
+  padding: var(--font_05);
+  text-align: center;
+  color: var(--secondary_8);
+  white-space: pre-line;
+}
+
+._title_2 {
+  padding: 0;
+  width: 16rem;
+  text-align: center;
+  font-size: var(--font_m);
+  font-weight: 600;
+  color: var(--secondary_8);
+
+  @media (min-width:550px) {
+    width: 19rem;
+  }
+}
+
+u {
+  text-decoration: underline;
+}
+
+p {
+  font-family: var(--font-family);
+  margin: var(--font_xs) 0;
+  text-align: center;
+  color: var(--secondary_8);
+  font-size: var(--font_ss);
+}
+
+._footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.input_1 {
+  border-radius: $border_15;
+}
+
+.input_box {
+  display: flex;
+  justify-content: center;
+}
+
+._container {
+  border-radius: $border_15;
+  direction: rtl;
+  background: var(--white);
+  padding: 1.5rem 0.3rem 0.3rem;
+  margin: var(--font_s);
+  box-shadow: 0 0 5px 1px var(--primary_1);
+}
+
+._icon {
+  content: "";
+  display: grid;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  top: 0;
+  left: 50%;
+  color: inherit;
+  background-color: var(--secondary_1);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 0.5rem var(--secondary_1);
+
+  i {
+    font-size: var(--font_2);
+    color: var(--primary_4);
+  }
+
+  ._delete_color {
+    color: var(--red_500);
+  }
+
+}
+
+.btn_2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 6rem;
+  margin-top: 2rem;
+
+  &:hover,
+  &:active,
+  &:focus-visible {
+    box-shadow: 0px 2px 4px 1px var(--primary_3);
+    background-color: var(--primary_3);
+  }
+}
+
+// _delete_style is button for red buttons
+// should implement after btn_2 to affect
+._delete_style {
+  direction: rtl;
+  background-color: var(--red_500);
+  border-color: var(--red_500);
+  color: var(--white);
+  text-align: center;
+
+  &:hover,
+  &:active,
+  &:focus-visible {
+    box-shadow: 0px 2px 4px 1px var(--red_600);
+    background-color: var(--red_500);
+  }
+}

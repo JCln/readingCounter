@@ -38,12 +38,13 @@ export class UserConfigComponent implements OnInit {
     const config = {
       messageTitle: EN_messages.confirm_removeingUser1 + this.dataSource.displayName + EN_messages.confirm_removeingUser2 + this.dataSource.username + EN_messages.confirm_IS,
       text: EN_messages.confirm_removeUser,
-      minWidth: '19rem',
+      width: '21rem',
       isInput: false,
       isDelete: true,
+      isImportant: true,
       icon: 'pi pi-user-minus'
     }
-    const confirmed = await this.utilsService.firstConfirmDialog(config);
+    const confirmed = await this.utilsService.primeConfirmDialog(config);
     if (confirmed) {
       const res = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userRemove, this.dataSource.id);
       this.utilsService.snackBarMessageSuccess(res.message);

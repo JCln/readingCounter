@@ -120,6 +120,7 @@ li {
 
 ._time {
   display: flex;
+  justify-content: center;
   gap: var(--font_025);
 }
 
@@ -142,6 +143,7 @@ li {
   border-radius: $border_7;
 
   .t_value {
+    width: 6rem;
     border: none;
     border-radius: $border_7;
     text-align: center;

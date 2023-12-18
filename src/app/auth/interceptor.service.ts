@@ -29,24 +29,24 @@ export class InterceptorService implements HttpInterceptor {
     const config = {
       messageTitle: error,
       text: EN_Mess.access_denied401Msg,
-      minWidth: '19rem',
+      width: '21rem',
       isInput: false,
-      isDelete: true,
+      isImportant: true,
       icon: 'pi pi-ban',
-      disableClose: true,
+      closable: true,
     }
-    await this.utilsService.firstConfirmDialog(config);
+    await this.utilsService.primeConfirmDialog(config);
   }
   accessDeniedSpecial = async (message: string) => {
     const config = {
       messageTitle: message,
-      minWidth: '19rem',
+      width: '21rem',
       isInput: false,
-      isDelete: true,
+      isImportant: true,
       icon: 'pi pi-ban',
-      disableClose: true,
+      closable: true,
     }
-    await this.utilsService.firstConfirmDialog(config);
+    await this.utilsService.primeConfirmDialog(config);
   }
   // when on login page, no dialog should open
   private showLoginMessage = async (error: any) => {
@@ -98,7 +98,7 @@ export class InterceptorService implements HttpInterceptor {
             // block IP
             // if (error.status === ENClientServerErrors.cs451) {
             //   this.showDialogSpeciall(EN_Mess.access_denied451LegalReasons);
-            // }
+            // }            
           }
           if (error instanceof HttpErrorResponse && error.error instanceof Blob && error.error.type === this.errorType) {
             // https://github.com/angular/angular/issues/19888

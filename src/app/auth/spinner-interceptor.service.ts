@@ -24,10 +24,21 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     const config = {
       messageTitle: EN_Mess.youHaveNotAccess,
       text: EN_Mess.youHaveNotAccessMsg,
+      width: '21',
+      isInput: false,
+      isImportant: true,
+      icon: 'pi pi-ban'
+    }
+    await this.utilsService.primeConfirmDialog(config);
+  }
+  accessDenied_402 = async (error: string) => {//License
+    const config = {
+      messageTitle: error,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
-      icon: 'pi pi-ban'
+      icon: 'pi pi-credit-card',
+      disableClose: false,
     }
     await this.utilsService.firstConfirmDialog(config);
   }
@@ -58,6 +69,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             const messageText = error.error.message ? error.error.message : '';
             //401 handling in authService
             switch (error.status) {
+              // License
+              case ENClientServerErrors.cs402:
+                this.accessDenied_402(error.error.message);
               case ENClientServerErrors.cs403:
                 this.accessDenied_403();
                 break;

@@ -3,6 +3,7 @@ import { EN_messages } from "./enums.enum"
 export enum ENClientServerErrors {
     'cs400' = 400,
     'cs401' = 401,
+    'cs402' = 402,
     'cs403' = 403,
     'cs404' = 404,
     'cs405' = 405,

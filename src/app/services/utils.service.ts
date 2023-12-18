@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage } from 'interfaces/ioverall-config';
+import { ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage, IPrimeConfirmDialog } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
@@ -14,6 +14,7 @@ import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/lis
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MathS } from '../classes/math-s';
 import { UserConfigComponent } from '../shared/user-config/user-config.component';
+import { PrimeConfirmDgComponent } from '../shared/prime-confirm-dg/prime-confirm-dg.component';
 
 @Injectable({
   providedIn: 'root'
@@ -205,6 +206,29 @@ export class UtilsService {
         }
       })
     })
+  }
+  primeConfirmDialog = (config: IPrimeConfirmDialog): Promise<any> => {
+    this.ref = this.dialogService.open(PrimeConfirmDgComponent, {
+      data: {
+        messageTitle: config.messageTitle,
+        messageTitleTwo: config.messageTitleTwo,
+        text: config.text,
+        isInput: config.isInput,
+        icon: config.icon,
+        isImportant: config.isImportant
+      },
+      rtl: true,
+      width: config.width,
+      closable: config.closable
+    })
+    return new Promise((resolve) => {
+      this.ref.onClose.subscribe(async res => {
+        if (res)
+          resolve(res);
+        else
+          resolve(false);
+      });
+    });
   }
   doShowImageDialog = (dataSource: any, type: ENImageTypes) => {
     this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {

@@ -26,6 +26,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { InputMaskModule } from 'primeng/inputmask';
 import { SharedCarouselModule } from './shared_carousel';
 import { UnSortTableDirective } from '../directives/un-sort-table.directive';
+import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { UnSortTableDirective } from '../directives/un-sort-table.directive';
     ImageViewerComponent,
     ConfirmTextDialogComponent,
     UserBlockingComponent,
+    PrimeConfirmDgComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,7 @@ import { UnSortTableDirective } from '../directives/un-sort-table.directive';
   exports: [
     PrimeTableComponent,
     PrimeTableEditableComponent,
+    PrimeConfirmDgComponent,
     UserBlockingComponent,
     CommonModule,
     FormsModule,

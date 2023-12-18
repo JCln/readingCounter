@@ -1,0 +1,26 @@
+<main class="_container">
+    <div class="_icon">
+        <i [class]="dataSource.icon" [ngClass]="{'_delete_color': dataSource?.isImportant }"></i>
+    </div>
+    <h2>
+        {{dataSource.messageTitle}}
+    </h2>
+    <!-- _title_2 class has static width for Kartables(force & backTo Imported) -->
+    <div class="_title_2">
+        {{dataSource.messageTitleTwo}}
+    </div>
+    <p>
+        {{dataSource.text}}
+    </p>
+    <!-- <div class="input_box">
+        <input *ngIf="dataSource.isInput" class="input_1" type="text" [placeholder]="'توضیحات را وارد نمایید'"
+            [(ngModel)]="userInputText">
+    </div> -->
+
+    <div class="_footer">
+        <button class="btn_2 _custom" [ngClass]="{'_delete_style': dataSource?.isImportant }" (click)="confirmed()">
+            تایید
+        </button>
+    </div>
+
+</main>
