@@ -39,6 +39,10 @@ export class OfflineModeService {
     description: '',
     onOffLoadId: ''
   }
+  offlineTextOut = {
+    zoneId: null,
+    counterReaderId: '',
+  }
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
@@ -89,6 +93,14 @@ export class OfflineModeService {
   checkVertiticationOfflineTxtOut = (filesList: FileList, data: any): boolean => {
     this.fileForm = filesList;
     this.desc = data;
+    if (MathS.isNull(this.offlineTextOut.zoneId)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(this.offlineTextOut.counterReaderId)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
     if (!this.vertificationOfflineTxtOut())
       return false;
     return true;
@@ -142,6 +154,7 @@ export class OfflineModeService {
     const formData: FormData = new FormData();
 
     formData.append('file', this.fileForm[0]);
+    formData.append('userId', this.offlineTextOut.counterReaderId);
     return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.offloadManual, formData);
   }
   postTicketFileUploadSingle = (filesList: FileList): Observable<any> => {

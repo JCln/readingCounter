@@ -2,6 +2,24 @@
 
 <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="_card">
     <section>
+        <span class="input_2">
+            <div class="_key">ناحیه</div>
+            <div class="_value">
+                <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
+                    [(ngModel)]="offlineModeService.offlineTextOut.zoneId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" placeholder="انتخاب مورد" (onChange)="getCounterReader()">
+                </p-dropdown>
+            </div>
+        </span>
+        <div class="input_2">
+            <div class="_key">قرائت کننده</div>
+            <div class="_value">
+                <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                    [(ngModel)]="offlineModeService.offlineTextOut.counterReaderId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" placeholder="انتخاب مورد">
+                </p-dropdown>
+            </div>
+        </div>
         <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
             <span class="icon_android fa fa-file-zip-o"></span>
             فایل <small>zip</small> انتخاب نمایید

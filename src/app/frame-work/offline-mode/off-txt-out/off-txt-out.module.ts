@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { SharedTwoModule } from 'src/app/shared/shared-two.module';
-
 import { OffTxtOutRoutingModule } from './off-txt-out-routing.module';
 import { OffTxtOutComponent } from './off-txt-out.component';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 
 @NgModule({
@@ -10,7 +9,7 @@ import { OffTxtOutComponent } from './off-txt-out.component';
     OffTxtOutComponent
   ],
   imports: [
-    SharedTwoModule,
+    SharedPrimeNgModule,
     OffTxtOutRoutingModule
   ]
 })

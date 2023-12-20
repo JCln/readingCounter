@@ -48,7 +48,5 @@ export class MainService {
   POSTBODYProgress = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { reportProgress: true, observe: 'events' });
   }
-  DELETE = (URL: string, id: number) => {
-    return this.http.delete(this.environment.API_URL + '/' + URL + '/' + id);
-  }
+
 }

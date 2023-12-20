@@ -23,9 +23,7 @@ export class OffLoadComponent {
   // classWrapper is not Overritten
   classWrapper = () => {
     this.getZoneDictionary();
-
-    if (this.offlineModeService.loadForm.zoneId)
-      this.getCounterReader();
+    this.getCounterReader();
   }
 
   downloadTextFile = async () => {
