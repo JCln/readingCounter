@@ -4,12 +4,14 @@
   margin: var(--font_xs) var(--font_02) 1.7rem;
   height: 100%;
   min-height: 30vh;
+  min-height: 30svh;
   box-shadow: -1px 2px 5px 5px var(--secondary_4);
   position: relative;
 }
 
 #map2 {
   height: 30vh;
+  height: 30svh;
   width: 100%;
   z-index: 3;
 }

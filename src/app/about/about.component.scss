@@ -6,11 +6,13 @@ main {
     justify-content: center;
     direction: rtl;
     height: 80vh; //height of page, to show 
+    height: 80svh; //height of page, to show 
     gap: var(--font_03);
     margin: var(--font_ss) 0 0;
 
     @media (min-width:770px) {
         height: 70vh;
+        height: 70svh;
     }
 }
 

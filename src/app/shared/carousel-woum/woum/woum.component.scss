@@ -26,6 +26,7 @@
 
 .main_img {
   height: 40vh;
+  height: 40svh;
   width: 100%;
   min-width: 40rem;
 }
@@ -33,11 +34,13 @@
 ._is_fullcreen {
   width: 70%;
   height: 80vh;
+  height: 80svh;
   margin-top: var(--font_3);
 }
 
 ._is_not_fullscreen {
   height: 40vh;
+  height: 40svh;
   width: 100%;
   min-width: 40rem;
 }
