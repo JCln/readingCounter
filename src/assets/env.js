@@ -10,8 +10,7 @@
     window.__env.mapUrls = [
         { title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
         { title: 'sattelite', url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg' }
-    ];
-    window.__env.hasNextBazdid = false;
+    ];    
     window.__env.mapCenter = [35.73698, 51.41606];
     window.__env.browserVersions = {
         Desktop: {
@@ -67,14 +66,6 @@
         { id: 9, field: 'TwoStepUsedCode', title: 'دومرحله‌ای کد تکراری' },
         { id: 10, field: 'IpIsBlocked', title: 'IP مسدود شده' },
     ];
-    window.__env.hasCanclableSpinner = false;
-    window.__env.timeout = 18000;
-    window.__env.reOrderableTable = false;
-    window.__env.defaultAggregateTracks = false;
-    window.__env.shouldSaveTokensInLocal = false;
-    window.__env.simafaImportStatus = { hasSingle: false, hasBatch: false };
-    window.__env.version = '1.0.0';
-    window.__env.aboutUs = { email: 'info@hivapardaz.ir', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
     window.__env.NotificationAlertTypesList = [
         { title: 'confidential', value: 0, titleUnicode: 'محرمانه' },
         { title: 'ordinary', value: 1, titleUnicode: 'عادی' },
@@ -105,6 +96,17 @@
         license: 16,
         incorrect_time: 32
     }
+    window.__env.version = '1.0.12';
+    window.__env.aboutUs = { email: 'info@hivapardaz.ir', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
+
+
+    window.__env.hasCanclableSpinner = false;
+    window.__env.timeout = 18000;
+    window.__env.hasNextBazdid = false;
+    window.__env.reOrderableTable = false;
+    window.__env.defaultAggregateTracks = false;
+    window.__env.shouldSaveTokensInLocal = false;
+    window.__env.simafaImportStatus = { hasSingle: false, hasBatch: false };
 
     // Whether or not to enable debug mode
     // Setting this to false will disable console output

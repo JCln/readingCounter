@@ -119,19 +119,19 @@
                         <div class="tooltip_text">ذخیره صوت</div>
                     </i>
                 </button>
-                <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
+                <!-- <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
                     <i *ngIf="isPlaying" (click)="pauseAudio()" class="tooltip pi pi-pause">
                         <div class="tooltip_text">توقف صوت</div>
                     </i>
                     <i *ngIf="!isPlaying" (click)="playAudio()" class="tooltip pi pi-play">
                         <div class="tooltip_text">پخش صوت</div>
                     </i>
-                </button>
-                <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
+                </button> -->
+                <!-- <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
                     <i class="tooltip pi pi-replay">
                         <div class="tooltip_text">پخش مجدد</div>
                     </i>
-                </button>
+                </button> -->
             </div>
             <div class="not_found_header" *ngIf="!audioFiles.length">
                 <h2>فاقد صوت</h2>

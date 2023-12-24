@@ -66,7 +66,7 @@ export class WoumComponent implements OnChanges {
   audioFiles: any[] = [];
   downloadURL: string = '';
   showAudioControllers: boolean = false;
-  isPlaying: boolean = false;  
+  // isPlaying: boolean = false;  
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
 
@@ -148,17 +148,17 @@ export class WoumComponent implements OnChanges {
     link.download = `${new Date().toLocaleDateString()}.ogg`;
     link.click();
   }
-  playAudio = () => {
-    this.testAudio.play();
-    this.testAudio.addEventListener('ended', () => {
-      this.isPlaying = false;
-    });
-  }
-  pauseAudio = () => this.testAudio.pause();
-  rePlayAudio = () => {
-    this.testAudio.load();
-    this.testAudio.play();
-  }
+  // playAudio = () => {
+  //   this.testAudio.play();
+  //   this.testAudio.addEventListener('ended', () => {
+  //     this.isPlaying = false;
+  //   });
+  // }
+  // pauseAudio = () => this.testAudio.pause();
+  // rePlayAudio = () => {
+  //   this.testAudio.load();
+  //   this.testAudio.play();
+  // }
   showBigImage = (data: any) => {
     this.ref = this.dialogService.open(ImageViewerComponent, {
       data: data,
