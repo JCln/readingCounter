@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
-import { UtilsService } from 'services/utils.service';
 
 @Injectable({
     providedIn: 'root'
@@ -378,7 +377,7 @@ export class ColumnManager {
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
         // { field: 'insertDateTime', header: 'قرائت کننده', isSelected: true,isSelectedOrigin:true, readonly: true },
         { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, isBoolean: true },
-        { field: 'isRoosta', header: 'روستا', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'isRoosta', header: 'روستایی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'year', header: 'سال', isSelected: false, isSelectedOrigin: false, readonly: false },
         { field: 'overallQuantity', header: 'تعداد کل', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, isSelectedOrigin: true, isNumber: true },
@@ -1620,7 +1619,7 @@ export class ColumnManager {
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, isSelectedOrigin: true, isNumber: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true },
         { field: 'isBazdid', header: 'بازدید', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'isRoosta', header: 'روستا', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'isRoosta', header: 'روستایی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isSelectedOrigin: false },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isSelectedOrigin: false },
         { field: 'fromDate', header: 'از', isSelected: false, isSelectedOrigin: false },
@@ -1875,11 +1874,11 @@ export class ColumnManager {
         { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'maneCount', header: 'تعداد مانع', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'manePercent', header: 'درصد مانع', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true },
-        { field: 'hasPreNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
+        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
         { field: 'isBazdid', header: 'بازدید', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
-        { field: 'isRoosta', header: 'روستا', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
+        { field: 'isRoosta', header: 'روستایی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
     ];
     lMPerDayPositions: IObjectIteratation[] = [
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true },
