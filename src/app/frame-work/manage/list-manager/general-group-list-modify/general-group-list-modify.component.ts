@@ -297,6 +297,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory implements 
     for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
 
       let tempOrigin = this.closeTabService.saveDataForLMGeneralGroupModify[index];
+      if (typeof tempOrigin.modifyType == 'object') {
+        tempOrigin.modifyType = null;
+      }
 
       if (!MathS.isNull(tempOrigin.modifyType) && this.convertTitleToIdByModifyType(tempOrigin.modifyType).id != null) {
 
