@@ -27,6 +27,20 @@
                 [(ngModel)]="closeTabService.saveDataForLMPD.displayRadif">ش.پرونده
             </mat-checkbox>
 
+            <mat-checkbox [disabled]="true" name="displayPreDate"
+                [(ngModel)]="closeTabService.saveDataForLMPD.displayPreDate">
+                تاریخ قبلی
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="displayMobile"
+                [(ngModel)]="closeTabService.saveDataForLMPD.displayMobile">
+                موبایل
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="hasImage" [(ngModel)]="closeTabService.saveDataForLMPD.hasImage">
+                تصویر
+            </mat-checkbox>
+
             <mat-checkbox [disabled]="true" name="isBazdid"
                 [(ngModel)]="closeTabService.saveDataForLMPD.isBazdid">بازدید
             </mat-checkbox>

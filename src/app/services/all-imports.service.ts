@@ -26,6 +26,9 @@ export class AllImportsService {
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false,
   };
 
 }

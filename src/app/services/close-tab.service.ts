@@ -355,6 +355,9 @@ export class CloseTabService {
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false
   }
   saveDataForUserKarkard: IUserKarkard[];
   saveDataForTrackOffloaded: ITracking[];
@@ -411,6 +414,9 @@ export class CloseTabService {
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false,
   };
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
@@ -427,6 +433,9 @@ export class CloseTabService {
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false,
     skipErrors: false,
     counterReaderId: '',
     readingPeriodId: '',

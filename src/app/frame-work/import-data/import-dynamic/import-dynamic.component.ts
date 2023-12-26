@@ -71,6 +71,9 @@ export class ImportDynamicComponent extends FactoryONE {
     this.importDynamicService.importDynamicReq.displayRadif = rcd.displayRadif;
     this.importDynamicService.importDynamicReq.imagePercent = rcd.defaultImagePercent;
     this.importDynamicService.importDynamicReq.alalHesabPercent = rcd.defaultAlalHesab;
+    this.importDynamicService.importDynamicReq.displayPreDate = rcd.displayPreDate;
+    this.importDynamicService.importDynamicReq.displayMobile = rcd.displayMobile;
+    this.importDynamicService.importDynamicReq.hasImage = rcd.hasImage;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
@@ -135,6 +138,9 @@ export class ImportDynamicComponent extends FactoryONE {
       hasPreNumber: false,
       displayBillId: false,
       displayRadif: false,
+      displayPreDate: false,
+      displayMobile: false,
+      hasImage: false,
       fromDate: null,
       toDate: null,
       counterReaderId: '',

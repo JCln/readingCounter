@@ -89,7 +89,7 @@ export class ColumnManager {
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true },
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
         { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true, isSelectedOrigin: true },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
         { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
@@ -126,6 +126,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true, readonly: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
@@ -151,6 +154,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true, readonly: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
@@ -176,6 +182,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
 
     ];
@@ -201,6 +210,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
 
     ];
@@ -226,6 +238,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
 
     ];
@@ -251,6 +266,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true, isSelectedOrigin: false },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true, isSelectedOrigin: false },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true, isSelectedOrigin: false },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true, isSelectedOrigin: false }
 
     ];
@@ -277,6 +295,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
         // { field: 'hasMap', header: 'نقشه', isSelected: true,isSelectedOrigin:true, isBoolean: true }        
     ];
@@ -302,6 +323,9 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
     ];
     counterStateDto: IObjectIteratation[] = [
@@ -383,7 +407,7 @@ export class ColumnManager {
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, isSelectedOrigin: true, isNumber: true },
         { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, readonly: true },
-        { field: 'hasPreNumber', header: 'ر قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: true },//hover باشد
@@ -1109,8 +1133,8 @@ export class ColumnManager {
         { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false },
         { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
         { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
         { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
         { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -1181,8 +1205,8 @@ export class ColumnManager {
         { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false },
         { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
         { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
         { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
         { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -1240,8 +1264,8 @@ export class ColumnManager {
             { field: 'preCounterStateTitle', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, tabIndex: 1 },
             { field: 'modifyType', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, isSelectOption: true, tabIndex: 2 },
-            { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, tabIndex: -1 },
-            { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, isNumber: true, tabIndex: 3 },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, tabIndex: -1 },
+            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true, isNumber: true, tabIndex: 3 },
             { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2", tabIndex: 4 },
             { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: "grid-column: auto/ span 2", tabIndex: -1 },
             { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
@@ -1330,8 +1354,8 @@ export class ColumnManager {
             { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false },
             { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
             { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
-            { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-            { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
             { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
             { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -1401,8 +1425,8 @@ export class ColumnManager {
             { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false },
             { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
             { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
-            { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-            { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
             { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
             { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -1473,8 +1497,8 @@ export class ColumnManager {
             { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false },
             { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
             { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
-            { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-            { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
             { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
             { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -1533,8 +1557,8 @@ export class ColumnManager {
             { field: 'registerDate', header: 'تاریخ ثبت', isSelected: true, isSelectedOrigin: true },
             { field: 'preDate', header: 'ت قبلی', isSelected: true, isSelectedOrigin: true },
             { field: 'currentDate', header: 'تاریخ فعلی', isSelected: true, isSelectedOrigin: true },
-            { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-            { field: 'currentNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'currentNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
             { field: 'preDebt', header: 'بدهی قبلی', isSelected: true, isSelectedOrigin: true },
             { field: 'amount', header: 'مبلغ قبض(ریال)', isSelected: true, isSelectedOrigin: true },
         ];
@@ -1556,8 +1580,8 @@ export class ColumnManager {
             { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false },
             { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false },
             { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
-            { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-            { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
             { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
             { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -1864,7 +1888,10 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, isSelectedOrigin: true, readonly: false, borderize: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, isSelectedOrigin: true, readonly: false, isBoolean: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, isSelectedOrigin: true, readonly: false, isBoolean: true },
-        { field: 'hasPreNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ];
     // For Follow UP component
     LMPerDayFollowUpPositions: IObjectIteratation[] = [
@@ -1926,8 +1953,8 @@ export class ColumnManager {
         { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
         { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
         { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
         { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -1993,8 +2020,8 @@ export class ColumnManager {
         { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -2136,8 +2163,8 @@ export class ColumnManager {
         { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false },
         { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
         { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true },
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
         { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false },
         { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false },
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
@@ -2199,7 +2226,7 @@ export class ColumnManager {
         { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true },
         { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true },
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
         { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true, isSelectedOrigin: true },
         { field: 'imageAttrTitle', header: 'آیتم', isSelected: true, isSelectedOrigin: true },
         { field: 'operatorName', header: 'کاربر', isSelected: false, isSelectedOrigin: false },
@@ -2229,6 +2256,9 @@ export class ColumnManager {
         { field: 'isOnQeraatCode', header: 'کد قرائت باشد', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'lowConstBoundMaskooni', header: 'ثابت مسکونی پایین', isSelected: false, isSelectedOrigin: false },
         { field: 'highConstBoundMaskooni', header: 'ثابت مسکونی بالا', isSelected: false, isSelectedOrigin: false },
         { field: 'lowPercentBoundMaskooni', header: 'میانگین مسکونی پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },

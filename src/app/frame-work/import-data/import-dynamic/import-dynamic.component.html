@@ -123,6 +123,19 @@
                         ش.پرونده
                     </mat-checkbox>
 
+                    <mat-checkbox name="displayPreDate"
+                        [(ngModel)]="importDynamicService.importDynamicReq.displayPreDate">
+                        تاریخ قبلی
+                    </mat-checkbox>
+
+                    <mat-checkbox name="displayMobile"
+                        [(ngModel)]="importDynamicService.importDynamicReq.displayMobile">
+                        موبایل
+                    </mat-checkbox>
+                    
+                    <mat-checkbox name="hasImage" [(ngModel)]="importDynamicService.importDynamicReq.hasImage">
+                        تصویر
+                    </mat-checkbox>
                 </div>
                 <hr class="hr_1">
                 <footer>

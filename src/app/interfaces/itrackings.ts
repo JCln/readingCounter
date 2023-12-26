@@ -25,7 +25,10 @@ export interface ITracking {
     stateTitle?: string,
     fragmentMasterTitle: string,
     fragmentDetailTitle: string,
-    hasMap: boolean
+    hasMap: boolean,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean
 }
 export interface ITrackingSearchDto {
     fromDate: string,
@@ -36,7 +39,10 @@ export interface ITrackingSearchDto {
     alalHesabPercent: number,
     hasPreNumber: boolean,
     displayBillId: boolean,
-    displayRadif: boolean
+    displayRadif: boolean,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean
 }
 export interface IEditTracking {
     id: string,
@@ -61,6 +67,9 @@ export interface IOffLoadPerDay {
     hasPreNumber: boolean,
     displayBillId: boolean,
     displayRadif: boolean,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean,
     isBazdid: boolean,
     isRoosta: boolean,
     overalDistance: number,

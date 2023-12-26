@@ -27,6 +27,9 @@ export class AutoImportDgComponent implements OnInit {
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false,
   };
 
   constructor(

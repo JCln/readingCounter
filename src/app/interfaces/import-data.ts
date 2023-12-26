@@ -11,6 +11,9 @@ export interface IImportDynamicDefault {
     toDate: string,
     counterReaderId: string,
     readingPeriodId: number,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean,
     kindId?: number,
     period?: number
 }
@@ -30,6 +33,9 @@ export interface IFileExcelReq {
     hasPreNumber: boolean,
     displayBillId: boolean,
     displayRadif: boolean,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean,
     counterReaderId: string;
     readingPeriodId: string;
     listNumber: string;
@@ -55,6 +61,9 @@ export interface IImportSimafaBatchReq {
     displayBillId: boolean,
     displayRadif: boolean,
     year: number,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean,
     readingPeriodId?: number,
     canContinue?: boolean,
     fromEshterak?: string,
@@ -72,7 +81,10 @@ export interface IImportSimafaSingleReq {
     displayBillId: boolean,
     displayRadif: boolean,
     year: number,
-    readingPeriodId: number
+    readingPeriodId: number,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean
 }
 export interface IImportSimafaReadingProgramsReq {
     readingPeriodId: number,

@@ -52,6 +52,9 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService._assessAddReq.displayRadif = rcd.displayRadif;
     this.importDynamicService._assessAddReq.alalHesabPercent = rcd.defaultAlalHesab;
     this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
+    this.importDynamicService._assessAddReq.displayPreDate = rcd.displayPreDate;
+    this.importDynamicService._assessAddReq.displayMobile = rcd.displayMobile;
+    this.importDynamicService._assessAddReq.hasImage = rcd.hasImage;
   }
   converts = () => {
     this.closeTabService.saveDataForAssessPre =

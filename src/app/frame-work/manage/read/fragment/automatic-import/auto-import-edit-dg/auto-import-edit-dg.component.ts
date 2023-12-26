@@ -39,7 +39,10 @@ export class AutoImportEditDgComponent {
       imagePercent: data.body.imagePercent,
       hasPreNumber: data.body.hasPreNumber,
       displayBillId: data.body.displayBillId,
-      displayRadif: data.body.displayRadif
+      displayRadif: data.body.displayRadif,
+      displayPreDate: data.body.displayPreDate,
+      displayMobile: data.body.displayMobile,
+      hasImage: data.body.hasImage
     })
   }
   async save() {

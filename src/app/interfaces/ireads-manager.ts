@@ -58,7 +58,10 @@ export interface IAutomaticImportAddEdit {
     imagePercent: number,
     hasPreNumber: boolean,
     displayBillId: boolean,
-    displayRadif: boolean
+    displayRadif: boolean,
+    displayPreDate
+displayMobile
+hasImage
 }
 export interface IAutomaticImport {
     id: string,

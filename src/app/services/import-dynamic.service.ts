@@ -48,7 +48,10 @@ export class ImportDynamicService {
     hasPreNumber: true,
     displayBillId: true,
     displayRadif: true,
-    counterReaderId: ''
+    counterReaderId: '',
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false
   }
   private _simafaSingleReq: IReadingProgramRes;
 
@@ -73,7 +76,10 @@ export class ImportDynamicService {
     fromDate: null,
     toDate: null,
     counterReaderId: '',
-    readingPeriodId: null
+    readingPeriodId: null,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false
   }
 
   constructor(

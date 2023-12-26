@@ -56,6 +56,20 @@
                             ش.پرونده
                         </mat-checkbox>
 
+                        <mat-checkbox name="displayPreDate"
+                            [(ngModel)]="closeTabService.importedEditedReq.displayPreDate">
+                            تاریخ قبلی
+                        </mat-checkbox>
+
+                        <mat-checkbox name="displayMobile"
+                            [(ngModel)]="closeTabService.importedEditedReq.displayMobile">
+                            موبایل
+                        </mat-checkbox>
+
+                        <mat-checkbox name="hasImage" [(ngModel)]="closeTabService.importedEditedReq.hasImage">
+                            تصویر
+                        </mat-checkbox>
+
                     </div>
                     <button type="submit" class="btn_1">
                         مشاهده

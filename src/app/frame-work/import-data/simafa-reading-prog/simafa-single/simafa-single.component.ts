@@ -24,6 +24,9 @@ export class SimafaSingleComponent extends FactoryONE {
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false,
     counterReaderId: '',
     readingPeriodId: null,
     year: this.utilsService.getFirstYear(),
@@ -83,5 +86,8 @@ export class SimafaSingleComponent extends FactoryONE {
     this.simafaSingleReq.displayRadif = rcd.displayRadif;
     this.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
     this.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
+    this.simafaSingleReq.displayPreDate = rcd.displayPreDate;
+    this.simafaSingleReq.displayMobile = rcd.displayMobile;
+    this.simafaSingleReq.hasImage = rcd.hasImage;
   }
 }

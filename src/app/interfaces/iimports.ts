@@ -15,7 +15,10 @@ export interface IAssessAddDtoSimafa {
     hasPreNumber: boolean,
     displayBillId: boolean,
     displayRadif: boolean,
-    counterReaderId: string
+    counterReaderId: string,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean
 }
 export interface IReadingConfigDefault {
     id: number,
@@ -30,6 +33,9 @@ export interface IReadingConfigDefault {
     isOnQeraatCode: boolean,
     displayBillId: boolean,
     displayRadif: boolean,
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean,
     lowConstBoundMaskooni: number,
     lowPercentBoundMaskooni: number,
     highConstBoundMaskooni: number,

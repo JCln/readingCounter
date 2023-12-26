@@ -39,6 +39,18 @@
                 <mat-checkbox name="displayRadif" [(ngModel)]="simafaSingleReq.displayRadif">
                     ش.پرونده
                 </mat-checkbox>
+
+                <mat-checkbox name="displayPreDate" [(ngModel)]="simafaSingleReq.displayPreDate">
+                    تاریخ قبلی
+                </mat-checkbox>
+
+                <mat-checkbox name="displayMobile" [(ngModel)]="simafaSingleReq.displayMobile">
+                    موبایل
+                </mat-checkbox>
+
+                <mat-checkbox name="hasImage" [(ngModel)]="simafaSingleReq.hasImage">
+                    تصویر
+                </mat-checkbox>
             </div>
             <footer>
                 <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>

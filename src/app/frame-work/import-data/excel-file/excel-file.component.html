@@ -96,6 +96,21 @@
                     [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayRadif">
                     ش.پرونده
                 </mat-checkbox>
+
+                <mat-checkbox name="displayPreDate"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayPreDate">
+                    تاریخ قبلی
+                </mat-checkbox>
+
+                <mat-checkbox name="displayMobile"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayMobile">
+                    موبایل
+                </mat-checkbox>
+
+                <mat-checkbox name="hasImage" [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.hasImage">
+                    تصویر
+                </mat-checkbox>
+
                 <mat-checkbox name="skipErrors"
                     [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.skipErrors">
                     نادیده گرفتن خطا

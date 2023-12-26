@@ -60,6 +60,9 @@ export class ExcelFileComponent extends FactoryONE {
     this.closeTabService.saveDataForImportDataFileExcelReq.displayRadif = rcd.displayRadif;
     this.closeTabService.saveDataForImportDataFileExcelReq.imagePercent = rcd.defaultImagePercent;
     this.closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent = rcd.defaultAlalHesab;
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayPreDate = rcd.displayPreDate;
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayMobile = rcd.displayMobile;
+    this.closeTabService.saveDataForImportDataFileExcelReq.hasImage = rcd.hasImage;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
