@@ -1867,7 +1867,10 @@ export class ColumnManager {
         { field: 'overallQuantity', header: 'تعداد کل', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'itemQuantity', header: 'تعداد ', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'year', header: 'سال', isSelected: true, isSelectedOrigin: true, readonly: true }
+        { field: 'year', header: 'سال', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ];
     importedListDetails: IObjectIteratation[] = [
         { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, readonly: true, isBoolean: true },

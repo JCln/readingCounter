@@ -20,9 +20,9 @@ export class FollowUpComponent extends FactoryONE {
   shouldActive: boolean = false;
   _showDesc: IObjectIteratation[] = [];
   _defColumns: any[];
-  private listManagerPerdayFollowColumns: string = 'LMPerDayFollowUpPositions';
-  private followupViewColumns: string = 'followUpView';
-  private defColumns: string = 'defColumns';
+  private readonly listManagerPerdayFollowColumns: string = 'LMPerDayFollowUpPositions';
+  private readonly followupViewColumns: string = 'followUpView';
+  private readonly defColumns: string = 'defColumns';
   showInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'گراف',
@@ -101,7 +101,6 @@ export class FollowUpComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForFollowUp) {
       this.dataSourceAUX = this.closeTabService.saveDataForFollowUpAUX;
-      console.log(this.closeTabService.saveDataForFollowUpAUX);
       this.makeConfigs();
       return;
     }

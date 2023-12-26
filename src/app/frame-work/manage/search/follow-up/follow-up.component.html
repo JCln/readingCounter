@@ -29,7 +29,7 @@
         <ng-container *ngIf="item.isBoolean; else elseTemplate">
             <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
                 {{item.header}}
-            </mat-checkbox>
+            </mat-checkbox>            
         </ng-container>
         <ng-template #elseTemplate>
             <div class="_key">{{item.header}}</div>
@@ -37,7 +37,8 @@
                 <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
                     [(ngModel)]="dataSourceAUX[item.field]">
                 <div *ngIf="item.enableTooltip" class="tooltip_text">
-                    درصد مانع صادر شده {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
+                    درصد مانع صادر شده
+                    {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
                 </div>
             </div>
         </ng-template>
