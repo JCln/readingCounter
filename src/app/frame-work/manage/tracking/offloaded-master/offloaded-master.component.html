@@ -1,0 +1,12 @@
+<app-prime-table     
+    [dataSource]="closeTabService.trackingOffloadedMaster" 
+    [_outputFileName]="'offloadedMaster'"
+    [_checkUpName]="'Kartables'"    
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4,5]"
+    [_sessionName]="'offloadedmaster-session'"
+    [_selectedColumnsToRemember]="'selectedTrackOffloadedMaster'"    
+    [_calculableSUM]=true            
+    (refreshedTable)="refreshTable()"            
+ > 
+</app-prime-table>
+

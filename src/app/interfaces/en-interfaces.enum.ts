@@ -169,6 +169,8 @@ export enum ENInterfaces {
     trackingToREADING = 'V1/Tracking/ToReading',
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingGetImportedEdited = 'V1/Tracking/ImportedEdited',
+    trackingOffloadedMaster = 'V1/Tracking/OffloadedMaster',
+    trackingOffloadedDetails = 'V1/Tracking/OffloadedDetails',
     trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
     trackingToOffloadedGroupModifyBatch = 'V1/OffLoad/ModifyBatch',
     GeneralModifyAllExcelInGroup = 'V1/List/OffLoaded/AllExcelInGroup',

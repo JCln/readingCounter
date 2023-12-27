@@ -132,6 +132,15 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
+    // tracking master 
+    offloadedMaster: IObjectIteratation[] = [
+        { field: 'groupId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'routeCount', header: 'تعداد', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'eshterakCount', header: 'تعداد اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'fragmentMasterTitle', header: 'نوبتی', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true },
+    ];
     reading: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: true },
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false, isSelectedOrigin: false, readonly: true },

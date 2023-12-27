@@ -136,3 +136,11 @@ export interface IOverAllWOUIInfo {
     imageNumbers: number,
     audioNumbers: number
 }
+export interface ITrackingMasterDto {
+    groupId: string,
+    listNumber: string,
+    routeCount: number,
+    eshterakCount: number,
+    fragmentMasterTitle: string,
+    zoneTitle: string
+}

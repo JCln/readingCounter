@@ -46,7 +46,7 @@ import {
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
 import { IDynamicExcelReq } from 'interfaces/itools';
-import { IOffLoadPerDay, IOnOffLoad, ITracking, ITrackingSearchDto } from 'interfaces/itrackings';
+import { IOffLoadPerDay, IOnOffLoad, ITracking, ITrackingMasterDto, ITrackingSearchDto } from 'interfaces/itrackings';
 import { IAddUserInfos, IRoleManager, IUserCompareManager, IUserManager, IUserOnlines, IUserRoleCompare } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -95,6 +95,12 @@ export class CloseTabService {
     if (!MathS.isNull(this.ipFilterHistory) && !canRefresh)
       return this.ipFilterHistory;
     this.ipFilterHistory = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilterHistory);
+  }
+  trackingOffloadedMaster: ITrackingMasterDto[] = [];
+  getTrackingOffloadedMaster = async (canRefresh: boolean): Promise<any> => {
+    if (!MathS.isNull(this.trackingOffloadedMaster) && !canRefresh)
+      return this.trackingOffloadedMaster;
+    this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
   }
 
   IOPolicyHistory: IIOPolicyHistory[];
@@ -895,6 +901,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
     { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory },
+    { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, url: EN_Routes.trackOffloadedMaster },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
     { id: 2, req: ENEssentialsToSave.authenticityAttemptsReq, value: ENEssentialsToSave.authenticityAttempts, url: EN_Routes.requestLogsAuthenticityAttempts },

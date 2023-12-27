@@ -577,7 +577,8 @@ export enum ENEssentialsToSave {
     ipFilterGetInvalidTimeReq = 'ipFilterGetInvalidTimeReq',
     authenticityAttemptsReq = 'authenticityAttemptsReq',
     authenticityAttempts = 'authenticityAttempts',
-    importedEditedRes = 'importedEditedRes'
+    importedEditedRes = 'importedEditedRes',
+    trackingOffloadedMaster = 'trackingOffloadedMaster'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -688,6 +689,7 @@ export enum ENSelectedColumnVariables {
     selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
+    selectedTrackOffloadedMaster = 'offloadedMaster',
     selectedUserLoggins = 'userLogs',
     selectedPolicyHistory = 'policyHistory',
     selectedIpFilterHistory = 'ipFilterHistory',
