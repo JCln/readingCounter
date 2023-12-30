@@ -4,6 +4,7 @@ export interface IOnOffLoadNessessities {
   GUid: string,
   listNumber: string,
   trackNumber: number,
+  trackNumberOrGroupId?: string, // for lazy offloaded lists
   groupId?: string,
   zoneId?: number,
   zoneTitle?: string
@@ -40,6 +41,15 @@ export class AllListsService {
     groupId: '',
     zoneId: null,
     trackNumber: null,
+    zoneTitle: ''
+  };
+  offloadedListLazy_pageSign: IOnOffLoadNessessities = {
+    GUid: null,
+    listNumber: null,
+    groupId: '',
+    zoneId: null,
+    trackNumber: null,
+    trackNumberOrGroupId: '',
     zoneTitle: ''
   };
 

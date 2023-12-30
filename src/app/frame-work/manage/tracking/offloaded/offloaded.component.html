@@ -2,7 +2,7 @@
     [dataSource]="closeTabService.saveDataForTrackOffloaded" 
     [_outputFileName]="'offloaded'"
     [_checkUpName]="'Kartables'"
-    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4,5]: [1,2,3,4,5,6]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4,5,6]: [1,2,3,4,5,6,7]"
     [_calculableSUM]=true
     [_hasAggregating] = true
     [_selectedColumnsToRemember]="'selectedTrackOffloaded'"
@@ -11,6 +11,7 @@
     (downloadedOutputSingle)="downloadOutputSingle($event)"        
     (routeedToOffloadModify)="routeToOffloadModify($event)"        
     (routedToOffloadGeneralModify)="routeToOffloadGeneralModify($event)"        
+    (routedToLoggs)="routeToOffloadLazy($event)"
     (backedToReading)="backToReading($event)"
     (routedToLMAll)="routeToAssessPre($event)"        
     (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"

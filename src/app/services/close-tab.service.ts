@@ -102,6 +102,32 @@ export class CloseTabService {
       return this.trackingOffloadedMaster;
     this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
   }
+  saveDataForOffloadedAllLazyReq = {
+    filters: {},
+    first: 0,
+    rows: 0,
+    sortField: '',
+    sortOrder: 0,
+    multiSortMeta: [
+      {
+        field: '',
+        order: 0
+      }
+    ],
+    GUid: '',
+    trackingId: '',
+    groupId: '',
+    counterStateValue: null,
+    multiSelectCounterStateId: [],
+    multiSelectPreCounterStateCode: []
+  };
+  AUXoffloadedAllLazy: IOnOffLoadFlat[] = [];
+  offloadedAllLazy: IOnOffLoadFlat[] = [];
+  getOffloadedAllLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
+    if (!MathS.isNull(this.offloadedAllLazy) && !canRefresh)
+      return this.offloadedAllLazy;
+    this.offloadedAllLazy = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.trackingAllInLazy, UUID);
+  }
 
   IOPolicyHistory: IIOPolicyHistory[];
   iOPolicy: IIOPolicy = {
@@ -901,6 +927,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
     { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory },
+    { id: 2, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy },
     { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, url: EN_Routes.trackOffloadedMaster },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },

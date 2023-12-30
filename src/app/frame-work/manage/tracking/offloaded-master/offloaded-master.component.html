@@ -1,4 +1,4 @@
-<app-prime-table     
+<!-- <app-prime-table     
     [dataSource]="closeTabService.trackingOffloadedMaster" 
     [_outputFileName]="'offloadedMaster'"
     [_checkUpName]="'Kartables'"    
@@ -8,5 +8,72 @@
     [_calculableSUM]=true            
     (refreshedTable)="refreshTable()"            
  > 
-</app-prime-table>
+</app-prime-table> -->
 
+<p-table #dtable *ngIf="closeTabService.trackingOffloadedMaster && closeTabService.trackingOffloadedMaster.length > 0"
+    [columns]="selectedColumns" [value]="closeTabService.trackingOffloadedMaster" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" rowGroupMode="subheader"
+    styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
+    stateKey="karkard-allstates" [reorderableColumns]="trackingManagerService.getLocalReOrderable()" appUnSortTable>
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="right_side">
+            </div>
+            <div class="left_side">
+                <!-- <i (click)="clearFilters(dtable)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                        class="_circle_border p_icons tooltip pi pi-filter-slash">
+                        <div class="tooltip_text_right">حذف فیلترها</div>
+                    </i>
+                    <app-collapsable [_isCollapsed]=closeTabService.trackingOffloadedMasterReq._isCollapsed
+                        (_clicked)="closeTabService.trackingOffloadedMasterReq._isCollapsed = !closeTabService.trackingOffloadedMasterReq._isCollapsed">
+                    </app-collapsable> -->
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+
+        <tr>
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+            </th>
+        </tr>
+
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
+        <tr>
+            <td class="__columns" *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                <ng-container *ngIf="col.isBoolean; else simple">
+                    <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">
+                    </mat-checkbox>
+                </ng-container>
+                <ng-template #simple>
+                    {{dataSource[col.field]}}
+                </ng-template>
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
+
+<section *ngIf="!closeTabService.trackingOffloadedMaster">
+    <tr class="empty_data">
+        موردی پیدا نشد
+        <i class="fa fa-folder-blank"></i>
+    </tr>
+</section>

@@ -578,7 +578,8 @@ export enum ENEssentialsToSave {
     authenticityAttemptsReq = 'authenticityAttemptsReq',
     authenticityAttempts = 'authenticityAttempts',
     importedEditedRes = 'importedEditedRes',
-    trackingOffloadedMaster = 'trackingOffloadedMaster'
+    trackingOffloadedMaster = 'trackingOffloadedMaster',
+    offloadedAllLazy = 'offloadedAllLazy'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -714,6 +715,7 @@ export enum ENSelectedColumnVariables {
     selectedListManagerAll = 'allLists',
     selectedGeneralModify = 'generalListModify',
     selectedGeneralGroupModify = 'generalGroupModify',
+    selectedOffloadedLazy = 'listOffloadedLazy',
     selectedListManagerModify = 'ModifyList',
     selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = 'searchMosh',

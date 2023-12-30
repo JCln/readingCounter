@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'all/true', loadChildren: () => import('./list-modify/list-modify.module').then(modifyList => modifyList.ListModifyModule) },
   { path: 'generalList', loadChildren: () => import('./general-list-modify/general-list-modify.module').then(generalInlineListModify => generalInlineListModify.GeneralListModifyModule) },
   { path: 'generalGList', loadChildren: () => import('./general-group-list-modify/general-group-list-modify.module').then(generalGroupListModify => generalGroupListModify.GeneralGroupListModifyModule) },
-  { path: 'latestInfo', loadChildren: () => import('./list-latest-info/list-latest-info.module').then(listLatestOnOffloadInfo => listLatestOnOffloadInfo.ListLatestInfoModule) }
+  { path: 'latestInfo', loadChildren: () => import('./list-latest-info/list-latest-info.module').then(listLatestOnOffloadInfo => listLatestOnOffloadInfo.ListLatestInfoModule) },
+  { path: 'allLazy', loadChildren: () => import('./all-lazy/all-lazy.module').then(listAllLazy => listAllLazy.AllLazyModule) }
 ];
 
 @NgModule({

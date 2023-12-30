@@ -61,6 +61,9 @@ export class OffloadedComponent extends FactoryONE {
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadGeneralModify(dataSource);
   }
+  routeToOffloadLazy = (dataSource: ITracking) => {
+    this.trackingManagerService.routeToOffloadLazy(dataSource);
+  }
   routeToAssessPre = (dataSource: ITracking) => {
     if (MathS.isNull(dataSource.listNumber)) {
       this.trackingManagerService.showWarnMessage(EN_messages.no_listNumberExist);

@@ -289,6 +289,15 @@ export class TrackingManagerService {
     this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.wrmlGeneralModify);
   }
+  routeToOffloadLazy = (dataSource: ITracking) => {
+    this.allListsService.offloadedListLazy_pageSign.GUid = dataSource.id;
+    this.allListsService.offloadedListLazy_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.offloadedListLazy_pageSign.groupId = dataSource.groupId;
+    this.allListsService.offloadedListLazy_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.offloadedListLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.offloadedListLazy_pageSign.trackNumber = dataSource.trackNumber;
+    this.utilsService.routeTo(EN_Routes.listAllLazy);
+  }
   routeToAssessPre = () => {
     this.utilsService.routeTo(EN_Routes.wrimpassesspre);
   }

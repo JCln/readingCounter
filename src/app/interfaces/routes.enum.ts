@@ -4,6 +4,7 @@ export enum EN_Routes {
     'wrmlGeneralModify' = '/wr/m/l/generalList',
     'wrmlGeneralGModify' = '/wr/m/l/generalGList',
     listLatestInfo = '/wr/m/l/latestInfo',
+    listAllLazy = '/wr/m/l/allLazy',
     'wrmsfwu' = '/wr/m/s/fwu',
     'wrofflinetxtout' = '/wr/offline/txtout',
     'offlineLoad' = '/wr/offline/load',
