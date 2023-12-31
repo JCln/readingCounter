@@ -13,7 +13,7 @@
 <p-table #dtable *ngIf="closeTabService.trackingOffloadedMaster && closeTabService.trackingOffloadedMaster.length > 0"
     [columns]="selectedColumns" [value]="closeTabService.trackingOffloadedMaster" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" rowGroupMode="subheader"
+    [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" dataKey="zoneTitle"
     styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
     stateKey="karkard-allstates" [reorderableColumns]="trackingManagerService.getLocalReOrderable()" appUnSortTable>
 
@@ -54,8 +54,15 @@
 
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex" let-expanded="expanded">
         <tr>
+            <td>
+                <button type="button" pButton pRipple [pRowToggler]="dataSource"
+                    class="p-button-text p-button-rounded p-button-plain"
+                    [ngClass]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+                    (click)="expanded ?  false : loadDetailPlease(dataSource, ri)">
+                </button>
+            </td>
             <td class="__columns" *ngFor="let col of columns">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isBoolean; else simple">
@@ -66,6 +73,22 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion" let-columns let-dataSource>
+        <tr>
+            <!-- <td colspan="7">
+                <div class="p-3"> -->
+                    <app-prime-table [dataSource]="closeTabService.trackingOffloadedDetails"
+                        [_outputFileName]="'offloadedDetails'" [_checkUpName]="'Kartables'"
+                        [_numberOfExtraColumns]="[1]" [_sessionName]="'offloadedDetails-session'"
+                        [_selectedColumnsToRemember]="'selectedTrackOffloadedDetails'" [_outputEnabled]="false"
+                        [_isSortable]="false" [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
+                        [_paginator]="false" [_hasRefreshTable]="false">
+                    </app-prime-table>
+                <!-- </div>
+            </td> -->
         </tr>
     </ng-template>
 

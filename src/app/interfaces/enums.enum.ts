@@ -690,6 +690,7 @@ export enum ENSelectedColumnVariables {
     selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
+    selectedTrackOffloadedDetails = 'offloadedDetails',
     selectedTrackOffloadedMaster = 'offloadedMaster',
     selectedUserLoggins = 'userLogs',
     selectedPolicyHistory = 'policyHistory',

@@ -4,6 +4,8 @@ import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ITracking, ITrackingMasterDto } from 'interfaces/itrackings';
 
 @Component({
   selector: 'app-offloaded-master',
@@ -51,6 +53,22 @@ export class OffloadedMasterComponent extends FactoryONE {
           old.isSelected = true;
       })
     })
+  }
+  loadDetailPlease = async (dataSource: ITrackingMasterDto, rowIndex: number) => {
+    console.log(dataSource);
+    console.log(rowIndex);
+    const res: ITracking = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
+    console.log(res);
+    this.closeTabService.trackingOffloadedDetails[rowIndex] = res;
+    // this.closeTabService.trackingOffloadedDetails.push(res);
+    // this.closeTabService.trackingOffloadedMaster.find(item => {
+    //   if (dataSource.groupId == item.groupId) {
+    //     this.closeTabService.trackingOffloadedDetails[rowIndex] = res;
+    //   }
+    // })
+    // console.log(this.closeTabService.trackingOffloadedDetails);
+
+
   }
 
 }

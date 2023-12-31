@@ -97,6 +97,7 @@ export class CloseTabService {
     this.ipFilterHistory = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilterHistory);
   }
   trackingOffloadedMaster: ITrackingMasterDto[] = [];
+  trackingOffloadedDetails: ITracking[] = [];
   getTrackingOffloadedMaster = async (canRefresh: boolean): Promise<any> => {
     if (!MathS.isNull(this.trackingOffloadedMaster) && !canRefresh)
       return this.trackingOffloadedMaster;
