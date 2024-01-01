@@ -1,0 +1,19 @@
+@import 'variable';
+
+.dtable_wrapper {
+    background-color: var(--secondary_4);
+}
+
+._chevron {
+    background: var(--secondary_1);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    cursor: pointer;
+
+    :focus-visible,
+    :hover {
+        outline: 1px solid var(--primary_2);
+    }
+}

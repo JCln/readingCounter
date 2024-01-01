@@ -579,7 +579,8 @@ export enum ENEssentialsToSave {
     authenticityAttempts = 'authenticityAttempts',
     importedEditedRes = 'importedEditedRes',
     trackingOffloadedMaster = 'trackingOffloadedMaster',
-    offloadedAllLazy = 'offloadedAllLazy'
+    offloadedAllLazy = 'offloadedAllLazy',
+    trackingOffloadedDetails = 'trackingOffloadedDetails'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

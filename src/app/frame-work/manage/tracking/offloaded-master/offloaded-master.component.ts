@@ -1,5 +1,5 @@
 import { ColumnManager } from 'src/app/classes/column-manager';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -20,7 +20,8 @@ export class OffloadedMasterComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    private columnManager: ColumnManager
+    private columnManager: ColumnManager,
+    private cdk: ChangeDetectorRef
   ) {
     super();
   }
@@ -57,9 +58,10 @@ export class OffloadedMasterComponent extends FactoryONE {
   loadDetailPlease = async (dataSource: ITrackingMasterDto, rowIndex: number) => {
     console.log(dataSource);
     console.log(rowIndex);
-    const res: ITracking = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
-    console.log(res);
-    this.closeTabService.trackingOffloadedDetails[rowIndex] = res;
+    this.closeTabService.trackingOffloadedDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
+    console.log(this.closeTabService.trackingOffloadedDetails);
+    this.cdk.detectChanges();
+    
     // this.closeTabService.trackingOffloadedDetails.push(res);
     // this.closeTabService.trackingOffloadedMaster.find(item => {
     //   if (dataSource.groupId == item.groupId) {
