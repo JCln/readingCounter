@@ -61,7 +61,7 @@ export class OffloadedMasterComponent extends FactoryONE {
     this.closeTabService.trackingOffloadedDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
     console.log(this.closeTabService.trackingOffloadedDetails);
     this.cdk.detectChanges();
-    
+
     // this.closeTabService.trackingOffloadedDetails.push(res);
     // this.closeTabService.trackingOffloadedMaster.find(item => {
     //   if (dataSource.groupId == item.groupId) {
@@ -72,5 +72,12 @@ export class OffloadedMasterComponent extends FactoryONE {
 
 
   }
+  routeToOffloadModify = (dataSource: ITracking) => {
+    this.trackingManagerService.routeToOffloadModify(dataSource);
+  }
+  routeToOffloadLazy = (dataSource: ITracking) => {
+    this.trackingManagerService.routeToOffloadLazy(dataSource);
+  }
+
 
 }

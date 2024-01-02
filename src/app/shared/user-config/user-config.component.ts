@@ -19,7 +19,7 @@ export class UserConfigComponent implements OnInit {
   ) { }
 
   ActivateUser = async () => {
-    const res = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userACTIVATE, this.dataSource.username);
+    const res = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.userACTIVATE, this.dataSource.id);
     this.utilsService.snackBarMessageSuccess(res.message);
   }
   DeActivateUser = async () => {

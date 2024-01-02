@@ -86,7 +86,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
         ) ||
         shouldCallApi
       )) {
-        this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.trackNumberOrGroupId, this.closeTabService.saveDataForOffloadedAllLazyReq);
+        this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, this.closeTabService.saveDataForOffloadedAllLazyReq);
         this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy));
         this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy);
         this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = this.allListsService.offloadedListLazy_pageSign.GUid;

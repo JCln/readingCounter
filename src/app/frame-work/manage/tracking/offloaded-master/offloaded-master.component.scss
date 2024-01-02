@@ -1,7 +1,8 @@
 @import 'variable';
 
 .dtable_wrapper {
-    background-color: var(--secondary_4);
+    box-shadow: 0 0 2px 2px var(--secondary_6);
+    border-radius: 7px;
 }
 
 ._chevron {

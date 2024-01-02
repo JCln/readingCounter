@@ -1,11 +1,11 @@
 <div class="_container">
     <h3 class="title">{{dataSource.displayName}} «{{dataSource.username}}»</h3>
     <div class="_key_value" (click)="ActivateUser()">
-        <i class="pi pi-lock-open"></i>
+        <i class="fas fa-user-check"></i>
         فعال
     </div>
     <div class="_key_value" (click)="DeActivateUser()">
-        <i class="pi pi-unlock"></i>
+        <i class="fas fa-user-times"></i>
         غیر فعال
     </div>
     <div class="_key_value" (click)="resetPasswordUser()">
@@ -13,7 +13,7 @@
         بازنشانی گذرواژه
     </div>
     <div class="_key_value" (click)="unLockUser()">
-        <i class="pi pi-check"></i>
+        <i class="pi pi-lock-open"></i>
         Unlock
     </div>
     <div class="_key_value _red_500" (click)="removeUser()">

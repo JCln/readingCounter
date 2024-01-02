@@ -384,10 +384,18 @@
                     <div class="tooltip_text_right">اصلاح لیست</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_outputFileName == 'offloaded'" (click)="routeToLoggs(dataSource)">
-                <span class="ui-column-title">اصلاح لیست2</span>
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded' || _outputFileName == 'offloadedDetails'"
+                (click)="routeToOffloadModify(dataSource)">
+                <span class="ui-column-title">اصلاح لیست</span>
                 <i class="tooltip p_icons pi pi-info-circle">
-                    <div class="tooltip_text_right">اصلاح لیست2</div>
+                    <div class="tooltip_text_right">اصلاح لیست</div>
+                </i>
+            </td>
+            <td class="__columns" *ngIf="_outputFileName == 'offloaded' || _outputFileName== 'offloadedDetails'"
+                (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">اصلاح لیست 2</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">اصلاح لیست 2</div>
                 </i>
             </td>
             <td class="__columns" *ngIf="_outputFileName == 'offloaded'"
