@@ -54,7 +54,7 @@ import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
-import { IForbiddenManager, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat } from 'interfaces/imanage';
+import { IForbiddenManager, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat, IOnOffLoadFlatLazy } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity, IAuthenticityAttempts } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
@@ -107,14 +107,9 @@ export class CloseTabService {
     filters: {},
     first: 0,
     rows: 0,
-    sortField: '',
-    sortOrder: 0,
-    multiSortMeta: [
-      {
-        field: '',
-        order: 0
-      }
-    ],
+    sortField: 'offloadDateJalali',
+    sortOrder: 1,
+    multiSortMeta: [],
     GUid: '',
     trackingId: '',
     groupId: '',
@@ -123,7 +118,10 @@ export class CloseTabService {
     multiSelectPreCounterStateCode: []
   };
   AUXoffloadedAllLazy: IOnOffLoadFlat[] = [];
-  offloadedAllLazy: IOnOffLoadFlat[] = [];
+  offloadedAllLazy: IOnOffLoadFlatLazy = {
+    data: [],
+    totalRecords: 0
+  };
   getOffloadedAllLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
     if (!MathS.isNull(this.offloadedAllLazy) && !canRefresh)
       return this.offloadedAllLazy;
@@ -965,6 +963,7 @@ export class CloseTabService {
   cleanArrays = () => {
     this.tabs = [];
     this.ipFilterHistory = [];
+    this.offloadedAllLazy.data = [];
   }
   // setAll(value, val) {
   //   if (value) {

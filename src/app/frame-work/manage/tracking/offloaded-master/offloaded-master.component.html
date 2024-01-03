@@ -79,23 +79,15 @@
 
     <ng-template pTemplate="rowexpansion" let-ri="rowIndex" let-expanded="expanded">
         <tr>
-            <td class="dtable_wrapper">
-                <app-prime-table 
-                    [dataSource]="closeTabService.trackingOffloadedDetails[ri]"               
-                    [_outputFileName]="'offloadedDetails'" 
-                    [_checkUpName]="'offloadedDetails'" 
-                    [_numberOfExtraColumns]="[1]"
-                    [_sessionName]="'offloadedDetails-session'"
-                    [_selectedColumnsToRemember]="'selectedTrackOffloadedDetails'" 
-                    [_outputEnabled]="false"
-                    [_isSortable]="false" 
-                    [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
-                    [_paginator]="false" 
-                    [_hasRefreshTable]="false" 
-                    [_captionEnabled]="false"
+            <td class="dtable_wrapper" colspan="7">
+                <app-prime-table [dataSource]="closeTabService.trackingOffloadedDetails[ri]"
+                    [_outputFileName]="'offloadedDetails'" [_checkUpName]="'offloadedDetails'"
+                    [_numberOfExtraColumns]="[1,2]" [_sessionName]="'offloadedDetails-session'"
+                    [_selectedColumnsToRemember]="'selectedTrackOffloadedDetails'" [_outputEnabled]="false"
+                    [_isSortable]="false" [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
+                    [_paginator]="false" [_hasRefreshTable]="false" [_captionEnabled]="false"
                     (routeedToOffloadModify)="routeToOffloadModify($event)"
-                    (routedToLoggs)="routeToOffloadLazy($event)"
-                    >
+                    (routedToLoggs)="routeToOffloadLazy($event)">
                 </app-prime-table>
             </td>
         </tr>

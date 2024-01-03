@@ -40,7 +40,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   _outputFileName: string = 'listOffloadedLazy';
   _selectCols: any = [];
   _selectedColumns: any[];
-
+  totalRecords: number;
   clonedProducts: { [s: string]: object; } = {};
 
   deleteDictionary: IDictionaryManager[] = [];
@@ -49,7 +49,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   counterStateByZoneDictionary: IDictionaryManager[] = [];
-  counterStateForModifyDictionary: IDictionaryManager[] = [];
 
   modifyType: OffloadModify[];
   tempFilter = { first: [], second: [] };
@@ -71,71 +70,51 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   makeDefaultValCheckbox = () => {
     this.listManagerService.columnManager._generalGroupHeaderCheckbox = false;
   }
-  updateOnChangedCounterState = async (val: number, shouldCallApi: boolean) => {
-    if (val) {
-      // TODO: if from same listNumber, no need to call api, check BY GROUP ID
-      if ((
-        !this.closeTabService.offloadedAllLazy ||
-        (
-          this.closeTabService.saveDataForOffloadedAllLazyReq.GUid !=
-          this.allListsService.offloadedListLazy_pageSign.GUid
-        ) &&
-        (
-          this.closeTabService.saveDataForOffloadedAllLazyReq.groupId !=
-          this.allListsService.offloadedListLazy_pageSign.groupId
-        ) ||
-        shouldCallApi
-      )) {
-        this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, this.closeTabService.saveDataForOffloadedAllLazyReq);
-        this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy));
-        this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy);
-        this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = this.allListsService.offloadedListLazy_pageSign.GUid;
-        this.closeTabService.saveDataForOffloadedAllLazyReq.groupId = this.allListsService.offloadedListLazy_pageSign.groupId;
-      }
-      this.makeDefaultValCheckbox();
-      this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-      this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
-      this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
-      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
-      this.resetDataSourceView();
+  updateOnChangedCounterState = async (event: any) => {
+    this.closeTabService.offloadedAllLazy.data = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, event);
+    this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy.data));
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
+    this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = this.allListsService.offloadedListLazy_pageSign.GUid;
+    this.makeDefaultValCheckbox();
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
+    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
+    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
+    this.resetDataSourceView();
 
 
-      this.closeTabService.offloadedAllLazy =
-        Converter.convertIdsToTitles(
-          this.closeTabService.offloadedAllLazy,
-          {
-            deleteDictionary: this.deleteDictionary,
-            counterStateDictionary: this.counterStateDictionary,
-            counterStateByCodeDictionary: this.counterStateByCodeDictionary,
-            karbariDictionaryCode: this.karbariDictionaryCode,
-            qotrDictionary: this.qotrDictionary,
-          },
-          {
-            hazf: 'hazf',
-            counterStateId: 'counterStateId',
-            preCounterStateCode: 'preCounterStateCode',
-            possibleKarbariCode: 'possibleKarbariCode',
-            qotrCode: 'qotrCode'
-          })
-      Converter.convertIdToTitle(this.closeTabService.offloadedAllLazy, this.karbariDictionaryCode, 'karbariCode');
-      this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllLazy);
-    }
+    this.closeTabService.offloadedAllLazy.data =
+      Converter.convertIdsToTitles(
+        this.closeTabService.offloadedAllLazy.data,
+        {
+          deleteDictionary: this.deleteDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          hazf: 'hazf',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
+    Converter.convertIdToTitle(this.closeTabService.offloadedAllLazy.data, this.karbariDictionaryCode, 'karbariCode');
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.offloadedListLazy_pageSign.GUid) {
-      this.closeTabService.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
+      this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
     else {
       // to show counterStates radioButtons
-      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);
-      this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
+      // await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);      
       if (canRefresh) {
-        this.closeTabService.offloadedAllLazy = null;
+        this.closeTabService.offloadedAllLazy.data = [];
         this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = null;
       }
-
-      this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
       } else {
@@ -143,17 +122,13 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
       }
       this._selectedColumns = this.listManagerService.columnManager.customizeSelectedColumns(this._selectCols);
       this.insertSelectedColumns();
-      // setDynamics should implement before new instance of dataSource create      
-      // this.closeTabService.offloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy));
+      // setDynamics should implement before new instance of dataSource create       
     }
   }
   refreshTable = () => {
-    if (!MathS.isNull(this.listManagerService.counterStateGeneralGroupList)) {
-      this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, true);
-    }
-    else {
-      this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
-    }
+    console.log(1);
+
+    this.updateOnChangedCounterState(this.closeTabService.saveDataForOffloadedAllLazyReq);
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
@@ -197,46 +172,12 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
       return tempDataSource;
     }
   }
-  testCallBackFun = (e: any, filterValid: string): Promise<boolean> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-
-        if (MathS.isNull(e)) {
-          this.tempFilter[filterValid] = [];
-        }
-        if (!this.tempFilter[filterValid].includes(e)) {
-          this.tempFilter[filterValid] = e;
-        }
-
-        if (this.tempMainDataSource.totalNum == 0) {
-          // for single use only on each 'component init'
-          this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy));
-          this.tempMainDataSource.totalNum = 1;
-        }
-
-        this.closeTabService.offloadedAllLazy = this.filterHelp2(this.filterHelper());
-
-        if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
-          this.closeTabService.offloadedAllLazy = this.closeTabService.AUXoffloadedAllLazy;
-          // TODO: update rows that need to dictionaries
-          this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
-        }
-        resolve(true)
-      }, 0)
-    });
-  }
   loadCustomers(event: LazyLoadEvent) {
-    this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
+    this.updateOnChangedCounterState(event);
     console.log(event);
 
     // this.customerService.getCustomers({ lazyEvent: JSON.stringify(event) }).then((res) => {            
     // }); 
-  }
-  filterOptions = async (e: any[], filterValid: string) => {
-    // make hackable async function to show spinner on filter event
-    this.spinnerWrapperService.startPending();
-    await this.testCallBackFun(e, filterValid);
-    this.spinnerWrapperService.stopPending();
   }
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
     return new Promise(async (resolve) => {
@@ -248,9 +189,9 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   }
   // have problem on SHOWING Without this Code for DropDowns
   clickedDropDowns = (event: any, element: string, dataId: any) => {
-    for (let index = 0; index < this.closeTabService.offloadedAllLazy.length; index++) {
-      if (this.closeTabService.offloadedAllLazy[index].id === dataId) {
-        this.closeTabService.offloadedAllLazy[index][element] = event.title;
+    for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
+      if (this.closeTabService.offloadedAllLazy.data[index].id === dataId) {
+        this.closeTabService.offloadedAllLazy.data[index][element] = event.title;
       }
     }
   }
@@ -276,21 +217,21 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   }
   manageModifyBatchResponse = (data: IBatchModifyRes) => {
     for (let index = 0; index < data.detailsInfo.length; index++) {
-      for (let j = 0; j < this.closeTabService.offloadedAllLazy.length; j++) {
-        if (data.detailsInfo[index].onOffLoadId === this.closeTabService.offloadedAllLazy[j].id) {
+      for (let j = 0; j < this.closeTabService.offloadedAllLazy.data.length; j++) {
+        if (data.detailsInfo[index].onOffLoadId === this.closeTabService.offloadedAllLazy.data[j].id) {
 
-          this.closeTabService.offloadedAllLazy[j].id = data.detailsInfo[index].newOnOffLoadId;//insert newOnOffLoad to last dataSource Id
+          this.closeTabService.offloadedAllLazy.data[j].id = data.detailsInfo[index].newOnOffLoadId;//insert newOnOffLoad to last dataSource Id
           if (data.detailsInfo[index].hasError) {
             // with error[index of dataSource]
-            this.closeTabService.offloadedAllLazy[j].isResponseHasError = true;
-            this.closeTabService.offloadedAllLazy[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
+            this.closeTabService.offloadedAllLazy.data[j].isResponseHasError = true;
+            this.closeTabService.offloadedAllLazy.data[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
           }
           else {
             // successful
             // possible for last icon remain in table, make sure new icons replace
-            this.closeTabService.offloadedAllLazy[j].isResponseHasError = false;
-            this.closeTabService.offloadedAllLazy[j].modifyType = null;
-            this.closeTabService.offloadedAllLazy[j].editedErrorDescription = '';
+            this.closeTabService.offloadedAllLazy.data[j].isResponseHasError = false;
+            this.closeTabService.offloadedAllLazy.data[j].modifyType = null;
+            this.closeTabService.offloadedAllLazy.data[j].editedErrorDescription = '';
           }
         }
       }
@@ -301,9 +242,9 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   uploadAll = async () => {
     const temp: IOffloadModifyReq[] = [];
 
-    for (let index = 0; index < this.closeTabService.offloadedAllLazy.length; index++) {
+    for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
 
-      let tempOrigin = this.closeTabService.offloadedAllLazy[index];
+      let tempOrigin = this.closeTabService.offloadedAllLazy.data[index];
       if (typeof tempOrigin.modifyType == 'object') {
         tempOrigin.modifyType = null;
       }
@@ -347,9 +288,9 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   }
   receiveDateJalali = (event: any, dataId: string) => {
     // to make date updated to latest change by user
-    for (let index = 0; index < this.closeTabService.offloadedAllLazy.length; index++) {
-      if (this.closeTabService.offloadedAllLazy[index].id === dataId) {
-        this.closeTabService.offloadedAllLazy[index].offloadDateJalali = event;
+    for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
+      if (this.closeTabService.offloadedAllLazy.data[index].id === dataId) {
+        this.closeTabService.offloadedAllLazy.data[index].offloadDateJalali = event;
       }
     }
   }
@@ -397,16 +338,15 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     let temp: any[] = [];
     // should be false on initial(_generalGroupHeaderCheckbox) because filter on DataSource happen
     if (this.listManagerService.columnManager._generalGroupHeaderCheckbox) {
-      for (let index = 0; index < this.closeTabService.offloadedAllLazy.length; index++) {
-        if (this.closeTabService.offloadedAllLazy[index].counterStateId !== null)
-          temp.push(this.closeTabService.offloadedAllLazy[index]);
+      for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
+        if (this.closeTabService.offloadedAllLazy.data[index].counterStateId !== null)
+          temp.push(this.closeTabService.offloadedAllLazy.data[index]);
       }
-      this.closeTabService.offloadedAllLazy = temp;
+      this.closeTabService.offloadedAllLazy.data = temp;
     }
     else {
       if (!MathS.isNull(this.closeTabService.AUXoffloadedAllLazy)) {
-        this.closeTabService.offloadedAllLazy = this.closeTabService.AUXoffloadedAllLazy;
-        this.updateOnChangedCounterState(this.listManagerService.counterStateGeneralGroupList, false);
+        this.closeTabService.offloadedAllLazy.data = this.closeTabService.AUXoffloadedAllLazy;
       }
     }
   }

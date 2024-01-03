@@ -134,6 +134,10 @@ export interface IOnOffLoadFlat {
     editedErrorDescription?: string// to make alert in the table
     fileRepositoryId?: string // on single image like SinglePanel API
 }
+export interface IOnOffLoadFlatLazy {
+    data: IOnOffLoadFlat[],
+    totalRecords: number
+}
 export interface IOutputManager {
     zoneId: number,
     fromDate: string,

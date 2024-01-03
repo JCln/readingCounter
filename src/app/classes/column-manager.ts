@@ -1222,7 +1222,7 @@ export class ColumnManager {
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-        { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
     ]
     rrLocked: IObjectIteratation[] = [
@@ -1294,7 +1294,7 @@ export class ColumnManager {
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-        { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
         // { field: 'eslahType', header: 'علت اصلاح', isSelected: false,isSelectedOrigin:false },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
     ]
@@ -1373,7 +1373,7 @@ export class ColumnManager {
             { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
-            { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
+            { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
         ];
     searchPro: IObjectIteratation[] =
         [
@@ -1444,7 +1444,7 @@ export class ColumnManager {
             { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
             { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
             { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-            { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+            { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
             { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
         ];
     searchMosh: IObjectIteratation[] =
@@ -1516,7 +1516,7 @@ export class ColumnManager {
             { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false },
             { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
             { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-            { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+            { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
             { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
             { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
         ];
@@ -1589,7 +1589,7 @@ export class ColumnManager {
             { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false },
             { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
             { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-            { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+            { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
             { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
             { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
         ];
@@ -1675,7 +1675,7 @@ export class ColumnManager {
             { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
             { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
             { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-            { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+            { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
             { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
             { field: 'isSelected', header: 'انتخاب', isSelected: true, isSelectedOrigin: true, isBoolean: true }
         ]
@@ -2052,7 +2052,7 @@ export class ColumnManager {
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-        { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
     ]
     generalListModify: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -2119,7 +2119,7 @@ export class ColumnManager {
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: false },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-        { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
         { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: true, enableTooltip: true }
     ]
@@ -2156,7 +2156,7 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'mobiles', header: 'موبایل‌ها', isSelected: false, isSelectedOrigin: false },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
-        { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '' },
         { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
@@ -2228,7 +2228,7 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
         { field: 'mobiles', header: 'موبایل‌ها', isSelected: false, isSelectedOrigin: false },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
-        { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '' },
         { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
@@ -2336,7 +2336,7 @@ export class ColumnManager {
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false },
-        { field: 'phoneDateTime', header: 'زمان گوشی', isSelected: false, isSelectedOrigin: false },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
     ]
     imgResultGridBased: IObjectIteratation[] = [

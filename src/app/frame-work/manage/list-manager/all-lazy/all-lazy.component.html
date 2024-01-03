@@ -16,7 +16,7 @@
                 [(ngModel)]="allListsService.offloadedListLazy_pageSign.zoneTitle">
         </div>
     </div>
-    <div class="radios">
+    <!-- <div class="radios">
         <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
             <div class="p-field-radiobutton">
                 <p-radioButton name="orderByDate" [value]="orderType.id"
@@ -26,17 +26,16 @@
                 <label [for]="orderType.id">{{orderType.title}}</label>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
 
 <main style="position: relative; ">
-    <p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="closeTabService.offloadedAllLazy" [lazy]="true"
-        (onLazyLoad)="loadCustomers($event)" dataKey="id" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    <p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="closeTabService.offloadedAllLazy.data"
+        [lazy]="true" (onLazyLoad)="loadCustomers($event)" dataKey="id" [paginator]="true" [rows]="10"
+        [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
         styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
-        [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
-        [reorderableColumns]="getLocalReOrderable()" appUnSortTable>
+        [stateKey]="_sessionName" editMode="row" [reorderableColumns]="getLocalReOrderable()" appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -66,7 +65,7 @@
                     <input class="_general_search" type="text"
                         (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
                     <i (click)="hasBeenReadsToggler()">
-                        <label class="font_family" for="binary">({{closeTabService.offloadedAllLazy.length}})
+                        <label class="font_family" for="binary">({{closeTabService.offloadedAllLazy.data.length}})
                             فقط قرائت شده
                         </label>
                         <p-checkbox [(ngModel)]="listManagerService.columnManager._offloadedLazyHeaderCheckbox"
@@ -108,9 +107,8 @@
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId"
-                                [options]="counterStateByZoneDictionary"
-                                (onChange)="filterOptions($event.value, 'first')" optionLabel="title"
-                                optionValue="title" [filter]="true" showClear="true">
+                                [options]="counterStateByZoneDictionary" optionLabel="title" optionValue="title"
+                                [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -124,9 +122,8 @@
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode"
-                                [options]="counterStateByCodeDictionary"
-                                (onChange)="filterOptions($event.value, 'second')" optionLabel="title"
-                                optionValue="title" [filter]="true" showClear="true">
+                                [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="title"
+                                [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -329,7 +326,7 @@
         (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 
-    <section *ngIf="!closeTabService.offloadedAllLazy || closeTabService.offloadedAllLazy.length === 0">
+    <section *ngIf="!closeTabService.offloadedAllLazy.data || closeTabService.offloadedAllLazy.data.length === 0">
         <tr class="empty_data">
             موردی پیدا نشد
             <i class="fa fa-folder-blank"></i>
