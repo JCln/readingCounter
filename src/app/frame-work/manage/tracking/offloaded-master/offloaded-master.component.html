@@ -1,19 +1,7 @@
-<!-- <app-prime-table     
-    [dataSource]="closeTabService.trackingOffloadedMaster" 
-    [_outputFileName]="'offloadedMaster'"
-    [_checkUpName]="'Kartables'"    
-    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4,5]"
-    [_sessionName]="'offloadedmaster-session'"
-    [_selectedColumnsToRemember]="'selectedTrackOffloadedMaster'"    
-    [_calculableSUM]=true            
-    (refreshedTable)="refreshTable()"            
- > 
-</app-prime-table> -->
-
 <p-table #dtable *ngIf="closeTabService.trackingOffloadedMaster && closeTabService.trackingOffloadedMaster.length > 0"
     [columns]="selectedColumns" [value]="closeTabService.trackingOffloadedMaster" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" dataKey="listNumber"
+    [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" dataKey="groupId"
     styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
     stateKey="offloadedmaster" [reorderableColumns]="trackingManagerService.getLocalReOrderable()" appUnSortTable>
 
@@ -82,11 +70,10 @@
             <td class="dtable_wrapper" colspan="7">
                 <app-prime-table [dataSource]="closeTabService.trackingOffloadedDetails[ri]"
                     [_outputFileName]="'offloadedDetails'" [_checkUpName]="'offloadedDetails'"
-                    [_numberOfExtraColumns]="[1,2]" [_sessionName]="'offloadedDetails-session'"
+                    [_numberOfExtraColumns]="[1]" [_sessionName]="'offloadedDetails-session'"
                     [_selectedColumnsToRemember]="'selectedTrackOffloadedDetails'" [_outputEnabled]="false"
                     [_isSortable]="false" [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
                     [_paginator]="false" [_hasRefreshTable]="false" [_captionEnabled]="false"
-                    (routeedToOffloadModify)="routeToOffloadModify($event)"
                     (routedToLoggs)="routeToOffloadLazy($event)">
                 </app-prime-table>
             </td>

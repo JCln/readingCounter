@@ -1,5 +1,5 @@
 import { ColumnManager } from 'src/app/classes/column-manager';
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -21,14 +21,18 @@ export class OffloadedMasterComponent extends FactoryONE {
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private columnManager: ColumnManager,
-    private cdk: ChangeDetectorRef
+    // private cdk: ChangeDetectorRef
   ) {
     super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.trackingOffloadedDetails = [];
+    }
     await this.closeTabService.getTrackingOffloadedMaster(canRefresh ? canRefresh : false);
     this.insertSelectedColumns();
+    
   }
   insertSelectedColumns = () => {
     this._selectCols = this.columnManager.getColumnsMenus(this.offloadedMasterOutputName);
@@ -56,24 +60,15 @@ export class OffloadedMasterComponent extends FactoryONE {
     })
   }
   loadDetailPlease = async (dataSource: ITrackingMasterDto, rowIndex: number) => {
-    console.log(dataSource);
-    console.log(rowIndex);
-    this.closeTabService.trackingOffloadedDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
+    console.log(1);
+    console.log(this.closeTabService.trackingOffloadedDetails[rowIndex]);
+    console.log(1);
     console.log(this.closeTabService.trackingOffloadedDetails);
-    this.cdk.detectChanges();
-
-    // this.closeTabService.trackingOffloadedDetails.push(res);
-    // this.closeTabService.trackingOffloadedMaster.find(item => {
-    //   if (dataSource.groupId == item.groupId) {
-    //     this.closeTabService.trackingOffloadedDetails[rowIndex] = res;
-    //   }
-    // })
-    // console.log(this.closeTabService.trackingOffloadedDetails);
-
-
-  }
-  routeToOffloadModify = (dataSource: ITracking) => {
-    this.trackingManagerService.routeToOffloadModify(dataSource);
+    console.log(1);
+    this.closeTabService.trackingOffloadedDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
+    console.log(1);
+    console.log(this.closeTabService.trackingOffloadedDetails);
+    // this.cdk.detectChanges();
   }
   routeToOffloadLazy = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadLazy(dataSource);

@@ -4,6 +4,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { LazyLoadEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
 import { BrowserStorageService } from 'services/browser-storage.service';
@@ -21,14 +22,13 @@ import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { GeneralGroupInfoResComponent } from '../general-group-list-modify/general-group-info-res/general-group-info-res.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 import { Table } from 'primeng/table';
-import { LazyLoadEvent } from 'primeng/api';
 
 @Component({
-  selector: 'app-all-lazy',
-  templateUrl: './all-lazy.component.html',
-  styleUrls: ['./all-lazy.component.scss']
+  selector: 'app-all-ingroup-lazy',
+  templateUrl: './all-ingroup-lazy.component.html',
+  styleUrls: ['./all-ingroup-lazy.component.scss']
 })
-export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
+export class AllIngroupLazyComponent  extends AllListsFactory implements AfterViewInit {
   // should place only in component because overright totalNum needs for dynamic use  
   tempMainDataSource = { totalNum: 0, data: [] };
   @ViewChild(Table) datatableG: Table;

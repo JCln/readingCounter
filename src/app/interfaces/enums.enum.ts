@@ -580,7 +580,8 @@ export enum ENEssentialsToSave {
     importedEditedRes = 'importedEditedRes',
     trackingOffloadedMaster = 'trackingOffloadedMaster',
     offloadedAllLazy = 'offloadedAllLazy',
-    trackingOffloadedDetails = 'trackingOffloadedDetails'
+    trackingOffloadedDetails = 'trackingOffloadedDetails',
+    offloadedAllInGroupLazy = 'offloadedAllInGroupLazy'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

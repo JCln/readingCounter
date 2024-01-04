@@ -122,6 +122,10 @@ export class CloseTabService {
     data: [],
     totalRecords: 0
   };
+  offloadedAllInGroupLazy: IOnOffLoadFlatLazy = {
+    data: [],
+    totalRecords: 0
+  };
   getOffloadedAllLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
     if (!MathS.isNull(this.offloadedAllLazy) && !canRefresh)
       return this.offloadedAllLazy;
@@ -927,6 +931,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
     { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory },
     { id: 2, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy },
+    { id: 2, value: ENEssentialsToSave.offloadedAllInGroupLazy, url: EN_Routes.listAllInGroupLazy },
     { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, value_2: ENEssentialsToSave.trackingOffloadedDetails, url: EN_Routes.trackOffloadedMaster },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },

@@ -1,4 +1,9 @@
-@import 'variable';
+@import 'primeNG.scss';
+@import 'tooltip';
+@import 'input.scss';
+@import '_mat.scss';
+@import 'all-lists.scss';
+
 
 .dtable_wrapper {
     box-shadow: 0 0 2px 2px var(--secondary_6);
