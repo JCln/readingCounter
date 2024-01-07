@@ -28,7 +28,7 @@ import { Table } from 'primeng/table';
   templateUrl: './all-ingroup-lazy.component.html',
   styleUrls: ['./all-ingroup-lazy.component.scss']
 })
-export class AllIngroupLazyComponent  extends AllListsFactory implements AfterViewInit {
+export class AllIngroupLazyComponent extends AllListsFactory implements AfterViewInit {
   // should place only in component because overright totalNum needs for dynamic use  
   tempMainDataSource = { totalNum: 0, data: [] };
   @ViewChild(Table) datatableG: Table;
@@ -77,7 +77,6 @@ export class AllIngroupLazyComponent  extends AllListsFactory implements AfterVi
 
     this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy.data));
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
-    this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = this.allListsService.offloadedListLazy_pageSign.GUid;
     this.makeDefaultValCheckbox();
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -115,10 +114,9 @@ export class AllIngroupLazyComponent  extends AllListsFactory implements AfterVi
       console.log(1);
 
       // to show counterStates radioButtons
-      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);      
+      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.offloadedAllLazy.data = [];
-        this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = null;
       }
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
@@ -132,8 +130,6 @@ export class AllIngroupLazyComponent  extends AllListsFactory implements AfterVi
   }
   refreshTable = () => {
     console.log(1);
-
-    this.updateOnChangedCounterState(this.closeTabService.saveDataForOffloadedAllLazyReq);
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
@@ -178,6 +174,8 @@ export class AllIngroupLazyComponent  extends AllListsFactory implements AfterVi
     }
   }
   loadCustomers(event: LazyLoadEvent) {
+    console.log(event);
+    
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
     }

@@ -64,19 +64,16 @@ export class JwtService {
     }
   }
   getAuthorizationToken = (): IAuthTokenLogoutType => {
-    if (this.shouldSaveTokensInLocal()) {
+    if (this.shouldSaveTokensInLocal())
       return {
         accessToken: this.browserStorageService.getLocal(ENAuthTokenType.access_token),
         refreshToken: this.browserStorageService.getLocal(ENAuthTokenType.refresh_token),
         loginId: this.browserStorageService.getLocal(ENAuthTokenType.login_id)
       }
-    }
-    else {
-      return {
-        accessToken: this.browserStorageService.getSession(ENAuthTokenType.access_token),
-        refreshToken: this.browserStorageService.getSession(ENAuthTokenType.refresh_token),
-        loginId: this.browserStorageService.getSession(ENAuthTokenType.login_id)
-      }
+    return {
+      accessToken: this.browserStorageService.getSession(ENAuthTokenType.access_token),
+      refreshToken: this.browserStorageService.getSession(ENAuthTokenType.refresh_token),
+      loginId: this.browserStorageService.getSession(ENAuthTokenType.login_id)
     }
   }
   private getRefreshTokenLocal = (): string => {

@@ -77,7 +77,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
 
     this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy.data));
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
-    this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = this.allListsService.offloadedListLazy_pageSign.GUid;
     this.makeDefaultValCheckbox();
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -115,10 +114,9 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
       console.log(1);
 
       // to show counterStates radioButtons
-      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);      
+      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.offloadedAllLazy.data = [];
-        this.closeTabService.saveDataForOffloadedAllLazyReq.GUid = null;
       }
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
@@ -178,13 +176,22 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     }
   }
   loadCustomers(event: LazyLoadEvent) {
+    console.log(event);
+
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
     }
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
+
     this.updateOnChangedCounterState(event);
+  }
+  changedFilterDropdowns(val: any) {
+    console.log(val);
+
+    console.log(this.closeTabService.saveDataForOffloadedAllLazyReq);
+
   }
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
     return new Promise(async (resolve) => {

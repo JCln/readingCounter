@@ -109,7 +109,7 @@
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId"
                                 [options]="counterStateByZoneDictionary" optionLabel="title" optionValue="title"
-                                [filter]="true" showClear="true">
+                                [filter]="true" showClear="true" (onChange)="loadCustomers($event)">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -124,7 +124,7 @@
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode"
                                 [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="title"
-                                [filter]="true" showClear="true">
+                                [filter]="true" showClear="true" (onChange)="loadCustomers($event)">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>

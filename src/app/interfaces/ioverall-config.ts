@@ -63,7 +63,7 @@ export interface IPrimeConfirmDialog {
     messageTitleTwo?: string,
     text?: string,
     width: string,
-    isInput: boolean,    
+    isInput: boolean,
     icon: string,
     isImportant?: boolean,
     closable?: boolean,
@@ -146,6 +146,7 @@ export interface IObjectIteratation {
     isSelectOption?: boolean;
     enableTooltip?: boolean;
     tabIndex?: number;
+    type?: string
 }
 export type BookType = 'xlsx' | 'csv' | 'xls';
 export interface INotificationAlertTypes {

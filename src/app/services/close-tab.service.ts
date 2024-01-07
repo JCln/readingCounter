@@ -104,15 +104,6 @@ export class CloseTabService {
     this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
   }
   saveDataForOffloadedAllLazyReq = {
-    filters: {},
-    first: 0,
-    rows: 0,
-    sortField: 'offloadDateJalali',
-    sortOrder: 1,
-    multiSortMeta: [],
-    GUid: '',
-    trackingId: '',
-    groupId: '',
     counterStateValue: null,
     multiSelectCounterStateId: [],
     multiSelectPreCounterStateCode: []
@@ -126,10 +117,17 @@ export class CloseTabService {
     data: [],
     totalRecords: 0
   };
+  AUXOffloadedAllInGroupLazy: IOnOffLoadFlat[] = [];
+
   getOffloadedAllLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
     if (!MathS.isNull(this.offloadedAllLazy) && !canRefresh)
       return this.offloadedAllLazy;
     this.offloadedAllLazy = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.trackingAllInLazy, UUID);
+  }
+  getOffloadedAllInGroupLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
+    if (!MathS.isNull(this.offloadedAllInGroupLazy) && !canRefresh)
+      return this.offloadedAllInGroupLazy;
+    this.offloadedAllInGroupLazy = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.trackingAllInGroupLazy, UUID);
   }
 
   IOPolicyHistory: IIOPolicyHistory[];
@@ -968,7 +966,6 @@ export class CloseTabService {
   cleanArrays = () => {
     this.tabs = [];
     this.ipFilterHistory = [];
-    this.offloadedAllLazy.data = [];
   }
   // setAll(value, val) {
   //   if (value) {
