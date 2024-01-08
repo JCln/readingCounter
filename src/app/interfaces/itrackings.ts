@@ -52,6 +52,9 @@ export interface IEditTracking {
     displayBillId: boolean,
     displayRadif: boolean,
     counterReaderId: string;
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean,
 }
 export interface IOffLoadPerDay {
     trackNumber: number,

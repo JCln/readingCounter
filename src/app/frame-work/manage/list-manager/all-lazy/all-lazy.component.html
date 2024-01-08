@@ -102,17 +102,17 @@
                 <th class="__headers" pReorderableColumn *ngFor="let col of columns">
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="contains"
-                        [type]="col.type" field="{{col.field}}">
+                        type="{{col.type == 'texture'? 'text': 'numeric'}}" field="{{col.field}}">
                     </p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
-                        field="counterStateId" matchMode="in" [showMenu]="false">
+                        field="counterStateId" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId"
-                                [options]="counterStateByZoneDictionary" optionLabel="title" optionValue="title"
-                                [filter]="true" showClear="true"
-                                (onChange)="changedFilterDropdowns(closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId)"
-                                (onPanelHide)="changedFilterDropdowns(closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId)">
+                                [options]="counterStateByZoneDictionary" optionLabel="title" optionValue="id"
+                                [filter]="true" showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectCounterStateId')">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -122,14 +122,14 @@
                         </ng-template>
                     </p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
-                        field="preCounterStateCode" matchMode="in" [showMenu]="false">
+                        field="preCounterStateCode" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
                                 [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode"
-                                [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="title"
-                                [filter]="true" showClear="true"
-                                (onChange)="changedFilterDropdowns(closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId)"
-                                (onPanelHide)="changedFilterDropdowns(closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId)">
+                                [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="id"
+                                [filter]="true" showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectPreCounterStateCode' )">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -251,7 +251,19 @@
                                                 <input [(ngModel)]="dataSource[col.field]">
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{dataSource[col.field]}}
+                                                <div class="tooltip">
+                                                    {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                                    dataSource[col.field].toString().split(' ')[0]
+                                                    : ''}}
+                                                    <div class="tooltip_text_right" [ngClass]="
+                                                    {
+                                                    'tooltip_long2':dataSource[col.field]?.length >= 20,
+                                                    'tooltip_long3':dataSource[col.field]?.length >= 30,
+                                                    'tooltip_long4':dataSource[col.field]?.length >= 40
+                                                    }">
+                                                        {{dataSource[col.field]}}
+                                                    </div>
+                                                </div>
                                             </ng-template>
                                         </p-cellEditor>
                                     </div>

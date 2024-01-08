@@ -176,20 +176,19 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     }
   }
   loadCustomers(event: LazyLoadEvent) {
-    console.log(event);
-
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
     }
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
-
+    event.filters['counterStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId : null;
+    event.filters['preCounterStateCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode : null;
+    console.log(event);
     this.updateOnChangedCounterState(event);
   }
-  changedFilterDropdowns(val: any) {
-    console.log(val);
-
+  changedFilterDropdowns(eventValue: any, elementName: string) {
+    this.closeTabService.saveDataForOffloadedAllLazyReq[elementName] = eventValue;
     console.log(this.closeTabService.saveDataForOffloadedAllLazyReq);
 
   }

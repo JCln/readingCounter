@@ -41,16 +41,18 @@ export class ImportedComponent extends FactoryONE {
   }
   // imported service control
   private selectSpecialParameters = (rowData: IEditTracking): IEditTracking => {
-    const a: IEditTracking = {
+    return {
       id: rowData.id,
       alalHesabPercent: rowData.alalHesabPercent,
       imagePercent: rowData.imagePercent,
       hasPreNumber: rowData.hasPreNumber,
       displayBillId: rowData.displayBillId,
       displayRadif: rowData.displayRadif,
-      counterReaderId: rowData.counterReaderId
+      counterReaderId: rowData.counterReaderId,
+      displayMobile: rowData.displayMobile,
+      displayPreDate: rowData.displayPreDate,
+      hasImage: rowData.hasImage
     }
-    return a;
   }
   //  
   private async onRowEditSave(rowData: IEditTracking) {
