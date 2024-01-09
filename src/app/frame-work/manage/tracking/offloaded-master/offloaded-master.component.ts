@@ -6,6 +6,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking, ITrackingMasterDto } from 'interfaces/itrackings';
+import { OutputManagerService } from 'services/output-manager.service';
 
 @Component({
   selector: 'app-offloaded-master',
@@ -21,18 +22,10 @@ export class OffloadedMasterComponent extends FactoryONE {
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private columnManager: ColumnManager,
+    private outputManagerService: OutputManagerService
     // private cdk: ChangeDetectorRef
   ) {
     super();
-  }
-
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.trackingOffloadedDetails = [];
-    }
-    await this.closeTabService.getTrackingOffloadedMaster(canRefresh ? canRefresh : false);
-    this.insertSelectedColumns();
-    
   }
   insertSelectedColumns = () => {
     this._selectCols = this.columnManager.getColumnsMenus(this.offloadedMasterOutputName);
@@ -60,18 +53,22 @@ export class OffloadedMasterComponent extends FactoryONE {
     })
   }
   loadDetailPlease = async (dataSource: ITrackingMasterDto, rowIndex: number) => {
-    console.log(1);
-    console.log(this.closeTabService.trackingOffloadedDetails[rowIndex]);
-    console.log(1);
-    console.log(this.closeTabService.trackingOffloadedDetails);
-    console.log(1);
     this.closeTabService.trackingOffloadedDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
-    console.log(1);
-    console.log(this.closeTabService.trackingOffloadedDetails);
     // this.cdk.detectChanges();
   }
   routeToOffloadLazy = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadLazy(dataSource);
+  }
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.trackingOffloadedDetails = [];
+    }
+    await this.closeTabService.getTrackingOffloadedMaster(canRefresh ? canRefresh : false);
+    this.insertSelectedColumns();
+  }
+  getExcel = async (dataSource: ITracking) => {
+    const res = await this.trackingManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, dataSource.groupId);
+    this.outputManagerService.downloadFile(res, '.xlsx');
   }
 
 

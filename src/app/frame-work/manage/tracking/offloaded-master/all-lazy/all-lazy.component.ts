@@ -17,11 +17,11 @@ import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
-import { GeneralGroupInfoResComponent } from '../general-group-list-modify/general-group-info-res/general-group-info-res.component';
-import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 import { Table } from 'primeng/table';
 import { LazyLoadEvent } from 'primeng/api';
+import { GeneralGroupInfoResComponent } from '../../../list-manager/general-group-list-modify/general-group-info-res/general-group-info-res.component';
+import { BriefKardexComponent } from '../../../list-manager/brief-kardex/brief-kardex.component';
+import { ListSearchMoshDgComponent } from '../../../list-manager/list-search-mosh-dg/list-search-mosh-dg.component';
 
 @Component({
   selector: 'app-all-lazy',
@@ -71,8 +71,10 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.listManagerService.columnManager._generalGroupHeaderCheckbox = false;
   }
   updateOnChangedCounterState = async (event: any) => {
+    if (MathS.isNull(event))
+      return;
+
     this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, event);
-    console.log(this.closeTabService.offloadedAllLazy);
     this.totalRecords = this.closeTabService.offloadedAllLazy.totalRecords;
 
     this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy.data));
@@ -113,11 +115,8 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     else {
       console.log(1);
 
-      // to show counterStates radioButtons
+      // to show counterStates radioButtons      
       await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);
-      if (canRefresh) {
-        this.closeTabService.offloadedAllLazy.data = [];
-      }
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
       } else {
@@ -182,8 +181,11 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
-    event.filters['counterStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId : null;
-    event.filters['preCounterStateCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode : null;
+    console.log(1);
+    console.log(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId);
+
+    // event.filters['counterStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId : null;
+    // event.filters['preCounterStateCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode : null;
     console.log(event);
     this.updateOnChangedCounterState(event);
   }
@@ -345,23 +347,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
       if (res)
         console.log(res);
     });
-  }
-  hasBeenReadsToggler = () => {
-    // if OnOffloadComponent rendering
-    let temp: any[] = [];
-    // should be false on initial(_generalGroupHeaderCheckbox) because filter on DataSource happen
-    if (this.listManagerService.columnManager._generalGroupHeaderCheckbox) {
-      for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
-        if (this.closeTabService.offloadedAllLazy.data[index].counterStateId !== null)
-          temp.push(this.closeTabService.offloadedAllLazy.data[index]);
-      }
-      this.closeTabService.offloadedAllLazy.data = temp;
-    }
-    else {
-      if (!MathS.isNull(this.closeTabService.AUXoffloadedAllLazy)) {
-        this.closeTabService.offloadedAllLazy.data = this.closeTabService.AUXoffloadedAllLazy;
-      }
-    }
   }
   getExcel = async () => {
     const res = await this.listManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.offloadedListLazy_pageSign.groupId);

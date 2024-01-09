@@ -32,6 +32,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
+            <th style="width: 2rem; min-width: 2rem">
         </tr>
         <tr>
             <th></th>
@@ -40,6 +41,7 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
+            <th style="width: 2rem; min-width: 2rem">
         </tr>
 
     </ng-template>
@@ -61,6 +63,12 @@
                 <ng-template #simple>
                     {{dataSource[col.field]}}
                 </ng-template>
+            </td>
+            <td class="__columns" (click)="getExcel(dataSource)">
+                <span class="ui-column-title">دریافت Excel</span>
+                <i class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                    <div class="tooltip_text_right">دریافت Excel</div>
+                </i>
             </td>
         </tr>
     </ng-template>

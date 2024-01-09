@@ -119,11 +119,6 @@ export class CloseTabService {
   };
   AUXOffloadedAllInGroupLazy: IOnOffLoadFlat[] = [];
 
-  getOffloadedAllLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
-    if (!MathS.isNull(this.offloadedAllLazy) && !canRefresh)
-      return this.offloadedAllLazy;
-    this.offloadedAllLazy = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.trackingAllInLazy, UUID);
-  }
   getOffloadedAllInGroupLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
     if (!MathS.isNull(this.offloadedAllInGroupLazy) && !canRefresh)
       return this.offloadedAllInGroupLazy;

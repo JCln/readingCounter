@@ -55,6 +55,10 @@
     .p-dropdown {
         min-width: 100%;
     }
+
+    .p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-button.p-inputnumber-button {
+        display: none;
+    }
 }
 
 :host ::ng-deep .p-datatable table {

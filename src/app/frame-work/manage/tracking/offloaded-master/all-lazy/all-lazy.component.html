@@ -66,14 +66,7 @@
                 <div class="left_side">
                     <input class="_general_search" type="text"
                         (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
-                    <i (click)="hasBeenReadsToggler()">
-                        <label class="font_family" for="binary">({{closeTabService.offloadedAllLazy.data.length}})
-                            فقط قرائت شده
-                        </label>
-                        <p-checkbox [(ngModel)]="listManagerService.columnManager._offloadedLazyHeaderCheckbox"
-                            [binary]="true">
-                        </p-checkbox>
-                    </i>
+
                     <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
                         class="_circle_border p_icons tooltip pi pi-filter-slash">
                         <div class="tooltip_text_right">حذف فیلترها</div>
@@ -101,9 +94,12 @@
             <tr>
                 <th class="__headers" pReorderableColumn *ngFor="let col of columns">
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="contains"
-                        type="{{col.type == 'texture'? 'text': 'numeric'}}" field="{{col.field}}">
+
+                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="equals"
+                        type="{{col.type == 'numeric'? 'numeric': 'text'}}" field="{{col.field}}">
+                        {{col.type}}
                     </p-columnFilter>
+
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
                         field="counterStateId" matchMode="in" display="menu" [showMatchModes]="false"
                         [showOperator]="false" [showAddButton]="false">

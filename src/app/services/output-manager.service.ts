@@ -58,7 +58,6 @@ export class OutputManagerService {
     const fileName = data.headers.get(this.contentDisposition).split('filename=')[1].split(';')[0]
     import("file-saver").then(FileSaver => {
       const blob = new Blob([data.body], { type: data.body.type });
-      console.log(blob);
       FileSaver.saveAs(blob, fileName);
     })
   }
@@ -226,16 +225,6 @@ export class OutputManagerService {
       });
       FileSaver.saveAs(data, name);
     })
-  }
-  saveAsExcelFile(buffer: any, fileName: string, EXCEL_EXTENSION: string): void {
-    import("file-saver").then(FileSaver => {
-      const data: Blob = new Blob([buffer], {
-        type: this._exportType
-      });
-      console.log(data);
-
-      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-    });
   }
 
 }

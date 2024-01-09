@@ -29,7 +29,7 @@
         <ng-container *ngIf="item.isBoolean; else elseTemplate">
             <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
                 {{item.header}}
-            </mat-checkbox>            
+            </mat-checkbox>
         </ng-container>
         <ng-template #elseTemplate>
             <div class="_key">{{item.header}}</div>
@@ -110,8 +110,22 @@
                         </ng-template>
                     </p-cellEditor>
                 </ng-container>
+
                 <ng-template #elseTemplate>
-                    {{changeHsty[col.field]}}
+                    <div *ngIf="col.field !== 'trackStatusTitle'">
+                        {{changeHsty[col.field]}}
+                    </div>
+                    <div class="tooltip" *ngIf="col.field == 'trackStatusTitle'">
+                        {{changeHsty['trackStatusTitle']}}
+                        <div *ngIf="changeHsty['trackStatusTitle'].length > 0" class="tooltip_text_right" [ngClass]="
+                            {
+                            'tooltip_long2':changeHsty['description']?.length >= 20,
+                            'tooltip_long3':changeHsty['description']?.length >= 30,
+                            'tooltip_long4':changeHsty['description']?.length >= 40
+                            }">
+                            {{changeHsty['description']}}
+                        </div>
+                    </div>
                 </ng-template>
             </td>
             <td class="__columns" *ngIf="shouldActive">
