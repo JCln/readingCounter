@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
@@ -18,7 +18,7 @@ import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { Table } from 'primeng/table';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, SelectItem } from 'primeng/api';
 import { GeneralGroupInfoResComponent } from '../../../list-manager/general-group-list-modify/general-group-info-res/general-group-info-res.component';
 import { BriefKardexComponent } from '../../../list-manager/brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../../../list-manager/list-search-mosh-dg/list-search-mosh-dg.component';
@@ -39,11 +39,13 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   _sessionName: string = 'listOffloadedLazy';
   _outputFileName: string = 'listOffloadedLazy';
   _selectCols: any = [];
-  _selectedColumns: any[];
+  _selectedColumns: IObjectIteratation[];
   totalRecords: number;
   clonedProducts: { [s: string]: object; } = {};
+  matchModeOptions: SelectItem[];
 
   deleteDictionary: IDictionaryManager[] = [];
+  masrafStateIdDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -63,7 +65,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
     public spinnerWrapperService: SpinnerWrapperService,
-    private dateJalaliService: DateJalaliService
+    private dateJalaliService: DateJalaliService,
   ) {
     super(dialogService, listManagerService);
   }
@@ -71,7 +73,9 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.listManagerService.columnManager._generalGroupHeaderCheckbox = false;
   }
   updateOnChangedCounterState = async (event: any) => {
-    if (MathS.isNull(event))
+    console.log(this.allListsService.offloadedListLazy_pageSign.GUid);
+
+    if (MathS.isNull(this.allListsService.offloadedListLazy_pageSign.GUid))
       return;
 
     this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, event);
@@ -81,6 +85,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
     this.makeDefaultValCheckbox();
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
     this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
@@ -109,6 +114,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
+    console.log(this.allListsService.offloadedListLazy_pageSign.GUid);
     if (!this.allListsService.offloadedListLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
@@ -128,52 +134,13 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     }
   }
   refreshTable = () => {
-    console.log(1);
-
     this.updateOnChangedCounterState(this.closeTabService.saveDataForOffloadedAllLazyReq);
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
     this.tempMainDataSource.totalNum = 0;
   }
-  filterHelper = (): any[] => {
-    let tempDataSource: any[] = [];
-    if (this.tempFilter.first.length > 0) {
-      for (let i = 0; i < this.tempMainDataSource.data.length; i++) {
-        for (let j = 0; j < this.tempFilter.first.length; j++) {
-          if (this.tempFilter.first[j] == this.tempMainDataSource.data[i]['counterStateId']) {
-            tempDataSource.push(this.tempMainDataSource.data[i]);
-          }
-        }
-      }
-      return tempDataSource;
-    }
-    else {
-      return this.tempMainDataSource.data;
-    }
-  }
-  filterHelp2 = (tempDataSource: any): any[] => {
-    let tempDataSource2: any[] = [];
-    if (this.tempFilter.second.length > 0) {
-      if (!MathS.isNull(tempDataSource)) {
-        for (let i = 0; i < tempDataSource.length; i++) {
-          for (let j = 0; j < this.tempFilter.second.length; j++) {
-            if (this.tempFilter.second[j] == tempDataSource[i]['preCounterStateCode']) {
-              tempDataSource2.push(tempDataSource[i]);
-            }
-          }
-        }
-        return tempDataSource2;
-      }
-      else {
-        return tempDataSource;
-      }
-    }
-    // if tempDataSource is null but filter is not null
-    else {
-      return tempDataSource;
-    }
-  }
+
   loadCustomers(event: LazyLoadEvent) {
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
@@ -181,12 +148,14 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
-    console.log(1);
-    console.log(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId);
-
     // event.filters['counterStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId : null;
     // event.filters['preCounterStateCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode : null;
+    // event.filters['karbariCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode : null;
+    // event.filters['hazf'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf : null;
+    // event.filters['masrafStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId : null;
     console.log(event);
+    console.log(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId);
+
     this.updateOnChangedCounterState(event);
   }
   changedFilterDropdowns(eventValue: any, elementName: string) {

@@ -52,5 +52,14 @@ export class AllListsService {
     trackNumberOrGroupId: '',
     zoneTitle: ''
   };
+  offloadedListAllInGroupLazy_pageSign: IOnOffLoadNessessities = {
+    GUid: null,
+    listNumber: null,
+    groupId: '',
+    zoneId: null,
+    trackNumber: null,
+    trackNumberOrGroupId: '',
+    zoneTitle: ''
+  };
 
 }

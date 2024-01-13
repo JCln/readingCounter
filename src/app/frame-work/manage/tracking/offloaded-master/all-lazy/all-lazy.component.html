@@ -30,9 +30,9 @@
 </section>
 
 <main style="position: relative; ">
-    <p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="closeTabService.offloadedAllLazy.data"
-        [lazy]="true" (onLazyLoad)="loadCustomers($event)" dataKey="id" [paginator]="true" [rows]="10"
-        [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+    <p-table #datatableG id="tdm" *ngIf="closeTabService.offloadedAllLazy.data" [columns]="selectedColumns"
+        [value]="closeTabService.offloadedAllLazy.data" [lazy]="true" (onLazyLoad)="loadCustomers($event)" dataKey="id"
+        [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords"
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
         styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
@@ -92,11 +92,13 @@
                 <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
             </tr>
             <tr>
-                <th class="__headers" pReorderableColumn *ngFor="let col of columns">
+                <th class="__headers" pReorderableColumn *ngFor="let col of _selectedColumns">
+
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
 
-                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="equals"
-                        type="{{col.type == 'numeric'? 'numeric': 'text'}}" field="{{col.field}}">
+                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption"
+                        [type]="col.type == 'numeric'? 'numeric': 'text'"
+                        [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
                         {{col.type}}
                     </p-columnFilter>
 
@@ -126,6 +128,58 @@
                                 [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="id"
                                 [filter]="true" showClear="true" placeholder="انتخاب کنید"
                                 (onChange)="changedFilterDropdowns($event.value , 'multiSelectPreCounterStateCode' )">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'karbariCode'"
+                        field="karbariCode" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode"
+                                [options]="karbariDictionaryCode" optionLabel="title" optionValue="id" [filter]="true"
+                                showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectkarbariCode' )">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'hazf'" field="hazf"
+                        matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false"
+                        [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf"
+                                [options]="deleteDictionary" optionLabel="title" optionValue="id" [filter]="true"
+                                showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectHazf' )">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'masrafStateId'"
+                        field="masrafStateId" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId"
+                                [options]="masrafStateIdDictionary" optionLabel="titleUnicode" optionValue="value" [filter]="true"
+                                showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectMasrafStateId' )">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -199,10 +253,12 @@
                         </ng-container>
                         <ng-template #elseTemplate>
                             <ng-container *ngIf="col.field == 'masrafStateId'; else digits">
-                                <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
-                                    <div class="tooltip_text">عادی</div>
-                                </i>
-                                <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
+                                <div *ngFor="let item of masrafStateIdDictionary">
+                                    <i class="tooltip" [ngClass]="dataSource[col.field] === item.value ?  item.className: ''">
+                                        <div class="tooltip_text">{{item.titleUnicode}}</div>
+                                    </i>
+                                </div>
+                                <!-- <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
                                     <div class="tooltip_text">پایین</div>
                                 </i>
                                 <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
@@ -213,7 +269,7 @@
                                 </i>
                                 <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
                                     <div class="tooltip_text">غیرقابل محاسبه</div>
-                                </i>
+                                </i> -->
                             </ng-container>
 
                             <ng-template #digits>

@@ -106,7 +106,10 @@ export class CloseTabService {
   saveDataForOffloadedAllLazyReq = {
     counterStateValue: null,
     multiSelectCounterStateId: [],
-    multiSelectPreCounterStateCode: []
+    multiSelectPreCounterStateCode: [],
+    multiSelectkarbariCode: [],
+    multiSelectMasrafStateId: [],//وضعیت مصرف
+    multiSelectHazf: []// 
   };
   AUXoffloadedAllLazy: IOnOffLoadFlat[] = [];
   offloadedAllLazy: IOnOffLoadFlatLazy = {

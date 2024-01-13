@@ -36,6 +36,14 @@ export interface IENV {
     }
     getLogoutReasonDictionary: { id: number, title: string }[],
     shouldSaveTokensInLocal: boolean,
+    getMasrafStateDictionary: {
+        id: number,
+        title: string,
+        titleUnicode: string,
+        icon: string,
+        className: string,
+        value: number
+    }[]
 }
 export enum ENURLs {
     // LOCAL = 'http://192.168.99.131:7529',
@@ -256,6 +264,20 @@ export class getDeleteDictionary {
         { id: 5, title: 'حذف موقت' }
     ]);
     private constructor(public readonly value: { id: number, title: string }[]) {
+    }
+}
+export class getMasrafStateDictionary {
+    static readonly DEFAULT = new getMasrafStateDictionary([
+        { id: 10, title: 'normal', value: 0, titleUnicode: '0', icon: 'pi pi-check', className: 'pi pi pi-check' },
+        { id: 11, title: 'down', value: 1, titleUnicode: '1', icon: 'pi pi-arrow-down', className: 'pi pi-arrow-down' },
+        { id: 12, title: 'up', value: 2, titleUnicode: '2', icon: 'pi pi-arrow-up', className: 'pi pi-arrow-up' },
+        { id: 13, title: 'empty', value: 3, titleUnicode: '3', icon: 'صفر', className: '_empty' },
+        { id: 14, title: 'unCalculable', value: 4, titleUnicode: '4', icon: '!', className: '_mark' }
+    ]);
+    private constructor(public readonly value: {
+        id: number, title: string, titleUnicode: string, icon: string,
+        className: string, value: number
+    }[]) {
     }
 }
 export class ENHasNextBazdid {

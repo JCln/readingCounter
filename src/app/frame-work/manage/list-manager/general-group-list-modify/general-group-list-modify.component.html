@@ -250,7 +250,19 @@
                                                 <input [(ngModel)]="dataSource[col.field]">
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{dataSource[col.field]}}
+                                                <div class="tooltip">
+                                                    {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                                    dataSource[col.field].toString().split(' ')[0]
+                                                    : ''}}
+                                                    <div class="tooltip_text_right" [ngClass]="
+                                                    {
+                                                    'tooltip_long2':dataSource[col.field]?.length >= 20,
+                                                    'tooltip_long3':dataSource[col.field]?.length >= 30,
+                                                    'tooltip_long4':dataSource[col.field]?.length >= 40
+                                                    }">
+                                                        {{dataSource[col.field]}}
+                                                    </div>
+                                                </div>
                                             </ng-template>
                                         </p-cellEditor>
                                     </div>

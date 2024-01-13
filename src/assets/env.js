@@ -10,7 +10,7 @@
     window.__env.mapUrls = [
         { title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
         { title: 'sattelite', url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg' }
-    ];    
+    ];
     window.__env.mapCenter = [35.73698, 51.41606];
     window.__env.browserVersions = {
         Desktop: {
@@ -43,6 +43,13 @@
         { id: 2, title: 'حذف موقت' },
         { id: 3, title: 'حذف موقت' },
         { id: 5, title: 'حذف موقت' }
+    ];
+    window.__env.getMasrafStateDictionary = [
+        { id: 10, title: 'normal', value: 0, titleUnicode: 'عادی', icon: 'pi pi-check', className: 'pi pi pi-check' },
+        { id: 11, title: 'down', value: 1, titleUnicode: 'پایین', icon: 'pi pi-arrow-down', className: 'pi pi-arrow-down' },
+        { id: 12, title: 'up', value: 2, titleUnicode: 'بالا', icon: 'pi pi-arrow-up', className: 'pi pi-arrow-up' },
+        { id: 13, title: 'empty', value: 3, titleUnicode: 'صفر', icon: 'صفر', className: '_empty' },
+        { id: 14, title: 'unCalculable', value: 4, titleUnicode: 'غیرقابل محاسبه', icon: '!', className: '_mark' }
     ];
     window.__env.getLogoutReasonDictionary = [
         { id: 0, title: 'توسط کاربر' },
