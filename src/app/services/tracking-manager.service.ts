@@ -12,7 +12,7 @@ import { Converter } from 'src/app/classes/converter';
 import { MathS } from '../classes/math-s';
 import { OffloadModify } from '../classes/offload-modify-type';
 
-import { IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
+import { IOffLoadPerDay, ITracking, ITrackingMasterDto } from '../interfaces/itrackings';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { FollowUpService } from './follow-up.service';
@@ -297,6 +297,15 @@ export class TrackingManagerService {
     this.allListsService.offloadedListLazy_pageSign.zoneTitle = dataSource.zoneTitle;
     this.allListsService.offloadedListLazy_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.listAllLazy);
+  }
+  routeToOffloadAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid = dataSource.groupId;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId = dataSource.groupId;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
+    this.utilsService.routeTo(EN_Routes.listAllInGroupLazy);
   }
   routeToAssessPre = () => {
     this.utilsService.routeTo(EN_Routes.wrimpassesspre);

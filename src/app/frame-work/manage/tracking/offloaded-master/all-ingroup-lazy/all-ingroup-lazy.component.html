@@ -1,42 +1,32 @@
 <section>
     <div class="overall-info">
         <div class="input_2">
-            <div class="_key">ش.پیگیری</div>
-            <input [readOnly]="true" class="_value" name="trackNumber"
-                [(ngModel)]="allListsService.offloadedListLazy_pageSign.trackNumber">
+            <div class="_key">تعداد مسیر</div>
+            <input [readOnly]="true" class="_value" name="routeCount"
+                [(ngModel)]="allListsService.offloadedListAllInGroupLazy_pageSign.routeCount">
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
             <input [readOnly]="true" class="_value" name="listNumber"
-                [(ngModel)]="allListsService.offloadedListLazy_pageSign.listNumber">
+                [(ngModel)]="allListsService.offloadedListAllInGroupLazy_pageSign.listNumber">
         </div>
         <div class="input_2">
             <div class="_key">ناحیه</div>
             <input [readOnly]="true" class="_value" name="zone"
-                [(ngModel)]="allListsService.offloadedListLazy_pageSign.zoneTitle">
+                [(ngModel)]="allListsService.offloadedListAllInGroupLazy_pageSign.zoneTitle">
         </div>
     </div>
-    <!-- <div class="radios">
-        <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
-            <div class="p-field-radiobutton">
-                <p-radioButton name="orderByDate" [value]="orderType.id"
-                    [(ngModel)]="listManagerService.counterStateGeneralGroupList" [inputId]="orderType.id"
-                    (onClick)="updateOnChangedCounterState(orderType.id,true)">
-                </p-radioButton>
-                <label [for]="orderType.id">{{orderType.title}}</label>
-            </div>
-        </div>
-    </div> -->
 </section>
 
 <main style="position: relative; ">
-    <p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="closeTabService.offloadedAllLazy.data"
-        [lazy]="true" (onLazyLoad)="loadCustomers($event)" dataKey="id" [paginator]="true" [rows]="10"
-        [showCurrentPageReport]="true" [totalRecords]="totalRecords"
-        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    <p-table #datatableG id="tdm" *ngIf="closeTabService.offloadedAllInGroupLazy.data" [columns]="selectedColumns"
+        [value]="closeTabService.offloadedAllInGroupLazy.data" [lazy]="true" (onLazyLoad)="LazyLoading($event)"
+        (onLazyLoad)="hasFilters()" dataKey="id" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        [totalRecords]="totalRecords" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
         styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
-        [stateKey]="_sessionName" editMode="row" [reorderableColumns]="getLocalReOrderable()" appUnSortTable>
+        [stateKey]="_sessionName" editMode="row" [reorderableColumns]="getLocalReOrderable()" [filterDelay]="500"
+        appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -63,16 +53,6 @@
                     </i>
                 </div>
                 <div class="left_side">
-                    <input class="_general_search" type="text"
-                        (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
-                    <i (click)="hasBeenReadsToggler()">
-                        <label class="font_family" for="binary">({{closeTabService.offloadedAllLazy.data.length}})
-                            فقط قرائت شده
-                        </label>
-                        <p-checkbox [(ngModel)]="listManagerService.columnManager._offloadedLazyHeaderCheckbox"
-                            [binary]="true">
-                        </p-checkbox>
-                    </i>
                     <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
                         class="_circle_border p_icons tooltip pi pi-filter-slash">
                         <div class="tooltip_text_right">حذف فیلترها</div>
@@ -98,18 +78,25 @@
                 <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
             </tr>
             <tr>
-                <th class="__headers" pReorderableColumn *ngFor="let col of columns">
+                <th class="__headers" pReorderableColumn *ngFor="let col of _selectedColumns">
+
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption" matchMode="contains" type="text"
-                        field="{{col.field}}">
+
+                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption && col?.type !== 'disabled'"
+                        [type]="col.type == 'numeric'? 'numeric': 'text'"
+                        [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
+                        {{col.type}}
                     </p-columnFilter>
+
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
-                        field="counterStateId" matchMode="in" [showMenu]="false">
+                        field="counterStateId" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
-                                [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId"
-                                [options]="counterStateByZoneDictionary" optionLabel="title" optionValue="title"
-                                [filter]="true" showClear="true" (onChange)="loadCustomers($event)">
+                                [ngModel]="closeTabService.allInGroupLazyReq.multiSelectCounterStateId"
+                                [options]="counterStateByZoneDictionary" optionLabel="title" optionValue="id"
+                                [filter]="true" showClear="false" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectCounterStateId')">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -119,12 +106,49 @@
                         </ng-template>
                     </p-columnFilter>
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
-                        field="preCounterStateCode" matchMode="in" [showMenu]="false">
+                        field="preCounterStateCode" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="1"
-                                [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode"
-                                [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="title"
-                                [filter]="true" showClear="true" (onChange)="loadCustomers($event)">
+                                [ngModel]="closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode"
+                                [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="id"
+                                [filter]="true" showClear="false" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectPreCounterStateCode' )">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'karbariCode'"
+                        field="karbariCode" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.allInGroupLazyReq.multiSelectkarbariCode"
+                                [options]="karbariDictionaryCode" optionLabel="title" optionValue="id" [filter]="true"
+                                showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectkarbariCode' )">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'hazf'" field="hazf"
+                        matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false"
+                        [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.allInGroupLazyReq.multiSelectHazf"
+                                [options]="deleteDictionary" optionLabel="title" optionValue="id" [filter]="true"
+                                showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectHazf' )">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -198,21 +222,14 @@
                         </ng-container>
                         <ng-template #elseTemplate>
                             <ng-container *ngIf="col.field == 'masrafStateId'; else digits">
-                                <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
-                                    <div class="tooltip_text">عادی</div>
-                                </i>
-                                <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
-                                    <div class="tooltip_text">پایین</div>
-                                </i>
-                                <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
-                                    <div class="tooltip_text">بالا</div>
-                                </i>
-                                <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">صفر
-                                    <div class="tooltip_text">صفر</div>
-                                </i>
-                                <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
-                                    <div class="tooltip_text">غیرقابل محاسبه</div>
-                                </i>
+                                <div *ngFor="let item of masrafStateIdDictionary">
+                                    <i class="tooltip" *ngIf="dataSource[col.field] === item.value"
+                                        [ngClass]="item.className">
+                                        {{item.icon}}
+                                        <div class=" tooltip_text">{{item.titleUnicode}}
+                                        </div>
+                                    </i>
+                                </div>
                             </ng-container>
 
                             <ng-template #digits>
@@ -246,7 +263,19 @@
                                                 <input [(ngModel)]="dataSource[col.field]">
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{dataSource[col.field]}}
+                                                <div class="tooltip">
+                                                    {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                                    dataSource[col.field].toString().split(' ')[0]
+                                                    : ''}}
+                                                    <div class="tooltip_text_right" [ngClass]="
+                                                    {
+                                                    'tooltip_long2':dataSource[col.field]?.length >= 20,
+                                                    'tooltip_long3':dataSource[col.field]?.length >= 30,
+                                                    'tooltip_long4':dataSource[col.field]?.length >= 40
+                                                    }">
+                                                        {{dataSource[col.field]}}
+                                                    </div>
+                                                </div>
                                             </ng-template>
                                         </p-cellEditor>
                                     </div>
@@ -327,7 +356,8 @@
         (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 
-    <section *ngIf="!closeTabService.offloadedAllLazy.data || closeTabService.offloadedAllLazy.data.length === 0">
+    <section
+        *ngIf="!closeTabService.offloadedAllInGroupLazy.data || closeTabService.offloadedAllInGroupLazy.data.length === 0">
         <tr class="empty_data">
             موردی پیدا نشد
             <i class="fa fa-folder-blank"></i>

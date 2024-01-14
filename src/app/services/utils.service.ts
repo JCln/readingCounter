@@ -75,6 +75,9 @@ export class UtilsService {
   getDeleteDictionary = (): any[] => {
     return this.envService.getDeleteDictionary;
   }
+  getMasrafStateDictionary = (): any[] => {
+    return this.envService.getMasrafStateDictionary;
+  }
   getAPIUrl = (): string => {
     return this.envService.API_URL;
   }

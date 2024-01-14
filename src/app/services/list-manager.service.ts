@@ -63,6 +63,9 @@ export class ListManagerService {
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
   }
+  getMasrafStateDictionary = (): any[] => {
+    return this.utilsService.getMasrafStateDictionary();
+  }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {

@@ -1,5 +1,5 @@
 import { ColumnManager } from 'src/app/classes/column-manager';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -7,6 +7,8 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking, ITrackingMasterDto } from 'interfaces/itrackings';
 import { OutputManagerService } from 'services/output-manager.service';
+import { EN_messages } from 'interfaces/enums.enum';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-offloaded-master',
@@ -17,15 +19,17 @@ export class OffloadedMasterComponent extends FactoryONE {
   private readonly offloadedMasterOutputName: string = 'offloadedMaster';
   _selectCols: any = [];
   _selectedColumns: any[];
+  @ViewChild(Table) dtable: Table;
 
   constructor(
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private columnManager: ColumnManager,
     private outputManagerService: OutputManagerService
-    // private cdk: ChangeDetectorRef
   ) {
     super();
+    console.log(Table);
+
   }
   insertSelectedColumns = () => {
     this._selectCols = this.columnManager.getColumnsMenus(this.offloadedMasterOutputName);
@@ -59,16 +63,32 @@ export class OffloadedMasterComponent extends FactoryONE {
   routeToOffloadLazy = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadLazy(dataSource);
   }
+  routeToAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
+    this.trackingManagerService.routeToOffloadAllInGroupLazy(dataSource);
+  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.trackingOffloadedDetails = [];
     }
     await this.closeTabService.getTrackingOffloadedMaster(canRefresh ? canRefresh : false);
     this.insertSelectedColumns();
+    this.showTestingPart();
   }
   getExcel = async (dataSource: ITracking) => {
     const res = await this.trackingManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, dataSource.groupId);
     this.outputManagerService.downloadFile(res, '.xlsx');
+  }
+  showTestingPart() {
+    const config = {
+      messageTitle: EN_messages.confirmPilotSection,
+      text: EN_messages.confirmPilotSection2,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-info-circle',
+      doesNotReturnButton: false
+    }
+    this.closeTabService.utilsService.firstConfirmDialog(config);
   }
 
 

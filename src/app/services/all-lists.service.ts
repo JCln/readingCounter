@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 export interface IOnOffLoadNessessities {
   GUid: string,
   listNumber: string,
-  trackNumber: number,
+  trackNumber?: number,
   trackNumberOrGroupId?: string, // for lazy offloaded lists
   groupId?: string,
   zoneId?: number,
-  zoneTitle?: string
+  zoneTitle?: string,
+  routeCount?: number // for all in group lazy list
 }
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,14 @@ export class AllListsService {
     trackNumber: null,
     trackNumberOrGroupId: '',
     zoneTitle: ''
+  };
+  offloadedListAllInGroupLazy_pageSign: IOnOffLoadNessessities = {
+    GUid: null,
+    listNumber: null,
+    groupId: '',
+    zoneId: null,
+    zoneTitle: '',
+    routeCount: null
   };
 
 }

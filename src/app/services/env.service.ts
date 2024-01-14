@@ -28,6 +28,7 @@ export class EnvService implements IENV {
   getLogoutReasonDictionary = this.temp.getLogoutReasonDictionary;
   getInvalidLoginReasonDictionary = this.temp.getInvalidLoginReasonDictionary;
   shouldSaveTokensInLocal = this.temp.shouldSaveTokensInLocal;
+  getMasrafStateDictionary = this.temp.getMasrafStateDictionary;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

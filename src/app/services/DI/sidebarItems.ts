@@ -26,6 +26,7 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.userActivationByuserId, title: 'تغییرات حساب کاربر', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.userCompare, title: 'مقایسه تغییرات دسترسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.listAllLazy, title: 'اصلاح مسیر 2', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.listAllInGroupLazy, title: 'اصلاح 2', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
             ]
         }
     ]

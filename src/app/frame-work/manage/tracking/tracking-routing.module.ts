@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'finished', loadChildren: () => import('./finished/finished.module').then(finished => finished.FinishedModule) },
   { path: 'latest', loadChildren: () => import('./last-states/last-states.module').then(lastStates => lastStates.LastStatesModule) },
   { path: 'userSummary', loadChildren: () => import('./user-karkard-summary/user-karkard-summary.module').then(userKarkardSummary => userKarkardSummary.UserKarkardSummaryModule) },
-  { path: 'offMaster', loadChildren: () => import('./offloaded-master/offloaded-master.module').then(offloadedMaster => offloadedMaster.OffloadedMasterModule) },
+  { path: 'offMaster', loadChildren: () => import('./offloaded-master/offloaded-master.module').then(offloadedMaster => offloadedMaster.OffloadedMasterModule) }
 ];
 
 @NgModule({
