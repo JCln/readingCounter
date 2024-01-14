@@ -18,9 +18,9 @@ import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
-import { GeneralGroupInfoResComponent } from '../general-group-list-modify/general-group-info-res/general-group-info-res.component';
-import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
+import { BriefKardexComponent } from '../../../list-manager/brief-kardex/brief-kardex.component';
+import { GeneralGroupInfoResComponent } from '../../../list-manager/general-group-list-modify/general-group-info-res/general-group-info-res.component';
+import { ListSearchMoshDgComponent } from '../../../list-manager/list-search-mosh-dg/list-search-mosh-dg.component';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -35,9 +35,9 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   hasFiltersInTable: boolean = false;
 
   _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];
-  _selectedColumnsToRemember: string = 'selectedOffloadedLazy';
-  _sessionName: string = 'listOffloadedLazy';
-  _outputFileName: string = 'listOffloadedLazy';
+  _selectedColumnsToRemember: string = 'selectedOffloadedAllInGroupLazy';
+  _sessionName: string = 'listOffloadedAllInGroupLazy';
+  _outputFileName: string = 'listOffloadedAllInGroupLazy';
   _selectCols: any = [];
   _selectedColumns: any[];
   totalRecords: number;
@@ -46,6 +46,7 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   deleteDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  masrafStateIdDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   counterStateByZoneDictionary: IDictionaryManager[] = [];
@@ -67,28 +68,27 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   ) {
     super(dialogService, listManagerService);
   }
-  makeDefaultValCheckbox = () => {
-    this.listManagerService.columnManager._generalGroupHeaderCheckbox = false;
-  }
   updateOnChangedCounterState = async (event: any) => {
-    this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, event);
-    console.log(this.closeTabService.offloadedAllLazy);
-    this.totalRecords = this.closeTabService.offloadedAllLazy.totalRecords;
+    if (MathS.isNull(this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId))
+      return;
 
-    this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy.data));
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
-    this.makeDefaultValCheckbox();
+    this.closeTabService.offloadedAllInGroupLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInGroupLazy + this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId, event);
+    this.totalRecords = this.closeTabService.offloadedAllInGroupLazy.totalRecords;
+
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllInGroupLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
+
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
-    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
+    // this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId);
+    // this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId);
     this.resetDataSourceView();
 
 
-    this.closeTabService.offloadedAllLazy.data =
+    this.closeTabService.offloadedAllInGroupLazy.data =
       Converter.convertIdsToTitles(
-        this.closeTabService.offloadedAllLazy.data,
+        this.closeTabService.offloadedAllInGroupLazy.data,
         {
           deleteDictionary: this.deleteDictionary,
           counterStateDictionary: this.counterStateDictionary,
@@ -103,21 +103,17 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
           possibleKarbariCode: 'possibleKarbariCode',
           qotrCode: 'qotrCode'
         })
-    Converter.convertIdToTitle(this.closeTabService.offloadedAllLazy.data, this.karbariDictionaryCode, 'karbariCode');
-    this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllLazy.data);
+    Converter.convertIdToTitle(this.closeTabService.offloadedAllInGroupLazy.data, this.karbariDictionaryCode, 'karbariCode');
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllInGroupLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.allListsService.offloadedListLazy_pageSign.GUid) {
+    console.log(this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid);
+    if (!this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
     else {
-      console.log(1);
-
-      // to show counterStates radioButtons
-      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);
-      if (canRefresh) {
-        this.closeTabService.offloadedAllLazy.data = [];
-      }
+      // to show counterStates radioButtons      
+      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId);
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
       } else {
@@ -129,60 +125,35 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     }
   }
   refreshTable = () => {
-    console.log(1);
+    this.updateOnChangedCounterState(this.closeTabService.allInGroupLazyReq);
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
     this.tempMainDataSource.totalNum = 0;
   }
-  filterHelper = (): any[] => {
-    let tempDataSource: any[] = [];
-    if (this.tempFilter.first.length > 0) {
-      for (let i = 0; i < this.tempMainDataSource.data.length; i++) {
-        for (let j = 0; j < this.tempFilter.first.length; j++) {
-          if (this.tempFilter.first[j] == this.tempMainDataSource.data[i]['counterStateId']) {
-            tempDataSource.push(this.tempMainDataSource.data[i]);
-          }
-        }
-      }
-      return tempDataSource;
-    }
-    else {
-      return this.tempMainDataSource.data;
-    }
-  }
-  filterHelp2 = (tempDataSource: any): any[] => {
-    let tempDataSource2: any[] = [];
-    if (this.tempFilter.second.length > 0) {
-      if (!MathS.isNull(tempDataSource)) {
-        for (let i = 0; i < tempDataSource.length; i++) {
-          for (let j = 0; j < this.tempFilter.second.length; j++) {
-            if (this.tempFilter.second[j] == tempDataSource[i]['preCounterStateCode']) {
-              tempDataSource2.push(tempDataSource[i]);
-            }
-          }
-        }
-        return tempDataSource2;
-      }
-      else {
-        return tempDataSource;
-      }
-    }
-    // if tempDataSource is null but filter is not null
-    else {
-      return tempDataSource;
-    }
-  }
-  loadCustomers(event: LazyLoadEvent) {
-    console.log(event);
-    
+
+  LazyLoading(event: LazyLoadEvent) {
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
     }
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
+    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId))
+      event.filters['counterStateId'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId : null;
+    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode))
+      event.filters['preCounterStateCode'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode : null;
+    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectkarbariCode))
+      event.filters['karbariCode'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectkarbariCode.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectkarbariCode : null;
+    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectHazf))
+      event.filters['hazf'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectHazf.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectHazf : null;
+    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectMasrafStateId))
+      event.filters['masrafStateId'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectMasrafStateId.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectMasrafStateId : null;
+
     this.updateOnChangedCounterState(event);
+  }
+  changedFilterDropdowns(eventValue: any, elementName: string) {
+    this.closeTabService.allInGroupLazyReq[elementName] = eventValue;
   }
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
     return new Promise(async (resolve) => {
@@ -194,9 +165,9 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   }
   // have problem on SHOWING Without this Code for DropDowns
   clickedDropDowns = (event: any, element: string, dataId: any) => {
-    for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
-      if (this.closeTabService.offloadedAllLazy.data[index].id === dataId) {
-        this.closeTabService.offloadedAllLazy.data[index][element] = event.title;
+    for (let index = 0; index < this.closeTabService.offloadedAllInGroupLazy.data.length; index++) {
+      if (this.closeTabService.offloadedAllInGroupLazy.data[index].id === dataId) {
+        this.closeTabService.offloadedAllInGroupLazy.data[index][element] = event.title;
       }
     }
   }
@@ -222,21 +193,21 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   }
   manageModifyBatchResponse = (data: IBatchModifyRes) => {
     for (let index = 0; index < data.detailsInfo.length; index++) {
-      for (let j = 0; j < this.closeTabService.offloadedAllLazy.data.length; j++) {
-        if (data.detailsInfo[index].onOffLoadId === this.closeTabService.offloadedAllLazy.data[j].id) {
+      for (let j = 0; j < this.closeTabService.offloadedAllInGroupLazy.data.length; j++) {
+        if (data.detailsInfo[index].onOffLoadId === this.closeTabService.offloadedAllInGroupLazy.data[j].id) {
 
-          this.closeTabService.offloadedAllLazy.data[j].id = data.detailsInfo[index].newOnOffLoadId;//insert newOnOffLoad to last dataSource Id
+          this.closeTabService.offloadedAllInGroupLazy.data[j].id = data.detailsInfo[index].newOnOffLoadId;//insert newOnOffLoad to last dataSource Id
           if (data.detailsInfo[index].hasError) {
             // with error[index of dataSource]
-            this.closeTabService.offloadedAllLazy.data[j].isResponseHasError = true;
-            this.closeTabService.offloadedAllLazy.data[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
+            this.closeTabService.offloadedAllInGroupLazy.data[j].isResponseHasError = true;
+            this.closeTabService.offloadedAllInGroupLazy.data[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
           }
           else {
             // successful
             // possible for last icon remain in table, make sure new icons replace
-            this.closeTabService.offloadedAllLazy.data[j].isResponseHasError = false;
-            this.closeTabService.offloadedAllLazy.data[j].modifyType = null;
-            this.closeTabService.offloadedAllLazy.data[j].editedErrorDescription = '';
+            this.closeTabService.offloadedAllInGroupLazy.data[j].isResponseHasError = false;
+            this.closeTabService.offloadedAllInGroupLazy.data[j].modifyType = null;
+            this.closeTabService.offloadedAllInGroupLazy.data[j].editedErrorDescription = '';
           }
         }
       }
@@ -247,9 +218,9 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   uploadAll = async () => {
     const temp: IOffloadModifyReq[] = [];
 
-    for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
+    for (let index = 0; index < this.closeTabService.offloadedAllInGroupLazy.data.length; index++) {
 
-      let tempOrigin = this.closeTabService.offloadedAllLazy.data[index];
+      let tempOrigin = this.closeTabService.offloadedAllInGroupLazy.data[index];
       if (typeof tempOrigin.modifyType == 'object') {
         tempOrigin.modifyType = null;
       }
@@ -293,9 +264,9 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   }
   receiveDateJalali = (event: any, dataId: string) => {
     // to make date updated to latest change by user
-    for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
-      if (this.closeTabService.offloadedAllLazy.data[index].id === dataId) {
-        this.closeTabService.offloadedAllLazy.data[index].offloadDateJalali = event;
+    for (let index = 0; index < this.closeTabService.offloadedAllInGroupLazy.data.length; index++) {
+      if (this.closeTabService.offloadedAllInGroupLazy.data[index].id === dataId) {
+        this.closeTabService.offloadedAllInGroupLazy.data[index].offloadDateJalali = event;
       }
     }
   }
@@ -338,25 +309,8 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
         console.log(res);
     });
   }
-  hasBeenReadsToggler = () => {
-    // if OnOffloadComponent rendering
-    let temp: any[] = [];
-    // should be false on initial(_generalGroupHeaderCheckbox) because filter on DataSource happen
-    if (this.listManagerService.columnManager._generalGroupHeaderCheckbox) {
-      for (let index = 0; index < this.closeTabService.offloadedAllLazy.data.length; index++) {
-        if (this.closeTabService.offloadedAllLazy.data[index].counterStateId !== null)
-          temp.push(this.closeTabService.offloadedAllLazy.data[index]);
-      }
-      this.closeTabService.offloadedAllLazy.data = temp;
-    }
-    else {
-      if (!MathS.isNull(this.closeTabService.AUXoffloadedAllLazy)) {
-        this.closeTabService.offloadedAllLazy.data = this.closeTabService.AUXoffloadedAllLazy;
-      }
-    }
-  }
   getExcel = async () => {
-    const res = await this.listManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.offloadedListLazy_pageSign.groupId);
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId);
     this.outputManagerService.downloadFile(res, '.xlsx');
   }
   @Input() get selectedColumns(): any[] {
@@ -399,6 +353,11 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     return this.profileService.getLocalReOrderable();
   }
   clearFilters(table: Table) {
+    this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId = [];
+    this.closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode = [];
+    this.closeTabService.allInGroupLazyReq.multiSelectkarbariCode = [];
+    this.closeTabService.allInGroupLazyReq.multiSelectHazf = [];
+    this.closeTabService.allInGroupLazyReq.multiSelectMasrafStateId = [];
     this.closeTabService.utilsService.clearFilters(table);
     this.hasFiltersInTable = false;
   }
@@ -408,6 +367,5 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   ngAfterViewInit(): void {
     this.hasFilters();
   }
-
 
 }

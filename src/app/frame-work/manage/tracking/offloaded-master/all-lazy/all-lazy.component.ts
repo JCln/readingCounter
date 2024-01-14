@@ -69,9 +69,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   ) {
     super(dialogService, listManagerService);
   }
-  makeDefaultValCheckbox = () => {
-    this.listManagerService.columnManager._generalGroupHeaderCheckbox = false;
-  }
   updateOnChangedCounterState = async (event: any) => {
     console.log(this.allListsService.offloadedListLazy_pageSign.GUid);
 
@@ -81,11 +78,11 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, event);
     this.totalRecords = this.closeTabService.offloadedAllLazy.totalRecords;
 
-    this.closeTabService.AUXoffloadedAllLazy = JSON.parse(JSON.stringify(this.closeTabService.offloadedAllLazy.data));
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
-    this.makeDefaultValCheckbox();
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);    
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
+    console.log(this.masrafStateIdDictionary);
+
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
     this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
@@ -119,8 +116,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
       this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
     else {
-      console.log(1);
-
       // to show counterStates radioButtons      
       await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);
       if (this.browserStorageService.isExists(this._outputFileName)) {
@@ -141,20 +136,23 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.tempMainDataSource.totalNum = 0;
   }
 
-  loadCustomers(event: LazyLoadEvent) {
+  LazyLoading(event: LazyLoadEvent) {
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
     }
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
-    // event.filters['counterStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId : null;
-    // event.filters['preCounterStateCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode : null;
-    // event.filters['karbariCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode : null;
-    // event.filters['hazf'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf : null;
-    // event.filters['masrafStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId : null;
-    console.log(event);
-    console.log(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId);
+    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId))
+      event.filters['counterStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId : null;
+    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode))
+      event.filters['preCounterStateCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode : null;
+    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode))
+      event.filters['karbariCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode : null;
+    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf))
+      event.filters['hazf'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf : null;
+    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId))
+      event.filters['masrafStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId : null;
 
     this.updateOnChangedCounterState(event);
   }
@@ -361,6 +359,11 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     return this.profileService.getLocalReOrderable();
   }
   clearFilters(table: Table) {
+    this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId = [];
+    this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode = [];
+    this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode = [];
+    this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf = [];
+    this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId = [];
     this.closeTabService.utilsService.clearFilters(table);
     this.hasFiltersInTable = false;
   }

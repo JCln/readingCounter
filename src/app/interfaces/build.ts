@@ -268,11 +268,11 @@ export class getDeleteDictionary {
 }
 export class getMasrafStateDictionary {
     static readonly DEFAULT = new getMasrafStateDictionary([
-        { id: 10, title: 'normal', value: 0, titleUnicode: '0', icon: 'pi pi-check', className: 'pi pi pi-check' },
-        { id: 11, title: 'down', value: 1, titleUnicode: '1', icon: 'pi pi-arrow-down', className: 'pi pi-arrow-down' },
-        { id: 12, title: 'up', value: 2, titleUnicode: '2', icon: 'pi pi-arrow-up', className: 'pi pi-arrow-up' },
-        { id: 13, title: 'empty', value: 3, titleUnicode: '3', icon: 'صفر', className: '_empty' },
-        { id: 14, title: 'unCalculable', value: 4, titleUnicode: '4', icon: '!', className: '_mark' }
+        { id: 10, title: 'normal', value: 0, titleUnicode: 'عادی', icon: '', className: 'pi pi pi-check' },
+        { id: 11, title: 'down', value: 1, titleUnicode: 'پایین', icon: '', className: 'pi pi-arrow-down' },
+        { id: 12, title: 'up', value: 2, titleUnicode: 'بالا', icon: '', className: 'pi pi-arrow-up' },
+        { id: 13, title: 'empty', value: 3, titleUnicode: 'صفر', icon: 'صفر', className: '_empty' },
+        { id: 14, title: 'unCalculable', value: 4, titleUnicode: 'غیرقابل محاسبه', icon: '!', className: '_mark' }
     ]);
     private constructor(public readonly value: {
         id: number, title: string, titleUnicode: string, icon: string,

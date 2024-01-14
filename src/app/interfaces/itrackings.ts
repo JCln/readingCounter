@@ -145,5 +145,6 @@ export interface ITrackingMasterDto {
     routeCount: number,
     eshterakCount: number,
     fragmentMasterTitle: string,
+    zoneId: number,
     zoneTitle: string
 }

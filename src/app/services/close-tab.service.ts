@@ -47,7 +47,7 @@ import {
 import { IFollowUp } from 'interfaces/isearchs';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IOffLoadPerDay, IOnOffLoad, ITracking, ITrackingMasterDto, ITrackingSearchDto } from 'interfaces/itrackings';
-import { IAddUserInfos, IRoleManager, IUserCompareManager, IUserManager, IUserOnlines, IUserRoleCompare } from 'interfaces/iuser-manager';
+import { IAddUserInfos, IRoleManager, IUserCompareManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
@@ -111,23 +111,22 @@ export class CloseTabService {
     multiSelectMasrafStateId: [],//وضعیت مصرف
     multiSelectHazf: []// 
   };
-  AUXoffloadedAllLazy: IOnOffLoadFlat[] = [];
   offloadedAllLazy: IOnOffLoadFlatLazy = {
     data: [],
     totalRecords: 0
+  };
+  allInGroupLazyReq = {
+    counterStateValue: null,
+    multiSelectCounterStateId: [],
+    multiSelectPreCounterStateCode: [],
+    multiSelectkarbariCode: [],
+    multiSelectMasrafStateId: [],//وضعیت مصرف
+    multiSelectHazf: []// 
   };
   offloadedAllInGroupLazy: IOnOffLoadFlatLazy = {
     data: [],
     totalRecords: 0
   };
-  AUXOffloadedAllInGroupLazy: IOnOffLoadFlat[] = [];
-
-  getOffloadedAllInGroupLazy = async (UUID: string, canRefresh: boolean): Promise<any> => {
-    if (!MathS.isNull(this.offloadedAllInGroupLazy) && !canRefresh)
-      return this.offloadedAllInGroupLazy;
-    this.offloadedAllInGroupLazy = await this.utilsService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.trackingAllInGroupLazy, UUID);
-  }
-
   IOPolicyHistory: IIOPolicyHistory[];
   iOPolicy: IIOPolicy = {
     id: null,

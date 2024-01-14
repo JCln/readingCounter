@@ -721,6 +721,7 @@ export enum ENSelectedColumnVariables {
     selectedGeneralModify = 'generalListModify',
     selectedGeneralGroupModify = 'generalGroupModify',
     selectedOffloadedLazy = 'listOffloadedLazy',
+    selectedOffloadedAllInGroupLazy = 'listOffloadedAllInGroupLazy',
     selectedListManagerModify = 'ModifyList',
     selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = 'searchMosh',

@@ -279,6 +279,11 @@
     }
   }
 
+  .p-column-filter-overlay-menu .p-column-filter-buttonbar .p-button.p-button-outlined {
+    visibility: hidden;
+    opacity: 0;
+  }
+
   .p-column-filter-overlay-menu .p-column-filter-buttonbar {
     .p-button.p-button-outlined {
       background-color: var(--thirdy_1);

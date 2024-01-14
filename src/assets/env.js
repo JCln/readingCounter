@@ -45,9 +45,9 @@
         { id: 5, title: 'حذف موقت' }
     ];
     window.__env.getMasrafStateDictionary = [
-        { id: 10, title: 'normal', value: 0, titleUnicode: 'عادی', icon: 'pi pi-check', className: 'pi pi pi-check' },
-        { id: 11, title: 'down', value: 1, titleUnicode: 'پایین', icon: 'pi pi-arrow-down', className: 'pi pi-arrow-down' },
-        { id: 12, title: 'up', value: 2, titleUnicode: 'بالا', icon: 'pi pi-arrow-up', className: 'pi pi-arrow-up' },
+        { id: 10, title: 'normal', value: 0, titleUnicode: 'عادی', icon: '', className: 'pi pi pi-check' },
+        { id: 11, title: 'down', value: 1, titleUnicode: 'پایین', icon: '', className: 'pi pi-arrow-down' },
+        { id: 12, title: 'up', value: 2, titleUnicode: 'بالا', icon: '', className: 'pi pi-arrow-up' },
         { id: 13, title: 'empty', value: 3, titleUnicode: 'صفر', icon: 'صفر', className: '_empty' },
         { id: 14, title: 'unCalculable', value: 4, titleUnicode: 'غیرقابل محاسبه', icon: '!', className: '_mark' }
     ];
