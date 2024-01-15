@@ -238,7 +238,7 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
     if (average) {
       let total: number = 0;
       for (let index = 0; index < average.length; index++) {
-        total += average[index][param];
+        total += average[index][param] ? average[index][param] : 0;
       }
       return total;
     }
