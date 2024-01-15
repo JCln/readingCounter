@@ -102,6 +102,7 @@ export class CloseTabService {
     if (!MathS.isNull(this.trackingOffloadedMaster) && !canRefresh)
       return this.trackingOffloadedMaster;
     this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
+    return this.trackingOffloadedMaster;
   }
   saveDataForOffloadedAllLazyReq = {
     counterStateValue: null,
@@ -337,7 +338,7 @@ export class CloseTabService {
   saveDataForRoleManager: IRoleManager[];
   saveDataForUserLoggins: any;
   saveDataForEditOnRole: any;
-  saveDataForRoleHistory: IRoleHistory[] = []
+  saveDataForRoleHistory: IRoleHistory[] = [];
   saveDataForAddUsers: any;
   saveDataForUserSearch: any;
   saveDataForUserSearchRes: any;
@@ -830,20 +831,20 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.downloadAttempts, url: EN_Routes.reqLogDownloadAttempts },
     { id: 1, value: ENEssentialsToSave.uploadAttempts, url: EN_Routes.reqLogUploadAttempts },
     { id: 1, value: ENEssentialsToSave.getUploaded, url: EN_Routes.reqLogGetUploaded },
-    { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
-    { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
+    { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, defaultValue_2: '', url: EN_Routes.wrtoolsrandomImg },
+    { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, defaultValue_2: '', url: EN_Routes.wrToolsResultDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrExcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterMark, url: EN_Routes.wrSettingsWaterMark },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
-    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, value_2: ENEssentialsToSave.AUXSaveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralGModify },
+    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, value_2: ENEssentialsToSave.AUXSaveDataForLMGeneralGroupModify, defaultValue_2: [], url: EN_Routes.wrmlGeneralGModify },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
     { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild },
     { id: 1, value: ENEssentialsToSave.ipFilterRes, url: EN_Routes.ipFilter },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse },
-    { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, defaultValue_2: '', url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.wrmrkar },
@@ -900,7 +901,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished },
-    { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, url: EN_Routes.wrmsfwu },
+    { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, defaultValue_2: '', url: EN_Routes.wrmsfwu },
     { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
     { id: 1, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple },
     { id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn },
@@ -910,7 +911,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverse, url: EN_Routes.wrrptsmamtrv },
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: EN_Routes.wrrptsmamtrvch },
     { id: 1, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: EN_Routes.wrrptsmamdh },
-    { id: 1, value: ENEssentialsToSave.saveDataForKarkardAllStates, value_2: ENEssentialsToSave.saveDataForKarkardAllStatesTWO, url: EN_Routes.wrrptsmamKarkardAllStates },
+    { id: 1, value: ENEssentialsToSave.saveDataForKarkardAllStates, value_2: ENEssentialsToSave.saveDataForKarkardAllStatesTWO, defaultValue_2: '', url: EN_Routes.wrrptsmamKarkardAllStates },
     { id: 1, value: ENEssentialsToSave.saveDataForRRKarkard, url: EN_Routes.wrrptsmamkarkard },
     { id: 1, value: ENEssentialsToSave.saveDataForRRPreNumShown, url: EN_Routes.wrrptsmampns },
     { id: 1, value: ENEssentialsToSave.saveDataForRRLocked, url: EN_Routes.wrrptsmamlocked },
@@ -919,15 +920,15 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.notificationMessages, url: EN_Routes.NotificationMessages },
     { id: 1, value: ENEssentialsToSave.saveDataForRRMaster, url: EN_Routes.wrrptsexmmaster },
     { id: 1, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm },
-    { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, url: EN_Routes.wrrptsgalleryai },
+    { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, defaultValue_2: null, url: EN_Routes.wrrptsgalleryai },
     { id: 2, req: ENEssentialsToSave.notificationListByDateReq, value: ENEssentialsToSave.notificationListByDate, url: EN_Routes.NotificationListByUrl },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
-    { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory },
+    { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy },
     { id: 2, value: ENEssentialsToSave.offloadedAllInGroupLazy, url: EN_Routes.listAllInGroupLazy },
-    { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, value_2: ENEssentialsToSave.trackingOffloadedDetails, url: EN_Routes.trackOffloadedMaster },
+    { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, value_2: ENEssentialsToSave.trackingOffloadedDetails, url: EN_Routes.trackOffloadedMaster, defaultValue: [], defaultValue_2: [] },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
     { id: 2, req: ENEssentialsToSave.authenticityAttemptsReq, value: ENEssentialsToSave.authenticityAttempts, url: EN_Routes.requestLogsAuthenticityAttempts },
@@ -949,7 +950,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.serverGetAuthenticity, url: EN_Routes.serverGetAuthenticity },
     { id: 2, value: ENEssentialsToSave.serverAuthenticityBrief, url: EN_Routes.serverAuthenticityBrief },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
-    { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, url: EN_Routes.userKarkardSummary },
+    { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, defaultValue: null, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, defaultValue_2: null, url: EN_Routes.userKarkardSummary },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
     { id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes.wrmlallfalse },
@@ -996,8 +997,9 @@ export class CloseTabService {
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
-      this[this.val[index].value_2] = null;
+      this[this.val[index].value_2] = this.val[index].defaultValue_2;
       /* commented due to unValid values after refresh page
+      /////// for assign default value to values, every value should have default value at the object 
       TODO body request vals have to back to defualt values after refresh page happended
        */
       // this.setAll(this[this.val[index].req], null);      
@@ -1007,7 +1009,7 @@ export class CloseTabService {
     }
     /* TODO: make null all objects
     should separate objects and array of objects
-*/
+  */
     this.cleanArrays();
   }
   // every component dataSource to '' value, may better implement happends
@@ -1015,15 +1017,14 @@ export class CloseTabService {
     this.val.find(item => {
       if (item.url === url) {
         this[item.value] = '';
-        this[item.value_2] = '';
-        this.ipFilterHistory = [];
+        this[item.value_2] = item.defaultValue_2;
         // this.setAll(this[item.req], null);
         // this.requestsToDefault(this[item.req]);
       }
       else {
         if (url.includes(item.url)) {
           this[item.value] = '';
-          this[item.value_2] = '';
+          this[item.value_2] = item.defaultValue_2;
           // this.setAll(this[item.req], null);
         }
       }

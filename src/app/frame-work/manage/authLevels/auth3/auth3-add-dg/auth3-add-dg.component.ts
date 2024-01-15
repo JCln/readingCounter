@@ -38,11 +38,12 @@ export class Auth3AddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3ADD, this.form.value))
-      return;
-
-    this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev3Dictionary');
-    this.dialogRef.close(this.form.value);
+    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3ADD, this.form.value);
+    if (res) {
+      this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev3Dictionary');
+      this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.dialogRef.close(this.form.value);
+    }
   }
   close() {
     this.dialogRef.close();

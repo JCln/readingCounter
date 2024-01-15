@@ -78,7 +78,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, event);
     this.totalRecords = this.closeTabService.offloadedAllLazy.totalRecords;
 
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);    
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
     console.log(this.masrafStateIdDictionary);

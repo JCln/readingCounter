@@ -107,6 +107,16 @@
             </section>
             <section>
                 <div class="content">
+                    <h1 class="title">با تغییر اندازه ستونها، اندازه جدول تغییر کند</h1>
+                    <p-selectButton [options]="stateOptionsColumnResizableMode"
+                        [(ngModel)]="profileService.showStateVals.columnResizeMode" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setColumnResizeModeStatus(profileService.showStateVals.columnResizeMode)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
                     <h1 class="title">گروه‌بندی پیشفرض در کارتابل</h1>
                     <p-selectButton [options]="stateOptionsAggregateTracks" [(ngModel)]="profileService._agg.flag"
                         optionLabel="label" optionValue="value"

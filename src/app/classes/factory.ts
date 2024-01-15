@@ -1,7 +1,7 @@
 import { InteractionService } from 'services/interaction.service';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENImageTypes, ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
+import { ENColumnResizeMode, ENImageTypes, ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -73,6 +73,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _hasSaveColumns: boolean = true;
     @Input() _hasRefreshTable: boolean = true;
     @Input() _virtualScroll: boolean = false;
+    @Input() _columnResizeMode: ENColumnResizeMode = ENColumnResizeMode.true;
 
     constructor(
         public browserStorageService: BrowserStorageService,
@@ -86,6 +87,7 @@ export class FactorySharedPrime implements OnChanges {
         this.setTraslateToPrimeNgTable();
         this.getResizReOrderable();
         this.getVirtualScrollable();
+        this.getColumnResizeMode();
     }
 
     @Input() get selectedColumns(): any[] {
@@ -183,6 +185,9 @@ export class FactorySharedPrime implements OnChanges {
     }
     getVirtualScrollable = () => {
         this._virtualScroll = this.profileService.getLocalVirtuallScrollStatus();
+    }
+    getColumnResizeMode = () => {
+        this._columnResizeMode = this.profileService.getColumnResizeMode() ? ENColumnResizeMode.true : ENColumnResizeMode.false;
     }
     denyTracking = (): boolean => {
         return this.utilsService.getDenyTracking();

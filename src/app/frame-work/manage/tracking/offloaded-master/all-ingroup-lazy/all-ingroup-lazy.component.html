@@ -24,9 +24,8 @@
         (onLazyLoad)="hasFilters()" dataKey="id" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         [totalRecords]="totalRecords" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
-        styleClass="p-datatable-responsive _unset_overflow_tables" [responsive]="true" stateStorage="session"
-        [stateKey]="_sessionName" editMode="row" [reorderableColumns]="getLocalReOrderable()" [filterDelay]="500"
-        appUnSortTable>
+        styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" [stateKey]="_sessionName"
+        editMode="row" [reorderableColumns]="getLocalReOrderable()" [filterDelay]="500" appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"

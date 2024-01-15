@@ -189,6 +189,8 @@ export enum EN_messages {
     possibleReOrderableEnabled = 'تغییر ترتیب ستونها فعال شد',
     virtualScrollEnabled = 'scroll در جداول فعال شد',
     virtualScrollDisabled = 'scroll در جداول غیر فعال شد',
+    columnResizeModeEnabled = 'با تغییر اندازه ستونها، عرض جدول نیز تغییر خواهد کرد',
+    columnResizeModeDisabled = 'با تغییر اندازه ستونها، عرض جدول تغییری نخواهد داشت',
     possibleReOrderableDisabled = 'تغییر ترتیب ستونها غیرفعال شد',
     twoStepsAuthEnabledWarn = 'شما درحال فعال سازی ورود دو مرحله ای می‌باشید',
     twoStepsAuthDisabledWarn = 'شما درحال غیرفعال سازی ورود دو مرحله ای می‌باشید',
@@ -670,6 +672,7 @@ export enum ENLocalStorageNames {
     numberOfFlashRead = 'numberOfFlashRead',
     shouldUseCarouselGallery = 'shouldUseCarouselGallery',
     shouldUseBaseOnDate = 'shouldUseBaseOnDate',
+    columnResizeMode = 'columnResizeMode',
     notifyPosition = 'notifyPosition',
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
@@ -844,4 +847,8 @@ export enum ENGroupByNames {
 export interface IFiltered {
     global: string,
     hasFilter: boolean
+}
+export enum ENColumnResizeMode {
+    true = 'expand',
+    false = ''
 }

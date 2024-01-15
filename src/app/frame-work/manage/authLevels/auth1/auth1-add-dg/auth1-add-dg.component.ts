@@ -32,11 +32,12 @@ export class Auth1AddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
-    if (!await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel1ADD, this.form.value))
-      return;
-
-    this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev1Dictionary');
-    this.dialogRef.close(this.form.value);
+    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel1ADD, this.form.value);
+    if (res) {
+      this.authsManagerService.dictionaryWrapperService.cleanSingleDictionary('authLev1Dictionary');
+      this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.dialogRef.close(this.form.value);
+    }
   }
   close() {
     this.dialogRef.close();
