@@ -2655,7 +2655,7 @@ export class ColumnManager {
                 return items
         })
     }
-    setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    setColumnsChanges = (variableName: string, newValues: any) => {
         // convert all items to false
         // variableName is the selectedColumnsToRemember
         this[variableName].forEach(old => {
@@ -2664,7 +2664,7 @@ export class ColumnManager {
 
         // merge new values
         this[variableName].find(old => {
-            newValues.find(newVals => {
+            newValues.value.find(newVals => {
                 if (newVals.field == old.field)
                     old.isSelected = true;
             })
