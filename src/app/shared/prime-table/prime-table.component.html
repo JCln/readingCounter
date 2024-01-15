@@ -2,12 +2,12 @@
     *ngIf="dataSource && dataSource.length > 0 || isAddableTable || _checkUpName == 'allComponent'"
     [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
-    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
+    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive"
+    [tableStyle]="{'min-width': '70rem'}" stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField"
+    [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
     [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)" [scrollable]="_virtualScroll"
     [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll" [resizableColumns]="true"
-    columnResizeMode="expand" rowGroupMode="subheader"
+    [columnResizeMode]="_columnResizeMode" rowGroupMode="subheader"
     [groupRowsBy]="_hasAggregating && profileService._agg.flag ?  profileService._agg[_selectedAggregatedName] : ''"
     [dataKey]="_hasAggregating && profileService._agg.flag ? profileService._agg[_selectedAggregatedName] : ''"
     appUnSortTable>

@@ -44,6 +44,7 @@ export class ProfileService {
     reOrderableTable: false,
     twoStepsAuth: false,
     virtualScrollStatus: false,
+    columnResizeMode: true,// true for columnResizeMode is expand
     notifyPosition: 'top-right',
     imgOptions: {
       width: '40rem',
@@ -122,9 +123,10 @@ export class ProfileService {
   setFontStyle = (fontStyle: number) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
   }
+  setColumnResizeMode = (columnMode: boolean) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.columnResizeMode, columnMode);
+  }
   setFontFamily = (name: string) => {
-    console.log(name);
-
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontFamily, name);
   }
   getLocalValue = (): boolean => {
@@ -133,6 +135,9 @@ export class ProfileService {
   getTwoStepsAuth = async (): Promise<any> => {
     // TODO return from server value
     this.showStateVals.twoStepsAuth = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.getTwoStepAuth);
+  }
+  getColumnResizeMode = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.columnResizeMode, true);// true for columnResizeMode is expand
   }
   getLocalNotifyPosition = (): string => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'top-right');

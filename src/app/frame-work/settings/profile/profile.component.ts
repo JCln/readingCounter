@@ -26,6 +26,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsGeneralSearch: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsVirtualScroll: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsColumnResizableMode: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
@@ -144,6 +145,7 @@ export class ProfileComponent extends FactoryONE {
     this.getVirtuallScrollStatus();
     this.getValuesOfImg();
     this.getOutputConfig();
+    this.getColumnResizeMode();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnManager.getColumnsMenus(this.profileColumns);
@@ -160,6 +162,10 @@ export class ProfileComponent extends FactoryONE {
   setValuesOfImg = (val: imageOption) => {
     this.profileService.setImg(val);
     this.profileService.showMessage(EN_messages.imageOptionChanged);
+  }
+  setColumnResizeModeStatus = (val: boolean) => {
+    this.profileService.setColumnResizeMode(val);
+    val ? this.profileService.showMessage(EN_messages.columnResizeModeEnabled) : this.profileService.showMessage(EN_messages.columnResizeModeDisabled);
   }
   setOutputConfigShouldFilterValue = (val: IOutputConfig) => {
     this.profileService.setOutputConfigs(val);
@@ -196,6 +202,9 @@ export class ProfileComponent extends FactoryONE {
   }
   getVirtuallScrollStatus = () => {
     this.profileService.showStateVals.virtualScrollStatus = this.profileService.getLocalVirtuallScrollStatus();
+  }
+  getColumnResizeMode = () => {
+    this.profileService.showStateVals.columnResizeMode = this.profileService.getColumnResizeMode();
   }
   getDefaultAggregationTrackings = () => {
     this.profileService._agg.flag = this.profileService.getLocalDefaultAggregateTracks();
