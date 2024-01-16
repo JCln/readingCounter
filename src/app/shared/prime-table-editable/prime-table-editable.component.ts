@@ -16,7 +16,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   templateUrl: './prime-table-editable.component.html',
   styleUrls: ['./prime-table-editable.component.scss']
 })
-export class PrimeTableEditableComponent extends FactorySharedPrime implements AfterViewInit {
+export class PrimeTableEditableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   onRowEditing: any;
   @ViewChild(Table) dtable: Table;
@@ -36,7 +36,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime implements A
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
-  @Output() openedBriefKardexDialog = new EventEmitter<any>();  
+  @Output() openedBriefKardexDialog = new EventEmitter<any>();
   @Output() receivedDateJalali = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() onRowEditedInit = new EventEmitter<any>();
@@ -131,6 +131,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime implements A
     this.routedToParent.emit();
   }
   filterEventTable(e: Table) {
+    this.hasFilters(e);// check whether there is new filter to affect on filter icon in tables
     this.filteredEvent.emit(e.filteredValue);
   }
   showWOUIAsCarousel = (dataSource: any, ri: number) => {
@@ -174,10 +175,8 @@ export class PrimeTableEditableComponent extends FactorySharedPrime implements A
     this.utilsService.clearFilters(table);
     this.hasFiltersInTable = false;
   }
-  hasFilters = () => {
-    this.hasFiltersInTable = this.utilsService.hasFilters(this.dtable);
+  hasFilters = (dtable: Table) => {
+    this.hasFiltersInTable = this.utilsService.hasFilters(dtable);
   }
-  ngAfterViewInit(): void {
-    this.hasFilters();
-  }
+
 }

@@ -80,6 +80,13 @@ export class BrowserStorageService {
       }
     }
   }
+  removeSessionExceptAuths = () => {
+    for (const key in this.sessionStorage) {
+      if (this.sessionStorage.hasOwnProperty(key) && key !== ENAuthTokenType.refresh_token && key !== ENAuthTokenType.access_token && key !== ENAuthTokenType.login_id) {
+        this.removeSession(key);
+      }
+    }
+  }
   // is local storage supported by the browser
   get isLocalStorageSupported(): boolean {
     return !!this.localStorage;

@@ -2,13 +2,9 @@
     <div class="input_2">
         <div class="_key">نوع جستجو</div>
         <div class="_value">
-            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.listLatestInfoReq.searchBy"
-                name="searchType">
-                <mat-option (click)="_searchByInfo = truefalse.searchBy" *ngFor="let truefalse of searchType"
-                    [value]="truefalse.id">
-                    {{truefalse.searchBy}}
-                </mat-option>
-            </mat-select>
+            <p-dropdown name="searchby" [options]="searchType" [(ngModel)]="closeTabService.listLatestInfoReq.searchBy"
+                optionLabel="searchBy" optionValue="id" placeholder="انتخاب مورد">
+            </p-dropdown>
         </div>
     </div>
     <div class="input_2">

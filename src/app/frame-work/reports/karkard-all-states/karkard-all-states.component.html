@@ -99,7 +99,7 @@
         *ngIf="closeTabService.saveDataForKarkardAllStates &&  closeTabService.saveDataForKarkardAllStates.length > 0"
         [columns]="selectedColumns" [value]="closeTabService.saveDataForKarkardAllStates" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
+        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" (onFilter)="filteredTableEvent($event)"
         styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" stateKey="karkard-allstates"
         [reorderableColumns]="readingReportManagerService.getLocalReOrderable()" appUnSortTable>
 

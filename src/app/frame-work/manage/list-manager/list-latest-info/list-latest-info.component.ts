@@ -120,12 +120,13 @@ export class ListLatestInfoComponent extends AllListsFactory {
     if (canRefresh) {
       this.verification(canRefresh);
     }
-    this.searchType = this.listManagerService.getSearchTypes();
+
     if (!MathS.isNull(this.closeTabService.listLatestInfo.zoneId)) {
       await this.getCounterStateDictionaryAndAddSelectable(this.closeTabService.listLatestInfo.zoneId);
       this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.closeTabService.listLatestInfo.zoneId);
       this.dictionaryWrapper();
     }
+    this.searchType = this.listManagerService.getSearchTypes();
     this.insertSelectedColumns();
   }
   openEditedModifyBatch = (data: IBatchModifyRes) => {

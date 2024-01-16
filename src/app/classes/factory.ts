@@ -74,6 +74,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _hasRefreshTable: boolean = true;
     @Input() _virtualScroll: boolean = false;
     @Input() _columnResizeMode: ENColumnResizeMode = ENColumnResizeMode.true;
+    @Input() _hasColumnsResizable: boolean = false;
 
     constructor(
         public browserStorageService: BrowserStorageService,
@@ -88,6 +89,7 @@ export class FactorySharedPrime implements OnChanges {
         this.getResizReOrderable();
         this.getVirtualScrollable();
         this.getColumnResizeMode();
+        this.getHasColumnsResizable();
     }
 
     @Input() get selectedColumns(): any[] {
@@ -188,6 +190,9 @@ export class FactorySharedPrime implements OnChanges {
     }
     getColumnResizeMode = () => {
         this._columnResizeMode = this.profileService.getColumnResizeMode() ? ENColumnResizeMode.true : ENColumnResizeMode.false;
+    }
+    getHasColumnsResizable = () => {
+        this._hasColumnsResizable = this.profileService.getHasColumnsResizable();
     }
     denyTracking = (): boolean => {
         return this.utilsService.getDenyTracking();

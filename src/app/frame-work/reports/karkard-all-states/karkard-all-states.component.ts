@@ -16,7 +16,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   styleUrls: ['./karkard-all-states.component.scss'],
   animations: [transitionAnimation]
 })
-export class KarkardAllStatesComponent extends FactoryONE implements AfterViewInit {
+export class KarkardAllStatesComponent extends FactoryONE {
   @ViewChild(Table) dtable: Table;
   tempData: IKarkardAllStatesDto[] = [];
   header: any[] = [];
@@ -163,11 +163,11 @@ export class KarkardAllStatesComponent extends FactoryONE implements AfterViewIn
     this.closeTabService.utilsService.clearFilters(table);
     this.hasFiltersInTable = false;
   }
-  hasFilters = () => {
-    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(this.dtable);
+  hasFilters = (dtable: Table) => {
+    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(dtable);
   }
-  ngAfterViewInit(): void {
-    this.hasFilters();
+  filteredTableEvent = (e: Table) => {
+    this.hasFilters(e);
   }
 
 }

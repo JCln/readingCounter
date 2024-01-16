@@ -45,6 +45,7 @@ export class ProfileService {
     twoStepsAuth: false,
     virtualScrollStatus: false,
     columnResizeMode: true,// true for columnResizeMode is expand
+    hasColumnsResizable: true, // true for has columns resizable default value
     notifyPosition: 'top-right',
     imgOptions: {
       width: '40rem',
@@ -126,6 +127,9 @@ export class ProfileService {
   setColumnResizeMode = (columnMode: boolean) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.columnResizeMode, columnMode);
   }
+  setHasColumnsResizable = (hasColumnsResizable: boolean) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.hasColumnsResizable, hasColumnsResizable);
+  }
   setFontFamily = (name: string) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontFamily, name);
   }
@@ -138,6 +142,9 @@ export class ProfileService {
   }
   getColumnResizeMode = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.columnResizeMode, true);// true for columnResizeMode is expand
+  }
+  getHasColumnsResizable = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasColumnsResizable, true);// true for hasColumns resizable
   }
   getLocalNotifyPosition = (): string => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'top-right');
@@ -237,7 +244,7 @@ export class ProfileService {
       icon: 'pi pi-refresh'
     }
     if (await this.utilsService.firstConfirmDialog(a))
-      this.jwtService.removeAllExceptAuths();
+      this.jwtService.removeAllStoragesExceptAuths();
   }
   // TODO: get access aggregating from trackingManager(کارتابل)
   _agg: ITableDetails = {

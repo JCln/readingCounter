@@ -29,7 +29,6 @@
                         <div class="_key">قرائت کننده</div>
                         <div class="_value">
                             <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
-                                name="counter-reader"
                                 [(ngModel)]="importDynamicService.importDynamicReq.counterReaderId" optionLabel="title"
                                 [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                                 placeholder="انتخاب مورد">
@@ -132,7 +131,7 @@
                         [(ngModel)]="importDynamicService.importDynamicReq.displayMobile">
                         موبایل
                     </mat-checkbox>
-                    
+
                     <mat-checkbox name="hasImage" [(ngModel)]="importDynamicService.importDynamicReq.hasImage">
                         تصویر
                     </mat-checkbox>

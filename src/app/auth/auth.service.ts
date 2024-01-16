@@ -67,6 +67,7 @@ export class AuthService {
       this.jwtService.getAuthorizationToken()
     );
     this.jwtService.removeTokens();
+    this.jwtService.browserStorageService.removeSessionExceptAuths();
     this.utilsService.routeTo(EN_Routes.loginSlash);
   }
   offlineLogout = async () => {
@@ -74,6 +75,7 @@ export class AuthService {
     this.clearDictionaries();
     this.signalRService.disconnectConnection();
     this.jwtService.removeTokens();
+    this.jwtService.browserStorageService.removeSessionExceptAuths();
     this.utilsService.routeTo(EN_Routes.loginSlash);
   }
   saveToStorage = (token: IAuthTokenType) => {

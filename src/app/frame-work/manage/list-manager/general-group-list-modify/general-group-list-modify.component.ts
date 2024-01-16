@@ -28,7 +28,7 @@ import { Table } from 'primeng/table';
   templateUrl: './general-group-list-modify.component.html',
   styleUrls: ['./general-group-list-modify.component.scss']
 })
-export class GeneralGroupListModifyComponent extends AllListsFactory implements AfterViewInit {
+export class GeneralGroupListModifyComponent extends AllListsFactory {
   // should place only in component because overright totalNum needs for dynamic use  
   tempMainDataSource = { totalNum: 0, data: [] };
   @ViewChild(Table) datatableG: Table;
@@ -450,12 +450,12 @@ export class GeneralGroupListModifyComponent extends AllListsFactory implements 
     this.closeTabService.utilsService.clearFilters(table);
     this.hasFiltersInTable = false;
   }
-  hasFilters = () => {
-    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(this.datatableG);
+  hasFilters = (datatableG: Table) => {
+    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(datatableG);
   }
-  ngAfterViewInit(): void {
-    this.hasFilters();
+  filteredTableEvent = (e: Table) => {
+    this.filterableDataSource = e.filteredValue;
+    this.hasFilters(e);
   }
-
 
 }

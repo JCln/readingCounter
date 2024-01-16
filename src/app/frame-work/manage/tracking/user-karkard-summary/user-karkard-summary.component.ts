@@ -14,7 +14,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   styleUrls: ['./user-karkard-summary.component.scss'],
   animations: [transitionAnimation]
 })
-export class UserKarkardSummaryComponent extends FactoryONE implements AfterViewInit {
+export class UserKarkardSummaryComponent extends FactoryONE {
   tempData: IUserKarkardSummary[] = [];
   header: any[] = [];
   @ViewChild(Table) dtable: Table;
@@ -122,11 +122,11 @@ export class UserKarkardSummaryComponent extends FactoryONE implements AfterView
     this.closeTabService.utilsService.clearFilters(table);
     this.hasFiltersInTable = false;
   }
-  hasFilters = () => {
-    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(this.dtable);
+  hasFilters = (dtable: Table) => {
+    this.hasFiltersInTable = this.closeTabService.utilsService.hasFilters(dtable);
   }
-  ngAfterViewInit(): void {
-    this.hasFilters();
+  filteredTableEvent = (e: Table) => {
+    this.hasFilters(e);
   }
 
 }

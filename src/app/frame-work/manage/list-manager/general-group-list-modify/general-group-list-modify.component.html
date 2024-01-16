@@ -35,7 +35,7 @@
         currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" [customSort]="true"
         styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session"
-        (onFilter)="filteredTableEvent($event.filteredValue)" (sortFunction)="listManagerService.customSort($event)"
+        (onFilter)="filteredTableEvent($event)" (sortFunction)="listManagerService.customSort($event)"
         [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
         [reorderableColumns]="getLocalReOrderable()" appUnSortTable>
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ENGroupByNames, ENSelectedColumnVariables } from 'interfaces/enums.enum';
 import { PrimeNGConfig, SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -19,7 +19,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   styleUrls: ['./prime-table.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush // commented => cause sideEffect to dictionary Wrapper response when data need to change after converted dictionary
 })
-export class PrimeTableComponent extends FactorySharedPrime implements AfterViewInit {
+export class PrimeTableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   previousAggregate: string;
   hasFiltersInTable: boolean = false;
@@ -103,14 +103,12 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
       this.makeCapsulateGroupBy();
     }
   }
-  ngAfterViewInit(): void {
-    this.hasFilters();
-  }
   refreshTable() {
     this.refreshedTable.emit(true);
   }
   filterEventTable(e: Table) {
     this.filteredEvent.emit(e.filteredValue);
+    this.hasFilters(e);
   }
   forceOffload = (dataSource: object) => {
     this.forcedOffload.emit(dataSource);
@@ -247,8 +245,8 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
     this.utilsService.clearFilters(session);
     this.hasFiltersInTable = false;
   }
-  hasFilters = () => {
-    this.hasFiltersInTable = this.utilsService.hasFilters(this.datatableG);
+  hasFilters = (datatableG: Table) => {
+    this.hasFiltersInTable = this.utilsService.hasFilters(datatableG);
   }
   // groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
   //   arr.reduce((groups, item) => {

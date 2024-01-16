@@ -146,7 +146,6 @@ export class JwtService {
     const refreshToken = this.getRefreshToken();
     return (!MathS.isEmptyString(accessToken) && !MathS.isEmptyString(refreshToken));
   }
-  removeAllLocalStorage = () => this.browserStorageService.removeAll();
   private removeAuthLocalStorage = () => {
     this.browserStorageService.removeLocal(ENAuthTokenType.access_token);
     this.browserStorageService.removeLocal(ENAuthTokenType.refresh_token);
@@ -166,7 +165,7 @@ export class JwtService {
     else
       this.removeAuthLocalStorage();
   }
-  removeAllExceptAuths = () => {
+  removeAllStoragesExceptAuths = () => {
     this.browserStorageService.removeAllExceptAuths();
   }
 }

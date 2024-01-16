@@ -69,7 +69,7 @@ export class MoshtarakComponent extends AllListsFactory {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.closeTabService.saveDataForSearchMoshtarakin = null;
+      this.closeTabService.saveDataForSearchMoshtarakin = [];
       this.closeTabService.saveDataForSearchMoshtarakinReq = null;
     }
     if (this.closeTabService.saveDataForSearchMoshtarakin) {

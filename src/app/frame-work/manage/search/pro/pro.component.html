@@ -41,7 +41,7 @@
                 <div class="input_2" [hidden]="searchService._isOrderByDate">
                     <div class="_key">نوع دوره</div>
                     <div class="_value">
-                        <p-dropdown name="kindId" #kindId [options]="readingPeriodKindDictionary" name="_selectedKindId"
+                        <p-dropdown name="kindId" #kindId [options]="readingPeriodKindDictionary"
                             [(ngModel)]="closeTabService.saveDataForSearchProReq._selectedKindId" optionLabel="title"
                             [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                             placeholder="انتخاب مورد" (onClick)="getReadingPeriod()">
@@ -52,7 +52,7 @@
                     <div class="_key">دوره قرائت</div>
                     <div class="_value">
 
-                        <p-dropdown name="period" #period [options]="readingPeriodDictionary" name="readingPeriodId"
+                        <p-dropdown name="period" #period [options]="readingPeriodDictionary"
                             [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId" optionLabel="title"
                             [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                             placeholder="انتخاب مورد">

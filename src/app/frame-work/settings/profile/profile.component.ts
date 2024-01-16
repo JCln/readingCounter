@@ -27,6 +27,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsVirtualScroll: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsColumnResizableMode: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsHasColumnsResizable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
@@ -146,6 +147,7 @@ export class ProfileComponent extends FactoryONE {
     this.getValuesOfImg();
     this.getOutputConfig();
     this.getColumnResizeMode();
+    this.getHasColumnsResizable();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnManager.getColumnsMenus(this.profileColumns);
@@ -166,6 +168,10 @@ export class ProfileComponent extends FactoryONE {
   setColumnResizeModeStatus = (val: boolean) => {
     this.profileService.setColumnResizeMode(val);
     val ? this.profileService.showMessage(EN_messages.columnResizeModeEnabled) : this.profileService.showMessage(EN_messages.columnResizeModeDisabled);
+  }
+  setHasColumnsResizable = (val: boolean) => {
+    this.profileService.setHasColumnsResizable(val);
+    val ? this.profileService.showMessage(EN_messages.columnHasColumnsResizableEnabled) : this.profileService.showMessage(EN_messages.columnHasColumnsResizableDisabled);
   }
   setOutputConfigShouldFilterValue = (val: IOutputConfig) => {
     this.profileService.setOutputConfigs(val);
@@ -205,6 +211,9 @@ export class ProfileComponent extends FactoryONE {
   }
   getColumnResizeMode = () => {
     this.profileService.showStateVals.columnResizeMode = this.profileService.getColumnResizeMode();
+  }
+  getHasColumnsResizable = () => {
+    this.profileService.showStateVals.hasColumnsResizable = this.profileService.getHasColumnsResizable();
   }
   getDefaultAggregationTrackings = () => {
     this.profileService._agg.flag = this.profileService.getLocalDefaultAggregateTracks();

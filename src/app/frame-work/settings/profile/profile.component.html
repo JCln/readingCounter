@@ -107,6 +107,16 @@
             </section>
             <section>
                 <div class="content">
+                    <h1 class="title">اندازه ستونها قابل تغییر باشد</h1>
+                    <p-selectButton [options]="stateOptionsHasColumnsResizable"
+                        [(ngModel)]="profileService.showStateVals.hasColumnsResizable" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setHasColumnsResizable(profileService.showStateVals.hasColumnsResizable)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
                     <h1 class="title">با تغییر اندازه ستونها، اندازه جدول تغییر کند</h1>
                     <p-selectButton [options]="stateOptionsColumnResizableMode"
                         [(ngModel)]="profileService.showStateVals.columnResizeMode" optionLabel="label"

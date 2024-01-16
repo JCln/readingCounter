@@ -11,7 +11,7 @@
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
                     <div class="_value">
-                        <p-dropdown name="zone" #zoneId [options]="zoneDictionary" name="_selectedKindId"
+                        <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
                             [(ngModel)]="closeTabService.saveDataForAssessPreReq.zoneId" optionLabel="title"
                             [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                             placeholder="انتخاب مورد" (onClick)="getMasterInZone()"
@@ -93,9 +93,8 @@
                 <div class="_key">قرائت کننده</div>
                 <div class="_value">
                     <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
-                        name="counter-reader" [(ngModel)]="importDynamicService._assessAddReq.counterReaderId"
-                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                        placeholder="انتخاب مورد">
+                        [(ngModel)]="importDynamicService._assessAddReq.counterReaderId" optionLabel="title"
+                        [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
                     </p-dropdown>
                 </div>
             </div>
