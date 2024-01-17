@@ -18,6 +18,7 @@ import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
+import { IUserKarkard } from 'interfaces/ireports';
 
 @Injectable({
   providedIn: 'root'
@@ -253,7 +254,7 @@ export class TrackingManagerService {
   verificationTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
   }
-  routeToFollowUp = (row: ITracking) => {
+  routeToFollowUp = (row: any) => {
     this.followUpService.setTrackNumber(row.trackNumber);
     this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
   }

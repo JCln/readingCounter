@@ -1,3 +1,4 @@
+import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -18,7 +19,8 @@ export class UserKarkardComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    public closeTabService: CloseTabService
+    public closeTabService: CloseTabService,
+    public trackingManagerService: TrackingManagerService
   ) {
     super();
   }
@@ -39,4 +41,5 @@ export class UserKarkardComponent extends FactoryONE {
     if (temp)
       this.connectToServer();
   }
+
 }

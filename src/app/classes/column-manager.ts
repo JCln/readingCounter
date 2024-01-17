@@ -425,6 +425,16 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'isValidated', header: 'تایید شده', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
     ]
+    rrkarkardAllStates: IObjectIteratation[] = [
+        { field: 'offloadDayalali', header: 'روز', isSelected: true, isSelectedOrigin: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isSelectedOrigin: false },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isSelectedOrigin: false },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true },
+        { field: 'duration', header: 'مدت', isSelected: false, isNumber: true, isSelectedOrigin: false },
+        { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true, isSelectedOrigin: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true, isSelectedOrigin: false }
+    ]
     rrUserKarkard: IObjectIteratation[] = [
         // { field: 'userId', header: 'کد کاربر', isSelected: true,isSelectedOrigin:true },
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
@@ -2157,7 +2167,7 @@ export class ColumnManager {
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
         { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
@@ -2172,7 +2182,7 @@ export class ColumnManager {
         { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'boolean' },
+        { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'hazf', header: 'حذف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, isSelectOption: true },
         { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric' },//مانده حساب
         { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
@@ -2229,7 +2239,7 @@ export class ColumnManager {
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
         { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
         { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
@@ -2244,7 +2254,7 @@ export class ColumnManager {
         { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
         { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'boolean' },
+        { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'hazf', header: 'حذف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, isSelectOption: true },
         { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric' },//مانده حساب
         { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },

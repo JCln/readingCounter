@@ -32,7 +32,6 @@ export class ImportedEditedComponent extends FactoryONE {
       this.verification();
     }
     this.zoneDictionary = await this.trackingManagerService.dictionaryWrapperService.getZoneDictionary();
-    this.getReadingConfigDefaults();
   }
   connectToServer = async () => {
     this.closeTabService.importedEditedRes = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingGetImportedEdited, this.closeTabService.importedEditedReq);
@@ -41,19 +40,6 @@ export class ImportedEditedComponent extends FactoryONE {
     const temp = this.trackingManagerService.validationImportedEdited(this.closeTabService.importedEditedReq);
     if (temp)
       this.connectToServer();
-  }
-  getReadingConfigDefaults = async () => {
-    if (this.closeTabService.importedEditedReq.zoneId) {
-      this.readingConfigDefault = await this.trackingManagerService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.closeTabService.importedEditedReq.zoneId);
-      this.closeTabService.importedEditedReq.hasPreNumber = this.readingConfigDefault.defaultHasPreNumber;
-      this.closeTabService.importedEditedReq.displayBillId = this.readingConfigDefault.displayBillId;
-      this.closeTabService.importedEditedReq.displayRadif = this.readingConfigDefault.displayRadif;
-      this.closeTabService.importedEditedReq.imagePercent = this.readingConfigDefault.defaultImagePercent;
-      this.closeTabService.importedEditedReq.alalHesabPercent = this.readingConfigDefault.defaultAlalHesab;
-      this.closeTabService.importedEditedReq.displayPreDate = this.readingConfigDefault.displayPreDate;
-      this.closeTabService.importedEditedReq.displayMobile = this.readingConfigDefault.displayMobile;
-      this.closeTabService.importedEditedReq.hasImage = this.readingConfigDefault.hasImage;
-    }
   }
 
 }

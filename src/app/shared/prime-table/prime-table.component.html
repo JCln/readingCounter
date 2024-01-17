@@ -3,10 +3,10 @@
     [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive"
-    [tableStyle]="{'min-width': '70rem'}" stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField"
-    [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
-    [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)" [scrollable]="_virtualScroll"
-    [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll"
+    [tableStyle]="{'min-width': tableMinWidth}" stateStorage="session" [stateKey]="_sessionName"
+    [sortField]="_sortField" [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort"
+    (sortFunction)="customSort($event)" [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)"
+    [scrollable]="_virtualScroll" [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll"
     [resizableColumns]="_hasColumnsResizable" [columnResizeMode]="_columnResizeMode" rowGroupMode="subheader"
     [groupRowsBy]="_hasAggregating && profileService._agg.flag ?  profileService._agg[_selectedAggregatedName] : ''"
     [dataKey]="_hasAggregating && profileService._agg.flag ? profileService._agg[_selectedAggregatedName] : ''"
@@ -52,7 +52,6 @@
             <div class="left_side">
                 <input *ngIf="profileService._agg.hasGeneralSearch" class="_general_search"
                     (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
-
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="hasBeenReadsToggler()">
                     <label class="font_family" for="binary">({{dataSource.length}})فقط قرائت شده</label>
@@ -204,7 +203,10 @@
              _outputFileName== 'offloaded'||
              _outputFileName== 'finished' ||
              _outputFileName== 'lastStates' ||
-             _outputFileName== 'offloadedGroup'
+             _outputFileName == 'offloadedGroup' || 
+             _outputFileName == 'rrUserKarkard' ||
+             _outputFileName == 'karkardOffload' ||
+             _outputFileName == 'fragmentKarkard'
               " (click)="routeToFollowUp(dataSource)">
                 <span class="ui-column-title">مشاهده در پیگیری موردی</span>
                 <i class="tooltip p_icons pi pi-search-plus">

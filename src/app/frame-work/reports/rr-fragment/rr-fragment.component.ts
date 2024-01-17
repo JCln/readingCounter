@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
@@ -21,7 +22,8 @@ export class RrFragmentComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    public closeTabService: CloseTabService
+    public closeTabService: CloseTabService,
+    public trackingManagerService: TrackingManagerService
   ) {
     super();
   }

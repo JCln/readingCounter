@@ -95,7 +95,8 @@
         [_checkUpName]="'rr-offload-karkard'" [_sessionName]="'rrOffloadKarkard-session'"
         [_selectedColumnsToRemember]="'selectedRROffloadedKarkard'" [_hasCollapsible]=true [_calculableSUM]="true"
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard"
+        [_numberOfExtraColumns]="[1]"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard = !readingReportManagerService.utilsService.collapser.isCollapsedOffKarkard"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="refreshTable()" (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)">
     </app-prime-table>
 </main>

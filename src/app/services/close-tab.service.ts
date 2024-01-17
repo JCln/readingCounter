@@ -896,7 +896,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading },
-    { id: 1, value: ENEssentialsToSave.importedEditedRes, url: EN_Routes.importedEdited },
+    { id: 1, value: ENEssentialsToSave.importedEditedRes, url: EN_Routes.importedEdited, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },

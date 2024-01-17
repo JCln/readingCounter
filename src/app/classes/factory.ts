@@ -155,8 +155,8 @@ export class FactorySharedPrime implements OnChanges {
     resetSavedColumns = () => {
         if (!MathS.isNull(this._outputFileName)) {
             // if origin columns not exists, it means contact did not clicked on save columns
-            // working when data exists in local host and reset button clicked now          
-            // columns was saved on local host and should going to remove
+            // working when data exists in local storage and reset button clicked now          
+            // columns was saved on local storage and should going to remove
             if (this.browserStorageService.isExists(this._outputFileName)) {
                 this.browserStorageService.removeLocal(this._outputFileName);
                 this.convertToOrigin();
