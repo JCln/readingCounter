@@ -280,13 +280,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   previousAggregatedOption = () => {
     this.previousAggregate = this.profileService._agg[this._selectedAggregatedName];
   }
-  resetAggregation = () => {
-    this.profileService._agg[this._selectedAggregatedName] = '';
-    setTimeout(() => {
-      this.refreshAggregatedTable();
-      this.datatableG.reset();
-    }, 0);
-  }
   canShowPaginator = () => {
     /*// Kartables mean aggregatable tables */
     if (this._hasAggregating) {
