@@ -2671,10 +2671,11 @@ export class ColumnManager {
         this[variableName].forEach(old => {
             old.isSelected = false;
         })
-
+        // some values may be different in shape like allLazy component so need to convert to unique
+        newValues = !newValues.value || newValues.value === undefined ? newValues : newValues.value;
         // merge new values
         this[variableName].find(old => {
-            newValues.value.find(newVals => {
+            newValues.find(newVals => {
                 if (newVals.field == old.field)
                     old.isSelected = true;
             })

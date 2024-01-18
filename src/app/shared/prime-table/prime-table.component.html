@@ -3,7 +3,7 @@
     [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive"
-    [tableStyle]="{'min-width': tableMinWidth}" stateStorage="session" [stateKey]="_sessionName"
+    [tableStyle]="{'min-width': tableMinWidth, 'width': '100%'}" stateStorage="session" [stateKey]="_sessionName"
     [sortField]="_sortField" [sortOrder]="_sortOrder" [sortMode]="_sortMode" [customSort]="_isCustomSort"
     (sortFunction)="customSort($event)" [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)"
     [scrollable]="_virtualScroll" [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll"

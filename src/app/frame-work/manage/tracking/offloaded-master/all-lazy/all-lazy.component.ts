@@ -18,7 +18,7 @@ import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { Table } from 'primeng/table';
-import { LazyLoadEvent, SelectItem } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
 import { GeneralGroupInfoResComponent } from '../../../list-manager/general-group-list-modify/general-group-info-res/general-group-info-res.component';
 import { BriefKardexComponent } from '../../../list-manager/brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../../../list-manager/list-search-mosh-dg/list-search-mosh-dg.component';
@@ -39,10 +39,8 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   _sessionName: string = 'listOffloadedLazy';
   _outputFileName: string = 'listOffloadedLazy';
   _selectCols: any = [];
-  _selectedColumns: IObjectIteratation[];
+  _selectedColumns: IObjectIteratation[] = [];
   totalRecords: number;
-  clonedProducts: { [s: string]: object; } = {};
-  matchModeOptions: SelectItem[];
 
   deleteDictionary: IDictionaryManager[] = [];
   masrafStateIdDictionary: IDictionaryManager[] = [];
@@ -81,7 +79,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
-    console.log(this.masrafStateIdDictionary);
 
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
@@ -111,7 +108,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.allListsService.offloadedListLazy_pageSign.GUid);
     if (!this.allListsService.offloadedListLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
@@ -129,7 +125,13 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     }
   }
   refreshTable = () => {
-    this.updateOnChangedCounterState(this.closeTabService.saveDataForOffloadedAllLazyReq);
+    this.datatableG.onLazyLoad.emit({
+      sortField: '',
+      globalFilter: null,
+      sortOrder: 1,
+      rows: 10,
+      first: 0,
+    })
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
@@ -137,6 +139,8 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   }
 
   LazyLoading(event: LazyLoadEvent) {
+    console.log(event);
+
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
     }

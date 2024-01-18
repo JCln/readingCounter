@@ -1,5 +1,5 @@
 <p-table #dtable *ngIf="closeTabService.trackingOffloadedMaster && closeTabService.trackingOffloadedMaster.length > 0"
-    [columns]="selectedColumns" [value]="closeTabService.trackingOffloadedMaster" [rows]="10"
+    [columns]="selectedColumns" [value]="closeTabService.trackingOffloadedMaster" [rows]="10" paginator="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" dataKey="groupId"
     styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" stateKey="offloadedmaster"

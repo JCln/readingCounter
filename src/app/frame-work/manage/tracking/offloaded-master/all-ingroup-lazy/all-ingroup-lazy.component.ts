@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { LazyLoadEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -39,14 +39,13 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   _sessionName: string = 'listOffloadedAllInGroupLazy';
   _outputFileName: string = 'listOffloadedAllInGroupLazy';
   _selectCols: any = [];
-  _selectedColumns: any[];
+  _selectedColumns: IObjectIteratation[] = [];
   totalRecords: number;
-  clonedProducts: { [s: string]: object; } = {};
 
   deleteDictionary: IDictionaryManager[] = [];
+  masrafStateIdDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
-  masrafStateIdDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   counterStateByZoneDictionary: IDictionaryManager[] = [];
@@ -64,7 +63,7 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
     public spinnerWrapperService: SpinnerWrapperService,
-    private dateJalaliService: DateJalaliService
+    private dateJalaliService: DateJalaliService,
   ) {
     super(dialogService, listManagerService);
   }
@@ -81,8 +80,8 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
 
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-    // this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId);
-    // this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId);
+    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId);
     this.resetDataSourceView();
 
 
@@ -107,7 +106,6 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllInGroupLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid);
     if (!this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
@@ -125,7 +123,13 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     }
   }
   refreshTable = () => {
-    this.updateOnChangedCounterState(this.closeTabService.allInGroupLazyReq);
+    this.datatableG.onLazyLoad.emit({
+      sortField: '',
+      globalFilter: null,
+      sortOrder: 1,
+      rows: 10,
+      first: 0,
+    })
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
@@ -133,6 +137,8 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   }
 
   LazyLoading(event: LazyLoadEvent) {
+    console.log(event);
+
     if (MathS.isNull(event.sortField)) {
       event.sortField = 'offloadDateJalali';
     }
@@ -367,5 +373,6 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   ngAfterViewInit(): void {
     this.hasFilters();
   }
+
 
 }
