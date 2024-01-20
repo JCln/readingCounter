@@ -1,5 +1,5 @@
 import { ColumnManager } from 'src/app/classes/column-manager';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -8,6 +8,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking, ITrackingMasterDto } from 'interfaces/itrackings';
 import { OutputManagerService } from 'services/output-manager.service';
 import { EN_messages } from 'interfaces/enums.enum';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-offloaded-master',
@@ -16,6 +17,8 @@ import { EN_messages } from 'interfaces/enums.enum';
 })
 export class OffloadedMasterComponent extends FactoryONE {
   private readonly offloadedMasterOutputName: string = 'offloadedMaster';
+  @ViewChild(Table) dtable: Table;
+
   _selectCols: any = [];
   _selectedColumns: any[];
 
@@ -54,7 +57,15 @@ export class OffloadedMasterComponent extends FactoryONE {
   }
   loadDetailPlease = async (dataSource: ITrackingMasterDto, rowIndex: number) => {
     this.closeTabService.trackingOffloadedDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
-    // this.cdk.detectChanges();
+  }
+  doLoadIfToggled(): void {
+    const selectedKey = Object.keys(this.dtable.expandedRowKeys)[0];
+    if (selectedKey) {
+      for (let index = 0; index < this.closeTabService.trackingOffloadedMaster.length; index++) {
+        if (selectedKey == this.closeTabService.trackingOffloadedMaster[index].groupId)
+          this.loadDetailPlease(this.closeTabService.trackingOffloadedMaster[index], index);
+      }
+    }
   }
   routeToOffloadLazy = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadLazy(dataSource);
@@ -66,6 +77,7 @@ export class OffloadedMasterComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.trackingOffloadedDetails = [];
     }
+
     await this.closeTabService.getTrackingOffloadedMaster(canRefresh ? canRefresh : false);
     this.insertSelectedColumns();
     this.showTestingPart();
@@ -74,7 +86,7 @@ export class OffloadedMasterComponent extends FactoryONE {
     const res = await this.trackingManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, dataSource.groupId);
     this.outputManagerService.downloadFile(res, '.xlsx');
   }
-  showTestingPart() {
+  async showTestingPart() {
     const config = {
       messageTitle: EN_messages.confirmPilotSection,
       text: EN_messages.confirmPilotSection2,
@@ -84,7 +96,10 @@ export class OffloadedMasterComponent extends FactoryONE {
       icon: 'pi pi-info-circle',
       doesNotReturnButton: false
     }
-    this.closeTabService.utilsService.firstConfirmDialog(config);
+    await this.closeTabService.utilsService.firstConfirmDialog(config);
+    // TODO: call opened more details dialog
+    this.doLoadIfToggled();
+
   }
 
 

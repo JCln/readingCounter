@@ -89,8 +89,8 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th pReorderableColumn *ngIf="shouldActive" style="min-width: 2rem; width: 2rem"></th>
-            <th pReorderableColumn style="min-width: 2rem;width: 2rem"></th>
+            <th pReorderableColumn *ngIf="shouldActive" class="__icon-columns"></th>
+            <th pReorderableColumn class="__icon-columns"></th>
         </tr>
     </ng-template>
 
@@ -128,7 +128,7 @@
                     </div>
                 </ng-template>
             </td>
-            <td class="__columns" *ngIf="shouldActive">
+            <td class="__icon-columns" *ngIf="shouldActive">
                 <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(changeHsty)"
                     class="tooltip _edit pi pi-pencil">
@@ -137,13 +137,13 @@
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(changeHsty)" class="_save pi pi-check"></i>
                 <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
             </td>
-            <td class="__columns" *ngIf="changeHsty.hasMap" (click)="showInMap()">
+            <td class="__icon-columns" *ngIf="changeHsty.hasMap" (click)="showInMap()">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="!changeHsty.hasMap">
+            <td class="__icon-columns" *ngIf="!changeHsty.hasMap">
             </td>
         </tr>
     </ng-template>

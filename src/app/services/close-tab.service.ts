@@ -926,7 +926,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
     { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory, defaultValue: [] },
-    { id: 2, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy },
+    { id: 2, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy, defaultValue: { data: [], totalRecords: 0 } },
     { id: 2, value: ENEssentialsToSave.offloadedAllInGroupLazy, url: EN_Routes.listAllInGroupLazy },
     { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, value_2: ENEssentialsToSave.trackingOffloadedDetails, url: EN_Routes.trackOffloadedMaster, defaultValue: [], defaultValue_2: [] },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
@@ -965,35 +965,6 @@ export class CloseTabService {
     this.tabs = [];
     this.ipFilterHistory = [];
   }
-  // setAll(value, val) {
-  //   if (value) {
-  //     if (typeof value === 'string') {
-  //       value = '';
-  //     }
-  //     if (typeof value === 'boolean') {
-  //       value = false;
-  //     }
-  //     else {
-  //       Object.keys(value).forEach(function (index) {
-  //         value[index] = val
-  //       });
-  //     }
-  //   }
-  // }
-  // requestsToDefault = (innerVal: any) => {
-  //   for (const property in innerVal) {
-  //     // if value exists in property value
-  //     //  what if another number exists
-  //     if (innerVal[property]) {
-  //       if (typeof innerVal[property] === 'string') {
-  //         innerVal[property] = '';
-  //       }
-  //       if (typeof innerVal[property] === 'number') {
-  //         innerVal[property] = null;
-  //       }
-  //     }
-  //   }
-  // }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
@@ -1002,30 +973,19 @@ export class CloseTabService {
       /////// for assign default value to values, every value should have default value at the object 
       TODO body request vals have to back to defualt values after refresh page happended
        */
-      // this.setAll(this[this.val[index].req], null);      
-      // console.log(1);
-
-      // this.requestsToDefault(this[this.val[index].req]);
     }
-    /* TODO: make null all objects
-    should separate objects and array of objects
-  */
     this.cleanArrays();
   }
-  // every component dataSource to '' value, may better implement happends
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
-        this[item.value] = '';
-        this[item.value_2] = item.defaultValue_2;
-        // this.setAll(this[item.req], null);
-        // this.requestsToDefault(this[item.req]);
+        this[item.value] = item.defaultValue ? item.defaultValue : '';
+        this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
       }
       else {
         if (url.includes(item.url)) {
-          this[item.value] = '';
-          this[item.value_2] = item.defaultValue_2;
-          // this.setAll(this[item.req], null);
+          this[item.value] = item.defaultValue ? item.defaultValue : '';
+          this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
         }
       }
     })

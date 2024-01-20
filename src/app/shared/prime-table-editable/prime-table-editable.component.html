@@ -84,7 +84,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
@@ -92,7 +92,7 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 
@@ -227,52 +227,52 @@
                     </ng-template>
                 </ng-template>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'"
+            <td class="__icon-columns" *ngIf="_checkUpName == 'generalListModify'"
                 (click)="openMoshtarakinDialog(dataSource)">
                 <span class="ui-column-title">مشاهده سابقه</span>
                 <i class="tooltip p_icons pi pi-users">
                     <div class="tooltip_text">مشاهده سابقه</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'"
+            <td class="__icon-columns" *ngIf="_checkUpName == 'generalListModify'"
                 (click)="openBriefKardexDialog(dataSource)">
                 <span class="ui-column-title">خلاصه کاردکس</span>
                 <i class="tooltip p_icons pi pi-folder">
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
+            <td class="__icon-columns" *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right">مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'"
+            <td class="__icon-columns" *ngIf="_checkUpName == 'generalListModify'"
                 (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                 <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'generalListModify'">
+            <td class="__icon-columns" *ngIf="_checkUpName == 'generalListModify'">
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'fragmentMaster'">
+            <td class="__icon-columns" *ngIf="_checkUpName == 'fragmentMaster'">
                 <span class="ui-column-title">مدیریت مسیرها</span>
                 <i *ngIf="!editing" (click)="openMoshtarakinDialog(dataSource.id)" class="tooltip p_icons pi pi-info">
                     <div class="tooltip_text_right">مدیریت مسیرها</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'fragmentMaster'">
+            <td class="__icon-columns" *ngIf="_checkUpName == 'fragmentMaster'">
                 <span class="ui-column-title">صدور لیست خودکار</span>
                 <i *ngIf="!editing" (click)="showPictures(dataSource)" class="tooltip p_icons pi pi-directions-alt">
                     <div class="tooltip_text">صدور لیست خودکار</div>
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName == 'fragmentMaster'">
+            <td class="__icon-columns" *ngIf="_checkUpName == 'fragmentMaster'">
                 <span class="ui-column-title">تایید نوبتی</span>
                 <i *ngIf="!editing" class="tooltip p_icons"
                     [ngClass]="dataSource.isValidated ? 'pi pi-check-circle' : 'pi pi-info-circle'"
@@ -281,7 +281,7 @@
                     </div>
                 </i>
             </td>
-            <td class="__columns">
+            <td class="__icon-columns">
                 <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
@@ -297,7 +297,7 @@
                     class="_cancel pi pi-times">
                 </i>
             </td>
-            <td class="__columns" *ngIf="_checkUpName != 'generalListModify'">
+            <td class="__icon-columns" *ngIf="_checkUpName != 'generalListModify'">
                 <span class="ui-column-title">حذف مورد</span>
                 <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>

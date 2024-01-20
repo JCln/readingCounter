@@ -68,8 +68,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     super(dialogService, listManagerService);
   }
   updateOnChangedCounterState = async (event: any) => {
-    console.log(this.allListsService.offloadedListLazy_pageSign.GUid);
-
     if (MathS.isNull(this.allListsService.offloadedListLazy_pageSign.GUid))
       return;
 
@@ -147,20 +145,21 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
-    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId))
+    if (event.filters.hasOwnProperty('counterStateId'))
       event.filters['counterStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId : null;
-    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode))
+    if (event.filters.hasOwnProperty('preCounterStateCode'))
       event.filters['preCounterStateCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode : null;
-    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode))
+    if (event.filters.hasOwnProperty('karbariCode'))
       event.filters['karbariCode'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode : null;
-    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf))
+    if (event.filters.hasOwnProperty('hazf'))
       event.filters['hazf'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf : null;
-    if (!MathS.isNull(this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId))
+    if (event.filters.hasOwnProperty('masrafStateId'))
       event.filters['masrafStateId'][0].value = this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId.length > 0 ? this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectMasrafStateId : null;
 
     this.updateOnChangedCounterState(event);
   }
   changedFilterDropdowns(eventValue: any, elementName: string) {
+    console.log(1);
     this.closeTabService.saveDataForOffloadedAllLazyReq[elementName] = eventValue;
     console.log(this.closeTabService.saveDataForOffloadedAllLazyReq);
 

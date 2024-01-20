@@ -80,6 +80,7 @@
     direction: rtl;
     text-align: center;
     font-weight: 600;
+    white-space: pre-wrap; // added for firefox but may affect on other browsers
     text-wrap: wrap;
     border: 1px solid var(--secondary_2);
   }
@@ -128,6 +129,11 @@
 
   .__headers {
     width: 6rem;
+  }
+
+  .__icon-columns {
+    width: 2.5rem !important;
+    min-width: 2.5rem !important;
   }
 
   span.ui-column-title {

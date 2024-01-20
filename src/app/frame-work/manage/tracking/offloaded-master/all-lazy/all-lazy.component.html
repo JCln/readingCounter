@@ -74,7 +74,7 @@
                         <div class="tooltip_text_bottom">{{col.header}}</div>
                     </div>
                 </th>
-                <th style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns"></th>
+                <th class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
             </tr>
             <tr>
                 <th class="__headers" pReorderableColumn *ngFor="let col of _selectedColumns">
@@ -86,7 +86,7 @@
                         [type]="col.type == 'numeric'? 'numeric': 'text'"
                         [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
                         {{col.type}}
-                    </p-columnFilter>
+                    </p-columnFilter>                
 
                     <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
                         field="counterStateId" matchMode="in" display="menu" [showMatchModes]="false"
@@ -158,7 +158,7 @@
                         </ng-template>
                     </p-columnFilter>
                 </th>
-                <th pReorderableColumn style="width: 2rem; min-width: 2rem" *ngFor="let item of _numberOfExtraColumns">
+                <th pReorderableColumn class="__icon-columns" *ngFor="let item of _numberOfExtraColumns">
                 </th>
             </tr>
         </ng-template>
@@ -308,39 +308,39 @@
                         </ng-template>
                     </ng-template>
                 </td>
-                <td class="__columns" (click)="openMoshtarakinDialog(dataSource)">
+                <td class="__icon-columns" (click)="openMoshtarakinDialog(dataSource)">
                     <span class="ui-column-title">مشاهده سابقه</span>
                     <i class="tooltip p_icons pi pi-users">
                         <div class="tooltip_text">مشاهده سابقه</div>
                     </i>
                 </td>
-                <td class="__columns" (click)="openBriefKardexDialog(dataSource)">
+                <td class="__icon-columns" (click)="openBriefKardexDialog(dataSource)">
                     <span class="ui-column-title">خلاصه کاردکس</span>
                     <i class="tooltip p_icons pi pi-folder">
                         <div class="tooltip_text">خلاصه کاردکس</div>
                     </i>
                 </td>
-                <td class="__columns" (click)="openMapDialog(dataSource)">
+                <td class="__icon-columns" (click)="openMapDialog(dataSource)">
                     <span class="ui-column-title">مشاهده روی نقشه</span>
                     <i class="tooltip p_icons pi pi-map-marker">
                         <div class="tooltip_text_right">مشاهده روی نقشه</div>
                     </i>
                 </td>
-                <td class="__columns">
+                <td class="__icon-columns">
                     <span class="ui-column-title">نمایش گزارش بازرسی</span>
                     <i (click)="getReadingReportTitles(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                         <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                     </i>
                 </td>
                 <!-- for making readable and compatible singleton dataType -->
-                <td class="__columns" (click)="doShowCarousel(dataSource)">
+                <td class="__icon-columns" (click)="doShowCarousel(dataSource)">
                     <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
                     <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons pi pi-camera">
                         <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
                         </div>
                     </i>
                 </td>
-                <td class="__columns" class="error_info">
+                <td class="__icon-columns" class="error_info">
                     <i *ngIf="dataSource.editedErrorDescription == '' && !dataSource.isResponseHasError"
                         class="pi-check tooltip p_icons pi pi-check-circle"></i>
                     <i *ngIf="dataSource.isResponseHasError" class="info_icon tooltip p_icons pi pi-info-circle">
