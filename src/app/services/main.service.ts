@@ -30,6 +30,9 @@ export class MainService {
   GETBLOB = (URL: string) => {
     return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' });
   }
+  GETBLOBAsJson = (URL: string) => {
+    return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' as 'json', observe: 'response' });
+  }
   POSTById = (URL: string, ID: number) => {
     return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
   }

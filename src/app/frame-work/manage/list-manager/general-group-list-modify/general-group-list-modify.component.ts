@@ -404,8 +404,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   getExcel = async () => {
-    const res = await this.listManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyListsGrouped_pageSign.groupId);
-    this.outputManagerService.downloadFile(res, '.xlsx');
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyListsGrouped_pageSign.groupId);
+    this.outputManagerService.downloadFile(res);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

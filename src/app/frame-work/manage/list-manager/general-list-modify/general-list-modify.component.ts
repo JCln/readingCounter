@@ -239,8 +239,8 @@ export class GeneralListModifyComponent extends AllListsFactory {
     });
   }
   getExcel = async () => {
-    const res = await this.listManagerService.ajaxReqWrapperService.getBlobById(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyLists_pageSign.groupId);
-    this.outputManagerService.downloadFile(res, '.xlsx');
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyLists_pageSign.groupId);
+    this.outputManagerService.downloadFile(res);
   }
 
 }
