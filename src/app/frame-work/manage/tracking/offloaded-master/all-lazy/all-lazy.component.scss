@@ -61,15 +61,6 @@
     }
 }
 
-::ng-deep,
-:host {
-
-    p-multiselect-clear-icon,
-    .p-multiselect-clear-icon,
-    p-multiselect.p-multiselect-clearable .p-multiselect-clear-icon {
-        display: none !important;
-    }
-}
 
 :host ::ng-deep .p-datatable table {
     table-layout: fixed;

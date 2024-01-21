@@ -129,13 +129,13 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
       sortOrder: 1,
       rows: 10,
       first: 0,
+      filters: {}
     })
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
     this.tempMainDataSource.totalNum = 0;
   }
-
   LazyLoading(event: LazyLoadEvent) {
     console.log(event);
 

@@ -186,10 +186,11 @@
     }
   }
 
+  p-multiselect-clear-icon,
+  .p-multiselect-clear-icon,
   p-multiselect.p-multiselect-clearable .p-multiselect-clear-icon {
     // break default value
-    left: 2.357rem;
-    right: auto;
+    display: none; // all lazy bacame problem on not giving exact number on filter so display have became none    
   }
 
   .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {

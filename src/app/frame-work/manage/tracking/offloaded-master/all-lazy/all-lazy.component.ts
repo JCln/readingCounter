@@ -129,13 +129,13 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
       sortOrder: 1,
       rows: 10,
       first: 0,
+      filters: {}
     })
   }
   resetDataSourceView = () => {
     // on each change of ChangedCounterState
     this.tempMainDataSource.totalNum = 0;
   }
-
   LazyLoading(event: LazyLoadEvent) {
     console.log(event);
 
@@ -159,10 +159,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.updateOnChangedCounterState(event);
   }
   changedFilterDropdowns(eventValue: any, elementName: string) {
-    console.log(1);
     this.closeTabService.saveDataForOffloadedAllLazyReq[elementName] = eventValue;
-    console.log(this.closeTabService.saveDataForOffloadedAllLazyReq);
-
   }
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
     return new Promise(async (resolve) => {

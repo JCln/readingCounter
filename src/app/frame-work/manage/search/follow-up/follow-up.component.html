@@ -32,7 +32,7 @@
             </mat-checkbox>
         </ng-container>
         <ng-template #elseTemplate>
-            <div class="_key">{{item.header}}</div>
+            <div class="_key" [ngClass]="{'special_icon': item.enableTooltip}">{{item.header}}</div>
             <div class="tooltip _double_width">
                 <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
                     [(ngModel)]="dataSourceAUX[item.field]">
@@ -116,8 +116,10 @@
                         {{changeHsty[col.field]}}
                     </div>
                     <div class="tooltip" *ngIf="col.field == 'trackStatusTitle'">
-                        {{changeHsty['trackStatusTitle']}}
-                        <div *ngIf="changeHsty['trackStatusTitle'].length > 0" class="tooltip_text_right" [ngClass]="
+                        <div [ngClass]="{'special_text': changeHsty['description']?.length > 0}">
+                            {{changeHsty['trackStatusTitle']}}
+                        </div>
+                        <div *ngIf="changeHsty['description']?.length > 0" class="tooltip_text_right" [ngClass]="
                             {
                             'tooltip_long2':changeHsty['description']?.length >= 20,
                             'tooltip_long3':changeHsty['description']?.length >= 30,

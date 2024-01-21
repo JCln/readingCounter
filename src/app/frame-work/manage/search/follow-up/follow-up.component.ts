@@ -108,6 +108,7 @@ export class FollowUpComponent extends FactoryONE {
   onRowEditSave = async (dataSource: IFollowUpHistory) => {
     const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
     this.trackingManagerService.successSnackMessage(res.message);
+    this.refreshTable();
   }
   onRowEditInit(dataSource: any) {
     // this.clonedProducts[dataSource.id] = { ...dataSource };

@@ -18,6 +18,7 @@ import { Table } from 'primeng/table';
 export class OffloadedMasterComponent extends FactoryONE {
   private readonly offloadedMasterOutputName: string = 'offloadedMaster';
   @ViewChild(Table) dtable: Table;
+  static showOneTimeDialog: boolean = true;
 
   _selectCols: any = [];
   _selectedColumns: any[];
@@ -87,18 +88,24 @@ export class OffloadedMasterComponent extends FactoryONE {
     this.outputManagerService.downloadFile(res, '.xlsx');
   }
   async showTestingPart() {
-    const config = {
-      messageTitle: EN_messages.confirmPilotSection,
-      text: EN_messages.confirmPilotSection2,
-      minWidth: '19rem',
-      isInput: false,
-      isDelete: true,
-      icon: 'pi pi-info-circle',
-      doesNotReturnButton: false
+    if (OffloadedMasterComponent.showOneTimeDialog) {
+
+      const config = {
+        messageTitle: EN_messages.confirmPilotSection,
+        text: EN_messages.confirmPilotSection2,
+        minWidth: '19rem',
+        isInput: false,
+        isDelete: true,
+        icon: 'pi pi-info-circle',
+        doesNotReturnButton: false
+      }
+      await this.closeTabService.utilsService.firstConfirmDialog(config);
+      OffloadedMasterComponent.showOneTimeDialog = false;
     }
-    await this.closeTabService.utilsService.firstConfirmDialog(config);
     // TODO: call opened more details dialog
-    this.doLoadIfToggled();
+    setTimeout(() => {
+      this.doLoadIfToggled();
+    }, 0);
 
   }
 

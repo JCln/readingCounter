@@ -261,7 +261,8 @@
                     <div class="tooltip_text_right">حذف نوبتی</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName =='ModifyList'" (click)="openMoshtarakinDialog(dataSource)">
+            <td class="__icon-columns" *ngIf="_outputFileName =='ModifyList'"
+                (click)="openMoshtarakinDialog(dataSource)">
                 <span class="ui-column-title">مشاهده سابقه</span>
                 <i class="tooltip p_icons pi pi-users">
                     <div class="tooltip_text">مشاهده سابقه</div>
@@ -377,7 +378,8 @@
                     <div class="tooltip_text_right">دانلود مجدد فایل</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded'" (click)="routeToOffloadModify(dataSource)">
+            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded'"
+                (click)="routeToOffloadModify(dataSource)">
                 <span class="ui-column-title">اصلاح لیست</span>
                 <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح لیست</div>
@@ -403,7 +405,8 @@
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded'" (click)="downloadOutputSingle(dataSource)">
+            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded'"
+                (click)="downloadOutputSingle(dataSource)">
                 <span class="ui-column-title">دانلود فایل</span>
                 <i class="tooltip p_icons pi pi-download">
                     <div class="tooltip_text">دانلود فایل</div>
@@ -534,8 +537,8 @@
                     <div class="tooltip_text_right">دانلود Excel</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
-                (click)="routeToEditPage(dataSource.id)">
+            <td class="__icon-columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'"
+                class="edit_button" (click)="routeToEditPage(dataSource.id)">
                 <span class="ui-column-title">مشاهده/ویرایش کاربر</span>
                 <i class="tooltip p_icons pi pi-user-edit">
                     <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
@@ -556,8 +559,8 @@
                     <div class="tooltip_text_right">ویرایش مسدود سازی IP</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
-                (click)="showExactConfig(dataSource)">
+            <td class="__icon-columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'"
+                class="edit_button" (click)="showExactConfig(dataSource)">
                 <span class="ui-column-title">تغییر وضعیت</span>
                 <i class="tooltip _tooltip_special _map_frame_show p_icons pi pi-ellipsis-h">
                     <div class="tooltip_text_right">تغییر وضعیت</div>
