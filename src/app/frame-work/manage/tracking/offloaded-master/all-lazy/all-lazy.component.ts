@@ -159,6 +159,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.updateOnChangedCounterState(event);
   }
   changedFilterDropdowns(eventValue: any, elementName: string) {
+    console.log(1);
     this.closeTabService.saveDataForOffloadedAllLazyReq[elementName] = eventValue;
   }
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
