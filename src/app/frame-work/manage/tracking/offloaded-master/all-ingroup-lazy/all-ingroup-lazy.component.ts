@@ -145,15 +145,15 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
-    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId))
+    if (event.filters.hasOwnProperty('counterStateId'))
       event.filters['counterStateId'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId : null;
-    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode))
+    if (event.filters.hasOwnProperty('preCounterStateCode'))
       event.filters['preCounterStateCode'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectPreCounterStateCode : null;
-    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectkarbariCode))
+    if (event.filters.hasOwnProperty('karbariCode'))
       event.filters['karbariCode'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectkarbariCode.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectkarbariCode : null;
-    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectHazf))
+    if (event.filters.hasOwnProperty('hazf'))
       event.filters['hazf'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectHazf.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectHazf : null;
-    if (!MathS.isNull(this.closeTabService.allInGroupLazyReq.multiSelectMasrafStateId))
+    if (event.filters.hasOwnProperty('masrafStateId'))
       event.filters['masrafStateId'][0].value = this.closeTabService.allInGroupLazyReq.multiSelectMasrafStateId.length > 0 ? this.closeTabService.allInGroupLazyReq.multiSelectMasrafStateId : null;
 
     this.updateOnChangedCounterState(event);
