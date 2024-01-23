@@ -132,8 +132,8 @@
   }
 
   .__icon-columns {
-    width: 2.5rem !important;
-    min-width: 2.5rem !important;
+    width: 2.2rem !important;
+    min-width: 2.2rem !important;
   }
 
   span.ui-column-title {
@@ -439,21 +439,6 @@
 
   .p-hidden-space {
     display: none !important;
-  }
-
-  th {
-    p-sorticon {
-      opacity: 0;
-      transition: opacity ease-in-out 80ms;
-    }
-
-    &:hover,
-    &:active,
-    &:focus-visible {
-      p-sorticon {
-        opacity: 1;
-      }
-    }
   }
 
   .p-datatable .p-datatable-tfoot>tr>td {
