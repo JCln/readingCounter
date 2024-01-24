@@ -4,9 +4,23 @@
 ::ng-deep {
   .mat-simple-snackbar {
     font-family: var(--font-family);
-    font-size: var(--font_s);
+    font-size: 1.2rem;
     font-weight: 600;
-    color: var(--fix_gray_light);
+    color: var(--secondary_8);
+    height: 3rem;
+  }
+
+  .mat-snack-bar-container {
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    margin: 18px;
+    max-width: 38vw;
+    min-width: 20rem;
+    padding: 12px 14px;
+    min-height: 48px;
+    transform-origin: center;
   }
 
   .mat-simple-snackbar-action button {
@@ -21,20 +35,32 @@
     top: 0;
   }
 
+  .snack_success,
+  .snack_danger,
+  .snack_info,
+  .snack_warn {
+    background-color: var(--white);
+    color: var(--secondary_8);
+  }
+
   .snack_danger {
-    background-color: var(--red_600);
+    border-right: 6px solid var(--red_600);
+    border-bottom: 3px solid var(--red_600);
   }
 
   .snack_warn {
-    background-color: var(--fix_orange);
+    border-right: 6px solid var(--fix_orange);
+    border-bottom: 3px solid var(--fix_orange);
   }
 
   .snack_success {
-    background-color: var(--green_600);
+    border-right: 6px solid var(--green_600);
+    border-bottom: 3px solid var(--green_600);
   }
 
   .snack_info {
-    background-color: var(--fix_blue);
+    border-right: 6px solid var(--fix_blue);
+    border-bottom: 3px solid var(--fix_blue);
   }
 
   .newline {

@@ -73,6 +73,7 @@ export class ListManagerService {
       item.preAverage = MathS.getFormatRange(item.preAverage);
       item.reteDifference = MathS.getFormatRange(item.reteDifference);
       item.newRateDaily = MathS.getFormatRange(item.newRateDaily);
+      item.newRateDaily2 = MathS.getFormatRange(item.newRateDaily2);
       // item.x = item.x ? MathS.getFormatRange(item.x) : ''; format for string should be like this
     })
   }

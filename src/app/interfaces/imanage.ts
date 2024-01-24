@@ -115,6 +115,7 @@ export interface IOnOffLoadFlat {
     eslahType: number,
     newRate: number,
     newRateDaily: number,
+    newRateDaily2: number,
     reteDifference: number,
     dateDifference: number,
     counterNumberShown: boolean,

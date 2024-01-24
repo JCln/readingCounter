@@ -41,7 +41,8 @@
     <p-table #dtable
         *ngIf="closeTabService.saveDataForUserKarkardSummary && closeTabService.saveDataForUserKarkardSummary.length > 0"
         [columns]="selectedColumns" [value]="closeTabService.saveDataForUserKarkardSummary" [rows]="10"
-        [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+        [showCurrentPageReport]="true" paginator="true"
+        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" (onFilter)="filteredTableEvent($event)"
         styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" stateKey="karkard-allstates"
         [reorderableColumns]="trackingManagerService.getLocalReOrderable()" appUnSortTable>

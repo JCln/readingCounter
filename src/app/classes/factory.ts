@@ -200,6 +200,11 @@ export class FactorySharedPrime implements OnChanges {
     clearFilters(session: Table) {
         this.utilsService.clearFilters(session);
     }
+    copyContext(data: string) {
+        navigator.clipboard.writeText(data);
+        this.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
+        return false;
+    }
 
 }
 
@@ -295,6 +300,11 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     }
     refreshTable = () => {
         this.classWrapper(true);
+    }
+    copyContext(data: string) {
+        navigator.clipboard.writeText(data);
+        this.listManagerService.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
+        return false;
     }
 
 }

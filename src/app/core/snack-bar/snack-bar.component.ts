@@ -1,7 +1,6 @@
 import { EnvService } from 'services/env.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NotificationMediaTypeIds } from 'interfaces/build';
 import { ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';

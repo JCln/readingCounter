@@ -234,6 +234,7 @@ export enum EN_messages {
     compressExpireLicense = 'از کاهش زمان اطمینان دارید',
     checkAuthenticity = 'از بررسی اعتبار سنجی اطمینان دارید',
     NTPCheck = 'از بررسی پروتکل زمان شبکه اطمینان دارید',
+    savedToClipboard = 'در کلیپبورد ذخیره شد',
     dBConnection = 'از اتصال به پایگاه داده اطمینان دارید',
     NTPResult = 'زمان پروتکل شبکه (NTP)',
 

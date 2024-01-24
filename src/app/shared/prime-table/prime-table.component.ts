@@ -33,7 +33,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
   @Input() _hasAggregating: boolean = false;
-  @Input() tableMinWidth: string = '70rem';
   @Input() _selectedAggregatedName: ENGroupByNames = ENGroupByNames.selectedAggregate;
 
   @Output() customedSort = new EventEmitter<any>();

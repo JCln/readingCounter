@@ -2016,7 +2016,7 @@ export class ColumnManager {
         { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, isSelectedOrigin: false },
         { field: 'newRate', header: 'میانگین فعلی', isSelected: false, isSelectedOrigin: false },
         { field: 'newRateDaily', header: 'میانگین روزانه', isSelected: false, isSelectedOrigin: false },
-        { field: 'newRateDaily2', header: 'میانگین روزانه 2', isSelected: false, isSelectedOrigin: false },//2میانگین روزانه
+        { field: 'newRateDaily2', header: 'میانگین روزانه 2', isSelected: false, isSelectedOrigin: false },//2میانگین روزانه // 'بدون احتساب آحاد'
         { field: 'reteDifference', header: 'اختلاف میانگین', isSelected: false, isSelectedOrigin: false },
         { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false, isSelectedOrigin: false },
         { field: 'preDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false },

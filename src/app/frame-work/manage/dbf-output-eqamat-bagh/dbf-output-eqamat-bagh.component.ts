@@ -28,7 +28,7 @@ export class DbfOutputEqamatBaghComponent extends FactoryONE {
       console.log(this.trackingManagerService.dbfOutputEqamatBagh);
 
       const res = await this.trackingManagerService.downloadOutputDBFEqamatBagh(ENInterfaces.OutputDBFEqamatBagh, this.trackingManagerService.dbfOutputEqamatBagh);
-      this.outputManagerService.downloadFile(res, '.dbf');
+      this.outputManagerService.downloadFile(res);
     }
   }
   nullSavedSource = () => this.closeTabService.saveDataForOutputDBFEqamatBagh = null;
