@@ -44,7 +44,7 @@ export class SimafaReadingProgComponent extends FactoryONE {
   }
   getReadingPeriod = async () => {
     if (this.closeTabService.importSimafaReadingProgramReq.kindId)
-      this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.importSimafaReadingProgramReq.kindId);
+      this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.importSimafaReadingProgramReq.zoneId, this.closeTabService.importSimafaReadingProgramReq.kindId);
   }
   nullSavedSource = () => this.closeTabService.saveDataForSimafaReadingPrograms = null;
   classWrapper = async (canRefresh?: boolean) => {

@@ -88,7 +88,6 @@ export class FactorySharedPrime implements OnChanges {
         this.setTraslateToPrimeNgTable();
         this.getResizReOrderable();
         this.getVirtualScrollable();
-        this.getColumnResizeMode();
         this.getHasColumnsResizable();
     }
 
@@ -187,9 +186,6 @@ export class FactorySharedPrime implements OnChanges {
     }
     getVirtualScrollable = () => {
         this._virtualScroll = this.profileService.getLocalVirtuallScrollStatus();
-    }
-    getColumnResizeMode = () => {
-        this._columnResizeMode = this.profileService.getColumnResizeMode() ? ENColumnResizeMode.true : ENColumnResizeMode.false;
     }
     getHasColumnsResizable = () => {
         this._hasColumnsResizable = this.profileService.getHasColumnsResizable();

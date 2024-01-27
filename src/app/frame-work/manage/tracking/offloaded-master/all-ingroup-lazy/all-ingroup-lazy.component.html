@@ -253,7 +253,7 @@
 
                             <ng-template #editableForm>
                                 <ng-container *ngIf="col.enableTooltip; else simpleText">
-                                    <div *ngIf="col.icon">
+                                    <div *ngIf="col.icon" (contextmenu)="copyContext(dataSource[col.field])">
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
                                                 <input [(ngModel)]="dataSource[col.field]">

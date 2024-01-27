@@ -176,11 +176,11 @@ export class UsersAllService {
       this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobile);
       return false;
     }
-    if (!MathS.isNull(dataSource.email))
-      if (!MathS.isEmailValid(dataSource.email)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
-        return false;
-      }
+    // if (!MathS.isNull(dataSource.email))
+    //   if (!MathS.isEmailValid(dataSource.email)) {
+    //     this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
+    //     return false;
+    //   }
 
     return true;
   }

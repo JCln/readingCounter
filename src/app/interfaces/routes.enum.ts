@@ -16,7 +16,7 @@ export enum EN_Routes {
     'wrrptsmamtrvchchart' = '/wr/rpts/mam/trvch/chart',
     'wrSettingsWaterMark' = '/wr/settings/waterMark',
     ipFilter = '/wr/m/system/ipFilter',
-    'wrflashlr' = '/wr/flash/lr',
+    wrflashlr = '/wr/flash/lr',
     'wrmrimgattr' = '/wr/m/r/imgattr',
     'wrrptsanlzfileresult' = '/wr/rpts/anlzfile/result',
     'wrrptsanlzfileanalyze' = '/wr/rpts/anlzfile/analyze',

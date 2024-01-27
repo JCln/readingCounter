@@ -23,7 +23,6 @@ export class ZoneBoundAddDgComponent {
   ) {
     data = data.di
     this.form = fb.group({
-      id: [''],
       title: '',
       zoneId: data.zoneId,
       govermentalCode: '',

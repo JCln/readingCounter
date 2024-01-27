@@ -84,6 +84,11 @@ export class DictionaryWrapperService {
     dictionary: null,
     kindId: null
   }
+  private readingPeriodDictionaryByZoneAndKind = {
+    dictionary: null,
+    kindId: null,
+    zoneId: null
+  }
 
   async getkarbariCodeDictionary(): Promise<any> {
     if (!MathS.isNull(this.karbariCodeDictionary))
@@ -282,6 +287,13 @@ export class DictionaryWrapperService {
     this.setReadingPeriodDictionary(res, +kindId);
     return res;
   }
+  getReadingPeriodDictionaryByZoneAndKind = async (zoneId: number, kindId: number): Promise<any> => {
+    if (this.readingPeriodDictionaryByZoneAndKind.kindId == kindId && this.readingPeriodDictionaryByZoneAndKind.zoneId == zoneId && !MathS.isNull(this.readingPeriodDictionaryByZoneAndKind.dictionary))
+      return this.readingPeriodDictionaryByZoneAndKind.dictionary;
+    const res = await this.ajaxReqWrapperService.getDataSourceByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, zoneId, kindId);
+    this.setReadingPeriodDictionaryByZoneAndKind(res, zoneId, kindId);
+    return res;
+  }
   async getQotrDictionary(): Promise<any> {
     if (!MathS.isNull(this.qotrDictionary))
       return this.qotrDictionary;
@@ -392,6 +404,11 @@ export class DictionaryWrapperService {
     this.readingPeriodDictionary.dictionary = v;
     this.readingPeriodDictionary.kindId = id;
   }
+  private setReadingPeriodDictionaryByZoneAndKind(v: any, zone: number, kind: number) {
+    this.readingPeriodDictionaryByZoneAndKind.dictionary = v;
+    this.readingPeriodDictionaryByZoneAndKind.kindId = kind;
+    this.readingPeriodDictionaryByZoneAndKind.zoneId = zone;
+  }
   private setCounterStateByCodeShowAllDictionary(v: any, id: number) {
     this.counterStateByCodeShowAllDictionary.dictionary = v;
     this.counterStateByCodeShowAllDictionary.zoneId = id;
@@ -445,6 +462,9 @@ export class DictionaryWrapperService {
     this.counterStateForModifyDictionary.zoneId = null;
     this.readingPeriodDictionary.dictionary = [];
     this.readingPeriodDictionary.kindId = null;
+    this.readingPeriodDictionaryByZoneAndKind.dictionary = [];
+    this.readingPeriodDictionaryByZoneAndKind.kindId = null;
+    this.readingPeriodDictionaryByZoneAndKind.zoneId = null;
     this.counterStateByCodeShowAllDictionary.dictionary = [];
     this.counterStateByCodeShowAllDictionary.zoneId = null;
     this.counterStateByZoneShowAllDictionary.dictionary = [];

@@ -79,7 +79,7 @@ export class ExcelFileComponent extends FactoryONE {
   }
   verificationReadingPeriod = async () => {
     if (this.closeTabService.saveDataForImportDataFileExcelReq.zoneId || this.kindId) {
-      this.readingPeriodDictionary = await this.importDynamicService.ajaxReqWrapperService.getDataSourceByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, this.closeTabService.saveDataForImportDataFileExcelReq.zoneId, this.kindId);
+      this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId, this.kindId);
     }
   }
   nullSavedSource = () => this.closeTabService.saveDataForImportDataFileExcel = null;

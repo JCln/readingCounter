@@ -43,8 +43,7 @@ export class ProfileService {
     defaultFontFamily: ENFontFamily.BLotus,// value of default is sync with font.service.ts
     reOrderableTable: false,
     twoStepsAuth: false,
-    virtualScrollStatus: false,
-    columnResizeMode: true,// true for columnResizeMode is expand
+    virtualScrollStatus: false,    
     hasColumnsResizable: true, // true for has columns resizable default value
     notifyPosition: 'top-right',
     imgOptions: {
@@ -124,9 +123,6 @@ export class ProfileService {
   setFontStyle = (fontStyle: number) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
   }
-  setColumnResizeMode = (columnMode: boolean) => {
-    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.columnResizeMode, columnMode);
-  }
   setHasColumnsResizable = (hasColumnsResizable: boolean) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.hasColumnsResizable, hasColumnsResizable);
   }
@@ -139,9 +135,6 @@ export class ProfileService {
   getTwoStepsAuth = async (): Promise<any> => {
     // TODO return from server value
     this.showStateVals.twoStepsAuth = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.getTwoStepAuth);
-  }
-  getColumnResizeMode = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.columnResizeMode, true);// true for columnResizeMode is expand
   }
   getHasColumnsResizable = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasColumnsResizable, true);// true for hasColumns resizable

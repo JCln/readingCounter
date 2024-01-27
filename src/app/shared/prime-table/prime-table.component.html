@@ -7,7 +7,7 @@
     [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
     [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)" [scrollable]="_virtualScroll"
     [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll"
-    [resizableColumns]="_hasColumnsResizable" [columnResizeMode]="_columnResizeMode" rowGroupMode="subheader"
+    [resizableColumns]="_hasColumnsResizable" rowGroupMode="subheader"
     [groupRowsBy]="_hasAggregating && profileService._agg.flag ?  profileService._agg[_selectedAggregatedName] : ''"
     [dataKey]="_hasAggregating && profileService._agg.flag ? profileService._agg[_selectedAggregatedName] : ''"
     appUnSortTable>
@@ -88,7 +88,10 @@
             <th class="__headers" pReorderableColumn pResizableColumn *ngFor="let col of columns"
                 pSortableColumn="{{col.field}}" pSortableColumnDisabled="{{col.readonly}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
+                <div class="_overflow_header tooltip">
+                    {{col.header}}
+                    <div class="tooltip_text_bottom">{{col.header}}</div>
+                </div>
             </th>
             <th pReorderableColumn class="__icon-columns" *ngFor="let item of _numberOfExtraColumns">
             </th>

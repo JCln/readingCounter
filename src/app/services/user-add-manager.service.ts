@@ -104,10 +104,10 @@ export class UserAddManagerService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_showName);
       return false;
     }
-    if (!MathS.isNull(vals.email) && !MathS.isEmailValid(vals.email)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
-      return false;
-    }
+    // if (!MathS.isNull(vals.email) && !MathS.isEmailValid(vals.email)) {
+    //   this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
+    //   return false;
+    // }
     if (MathS.isNull(vals.selectedRoles[0])) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_group_access);
       return false;

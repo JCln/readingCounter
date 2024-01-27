@@ -3,8 +3,8 @@
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" stateStorage="session"
     (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
     [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
-    [resizableColumns]="_hasColumnsResizable" [columnResizeMode]="_columnResizeMode" editMode="row" dataKey="id"
-    [reorderableColumns]=_reOrderableTable appUnSortTable>
+    [resizableColumns]="_hasColumnsResizable" editMode="row" dataKey="id" [reorderableColumns]=_reOrderableTable
+    appUnSortTable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -195,7 +195,6 @@
 
                         <ng-template #editableForm>
                             <ng-container *ngIf="col.enableTooltip; else simpleText">
-
                                 <div class="tooltip" *ngIf="col.enableTooltip">
                                     {{dataSource[col.field] && dataSource[col.field].length > 0 ?
                                     dataSource[col.field].toString().split(' ')[0]
@@ -207,22 +206,23 @@
                                         {{dataSource[col.field]}}
                                     </div>
                                 </div>
-                                <div *ngIf="!col.enableTooltip" oncontextmenu="copyContext(dataSource[col.field])">
+                                <div *ngIf="!col.enableTooltip">
                                     {{dataSource[col.field]}}
                                 </div>
                             </ng-container>
                             <ng-template #simpleText>
-                                <p-cellEditor>
-                                    <ng-template pTemplate="input">
-                                        <input pInputText [type]="col.isNumber ? 'number': 'text'"
-                                            [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
-                                    </ng-template>
-                                    <ng-template pTemplate="output">
-                                        {{dataSource[col.field]}}
-                                    </ng-template>
-                                </p-cellEditor>
+                                <div (contextmenu)="copyContext(dataSource[col.field])">
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText [type]="col.isNumber ? 'number': 'text'"
+                                                [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{dataSource[col.field]}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </div>
                             </ng-template>
-
                         </ng-template>
                     </ng-template>
                 </ng-template>

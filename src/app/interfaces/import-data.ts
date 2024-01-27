@@ -90,7 +90,7 @@ export interface IImportSimafaReadingProgramsReq {
     readingPeriodId: number,
     year: number,
     zoneId: number,
-    kindId?: string,
+    kindId?: number,
     _isCollapsed?: boolean
 }
 export interface IImportErrors {

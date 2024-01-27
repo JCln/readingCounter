@@ -26,7 +26,6 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsGeneralSearch: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsVirtualScroll: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
-  stateOptionsColumnResizableMode: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsHasColumnsResizable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
@@ -146,7 +145,6 @@ export class ProfileComponent extends FactoryONE {
     this.getVirtuallScrollStatus();
     this.getValuesOfImg();
     this.getOutputConfig();
-    this.getColumnResizeMode();
     this.getHasColumnsResizable();
   }
   getSelectedColumns = () => {
@@ -164,10 +162,6 @@ export class ProfileComponent extends FactoryONE {
   setValuesOfImg = (val: imageOption) => {
     this.profileService.setImg(val);
     this.profileService.showMessage(EN_messages.imageOptionChanged);
-  }
-  setColumnResizeModeStatus = (val: boolean) => {
-    this.profileService.setColumnResizeMode(val);
-    val ? this.profileService.showMessage(EN_messages.columnResizeModeEnabled) : this.profileService.showMessage(EN_messages.columnResizeModeDisabled);
   }
   setHasColumnsResizable = (val: boolean) => {
     this.profileService.setHasColumnsResizable(val);
@@ -208,9 +202,6 @@ export class ProfileComponent extends FactoryONE {
   }
   getVirtuallScrollStatus = () => {
     this.profileService.showStateVals.virtualScrollStatus = this.profileService.getLocalVirtuallScrollStatus();
-  }
-  getColumnResizeMode = () => {
-    this.profileService.showStateVals.columnResizeMode = this.profileService.getColumnResizeMode();
   }
   getHasColumnsResizable = () => {
     this.profileService.showStateVals.hasColumnsResizable = this.profileService.getHasColumnsResizable();

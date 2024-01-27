@@ -888,7 +888,15 @@ export class CloseTabService {
     { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
-    { id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg },
+    {
+      id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg, defaultReq: {
+        zoneId: null,
+        readingPeriodId: null,
+        year: this.utilsService.getFirstYear(),
+        kindId: null,
+        _isCollapsed: false
+      }
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: EN_Routes.wrpolicies },
     { id: 1, value: ENEssentialsToSave.listLatestInfo, url: EN_Routes.listLatestInfo },
     { id: 1, value: ENEssentialsToSave.saveDataForPoliciesHistory, url: EN_Routes.policyHistory },
@@ -967,6 +975,7 @@ export class CloseTabService {
   }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
+      this[this.val[index].req] = this.val[index].defaultReq;
       this[this.val[index].value] = null;
       this[this.val[index].value_2] = this.val[index].defaultValue_2;
       /* commented due to unValid values after refresh page
@@ -979,11 +988,13 @@ export class CloseTabService {
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
+        this[item.req] = item.defaultReq;
         this[item.value] = item.defaultValue ? item.defaultValue : '';
         this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
       }
       else {
         if (url.includes(item.url)) {
+          this[item.req] = item.defaultReq;
           this[item.value] = item.defaultValue ? item.defaultValue : '';
           this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
         }

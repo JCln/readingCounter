@@ -120,7 +120,7 @@
     background-color: var(--secondary_3);
     color: var(--secondary_8);
     direction: ltr;
-    min-width: 4rem;
+    // min-width: 4rem;
   }
 
   .__columns {
@@ -134,6 +134,33 @@
   .__icon-columns {
     width: 2.2rem !important;
     min-width: 2.2rem !important;
+  }
+
+  ._rotate_header {
+    transform: rotate(-90deg);
+
+    .p-datatable .p-datatable-thead>tr>th {
+      width: 2.2rem !important;
+      min-width: 2.2rem !important;
+      max-width: 2.5rem !important;
+    }
+  }
+
+  .p-datatable-resizable-table>.p-datatable-thead>tr>th {
+    overflow: initial;
+  }
+
+  ._overflow_header {
+    overflow: hidden;
+    text-wrap: nowrap;
+    direction: rtl;
+    display: block;
+    font-size: var(--font_ss);
+
+    &:hover {
+      overflow: visible;
+    }
+
   }
 
   span.ui-column-title {

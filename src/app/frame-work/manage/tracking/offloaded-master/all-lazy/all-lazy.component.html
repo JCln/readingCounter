@@ -253,7 +253,7 @@
 
                             <ng-template #editableForm>
                                 <ng-container *ngIf="col.enableTooltip; else simpleText">
-                                    <div *ngIf="col.icon">
+                                    <div *ngIf="col.icon" (contextmenu)="copyContext(dataSource[col.field])">
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
                                                 <input [(ngModel)]="dataSource[col.field]">
@@ -277,7 +277,7 @@
                                         </p-cellEditor>
                                     </div>
                                     <div *ngIf="!col.icon">
-                                        <div class="tooltip">
+                                        <div class="tooltip" (contextmenu)="copyContext(dataSource[col.field])">
                                             {{dataSource[col.field] && dataSource[col.field].length > 0 ?
                                             dataSource[col.field].toString().split(' ')[0] :
                                             ''}}
@@ -291,15 +291,17 @@
                                     </div>
                                 </ng-container>
                                 <ng-template #simpleText>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input [type]="col.isNumber ? 'number': 'text'"
-                                                [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{dataSource[col.field]}}
-                                        </ng-template>
-                                    </p-cellEditor>
+                                    <div (contextmenu)="copyContext(dataSource[col.field])">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input [type]="col.isNumber ? 'number': 'text'"
+                                                    [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{dataSource[col.field]}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </div>
                                 </ng-template>
 
                             </ng-template>

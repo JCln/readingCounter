@@ -95,30 +95,6 @@ export class SectionsService {
         return false;
       }
     }
-    if (this.dynamicValue.hasOwnProperty('host')) {
-      if (MathS.isNull(this.dynamicValue.host)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_host);
-        return false;
-      }
-    }
-    if (this.dynamicValue.hasOwnProperty('dbUserName')) {
-      if (MathS.isNull(this.dynamicValue.dbUserName)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_userName);
-        return false;
-      }
-    }
-    if (this.dynamicValue.hasOwnProperty('dbPassword')) {
-      if (MathS.isNull(this.dynamicValue.dbPassword)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_password);
-        return false;
-      }
-    }
-    if (this.dynamicValue.hasOwnProperty('dbInitialCatalog')) {
-      if (MathS.isNull(this.dynamicValue.dbInitialCatalog)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_catalog);
-        return false;
-      }
-    }
     // periods
     if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {
       if (MathS.isNull(this.dynamicValue.moshtarakinId)) {

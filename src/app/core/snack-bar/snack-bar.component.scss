@@ -21,6 +21,7 @@
     padding: 12px 14px;
     min-height: 48px;
     transform-origin: center;
+    border-radius: 0;
   }
 
   .mat-simple-snackbar-action button {
@@ -39,28 +40,51 @@
   .snack_danger,
   .snack_info,
   .snack_warn {
+    position: relative;
     background-color: var(--white);
     color: var(--secondary_8);
+
+    &::after {
+      content: '';
+      position: absolute;
+      clip-path: polygon(0 0, calc(17%) 0%, calc(5%) 100%, 0 100%);
+      top: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+    }
   }
 
   .snack_danger {
     border-right: 6px solid var(--red_600);
-    border-bottom: 3px solid var(--red_600);
+
+    &::after {
+      background: var(--red_600);
+    }
   }
 
   .snack_warn {
     border-right: 6px solid var(--fix_orange);
-    border-bottom: 3px solid var(--fix_orange);
+
+    &::after {
+      background: var(--fix_orange);
+    }
   }
 
   .snack_success {
     border-right: 6px solid var(--green_600);
-    border-bottom: 3px solid var(--green_600);
+
+    &::after {
+      background: var(--green_600);
+    }
   }
 
   .snack_info {
     border-right: 6px solid var(--fix_blue);
-    border-bottom: 3px solid var(--fix_blue);
+
+    &::after {
+      background: var(--fix_blue);
+    }
   }
 
   .newline {
