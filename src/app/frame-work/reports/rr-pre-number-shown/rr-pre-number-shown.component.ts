@@ -21,6 +21,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -59,6 +60,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.counterStateDictionary = await this.readingReportManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(tempZone);
     this.counterStateByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(tempZone);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.readingReportManagerService.dictionaryWrapperService.getQotrDictionary();
 
@@ -70,7 +72,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
           counterStateDictionary: this.counterStateDictionary,
           counterStateByCodeDictionary: this.counterStateByCodeDictionary,
           karbariDictionaryCode: this.karbariDictionaryCode,
-          qotrDictionary: this.qotrDictionary,
+          qotrDictionary: this.qotrDictionary
         },
         {
           hazf: 'hazf',

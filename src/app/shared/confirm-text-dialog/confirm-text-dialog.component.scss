@@ -1,6 +1,7 @@
 @import 'shared_dialog';
 @import 'button.scss';
 @import 'input.scss';
+@import 'tooltip';
 
 .mat-dialog-content {
   color: var(--secondary_7);
@@ -126,4 +127,10 @@ p {
     box-shadow: 0px 2px 4px 1px var(--red_600);
     background-color: var(--red_500);
   }
+}
+
+.tooltip {
+  display: flex;
+  justify-content: center;
+  position: relative;
 }

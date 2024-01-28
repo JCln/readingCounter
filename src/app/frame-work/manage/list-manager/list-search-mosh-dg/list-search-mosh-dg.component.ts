@@ -22,6 +22,7 @@ export class ListSearchMoshDgComponent implements OnInit {
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   searchType: Search[];
 
   constructor(
@@ -40,6 +41,7 @@ export class ListSearchMoshDgComponent implements OnInit {
   }
   converts = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
@@ -56,7 +58,7 @@ export class ListSearchMoshDgComponent implements OnInit {
           counterStateDictionary: this.counterStateDictionary,
           counterStateByCodeDictionary: this.counterStateByCodeDictionary,
           karbariDictionaryCode: this.karbariDictionaryCode,
-          qotrDictionary: this.qotrDictionary,
+          qotrDictionary: this.qotrDictionary
         },
         {
           zoneId: 'zoneId',

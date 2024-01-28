@@ -45,6 +45,7 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   deleteDictionary: IDictionaryManager[] = [];
   masrafStateIdDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
@@ -76,6 +77,7 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
 
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllInGroupLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
 
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -93,7 +95,7 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
           counterStateDictionary: this.counterStateDictionary,
           counterStateByCodeDictionary: this.counterStateByCodeDictionary,
           karbariDictionaryCode: this.karbariDictionaryCode,
-          qotrDictionary: this.qotrDictionary,
+          qotrDictionary: this.qotrDictionary
         },
         {
           hazf: 'hazf',

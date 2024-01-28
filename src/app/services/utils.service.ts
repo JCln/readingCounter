@@ -21,6 +21,8 @@ import { PrimeConfirmDgComponent } from '../shared/prime-confirm-dg/prime-confir
 })
 export class UtilsService {
   ref: DynamicDialogRef;
+  private readonly adminUser: string = 'admin';
+  private readonly denyTracking: string = 'denytracking';
 
   constructor(
     public compositeService: CompositeService,
@@ -38,11 +40,14 @@ export class UtilsService {
   }
   getDenyTracking = (): boolean => {
     const jwtRole = this.compositeService.getAuthUser();
-    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+    return !!jwtRole.roles.toString().includes(this.denyTracking);
   }
   getIsAdminRole = (): boolean => {
     const jwtRole = this.compositeService.getAuthUser();
-    return jwtRole.roles.toString().includes('admin') ? true : false;
+    return !!jwtRole.roles.toString().includes(this.adminUser);
+  }
+  getHighLowStateDictionary = () => {
+    return this.envService.getHighLowStateId;
   }
   getNotificationAlertTypesList = () => {
     return this.envService.NotificationAlertTypesList;
@@ -197,7 +202,8 @@ export class UtilsService {
           icon: config.icon,
           doesNotReturnButton: config.doesNotReturnButton,
           isSelectableDate: config.isSelectableDate,
-          changePassword: config.changePassword
+          changePassword: config.changePassword,
+          tooltipText: config.tooltipText,
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

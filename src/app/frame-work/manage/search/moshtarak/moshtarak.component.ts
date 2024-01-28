@@ -26,6 +26,7 @@ export class MoshtarakComponent extends AllListsFactory {
 
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -47,6 +48,7 @@ export class MoshtarakComponent extends AllListsFactory {
       this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateDictionary();
     }
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.karbariDictionaryCode = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.searchService.dictionaryWrapperService.getQotrDictionary();
 
@@ -57,6 +59,7 @@ export class MoshtarakComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.qotrDictionary, 'qotrCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.eslahType, 'eslahType');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.highLowStateDictionary, 'highLowStateId');
 
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForSearchMoshtarakin);
   }

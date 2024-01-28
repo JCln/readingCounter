@@ -1226,6 +1226,7 @@ export class ColumnManager {
         { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
         { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         // { field: 'eslahType', header: 'علت اصلاح', isSelected: false,isSelectedOrigin:false },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true },
@@ -1299,6 +1300,7 @@ export class ColumnManager {
         { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
         { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false },
@@ -1376,6 +1378,7 @@ export class ColumnManager {
             { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true, readonly: true, tabIndex: -1 },
+            { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, tabIndex: -1 },
             { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
@@ -1446,6 +1449,7 @@ export class ColumnManager {
             { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+            { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
             { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false },
             { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
             { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
@@ -1519,6 +1523,7 @@ export class ColumnManager {
             { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+            { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
             { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false },
             { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
             { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
@@ -1592,6 +1597,7 @@ export class ColumnManager {
             { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+            { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
             { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false },
             { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
             { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
@@ -1677,6 +1683,7 @@ export class ColumnManager {
             { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false },
             { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+            { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
             { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false },
             { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
             { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
@@ -2030,6 +2037,7 @@ export class ColumnManager {
         { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false },
         { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false },
         { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false },
         { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false },
@@ -2123,6 +2131,7 @@ export class ColumnManager {
         { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: false },
         // { field: 'eslahType', header: 'علت اصلاح', isSelected: false,isSelectedOrigin:false, , readonly: true},
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: false },
@@ -2155,6 +2164,7 @@ export class ColumnManager {
         { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین قبلی
         { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین فعلی
         { field: 'masrafStateId', header: 'هایلو', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },//وضعیت مصرف        
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true, icon: '_editable', isNumber: false, type: 'disabled' },// disable the type to disable filtering
         { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین روزانه
         { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//2میانگین روزانه
@@ -2227,6 +2237,7 @@ export class ColumnManager {
         { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین قبلی
         { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین فعلی
         { field: 'masrafStateId', header: 'هایلو', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },//وضعیت مصرف// disable the type to disable filtering
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, isNumber: true, type: 'disabled' },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true, icon: '_editable', isNumber: false, type: 'disabled' },// disable the type to disable filtering
         { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین روزانه
         { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//2میانگین روزانه
@@ -2299,6 +2310,7 @@ export class ColumnManager {
         { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },//میانگین قبلی
         { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },//میانگین فعلی
         { field: 'masrafStateId', header: 'هایلو', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },//وضعیت مصرف
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },//وضعیت مصرف
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true, icon: '_editable' },
         { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '' },//میانگین روزانه
         { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },//2میانگین روزانه
@@ -2412,6 +2424,7 @@ export class ColumnManager {
         { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
         { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, isSelectedOrigin: true },
+        { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         // { field: 'eslahType', header: 'اصلاح', isSelected: false,isSelectedOrigin:false },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true },

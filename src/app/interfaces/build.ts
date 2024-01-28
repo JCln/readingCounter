@@ -266,9 +266,24 @@ export class getDeleteDictionary {
     private constructor(public readonly value: { id: number, title: string }[]) {
     }
 }
+export class getHighLowStateId {
+    static readonly DEFAULT = new getHighLowStateId([
+        { id: 0, title: 'nothing', value: 0, titleUnicode: '--', icon: '', className: '' },
+        { id: 1, title: 'normal', value: 1, titleUnicode: 'عادی', icon: '', className: 'pi pi-check' },
+        { id: 2, title: 'down', value: 2, titleUnicode: 'پایین', icon: '', className: 'pi pi-arrow-down' },
+        { id: 3, title: 'up', value: 3, titleUnicode: 'بالا', icon: '', className: 'pi pi-arrow-up' },
+        { id: 4, title: 'empty', value: 4, titleUnicode: 'صفر', icon: 'صفر', className: '_empty' },
+        { id: 5, title: 'unCalculable', value: 5, titleUnicode: 'غیرقابل محاسبه', icon: '!', className: '_mark' }
+    ]);
+    private constructor(public readonly value: {
+        id: number, title: string, titleUnicode: string, icon: string,
+        className: string, value: number
+    }[]) {
+    }
+}
 export class getMasrafStateDictionary {
     static readonly DEFAULT = new getMasrafStateDictionary([
-        { id: 10, title: 'normal', value: 0, titleUnicode: 'عادی', icon: '', className: 'pi pi pi-check' },
+        { id: 10, title: 'normal', value: 0, titleUnicode: 'عادی', icon: '', className: 'pi pi-check' },
         { id: 11, title: 'down', value: 1, titleUnicode: 'پایین', icon: '', className: 'pi pi-arrow-down' },
         { id: 12, title: 'up', value: 2, titleUnicode: 'بالا', icon: '', className: 'pi pi-arrow-up' },
         { id: 13, title: 'empty', value: 3, titleUnicode: 'صفر', icon: 'صفر', className: '_empty' },

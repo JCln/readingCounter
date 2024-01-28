@@ -134,6 +134,7 @@ export interface IOnOffLoadFlat {
     isResponseHasError?: boolean// to make alert in the table
     editedErrorDescription?: string// to make alert in the table
     fileRepositoryId?: string // on single image like SinglePanel API
+    highLowStateId?: number
 }
 export interface IOnOffLoadFlatLazy {
     data: IOnOffLoadFlat[],

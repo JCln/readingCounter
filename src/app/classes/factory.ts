@@ -196,9 +196,26 @@ export class FactorySharedPrime implements OnChanges {
     clearFilters(session: Table) {
         this.utilsService.clearFilters(session);
     }
+    copyToClipboard = str => {
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+            return navigator.clipboard.writeText(str);
+        return Promise.reject(false);
+    };
     copyContext(data: string) {
-        navigator.clipboard.writeText(data);
-        this.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
+        if (this.copyToClipboard(data))
+            this.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
+        else {
+            const config = {
+                messageTitle: EN_messages.saveToClipbloardTitle,
+                text: data,
+                minWidth: '19rem',
+                isInput: false,
+                isDelete: false,
+                icon: 'pi pi-info',
+                tooltipText: EN_messages.cannotSaveToClipbloard
+            }
+            this.utilsService.firstConfirmDialog(config);
+        }
         return false;
     }
 
@@ -297,9 +314,26 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     refreshTable = () => {
         this.classWrapper(true);
     }
+    copyToClipboard = str => {
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+            return navigator.clipboard.writeText(str);
+        return Promise.reject(false);
+    };
     copyContext(data: string) {
-        navigator.clipboard.writeText(data);
-        this.listManagerService.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
+        if (this.copyToClipboard(data))
+            this.listManagerService.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
+        else {
+            const config = {
+                messageTitle: EN_messages.saveToClipbloardTitle,
+                text: data,
+                minWidth: '19rem',
+                isInput: false,
+                isDelete: false,
+                icon: 'pi pi-info',
+                tooltipText: EN_messages.cannotSaveToClipbloard
+            }
+            this.listManagerService.utilsService.firstConfirmDialog(config);
+        }
         return false;
     }
 

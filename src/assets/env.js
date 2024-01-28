@@ -88,6 +88,14 @@
         { title: 'video', value: 2, titleUnicode: 'ویدیو' },
         { title: 'audio', value: 4, titleUnicode: 'صوت' }
     ];
+    window.__env.getHighLowStateId = [
+        { id: 0, field: 'nothing', title: '-' },
+        { id: 1, field: 'normal', title: 'عادی' },
+        { id: 2, field: 'low', title: 'پایین' },
+        { id: 3, field: 'high', title: 'بالا' },
+        { id: 4, field: 'zero', title: 'صفر' },
+        { id: 5, field: 'unCalculated', title: 'غیرقابل محاسبه' },
+    ];
     window.__env.NotificationMediaTypeIds = {
         text: 0,
         image: 1,

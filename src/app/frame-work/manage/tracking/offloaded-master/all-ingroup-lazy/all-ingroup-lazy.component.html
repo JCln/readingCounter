@@ -217,14 +217,27 @@
                             </p-cellEditor>
                         </ng-container>
                         <ng-template #elseTemplate>
-                            <ng-container *ngIf="col.field == 'masrafStateId'; else digits">
-                                <div *ngFor="let item of masrafStateIdDictionary">
-                                    <i class="tooltip" *ngIf="dataSource[col.field] === item.value"
-                                        [ngClass]="item.className">
-                                        {{item.icon}}
-                                        <div class=" tooltip_text">{{item.titleUnicode}}
-                                        </div>
-                                    </i>
+                            <ng-container
+                                *ngIf="col.field == 'masrafStateId' || col.field == 'highLowStateId'; else digits">
+                                <div *ngIf="col.field == 'masrafStateId'">
+                                    <div *ngFor="let item of masrafStateIdDictionary">
+                                        <i class="tooltip" *ngIf="dataSource[col.field] === item.value"
+                                            [ngClass]="item.className">
+                                            {{item.icon}}
+                                            <div class=" tooltip_text">{{item.titleUnicode}}
+                                            </div>
+                                        </i>
+                                    </div>
+                                </div>
+                                <div *ngIf="col.field == 'highLowStateId'">
+                                    <div *ngFor="let item of highLowStateDictionary">
+                                        <i class="tooltip" *ngIf="dataSource[col.field] === item.value"
+                                            [ngClass]="item.className">
+                                            {{item.icon}}
+                                            <div class=" tooltip_text">{{item.titleUnicode}}
+                                            </div>
+                                        </i>
+                                    </div>
                                 </div>
                             </ng-container>
 

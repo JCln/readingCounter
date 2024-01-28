@@ -50,6 +50,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   counterStateByZoneDictionary: IDictionaryManager[] = [];
   counterStateForModifyDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
 
   modifyType: OffloadModify[];
   tempFilter = { first: [], second: [] };
@@ -94,6 +95,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       }
       this.makeDefaultValCheckbox();
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+      this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
       this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
       this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
       this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
@@ -109,7 +111,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
             counterStateDictionary: this.counterStateDictionary,
             counterStateByCodeDictionary: this.counterStateByCodeDictionary,
             karbariDictionaryCode: this.karbariDictionaryCode,
-            qotrDictionary: this.qotrDictionary,
+            qotrDictionary: this.qotrDictionary
           },
           {
             hazf: 'hazf',

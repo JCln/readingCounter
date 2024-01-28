@@ -2,9 +2,13 @@
     <div class="_icon">
         <i [class]="data.icon" [ngClass]="{'_delete_color': data?.isDelete }"></i>
     </div>
-    <h2>
+    <h2 class="tooltip">
         {{data.messageTitle}}
     </h2>
+    <!-- may not show best tooltip for all cases -->
+    <i *ngIf="data.tooltipText" class="p_icons tooltip pi pi-info-circle">
+        <div class="tooltip_text_bottom">{{data.tooltipText}}</div>
+    </i>
     <!-- _title_2 class has static width for Kartables(force & backTo Imported) -->
     <div class="_title_2">
         {{data.messageTitleTwo}}

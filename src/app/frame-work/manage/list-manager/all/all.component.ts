@@ -20,6 +20,7 @@ export class AllComponent extends AllListsFactory {
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
 
   constructor(
     public listManagerService: ListManagerService,
@@ -31,6 +32,7 @@ export class AllComponent extends AllListsFactory {
   }
   dictionaryWrapps = async (): Promise<any> => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
@@ -78,6 +80,7 @@ export class AllComponent extends AllListsFactory {
       }
 
       await this.dictionaryWrapps();
+
       // setDynamics should implement before new instance of dataSource create
       // this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
       this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);

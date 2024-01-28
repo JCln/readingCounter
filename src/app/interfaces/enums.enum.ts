@@ -233,6 +233,8 @@ export enum EN_messages {
     checkAuthenticity = 'از بررسی اعتبار سنجی اطمینان دارید',
     NTPCheck = 'از بررسی پروتکل زمان شبکه اطمینان دارید',
     savedToClipboard = 'در کلیپبورد ذخیره شد',
+    cannotSaveToClipbloard = 'به علت عدم پشتیبانی از پروتکل امن امکان ذخیره بصورت خودکار در کلیپبورد وجود ندارد. ',
+    saveToClipbloardTitle = 'متن مورد نظر',
     dBConnection = 'از اتصال به پایگاه داده اطمینان دارید',
     NTPResult = 'زمان پروتکل شبکه (NTP)',
 

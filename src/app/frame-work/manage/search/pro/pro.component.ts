@@ -27,6 +27,7 @@ export class ProComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
 
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -78,6 +79,7 @@ export class ProComponent extends AllListsFactory {
     }
 
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafState = this.searchService.getMasrafStates();
     this.qotrDictionary = await this.searchService.dictionaryWrapperService.getQotrDictionary();
     this.karbariDictionaryCode = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -90,6 +92,7 @@ export class ProComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.eslahType, 'eslahType');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.highLowStateDictionary, 'highLowStateId');
 
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForSearchPro);
     this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);

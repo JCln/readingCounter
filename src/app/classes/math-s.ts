@@ -39,7 +39,7 @@ export class MathS {
         return val.toString().substring(ENRandomNumbers.zero, ENRandomNumbers.five);
     }
     static getFormatRange = (val: any): any => {
-        return this.isNull(val) ?
+        return this.isNullZero(val) ?
             null :
             Number(val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0])
     }

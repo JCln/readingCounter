@@ -26,6 +26,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   clonedProducts: { [s: string]: object; } = {};
 
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -70,6 +71,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
       shouldCallApi
     )) {
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+      this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
       this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val);
       this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
       this.closeTabService.saveDataForLMGeneralModifyReq.GUid = this.allListsService.generalModifyLists_pageSign.GUid;
@@ -88,7 +90,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
           counterStateDictionary: this.counterStateDictionary,
           counterStateByCodeDictionary: this.counterStateByCodeDictionary,
           karbariDictionaryCode: this.karbariDictionaryCode,
-          qotrDictionary: this.qotrDictionary,
+          qotrDictionary: this.qotrDictionary
         },
         {
           hazf: 'hazf',

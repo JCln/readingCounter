@@ -59,7 +59,8 @@ export interface IDialogMessage {
     doesNotReturnButton?: boolean,
     disableClose?: boolean,
     isSelectableDate?: boolean,
-    changePassword?: boolean
+    changePassword?: boolean,
+    tooltipText?: any,
 }
 export interface IPrimeConfirmDialog {
     messageTitle: string,

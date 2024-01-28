@@ -27,6 +27,7 @@ export class AssessPreComponent extends AllListsFactory {
 
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
@@ -66,7 +67,7 @@ export class AssessPreComponent extends AllListsFactory {
           counterStateDictionary: this.counterStateDictionary,
           counterStateByCodeDictionary: this.counterStateByCodeDictionary,
           karbariDictionaryCode: this.karbariDictionaryCode,
-          qotrDictionary: this.qotrDictionary,
+          qotrDictionary: this.qotrDictionary
         },
         {
           hazf: 'hazf',
@@ -104,6 +105,7 @@ export class AssessPreComponent extends AllListsFactory {
   }
   getMasterInZone = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
     this.masrafState = this.importDynamicService.getMasrafStates();
     this.karbariDictionary = await this.importDynamicService.dictionaryWrapperService.getkarbariCodeDictionary();

@@ -20,6 +20,7 @@ export class ListModifyComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   showWouImages: boolean = false;
@@ -53,6 +54,7 @@ export class ListModifyComponent extends AllListsFactory {
       this.closeTabService.saveDataForLMModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMModify));
 
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+      this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
       this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
       this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
       const tempZone: number = parseInt(this.closeTabService.saveDataForLMModify[0].zoneId.toString());
@@ -67,7 +69,7 @@ export class ListModifyComponent extends AllListsFactory {
             counterStateDictionary: this.counterStateDictionary,
             counterStateByCodeDictionary: this.counterStateByCodeDictionary,
             karbariDictionaryCode: this.karbariDictionaryCode,
-            qotrDictionary: this.qotrDictionary,
+            qotrDictionary: this.qotrDictionary
           },
           {
             hazf: 'hazf',

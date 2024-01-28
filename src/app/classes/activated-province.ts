@@ -10,6 +10,7 @@ import {
     ENURLs,
     ENYears,
     getDeleteDictionary,
+    getHighLowStateId,
     getInvalidLoginReasonDictionary,
     getLogoutReasonDictionary,
     getMasrafStateDictionary,
@@ -52,6 +53,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly DEFAULT = new ActivatedProvince(
         ENActivateProvinceTitle.DEFAULT,
@@ -77,6 +79,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
@@ -102,6 +105,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly TEH = new ActivatedProvince(
         ENActivateProvinceTitle.TEH,
@@ -127,6 +131,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
@@ -152,6 +157,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
@@ -177,6 +183,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
@@ -202,6 +209,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
@@ -227,6 +235,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     // ZONE 6 TEHRAN
     public static readonly REY = new ActivatedProvince(
@@ -253,6 +262,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly TSW = new ActivatedProvince(
         ENActivateProvinceTitle.TSW,
@@ -278,6 +288,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly TEH1 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH1,
@@ -303,6 +314,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
     public static readonly TEH5 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH5,
@@ -328,6 +340,7 @@ export class ActivatedProvince implements IENV {
         getInvalidLoginReasonDictionary.DEFAULT.value,
         shouldSaveTokensInLocal.DEFAULT.value,
         getMasrafStateDictionary.DEFAULT.value,
+        getHighLowStateId.DEFAULT.value,
     );
 
     private constructor(
@@ -382,6 +395,14 @@ export class ActivatedProvince implements IENV {
         public readonly getInvalidLoginReasonDictionary: { id: number, title: string }[],
         public readonly shouldSaveTokensInLocal: boolean,
         public readonly getMasrafStateDictionary: {
+            id: number,
+            title: string,
+            titleUnicode: string,
+            icon: string,
+            className: string,
+            value: number
+        }[],
+        public readonly getHighLowStateId: {
             id: number,
             title: string,
             titleUnicode: string,

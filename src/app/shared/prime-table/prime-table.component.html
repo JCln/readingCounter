@@ -141,22 +141,44 @@
                     </ng-template>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    <ng-container *ngIf="col.field == 'masrafStateId'; else showText">
-                        <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
-                            <div class="tooltip_text">عادی</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
-                            <div class="tooltip_text">پایین</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
-                            <div class="tooltip_text">بالا</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">صفر
-                            <div class="tooltip_text">صفر</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
-                            <div class="tooltip_text">غیرقابل محاسبه</div>
-                        </i>
+                    <ng-container *ngIf="col.field == 'masrafStateId' || col.field == 'highLowStateId'; else showText">
+                        <div *ngIf="col.field == 'masrafStateId'">
+                            <i *ngIf=" dataSource['masrafStateId']===0" class="tooltip pi pi-check">
+                                <div class="tooltip_text">عادی</div>
+                            </i>
+                            <i *ngIf="dataSource['masrafStateId'] === 1" class="tooltip pi pi-arrow-down">
+                                <div class="tooltip_text">پایین</div>
+                            </i>
+                            <i *ngIf="dataSource['masrafStateId'] === 2" class="tooltip pi pi-arrow-up">
+                                <div class="tooltip_text">بالا</div>
+                            </i>
+                            <i *ngIf="dataSource['masrafStateId'] === 3" class="tooltip _empty">صفر
+                                <div class="tooltip_text">صفر</div>
+                            </i>
+                            <i *ngIf="dataSource['masrafStateId'] === 4" class="tooltip _mark">!
+                                <div class="tooltip_text">غیرقابل محاسبه</div>
+                            </i>
+                        </div>
+                        <div *ngIf="col.field == 'highLowStateId'">
+                            <i *ngIf="dataSource['highLowStateId']=== 0" class="tooltip">
+                                <div class="tooltip_text">--</div>
+                            </i>
+                            <i *ngIf="dataSource['highLowStateId']=== 1" class="tooltip pi pi-check">
+                                <div class="tooltip_text">عادی</div>
+                            </i>
+                            <i *ngIf="dataSource['highLowStateId'] === 2" class="tooltip pi pi-arrow-down">
+                                <div class="tooltip_text">پایین</div>
+                            </i>
+                            <i *ngIf="dataSource['highLowStateId'] === 3" class="tooltip pi pi-arrow-up">
+                                <div class="tooltip_text">بالا</div>
+                            </i>
+                            <i *ngIf="dataSource['highLowStateId'] === 4" class="tooltip _empty">صفر
+                                <div class="tooltip_text">صفر</div>
+                            </i>
+                            <i *ngIf="dataSource['highLowStateId'] === 5" class="tooltip _mark">!
+                                <div class="tooltip_text">غیرقابل محاسبه</div>
+                            </i>
+                        </div>
                     </ng-container>
                     <ng-template #showText>
                         <div class="tooltip" *ngIf="col.enableTooltip"

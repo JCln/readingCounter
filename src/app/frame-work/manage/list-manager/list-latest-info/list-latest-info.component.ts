@@ -28,6 +28,7 @@ export class ListLatestInfoComponent extends AllListsFactory {
   searchType: Search[] = [];
   modifyType: OffloadModify[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -89,6 +90,7 @@ export class ListLatestInfoComponent extends AllListsFactory {
   }
   dictionaryWrapper = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
     this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.closeTabService.listLatestInfo.zoneId);
@@ -100,6 +102,7 @@ export class ListLatestInfoComponent extends AllListsFactory {
     Converter.convertIdToTitle([this.closeTabService.listLatestInfo], this.counterStateByCodeDictionary, 'preCounterStateCode');
     Converter.convertIdToTitle([this.closeTabService.listLatestInfo], this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle([this.closeTabService.listLatestInfo], this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle([this.closeTabService.listLatestInfo], this.highLowStateDictionary, 'highLowStateId');
 
     this.listManagerService.setDynamicPartRanges([this.closeTabService.listLatestInfo]);
   }

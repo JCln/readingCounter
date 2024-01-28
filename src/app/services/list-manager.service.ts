@@ -63,6 +63,9 @@ export class ListManagerService {
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
   }
+  getHighLowDictionary = (): any[] => {
+    return this.utilsService.getHighLowStateDictionary();
+  }
   getMasrafStateDictionary = (): any[] => {
     return this.utilsService.getMasrafStateDictionary();
   }

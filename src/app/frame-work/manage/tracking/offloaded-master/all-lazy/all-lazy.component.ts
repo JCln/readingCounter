@@ -47,6 +47,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
+  highLowStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   counterStateByZoneDictionary: IDictionaryManager[] = [];
 
@@ -76,6 +77,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
 
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
 
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -93,7 +95,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
           counterStateDictionary: this.counterStateDictionary,
           counterStateByCodeDictionary: this.counterStateByCodeDictionary,
           karbariDictionaryCode: this.karbariDictionaryCode,
-          qotrDictionary: this.qotrDictionary,
+          qotrDictionary: this.qotrDictionary
         },
         {
           hazf: 'hazf',
