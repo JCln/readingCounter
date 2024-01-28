@@ -199,11 +199,12 @@ export class FactorySharedPrime implements OnChanges {
     copyToClipboard = str => {
         if (navigator && navigator.clipboard && navigator.clipboard.writeText)
             return navigator.clipboard.writeText(str);
-        return Promise.reject(false);
+        return Promise.resolve(false);
     };
     copyContext(data: string) {
-        if (this.copyToClipboard(data))
+        if (this.utilsService.checkProtocol() && this.copyToClipboard(data)) {
             this.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
+        }
         else {
             const config = {
                 messageTitle: EN_messages.saveToClipbloardTitle,
@@ -317,10 +318,10 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     copyToClipboard = str => {
         if (navigator && navigator.clipboard && navigator.clipboard.writeText)
             return navigator.clipboard.writeText(str);
-        return Promise.reject(false);
+        return Promise.resolve(false);
     };
     copyContext(data: string) {
-        if (this.copyToClipboard(data))
+        if (this.listManagerService.utilsService.checkProtocol() && this.copyToClipboard(data))
             this.listManagerService.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
         else {
             const config = {

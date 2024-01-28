@@ -23,6 +23,7 @@ export class UtilsService {
   ref: DynamicDialogRef;
   private readonly adminUser: string = 'admin';
   private readonly denyTracking: string = 'denytracking';
+  private readonly httpProtocol: string = 'http:';
 
   constructor(
     public compositeService: CompositeService,
@@ -45,6 +46,9 @@ export class UtilsService {
   getIsAdminRole = (): boolean => {
     const jwtRole = this.compositeService.getAuthUser();
     return !!jwtRole.roles.toString().includes(this.adminUser);
+  }
+  checkProtocol = (): boolean => {
+    return location.protocol == this.httpProtocol ? false : true;
   }
   getHighLowStateDictionary = () => {
     return this.envService.getHighLowStateId;

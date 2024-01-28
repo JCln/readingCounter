@@ -33,7 +33,7 @@ export class PrivacyComponent extends FactoryONE {
 
   checkProtocol = () => {
     if (this.closeTabService.saveDataForPolicies)
-      this.auxDataSource.HSTSProtection = location.protocol == 'http:' ? false : true;
+      this.auxDataSource.HSTSProtection = this.closeTabService.utilsService.checkProtocol();
   }
   classWrapper = async (canRefresh?: boolean) => {
     // console.log(this.closeTabService.saveDataForPolicies.id);
