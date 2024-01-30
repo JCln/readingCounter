@@ -30,6 +30,7 @@ export const fontXXS: Theme = {
         "--font_5": "3.5rem",
         "--font_52": "3.35rem",
         "--font_55": "4.5rem",
+        "--date_input": "5.1rem",
     }
 }
 export const fontXS: Theme = {
@@ -62,6 +63,7 @@ export const fontXS: Theme = {
         "--font_5": "4rem",
         "--font_52": "4.5rem",
         "--font_55": "5rem",
+        "--date_input": "5.1rem",
     }
 }
 export const fontSM: Theme = {
@@ -94,6 +96,7 @@ export const fontSM: Theme = {
         "--font_5": "4.5rem",
         "--font_52": "5rem",
         "--font_55": "5.2rem",
+        "--date_input": "5.5rem",
     }
 };
 export const fontS: Theme = {
@@ -126,6 +129,7 @@ export const fontS: Theme = {
         "--font_5": "5rem",
         "--font_52": "5.2rem",
         "--font_55": "5.5rem",
+        "--date_input": "6.1rem",
     }
 };
 

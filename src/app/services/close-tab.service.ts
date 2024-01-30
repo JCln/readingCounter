@@ -58,7 +58,7 @@ import { IForbiddenManager, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity, IAuthenticityAttempts } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
-import { ENEssentialsToSave } from 'interfaces/enums.enum';
+import { ENEssentialsToSave, ENRandomNumbers, ITimesType } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 
@@ -104,6 +104,32 @@ export class CloseTabService {
     this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
     return this.trackingOffloadedMaster;
   }
+  insertToTimes = (): ITimesType => {
+    let temp = this.utilsService.dateJalaliService.getCurrentTime();
+    const hour = temp.split(':').shift();
+    const minute = temp.split(':').pop();
+    const fromTimeM = minute;
+    let fromTimeH: any = hour - 1;
+    const toTimeM = minute;
+    let toTimeH: any = hour;
+    // add zero before single digits even if it is zero
+    if (fromTimeH < ENRandomNumbers.ten) {
+      fromTimeH = '0'.concat(fromTimeH.toString());
+    }
+    if (hour == '24') {
+      toTimeH = '00';
+    }
+    return {
+      jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+      fromTimeM: fromTimeM,
+      fromTimeH: fromTimeH,
+      toTimeM: toTimeM,
+      toTimeH: toTimeH,
+      fromTime: fromTimeH + ':' + fromTimeM,
+      toTime: toTimeH + ':' + toTimeM
+    }
+  }
+
   saveDataForOffloadedAllLazyReq = {
     counterStateValue: null,
     multiSelectCounterStateId: [],
@@ -555,7 +581,7 @@ export class CloseTabService {
   RRGuildsWithParam: IReadingGuildReportOutput[];
   saveDataForRequestLogListUser: IRequestLog[];
   saveDataForRequestLogAnonymous: IRequestLog[];
-  requestLogUnAuthorized: IRequestLog[];
+  requestLogUnAuthorized: IRequestLog[] = [];
   saveDataForRequestLogListUserReq: IRequestLogInput = {
     jalaliDay: '',
     fromTimeH: '',
@@ -607,7 +633,7 @@ export class CloseTabService {
   serverGetAuthenticity: IServerGetAuthenticity[] = [];
   serverAuthenticityBrief: IServerAuthenticityBrief[] = [];
   saveDataForServerErrors: IManageServerErrorsRes[];
-  saveDataForServerUserActivation: IUserActivation[];
+  saveDataForServerUserActivation: IUserActivation[] = [];
   saveDataForServerUserActivationReq: IUserActivationREQ = {
     fromDate: '',
     toDate: '',
@@ -836,7 +862,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrExcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterMark, url: EN_Routes.wrSettingsWaterMark },
-    { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
+    { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr, defaultValue: [] },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, value_2: ENEssentialsToSave.AUXSaveDataForLMGeneralGroupModify, defaultValue_2: [], url: EN_Routes.wrmlGeneralGModify },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
@@ -945,11 +971,38 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.ipFilterBlockedUsers, url: EN_Routes.reqLogBlockedUsers },
     { id: 2, value: ENEssentialsToSave.reqLogUserActivationByUserId, url: EN_Routes.userActivationByuserId },
     { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },
-    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, url: EN_Routes.wrmRequestLogsUser },
+    {
+      id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, defaultValue: [], url: EN_Routes.wrmRequestLogsUser, defaultReq: {
+        jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+        fromTimeH: '',
+        fromTimeM: '',
+        fromTime: '',
+        toTimeH: '',
+        toTimeM: '',
+        toTime: ''
+      }
+    },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
-    { id: 2, req: ENEssentialsToSave.requestLogUnAuthorizedReq, value: ENEssentialsToSave.requestLogUnAuthorized, url: EN_Routes.requestLogsUnAuthorized },
+    {
+      id: 2, req: ENEssentialsToSave.requestLogUnAuthorizedReq, value: ENEssentialsToSave.requestLogUnAuthorized, url: EN_Routes.requestLogsUnAuthorized, defaultReq: {
+        jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+        fromTimeH: this.insertToTimes().fromTimeH,
+        fromTimeM: this.insertToTimes().fromTimeM,
+        toTimeH: this.insertToTimes().toTimeH,
+        toTimeM: this.insertToTimes().toTimeM,
+        fromTime: this.insertToTimes().fromTime,
+        toTime: this.insertToTimes().toTime
+      },
+      defaultValue: []
+    },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
-    { id: 2, req: ENEssentialsToSave.saveDataForServerUserActivationReq, value: ENEssentialsToSave.saveDataForServerUserActivation, url: EN_Routes.userActivation },
+    {
+      id: 2, req: ENEssentialsToSave.saveDataForServerUserActivationReq, value: ENEssentialsToSave.saveDataForServerUserActivation, url: EN_Routes.userActivation, defaultValue: [], defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        userActivationLogTypes: []
+      }
+    },
     { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 13, req: ENEssentialsToSave.offlineSingleReadingCounterReq, value: ENEssentialsToSave.offlineSingleReadingCounter, url: EN_Routes.offlineSingleReading },
@@ -975,9 +1028,9 @@ export class CloseTabService {
   }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
-      this[this.val[index].req] = this.val[index].defaultReq;
-      this[this.val[index].value] = null;
-      this[this.val[index].value_2] = this.val[index].defaultValue_2;
+      this[this.val[index].req] = this.val[index].defaultReq ? this.val[index].defaultReq : null;
+      this[this.val[index].value] = this.val[index].defaultValue ? this.val[index].defaultValue : null;
+      this[this.val[index].value_2] = this.val[index].defaultValue_2 ? this.val[index].defaultValue_2 : null;
       /* commented due to unValid values after refresh page
       /////// for assign default value to values, every value should have default value at the object 
       TODO body request vals have to back to defualt values after refresh page happended
@@ -988,13 +1041,13 @@ export class CloseTabService {
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
-        this[item.req] = item.defaultReq;
+        this[item.req] = item.defaultReq ? item.defaultReq : null;
         this[item.value] = item.defaultValue ? item.defaultValue : '';
         this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
       }
       else {
         if (url.includes(item.url)) {
-          this[item.req] = item.defaultReq;
+          this[item.req] = item.defaultReq ? item.defaultReq : null;
           this[item.value] = item.defaultValue ? item.defaultValue : '';
           this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
         }

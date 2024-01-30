@@ -115,7 +115,7 @@ export class ListLatestInfoComponent extends AllListsFactory {
     this.insertToModifyReq();
   }
   verification = async (canRefresh?: boolean) => {
-    this.closeTabService.listLatestInfoReq.item = this.closeTabService.listLatestInfoReq.item.trim();
+    this.closeTabService.listLatestInfoReq.item = this.closeTabService.listLatestInfoReq.item.length > 0 ? this.closeTabService.listLatestInfoReq.item.trim() : '';
     const temp = this.listManagerService.verificationLatestInfo(this.closeTabService.listLatestInfoReq);
     if (temp)
       this.connectToServer(canRefresh);

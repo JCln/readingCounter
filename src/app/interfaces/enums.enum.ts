@@ -233,7 +233,7 @@ export enum EN_messages {
     checkAuthenticity = 'از بررسی اعتبار سنجی اطمینان دارید',
     NTPCheck = 'از بررسی پروتکل زمان شبکه اطمینان دارید',
     savedToClipboard = 'در کلیپبورد ذخیره شد',
-    cannotSaveToClipbloard = 'به علت عدم پشتیبانی از پروتکل امن امکان ذخیره بصورت خودکار در کلیپبورد وجود ندارد. ',
+    cannotSaveToClipbloard = 'به علت عدم پشتیبانی از پروتکل امن امکان ذخیره خودکار در کلیپبورد وجود ندارد',
     saveToClipbloardTitle = 'متن مورد نظر',
     dBConnection = 'از اتصال به پایگاه داده اطمینان دارید',
     NTPResult = 'زمان پروتکل شبکه (NTP)',
@@ -655,6 +655,15 @@ export enum ENRandomNumbers {
     oneHundred = 100,
     oneHundredAndTwenty = 120,
     twoHundred = 200,
+}
+export interface ITimesType {
+    jalaliDay: string,
+    fromTimeM: string,
+    fromTimeH: any,
+    toTimeM: string,
+    toTimeH: string,
+    fromTime: string,
+    toTime: string,
 }
 export enum ENImageTypes {
     typical = 1,

@@ -1319,7 +1319,7 @@ export class ColumnManager {
             { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2", tabIndex: 4 },
             { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: "grid-column: auto/ span 2", tabIndex: -1 },
             { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
-            { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
+            { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1, icon: "grid-column: auto/ span 2" },
             { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, tabIndex: -1 },
             { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, readonly: true, tabIndex: -1 },

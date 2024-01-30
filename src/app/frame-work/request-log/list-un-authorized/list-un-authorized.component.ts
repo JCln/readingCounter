@@ -21,9 +21,6 @@ export class ListUnAuthorizedComponent extends FactoryONE {
   }
 
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.requestLogUnAuthorized = null;
-    }
     this.insertToTimes();
   }
   insertToTimes = () => {

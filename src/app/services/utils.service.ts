@@ -15,6 +15,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MathS } from '../classes/math-s';
 import { UserConfigComponent } from '../shared/user-config/user-config.component';
 import { PrimeConfirmDgComponent } from '../shared/prime-confirm-dg/prime-confirm-dg.component';
+import { DateJalaliService } from './date-jalali.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class UtilsService {
 
   constructor(
     public compositeService: CompositeService,
+    public dateJalaliService: DateJalaliService,
     public envService: EnvService,
     public dialog: MatDialog,
     public dialogService: DialogService,

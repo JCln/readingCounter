@@ -75,11 +75,26 @@ export class LatestReadsComponent extends AllListsFactory {
   addResponseToFirst = (res: ILatestReads) => {
     this.closeTabService.saveDataForMomentLastRead.unshift(res);
   }
+  private removeAllLayers = () => {
+    this.layerGroup2.clearLayers();
+  }
   makeEmptyLastReadArray = () => {
     this.closeTabService.saveDataForMomentLastRead = [];
   }
   pushToArray = (res: ILatestReads) => {
     this.closeTabService.saveDataForMomentLastRead.push(res);
+  }
+  onNextReadViewable = () => {
+    this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, this._selectedMostNumbers);
+    this.listManagerService.utilsService.snackBarMessageSuccess(EN_messages.changesOnNextRead);
+  }
+  numberOfSelectedMostNumber = () => {
+    if (this.mapService.browserStorageService.isExists(ENLocalStorageNames.numberOfFlashRead)) {
+      this._selectedMostNumbers = this.mapService.browserStorageService.getLocal(ENLocalStorageNames.numberOfFlashRead);
+    }
+    else {
+      this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, ENRandomNumbers.ten);
+    }
   }
   classWrapper = async (canRefresh?: boolean) => {
     this.initMap();
@@ -97,24 +112,15 @@ export class LatestReadsComponent extends AllListsFactory {
         this.addResponseToFirst(res);
       }
       // should pop from top more than atMostNumbers is in table
+      //  Loop implemented because after change selectedMostNumbers to down, all extra items should remove
       for (let index = 0; index < this.closeTabService.saveDataForMomentLastRead.length; index++) {
-        if (this.closeTabService.saveDataForMomentLastRead.length > this._selectedMostNumbers)
+        if (this.closeTabService.saveDataForMomentLastRead.length > this._selectedMostNumbers) {
           this.closeTabService.saveDataForMomentLastRead.pop();
+          this.removeAllLayers();
+        }
       }
       this.updateTableData();
     }))
-  }
-  onNextReadViewable = () => {
-    this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, this._selectedMostNumbers);
-    this.listManagerService.utilsService.snackBarMessageSuccess(EN_messages.changesOnNextRead);
-  }
-  numberOfSelectedMostNumber = () => {
-    if (this.mapService.browserStorageService.isExists(ENLocalStorageNames.numberOfFlashRead)) {
-      this._selectedMostNumbers = this.mapService.browserStorageService.getLocal(ENLocalStorageNames.numberOfFlashRead);
-    }
-    else {
-      this.mapService.saveToLocalStorage(ENLocalStorageNames.numberOfFlashRead, ENRandomNumbers.ten);
-    }
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
