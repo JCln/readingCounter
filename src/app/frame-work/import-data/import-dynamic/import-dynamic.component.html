@@ -19,8 +19,8 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="this.importDynamicService.importDynamicReq.zoneId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                [(ngModel)]="closeTabService.importDynamicReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true"
                                 (click)="verificationACounterReaderId()">
                             </p-dropdown>
                         </div>
@@ -29,7 +29,7 @@
                         <div class="_key">قرائت کننده</div>
                         <div class="_value">
                             <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
-                                [(ngModel)]="importDynamicService.importDynamicReq.counterReaderId" optionLabel="title"
+                                [(ngModel)]="closeTabService.importDynamicReq.counterReaderId" optionLabel="title"
                                 [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                                 placeholder="انتخاب مورد">
                             </p-dropdown>
@@ -40,12 +40,12 @@
                     <div class="input_2">
                         <div class="_key">از اشتراک</div>
                         <input class="_value" name="fromEshterak"
-                            [(ngModel)]="importDynamicService.importDynamicReq.fromEshterak">
+                            [(ngModel)]="closeTabService.importDynamicReq.fromEshterak">
                     </div>
                     <div class="input_2">
                         <div class="_key">تا اشتراک</div>
                         <input class="_value" name="toEshterak"
-                            [(ngModel)]="importDynamicService.importDynamicReq.toEshterak">
+                            [(ngModel)]="closeTabService.importDynamicReq.toEshterak">
                     </div>
                 </section>
                 <section class="content_inline">
@@ -66,8 +66,7 @@
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="importDynamicService.importDynamicReq.readingPeriodId"
-                                name="readingPeriodId">
+                                [(ngModel)]="closeTabService.importDynamicReq.readingPeriodId" name="readingPeriodId">
                                 <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                                     {{truefalse.title}}
                                 </mat-option>
@@ -79,12 +78,12 @@
                     <div class="input_2 " [hidden]="!_showAlalHesabPercent">
                         <div class="_key">درصد علی‌الحساب</div>
                         <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
-                            [(ngModel)]="importDynamicService.importDynamicReq.alalHesabPercent">
+                            [(ngModel)]="closeTabService.importDynamicReq.alalHesabPercent">
                     </div>
                     <div class="input_2 " [hidden]="!_showimagePercent">
                         <div class="_key">درصد تصویر</div>
                         <input class="_value" type="number" min="0" max="100" name="imagePercent"
-                            [(ngModel)]="importDynamicService.importDynamicReq.imagePercent">
+                            [(ngModel)]="closeTabService.importDynamicReq.imagePercent">
                     </div>
                 </section>
                 <section class="content_inline">
@@ -93,7 +92,7 @@
                         <div class="_value">
                             <app-date-jalali name="fromDate"
                                 (dateJalEvent)="importDynamicService.receiveFromDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
-                                [dateObject]="importDynamicService.importDynamicReq.fromDate">
+                                [dateObject]="closeTabService.importDynamicReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -102,37 +101,34 @@
                         <div class="_value">
                             <app-date-jalali name="toDate"
                                 (dateJalEvent)="importDynamicService.receiveToDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
-                                [dateObject]="importDynamicService.importDynamicReq.toDate">
+                                [dateObject]="closeTabService.importDynamicReq.toDate">
                             </app-date-jalali>
                         </div>
                     </div>
                 </section>
 
                 <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">
-                    <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamicService.importDynamicReq.hasPreNumber">
+                    <mat-checkbox name="hasPreNumber" [(ngModel)]="closeTabService.importDynamicReq.hasPreNumber">
                         رقم قبلی
                     </mat-checkbox>
 
-                    <mat-checkbox name="displayBillId"
-                        [(ngModel)]="importDynamicService.importDynamicReq.displayBillId">
+                    <mat-checkbox name="displayBillId" [(ngModel)]="closeTabService.importDynamicReq.displayBillId">
                         شناسه قبض
                     </mat-checkbox>
 
-                    <mat-checkbox name="displayRadif" [(ngModel)]="importDynamicService.importDynamicReq.displayRadif">
+                    <mat-checkbox name="displayRadif" [(ngModel)]="closeTabService.importDynamicReq.displayRadif">
                         ش.پرونده
                     </mat-checkbox>
 
-                    <mat-checkbox name="displayPreDate"
-                        [(ngModel)]="importDynamicService.importDynamicReq.displayPreDate">
+                    <mat-checkbox name="displayPreDate" [(ngModel)]="closeTabService.importDynamicReq.displayPreDate">
                         تاریخ قبلی
                     </mat-checkbox>
 
-                    <mat-checkbox name="displayMobile"
-                        [(ngModel)]="importDynamicService.importDynamicReq.displayMobile">
+                    <mat-checkbox name="displayMobile" [(ngModel)]="closeTabService.importDynamicReq.displayMobile">
                         موبایل
                     </mat-checkbox>
 
-                    <mat-checkbox name="hasImage" [(ngModel)]="importDynamicService.importDynamicReq.hasImage">
+                    <mat-checkbox name="hasImage" [(ngModel)]="closeTabService.importDynamicReq.hasImage">
                         تصویر
                     </mat-checkbox>
                 </div>

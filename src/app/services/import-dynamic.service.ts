@@ -64,24 +64,6 @@ export class ImportDynamicService {
     { field: 'routeAndReaderIds', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: false, isSelectOption: true }
   ]
 
-  importDynamicReq: IImportDynamicDefault = {
-    fromEshterak: '',
-    toEshterak: '',
-    zoneId: null,
-    alalHesabPercent: 0,
-    imagePercent: 0,
-    hasPreNumber: false,
-    displayBillId: false,
-    displayRadif: false,
-    fromDate: null,
-    toDate: null,
-    counterReaderId: '',
-    readingPeriodId: null,
-    displayPreDate: false,
-    displayMobile: false,
-    hasImage: false
-  }
-
   constructor(
     public utilsService: UtilsService,
     private allImportsService: AllImportsService,

@@ -217,7 +217,8 @@
 
                         <ng-template #editableForm>
                             <ng-container *ngIf="col.enableTooltip; else simpleText">
-                                <div class="tooltip" *ngIf="col.enableTooltip">
+                                <div class="tooltip" *ngIf="col.enableTooltip"
+                                    (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): false">
                                     {{dataSource[col.field] && dataSource[col.field].length > 0 ?
                                     dataSource[col.field].toString().split(' ')[0]
                                     : ''}}
@@ -233,7 +234,7 @@
                                 </div>
                             </ng-container>
                             <ng-template #simpleText>
-                                <div (contextmenu)="copyContext(dataSource[col.field])">
+                                <div (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): false">
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
                                             <input pInputText [type]="col.isNumber ? 'number': 'text'"

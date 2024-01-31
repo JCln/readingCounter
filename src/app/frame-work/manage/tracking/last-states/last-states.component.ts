@@ -4,6 +4,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-last-states',
@@ -19,14 +20,12 @@ export class LastStatesComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForLastStates = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForLastStates) {
-      this.closeTabService.saveDataForLastStates = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingLASTSTATES);
+  callAPI = async () => {
+    this.closeTabService.saveDataForLastStates = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingLASTSTATES);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForLastStates)) {
+      this.callAPI();
     }
   }
   showInMap = (trackNumberAndDate: object) => {

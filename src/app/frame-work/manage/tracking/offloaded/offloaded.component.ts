@@ -26,14 +26,12 @@ export class OffloadedComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForTrackOffloaded = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForTrackOffloaded) {
-      this.closeTabService.saveDataForTrackOffloaded = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOFFLOADED);
+  callAPI = async () => {
+    this.closeTabService.saveDataForTrackOffloaded = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOFFLOADED);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForTrackOffloaded)) {
+      this.callAPI();
     }
   }
   downloadOutputSingle = async (row: ITracking) => {

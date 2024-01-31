@@ -477,10 +477,11 @@ export enum ENEssentialsToSave {
     saveDataForFollowUp = 'saveDataForFollowUp',
     saveDataForFollowUpReq = 'saveDataForFollowUpReq',
     saveDataForFollowUpAUX = 'saveDataForFollowUpAUX',
-    rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
+    searchReqMosh = 'searchReqMosh',
     saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
     saveDataForSearchProReq = 'saveDataForSearchProReq',
     saveDataForSearchPro = 'saveDataForSearchPro',
+    _searchSimpleReq = '_searchSimpleReq',
     saveDataForSearchSimple = 'saveDataForSearchSimple',
     saveDataForUserSearch = 'saveDataForUserSearch',
     saveDataForUserSearchRes = 'saveDataForUserSearchRes',
@@ -585,10 +586,12 @@ export enum ENEssentialsToSave {
     authenticityAttemptsReq = 'authenticityAttemptsReq',
     authenticityAttempts = 'authenticityAttempts',
     importedEditedRes = 'importedEditedRes',
+    importedEditedReq = 'importedEditedReq',
     trackingOffloadedMaster = 'trackingOffloadedMaster',
     offloadedAllLazy = 'offloadedAllLazy',
     trackingOffloadedDetails = 'trackingOffloadedDetails',
-    offloadedAllInGroupLazy = 'offloadedAllInGroupLazy'
+    offloadedAllInGroupLazy = 'offloadedAllInGroupLazy',
+    importDynamicReq = 'importDynamicReq'
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

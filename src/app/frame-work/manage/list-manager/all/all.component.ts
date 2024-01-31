@@ -7,6 +7,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-all',
@@ -31,6 +32,8 @@ export class AllComponent extends AllListsFactory {
     super(dialogService, listManagerService);
   }
   dictionaryWrapps = async (): Promise<any> => {
+    console.log(1);
+
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
@@ -70,11 +73,10 @@ export class AllComponent extends AllListsFactory {
 
     else {
       if (canRefresh) {
-        this.closeTabService.saveDataForLMAll = null;
-        this.closeTabService.saveDataForLMAllReq.GUID = null;
+        this.closeTabService.saveDataForLMAll = [];
       }
 
-      if (!this.closeTabService.saveDataForLMAll || this.closeTabService.saveDataForLMAllReq.GUID != this.allListsService.allLists_pageSign.GUid) {
+      if (MathS.isNull(this.closeTabService.saveDataForLMAll) || this.closeTabService.saveDataForLMAllReq.GUID != this.allListsService.allLists_pageSign.GUid) {
         this.closeTabService.saveDataForLMAll = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
         this.closeTabService.saveDataForLMAllReq.GUID = this.allListsService.allLists_pageSign.GUid;
       }

@@ -8,7 +8,7 @@
     [_numberOfExtraColumns]="[1,2]"
     [_sessionName]="'last-states-session'"    
     (showedInMap)="showInMap($event)"   
-    (refreshedTable)="refreshTable()"    
+    (refreshedTable)="callAPI()"    
     (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"
  > 
 </app-prime-table>

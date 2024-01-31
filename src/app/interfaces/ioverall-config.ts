@@ -27,9 +27,9 @@ export interface ISidebarVals {
     value: ENEssentialsToSave;
     value_2?: ENEssentialsToSave;
     readonly url: string,
-    defaultReq?: any,
-    defaultValue?: any,
-    defaultValue_2?: any
+    readonly defaultReq?: any,
+    readonly defaultValue?: any,
+    readonly defaultValue_2?: any
 }
 export interface ITabs {
     title: string;

@@ -6,6 +6,7 @@ import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/ii
 import { ILatestReads } from 'interfaces/imoment';
 import {
   IFileExcelReq,
+  IImportDynamicDefault,
   IImportErrors,
   IImportSimafaBatchReq,
   IImportSimafaReadingProgramsReq,
@@ -50,7 +51,7 @@ import { IOffLoadPerDay, IOnOffLoad, ITracking, ITrackingMasterDto, ITrackingSea
 import { IAddUserInfos, IRoleManager, IUserCompareManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, IZoneManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
+import { ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
@@ -398,9 +399,9 @@ export class CloseTabService {
   }
   offlineSingleReadingCounter: IOnOffLoadFlat[];
   // track manager
-  saveDataForTrackImported: ITracking[];
-  saveDataForTrackLoaded: ITracking[];
-  saveDataForTrackReading: ITracking[];
+  saveDataForTrackImported: ITracking[] = [];
+  saveDataForTrackLoaded: ITracking[] = [];
+  saveDataForTrackReading: ITracking[] = [];
   importedEditedRes: ITracking[] = [];
   importedEditedReq: ITrackingSearchDto = {
     fromDate: '',
@@ -432,8 +433,8 @@ export class CloseTabService {
   offloadedGroupReq = {
     _selectedAggregate: 'listNumber'// Default group by
   }
-  saveDataForTrackFinished: ITracking[];
-  saveDataForLastStates: any;
+  saveDataForTrackFinished: ITracking[] = [];
+  saveDataForLastStates: ITracking[] = [];
   saveDataForFollowUp: IFollowUp;
   saveDataForFollowUpReq = {
     trackNumber: null,
@@ -443,6 +444,23 @@ export class CloseTabService {
   saveDataForFollowUpAUX: any;
   // import dynamic
   saveDataForAutomaticImport: IAutomaticImport[];
+  importDynamicReq: IImportDynamicDefault = {
+    fromEshterak: '',
+    toEshterak: '',
+    zoneId: null,
+    alalHesabPercent: 0,
+    imagePercent: 0,
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false
+  }
   saveDataForImportDynamic: any;
   saveDataForImportErrors: IImportErrors[];
   saveDataForImportErrorsByTrackNumber: any;
@@ -501,7 +519,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     file: File
   }
-  saveDataForSimafaReadingPrograms: IReadingProgramRes[];
+  saveDataForSimafaReadingPrograms: IReadingProgramRes[] = [];
   saveDataForAssessPreReq: IAssessPreDisplayDtoSimafa = {
     reportIds: [],
     counterStateIds: [],
@@ -514,13 +532,28 @@ export class CloseTabService {
   saveDataForAssessPre: IOnOffLoadFlat[];
   saveDataForAssessAdd: any;
   // SEARCH
+  searchReqMosh: ISearchMoshReq = {
+    zoneId: null,
+    searchBy: 1,
+    item: null,
+    similar: false,
+    showAll: false
+  }
+  _searchSimpleReq: ISearchSimpleReq = {
+    zoneId: null,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    readingPeriodId: null,
+    _selectedKindId: '',
+    year: this.utilsService.getFirstYear(),
+    isCollapsed: false
+  }
   saveDataForSearchMoshtarakin: IOnOffLoadFlat[] = [];
-  saveDataForSearchMoshtarakinReq: any;
   saveDataForSearchPro: IOnOffLoadFlat[] = [];
   saveDataForSearchProReq: ISearchProReportInput = {
     zoneId: null,
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     readingPeriodId: null,
     zoneIds: [],
     year: this.utilsService.getFirstYear(),
@@ -540,7 +573,7 @@ export class CloseTabService {
   saveDataForLMAllReq = {
     GUID: ''
   };
-  saveDataForLMAll: IOnOffLoadFlat[];
+  saveDataForLMAll: IOnOffLoadFlat[] = [];
   saveDataForLMModifyReq: any;
   saveDataForLMModify: IOnOffLoadFlat[];
   saveDataForLMGeneralModifyReq = {
@@ -580,7 +613,7 @@ export class CloseTabService {
   saveDataForRRDetails: IReadingReportDetails[];
   RRGuildsWithParam: IReadingGuildReportOutput[];
   saveDataForRequestLogListUser: IRequestLog[];
-  saveDataForRequestLogAnonymous: IRequestLog[];
+  saveDataForRequestLogAnonymous: IRequestLog[] = [];
   requestLogUnAuthorized: IRequestLog[] = [];
   saveDataForRequestLogListUserReq: IRequestLogInput = {
     jalaliDay: '',
@@ -907,7 +940,25 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRegion, url: EN_Routes.wrmzsr },
     { id: 1, value: ENEssentialsToSave.saveDataForZone, url: EN_Routes.wrmzsz },
     { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: EN_Routes.wrmzszb },
-    { id: 1, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd },
+    {
+      id: 1, req: ENEssentialsToSave.importDynamicReq, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd, defaultReq: {
+        fromEshterak: '',
+        toEshterak: '',
+        zoneId: null,
+        alalHesabPercent: 0,
+        imagePercent: 0,
+        hasPreNumber: false,
+        displayBillId: false,
+        displayRadif: false,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        displayPreDate: false,
+        displayMobile: false,
+        hasImage: false
+      }
+    },
     { id: 1, req: ENEssentialsToSave.saveDataForImportDataFileExcelReq, value: ENEssentialsToSave.saveDataForImportDataFileExcel, url: EN_Routes.wrimpFileExcel },
     { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
     { id: 1, req: ENEssentialsToSave.saveDataForImportErrorsByTrackNumberReq, value: ENEssentialsToSave.saveDataForImportErrorsByTrackNumber, url: EN_Routes.wrImportErrByTrackNumber },
@@ -915,7 +966,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
     {
-      id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg, defaultReq: {
+      id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg, defaultValue: [], defaultReq: {
         zoneId: null,
         readingPeriodId: null,
         year: this.utilsService.getFirstYear(),
@@ -927,17 +978,42 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.listLatestInfo, url: EN_Routes.listLatestInfo },
     { id: 1, value: ENEssentialsToSave.saveDataForPoliciesHistory, url: EN_Routes.policyHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading },
-    { id: 1, value: ENEssentialsToSave.importedEditedRes, url: EN_Routes.importedEdited, defaultValue: [] },
-    { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported, defaultValue: [] },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded, defaultValue: [] },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading, defaultValue: [] },
+    {
+      id: 1, req: ENEssentialsToSave.importedEditedReq, value: ENEssentialsToSave.importedEditedRes, url: EN_Routes.importedEdited, defaultValue: [], defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        zoneId: null,
+        imagePercent: null,
+        alalHesabPercent: null,
+        isRoosta: false,
+        hasPreNumber: false,
+        displayBillId: false,
+        displayRadif: false,
+        displayPreDate: false,
+        displayMobile: false,
+        hasImage: false
+      }
+    },
+    { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished, defaultValue: [] },
     { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, defaultValue_2: '', url: EN_Routes.wrmsfwu },
     { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
-    { id: 1, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple },
+    {
+      id: 1, req: ENEssentialsToSave._searchSimpleReq, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple, defaultValue: [], defaultReq: {
+        zoneId: null,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        readingPeriodId: null,
+        _selectedKindId: '',
+        year: this.utilsService.getFirstYear(),
+        isCollapsed: false
+      }
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn },
     { id: 1, req: ENEssentialsToSave.saveDataForLMPDTrackNumber, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes.wrmlpd },
     { id: 1, value: ENEssentialsToSave.saveDataForOutputDBF, url: EN_Routes.wrmdbf },
@@ -982,7 +1058,19 @@ export class CloseTabService {
         toTime: ''
       }
     },
-    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous },
+    {
+      id: 2, req: ENEssentialsToSave.saveDataForRequestLogAnonymousReq, value: ENEssentialsToSave.saveDataForRequestLogAnonymous, url: EN_Routes.wrmRequestLogsAnonymous, defaultReq:
+      {
+        jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+        fromTimeH: this.insertToTimes().fromTimeH,
+        fromTimeM: this.insertToTimes().fromTimeM,
+        toTimeH: this.insertToTimes().toTimeH,
+        toTimeM: this.insertToTimes().toTimeM,
+        fromTime: this.insertToTimes().fromTime,
+        toTime: this.insertToTimes().toTime
+      },
+      defaultValue: []
+    },
     {
       id: 2, req: ENEssentialsToSave.requestLogUnAuthorizedReq, value: ENEssentialsToSave.requestLogUnAuthorized, url: EN_Routes.requestLogsUnAuthorized, defaultReq: {
         jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
@@ -1014,12 +1102,24 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, defaultValue: null, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, defaultValue_2: null, url: EN_Routes.userKarkardSummary },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
-    { id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes.wrmlallfalse },
+    {
+      id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes.wrmlallfalse, defaultValue: [], defaultReq: {
+        GUID: ''
+      }
+    },
     { id: 2, req: ENEssentialsToSave.saveDataForLMModifyReq, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
     { id: 2, req: ENEssentialsToSave.saveDataForEditUsersGUID, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },
     { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.userLoggins },
     { id: 2, req: ENEssentialsToSave.fragmentNOBDetailsGUID, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: EN_Routes.wrmrnob },
-    { id: 13, req: ENEssentialsToSave.rSearchMoshtarakinReq, value: ENEssentialsToSave.saveDataForSearchMoshtarakin, defaultValue: [], url: EN_Routes.wrmssearchMosh },
+    {
+      id: 13, req: ENEssentialsToSave.searchReqMosh, value: ENEssentialsToSave.saveDataForSearchMoshtarakin, url: EN_Routes.wrmssearchMosh, defaultValue: [], defaultReq: {
+        zoneId: null,
+        searchBy: 1,
+        item: null,
+        similar: false,
+        showAll: false
+      }
+    },
   ]
 
   cleanArrays = () => {
@@ -1028,9 +1128,9 @@ export class CloseTabService {
   }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
-      this[this.val[index].req] = this.val[index].defaultReq ? this.val[index].defaultReq : null;
-      this[this.val[index].value] = this.val[index].defaultValue ? this.val[index].defaultValue : null;
-      this[this.val[index].value_2] = this.val[index].defaultValue_2 ? this.val[index].defaultValue_2 : null;
+      this[this.val[index].req] = this.val[index]?.defaultReq ? this.val[index].defaultReq : null;
+      this[this.val[index].value] = this.val[index]?.defaultValue ? this.val[index].defaultValue : null;
+      this[this.val[index].value_2] = this.val[index]?.defaultValue_2 ? this.val[index].defaultValue_2 : null;
       /* commented due to unValid values after refresh page
       /////// for assign default value to values, every value should have default value at the object 
       TODO body request vals have to back to defualt values after refresh page happended
@@ -1041,15 +1141,15 @@ export class CloseTabService {
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
-        this[item.req] = item.defaultReq ? item.defaultReq : null;
-        this[item.value] = item.defaultValue ? item.defaultValue : '';
-        this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
+        this[item.req] = item?.defaultReq ? item.defaultReq : null;
+        this[item.value] = item?.defaultValue ? item.defaultValue : '';
+        this[item.value_2] = item?.defaultValue_2 ? item.defaultValue_2 : '';
       }
       else {
         if (url.includes(item.url)) {
-          this[item.req] = item.defaultReq ? item.defaultReq : null;
-          this[item.value] = item.defaultValue ? item.defaultValue : '';
-          this[item.value_2] = item.defaultValue_2 ? item.defaultValue_2 : '';
+          this[item.req] = item?.defaultReq ? item.defaultReq : null;
+          this[item.value] = item?.defaultValue ? item.defaultValue : '';
+          this[item.value_2] = item?.defaultValue_2 ? item.defaultValue_2 : '';
         }
       }
     })

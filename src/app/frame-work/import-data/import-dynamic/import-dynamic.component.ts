@@ -38,27 +38,27 @@ export class ImportDynamicComponent extends FactoryONE {
 
   constructor(
     public importDynamicService: ImportDynamicService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private localClientConfigsService: LocalClientConfigsService
   ) {
     super();
   }
 
   connectToServer = async () => {
-    if (!MathS.isNull(this.importDynamicService.importDynamicReq.zoneId)) {
+    if (!MathS.isNull(this.closeTabService.importDynamicReq.zoneId)) {
 
-      if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService.importDynamicReq))
+      if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.importDynamicReq))
         return;
-      const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this.importDynamicService._isOrderByDate);
+      const validation = this.importDynamicService.checkVertification(this.closeTabService.importDynamicReq, this.importDynamicService._isOrderByDate);
       if (!validation)
         return;
       if (this._showDynamicCount) {
-        if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportDynamicCount, this.importDynamicService.importDynamicReq), true, EN_messages.confirm_createList)) {
-          this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportData, this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
+        if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportDynamicCount, this.closeTabService.importDynamicReq), true, EN_messages.confirm_createList)) {
+          this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportData, this.closeTabService.importDynamicReq), false, EN_messages.importDynamic_created)
           return;
         }
       }
-      this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportData, this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
+      this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportData, this.closeTabService.importDynamicReq), false, EN_messages.importDynamic_created)
       this.resetToDefaultFormStatus();
     }
     else {
@@ -66,27 +66,27 @@ export class ImportDynamicComponent extends FactoryONE {
     }
   }
   private insertReadingConfigDefaults = (rcd: any) => {
-    this.importDynamicService.importDynamicReq.hasPreNumber = rcd.defaultHasPreNumber;
-    this.importDynamicService.importDynamicReq.displayBillId = rcd.displayBillId;
-    this.importDynamicService.importDynamicReq.displayRadif = rcd.displayRadif;
-    this.importDynamicService.importDynamicReq.imagePercent = rcd.defaultImagePercent;
-    this.importDynamicService.importDynamicReq.alalHesabPercent = rcd.defaultAlalHesab;
-    this.importDynamicService.importDynamicReq.displayPreDate = rcd.displayPreDate;
-    this.importDynamicService.importDynamicReq.displayMobile = rcd.displayMobile;
-    this.importDynamicService.importDynamicReq.hasImage = rcd.hasImage;
+    this.closeTabService.importDynamicReq.hasPreNumber = rcd.defaultHasPreNumber;
+    this.closeTabService.importDynamicReq.displayBillId = rcd.displayBillId ? rcd.displayBillId : false;
+    this.closeTabService.importDynamicReq.displayRadif = rcd.displayRadif ? rcd.displayRadif : false;
+    this.closeTabService.importDynamicReq.imagePercent = rcd.defaultImagePercent;
+    this.closeTabService.importDynamicReq.alalHesabPercent = rcd.defaultAlalHesab;
+    this.closeTabService.importDynamicReq.displayPreDate = rcd.displayPreDate ? rcd.displayPreDate : false;
+    this.closeTabService.importDynamicReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
+    this.closeTabService.importDynamicReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
   verificationACounterReaderId = async () => {
-    if (!MathS.isNull(this.importDynamicService.importDynamicReq.zoneId)) {
+    if (!MathS.isNull(this.closeTabService.importDynamicReq.zoneId)) {
       if (this.zoneDictionary) {
         this.verificationReadingPeriod();
-        this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.importDynamicService.importDynamicReq.zoneId);
+        this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.closeTabService.importDynamicReq.zoneId);
       }
       if (!this.importDynamicService.validationInvalid(this.readingConfigDefault, EN_messages.thereis_no_default))
         return;
 
-      this.userCounterReader = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.importDynamicService.importDynamicReq.zoneId);
+      this.userCounterReader = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.importDynamicReq.zoneId);
       if (!this.importDynamicService.validationInvalid(this.userCounterReader, EN_messages.thereis_no_reader)) {
         this.userCounterReader = [];
         return;
@@ -97,11 +97,11 @@ export class ImportDynamicComponent extends FactoryONE {
   verificationReadingPeriod = async () => {
     if (this.importDynamicService._isOrderByDate)
       return;
-    if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary || !this.kindId) {
+    if (!this.closeTabService.importDynamicReq.zoneId || !this.zoneDictionary || !this.kindId) {
       this.readingPeriodDictionary = [];
       return;
     }
-    this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.importDynamicService.importDynamicReq.zoneId, this.kindId);
+    this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.importDynamicReq.zoneId, this.kindId);
     this.importDynamicService.validationInvalid(this.readingPeriodDictionary, EN_messages.not_found_period);
 
   }
@@ -129,7 +129,7 @@ export class ImportDynamicComponent extends FactoryONE {
     this.readingPeriodDictionary = [];
     this.userCounterReader = [];
 
-    this.importDynamicService.importDynamicReq = {
+    this.closeTabService.importDynamicReq = {
       fromEshterak: '',
       toEshterak: '',
       zoneId: 0,
@@ -141,8 +141,8 @@ export class ImportDynamicComponent extends FactoryONE {
       displayPreDate: false,
       displayMobile: false,
       hasImage: false,
-      fromDate: null,
-      toDate: null,
+      fromDate: this.closeTabService.utilsService.dateJalaliService.getCurrentDate(),
+      toDate: this.closeTabService.utilsService.dateJalaliService.getCurrentDate(),
       counterReaderId: '',
       readingPeriodId: null
     }

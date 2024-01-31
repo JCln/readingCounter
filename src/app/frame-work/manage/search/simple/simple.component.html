@@ -1,4 +1,4 @@
-<main class="main _card" [@openClose]="searchService._searchSimpleReq.isCollapsed ? 'slideUp' : 'slideDown'">
+<main class="main _card" [@openClose]="closeTabService._searchSimpleReq.isCollapsed ? 'slideUp' : 'slideDown'">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="order_by">
             <h2>جستجو بر اساس :</h2>
@@ -17,7 +17,7 @@
                 <div class="_key">ناحیه</div>
                 <div class="_value">
                     <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="searchService._searchSimpleReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                        [(ngModel)]="closeTabService._searchSimpleReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
                         optionLabel="title" filter="true">
                     </p-dropdown>
                 </div>
@@ -26,7 +26,7 @@
             <div class="input_2" [hidden]="searchService._isOrderByDate">
                 <div class="_key">نوع دوره</div>
                 <div class="_value">
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq._selectedKindId"
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService._searchSimpleReq._selectedKindId"
                         name="_selectedKindId">
                         <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
                             [value]="truefalse.id">
@@ -39,7 +39,7 @@
             <div class="input_2" [hidden]="!readingPeriodDictionary.length || searchService._isOrderByDate">
                 <div class="_key">دوره قرائت</div>
                 <div class="_value">
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.readingPeriodId"
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService._searchSimpleReq.readingPeriodId"
                         name="readingPeriodId">
                         <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
@@ -51,7 +51,8 @@
             <div class="input_2" [hidden]="searchService._isOrderByDate">
                 <div class="_key">سال</div>
                 <div class="_value">
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.year" name="year">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService._searchSimpleReq.year"
+                        name="year">
                         <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                             {{truefalse.title}}
                         </mat-option>
@@ -63,7 +64,7 @@
                 <div class="_value">
                     <app-date-jalali name="fromDate"
                         (dateJalEvent)="searchService.receiveFromDateJalali(searchService.ENSearchs.simple, $event)"
-                        [dateObject]="searchService._searchSimpleReq.fromDate">
+                        [dateObject]="closeTabService._searchSimpleReq.fromDate">
                     </app-date-jalali>
                 </div>
             </div>
@@ -72,7 +73,7 @@
                 <div class="_value">
                     <app-date-jalali name="toDate"
                         (dateJalEvent)="searchService.receiveToDateJalali(searchService.ENSearchs.simple, $event)"
-                        [dateObject]="searchService._searchSimpleReq.toDate">
+                        [dateObject]="closeTabService._searchSimpleReq.toDate">
                     </app-date-jalali>
                 </div>
             </div>
@@ -85,22 +86,13 @@
     </form>
 </main>
 
-<app-prime-table 
-[dataSource]="closeTabService.saveDataForSearchSimple" 
-[_outputFileName]="'simpleSearch'"    
-[_checkUpName]="'simpleSearch'" 
-[_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
-[_numberOfExtraColumns]="[1,2,3,4]"
-[_calculableSUM]="true"    
-[_hasAggregating]=true
-[_selectedAggregatedName]="ENGroupByNames.selectedAggregateSimpleSearch"
-[_sessionName]="'simpleSearch-session'"
-(refreshedTable)="refreshTable()"
-(routedToLMAll)="routeToLMAll($event)" 
-(routedToLMPayDay)="searchService.routeToLMPayDay($event)"
-(routedToFollowUp)="searchService.routeToFollowUp($event)" 
-(showedInMap)="searchService.showInMap($event)"
-[_hasCollapsible]=true 
-[_isCollaped]="searchService._searchSimpleReq.isCollapsed"
-(collapsed)="searchService._searchSimpleReq.isCollapsed = !searchService._searchSimpleReq.isCollapsed">
+<app-prime-table [dataSource]="closeTabService.saveDataForSearchSimple" [_outputFileName]="'simpleSearch'"
+    [_checkUpName]="'simpleSearch'" [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
+    [_numberOfExtraColumns]="[1,2,3,4]" [_calculableSUM]="true" [_hasAggregating]=true
+    [_selectedAggregatedName]="ENGroupByNames.selectedAggregateSimpleSearch" [_sessionName]="'simpleSearch-session'"
+    (refreshedTable)="refreshTable()" (routedToLMAll)="routeToLMAll($event)"
+    (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
+    (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)"
+    [_hasCollapsible]=true [_isCollaped]="closeTabService._searchSimpleReq.isCollapsed"
+    (collapsed)="closeTabService._searchSimpleReq.isCollapsed = !closeTabService._searchSimpleReq.isCollapsed">
 </app-prime-table>

@@ -7,7 +7,7 @@
     [_hasAggregating] = true
     [_selectedColumnsToRemember]="'selectedTrackOffloaded'"
     [_sessionName]="'offloaded-session'"
-    (refreshedTable)="refreshTable()"    
+    (refreshedTable)="callAPI()"    
     (downloadedOutputSingle)="downloadOutputSingle($event)"        
     (routeedToOffloadModify)="routeToOffloadModify($event)"        
     (routedToOffloadGeneralModify)="routeToOffloadGeneralModify($event)"        

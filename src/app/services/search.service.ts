@@ -1,11 +1,10 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
-import { ENSelectedColumnVariables, EN_messages, IMasrafStates } from 'interfaces/enums.enum';
+import { EN_messages, IMasrafStates } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
   IObjectIteratation,
-  ISearchInOrderTo,
-  ITitleValue,
+  ISearchInOrderTo
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -20,40 +19,16 @@ import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-check
 import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
 import { ProfileService } from './profile.service';
+import { ColumnManager } from '../classes/column-manager';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
-  _years: ITitleValue[] = [];
+  private readonly _searchProExcel: string = '_searchProExcel';
 
   _isOrderByDate: boolean = false;
-
-  searchReqMosh: ISearchMoshReq = {
-    zoneId: null,
-    searchBy: 1,
-    item: null,
-    similar: false,
-    showAll: false
-  }
-  _searchSimpleReq: ISearchSimpleReq = {
-    zoneId: null,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    _selectedKindId: '',
-    year: this.utilsService.getFirstYear(),
-    isCollapsed: false
-  }
-
-  private _searchProExcel: IObjectIteratation[] = [
-    { field: 'billId', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
-    { field: 'trackNumber', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
-    { field: 'radif', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
-    { field: 'eshterak', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
-  ]
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
@@ -62,7 +37,8 @@ export class SearchService {
     private followUpService: FollowUpService,
     private allListsService: AllListsService,
     private pageSignsService: PageSignsService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private columnManager: ColumnManager
   ) { }
 
   // should call "getSEarchInOrderTo" to isOrderByDate work perfectly
@@ -77,7 +53,7 @@ export class SearchService {
     }
   }
   columnSearchProExcel = (): IObjectIteratation[] => {
-    return this._searchProExcel;
+    return this.columnManager.getColumnsMenus(this._searchProExcel);
   }
   /*API CALLS*/
   getSearchTypes = (): Search[] => {

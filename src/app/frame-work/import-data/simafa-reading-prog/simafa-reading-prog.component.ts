@@ -46,19 +46,12 @@ export class SimafaReadingProgComponent extends FactoryONE {
     if (this.closeTabService.importSimafaReadingProgramReq.kindId)
       this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.importSimafaReadingProgramReq.zoneId, this.closeTabService.importSimafaReadingProgramReq.kindId);
   }
-  nullSavedSource = () => this.closeTabService.saveDataForSimafaReadingPrograms = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
+  classWrapper = async () => {
     this.closeTabService.importSimafaReadingProgramReq = this.importDynamicService.columnGetSimafaRDPG();
     this.readingPeriodKindsDictionary = await this.importDynamicService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.importDynamicService.dictionaryWrapperService.getZoneDictionary();
     this.getReadingPeriod();
     Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
-  }
-  refreshTable = () => {
-    this.connectToServer();
   }
   routeToBatch = (dataSource: any) => {
     let dataSourceTemp = JSON.parse(JSON.stringify(dataSource));

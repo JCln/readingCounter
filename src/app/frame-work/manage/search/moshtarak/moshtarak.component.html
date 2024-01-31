@@ -6,7 +6,7 @@
             <div class="input_2">
                 <div class="_key">نوع جستجو</div>
                 <div class="_value">
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService.searchReqMosh.searchBy"
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.searchReqMosh.searchBy"
                         name="searchType">
                         <mat-option (click)="_searchByInfo = truefalse.searchBy" *ngFor="let truefalse of searchType"
                             [value]="truefalse.id">
@@ -18,19 +18,20 @@
             <div class="input_2">
                 <div class="_key">ناحیه</div>
                 <div class="_value">
-                    <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService.searchReqMosh.zoneId"
-                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="closeTabService.searchReqMosh.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                        optionLabel="title" filter="true">
                     </p-dropdown>
                 </div>
             </div>
             <input class="input_1" placeholder="{{_searchByInfo}} را وارد نمایید " name="counterNumber"
-                [(ngModel)]="searchService.searchReqMosh.item" autofocus>
+                [(ngModel)]="closeTabService.searchReqMosh.item" autofocus>
 
             <div class="check_boxes">
-                <mat-checkbox name="similar" [(ngModel)]="searchService.searchReqMosh.similar">جستجو موارد مشابه
+                <mat-checkbox name="similar" [(ngModel)]="closeTabService.searchReqMosh.similar">جستجو موارد مشابه
                 </mat-checkbox>
                 <mat-checkbox *ngIf="!listManagerService.denyTracking()" name="showAll"
-                    [(ngModel)]="searchService.searchReqMosh.showAll">نمایش همه
+                    [(ngModel)]="closeTabService.searchReqMosh.showAll">نمایش همه
                 </mat-checkbox>
             </div>
             <button type="submit" class="tooltip btn_1">

@@ -7,7 +7,7 @@
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
     [_calculableSUM]=true        
     [_hasAggregating] = true
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (forcedOffload)="forceOffload($event)"    
     (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
     (routedToLMPayDay)="trackingManagerService.routeToLMPayDay($event)"

@@ -31,9 +31,9 @@ export class SimpleComponent implements OnInit {
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForSearchSimple = [];
-    if (!this.searchService.verificationSimpleSearch(this.searchService._searchSimpleReq))
+    if (!this.searchService.verificationSimpleSearch(this.closeTabService._searchSimpleReq))
       return;
-    this.closeTabService.saveDataForSearchSimple = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
+    this.closeTabService.saveDataForSearchSimple = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchSimple, this.closeTabService._searchSimpleReq);
     if (this.closeTabService.saveDataForSearchSimple.length) {
       this.converts();
     }
@@ -58,7 +58,7 @@ export class SimpleComponent implements OnInit {
     this.connectToServer();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(this.searchService._searchSimpleReq._selectedKindId);
+    this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService._searchSimpleReq._selectedKindId);
   }
   routeToLMAll = ($event: any) => {
     const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);

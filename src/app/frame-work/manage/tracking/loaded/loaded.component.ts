@@ -6,6 +6,7 @@ import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-loaded',
@@ -22,14 +23,12 @@ export class LoadedComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForTrackLoaded) {
-      this.closeTabService.saveDataForTrackLoaded = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingLOADED);
+  callAPI = async () => {
+    this.closeTabService.saveDataForTrackLoaded = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingLOADED);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForTrackLoaded)) {
+      this.callAPI();
     }
 
   }

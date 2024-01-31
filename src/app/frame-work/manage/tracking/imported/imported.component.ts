@@ -8,6 +8,7 @@ import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -26,18 +27,13 @@ export class ImportedComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForTrackImported = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForTrackImported) {
-      this.closeTabService.saveDataForTrackImported = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingIMPORTED);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForTrackImported = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingIMPORTED);
   }
-  onRowEditInit(product: any) {
-    console.log(product);
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForTrackImported)) {
+      this.callAPI();
+    }
   }
   // imported service control
   private selectSpecialParameters = (rowData: IEditTracking): IEditTracking => {

@@ -7,7 +7,7 @@
     [_hasAggregating] = true      
     [_selectedColumnsToRemember]="'selectedTrackFinished'"
     [_sessionName]="'finished-session'"    
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (downloadedOutputSingle)="reDownloadOutputSingle($event)"
     (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
     (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)"

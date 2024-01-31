@@ -8,6 +8,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-finished',
@@ -31,13 +32,12 @@ export class FinishedComponent extends FactoryONE {
     this.trackingManagerService.successSnackMessage(res.message);
     this.refreshTable();
   }
-  nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForTrackFinished) {
-      this.closeTabService.saveDataForTrackFinished = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingFINISHED);
+  callAPI = async () => {
+    this.closeTabService.saveDataForTrackFinished = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingFINISHED);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForTrackFinished)) {
+      this.callAPI();
     }
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {

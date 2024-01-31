@@ -41,8 +41,8 @@ export class MoshtarakComponent extends AllListsFactory {
   }
 
   converts = async () => {
-    if (this.searchService.searchReqMosh.zoneId) {
-      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.searchService.searchReqMosh.zoneId);
+    if (this.closeTabService.searchReqMosh.zoneId) {
+      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.closeTabService.searchReqMosh.zoneId);
     }
     else {
       this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateDictionary();
@@ -64,17 +64,13 @@ export class MoshtarakComponent extends AllListsFactory {
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForSearchMoshtarakin);
   }
   connectToServer = async () => {
-    if (this.searchService.verificationMosh(this.searchService.searchReqMosh)) {
-      this.closeTabService.saveDataForSearchMoshtarakin = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
+    if (this.searchService.verificationMosh(this.closeTabService.searchReqMosh)) {
+      this.closeTabService.saveDataForSearchMoshtarakin = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchMoshtarak, this.closeTabService.searchReqMosh);
       this.converts();
       this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchMoshtarakin);
     }
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForSearchMoshtarakin = [];
-      this.closeTabService.saveDataForSearchMoshtarakinReq = null;
-    }
+  classWrapper = async () => {
     if (this.closeTabService.saveDataForSearchMoshtarakin) {
       this.converts();
     }

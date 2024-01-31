@@ -202,6 +202,8 @@ export class FactorySharedPrime implements OnChanges {
         return Promise.resolve(false);
     };
     copyContext(data: string) {
+        console.log(data);
+        
         if (this.utilsService.checkProtocol() && this.copyToClipboard(data)) {
             this.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
         }

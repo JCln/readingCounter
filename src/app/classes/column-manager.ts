@@ -1387,6 +1387,13 @@ export class ColumnManager {
             { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
             { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, readonly: true, tabIndex: -1 },
         ];
+    _searchProExcel: IObjectIteratation[] = [
+        { field: 'billId', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
+        { field: 'trackNumber', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
+        { field: 'radif', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
+        { field: 'eshterak', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true },
+    ]
+
     searchPro: IObjectIteratation[] =
         [
             { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false },
@@ -2491,7 +2498,6 @@ export class ColumnManager {
         { field: 'lowPercentRateBoundNonMaskooni', header: 'میانگین غیرمسکونی پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'highPercentRateBoundNonMaskooni', header: 'میانگین غیرمسکونی بالا %', isSelected: false, isSelectedOrigin: false, isNumber: true }
     ]
-
     readingPeriod: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'readingPeriodKindId', header: 'نوع دوره', isSelected: true, isSelectedOrigin: true, isSelectOption: true },

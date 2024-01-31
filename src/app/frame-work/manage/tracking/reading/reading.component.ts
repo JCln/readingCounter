@@ -6,6 +6,7 @@ import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-reading',
@@ -21,13 +22,12 @@ export class ReadingComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
+  callAPI = async () => {
+    this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingREADING);
+  }
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForTrackReading) {
-      this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingREADING);
+    if (MathS.isNull(this.closeTabService.saveDataForTrackReading)) {
+      this.callAPI();
     }
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: ITracking) => {
