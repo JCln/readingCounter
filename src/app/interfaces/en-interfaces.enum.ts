@@ -170,6 +170,7 @@ export enum ENInterfaces {
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingGetImportedEdited = 'V1/Tracking/ImportedEdited',
     trackingOffloadedMaster = 'V1/Tracking/OffloadedMaster',
+    trackingSimpleMasterByFragment = 'V1/Tracking/Search/SimpleMaster',
     trackingOffloadedDetails = 'V1/Tracking/OffloadedDetails',
     trackingAllInLazy = 'V1/List/OffLoaded/AllLazy/',
     trackingAllInGroupLazy = 'V1/List/OffLoaded/AllInGroupLazy/',

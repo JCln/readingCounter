@@ -141,7 +141,43 @@ export class ColumnManager {
         { field: 'fragmentMasterTitle', header: 'نوبتی', isSelected: true, isSelectedOrigin: true },
         { field: 'routeCount', header: 'تعداد مسیر', isSelected: true, isSelectedOrigin: true }
     ];
+    simpleMasterByFragment: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true },
+        { field: 'eshterakCount', header: 'تعداد اشتراک', isSelected: true, isSelectedOrigin: true },
+        { field: 'fragmentMasterTitle', header: 'نوبتی', isSelected: true, isSelectedOrigin: true },
+        { field: 'routeCount', header: 'تعداد مسیر', isSelected: true, isSelectedOrigin: true }
+    ];
     offloadedDetails: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true, isSelectedOrigin: true, readonly: true },
+        // { field: 'zoneId', header: 'ناحیه', isSelected: false ,isSelectedOrigin: false,readonly: true},
+        { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        // { field: 'year', header: 'سال', isSelected: false ,isSelectedOrigin: false,readonly: true},
+        { field: 'isRoosta', header: 'روستایی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true },
+        { field: 'fromDate', header: 'از', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'toDate', header: 'تا', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'insertTime', header: 'زمان ثبت', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'alalHesabPercent', header: '% علی الحساب', isSelected: false, isSelectedOrigin: false, isNumber: true, readonly: true },
+        { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isSelectedOrigin: false, isNumber: true, readonly: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
+
+    ];
+    simpleDetailsByFragment: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: true },
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false, isSelectedOrigin: false, readonly: true },

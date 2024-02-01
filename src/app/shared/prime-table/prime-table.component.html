@@ -413,7 +413,9 @@
                     <div class="tooltip_text_right">اصلاح لیست</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName== 'offloadedDetails'" (click)="routeToLoggs(dataSource)">
+            <td class="__icon-columns"
+                *ngIf="_outputFileName== 'offloadedDetails' || _outputFileName== 'simpleDetailsByFragment'"
+                (click)="routeToLoggs(dataSource)">
                 <span class="ui-column-title">اصلاح لیست 2</span>
                 <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح لیست 2</div>

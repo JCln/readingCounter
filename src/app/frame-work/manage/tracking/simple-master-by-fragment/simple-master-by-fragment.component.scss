@@ -1,0 +1,25 @@
+@import 'primeNG.scss';
+@import 'tooltip';
+@import 'input.scss';
+@import '_mat.scss';
+@import 'all-lists.scss';
+
+
+.dtable_wrapper {
+    box-shadow: 0 0 2px 2px var(--secondary_6);
+    border-radius: 7px;
+}
+
+._chevron {
+    background: var(--secondary_1);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    cursor: pointer;
+
+    :focus-visible,
+    :hover {
+        outline: 1px solid var(--primary_2);
+    }
+}

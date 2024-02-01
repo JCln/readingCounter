@@ -97,13 +97,21 @@ export class CloseTabService {
       return this.ipFilterHistory;
     this.ipFilterHistory = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilterHistory);
   }
-  trackingOffloadedMaster: ITrackingMasterDto[] = [];
   trackingOffloadedDetails: ITracking[] = [];
+  trackingOffloadedMaster: ITrackingMasterDto[] = [];
   getTrackingOffloadedMaster = async (canRefresh: boolean): Promise<any> => {
     if (!MathS.isNull(this.trackingOffloadedMaster) && !canRefresh)
       return this.trackingOffloadedMaster;
     this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
     return this.trackingOffloadedMaster;
+  }
+  simpleDetailsByFragmentDetails: ITracking[] = [];
+  simpleMasterByFragment: ITrackingMasterDto[] = [];
+  getSimpleMasterByFragment = async (canRefresh: boolean): Promise<any> => {
+    if (!MathS.isNull(this.simpleMasterByFragment) && !canRefresh)
+      return this.simpleMasterByFragment;
+    this.simpleMasterByFragment = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingSimpleMasterByFragment);
+    return this.simpleMasterByFragment;
   }
   insertToTimes = (): ITimesType => {
     let temp = this.utilsService.dateJalaliService.getCurrentTime();
@@ -1045,6 +1053,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy, defaultValue: { data: [], totalRecords: 0 } },
     { id: 2, value: ENEssentialsToSave.offloadedAllInGroupLazy, url: EN_Routes.listAllInGroupLazy, defaultValue: { data: [], totalRecords: 0 } },
     { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, value_2: ENEssentialsToSave.trackingOffloadedDetails, url: EN_Routes.trackOffloadedMaster, defaultValue: [], defaultValue_2: [] },
+    { id: 2, value: ENEssentialsToSave.simpleMasterByFragment, value_2: ENEssentialsToSave.simpleDetailsByFragmentDetails, url: EN_Routes.simpleMasterByFragment, defaultValue: [], defaultValue_2: [] },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
     { id: 2, req: ENEssentialsToSave.authenticityAttemptsReq, value: ENEssentialsToSave.authenticityAttempts, url: EN_Routes.requestLogsAuthenticityAttempts },

@@ -1,0 +1,106 @@
+<p-table #dtable *ngIf="closeTabService.simpleMasterByFragment && closeTabService.simpleMasterByFragment.length > 0"
+    [columns]="selectedColumns" [value]="closeTabService.simpleMasterByFragment" [rows]="10" paginator="true"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" dataKey="groupId"
+    styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" stateKey="simplemasterbyfragment"
+    [reorderableColumns]="trackingManagerService.getLocalReOrderable()" appUnSortTable rowExpandMode="single">
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="right_side">
+            </div>
+            <div class="left_side">
+                <!-- <i (click)="clearFilters(dtable)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                        class="_circle_border p_icons tooltip pi pi-filter-slash">
+                        <div class="tooltip_text_right">حذف فیلترها</div>
+                    </i>
+                    <app-collapsable [_isCollapsed]=closeTabService.simpleMasterByFragmentReq._isCollapsed
+                        (_clicked)="closeTabService.simpleMasterByFragmentReq._isCollapsed = !closeTabService.simpleMasterByFragmentReq._isCollapsed">
+                    </app-collapsable> -->
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+
+        <tr>
+            <th></th>
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th class="__icon-columns">
+            <th class="__icon-columns">
+        </tr>
+        <tr>
+            <th></th>
+            <th class="__headers" pReorderableColumn *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+            </th>
+            <th class="__icon-columns">
+            <th class="__icon-columns">
+        </tr>
+
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex" let-expanded="expanded">
+        <tr>
+            <td>
+                <button type="button" [pRowToggler]="dataSource" class="_chevron"
+                    [ngClass]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+                    (click)="expanded ?  false : loadDetailPlease(dataSource, ri)">
+                </button>
+            </td>
+            <td class="__columns" *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                <ng-container *ngIf="col.isBoolean; else simple">
+                    <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">
+                    </mat-checkbox>
+                </ng-container>
+                <ng-template #simple>
+                    {{dataSource[col.field]}}
+                </ng-template>
+            </td>
+            <td class="__icon-columns" (click)="routeToAllInGroupLazy(dataSource)">
+                <span class="ui-column-title">اصلاح 2</span>
+                <i class="tooltip _circle_border p_icons pi pi-file-edit">
+                    <div class="tooltip_text_right">اصلاح 2</div>
+                </i>
+            </td>
+            <td class="__icon-columns" (click)="getExcel(dataSource)">
+                <span class="ui-column-title">دریافت Excel</span>
+                <i class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                    <div class="tooltip_text_right">دریافت Excel</div>
+                </i>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion" let-ri="rowIndex" let-expanded="expanded">
+        <tr>
+            <td class="dtable_wrapper" colspan="7">
+                <app-prime-table [dataSource]="closeTabService.simpleDetailsByFragmentDetails"
+                    [_outputFileName]="'simpleDetailsByFragment'" [_checkUpName]="'simpleDetailsByFragment'"
+                    [_numberOfExtraColumns]="[1]" [_sessionName]="'simpleDetailsByFragment-session'"
+                    [_selectedColumnsToRemember]="'selectedSimpleDetailsByFragment'" [_outputEnabled]="false"
+                    [_isSortable]="false" [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
+                    [_paginator]="false" [_hasRefreshTable]="false" [_captionEnabled]="false"
+                    (routedToLoggs)="routeToOffloadLazy($event)">
+                </app-prime-table>
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
+
+<section *ngIf="!closeTabService.simpleMasterByFragment">
+    <tr class="empty_data">
+        موردی پیدا نشد
+        <i class="fa fa-folder-blank"></i>
+    </tr>
+</section>
