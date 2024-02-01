@@ -9,6 +9,7 @@ export interface IOnOffLoadNessessities {
   zoneId?: number,
   zoneTitle?: string,
   routeCount?: number // for all in group lazy list
+  prePage?: string // for all list component
 }
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class AllListsService {
     listNumber: null,
     trackNumber: null,
     zoneTitle: '',
-    zoneId: null
+    zoneId: null,
+    prePage: ''
   };
   modifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,

@@ -41,6 +41,11 @@
                 تصویر
             </mat-checkbox>
 
+            <mat-checkbox [disabled]="true" name="displayDebt"
+                [(ngModel)]="closeTabService.saveDataForLMPD.displayDebt">
+                بدهی
+            </mat-checkbox>
+
             <mat-checkbox [disabled]="true" name="isBazdid"
                 [(ngModel)]="closeTabService.saveDataForLMPD.isBazdid">بازدید
             </mat-checkbox>

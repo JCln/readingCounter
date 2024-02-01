@@ -1,3 +1,5 @@
+import { EN_Routes } from "./routes.enum"
+
 export interface ISearchMoshReq {
     zoneId: number,
     searchBy: number,
@@ -37,7 +39,8 @@ export interface ISearchSimpleOutput {
     itemQuantity: number,
     counterReaderName: string,
     trackStatusTitle: string,
-    hasMap: boolean
+    hasMap: boolean,
+    whereToBack: EN_Routes
 }
 export interface ISearchProReportInput {
     zoneId: number,

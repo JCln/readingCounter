@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -54,7 +55,7 @@ export class OffloadedComponent extends FactoryONE {
     }
   }
   routeToOffloadModify = (dataSource: ITracking) => {
-    this.trackingManagerService.routeToOffloadModify(dataSource);
+    this.trackingManagerService.routeToOffloadModify(dataSource, EN_Routes.wrmlalltrue);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadGeneralModify(dataSource);

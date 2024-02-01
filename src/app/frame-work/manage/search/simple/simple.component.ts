@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENGroupByNames } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
@@ -64,6 +65,6 @@ export class SimpleComponent implements OnInit {
     const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);
     $event.zoneTitle = $event.zoneId;
     $event.zoneId = tempZoneId.id;
-    this.searchService.routeToLMAll($event);
+    this.searchService.routeToLMAll($event, EN_Routes.wrmssimple);
   }
 }

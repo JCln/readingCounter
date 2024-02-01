@@ -183,7 +183,7 @@
                     <!-- only when enableTooltip enabled, context menu should work -->
                     <ng-template #showText>
                         <div class="tooltip" *ngIf="col.enableTooltip"
-                            (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): false">
+                            (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): true">
                             {{dataSource[col.field] && dataSource[col.field].length > 0 ?
                             dataSource[col.field].toString().split(' ')[0]
                             : ''}}
@@ -197,7 +197,7 @@
                             </div>
                         </div>
                         <div *ngIf="!col.enableTooltip"
-                            (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): false">
+                            (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): true">
                             {{dataSource[col.field]}}
                         </div>
                     </ng-template>

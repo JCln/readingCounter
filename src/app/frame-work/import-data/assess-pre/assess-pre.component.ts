@@ -48,14 +48,15 @@ export class AssessPreComponent extends AllListsFactory {
   }
 
   insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
+    this.importDynamicService._assessAddReq.displayBillId = rcd.displayBillId ? rcd.displayBillId : false;
+    this.importDynamicService._assessAddReq.displayRadif = rcd.displayRadif ? rcd.displayRadif : false;
+    this.importDynamicService._assessAddReq.displayPreDate = rcd.displayPreDate ? rcd.displayPreDate : false;
+    this.importDynamicService._assessAddReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
+    this.importDynamicService._assessAddReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
+    this.importDynamicService._assessAddReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
     this.importDynamicService._assessAddReq.hasPreNumber = rcd.defaultHasPreNumber;
-    this.importDynamicService._assessAddReq.displayBillId = rcd.displayBillId;
-    this.importDynamicService._assessAddReq.displayRadif = rcd.displayRadif;
     this.importDynamicService._assessAddReq.alalHesabPercent = rcd.defaultAlalHesab;
     this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
-    this.importDynamicService._assessAddReq.displayPreDate = rcd.displayPreDate;
-    this.importDynamicService._assessAddReq.displayMobile = rcd.displayMobile;
-    this.importDynamicService._assessAddReq.hasImage = rcd.hasImage;
   }
   converts = () => {
     this.closeTabService.saveDataForAssessPre =

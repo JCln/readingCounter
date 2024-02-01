@@ -18,7 +18,8 @@ export interface IAssessAddDtoSimafa {
     counterReaderId: string,
     displayPreDate: boolean,
     displayMobile: boolean,
-    hasImage: boolean
+    hasImage: boolean,
+    displayDebt: boolean
 }
 export interface IReadingConfigDefault {
     id: number,
@@ -36,6 +37,7 @@ export interface IReadingConfigDefault {
     displayPreDate: boolean,
     displayMobile: boolean,
     hasImage: boolean,
+    displayDebt: boolean,
     lowConstBoundMaskooni: number,
     lowPercentBoundMaskooni: number,
     highConstBoundMaskooni: number,

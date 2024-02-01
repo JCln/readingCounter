@@ -74,6 +74,7 @@ export class ImportDynamicComponent extends FactoryONE {
     this.closeTabService.importDynamicReq.displayPreDate = rcd.displayPreDate ? rcd.displayPreDate : false;
     this.closeTabService.importDynamicReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
     this.closeTabService.importDynamicReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
+    this.closeTabService.importDynamicReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
@@ -141,6 +142,7 @@ export class ImportDynamicComponent extends FactoryONE {
       displayPreDate: false,
       displayMobile: false,
       hasImage: false,
+      displayDebt: false,
       fromDate: this.closeTabService.utilsService.dateJalaliService.getCurrentDate(),
       toDate: this.closeTabService.utilsService.dateJalaliService.getCurrentDate(),
       counterReaderId: '',

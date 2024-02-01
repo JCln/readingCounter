@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -62,6 +63,9 @@ export class ReadingComponent extends FactoryONE {
       this.trackingManagerService.successSnackMessage(res.message);
       this.refreshTable();
     }
+  }
+  routeToLMAll = (row: ITracking) => {
+    this.trackingManagerService.routeToLMAll(row, EN_Routes.wrmtrackreading);
   }
 
 }

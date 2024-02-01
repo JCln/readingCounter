@@ -18,13 +18,13 @@ import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
-import { IUserKarkard } from 'interfaces/ireports';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  ENRoutes = EN_Routes;
 
   dbfOutput: IOutputManager = {
     zoneId: 0,
@@ -256,7 +256,7 @@ export class TrackingManagerService {
   }
   routeToFollowUp = (row: any) => {
     this.followUpService.setTrackNumber(row.trackNumber);
-    this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
+    this.utilsService.routeToByUrl(EN_Routes.followUp);
   }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
@@ -266,19 +266,21 @@ export class TrackingManagerService {
     this.pageSignsService.perday_pageSign.zone = row.zoneTitle;
     this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
-  routeToLMAll = (row: any) => {
+  routeToLMAll = (row: any, whereToBack: EN_Routes) => {
     this.allListsService.allLists_pageSign.GUid = row.id;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
     this.allListsService.allLists_pageSign.zoneId = row.zoneId;
+    this.allListsService.allLists_pageSign.prePage = whereToBack;
     this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
-  routeToOffloadModify = (dataSource: ITracking) => {
+  routeToOffloadModify = (dataSource: ITracking, whereToBack: EN_Routes) => {
     this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
     this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
     this.allListsService.modifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.allListsService.modifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.modifyLists_pageSign.prePage = whereToBack;
     this.utilsService.routeTo(EN_Routes.wrmlalltrue);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {

@@ -51,7 +51,8 @@ export class ImportDynamicService {
     counterReaderId: '',
     displayPreDate: false,
     displayMobile: false,
-    hasImage: false
+    hasImage: false,
+    displayDebt: false,
   }
   private _simafaSingleReq: IReadingProgramRes;
 

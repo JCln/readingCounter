@@ -29,6 +29,7 @@ export class AllImportsService {
     displayPreDate: false,
     displayMobile: false,
     hasImage: false,
+    displayDebt: false,
   };
 
 }

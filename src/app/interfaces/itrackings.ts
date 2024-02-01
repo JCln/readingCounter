@@ -28,7 +28,8 @@ export interface ITracking {
     hasMap: boolean,
     displayPreDate: boolean,
     displayMobile: boolean,
-    hasImage: boolean
+    hasImage: boolean,
+    displayDebt: boolean
 }
 export interface ITrackingSearchDto {
     fromDate: string,
@@ -42,7 +43,8 @@ export interface ITrackingSearchDto {
     displayRadif: boolean,
     displayPreDate: boolean,
     displayMobile: boolean,
-    hasImage: boolean
+    hasImage: boolean,
+    displayDebt: boolean
 }
 export interface IEditTracking {
     id: string,
@@ -55,6 +57,7 @@ export interface IEditTracking {
     displayPreDate: boolean,
     displayMobile: boolean,
     hasImage: boolean,
+    displayDebt: boolean
 }
 export interface IOffLoadPerDay {
     trackNumber: number,
@@ -73,6 +76,7 @@ export interface IOffLoadPerDay {
     displayPreDate: boolean,
     displayMobile: boolean,
     hasImage: boolean,
+    displayDebt: boolean,
     isBazdid: boolean,
     isRoosta: boolean,
     overalDistance: number,

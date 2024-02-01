@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
 import { CloseTabService } from 'services/close-tab.service';
@@ -68,7 +69,10 @@ export class AllComponent extends AllListsFactory {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.allLists_pageSign.GUid) {
-      this.listManagerService.utilsService.backToPreviousPage();
+      if (this.allListsService.allLists_pageSign.prePage.length > 0)
+        this.listManagerService.utilsService.routeTo(this.allListsService.allLists_pageSign.prePage);
+      else
+        this.listManagerService.utilsService.routeTo(EN_Routes.wr);
     }
 
     else {

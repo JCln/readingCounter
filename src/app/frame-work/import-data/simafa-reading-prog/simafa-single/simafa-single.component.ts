@@ -27,6 +27,7 @@ export class SimafaSingleComponent extends FactoryONE {
     displayPreDate: false,
     displayMobile: false,
     hasImage: false,
+    displayDebt: false,
     counterReaderId: '',
     readingPeriodId: null,
     year: this.utilsService.getFirstYear(),
@@ -81,13 +82,14 @@ export class SimafaSingleComponent extends FactoryONE {
     this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.simafaSingleReq.zoneId);
   }
   private insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
+    this.simafaSingleReq.displayBillId = rcd.displayBillId ? rcd.displayBillId : false;
+    this.simafaSingleReq.displayRadif = rcd.displayRadif ? rcd.displayRadif : false;
+    this.simafaSingleReq.displayPreDate = rcd.displayPreDate ? rcd.displayPreDate : false;
+    this.simafaSingleReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
+    this.simafaSingleReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
+    this.simafaSingleReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
     this.simafaSingleReq.hasPreNumber = rcd.defaultHasPreNumber;
-    this.simafaSingleReq.displayBillId = rcd.displayBillId;
-    this.simafaSingleReq.displayRadif = rcd.displayRadif;
     this.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
     this.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
-    this.simafaSingleReq.displayPreDate = rcd.displayPreDate;
-    this.simafaSingleReq.displayMobile = rcd.displayMobile;
-    this.simafaSingleReq.hasImage = rcd.hasImage;
   }
 }

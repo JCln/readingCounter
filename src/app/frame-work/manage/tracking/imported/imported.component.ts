@@ -9,6 +9,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 
 import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
 import { MathS } from 'src/app/classes/math-s';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class ImportedComponent extends FactoryONE {
       counterReaderId: rowData.counterReaderId,
       displayMobile: rowData.displayMobile,
       displayPreDate: rowData.displayPreDate,
-      hasImage: rowData.hasImage
+      hasImage: rowData.hasImage,
+      displayDebt: rowData.displayDebt
     }
   }
   //  
@@ -93,6 +95,6 @@ export class ImportedComponent extends FactoryONE {
     }
   }
   routeToLMAll = (row: ITracking) => {
-    this.trackingManagerService.routeToLMAll(row);
+    this.trackingManagerService.routeToLMAll(row, EN_Routes.wrmtrackimported);
   }
 }

@@ -415,7 +415,8 @@ export class CloseTabService {
     displayRadif: false,
     displayPreDate: false,
     displayMobile: false,
-    hasImage: false
+    hasImage: false,
+    displayDebt: false
   }
   saveDataForUserKarkard: IUserKarkard[];
   saveDataForTrackOffloaded: ITracking[];
@@ -459,7 +460,8 @@ export class CloseTabService {
     readingPeriodId: null,
     displayPreDate: false,
     displayMobile: false,
-    hasImage: false
+    hasImage: false,
+    displayDebt: false
   }
   saveDataForImportDynamic: any;
   saveDataForImportErrors: IImportErrors[];
@@ -492,6 +494,7 @@ export class CloseTabService {
     displayPreDate: false,
     displayMobile: false,
     hasImage: false,
+    displayDebt: false
   };
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
@@ -511,6 +514,7 @@ export class CloseTabService {
     displayPreDate: false,
     displayMobile: false,
     hasImage: false,
+    displayDebt: false,
     skipErrors: false,
     counterReaderId: '',
     readingPeriodId: '',
@@ -956,7 +960,8 @@ export class CloseTabService {
         readingPeriodId: null,
         displayPreDate: false,
         displayMobile: false,
-        hasImage: false
+        hasImage: false,
+        displayDebt: false
       }
     },
     { id: 1, req: ENEssentialsToSave.saveDataForImportDataFileExcelReq, value: ENEssentialsToSave.saveDataForImportDataFileExcel, url: EN_Routes.wrimpFileExcel },
@@ -994,14 +999,15 @@ export class CloseTabService {
         displayRadif: false,
         displayPreDate: false,
         displayMobile: false,
-        hasImage: false
+        hasImage: false,
+        displayDebt: false
       }
     },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished, defaultValue: [] },
-    { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, defaultValue_2: '', url: EN_Routes.wrmsfwu },
+    { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, defaultValue_2: '', url: EN_Routes.followUp },
     { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
     {
       id: 1, req: ENEssentialsToSave._searchSimpleReq, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple, defaultValue: [], defaultReq: {

@@ -3,7 +3,6 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 21rem));
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);

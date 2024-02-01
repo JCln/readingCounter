@@ -32,6 +32,7 @@ export class RdAddDgComponent {
       displayPreDate: false,
       displayMobile: false,
       hasImage: false,
+      displayDebt: false,
       logicalOrder: [],
       zoneId: data.zoneId,
       defaultAlalHesab: [],

@@ -233,13 +233,15 @@ export class SearchService {
   receiveToDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].toDate = $event;
   }
-  routeToLMAll = (row: ISearchSimpleOutput) => {
+  routeToLMAll = (row: ISearchSimpleOutput, whereToBack: EN_Routes) => {
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.GUid = row.trackingId;
     this.allListsService.allLists_pageSign.zoneId = row.zoneId;
     this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
-    this.utilsService.routeToByParams(EN_Routes.wrmlall, false);
+    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
+    this.allListsService.allLists_pageSign.prePage = whereToBack;
+    this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
     this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
@@ -248,7 +250,7 @@ export class SearchService {
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {
     this.followUpService.setTrackNumber(row.trackNumber);
-    this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
+    this.utilsService.routeToByUrl(EN_Routes.followUp);
   }
   showInMap = (dataSource: object) => {
     this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });

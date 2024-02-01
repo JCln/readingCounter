@@ -107,7 +107,7 @@ export class CounterStateComponent extends FactoryONE {
   }
 
   newRow(): ICounterState {
-    return { moshtarakinId: null, title: '', zoneId: null, clientOrder: null, canEnterNumber: false, isMane: false, canNumberBeLessThanPre: false, isTavizi: false, shouldEnterNumber: false, isXarab: false, isFaqed: false, hasImage: false, isNew: true };
+    return { moshtarakinId: null, title: '', zoneId: null, clientOrder: null, canEnterNumber: false, isMane: false, canNumberBeLessThanPre: false, isTavizi: false, shouldEnterNumber: false, isXarab: false, isFaqed: false, hasImage: false, displayDebt: false, isNew: true };
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   testChangedValue() { this.newRowLimit = 2; }

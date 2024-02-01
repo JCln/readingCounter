@@ -47,6 +47,7 @@ section.content {
 .check_boxes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(7rem, 9rem));
+  justify-content: center;
   align-items: center;
   gap: var(--font_02);
   padding: 0;

@@ -4,6 +4,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { IFollowUpHistory } from 'interfaces/isearchs';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { FollowUpService } from 'services/follow-up.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -143,7 +144,7 @@ export class FollowUpComponent extends FactoryONE {
     row.zoneTitle = this.closeTabService.saveDataForFollowUp.zoneTitle;
     row.zoneId = this.closeTabService.saveDataForFollowUp.zoneId;
 
-    this.trackingManagerService.routeToLMAll(row);
+    this.trackingManagerService.routeToLMAll(row, EN_Routes.followUp);
   }
   ngOnInit(): void { return; }
 

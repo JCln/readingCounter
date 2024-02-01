@@ -110,6 +110,11 @@
                     تصویر
                 </mat-checkbox>
 
+                <mat-checkbox name="displayDebt"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayDebt">
+                    بدهی
+                </mat-checkbox>
+
                 <mat-checkbox name="skipErrors"
                     [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.skipErrors">
                     نادیده گرفتن خطا

@@ -37,7 +37,8 @@ export interface ICounterReport {
     canNumberBeLessThanPre: boolean,
     isTavizi: boolean,
     clientOrder: number,
-    hasImage: boolean
+    hasImage: boolean,
+    displayDebt: boolean
 }
 
 // fragment manager 
@@ -59,9 +60,10 @@ export interface IAutomaticImportAddEdit {
     hasPreNumber: boolean,
     displayBillId: boolean,
     displayRadif: boolean,
-    displayPreDate
-displayMobile
-hasImage
+    displayPreDate: boolean,
+    displayMobile: boolean,
+    hasImage: boolean,
+    displayDebt: boolean
 }
 export interface IAutomaticImport {
     id: string,
@@ -134,6 +136,7 @@ export interface ICounterState {
     canNumberBeLessThanPre: boolean,
     isTavizi: boolean,
     hasImage: boolean,
+    displayDebt: boolean,
     shouldEnterNumber: boolean,
     isXarab: boolean,
     isFaqed: boolean,

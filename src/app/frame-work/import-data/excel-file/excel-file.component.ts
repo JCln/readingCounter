@@ -55,14 +55,15 @@ export class ExcelFileComponent extends FactoryONE {
     }
   }
   private insertReadingConfigDefaults = (rcd: any) => {
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayBillId = rcd.displayBillId ? rcd.displayBillId : false;
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayRadif = rcd.displayRadif ? rcd.displayRadif : false;
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayPreDate = rcd.displayPreDate ? rcd.displayPreDate : false;
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
+    this.closeTabService.saveDataForImportDataFileExcelReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
     this.closeTabService.saveDataForImportDataFileExcelReq.hasPreNumber = rcd.defaultHasPreNumber;
-    this.closeTabService.saveDataForImportDataFileExcelReq.displayBillId = rcd.displayBillId;
-    this.closeTabService.saveDataForImportDataFileExcelReq.displayRadif = rcd.displayRadif;
     this.closeTabService.saveDataForImportDataFileExcelReq.imagePercent = rcd.defaultImagePercent;
     this.closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent = rcd.defaultAlalHesab;
-    this.closeTabService.saveDataForImportDataFileExcelReq.displayPreDate = rcd.displayPreDate;
-    this.closeTabService.saveDataForImportDataFileExcelReq.displayMobile = rcd.displayMobile;
-    this.closeTabService.saveDataForImportDataFileExcelReq.hasImage = rcd.hasImage;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }

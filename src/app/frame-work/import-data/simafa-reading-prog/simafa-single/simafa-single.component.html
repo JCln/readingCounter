@@ -50,6 +50,10 @@
                 <mat-checkbox name="hasImage" [(ngModel)]="simafaSingleReq.hasImage">
                     تصویر
                 </mat-checkbox>
+
+                <mat-checkbox name="displayDebt" [(ngModel)]="simafaSingleReq.displayDebt">
+                    بدهی
+                </mat-checkbox>
             </div>
             <footer>
                 <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
