@@ -79,7 +79,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
-
+    this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
     this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
@@ -112,8 +112,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
       this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
     else {
-      // to show counterStates radioButtons      
-      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.offloadedListLazy_pageSign.zoneId);
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
       } else {
@@ -163,14 +161,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
   changedFilterDropdowns(eventValue: any, elementName: string) {
     console.log(1);
     this.closeTabService.saveDataForOffloadedAllLazyReq[elementName] = eventValue;
-  }
-  getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
-    return new Promise(async (resolve) => {
-      this.counterStateByZoneDictionary = JSON.parse(JSON.stringify(await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zone)));
-      if (this.counterStateByZoneDictionary[0].id !== null)
-        this.counterStateByZoneDictionary.unshift({ id: null, title: 'انتخاب کنید', isSelected: true })
-      resolve(true);
-    });
   }
   // have problem on SHOWING Without this Code for DropDowns
   clickedDropDowns = (event: any, element: string, dataId: any) => {

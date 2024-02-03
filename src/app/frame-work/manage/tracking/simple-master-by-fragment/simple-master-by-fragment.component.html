@@ -1,3 +1,91 @@
+<main class="main _card" [@openClose]="closeTabService.simpleMasterByFragmentReq.isCollapsed ? 'slideUp' : 'slideDown'">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="order_by">
+            <h2>جستجو بر اساس :</h2>
+            <div *ngFor="let orderType of closeTabService.utilsService.getSearchInOrderTo">
+                <div class="p-field-radiobutton">
+                    <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                        [(ngModel)]="closeTabService._isOrderByDate" [inputId]="orderType.key">
+                    </p-radioButton>
+                    <label [for]="orderType.key">{{orderType.title}}</label>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="content">
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="closeTabService.simpleMasterByFragmentReq.zoneId" placeholder="انتخاب مورد"
+                        optionValue="id" optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="input_2" [hidden]="closeTabService._isOrderByDate">
+                <div class="_key">نوع دوره</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.simpleMasterByFragmentReq._selectedKindId" name="_selectedKindId">
+                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
+                            [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
+                <div class="_key">دوره قرائت</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.simpleMasterByFragmentReq.readingPeriodId" name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="input_2" [hidden]="closeTabService._isOrderByDate">
+                <div class="_key">سال</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.simpleMasterByFragmentReq.year"
+                        name="year">
+                        <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate"
+                        (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.selectedSimpleMasterByFragmentReq, $event)"
+                        [dateObject]="closeTabService.simpleMasterByFragmentReq.fromDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
+                <div class="_key">تا</div>
+                <div class="_value">
+                    <app-date-jalali name="toDate"
+                        (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.selectedSimpleMasterByFragmentReq, $event)"
+                        [dateObject]="closeTabService.simpleMasterByFragmentReq.toDate">
+                    </app-date-jalali>
+                </div>
+            </div>
+        </section>
+
+        <button type="submit" class="tooltip btn_1">
+            <i class="pi pi-search"></i>
+            جستجو
+        </button>
+    </form>
+</main>
+
 <p-table #dtable *ngIf="closeTabService.simpleMasterByFragment && closeTabService.simpleMasterByFragment.length > 0"
     [columns]="selectedColumns" [value]="closeTabService.simpleMasterByFragment" [rows]="10" paginator="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
@@ -11,21 +99,11 @@
             selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
         </p-multiSelect>
         <div class="header_icons_wrap">
-            <div class="right_side">
-            </div>
-            <div class="left_side">
-                <!-- <i (click)="clearFilters(dtable)" [ngClass]="{'has_filters': hasFiltersInTable}"
-                        class="_circle_border p_icons tooltip pi pi-filter-slash">
-                        <div class="tooltip_text_right">حذف فیلترها</div>
-                    </i>
-                    <app-collapsable [_isCollapsed]=closeTabService.simpleMasterByFragmentReq._isCollapsed
-                        (_clicked)="closeTabService.simpleMasterByFragmentReq._isCollapsed = !closeTabService.simpleMasterByFragmentReq._isCollapsed">
-                    </app-collapsable> -->
-            </div>
+            <div class="right_side"></div>
+            <div class="left_side"></div>
         </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
-
         <tr>
             <th></th>
             <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
@@ -45,7 +123,6 @@
             <th class="__icon-columns">
             <th class="__icon-columns">
         </tr>
-
     </ng-template>
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex" let-expanded="expanded">
@@ -66,10 +143,10 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td class="__icon-columns" (click)="routeToAllInGroupLazy(dataSource)">
-                <span class="ui-column-title">اصلاح 2</span>
-                <i class="tooltip _circle_border p_icons pi pi-file-edit">
-                    <div class="tooltip_text_right">اصلاح 2</div>
+            <td class="__icon-columns" (click)="routeToMasterByFragmentGroupLazy(dataSource)">
+                <span class="ui-column-title">مشاهده نوبتی</span>
+                <i class="tooltip _circle_border p_icons pi pi-folder-open">
+                    <div class="tooltip_text_right">مشاهده نوبتی</div>
                 </i>
             </td>
             <td class="__icon-columns" (click)="getExcel(dataSource)">
@@ -84,10 +161,10 @@
     <ng-template pTemplate="rowexpansion" let-ri="rowIndex" let-expanded="expanded">
         <tr>
             <td class="dtable_wrapper" colspan="7">
-                <app-prime-table [dataSource]="closeTabService.simpleDetailsByFragmentDetails"
-                    [_outputFileName]="'simpleDetailsByFragment'" [_checkUpName]="'simpleDetailsByFragment'"
-                    [_numberOfExtraColumns]="[1]" [_sessionName]="'simpleDetailsByFragment-session'"
-                    [_selectedColumnsToRemember]="'selectedSimpleDetailsByFragment'" [_outputEnabled]="false"
+                <app-prime-table [dataSource]="closeTabService.simpleMasterByFragmentDetails[ri]"
+                    [_outputFileName]="'simpleMasterByFragmentDetails'" [_checkUpName]="'simpleMasterByFragmentDetails'"
+                    [_numberOfExtraColumns]="[1]" [_sessionName]="'simpleMasterByFragmentDetails-session'"
+                    [_selectedColumnsToRemember]="'selectedSimpleMasterByFragmentDetails'" [_outputEnabled]="false"
                     [_isSortable]="false" [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
                     [_paginator]="false" [_hasRefreshTable]="false" [_captionEnabled]="false"
                     (routedToLoggs)="routeToOffloadLazy($event)">

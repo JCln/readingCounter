@@ -5,7 +5,7 @@
             <div *ngFor="let orderType of searchService.utilsService.getSearchInOrderTo">
                 <div class="p-field-radiobutton">
                     <p-radioButton name="orderByDate" [value]="orderType.isSelected"
-                        [(ngModel)]="searchService._isOrderByDate" [inputId]="orderType.key">
+                        [(ngModel)]="closeTabService._isOrderByDate" [inputId]="orderType.key">
                     </p-radioButton>
                     <label [for]="orderType.key">{{orderType.title}}</label>
                 </div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="input_2" [hidden]="searchService._isOrderByDate">
+            <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                 <div class="_key">نوع دوره</div>
                 <div class="_value">
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService._searchSimpleReq._selectedKindId"
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="input_2" [hidden]="!readingPeriodDictionary.length || searchService._isOrderByDate">
+            <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
                 <div class="_key">دوره قرائت</div>
                 <div class="_value">
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService._searchSimpleReq.readingPeriodId"
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="input_2" [hidden]="searchService._isOrderByDate">
+            <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                 <div class="_key">سال</div>
                 <div class="_value">
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService._searchSimpleReq.year"
@@ -59,7 +59,7 @@
                     </mat-select>
                 </div>
             </div>
-            <div class="input_2" [hidden]="!searchService._isOrderByDate">
+            <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                 <div class="_key">از</div>
                 <div class="_value">
                     <app-date-jalali name="fromDate"
@@ -68,7 +68,7 @@
                     </app-date-jalali>
                 </div>
             </div>
-            <div class="input_2" [hidden]="!searchService._isOrderByDate">
+            <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                 <div class="_key">تا</div>
                 <div class="_value">
                     <app-date-jalali name="toDate"

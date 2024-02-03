@@ -9,6 +9,7 @@ import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { UtilsService } from 'services/utils.service';
 import { EN_Mess, ENSnackBarColors } from 'interfaces/enums.enum';
+// import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     this.showSpinnerConsiderExceptions();
     return next.handle(req)
       .pipe(
+        // retry(1),
         catchError((error: HttpErrorResponse) => {
           try {
 

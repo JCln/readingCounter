@@ -3,6 +3,8 @@
 @import 'input.scss';
 @import '_mat.scss';
 @import 'all-lists.scss';
+@import 'button.scss';
+@import 'cards';
 
 
 .dtable_wrapper {
@@ -22,4 +24,56 @@
     :hover {
         outline: 1px solid var(--primary_2);
     }
+}
+
+.main {
+    direction: rtl;
+    padding: var(--font_05);
+    border-radius: $border_15;
+    width: 21rem;
+    margin: auto;
+    margin-bottom: var(--font_02);
+}
+
+section.content {
+    display: grid;
+    gap: var(--font_02);
+    align-items: center;
+}
+
+.tooltip {
+    cursor: pointer;
+}
+
+.order_by {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input_1 {
+    border-radius: 10px;
+    min-width: 100%;
+}
+
+.btn_1 {
+    max-width: 100%;
+    margin-top: var(--font_xxs);
+}
+
+h2 {
+    white-space: nowrap;
+    color: var(--primary_3);
+    margin-left: var(--font_05);
+    font-size: var(--font_s);
+}
+
+h3 {
+    color: var(--primary_3);
+    font-size: var(--font_m2);
+    padding: var(--font_05);
+}
+
+[hidden] {
+    display: none;
 }

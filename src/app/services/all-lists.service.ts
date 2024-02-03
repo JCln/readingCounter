@@ -55,6 +55,24 @@ export class AllListsService {
     trackNumberOrGroupId: '',
     zoneTitle: ''
   };
+  masterByFragmentLazy_pageSign: IOnOffLoadNessessities = {
+    GUid: null,
+    listNumber: null,
+    groupId: '',
+    zoneId: null,
+    trackNumber: null,
+    trackNumberOrGroupId: '',
+    zoneTitle: ''
+  };
+  masterByFragmentAllInGroupLazy_pageSign: IOnOffLoadNessessities = {
+    GUid: null,
+    listNumber: null,
+    groupId: '',
+    zoneId: null,
+    trackNumber: null,
+    trackNumberOrGroupId: '',
+    zoneTitle: ''
+  };
   offloadedListAllInGroupLazy_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,

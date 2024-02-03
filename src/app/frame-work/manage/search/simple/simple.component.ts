@@ -32,25 +32,21 @@ export class SimpleComponent implements OnInit {
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForSearchSimple = [];
-    if (!this.searchService.verificationSimpleSearch(this.closeTabService._searchSimpleReq))
+    if (!this.searchService.verificationSimpleSearch(this.closeTabService._searchSimpleReq, this.closeTabService._isOrderByDate))
       return;
     this.closeTabService.saveDataForSearchSimple = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchSimple, this.closeTabService._searchSimpleReq);
     if (this.closeTabService.saveDataForSearchSimple.length) {
       this.converts();
     }
   }
-  nullSavedSource = () => this.closeTabService.saveDataForSearchSimple = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
     if (!MathS.isNull(this.closeTabService.saveDataForSearchSimple)) {
       this.converts();
     }
 
     this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
-    this.searchService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
   }
   ngOnInit() {
     this.classWrapper();
