@@ -13,7 +13,7 @@ import {
   IReadingProgramRes,
 } from 'interfaces/import-data';
 import { IAPK } from 'interfaces/inon-manage';
-import { ISidebarVals, ITabs, ITitleValue } from 'interfaces/ioverall-config';
+import { ISearchInOrderTo, ISidebarVals, ITabs, ITitleValue } from 'interfaces/ioverall-config';
 import {
   IAbBahaFormula,
   IAutomaticImport,
@@ -62,14 +62,19 @@ import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces
 import { ENEssentialsToSave, ENRandomNumbers, ITimesType } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CloseTabService {
+  _isOrderByDate: boolean = false;//TODO: Show order by date in order to personal config
   ENReadingReports = ENReadingReports;
 
-  constructor(public utilsService: UtilsService) {
+  constructor(
+    public utilsService: UtilsService,
+    public profileService: ProfileService
+  ) {
   }
   /* TAB WRAPPER */
   readonly _rowsPerPage: number[] = [10, 20, 50, 100];
@@ -105,13 +110,20 @@ export class CloseTabService {
     this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
     return this.trackingOffloadedMaster;
   }
-  simpleDetailsByFragmentDetails: ITracking[] = [];
+  simpleMasterByFragmentDetails: ITracking[] = [];
   simpleMasterByFragment: ITrackingMasterDto[] = [];
-  getSimpleMasterByFragment = async (canRefresh: boolean): Promise<any> => {
-    if (!MathS.isNull(this.simpleMasterByFragment) && !canRefresh)
-      return this.simpleMasterByFragment;
-    this.simpleMasterByFragment = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingSimpleMasterByFragment);
-    return this.simpleMasterByFragment;
+  simpleMasterByFragmentAllLazy: IOnOffLoadFlatLazy = {
+    data: [],
+    totalRecords: 0
+  };
+  simpleMasterByFragmentReq = {
+    zoneId: null,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    readingPeriodId: null,
+    _selectedKindId: '',
+    year: this.utilsService.getFirstYear(),
+    isCollapsed: false
   }
   insertToTimes = (): ITimesType => {
     let temp = this.utilsService.dateJalaliService.getCurrentTime();
@@ -147,6 +159,14 @@ export class CloseTabService {
     multiSelectMasrafStateId: [],//وضعیت مصرف
     multiSelectHazf: []// 
   };
+  masterByFragmentLazyReq = {
+    counterStateValue: null,
+    multiSelectCounterStateId: [],
+    multiSelectPreCounterStateCode: [],
+    multiSelectkarbariCode: [],
+    multiSelectMasrafStateId: [],//وضعیت مصرف
+    multiSelectHazf: []// 
+  };
   offloadedAllLazy: IOnOffLoadFlatLazy = {
     data: [],
     totalRecords: 0
@@ -160,6 +180,18 @@ export class CloseTabService {
     multiSelectHazf: []// 
   };
   offloadedAllInGroupLazy: IOnOffLoadFlatLazy = {
+    data: [],
+    totalRecords: 0
+  };
+  masterByFragmentallInGroupLazyReq = {
+    counterStateValue: null,
+    multiSelectCounterStateId: [],
+    multiSelectPreCounterStateCode: [],
+    multiSelectkarbariCode: [],
+    multiSelectMasrafStateId: [],//وضعیت مصرف
+    multiSelectHazf: []// 
+  };
+  masterByFragmentAllInGroupLazy: IOnOffLoadFlatLazy = {
     data: [],
     totalRecords: 0
   };
@@ -578,7 +610,7 @@ export class CloseTabService {
     searchByText: '',
     showAll: false
   }
-  saveDataForSearchSimple: ISearchSimpleOutput[];
+  saveDataForSearchSimple: ISearchSimpleOutput[] = [];
   // list manager
   saveDataForLMPD: IOffLoadPerDay;
   saveDataForLMPDTrackNumber: number;
@@ -1016,7 +1048,25 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished, defaultValue: [] },
     { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, defaultValue_2: '', url: EN_Routes.followUp },
-    { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
+    {
+      id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme, defaultReq: {
+        zoneId: null,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        readingPeriodId: null,
+        zoneIds: [],
+        year: this.utilsService.getFirstYear(),
+        reportIds: [],
+        counterStateIds: [],
+        masrafStates: [],
+        karbariCodes: [],
+        fragmentMasterIds: [],
+        _selectedKindId: '',
+        searchByText: '',
+        showAll: false
+      },
+      defaultValue: []
+    },
     {
       id: 1, req: ENEssentialsToSave._searchSimpleReq, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple, defaultValue: [], defaultReq: {
         zoneId: null,
@@ -1050,10 +1100,49 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
     { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory, defaultValue: [] },
-    { id: 2, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy, defaultValue: { data: [], totalRecords: 0 } },
-    { id: 2, value: ENEssentialsToSave.offloadedAllInGroupLazy, url: EN_Routes.listAllInGroupLazy, defaultValue: { data: [], totalRecords: 0 } },
+    {
+      id: 2, req: ENEssentialsToSave.saveDataForOffloadedAllLazyReq, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy, defaultValue: { data: [], totalRecords: 0 }, defaultReq: {
+        counterStateValue: null,
+        multiSelectCounterStateId: [],
+        multiSelectPreCounterStateCode: [],
+        multiSelectkarbariCode: [],
+        multiSelectMasrafStateId: [],//وضعیت مصرف
+        multiSelectHazf: []// 
+      }
+    },
+    { id: 2, value: ENEssentialsToSave.simpleMasterByFragmentAllLazy, url: EN_Routes.simpleMasterByFragmentAllLazy, defaultValue: { data: [], totalRecords: 0 } },
+    {
+      id: 2, req: ENEssentialsToSave.masterByFragmentallInGroupLazyReq, value: ENEssentialsToSave.masterByFragmentAllInGroupLazy, url: EN_Routes.masterByFragmentAllInGroupLazy, defaultValue: { data: [], totalRecords: 0 }, defaultReq: {
+        counterStateValue: null,
+        multiSelectCounterStateId: [],
+        multiSelectPreCounterStateCode: [],
+        multiSelectkarbariCode: [],
+        multiSelectMasrafStateId: [],//وضعیت مصرف
+        multiSelectHazf: []// 
+      }
+    },
+    {
+      id: 2, req: ENEssentialsToSave.allInGroupLazyReq, value: ENEssentialsToSave.offloadedAllInGroupLazy, url: EN_Routes.listAllInGroupLazy, defaultValue: { data: [], totalRecords: 0 }, defaultReq: {
+        counterStateValue: null,
+        multiSelectCounterStateId: [],
+        multiSelectPreCounterStateCode: [],
+        multiSelectkarbariCode: [],
+        multiSelectMasrafStateId: [],//وضعیت مصرف
+        multiSelectHazf: []// 
+      }
+    },
     { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, value_2: ENEssentialsToSave.trackingOffloadedDetails, url: EN_Routes.trackOffloadedMaster, defaultValue: [], defaultValue_2: [] },
-    { id: 2, value: ENEssentialsToSave.simpleMasterByFragment, value_2: ENEssentialsToSave.simpleDetailsByFragmentDetails, url: EN_Routes.simpleMasterByFragment, defaultValue: [], defaultValue_2: [] },
+    {
+      id: 2, req: ENEssentialsToSave.simpleMasterByFragmentReq, value: ENEssentialsToSave.simpleMasterByFragment, value_2: ENEssentialsToSave.simpleMasterByFragmentDetails, url: EN_Routes.simpleMasterByFragment, defaultValue: [], defaultValue_2: [], defaultReq: {
+        zoneId: null,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        readingPeriodId: null,
+        _selectedKindId: '',
+        year: this.utilsService.getFirstYear(),
+        isCollapsed: false
+      }
+    },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
     { id: 2, req: ENEssentialsToSave.authenticityAttemptsReq, value: ENEssentialsToSave.authenticityAttempts, url: EN_Routes.requestLogsAuthenticityAttempts },
@@ -1174,6 +1263,16 @@ export class CloseTabService {
   }
   receiveToDateJalali = (variable: ENReadingReports, $event: string) => {
     this[variable].toDate = $event;
+  }
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.utilsService.getSearchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.utilsService.getSearchInOrderTo;
+    }
   }
 
 }

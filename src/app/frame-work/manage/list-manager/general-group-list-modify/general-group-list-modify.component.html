@@ -273,7 +273,8 @@
                                                 <input [(ngModel)]="dataSource[col.field]">
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                <div class="tooltip">
+                                                <div class="tooltip"
+                                                    (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): true">
                                                     {{dataSource[col.field] && dataSource[col.field].length > 0 ?
                                                     dataSource[col.field].toString().split(' ')[0]
                                                     : ''}}

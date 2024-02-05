@@ -12,6 +12,7 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.wrmlalltrue, title: 'اصلاح', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmlGeneralModify, title: 'اصلاح کلی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrimpsimafardpgbatch, title: 'صدور دسته‌ای', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.wrimpsimafardpgsingle, title: 'صدور تکی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.userLoggins, title: 'ورود', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.reqLogBlockedUsers, title: 'Ip های مسدود شده', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmlGeneralGModify, title: 'اصلاح کلی(دسته‌ای)', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
@@ -27,6 +28,7 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.userCompare, title: 'مقایسه تغییرات دسترسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.listAllLazy, title: 'اصلاح مسیر 2', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.listAllInGroupLazy, title: 'اصلاح 2', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.simpleMasterByFragmentAllLazy, title: 'مشاهده نوبتی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
             ]
         }
     ]

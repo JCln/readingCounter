@@ -1,13 +1,16 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { ITrackingMasterDto, ITracking } from 'interfaces/itrackings';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { SearchService } from 'services/search.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
+import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-simple-master-by-fragment',
@@ -15,6 +18,9 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./simple-master-by-fragment.component.scss']
 })
 export class SimpleMasterByFragmentComponent extends FactoryONE {
+  zoneDictionary: IDictionaryManager[] = [];
+  readingPeriodKindDictionary: IDictionaryManager[] = [];
+  readingPeriodDictionary: IDictionaryManager[] = [];
   private readonly simpleMasterOutputName: string = 'simpleMasterByFragment';
   @ViewChild(Table) dtable: Table;
 
@@ -25,7 +31,8 @@ export class SimpleMasterByFragmentComponent extends FactoryONE {
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private columnManager: ColumnManager,
-    private outputManagerService: OutputManagerService
+    private outputManagerService: OutputManagerService,
+    private searchService: SearchService
   ) {
     super();
   }
@@ -55,7 +62,7 @@ export class SimpleMasterByFragmentComponent extends FactoryONE {
     })
   }
   loadDetailPlease = async (dataSource: ITrackingMasterDto, rowIndex: number) => {
-    this.closeTabService.simpleDetailsByFragmentDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
+    this.closeTabService.simpleMasterByFragmentDetails[rowIndex] = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.trackingOffloadedDetails, dataSource.groupId);
   }
   doLoadIfToggled(): void {
     const selectedKey = Object.keys(this.dtable.expandedRowKeys)[0];
@@ -66,24 +73,43 @@ export class SimpleMasterByFragmentComponent extends FactoryONE {
       }
     }
   }
-  routeToOffloadLazy = (dataSource: ITracking) => {
-    this.trackingManagerService.routeToOffloadLazy(dataSource);
+  converts = async () => {
+    Converter.convertIdToTitle(this.closeTabService.simpleMasterByFragment, this.zoneDictionary, 'zoneId');
   }
-  routeToAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
-    this.trackingManagerService.routeToOffloadAllInGroupLazy(dataSource);
+  connectToServer = async () => {
+    this.closeTabService.simpleMasterByFragment = [];
+    if (!this.searchService.verificationSimpleSearch(this.closeTabService.simpleMasterByFragmentReq, this.closeTabService._isOrderByDate))
+      return;
+    this.closeTabService.simpleMasterByFragment = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingSimpleMasterByFragment, this.closeTabService.simpleMasterByFragmentReq);
+    if (this.closeTabService.simpleMasterByFragment.length) {
+      this.converts();
+      this.insertSelectedColumns();
+    }
+  }
+  routeToOffloadLazy = (dataSource: ITracking) => {
+    this.trackingManagerService.routeToMasterByFragmentLazy(dataSource);
+  }
+  routeToMasterByFragmentGroupLazy = (dataSource: ITrackingMasterDto) => {
+    this.trackingManagerService.routeToMasterByFragmentAllInGroupLazy(dataSource);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.simpleDetailsByFragmentDetails = [];
+    if (!MathS.isNull(this.closeTabService.saveDataForSearchSimple)) {
+      this.converts();
     }
 
-    await this.closeTabService.getSimpleMasterByFragment(canRefresh ? canRefresh : false);
+    this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.closeTabService.getSearchInOrderTo();
+
+    // await this.closeTabService.getSimpleMasterByFragment(canRefresh ? canRefresh : false);
     this.insertSelectedColumns();
   }
   getExcel = async (dataSource: ITracking) => {
     const res = await this.trackingManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, dataSource.groupId);
     this.outputManagerService.downloadFile(res);
   }
-
+  getReadingPeriod = async () => {
+    this.readingPeriodDictionary = await this.trackingManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.simpleMasterByFragmentReq._selectedKindId);
+  }
 
 }

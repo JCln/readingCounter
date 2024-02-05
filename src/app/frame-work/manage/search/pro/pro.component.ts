@@ -109,7 +109,7 @@ export class ProComponent extends AllListsFactory {
     this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
     this.karbariDictionary = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.searchService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
@@ -121,7 +121,7 @@ export class ProComponent extends AllListsFactory {
       this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(a);
   }
   async connectToServer() {
-    if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.searchService._isOrderByDate)) {
+    if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.closeTabService._isOrderByDate)) {
       if (document.activeElement.id == 'excel_download') {
         this.outputManagerService.saveAsExcelABuffer(await this.searchService.ajaxReqWrapperService.postBlob(ENInterfaces.ListGetProExcel, this.closeTabService.saveDataForSearchProReq), this.dateJalaliService.getCurrentDate());
       }

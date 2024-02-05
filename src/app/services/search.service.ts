@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { EN_messages, IMasrafStates } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  IObjectIteratation,
-  ISearchInOrderTo
+  IObjectIteratation
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -18,7 +17,6 @@ import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
 import { PageSignsService } from './page-signs.service';
-import { ProfileService } from './profile.service';
 import { ColumnManager } from '../classes/column-manager';
 
 @Injectable({
@@ -28,8 +26,6 @@ export class SearchService {
   ENSearchs = ENSearchs;
   private readonly _searchProExcel: string = '_searchProExcel';
 
-  _isOrderByDate: boolean = false;
-
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public utilsService: UtilsService,
@@ -37,21 +33,10 @@ export class SearchService {
     private followUpService: FollowUpService,
     private allListsService: AllListsService,
     private pageSignsService: PageSignsService,
-    private profileService: ProfileService,
     private columnManager: ColumnManager
   ) { }
 
   // should call "getSEarchInOrderTo" to isOrderByDate work perfectly
-  getSearchInOrderTo = (): ISearchInOrderTo[] => {
-    if (this.profileService.getLocalValue()) {
-      this._isOrderByDate = false;
-      return this.utilsService.getSearchInOrderToReverse;
-    }
-    else {
-      this._isOrderByDate = true;
-      return this.utilsService.getSearchInOrderTo;
-    }
-  }
   columnSearchProExcel = (): IObjectIteratation[] => {
     return this.columnManager.getColumnsMenus(this._searchProExcel);
   }
@@ -185,10 +170,17 @@ export class SearchService {
     return false;
   }
   /*VERIFICATION*/
-  verificationSimpleSearch = (searchReq: ISearchSimpleReq): boolean => {
+  verificationSimpleSearch = (searchReq: ISearchSimpleReq, _isOrderByDate: boolean): boolean => {
     searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
     searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
-    if (this._isOrderByDate)
+    if (_isOrderByDate)
+      return this.validateSearchSimpleByDate(searchReq);
+    return this.validationSearchSimpleByPeriod(searchReq)
+  }
+  verificationSimpleMasterByFragment = (searchReq: ISearchSimpleReq, _isOrderByDate: boolean): boolean => {
+    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
+    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
+    if (_isOrderByDate)
       return this.validateSearchSimpleByDate(searchReq);
     return this.validationSearchSimpleByPeriod(searchReq)
   }
