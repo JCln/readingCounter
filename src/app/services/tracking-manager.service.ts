@@ -301,15 +301,6 @@ export class TrackingManagerService {
     this.allListsService.offloadedListLazy_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.listAllLazy);
   }
-  routeToOffloadAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid = dataSource.groupId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId = dataSource.groupId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
-    this.utilsService.routeTo(EN_Routes.listAllInGroupLazy);
-  }
   routeToMasterByFragmentLazy = (dataSource: ITracking) => {
     this.allListsService.masterByFragmentLazy_pageSign.GUid = dataSource.id;
     this.allListsService.masterByFragmentLazy_pageSign.listNumber = dataSource.listNumber;
@@ -318,6 +309,15 @@ export class TrackingManagerService {
     this.allListsService.masterByFragmentLazy_pageSign.zoneTitle = dataSource.zoneTitle;
     this.allListsService.masterByFragmentLazy_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.simpleMasterByFragmentAllLazy);
+  }
+  routeToOffloadAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid = dataSource.groupId;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId = dataSource.groupId;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.offloadedListAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
+    this.utilsService.routeTo(EN_Routes.listAllInGroupLazy);
   }
   routeToMasterByFragmentAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
     this.allListsService.masterByFragmentAllInGroupLazy_pageSign.GUid = dataSource.groupId;

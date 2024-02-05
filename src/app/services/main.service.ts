@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { EnvService } from './env.service';
+import { retry } from 'rxjs/internal/operators/retry';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,11 @@ export class MainService {
 
 
   GET = (URL: string) => {
-    return this.http.get(this.environment.API_URL + '/' + URL);
-    // .pipe(
-    // retry(1) retry failed request up to 1
-    // catchError(err => this.errorHandler.errorHandler(err))
-    // )    
+    return this.http.get(this.environment.API_URL + '/' + URL)
+      .pipe(
+        retry(1) //retry failed request up to 1
+        // catchError(err => this.errorHandler.errorHandler(err))
+      )
   }
   GETID = (ID: string, URL: string) => {
     return this.http.get<any>(this.environment.API_URL + '/' + URL + '/' + ID);
@@ -46,7 +47,7 @@ export class MainService {
     return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
   }
   POSTBODY = (URL: string, body: object) => {
-    return this.http.post(this.environment.API_URL + '/' + URL, body);
+    return this.http.post(this.environment.API_URL + '/' + URL, body).pipe(retry(1));
   }
   POSTBODYProgress = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { reportProgress: true, observe: 'events' });

@@ -77,10 +77,7 @@ export class MasterByFragmentAllInGroupLazyComponent extends AllListsFactory imp
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
 
     this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId);
-    this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId);
-    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId);
     this.resetDataSourceView();
 
 

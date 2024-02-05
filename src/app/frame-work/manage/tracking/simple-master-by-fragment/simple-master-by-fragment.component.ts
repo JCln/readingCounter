@@ -8,9 +8,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
-import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-simple-master-by-fragment',
