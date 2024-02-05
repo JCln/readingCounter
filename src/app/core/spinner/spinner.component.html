@@ -11,8 +11,10 @@
 </section>
 
 <section class="pending_spinner d_flex_center" *ngIf="networkReq">
-    <p-progressSpinner strokeWidth="5" fill="var(--surface-ground)" animationDuration="350ms"></p-progressSpinner>
-    <button class="_cancel" *ngIf="_hasSpinner" (click)="cancelMe()">
-        لغو درخواست
-    </button>
+    <div class="wrapper">
+        <p-progressSpinner strokeWidth="5" fill="var(--surface-ground)" animationDuration="350ms"></p-progressSpinner>
+        <button class="_cancel" *ngIf="_hasSpinner" (click)="cancelMe()">
+            لغو درخواست
+        </button>
+    </div>
 </section>

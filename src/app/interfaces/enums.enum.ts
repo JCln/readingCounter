@@ -608,7 +608,8 @@ export enum ENHubMessages {
     Connecting = 'درحال اتصال به سامانه «لحظه»',
     Disconnecting = 'درحال قطع ارتباط از سامانه «لحظه»',
     Reconnecting = 'درحال اتصال به سامانه «لحظه»',
-    Connected = 'متصل به سامانه «لحظه»'
+    Connected = 'متصل به سامانه «لحظه»',
+    toastDisconnected = 'ارتباط شما با سامانه «لحظه» قطع شده است'
 }
 export enum ENSnackBarColors {
     warn = 'snack_warn',

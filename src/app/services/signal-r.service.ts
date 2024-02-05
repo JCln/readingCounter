@@ -6,7 +6,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
 import { InteractionService } from 'services/interaction.service';
 import { NotificationMediaTypeIds } from 'interfaces/build';
-import { ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
+import { ENHubMessages, ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +32,11 @@ export class SignalRService {
       const toast = {
         summary: EN_messages.networkError,
         severity: ENToastColors.warn,
-        sticky: false,
         detail: 'درحال اتصال مجدد..',
         icon: 'pi pi-info',
-        key: 'text'
+        key: 'text',
+        sticky: false,
+        hasReadMore: true
       }
       this.utilsService.snackWrapperService.openToastSignal(toast);
     })
@@ -51,21 +52,21 @@ export class SignalRService {
         icon: 'pi pi-info',
         key: 'text',
         sticky: false,
+        hasReadMore: true
       }
       this.utilsService.snackWrapperService.openToastSignal(toast);
     })
   }
   private disconnected() {
     this.hubConnection.onclose(disconnected => {
-      console.log('we are Disconnected');
       this.hideSpinnersAndRefreshPage();
       const toast = {
         severity: ENToastColors.warn,
-        summary: 'دسترسی به شبکه وجود ندارد',
-        detail: 'لطفا تب کنونی/مرورگر را رفرش نمایید',
+        summary: ENHubMessages.toastDisconnected,
         icon: 'pi pi-info',
         key: 'text',
         sticky: false,
+        hasReadMore: true
       }
       this.utilsService.snackWrapperService.openToastSignal(toast);
     })
@@ -75,7 +76,7 @@ export class SignalRService {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.utilsService.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
       .withAutomaticReconnect(this.retryTimes)
-      // .configureLogging(signalR.LogLevel.Information)
+      // .configureLogging(signalR.L82ogLevel.Information)
       // .configureLogging(signalR.LogLevel.Debug)
       .build();
     this.hubConnection

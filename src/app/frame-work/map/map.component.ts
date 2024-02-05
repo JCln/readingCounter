@@ -47,8 +47,6 @@ const myIcon = L.Icon.extend({
   }
 });
 const iconSimple = new myIcon({ iconUrl: 'assets/imgs/leaflet/marker-icon.png' });
-const markerGreen = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_blue.png' });
-const markerRed = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_red.png' });
 L.Marker.prototype.options.icon = simpleIcon;
 
 @Component({
@@ -367,8 +365,12 @@ export class MapComponent implements OnInit, OnDestroy {
   private circleToLeaflet = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
-    L.marker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
-      .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`);
+    items.counterStateTitle === 'بسته' ?
+      L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#f44336' }).addTo(this.layerGroup)
+        .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`)
+      :
+      L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#2196f3' }).addTo(this.layerGroup)
+        .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`)
   }
   private markWithoutCluster = (lat: number, lng: number, items) => {
     if (lat === 0)

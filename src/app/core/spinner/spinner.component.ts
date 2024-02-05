@@ -16,7 +16,7 @@ export class SpinnerComponent implements OnInit {
   _hasSpinner: boolean = false;
   interval: any;
   expire_seconds: number = 0;
-  private readonly static_second: number = 7;
+  private readonly static_second: number = 9;
   private readonly delayTime: number = 1000;
 
   constructor(
@@ -66,16 +66,14 @@ export class SpinnerComponent implements OnInit {
   }
   intervalWrapper = () => {
     this.expire_seconds = this.static_second;
-    this.interval = setInterval(async () => {
+    this.interval = setInterval(() => {
       this.expire_seconds--;
       if (this.expire_seconds > 1) {
         if (this.expire_seconds <= this.static_second / 2) {
           const url = this.utilsService.compositeService.getRouterUrl();
           this.interactionService.setRefresh(url);
-          console.log('after time devide 2');
         }
         if (this.expire_seconds <= this.static_second / 4) {
-          console.log('after time devide 4');
           this.removeSpinner();
           const config = {
             messageTitle: EN_messages.networkError,
@@ -85,13 +83,16 @@ export class SpinnerComponent implements OnInit {
             isDelete: false,
             icon: 'pi pi-wifi',
           }
-          await this.utilsService.firstConfirmDialog(config);
+          this.utilsService.firstConfirmDialog(config);
+          this.expire_seconds = 0;
+          this.clearInterval();
+          return;
         };
       }
       else {
         this.clearInterval();
+        return;
       }
-      console.log(this.expire_seconds);
     }, this.delayTime);
   }
 }
