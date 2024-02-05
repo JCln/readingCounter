@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { CoreModule } from './core/core.module';
 import { EnvServiceProvider } from './services/env.service.provider';
 import { SharedTwoModule } from './shared/shared-two.module';
+import { CustomPreloadingStrategyService } from 'services/custom-preloading-strategy.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { SharedTwoModule } from './shared/shared-two.module';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [EnvServiceProvider],
+  providers: [EnvServiceProvider, CustomPreloadingStrategyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

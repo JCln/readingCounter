@@ -6,6 +6,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { HfcComponent } from './core/_layouts/hfc/hfc.component';
 import { LayoutComponent } from './core/_layouts/layout/layout.component';
 import { PageNotFoundComponent } from './frame-work/page-not-found/page-not-found.component';
+import { CustomPreloadingStrategyService } from 'services/custom-preloading-strategy.service';
 
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', onSameUrlNavigation: 'reload', preloadingStrategy: CustomPreloadingStrategyService })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./map/map.module').then(mapComponent => mapComponent.MapModule) },
-  { path: 'imp', loadChildren: () => import('./import-data/import-data.module').then(importData => importData.ImportDataModule) },
-  { path: 'settings', loadChildren: () => import('./settings/settings.module').then(settings => settings.SettingsModule) },
-  { path: 'rpts', loadChildren: () => import('./reports/reports.module').then(reports => reports.ReportsModule) },
-  { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
-  { path: 'mu', loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule) },
+  { path: 'imp', loadChildren: () => import('./import-data/import-data.module').then(importData => importData.ImportDataModule), data: { preload: true } },
+  { path: 'settings', loadChildren: () => import('./settings/settings.module').then(settings => settings.SettingsModule), data: { preload: true } },
+  { path: 'rpts', loadChildren: () => import('./reports/reports.module').then(reports => reports.ReportsModule), data: { preload: true } },
+  { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule), data: { preload: true } },
+  { path: 'mu', loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule), data: { preload: true } },
   { path: 'tools', loadChildren: () => import('./tools/tools.module').then(tools => tools.ToolsModule) },
   { path: 'offline', loadChildren: () => import('./offline-mode/offline-mode.module').then(offlineMode => offlineMode.OfflineModeModule) },
   { path: 'flash', loadChildren: () => import('./moment-system/moment-system.module').then(momentSystem => momentSystem.MomentSystemModule) },

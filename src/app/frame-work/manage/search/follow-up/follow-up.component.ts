@@ -84,10 +84,7 @@ export class FollowUpComponent extends FactoryONE {
       this.makeConfigs();
     }
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.connectToServer();
-    }
+  classWrapper = async () => {
     /** 
      * it separate data from followUp service and 
      * simple search route,
@@ -109,7 +106,7 @@ export class FollowUpComponent extends FactoryONE {
   onRowEditSave = async (dataSource: IFollowUpHistory) => {
     const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
     this.trackingManagerService.successSnackMessage(res.message);
-    this.refreshTable();
+    this.connectToServer();
   }
   onRowEditInit(dataSource: any) {
     // this.clonedProducts[dataSource.id] = { ...dataSource };

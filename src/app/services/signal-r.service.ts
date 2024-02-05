@@ -57,20 +57,20 @@ export class SignalRService {
       this.utilsService.snackWrapperService.openToastSignal(toast);
     })
   }
-  private disconnected() {
-    this.hubConnection.onclose(disconnected => {
-      this.hideSpinnersAndRefreshPage();
-      const toast = {
-        severity: ENToastColors.warn,
-        summary: ENHubMessages.toastDisconnected,
-        icon: 'pi pi-info',
-        key: 'text',
-        sticky: false,
-        hasReadMore: true
-      }
-      this.utilsService.snackWrapperService.openToastSignal(toast);
-    })
-  }
+  // private disconnected() {
+  //   this.hubConnection.onclose(disconnected => {
+  //     this.hideSpinnersAndRefreshPage();
+  //     const toast = {
+  //       severity: ENToastColors.warn,
+  //       summary: ENHubMessages.toastDisconnected,
+  //       icon: 'pi pi-info',
+  //       key: 'text',
+  //       sticky: false,
+  //       hasReadMore: true
+  //     }
+  //     this.utilsService.snackWrapperService.openToastSignal(toast);
+  //   })
+  // }
   public startConnection = () => {
     const authToken = { accessTokenFactory: () => this.utilsService.compositeService.jwtService.getAccessToken() };
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -86,7 +86,7 @@ export class SignalRService {
 
     this.onReconnecting();
     this.onReConnected();
-    this.disconnected();
+    // this.disconnected();
 
     this.receiveMessage();
     this.receiveTextWithTimer();
