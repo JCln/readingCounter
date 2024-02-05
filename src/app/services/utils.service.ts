@@ -1,3 +1,4 @@
+import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage, IPrimeConfirmDialog } from 'interfaces/ioverall-config';
@@ -35,7 +36,8 @@ export class UtilsService {
     private _location: Location,
     public snackWrapperService: SnackWrapperService,
     public ajaxReqWrapperService: AjaxReqWrapperService,
-    public collapser: Collapser
+    public collapser: Collapser,
+    public spinnerWrapperService: SpinnerWrapperService
   ) { }
 
   getSimafaImportStatus = (): ISimafaImportStatus => {

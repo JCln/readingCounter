@@ -6,13 +6,14 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
 import { InteractionService } from 'services/interaction.service';
 import { NotificationMediaTypeIds } from 'interfaces/build';
-import { ENSnackBarTimes } from 'interfaces/enums.enum';
+import { ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
+  private readonly retryTimes: number[] = [2, 4, 8, 16];
 
   constructor(
     public utilsService: UtilsService,
@@ -20,11 +21,60 @@ export class SignalRService {
     public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
+  hideSpinnersAndRefreshPage() {
+    this.utilsService.spinnerWrapperService.stopAll();
+    const url = this.utilsService.compositeService.getRouterUrl();
+    this.interactionService.setRefresh(url);
+  }
+  private onReconnecting() {
+    this.hubConnection.onreconnecting(error => {
+      console.log('try to reconnect...');
+      const toast = {
+        summary: EN_messages.networkError,
+        severity: ENToastColors.warn,
+        sticky: false,
+        detail: 'درحال اتصال مجدد..',
+        icon: 'pi pi-info',
+        key: 'text'
+      }
+      this.utilsService.snackWrapperService.openToastSignal(toast);
+    })
+  }
+  private onReConnected() {
+    this.hubConnection.onreconnected(connected => {
+      console.log('we are connected');
+      this.hideSpinnersAndRefreshPage();
+      const toast = {
+        severity: ENToastColors.success,
+        summary: 'ارتباط با شبکه برقرار شد',
+        detail: '',
+        icon: 'pi pi-info',
+        key: 'text',
+        sticky: false,
+      }
+      this.utilsService.snackWrapperService.openToastSignal(toast);
+    })
+  }
+  private disconnected() {
+    this.hubConnection.onclose(disconnected => {
+      console.log('we are Disconnected');
+      this.hideSpinnersAndRefreshPage();
+      const toast = {
+        severity: ENToastColors.warn,
+        summary: 'دسترسی به شبکه وجود ندارد',
+        detail: 'لطفا تب کنونی/مرورگر را رفرش نمایید',
+        icon: 'pi pi-info',
+        key: 'text',
+        sticky: false,
+      }
+      this.utilsService.snackWrapperService.openToastSignal(toast);
+    })
+  }
   public startConnection = () => {
     const authToken = { accessTokenFactory: () => this.utilsService.compositeService.jwtService.getAccessToken() };
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.utilsService.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
-      .withAutomaticReconnect()
+      .withAutomaticReconnect(this.retryTimes)
       // .configureLogging(signalR.LogLevel.Information)
       // .configureLogging(signalR.LogLevel.Debug)
       .build();
@@ -32,6 +82,10 @@ export class SignalRService {
       .start()
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
+
+    this.onReconnecting();
+    this.onReConnected();
+    this.disconnected();
 
     this.receiveMessage();
     this.receiveTextWithTimer();
@@ -58,6 +112,7 @@ export class SignalRService {
     try {
       await this.hubConnection.start();
       console.log("SignalR Connected.");
+      this.hideSpinnersAndRefreshPage();
     } catch (err) {
       console.log(err);
     }

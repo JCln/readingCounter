@@ -142,6 +142,8 @@ export enum EN_messages {
     insert_radif = 'شماره پرونده را وارد نمایید',
     insert_allReaders = 'برای هر مسیر یک قرائت کننده مشخص نمایید',
     insert_nextBazdidDate = 'تاریخ بازدید بعدی را مشخص نمایید',
+    networkError = 'ارتباط با شبکه وجود ندارد',
+    networkErrorAdvice = 'لطفا پس از اطمینان از دسترسی به شبکه، صفحه یا تب را رفرش نمایید',
 
     format_invalid_trackNumber = 'فرمت شماره پیگیری اشتباه است',
     format_invalidOrWrong = 'مقدار/ مقادیر وارد شده خالی یا اشتباه است',

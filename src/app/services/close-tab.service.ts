@@ -719,7 +719,7 @@ export class CloseTabService {
   saveDataForIpSpecialRules: any;
   // saveDataForIpSpecialRules: IIpRules[];
   license: ILicenseInfo;
-  notificationMessages: INotificationMessage[] = [];
+  notificationMessages: INotificationMessage[] = [] = [];
   notificationMessagesReq = {
     messageType: -1,
     userInputType: -1

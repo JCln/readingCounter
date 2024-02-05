@@ -20,12 +20,12 @@ export class UserEditOnRoleComponent extends FactoryONE {
   connectToServer = () => {
     this.usersAllService.userEditOnRole(this.closeTabService.saveDataForEditOnRole);
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForEditOnRole = '';
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForEditOnRole = await this.usersAllService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
+  }
+  classWrapper = async () => {
     if (!this.closeTabService.saveDataForEditOnRole) {
-      this.closeTabService.saveDataForEditOnRole = await this.usersAllService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
+      this.callAPI();
     }
     this.usersAllService.firstConfirmDialog({ messageTitle: EN_messages.confirmUserGroupChange1, doesNotReturnButton: false });
   }

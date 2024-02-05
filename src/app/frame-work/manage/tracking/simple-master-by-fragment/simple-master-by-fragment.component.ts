@@ -73,30 +73,28 @@ export class SimpleMasterByFragmentComponent extends FactoryONE {
       }
     }
   }
-  converts = async () => {
-    Converter.convertIdToTitle(this.closeTabService.simpleMasterByFragment, this.zoneDictionary, 'zoneId');
-  }
   connectToServer = async () => {
     this.closeTabService.simpleMasterByFragment = [];
     if (!this.searchService.verificationSimpleSearch(this.closeTabService.simpleMasterByFragmentReq, this.closeTabService._isOrderByDate))
       return;
     this.closeTabService.simpleMasterByFragment = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingSimpleMasterByFragment, this.closeTabService.simpleMasterByFragmentReq);
     if (this.closeTabService.simpleMasterByFragment.length) {
-      this.converts();
       this.insertSelectedColumns();
+      // TODO: call opened more details dialog
+      setTimeout(() => {
+        this.doLoadIfToggled();
+      }, 0);
     }
   }
   routeToOffloadLazy = (dataSource: ITracking) => {
     this.trackingManagerService.routeToMasterByFragmentLazy(dataSource);
   }
   routeToMasterByFragmentGroupLazy = (dataSource: ITrackingMasterDto) => {
+    console.log(dataSource);
+
     this.trackingManagerService.routeToMasterByFragmentAllInGroupLazy(dataSource);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (!MathS.isNull(this.closeTabService.saveDataForSearchSimple)) {
-      this.converts();
-    }
-
     this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
     this.closeTabService.getSearchInOrderTo();

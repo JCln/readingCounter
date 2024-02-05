@@ -68,7 +68,7 @@ export class MasterByFragmentAllInGroupLazyComponent extends AllListsFactory imp
     if (MathS.isNull(this.allListsService.masterByFragmentAllInGroupLazy_pageSign.GUid))
       return;
 
-    this.closeTabService.masterByFragmentAllInGroupLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.masterByFragmentAllInGroupLazy_pageSign.GUid, event);
+    this.closeTabService.masterByFragmentAllInGroupLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInGroupLazy + this.allListsService.masterByFragmentAllInGroupLazy_pageSign.GUid, event);
     this.totalRecords = this.closeTabService.masterByFragmentAllInGroupLazy.totalRecords;
 
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.masterByFragmentAllInGroupLazy.data);
@@ -76,6 +76,7 @@ export class MasterByFragmentAllInGroupLazyComponent extends AllListsFactory imp
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
 
+    this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId);
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
     this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId);
@@ -104,12 +105,13 @@ export class MasterByFragmentAllInGroupLazyComponent extends AllListsFactory imp
     this.listManagerService.setDynamicPartRanges(this.closeTabService.masterByFragmentAllInGroupLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
+    console.log(this.allListsService.masterByFragmentAllInGroupLazy_pageSign);
+
     if (!this.allListsService.masterByFragmentAllInGroupLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.simpleMasterByFragment);
     }
     else {
-      // to show counterStates radioButtons      
-      this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId);
+      // to show counterStates radioButtons            
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
       } else {

@@ -1,6 +1,5 @@
 import { DateJalaliService } from 'services/date-jalali.service';
-import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
@@ -64,7 +63,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
-    public spinnerWrapperService: SpinnerWrapperService,
     private dateJalaliService: DateJalaliService
   ) {
     super(dialogService, listManagerService);
@@ -125,6 +123,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
+    console.log(this.allListsService.generalModifyListsGrouped_pageSign);
+    
     if (!this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
     }
@@ -229,9 +229,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   filterOptions = async (e: any[], filterValid: string) => {
     // make hackable async function to show spinner on filter event
-    this.spinnerWrapperService.startPending();
+    this.closeTabService.utilsService.spinnerWrapperService.startPending();
     await this.testCallBackFun(e, filterValid);
-    this.spinnerWrapperService.stopPending();
+    this.closeTabService.utilsService.spinnerWrapperService.stopPending();
   }
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
     return new Promise(async (resolve) => {

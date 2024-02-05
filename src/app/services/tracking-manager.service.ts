@@ -301,15 +301,6 @@ export class TrackingManagerService {
     this.allListsService.offloadedListLazy_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.listAllLazy);
   }
-  routeToMasterByFragmentLazy = (dataSource: ITracking) => {
-    this.allListsService.masterByFragmentLazy_pageSign.GUid = dataSource.id;
-    this.allListsService.masterByFragmentLazy_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.masterByFragmentLazy_pageSign.groupId = dataSource.groupId;
-    this.allListsService.masterByFragmentLazy_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.masterByFragmentLazy_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.masterByFragmentLazy_pageSign.trackNumber = dataSource.trackNumber;
-    this.utilsService.routeTo(EN_Routes.simpleMasterByFragmentAllLazy);
-  }
   routeToOffloadAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
     this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid = dataSource.groupId;
     this.allListsService.offloadedListAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
@@ -319,16 +310,22 @@ export class TrackingManagerService {
     this.allListsService.offloadedListAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
     this.utilsService.routeTo(EN_Routes.listAllInGroupLazy);
   }
+  routeToMasterByFragmentLazy = (dataSource: ITracking) => {
+    this.allListsService.masterByFragmentLazy_pageSign.GUid = dataSource.id;
+    this.allListsService.masterByFragmentLazy_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.masterByFragmentLazy_pageSign.groupId = dataSource.groupId;
+    this.allListsService.masterByFragmentLazy_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.masterByFragmentLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.masterByFragmentLazy_pageSign.trackNumber = dataSource.trackNumber;
+    this.utilsService.routeTo(EN_Routes.simpleMasterByFragmentAllLazy);
+  }
   routeToMasterByFragmentAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
-    console.log(1);
-    console.log(dataSource);
-
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid = dataSource.groupId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId = dataSource.groupId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
+    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.GUid = dataSource.groupId;
+    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.groupId = dataSource.groupId;
+    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
     this.utilsService.routeTo(EN_Routes.masterByFragmentAllInGroupLazy);
   }
   routeToAssessPre = () => {

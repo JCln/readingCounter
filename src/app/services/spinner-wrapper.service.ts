@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class SpinnerWrapperService {
 
-  private loadingStatus = new BehaviorSubject<object>({ isNetwork: false, value: false });
+  private loadingStatus = new BehaviorSubject<object>({ isNetwork: false, value: false, shouldShow: false });
   loadingStatus$ = this.loadingStatus.asObservable();
 
   private loadingSmallSpinnerStatus = new BehaviorSubject<boolean>(false);
@@ -19,16 +19,19 @@ export class SpinnerWrapperService {
     this.loadingSmallSpinnerStatus.next(loadingStatus);
   }
   startPending() {
-    this.loading({ isNetwork: true, value: true });
+    this.loading({ isNetwork: true, value: true, shouldShow: true });
   }
   stopPending() {
-    this.loading({ isNetwork: true, value: false });
+    this.loading({ isNetwork: true, value: false, shouldShow: true });
   }
   startLoading() {
-    this.loading({ isNetwork: false, value: true });
+    this.loading({ isNetwork: false, value: true, shouldShow: true });
   }
   stopLoading() {
-    this.loading({ isNetwork: false, value: false });
+    this.loading({ isNetwork: false, value: false, shouldShow: true });
+  }
+  stopAll() {
+    this.loading({ isNetwork: false, value: false, shouldShow: false });
   }
   startLoadingSmallSpinner() {
     this.loadingSmallSpinner(true);
