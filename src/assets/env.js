@@ -39,10 +39,12 @@
         { title: '1402', value: 1402 }
     ];
     window.__env.getDeleteDictionary = [
-        { id: 0, title: 'حذف دائمی' },
-        { id: 2, title: 'حذف موقت' },
-        { id: 3, title: 'حذف موقت' },
-        { id: 5, title: 'حذف موقت' }
+        { id: 0, title: 'فعال' },
+        { id: 1, title: 'جمع آوري موقت' },
+        { id: 2, title: 'جمع آوري دائم' },
+        { id: 3, title: 'غير فعال موقت' },
+        { id: 4, title: 'نصب نشده' },
+        { id: 6, title: 'قطع انشعاب' }
     ];
     window.__env.getMasrafStateDictionary = [
         { id: 10, title: 'normal', value: 0, titleUnicode: 'عادی', icon: '', className: 'pi pi pi-check' },

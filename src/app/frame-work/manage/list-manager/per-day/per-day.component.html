@@ -60,7 +60,7 @@
 <section class="content">
     <h1 class="title">اطلاعات روزانه قرائت</h1>
     <main *ngFor="let history of closeTabService.saveDataForLMPD.offLoadPerDayHistory" class="card_wrapper">
-        <div class="card__content" *ngFor="let item of _selectCols">
+        <div class="card__content" *ngFor="let item of _selectCols" [ngClass]="{'double_size':item.icon}">
             <div class="input_2">
                 <div class="_key">{{item.header}}</div>
                 <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"

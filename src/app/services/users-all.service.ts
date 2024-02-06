@@ -60,6 +60,7 @@ export class UsersAllService {
     this.userEdit_pageSign.GUid = e;
     this.utilsService.routeTo(EN_Routes.wrmuedit);
   }
+  routeToAddAUser = () => this.utilsService.routeTo(EN_Routes.wrmuadd);
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false
     this[variableName].forEach(old => {

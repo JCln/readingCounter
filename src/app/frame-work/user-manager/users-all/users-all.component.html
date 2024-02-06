@@ -3,11 +3,12 @@
 [_numberOfExtraColumns]="[1, 2, 3]"
 [_sessionName]="'user-all-session'"
 [_outputFileName]="'userAll'"
+[_checkUpName]="'userAll'"
 [_selectedColumnsToRemember]="'selectedUsersAll'"
 [_hasSaveColumns]=true
-[_checkUpName]="'userAll'"
 (refreshedTable)="refreshTable()"
 (routedToEditPage)="usersAllService.routeToEditPage($event)"
 (showedExactConfig)="showExactConfig($event)"
 (showedPictures)="openAddDialog($event)"
+(downloadedAPK)="usersAllService.routeToAddAUser()"
 ></app-prime-table>

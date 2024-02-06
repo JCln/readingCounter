@@ -297,13 +297,6 @@
                         </div>
                     </i>
                 </td>
-                <td class="__icon-columns" class="error_info">
-                    <i *ngIf="dataSource.editedErrorDescription == '' && !dataSource.isResponseHasError"
-                        class="pi-check tooltip p_icons pi pi-check-circle"></i>
-                    <i *ngIf="dataSource.isResponseHasError" class="info_icon tooltip p_icons pi pi-info-circle">
-                        <div class="tooltip_text_right">{{dataSource.editedErrorDescription}}</div>
-                    </i>
-                </td>
             </tr>
 
         </ng-template>

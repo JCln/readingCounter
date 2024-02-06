@@ -7,7 +7,7 @@
 
 form._user-input {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(14rem, auto));
   gap: var(--font_02);
 }
 
@@ -130,7 +130,7 @@ input::placeholder {
 
   .checkboxes {
     display: flex;
-    border-radius: 15px;
+    border-radius: $border_15;
     padding: var(--font_025);
   }
 }

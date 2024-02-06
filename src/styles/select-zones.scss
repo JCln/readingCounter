@@ -11,8 +11,11 @@ main {
   margin: var(--font_02);
   border-radius: $border_15;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
-  grid-auto-flow: dense;
+  grid-template-columns: repeat(2, minmax(18rem, 1fr));
+
+  @media (max-width:550px) {
+    grid-template-columns: repeat(1, minmax(100%, 1fr));
+  }
 }
 
 .l_1_c,

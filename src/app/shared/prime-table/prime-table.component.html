@@ -40,6 +40,10 @@
                     class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
                     <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
                 </i>
+                <i *ngIf="_outputFileName == 'userAll'" (click)="downloadAPK()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن کاربر</div>
+                </i>
                 <section *ngIf="_hasAggregating && profileService._agg.flag" class="_grouping">
                     <div class="_group_label">گروه‌بندی</div>
                     <p-dropdown name="zones" [options]="_groupByOptions"

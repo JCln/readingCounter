@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { NavigationError, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { fromEvent, merge, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FontService } from 'services/font.service';
@@ -36,9 +36,15 @@ export class AppComponent {
       this.createOnline$().subscribe(isOnline => {
         if (isOnline) {
           if (event instanceof RouteConfigLoadStart) {
-            this.spinnerWrapperService.startLoading();
+            this.spinnerWrapperService.startLoadingSmallSpinner();
           } else if (event instanceof RouteConfigLoadEnd) {
-            this.spinnerWrapperService.stopLoading();
+            this.spinnerWrapperService.stopLoadingSmallSpinner();
+          }
+          if (event instanceof NavigationError) {
+            console.log(event.url);
+
+            this.router.navigate([event.url]);
+            // Display an error message or perform other tasks
           }
         }
       });

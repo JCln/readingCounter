@@ -2057,8 +2057,8 @@ export class ColumnManager {
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'counterReaders', header: 'قرائت کننده(ها)', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'overalCount', header: 'تعداد کل', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -2068,8 +2068,8 @@ export class ColumnManager {
     ];
     lMPerDay: IObjectIteratation[] = [
         { field: 'day', header: 'روز', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true },
-        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'fromTime', header: 'از ساعت', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'toTime', header: 'تا ساعت', isSelected: true, isSelectedOrigin: true, readonly: true },
