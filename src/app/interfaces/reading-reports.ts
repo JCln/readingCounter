@@ -4,6 +4,7 @@ export enum ENReadingReports {
     master = 'masterReq',
     inState = 'inStateReq',
     details = 'detailsReq',
+    editModifyReq = 'editModifyReq',
     importedEdited = 'importedEditedReq',
     guildsWithParams = 'guildsWithParamsReq',
     userKarkardReq = 'userKarkardReq',

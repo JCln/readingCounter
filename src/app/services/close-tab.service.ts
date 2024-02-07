@@ -12,7 +12,7 @@ import {
   IImportSimafaReadingProgramsReq,
   IReadingProgramRes,
 } from 'interfaces/import-data';
-import { IAPK } from 'interfaces/inon-manage';
+import { IAPK, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ISearchInOrderTo, ISidebarVals, ITabs, ITitleValue } from 'interfaces/ioverall-config';
 import {
   IAbBahaFormula,
@@ -63,6 +63,7 @@ import { ENEssentialsToSave, ENRandomNumbers, ITimesType } from 'interfaces/enum
 import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
+import { Search } from '../classes/search';
 
 @Injectable({
   providedIn: 'root'
@@ -791,8 +792,17 @@ export class CloseTabService {
     maxLogRecords: 0,
     deactiveTerminationMinutes: 0
   };
+  editModifyReq: IOffloadModifyReq = {
+    id: '',
+    modifyType: null,
+    checkedItems: [],
+    counterStateId: null,
+    counterNumber: null,
+    jalaliDay: '',
+    description: ''
+  };
   listLatestInfoReq: IListLatestInfoReq = {
-    searchBy: null,
+    searchBy: Search.eshterak.id,
     item: '',
   }
   listLatestInfo: any = {
@@ -1257,6 +1267,9 @@ export class CloseTabService {
         }
       }
     })
+  }
+  receiveDateJalali = (variable: ENReadingReports, $event: string) => {//just JalaliDay
+    this[variable].jalaliDay = $event;
   }
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
     this[variable].fromDate = $event;

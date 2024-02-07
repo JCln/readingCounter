@@ -36,16 +36,6 @@ export class ListLatestInfoComponent extends AllListsFactory {
   counterStateByZoneDictionary: IDictionaryManager[] = [];
   counterStateForModifyDictionary: IDictionaryManager[] = [];
 
-  editModifyReq: IOffloadModifyReq = {
-    id: '',
-    modifyType: null,
-    checkedItems: [],
-    counterStateId: null,
-    counterNumber: null,
-    jalaliDay: '',
-    description: ''
-  };
-
   constructor(
     public listManagerService: ListManagerService,
     public closeTabService: CloseTabService,
@@ -56,9 +46,8 @@ export class ListLatestInfoComponent extends AllListsFactory {
   }
 
   uploadSingleToModifyBatch = async () => {
-
-    if (this.listManagerService.vertificationLatestInfoModifyBatchReq(this.editModifyReq)) {
-      const res = await this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, [this.editModifyReq]);
+    if (this.listManagerService.vertificationLatestInfoModifyBatchReq(this.closeTabService.editModifyReq)) {
+      const res = await this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, [this.closeTabService.editModifyReq]);
       this.openEditedModifyBatch(res);
     }
     // TODO: Should convert Arabic Numbers to ENG to counterNumbers
@@ -78,13 +67,13 @@ export class ListLatestInfoComponent extends AllListsFactory {
     this._selectColsAccordion = this.listManagerService.columnManager.getColumnsMenus(this._outputFileNameAccordion);
   }
   insertToModifyReq = () => {
-    this.editModifyReq = {
+    this.closeTabService.editModifyReq = {
       id: this.closeTabService.listLatestInfo.id,
       modifyType: null,
       checkedItems: [0],
       counterStateId: null,
       counterNumber: this.closeTabService.listLatestInfo.counterNumber,
-      jalaliDay: this.closeTabService.listLatestInfo.offloadDateJalali ? this.closeTabService.listLatestInfo.offloadDateJalali : this.dateJalaliService.getCurrentDate(),
+      jalaliDay: '',//this.closeTabService.listLatestInfo.offloadDateJalali ? this.closeTabService.listLatestInfo.offloadDateJalali : this.dateJalaliService.getCurrentDate()
       description: ''
     }
   }

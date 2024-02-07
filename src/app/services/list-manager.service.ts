@@ -266,6 +266,15 @@ export class ListManagerService {
       this.showSnackWarn(EN_messages.format_invalid_counterNumber);
       return false;
     }
+    if (MathS.isNull(body.jalaliDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
+      return false;
+    }
+    if (!MathS.lengthControl(body.jalaliDay, body.jalaliDay, 9, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_Date);
+      return false;
+    }
+
 
     return true;
   }

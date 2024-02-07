@@ -9,12 +9,14 @@ import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { UtilsService } from 'services/utils.service';
 import { EN_Mess, ENSnackBarColors } from 'interfaces/enums.enum';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 // import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpinnerInterceptorService implements HttpInterceptor {
+  private readonly shouldShowSmallSpinner = [ENInterfaces.NotifyManagerUnreadCount.toString(), ENInterfaces.getShouldIChangePassword.toString(), ENInterfaces.myPreviousFailures.toString()];
 
   constructor(
     private spinnerWrapperService: SpinnerWrapperService,
@@ -43,9 +45,22 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     }
     await this.utilsService.firstConfirmDialog(config);
   }
-  showSpinnerConsiderExceptions = () => {
+  showSpinnerConsiderSpecialRoutes = (): boolean => {
     const url = this.utilsService.compositeService.getRouterUrl();
-    if (url === EN_Routes.wrdb || url === EN_Routes.wrmrapk || url === EN_Routes.wrofflinetxtout) {
+    if (url === EN_Routes.wrdb || url === EN_Routes.wrmrapk || url === EN_Routes.wrofflinetxtout)
+      return true;
+    return false;
+  }
+  showSpinnerConsiderSpecialURLs = (httpRequest: HttpRequest<any>) => {
+    // if (httpRequest.url.includes(this.shouldShowSmallSpinner)) {
+    if (httpRequest.url.includes(ENInterfaces.NotifyManagerUnreadCount) ||
+      httpRequest.url.includes(ENInterfaces.getShouldIChangePassword) ||
+      httpRequest.url.includes(ENInterfaces.myPreviousFailures))
+      return true;
+    return false;
+  }
+  showSmallSpinner(req: HttpRequest<any>) {
+    if (this.showSpinnerConsiderSpecialRoutes() || this.showSpinnerConsiderSpecialURLs(req)) {
       this.spinnerWrapperService.startLoadingSmallSpinner();
     }
     else {
@@ -53,7 +68,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     }
   }
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    this.showSpinnerConsiderExceptions();
+    this.showSmallSpinner(req);
     return next.handle(req)
       .pipe(
         // retry(1),

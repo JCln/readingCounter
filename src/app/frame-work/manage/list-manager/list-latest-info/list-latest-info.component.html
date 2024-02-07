@@ -28,8 +28,8 @@
                         <div class="_key">اصلاح</div>
                         <div class="_value">
                             <p-dropdown [options]="modifyType" name="modifyType" [tabindex]="col.tabIndex"
-                                [(ngModel)]="editModifyReq.modifyType" filter="true" placeholder="انتخاب مورد"
-                                optionLabel="title" optionValue="id" [showClear]="true">
+                                [(ngModel)]="closeTabService.editModifyReq.modifyType" filter="true"
+                                placeholder="انتخاب مورد" optionLabel="title" optionValue="id" [showClear]="true">
                             </p-dropdown>
                         </div>
                     </div>
@@ -38,9 +38,18 @@
                         <div class="_key">وضعیت فعلی</div>
                         <div class="_value">
                             <p-dropdown [tabindex]="col.tabIndex" [options]="counterStateDictionary" name="counterState"
-                                [(ngModel)]="editModifyReq.counterStateId" filter="true" placeholder="انتخاب مورد"
-                                optionLabel="title" optionValue="id" [showClear]="true">
+                                [(ngModel)]="closeTabService.editModifyReq.counterStateId" filter="true"
+                                placeholder="انتخاب مورد" optionLabel="title" optionValue="id" [showClear]="true">
                             </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2" *ngIf="col.field == 'offloadDateJalali'">
+                        <div class="_key">تاریخ فعلی</div>
+                        <div class="_value">
+                            <app-date-jalali name="jalaliDay"
+                                (dateJalEvent)="closeTabService.receiveDateJalali(closeTabService.ENReadingReports.editModifyReq, $event)"
+                                [dateObject]="closeTabService.editModifyReq.jalaliDay">
+                            </app-date-jalali>
                         </div>
                     </div>
                 </ng-container>
@@ -55,7 +64,7 @@
                         <div class="_key">{{col.header}}</div>
                         <input [readonly]="col.readonly" [tabindex]="col.tabIndex"
                             [type]="col.isNumber ? 'number' : 'text'" class="_value" name="{{col.field}}"
-                            [(ngModel)]="editModifyReq[col.field]">
+                            [(ngModel)]="closeTabService.editModifyReq[col.field]">
                     </div>
                 </ng-template>
             </div>
@@ -106,7 +115,7 @@
                                 [ngClass]="{coloring_border: col.borderize}">
                                 <div class="_key">{{col.header}}</div>
                                 <input [tabindex]="col.tabIndex" [readonly]="col.readonly" class="_value"
-                                    name="{{col.field}}" [(ngModel)]="editModifyReq[col.field]">
+                                    name="{{col.field}}" [(ngModel)]="closeTabService.editModifyReq[col.field]">
                             </div>
                         </ng-template>
                     </div>

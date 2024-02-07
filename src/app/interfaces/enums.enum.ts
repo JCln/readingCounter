@@ -163,6 +163,7 @@ export enum EN_messages {
     format_invalid_from_eshterak = 'فرمت از اشتراک ناصحیح است',
     format_invalid_fromDate = 'فرمت از تاریخ ناصحیح است',
     format_invalid_toDate = 'فرمت تا تاریخ ناصحیح است',
+    format_invalid_Date = 'فرمت تاریخ ناصحیح است',
     format_invalid_to_eshterak = 'فرمت  تا اشتراک ناصحیح است',
     format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
     format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',

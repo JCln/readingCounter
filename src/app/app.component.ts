@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavigationError, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { EN_messages } from 'interfaces/enums.enum';
 import { fromEvent, merge, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FontService } from 'services/font.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { ThemeService } from 'services/theme.service';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,8 @@ export class AppComponent {
     private router: Router,
     public themeService: ThemeService,
     private spinnerWrapperService: SpinnerWrapperService,
-    private fontService: FontService
+    private fontService: FontService,
+    private utilsService: UtilsService
   ) {
     this.spinnerRouterChangeEvent();
     this.defaultConfigs();
@@ -41,11 +44,33 @@ export class AppComponent {
             this.spinnerWrapperService.stopLoadingSmallSpinner();
           }
           if (event instanceof NavigationError) {
-            console.log(event.url);
+            const config = {
+              messageTitle: EN_messages.networkError,
+              text: EN_messages.networkErrorAdvice,
+              minWidth: '20rem',
+              isInput: false,
+              isDelete: false,
+              icon: 'pi pi-wifi',
+            }
+            this.utilsService.firstConfirmDialog(config);
+            return;
+            // console.log(event.url);
 
-            this.router.navigate([event.url]);
+            // this.router.navigate([event.url]);
             // Display an error message or perform other tasks
           }
+        }
+        else {
+          const config = {
+            messageTitle: EN_messages.networkError,
+            text: EN_messages.networkErrorAdvice,
+            minWidth: '20rem',
+            isInput: false,
+            isDelete: false,
+            icon: 'pi pi-wifi',
+          }
+          this.utilsService.firstConfirmDialog(config);
+          return;
         }
       });
     });
