@@ -10,6 +10,7 @@ import {
   IImportErrors,
   IImportSimafaBatchReq,
   IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
   IReadingProgramRes,
 } from 'interfaces/import-data';
 import { IAPK, IOffloadModifyReq } from 'interfaces/inon-manage';
@@ -511,7 +512,23 @@ export class CloseTabService {
     trackNumber: null,
     _isCollapsed: false
   }
-  saveDataForSimafaBatch: IFragmentDetails[];
+  simafaSingleReq: IImportSimafaSingleReq = {
+    zoneId: 0,
+    alalHesabPercent: null,
+    imagePercent: null,
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false,
+    displayDebt: false,
+    counterReaderId: '',
+    readingPeriodId: null,
+    year: this.utilsService.getFirstYear(),
+    readingProgramId: ''
+  }
+  saveDataForSimafaBatch: IFragmentDetails[] = [];
   saveDataForSimafaBatchReq = {
     GUid: ''
   }
@@ -985,7 +1002,22 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForUserDetailsHistory, url: EN_Routes.userDetailsHistory },
     { id: 1, value: ENEssentialsToSave.userCompare, url: EN_Routes.userCompare },
     { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
-    { id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
+    {
+      id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd, defaultReq: {
+        userCode: null,
+        username: null,
+        password: null,
+        confirmPassword: null,
+        firstName: '',
+        sureName: '',
+        email: '',
+        mobile: '',
+        displayMobile: false,
+        displayName: '',
+        isActive: true,
+        deviceId: ''
+      }
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },
     { id: 1, value: ENEssentialsToSave.saveDataForEditOnRole, url: EN_Routes.wrmueor },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleHistory, url: EN_Routes.roleHistory },
@@ -1019,7 +1051,25 @@ export class CloseTabService {
     { id: 1, req: ENEssentialsToSave.saveDataForImportErrorsByTrackNumberReq, value: ENEssentialsToSave.saveDataForImportErrorsByTrackNumber, url: EN_Routes.wrImportErrByTrackNumber },
     { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
-    { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
+    {
+      id: 1, req: ENEssentialsToSave.simafaSingleReq, value: null, url: EN_Routes.wrimpsimafardpgsingle, defaultReq: {
+        zoneId: 0,
+        alalHesabPercent: null,
+        imagePercent: null,
+        hasPreNumber: false,
+        displayBillId: false,
+        displayRadif: false,
+        displayPreDate: false,
+        displayMobile: false,
+        hasImage: false,
+        displayDebt: false,
+        counterReaderId: '',
+        readingPeriodId: null,
+        year: this.utilsService.getFirstYear(),
+        readingProgramId: ''
+      }
+    },
+    { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch, defaultValue: [] },
     {
       id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg, defaultValue: [], defaultReq: {
         zoneId: null,
@@ -1258,13 +1308,6 @@ export class CloseTabService {
         this[item.req] = item?.defaultReq ? item.defaultReq : null;
         this[item.value] = item?.defaultValue ? item.defaultValue : '';
         this[item.value_2] = item?.defaultValue_2 ? item.defaultValue_2 : '';
-      }
-      else {
-        if (url.includes(item.url)) {
-          this[item.req] = item?.defaultReq ? item.defaultReq : null;
-          this[item.value] = item?.defaultValue ? item.defaultValue : '';
-          this[item.value_2] = item?.defaultValue_2 ? item.defaultValue_2 : '';
-        }
       }
     })
   }

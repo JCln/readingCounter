@@ -8,6 +8,7 @@ import { AllImportsService } from 'services/all-imports.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-simafa-batch',
@@ -68,7 +69,7 @@ export class SimafaBatchComponent extends FactoryONE {
     // TODO: if from same listNumber, no need to call api, check BY GROUP ID
     console.log(this.allImportsService.allImports_batch.routeAndReaderIds);
     if (
-      !this.closeTabService.saveDataForSimafaBatch ||
+      MathS.isNull(this.closeTabService.saveDataForSimafaBatch) ||
       (
         this.closeTabService.saveDataForSimafaBatchReq.GUid !=
         this.allImportsService.allImports_batch.readingProgramId

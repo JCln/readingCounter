@@ -19,13 +19,14 @@
     </div>
     <div class="input_2">
         <div class="_key">گذرواژه</div>
-        <input class="_value text_left" [(ngModel)]="closeTabService._userAddUserInfos.password" name="password" required>
+        <input class="_value text_left" [(ngModel)]="closeTabService._userAddUserInfos.password" name="password"
+            required>
     </div>
 
     <div class="input_2">
         <div class="_key">تکرار گذرواژه</div>
-        <input class="_value text_left" [(ngModel)]="closeTabService._userAddUserInfos.confirmPassword" name="confirmPassword"
-            required>
+        <input class="_value text_left" [(ngModel)]="closeTabService._userAddUserInfos.confirmPassword"
+            name="confirmPassword" required>
     </div>
     <div class="input_2 _double_size">
         <div class="_key">ایمیل</div>
@@ -45,19 +46,17 @@
     </div>
     <div class="input_2">
         <div class="_key">شناسه دستگاه</div>
-        <input class="_value text_left dir_left" [(ngModel)]="closeTabService._userAddUserInfos.deviceId" name="deviceId">
+        <input class="_value text_left dir_left" [(ngModel)]="closeTabService._userAddUserInfos.deviceId"
+            name="deviceId">
     </div>
 
     <div class="checkbox_s">
-        <mat-checkbox [(ngModel)]="closeTabService._userAddUserInfos.displayMobile" name="displayMobile">موبایل نمایش
-            داده شود؟
+        <mat-checkbox [(ngModel)]="closeTabService._userAddUserInfos.displayMobile" name="displayMobile">
+            موبایل نمایش داده شود؟
         </mat-checkbox>
-        <mat-checkbox [(ngModel)]="closeTabService._userAddUserInfos.isActive" name="isActive">کاربر فعال
-            باشد؟</mat-checkbox>
+        <mat-checkbox [(ngModel)]="closeTabService._userAddUserInfos.isActive" name="isActive">
+            کاربر فعال باشد؟
+        </mat-checkbox>
     </div>
 
 </form>
-<button type="submit" class="btn_2" matStepperNext>
-    <i class="fa fa-long-arrow-left"></i>
-    صفحه بعد
-</button>

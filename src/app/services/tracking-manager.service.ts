@@ -340,9 +340,6 @@ export class TrackingManagerService {
     this.allListsService.generalModifyListsGrouped_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.wrmlGeneralGModify);
   }
-  routeTo = (route: string, UUID: string) => {
-    this.utilsService.routeToByParams(route, UUID);
-  }
   setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));
     dataSource.overalDistance = parseFloat(MathS.getRange(dataSource.overalDistance));

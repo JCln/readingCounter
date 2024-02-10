@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
-import { IImportDataResponse, IImportSimafaSingleReq, IReadingProgramRes } from 'interfaces/import-data';
+import { IImportDataResponse, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
+import { AllImportsService } from 'services/all-imports.service';
+import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -17,22 +18,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class SimafaSingleComponent extends FactoryONE {
   _canShowAddButton: boolean = true;
   _readingProgramRes: IReadingProgramRes;
-  simafaSingleReq: IImportSimafaSingleReq = {
-    zoneId: 0,
-    alalHesabPercent: null,
-    imagePercent: null,
-    hasPreNumber: false,
-    displayBillId: false,
-    displayRadif: false,
-    displayPreDate: false,
-    displayMobile: false,
-    hasImage: false,
-    displayDebt: false,
-    counterReaderId: '',
-    readingPeriodId: null,
-    year: this.utilsService.getFirstYear(),
-    readingProgramId: ''
-  }
   _showAlalHesabPercent: boolean = false;
 
   readingConfigDefault: IReadingConfigDefault;
@@ -41,55 +26,53 @@ export class SimafaSingleComponent extends FactoryONE {
 
   constructor(
     public importDynamicService: ImportDynamicService,
-    private utilsService: UtilsService,
-    private route: ActivatedRoute
+    public closeTabService: CloseTabService,
+    private allImportsService: AllImportsService
   ) {
     super();
   }
-
-  getRouteParams = () => {
-    this.simafaSingleReq.readingProgramId = this.route.snapshot.paramMap.get('id');
-    this.simafaSingleReq.zoneId = parseInt(this.route.snapshot.paramMap.get('zoneId'));
-    this.simafaSingleReq.year = parseInt(this.route.snapshot.paramMap.get('year'));
-    this.simafaSingleReq.readingPeriodId = parseInt(this.route.snapshot.paramMap.get('readingPeriodId'));
-  }
-  connectToServer = async (canRefresh?: boolean) => {
-    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.simafaSingleReq))
+  connectToServer = async () => {
+    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.simafaSingleReq))
       return;
-    const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaSingleReq);
+    const validation = this.importDynamicService.checkSimafaSingleVertification(this.closeTabService.simafaSingleReq);
     if (!validation)
       return;
-    const a = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaSingle, this.simafaSingleReq);
+    const a = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaSingle, this.closeTabService.simafaSingleReq);
     if (a) {
-
       this.importDynamicService.showResDialog(a, false, EN_messages.importDynamic_created);
       this._canShowAddButton = false;
     }
   }
-  // nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      // this.nullSavedSource();
-    }
-    this._readingProgramRes = this.importDynamicService.columnSimafaSingle();
-    this.getRouteParams();
-    this.selectedZoneId();
-
-    this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.simafaSingleReq.zoneId);
-    this.insertReadingConfigDefaults(this.readingConfigDefault);
-  }
   selectedZoneId = async () => {
-    this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.simafaSingleReq.zoneId);
+    this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.simafaSingleReq.zoneId);
+  }
+  assignToSingleRequest() {
+    this.closeTabService.simafaSingleReq.readingProgramId = this.allImportsService.simafaSingle_pageSign.UUID;
+    this.closeTabService.simafaSingleReq.readingPeriodId = this.allImportsService.simafaSingle_pageSign.readingPeriodId;
+    this.closeTabService.simafaSingleReq.year = this.allImportsService.simafaSingle_pageSign.year;
+    this.closeTabService.simafaSingleReq.zoneId = this.allImportsService.simafaSingle_pageSign.zoneId;
   }
   private insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
-    this.simafaSingleReq.displayBillId = rcd.displayBillId ? rcd.displayBillId : false;
-    this.simafaSingleReq.displayRadif = rcd.displayRadif ? rcd.displayRadif : false;
-    this.simafaSingleReq.displayPreDate = rcd.displayPreDate ? rcd.displayPreDate : false;
-    this.simafaSingleReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
-    this.simafaSingleReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
-    this.simafaSingleReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
-    this.simafaSingleReq.hasPreNumber = rcd.defaultHasPreNumber;
-    this.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
-    this.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
+    this.closeTabService.simafaSingleReq.displayBillId = rcd.displayBillId ? rcd.displayBillId : false;
+    this.closeTabService.simafaSingleReq.displayRadif = rcd.displayRadif ? rcd.displayRadif : false;
+    this.closeTabService.simafaSingleReq.displayPreDate = rcd.displayPreDate ? rcd.displayPreDate : false;
+    this.closeTabService.simafaSingleReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
+    this.closeTabService.simafaSingleReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
+    this.closeTabService.simafaSingleReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
+    this.closeTabService.simafaSingleReq.hasPreNumber = rcd.defaultHasPreNumber;
+    this.closeTabService.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
+    this.closeTabService.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
+  }
+  classWrapper = async () => {
+    if (!this.allImportsService.simafaSingle_pageSign.UUID) {
+      this.closeTabService.utilsService.routeTo(EN_Routes.wrimpsimafardpg);
+      return;
+    }
+    this.assignToSingleRequest();
+    this._readingProgramRes = this.importDynamicService.columnSimafaSingle();
+    this.selectedZoneId();
+
+    this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.closeTabService.simafaSingleReq.zoneId);
+    this.insertReadingConfigDefaults(this.readingConfigDefault);
   }
 }

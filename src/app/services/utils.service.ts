@@ -181,12 +181,6 @@ export class UtilsService {
   routeToByParams = (router: string, params: any) => {
     this.compositeService.routeToByParams(router, params);
   }
-  routeToByExtras = (router: string, body: object) => {
-    this.compositeService.routeToByExtras(router, body);
-  }
-  getRouteParams = (paramName: string): string => {
-    return this.compositeService.getRouteParams(paramName);
-  }
   getRouteBySplit = (spliter: string): string => {
     return this.compositeService.getRouteBySplit(spliter);
   }

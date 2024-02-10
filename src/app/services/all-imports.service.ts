@@ -31,6 +31,12 @@ export class AllImportsService {
     hasImage: false,
     displayDebt: false,
   };
+  simafaSingle_pageSign = {
+    UUID: '',
+    zoneId: null,
+    year: null,
+    readingPeriodId: null,
+  };
 
 }
 

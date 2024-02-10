@@ -29,6 +29,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
   @Input() _isSortable: boolean = true;
+  @Input() _localGeneralSearch: boolean = true;
+  @Input() _localHasFilter: boolean = true;
   @Input() _hasCollapsible: boolean = false;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;

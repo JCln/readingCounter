@@ -1,17 +1,17 @@
 @import 'variable.scss';
 
 .map-frame {
-  margin: var(--font_xs) var(--font_02) 1.7rem;
+  margin: var(--font_xs) var(--font_02) 0.5rem;
   height: 100%;
-  min-height: 30vh;
-  min-height: 30svh;
+  min-height: 35vh;
+  min-height: 35svh;
   box-shadow: -1px 2px 5px 5px var(--secondary_4);
   position: relative;
 }
 
 #map2 {
-  height: 30vh;
-  height: 30svh;
+  height: 35vh;
+  height: 35svh;
   width: 100%;
   z-index: 3;
 }

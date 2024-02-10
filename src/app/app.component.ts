@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationError, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
-import { EN_messages } from 'interfaces/enums.enum';
+import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { fromEvent, merge, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FontService } from 'services/font.service';
@@ -43,35 +42,23 @@ export class AppComponent {
           } else if (event instanceof RouteConfigLoadEnd) {
             this.spinnerWrapperService.stopLoadingSmallSpinner();
           }
-          if (event instanceof NavigationError) {
-            const config = {
-              messageTitle: EN_messages.networkError,
-              text: EN_messages.networkErrorAdvice,
-              minWidth: '20rem',
-              isInput: false,
-              isDelete: false,
-              icon: 'pi pi-wifi',
-            }
-            this.utilsService.firstConfirmDialog(config);
-            return;
-            // console.log(event.url);
+          // console.log(event.url);
 
-            // this.router.navigate([event.url]);
-            // Display an error message or perform other tasks
-          }
+          // this.router.navigate([event.url]);
+          // Display an error message or perform other tasks          
         }
-        else {
-          const config = {
-            messageTitle: EN_messages.networkError,
-            text: EN_messages.networkErrorAdvice,
-            minWidth: '20rem',
-            isInput: false,
-            isDelete: false,
-            icon: 'pi pi-wifi',
-          }
-          this.utilsService.firstConfirmDialog(config);
-          return;
-        }
+        // else {
+        //   const config = {
+        //     messageTitle: EN_messages.networkError,
+        //     text: EN_messages.networkErrorAdvice,
+        //     minWidth: '20rem',
+        //     isInput: false,
+        //     isDelete: false,
+        //     icon: 'pi pi-wifi',
+        //   }
+        //   this.utilsService.firstConfirmDialog(config);
+        //   return;
+        // }
       });
     });
   }

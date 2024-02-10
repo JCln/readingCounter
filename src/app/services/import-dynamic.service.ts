@@ -153,7 +153,12 @@ export class ImportDynamicService {
     return true;
   }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
-    this.utilsService.compositeService.routeToExtras([EN_Routes.wrimpsimafardpgsingle, object]);
+    this.allImportsService.simafaSingle_pageSign.UUID = object.id;
+    this.allImportsService.simafaSingle_pageSign.zoneId = object.zoneId;
+    this.allImportsService.simafaSingle_pageSign.readingPeriodId = object.readingPeriodId;
+    this.allImportsService.simafaSingle_pageSign.year = object.year;
+
+    this.utilsService.routeTo(EN_Routes.wrimpsimafardpgsingle);
   }
   routeToSimafa = () => {
     this.utilsService.compositeService.routeTo(EN_Routes.wrimpsimafardpg);

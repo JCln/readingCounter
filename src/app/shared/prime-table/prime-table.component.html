@@ -54,15 +54,16 @@
                 </section>
             </div>
             <div class="left_side">
-                <input *ngIf="profileService._agg.hasGeneralSearch" class="_general_search"
+                <input *ngIf="profileService._agg.hasGeneralSearch && _localGeneralSearch" class="_general_search"
                     (input)="datatableG.filterGlobal($event.target.value, 'contains')" placeholder="جستجو.." />
+
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="hasBeenReadsToggler()">
                     <label class="font_family" for="binary">({{dataSource.length}})فقط قرائت شده</label>
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
                 </i>
-                <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                <i *ngIf="_localHasFilter" (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
                     class="_circle_border p_icons tooltip pi pi-filter-slash">
                     <div class="tooltip_text_right">حذف فیلترها</div>
                 </i>

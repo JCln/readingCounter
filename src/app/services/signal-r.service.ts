@@ -13,7 +13,7 @@ import { ENHubMessages, ENSnackBarTimes, ENToastColors, EN_messages } from 'inte
 })
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
-  private readonly retryTimes: number[] = [0, 0, 2000, null];
+  private readonly retryTimes: number[] = [0, 2000, 4000, null];
 
   constructor(
     public utilsService: UtilsService,

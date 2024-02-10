@@ -11,7 +11,8 @@
     </div>
 </div>
 <app-prime-table [dataSource]="closeTabService.saveDataForMomentLastRead" [_outputFileName]="'momentLs'"
-    [_checkUpName]="'moment-ls'" [_isSortable]=false [_hasRefreshTable]=false [_numberOfExtraColumns]="[1,2,3]"
+    [_checkUpName]="'moment-ls'" [_captionEnabled]="false" [_localGeneralSearch]="false" [_localHasFilter]="false"
+    [_outputEnabled]="false" [_isSortable]=false [_hasRefreshTable]=false [_numberOfExtraColumns]="[1,2,3]"
     [_hasSaveColumns]="false" (showedPictures)="getReadingReportTitles($event)"
     (showedWOUIAsCarousel)="doShowCarousel($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>
