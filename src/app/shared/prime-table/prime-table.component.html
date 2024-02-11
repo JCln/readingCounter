@@ -63,7 +63,8 @@
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
                 </i>
-                <i *ngIf="_localHasFilter" (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                <i *ngIf="_localHasFilter" (click)="clearFilters(datatableG)"
+                    [ngClass]="{'has_filters': hasFiltersInTable}"
                     class="_circle_border p_icons tooltip pi pi-filter-slash">
                     <div class="tooltip_text_right">حذف فیلترها</div>
                 </i>
@@ -208,26 +209,6 @@
                     </ng-template>
                 </ng-template>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName== 'reading' && !denyTracking()"
-                (click)="forceOffload(dataSource)">
-                <span class="ui-column-title">اتمام قرائت</span>
-                <i class="tooltip p_icons pi pi-ban _important">
-                    <div class="tooltip_text">اتمام قرائت</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName== 'reading' && !denyTracking()"
-                (click)="backToImportedConfirmDialog(dataSource)">
-                <span class="ui-column-title">بازگشت به صادر شده</span>
-                <i class="tooltip p_icons pi pi-fast-backward">
-                    <div class="tooltip_text">بازگشت به صادر شده</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName== 'reading'" (click)="routeToLMPayDay(dataSource)">
-                <span class="ui-column-title">اطلاعات روزانه</span>
-                <i class="tooltip p_icons pi pi-folder-open">
-                    <div class="tooltip_text">اطلاعات روزانه</div>
-                </i>
-            </td>
             <td class="__icon-columns" *ngIf="
             _checkUpName == 'simpleSearch' ||
             _outputFileName== 'imported' || 
@@ -246,6 +227,12 @@
                     <div class="tooltip_text_right">مشاهده در پیگیری موردی</div>
                 </i>
             </td>
+            <td class="__icon-columns" *ngIf="_outputFileName== 'reading'" (click)="routeToLMPayDay(dataSource)">
+                <span class="ui-column-title">اطلاعات روزانه</span>
+                <i class="tooltip p_icons pi pi-folder-open">
+                    <div class="tooltip_text">اطلاعات روزانه</div>
+                </i>
+            </td>
             <td class="__icon-columns" *ngIf="_checkUpName == 'simpleSearch'" (click)="routeToLMPayDay(dataSource)">
                 <span class="ui-column-title">اطلاعات روزانه</span>
                 <i class="tooltip p_icons pi pi-folder-open">
@@ -258,6 +245,20 @@
                 <span class="ui-column-title">مشاهده لیست قرائت</span>
                 <i class="tooltip p_icons pi pi-list">
                     <div class="tooltip_text_right">مشاهده لیست قرائت</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName== 'reading' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource)">
+                <span class="ui-column-title">بازگشت به صادر شده</span>
+                <i class="tooltip p_icons pi pi-fast-backward">
+                    <div class="tooltip_text">بازگشت به صادر شده</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName== 'reading' && !denyTracking()"
+                (click)="forceOffload(dataSource)">
+                <span class="ui-column-title">اتمام قرائت</span>
+                <i class="tooltip p_icons pi pi-ban _important">
+                    <div class="tooltip_text">اتمام قرائت</div>
                 </i>
             </td>
             <td class="__icon-columns" *ngIf="_outputFileName== 'loaded' && !denyTracking()"
@@ -438,13 +439,6 @@
                     <div class="tooltip_text_right">اصلاح کلی لیست</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded' && !denyTracking()"
-                (click)="backToReading(dataSource)">
-                <span class="ui-column-title">بازگشت به درحال قرائت</span>
-                <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
-                </i>
-            </td>
             <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded'"
                 (click)="downloadOutputSingle(dataSource)">
                 <span class="ui-column-title">دانلود فایل</span>
@@ -478,6 +472,13 @@
                 <span class="ui-column-title">بازدید</span>
                 <i class="tooltip p_icons pi pi-eye">
                     <div class="tooltip_text_right">بازدید</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded' && !denyTracking()"
+                (click)="backToReading(dataSource)">
+                <span class="ui-column-title">بازگشت به درحال قرائت</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
                 </i>
             </td>
             <td class="__icon-columns" *ngIf="                

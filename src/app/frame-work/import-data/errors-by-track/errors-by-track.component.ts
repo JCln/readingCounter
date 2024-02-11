@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
@@ -19,13 +20,12 @@ export class ErrorsByTrackComponent extends FactoryONE {
   ) {
     super();
   }
-
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForImportErrorsByTrackNumber = null;
-    }
-    if (!this.closeTabService.saveDataForImportErrorsByTrackNumber && this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber) {
-      this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber.toString());
+  callAPI = async () => {
+    this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber.toString());
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForImportErrorsByTrackNumber) && this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber) {
+      this.callAPI();
     }
   }
   connectToServer = async () => {

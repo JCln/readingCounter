@@ -31,10 +31,7 @@ export class ActivationUserComponent extends FactoryONE {
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.insert_ActivationUser);
     }
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.connectToServer();
-    }
+  classWrapper = async () => {
     this.userActivationLogDictionary = await this.manageServerService.dictionaryWrapperService.getUserActivationLogTypesDictionary();
   }
 

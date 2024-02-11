@@ -4,6 +4,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-errors',
@@ -20,14 +21,13 @@ export class ErrorsComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForImportErrors = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForImportErrors) {
-      this.closeTabService.saveDataForImportErrors = await this.importDynamicService.ajaxReqWrapperService.getDataSource(ENInterfaces.getImportErrros);
-      this.convertLoginTime();
+  callAPI = async () => {
+    this.closeTabService.saveDataForImportErrors = await this.importDynamicService.ajaxReqWrapperService.getDataSource(ENInterfaces.getImportErrros);
+    this.convertLoginTime();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForImportErrors)) {
+      this.callAPI();
     }
 
   }

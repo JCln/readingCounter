@@ -22,12 +22,7 @@ export class IpfilterGetInvalidTimeComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.ipFilterGetInvalidTime = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
+  classWrapper = async () => {
   }
   connectToServer = async () => {
     this.closeTabService.ipFilterGetInvalidTime = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.PostIpFilterGetInvalidTime, this.closeTabService.ipFilterGetInvalidTimeReq);

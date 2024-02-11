@@ -37,7 +37,7 @@
 
 <app-prime-table [dataSource]="closeTabService.saveDataForServerUserActivation" [_outputFileName]="'userActivation'"
     [_sessionName]="'userActivation-session'" [_selectedColumnsToRemember]="'selectedServerUserActivation'"
-    (refreshedTable)="refreshTable()" [_hasCollapsible]=true
+    (refreshedTable)="connectToServer()" [_hasCollapsible]=true
     [_isCollaped]="manageServerService.utilsService.collapser._userActivation"
     (collapsed)="manageServerService.utilsService.collapser._userActivation = !manageServerService.utilsService.collapser._userActivation">
 </app-prime-table>

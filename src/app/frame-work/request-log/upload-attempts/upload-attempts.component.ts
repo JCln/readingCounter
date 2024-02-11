@@ -22,12 +22,7 @@ export class UploadAttemptsComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.uploadAttempts = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
+  classWrapper = async (canRefresh?: boolean) => {  
   }
   convertDateTime = () => {
     this.closeTabService.uploadAttempts.forEach(item => {

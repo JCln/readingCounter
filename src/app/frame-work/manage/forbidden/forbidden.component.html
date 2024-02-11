@@ -43,5 +43,5 @@
     [_sessionName]="'forbidden-session'" [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
     [_isCollaped]="forbiddenService.utilsService.collapser._isCollapsedForbidden"
     (collapsed)="forbiddenService.utilsService.collapser._isCollapsedForbidden = !forbiddenService.utilsService.collapser._isCollapsedForbidden"
-    (refreshedTable)="refreshTable()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
+    (refreshedTable)="verification()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
 </app-prime-table>

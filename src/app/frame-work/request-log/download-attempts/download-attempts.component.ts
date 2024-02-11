@@ -20,12 +20,7 @@ export class DownloadAttemptsComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.downloadAttempts = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
+  classWrapper = async () => {
   }
   connectToServer = async () => {
     this.closeTabService.downloadAttempts = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogDownloadAttempts, this.closeTabService.downloadAttemptsReq);

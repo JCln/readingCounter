@@ -87,7 +87,7 @@ export class OffloadedComponent extends FactoryONE {
     if (desc) {
       const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingToREADING, { trackingId: rowDataAndIndex.id, description: desc });
       this.trackingManagerService.successSnackMessage(res.message);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   hasNextBazdid = async (row: ITracking) => {

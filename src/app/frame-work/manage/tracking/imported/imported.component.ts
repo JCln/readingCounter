@@ -56,7 +56,7 @@ export class ImportedComponent extends FactoryONE {
   private async onRowEditSave(rowData: IEditTracking) {
     const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingEDIT, this.selectSpecialParameters(rowData));
     this.trackingManagerService.successSnackMessage(res.message);
-    this.refreshTable();
+    this.callAPI();
   }
   ngOnDestroy(): void {
     if (this.ref) {
@@ -91,7 +91,7 @@ export class ImportedComponent extends FactoryONE {
     if (a) {
       const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingREMOVE, { trackingId: rowDataAndIndex['dataSource'].id, description: a });
       this.trackingManagerService.successSnackMessage(res.message);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   routeToLMAll = (row: ITracking) => {

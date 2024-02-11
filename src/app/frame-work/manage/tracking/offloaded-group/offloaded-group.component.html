@@ -7,7 +7,7 @@
     [_hasAggregating]= true
     [_selectedColumnsToRemember]="'selectedTrackOffloadedGroup'"
     [_sessionName]="'offloaded-group'"
-    (refreshedTable)="refreshTable()"    
+    (refreshedTable)="callAPI()"    
     (downloadedOutputSingle)="downloadOutputSingle($event)"            
     (routedToOffloadGeneralModify)="routeToOffloadGeneralGroupModify($event)"        
     (backedToImportedConfirmDialog)="backToReading($event)"

@@ -25,14 +25,12 @@ export class OffloadedGroupComponent extends FactoryONE {
   ) {
     super();
   }
-  nullSavedSource = () => this.closeTabService.saveDataForTrackOffloadedGroup = null;
-  refetchTable = (index: number) => this.closeTabService.saveDataForTrackOffloadedGroup = this.closeTabService.saveDataForTrackOffloadedGroup.slice(0, index).concat(this.closeTabService.saveDataForTrackOffloadedGroup.slice(index + 1));
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForTrackOffloadedGroup) {
-      this.closeTabService.saveDataForTrackOffloadedGroup = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOFFLOADED);
+  callAPI = async () => {
+    this.closeTabService.saveDataForTrackOffloadedGroup = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOFFLOADED);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForTrackOffloadedGroup)) {
+      this.callAPI();
     }
   }
   downloadOutputSingle = async (row: ITracking) => {
@@ -70,7 +68,7 @@ export class OffloadedGroupComponent extends FactoryONE {
     if (desc) {
       const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingToREADING, { trackingId: rowDataAndIndex.id, description: desc });
       this.trackingManagerService.successSnackMessage(res.message);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   hasNextBazdid = async (row: ITracking) => {

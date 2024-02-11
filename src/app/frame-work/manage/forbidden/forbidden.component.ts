@@ -27,10 +27,7 @@ export class ForbiddenComponent extends FactoryONE {
     Converter.convertIdToTitle(this.closeTabService.saveDataForFNB, this.fbnZoneDictionary, 'zoneId');
     this.forbiddenService.setDynamicPartRanges(this.closeTabService.saveDataForFNB);
   }
-  classWrapper = async (canRefresh: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForFNB = null;
-    }
+  classWrapper = async () => {
     this.fbnZoneDictionary = JSON.parse(JSON.stringify(await this.forbiddenService.dictionaryWrapperService.getZoneDictionary()));
     if (this.fbnZoneDictionary[0].id !== 0)
       this.fbnZoneDictionary.unshift({ id: 0, title: 'نامشخص', isSelected: true })
@@ -39,9 +36,6 @@ export class ForbiddenComponent extends FactoryONE {
     const temp = this.forbiddenService.verificationForbidden(this.closeTabService.forbiddenReq);
     if (temp)
       this.connectToServer();
-  }
-  refreshTable = () => {
-    this.verification();
   }
 
 }

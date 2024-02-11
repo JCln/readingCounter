@@ -26,7 +26,7 @@ export class ReadingComponent extends FactoryONE {
   callAPI = async () => {
     this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingREADING);
   }
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForTrackReading)) {
       this.callAPI();
     }
@@ -61,7 +61,7 @@ export class ReadingComponent extends FactoryONE {
     if (desc) {
       const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingFinishReadiED, { trackingId: rowDataAndIndex.id, description: desc });
       this.trackingManagerService.successSnackMessage(res.message);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   routeToLMAll = (row: ITracking) => {

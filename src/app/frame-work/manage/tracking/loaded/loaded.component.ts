@@ -45,7 +45,7 @@ export class LoadedComponent extends FactoryONE {
     if (a) {
       const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingToImportedFromLoad, { trackingId: rowDataAndIndex.id, description: a });
       this.trackingManagerService.successSnackMessage(res.message);
-      this.refreshTable();
+      this.callAPI();
     }
   }
 

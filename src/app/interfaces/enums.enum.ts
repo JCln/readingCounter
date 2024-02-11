@@ -603,7 +603,10 @@ export enum ENEssentialsToSave {
   masterByFragmentallInGroupLazyReq = 'masterByFragmentallInGroupLazyReq',
   allInGroupLazyReq = "allInGroupLazyReq",
   saveDataForOffloadedAllLazyReq = "saveDataForOffloadedAllLazyReq",
-  simafaSingleReq = "simafaSingleReq"
+  simafaSingleReq = "simafaSingleReq",
+  downloadAttemptsReq = "downloadAttemptsReq",
+  getUploadedReq = "getUploadedReq",
+  uploadAttemptsReq = "uploadAttemptsReq"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

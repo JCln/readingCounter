@@ -24,13 +24,12 @@ export class InputOutputPolicyHistoryComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.IOPolicyHistory = [];
+  callAPI = async () => {
+    this.closeTabService.IOPolicyHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicyHistory);
+  }
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
     if (MathS.isNull(this.closeTabService.IOPolicyHistory)) {
-      this.closeTabService.IOPolicyHistory = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicyHistory);
+      this.callAPI();
     }
   }
   // showMoreDetails = (data: IPrivacy) => {

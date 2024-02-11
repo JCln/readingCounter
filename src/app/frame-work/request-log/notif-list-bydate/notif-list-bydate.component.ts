@@ -21,12 +21,7 @@ export class NotifListBydateComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.notificationListByDate = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
+  classWrapper = async () => {
   }
   convertIdToTitle = (dataSource: any, dictionary: INotificationAlertTypes[], toConvert: string) => {
     dictionary.map(dictionary => {

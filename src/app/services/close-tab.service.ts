@@ -197,7 +197,7 @@ export class CloseTabService {
     data: [],
     totalRecords: 0
   };
-  IOPolicyHistory: IIOPolicyHistory[];
+  IOPolicyHistory: IIOPolicyHistory[] = [];
   iOPolicy: IIOPolicy = {
     id: null,
     inputExtensions: '',
@@ -413,25 +413,25 @@ export class CloseTabService {
   saveDataForUserSearchRes: any;
   usersLogins: IUsersLoginBriefInfo[] = [];
   usersLoginsReq = {
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
   }
   ipFilterBlockedUsers: IGetBlocked[] = [];
   reqLogUserActivationByUserId: IUserActivation[] = [];
   authenticityAttempts: IAuthenticityAttempts[] = [];
   authenticityAttemptsReq = {
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
   }
   ipFilterGetBlocked: IGetBlocked[] = [];
   ipFilterGetBlockedReq = {
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
   }
   ipFilterGetInvalidTime: IGetBlocked[] = [];
   ipFilterGetInvalidTimeReq = {
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
   }
   offlineSingleReadingCounterReq = {
     searchBy: 1,
@@ -446,8 +446,8 @@ export class CloseTabService {
   saveDataForTrackReading: ITracking[] = [];
   importedEditedRes: ITracking[] = [];
   importedEditedReq: ITrackingSearchDto = {
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     zoneId: null,
     imagePercent: null,
     alalHesabPercent: null,
@@ -461,16 +461,16 @@ export class CloseTabService {
     displayDebt: false
   }
   saveDataForUserKarkard: IUserKarkard[];
-  saveDataForTrackOffloaded: ITracking[];
+  saveDataForTrackOffloaded: ITracking[] = [];
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     _isCollapsed: false
   };
   saveDataForUserKarkardSummary: any;
   saveDataForUserKarkardSummaryTwo: any;
-  saveDataForTrackOffloadedGroup: ITracking[];
+  saveDataForTrackOffloadedGroup: ITracking[] = [];
   saveDataForKarkardAllStates: IKarkardAllStatesDto[];
   saveDataForKarkardAllStatesTWO: any;
   offloadedGroupReq = {
@@ -506,8 +506,8 @@ export class CloseTabService {
     displayDebt: false
   }
   saveDataForImportDynamic: any;
-  saveDataForImportErrors: IImportErrors[];
-  saveDataForImportErrorsByTrackNumber: any;
+  saveDataForImportErrors: IImportErrors[] = [];
+  saveDataForImportErrorsByTrackNumber = [];
   saveDataForImportErrorsByTrackNumberReq = {
     trackNumber: null,
     _isCollapsed: false
@@ -678,31 +678,31 @@ export class CloseTabService {
   saveDataForRequestLogAnonymous: IRequestLog[] = [];
   requestLogUnAuthorized: IRequestLog[] = [];
   saveDataForRequestLogListUserReq: IRequestLogInput = {
-    jalaliDay: '',
-    fromTimeH: '',
-    fromTimeM: '',
-    fromTime: '',
-    toTimeH: '',
-    toTimeM: '',
-    toTime: ''
+    jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+    fromTimeH: this.insertToTimes().fromTimeH,
+    fromTimeM: this.insertToTimes().fromTimeM,
+    toTimeH: this.insertToTimes().toTimeH,
+    toTimeM: this.insertToTimes().toTimeM,
+    fromTime: this.insertToTimes().fromTime,
+    toTime: this.insertToTimes().toTime
   }
   saveDataForRequestLogAnonymousReq: IRequestLogInput = {
-    jalaliDay: '',
-    fromTimeH: '',
-    fromTimeM: '',
-    fromTime: '',
-    toTimeH: '',
-    toTimeM: '',
-    toTime: ''
+    jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+    fromTimeH: this.insertToTimes().fromTimeH,
+    fromTimeM: this.insertToTimes().fromTimeM,
+    toTimeH: this.insertToTimes().toTimeH,
+    toTimeM: this.insertToTimes().toTimeM,
+    fromTime: this.insertToTimes().fromTime,
+    toTime: this.insertToTimes().toTime
   }
   requestLogUnAuthorizedReq: IRequestLogInput = {
-    jalaliDay: '',
-    fromTimeH: '',
-    fromTimeM: '',
-    fromTime: '',
-    toTimeH: '',
-    toTimeM: '',
-    toTime: ''
+    jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+    fromTimeH: this.insertToTimes().fromTimeH,
+    fromTimeM: this.insertToTimes().fromTimeM,
+    toTimeH: this.insertToTimes().toTimeH,
+    toTimeM: this.insertToTimes().toTimeM,
+    fromTime: this.insertToTimes().fromTime,
+    toTime: this.insertToTimes().toTime
   }
   saveDataForWaterMark: IWaterMarkConfig = {
     id: '',
@@ -730,8 +730,8 @@ export class CloseTabService {
   saveDataForServerErrors: IManageServerErrorsRes[];
   saveDataForServerUserActivation: IUserActivation[] = [];
   saveDataForServerUserActivationReq: IUserActivationREQ = {
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     userActivationLogTypes: []
   };
   saveDataForIpSpecialRules: any;
@@ -744,23 +744,23 @@ export class CloseTabService {
   }
   notificationListByDate: INotificationMessage[] = [];
   notificationListByDateReq = {
-    fromDate: '',
-    toDate: ''
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate()
   }
   getUploaded: IOnOffLoad[] = [];
   getUploadedReq = {
-    fromDate: '',
-    toDate: ''
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate()
   };
   downloadAttempts: IIOAttemptsLog[] = [];
   downloadAttemptsReq = {
-    fromDate: '',
-    toDate: ''
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate()
   };
   uploadAttempts: IIOAttemptsLog[] = [];
   uploadAttemptsReq = {
-    fromDate: '',
-    toDate: ''
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate()
   }
   logMemoryStatus: ILogMemoryStatus = {
     maxLogCount: 0,
@@ -815,7 +815,7 @@ export class CloseTabService {
     checkedItems: [],
     counterStateId: null,
     counterNumber: null,
-    jalaliDay: '',
+    jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
     description: ''
   };
   listLatestInfoReq: IListLatestInfoReq = {
@@ -907,15 +907,15 @@ export class CloseTabService {
   };
   forbiddenReq: IMostReportInput = {
     zoneId: 0,
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
     zoneIds: [0]
   }
-  saveDataForFNB: IForbiddenManager[];
+  saveDataForFNB: IForbiddenManager[] = [];
   saveDataForProfile: any;
   saveDataForMomentLastRead: ILatestReads[] = [];
   saveDataForRRGallery = [];
@@ -931,18 +931,18 @@ export class CloseTabService {
   mobileManagerFeedbackTypeIsNotComplaint: IFeedbackType[] = [];
   mobileManagerFeedbackAllC: IFeedbackList[] = [];
   mobileManagerFeedbackAllCReq: IFeedbackListReq = {
-    fromDate: '',
-    toDate: ''
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate()
   };
   mobileManagerFeedbackAllSReq: IFeedbackListReq = {
-    fromDate: '',
-    toDate: ''
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate()
   };
   mobileManagerFeedbackAllS: IFeedbackList[] = [];
   mobileManagerforbiddenTypeReq: IMostReportInput = {
     zoneId: 0,
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
@@ -954,13 +954,44 @@ export class CloseTabService {
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackComplaint },
     { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsNotComplaint, url: EN_Routes.mobileFeedbackSuggest },
-    { id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllCReq, value: ENEssentialsToSave.mobileManagerFeedbackAllC, url: EN_Routes.mobileFeedbackAllC },
-    { id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllSReq, value: ENEssentialsToSave.mobileManagerFeedbackAllS, url: EN_Routes.mobileFeedbackAllS },
+    {
+      id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllCReq, value: ENEssentialsToSave.mobileManagerFeedbackAllC, url: EN_Routes.mobileFeedbackAllC, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
+    {
+      id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllSReq, value: ENEssentialsToSave.mobileManagerFeedbackAllS, url: EN_Routes.mobileFeedbackAllS, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
     { id: 1, req: ENEssentialsToSave.mobileManagerforbiddenTypeReq, value: ENEssentialsToSave.mobileManagerforbiddenType, url: EN_Routes.mobileForbiddenType },
     { id: 1, value: ENEssentialsToSave.logMemoryStatus, url: EN_Routes.reqLogMemoryStatus },
-    { id: 1, value: ENEssentialsToSave.downloadAttempts, url: EN_Routes.reqLogDownloadAttempts },
-    { id: 1, value: ENEssentialsToSave.uploadAttempts, url: EN_Routes.reqLogUploadAttempts },
-    { id: 1, value: ENEssentialsToSave.getUploaded, url: EN_Routes.reqLogGetUploaded },
+    {
+      id: 1, req: ENEssentialsToSave.downloadAttemptsReq, value: ENEssentialsToSave.downloadAttempts, url: EN_Routes.reqLogDownloadAttempts, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
+    {
+      id: 1, req: ENEssentialsToSave.uploadAttemptsReq, value: ENEssentialsToSave.uploadAttempts, url: EN_Routes.reqLogUploadAttempts, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate()
+      },
+      defaultValue: []
+    },
+    {
+      id: 1, req: ENEssentialsToSave.getUploadedReq, value: ENEssentialsToSave.getUploaded, url: EN_Routes.reqLogGetUploaded, defaultReq:
+      {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, defaultValue_2: '', url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, defaultValue_2: '', url: EN_Routes.wrToolsResultDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },
@@ -1046,9 +1077,36 @@ export class CloseTabService {
         displayDebt: false
       }
     },
-    { id: 1, req: ENEssentialsToSave.saveDataForImportDataFileExcelReq, value: ENEssentialsToSave.saveDataForImportDataFileExcel, url: EN_Routes.wrimpFileExcel },
-    { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
-    { id: 1, req: ENEssentialsToSave.saveDataForImportErrorsByTrackNumberReq, value: ENEssentialsToSave.saveDataForImportErrorsByTrackNumber, url: EN_Routes.wrImportErrByTrackNumber },
+    {
+      id: 1, req: ENEssentialsToSave.saveDataForImportDataFileExcelReq, value: ENEssentialsToSave.saveDataForImportDataFileExcel, url: EN_Routes.wrimpFileExcel,
+      defaultReq: {
+        zoneId: 0,
+        alalHesabPercent: 0,
+        imagePercent: 0,
+        hasPreNumber: false,
+        displayBillId: false,
+        displayRadif: false,
+        displayPreDate: false,
+        displayMobile: false,
+        hasImage: false,
+        displayDebt: false,
+        skipErrors: false,
+        counterReaderId: '',
+        readingPeriodId: '',
+        listNumber: '',
+        description: '',
+        year: this.utilsService.getFirstYear(),
+        file: File
+      }
+    },
+    { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr, defaultValue: [] },
+    {
+      id: 1, req: ENEssentialsToSave.saveDataForImportErrorsByTrackNumberReq, value: ENEssentialsToSave.saveDataForImportErrorsByTrackNumber, url: EN_Routes.wrImportErrByTrackNumber, defaultReq: {
+        trackNumber: null,
+        _isCollapsed: false
+      },
+      defaultValue: []
+    },
     { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
     {
@@ -1104,10 +1162,16 @@ export class CloseTabService {
       }
     },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest, defaultValue: [] },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded, defaultValue: [] },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished, defaultValue: [] },
-    { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, defaultValue_2: '', url: EN_Routes.followUp },
+    {
+      id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, defaultValue_2: '', url: EN_Routes.followUp, defaultReq: {
+        trackNumber: null,
+        canShowGraph: false,
+        _isCollapsed: false
+      }
+    },
     {
       id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme, defaultReq: {
         zoneId: null,
@@ -1138,7 +1202,19 @@ export class CloseTabService {
         isCollapsed: false
       }
     },
-    { id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn },
+    {
+      id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn, defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        zoneIds: [0]
+      },
+      defaultValue: []
+    },
     { id: 1, req: ENEssentialsToSave.saveDataForLMPDTrackNumber, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes.wrmlpd },
     { id: 1, value: ENEssentialsToSave.saveDataForOutputDBF, url: EN_Routes.wrmdbf },
     { id: 1, value: ENEssentialsToSave.saveDataForOutputDBFEqamatBagh, url: EN_Routes.wrDbfEqamatBagh },
@@ -1155,7 +1231,13 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRRMaster, url: EN_Routes.wrrptsexmmaster },
     { id: 1, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm },
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, defaultValue_2: null, url: EN_Routes.wrrptsgalleryai },
-    { id: 2, req: ENEssentialsToSave.notificationListByDateReq, value: ENEssentialsToSave.notificationListByDate, url: EN_Routes.NotificationListByUrl },
+    {
+      id: 2, req: ENEssentialsToSave.notificationListByDateReq, value: ENEssentialsToSave.notificationListByDate, url: EN_Routes.NotificationListByUrl, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate()
+      },
+      defaultValue: []
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
@@ -1203,23 +1285,48 @@ export class CloseTabService {
         isCollapsed: false
       }
     },
-    { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory },
+    { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
-    { id: 2, req: ENEssentialsToSave.authenticityAttemptsReq, value: ENEssentialsToSave.authenticityAttempts, url: EN_Routes.requestLogsAuthenticityAttempts },
-    { id: 2, req: ENEssentialsToSave.ipFilterGetBlockedReq, value: ENEssentialsToSave.ipFilterGetBlocked, url: EN_Routes.requestLogsGetBlocked },
-    { id: 2, req: ENEssentialsToSave.ipFilterGetInvalidTimeReq, value: ENEssentialsToSave.ipFilterGetInvalidTime, url: EN_Routes.requestLogsGetInvalidTime },
+    {
+      id: 2, req: ENEssentialsToSave.authenticityAttemptsReq, value: ENEssentialsToSave.authenticityAttempts, url: EN_Routes.requestLogsAuthenticityAttempts, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
+    {
+      id: 2, req: ENEssentialsToSave.ipFilterGetBlockedReq, value: ENEssentialsToSave.ipFilterGetBlocked, url: EN_Routes.requestLogsGetBlocked, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
+    {
+      id: 2, req: ENEssentialsToSave.ipFilterGetInvalidTimeReq, value: ENEssentialsToSave.ipFilterGetInvalidTime, url: EN_Routes.requestLogsGetInvalidTime, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
     { id: 2, value: ENEssentialsToSave.ipFilterBlockedUsers, url: EN_Routes.reqLogBlockedUsers },
     { id: 2, value: ENEssentialsToSave.reqLogUserActivationByUserId, url: EN_Routes.userActivationByuserId },
-    { id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins },
+    {
+      id: 2, req: ENEssentialsToSave.usersLoginsReq, value: ENEssentialsToSave.usersLogins, url: EN_Routes.reqLogUsersLogins, defaultReq:
+      {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+      },
+      defaultValue: []
+    },
     {
       id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, defaultValue: [], url: EN_Routes.wrmRequestLogsUser, defaultReq: {
         jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
-        fromTimeH: '',
-        fromTimeM: '',
-        fromTime: '',
-        toTimeH: '',
-        toTimeM: '',
-        toTime: ''
+        fromTimeH: this.insertToTimes().fromTimeH,
+        fromTimeM: this.insertToTimes().fromTimeM,
+        toTimeH: this.insertToTimes().toTimeH,
+        toTimeM: this.insertToTimes().toTimeM,
+        fromTime: this.insertToTimes().fromTime,
+        toTime: this.insertToTimes().toTime
       }
     },
     {
@@ -1263,7 +1370,14 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.serverGetAuthenticity, url: EN_Routes.serverGetAuthenticity },
     { id: 2, value: ENEssentialsToSave.serverAuthenticityBrief, url: EN_Routes.serverAuthenticityBrief },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
-    { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, defaultValue: null, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, defaultValue_2: null, url: EN_Routes.userKarkardSummary },
+    {
+      id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, defaultValue: null, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, defaultValue_2: null, url: EN_Routes.userKarkardSummary, defaultReq: {
+        zoneId: null,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        _isCollapsed: false
+      }
+    },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
     {

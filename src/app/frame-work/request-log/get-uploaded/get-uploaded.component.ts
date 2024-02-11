@@ -22,10 +22,6 @@ export class GetUploadedComponent extends FactoryONE {
 
   nullSavedSource = () => this.closeTabService.getUploaded = [];
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
   }
   connectToServer = async () => {
     this.closeTabService.getUploaded = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogGetUploaded, this.closeTabService.getUploadedReq);

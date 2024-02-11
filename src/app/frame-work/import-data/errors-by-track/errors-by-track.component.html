@@ -15,7 +15,7 @@
     [_outputFileName]="'errorsByTrackNumber'" 
     [_sessionName]="'errbytracknumber'"
      [_selectedColumnsToRemember]="'selectedErrorsByTrackNumber'"
-    (refreshedTable)="refreshTable()" [_hasCollapsible]=true
+    (refreshedTable)="callAPI()" [_hasCollapsible]=true
     [_isCollaped]="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed"
     (collapsed)="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed = !closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed">
 </app-prime-table>

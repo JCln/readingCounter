@@ -22,12 +22,7 @@ export class IpfilterGetblockedComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.ipFilterGetBlocked = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
+  classWrapper = async () => {
   }
   connectToServer = async () => {
     this.closeTabService.ipFilterGetBlocked = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.PostIpFilterGetBlocked, this.closeTabService.ipFilterGetBlockedReq);

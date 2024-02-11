@@ -22,12 +22,7 @@ export class AuthenticityAttemptsComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.authenticityAttempts = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
+  classWrapper = async () => {
   }
   connectToServer = async () => {
     this.closeTabService.authenticityAttempts = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.policyAuthenticityAttempts, this.closeTabService.authenticityAttemptsReq);
