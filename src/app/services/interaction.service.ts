@@ -19,7 +19,20 @@ export class InteractionService {
 
   private latestReads = new Subject<any>();
   private netRequestSource = new BehaviorSubject<boolean>(false);
+  private chunkFailedStatus = new BehaviorSubject<boolean>(true);
 
+  $getChunkFailedStatus = (): Observable<boolean> => {
+    return this.chunkFailedStatus.asObservable();
+  }
+  private setChunkFailedStatus(status: boolean) {
+    this.chunkFailedStatus.next(status);
+  }
+  canShowFailedChunkDialog() {
+    this.setChunkFailedStatus(true);
+  }
+  dontShowFailedChunkDialogAnymore() {
+    this.setChunkFailedStatus(false);
+  }
   getNetRequestStatus$ = (): Observable<any> => {
     return this.netRequestSource.asObservable();
   }
