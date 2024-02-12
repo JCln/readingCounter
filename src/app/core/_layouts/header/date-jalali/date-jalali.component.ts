@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DateJalaliService } from 'services/date-jalali.service';
+import { Converter } from 'src/app/classes/converter';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class DateJalaliComponent implements AfterViewInit {
     locale: 'fa'
   }
   @Output() dateJalEvent = new EventEmitter<any>();
-  @Input() dateObject: string;  
+  @Input() dateObject: string;
   @Input() readonly _mode: string = 'day';
   @Input() readonly _disabled: boolean = false;
 
@@ -22,10 +23,10 @@ export class DateJalaliComponent implements AfterViewInit {
 
   sendDateJal = ($event, hasFirstVal?: boolean) => {
     if (hasFirstVal) {
-      this.dateJalEvent.emit(this.dateObject);
+      this.dateJalEvent.emit(Converter.persianToEngNumbers(this.dateObject));
     }
     else {
-      this.dateJalEvent.emit($event.inputElementValue);
+      this.dateJalEvent.emit(Converter.persianToEngNumbers($event.inputElementValue));
     }
   }
   ngAfterViewInit(): void {

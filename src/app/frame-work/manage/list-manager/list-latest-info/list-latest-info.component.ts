@@ -61,6 +61,14 @@ export class ListLatestInfoComponent extends AllListsFactory {
       resolve(true);
     });
   }
+  getCounterStateByZoneDictionaryAndAddSelectable = (): Promise<any> => {
+    return new Promise(async (resolve) => {
+      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.closeTabService.listLatestInfo.zoneId);
+      if (this.counterStateDictionary[0].id !== null)
+        this.counterStateDictionary.unshift({ id: null, title: 'انتخاب کنید', isSelected: true })
+      resolve(true);
+    });
+  }
   insertSelectedColumns = () => {
     this.modifyType = this.listManagerService.getOffloadModifyType();
     this._selectCols = this.listManagerService.columnManager.getColumnsMenus(this._outputFileName);
@@ -71,7 +79,7 @@ export class ListLatestInfoComponent extends AllListsFactory {
       id: this.closeTabService.listLatestInfo.id,
       modifyType: null,
       checkedItems: [0],
-      counterStateId: null,
+      counterStateId: this.closeTabService.listLatestInfo.counterStateId,
       counterNumber: this.closeTabService.listLatestInfo.counterNumber,
       jalaliDay: '',//this.closeTabService.listLatestInfo.offloadDateJalali ? this.closeTabService.listLatestInfo.offloadDateJalali : this.dateJalaliService.getCurrentDate()
       description: ''
@@ -83,7 +91,7 @@ export class ListLatestInfoComponent extends AllListsFactory {
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
     this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.closeTabService.listLatestInfo.zoneId);
-    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.closeTabService.listLatestInfo.zoneId);
+    await this.getCounterStateByZoneDictionaryAndAddSelectable();
 
     Converter.convertIdToTitle([this.closeTabService.listLatestInfo], this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle([this.closeTabService.listLatestInfo], this.deleteDictionary, 'hazf');

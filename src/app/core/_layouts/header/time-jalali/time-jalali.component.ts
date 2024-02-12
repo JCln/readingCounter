@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DateJalaliService } from 'services/date-jalali.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-time-jalali',
@@ -20,11 +21,10 @@ export class TimeJalaliComponent implements AfterViewInit {
   sendDateJal = ($event) => {
     if (!this.timeObject || this.timeObject.length === 0) {
       this.timeObject = this.dateJalaliService.getCurrentTime();
-
-      this.dateJalEvent.emit(this.timeObject);
+      this.dateJalEvent.emit(Converter.persianToEngNumbers(this.timeObject));
     }
     else {
-      this.dateJalEvent.emit($event.inputElementValue);
+      this.dateJalEvent.emit(Converter.persianToEngNumbers($event.inputElementValue));
     }
   }
   ngAfterViewInit(): void {

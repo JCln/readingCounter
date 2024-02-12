@@ -105,7 +105,7 @@ export class SimpleMasterByFragmentComponent extends FactoryONE {
     this.outputManagerService.downloadFile(res);
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.trackingManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.simpleMasterByFragmentReq._selectedKindId);
+    this.readingPeriodDictionary = await this.trackingManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.simpleMasterByFragmentReq.zoneId, +this.closeTabService.simpleMasterByFragmentReq._selectedKindId);
   }
 
 }

@@ -2,17 +2,31 @@ import { ErrorHandler, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
 import { IDialogMessage } from 'interfaces/ioverall-config';
-import { InteractionService } from './interaction.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable()
 
 export class GlobalErrorHandlerService implements ErrorHandler {
+  private chunkFailedStatus = new BehaviorSubject<boolean>(true);
   private readonly chunkFailedMessage = /Loading chunk [\d]+ failed/;
   private readonly newVersionAvailable = 'نسخه شما بروز نیست';
   private readonly needToRefresh = 'لازم است تا صفحه مجددا بارگیری شود';
+
+  $getChunkFailedStatus = (): Observable<boolean> => {
+    return this.chunkFailedStatus.asObservable();
+  }
+  private setChunkFailedStatus(status: boolean) {
+    this.chunkFailedStatus.next(status);
+  }
+  canShowFailedChunkDialog() {
+    this.setChunkFailedStatus(true);
+  }
+  dontShowFailedChunkDialogAnymore() {
+    this.setChunkFailedStatus(false);
+  }
   constructor(
-    public dialog: MatDialog,
-    private interactionService: InteractionService
+    public dialog: MatDialog
   ) { }
 
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
@@ -50,9 +64,9 @@ export class GlobalErrorHandlerService implements ErrorHandler {
   }
   handleError(error: any) {
     if (this.chunkFailedMessage.test(error.message)) {
-      this.interactionService.$getChunkFailedStatus().subscribe(async res => {
+      this.$getChunkFailedStatus().subscribe(async res => {
         if (res) {
-          this.interactionService.dontShowFailedChunkDialogAnymore();
+          this.dontShowFailedChunkDialogAnymore();
           const config = {
             messageTitle: this.newVersionAvailable,
             text: this.needToRefresh,
@@ -61,8 +75,8 @@ export class GlobalErrorHandlerService implements ErrorHandler {
             isDelete: false,
             icon: 'pi pi-refresh',
           }
-          await this.firstConfirmDialog(config)
-          this.interactionService.canShowFailedChunkDialog();
+          this.firstConfirmDialog(config)
+          this.canShowFailedChunkDialog();
           window.location.reload();
         }
       })

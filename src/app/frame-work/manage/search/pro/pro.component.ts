@@ -118,7 +118,7 @@ export class ProComponent extends AllListsFactory {
   getReadingPeriod = async () => {
     const a = this.closeTabService.saveDataForSearchProReq._selectedKindId;
     if (a)
-      this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(a);
+      this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.saveDataForSearchProReq.zoneId, +a);
   }
   async connectToServer() {
     if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.closeTabService._isOrderByDate)) {

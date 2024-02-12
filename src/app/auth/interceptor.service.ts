@@ -10,6 +10,7 @@ import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { UtilsService } from 'services/utils.service';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ENSnackBarColors, EN_Mess } from 'interfaces/enums.enum';
+import { InteractionService } from 'services/interaction.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     private jwtService: JwtService,
     private authService: AuthService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private interactionService: InteractionService
   ) { }
 
   accessDenied_401 = async (error: string) => {
@@ -75,6 +77,11 @@ export class InterceptorService implements HttpInterceptor {
       .pipe(
         catchError((error => {
           if (error instanceof HttpErrorResponse) {
+            // this.interactionService.$getShowExtraDialog().subscribe(res => {
+            //   if (res) {
+            //     this.interactionService.notShowExtraDialogAnymore();
+            //     console.log(res);
+
             if (error.status === ENClientServerErrors.cs401) {
               if (req.url.includes(EN_Routes.login)) {
                 this.showLoginMessage(error);
@@ -98,7 +105,10 @@ export class InterceptorService implements HttpInterceptor {
             // block IP
             // if (error.status === ENClientServerErrors.cs451) {
             //   this.showDialogSpeciall(EN_Mess.access_denied451LegalReasons);
-            // }            
+            // }     
+            //   this.interactionService.showExtraDialog();
+            // }
+            // })
           }
           if (error instanceof HttpErrorResponse && error.error instanceof Blob && error.error.type === this.errorType) {
             // https://github.com/angular/angular/issues/19888

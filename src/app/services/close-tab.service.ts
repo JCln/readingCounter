@@ -1428,10 +1428,10 @@ export class CloseTabService {
   receiveDateJalali = (variable: ENReadingReports, $event: string) => {//just JalaliDay
     this[variable].jalaliDay = $event;
   }
-  receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
+  receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {//just from date
     this[variable].fromDate = $event;
   }
-  receiveToDateJalali = (variable: ENReadingReports, $event: string) => {
+  receiveToDateJalali = (variable: ENReadingReports, $event: string) => {//just to date
     this[variable].toDate = $event;
   }
   getSearchInOrderTo = (): ISearchInOrderTo[] => {

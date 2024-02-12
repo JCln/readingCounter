@@ -30,7 +30,7 @@
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="this.readingReportManagerService.detailsReq._selectedKindId"
+                                [(ngModel)]="readingReportManagerService.detailsReq._selectedKindId"
                                 name="_selectedKindId">
                                 <mat-option (click)="getReadingPeriod()"
                                     *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
