@@ -43,7 +43,8 @@ export class AutoImportEditDgComponent {
       displayPreDate: data.body.displayPreDate,
       displayMobile: data.body.displayMobile,
       hasImage: data.body.hasImage,
-      displayDebt: data.body.displayDebt
+      displayDebt: data.body.displayDebt,
+      displayIcons: data.body.displayIcons
     })
   }
   async save() {

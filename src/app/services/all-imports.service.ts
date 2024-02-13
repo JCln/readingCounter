@@ -30,6 +30,7 @@ export class AllImportsService {
     displayMobile: false,
     hasImage: false,
     displayDebt: false,
+    displayIcons: false,
   };
   simafaSingle_pageSign = {
     UUID: '',

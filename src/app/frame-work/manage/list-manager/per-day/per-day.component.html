@@ -46,6 +46,11 @@
                 بدهی
             </mat-checkbox>
 
+            <mat-checkbox [disabled]="true" name="displayIcons"
+                [(ngModel)]="closeTabService.saveDataForLMPD.displayIcons">
+                آیکن
+            </mat-checkbox>
+
             <mat-checkbox [disabled]="true" name="isBazdid"
                 [(ngModel)]="closeTabService.saveDataForLMPD.isBazdid">بازدید
             </mat-checkbox>

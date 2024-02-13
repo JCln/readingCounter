@@ -19,7 +19,8 @@ export interface IAssessAddDtoSimafa {
     displayPreDate: boolean,
     displayMobile: boolean,
     hasImage: boolean,
-    displayDebt: boolean
+    displayDebt: boolean,
+    displayIcons: boolean
 }
 export interface IReadingConfigDefault {
     id: number,
@@ -38,6 +39,7 @@ export interface IReadingConfigDefault {
     displayMobile: boolean,
     hasImage: boolean,
     displayDebt: boolean,
+    displayIcons: boolean,
     lowConstBoundMaskooni: number,
     lowPercentBoundMaskooni: number,
     highConstBoundMaskooni: number,

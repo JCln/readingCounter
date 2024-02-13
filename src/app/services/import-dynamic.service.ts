@@ -53,6 +53,7 @@ export class ImportDynamicService {
     displayMobile: false,
     hasImage: false,
     displayDebt: false,
+    displayIcons: false,
   }
   private _simafaSingleReq: IReadingProgramRes;
 

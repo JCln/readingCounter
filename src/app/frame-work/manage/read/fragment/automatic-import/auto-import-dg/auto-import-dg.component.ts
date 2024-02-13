@@ -31,6 +31,7 @@ export class AutoImportDgComponent implements OnInit {
     displayMobile: false,
     hasImage: false,
     displayDebt: false,
+    displayIcons: false,
   };
 
   constructor(

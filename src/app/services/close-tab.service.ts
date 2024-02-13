@@ -458,7 +458,8 @@ export class CloseTabService {
     displayPreDate: false,
     displayMobile: false,
     hasImage: false,
-    displayDebt: false
+    displayDebt: false,
+    displayIcons: false,
   }
   saveDataForUserKarkard: IUserKarkard[];
   saveDataForTrackOffloaded: ITracking[] = [];
@@ -503,7 +504,8 @@ export class CloseTabService {
     displayPreDate: false,
     displayMobile: false,
     hasImage: false,
-    displayDebt: false
+    displayDebt: false,
+    displayIcons: false,
   }
   saveDataForImportDynamic: any;
   saveDataForImportErrors: IImportErrors[] = [];
@@ -523,6 +525,7 @@ export class CloseTabService {
     displayMobile: false,
     hasImage: false,
     displayDebt: false,
+    displayIcons: false,
     counterReaderId: '',
     readingPeriodId: null,
     year: this.utilsService.getFirstYear(),
@@ -552,7 +555,8 @@ export class CloseTabService {
     displayPreDate: false,
     displayMobile: false,
     hasImage: false,
-    displayDebt: false
+    displayDebt: false,
+    displayIcons: false,
   };
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
@@ -573,6 +577,7 @@ export class CloseTabService {
     displayMobile: false,
     hasImage: false,
     displayDebt: false,
+    displayIcons: false,
     skipErrors: false,
     counterReaderId: '',
     readingPeriodId: '',
@@ -1074,7 +1079,8 @@ export class CloseTabService {
         displayPreDate: false,
         displayMobile: false,
         hasImage: false,
-        displayDebt: false
+        displayDebt: false,
+        displayIcons: false,
       }
     },
     {
@@ -1090,6 +1096,7 @@ export class CloseTabService {
         displayMobile: false,
         hasImage: false,
         displayDebt: false,
+        displayIcons: false,
         skipErrors: false,
         counterReaderId: '',
         readingPeriodId: '',
@@ -1121,6 +1128,7 @@ export class CloseTabService {
         displayMobile: false,
         hasImage: false,
         displayDebt: false,
+        displayIcons: false,
         counterReaderId: '',
         readingPeriodId: null,
         year: this.utilsService.getFirstYear(),
@@ -1158,7 +1166,8 @@ export class CloseTabService {
         displayPreDate: false,
         displayMobile: false,
         hasImage: false,
-        displayDebt: false
+        displayDebt: false,
+        displayIcons: false,
       }
     },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest, defaultValue: [] },

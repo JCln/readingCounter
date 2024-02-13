@@ -55,6 +55,10 @@
                 <mat-checkbox name="displayDebt" [(ngModel)]="closeTabService.simafaSingleReq.displayDebt">
                     بدهی
                 </mat-checkbox>
+
+                <mat-checkbox name="displayIcons" [(ngModel)]="closeTabService.simafaSingleReq.displayIcons">
+                    آیکن
+                </mat-checkbox>
             </div>
             <footer>
                 <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>

@@ -34,6 +34,7 @@ export class RdEditDgComponent {
       displayMobile: data.displayMobile,
       hasImage: data.hasImage,
       displayDebt: data.displayDebt,
+      displayIcons: data.displayIcons,
       zoneId: editable,
       defaultAlalHesab: data.defaultAlalHesab,
       maxAlalHesab: data.maxAlalHesab,

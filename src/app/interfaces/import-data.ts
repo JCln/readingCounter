@@ -15,6 +15,7 @@ export interface IImportDynamicDefault {
     displayMobile: boolean,
     hasImage: boolean,
     displayDebt: boolean,
+    displayIcons: boolean,
     kindId?: number,
     period?: number
 }
@@ -38,6 +39,7 @@ export interface IFileExcelReq {
     displayMobile: boolean,
     hasImage: boolean,
     displayDebt: boolean,
+    displayIcons: boolean,
     counterReaderId: string;
     readingPeriodId: string;
     listNumber: string;
@@ -67,6 +69,7 @@ export interface IImportSimafaBatchReq {
     displayMobile: boolean,
     hasImage: boolean,
     displayDebt: boolean,
+    displayIcons: boolean,
     readingPeriodId?: number,
     canContinue?: boolean,
     fromEshterak?: string,
@@ -88,7 +91,8 @@ export interface IImportSimafaSingleReq {
     displayPreDate: boolean,
     displayMobile: boolean,
     hasImage: boolean,
-    displayDebt: boolean
+    displayDebt: boolean,
+    displayIcons: boolean
 }
 export interface IImportSimafaReadingProgramsReq {
     readingPeriodId: number,

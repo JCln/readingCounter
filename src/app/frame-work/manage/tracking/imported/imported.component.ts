@@ -49,6 +49,7 @@ export class ImportedComponent extends FactoryONE {
       displayMobile: rowData.displayMobile,
       displayPreDate: rowData.displayPreDate,
       hasImage: rowData.hasImage,
+      displayIcons: rowData.displayIcons,
       displayDebt: rowData.displayDebt
     }
   }

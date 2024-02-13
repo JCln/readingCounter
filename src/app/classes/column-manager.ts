@@ -130,6 +130,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
@@ -174,6 +175,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
@@ -203,6 +205,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
@@ -232,6 +235,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
@@ -261,6 +265,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, readonly: true }
 
     ];
@@ -290,6 +295,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
 
     ];
@@ -319,6 +325,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
 
     ];
@@ -348,6 +355,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
 
     ];
@@ -377,6 +385,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true, isSelectedOrigin: false }
 
     ];
@@ -407,6 +416,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
         // { field: 'hasMap', header: 'نقشه', isSelected: true,isSelectedOrigin:true, isBoolean: true }        
     ];
@@ -435,6 +445,7 @@ export class ColumnManager {
         { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayMobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true }
     ];
     counterStateDto: IObjectIteratation[] = [
@@ -2011,6 +2022,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ];
     importedListDetails: IObjectIteratation[] = [
         { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, readonly: true, isBoolean: true },
@@ -2036,6 +2048,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ];
     // For Follow UP component
     LMPerDayFollowUpPositions: IObjectIteratation[] = [
@@ -2687,7 +2700,8 @@ export class ColumnManager {
         { field: 'isTavizi', header: 'تعویض', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'clientOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
         { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true }
+        { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true }
     ]
     readingConfigDefault: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
@@ -2705,6 +2719,7 @@ export class ColumnManager {
         { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'lowConstBoundMaskooni', header: 'ثابت مسکونی پایین', isSelected: false, isSelectedOrigin: false },
         { field: 'highConstBoundMaskooni', header: 'ثابت مسکونی بالا', isSelected: false, isSelectedOrigin: false },
         { field: 'lowPercentBoundMaskooni', header: 'میانگین مسکونی پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },

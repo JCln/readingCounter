@@ -38,6 +38,7 @@ export interface ICounterReport {
     isTavizi: boolean,
     clientOrder: number,
     hasImage: boolean,
+    displayIcons: boolean,
     displayDebt: boolean
 }
 
@@ -63,7 +64,8 @@ export interface IAutomaticImportAddEdit {
     displayPreDate: boolean,
     displayMobile: boolean,
     hasImage: boolean,
-    displayDebt: boolean
+    displayDebt: boolean,
+    displayIcons: boolean
 }
 export interface IAutomaticImport {
     id: string,
@@ -137,6 +139,7 @@ export interface ICounterState {
     isTavizi: boolean,
     hasImage: boolean,
     displayDebt: boolean,
+    displayIcons: boolean,
     shouldEnterNumber: boolean,
     isXarab: boolean,
     isFaqed: boolean,

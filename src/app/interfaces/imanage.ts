@@ -44,6 +44,7 @@ export interface IBriefKardex {
     preNumber: number,
     currentNumber: number,
     preDebt: number,
+    displayIcons: number,
     amount: number,
     counterStateTitle: string
 }

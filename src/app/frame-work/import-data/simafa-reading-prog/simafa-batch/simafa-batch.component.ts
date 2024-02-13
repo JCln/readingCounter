@@ -142,6 +142,7 @@ export class SimafaBatchComponent extends FactoryONE {
     this.allImportsService.allImports_batch.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
     this.allImportsService.allImports_batch.hasImage = rcd.hasImage ? rcd.hasImage : false;
     this.allImportsService.allImports_batch.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
+    this.allImportsService.allImports_batch.displayIcons = rcd.displayIcons ? rcd.displayIcons : false;
     this.allImportsService.allImports_batch.hasPreNumber = rcd.defaultHasPreNumber;
     this.allImportsService.allImports_batch.imagePercent = rcd.defaultImagePercent;
     this.allImportsService.allImports_batch.alalHesabPercent = rcd.defaultAlalHesab;

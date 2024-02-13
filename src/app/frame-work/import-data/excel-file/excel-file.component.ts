@@ -61,6 +61,7 @@ export class ExcelFileComponent extends FactoryONE {
     this.closeTabService.saveDataForImportDataFileExcelReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
     this.closeTabService.saveDataForImportDataFileExcelReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
     this.closeTabService.saveDataForImportDataFileExcelReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
+    this.closeTabService.saveDataForImportDataFileExcelReq.displayIcons = rcd.displayIcons ? rcd.displayIcons : false;
     this.closeTabService.saveDataForImportDataFileExcelReq.hasPreNumber = rcd.defaultHasPreNumber;
     this.closeTabService.saveDataForImportDataFileExcelReq.imagePercent = rcd.defaultImagePercent;
     this.closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent = rcd.defaultAlalHesab;

@@ -59,6 +59,7 @@ export class SimafaSingleComponent extends FactoryONE {
     this.closeTabService.simafaSingleReq.displayMobile = rcd.displayMobile ? rcd.displayMobile : false;
     this.closeTabService.simafaSingleReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
     this.closeTabService.simafaSingleReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
+    this.closeTabService.simafaSingleReq.displayIcons = rcd.displayIcons ? rcd.displayIcons : false;
     this.closeTabService.simafaSingleReq.hasPreNumber = rcd.defaultHasPreNumber;
     this.closeTabService.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
     this.closeTabService.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
