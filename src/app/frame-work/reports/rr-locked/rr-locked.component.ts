@@ -77,8 +77,18 @@ export class RrLockedComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'karbariCode');
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.lockedReq.readingPeriodId = null;
+    this.readingReportManagerService.lockedReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.lockedReq.readingPeriodId = null;
+  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.lockedReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.lockedReq.zoneId, +this.readingReportManagerService.lockedReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.lockedReq, this.readingReportManagerService._isOrderByDate);

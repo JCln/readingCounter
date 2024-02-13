@@ -70,6 +70,9 @@ export class MapComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   _isOrderInAsc: boolean = false;
   _selectedOrderId: number = 0;
+  private readonly color_normal: string = '#0045cb';
+  private readonly color_mane: string = '#f44336';
+  private readonly color_polyline: string = '#0e4c92';
 
   orderGroup: ITHV[] = [
     {
@@ -122,7 +125,7 @@ export class MapComponent implements OnInit, OnDestroy {
           return;
         lines.push([parseFloat(items.y), parseFloat(items.x)]);
         L.polyline(lines, {
-          color: '#0e4c92',
+          color: this.color_polyline,
           weight: 1
         }).addTo(this.layerGroup);
       }, i * delay);
@@ -367,16 +370,16 @@ export class MapComponent implements OnInit, OnDestroy {
     if (lat === 0)
       return;
     items.counterStateTitle === 'بسته' ?
-      L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#f44336' }).addTo(this.layerGroup)
+      L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_mane }).addTo(this.layerGroup)
         .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`)
       :
-      L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#2196f3' }).addTo(this.layerGroup)
+      L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
         .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`)
   }
   private markWithoutCluster = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
-    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
@@ -391,14 +394,14 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   private markSingle = (items: any) => {
     this.flyToDes(items.y, items.x, 12);
-    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
         `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
       );
   }
   private markSingleForbidden = (items: any) => {
     this.flyToDes(items.y, items.x, 12);
-    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
         `${'ناحیه :' + items.zone} <br>` +
         `${'توضیحات :' + items.description} <br>` +

@@ -42,6 +42,16 @@ export class SimafaReadingProgComponent extends FactoryONE {
       Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
     }
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingPeriodDictionary = [];
+    this.closeTabService.importSimafaReadingProgramReq.readingPeriodId = null;
+    this.closeTabService.importSimafaReadingProgramReq.kindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.closeTabService.importSimafaReadingProgramReq.readingPeriodId = null;
+  }
   getReadingPeriod = async () => {
     if (this.closeTabService.importSimafaReadingProgramReq.kindId)
       this.readingPeriodDictionary = await this.importDynamicService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.importSimafaReadingProgramReq.zoneId, this.closeTabService.importSimafaReadingProgramReq.kindId);

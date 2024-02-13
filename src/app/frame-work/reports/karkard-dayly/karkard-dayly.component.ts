@@ -45,8 +45,19 @@ export class KarkardDaylyComponent extends FactoryONE {
     if (this.readingReportManagerService.karkardDailyReq.zoneId)
       this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.karkardDailyReq.zoneId);
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingReportManagerService.karkardDailyReq.fragmentMasterIds = [];
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.karkardDailyReq.readingPeriodId = null;
+    this.readingReportManagerService.karkardDailyReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.karkardDailyReq.readingPeriodId = null;
+  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.karkardDailyReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.karkardDailyReq.zoneId, +this.readingReportManagerService.karkardDailyReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this.readingReportManagerService._isOrderByDate);

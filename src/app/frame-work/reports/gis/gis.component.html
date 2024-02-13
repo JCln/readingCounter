@@ -33,9 +33,8 @@
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
-                            optionValue="id" optionLabel="title" filter="true" (onChange)="getCounterStateByZoneId()"
-                            (onChange)="getFragmentByZone()"
-                            (onChange)="readingReportManagerService.gisReq.fragmentMasterIds = []">
+                            optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
+                            (onChange)="getCounterStateByZoneId()" (onChange)="afterZoneChanged()">
                         </p-dropdown>
                     </div>
                 </div>
@@ -52,26 +51,21 @@
                 <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                     <div class="_key">نوع دوره</div>
                     <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="this.readingReportManagerService.gisReq._selectedKindId"
-                            name="_selectedKindId">
-                            <mat-option (click)="getReadingPeriod()"
-                                *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
+                            [(ngModel)]="readingReportManagerService.gisReq._selectedKindId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
+                            (onChange)="afterPeriodChanged()">
+                        </p-dropdown>
                     </div>
                 </div>
                 <div class="input_2"
                     [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                     <div class="_key">دوره قرائت</div>
                     <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.gisReq.readingPeriodId" name="readingPeriodId">
-                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
+                            [(ngModel)]="readingReportManagerService.gisReq.readingPeriodId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
                     </div>
                 </div>
                 <div class="input_2"

@@ -78,15 +78,6 @@
         <div class="over_all">
             <section>
                 <div class="content">
-                    <h1 class="title">جستجو براساس</h1>
-                    <p-selectButton [options]="stateOptionsSearchType"
-                        [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label"
-                        optionValue="value" (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
-                    </p-selectButton>
-                </div>
-            </section>
-            <section>
-                <div class="content">
                     <h1 class="title">امکان جابجایی ستونها در جدول</h1>
                     <p-selectButton [options]="stateOptionsReordersableTable"
                         [(ngModel)]="profileService.showStateVals.reOrderableTable" optionLabel="label"
@@ -97,7 +88,7 @@
             </section>
             <section>
                 <div class="content">
-                    <h1 class="title">Scroll در جداول</h1>
+                    <h1 class="title">Scroll در جدول‌ها</h1>
                     <p-selectButton [options]="stateOptionsVirtualScroll"
                         [(ngModel)]="profileService.showStateVals.virtualScrollStatus" optionLabel="label"
                         optionValue="value"
@@ -114,7 +105,7 @@
                         (onChange)="setHasColumnsResizable(profileService.showStateVals.hasColumnsResizable)">
                     </p-selectButton>
                 </div>
-            </section>           
+            </section>
             <section>
                 <div class="content">
                     <h1 class="title">گروه‌بندی پیشفرض در کارتابل</h1>
@@ -200,6 +191,15 @@
             <span>برنامه</span>
         </ng-template>
         <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">جستجو براساس</h1>
+                    <p-selectButton [options]="stateOptionsSearchType"
+                        [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label"
+                        optionValue="value" (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
+                    </p-selectButton>
+                </div>
+            </section>
             <section>
                 <div class="content">
                     <h1 class="title">اندازه فونت</h1>

@@ -41,9 +41,20 @@ export class RrFragmentComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingReportManagerService.rrFragmentKarkardReq.fragmentMasterIds = [];
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.rrFragmentKarkardReq.readingPeriodId = null;
+    this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.rrFragmentKarkardReq.readingPeriodId = null;
+  }
   getReadingPeriod = async () => {
     if (this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId)
-      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId);
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.rrFragmentKarkardReq.zoneId, +this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId);
   }
   getFragmentByZone = async () => {
     if (this.readingReportManagerService.rrFragmentKarkardReq.zoneId)

@@ -37,7 +37,17 @@ export class PerformanceComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.anlzPrfmReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.anlzPrfmReq.zoneId, +this.readingReportManagerService.anlzPrfmReq._selectedKindId);
+  }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.anlzPrfmReq.readingPeriodId = null;
+    this.readingReportManagerService.anlzPrfmReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.anlzPrfmReq.readingPeriodId = null;
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRAnalyzePerformance(this.readingReportManagerService.anlzPrfmReq, this.readingReportManagerService._isOrderByDate);

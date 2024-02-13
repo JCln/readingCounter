@@ -1,8 +1,9 @@
-import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
+import { UtilsService } from './utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from '../classes/math-s';
 import { IIOPolicy } from 'interfaces/iserver-manager';
+import { VerificationService } from './verification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { IIOPolicy } from 'interfaces/iserver-manager';
 export class DictionaryWrapperService {
 
   constructor(
-    public ajaxReqWrapperService: AjaxReqWrapperService
+    public utilsService: UtilsService,
+    private verificationService: VerificationService
   ) { }
 
   private provinceDictionary: any = [];
@@ -93,133 +95,133 @@ export class DictionaryWrapperService {
   async getkarbariCodeDictionary(): Promise<any> {
     if (!MathS.isNull(this.karbariCodeDictionary))
       return this.karbariCodeDictionary;
-    const res = this.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariDictionaryCode);
+    const res = this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariDictionaryCode);
     this.setKarbariDictionaryCode(res);
     return this.karbariCodeDictionary;
   }
   async getProvinceDictionary(): Promise<any> {
     if (!MathS.isNull(this.provinceDictionary))
       return this.provinceDictionary;
-    const res = this.ajaxReqWrapperService.getDataSource(ENInterfaces.ProvinceDICTIONARY);
+    const res = this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ProvinceDICTIONARY);
     this.setProvinceDictionary(res);
     return this.provinceDictionary;
   }
   getRegionDictionary(): Promise<any> {
     if (!MathS.isNull(this.regionDictionary))
       return this.regionDictionary;
-    const res = this.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionDICTIONARY);
+    const res = this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionDICTIONARY);
     this.setRegionDictionary(res);
     return this.regionDictionary;
   }
   async getZoneDictionary(): Promise<any> {
     if (!MathS.isNull(this.zoneDictionary))
       return this.zoneDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneDICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneDICTIONARY);
     this.setZoneDictionary(res);
     return this.zoneDictionary;
   }
   async getCountryDictionary(): Promise<any> {
     if (!MathS.isNull(this.countryDictionary))
       return this.countryDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.CountryDICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.CountryDICTIONARY);
     this.setCountryDictionary(res);
     return this.countryDictionary;
   }
   async getUserActivationLogTypesDictionary(): Promise<any> {
     if (!MathS.isNull(this.userActivationLogTypes))
       return this.userActivationLogTypes;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.requestLogUserActivationDictionary);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.requestLogUserActivationDictionary);
     this.setUserActivationLogTypes(res);
     return this.userActivationLogTypes;
   }
   async getUserAllDictionary(): Promise<any> {
     if (!MathS.isNull(this.userAllDictionary))
       return this.userAllDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.userAllDictionary);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.userAllDictionary);
     this.setUserAllDictionary(res);
     return this.userAllDictionary;
   }
   async getAuthLev1Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev1Dictionary))
       return this.authLev1Dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel1DICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel1DICTIONARY);
     this.setAuthLev1Dictionary(res);
     return this.authLev1Dictionary;
   }
   async getAuthLev2Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev2Dictionary))
       return this.authLev2Dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel2DICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel2DICTIONARY);
     this.setAuthLev2Dictionary(res);
     return this.authLev2Dictionary;
   }
   async getAuthLev3Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev3Dictionary))
       return this.authLev3Dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel3DICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel3DICTIONARY);
     this.setAuthLev3Dictionary(res);
     return this.authLev3Dictionary;
   }
   async getAuthLev4Dictionary(): Promise<any> {
     if (!MathS.isNull(this.authLev4Dictionary))
       return this.authLev4Dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel4DICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel4DICTIONARY);
     this.setAuthLev4Dictionary(res);
     return this.authLev4Dictionary;
   }
   async getImageAttrAllDictionary(): Promise<any> {
     if (!MathS.isNull(this.imageAttributionAllDictionary))
       return this.imageAttributionAllDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.imageAttributionGet);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.imageAttributionGet);
     this.setImgAttributionDictionary(res);
     return this.imageAttributionAllDictionary;
   }
   async getTrackingStatesDictionary(): Promise<any> {
     if (!MathS.isNull(this.trackingStatesDictionary))
       return this.trackingStatesDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingStatesDictionary);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingStatesDictionary);
     this.setTrackingStatesDictionary(res);
     return this.trackingStatesDictionary;
   }
   async getTraverseDifferentialDictionary(): Promise<any> {
     if (!MathS.isNull(this.traverseDifferentialDictionary))
       return this.traverseDifferentialDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.ListTraverseDifferentialDictionary);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ListTraverseDifferentialDictionary);
     this.setTraverseDiffDictionary(res);
     return this.traverseDifferentialDictionary;
   }
   async getCounterReportDictionary(): Promise<any> {
     if (!MathS.isNull(this.counterReportDictionary))
       return this.counterReportDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.CounterReportDICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.CounterReportDICTIONARY);
     this.setCounterReportDictionary(res);
     return this.counterReportDictionary;
   }
   async getCounterReportByZoneIdDictionary(zoneId: number): Promise<any> {
     if (this.counterReportByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.counterReportByZoneDictionary.dictionary))
       return this.counterReportByZoneDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId);
     this.setCounterReportByZoneDictionary(res, zoneId);
     return res;
   }
   getUserCounterReaderDictionary = async (zoneId: number): Promise<any> => {
     if (this.userCounterReadersByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.userCounterReadersByZoneDictionary.dictionary))
       return this.userCounterReadersByZoneDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterReadersByZoneId, zoneId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterReadersByZoneId, zoneId);
     this.setUserCounterReadersByZoneDictionary(res, zoneId);
     return res;
   }
   getReadingConfigDefaultByZoneIdDictionary = async (zoneId: number): Promise<any> => {
     if (this.readingConfigDefaultByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.readingConfigDefaultByZoneDictionary.dictionary))
       return this.readingConfigDefaultByZoneDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId);
     this.setReadingConfigDefaultByZoneDictionary(res, zoneId);
     return res;
   }
   getIOPolicy = async (canRefresh: boolean): Promise<any> => {
     if (!MathS.isNull(this.iOPolicy.id) && !canRefresh)
       return this.iOPolicy;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicy);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIOPolicy);
     this.setIOPolicy(res);
     return res;
   }
@@ -227,91 +229,94 @@ export class DictionaryWrapperService {
     if (this.fragmentMasterByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.fragmentMasterByZoneDictionary.dictionary))
       return this.fragmentMasterByZoneDictionary.dictionary;
 
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.fragmentMasterInZone, zoneId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.fragmentMasterInZone, zoneId);
     this.setFragmentMasterByZoneDictionary(res, zoneId);
     return res;
   }
   async getCounterStateDictionary(): Promise<any> {
     if (!MathS.isNull(this.counterStateDictionary))
       return this.counterStateDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateDictionary);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateDictionary);
     this.setCounterStateDictionary(res);
     return this.counterStateDictionary;
   }
   async getCounterStateForModifyDictionary(zoneId: number): Promise<any> {
     if (this.counterStateForModifyDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateForModifyDictionary.dictionary))
       return this.counterStateForModifyDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryForModify, zoneId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryForModify, zoneId);
     this.setCounterStateForModifyDictionary(res, zoneId);
     return res;
   }
   async getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByZoneIdDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneIdDictionary.dictionary))
       return this.counterStateByZoneIdDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId);
     this.setCounterStateByZoneIdDictionary(res, zoneId);
     return res;
   }
   async getCounterStateByCodeShowAllDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByCodeShowAllDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeShowAllDictionary.dictionary))
       return this.counterStateByCodeShowAllDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId + '?showAll=true');
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId + '?showAll=true');
     this.setCounterStateByCodeShowAllDictionary(res, zoneId);
     return res;
   }
   async getCounterStateByZoneShowAllDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByZoneShowAllDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneShowAllDictionary.dictionary))
       return this.counterStateByZoneShowAllDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId + '?showAll=true');
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId + '?showAll=true');
     this.setCounterStateByZoneShowAllDictionary(res, zoneId);
     return res;
   }
   async getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByCodeDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeDictionary.dictionary))
       return this.counterStateByCodeDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId);
     this.setCounterStateByCodeDictionary(res, zoneId);
     return res;
   }
   async getPeriodKindDictionary(): Promise<any> {
     if (!MathS.isNull(this.periodKindDictionary))
       return this.periodKindDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodKindDictionary);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodKindDictionary);
     this.setPeriodKindDictionary(res);
     return this.periodKindDictionary;
   }
   getReadingPeriodDictionary = async (kindId: string): Promise<any> => {
     if (this.readingPeriodDictionary.kindId == kindId && !MathS.isNull(this.readingPeriodDictionary.dictionary))
       return this.readingPeriodDictionary.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId);
     this.setReadingPeriodDictionary(res, +kindId);
     return res;
   }
   getReadingPeriodDictionaryByZoneAndKind = async (zoneId: number, kindId: number): Promise<any> => {
+    if (!this.verificationService.verificationZoneAndKind(zoneId, kindId))
+      return [];
     if (this.readingPeriodDictionaryByZoneAndKind.kindId == kindId && this.readingPeriodDictionaryByZoneAndKind.zoneId == zoneId && !MathS.isNull(this.readingPeriodDictionaryByZoneAndKind.dictionary))
       return this.readingPeriodDictionaryByZoneAndKind.dictionary;
-    const res = await this.ajaxReqWrapperService.getDataSourceByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, zoneId, kindId);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, zoneId, kindId);
     this.setReadingPeriodDictionaryByZoneAndKind(res, zoneId, kindId);
     return res;
+
   }
   async getQotrDictionary(): Promise<any> {
     if (!MathS.isNull(this.qotrDictionary))
       return this.qotrDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.QotrDictionary);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.QotrDictionary);
     this.setQotrDictionary(res);
     return this.qotrDictionary;
   }
   async getRoleDictionary(): Promise<any> {
     if (!MathS.isNull(this.roleDictionary))
       return this.roleDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleDICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleDICTIONARY);
     this.setRoleDictionary(res);
     return this.roleDictionary;
   }
   async getZoneBoundDictionary(): Promise<any> {
     if (!MathS.isNull(this.zoneBoundDictionary))
       return this.zoneBoundDictionary;
-    const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneBoundDICTIONARY);
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneBoundDICTIONARY);
     this.setZoneBoundDictionary(res);
     return this.zoneBoundDictionary;
   }

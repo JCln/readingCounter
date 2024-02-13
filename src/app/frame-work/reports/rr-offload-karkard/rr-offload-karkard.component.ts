@@ -46,8 +46,20 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     if (this.readingReportManagerService.karkardOffloadReq.zoneId)
       this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.karkardOffloadReq.zoneId);
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingReportManagerService.karkardOffloadReq.fragmentMasterIds = [];
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.karkardOffloadReq.readingPeriodId = null;
+    this.readingReportManagerService.karkardOffloadReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.karkardOffloadReq.readingPeriodId = null;
+  }
+
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.karkardOffloadReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.karkardOffloadReq.zoneId, +this.readingReportManagerService.karkardOffloadReq._selectedKindId);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardOffloadReq, this.readingReportManagerService._isOrderByDate);

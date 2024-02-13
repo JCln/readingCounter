@@ -46,9 +46,20 @@ export class DetailsComponent extends FactoryONE {
     this.getReadingPeriod();
     this.getFragmentByZone();
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingReportManagerService.detailsReq.fragmentMasterIds = [];
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.detailsReq.readingPeriodId = null;
+    this.readingReportManagerService.detailsReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.detailsReq.readingPeriodId = null;
+  }
   getReadingPeriod = async () => {
     if (this.readingReportManagerService.detailsReq._selectedKindId)
-      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.detailsReq._selectedKindId);
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.detailsReq.zoneId, +this.readingReportManagerService.detailsReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.detailsReq, this.readingReportManagerService._isOrderByDate);

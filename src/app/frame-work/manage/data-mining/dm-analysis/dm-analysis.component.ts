@@ -39,8 +39,18 @@ export class DmAnalysisComponent extends FactoryONE {
     this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getPeriodKindDictionary();
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingPeriodDictionary = [];
+    this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null;
+    this.dataMiningAnalysesService.dataMiningReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null;
+  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionary(this.dataMiningAnalysesService.dataMiningReq._selectedKindId);
+    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.dataMiningAnalysesService.dataMiningReq.zoneId, +this.dataMiningAnalysesService.dataMiningReq._selectedKindId);
   }
   verification = async () => {
     const temp = this.dataMiningAnalysesService.verificationRRShared(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);

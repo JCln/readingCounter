@@ -11,34 +11,29 @@
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="readingReportManagerService.preNumberShownReq.zoneId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                (onChange)="afterZoneChanged()">
                             </p-dropdown>
                         </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
+                            <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
                                 [(ngModel)]="readingReportManagerService.preNumberShownReq._selectedKindId"
-                                name="_selectedKindId">
-                                <mat-option (click)="getReadingPeriod()"
-                                    *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                                    {{truefalse.title}}
-                                </mat-option>
-                            </mat-select>
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                (click)="getReadingPeriod()" (onChange)="afterPeriodChanged()">
+                            </p-dropdown>
                         </div>
                     </div>
                     <div class="input_2"
                         [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
+                            <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
                                 [(ngModel)]="readingReportManagerService.preNumberShownReq.readingPeriodId"
-                                name="readingPeriodId">
-                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                    {{truefalse.title}}
-                                </mat-option>
-                            </mat-select>
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
                         </div>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">

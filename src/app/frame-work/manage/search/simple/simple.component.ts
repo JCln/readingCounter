@@ -54,8 +54,18 @@ export class SimpleComponent implements OnInit {
   refreshTable = () => {
     this.connectToServer();
   }
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingPeriodDictionary = [];
+    this.closeTabService._searchSimpleReq.readingPeriodId = null;
+    this.closeTabService._searchSimpleReq._selectedKindId = null;
+  }
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.closeTabService._searchSimpleReq.readingPeriodId = null;
+  }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService._searchSimpleReq._selectedKindId);
+    this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService._searchSimpleReq.zoneId, +this.closeTabService._searchSimpleReq._selectedKindId);
   }
   routeToLMAll = ($event: any) => {
     const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);

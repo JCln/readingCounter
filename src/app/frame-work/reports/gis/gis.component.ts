@@ -38,11 +38,21 @@ export class GisComponent extends FactoryONE {
     this.readingReportManagerService.getSearchInOrderTo();
     this.getFragmentByZone();
   }
-
-  getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.gisReq._selectedKindId);
+  afterZoneChanged() {
+    // TODO: CLEAR period dictionaries and selected periodId and kindId values
+    this.readingReportManagerService.gisReq.fragmentMasterIds = [];
+    this.readingReportManagerService.gisReq.counterStateId = null;
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.gisReq.readingPeriodId = null;
+    this.readingReportManagerService.gisReq._selectedKindId = null;
   }
-
+  afterPeriodChanged() {
+    this.readingPeriodDictionary = [];
+    this.readingReportManagerService.gisReq.readingPeriodId = null;
+  }
+  getReadingPeriod = async () => {
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.gisReq.zoneId, +this.readingReportManagerService.gisReq._selectedKindId);
+  }
   changeRadio = (event: any) => {
     this.readingReportManagerService.showGisInOrderTo.forEach(item => {
       if (item.id == event)
