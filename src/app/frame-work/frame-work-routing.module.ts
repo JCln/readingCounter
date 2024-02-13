@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'rpts', loadChildren: () => import('./reports/reports.module').then(reports => reports.ReportsModule), data: { preload: true } },
   { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule), data: { preload: true } },
   { path: 'mu', loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule), data: { preload: true } },
-  { path: 'tools', loadChildren: () => import('./tools/tools.module').then(tools => tools.ToolsModule) },
+  { path: 'tools', loadChildren: () => import('./tools/tools.module').then(tools => tools.ToolsModule), data: { preload: true } },
   { path: 'offline', loadChildren: () => import('./offline-mode/offline-mode.module').then(offlineMode => offlineMode.OfflineModeModule) },
   { path: 'flash', loadChildren: () => import('./moment-system/moment-system.module').then(momentSystem => momentSystem.MomentSystemModule) },
   { path: 'reqLog', loadChildren: () => import('./request-log/request-log.module').then(requestLog => requestLog.RequestLogModule) },
