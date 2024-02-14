@@ -369,7 +369,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private circleToLeaflet = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
-    items.counterStateTitle === 'بسته' ?
+    items.hasAlert ?
       L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_mane }).addTo(this.layerGroup)
         .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`)
       :
