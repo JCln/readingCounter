@@ -158,6 +158,7 @@ export class ImportDynamicService {
     this.allImportsService.simafaSingle_pageSign.zoneId = object.zoneId;
     this.allImportsService.simafaSingle_pageSign.readingPeriodId = object.readingPeriodId;
     this.allImportsService.simafaSingle_pageSign.year = object.year;
+    this.allImportsService.simafaSingle_pageSign._canShowAddButton = true;
 
     this.utilsService.routeTo(EN_Routes.wrimpsimafardpgsingle);
   }
@@ -173,6 +174,7 @@ export class ImportDynamicService {
     this.allImportsService.allImports_batch.year = object.year;
     this.allImportsService.allImports_batch.readingPeriodId = object.readingPeriodId;
     this.allImportsService.allImports_batch.canContinue = object.canContinue;
+    this.allImportsService.allImports_batch._canShowImportBatchButton = true; // make to imported button enable/ show
     this.utilsService.routeTo(EN_Routes.wrimpsimafardpgbatch);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
@@ -514,9 +516,6 @@ export class ImportDynamicService {
     return IMasrafStates;
   }
   postImportDynamicData = (method: ENInterfaces, importDynamic: IImportDynamicDefault): Promise<any> => {
-    importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
-    importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
-
     return this.ajaxReqWrapperService.postDataSourceByObject(method, importDynamic);
   }
   insertToSimafaRdpgReq = (body: IImportSimafaReadingProgramsReq) => {

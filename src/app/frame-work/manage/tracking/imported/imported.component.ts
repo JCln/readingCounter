@@ -42,15 +42,15 @@ export class ImportedComponent extends FactoryONE {
       id: rowData.id,
       alalHesabPercent: rowData.alalHesabPercent,
       imagePercent: rowData.imagePercent,
-      hasPreNumber: rowData.hasPreNumber,
-      displayBillId: rowData.displayBillId,
-      displayRadif: rowData.displayRadif,
+      hasPreNumber: rowData.hasPreNumber ? rowData.hasPreNumber : false,
+      displayBillId: rowData.displayBillId ? rowData.displayBillId : false,
+      displayRadif: rowData.displayRadif ? rowData.displayRadif : false,
       counterReaderId: rowData.counterReaderId,
-      displayMobile: rowData.displayMobile,
-      displayPreDate: rowData.displayPreDate,
-      hasImage: rowData.hasImage,
-      displayIcons: rowData.displayIcons,
-      displayDebt: rowData.displayDebt
+      displayMobile: rowData.displayMobile ? rowData.displayMobile : false,
+      displayPreDate: rowData.displayPreDate ? rowData.displayPreDate : false,
+      hasImage: rowData.hasImage ? rowData.hasImage : false,
+      displayIcons: rowData.displayIcons ? rowData.displayIcons : false,
+      displayDebt: rowData.displayDebt ? rowData.displayDebt : false
     }
   }
   //  

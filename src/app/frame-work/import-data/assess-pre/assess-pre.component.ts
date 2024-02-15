@@ -55,7 +55,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService._assessAddReq.hasImage = rcd.hasImage ? rcd.hasImage : false;
     this.importDynamicService._assessAddReq.displayDebt = rcd.displayDebt ? rcd.displayDebt : false;
     this.importDynamicService._assessAddReq.displayIcons = rcd.displayIcons ? rcd.displayIcons : false;
-    this.importDynamicService._assessAddReq.hasPreNumber = rcd.defaultHasPreNumber;
+    this.importDynamicService._assessAddReq.hasPreNumber = rcd.defaultHasPreNumber ? rcd.defaultHasPreNumber : false;
     this.importDynamicService._assessAddReq.alalHesabPercent = rcd.defaultAlalHesab;
     this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
   }

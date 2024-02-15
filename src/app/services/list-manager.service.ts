@@ -132,7 +132,6 @@ export class ListManagerService {
     return true;
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq): Promise<any> => {
-    body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
     return new Promise((resolve) => {
       this.ajaxReqWrapperService.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);

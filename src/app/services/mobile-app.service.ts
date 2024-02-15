@@ -64,9 +64,6 @@ export class MobileAppService {
     return this.utilsService.firstConfirmDialog(a);
   }
   verificationForbiddenWithType = (forbidden: IMostReportInput): boolean => {
-    forbidden.fromDate = Converter.persianToEngNumbers(forbidden.fromDate);
-    forbidden.toDate = Converter.persianToEngNumbers(forbidden.toDate);
-
     if (MathS.isNull(forbidden.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;

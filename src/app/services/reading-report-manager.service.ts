@@ -406,33 +406,21 @@ export class ReadingReportManagerService {
 
   // VerificationS 
   verificationUserKarkard = (readingReportReq: IUserKarkardInput): boolean => {
-    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
-    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     return this.datesValidation(readingReportReq);
   }
   verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
-    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
-    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {
-    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
-    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
   verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
-    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
-    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     return this.datesValidation(readingReportReq);
   }
   verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
-    readingReportGISReq.fromDate = Converter.persianToEngNumbers(readingReportGISReq.fromDate);
-    readingReportGISReq.toDate = Converter.persianToEngNumbers(readingReportGISReq.toDate);
     return isValidateByDate ? (readingReportGISReq.readingPeriodId = null, this.datesValidation(readingReportGISReq)) : this.periodValidationGIS(readingReportGISReq)
   }
   verificationRRAnalyzePerformance = (readingReportReq: IMostReportInput, isValidateByDate: boolean): boolean => {
-    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
-    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
 

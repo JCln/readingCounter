@@ -51,7 +51,7 @@ export class OffloadedComponent extends FactoryONE {
         return;
       }
       const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
-      this.outputManagerService.downloadFile(a);
+      this.outputManagerService.downloadFileWithContentDisposition(a);
     }
   }
   routeToOffloadModify = (dataSource: ITracking) => {
@@ -92,10 +92,9 @@ export class OffloadedComponent extends FactoryONE {
   }
   hasNextBazdid = async (row: ITracking) => {
     let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
-    hasbazdid = Converter.persianToEngNumbers(hasbazdid);
     if (hasbazdid) {
       const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputSINGLE, row, hasbazdid);
-      this.outputManagerService.downloadFile(a);
+      this.outputManagerService.downloadFileWithContentDisposition(a);
     }
   }
 }

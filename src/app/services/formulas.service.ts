@@ -29,8 +29,6 @@ export class FormulasService {
     return res;
   }
   postFormulaAdd = async (method: ENInterfaces, dataSource: object) => {
-    dataSource['fromDate'] = Converter.persianToEngNumbers(dataSource['fromDate']);
-    dataSource['toDate'] = Converter.persianToEngNumbers(dataSource['toDate']);
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, dataSource);
     this.utilsService.snackBarMessageSuccess(res.message);
     return res;

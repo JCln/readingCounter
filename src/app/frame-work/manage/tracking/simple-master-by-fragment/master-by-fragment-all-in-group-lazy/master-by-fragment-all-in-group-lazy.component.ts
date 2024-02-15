@@ -208,7 +208,7 @@ export class MasterByFragmentAllInGroupLazyComponent extends AllListsFactory imp
   }
   getExcel = async () => {
     const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.masterByFragmentAllInGroupLazy_pageSign.groupId);
-    this.outputManagerService.downloadFile(res);
+    this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

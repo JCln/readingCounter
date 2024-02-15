@@ -67,21 +67,20 @@ export class OutputManagerService {
     return fileName;
   }
   // Exports
-  downloadFile(data: any, type?: string) {
-    if (type) {
-      const downloadURL = window.URL.createObjectURL(data);
-      const link = document.createElement('a');
-      link.href = downloadURL;
-      link.download = `${new Date().toLocaleDateString() + type}`;
-      link.click();
-      return;
-    }
+  downloadFileWithContentDisposition(data: any) {
     const fileName = this.getFileNameFromHeader(data.headers.get(this.contentDisposition));
 
     import("file-saver").then(FileSaver => {
       const blob = new Blob([data.body], { type: data.body.type });
       FileSaver.saveAs(blob, fileName);
     })
+  }
+  downloadFile(data: any, type: string) {
+    const downloadURL = window.URL.createObjectURL(data);
+    const link = document.createElement('a');
+    link.href = downloadURL;
+    link.download = `${new Date().toLocaleDateString() + type}`;
+    link.click();
   }
   getValidatedTableData = (dataSource: any[], _selectCols: any[], outputConfig: IOutputConfig, isPdf: boolean): any => {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));

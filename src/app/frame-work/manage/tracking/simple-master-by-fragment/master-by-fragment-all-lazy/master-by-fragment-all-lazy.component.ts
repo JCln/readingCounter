@@ -106,7 +106,7 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
   }
   classWrapper = async (canRefresh?: boolean) => {
     console.log(this.allListsService.masterByFragmentLazy_pageSign);
-    
+
     if (!this.allListsService.masterByFragmentLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.simpleMasterByFragment);
     }
@@ -210,7 +210,7 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
   }
   getExcel = async () => {
     const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.masterByFragmentLazy_pageSign.groupId);
-    this.outputManagerService.downloadFile(res);
+    this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

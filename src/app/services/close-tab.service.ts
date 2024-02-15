@@ -535,29 +535,6 @@ export class CloseTabService {
   saveDataForSimafaBatchReq = {
     GUid: ''
   }
-  allImports_batch: IImportSimafaBatchReq = {
-    routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
-    canContinue: false,
-    fromEshterak: '',
-    id: '',
-    listNumber: '',
-    readingPeriodId: null,
-    toEshterak: '',
-    year: this.utilsService.getFirstYear(),
-    zoneId: null,
-    fragmentMasterId: '',
-    alalHesabPercent: 5,
-    imagePercent: 5,
-    readingProgramId: '',
-    hasPreNumber: false,
-    displayBillId: false,
-    displayRadif: false,
-    displayPreDate: false,
-    displayMobile: false,
-    hasImage: false,
-    displayDebt: false,
-    displayIcons: false,
-  };
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,

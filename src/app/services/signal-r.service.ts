@@ -6,14 +6,14 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
 import { InteractionService } from 'services/interaction.service';
 import { NotificationMediaTypeIds } from 'interfaces/build';
-import { ENHubMessages, ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
-  private readonly retryTimes: number[] = [0, 2000, 4000, null];
+  private readonly retryTimes: number[] = [0, 2000, 4000, 16000, null];
 
   constructor(
     public utilsService: UtilsService,
@@ -21,6 +21,9 @@ export class SignalRService {
     public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
+  hideSpinners() {
+    this.utilsService.spinnerWrapperService.stopAll();
+  }
   hideSpinnersAndRefreshPage() {
     this.utilsService.spinnerWrapperService.stopAll();
     const url = this.utilsService.compositeService.getRouterUrl();
@@ -44,7 +47,7 @@ export class SignalRService {
   private onReConnected() {
     this.hubConnection.onreconnected(connected => {
       console.log('we are connected');
-      this.hideSpinnersAndRefreshPage();
+      this.hideSpinners();
       const toast = {
         severity: ENToastColors.success,
         summary: 'ارتباط با شبکه برقرار شد',

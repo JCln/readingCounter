@@ -171,15 +171,11 @@ export class SearchService {
   }
   /*VERIFICATION*/
   verificationSimpleSearch = (searchReq: ISearchSimpleReq, _isOrderByDate: boolean): boolean => {
-    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
-    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
     if (_isOrderByDate)
       return this.validateSearchSimpleByDate(searchReq);
     return this.validationSearchSimpleByPeriod(searchReq)
   }
   verificationSimpleMasterByFragment = (searchReq: ISearchSimpleReq, _isOrderByDate: boolean): boolean => {
-    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
-    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
     if (_isOrderByDate)
       return this.validateSearchSimpleByDate(searchReq);
     return this.validationSearchSimpleByPeriod(searchReq)
@@ -191,9 +187,6 @@ export class SearchService {
     }
   }
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
-    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
-    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
-
     if (isValidateByDate) {
       return this.validationNullPro(searchReq) && this.validationDate(searchReq);
     }

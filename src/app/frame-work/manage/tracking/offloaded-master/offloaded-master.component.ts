@@ -85,7 +85,7 @@ export class OffloadedMasterComponent extends FactoryONE {
   }
   getExcel = async (dataSource: ITracking) => {
     const res = await this.trackingManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, dataSource.groupId);
-    this.outputManagerService.downloadFile(res);
+    this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   async showTestingPart() {
     if (OffloadedMasterComponent.showOneTimeDialog) {

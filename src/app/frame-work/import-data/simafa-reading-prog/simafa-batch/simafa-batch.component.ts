@@ -24,7 +24,6 @@ export class SimafaBatchComponent extends FactoryONE {
   _selectCols: any = [];
   _selectedColumns: any[];
   _successImportBatchMessage: string = '';
-  _canShowImportBatchButton: boolean = true;
 
   constructor(
     public importDynamicService: ImportDynamicService,
@@ -36,7 +35,7 @@ export class SimafaBatchComponent extends FactoryONE {
 
   changeStatusAfterSuccess = () => {
     this._successImportBatchMessage = EN_messages.import_simafaBatch;
-    this._canShowImportBatchButton = false;
+    this.allImportsService.allImports_batch._canShowImportBatchButton = false;
   }
   connectToServer = async () => {
     if (!this.closeTabService.saveDataForSimafaBatch || this.closeTabService.saveDataForSimafaBatch.length == 0) {

@@ -72,8 +72,6 @@ export class TrackingManagerService {
 
   // Output manager 
   downloadOutputDBF = (method: ENInterfaces, dbfData: ITracking | IOutputManager): Promise<any> => {
-    dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);
-    dbfData.toDate = Converter.persianToEngNumbers(dbfData.toDate);
     const a: IOutputManager = {
       zoneId: dbfData.zoneId,
       fromDate: dbfData.fromDate,
@@ -124,7 +122,6 @@ export class TrackingManagerService {
     return this.utilsService.firstConfirmDialog(a);
   }
   postOffloadModifyEdited = (method: ENInterfaces, body: IOffloadModifyReq): Promise<any> => {
-    body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
     return this.ajaxReqWrapperService.postDataSourceByObject(method, body)
   }
 

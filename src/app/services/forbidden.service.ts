@@ -36,8 +36,6 @@ export class ForbiddenService {
 
   /* VERIFICATION */
   verificationForbidden = (forbidden: IMostReportInput) => {
-    forbidden.fromDate = Converter.persianToEngNumbers(forbidden.fromDate);
-    forbidden.toDate = Converter.persianToEngNumbers(forbidden.toDate);
     return this.datesValidationForbidden(forbidden);
   }
   setDynamicPartRanges = (dataSource: IForbiddenManager[]) => {

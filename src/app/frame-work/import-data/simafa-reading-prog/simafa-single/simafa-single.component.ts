@@ -16,7 +16,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./simafa-single.component.scss']
 })
 export class SimafaSingleComponent extends FactoryONE {
-  _canShowAddButton: boolean = true;
   _readingProgramRes: IReadingProgramRes;
   _showAlalHesabPercent: boolean = false;
 
@@ -27,7 +26,7 @@ export class SimafaSingleComponent extends FactoryONE {
   constructor(
     public importDynamicService: ImportDynamicService,
     public closeTabService: CloseTabService,
-    private allImportsService: AllImportsService
+    public allImportsService: AllImportsService
   ) {
     super();
   }
@@ -40,7 +39,7 @@ export class SimafaSingleComponent extends FactoryONE {
     const a = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaSingle, this.closeTabService.simafaSingleReq);
     if (a) {
       this.importDynamicService.showResDialog(a, false, EN_messages.importDynamic_created);
-      this._canShowAddButton = false;
+      this.allImportsService.simafaSingle_pageSign._canShowAddButton = false;
     }
   }
   selectedZoneId = async () => {

@@ -70,6 +70,10 @@ section.dynamic_content {
   width: 100%;
 }
 
+._smaller_font {
+  font-size: var(--font_s);
+}
+
 h2 {
   display: flex;
   justify-content: flex-end;

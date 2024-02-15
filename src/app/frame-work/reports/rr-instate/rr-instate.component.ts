@@ -25,7 +25,7 @@ export class RrInstateComponent extends FactoryONE {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.inStateReq, true);
     if (temp) {
       const res = await this.readingReportManagerService.ajaxReqWrapperService.postBlob(ENInterfaces.rrInStatePost, this.readingReportManagerService.inStateReq);
-      this.outputManagerService.downloadFile(res);
+      this.outputManagerService.downloadFileWithContentDisposition(res);
     }
   }
   classWrapper = async (canRefresh?: boolean) => {

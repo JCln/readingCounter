@@ -29,7 +29,7 @@ export class OffLoadComponent {
   downloadTextFile = async () => {
     if (this.offlineModeService.vertificationLoadManual()) {
       const a = await this.offlineModeService.ajaxReqWrapperService.getBlob(ENInterfaces.loadManual + '?userId=' + this.offlineModeService.loadForm.counterReaderId);
-      this.outputManagerService.downloadFile(a);
+      this.outputManagerService.downloadFileWithContentDisposition(a);
     }
   }
   getZoneDictionary = async () => {

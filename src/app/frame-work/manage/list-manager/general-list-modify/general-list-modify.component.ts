@@ -242,7 +242,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   }
   getExcel = async () => {
     const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyLists_pageSign.groupId);
-    this.outputManagerService.downloadFile(res);
+    this.outputManagerService.downloadFileWithContentDisposition(res);
   }
 
 }

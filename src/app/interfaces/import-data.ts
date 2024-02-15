@@ -76,6 +76,7 @@ export interface IImportSimafaBatchReq {
     id?: string,
     listNumber?: string,
     toEshterak?: string,
+    _canShowImportBatchButton: boolean
 }
 export interface IImportSimafaSingleReq {
     counterReaderId: string,

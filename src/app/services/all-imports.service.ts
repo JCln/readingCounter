@@ -31,12 +31,14 @@ export class AllImportsService {
     hasImage: false,
     displayDebt: false,
     displayIcons: false,
+    _canShowImportBatchButton: true
   };
   simafaSingle_pageSign = {
     UUID: '',
     zoneId: null,
     year: null,
     readingPeriodId: null,
+    _canShowAddButton: true
   };
 
 }

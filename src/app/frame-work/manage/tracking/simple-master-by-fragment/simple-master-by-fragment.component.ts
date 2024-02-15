@@ -102,7 +102,7 @@ export class SimpleMasterByFragmentComponent extends FactoryONE {
   }
   getExcel = async (dataSource: ITracking) => {
     const res = await this.trackingManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, dataSource.groupId);
-    this.outputManagerService.downloadFile(res);
+    this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.trackingManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.simpleMasterByFragmentReq.zoneId, +this.closeTabService.simpleMasterByFragmentReq._selectedKindId);

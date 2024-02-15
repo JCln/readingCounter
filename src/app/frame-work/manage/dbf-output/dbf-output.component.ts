@@ -27,7 +27,7 @@ export class DbfOutputComponent extends FactoryONE {
   connectToServer = async () => {
     if (this.trackingManagerService.checkVertificationDBF(this.trackingManagerService.dbfOutput)) {
       const res = await this.trackingManagerService.downloadOutputDBF(ENInterfaces.OutputDBF, this.trackingManagerService.dbfOutput);
-      this.outputManagerService.downloadFile(res);
+      this.outputManagerService.downloadFileWithContentDisposition(res);
     }
   }
   nullSavedSource = () => this.closeTabService.saveDataForOutputDBF = null;

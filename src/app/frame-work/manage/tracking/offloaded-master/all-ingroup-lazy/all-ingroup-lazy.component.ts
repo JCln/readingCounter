@@ -308,7 +308,7 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
   }
   getExcel = async () => {
     const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId);
-    this.outputManagerService.downloadFile(res);
+    this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

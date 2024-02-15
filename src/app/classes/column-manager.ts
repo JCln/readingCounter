@@ -1980,7 +1980,7 @@ export class ColumnManager {
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, isNumber: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, isNumber: true },
-        { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true },
         { field: 'year', header: 'سال', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
     ]

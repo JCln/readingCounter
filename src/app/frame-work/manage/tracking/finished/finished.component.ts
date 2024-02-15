@@ -61,13 +61,12 @@ export class FinishedComponent extends FactoryONE {
       return;
     }
     const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputDELAYED, row);
-    this.outputManagerService.downloadFile(a);
+    this.outputManagerService.downloadFileWithContentDisposition(a);
   }
   hasNextBazdid = async (row: ITracking) => {
     let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
-    hasbazdid = Converter.persianToEngNumbers(hasbazdid);
     if (hasbazdid) {
-      this.outputManagerService.downloadFile(await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, hasbazdid));
+      this.outputManagerService.downloadFileWithContentDisposition(await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, hasbazdid));
     }
   }
 

@@ -49,7 +49,7 @@ export class OffloadedGroupComponent extends FactoryONE {
         return;
       }
       const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
-      this.outputManagerService.downloadFile(a);
+      this.outputManagerService.downloadFileWithContentDisposition(a);
     }
   }
   routeToOffloadGeneralGroupModify = (dataSource: ITracking) => {
@@ -73,10 +73,9 @@ export class OffloadedGroupComponent extends FactoryONE {
   }
   hasNextBazdid = async (row: ITracking) => {
     let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
-    hasbazdid = Converter.persianToEngNumbers(hasbazdid);
     if (hasbazdid) {
       const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputSINGLE, row, hasbazdid);
-      this.outputManagerService.downloadFile(a);
+      this.outputManagerService.downloadFileWithContentDisposition(a);
     }
   }
   routeToAssessPre = (dataSource: ITracking) => {
