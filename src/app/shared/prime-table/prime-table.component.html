@@ -399,17 +399,17 @@
             <td class="__icon-columns"
                 *ngIf="!dataSource.hasMap && (_outputFileName == 'lastStates' || _checkUpName == 'desc' || _checkUpName == 'simpleSearch')">
             </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == 'finished'" (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود مجدد فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text_right">دانلود مجدد فایل</div>
+                </i>
+            </td>
             <td class="__icon-columns" *ngIf="_outputFileName == 'finished' && !denyTracking()"
                 (click)="backToImportedConfirmDialog(dataSource)">
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text">بازگشت به بارگذاری شده</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'finished'" (click)="downloadOutputSingle(dataSource)">
-                <span class="ui-column-title">دانلود مجدد فایل</span>
-                <i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text_right">دانلود مجدد فایل</div>
                 </i>
             </td>
             <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded'"
@@ -439,32 +439,11 @@
                     <div class="tooltip_text_right">اصلاح کلی لیست</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded'"
-                (click)="downloadOutputSingle(dataSource)">
-                <span class="ui-column-title">دانلود فایل</span>
-                <i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text">دانلود فایل</div>
-                </i>
-            </td>
             <td class="__icon-columns" *ngIf="_outputFileName == 'offloadedGroup'"
                 (click)="routeToOffloadGeneralModify(dataSource)">
                 <span class="ui-column-title">اصلاح کلی لیست(دسته‌ای)</span>
                 <i class="tooltip p_icons pi pi-file-edit">
                     <div class="tooltip_text_right">اصلاح کلی لیست(دسته‌ای)</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'offloadedGroup' && !denyTracking()"
-                (click)="backToImportedConfirmDialog(dataSource)">
-                <span class="ui-column-title">بازگشت به درحال قرائت</span>
-                <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'offloadedGroup'"
-                (click)="downloadOutputSingle(dataSource)">
-                <span class="ui-column-title">دانلود فایل</span>
-                <i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
             <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded' || _outputFileName == 'offloadedGroup'"
@@ -474,8 +453,16 @@
                     <div class="tooltip_text_right">بازدید</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded' && !denyTracking()"
-                (click)="backToReading(dataSource)">
+            <td class="__icon-columns" *ngIf="_outputFileName == 'offloaded' || _outputFileName == 'offloadedGroup'"
+                (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">دانلود فایل</div>
+                </i>
+            </td>
+            <td class="__icon-columns"
+                *ngIf="_outputFileName == 'offloadedGroup' || _outputFileName == 'offloaded' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource)">
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>

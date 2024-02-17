@@ -21,6 +21,7 @@ main {
 .l_1_c,
 .l_2,
 .l_3 {
+  background: var(--white);
   border-radius: $border_15;
   padding: var(--font_03) var(--font_02);
 }
@@ -52,6 +53,8 @@ main {
 }
 
 .l_2 {
+  margin: 1px;
+
   .l_2_c {
     background: var(--secondary_1);
     margin-bottom: var(--font_02);

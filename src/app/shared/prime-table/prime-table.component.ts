@@ -57,7 +57,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() downloadedOutputSingle = new EventEmitter<any>();
   @Output() routeedToOffloadModify = new EventEmitter<any>();
   @Output() routedToOffloadGeneralModify = new EventEmitter<any>();
-  @Output() backedToReading = new EventEmitter<any>();
   @Output() backedToPrevious = new EventEmitter<any>();
   @Output() downloadedAPK = new EventEmitter<any>();
   @Output() clickedElmah = new EventEmitter<any>();
@@ -173,9 +172,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   routeToOffloadGeneralModify = (dataSource: object) => {
     this.routedToOffloadGeneralModify.emit(dataSource);
-  }
-  backToReading = (dataSource: object) => {
-    this.backedToReading.emit(dataSource);
   }
   backToPrevious = () => {
     this.backedToPrevious.emit(true);

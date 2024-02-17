@@ -8,6 +8,7 @@ import { DashboardService } from 'services/dashboard.service';
   styleUrls: ['./locations.component.scss']
 })
 export class LocationsComponent {
+  showLocationButtons: boolean = false;
 
   @Output() sendlocations = new EventEmitter<any>();
 
@@ -15,8 +16,10 @@ export class LocationsComponent {
     private dashboardService: DashboardService
   ) { }
 
-  showLocations = async () => {
-    this.sendlocations.emit(await this.dashboardService.getDashboardDataSource(ENInterfaces.getCounterReaderLocations));
+  showLocations = async (showCluster: boolean) => {
+    const res = await this.dashboardService.getDashboardDataSource(ENInterfaces.getCounterReaderLocations);
+    this.showLocationButtons = false;
+    this.sendlocations.emit({ data: res, showCluster: showCluster });
   }
 
 }

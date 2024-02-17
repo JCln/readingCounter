@@ -304,11 +304,16 @@ export class MapComponent implements OnInit, OnDestroy {
     this.layerGroup.addLayer(markers);
   }
   showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
-    this.utilsService.routeTo(EN_Routes.wr);
-    this.removeAllLayers();
     this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
   }
-
+  showCounterReadersLocationsByCluster = (dataSource: IGisXYResponse[]) => {
+    this.getXYMarkerClusterPosition(dataSource);
+  }
+  showCounterReaders = (dataSource: IGisXYResponse[], showCluster: boolean) => {
+    this.utilsService.routeTo(EN_Routes.wr);
+    this.removeAllLayers();
+    showCluster ? this.showCounterReadersLocationsByCluster(dataSource) : this.showCounterReadersLocations(dataSource)
+  }
   mapConfigOptions = (delay: number, isFirstTime: boolean) => {
     this.removeAllLayers();
     if (this.polyline_configs)

@@ -15,23 +15,26 @@
         <input type="radio" id="_dash" name="radio">
     </div>
 
-    <app-locations [hidden]="!isShowMap" (sendlocations)="showCounterReadersLocations($event)"></app-locations>
-    <section class="_options">
-        <div class="_flex_dr_ric" [hidden]="!canShowOptionsButton || !isShowMap">
-            <button class="polyline_switch tooltip" (click)="isShowMapConfig = !isShowMapConfig">
+    <app-locations [hidden]="!isShowMap" (sendlocations)="showCounterReaders($event.data, $event.showCluster)">
+    </app-locations>
+
+    <section class="_options tooltip">
+        <div class="_flex_dr_ric" [hidden]="!canShowOptionsButton || !isShowMap"
+            (click)="isShowMapConfig = !isShowMapConfig">
+            <button class="polyline_switch">
                 <i class="pi pi-cog"></i>
-                <div class="tooltip_text">تنظیمات نقشه</div>
             </button>
+            <div class="tooltip_text">تنظیمات نقشه</div>
             <p>تنظیمات نقشه</p>
         </div>
-        <div class="_flex_dr_ric" [hidden]="!isShowMap">
-            <button style="z-index: 1;" (click)="utilsService.backToPreviousPage()"
-                class="_circle_border p_icons tooltip">
-                <i class="pi pi-arrow-left"></i>
-                <div class="tooltip_text">بازگشت</div>
-            </button>
-        </div>
     </section>
+
+    <div [hidden]="!isShowMap" class="_backto_previous">
+        <button style="z-index: 1;" (click)="utilsService.backToPreviousPage()" class="tooltip">
+            <i class="pi pi-arrow-left"></i>
+            <div class="tooltip_text">بازگشت</div>
+        </button>
+    </div>
 
 </section>
 

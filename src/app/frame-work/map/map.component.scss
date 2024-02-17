@@ -34,6 +34,7 @@
 ._options {
   display: flex;
   flex-direction: row-reverse;
+  cursor: pointer;
 }
 
 .unit {
@@ -86,6 +87,12 @@
     border-radius: $border_50;
     padding: var(--font_05);
     cursor: pointer;
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+      outline: 1px solid var(--primary_5);
+    }
   }
 }
 
@@ -125,7 +132,7 @@
   padding: 0rem;
   border: 0;
   background-color: var(--secondary_3);
-  color: var(--thirdy_1);
+  color: var(--primary_5);
 
   i {
     font-size: var(--font_m);
@@ -193,11 +200,42 @@ h2 .btn_2 {
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 var(--font_05);
+  background-color: var(--secondary_3);
+  border-radius: $border_7;
+  user-select: none;
 
   p {
     font-size: var(--font_s);
     color: var(--primary_5);
     margin: 0 var(--font_xs);
+  }
+}
+
+._backto_previous {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 2px;
+  font-size: var(--font_m);
+  cursor: pointer;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--font_25);
+    height: var(--font_25);
+    padding: 0;
+    border-radius: 50%;
+    color: var(--primary_5);
+    background: var(--secondary_3);
+    border: none;
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+      outline: 1px solid var(--primary_5);
+    }
   }
 }
 

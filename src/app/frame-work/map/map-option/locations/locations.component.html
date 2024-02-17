@@ -1,1 +1,15 @@
-<button class="btn_1" (click)="showLocations()">مکان کنونی قرائت کنند‌ه‌ها</button>
+<button class="polyline_switch tooltip" (click)="showLocationButtons = !showLocationButtons">
+    <i class="fas fa-map-marked-alt"></i>
+    <div class="tooltip_text_right" [hidden]="showLocationButtons">مکان کنونی قرائت کنند‌ه‌ها</div>
+</button>
+<div class="_dialog">
+    <div class="polyline_config" *ngIf="showLocationButtons">
+        <button class="btn_1" (click)="showLocations(false)">
+            <i class="pi pi-map-marker"></i>
+            نقطه</button>
+        <button class="btn_1" (click)="showLocations(true)">
+            <i class="pi pi-chart-pie"></i>
+            خوشه‌بندی
+        </button>
+    </div>
+</div>
