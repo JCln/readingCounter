@@ -11,13 +11,17 @@ i {
   width: var(--font_23);
   height: var(--font_23);
   border-radius: 50%;
-  font-size: var(--font_m);
+  font-size: var(--font_s);
 
   &:hover,
   &:focus-visible {
     --thirdy_opacity: rgba(108, 159, 214, 0.3);
     box-shadow: 0px 0px 1px 1px var(--thirdy_1);
     background-color: var(--thirdy_opacity);
+  }
+
+  @media (min-width: 550px) {
+    font-size: var(--font_m);
   }
 }
 

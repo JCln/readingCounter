@@ -20,7 +20,7 @@
 ul {
   display: flex;
   align-items: center;
-  gap: .25rem;
+  gap: 2px;
   height: 100%;
   width: 82%;
   margin: 0;
@@ -37,26 +37,35 @@ ul {
 li {
   display: flex;
   align-items: center;
-  margin: 0 var(--font_025);
+  margin: 0 1px;
   color: var(--secondary_7);
   text-align: center;
   list-style-type: none;
   cursor: pointer;
   border: none;
 
-  font-size: var(--font_m);
+  font-size: var(--font_s);
   font-weight: 600;
+
+  @media (min-width: 550px) {
+    font-size: var(--font_m);
+    margin: 0 var(--font_025);
+  }
 }
 
 ._name {
   margin-left: auto;
   padding-right: 0;
-  font-size: var(--font_ss);
+  font-size: var(--font_xxs);
   color: var(--primary_5);
   cursor: auto;
   @include _borders();
+  width: 4.5rem;
+  text-wrap: nowrap;
+  overflow: auto;
 
   @media (min-width:550px) {
+    width: auto;
     font-size: var(--font_ss);
     padding-right: 0.87rem;
   }
@@ -77,7 +86,11 @@ li {
   justify-content: center;
   align-items: center;
   right: 1.3rem;
-  top: .87rem;
+  top: 1.6rem;
+
+  @media (min-width: 550px) {
+    top: .87rem;
+  }
 }
 
 ._notif_icon {
@@ -101,7 +114,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font_s);
+  font-size: var(--font_xxs);
   max-height: 1.87rem;
   min-width: 1.5rem;
   padding: 0 0.3rem;
@@ -110,6 +123,10 @@ li {
   color: var(--secondary_1);
   font-family: var(--font-family);
   background-color: var(--red_600);
+
+  @media (min-width: 550px) {
+    font-size: var(--font_s);
+  }
 }
 
 .menu_toggle {
@@ -150,8 +167,12 @@ li {
   }
 
   i {
-    font-size: var(--font_l);
+    font-size: var(--font_s);
     vertical-align: middle;
+
+    @media (min-width: 550px) {
+      font-size: var(--font_l);
+    }
   }
 
   .pi-spinner {

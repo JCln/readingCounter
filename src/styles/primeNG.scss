@@ -132,8 +132,13 @@
   }
 
   .__icon-columns {
-    width: 2.2rem !important;
+    width: 100% !important;
     min-width: 2.2rem !important;
+
+    @media (min-width: 550px) {
+      width: 2.2rem !important;
+      min-width: 2.2rem !important;
+    }
   }
 
   ._rotate_header {

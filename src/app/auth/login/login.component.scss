@@ -57,12 +57,17 @@ main {
     color: var(--primary_5);
   }
 
-  .input_1 {
-    text-align: center;
-    max-width: 19rem;
-    border: 1px solid var(--primary_5);
-    padding: 0 var(--font_3) 0 var(--font_s);
-    color: var(--primary_5) !important;
+}
+
+.input_1 {
+  text-align: center;
+  max-width: 19rem;
+  border: 1px solid var(--primary_5);
+  padding: 0 var(--font_3) 0 var(--font_s);
+  color: var(--primary_5) !important;
+
+  @media (max-width: 550px) {
+    width: 100%;
   }
 }
 
