@@ -49,7 +49,7 @@ section {
 ._container {
     position: relative;
     display: flex;
-    min-height: 8.5rem;
+    min-height: 10rem;
     color: var(--primary_7);
     background: var(--white);
     border-left: 4px solid var(--primary_2);
@@ -72,20 +72,23 @@ section {
         display: -webkit-box;
         overflow: hidden;
         text-overflow: ellipsis;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         padding-right: 1px;
-        margin: var(--font_xs) -4rem var(--font_05) var(--font_05);
-        height: 5rem;
+        margin: var(--font_025) -4rem var(--font_05) var(--font_05);
+        height: 100%;
+        max-height: 3.1em;
     }
 
     .btn_2_o {
+        position: absolute;
+        display: flex;
         align-items: center;
         justify-content: center;
-        display: flex;
-        font-size: var(--font_s);
+        bottom: 1px;
         height: var(--font_l2);
         width: var(--font_5);
+        font-size: var(--font_s);
     }
 
     .__title {

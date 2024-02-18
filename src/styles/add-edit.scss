@@ -201,7 +201,7 @@ input::placeholder {
 .role_items {
   direction: rtl;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 14rem));
   gap: var(--font_02);
   padding: var(--font_05);
   border-radius: $border_15;

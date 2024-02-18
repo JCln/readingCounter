@@ -55,15 +55,15 @@ export class UserRoleHistoryComponent extends FactoryONE {
       item.lockTimeSpan = this.dateJalaliService.getDate(item.lockTimeSpan) + '   ' + this.dateJalaliService.getTime(item.lockTimeSpan);
     })
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAllUsers = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
-      this.closeTabService.saveDataForAllUsers = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
-    }
+  callApi = async () => {
+    this.closeTabService.saveDataForAllUsers = await this.securityService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
     this.convertLoginTime();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
+      this.callApi();
+    }
+
   }
 
 }

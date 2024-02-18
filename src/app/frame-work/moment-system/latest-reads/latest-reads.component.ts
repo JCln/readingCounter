@@ -41,7 +41,7 @@ export class LatestReadsComponent extends AllListsFactory {
   private markMultipleLocations = (xyData: any) => {
     xyData.map((items) => {
       if (items.y > ENRandomNumbers.zero) {
-        L.circleMarker([items.y, items.x], { weight: 7, radius: 3 }).addTo(this.layerGroup2)
+        L.circleMarker([items.y, items.x], { weight: 7, radius: 2 }).addTo(this.layerGroup2)
           .bindPopup(`${items.zoneTitle} <br> ${items.counterReaderName} <br>` + `${items.eshterak} <br> ${items.radif}`
           );
       }

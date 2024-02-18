@@ -13,8 +13,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class ServerErrorsComponent extends FactoryONE {
-  // important that selectedErrors default value should be []
-  selectedErrors: any[] = [];
 
   constructor(
     public manageServerService: ManageServerService,
@@ -24,15 +22,8 @@ export class ServerErrorsComponent extends FactoryONE {
     super();
   }
 
-  connectToServer = async () => {
-    this.closeTabService.saveDataForServerErrors = await this.manageServerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.serverManagerErrors, this.selectedErrors);
-    this.convertLoginTime();
-  }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.connectToServer();
-    }
-  }
+  classWrapper = async () => { }
+
   linkToElmah = (body: string) => {
     this.manageServerService.linkToElmah(body);
   }
@@ -40,5 +31,9 @@ export class ServerErrorsComponent extends FactoryONE {
     this.closeTabService.saveDataForServerErrors.forEach(item => {
       item.insertDateTime = this.dateJalaliService.getDate(item.insertDateTime) + '   ' + this.dateJalaliService.getTime(item.insertDateTime);
     })
+  }
+  connectToServer = async () => {
+    this.closeTabService.saveDataForServerErrors = await this.manageServerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.serverManagerErrors, this.closeTabService.serverErrorsSelectedErrors);
+    this.convertLoginTime();
   }
 }

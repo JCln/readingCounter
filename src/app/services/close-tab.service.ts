@@ -709,7 +709,8 @@ export class CloseTabService {
   saveDataForMsDriveInfo: IManageDrivesInfo[];
   serverGetAuthenticity: IServerGetAuthenticity[] = [];
   serverAuthenticityBrief: IServerAuthenticityBrief[] = [];
-  saveDataForServerErrors: IManageServerErrorsRes[];
+  saveDataForServerErrors: IManageServerErrorsRes[] = [];
+  serverErrorsSelectedErrors: any[] = [];
   saveDataForServerUserActivation: IUserActivation[] = [];
   saveDataForServerUserActivationReq: IUserActivationREQ = {
     fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
@@ -1008,8 +1009,8 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel2, url: EN_Routes.wrmalme },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.wrmalcr },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac },
-    { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall },
-    { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.userRoleHistory },
+    { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall, defaultValue: [] },
+    { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.userRoleHistory, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForUserRoleHistory, url: EN_Routes.userRoleHistoryDetails },
     { id: 1, value: ENEssentialsToSave.saveDataForUserMasterHistory, url: EN_Routes.userMasterHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForUserDetailsHistory, url: EN_Routes.userDetailsHistory },
@@ -1340,7 +1341,7 @@ export class CloseTabService {
       },
       defaultValue: []
     },
-    { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.serverIPSpecialRules },
+    { id: 2, req: ENEssentialsToSave.serverErrorsSelectedErrors, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr, defaultValue: [], defaultReq: [] },
     {
       id: 2, req: ENEssentialsToSave.saveDataForServerUserActivationReq, value: ENEssentialsToSave.saveDataForServerUserActivation, url: EN_Routes.userActivation, defaultValue: [], defaultReq: {
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),

@@ -31,11 +31,11 @@ export class SignalRService {
   }
   private onReconnecting() {
     this.hubConnection.onreconnecting(error => {
-      console.log('try to reconnect...');
+      // console.log('try to reconnect...');
       const toast = {
         summary: EN_messages.networkError,
         severity: ENToastColors.warn,
-        detail: 'درحال اتصال مجدد..',
+        detail: EN_messages.reconnecting,
         icon: 'pi pi-info',
         key: 'text',
         sticky: false,
@@ -46,11 +46,11 @@ export class SignalRService {
   }
   private onReConnected() {
     this.hubConnection.onreconnected(connected => {
-      console.log('we are connected');
+      // console.log('we are connected');
       this.hideSpinners();
       const toast = {
         severity: ENToastColors.success,
-        summary: 'ارتباط با شبکه برقرار شد',
+        summary: EN_messages.networkSucceed,
         detail: '',
         icon: 'pi pi-info',
         key: 'text',
@@ -115,7 +115,7 @@ export class SignalRService {
   reconnectManualy = async () => {
     try {
       await this.hubConnection.start();
-      console.log("SignalR Connected.");
+      // console.log("SignalR Connected.");
       this.hideSpinnersAndRefreshPage();
     } catch (err) {
       console.log(err);

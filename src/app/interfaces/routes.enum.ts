@@ -124,7 +124,7 @@ export enum EN_Routes {
     'userMasterHistory' = '/wr/reqLog/userMaster',
     'userDetailsHistory' = '/wr/reqLog/userDetails',
     userCompare = '/wr/reqLog/userCompare',
-    'wrmmserr' = '/wr/m/system/mserr',
+    wrmmserr = '/wr/m/system/mserr',
     'serverOSInfo' = '/wr/m/system/osInfo',
     'serverIPSpecialRules' = '/wr/m/system/ipRules',
     serverAuthenticityBrief = '/wr/m/system/briefAuthenticity',

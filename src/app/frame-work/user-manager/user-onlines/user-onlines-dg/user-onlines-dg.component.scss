@@ -36,8 +36,27 @@ section {
     font-size: var(--font_s);
   }
 
+  textarea {
+    background: var(--secondary_3);
+    color: var(--primary_7);
+    font-size: var(--font_s);
+    font-weight: 600;
+    text-align: right;
+    direction: rtl;
+    border: none;
+    outline: none;
+    padding: var(--font_05);
+    height: 6rem;
+    min-width: 19rem;
+    width: 100%;
+    max-width: 100%;
+    border-radius: $border_15;
+    font-family: inherit;
+  }
+
   ._value2 {
-    height: 5rem;
+    min-height: 7rem;
+    max-height: 13rem;
   }
 
   .text {
