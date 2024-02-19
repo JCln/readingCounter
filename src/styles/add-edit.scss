@@ -114,6 +114,7 @@ input::placeholder {
   margin: 0;
   padding: var(--font_025);
   border-radius: $border_15;
+  background: var(--secondary_3);
   box-shadow: 0px 1px 3px 1.5px var(--secondary_4);
 }
 
@@ -143,7 +144,7 @@ input::placeholder {
 }
 
 .text_btn {
-  max-width: 11rem;
+  max-width: 15rem;
   width: auto;
   text-align: center;
   padding: var(--font_05);
@@ -152,7 +153,7 @@ input::placeholder {
   font-size: var(--font_m);
   font-weight: 600;
   color: var(--primary_4);
-  background: var(--secondary_3);
+  // background: var(--secondary_3);
 }
 
 .accept {
@@ -248,6 +249,10 @@ h2 {
     border-radius: 6rem;
     padding: var(--font_05);
     margin-bottom: var(--font_025);
+  }
+
+  .mat-horizontal-stepper-header {
+    padding: 0;
   }
 
   .mat-step-text-label {

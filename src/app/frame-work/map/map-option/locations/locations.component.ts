@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { DashboardService } from 'services/dashboard.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class LocationsComponent {
   showLocations = async (showCluster: boolean) => {
     const res = await this.dashboardService.getDashboardDataSource(ENInterfaces.getCounterReaderLocations);
     this.showLocationButtons = false;
+    this.dashboardService.utilsService.snackBarMessageInfo(EN_messages.counterReaderNumber + res.length);
     this.sendlocations.emit({ data: res, showCluster: showCluster });
   }
 

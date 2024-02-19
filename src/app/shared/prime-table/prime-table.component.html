@@ -107,6 +107,76 @@
                 <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+
+                <!-- <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'counterStateId'"
+                field="counterStateId" matchMode="in" display="menu" [showMatchModes]="false"
+                [showOperator]="false" [showAddButton]="false">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                    <p-multiSelect [maxSelectedLabels]="1"
+                        [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId"
+                        [options]="counterStateByZoneDictionary" optionLabel="title" optionValue="id"
+                        [filter]="true" showClear="false" placeholder="انتخاب کنید"
+                        (onChange)="changedFilterDropdowns($event.value , 'multiSelectCounterStateId')">
+                        <ng-template let-option pTemplate="item">
+                            <div class="p-multiselect-representative-option">
+                                <span class="ml-1">{{option.title}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </ng-template>
+            </p-columnFilter>
+            <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'preCounterStateCode'"
+                field="preCounterStateCode" matchMode="in" display="menu" [showMatchModes]="false"
+                [showOperator]="false" [showAddButton]="false">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                    <p-multiSelect [maxSelectedLabels]="1"
+                        [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectPreCounterStateCode"
+                        [options]="counterStateByCodeDictionary" optionLabel="title" optionValue="id"
+                        [filter]="true" showClear="false" placeholder="انتخاب کنید"
+                        (onChange)="changedFilterDropdowns($event.value , 'multiSelectPreCounterStateCode' )">
+                        <ng-template let-option pTemplate="item">
+                            <div class="p-multiselect-representative-option">
+                                <span class="ml-1">{{option.title}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </ng-template>
+            </p-columnFilter>
+
+            <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'karbariCode'"
+                field="karbariCode" matchMode="in" display="menu" [showMatchModes]="false"
+                [showOperator]="false" [showAddButton]="false">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                    <p-multiSelect [maxSelectedLabels]="1"
+                        [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectkarbariCode"
+                        [options]="karbariDictionaryCode" optionLabel="title" optionValue="id" [filter]="true"
+                        showClear="true" placeholder="انتخاب کنید"
+                        (onChange)="changedFilterDropdowns($event.value , 'multiSelectkarbariCode' )">
+                        <ng-template let-option pTemplate="item">
+                            <div class="p-multiselect-representative-option">
+                                <span class="ml-1">{{option.title}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </ng-template>
+            </p-columnFilter>
+            <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'hazf'" field="hazf"
+                matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false"
+                [showAddButton]="false">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                    <p-multiSelect [maxSelectedLabels]="1"
+                        [ngModel]="closeTabService.saveDataForOffloadedAllLazyReq.multiSelectHazf"
+                        [options]="deleteDictionary" optionLabel="title" optionValue="id" [filter]="true"
+                        showClear="true" placeholder="انتخاب کنید"
+                        (onChange)="changedFilterDropdowns($event.value , 'multiSelectHazf' )">
+                        <ng-template let-option pTemplate="item">
+                            <div class="p-multiselect-representative-option">
+                                <span class="ml-1">{{option.title}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </ng-template>
+            </p-columnFilter> -->
             </th>
             <th pReorderableColumn class="__icon-columns" *ngFor="let item of _numberOfExtraColumns">
             </th>

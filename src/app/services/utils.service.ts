@@ -159,6 +159,9 @@ export class UtilsService {
   snackBarMessageFailed = (message: string) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarColors.danger);
   }
+  snackBarMessageInfo = (message: string) => {
+    this.snackWrapperService.openSnackBar(message, ENSnackBarColors.info);
+  }
   snackBarMessage = (message: string, time: ENSnackBarTimes, color: ENSnackBarColors) => {
     this.snackWrapperService.openSnackBar(message, color);
   }
