@@ -124,11 +124,11 @@ export class UserAddManagerService {
     return true;
   }
   toDefaultValsUserAddInfos = () => {
-    this.closeTabService._userAddUserInfos = {
-      userCode: null,
-      username: null,
-      password: null,
-      confirmPassword: null,
+    this.closeTabService.saveDataForAddUsers = {
+      userCode: 0,
+      username: 0,
+      password: 0,
+      confirmPassword: 0,
       firstName: '',
       sureName: '',
       email: '',
@@ -136,18 +136,27 @@ export class UserAddManagerService {
       displayMobile: false,
       displayName: '',
       isActive: true,
-      deviceId: ''
+      deviceId: '',
+      roleItems: [],
+      provinceItems: [],
+      appItems: []
     }
   }
   private connectToServer = async (vals: IAddAUserManager) => {
     if (!this.checkEmptyUserInfos(vals))
       return false;
-    const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
-    if (res) {
-      this.toDefaultValsUserAddInfos();
-      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-      this.utilsService.routeTo(EN_Routes.wrmuall);
-    }
+    console.log(vals);
+
+    this.toDefaultValsUserAddInfos();
+    console.log(vals);
+    console.log(this.closeTabService.saveDataForAddUsers);
+    console.log(this.closeTabService._userAddUserInfos);
+
+    // const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
+    // if (res) {
+    //   this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+    //   this.utilsService.routeTo(EN_Routes.wrmuall);
+    // }
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {
     const vals: IAddAUserManager = {

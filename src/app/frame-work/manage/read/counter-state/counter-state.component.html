@@ -8,13 +8,12 @@
     [_numberOfExtraColumns]="[1, 2]"
     [_outputEnabled]=false
     [_isInRowEditing]=true
-    [_hasSaveColumns]=false
     [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
     [_sessionName]="'counterstate-session'"
     [_selectedColumnsToRemember]="'selectedCounterState'"
     (newedRowChangedStatus)="testChangedValue()"
-    (refreshedTable)="refreshTable()"     
+    (refreshedTable)="callAPI()"     
     (removedRowEditing)="removeRow($event)"        
     (onRowEditedSave)="onRowEditSave($event)"
  > 

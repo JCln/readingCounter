@@ -6,6 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-counter-state',
@@ -27,17 +28,15 @@ export class CounterStateComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForCounterState = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForCounterState) {
-      this.closeTabService.saveDataForCounterState = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateAll);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForCounterState = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateAll);
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForCounterState)) {
+      this.callAPI();
+    }
   }
   columnSelectedMenuDefault = () => {
     this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.counterStateDto);

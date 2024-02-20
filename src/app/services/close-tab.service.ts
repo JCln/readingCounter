@@ -94,7 +94,7 @@ export class CloseTabService {
   saveDataForAppLevel3: IAuthLevel3[];
   saveDataForAppLevel4: IAuthLevel4[];
 
-  saveDataForCounterState: ICounterState[];
+  saveDataForCounterState: ICounterState[] = [];
   saveDataForImageAttribution: IImageAttribution[];
   saveDataForGuild: IGuild[];
 
@@ -992,7 +992,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.wrmrkar },
-    { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs },
+    { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqtr },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: EN_Routes.wrmrrpt },
     { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: EN_Routes.wrmrnob },

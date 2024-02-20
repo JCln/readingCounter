@@ -770,7 +770,7 @@ export enum ENSelectedColumnVariables {
     selectedListManagerBriefKardexDialog = 'briefKardex',
     selectedMyPreviousFailuresDialog = 'myPreviousFailures',
     selectedPolicyCompare = 'policyCompare',
-    selectedCounterState = 'counterState',
+    selectedCounterState = 'counterStateDto',
     selectedListManagerPro = 'searchPro',
     selectedSearchManagerSimple = 'simpleSearch',
     selectedAuth1 = 'auth1',

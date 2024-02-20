@@ -387,13 +387,6 @@
                 </i>
             </td>
             <td class="__icon-columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
-                (click)="routeToBatch(dataSource)">
-                <span class="ui-column-title">Ip های بلاک شده</span>
-                <i class="tooltip p_icons pi pi-ban _red_500">
-                    <div class="tooltip_text_right">Ip های بلاک شده</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
                 (click)="routeToSingle(dataSource)">
                 <span class="ui-column-title">تغییرات حساب کاربر</span>
                 <i class="tooltip p_icons pi pi-user">
@@ -647,6 +640,13 @@
                 <span class="ui-column-title">مشاهده ورودها</span>
                 <i class="tooltip p_icons pi pi-sign-in _green_600">
                     <div class="tooltip_text_right">مشاهده ورودها</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_checkUpName =='userRoleHistoryAll'" class="edit_button"
+                (click)="routeToBatch(dataSource)">
+                <span class="ui-column-title">Ip های بلاک شده</span>
+                <i class="tooltip p_icons pi pi-ban _red_500">
+                    <div class="tooltip_text_right">Ip های بلاک شده</div>
                 </i>
             </td>
             <td class="__icon-columns"
