@@ -74,6 +74,7 @@ export class LatestReadsComponent extends AllListsFactory {
   }
   addResponseToFirst = (res: ILatestReads) => {
     this.closeTabService.saveDataForMomentLastRead.unshift(res);
+    this.listManagerService.setRangesForSingleValue(res);
   }
   private removeAllLayers = () => {
     this.layerGroup2.clearLayers();

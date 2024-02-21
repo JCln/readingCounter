@@ -5,7 +5,8 @@
 
   .tooltip_text,
   .tooltip_text_right,
-  .tooltip_text_bottom {
+  .tooltip_text_bottom,
+  .tooltip_text_left {
     // pointer-events: none; hover on child should not pups up tooltip
     position: absolute;
     pointer-events: none;
@@ -35,6 +36,13 @@
 .tooltip_text_right {
   width: 10rem;
   left: 100%;
+  bottom: 50%;
+  transform: translate(-10%, 50%);
+}
+
+.tooltip_text_left {
+  width: 10rem;
+  right: 100%;
   bottom: 50%;
   transform: translate(-10%, 50%);
 }
@@ -80,6 +88,17 @@
   border-color: transparent var(--orange_500) transparent transparent;
 }
 
+.tooltip_text_left::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  right: -10px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--orange_500);
+}
+
 .tooltip:hover .tooltip_text {
   visibility: visible;
   transform: translate(-50%, -30%);
@@ -93,4 +112,9 @@
 .tooltip:hover .tooltip_text_bottom {
   visibility: visible;
   transform: translate(-50%, 80%);
+}
+
+.tooltip:hover .tooltip_text_left {
+  visibility: visible;
+  transform: translate(-10%, 50%);
 }

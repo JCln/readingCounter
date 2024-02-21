@@ -69,6 +69,11 @@ export class ListManagerService {
   getMasrafStateDictionary = (): any[] => {
     return this.utilsService.getMasrafStateDictionary();
   }
+  setRangesForSingleValue = (dataSource: any) => {
+    dataSource.x = MathS.getFormatRange(dataSource.x);
+    dataSource.y = MathS.getFormatRange(dataSource.y);
+    dataSource.gisAccuracy = MathS.getFormatRange(dataSource.gisAccuracy);
+  }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
@@ -77,6 +82,9 @@ export class ListManagerService {
       item.reteDifference = MathS.getFormatRange(item.reteDifference);
       item.newRateDaily = MathS.getFormatRange(item.newRateDaily);
       item.newRateDaily2 = MathS.getFormatRange(item.newRateDaily2);
+      item.x = MathS.getFormatRange(item.x);
+      item.y = MathS.getFormatRange(item.y);
+      item.gisAccuracy = MathS.getFormatRange(item.gisAccuracy);
       // item.x = item.x ? MathS.getFormatRange(item.x) : ''; format for string should be like this
     })
   }

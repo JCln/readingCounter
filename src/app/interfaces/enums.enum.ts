@@ -732,6 +732,7 @@ export enum ENSelectedColumnVariables {
     selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
+    selectedMomentFlash = 'momentLs',
     selectedTrackOffloadedDetails = 'offloadedDetails',
     selectedSimpleMasterByFragmentDetails = 'simpleMasterByFragmentDetails',
     selectedMasterByFragmentLazy = 'listMasterByFragmentLazy',
