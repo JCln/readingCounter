@@ -48,6 +48,7 @@ export class FactorySharedPrime implements OnChanges {
     _reOrderableTable: boolean;
     tempOriginDataSource: any[] = [];
     ref: DynamicDialogRef;
+    public readonly footerInfos = `نمایش از {first} تا{last} از {totalRecords} مورد`;
     public readonly routerLink: string = this.utilsService.compositeService.getRouterUrl();
 
     @Input() dataSource: any;
@@ -75,6 +76,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _virtualScroll: boolean = false;
     @Input() _columnResizeMode: ENColumnResizeMode = ENColumnResizeMode.true;
     @Input() _hasColumnsResizable: boolean = false;
+    @Input() _widthExpandMode: string = 'expand';
 
     constructor(
         public browserStorageService: BrowserStorageService,
@@ -89,6 +91,7 @@ export class FactorySharedPrime implements OnChanges {
         this.getResizReOrderable();
         this.getVirtualScrollable();
         this.getHasColumnsResizable();
+        this.getWidthExpandMode();
     }
 
     @Input() get selectedColumns(): any[] {
@@ -190,6 +193,9 @@ export class FactorySharedPrime implements OnChanges {
     getHasColumnsResizable = () => {
         this._hasColumnsResizable = this.profileService.getHasColumnsResizable();
     }
+    getWidthExpandMode = () => {
+        this._widthExpandMode = this.profileService.getWidthExpandMode();
+    }
     denyTracking = (): boolean => {
         return this.utilsService.getDenyTracking();
     }
@@ -203,7 +209,7 @@ export class FactorySharedPrime implements OnChanges {
     };
     copyContext(data: string) {
         console.log(data);
-        
+
         if (this.utilsService.checkProtocol() && this.copyToClipboard(data)) {
             this.utilsService.snackBarMessageSuccess(EN_messages.savedToClipboard);
         }

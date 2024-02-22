@@ -108,6 +108,16 @@
             </section>
             <section>
                 <div class="content">
+                    <h1 class="title">با تغییر عرض ستونها، عرض جدول تغییر کند</h1>
+                    <p-selectButton [options]="stateOptionsWidthExpandMode"
+                        [(ngModel)]="profileService.showStateVals.widthExpandMode" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setWidthExpandMode(profileService.showStateVals.widthExpandMode)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
                     <h1 class="title">گروه‌بندی پیش‌فرض در کارتابل</h1>
                     <p-selectButton [options]="stateOptionsAggregateTracks" [(ngModel)]="profileService._agg.flag"
                         optionLabel="label" optionValue="value"
