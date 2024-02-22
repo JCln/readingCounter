@@ -27,6 +27,10 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsTwoSteps: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsVirtualScroll: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsHasColumnsResizable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsWidthExpandMode: any[] = [
+    { label: 'بله', value: 'expand' },
+    { label: 'خیر', value: 'fit' }
+  ];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
@@ -146,6 +150,7 @@ export class ProfileComponent extends FactoryONE {
     this.getValuesOfImg();
     this.getOutputConfig();
     this.getHasColumnsResizable();
+    this.getWidthExpandMode();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnManager.getColumnsMenus(this.profileColumns);
@@ -166,6 +171,10 @@ export class ProfileComponent extends FactoryONE {
   setHasColumnsResizable = (val: boolean) => {
     this.profileService.setHasColumnsResizable(val);
     val ? this.profileService.showMessage(EN_messages.columnHasColumnsResizableEnabled) : this.profileService.showMessage(EN_messages.columnHasColumnsResizableDisabled);
+  }
+  setWidthExpandMode = (val: string) => {
+    this.profileService.setWidthExpandMode(val);
+    val ? this.profileService.showMessage(EN_messages.widthExpandModeEnabled) : this.profileService.showMessage(EN_messages.widthExpandModeDisabled);
   }
   setOutputConfigShouldFilterValue = (val: IOutputConfig) => {
     this.profileService.setOutputConfigs(val);
@@ -205,6 +214,11 @@ export class ProfileComponent extends FactoryONE {
   }
   getHasColumnsResizable = () => {
     this.profileService.showStateVals.hasColumnsResizable = this.profileService.getHasColumnsResizable();
+  }
+  getWidthExpandMode = () => {
+    console.log(this.profileService.getWidthExpandMode());
+
+    this.profileService.showStateVals.widthExpandMode = this.profileService.getWidthExpandMode();
   }
   getDefaultAggregationTrackings = () => {
     this.profileService._agg.flag = this.profileService.getLocalDefaultAggregateTracks();

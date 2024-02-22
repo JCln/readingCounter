@@ -43,9 +43,10 @@ export class ProfileService {
     defaultFontFamily: ENFontFamily.BLotus,// value of default is sync with font.service.ts
     reOrderableTable: false,
     twoStepsAuth: false,
-    virtualScrollStatus: false,    
+    virtualScrollStatus: false,
     hasColumnsResizable: true, // true for has columns resizable default value
     notifyPosition: 'top-right',
+    widthExpandMode: 'expand', // true ? expand : fit
     imgOptions: {
       width: '40rem',
       height: '40rem',
@@ -126,6 +127,9 @@ export class ProfileService {
   setHasColumnsResizable = (hasColumnsResizable: boolean) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.hasColumnsResizable, hasColumnsResizable);
   }
+  setWidthExpandMode = (str: string) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.widthExpandMode, str);
+  }
   setFontFamily = (name: string) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontFamily, name);
   }
@@ -138,6 +142,9 @@ export class ProfileService {
   }
   getHasColumnsResizable = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasColumnsResizable, true);// true for hasColumns resizable
+  }
+  getWidthExpandMode = (): string => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.widthExpandMode, 'expand');
   }
   getLocalNotifyPosition = (): string => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'top-right');

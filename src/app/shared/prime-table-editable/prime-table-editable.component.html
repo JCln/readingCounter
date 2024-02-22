@@ -1,10 +1,11 @@
-<p-table #dtable id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+<p-table #dtable id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll"
+    [rows]=_rowsNumbers [showCurrentPageReport]="true" [currentPageReportTemplate]="footerInfos"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" stateStorage="session"
     (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
     [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
     [resizableColumns]="_hasColumnsResizable" editMode="row" dataKey="id" [reorderableColumns]=_reOrderableTable
-    appUnSortTable>
+    [scrollable]="_virtualScroll" [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll"
+    [columnResizeMode]="_widthExpandMode" appUnSortTable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect [maxSelectedLabels]="1" *ngIf="_multiSelectEnable" [options]="_selectCols"
@@ -80,19 +81,20 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th class="__headers" pReorderableColumn pResizableColumn *ngFor="let col of columns"
+                pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th pReorderableColumn class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
-            <th *ngFor="let col of columns">
+            <th class="__headers" pReorderableColumn pResizableColumn *ngFor="let col of columns">
                 <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th pReorderableColumn class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 
