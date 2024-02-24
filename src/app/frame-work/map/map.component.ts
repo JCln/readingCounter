@@ -257,12 +257,13 @@ export class MapComponent implements OnInit, OnDestroy {
       this.map.flyTo([(lat), (lag)], zoom);
     }
   }
+  private panInsideItems = (lat: number, lag: number) => {
+    if (lat != 0 || lag != 0) {
+      this.map.panInside([(lat), (lag)]);
+    }
+  }
   private panToDes = (lat: number, lag: number) => {
     if (lat != 0 || lag != 0) {
-
-      lat = parseFloat(lat.toString().substring(0, 6));
-      lag = parseFloat(lag.toString().substring(0, 6));
-
       this.map.panTo([(lat), (lag)]);
     }
   }
@@ -274,10 +275,11 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   // get X Y positions
   private getXYPosition = (method: string, xyData: any, delay?: number) => {
+    this.panToDes(xyData[0].y, xyData[0].x);
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
-        this.panToDes(items.y, items.x);
+        this.panInsideItems(items.y, items.x);
       }, i * delay);
     })
   }

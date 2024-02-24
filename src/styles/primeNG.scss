@@ -555,6 +555,9 @@
   //   overflow: inherit;
   //   white-space: normal;
   // }
+  .p-accordion .p-accordion-content {
+    background: var(--white);
+  }
 
   .p-paginator {
     background: var(--white);

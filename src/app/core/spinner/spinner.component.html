@@ -1,15 +1,3 @@
-<!-- <section class="spinner d_flex_center" *ngIf="notification">
-    <div class="wrapper">
-        <i class="loader"></i>
-        <h2>
-            لطفا منتظر بمانید
-        </h2>
-        <button class="_cancel" *ngIf="_hasSpinner" (click)="cancelMe()">
-            لغو درخواست
-        </button>
-    </div>
-</section> -->
-
 <section class="pending_spinner d_flex_center" *ngIf="networkReq">
     <div class="wrapper">
         <p-progressSpinner strokeWidth="5" fill="var(--surface-ground)" animationDuration="350ms"></p-progressSpinner>

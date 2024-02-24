@@ -174,7 +174,7 @@ export class ProfileComponent extends FactoryONE {
   }
   setWidthExpandMode = (val: string) => {
     this.profileService.setWidthExpandMode(val);
-    val ? this.profileService.showMessage(EN_messages.widthExpandModeEnabled) : this.profileService.showMessage(EN_messages.widthExpandModeDisabled);
+    val == 'expand' ? this.profileService.showMessage(EN_messages.widthExpandModeEnabled) : this.profileService.showMessage(EN_messages.widthExpandModeDisabled);
   }
   setOutputConfigShouldFilterValue = (val: IOutputConfig) => {
     this.profileService.setOutputConfigs(val);
@@ -216,8 +216,6 @@ export class ProfileComponent extends FactoryONE {
     this.profileService.showStateVals.hasColumnsResizable = this.profileService.getHasColumnsResizable();
   }
   getWidthExpandMode = () => {
-    console.log(this.profileService.getWidthExpandMode());
-
     this.profileService.showStateVals.widthExpandMode = this.profileService.getWidthExpandMode();
   }
   getDefaultAggregationTrackings = () => {
