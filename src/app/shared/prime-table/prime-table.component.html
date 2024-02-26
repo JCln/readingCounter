@@ -544,7 +544,11 @@
                 _outputFileName == 'rrDetails'                        
             )" (click)="utilsService.showImageDialogImageCount(dataSource)">
                 <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
-                <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
+                <i class="tooltip p_icons pi pi-camera" [ngClass]="{
+                    '_haveimage':dataSource.imageCount, 
+                    'far fa-images': dataSource.imageCount,
+                    'pi pi-camera': !dataSource.imageCount
+            }">
                     <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
                 </i>
             </td>
@@ -581,7 +585,11 @@
                 _outputFileName == 'forbiddenByParamWithType' 
             )" (click)="utilsService.showCarouselForbidden(dataSource)">
                 <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
-                <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
+                <i class="tooltip p_icons pi pi-camera" [ngClass]="{
+                    '_haveimage':dataSource.imageCount, 
+                    'far fa-images': dataSource.imageCount,
+                    'pi pi-camera': !dataSource.imageCount
+            }">
                     <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</div>
                 </i>
             </td>

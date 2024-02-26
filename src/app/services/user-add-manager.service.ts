@@ -145,18 +145,13 @@ export class UserAddManagerService {
   private connectToServer = async (vals: IAddAUserManager) => {
     if (!this.checkEmptyUserInfos(vals))
       return false;
-    console.log(vals);
 
-    this.toDefaultValsUserAddInfos();
-    console.log(vals);
-    console.log(this.closeTabService.saveDataForAddUsers);
-    console.log(this.closeTabService._userAddUserInfos);
-
-    // const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
-    // if (res) {
-    //   this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-    //   this.utilsService.routeTo(EN_Routes.wrmuall);
-    // }
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
+    if (res) {
+      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+      this.toDefaultValsUserAddInfos();
+      this.utilsService.routeTo(EN_Routes.wrmuall);
+    }
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {
     const vals: IAddAUserManager = {

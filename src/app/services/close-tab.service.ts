@@ -1017,20 +1017,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.userCompare, url: EN_Routes.userCompare },
     { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
     {
-      id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd, defaultReq: {
-        userCode: null,
-        username: null,
-        password: null,
-        confirmPassword: null,
-        firstName: '',
-        sureName: '',
-        email: '',
-        mobile: '',
-        displayMobile: false,
-        displayName: '',
-        isActive: true,
-        deviceId: ''
-      }
+      id: 1, req: ENEssentialsToSave._userAddUserInfos, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd
     },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },
     { id: 1, value: ENEssentialsToSave.saveDataForEditOnRole, url: EN_Routes.wrmueor },

@@ -230,6 +230,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.classWrapper();
       return;
     }
+    // ToDo: should manage by clustering
     this._isSingle = this.route.snapshot.paramMap.get('isSingle') == 'true' ? true : false;
     if (this._isSingle) {
       this.singleMarksManager();
@@ -239,14 +240,12 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit(): void {
-    // this.getMapItems();
     this.initMap();
     this.getRouteParams();
     this.mapService.serviceInstantiate(this.map);
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
     this.myLocationButtonLeaflet();
-    // this.toggleMapView();
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     if (lat != 0 || lag != 0) {
@@ -300,7 +299,7 @@ export class MapComponent implements OnInit, OnDestroy {
     xyData.map((items) => {
       this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
-        .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        .bindPopup(`اشتراک:${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
         ));
     })
     this.layerGroup.addLayer(markers);
@@ -378,17 +377,17 @@ export class MapComponent implements OnInit, OnDestroy {
       return;
     items.hasAlert ?
       L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_mane }).addTo(this.layerGroup)
-        .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`)
+        .bindPopup(`${items.firstName}` + `${items.sureName} <br> اشتراک: ${items.eshterak} <br> ${items.time}`)
       :
       L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
-        .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`)
+        .bindPopup(`${items.firstName}` + `${items.sureName} <br> اشتراک: ${items.eshterak} <br> ${items.time}`)
   }
   private markWithoutCluster = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
-        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        `اشتراک: ${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
   }
   private markWithoutClusterColorized = (lat: number, lng: number, items) => {
@@ -403,7 +402,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.flyToDes(items.y, items.x, 12);
     L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
-        `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
+        `${items.firstName} <br>` + `${items.sureName} <br> اشتراک:${items.eshterak} <br> ${'ش.پیگیری :' + items.trackNumber}`
       );
   }
   private markSingleForbidden = (items: any) => {

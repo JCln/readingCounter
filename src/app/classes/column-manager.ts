@@ -2791,6 +2791,7 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
+        { field: 'isRemoved', header: 'حذف شده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false, isSelectedOrigin: false },
         { field: 'deviceId', header: 'سریال', isSelected: false, isSelectedOrigin: false }
@@ -2803,6 +2804,7 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
+        { field: 'isRemoved', header: 'حذف شده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false, isSelectedOrigin: false },
         { field: 'deviceId', header: 'سریال', isSelected: false, isSelectedOrigin: false }
@@ -2857,6 +2859,7 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, isSelectedOrigin: true, ltr: false, isBoolean: true },
+        { field: 'isRemoved', header: 'حذف شده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false, isSelectedOrigin: false },
         { field: 'deviceId', header: 'سریال', isSelected: false, isSelectedOrigin: false }
     ]
