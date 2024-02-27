@@ -32,7 +32,7 @@
 
 
         <app-prime-table [dataSource]="closeTabService.saveDataForUserSearchRes" [_numberOfExtraColumns]="[1, 2 , 3]"
-            [_sessionName]="'user-search-session'" [_sortMode]="'multiple'" [_outputFileName]="'userSearch'"
+            [_sessionName]="'user-search-session'" [_outputFileName]="'userSearch'"
             [_selectedColumnsToRemember]="'selectedUsersSearch'" [_checkUpName]="'userSearch'"
             (refreshedTable)="searchUsers()" (routedToEditPage)="usersAllService.routeToEditPage($event)"
             (showedExactConfig)="showUserConfigDialog($event)" (showedPictures)="openAddDialog($event)">

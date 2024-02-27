@@ -22,7 +22,7 @@ export class UploadAttemptsComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {  
+  classWrapper = async () => {
   }
   convertDateTime = () => {
     this.closeTabService.uploadAttempts.forEach(item => {

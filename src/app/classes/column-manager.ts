@@ -1705,9 +1705,12 @@ export class ColumnManager {
             { field: 'registerDate', header: 'تاریخ ثبت', isSelected: true, isSelectedOrigin: true },
             { field: 'preDate', header: 'تاریخ قبلی', isSelected: true, isSelectedOrigin: true },
             { field: 'currentDate', header: 'تاریخ فعلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'duration', header: 'مدت', isSelected: true, isSelectedOrigin: true },
             { field: 'preNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true },
             { field: 'currentNumber', header: 'رقم فعلی', isSelected: true, isSelectedOrigin: true },
             { field: 'preDebt', header: 'بدهی قبلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'consumption', header: 'مصرف', isSelected: true, isSelectedOrigin: true },
+            { field: 'dailyAverage', header: 'میانگین روزانه', isSelected: true, isSelectedOrigin: true },
             { field: 'amount', header: 'مبلغ قبض(ریال)', isSelected: true, isSelectedOrigin: true },
         ];
     assess_pre: IObjectIteratation[] =

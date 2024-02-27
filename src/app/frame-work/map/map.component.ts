@@ -294,12 +294,20 @@ export class MapComponent implements OnInit, OnDestroy {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
   }
+  private markWithoutCluster = (lat: number, lng: number, items) => {
+    if (lat === 0)
+      return;
+    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+      );
+  }
   private getXYMarkerClusterPosition = (xyData: any) => {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
       this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
-        .bindPopup(`اشتراک:${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
         ));
     })
     this.layerGroup.addLayer(markers);
@@ -372,6 +380,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.removeAllLayers();
     }, 'بستن تمامی لایه ها').addTo(this.map);
   }
+  //  circleToLeaflet is for perday counter reader (normal and is Mane!)
   private circleToLeaflet = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
@@ -381,14 +390,6 @@ export class MapComponent implements OnInit, OnDestroy {
       :
       L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
         .bindPopup(`${items.firstName}` + `${items.sureName} <br> اشتراک: ${items.eshterak} <br> ${items.time}`)
-  }
-  private markWithoutCluster = (lat: number, lng: number, items) => {
-    if (lat === 0)
-      return;
-    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
-      .bindPopup(
-        `اشتراک: ${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
-      );
   }
   private markWithoutClusterColorized = (lat: number, lng: number, items) => {
     if (lat === 0)

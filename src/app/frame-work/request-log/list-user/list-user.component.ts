@@ -17,7 +17,7 @@ export class ListUserComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     this.insertToTimes();
   }
   insertToTimes = () => {

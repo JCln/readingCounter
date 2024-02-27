@@ -74,6 +74,9 @@ export class ListManagerService {
     dataSource.y = MathS.getFormatRange(dataSource.y);
     dataSource.gisAccuracy = MathS.getFormatRange(dataSource.gisAccuracy);
   }
+  setRangesForDailyAverage = (dataSource: any) => {
+    dataSource.dailyAverage = MathS.getFormatRange(dataSource.dailyAverage);
+  }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {

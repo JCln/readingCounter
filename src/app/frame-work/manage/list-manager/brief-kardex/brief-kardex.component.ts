@@ -17,8 +17,14 @@ export class BriefKardexComponent implements OnInit {
     public config: DynamicDialogConfig,
   ) { }
 
+  getFormatRange() {
+    this.dataSource.forEach(item => {
+      this.listManagerService.setRangesForDailyAverage(item.dailyAverage);
+    })
+  }
   classWrapper = async () => {
     this.dataSource = await this.listManagerService.ajaxReqWrapperService.postDataSourceByIdStringly(ENInterfaces.trackingBriefKardex, 'BriefKardex?zoneId=' + this.config.data.zoneId + '&radif=' + this.config.data.radif);
+    this.getFormatRange();
   }
   ngOnInit(): void {
     this.classWrapper();

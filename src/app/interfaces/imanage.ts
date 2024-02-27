@@ -46,7 +46,10 @@ export interface IBriefKardex {
     preDebt: number,
     displayIcons: number,
     amount: number,
-    counterStateTitle: string
+    counterStateTitle: string,
+    duration: string,
+    consumption: number,
+    dailyAverage: number
 }
 export interface IListLatestInfoReq {
     searchBy: number,
