@@ -708,6 +708,7 @@ export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
     numberOfFlashRead = 'numberOfFlashRead',
+    latestZoneViewType = 'latestZoneViewType',
     shouldUseCarouselGallery = 'shouldUseCarouselGallery',
     shouldUseBaseOnDate = 'shouldUseBaseOnDate',
     hasColumnsResizable = 'hasColumnsResizable',

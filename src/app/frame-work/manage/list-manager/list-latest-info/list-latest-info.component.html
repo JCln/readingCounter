@@ -83,8 +83,11 @@
                     <span class="ui-column-title">
                         {{closeTabService.listLatestInfo.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
                     </span>
-                    <i class="tooltip p_icons pi pi-camera"
-                        [ngClass]="{'_haveimage':closeTabService.listLatestInfo.imageCount}">
+                    <i class="tooltip p_icons pi pi-camera" [ngClass]="{
+                        '_haveimage':closeTabService.listLatestInfo.imageCount, 
+                        'far fa-images': closeTabService.listLatestInfo.imageCount,
+                        'pi pi-camera': !closeTabService.listLatestInfo.imageCount
+                }">
                         <div class="tooltip_text_bottom">
                             {{closeTabService.listLatestInfo.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
                         </div>

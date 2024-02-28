@@ -1,9 +1,9 @@
 <main>
-    <button class="fa_icons" (click)="this.switchDisplay = !this.switchDisplay">
-        <i *ngIf="!switchDisplay" class="tooltip fa fa-list">
+    <button class="fa_icons" (click)="userAllService.latestZoneViewType = !userAllService.latestZoneViewType">
+        <i *ngIf="!userAllService.latestZoneViewType" class="tooltip fa fa-list">
             <div class="tooltip_text_right">نمایش خطی</div>
         </i>
-        <i *ngIf="switchDisplay" class="tooltip fa fa-th-large">
+        <i *ngIf="userAllService.latestZoneViewType" class="tooltip fa fa-th-large">
             <div class="tooltip_text_right">نمایش ستونی</div>
         </i>
     </button>
@@ -16,7 +16,7 @@
         </div>
     </section>
     <section class="_content" *ngFor="let provinceIt of provinceItemsData"
-        [ngClass]="switchDisplay ? 'toggle_content' : '_content'">
+        [ngClass]="userAllService.latestZoneViewType ? 'toggle_content' : '_content'">
         <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
 
             <div class="l_2_c">
@@ -26,7 +26,7 @@
                 </mat-checkbox>
             </div>
 
-            <div class="l_3_c" [ngClass]="switchDisplay ? 'toggle' : 'l_3_c'">
+            <div class="l_3_c" [ngClass]="userAllService.latestZoneViewType ? 'toggle' : 'l_3_c'">
                 <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
                     <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)"
                         name="zoneIt">

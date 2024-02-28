@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { UsersAllService } from 'services/users-all.service';
 
 @Component({
   selector: 'app-user-details-history',
@@ -14,8 +15,8 @@ export class UserDetailsHistoryComponent extends FactoryONE {
 
   constructor(
     private securityService: SecurityService,
-    public closeTabService: CloseTabService
-
+    public closeTabService: CloseTabService,
+    public usersAllService: UsersAllService
   ) {
     super();
   }
@@ -27,6 +28,7 @@ export class UserDetailsHistoryComponent extends FactoryONE {
       this.closeTabService.saveDataForUserDetailsHistory = await this.securityService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.UserDetailsHistory, this.securityService.userMasterDetailsHistory_pageSign.id + `/${this.securityService.userMasterDetailsHistory_pageSign.changeOrInsertUserLogId}`);
       this.closeTabService.saveDataForUserMasterDetailsHistoryReq.id = this.securityService.userMasterDetailsHistory_pageSign.id;
     }
+    this.usersAllService.getLatestZoneViewType();
   }
 
 }

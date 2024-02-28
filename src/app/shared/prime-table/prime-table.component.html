@@ -557,7 +557,11 @@
                 _outputFileName == 'feedbackAllSuggest'
             )" (click)="utilsService.showImageMobileApp(dataSource)">
                 <span class="ui-column-title">{{dataSource.mediaCount ? 'بررسی عکس' : '× بدون عکس'}}</span>
-                <i class="tooltip p_icons pi pi-camera" [ngClass]="{'_haveimage':dataSource.mediaCount}">
+                <i class="tooltip p_icons pi pi-camera" [ngClass]="{
+                    '_haveimage':dataSource.imageCount, 
+                    'far fa-images': dataSource.imageCount,
+                    'pi pi-camera': !dataSource.imageCount
+            }">
                     <div class="tooltip_text_right">{{dataSource.mediaCount ? 'بررسی عکس' : '× بدون عکس'}}</div>
                 </i>
             </td>

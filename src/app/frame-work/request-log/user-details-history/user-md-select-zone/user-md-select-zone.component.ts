@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { UsersAllService } from 'services/users-all.service';
 
 @Component({
   selector: 'app-user-md-select-zone',
@@ -6,7 +7,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./user-md-select-zone.component.scss']
 })
 export class UserMdSelectZoneComponent {
-  switchDisplay: boolean = false;
+  constructor(
+    public userAllService: UsersAllService
+  ) { }
+
   // province config
   @Input() provinceItemsData: any;
   title: string = '';

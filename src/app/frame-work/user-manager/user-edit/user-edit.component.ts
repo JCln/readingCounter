@@ -14,7 +14,6 @@ export class UserEditComponent extends FactoryONE {
   constructor(
     private usersAllService: UsersAllService,
     public closeTabService: CloseTabService
-
   ) {
     super();
   }
@@ -37,7 +36,7 @@ export class UserEditComponent extends FactoryONE {
         this.closeTabService.saveDataForEditUsers = await this.usersAllService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userEDIT, this.usersAllService.userEdit_pageSign.GUid);
         this.closeTabService.saveDataForEditUsersGUID = this.usersAllService.userEdit_pageSign.GUid;
       }
-
+      this.usersAllService.getLatestZoneViewType();
     }
   }
 

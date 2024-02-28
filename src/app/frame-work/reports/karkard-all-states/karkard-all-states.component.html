@@ -92,9 +92,10 @@
         *ngIf="closeTabService.saveDataForKarkardAllStates &&  closeTabService.saveDataForKarkardAllStates.length > 0"
         [columns]="selectedColumns" [value]="closeTabService.saveDataForKarkardAllStates" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" (onFilter)="filteredTableEvent($event)"
-        styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" stateKey="karkard-allstates"
-        [reorderableColumns]="readingReportManagerService.getLocalReOrderable()" appUnSortTable>
+        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" [tableStyle]="{'width': '100%'}"
+        (onFilter)="filteredTableEvent($event)" styleClass="p-datatable-responsive" stateStorage="session"
+        stateKey="karkard-allstates" [reorderableColumns]="readingReportManagerService.getLocalReOrderable()"
+        appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -213,6 +214,26 @@
                     <div *ngIf="col.field == 'c12'">
                         جمع:
                         {{calcSums(dtable,'c12')}}
+                    </div>
+                    <div *ngIf="col.field == 'c13'">
+                        جمع:
+                        {{calcSums(dtable,'c13')}}
+                    </div>
+                    <div *ngIf="col.field == 'c14'">
+                        جمع:
+                        {{calcSums(dtable,'c14')}}
+                    </div>
+                    <div *ngIf="col.field == 'c15'">
+                        جمع:
+                        {{calcSums(dtable,'c15')}}
+                    </div>
+                    <div *ngIf="col.field == 'c16'">
+                        جمع:
+                        {{calcSums(dtable,'c16')}}
+                    </div>
+                    <div *ngIf="col.field == 'c17'">
+                        جمع:
+                        {{calcSums(dtable,'c17')}}
                     </div>
             </tr>
         </ng-template>

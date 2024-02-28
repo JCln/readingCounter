@@ -2,7 +2,7 @@ import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSelectedColumnVariables, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENLocalStorageNames, ENSelectedColumnVariables, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
 import { INotifyDirectImage } from 'interfaces/inon-manage';
 import { IAUserEditSave, IUserEditManager, IUserEditOnRole, IUserEditOnRoleManager } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -14,6 +14,7 @@ import { UtilsService } from './utils.service';
 import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
+import { MapService } from './map.service';
 
 export interface IUserEditNessessities {
   GUid: string
@@ -31,13 +32,15 @@ export class UsersAllService {
   userEdit_pageSign: IUserEditNessessities = {
     GUid: null,
   };
+  latestZoneViewType: boolean = false;
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    private columnManager: ColumnManager
+    private columnManager: ColumnManager,
+    private mapService: MapService
   ) { }
 
   /* COLUMNS */
@@ -59,6 +62,14 @@ export class UsersAllService {
   routeToEditPage(e) {
     this.userEdit_pageSign.GUid = e;
     this.utilsService.routeTo(EN_Routes.wrmuedit);
+  }
+  getLatestZoneViewType = () => {
+    if (this.mapService.browserStorageService.isExists(ENLocalStorageNames.latestZoneViewType)) {
+      this.latestZoneViewType = this.mapService.browserStorageService.getLocal(ENLocalStorageNames.latestZoneViewType);
+    }
+    else {
+      this.mapService.saveToLocalStorage(ENLocalStorageNames.latestZoneViewType, false);
+    }
   }
   routeToAddAUser = () => this.utilsService.routeTo(EN_Routes.wrmuadd);
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {

@@ -5,6 +5,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 
 import { UserInputsComponent } from './user-inputs/user-inputs.component';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { UsersAllService } from 'services/users-all.service';
 
 @Component({
   selector: 'app-user-add',
@@ -17,7 +18,8 @@ export class UserAddComponent extends FactoryONE {
 
   constructor(
     private userAddManagerService: UserAddManagerService,
-    public closeTabService: CloseTabService
+    public closeTabService: CloseTabService,
+    public userAllService: UsersAllService,
   ) {
     super();
   }
@@ -31,5 +33,6 @@ export class UserAddComponent extends FactoryONE {
     if (!this.closeTabService.saveDataForAddUsers) {
       this.closeTabService.saveDataForAddUsers = await this.userAddManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
     }
+    this.userAllService.getLatestZoneViewType();
   }
 }

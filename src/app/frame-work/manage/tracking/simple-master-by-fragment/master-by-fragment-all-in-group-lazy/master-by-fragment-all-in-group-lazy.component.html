@@ -293,7 +293,11 @@
                 <!-- for making readable and compatible singleton dataType -->
                 <td class="__icon-columns" (click)="doShowCarousel(dataSource)">
                     <span class="ui-column-title">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}</span>
-                    <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons pi pi-camera">
+                    <i [ngClass]="{
+                        '_haveimage':dataSource.imageCount, 
+                        'far fa-images': dataSource.imageCount,
+                        'pi pi-camera': !dataSource.imageCount
+                }" class="tooltip p_icons pi pi-camera">
                         <div class="tooltip_text_right">{{dataSource.imageCount ? 'بررسی عکس/صوت' : '× بدون عکس/صوت'}}
                         </div>
                     </i>

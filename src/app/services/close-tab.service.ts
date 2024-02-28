@@ -627,7 +627,7 @@ export class CloseTabService {
     multiSelectCounterStateId: [],
     multiSelectPreCounterStateCode: []
   };
-  saveDataForLMGeneralModify: IOnOffLoadFlat[];
+  saveDataForLMGeneralModify: IOnOffLoadFlat[] = [];
   saveDataForLMGeneralGroupModifyReq = {
     GUid: '',
     groupId: '',
@@ -981,8 +981,27 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrExcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterMark, url: EN_Routes.wrSettingsWaterMark },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr, defaultValue: [] },
-    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, value_2: ENEssentialsToSave.AUXSaveDataForLMGeneralGroupModify, defaultValue_2: [], url: EN_Routes.wrmlGeneralGModify },
-    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
+    {
+      id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, value_2: ENEssentialsToSave.AUXSaveDataForLMGeneralGroupModify, defaultValue: [], defaultValue_2: [], defaultReq: {
+        GUid: '',
+        groupId: '',
+        counterStateValue: null,
+        multiSelectCounterStateId: [],
+        multiSelectPreCounterStateCode: []
+
+      }, url: EN_Routes.wrmlGeneralGModify
+    },
+    {
+      id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify, defaultReq: {
+        GUid: '',
+        groupId: '',
+        counterStateValue: null,
+        multiSelectCounterStateId: [],
+        multiSelectPreCounterStateCode: []
+      }
+      , defaultValue: []
+      , defaultValue_2: []
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
     { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild },

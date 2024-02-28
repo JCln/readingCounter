@@ -27,11 +27,11 @@ export class UserSearchComponent extends FactoryONE {
       this.closeTabService.saveDataForUserSearchRes = await this.userAddManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userSearch, temp);
     }
   }
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     if (!this.closeTabService.saveDataForUserSearchRes) {
       this.closeTabService.saveDataForUserSearch = await this.userAddManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
     }
-
+    this.usersAllService.getLatestZoneViewType();
   }
   showUserConfigDialog = (dataSource: IUserManager) => {
     this.closeTabService.utilsService.showUserConfigDialog(dataSource);
