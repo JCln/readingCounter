@@ -149,7 +149,7 @@ export class UserAddManagerService {
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
     if (res) {
       this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-      this.toDefaultValsUserAddInfos();
+      // this.toDefaultValsUserAddInfos();
       this.utilsService.routeTo(EN_Routes.wrmuall);
     }
   }

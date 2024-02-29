@@ -48,7 +48,8 @@ export class SnackWrapperService {
     }
     this.snack(a);
   }
-  openSnackBarSignal(message: string, duration: ENSnackBarTimes, backColor?: ENSnackBarColors) {
+  openSnackBarSignal(message: string, backColor?: ENSnackBarColors) {
+    const duration: number = message?.length * ENSnackBarTimes.snackTimeMultipleTo;
     const a: ISnackBarSignal = {
       message,
       duration,

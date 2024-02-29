@@ -126,7 +126,7 @@ export class SignalRService {
 */
   private receiveMessage = () => {
     this.hubConnection.on(ENInterfaces.signalRReceiveMessage, (user: string, message: string) => {
-      this.utilsService.snackWrapperService.openSnackBarSignal(user + '   ' + message, ENSnackBarTimes.tenMili);
+      this.utilsService.snackWrapperService.openSnackBarSignal(user + '   ' + message);
     });
   }
   private receiveTextWithTimer = () => {

@@ -30,7 +30,7 @@ export class UsersAllService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   userEditOnRoleRoleVal: IIDTitle;
   userEdit_pageSign: IUserEditNessessities = {
-    GUid: null,
+    GUid: null
   };
   latestZoneViewType: boolean = false;
 
@@ -60,7 +60,13 @@ export class UsersAllService {
     this.utilsService.routeTo(EN_Routes.wrmuall);
   }
   routeToEditPage(e) {
-    this.userEdit_pageSign.GUid = e;
+    if (e.isRemoved) {
+      const message: string = 'کاربر ' + e.displayName + '(' + e.userCode + ')' + EN_messages.userIsRemoved;
+      this.utilsService.snackBarMessageWarn(message);
+      return;
+    }
+
+    this.userEdit_pageSign.GUid = e.id;
     this.utilsService.routeTo(EN_Routes.wrmuedit);
   }
   getLatestZoneViewType = () => {

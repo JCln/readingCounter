@@ -57,6 +57,10 @@ export class ForbiddenService {
       displayName: dataSource.displayName,
       description: dataSource.description,
       postalCode: dataSource.postalCode,
+      gisAccuracy: dataSource.gisAccuracy,
+      tedadVahed: dataSource.tedadVahed,
+      preEshterak: dataSource.preEshterak,
+      nextEshterak: dataSource.nextEshterak,
       isSingle: true,
       isForbidden: true
     });

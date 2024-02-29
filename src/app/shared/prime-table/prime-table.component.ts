@@ -191,7 +191,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   openAddDialog = () => {
     this.openedAddDialog.emit();
   }
-  routeToEditPage = (dataSource: string) => {
+  routeToEditPage = (dataSource: object) => {
     this.routedToEditPage.emit(dataSource);
   }
   routeToLoggs = (dataSource: object) => {

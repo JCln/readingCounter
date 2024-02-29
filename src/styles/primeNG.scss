@@ -178,6 +178,10 @@
   }
 
   @media (max-width: 40rem) {
+    .p-datatable.p-datatable-responsive .p-datatable-tbody>tr>td {
+      display: flex !important;
+    }
+
     span.ui-column-title {
       display: inline;
       padding-right: var(--font_05);

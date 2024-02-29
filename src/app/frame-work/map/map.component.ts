@@ -59,6 +59,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private map: L.Map;
   private layerGroup = new L.FeatureGroup();
   private markersDataSourceXY: IListManagerPDXY[] = [];
+  private routeParams: object = {};
 
   polyline_configs: number = null;
   isShowMap: boolean = true;
@@ -132,9 +133,9 @@ export class MapComponent implements OnInit, OnDestroy {
     })
   }
   private classWrapper = async () => {
-    this.onShowCounterReader.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-    this.onShowCounterReader.day = this.route.snapshot.paramMap.get('day');
-    this.onShowCounterReader.isPerday = this.route.snapshot.paramMap.get('isPerday');
+    this.onShowCounterReader.trackNumber = this.routeParams['trackNumber'];
+    this.onShowCounterReader.day = this.routeParams['day'];
+    this.onShowCounterReader.isPerday = this.routeParams['isPerday'];
     this.canShowOptionsButton = true;
 
     if (this.onShowCounterReader.isPerday)
@@ -151,26 +152,26 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
     let numberOfFragmentMasterIds = [];
-    const fragmentMaster = this.route.snapshot.paramMap.get('fragmentMasterIds');
+    const fragmentMaster = this.routeParams['fragmentMasterIds'];
     if (fragmentMaster.length) {
-      for (let index = 0; index < this.route.snapshot.paramMap.get('fragmentMasterIds').split(',').length; index++) {
-        numberOfFragmentMasterIds.push(this.route.snapshot.paramMap.get('fragmentMasterIds').split(',')[index])
+      for (let index = 0; index < this.routeParams['fragmentMasterIds'].split(',').length; index++) {
+        numberOfFragmentMasterIds.push(this.routeParams['fragmentMasterIds'].split(',')[index])
       }
     }
 
     return {
-      zoneId: parseInt(this.route.snapshot.paramMap.get('zoneId')),
-      isCounterState: this.route.snapshot.paramMap.get('isCounterState') === 'true' ? true : false,
-      counterStateId: parseInt(this.route.snapshot.paramMap.get('counterStateId')),
-      isKarbariChange: this.route.snapshot.paramMap.get('isKarbariChange') === 'true' ? true : false,
+      zoneId: parseInt(this.routeParams['zoneId']),
+      isCounterState: this.routeParams['isCounterState'] === 'true' ? true : false,
+      counterStateId: parseInt(this.routeParams['counterStateId']),
+      isKarbariChange: this.routeParams['isKarbariChange'] === 'true' ? true : false,
       fragmentMasterIds: numberOfFragmentMasterIds,
-      isAhadChange: this.route.snapshot.paramMap.get('isAhadChange') === 'true' ? true : false,
-      isForbidden: this.route.snapshot.paramMap.get('isForbidden') === 'true' ? true : false,
-      readingPeriodId: parseInt(this.route.snapshot.paramMap.get('readingPeriodId')),
-      year: parseInt(this.route.snapshot.paramMap.get('year')),
-      fromDate: this.route.snapshot.paramMap.get('fromDate'),
-      toDate: this.route.snapshot.paramMap.get('toDate'),
-      isCluster: this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false
+      isAhadChange: this.routeParams['isAhadChange'] === 'true' ? true : false,
+      isForbidden: this.routeParams['isForbidden'] === 'true' ? true : false,
+      readingPeriodId: parseInt(this.routeParams['readingPeriodId']),
+      year: parseInt(this.routeParams['year']),
+      fromDate: this.routeParams['fromDate'],
+      toDate: this.routeParams['toDate'],
+      isCluster: this.routeParams['isCluster'] === 'true' ? true : false
     }
   }
   private classWrapperCluster = async () => {
@@ -183,60 +184,54 @@ export class MapComponent implements OnInit, OnDestroy {
     this._isCluster ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
   }
   private forbiddenMarkSingleLocation = (x: string, y: string) => {
-    const zone = this.route.snapshot.paramMap.get('zoneId');
-    const insertDateJalali = this.route.snapshot.paramMap.get('insertDateJalali');
-    const displayName = this.route.snapshot.paramMap.get('displayName');
-    const description = this.route.snapshot.paramMap.get('description');
-    const postalCode = this.route.snapshot.paramMap.get('postalCode');
-
     this.markSingleForbidden({
       x: x,
       y: y,
-      description: description,
-      displayName: displayName,
-      insertDateJalali: insertDateJalali,
-      zone: zone,
-      postalCode: postalCode
+      description: this.routeParams['description'],
+      displayName: this.routeParams['displayName'],
+      insertDateJalali: this.routeParams['insertDateJalali'],
+      zone: this.routeParams['zoneId'],
+      gisAccuracy: this.routeParams['gisAccuracy'],
+      tedadVahed: this.routeParams['tedadVahed'],
+      preEshterak: this.routeParams['preEshterak'],
+      nextEshterak: this.routeParams['nextEshterak'],
+      postalCode: this.routeParams['postalCode']
     });
   }
   private simpleMarkSingleLocation = (x: string, y: string) => {
-    const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-    const sureName = this.route.snapshot.paramMap.get('sureName');
-    const eshterak = this.route.snapshot.paramMap.get('eshterak');
-    const firstName = this.route.snapshot.paramMap.get('firstName');
-    this.markSingle({ x: x, y: y, firstName: firstName, sureName: sureName, eshterak: eshterak, trackNumber: trackNumber });
-  }
-  private singleMarksManager = () => {
-    const _isForbidden = this.route.snapshot.paramMap.get('isForbidden') == 'true' ? true : false;
-    const x = this.route.snapshot.paramMap.get('x');
-    const y = this.route.snapshot.paramMap.get('y');
-
-    if (_isForbidden) {
-      this.forbiddenMarkSingleLocation(x, y);
-    } else {
-      this.simpleMarkSingleLocation(x, y);
-    }
-  }
-  private clusterManager = () => {
-    this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
-      this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null;
-    if (this._isCluster == false || this._isCluster == true)
-      this.classWrapperCluster();
+    this.markSingle({
+      x: x,
+      y: y,
+      firstName: this.routeParams['firstName'],
+      sureName: this.routeParams['sureName'],
+      eshterak: this.routeParams['eshterak'],
+      trackNumber: this.routeParams['trackNumber']
+    });
   }
   private getRouteParams = () => {
-    this.onShowCounterReader.distance = this.route.snapshot.paramMap.get('distance');
+    // get all route params
+    this.routeParams = this.route.snapshot.params;
 
-    if (!MathS.isNull(this.onShowCounterReader.distance)) {
+    if (!MathS.isNull(this.routeParams['distance'])) {
+      this.onShowCounterReader.distance = this.routeParams['distance'];
       this.classWrapper();
       return;
     }
-    // ToDo: should manage by clustering
-    this._isSingle = this.route.snapshot.paramMap.get('isSingle') == 'true' ? true : false;
-    if (this._isSingle) {
-      this.singleMarksManager();
-    }
-    else {
-      this.clusterManager();
+    // ToDo: should manage by clustering    
+    if (this.routeParams['isSingle'] == 'true' ? true : false) {
+      const _isForbidden = this.routeParams['isForbidden'] == 'true' ? true : false;
+      const x = this.routeParams['x'];
+      const y = this.routeParams['y'];
+      if (_isForbidden) {
+        this.forbiddenMarkSingleLocation(x, y);
+      }
+      else {
+        this.simpleMarkSingleLocation(x, y);
+      }
+    } else {
+      this._isCluster = this.routeParams['isCluster'] == 'true' ? true : this.routeParams['isCluster'] == 'false' ? false : null;
+      if (this._isCluster == false || this._isCluster == true)
+        this.classWrapperCluster();
     }
   }
   ngOnInit(): void {
@@ -294,6 +289,14 @@ export class MapComponent implements OnInit, OnDestroy {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
   }
+  private markWithoutClusterColorized = (lat: number, lng: number, items) => {
+    if (lat === 0)
+      return;
+    L.marker([lat, lng]).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+      );
+  }
   private markWithoutCluster = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
@@ -307,16 +310,56 @@ export class MapComponent implements OnInit, OnDestroy {
     xyData.map((items) => {
       this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
+        .bindPopup(`اشتراک${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        ));
+    })
+    this.layerGroup.addLayer(markers);
+  }
+  private getXYMarkerClusterCounterReader = (xyData: any) => {
+    const markers = new L.markerClusterGroup();
+    xyData.map((items) => {
+      this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
+      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
+        .bindPopup(`موبایل: ${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        ));
+    })
+    this.layerGroup.addLayer(markers);
+  }
+  private getXYMarkerClusterForForbidden = (xyData: any) => {
+    const markers = new L.markerClusterGroup();
+    xyData.map((items) => {
+      this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
+      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
+        .bindPopup(`${items.info1} <br>` + `اشتراک قبلی:${items.info2} <br> اشتراک بعدی:${items.info3}`
+        ));
+    })
+    this.layerGroup.addLayer(markers);
+  }
+  private getXYMarkerCluster = (xyData: any) => {
+    const markers = new L.markerClusterGroup();
+    xyData.map((items) => {
+      this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
+      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
         .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
         ));
     })
     this.layerGroup.addLayer(markers);
   }
+  private extrasConfigOptionsCluster = (xyData: any) => {
+    this.removeAllLayers();
+    // to have better ux show titles and we implement bottom codes to separate different titles
+    if (this.routeParams['isForbidden'] === 'true' ? true : false) {
+      this.getXYMarkerClusterForForbidden(xyData);
+    }
+    else {
+      this.getXYMarkerClusterPosition(xyData);
+    }
+  }
   showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
     this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
   }
   showCounterReadersLocationsByCluster = (dataSource: IGisXYResponse[]) => {
-    this.getXYMarkerClusterPosition(dataSource);
+    this.getXYMarkerClusterCounterReader(dataSource);
   }
   showCounterReaders = (dataSource: IGisXYResponse[], showCluster: boolean) => {
     this.utilsService.routeTo(EN_Routes.wr);
@@ -347,10 +390,6 @@ export class MapComponent implements OnInit, OnDestroy {
   private extrasConfigOptions = (xyData: any) => {
     this.removeAllLayers();
     this.markingOnMapNClusterNDelay('markWithoutCluster', xyData);
-  }
-  private extrasConfigOptionsCluster = (xyData: any) => {
-    this.removeAllLayers();
-    this.getXYMarkerClusterPosition(xyData);
   }
   showDashboard = (isShowMap: boolean) => {
     this.isShowMap = isShowMap;
@@ -391,14 +430,6 @@ export class MapComponent implements OnInit, OnDestroy {
       L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
         .bindPopup(`${items.firstName}` + `${items.sureName} <br> اشتراک: ${items.eshterak} <br> ${items.time}`)
   }
-  private markWithoutClusterColorized = (lat: number, lng: number, items) => {
-    if (lat === 0)
-      return;
-    L.marker([lat, lng]).addTo(this.layerGroup)
-      .bindPopup(
-        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
-      );
-  }
   private markSingle = (items: any) => {
     this.flyToDes(items.y, items.x, 12);
     L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
@@ -406,15 +437,19 @@ export class MapComponent implements OnInit, OnDestroy {
         `${items.firstName} <br>` + `${items.sureName} <br> اشتراک:${items.eshterak} <br> ${'ش.پیگیری :' + items.trackNumber}`
       );
   }
-  private markSingleForbidden = (items: any) => {
-    this.flyToDes(items.y, items.x, 12);
-    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
+  private markSingleForbidden = (item: any) => {
+    this.flyToDes(item.y, item.x, 12);
+
+    L.circleMarker([item.y, item.x], { weight: 4, radius: parseInt(item.gisAccuracy), color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
-        `${'ناحیه :' + items.zone} <br>` +
-        `${'توضیحات :' + items.description} <br>` +
-        `${'تاریخ :' + items.insertDateJalali} <br>` +
-        `${'قرائت کننده :' + items.displayName} <br>` +
-        `${'کد پستی :' + items.postalCode}`
+        `${'ناحیه :' + item.zone} <br>` +
+        `${'تاریخ :' + item.insertDateJalali} <br>` +
+        `${'قرائت کننده :' + item.displayName} <br>` +
+        `${'اشتراک قبلی :' + item.preEshterak} <br>` +
+        `${'اشتراک بعدی :' + item.nextEshterak} <br>` +
+        `${'تعداد واحد :' + item.tedadVahed} <br>` +
+        `${item.postalCode} :کد پستی <br>` +
+        `${'توضیحات :' + item.description} <br>`
       );
   }
   private findMyLocationLeaflet = (e) => {
