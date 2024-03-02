@@ -2,7 +2,7 @@
     <section>
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="_card"
-                [@openClose]="readingReportManagerService.offKarkardAllStatesReq.isCollapsed ? 'slideUp' : 'slideDown'">
+                [@openClose]="closeTabService.offKarkardAllStatesReq.isCollapsed ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
@@ -10,9 +10,9 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.zoneId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
-                                (onChange)="getFragmentByZone()" (onChange)="afterZoneChanged()">
+                                [(ngModel)]="closeTabService.offKarkardAllStatesReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
+                                (onChange)="afterZoneChanged()">
                             </p-dropdown>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                         <div class="_key">نوبتی</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
-                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.fragmentMasterIds"
+                                [(ngModel)]="closeTabService.offKarkardAllStatesReq.fragmentMasterIds"
                                 optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
                                 placeholder="انتخاب مورد" [filter]="true" showClear="true">
                             </p-multiSelect>
@@ -30,7 +30,7 @@
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
-                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq._selectedKindId"
+                                [(ngModel)]="closeTabService.offKarkardAllStatesReq._selectedKindId"
                                 placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
                                 (click)="getReadingPeriod()" (onChange)="afterPeriodChanged()">
                             </p-dropdown>
@@ -41,7 +41,7 @@
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
-                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.readingPeriodId"
+                                [(ngModel)]="closeTabService.offKarkardAllStatesReq.readingPeriodId"
                                 placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="_key">سال</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.year" name="year">
+                                [(ngModel)]="closeTabService.offKarkardAllStatesReq.year" name="year">
                                 <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                     {{truefalse.title}}
                                 </mat-option>
@@ -63,7 +63,7 @@
                         <div class="_value">
                             <app-date-jalali name="fromDate"
                                 (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.karkardAllStates, $event)"
-                                [dateObject]="readingReportManagerService.offKarkardAllStatesReq.fromDate">
+                                [dateObject]="closeTabService.offKarkardAllStatesReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <div class="_value">
                             <app-date-jalali name="toDate"
                                 (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.karkardAllStates, $event)"
-                                [dateObject]="readingReportManagerService.offKarkardAllStatesReq.toDate">
+                                [dateObject]="closeTabService.offKarkardAllStatesReq.toDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -114,8 +114,8 @@
                     </i>
                 </div>
                 <div class="left_side">
-                    <app-collapsable [_isCollapsed]=readingReportManagerService.offKarkardAllStatesReq.isCollapsed
-                        (_clicked)="readingReportManagerService.offKarkardAllStatesReq.isCollapsed = !readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
+                    <app-collapsable [_isCollapsed]=closeTabService.offKarkardAllStatesReq.isCollapsed
+                        (_clicked)="closeTabService.offKarkardAllStatesReq.isCollapsed = !closeTabService.offKarkardAllStatesReq.isCollapsed">
                     </app-collapsable>
                     <i (click)="clearFilters(dtable)" [ngClass]="{'has_filters': hasFiltersInTable}"
                         class="_circle_border p_icons tooltip pi pi-filter-slash">

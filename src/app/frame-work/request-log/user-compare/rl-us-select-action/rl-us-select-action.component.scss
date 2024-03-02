@@ -5,6 +5,10 @@
   display: grid;
   direction: rtl;
   grid-template-columns: 1fr 18rem 18rem;
+
+  @media (max-width:550px) {
+    overflow: auto;
+  }
 }
 
 .auth_3 {

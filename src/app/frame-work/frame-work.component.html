@@ -1,4 +1,4 @@
-<main role="main" [ngClass]="{
+<main id="main" role="main" [ngClass]="{
     'lightBackground':this.themeService.getActiveTheme().name == 'light' || this.themeService.getActiveTheme().name == 'corporate',    
     'darkBackground':this.themeService.getActiveTheme().name == 'dark',        
     'purpleBackground':this.themeService.getActiveTheme().name == 'purple'
@@ -12,8 +12,8 @@
             <button (click)="openDialog()" class="btn_1 d_grid_center">
                 <i class="pi pi-question"></i>
             </button>
-            <button (click)="toggleFullScreen()" class="btn_1 d_grid_center _screen">
-                <i [ngClass]="_isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
+            <button (click)="fullScreenService.toggleFullScreen(true)" class="btn_1 d_grid_center _screen">
+                <i [ngClass]="fullScreenService._isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
             </button>
         </h2>
     </div>

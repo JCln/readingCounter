@@ -9,6 +9,7 @@ import { ThemeService } from 'services/theme.service';
 import { UtilsService } from 'services/utils.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MyPreviousFailuresComponent } from './my-previous-failures/my-previous-failures.component';
+import { FullScreenService } from 'services/full-screen.service';
 
 @Component({
   selector: 'app-header',
@@ -33,6 +34,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     public signalRService: SignalRService,
     private utilsService: UtilsService,
     public dialogService: DialogService,
+    public fullScreenService: FullScreenService
   ) { }
 
   setSidebar = () => {

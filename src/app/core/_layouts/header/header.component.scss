@@ -56,7 +56,7 @@ li {
 ._name {
   margin-left: auto;
   padding-right: 0;
-  font-size: var(--font_xxs);
+  font-size: .87rem;
   color: var(--primary_5);
   cursor: auto;
   @include _borders();
@@ -114,7 +114,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font_xxs);
+  font-size: var(--font_ss);
   max-height: 1.87rem;
   min-width: 1.5rem;
   padding: 0 0.3rem;
@@ -131,7 +131,6 @@ li {
 
 .menu_toggle {
   display: block;
-  padding: var(--font_05);
   border-radius: $border_50;
   cursor: pointer;
   transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
@@ -200,4 +199,17 @@ li {
   height: inherit;
   width: var(--font_55);
   font-size: var(--font_ss);
+}
+
+._fullscreen {
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 2rem;
+  cursor: pointer;
+
+  i {
+    font-size: 1.2rem;
+    color: var(--primary_5);
+  }
 }

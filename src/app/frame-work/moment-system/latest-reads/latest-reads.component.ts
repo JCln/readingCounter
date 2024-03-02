@@ -42,7 +42,7 @@ export class LatestReadsComponent extends AllListsFactory {
     xyData.map((items) => {
       if (items.y > ENRandomNumbers.zero) {
         L.circleMarker([items.y, items.x], { weight: 7, radius: 2 }).addTo(this.layerGroup2)
-          .bindPopup(`${items.zoneTitle} <br> ${items.counterReaderName} <br>` + `${items.eshterak} <br> ${items.radif}`
+          .bindPopup(`${items.zoneTitle} <br> ${items.counterReaderName} <br>` + `اشتراک: ${items.eshterak} <br> ردیف: ${items.radif}`
           );
       }
     })

@@ -212,7 +212,7 @@ export class ColumnManager {
     simpleMasterByFragmentDetails: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: true },
         { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false, isSelectedOrigin: false, readonly: true },
-        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true },

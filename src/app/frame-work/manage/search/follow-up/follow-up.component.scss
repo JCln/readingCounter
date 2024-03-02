@@ -6,6 +6,10 @@
 @import '_mat.scss';
 @import 'cards.scss';
 
+._card {
+  max-height: 10rem;
+}
+
 .contain {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 19rem));

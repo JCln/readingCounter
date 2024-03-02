@@ -2,7 +2,11 @@
 
 main {
     display: flex;
-    direction: rtl;    
+    direction: rtl;
+
+    @media (max-width:550px) {
+        overflow: auto;
+    }
 }
 
 .l_3_c {

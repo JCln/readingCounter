@@ -52,7 +52,10 @@
             <span></span>
             <span></span>
         </li>
-    </ul>
+        <li class="_fullscreen" (click)="fullScreenService.toggleFullScreen()">
+            <i [ngClass]="fullScreenService._isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
+        </li>
 
+    </ul>
 
 </div>

@@ -289,7 +289,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
   }
-  private markWithoutClusterColorized = (lat: number, lng: number, items) => {
+  private markWithoutClusterCounterReaders = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
     L.marker([lat, lng]).addTo(this.layerGroup)
@@ -356,7 +356,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
-    this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
+    this.markingOnMapNClusterNDelay('markWithoutClusterCounterReaders', dataSource);
   }
   showCounterReadersLocationsByCluster = (dataSource: IGisXYResponse[]) => {
     this.getXYMarkerClusterCounterReader(dataSource);

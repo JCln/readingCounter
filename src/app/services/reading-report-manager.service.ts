@@ -193,20 +193,6 @@ export class ReadingReportManagerService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [0]
   }
-  offKarkardAllStatesReq: IMostReportInput = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: this.utilsService.getFirstYear(),
-    _selectedKindId: '',
-    zoneIds: [0],
-    beginFromImported: false,
-    fragmentMasterIds: [],
-    isCollapsed: false
-  }
   dataMiningReq: IMostReportInput = {
     zoneId: 0,
     fromDate: '',

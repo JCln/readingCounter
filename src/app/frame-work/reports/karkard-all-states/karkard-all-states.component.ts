@@ -8,6 +8,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
@@ -40,16 +41,13 @@ export class KarkardAllStatesComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForKarkardAllStates = null;
-    }
-    if (this.closeTabService.saveDataForKarkardAllStates) {
+  classWrapper = async () => {
+    if (!MathS.isNull(this.closeTabService.saveDataForKarkardAllStates)) {
       this._selectCols = this.closeTabService.saveDataForKarkardAllStatesTWO;
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
     }
 
-    this.readingReportManagerService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
 
@@ -57,6 +55,8 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.getCounterStateHeaders(this.tempData);
+    console.log(this._selectCols);
+
     this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
     this.closeTabService.saveDataForKarkardAllStatesTWO = this._selectCols;
   }
@@ -68,26 +68,26 @@ export class KarkardAllStatesComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.offKarkardAllStatesReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.offKarkardAllStatesReq.zoneId);
+    if (this.closeTabService.offKarkardAllStatesReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.offKarkardAllStatesReq.zoneId);
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.offKarkardAllStatesReq.fragmentMasterIds = [];
+    this.closeTabService.offKarkardAllStatesReq.fragmentMasterIds = [];
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.offKarkardAllStatesReq.readingPeriodId = null;
-    this.readingReportManagerService.offKarkardAllStatesReq._selectedKindId = null;
+    this.closeTabService.offKarkardAllStatesReq.readingPeriodId = null;
+    this.closeTabService.offKarkardAllStatesReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.offKarkardAllStatesReq.readingPeriodId = null;
+    this.closeTabService.offKarkardAllStatesReq.readingPeriodId = null;
   }
 
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.offKarkardAllStatesReq.zoneId, +this.readingReportManagerService.offKarkardAllStatesReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.offKarkardAllStatesReq.zoneId, +this.closeTabService.offKarkardAllStatesReq._selectedKindId);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.offKarkardAllStatesReq, this.readingReportManagerService._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.closeTabService.offKarkardAllStatesReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
@@ -133,7 +133,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
   connectToServer = async () => {
 
-    this.tempData = await this.readingReportManagerService.portRRTest(ENInterfaces.postKarkardAllStates, this.readingReportManagerService.offKarkardAllStatesReq);
+    this.tempData = await this.readingReportManagerService.portRRTest(ENInterfaces.postKarkardAllStates, this.closeTabService.offKarkardAllStatesReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForKarkardAllStates = this.getCounterStateData(this.tempData);
     console.log(this.closeTabService.saveDataForKarkardAllStates);
