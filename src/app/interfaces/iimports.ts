@@ -24,6 +24,7 @@ export interface IAssessAddDtoSimafa {
 }
 export interface IReadingConfigDefault {
     id: number,
+    staticID: number,
     zoneId: number,
     defaultAlalHesab: number,
     maxAlalHesab: number,

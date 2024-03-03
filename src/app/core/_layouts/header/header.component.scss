@@ -133,6 +133,7 @@ li {
   display: block;
   border-radius: $border_50;
   cursor: pointer;
+  padding: .3rem;
   transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
 
   &:hover,

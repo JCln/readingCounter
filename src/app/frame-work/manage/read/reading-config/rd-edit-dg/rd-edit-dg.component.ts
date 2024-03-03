@@ -20,7 +20,6 @@ export class RdEditDgComponent {
     fb: FormBuilder,
     private utilsService: UtilsService
   ) {
-    const editable = data.editable;
     data = data.row;
     this.selected = data.zoneId;
 
@@ -28,14 +27,14 @@ export class RdEditDgComponent {
       id: data.id,
       defaultHasPreNumber: data.defaultHasPreNumber,
       isOnQeraatCode: data.isOnQeraatCode,
-      displayBillId: data.displayBillId,
-      displayRadif: data.displayRadif,
-      displayPreDate: data.displayPreDate,
-      displayMobile: data.displayMobile,
-      hasImage: data.hasImage,
-      displayDebt: data.displayDebt,
-      displayIcons: data.displayIcons,
-      zoneId: editable,
+      displayBillId: data.displayBillId === null ? false : data.displayBillId,
+      displayRadif: data.displayRadif === null ? false : data.displayRadif,
+      displayPreDate: data.displayPreDate === null ? false : data.displayPreDate,
+      displayMobile: data.displayMobile === null ? false : data.displayMobile,
+      hasImage: data.hasImage === null ? false : data.hasImage,
+      displayDebt: data.displayDebt === null ? false : data.displayDebt,
+      displayIcons: data.displayIcons === null ? false : data.displayIcons,
+      zoneId: data.staticID,
       defaultAlalHesab: data.defaultAlalHesab,
       maxAlalHesab: data.maxAlalHesab,
       minAlalHesab: data.minAlalHesab,

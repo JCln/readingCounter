@@ -10,6 +10,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 
 import { RdAddDgComponent } from './rd-add-dg/rd-add-dg.component';
 import { RdEditDgComponent } from './rd-edit-dg/rd-edit-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-reading-config',
@@ -42,20 +43,11 @@ export class ReadingConfigComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
-  getEditableSource = (row: any) => {
-    const a = this.editableDataSource.find(dataSource => {
-      if (dataSource.id == row.id) {
-        return dataSource.id;
-      }
-    })
-    return a;
-  }
-  openEditDialog = (row: object) => {
-    const editable = this.getEditableSource(row).zoneId;
+  openEditDialog = (row: any) => {
     return new Promise(() => {
       const dialogRef = this.dialog.open(RdEditDgComponent, {
         disableClose: true,
@@ -63,32 +55,34 @@ export class ReadingConfigComponent extends FactoryONE {
         width: '100%',
         data: {
           row,
-          editable,
           di: this.zoneDictionary
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           if (await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.ReadingConfigEDIT, result)) {
-            this.refreshTable();
+            this.callAPI();
           }
         }
       });
     })
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForReadingConfig = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForReadingConfig) {
-      this.closeTabService.saveDataForReadingConfig = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ReadingConfigALL);
-    }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForReadingConfig.forEach(item => {
+      item.staticID = item.zoneId;
+    })
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForReadingConfig = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ReadingConfigALL);
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.closeTabService.saveDataForReadingConfig));
+    this.insertToAuxZoneid();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForReadingConfig, this.zoneDictionary, 'zoneId');
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForReadingConfig)) {
+      this.callAPI();
+    }
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForReadingConfig = this.closeTabService.saveDataForReadingConfig.slice(0, index).concat(this.closeTabService.saveDataForReadingConfig.slice(index + 1));
   removeRow = async (rowData: object) => {

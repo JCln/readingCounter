@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/enums.enum';
 import { PrimeNGConfig, SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';

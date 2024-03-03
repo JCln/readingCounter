@@ -211,7 +211,7 @@ export class CloseTabService {
   ipFilterRes: IBlockOrSafeIp[];
   saveDataForDynamicTraverse: IDynamicTraverse[];
   saveDataForKarbari: IKarbari[];
-  saveDataForReadingConfig: IReadingConfigDefault[];
+  saveDataForReadingConfig: IReadingConfigDefault[] = [];
   saveDataForReadingPeriodManager: IReadingPeriod[];
   saveDataForReadingPeriodKindManager: IReadingPeriodKind[];
   saveDataForAPKManager: IAPK[];
@@ -1032,7 +1032,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.wrmrnobautoImport },
     { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: EN_Routes.wrmrtxtout },
     { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: EN_Routes.wrmrapk },
-    { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, url: EN_Routes.wrmrrcd },
+    { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, defaultValue: [], url: EN_Routes.wrmrrcd },
     { id: 1, value: ENEssentialsToSave.saveDataForReadingPeriodKindManager, url: EN_Routes.wrmrrpkm },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterFormula, url: EN_Routes.wrmrformulaab },
     { id: 1, value: ENEssentialsToSave.saveDataForBadgetFormula, url: EN_Routes.wrmrformulabudget },

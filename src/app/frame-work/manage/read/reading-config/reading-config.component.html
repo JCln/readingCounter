@@ -8,9 +8,8 @@
     [_numberOfExtraColumns]="[1, 2]"
     [_sessionName]="'readingconfig-session'"
     [_selectedColumnsToRemember]="'selectedReadingConfigDefault'"    
-    (refreshedTable)="refreshTable()"    
     (openedAddDialog)="openAddDialog()"    
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (removedRow)="removeRow($event)"
     (openedEditDialog)="openEditDialog($event)"
  > 
