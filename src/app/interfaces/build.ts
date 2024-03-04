@@ -60,6 +60,7 @@ export enum ENURLs {
     TSW = 'http://81.90.148.25:880/kontoriNew',
     TEH1 = 'http://85.133.245.139/kontoriNew',
     TEH5 = 'http://178.252.151.147/kontoriNew',
+    RDPServer = 'http://130.185.75.117/kontoriNew',
 }
 export enum ENOSMUrls {
     DEFAULT = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -91,6 +92,7 @@ export enum ENSatelliteToken {
 export enum ENActivateProvinceTitle {
     LOCAL = 'LOCAL',
     DEFAULT = '',
+    RDPServer = 'RDP',
     ESF = 'اصفهان',
     TEH = 'تهران',
     TEH_ZONE4 = 'منطقه 4 تهران',

@@ -65,6 +65,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
+import { IBranchState } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +89,14 @@ export class CloseTabService {
   saveDataForTabsare2Formula: ITabsare2Formula[];
   saveDataForTabsare3Formula: IAbBahaFormula[];
   // 
+  /*BranchState*/
+  branchState: IBranchState[] = [];
+
+
+
+
+
+  /***///////////// */
   // save data when route change 
   saveDataForAppLevel1: IAuthLevels[];
   saveDataForAppLevel2: IAuthLevel2[];
@@ -1513,6 +1522,8 @@ export class CloseTabService {
         showAll: false
       }
     },
+    { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState },
+
   ]
 
   cleanArrays = () => {

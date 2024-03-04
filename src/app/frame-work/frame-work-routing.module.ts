@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'flash', loadChildren: () => import('./moment-system/moment-system.module').then(momentSystem => momentSystem.MomentSystemModule) },
   { path: 'reqLog', loadChildren: () => import('./request-log/request-log.module').then(requestLog => requestLog.RequestLogModule) },
   { path: 'app', loadChildren: () => import('./mobile-manager/mobile-manager.module').then(mobileManager => mobileManager.MobileManagerModule) },
+  { path: 'branch', loadChildren: () => import('./branch-manager/branch-manager.module').then(branchManager => branchManager.BranchManagerModule) },
 ];
 
 @NgModule({

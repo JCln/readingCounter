@@ -615,7 +615,8 @@ export enum ENEssentialsToSave {
   uploadAttemptsReq = "uploadAttemptsReq",
   serverErrorsSelectedErrors = "serverErrorsSelectedErrors",
   listLatestInfoReq = "listLatestInfoReq",
-  offKarkardAllStatesReq = "offKarkardAllStatesReq"
+  offKarkardAllStatesReq = "offKarkardAllStatesReq",
+  branchState = "branchState"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -827,6 +828,7 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = 'periodKind',
     selectedImageAttribution = 'imgattr',
     selectedImageGuild = 'guild',
+    selectedBranchState = 'branchState',
     selectedIpFilter = 'ipFilter',
     selectedFeedbackComplaint = 'feedbackComplaint',
     selectedFeedbackNotComplaint = 'feedbackNotComplaint',

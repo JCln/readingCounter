@@ -167,4 +167,6 @@ export enum EN_Routes {
     mobileFeedbackAllC = '/wr/app/listC',
     mobileFeedbackAllS = '/wr/app/listS',
     mobileForbiddenType = '/wr/app/fbnType',
+
+    branchState = '/wr/branch/state'
 }

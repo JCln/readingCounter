@@ -1,0 +1,20 @@
+<app-prime-table-editable     
+    [dataSource]="closeTabService.branchState" 
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"    
+    [_isInRowEditing]=true
+    [_checkUpName]="'branchState'"    
+    [_numberOfExtraColumns]="[1,2]"
+    [_sessionName]="'branchstate-session'"
+    [_selectedColumnsToRemember]="'selectedBranchState'"
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
+    (refreshedTable)="refreshTable()"
+    (newedRowChangedStatus)="testChangedValue()"
+    (onRowEditedSave)="onRowEditSave($event)"
+    (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (removedRowEditing)="removeRow($event)"
+ > 
+</app-prime-table-editable>
+<!-- [_outputFileName]="'imgattr'" on prime table editable accur table not show data -->

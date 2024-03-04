@@ -459,4 +459,10 @@ export enum ENInterfaces {
 
     feedbackManagerAllC = 'V1/Feedback/All/true',
     feedbackManagerAllS = 'V1/Feedback/All/false',
+
+    //  Pre Sell
+    branchStateGet = 'V1/BranchState/All',
+    branchStateEdit = 'V1/BranchState/Edit',
+    branchStateAdd = 'V1/BranchState/Add',
+    branchStateRemove = 'V1/BranchState/Remove',
 }
