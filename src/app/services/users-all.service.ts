@@ -15,6 +15,7 @@ import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { MapService } from './map.service';
+import { Converter } from '../classes/converter';
 
 export interface IUserEditNessessities {
   GUid: string
@@ -224,8 +225,8 @@ export class UsersAllService {
       firstName: dataSource.userInfo.firstName,
       sureName: dataSource.userInfo.sureName,
       email: dataSource.userInfo.email,
-      mobile: dataSource.userInfo.mobile,
-      displayMobile: dataSource.userInfo.displayMobile,
+      mobile: Converter.persianToEngNumbers(dataSource.userInfo.mobile),
+      displayMobile: MathS.isNull(dataSource.userInfo.displayMobile) ? false : dataSource.userInfo.displayMobile,
       displayName: dataSource.userInfo.displayName,
       deviceId: dataSource.userInfo.deviceId,
       isActive: dataSource.userInfo.isActive

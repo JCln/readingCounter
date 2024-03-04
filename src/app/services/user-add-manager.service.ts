@@ -8,6 +8,7 @@ import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems, ISearchUs
 import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { UtilsService } from './utils.service';
+import { Converter } from '../classes/converter';
 
 @Injectable()
 export class UserAddManagerService {
@@ -123,34 +124,35 @@ export class UserAddManagerService {
 
     return true;
   }
-  toDefaultValsUserAddInfos = () => {
-    this.closeTabService.saveDataForAddUsers = {
-      userCode: 0,
-      username: 0,
-      password: 0,
-      confirmPassword: 0,
-      firstName: '',
-      sureName: '',
-      email: '',
-      mobile: '',
-      displayMobile: false,
-      displayName: '',
-      isActive: true,
-      deviceId: '',
-      roleItems: [],
-      provinceItems: [],
-      appItems: []
-    }
-  }
+  // toDefaultValsUserAddInfos = () => {
+  //   this.closeTabService.saveDataForAddUsers = {
+  //     userCode: 0,
+  //     username: 0,
+  //     password: 0,
+  //     confirmPassword: 0,
+  //     firstName: '',
+  //     sureName: '',
+  //     email: '',
+  //     mobile: '',
+  //     displayMobile: false,
+  //     displayName: '',
+  //     isActive: true,
+  //     deviceId: '',
+  //     roleItems: [],
+  //     provinceItems: [],
+  //     appItems: []
+  //   }
+  // }
   private connectToServer = async (vals: IAddAUserManager) => {
     if (!this.checkEmptyUserInfos(vals))
       return false;
 
+
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
     if (res) {
       this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-      // this.toDefaultValsUserAddInfos();
       this.utilsService.routeTo(EN_Routes.wrmuall);
+      // this.toDefaultValsUserAddInfos();
     }
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {
@@ -162,12 +164,12 @@ export class UserAddManagerService {
       displayName: userInputs.displayName,
       email: userInputs.email,
       firstName: userInputs.firstName,
-      mobile: userInputs.mobile,
+      mobile: Converter.persianToEngNumbers(userInputs.mobile),
       displayMobile: userInputs.displayMobile,
       sureName: userInputs.sureName,
       userCode: userInputs.userCode,
-      password: userInputs.password,
-      confirmPassword: userInputs.confirmPassword,
+      password: Converter.persianToEngNumbers(userInputs.password),
+      confirmPassword: Converter.persianToEngNumbers(userInputs.confirmPassword),
       username: userInputs.username,
       isActive: userInputs.isActive
     }
