@@ -6,6 +6,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { UserInputsComponent } from './user-inputs/user-inputs.component';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { UsersAllService } from 'services/users-all.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-user-add',
@@ -26,13 +27,12 @@ export class UserAddComponent extends FactoryONE {
   addUser = () => {
     this.userAddManagerService.userAddA(this.closeTabService.saveDataForAddUsers, this.userInfos.closeTabService._userAddUserInfos);
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForAddUsers = null;
-    }
-    if (!this.closeTabService.saveDataForAddUsers) {
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForAddUsers.appItems)) {
       this.closeTabService.saveDataForAddUsers = await this.userAddManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.userADD);
     }
     this.userAllService.getLatestZoneViewType();
+    // console.log(this.userAllService.latestZoneViewType);
+
   }
 }

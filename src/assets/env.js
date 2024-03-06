@@ -2,9 +2,8 @@
     window.__env = window.__env || {};
 
     // API url
+    window.__env.version = '1.0.32';
     window.__env.headerProvinceTitle = 'ENV';
-    // window.__env.API_URL = 'http://127.0.0.1/kontoriNew';
-    // window.__env.API_URL = 'http://192.168.100.18:7529';
     window.__env.API_URL = 'https://37.191.92.157/kontoriNew'
     // for map instantiation    
     window.__env.mapUrls = [
@@ -112,8 +111,7 @@
         security: 8,
         license: 16,
         incorrect_time: 32
-    }
-    window.__env.version = '1.0.12';
+    }    
     window.__env.aboutUs = { email: 'info@hivapardaz.ir', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
 
 

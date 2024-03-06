@@ -12,8 +12,8 @@
 </div>
 <app-prime-table [dataSource]="closeTabService.saveDataForMomentLastRead" [_outputFileName]="'momentLs'"
     [_selectedColumnsToRemember]="'selectedMomentFlash'" [_checkUpName]="'moment-ls'" [_localGeneralSearch]="false"
-    [_localHasFilter]="false" [_outputEnabled]="false" [_isSortable]=false [_hasRefreshTable]=false
-    [_numberOfExtraColumns]="[1,2,3]" [_hasSaveColumns]="false" (showedPictures)="getReadingReportTitles($event)"
+    [_localHasFilter]="false" [_outputEnabled]="false" [_hasRefreshTable]=false [_numberOfExtraColumns]="[1,2,3]"
+    [_hasSaveColumns]="false" (showedPictures)="getReadingReportTitles($event)"
     (showedWOUIAsCarousel)="doShowCarousel($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>
 <!-- state saving correctly but for default sortField it may not happenning -->

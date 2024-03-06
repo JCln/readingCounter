@@ -211,66 +211,9 @@ export interface IUserEditOnRole {
 }
 // add user 
 export interface IAddUserManager {
-    provinceItems: [
-        {
-            title: string,
-            logicalOrder: number,
-            regionItems: [
-                {
-                    title: string,
-                    logicalOrder: number,
-                    zoneItems: [
-                        {
-                            title: string,
-                            logicalOrder: number,
-                            id: number,
-                            isMetro: boolean,
-                            isSelected: boolean
-                        }
-                    ],
-                    isSelected: boolean
-                }
-            ],
-            isSelected: boolean
-        }
-    ],
-    appItems: [
-        {
-            title: string,
-            cssClass: string,
-            logicalOrder: number,
-            moduleItems: [
-                {
-                    title: string,
-                    cssClass: string,
-                    logicalOrder: number,
-                    controllerItems: [
-                        {
-                            title: string,
-                            cssClass: string,
-                            logicalOrder: number,
-                            actionItems: [
-                                {
-                                    title: string,
-                                    cssClass: string,
-                                    logicalOrder: number,
-                                    value: string,
-                                    isSelected: boolean
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-    roleItems: [
-        {
-            id: number,
-            title: string,
-            isSelected: boolean
-        }
-    ]
+    provinceItems: any[],
+    appItems: any[],
+    roleItems: any[]
 }
 export interface IAddProvinceItems {
     provinceItems: [
