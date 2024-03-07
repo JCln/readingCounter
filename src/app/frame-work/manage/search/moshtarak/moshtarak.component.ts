@@ -11,6 +11,7 @@ import { Search } from 'src/app/classes/search';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 import { BriefKardexComponent } from '../../list-manager/brief-kardex/brief-kardex.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-moshtarak',
@@ -71,7 +72,7 @@ export class MoshtarakComponent extends AllListsFactory {
     }
   }
   classWrapper = async () => {
-    if (this.closeTabService.saveDataForSearchMoshtarakin) {
+    if (!MathS.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
       this.converts();
     }
 

@@ -30,8 +30,6 @@ export class ImportedEditedComponent extends FactoryONE {
     if (canRefresh) {
       this.verification();
     }
-    console.log(this.closeTabService.importedEditedRes);
-
     this.zoneDictionary = await this.trackingManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   connectToServer = async () => {
