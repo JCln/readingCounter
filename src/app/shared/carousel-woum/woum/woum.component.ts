@@ -94,10 +94,7 @@ export class WoumComponent implements OnChanges {
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     public profileService: ProfileService
-  ) {
-    console.log(1);
-    
-   }
+  ) { }
 
 
   showSingleAudio = () => {

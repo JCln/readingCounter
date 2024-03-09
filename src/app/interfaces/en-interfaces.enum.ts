@@ -465,4 +465,19 @@ export enum ENInterfaces {
     branchStateEdit = 'V1/BranchState/Edit',
     branchStateAdd = 'V1/BranchState/Add',
     branchStateRemove = 'V1/BranchState/Remove',
+
+    customerTypeGet = 'V1/customerType/All',
+    customerTypeEdit = 'V1/customerType/Edit',
+    customerTypeAdd = 'V1/customerType/Add',
+    customerTypeRemove = 'V1/customerType/Remove',
+
+    waterSourceGet = 'V1/waterSource/All',
+    waterSourceEdit = 'V1/waterSource/Edit',
+    waterSourceAdd = 'V1/waterSource/Add',
+    waterSourceRemove = 'V1/waterSource/Remove',
+
+    ownershipTypeGet = 'V1/ownershipType/All',
+    ownershipTypeEdit = 'V1/ownershipType/Edit',
+    ownershipTypeAdd = 'V1/ownershipType/Add',
+    ownershipTypeRemove = 'V1/ownershipType/Remove',
 }

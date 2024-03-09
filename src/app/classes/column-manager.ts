@@ -2917,6 +2917,22 @@ export class ColumnManager {
         { field: 'defaultValue', header: 'مقدار پیشفرض', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         // { field: 'isActive', header: 'فعال', isSelected: true,isSelectedOrigin:true, isBoolean: true },
     ]
+    branchState: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
+    customerType: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
+    waterSource: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
+    ownership: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
 
     getColumnsMenus = (name: string): IObjectIteratation[] => {
         return this[name];

@@ -8,7 +8,7 @@
     [_numberOfExtraColumns]="[1, 2]"
     [_selectedColumnsToRemember]="'selectedAuth4'"
     [_sessionName]="'auth4-session'"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (dropDownChanges)="closeTabService.saveDataForAppLevel4['authLevel3Id']"
     (removedRow)="removeRow($event)"

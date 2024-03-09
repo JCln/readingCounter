@@ -83,6 +83,11 @@ export class AssessPreComponent extends AllListsFactory {
 
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForAssessPre);
   }
+  setAllIsSelected = (val: any) => {
+    this.closeTabService.saveDataForAssessPre.forEach(item => {
+      item.isSelected = val
+    })
+  }
   connectToServer = async () => {
     this.closeTabService.saveDataForAssessPre = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
@@ -94,6 +99,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.converts();
     this.insertReadingConfigDefaults(this.readingConfigDefault);
     this.importDynamicService.makeHadPicturesToBoolean(this.closeTabService.saveDataForAssessPre);
+    this.setAllIsSelected(this.checkedItemsChanged());
   }
   refreshTable = () => {
     this.connectToServer();
@@ -104,6 +110,9 @@ export class AssessPreComponent extends AllListsFactory {
       this.closeTabService.saveDataForAssessPre = null;
     }
     this.getMasterInZone();
+  }
+  checkedItemsChanged = (): boolean => {
+    return this.closeTabService.saveDataForAssessPreReq.isCheckedItems;
   }
   getMasterInZone = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();

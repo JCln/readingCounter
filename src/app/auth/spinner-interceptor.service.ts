@@ -47,7 +47,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
   }
   showSpinnerConsiderSpecialRoutes = (): boolean => {
     const url = this.utilsService.compositeService.getRouterUrl();
-    if (url === EN_Routes.wrdb || url === EN_Routes.wrmrapk || url === EN_Routes.wrofflinetxtout)
+    if (url === EN_Routes.wrdb)
       return true;
     return false;
   }
@@ -55,6 +55,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     // if (httpRequest.url.includes(this.shouldShowSmallSpinner)) {
     if (httpRequest.url.includes(ENInterfaces.NotifyManagerUnreadCount) ||
       httpRequest.url.includes(ENInterfaces.getShouldIChangePassword) ||
+      httpRequest.url.includes(ENInterfaces.APKUpload) ||
+      httpRequest.url.includes(ENInterfaces.offloadManual) ||
       httpRequest.url.includes(ENInterfaces.myPreviousFailures))
       return true;
     return false;

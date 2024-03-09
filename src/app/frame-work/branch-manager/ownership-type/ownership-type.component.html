@@ -1,14 +1,14 @@
 <app-prime-table-editable     
-    [dataSource]="closeTabService.branchState" 
+    [dataSource]="closeTabService.ownershipType" 
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
-    [_checkUpName]="'branchState'"
+    [_checkUpName]="'ownershipType'"
     [_numberOfExtraColumns]="[1, 2]"
     [_isInRowEditing]=true
     [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
-    [_sessionName]="'branchState-session'"
-    [_selectedColumnsToRemember]="'selectedBranchState'"
+    [_sessionName]="'ownershipType-session'"
+    [_selectedColumnsToRemember]="'selectedOwnershipType'"
     (newedRowChangedStatus)="testChangedValue()"
     (refreshedTable)="callAPI()"     
     (removedRowEditing)="removeRow($event)"        

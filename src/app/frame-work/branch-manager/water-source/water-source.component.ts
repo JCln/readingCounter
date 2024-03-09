@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IBranchState } from 'interfaces/i-branch';
+import { IWaterSource } from 'interfaces/i-branch';
 import { BranchesVerificationService } from 'services/branches-verification.service';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
@@ -8,13 +8,13 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
-  selector: 'app-state',
-  templateUrl: './state.component.html',
-  styleUrls: ['./state.component.scss']
+  selector: 'app-water-source',
+  templateUrl: './water-source.component.html',
+  styleUrls: ['./water-source.component.scss']
 })
-export class StateComponent extends FactoryONE {
-  clonedProducts: { [s: string]: IBranchState; } = {};
-  private branchStateColumns: string = 'branchState';
+export class WaterSourceComponent extends FactoryONE {
+  clonedProducts: { [s: string]: IWaterSource; } = {};
+  private waterSourceColumns: string = 'waterSource';
   newRowLimit: number = 1;
   _selectCols: any[];
   _selectedColumns: any[];
@@ -27,15 +27,15 @@ export class StateComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.branchState = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.branchStateGet);
+    this.closeTabService.waterSource = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.waterSourceGet);
   }
   classWrapper = async () => {
-    if (MathS.isNull(this.closeTabService.branchState)) {
+    if (MathS.isNull(this.closeTabService.waterSource)) {
       this.callAPI();
     }
   }
   columnSelectedMenuDefault = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.branchStateColumns);
+    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.waterSourceColumns);
     this._selectedColumns = this.branchesService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
@@ -49,25 +49,24 @@ export class StateComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  refetchTable = (index: number) => this.closeTabService.branchState = this.closeTabService.branchState.slice(0, index).concat(this.closeTabService.branchState.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.waterSource = this.closeTabService.waterSource.slice(0, index).concat(this.closeTabService.waterSource.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateRemove, rowData['dataSource']);
+      await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.waterSourceRemove, rowData['dataSource']);
       this.refetchTable(rowData['ri']);
       this.callAPI();
     }
   }
-  onRowEditSave = async (dataSource: IBranchState) => {
+  onRowEditSave = async (dataSource: IWaterSource) => {
     this.defaultAddStatus();
-
 
     if (!this.branchesVerificationService.stateVerification(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.closeTabService.branchState.shift();
+        this.closeTabService.waterSource.shift();
         return;
       }
-      this.closeTabService.branchState[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.waterSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
 
@@ -75,13 +74,13 @@ export class StateComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateEdit, dataSource['dataSource']);
+      const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.waterSourceEdit, dataSource['dataSource']);
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       this.callAPI();
     }
   }
-  private async onRowAdd(dataSource: IBranchState, rowIndex: number) {
-    const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateAdd, dataSource);
+  private async onRowAdd(dataSource: IWaterSource, rowIndex: number) {
+    const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.waterSourceAdd, dataSource);
     if (res) {
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       this.refetchTable(rowIndex);
@@ -89,7 +88,7 @@ export class StateComponent extends FactoryONE {
     }
   }
 
-  newRow(): IBranchState {
+  newRow(): IWaterSource {
     return { id: 0, title: '', isActive: false, isNew: true };
   }
   defaultAddStatus = () => this.newRowLimit = 1;

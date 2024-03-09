@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { EnvService } from './env.service';
-import { retry } from 'rxjs/internal/operators/retry';
+// import { retry } from 'rxjs/internal/operators/retry';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IBranchState } from 'interfaces/i-branch';
+import { ICustomerType } from 'interfaces/i-branch';
 import { BranchesVerificationService } from 'services/branches-verification.service';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
@@ -8,13 +8,13 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
-  selector: 'app-state',
-  templateUrl: './state.component.html',
-  styleUrls: ['./state.component.scss']
+  selector: 'app-customer-type',
+  templateUrl: './customer-type.component.html',
+  styleUrls: ['./customer-type.component.scss']
 })
-export class StateComponent extends FactoryONE {
-  clonedProducts: { [s: string]: IBranchState; } = {};
-  private branchStateColumns: string = 'branchState';
+export class CustomerTypeComponent extends FactoryONE {
+  clonedProducts: { [s: string]: ICustomerType; } = {};
+  private customerTypeColumns: string = 'customerType';
   newRowLimit: number = 1;
   _selectCols: any[];
   _selectedColumns: any[];
@@ -27,15 +27,15 @@ export class StateComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.branchState = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.branchStateGet);
+    this.closeTabService.customerType = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.customerTypeGet);
   }
   classWrapper = async () => {
-    if (MathS.isNull(this.closeTabService.branchState)) {
+    if (MathS.isNull(this.closeTabService.customerType)) {
       this.callAPI();
     }
   }
   columnSelectedMenuDefault = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.branchStateColumns);
+    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.customerTypeColumns);
     this._selectedColumns = this.branchesService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
@@ -49,25 +49,24 @@ export class StateComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  refetchTable = (index: number) => this.closeTabService.branchState = this.closeTabService.branchState.slice(0, index).concat(this.closeTabService.branchState.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.customerType = this.closeTabService.customerType.slice(0, index).concat(this.closeTabService.customerType.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateRemove, rowData['dataSource']);
+      await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.customerTypeRemove, rowData['dataSource']);
       this.refetchTable(rowData['ri']);
       this.callAPI();
     }
   }
-  onRowEditSave = async (dataSource: IBranchState) => {
+  onRowEditSave = async (dataSource: ICustomerType) => {
     this.defaultAddStatus();
-
 
     if (!this.branchesVerificationService.stateVerification(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.closeTabService.branchState.shift();
+        this.closeTabService.customerType.shift();
         return;
       }
-      this.closeTabService.branchState[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.customerType[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
 
@@ -75,13 +74,13 @@ export class StateComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateEdit, dataSource['dataSource']);
+      const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.customerTypeEdit, dataSource['dataSource']);
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       this.callAPI();
     }
   }
-  private async onRowAdd(dataSource: IBranchState, rowIndex: number) {
-    const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateAdd, dataSource);
+  private async onRowAdd(dataSource: ICustomerType, rowIndex: number) {
+    const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.customerTypeAdd, dataSource);
     if (res) {
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       this.refetchTable(rowIndex);
@@ -89,7 +88,7 @@ export class StateComponent extends FactoryONE {
     }
   }
 
-  newRow(): IBranchState {
+  newRow(): ICustomerType {
     return { id: 0, title: '', isActive: false, isNew: true };
   }
   defaultAddStatus = () => this.newRowLimit = 1;

@@ -10,8 +10,8 @@ import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { UtilsService } from 'services/utils.service';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ENSnackBarColors, EN_Mess } from 'interfaces/enums.enum';
-import { InteractionService } from 'services/interaction.service';
 
+// export const DEFAULT_TIMEOUT = new InjectionToken<number>('defaultTimeout');
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +24,7 @@ export class InterceptorService implements HttpInterceptor {
     private jwtService: JwtService,
     private authService: AuthService,
     private utilsService: UtilsService,
-    private interactionService: InteractionService
+    // @Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number
   ) { }
 
   accessDenied_401 = async (error: string) => {
@@ -69,6 +69,8 @@ export class InterceptorService implements HttpInterceptor {
     });
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // const timeoutValue = req.headers.get('timeout') || this.defaultTimeout;
+    // console.log(timeoutValue);
     const authToken = this.jwtService.getAccessToken();
     if (authToken)
       req = this.addToken(req, authToken);

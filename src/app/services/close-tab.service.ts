@@ -65,7 +65,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState } from 'interfaces/i-branch';
+import { IBranchState, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +91,9 @@ export class CloseTabService {
   // 
   /*BranchState*/
   branchState: IBranchState[] = [];
+  customerType: ICustomerType[] = [];
+  waterSource: IWaterSource[] = [];
+  ownershipType: IOwnershipType[] = [];
 
 
 
@@ -101,7 +104,7 @@ export class CloseTabService {
   saveDataForAppLevel1: IAuthLevels[];
   saveDataForAppLevel2: IAuthLevel2[];
   saveDataForAppLevel3: IAuthLevel3[];
-  saveDataForAppLevel4: IAuthLevel4[];
+  saveDataForAppLevel4: IAuthLevel4[] = [];
 
   saveDataForCounterState: ICounterState[] = [];
   saveDataForImageAttribution: IImageAttribution[];
@@ -417,7 +420,7 @@ export class CloseTabService {
   saveDataForUserLoggins: any;
   saveDataForEditOnRole: any;
   saveDataForRoleHistory: IRoleHistory[] = [];
-  saveDataForAddUsers:IAddUserManager = {
+  saveDataForAddUsers: IAddUserManager = {
     provinceItems: [],
     appItems: [],
     roleItems: []
@@ -598,7 +601,8 @@ export class CloseTabService {
     karbariCodes: [],
     zoneId: null,
     listNumber: '',
-    noImages: false
+    noImages: false,
+    isCheckedItems: false
   };
   saveDataForAssessPre: IOnOffLoadFlat[];
   saveDataForAssessAdd: any;
@@ -1054,7 +1058,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel1, url: EN_Routes.wrmalap },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel2, url: EN_Routes.wrmalme },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.wrmalcr },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.userRoleHistory, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForUserRoleHistory, url: EN_Routes.userRoleHistoryDetails },
@@ -1545,7 +1549,10 @@ export class CloseTabService {
         showAll: false
       }
     },
-    { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState },
+    { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.waterSource, url: EN_Routes.waterSource, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.ownershipType, url: EN_Routes.ownershipType, defaultValue: [] },
 
   ]
 

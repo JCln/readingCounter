@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -40,21 +41,23 @@ export class Auth4Component extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAppLevel4 = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForAppLevel4) {
-      this.closeTabService.saveDataForAppLevel4 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel4GET);
-    }
-
+  convertion = async () => {
     this.authLevel3Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev3Dictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForAppLevel4 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel4GET);
+    this.convertion();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForAppLevel4)) {
+      this.callAPI();
+    }
+    this.convertion();
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel4 = this.closeTabService.saveDataForAppLevel4.slice(0, index).concat(this.closeTabService.saveDataForAppLevel4.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {

@@ -6,7 +6,8 @@ export interface IAssessPreDisplayDtoSimafa {
     karbariCodes: number[],
     listNumber: string,
     zoneId: number,
-    noImages: boolean
+    noImages: boolean,
+    isCheckedItems:boolean
 }
 export interface IAssessAddDtoSimafa {
     onOffLoadIds: string[],

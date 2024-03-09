@@ -66,8 +66,8 @@ export enum EN_Routes {
     wrmtrackreading = '/wr/m/track/reading',
     trackOffloadedMaster = '/wr/m/track/offMaster',
     simpleMasterByFragment = '/wr/m/track/simpleMaster',
-    simpleMasterByFragmentAllLazy = '/wr/m/track/simpleMaster/masterAll',    
-    masterByFragmentAllInGroupLazy = '/wr/m/track/simpleMaster/masterAllGroup',    
+    simpleMasterByFragmentAllLazy = '/wr/m/track/simpleMaster/masterAll',
+    masterByFragmentAllInGroupLazy = '/wr/m/track/simpleMaster/masterAllGroup',
     importedEdited = '/wr/m/track/importedEdited',
     'wrmtracklatest' = '/wr/m/track/latest',
     'wrmtrackoffloaded' = '/wr/m/track/offloaded',
@@ -99,7 +99,7 @@ export enum EN_Routes {
     'wrRptsDynamic' = '/wr/rpts/dynamic',
     'rptskarkardDaily' = '/wr/rpts/mam/karkardDaily',
     'wrrptsmamgis' = '/wr/rpts/mam/gis',
-    'wrmtrackoffloadedoffloadMfy/' = '/wr/m/track/offloaded/offloadMfy/',    
+    'wrmtrackoffloadedoffloadMfy/' = '/wr/m/track/offloaded/offloadMfy/',
     'downloadAI' = '/wr/tools/downloadAI',
     'downloadAITwo' = '/wr/tools/downloadAITwo',
     'uploadSingle' = '/wr/tools/uploadSingle',
@@ -168,5 +168,8 @@ export enum EN_Routes {
     mobileFeedbackAllS = '/wr/app/listS',
     mobileForbiddenType = '/wr/app/fbnType',
 
-    branchState = '/wr/branch/state'
+    branchState = '/wr/branch/state',
+    customerType = '/wr/branch/customerType',
+    waterSource = '/wr/branch/waterSource',
+    ownershipType = '/wr/branch/ownershipType',
 }

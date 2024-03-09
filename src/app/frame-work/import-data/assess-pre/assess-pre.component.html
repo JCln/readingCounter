@@ -28,6 +28,10 @@
                     <mat-checkbox name="noImages" [(ngModel)]="closeTabService.saveDataForAssessPreReq.noImages">
                         عکس ندارد
                     </mat-checkbox>
+                    <mat-checkbox (change)="setAllIsSelected($event.checked)" name="isCheckedItems"
+                        [(ngModel)]="closeTabService.saveDataForAssessPreReq.isCheckedItems">
+                        انتخاب شود
+                    </mat-checkbox>
                 </div>
                 <footer class="footer_with_background">
                     <button class="btn_1" type="submit">جستجو</button>

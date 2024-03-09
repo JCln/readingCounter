@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from './utils.service';
+import { ColumnManager } from '../classes/column-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { UtilsService } from './utils.service';
 export class BranchesService {
 
   constructor(
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public columnManager: ColumnManager
   ) { }
 
   firstConfirmDialog = (text: string): Promise<any> => {
@@ -22,4 +24,5 @@ export class BranchesService {
     }
     return this.utilsService.firstConfirmDialog(a);
   }
+
 }

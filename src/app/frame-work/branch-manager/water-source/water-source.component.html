@@ -1,14 +1,14 @@
 <app-prime-table-editable     
-    [dataSource]="closeTabService.branchState" 
+    [dataSource]="closeTabService.waterSource" 
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
-    [_checkUpName]="'branchState'"
+    [_checkUpName]="'waterSource'"
     [_numberOfExtraColumns]="[1, 2]"
     [_isInRowEditing]=true
     [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
-    [_sessionName]="'branchState-session'"
-    [_selectedColumnsToRemember]="'selectedBranchState'"
+    [_sessionName]="'waterSource-session'"
+    [_selectedColumnsToRemember]="'selectedWaterSource'"
     (newedRowChangedStatus)="testChangedValue()"
     (refreshedTable)="callAPI()"     
     (removedRowEditing)="removeRow($event)"        

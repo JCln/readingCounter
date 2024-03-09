@@ -25,23 +25,23 @@ export class UsersAllComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForAllUsers = [];
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
-      this.closeTabService.saveDataForAllUsers = await this.usersAllService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
-    }
-    this.convertLoginTime();
-  }
-  showExactConfig = (dataSource: IUserManager) => {
-    this.closeTabService.utilsService.showUserConfigDialog(dataSource);
-  }
   convertLoginTime = () => {
     this.closeTabService.saveDataForAllUsers.forEach(item => {
       item.lockTimeSpan = this.dateJalaliService.getDate(item.lockTimeSpan) + '   ' + this.dateJalaliService.getTime(item.lockTimeSpan);
+      item.lastActivityDateTime = this.dateJalaliService.getDate(item.lastActivityDateTime) + '   ' + this.dateJalaliService.getTime(item.lastActivityDateTime);
     })
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForAllUsers = await this.usersAllService.ajaxReqWrapperService.getDataSource(ENInterfaces.userGET);
+    this.convertLoginTime();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
+      this.callAPI();
+    }
+  }
+  showExactConfig = (dataSource: IUserManager) => {
+    this.closeTabService.utilsService.showUserConfigDialog(dataSource);
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAllUsers = this.closeTabService.saveDataForAllUsers.slice(0, index).concat(this.closeTabService.saveDataForAllUsers.slice(index + 1));
   openAddDialog = (dataSource: any) => {
@@ -58,7 +58,7 @@ export class UsersAllComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
