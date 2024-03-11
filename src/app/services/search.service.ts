@@ -1,3 +1,4 @@
+import { PageSignsService } from 'services/page-signs.service';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { EN_messages, IMasrafStates } from 'interfaces/enums.enum';
@@ -6,17 +7,14 @@ import {
   IObjectIteratation
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
-import { AllListsService } from 'services/all-lists.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { UtilsService } from 'services/utils.service';
-import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
-import { PageSignsService } from './page-signs.service';
 import { ColumnManager } from '../classes/column-manager';
 
 @Injectable({
@@ -31,7 +29,6 @@ export class SearchService {
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
-    private allListsService: AllListsService,
     private pageSignsService: PageSignsService,
     private columnManager: ColumnManager
   ) { }
@@ -219,13 +216,13 @@ export class SearchService {
     this[variable].toDate = $event;
   }
   routeToLMAll = (row: ISearchSimpleOutput, whereToBack: EN_Routes) => {
-    this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
-    this.allListsService.allLists_pageSign.GUid = row.trackingId;
-    this.allListsService.allLists_pageSign.zoneId = row.zoneId;
-    this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
-    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
-    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
-    this.allListsService.allLists_pageSign.prePage = whereToBack;
+    this.pageSignsService.allLists_pageSign.trackNumber = row.trackNumber;
+    this.pageSignsService.allLists_pageSign.GUid = row.trackingId;
+    this.pageSignsService.allLists_pageSign.zoneId = row.zoneId;
+    this.pageSignsService.allLists_pageSign.zoneTitle = row.zoneTitle;
+    this.pageSignsService.allLists_pageSign.listNumber = row.listNumber;
+    this.pageSignsService.allLists_pageSign.listNumber = row.listNumber;
+    this.pageSignsService.allLists_pageSign.prePage = whereToBack;
     this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {

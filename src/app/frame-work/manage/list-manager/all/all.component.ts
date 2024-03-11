@@ -3,9 +3,9 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AllListsService } from 'services/all-lists.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
+import { PageSignsService } from 'services/page-signs.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -27,7 +27,7 @@ export class AllComponent extends AllListsFactory {
   constructor(
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
-    public allListsService: AllListsService,
+    public pageSignsService: PageSignsService,
     public closeTabService: CloseTabService
   ) {
     super(dialogService, listManagerService);
@@ -40,8 +40,8 @@ export class AllComponent extends AllListsFactory {
     this.zoneDictionary = await this.listManagerService.dictionaryWrapperService.getZoneDictionary();
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.allLists_pageSign.zoneId);
-    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.allListsService.allLists_pageSign.zoneId);
+    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.pageSignsService.allLists_pageSign.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.pageSignsService.allLists_pageSign.zoneId);
     this.closeTabService.saveDataForLMAll =
       Converter.convertIdsToTitles(
         this.closeTabService.saveDataForLMAll,
@@ -68,9 +68,9 @@ export class AllComponent extends AllListsFactory {
     });
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.allListsService.allLists_pageSign.GUid) {
-      if (this.allListsService.allLists_pageSign.prePage.length > 0)
-        this.listManagerService.utilsService.routeTo(this.allListsService.allLists_pageSign.prePage);
+    if (!this.pageSignsService.allLists_pageSign.GUid) {
+      if (this.pageSignsService.allLists_pageSign.prePage.length > 0)
+        this.listManagerService.utilsService.routeTo(this.pageSignsService.allLists_pageSign.prePage);
       else
         this.listManagerService.utilsService.routeTo(EN_Routes.wr);
     }
@@ -80,9 +80,9 @@ export class AllComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMAll = [];
       }
 
-      if (MathS.isNull(this.closeTabService.saveDataForLMAll) || this.closeTabService.saveDataForLMAllReq.GUID != this.allListsService.allLists_pageSign.GUid) {
-        this.closeTabService.saveDataForLMAll = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
-        this.closeTabService.saveDataForLMAllReq.GUID = this.allListsService.allLists_pageSign.GUid;
+      if (MathS.isNull(this.closeTabService.saveDataForLMAll) || this.closeTabService.saveDataForLMAllReq.GUID != this.pageSignsService.allLists_pageSign.GUid) {
+        this.closeTabService.saveDataForLMAll = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.pageSignsService.allLists_pageSign.GUid);
+        this.closeTabService.saveDataForLMAllReq.GUID = this.pageSignsService.allLists_pageSign.GUid;
       }
 
       await this.dictionaryWrapps();

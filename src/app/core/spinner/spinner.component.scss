@@ -10,14 +10,16 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  width: 20rem;
-  height: 15rem;
+  width: 17rem;
+  height: 12rem;
   background: transparent;
   border-radius: $border_10;
-  box-shadow: 0 1px 10px 0px var(--primary_4);
 
   @media (min-width:550px) {
+    width: 20rem;
+    height: 15rem;
     background: var(--white);
+    box-shadow: 0 1px 10px 0px var(--primary_4);
   }
 }
 

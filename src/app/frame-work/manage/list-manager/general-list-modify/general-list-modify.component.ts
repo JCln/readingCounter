@@ -5,7 +5,6 @@ import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AllListsService } from 'services/all-lists.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -16,6 +15,7 @@ import { OffloadModify } from 'src/app/classes/offload-modify-type';
 
 import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
+import { PageSignsService } from 'services/page-signs.service';
 
 @Component({
   selector: 'app-general-list-modify',
@@ -49,7 +49,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
     public closeTabService: CloseTabService,
-    public allListsService: AllListsService,
+    public pageSignsService: PageSignsService,
     public outputManagerService: OutputManagerService
   ) {
     super(dialogService, listManagerService);
@@ -62,24 +62,24 @@ export class GeneralListModifyComponent extends AllListsFactory {
       !this.closeTabService.saveDataForLMGeneralModify ||
       (
         this.closeTabService.saveDataForLMGeneralModifyReq.GUid !=
-        this.allListsService.generalModifyLists_pageSign.GUid
+        this.pageSignsService.generalModifyLists_pageSign.GUid
       ) &&
       (
         this.closeTabService.saveDataForLMGeneralModifyReq.groupId !=
-        this.allListsService.generalModifyLists_pageSign.groupId
+        this.pageSignsService.generalModifyLists_pageSign.groupId
       ) ||
       shouldCallApi
     )) {
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
-      this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val);
+      this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.pageSignsService.generalModifyLists_pageSign.groupId + '/', val);
       this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
-      this.closeTabService.saveDataForLMGeneralModifyReq.GUid = this.allListsService.generalModifyLists_pageSign.GUid;
-      this.closeTabService.saveDataForLMGeneralModifyReq.groupId = this.allListsService.generalModifyLists_pageSign.groupId;
+      this.closeTabService.saveDataForLMGeneralModifyReq.GUid = this.pageSignsService.generalModifyLists_pageSign.GUid;
+      this.closeTabService.saveDataForLMGeneralModifyReq.groupId = this.pageSignsService.generalModifyLists_pageSign.groupId;
       this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
       this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
-      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
+      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.pageSignsService.generalModifyLists_pageSign.zoneId);
+      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.pageSignsService.generalModifyLists_pageSign.zoneId);
     }
 
     this.closeTabService.saveDataForLMGeneralModify =
@@ -104,12 +104,12 @@ export class GeneralListModifyComponent extends AllListsFactory {
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.allListsService.generalModifyLists_pageSign.GUid) {
+    if (!this.pageSignsService.generalModifyLists_pageSign.GUid) {
       this.toPrePage();
     }
     else {
-      this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
-      this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
+      this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.pageSignsService.generalModifyLists_pageSign.zoneId);
+      this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.pageSignsService.generalModifyLists_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.saveDataForLMGeneralModify = null;
         this.closeTabService.saveDataForLMGeneralModifyReq.GUid = null;
@@ -241,7 +241,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
     });
   }
   getExcel = async () => {
-    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyLists_pageSign.groupId);
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.pageSignsService.generalModifyLists_pageSign.groupId);
     this.outputManagerService.downloadFileWithContentDisposition(res);
   }
 

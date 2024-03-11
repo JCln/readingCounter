@@ -1,3 +1,5 @@
+import { PageSignsService } from 'services/page-signs.service';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from './utils.service';
@@ -10,7 +12,9 @@ export class BranchesService {
 
   constructor(
     public utilsService: UtilsService,
-    public columnManager: ColumnManager
+    public columnManager: ColumnManager,
+    public dictionaryWrapperService: DictionaryWrapperService,
+    public pageSignsService: PageSignsService
   ) { }
 
   firstConfirmDialog = (text: string): Promise<any> => {

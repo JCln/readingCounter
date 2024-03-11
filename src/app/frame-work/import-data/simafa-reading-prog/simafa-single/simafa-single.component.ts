@@ -5,9 +5,9 @@ import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IImportDataResponse, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { AllImportsService } from 'services/all-imports.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
+import { PageSignsService } from 'services/page-signs.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -26,7 +26,8 @@ export class SimafaSingleComponent extends FactoryONE {
   constructor(
     public importDynamicService: ImportDynamicService,
     public closeTabService: CloseTabService,
-    public allImportsService: AllImportsService
+    public pageSignsService: PageSignsService,
+
   ) {
     super();
   }
@@ -39,17 +40,17 @@ export class SimafaSingleComponent extends FactoryONE {
     const a = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaSingle, this.closeTabService.simafaSingleReq);
     if (a) {
       this.importDynamicService.showResDialog(a, false, EN_messages.importDynamic_created);
-      this.allImportsService.simafaSingle_pageSign._canShowAddButton = false;
+      this.pageSignsService.simafaSingle_pageSign._canShowAddButton = false;
     }
   }
   selectedZoneId = async () => {
     this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.simafaSingleReq.zoneId);
   }
   assignToSingleRequest() {
-    this.closeTabService.simafaSingleReq.readingProgramId = this.allImportsService.simafaSingle_pageSign.UUID;
-    this.closeTabService.simafaSingleReq.readingPeriodId = this.allImportsService.simafaSingle_pageSign.readingPeriodId;
-    this.closeTabService.simafaSingleReq.year = this.allImportsService.simafaSingle_pageSign.year;
-    this.closeTabService.simafaSingleReq.zoneId = this.allImportsService.simafaSingle_pageSign.zoneId;
+    this.closeTabService.simafaSingleReq.readingProgramId = this.pageSignsService.simafaSingle_pageSign.UUID;
+    this.closeTabService.simafaSingleReq.readingPeriodId = this.pageSignsService.simafaSingle_pageSign.readingPeriodId;
+    this.closeTabService.simafaSingleReq.year = this.pageSignsService.simafaSingle_pageSign.year;
+    this.closeTabService.simafaSingleReq.zoneId = this.pageSignsService.simafaSingle_pageSign.zoneId;
   }
   private insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
     this.closeTabService.simafaSingleReq.displayBillId = rcd.displayBillId ? rcd.displayBillId : false;
@@ -64,7 +65,7 @@ export class SimafaSingleComponent extends FactoryONE {
     this.closeTabService.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
   }
   classWrapper = async () => {
-    if (!this.allImportsService.simafaSingle_pageSign.UUID) {
+    if (!this.pageSignsService.simafaSingle_pageSign.UUID) {
       this.closeTabService.utilsService.routeTo(EN_Routes.wrimpsimafardpg);
       return;
     }

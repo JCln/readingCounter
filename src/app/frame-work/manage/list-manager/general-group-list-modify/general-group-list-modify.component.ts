@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AllListsService } from 'services/all-lists.service';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
@@ -21,6 +20,7 @@ import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 import { GeneralGroupInfoResComponent } from './general-group-info-res/general-group-info-res.component';
 import { Table } from 'primeng/table';
+import { PageSignsService } from 'services/page-signs.service';
 
 @Component({
   selector: 'app-general-group-list-modify',
@@ -59,7 +59,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
     public closeTabService: CloseTabService,
-    public allListsService: AllListsService,
+    public pageSignsService: PageSignsService,
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
@@ -77,27 +77,27 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         !this.closeTabService.saveDataForLMGeneralGroupModify ||
         (
           this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid !=
-          this.allListsService.generalModifyListsGrouped_pageSign.GUid
+          this.pageSignsService.generalModifyListsGrouped_pageSign.GUid
         ) &&
         (
           this.closeTabService.saveDataForLMGeneralGroupModifyReq.groupId !=
-          this.allListsService.generalModifyListsGrouped_pageSign.groupId
+          this.pageSignsService.generalModifyListsGrouped_pageSign.groupId
         ) ||
         shouldCallApi
       )) {
-        this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
+        this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.pageSignsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
         this.closeTabService.AUXSaveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
         this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
-        this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
-        this.closeTabService.saveDataForLMGeneralGroupModifyReq.groupId = this.allListsService.generalModifyListsGrouped_pageSign.groupId;
+        this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.pageSignsService.generalModifyListsGrouped_pageSign.GUid;
+        this.closeTabService.saveDataForLMGeneralGroupModifyReq.groupId = this.pageSignsService.generalModifyListsGrouped_pageSign.groupId;
       }
       this.makeDefaultValCheckbox();
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
       this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
       this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
-      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.pageSignsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.pageSignsService.generalModifyListsGrouped_pageSign.zoneId);
       this.resetDataSourceView();
 
 
@@ -123,15 +123,15 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.allListsService.generalModifyListsGrouped_pageSign);
+    console.log(this.pageSignsService.generalModifyListsGrouped_pageSign);
 
-    if (!this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
+    if (!this.pageSignsService.generalModifyListsGrouped_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
     }
     else {
       // to show counterStates radioButtons
-      await this.getCounterStateDictionaryAndAddSelectable(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
-      this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      await this.getCounterStateDictionaryAndAddSelectable(this.pageSignsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.counterStateForModifyDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateForModifyDictionary(this.pageSignsService.generalModifyListsGrouped_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.saveDataForLMGeneralGroupModify = null;
         this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = null;
@@ -406,7 +406,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   getExcel = async () => {
-    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyListsGrouped_pageSign.groupId);
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.pageSignsService.generalModifyListsGrouped_pageSign.groupId);
     this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   @Input() get selectedColumns(): any[] {

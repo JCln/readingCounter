@@ -24,7 +24,7 @@ export class PerDayComponent extends FactoryONE {
     public closeTabService: CloseTabService,
     public listManagerService: ListManagerService,
     private dateJalaliService: DateJalaliService,
-    private PageSignsService: PageSignsService
+    private pageSignsService: PageSignsService
   ) {
     super();
   }
@@ -57,7 +57,7 @@ export class PerDayComponent extends FactoryONE {
     })
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.PageSignsService.perday_pageSign.trackNumber) {
+    if (!this.pageSignsService.perday_pageSign.trackNumber) {
       this.listManagerService.routeToReading();
     }
     else {
@@ -65,10 +65,10 @@ export class PerDayComponent extends FactoryONE {
         this.closeTabService.saveDataForLMPD = null;
         this.closeTabService.saveDataForLMPDTrackNumber = null;
       }
-      if (this.closeTabService.saveDataForLMPDTrackNumber != this.PageSignsService.perday_pageSign.trackNumber || !this.closeTabService.saveDataForLMPD) {
-        this.closeTabService.saveDataForLMPD = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedPERDAY, this.PageSignsService.perday_pageSign.trackNumber);
-        this.closeTabService.saveDataForLMPDTrackNumber = this.PageSignsService.perday_pageSign.trackNumber;
-        this.closeTabService.saveDataForLMPD.zoneTitle = this.PageSignsService.perday_pageSign.zone;
+      if (this.closeTabService.saveDataForLMPDTrackNumber != this.pageSignsService.perday_pageSign.trackNumber || !this.closeTabService.saveDataForLMPD) {
+        this.closeTabService.saveDataForLMPD = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedPERDAY, this.pageSignsService.perday_pageSign.trackNumber);
+        this.closeTabService.saveDataForLMPDTrackNumber = this.pageSignsService.perday_pageSign.trackNumber;
+        this.closeTabService.saveDataForLMPD.zoneTitle = this.pageSignsService.perday_pageSign.zone;
       }
       this.setGetRanges();
       this.setDynamicPartRanges();

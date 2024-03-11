@@ -5,7 +5,6 @@ import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AllListsService } from 'services/all-lists.service';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
@@ -22,6 +21,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { GeneralGroupInfoResComponent } from '../../../list-manager/general-group-list-modify/general-group-info-res/general-group-info-res.component';
 import { BriefKardexComponent } from '../../../list-manager/brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../../../list-manager/list-search-mosh-dg/list-search-mosh-dg.component';
+import { PageSignsService } from 'services/page-signs.service';
 
 @Component({
   selector: 'app-all-lazy',
@@ -59,7 +59,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
     public closeTabService: CloseTabService,
-    public allListsService: AllListsService,
+    public pageSignsService: PageSignsService,
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
@@ -69,21 +69,21 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     super(dialogService, listManagerService);
   }
   updateOnChangedCounterState = async (event: any) => {
-    if (MathS.isNull(this.allListsService.offloadedListLazy_pageSign.GUid))
+    if (MathS.isNull(this.pageSignsService.offloadedListLazy_pageSign.GUid))
       return;
 
-    this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.offloadedListLazy_pageSign.GUid, event);
+    this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.pageSignsService.offloadedListLazy_pageSign.GUid, event);
     this.totalRecords = this.closeTabService.offloadedAllLazy.totalRecords;
 
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
-    this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
+    this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.pageSignsService.offloadedListLazy_pageSign.zoneId);
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
-    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.offloadedListLazy_pageSign.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.pageSignsService.offloadedListLazy_pageSign.zoneId);
+    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.pageSignsService.offloadedListLazy_pageSign.zoneId);
     this.resetDataSourceView();
 
 
@@ -108,7 +108,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.listManagerService.setDynamicPartRanges(this.closeTabService.offloadedAllLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.allListsService.offloadedListLazy_pageSign.GUid) {
+    if (!this.pageSignsService.offloadedListLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.trackOffloadedMaster);
     }
     else {
@@ -309,7 +309,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     });
   }
   getExcel = async () => {
-    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.offloadedListLazy_pageSign.groupId);
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.pageSignsService.offloadedListLazy_pageSign.groupId);
     this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   @Input() get selectedColumns(): any[] {

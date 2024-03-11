@@ -480,4 +480,7 @@ export enum ENInterfaces {
     ownershipTypeEdit = 'V1/ownershipType/Edit',
     ownershipTypeAdd = 'V1/ownershipType/Add',
     ownershipTypeRemove = 'V1/ownershipType/Remove',
+
+    clientGet = 'V1/Client/Get',
+    clientAdd = 'V1/Client/Add'
 }

@@ -24,9 +24,9 @@ import { ProfileService } from 'services/profile.service';
 import { MathS } from '../classes/math-s';
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
-import { Converter } from './../classes/converter';
-import { AllImportsService } from './all-imports.service';
 import { UtilsService } from './utils.service';
+import { PageSignsService } from './page-signs.service';
+import { AllImportsService } from './all-imports.service';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +69,7 @@ export class ImportDynamicService {
   constructor(
     public utilsService: UtilsService,
     private allImportsService: AllImportsService,
+    private pageSignsService: PageSignsService,
     private profileService: ProfileService,
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService
@@ -154,11 +155,11 @@ export class ImportDynamicService {
     return true;
   }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
-    this.allImportsService.simafaSingle_pageSign.UUID = object.id;
-    this.allImportsService.simafaSingle_pageSign.zoneId = object.zoneId;
-    this.allImportsService.simafaSingle_pageSign.readingPeriodId = object.readingPeriodId;
-    this.allImportsService.simafaSingle_pageSign.year = object.year;
-    this.allImportsService.simafaSingle_pageSign._canShowAddButton = true;
+    this.pageSignsService.simafaSingle_pageSign.UUID = object.id;
+    this.pageSignsService.simafaSingle_pageSign.zoneId = object.zoneId;
+    this.pageSignsService.simafaSingle_pageSign.readingPeriodId = object.readingPeriodId;
+    this.pageSignsService.simafaSingle_pageSign.year = object.year;
+    this.pageSignsService.simafaSingle_pageSign._canShowAddButton = true;
 
     this.utilsService.routeTo(EN_Routes.wrimpsimafardpgsingle);
   }

@@ -6,7 +6,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
 import { InteractionService } from 'services/interaction.service';
 import { NotificationMediaTypeIds } from 'interfaces/build';
-import { ENSnackBarTimes, ENToastColors, EN_messages } from 'interfaces/enums.enum';
+import { ENToastColors, EN_messages } from 'interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +23,6 @@ export class SignalRService {
 
   hideSpinners() {
     this.utilsService.spinnerWrapperService.stopAll();
-  }
-  hideSpinnersAndRefreshPage() {
-    this.utilsService.spinnerWrapperService.stopAll();
-    const url = this.utilsService.compositeService.getRouterUrl();
-    this.interactionService.setRefresh(url);
   }
   private onReconnecting() {
     this.hubConnection.onreconnecting(error => {
@@ -116,7 +111,7 @@ export class SignalRService {
     try {
       await this.hubConnection.start();
       // console.log("SignalR Connected.");
-      this.hideSpinnersAndRefreshPage();
+      this.hideSpinners();
     } catch (err) {
       console.log(err);
     }

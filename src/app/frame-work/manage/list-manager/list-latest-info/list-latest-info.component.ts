@@ -1,7 +1,7 @@
 import { DialogService } from 'primeng/dynamicdialog';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
+import { IBatchModifyRes } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';

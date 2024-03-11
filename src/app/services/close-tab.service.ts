@@ -65,7 +65,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -94,8 +94,58 @@ export class CloseTabService {
   customerType: ICustomerType[] = [];
   waterSource: IWaterSource[] = [];
   ownershipType: IOwnershipType[] = [];
-
-
+  clientAddReq: IClientAll = {
+    zoneId: null,
+    nationalId: '',
+    postalCode: '',
+    mobiles: '',
+    customerNumber: null,
+    readingNumber: '',
+    billId: '',
+    fullName: '',
+    fatherName: '',
+    address: '',
+    usageId: null,
+    branchDiameterId: null,
+    siphon1Count: null,
+    siphon2Count: null,
+    siphon3Count: null,
+    siphon4Count: null,
+    domesticCount: null,
+    commercialCount: null,
+    otherCount: null,
+    familyCount: null,
+    domesticArea: null,
+    commercialArea: null,
+    otherArea: null,
+    capacity: null,
+    watarInstallationJalaliDay: '',
+    waterInstallationDateTime: '',
+    sewageInstallationJalaliDay: '',
+    sewageInstallationDateTime: '',
+    guildId: null,
+    ownershipTypeId: null,
+    branchStateId: null,
+    waterSourceId: null,
+    customerTypeId: null,
+    previousClientId: null,
+    changeOrInsertLogId: '',
+    description: '',
+    isLast: false,
+    fromDateTime: '',
+    toDateTime: '',
+    x: '',
+    y: '',
+    zoneTitle: {},
+    usageTitle: {},
+    branchDiameterTitle: '',
+    guildTitle: '',
+    branchStateTitle: '',
+    ownershipTypeTitle: '',
+    customerTypeTitle: '',
+    waterSourceTitle: ''
+  };
+  clientGet: IClientAll[] = [];
 
 
 
@@ -1553,6 +1603,60 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.waterSource, url: EN_Routes.waterSource, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.ownershipType, url: EN_Routes.ownershipType, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.clientAdd, url: EN_Routes.clientGet, defaultValue: [] },
+    // {
+    //   id: 2, value: ENEssentialsToSave.clientGet, url: EN_Routes.clientGet, defaultValue: {
+    //     zoneId: null,
+    //     nationalId: '',
+    //     postalCode: '',
+    //     mobiles: '',
+    //     customerNumber: null,
+    //     readingNumber: '',
+    //     billId: '',
+    //     fullName: '',
+    //     fatherName: '',
+    //     address: '',
+    //     usageId: null,
+    //     branchDiameterId: null,
+    //     siphon1Count: null,
+    //     siphon2Count: null,
+    //     siphon3Count: null,
+    //     siphon4Count: null,
+    //     domesticCount: null,
+    //     commercialCount: null,
+    //     otherCount: null,
+    //     familyCount: null,
+    //     domesticArea: null,
+    //     commercialArea: null,
+    //     otherArea: null,
+    //     capacity: null,
+    //     watarInstallationJalaliDay: '',
+    //     waterInstallationDateTime: '',
+    //     sewageInstallationJalaliDay: '',
+    //     sewageInstallationDateTime: '',
+    //     guildId: null,
+    //     ownershipTypeId: null,
+    //     branchStateId: null,
+    //     waterSourceId: null,
+    //     customerTypeId: null,
+    //     previousClientId: null,
+    //     changeOrInsertLogId: '',
+    //     description: '',
+    //     isLast: false,
+    //     fromDateTime: '',
+    //     toDateTime: '',
+    //     x: '',
+    //     y: '',
+    //     zoneTitle: {},
+    //     usageTitle: {},
+    //     branchDiameterTitle: '',
+    //     guildTitle: '',
+    //     branchStateTitle: '',
+    //     ownershipTypeTitle: '',
+    //     customerTypeTitle: '',
+    //     waterSourceTitle: ''
+    //   }
+    // },
 
   ]
 

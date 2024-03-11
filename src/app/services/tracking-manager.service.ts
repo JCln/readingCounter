@@ -8,16 +8,14 @@ import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ProfileService } from 'services/profile.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
-import { Converter } from 'src/app/classes/converter';
 import { MathS } from '../classes/math-s';
 import { OffloadModify } from '../classes/offload-modify-type';
 
 import { IOffLoadPerDay, ITracking, ITrackingMasterDto } from '../interfaces/itrackings';
-import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { FollowUpService } from './follow-up.service';
-import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
+import { PageSignsService } from './page-signs.service';
 
 @Injectable({
   providedIn: 'root'
@@ -62,9 +60,8 @@ export class TrackingManagerService {
   constructor(
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    private allListsService: AllListsService,
-    public columnManager: ColumnManager,
     private pageSignsService: PageSignsService,
+    public columnManager: ColumnManager,
     private profileService: ProfileService,
     private followUpService: FollowUpService,
     public ajaxReqWrapperService: AjaxReqWrapperService
@@ -264,77 +261,77 @@ export class TrackingManagerService {
     this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToLMAll = (row: any, whereToBack: EN_Routes) => {
-    this.allListsService.allLists_pageSign.GUid = row.id;
-    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
-    this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
-    this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
-    this.allListsService.allLists_pageSign.zoneId = row.zoneId;
-    this.allListsService.allLists_pageSign.prePage = whereToBack;
+    this.pageSignsService.allLists_pageSign.GUid = row.id;
+    this.pageSignsService.allLists_pageSign.listNumber = row.listNumber;
+    this.pageSignsService.allLists_pageSign.trackNumber = row.trackNumber;
+    this.pageSignsService.allLists_pageSign.zoneTitle = row.zoneTitle;
+    this.pageSignsService.allLists_pageSign.zoneId = row.zoneId;
+    this.pageSignsService.allLists_pageSign.prePage = whereToBack;
     this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToOffloadModify = (dataSource: ITracking, whereToBack: EN_Routes) => {
-    this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
-    this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.modifyLists_pageSign.trackNumber = dataSource.trackNumber;
-    this.allListsService.modifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.modifyLists_pageSign.prePage = whereToBack;
+    this.pageSignsService.modifyLists_pageSign.GUid = dataSource.id;
+    this.pageSignsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.pageSignsService.modifyLists_pageSign.trackNumber = dataSource.trackNumber;
+    this.pageSignsService.modifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.pageSignsService.modifyLists_pageSign.prePage = whereToBack;
     this.utilsService.routeTo(EN_Routes.wrmlalltrue);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
-    this.allListsService.generalModifyLists_pageSign.GUid = dataSource.id;
-    this.allListsService.generalModifyLists_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
-    this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.generalModifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
+    this.pageSignsService.generalModifyLists_pageSign.GUid = dataSource.id;
+    this.pageSignsService.generalModifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.pageSignsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
+    this.pageSignsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
+    this.pageSignsService.generalModifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.pageSignsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.wrmlGeneralModify);
   }
   routeToOffloadLazy = (dataSource: ITracking) => {
-    this.allListsService.offloadedListLazy_pageSign.GUid = dataSource.id;
-    this.allListsService.offloadedListLazy_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.offloadedListLazy_pageSign.groupId = dataSource.groupId;
-    this.allListsService.offloadedListLazy_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.offloadedListLazy_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.offloadedListLazy_pageSign.trackNumber = dataSource.trackNumber;
+    this.pageSignsService.offloadedListLazy_pageSign.GUid = dataSource.id;
+    this.pageSignsService.offloadedListLazy_pageSign.listNumber = dataSource.listNumber;
+    this.pageSignsService.offloadedListLazy_pageSign.groupId = dataSource.groupId;
+    this.pageSignsService.offloadedListLazy_pageSign.zoneId = dataSource.zoneId;
+    this.pageSignsService.offloadedListLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.pageSignsService.offloadedListLazy_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.listAllLazy);
   }
   routeToMasterByFragmentLazy = (dataSource: ITracking) => {
-    this.allListsService.masterByFragmentLazy_pageSign.GUid = dataSource.id;
-    this.allListsService.masterByFragmentLazy_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.masterByFragmentLazy_pageSign.groupId = dataSource.groupId;
-    this.allListsService.masterByFragmentLazy_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.masterByFragmentLazy_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.masterByFragmentLazy_pageSign.trackNumber = dataSource.trackNumber;
+    this.pageSignsService.masterByFragmentLazy_pageSign.GUid = dataSource.id;
+    this.pageSignsService.masterByFragmentLazy_pageSign.listNumber = dataSource.listNumber;
+    this.pageSignsService.masterByFragmentLazy_pageSign.groupId = dataSource.groupId;
+    this.pageSignsService.masterByFragmentLazy_pageSign.zoneId = dataSource.zoneId;
+    this.pageSignsService.masterByFragmentLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.pageSignsService.masterByFragmentLazy_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.simpleMasterByFragmentAllLazy);
   }
   routeToOffloadAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.GUid = dataSource.groupId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.groupId = dataSource.groupId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.offloadedListAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
+    this.pageSignsService.offloadedListAllInGroupLazy_pageSign.GUid = dataSource.groupId;
+    this.pageSignsService.offloadedListAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
+    this.pageSignsService.offloadedListAllInGroupLazy_pageSign.groupId = dataSource.groupId;
+    this.pageSignsService.offloadedListAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
+    this.pageSignsService.offloadedListAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.pageSignsService.offloadedListAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
     this.utilsService.routeTo(EN_Routes.listAllInGroupLazy);
   }
   routeToMasterByFragmentAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
-    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.GUid = dataSource.groupId;
-    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.groupId = dataSource.groupId;
-    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.masterByFragmentAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
+    this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.GUid = dataSource.groupId;
+    this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.listNumber = dataSource.listNumber;
+    this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.groupId = dataSource.groupId;
+    this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.zoneId = dataSource.zoneId;
+    this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
     this.utilsService.routeTo(EN_Routes.masterByFragmentAllInGroupLazy);
   }
   routeToAssessPre = () => {
     this.utilsService.routeTo(EN_Routes.wrimpassesspre);
   }
   routeToOffloadGeneralModifyGrouped = (dataSource: ITracking) => {
-    this.allListsService.generalModifyListsGrouped_pageSign.GUid = dataSource.id;
-    this.allListsService.generalModifyListsGrouped_pageSign.listNumber = dataSource.listNumber;
-    this.allListsService.generalModifyListsGrouped_pageSign.groupId = dataSource.groupId;
-    this.allListsService.generalModifyListsGrouped_pageSign.zoneId = dataSource.zoneId;
-    this.allListsService.generalModifyListsGrouped_pageSign.zoneTitle = dataSource.zoneTitle;
-    this.allListsService.generalModifyListsGrouped_pageSign.trackNumber = dataSource.trackNumber;
+    this.pageSignsService.generalModifyListsGrouped_pageSign.GUid = dataSource.id;
+    this.pageSignsService.generalModifyListsGrouped_pageSign.listNumber = dataSource.listNumber;
+    this.pageSignsService.generalModifyListsGrouped_pageSign.groupId = dataSource.groupId;
+    this.pageSignsService.generalModifyListsGrouped_pageSign.zoneId = dataSource.zoneId;
+    this.pageSignsService.generalModifyListsGrouped_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.pageSignsService.generalModifyListsGrouped_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.wrmlGeneralGModify);
   }
   setGetRanges = (dataSource: IOffLoadPerDay) => {

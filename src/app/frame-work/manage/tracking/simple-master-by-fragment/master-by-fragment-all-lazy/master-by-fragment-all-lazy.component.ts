@@ -5,7 +5,6 @@ import { IObjectIteratation, IDictionaryManager } from 'interfaces/ioverall-conf
 import { EN_Routes } from 'interfaces/routes.enum';
 import { LazyLoadEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AllListsService } from 'services/all-lists.service';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
@@ -19,6 +18,7 @@ import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { BriefKardexComponent } from '../../../list-manager/brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../../../list-manager/list-search-mosh-dg/list-search-mosh-dg.component';
 import { Table } from 'primeng/table';
+import { PageSignsService } from 'services/page-signs.service';
 
 @Component({
   selector: 'app-master-by-fragment-all-lazy',
@@ -56,7 +56,7 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
     public closeTabService: CloseTabService,
-    public allListsService: AllListsService,
+    public pageSignsService: PageSignsService,
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
@@ -65,10 +65,10 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
     super(dialogService, listManagerService);
   }
   updateOnChangedCounterState = async (event: any) => {
-    if (MathS.isNull(this.allListsService.masterByFragmentLazy_pageSign.GUid))
+    if (MathS.isNull(this.pageSignsService.masterByFragmentLazy_pageSign.GUid))
       return;
 
-    this.closeTabService.simpleMasterByFragmentAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.allListsService.masterByFragmentLazy_pageSign.GUid, event);
+    this.closeTabService.simpleMasterByFragmentAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.pageSignsService.masterByFragmentLazy_pageSign.GUid, event);
     this.totalRecords = this.closeTabService.simpleMasterByFragmentAllLazy.totalRecords;
 
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.simpleMasterByFragmentAllLazy.data);
@@ -76,11 +76,11 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
 
-    this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.allListsService.masterByFragmentLazy_pageSign.zoneId);
+    this.counterStateByZoneDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.pageSignsService.masterByFragmentLazy_pageSign.zoneId);
     this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.qotrDictionary = await this.listManagerService.dictionaryWrapperService.getQotrDictionary();
-    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.allListsService.masterByFragmentLazy_pageSign.zoneId);
-    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.allListsService.masterByFragmentLazy_pageSign.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(this.pageSignsService.masterByFragmentLazy_pageSign.zoneId);
+    this.counterStateDictionary = await this.listManagerService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.pageSignsService.masterByFragmentLazy_pageSign.zoneId);
     this.resetDataSourceView();
 
 
@@ -105,9 +105,9 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
     this.listManagerService.setDynamicPartRanges(this.closeTabService.simpleMasterByFragmentAllLazy.data);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.allListsService.masterByFragmentLazy_pageSign);
+    console.log(this.pageSignsService.masterByFragmentLazy_pageSign);
 
-    if (!this.allListsService.masterByFragmentLazy_pageSign.GUid) {
+    if (!this.pageSignsService.masterByFragmentLazy_pageSign.GUid) {
       this.closeTabService.utilsService.routeTo(EN_Routes.simpleMasterByFragment);
     }
     else {
@@ -209,7 +209,7 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
     });
   }
   getExcel = async () => {
-    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.masterByFragmentLazy_pageSign.groupId);
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobByIdAsJson(ENInterfaces.GeneralModifyAllExcelInGroup, this.pageSignsService.masterByFragmentLazy_pageSign.groupId);
     this.outputManagerService.downloadFileWithContentDisposition(res);
   }
   @Input() get selectedColumns(): any[] {

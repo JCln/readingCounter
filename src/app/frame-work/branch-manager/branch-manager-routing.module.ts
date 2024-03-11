@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'customerType', loadChildren: () => import('./customer-type/customer-type.module').then(customerType => customerType.CustomerTypeModule) },
   { path: 'waterSource', loadChildren: () => import('./water-source/water-source.module').then(waterSource => waterSource.WaterSourceModule) },
   { path: 'ownershipType', loadChildren: () => import('./ownership-type/ownership-type.module').then(ownershipType => ownershipType.OwnershipTypeModule) },
+  { path: 'clients', loadChildren: () => import('./client-manager/client-manager.module').then(clientManagerGet => clientManagerGet.ClientManagerModule) },
 ];
 
 @NgModule({

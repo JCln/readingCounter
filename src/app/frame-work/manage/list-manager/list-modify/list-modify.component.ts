@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AllListsService } from 'services/all-lists.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -10,6 +9,7 @@ import { AllListsFactory } from 'src/app/classes/factory';
 
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 import { BriefKardexComponent } from './../brief-kardex/brief-kardex.component';
+import { PageSignsService } from 'services/page-signs.service';
 
 @Component({
   selector: 'app-list-modify',
@@ -29,14 +29,14 @@ export class ListModifyComponent extends AllListsFactory {
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
     public closeTabService: CloseTabService,
-    public allListsService: AllListsService
+    public pageSignsService: PageSignsService
   ) {
     super(dialogService, listManagerService);
   }
 
   classWrapper = async (canRefresh?: boolean) => {
 
-    if (!this.allListsService.modifyLists_pageSign.GUid) {
+    if (!this.pageSignsService.modifyLists_pageSign.GUid) {
       this.toPrePage();
     }
     else {
@@ -44,10 +44,10 @@ export class ListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMModify = null;
         this.closeTabService.saveDataForLMModifyReq = null;
       }
-      if (this.closeTabService.saveDataForLMModifyReq != this.allListsService.modifyLists_pageSign.GUid || !this.closeTabService.saveDataForLMModify) {
-        this.closeTabService.saveDataForLMModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
+      if (this.closeTabService.saveDataForLMModifyReq != this.pageSignsService.modifyLists_pageSign.GUid || !this.closeTabService.saveDataForLMModify) {
+        this.closeTabService.saveDataForLMModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.pageSignsService.modifyLists_pageSign.GUid);
         this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMModify);
-        this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
+        this.closeTabService.saveDataForLMModifyReq = this.pageSignsService.modifyLists_pageSign.GUid;
       }
       // setDynamics should implement before new instance of dataSource create
       // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMModify);
