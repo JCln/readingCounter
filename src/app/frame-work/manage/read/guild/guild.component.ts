@@ -4,6 +4,7 @@ import { IGuild } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-guild',
@@ -25,25 +26,23 @@ export class GuildComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForGuild = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForGuild) {
-      this.closeTabService.saveDataForGuild = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.GuildManagerAll);
-    }
-    this.defaultAddStatus();
-    this.insertSelectedColumns();
-  }
-  defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
     this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.guildColumns);
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
+  callAPI = async () => {
+    this.closeTabService.saveDataForGuild = await this.readManagerService.dictionaryWrapperService.getGuildDictionary(true);
+  }
+  defaultAddStatus = () => this.newRowLimit = 1;
   testChangedValue() {
     this.newRowLimit = 2;
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForGuild)) {
+      this.callAPI();
+    }
+    this.defaultAddStatus();
+    this.insertSelectedColumns();
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForGuild = this.closeTabService.saveDataForGuild.slice(0, index).concat(this.closeTabService.saveDataForGuild.slice(index + 1));
   newRow(): IGuild {
@@ -80,7 +79,7 @@ export class GuildComponent extends FactoryONE {
       this.closeTabService.saveDataForGuild[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       delete this.closeTabService.saveDataForGuild[dataSource['dataSource'].id];
       this.refetchTable(dataSource['ri']);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   async onRowEditSave(dataSource: object) {
@@ -99,7 +98,7 @@ export class GuildComponent extends FactoryONE {
     else {
       const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.GuildManagerEdit, dataSource['dataSource']);
       if (a) {
-        this.refreshTable();
+        this.callAPI();
       }
       else {
         this.refetchTable(dataSource['ri']);
@@ -110,7 +109,7 @@ export class GuildComponent extends FactoryONE {
     const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.GuildManagerAdd, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   @Input() get selectedColumns(): any[] {

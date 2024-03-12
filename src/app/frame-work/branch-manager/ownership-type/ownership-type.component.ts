@@ -27,7 +27,7 @@ export class OwnershipTypeComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.ownershipType = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ownershipTypeGet);
+    this.closeTabService.ownershipType = await this.branchesService.dictionaryWrapperService.getOwnershipTypeDictionary(true);
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.ownershipType)) {

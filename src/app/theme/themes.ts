@@ -45,7 +45,8 @@ export const light: Theme = {
         "--green_600": "rgb(75, 140, 56)",
         "--red_500": "rgb(246, 62, 56)",
         "--red_600": "rgb(183, 28, 28)",
-        "--pink_500": "rgb(0, 45, 252)"
+        "--pink_500": "rgb(0, 45, 252)",
+        "--input_icon": " rgb(14, 76, 146)",
     }
 };
 export const dark: Theme = {
@@ -94,6 +95,7 @@ export const dark: Theme = {
         "--red_500": "rgb(246, 62, 56)",
         "--red_600": "rgb(246, 62, 56)",
         "--pink_500": "rgb(132, 179, 206)",
+        "--input_icon": " rgb(242, 243, 244)",
     }
 };
 
@@ -141,7 +143,8 @@ export const purple: Theme = {
         "--green_600": "rgb(75, 140, 56)",
         "--red_500": " rgb(246, 62, 56)",
         "--red_600": " rgb(246, 62, 56)",
-        "--pink_500": "rgb(158 ,124, 234)"
+        "--pink_500": "rgb(158 ,124, 234)",
+        "--input_icon": " rgb(242, 243, 244)",
     }
 };
 
@@ -189,7 +192,8 @@ export const bedge: Theme = {
         "--green_600": " rgb(75, 140, 56)",
         "--red_500": " rgb(246, 62, 56)",
         "--red_600": " rgb(246, 62, 56)",
-        "--pink_500": "#C8963E"
+        "--pink_500": "#C8963E",
+        "--input_icon": "#5a776f",
     }
 };
 
@@ -239,5 +243,6 @@ export const corporate: Theme = {
         "--red_500": "rgb(246, 62, 56)",
         "--red_600": "rgb(246, 62, 56)",
         "--pink_500": "orange",
+        "--input_icon": "rgb(0, 69, 203)",
     }
 };

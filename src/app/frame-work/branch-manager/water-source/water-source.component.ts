@@ -27,7 +27,7 @@ export class WaterSourceComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.waterSource = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.waterSourceGet);
+    this.closeTabService.waterSource = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(true);
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.waterSource)) {

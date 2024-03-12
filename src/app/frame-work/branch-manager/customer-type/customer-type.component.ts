@@ -27,7 +27,7 @@ export class CustomerTypeComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.customerType = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.customerTypeGet);
+    this.closeTabService.customerType = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(true);
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.customerType)) {

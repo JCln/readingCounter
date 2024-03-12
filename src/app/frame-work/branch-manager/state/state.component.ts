@@ -27,7 +27,7 @@ export class StateComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.branchState = await this.branchesService.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.branchStateGet);
+    this.closeTabService.branchState = await this.branchesService.dictionaryWrapperService.getBranchStateDictionary(true);
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.branchState)) {

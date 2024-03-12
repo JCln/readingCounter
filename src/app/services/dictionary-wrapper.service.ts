@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from '../classes/math-s';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { VerificationService } from './verification.service';
+import { IBranchState, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,11 @@ export class DictionaryWrapperService {
   private imageAttributionAllDictionary: any = [];
   private counterReportDictionary: any = [];
   private counterStateDictionary: any = [];
+  private guildDictionary: any = [];
+  private ownershipType: IOwnershipType[] = [];
+  private branchState: IBranchState[] = [];
+  private customerType: ICustomerType[] = [];
+  private waterSource: IWaterSource[] = [];
   private iOPolicy: IIOPolicy = {
     id: null,
     inputExtensions: '',
@@ -189,6 +195,41 @@ export class DictionaryWrapperService {
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ListTraverseDifferentialDictionary);
     this.setTraverseDiffDictionary(res);
     return this.traverseDifferentialDictionary;
+  }
+  async getGuildDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.guildDictionary) && !canRefresh)
+      return this.guildDictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GuildManagerAll);
+    this.setGuildDictionary(res);
+    return this.guildDictionary;
+  }
+  async getOwnershipTypeDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.ownershipType) && !canRefresh)
+      return this.ownershipType;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ownershipTypeGet);
+    this.setOwnershipTypeDictionary(res);
+    return this.ownershipType;
+  }
+  async getBranchStateDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.branchState) && !canRefresh)
+      return this.branchState;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.branchStateGet);
+    this.setBranchStateDictionary(res);
+    return this.branchState;
+  }
+  async getCustomerTypeDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.customerType) && !canRefresh)
+      return this.customerType;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.customerTypeGet);
+    this.setCustomerTypeDictionary(res);
+    return this.customerType;
+  }
+  async getWaterSourceDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.waterSource) && !canRefresh)
+      return this.waterSource;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.waterSourceGet);
+    this.setWaterSourceDictionary(res);
+    return this.waterSource;
   }
   async getCounterReportDictionary(): Promise<any> {
     if (!MathS.isNull(this.counterReportDictionary))
@@ -430,8 +471,27 @@ export class DictionaryWrapperService {
   private setTraverseDiffDictionary(v: any) {
     this.traverseDifferentialDictionary = v;
   }
+  private setGuildDictionary(v: any) {
+    this.guildDictionary = v;
+  }
+  private setOwnershipTypeDictionary(v: any) {
+    this.ownershipType = v;
+  }
+  private setBranchStateDictionary(v: any) {
+    this.branchState = v;
+  }
+  private setCustomerTypeDictionary(v: any) {
+    this.customerType = v;
+  }
+  private setWaterSourceDictionary(v: any) {
+    this.waterSource = v;
+  }
 
   cleanDictionaries = () => {
+    this.ownershipType = [];
+    this.waterSource = [];
+    this.customerType = [];
+    this.branchState = [];
     this.provinceDictionary = [];
     this.regionDictionary = [];
     this.zoneDictionary = [];
@@ -448,6 +508,7 @@ export class DictionaryWrapperService {
     this.roleDictionary = [];
     this.karbariCodeDictionary = [];
     this.traverseDifferentialDictionary = [];
+    this.guildDictionary = [];
     this.counterReportByZoneDictionary.dictionary = [];
     this.counterReportByZoneDictionary.zoneId = null;
     this.iOPolicy.id = null;

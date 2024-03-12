@@ -63,3 +63,46 @@ $border_15: 10px;
   font-weight: 600;
   color: var(--primary_4);
 }
+
+// with icon
+
+.input_icon {
+  background: var(--secondary_3);
+  color: var(--secondary_3);
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  height: var(--font_28);
+  border: 1px solid var(--secondary_3_spec);
+  border-radius: $border_7;
+  font-family: var(--font-family);
+
+  ._bookmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--input_icon);
+    border-left: 1px solid var(--input_icon);
+    min-width: 2.5rem;
+    height: 100%;
+    border-radius: 0 $border_7 $border_7 0;
+    font-size: 1.3rem;
+  }
+
+  .input_3 {
+    width: 100%;
+    background: var(--secondary_3);
+    color: var(--secondary_3);
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+    border: 0;
+    height: calc(100% - 1px);
+    border-radius: $border_7 0 0 $border_7;
+    font-family: var(--font-family);
+  }
+
+  .p-dropdown {
+    max-width: 100%;
+  }
+}

@@ -158,7 +158,7 @@ export class CloseTabService {
 
   saveDataForCounterState: ICounterState[] = [];
   saveDataForImageAttribution: IImageAttribution[];
-  saveDataForGuild: IGuild[];
+  saveDataForGuild: IGuild[] = [];
 
   ipFilterHistory: IGetBlockedCompareVals[] = [];
   getIpFilterHisotry = async (canRefresh: boolean): Promise<any> => {
@@ -1085,7 +1085,7 @@ export class CloseTabService {
     },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
-    { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild },
+    { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.ipFilterRes, url: EN_Routes.ipFilter },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, defaultValue_2: '', url: EN_Routes.wrmusearch },
@@ -1603,7 +1603,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.waterSource, url: EN_Routes.waterSource, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.ownershipType, url: EN_Routes.ownershipType, defaultValue: [] },
-    { id: 2, value: ENEssentialsToSave.clientAdd, url: EN_Routes.clientGet, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.clientAdd, url: EN_Routes.clientAdd, defaultValue: [] },
     // {
     //   id: 2, value: ENEssentialsToSave.clientGet, url: EN_Routes.clientGet, defaultValue: {
     //     zoneId: null,

@@ -173,4 +173,5 @@ export enum EN_Routes {
     waterSource = '/wr/branch/waterSource',
     ownershipType = '/wr/branch/ownershipType',
     clientGet = '/wr/branch/clients',
+    clientAdd = '/wr/branch/addClients',
 }

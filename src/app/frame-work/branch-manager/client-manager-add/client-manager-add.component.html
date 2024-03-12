@@ -1,0 +1,154 @@
+<form (ngSubmit)="callAPI()">
+    <div class="_desc">
+        <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
+            <ng-container *ngIf="col.isSelectOption;else simpleInput">
+                <div class="input_icon" *ngIf="col.field == 'zoneId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'usageId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">کاربری</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="usageDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.usageId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'branchDiameterId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">قطر</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="branchDiameterDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.branchDiameterId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'guildId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">صنف</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="guildDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.guildId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'ownershipTypeId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نوع مالک</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="ownershipTypeDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.ownershipTypeId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'branchStateId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">وضعیت انشعاب</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="branchStateDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.branchStateId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'waterSourceId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">منبع آب</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="waterSourceDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.waterSourceId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'customerTypeId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نوع مشترک</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="customerTypeDictionary"
+                                [(ngModel)]="closeTabService.clientAddReq.customerTypeId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'watarInstallationJalaliDay'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">تاریخ نصب آب</div>
+                        <div class="_value">
+                            <app-date-jalali name="watarInstallationJalaliDay"
+                                (dateJalEvent)="closeTabService.receiveDateJalali(closeTabService.ENReadingReports.clientAddReq, $event)"
+                                [dateObject]="closeTabService.clientAddReq.watarInstallationJalaliDay">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'sewageInstallationJalaliDay'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">تاریخ نصب فاضلاب</div>
+                        <div class="_value">
+                            <app-date-jalali name="sewageInstallationJalaliDay"
+                                (dateJalEvent)="closeTabService.receiveDateJalali(closeTabService.ENReadingReports.clientAddReq, $event)"
+                                [dateObject]="closeTabService.clientAddReq.sewageInstallationJalaliDay">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #simpleInput>
+                <div class="input_icon" *ngIf="col.readonly">
+                    <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                    <div class="input_3" [tabindex]="col.tabIndex">
+                        <div class="_key">{{col.header}}</div>
+                        <input [ngClass]="{'double_size':col.icon}" [readonly]="col.readonly" class="_value"
+                            name="{{col.field}}" [tabindex]="col.tabIndex"
+                            [(ngModel)]="closeTabService.listLatestInfo[col.field]">
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="!col.readonly">
+                    <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                    <div class="input_3">
+                        <div class="_key">{{col.header}}</div>
+                        <input [readonly]="col.readonly" [tabindex]="col.tabIndex"
+                            [type]="col.isNumber ? 'number' : 'text'" class="_value" name="{{col.field}}"
+                            [(ngModel)]="closeTabService.clientAddReq[col.field]">
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <footer>
+        <button type="submit" class="btn_1">
+            افزودن مشترک
+            <i class="pi pi-list"></i>
+        </button>
+    </footer>
+</form>
