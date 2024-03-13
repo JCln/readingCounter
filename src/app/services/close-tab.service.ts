@@ -654,7 +654,7 @@ export class CloseTabService {
     noImages: false,
     isCheckedItems: false
   };
-  saveDataForAssessPre: IOnOffLoadFlat[];
+  saveDataForAssessPre: IOnOffLoadFlat[] = [];
   saveDataForAssessAdd: any;
   // SEARCH
   searchReqMosh: ISearchMoshReq = {
@@ -1198,7 +1198,20 @@ export class CloseTabService {
       },
       defaultValue: []
     },
-    { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
+    {
+      id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.assessPre,
+      defaultValue: [],
+      defaultReq: {
+        reportIds: [],
+        counterStateIds: [],
+        masrafStates: [],
+        karbariCodes: [],
+        zoneId: null,
+        listNumber: '',
+        noImages: false,
+        isCheckedItems: false
+      }
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
     {
       id: 1, req: ENEssentialsToSave.simafaSingleReq, value: null, url: EN_Routes.wrimpsimafardpgsingle, defaultReq: {

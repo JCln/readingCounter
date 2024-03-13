@@ -2,7 +2,7 @@
     (_clicked)="importDynamicService.utilsService.collapser._assessPreCollapse = !importDynamicService.utilsService.collapser._assessPreCollapse">
 </app-collapsable>
 
-<form #form="ngForm" (ngSubmit)="editCloseData()"
+<form #form="ngForm" (ngSubmit)="searchData()"
     [@openClose]="importDynamicService.utilsService.collapser._assessPreCollapse ? 'slideUp' : 'slideDown'">
 
     <main class="main_content">
@@ -12,7 +12,7 @@
                     <div class="_key">ناحیه</div>
                     <div class="_value">
                         <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
-                            [(ngModel)]="closeTabService.saveDataForAssessPreReq.zoneId" optionLabel="title"
+                            [(ngModel)]="importDynamicService.pageSignsService.assessPre_pageSign.zoneId" optionLabel="title"
                             [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                             placeholder="انتخاب مورد" (onClick)="getMasterInZone()"
                             (onChange)="emptyPreviousValuesFromSelectOptions()">
@@ -22,7 +22,7 @@
                 <div class="input_2">
                     <div class="_key">شماره لیست</div>
                     <input class="_value" name="listNumber"
-                        [(ngModel)]="closeTabService.saveDataForAssessPreReq.listNumber">
+                        [(ngModel)]="importDynamicService.pageSignsService.assessPre_pageSign.listNumber">
                 </div>
                 <div class="check_boxes">
                     <mat-checkbox name="noImages" [(ngModel)]="closeTabService.saveDataForAssessPreReq.noImages">
@@ -159,6 +159,6 @@
 <app-prime-table *ngIf="closeTabService.saveDataForAssessPre" [dataSource]="closeTabService.saveDataForAssessPre"
     [_outputFileName]="'assess_pre'" [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1, 2, 3]"
     [_selectedColumnsToRemember]="'selectedListManagerAssess'" [_sessionName]="'assess_pre'"
-    (refreshedTable)="refreshTable()" (registeredAssess)="registerAssessAdd()"
+    (refreshedTable)="connectToServer()" (registeredAssess)="registerAssessAdd()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>

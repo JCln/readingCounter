@@ -69,7 +69,7 @@ export class ImportDynamicService {
   constructor(
     public utilsService: UtilsService,
     private allImportsService: AllImportsService,
-    private pageSignsService: PageSignsService,
+    public pageSignsService: PageSignsService,
     private profileService: ProfileService,
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService
@@ -139,21 +139,6 @@ export class ImportDynamicService {
     }
     return true;
   }
-  private validationNull = (object: IAssessPreDisplayDtoSimafa): boolean => {
-    if (object.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(object.zoneId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-        return false;
-      }
-    }
-    if (object.hasOwnProperty('listNumber')) {
-      if (MathS.isNull(object.listNumber)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_listNumber);
-        return false;
-      }
-    }
-    return true;
-  }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
     this.pageSignsService.simafaSingle_pageSign.UUID = object.id;
     this.pageSignsService.simafaSingle_pageSign.zoneId = object.zoneId;
@@ -178,8 +163,20 @@ export class ImportDynamicService {
     this.allImportsService.allImports_batch._canShowImportBatchButton = true; // make to imported button enable/ show
     this.utilsService.routeTo(EN_Routes.wrimpsimafardpgbatch);
   }
-  verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
-    return this.validationNull(searchReq);
+  verificationAssessPre = (searchReq: any): boolean => {
+    if (searchReq.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(searchReq.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    if (searchReq.hasOwnProperty('listNumber')) {
+      if (MathS.isNull(searchReq.listNumber)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_listNumber);
+        return false;
+      }
+    }
+    return true;
   }
   verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: any): boolean => {
     if (val.minAlalHesab > insertedVals.alalHesabPercent) {

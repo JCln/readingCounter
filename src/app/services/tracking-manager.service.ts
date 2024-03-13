@@ -255,6 +255,12 @@ export class TrackingManagerService {
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
+  routeToAssessPre = (row: ITracking) => {
+    this.pageSignsService.assessPre_pageSign.zoneId = row.zoneId;
+    this.pageSignsService.assessPre_pageSign.listNumber = row.listNumber;
+    this.pageSignsService.assessPre_pageSign.isFromSource = true;
+    this.utilsService.routeToByUrl(EN_Routes.assessPre);
+  }
   routeToLMPayDay = (row: ITracking) => {
     this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
     this.pageSignsService.perday_pageSign.zone = row.zoneTitle;
@@ -321,9 +327,6 @@ export class TrackingManagerService {
     this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.zoneTitle = dataSource.zoneTitle;
     this.pageSignsService.masterByFragmentAllInGroupLazy_pageSign.routeCount = dataSource.routeCount;
     this.utilsService.routeTo(EN_Routes.masterByFragmentAllInGroupLazy);
-  }
-  routeToAssessPre = () => {
-    this.utilsService.routeTo(EN_Routes.wrimpassesspre);
   }
   routeToOffloadGeneralModifyGrouped = (dataSource: ITracking) => {
     this.pageSignsService.generalModifyListsGrouped_pageSign.GUid = dataSource.id;

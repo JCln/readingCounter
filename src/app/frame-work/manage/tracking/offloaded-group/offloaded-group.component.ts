@@ -83,9 +83,7 @@ export class OffloadedGroupComponent extends FactoryONE {
       this.trackingManagerService.showWarnMessage(EN_messages.no_listNumberExist);
     }
     else {
-      this.closeTabService.saveDataForAssessPreReq.zoneId = dataSource.zoneId;
-      this.closeTabService.saveDataForAssessPreReq.listNumber = dataSource.listNumber;
-      this.trackingManagerService.routeToAssessPre();
+      this.trackingManagerService.routeToAssessPre(dataSource);
     }
   }
 

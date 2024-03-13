@@ -153,7 +153,7 @@ export class version {
     static readonly version = 'build: 0.0.0';
 }
 export class aboutUs {
-    static readonly email = 'info@hivapardaz.ir';
+    static readonly email = 'infohivaatlas@gmail.com';
     static readonly tel = '031-32121764';
     static readonly address = 'اصفهان، ارگ جهان نما، واحد 107';
     static readonly coName = 'هیوا پرداز اطلس';

@@ -112,7 +112,7 @@
         license: 16,
         incorrect_time: 32
     }    
-    window.__env.aboutUs = { email: 'info@hivapardaz.ir', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
+    window.__env.aboutUs = { email: 'infohivaatlas@gmail.com', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
 
 
     window.__env.hasCanclableSpinner = false;

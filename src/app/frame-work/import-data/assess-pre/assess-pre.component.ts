@@ -36,7 +36,6 @@ export class AssessPreComponent extends AllListsFactory {
   counterReportDictionary: IDictionaryManager[] = [];
 
   userCounterReaderDictionary: IDictionaryManager[] = [];
-  _canShowAssessButton: boolean = true;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -89,6 +88,8 @@ export class AssessPreComponent extends AllListsFactory {
     })
   }
   connectToServer = async () => {
+    this.closeTabService.saveDataForAssessPreReq.listNumber = this.importDynamicService.pageSignsService.assessPre_pageSign.listNumber;
+    this.closeTabService.saveDataForAssessPreReq.zoneId = this.importDynamicService.pageSignsService.assessPre_pageSign.zoneId;
     this.closeTabService.saveDataForAssessPre = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
 
@@ -101,14 +102,15 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService.makeHadPicturesToBoolean(this.closeTabService.saveDataForAssessPre);
     this.setAllIsSelected(this.checkedItemsChanged());
   }
-  refreshTable = () => {
-    this.connectToServer();
-  };
-  nullSavedSource = () => this.closeTabService.saveDataForAssessPre = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForAssessPre = null;
-    }
+  doEmptyAssessPreData = () => {
+    this.closeTabService.saveDataForAssessPre = [];
+  }
+  shouldEmptyData = () => {
+    if (this.importDynamicService.pageSignsService.assessPre_pageSign.isFromSource && this.closeTabService.saveDataForAssessPreReq.listNumber !== this.importDynamicService.pageSignsService.assessPre_pageSign.listNumber)
+      this.doEmptyAssessPreData();
+  }
+  classWrapper = async () => {
+    this.shouldEmptyData();
     this.getMasterInZone();
   }
   checkedItemsChanged = (): boolean => {
@@ -121,17 +123,17 @@ export class AssessPreComponent extends AllListsFactory {
     this.masrafState = this.importDynamicService.getMasrafStates();
     this.karbariDictionary = await this.importDynamicService.dictionaryWrapperService.getkarbariCodeDictionary();
 
-    if (this.closeTabService.saveDataForAssessPreReq.zoneId) {
-      this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.counterStateDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.counterStateByCodeDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
-      this.counterReportDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterReportByZoneIdDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+    if (this.importDynamicService.pageSignsService.assessPre_pageSign.zoneId) {
+      this.userCounterReaderDictionary = await this.importDynamicService.dictionaryWrapperService.getUserCounterReaderDictionary(this.importDynamicService.pageSignsService.assessPre_pageSign.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(this.importDynamicService.pageSignsService.assessPre_pageSign.zoneId);
+      this.counterStateDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.importDynamicService.pageSignsService.assessPre_pageSign.zoneId);
+      this.counterStateByCodeDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterStateByCodeDictionary(this.importDynamicService.pageSignsService.assessPre_pageSign.zoneId);
+      this.counterReportDictionary = await this.importDynamicService.dictionaryWrapperService.getCounterReportByZoneIdDictionary(this.importDynamicService.pageSignsService.assessPre_pageSign.zoneId);
     }
   }
-  editCloseData() {
-    this.closeTabService.saveDataForAssessPreReq.listNumber = MathS.trimation(this.closeTabService.saveDataForAssessPreReq.listNumber);
-    if (this.importDynamicService.verificationAssessPre(this.closeTabService.saveDataForAssessPreReq))
+  searchData() {
+    this.importDynamicService.pageSignsService.assessPre_pageSign.listNumber = MathS.trimation(this.importDynamicService.pageSignsService.assessPre_pageSign.listNumber);
+    if (this.importDynamicService.verificationAssessPre(this.importDynamicService.pageSignsService.assessPre_pageSign))
       this.connectToServer();
   }
   getOnOffLoadIdsFromDataSource = () => {
@@ -147,7 +149,7 @@ export class AssessPreComponent extends AllListsFactory {
       this.getOnOffLoadIdsFromDataSource();
       if (this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq)) {
         this.importDynamicService.showResDialog(await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
-        this._canShowAssessButton = false;
+        this.doEmptyAssessPreData();
       }
     }
   }
@@ -173,7 +175,7 @@ export class AssessPreComponent extends AllListsFactory {
       })
     this.ref.onClose.subscribe(async res => {
       if (res)
-        this.refreshTable();
+        this.connectToServer();
     });
   }
   emptyPreviousValuesFromSelectOptions() {

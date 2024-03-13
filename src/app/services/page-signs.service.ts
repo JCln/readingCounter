@@ -100,4 +100,10 @@ export class PageSignsService {
   clientManager_pageSign = {
     id: null
   };
+  assessPre_pageSign = {
+    GUid: null,
+    listNumber: '',
+    zoneId: null,
+    isFromSource: false
+  };
 }
