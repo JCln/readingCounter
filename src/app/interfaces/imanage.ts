@@ -149,3 +149,19 @@ export interface IOutputManager {
     fromDate: string,
     toDate: string
 }
+export interface IInactiveEntity {
+    id: number,
+    insertDateTime: string,
+    insertDateJalali: string,
+    insertTime: string,
+    ip: string,
+    entityTitle: string,
+    operationTitle: string,
+    userInfo: string,
+    browserInfo: string,
+    osInfo: string
+}
+export interface IInactiveEntityLazy {
+    data: IInactiveEntity[],
+    totalRecords: number
+}

@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'uploadAttempts', loadChildren: () => import('./upload-attempts/upload-attempts.module').then(uploadAttempts => uploadAttempts.UploadAttemptsModule) },
   { path: 'getUploaded', loadChildren: () => import('./get-uploaded/get-uploaded.module').then(GetUploaded => GetUploaded.GetUploadedModule) },
   { path: 'memoryStatus', loadChildren: () => import('./log-memory-status/log-memory-status.module').then(LogMemoryStatus => LogMemoryStatus.LogMemoryStatusModule) },
+  { path: 'inactiveEntity', loadChildren: () => import('./inactive-entity/inactive-entity.module').then(InActiveEntityLog => InActiveEntityLog.InactiveEntityModule) },
 ];
 
 @NgModule({

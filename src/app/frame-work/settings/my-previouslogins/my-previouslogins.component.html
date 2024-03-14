@@ -1,0 +1,10 @@
+<app-prime-table 
+[dataSource]="closeTabService.myPreviousLogins"
+[_outputFileName]="'myPreviousLogins'"
+[_checkUpName]="'myPreviousLogins'"
+[_numberOfExtraColumns]="[]"
+[_sessionName]="'mypreviouslogins-session'"
+[_selectedColumnsToRemember]="'selectedRequestLogMyPreviousLogins'"
+(refreshedTable)="callAPI()"
+>
+</app-prime-table>

@@ -963,6 +963,31 @@ export class ColumnManager {
         { field: 'osTitle', header: 'سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
         { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true }
     ]
+    myPreviousLogins: IObjectIteratation[] = [
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
+        { field: 'username', header: 'نام کاربری', isSelected: false, isSelectedOrigin: false },
+        { field: 'loginDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
+        { field: 'loginIp', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'wasSuccessful', header: 'موفق', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        // { field: 'twoStepExpireDateTime', header: 'زمان انقضای رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
+        { field: 'twoStepType', header: 'نحوه ورود', isSelected: true, isSelectedOrigin: true },
+        { field: 'twoStepEnterDateTime', header: 'زمان تلاش رمز دومرحله‌ای', isSelected: false, isSelectedOrigin: false },
+        { field: 'twoStepWasSuccessful', header: 'دو مرحله‌ای موفق', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'invalidLoginReasonId', header: 'علت ناموفق', isSelected: true, isSelectedOrigin: true },
+        { field: 'logoutDateTime', header: 'زمان خروج', isSelected: true, isSelectedOrigin: true },
+        { field: 'logoutReasonId', header: 'علت خروج', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserShortTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserTitle', header: 'مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false, isSelectedOrigin: false },
+        { field: 'osTitle', header: 'سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osVersion', header: 'نسخه سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'osPlatform', header: 'نوع سیستم', isSelected: false, isSelectedOrigin: false },
+        { field: 'wrongPassword', header: 'گذرواژه', isSelected: false, isSelectedOrigin: false },
+        { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false, isSelectedOrigin: false },
+        { field: 'appVersion', header: 'نسخه App', isSelected: false, isSelectedOrigin: false }
+    ]
     usersLogins: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
         { field: 'username', header: 'نام کاربری', isSelected: false, isSelectedOrigin: false },
@@ -2831,6 +2856,17 @@ export class ColumnManager {
         // { field: 'osShortTitle', header: 'عنوان سیستم‌عامل', isSelected: false,isSelectedOrigin:false },                
         { field: 'userAgent', header: 'userAgent', isSelected: false, isSelectedOrigin: false },
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
+    ]
+    reqLogInactiveEntity: IObjectIteratation[] = [
+        { field: 'userInfo', header: 'اطلاعات کاربر', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'entityTitle', header: 'عنوان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'operationTitle', header: 'عملیات', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'insertDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'insertTime', header: 'زمان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'browserInfo', header: 'اطلاعات مرورگر', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'osInfo', header: 'اطلاعات سیستم', isSelected: true, isSelectedOrigin: true, type: 'texture' },
     ]
     userMasterDetailsAll: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },

@@ -257,6 +257,7 @@ export class ProfileComponent extends FactoryONE {
     val ? this.profileService.showMessage(EN_messages.virtualScrollEnabled) : this.profileService.showMessage(EN_messages.virtualScrollDisabled);
   }
   setNotifyPosition = (val: string) => {
+    this.profileService.showStateVals.notifyPosition = val;
     this.profileService.setLocalNotifyPosition(val);
     this.profileService.showMessage(EN_messages.notifyPositionChange);
   }

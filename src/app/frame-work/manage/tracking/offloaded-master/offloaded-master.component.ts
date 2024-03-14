@@ -7,7 +7,6 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking, ITrackingMasterDto } from 'interfaces/itrackings';
 import { OutputManagerService } from 'services/output-manager.service';
-import { EN_messages } from 'interfaces/enums.enum';
 import { Table } from 'primeng/table';
 
 @Component({

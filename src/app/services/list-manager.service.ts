@@ -14,7 +14,6 @@ import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
-import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { OffloadModify } from '../classes/offload-modify-type';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';

@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'license', loadChildren: () => import('./license/license.module').then(license => license.LicenseModule) },
   { path: 'waterMark', loadChildren: () => import('./water-mark/water-mark.module').then(waterMarkConfig => waterMarkConfig.WaterMarkModule) },
   { path: 'notification', loadChildren: () => import('./notification-message/notification-message.module').then(notificationMessage => notificationMessage.NotificationMessageModule) },
+  { path: 'myLogins', loadChildren: () => import('./my-previouslogins/my-previouslogins.module').then(myPreviousLogins => myPreviousLogins.MyPreviousloginsModule) },
 ];
 
 @NgModule({

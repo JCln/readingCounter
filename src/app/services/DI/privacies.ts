@@ -50,12 +50,12 @@ export interface LoginBriefInfo {
     appVersion: string,
     userDisplayName: string,
     logoutDateTime: string,
-    logoutReasonId: 0,
+    logoutReasonId: number,
     username: string,
-    invalidLoginReasonId: 1,
+    invalidLoginReasonId: number,
     twoStepExpireDateTime: string,
     twoStepEnterDateTime: string,
-    twoStepWasSuccessful: true
+    twoStepWasSuccessful: boolean | string
 }
 export interface IPoliciesCompare {
     previous: IPolicies,

@@ -282,9 +282,11 @@ export enum ENInterfaces {
     requestLogUserActivation = 'V1/RequestLog/UserActivation',
     requestLogUserActivationByUserId = 'V1/RequestLog/UserActivationByUserId',
     requestLogUsersLogins = 'V1/User/UsersLogins',
+    requestLogMyPreviousLogins = 'V1/User/MyLogins',
     requestLogDownloadAttempts = 'V1/RequestLog/DownloadAttempts',
     requestLogUploadAttempts = 'V1/RequestLog/UploadAttempts',
     requestLogGetUploaded = 'V1/Upload/GetUploaded',
+    requestLogInactiveEntity = 'V1/InactiveEntityLog/GetLazy',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

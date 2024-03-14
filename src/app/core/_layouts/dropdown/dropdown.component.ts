@@ -11,6 +11,7 @@ import { UtilsService } from 'services/utils.service';
 export class DropdownComponent {
   @Output() isLogout = new EventEmitter<boolean>();
   routeToProfile = EN_Routes.wrprofile;
+  myPreviousLogins = EN_Routes.myLogins;
   routeToLicense = EN_Routes.wrLicense;
   routeToAboutUs = EN_Routes.aboutUs;
   aboutUsImage = 'assets/imgs/header/logo_Atlas.png';

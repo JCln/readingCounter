@@ -238,19 +238,39 @@
                     </p-selectButton>
                 </div>
             </section>
-            <section>
+            <section class="dialog-position">
                 <div class="content">
                     <h1 class="title">مکان اعلان پیام ها</h1>
-                    <p-selectButton class="_notify_position" [options]="notifyPositionOptions"
-                        [(ngModel)]="profileService.showStateVals.notifyPosition" optionLabel="label"
-                        optionValue="value" (onChange)="setNotifyPosition(profileService.showStateVals.notifyPosition)">
-                    </p-selectButton>
+                    <div class="_notify_position">
+                        <button *ngFor="let item of notifyPositionOptions" class="btn_1 small_button"
+                            [ngClass]="{'selected-button': item.value == profileService.showStateVals.notifyPosition}"
+                            (click)="setNotifyPosition(item.value)">
+                            {{item.label}}
+                            <div class="_container">
+                                <div class="_icon">
+                                    <div class="__notificationMediaTypeId pi pi-info"></div>
+                                </div>
+                                <div class="_content">
+                                    <p class="__sender">
+                                        'عنوانی وارد نمایید!'
+                                    </p>
+                                    <p class="__insertDateTimeJalali __caption">
+                                        'متنی وارد نمایید!'
+                                    </p>
+                                    <p class="__timer">
+                                        1000
+                                    </p>
+                                    <i class="__close pi pi-times"></i>
+                                </div>
+                            </div>
+                        </button>
+                    </div>            
                 </div>
             </section>
             <section>
                 <div class="content">
                     <h1 class="title">بازگشت به تنظیمات پیش‌فرض</h1>
-                    <button class="btn_1 _pdf small_button" (click)="profileService.resetAllSavedLocals()">
+                    <button class="btn_1 _pdf reset_all" (click)="profileService.resetAllSavedLocals()">
                         اعمال
                     </button>
                 </div>

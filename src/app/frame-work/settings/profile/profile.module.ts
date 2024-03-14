@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 
 import { ProfileRoutingModule } from './profile-routing.module';
@@ -10,8 +9,7 @@ import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 @NgModule({
   declarations: [ProfileComponent],
   imports: [
-    SharedTwoModule,
-    SelectButtonModule,
+    SharedTwoModule,    
     SharedChangePassModule,
     SharedPrimeNgModule,
     ProfileRoutingModule

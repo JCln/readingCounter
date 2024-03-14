@@ -54,9 +54,9 @@ import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, I
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
+import { IPolicies, IRoleHistory, IUsersLoginBriefInfo, LoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
-import { IForbiddenManager, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat, IOnOffLoadFlatLazy } from 'interfaces/imanage';
+import { IForbiddenManager, IInactiveEntityLazy, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat, IOnOffLoadFlatLazy } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity, IAuthenticityAttempts } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
@@ -231,6 +231,10 @@ export class CloseTabService {
     multiSelectMasrafStateId: [],//وضعیت مصرف
     multiSelectHazf: []// 
   };
+  inactiveEntitiy: IInactiveEntityLazy = {
+    data: [],
+    totalRecords: 0
+  }
   offloadedAllLazy: IOnOffLoadFlatLazy = {
     data: [],
     totalRecords: 0
@@ -981,6 +985,7 @@ export class CloseTabService {
   }
   saveDataForFNB: IForbiddenManager[] = [];
   saveDataForProfile: any;
+  myPreviousLogins: IUsersLoginBriefInfo[] = [];
   saveDataForMomentLastRead: ILatestReads[] = [];
   saveDataForRRGallery = [];
   saveDataForRRGalleryRSFirst: any;
@@ -1334,6 +1339,7 @@ export class CloseTabService {
     },
     { id: 1, value: ENEssentialsToSave.saveDataForPoliciesHistory, url: EN_Routes.policyHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile },
+    { id: 1, value: ENEssentialsToSave.myPreviousLogins, url: EN_Routes.myLogins },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading, defaultValue: [] },

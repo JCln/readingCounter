@@ -57,56 +57,130 @@ p-tabview {
   justify-content: space-around;
   border-radius: $border_15;
   min-height: var(--font_5);
+
+  p {
+    color: var(--secondary_5);
+  }
 }
 
-:host ::ng-deep ._notify_position {
-  .p-buttonset .p-button {
+.selected-button {
+  background: var(--primary_4);
+}
+
+._notify_position {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 7rem));
+  gap: .25rem;
+  justify-content: center;
+
+  .small_button {
     position: relative;
+    font-size: var(--font_s);
+    border-radius: 15px;
+    width: 7rem;
+  }
+}
 
-    &:nth-child(n) ::after {
-      content: '';
-      position: absolute;
-      background-color: var(--white);
-      width: 0.3rem;
-      height: 0.3rem;
-      border-radius: 50%;
-    }
+.small_button:nth-child(n)::after {
+  content: '';
+  position: absolute;
+  background-color: var(--white);
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+}
 
-    &:nth-child(1) ::after {
-      top: .3rem;
-      right: .3rem;
-    }
+.small_button:nth-child(1)::after {
+  top: .3rem;
+  right: .3rem;
+}
 
-    &:nth-child(2) ::after {
-      top: 0.3rem;
-      left: .3rem;
-    }
+.small_button:nth-child(2)::after {
+  top: 0.3rem;
+  left: .3rem;
+}
 
-    &:nth-child(3) ::after {
-      bottom: 0.3rem;
-      right: .3rem;
-    }
+.small_button:nth-child(3)::after {
+  bottom: 0.3rem;
+  right: .3rem;
+}
 
-    &:nth-child(4) ::after {
-      bottom: 0.3rem;
-      left: .3rem;
-    }
+.small_button:nth-child(4)::after {
+  bottom: 0.3rem;
+  left: .3rem;
+}
 
-    &:nth-child(5) ::after {
-      top: 0.3rem;
-      left: 50%;
-    }
+.small_button:nth-child(5)::after {
+  top: 0.3rem;
+  left: 50%;
+}
 
-    &:nth-child(6) ::after {
-      bottom: 0.3rem;
-      left: 50%;
-    }
+.small_button:nth-child(6)::after {
+  bottom: 0.3rem;
+  left: 50%;
+}
 
-    &:nth-child(7) ::after {
-      display: none;
-    }
+.small_button:nth-child(7)::after {
+  display: none;
+}
 
 
+.small_button:nth-child(1):hover {
+  ._container {
+    display: flex;
+    right: 0;
+    top: 0;
+  }
+}
+
+.small_button:nth-child(2):hover {
+  ._container {
+    display: flex;
+    left: 0;
+    top: 0;
+  }
+}
+
+.small_button:nth-child(3):hover {
+  ._container {
+    display: flex;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.small_button:nth-child(4):hover {
+  ._container {
+    display: flex;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.small_button:nth-child(5):hover {
+  ._container {
+    display: flex;
+    top: 0;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+.small_button:nth-child(6):hover {
+  ._container {
+    display: flex;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+.small_button:nth-child(7):hover {
+  ._container {
+    display: flex;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%);
   }
 }
 
@@ -136,10 +210,96 @@ p-tabview {
   width: 19rem;
 }
 
-.small_button {
+.reset_all {
   width: 7rem;
 }
 
 ._icon {
   padding-left: .5rem;
+}
+
+._container {
+  position: fixed;
+  display: none;
+  margin: auto;
+  min-height: 8.5rem;
+  width: 21rem;
+  z-index: 100;
+  opacity: 1;
+  color: var(--primary_8);
+  border-left: 4px solid var(--primary_2);
+  border-radius: 10px;
+  background-color: var(--white);
+  box-shadow: 0px 0px 50px 1px var(--secondary_7);
+
+  @media (min-width: 550px) {
+    width: 25rem;
+  }
+
+  ._content {
+    opacity: 1;
+    margin-bottom: 1.8rem;
+  }
+
+  ._icon {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    min-width: 5rem;
+    font-size: 5rem;
+    font-family: 'primeicons';
+  }
+
+  .__notificationMediaTypeId {
+    font-size: 3rem;
+    color: var(--primary_2);
+  }
+
+  .__caption {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    padding-right: 1px;
+    margin-bottom: var(--font_05);
+    height: 6rem;
+    font-size: var(--font_s);
+  }
+
+  .__sender {
+    font-size: var(--font_m);
+  }
+
+  .__timer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    bottom: .1rem;
+    left: 0.2rem;
+    padding: .5rem;
+    border-radius: $border_7;
+    font-size: var(--font_s);
+    background: var(--primary_2);
+    color: var(--secondary_1);
+    font-weight: 600;
+  }
+
+  .__close {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    top: 0.1rem;
+    left: 0.2rem;
+    padding: 0.5rem;
+    border-radius: 7px;
+    font-size: var(--font_ss);
+  }
 }
