@@ -1,11 +1,11 @@
 <main style="position: relative; ">
-    <p-table #datatableG id="tdm" *ngIf="closeTabService.inactiveEntitiy.data" [columns]="selectedColumns"
-        [value]="closeTabService.inactiveEntitiy.data" [lazy]="true" (onLazyLoad)="LazyLoading($event)"
-        (onLazyLoad)="hasFilters()" dataKey="id" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-        [totalRecords]="totalRecords" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
-        styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" [stateKey]="_sessionName"
-        editMode="row" [reorderableColumns]="getLocalReOrderable()" [filterDelay]="500" appUnSortTable>
+    <p-table #datatableG id="tdm" [columns]="selectedColumns" [value]="closeTabService.inactiveEntitiy.data"
+        [lazy]="true" (onLazyLoad)="LazyLoading($event)" (onLazyLoad)="hasFilters()" dataKey="id" [paginator]="true"
+        [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" styleClass="p-datatable-responsive"
+        stateStorage="session" [stateKey]="_sessionName" editMode="row" [reorderableColumns]="getLocalReOrderable()"
+        [filterDelay]="500" [columnResizeMode]="_widthExpandMode" [resizableColumns]="_hasColumnsResizable" appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -30,7 +30,7 @@
                         <div class="tooltip_text_right">حذف فیلترها</div>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                        <div class="tooltip_text">بارگیری مجدد جدول</div>
+                        <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                     </i>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         {{col.header}}
                         <div class="tooltip_text_bottom">{{col.header}}</div>
                     </div>
-                </th>                
+                </th>
             </tr>
             <tr>
                 <th class="__headers" pReorderableColumn *ngFor="let col of _selectedColumns">
@@ -58,7 +58,7 @@
                     </p-columnFilter>
 
 
-                </th>                
+                </th>
             </tr>
         </ng-template>
 
@@ -69,24 +69,11 @@
                     [ngClass]="{'d_ltr': col.ltr, '_editable': col.icon}">
                     <span class="ui-column-title">{{col.header}}</span>
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <mat-checkbox [disabled]="col.readonly"
-                                    [ngClass]="{'mat-checkbox-editable': !col.readonly}"
-                                    [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                            </ng-template>
-                        </p-cellEditor>
+                        <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                     </ng-container>
-                    <ng-template #elseTemplate>
-                        <ng-template #digits>
-                            <ng-container *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'">
-                                {{dataSource[col.field]}}
-                            </ng-container>
-                        </ng-template>
 
+                    <ng-template #elseTemplate>
+                        {{dataSource[col.field]}}
                     </ng-template>
         </ng-template>
 

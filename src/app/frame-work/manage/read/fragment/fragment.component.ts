@@ -54,18 +54,17 @@ export class FragmentComponent extends FactoryONE {
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
   }
-  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOB = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForFragmentNOB) {
-      this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.fragmentMASTERALL);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.fragmentMASTERALL);
     this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');
     this.defaultAddStatus();
     this.insertSelectedColumns();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForFragmentNOB)) {
+      this.callAPI();
+    }
   }
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnManager.getColumnsMenus(this.fragmentMasterColumns);
@@ -113,13 +112,13 @@ export class FragmentComponent extends FactoryONE {
       if (dataSource.isNew) {
         const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
         if (a) {
-          this.refreshTable();
+          this.callAPI();
         }
       }
       else {
         this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
         this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTEREDIT, dataSource);
-        this.refreshTable();
+        this.callAPI();
       }
     }
     else {
@@ -148,7 +147,7 @@ export class FragmentComponent extends FactoryONE {
       if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
         dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
         if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, dataSource))
-          this.refreshTable();
+          this.callAPI();
       }
     }
   }
@@ -158,7 +157,7 @@ export class FragmentComponent extends FactoryONE {
 
     if (this.fragmentManagerService.masterValidation(dataSource)) {
       if (this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, dataSource))
-        this.refreshTable();
+        this.callAPI();
     }
   }
   @Input() get selectedColumns(): any[] {

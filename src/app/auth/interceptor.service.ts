@@ -64,6 +64,14 @@ export class InterceptorService implements HttpInterceptor {
     });
   }
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
+    // const authReq = req.clone({
+    //   headers: req.headers
+    //     .set(this.authorizationHeader, this.bearer + token)
+    //     .set('Accept', 'application/json')
+    //     .set('Content-Type', 'application/json')
+    // });
+    // return authReq;
+
     return req.clone({
       headers: req.headers.set(this.authorizationHeader, this.bearer + token)
     });

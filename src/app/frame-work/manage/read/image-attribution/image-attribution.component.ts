@@ -4,6 +4,7 @@ import { IImageAttribution } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-image-attribution',
@@ -24,17 +25,15 @@ export class ImageAttributionComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForImageAttribution = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForImageAttribution) {
-      this.closeTabService.saveDataForImageAttribution = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.imageAttributionGet);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForImageAttribution = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.imageAttributionGet);
     this.defaultAddStatus();
     this.insertSelectedColumns();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForImageAttribution)) {
+      this.callAPI();
+    }
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
@@ -44,7 +43,6 @@ export class ImageAttributionComponent extends FactoryONE {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForImageAttribution = this.closeTabService.saveDataForImageAttribution.slice(0, index).concat(this.closeTabService.saveDataForImageAttribution.slice(index + 1));
   newRow(): IImageAttribution {
     return {
       title: '',
@@ -77,7 +75,7 @@ export class ImageAttributionComponent extends FactoryONE {
     if (a) {
       this.closeTabService.saveDataForImageAttribution[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       delete this.closeTabService.saveDataForImageAttribution[dataSource['dataSource'].id];
-      this.refetchTable(dataSource['ri']);
+      this.callAPI();
     }
   }
   async onRowEditSave(dataSource: object) {
@@ -96,15 +94,14 @@ export class ImageAttributionComponent extends FactoryONE {
     else {
       const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.imageAttributionEdit, dataSource['dataSource']);
       if (a) {
-        this.refreshTable();
+        this.callAPI();
       }
     }
   }
   private async onRowAdd(dataSource: IImageAttribution, rowIndex: number) {
     const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.imageAttributionAdd, dataSource);
     if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   @Input() get selectedColumns(): any[] {

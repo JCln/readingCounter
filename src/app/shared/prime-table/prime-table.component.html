@@ -585,6 +585,22 @@
                 </i>
             </td>
             <td class="__icon-columns" *ngIf="(
+                _outputFileName == 'errorsBackup'                
+            )" (click)="routeToEditPage(dataSource)">
+                <span class="ui-column-title">stackTrace مشاهده</span>
+                <i class="tooltip p_icons pi pi-server">
+                    <div class="tooltip_text_right">stackTrace مشاهده</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="(
+                _outputFileName == 'errorsBackup'                
+            )" (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">مشاهده پیام</span>
+                <i class="tooltip p_icons pi pi-envelope">
+                    <div class="tooltip_text_right">مشاهده پیام</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="(
                 _outputFileName == 'forbidden' || 
                 _outputFileName == 'forbiddenByParamWithType' 
             )" (click)="utilsService.showCarouselForbidden(dataSource)">

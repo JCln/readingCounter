@@ -9,7 +9,7 @@
     [_selectedColumnsToRemember]="'selectedImageAttribution'"
     [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (newedRowChangedStatus)="testChangedValue()"
     (onRowEditedSave)="onRowEditSave($event)"
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)"

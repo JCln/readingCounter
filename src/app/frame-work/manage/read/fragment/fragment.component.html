@@ -15,7 +15,7 @@
         [_sessionName]="'fragmentmaster-session'"
         [_selectedColumnsToRemember]="'selectedRRMaster'"
         (newedRowChangedStatus)="testChangedValue()"
-        (refreshedTable)="refreshTable()"     
+        (refreshedTable)="callAPI()"     
         (dropDownChanges)="closeTabService.saveDataForFragmentNOB['zoneId']"
         (removedRowEditing)="removeFragmentMaster($event)"        
         (onRowEditedSave)="onRowEditSave($event, $event)"

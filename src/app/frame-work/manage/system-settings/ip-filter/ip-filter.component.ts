@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IBlockOrSafeIp } from 'interfaces/iserver-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { UserBlockingComponent } from 'src/app/shared/user-blocking/user-blocking.component';
 
 @Component({
@@ -33,14 +35,14 @@ export class IpFilterComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.ipFilterRes = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
+  callAPI = async () => {
+    this.closeTabService.ipFilterRes = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilter);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.ipFilterRes)) {
+      this.callAPI();
     }
-    if (!this.closeTabService.ipFilterRes) {
-      this.closeTabService.ipFilterRes = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetIpFilter);
-    }
+    this.showDialogOnStart();
   }
   removeRow = async (dataSource: IBlockOrSafeIp) => {
     if (!this.readManagerService.verificationBlockOrSafeIP(dataSource))
@@ -50,7 +52,7 @@ export class IpFilterComponent extends FactoryONE {
     if (confirmed) {
       const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.RemoveIpFilter, dataSource);
       if (a) {
-        this.refreshTable();
+        this.callAPI();
       }
     }
   }
@@ -66,9 +68,24 @@ export class IpFilterComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
+  }
+  async showDialogOnStart() {
+    const config = {
+      messageTitle: EN_messages.learnFirst,
+      messageTitleTwo: EN_messages.learnFirstDesc,
+      text: EN_messages.ipFilterAnyChange,
+      minWidth: '21rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-info-circle',
+      doesNotReturnButton: false
+    }
+    this.closeTabService.utilsService.firstConfirmDialog(config);
+    // TODO: call opened more details dialog    
+
   }
 
 

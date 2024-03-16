@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-zone',
@@ -40,29 +41,26 @@ export class ZoneComponent extends FactoryONE {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForZone = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForZone) {
-      this.closeTabService.saveDataForZone = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneGET);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForZone = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneGET);
     this.regionDictionary = await this.sectorsManagerService.dictionaryWrapperService.getRegionDictionary();
-
     Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'regionId');
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForZone = this.closeTabService.saveDataForZone.slice(0, index).concat(this.closeTabService.saveDataForZone.slice(index + 1));
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForZone)) {
+      this.callAPI();
+    }
+  }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  منطقه: ' + rowDataAndIndex['dataSource'].regionId);
 
     if (a) {
       await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.ZoneREMOVE, rowDataAndIndex['dataSource'].id);
-      this.refetchTable(rowDataAndIndex['ri']);
+      this.callAPI();
     }
   }
   onRowEditInit(dataSource: any) {
@@ -82,9 +80,8 @@ export class ZoneComponent extends FactoryONE {
       dataSource['dataSource'].regionId = dataSource['dataSource'].regionId['id'];
     }
     const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneEDIT, dataSource['dataSource']);
-    if (res){
-      this.refreshTable();
-      Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'regionId');
+    if (res) {
+      this.callAPI();
     }
   }
   onRowEditCancel() {

@@ -2,7 +2,6 @@ import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 
 import { Component, ViewChild } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IPrivacy } from 'services/DI/privacies';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -50,15 +49,6 @@ export class PrivacyComponent extends FactoryONE {
     this.privacyOptions = this.securityService.getPrivacyToggle();
   }
   plusOrMinusPasswordLength = (value: number) => {
-    if (value > this.privacyOptions.maxPasswordLength) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.fifty + ENMessages.is, ENSnackBarTimes.threeMili);
-      return;
-    }
-
-    if (value < this.privacyOptions.minPasswordLength) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.eight + ENMessages.is, ENSnackBarTimes.threeMili);
-      return;
-    }
     this.closeTabService.saveDataForPolicies.minPasswordLength = value;
   }
   plusOrMinusDeactiveTerminationMinutes = (value: number) => {
@@ -125,6 +115,15 @@ export class PrivacyComponent extends FactoryONE {
   verification = async () => {
     if (this.closeTabService.saveDataForPolicies.maxLogRecords < this.privacyOptions.minLengthMaxLogRecords) {
       this.securityService.utilsService.snackBarMessageWarn(EN_messages.insert_minLengthMaxLogRecord);
+      return;
+    }
+    if (this.closeTabService.saveDataForPolicies.minPasswordLength > this.privacyOptions.maxPasswordLength) {
+      this.securityService.utilsService.snackBarMessageWarn(EN_messages.insert_maxPasswordLength);
+      return;
+    }
+
+    if (this.closeTabService.saveDataForPolicies.minPasswordLength < this.privacyOptions.minPasswordLength) {
+      this.securityService.utilsService.snackBarMessageWarn(EN_messages.insert_minPasswordLength);
       return;
     }
     if (!this.securityService.verificationTimes(this.closeTabService.saveDataForPolicies))

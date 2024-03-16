@@ -247,7 +247,7 @@ export class getInvalidLoginReasonDictionary {
         { id: 1, field: 'InvalidUser', title: 'کاربر غیرمجاز' },
         { id: 2, field: 'InvalidPassword', title: 'گذرواژه نادرست' },
         { id: 3, field: 'InvalidLoginAttemptCount', title: 'آستانه مسدود شدن' },
-        { id: 4, field: 'UserIsDeActived', title: 'کاربر غیرفعال' },
+        { id: 4, field: 'UserIsDeActived', title: 'کاربر غیرفعال شده' },
         { id: 5, field: 'UserIsLocked', title: 'کاربر قفل شده' },
         { id: 6, field: 'InvalidDeviceSerial', title: 'شماره سریال نادرست' },
         { id: 7, field: 'TwoStepExpiredTime', title: 'دومرحله‌ای زمان منقضی شده' },

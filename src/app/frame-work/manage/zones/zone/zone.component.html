@@ -9,7 +9,7 @@
     [_hasSaveColumns]= false
     [_numberOfExtraColumns]="[1, 2]"
     [dictionary]="regionDictionary"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (dropDownChanges)="closeTabService.saveDataForZone['regionId']"
     (removedRow)="removeRow($event)"

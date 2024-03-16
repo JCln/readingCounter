@@ -7,6 +7,7 @@ import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-user-role',
@@ -28,22 +29,19 @@ export class UserRoleComponent extends FactoryONE {
   ) {
     super();
   }
-
-  nullSavedSource = () => this.closeTabService.saveDataForRoleManager = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForRoleManager) {
-      this.closeTabService.saveDataForRoleManager = await this.userService.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleGET);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForRoleManager = await this.userService.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleGET);
     this.insertSelectedColumns();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForRoleManager)) {
+      this.callAPI();
+    }
   }
   insertSelectedColumns = () => {
     this._selectCols = this.userService.columnUserRoles();
     this._selectedColumns = this.userService.customizeSelectedColumns(this._selectCols);
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForRoleManager = this.closeTabService.saveDataForRoleManager.slice(0, index).concat(this.closeTabService.saveDataForRoleManager.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.userService.firstConfirmDialog(
       {
@@ -55,7 +53,7 @@ export class UserRoleComponent extends FactoryONE {
 
     if (a) {
       await this.userService.deleteSingleRow(ENInterfaces.RoleREMOVE, rowData['dataSource'].id);
-      this.refetchTable(rowData['ri']);
+      this.callAPI();
     }
   }
   onRowEditInit(dataSource: any) {
@@ -81,6 +79,7 @@ export class UserRoleComponent extends FactoryONE {
       if (res)
         this.userService.snackBarMessageSuccess(res);
     }
+    this.callAPI();
   }
   onRowEditCancel(dataSource: object) {
     this.defaultAddStatus();

@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'getUploaded', loadChildren: () => import('./get-uploaded/get-uploaded.module').then(GetUploaded => GetUploaded.GetUploadedModule) },
   { path: 'memoryStatus', loadChildren: () => import('./log-memory-status/log-memory-status.module').then(LogMemoryStatus => LogMemoryStatus.LogMemoryStatusModule) },
   { path: 'inactiveEntity', loadChildren: () => import('./inactive-entity/inactive-entity.module').then(InActiveEntityLog => InActiveEntityLog.InactiveEntityModule) },
+  { path: 'errorsBackup', loadChildren: () => import('./errors-backup/errors-backup.module').then(errorsBackup => errorsBackup.ErrorsBackupModule) },
 ];
 
 @NgModule({

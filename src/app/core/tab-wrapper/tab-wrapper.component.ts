@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { ITabs, ITabWrapperDetectDynamicRoute } from 'interfaces/ioverall-config';
+import { ITabs } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -49,69 +49,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return found;
     return null;
   }
-  getCurrentDynamicRoute = (route: string): string => {
-    if (this.getRouterUrl().includes(route))
-      return route;
-    return null;
-  }
   filterTabs = (routerUrl: string): ITabs[] => {
     return this.closeTabService.tabs.filter((item: any) => {
       return item.route !== routerUrl
     })
   }
-  findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
-    if (this.getCurrentDynamicRoute(EN_Routes.wrmlallfalse))
-      return {
-        _title: 'لیست', _dynamicRoute: EN_Routes.wrmlallfalse
-      }
-    if (this.getCurrentDynamicRoute(EN_Routes.wrmlalltrue))
-      return {
-        _title: 'لیست', _dynamicRoute: EN_Routes.wrmlalltrue
-      }
-    if (this.getCurrentDynamicRoute(EN_Routes['wrmtrackoffloadedoffloadMfy/']))
-      return {
-        _title: 'اصلاح', _dynamicRoute: EN_Routes['wrmtrackoffloadedoffloadMfy/']
-      }
-    return null;
-  }
-  dynamicRouteValidation = () => {
-    let lastUrlPart: string = '';
-    let completeRoutePart: string = '';
-
-    let dRoute: ITabWrapperDetectDynamicRoute = {
-      _title: '',
-      _dynamicRoute: ''
-    }
-    dRoute = this.findDynamicRouteStatus();
-    if (MathS.isNull(dRoute))
-      return;
-    else {
-      lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
-      completeRoutePart = this.router.url.split('/').pop();
-    }
-    // console.log(completeRoutePart);
-    // console.log(dRoute._dynamicRoute);
-    // console.log(lastUrlPart);
-
-    const a = {
-      route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
-    };
-
-    if (MathS.isNull(this.DoesTabsHaveThisRouteNow())) {
-      this.closeTabService.tabs.push(a);
-      // this.reFetchPageTitle();
-    }
-    this.reFetchPageTitle();
-  }
   getRouterUrl = (): string => { return this.router.url; }
-  staticRouteValidation = () => {
-    if (!this.DoesTabsHaveThisRouteNow()) {
-      this.getRouterUrl() === EN_Routes.wrprofile ? this.closeTabService.tabs.push(this.addProfileTab()) : ''
-    }
-  }
   verification = () => {
     const currentRouteFound = this.DoesCurrentRouteFound();
-    this.staticRouteValidation();
     if (currentRouteFound) {
       if (this.DoesTabsHaveThisRouteNow()) {
         this.reFetchPageTitle();
@@ -120,10 +65,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         this.closeTabService.tabs.push(currentRouteFound);
         this.reFetchPageTitle();
       }
-    } else {
-      this.dynamicRouteValidation();
     }
-    this.reFetchPageTitle();
   }
   getTabWrapper = async () => {
     this.sideBarItemsService.getLatestItems().subscribe(res => {
@@ -183,11 +125,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     return {
       route: EN_Routes.wr, title: 'نقشه/ داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
     };
-  }
-  addProfileTab = () => {
-    return {
-      route: EN_Routes.wrprofile, title: 'تنظیمات کاربری', cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
-    }
   }
   refreshCurrentPage = (tabRoute: string) => {
     this.interactionService.setRefresh(tabRoute);

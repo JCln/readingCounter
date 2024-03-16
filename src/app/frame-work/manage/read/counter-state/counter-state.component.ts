@@ -53,13 +53,11 @@ export class CounterStateComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForCounterState = this.closeTabService.saveDataForCounterState.slice(0, index).concat(this.closeTabService.saveDataForCounterState.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  ناحیه: ' + rowData['dataSource'].zoneId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.counterStateRemove, rowData['dataSource'].id);
-      this.refetchTable(rowData['ri']);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   onRowEditSave = async (dataSource: ICounterState) => {
@@ -92,16 +90,13 @@ export class CounterStateComponent extends FactoryONE {
     }
     else {
       await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.counterStateEdit, dataSource['dataSource']);
-      this.refreshTable();
     }
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
+    this.callAPI();
   }
   private async onRowAdd(dataSource: ICounterState, rowIndex: number) {
     const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.counterStateAdd, dataSource);
     if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
-      Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
+      this.callAPI();
     }
   }
 

@@ -84,8 +84,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               else
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkValuesAndTryAgain, ENSnackBarColors.warn);
             }
-
             const messageText = error.error.message ? error.error.message : '';
+
             //401 handling in authService
             switch (error.status) {
               // License
@@ -125,7 +125,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkNetwork, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs500:
-                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarColors.danger);
+                if (error.message)
+                  this.utilsService.snackWrapperService.openSnackBar(error.message, ENSnackBarColors.danger);
+                else
+                  this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs502:
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarColors.danger);

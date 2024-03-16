@@ -29,7 +29,7 @@ export class DateJalaliService {
     let persianDate = this.getJalaliDate();
 
     if (persianDate.length == 10)
-      return persianDate;
+      return Converter.persianToEngNumbers(persianDate);
     // add 0 to month
     if (persianDate.split('/')[1].length == 1) {
       persianDate = persianDate.substring(0, 5) + 0 + persianDate.substr(5);
@@ -56,7 +56,7 @@ export class DateJalaliService {
     let persianDate = this.getConvertedJalaliDate(item);
 
     if (persianDate.length == 10)
-      return persianDate;
+      return Converter.persianToEngNumbers(persianDate);
     // add 0 to month
     if (persianDate.split('/')[1].length == 1) {
       persianDate = persianDate.substring(0, 5) + 0 + persianDate.substr(5);

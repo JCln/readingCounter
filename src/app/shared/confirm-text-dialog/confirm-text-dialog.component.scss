@@ -49,6 +49,10 @@ p {
   text-align: center;
   color: var(--secondary_8);
   font-size: var(--font_ss);
+
+  @media (min-width:550px) {
+    width: 21rem;
+  }
 }
 
 .date_wrapper {

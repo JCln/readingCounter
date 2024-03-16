@@ -7,7 +7,7 @@
     [dictionary]="zoneDictionary"    
     [_outputEnabled]= false    
     [_numberOfExtraColumns]="[1, 2]"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (dropDownChanges)="closeTabService.saveDataForZoneBound['zoneId']"
     (removedRow)="removeRow($event)"

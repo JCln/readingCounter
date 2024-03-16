@@ -9,7 +9,7 @@
     [_outputEnabled]= false    
     [_hasSaveColumns]= false
     [_numberOfExtraColumns]="[1, 2]"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (dropDownChanges)="closeTabService.saveDataForRegion['provinceId']"
     (removedRow)="removeRow($event)"

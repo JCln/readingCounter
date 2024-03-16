@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-region',
@@ -40,29 +41,26 @@ export class RegionComponent extends FactoryONE {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForRegion = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForRegion) {
-      this.closeTabService.saveDataForRegion = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionGET);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForRegion = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionGET);
     this.provinceDictionary = await this.sectorsManagerService.dictionaryWrapperService.getProvinceDictionary();
-
     Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForRegion = this.closeTabService.saveDataForRegion.slice(0, index).concat(this.closeTabService.saveDataForRegion.slice(index + 1));
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForRegion)) {
+      this.callAPI();
+    }
+  }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  استان: ' + rowDataAndIndex['dataSource'].provinceId);
 
     if (a) {
       await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource'].id);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   onRowEditInit(dataSource: object) {
@@ -84,7 +82,7 @@ export class RegionComponent extends FactoryONE {
 
     const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.RegionEDIT, dataSource['dataSource']);
     if (res) {
-      this.refreshTable();
+      this.callAPI();
       Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
     }
   }

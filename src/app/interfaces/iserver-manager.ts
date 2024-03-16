@@ -40,6 +40,18 @@ export interface IRequestLog {
     ip: string
     tokenFailureReason: string
 }
+export interface ITextBackupLog {
+    ip: string,
+    message: string,
+    stacktrace: string,
+    source: string,
+    innerException: string,
+    targetSite: string,
+    data: string,
+    occuranceDateTime: string,
+    dateJalali: string,
+    time: string
+}
 export interface IAuthenticityAttempts {
     id: string,
     insertDateTime: string,

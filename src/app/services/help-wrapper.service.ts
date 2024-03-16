@@ -94,7 +94,7 @@ export class HelpWrapperService {
         messageOne: 'مشاهده کاربرانی که درحال حاضر به سامانه متصل هستند. امکان ارسال پیام شخصی، پیام تصویری و پیام ویدیویی به هر کاربر وجود دارد. \n ✔️	زمان به معنای آخرین ورود کاربران تاکنون است '
       }
     }
-    else if (currentRoute === EN_Routes.wrmzsr || currentRoute === EN_Routes.wrmzsp || currentRoute === EN_Routes.wrmzszb || currentRoute === EN_Routes.wrmzsz || currentRoute === EN_Routes.wrmzsc)
+    else if (currentRoute === EN_Routes.region || currentRoute === EN_Routes.wrmzsp || currentRoute === EN_Routes.zoneBound || currentRoute === EN_Routes.zone || currentRoute === EN_Routes.wrmzsc)
       return {
         title: 'مدیریت نواحی',
         messageOne: 'این بخش برای مشاهده، شخصی سازی و کنترل نواحی درنظر گرفته شده است. هر محدوده زیرمجموعه یک ناحیه/شهر و هر ناحیه/شهر زیرمجموعه یک منطقه و هر منطقه زیرمجموعه یک استان است.',
@@ -102,7 +102,7 @@ export class HelpWrapperService {
         messageTwo: 'برای افزودن یک ناحیه، پس از کلیک برروی گزینه افزودن مطابق تصویر و کامل کردن مقادیر خواسته شده، ناحیه ای ایجاد میشود، نکته حائز اهمیت مقدار منطقه است که یکی از مقادیر موجود در مناطق خودگردان است.',
         messageThree: 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد. \n ✔️	تغییرات بطور گروهی و در سایر بخش های برنامه اعمال خواهد شد.',
       }
-    else if (currentRoute === EN_Routes.wrmrkar)
+    else if (currentRoute === EN_Routes.rrkarbari)
       return {
         title: 'کاربری ها',
         messageOne: 'این بخش جهت مدیریت کاربری ها درنظر گرفته شده است. ',
@@ -135,11 +135,17 @@ export class HelpWrapperService {
         messageOne: 'این بخش جهت مدیریت نوع دوره های قرائت درنظر گرفته شده است. ',
         messageTwo: '✔️	شما میتوانید هر نوع دوره قرائتی ایجاد نمایید. \n ✔️	این قسمت برای اپلکیشن قرائت اندروید، صدور لیست، دوره قرائت و سایر بخش ها کاربرد دارد. '
       }
-    else if (currentRoute === EN_Routes.wrmrrp)
+    else if (currentRoute === EN_Routes.readingPeriod)
       return {
         title: 'دوره قرائت',
         messageOne: 'این بخش جهت مدیریت دوره های قرائت درنظر گرفته شده است. ',
         messageTwo: '✔️	شما میتوانید هر دوره قرائتی ایجاد نمایید.'
+      }
+    else if (currentRoute === EN_Routes.ipFilter)
+      return {
+        title: 'فیلتر IP',
+        messageOne: 'نحوه عملکرد مسدود کردن آی پی ها: بصورت پیش فرض تمامی محدوده آی پی ها (ip range) اجازه دسترسی ندارند و در واقع کلیه آی پی ها مسدود شده تلفی میشوند مگر اینکه با تعریف Rule هایی این قاعده ملغی شود. بعلاوه این امکان وجود دارد که یه محدوده مجاز (white list) برای آی پی ها تعریف شود و درون همان محدوده مجاز مجدداً یک یا چند آی پی مسدود شوند. برای مثال میتوان تعریف کرد که از 10.0.0.1 تا 10.0.0.255 مجاز شمرده شود اما استثنائاً 10.0.0.127 غیرمجاز باشد، نوع قاعده تعریف شده (white list یا black list بودن) با گزینه «مجاز» (بصورت چک باکس) در تعریف محدوده های مجاز یا غیرمجاز تعیین میگردد. پس از اجرای نرم افزار مقدار اولیه مجاز تعیین شده بصورت 0.0.0.0 تا 255.255.255.255 میباشد (کلیه ی آی پی ها مجاز شمرده میشوند) تا راهبر سامانه بنا به صلاحدید و نیاز های کارفرما اقدام به تغییر سیاست های محدود های مرتبط با IP نماید.',
+        messageTwo: 'درصورت مسدودیت هرکاربر، لازم است تا کاربر بصورت دستی توسط اپراتور از برنامه خارج شود و یا با اولین ورود به برنامه از مسدود بودن IP خود مطلع خواهد شد'
       }
     else if (currentRoute === EN_Routes.wrmrrpt)
       return {
@@ -152,12 +158,12 @@ export class HelpWrapperService {
         title: 'مدیریت apk',
         messageOne: '\n ✔️	درصورتی که نیاز به استفاده از آخرین APK وجود دارد برروی دانلود فایل کلیک نمایید. \n ✔️	برای ایجاد نسخه جدید با وارد کردن نام، کد و فایل نسخه میتوان به ایجاد نسخه جدید اقدام نمود. ',
       }
-    else if (currentRoute === EN_Routes.wrmrimgattr)
+    else if (currentRoute === EN_Routes.rrimageAttribution)
       return {
         title: 'توصیف تصاویر',
         messageOne: 'جهت اصلاح تصاویر در سایر بخش ها، علت اصلاح تصویر در این بخش تعریف می‌شود.',
       }
-    else if (currentRoute === EN_Routes.wrmrtxtout)
+    else if (currentRoute === EN_Routes.textOutputManager)
       return {
         title: 'تکست خروجی',
         messageOne: 'مدیریت چیدمان فایل تکست خروجی جهت ادغام با نرم افزار امور مشترکین استفاده می‌شود. ',

@@ -31,11 +31,9 @@ export class MyPreviousloginsComponent extends FactoryONE {
     this.logoutReasonDictionary = this.securityService.utilsService.getLogoutReason();
     this.invalidLoginReasonDictionary = this.securityService.utilsService.getInvalidLoginReason();
     this.convertLoginTime();
-    console.log(1);
 
     Converter.convertIdToTitle(this.closeTabService.myPreviousLogins, this.logoutReasonDictionary, 'logoutReasonId');
     Converter.convertIdToTitle(this.closeTabService.myPreviousLogins, this.invalidLoginReasonDictionary, 'invalidLoginReasonId');
-    console.log(2);
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForTrackReading)) {
@@ -50,7 +48,6 @@ export class MyPreviousloginsComponent extends FactoryONE {
       item.twoStepExpireDateTime = this.dateJalaliService.getDate(item.twoStepExpireDateTime) + '   ' + this.dateJalaliService.getTime(item.twoStepExpireDateTime);
       item.twoStepType = MathS.isBoolean(item.twoStepWasSuccessful) ? EN_messages.twoStepTypeByTwo : EN_messages.twoStepTypeByUserPass;
     })
-    console.log(3);
   }
 
 }

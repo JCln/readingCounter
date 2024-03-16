@@ -13,6 +13,7 @@ export interface IRegionManager {
     provinceId: number | string;
     logicalOrder: number;
     title: string;
+    connectionString: string
 }
 export interface IZoneManager {
     title: string;

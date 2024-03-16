@@ -6,7 +6,7 @@
     [_numberOfExtraColumns]="[1,2]"
     [_sessionName]="'ipfilter-session'"
     [_selectedColumnsToRemember]="'selectedIpFilter'"
-    (refreshedTable)="refreshTable()"    
+    (refreshedTable)="callAPI()"    
     (showedPictures)="openAddDialog($event, true)"
     (showedMoreDetails)="removeRow($event)"
     (openedAddDialog)="openAddDialog(emptyObject, false)"

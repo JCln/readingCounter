@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { RpmAddDgComponent } from './rpm-add-dg/rpm-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-reading-period',
@@ -41,7 +42,7 @@ export class ReadingPeriodComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
@@ -58,25 +59,22 @@ export class ReadingPeriodComponent extends FactoryONE {
           readingPeriodKindId: 'readingPeriodKindId',
         })
   }
-  nullSavedSource = () => this.closeTabService.saveDataForReadingPeriodManager = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForReadingPeriodManager) {
-      this.closeTabService.saveDataForReadingPeriodManager = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodAll);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForReadingPeriodManager = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodAll);
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-
     this.toConvert();
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForReadingPeriodManager = this.closeTabService.saveDataForReadingPeriodManager.slice(0, index).concat(this.closeTabService.saveDataForReadingPeriodManager.slice(index + 1));
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForReadingPeriodManager)) {
+      this.callAPI();
+    }
+  }
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  نوع دوره: ' + rowData['dataSource'].readingPeriodKindId + '،  ناحیه: ' + rowData['dataSource'].zoneId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodRemove, rowData['dataSource'].id);
-      this.refetchTable(rowData['ri']);
+      this.callAPI();
     }
   }
   onRowEditInit(dataSource: object) {
@@ -104,7 +102,7 @@ export class ReadingPeriodComponent extends FactoryONE {
       dataSource['dataSource'].readingPeriodKindId = dataSource['dataSource'].readingPeriodKindId['id'];
     }
     await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.readingPeriodEdit, dataSource['dataSource']);
-    this.toConvert();
+    this.callAPI();
   }
 
 }

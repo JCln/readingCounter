@@ -70,6 +70,8 @@ export enum EN_messages {
     insert_startDay = 'روز شروع اجرا خالی است',
     insert_endDay = 'روز پایان اجرا خالی است',
     insert_minLengthMaxLogRecord = 'تعداد رکورد های لاگ کمتر از حداقل مجاز است',
+    insert_maxPasswordLength = 'تعداد نویسه گذرواژه بیشتر از حداکثر مجاز است',
+    insert_minPasswordLength = 'تعداد نویسه گذرواژه کمتر از حداقل مجاز است',
     insert_startTime = 'زمان شروع خالی است',
     insert_endTime = 'زمان پایان خالی است',
     insert_toDate = 'تا تاریخ خالی است',
@@ -254,6 +256,9 @@ export enum EN_messages {
     confirm_yourPassword = 'تا زمان ورود مجدد، امکان ادامه فعالیت را نخواهید داشت. آیا از تغییر گذرواژه اطمینان دارید؟',
     confirmUserGroupChange1 = `1- توجه فرمایید دسترسی کاربران در گروه دقیقا منطبق با دسترسی تعیین شده توسط شما خواهد بود (تغییرات در دسترسی های قبلی لحاظ نمیگردد بلکه دسترسی های اعطا شده پس از ذخیره توسط شما اعمال خواهد شد)  \n 2-  کلیه کاربران در گروه مد نظر شما تا زمان ورود مجدد به سامانه اجازه فعالیت نخواهند داشت.`,
     confirmPilotSection = 'آزمایشی',
+    learnFirst = 'آموزش',
+    learnFirstDesc = 'لطفا پیش از هرگونه تغییر، قسمت راهنما را مطالعه فرمایید. راهنما با علامت «؟» مشخص شده است',
+    ipFilterAnyChange = 'درصورت رخداد هرگونه مشکل، مسئولیت آن با تغییر دهنده خواهد بود.',
     confirmPilotSection2 = 'همکار گرامی، این بخش بطور آزمایشی راه اندازی گردیده. منتظر  نظرات، انتقادات و پیشنهادات شما هستیم. ',
     confirm_remove = 'از حذف  مورد اطمینان دارید؟',
     confirm_removeingUser1 = 'شما درحال حذف کاربر «',
@@ -622,7 +627,10 @@ export enum ENEssentialsToSave {
   ownershipType = 'ownershipType',
   clientGet = 'clientGet',
   clientAdd = 'clientAdd',
-  myPreviousLogins = "myPreviousLogins"
+  myPreviousLogins = "myPreviousLogins",
+  inactiveEntitiy = "inactiveEntitiy",
+  saveDataForReadingPeriodManager = "saveDataForReadingPeriodManager",
+  errorsBackup = "errorsBackup"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -806,6 +814,7 @@ export enum ENSelectedColumnVariables {
     selectedRequestLogUsersLogins = 'usersLoginsDetails',
     selectedRequestLogMyPreviousLogins = 'myPreviousLogins',
     selectedRequestLogIpFilterGetBlocked = 'ipFilterGetBlocked',
+    selectedRequestLogErrorsBackup = 'errorsBackup',
     selectedRequestAuthenticityAttempts = 'authenticityAttempts',
     selectedRequestLogIpFilterGetInvalidTime = 'ipFilterGetInvalidTime',
     selectedRequestLogIpFilterBlockedUsers = 'ipFilterBlockedUsers',

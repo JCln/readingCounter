@@ -1061,6 +1061,7 @@ export class ColumnManager {
     roleHistory: IObjectIteratation[] = [
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
         { field: 'browserTitle', header: 'مرورگر', isSelected: true, isSelectedOrigin: true },
         { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true, isSelectedOrigin: true },
     ]
@@ -2862,11 +2863,23 @@ export class ColumnManager {
         { field: 'entityTitle', header: 'عنوان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
         { field: 'operationTitle', header: 'عملیات', isSelected: true, isSelectedOrigin: true, type: 'texture' },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true, type: 'texture' },
-        { field: 'insertDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'insertDateTime', header: 'تاریخ/زمان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true, type: 'texture' },
-        { field: 'insertTime', header: 'زمان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'insertTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, type: 'texture' },
         { field: 'browserInfo', header: 'اطلاعات مرورگر', isSelected: true, isSelectedOrigin: true, type: 'texture' },
         { field: 'osInfo', header: 'اطلاعات سیستم', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+    ]
+    errorsBackup: IObjectIteratation[] = [
+        { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true },
+        // { field: 'message', header: 'پیام', isSelected: true, isSelectedOrigin: true },
+        { field: 'source', header: 'منبع', isSelected: true, isSelectedOrigin: true },
+        { field: 'innerException', header: 'خطای داخلی', isSelected: false, isSelectedOrigin: false },
+        { field: 'targetSite', header: 'targetSite', isSelected: true, isSelectedOrigin: true },
+        { field: 'data', header: 'اطلاعات', isSelected: true, isSelectedOrigin: true },
+        { field: 'occuranceDateTime', header: 'تاریخ/زمان', isSelected: true, isSelectedOrigin: true },
+        { field: 'dateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'time', header: 'زمان', isSelected: false, isSelectedOrigin: false },
+        // { field: 'stacktrace', header: 'stacktrace', isSelected: true, isSelectedOrigin: true },
     ]
     userMasterDetailsAll: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },
@@ -2948,7 +2961,7 @@ export class ColumnManager {
     ]
     dynamicTraverse: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'storageTitle', header: 'عنوان لاتین', isSelected: false, isSelectedOrigin: false },
+        { field: 'storageTitle', header: 'عنوان لاتین', isSelected: true, isSelectedOrigin: true },
         { field: 'isChangeable', header: 'قابل تغییر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'defaultValue', header: 'مقدار پیشفرض', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         // { field: 'isActive', header: 'فعال', isSelected: true,isSelectedOrigin:true, isBoolean: true },

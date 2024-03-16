@@ -158,11 +158,3 @@ export interface INotificationAlertTypes {
     value: number,
     titleUnicode: string
 }
-export interface ITabWrapperDetectDynamicRoute {
-    _title: string,
-    _dynamicRoute: string
-}
-export interface IOffloadModifyType {
-    id: number,
-    modifyeType: ENOffloadModifyType
-}

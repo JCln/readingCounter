@@ -6,6 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-txt-output',
@@ -25,25 +26,22 @@ export class TxtOutputComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForTextOutput = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForTextOutput) {
-      this.closeTabService.saveDataForTextOutput = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.textOutputGET);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForTextOutput = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.textOutputGET);
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
-
     Converter.convertIdToTitle(this.closeTabService.saveDataForTextOutput, this.zoneDictionary, 'zoneId');
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForTextOutput = this.closeTabService.saveDataForTextOutput.slice(0, index).concat(this.closeTabService.saveDataForTextOutput.slice(index + 1));
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForTextOutput)) {
+      this.callAPI();
+    }
+  }
   removeRow = async (rowData: object) => {
     this.newRowLimit = 1;
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].itemTitle + '،  ناحیه: ' + rowData['dataSource'].zoneId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.textOutputRemove, rowData['dataSource'].id);
-      this.refetchTable(rowData['ri']);
+      this.callAPI();
     }
   }
   onRowEditInit(dataSource: object) {
@@ -97,8 +95,7 @@ export class TxtOutputComponent extends FactoryONE {
   private async onRowAdd(dataSource: ITextOutput, rowIndex: number) {
     const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.textOutputAdd, dataSource);
     if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
+      this.callAPI();
     }
   }
 

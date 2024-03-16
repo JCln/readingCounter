@@ -58,7 +58,7 @@ import { IPolicies, IRoleHistory, IUsersLoginBriefInfo, LoginBriefInfo } from '.
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IInactiveEntityLazy, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat, IOnOffLoadFlatLazy } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
-import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity, IAuthenticityAttempts } from 'interfaces/iserver-manager';
+import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity, IAuthenticityAttempts, ITextBackupLog } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
 import { ENEssentialsToSave, ENRandomNumbers, ITimesType } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
@@ -157,7 +157,7 @@ export class CloseTabService {
   saveDataForAppLevel4: IAuthLevel4[] = [];
 
   saveDataForCounterState: ICounterState[] = [];
-  saveDataForImageAttribution: IImageAttribution[];
+  saveDataForImageAttribution: IImageAttribution[] = [];
   saveDataForGuild: IGuild[] = [];
 
   ipFilterHistory: IGetBlockedCompareVals[] = [];
@@ -274,11 +274,11 @@ export class CloseTabService {
     outputMaxCountPerUser: null,
     outputMaxCountPerDay: null,
   };
-  ipFilterRes: IBlockOrSafeIp[];
+  ipFilterRes: IBlockOrSafeIp[] = [];
   saveDataForDynamicTraverse: IDynamicTraverse[];
-  saveDataForKarbari: IKarbari[];
+  saveDataForKarbari: IKarbari[] = [];
   saveDataForReadingConfig: IReadingConfigDefault[] = [];
-  saveDataForReadingPeriodManager: IReadingPeriod[];
+  saveDataForReadingPeriodManager: IReadingPeriod[] = [];
   saveDataForReadingPeriodKindManager: IReadingPeriodKind[];
   saveDataForAPKManager: IAPK[];
   saveDataForCounterReport: ICounterReport[];
@@ -287,9 +287,9 @@ export class CloseTabService {
   // zones
   saveDataForCountry: ICountryManager[];
   saveDataForProvince: IProvinceManager[];
-  saveDataForRegion: IRegionManager[];
-  saveDataForZone: IZoneManager[];
-  saveDataForZoneBound: IZoneBoundManager[];
+  saveDataForRegion: IRegionManager[] = [];
+  saveDataForZone: IZoneManager[] = [];
+  saveDataForZoneBound: IZoneBoundManager[] = [];
 
   saveDataForUserMasterHistory: IRoleHistory[] = [];
   saveDataForUserDetailsHistory: any = [];
@@ -741,6 +741,7 @@ export class CloseTabService {
   saveDataForDMAAnalyze: IReadingTimeRes[];
   saveDataForRRDetails: IReadingReportDetails[];
   RRGuildsWithParam: IReadingGuildReportOutput[];
+  errorsBackup: ITextBackupLog[] = [];
   saveDataForRequestLogListUser: IRequestLog[];
   saveDataForRequestLogAnonymous: IRequestLog[] = [];
   requestLogUnAuthorized: IRequestLog[] = [];
@@ -838,11 +839,11 @@ export class CloseTabService {
   };
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
-  saveDataForFragmentNOB: IFragmentMaster[];
+  saveDataForFragmentNOB: IFragmentMaster[] = [];
   saveDataForFragmentNOBDetails: IFragmentDetails[];
   fragmentNOBDetailsGUID: any;
 
-  saveDataForTextOutput: ITextOutput[];
+  saveDataForTextOutput: ITextOutput[] = [];
   saveDataForToolsExcelViewer: IDynamicExcelReq[];
   saveDataForDynamicReports: IDynamicReportsRes[];
   saveDataForPoliciesHistory: IPolicies[] = [];
@@ -1020,8 +1021,19 @@ export class CloseTabService {
   }
   mobileManagerforbiddenType: IForbiddenManager[];
 
+  /////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////
+
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackComplaint },
+    {
+      id: 1, value: ENEssentialsToSave.inactiveEntitiy, url: EN_Routes.inactiveEntity,
+      defaultValue: {
+        data: [],
+        totalRecords: 0
+      }
+    },
     { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsNotComplaint, url: EN_Routes.mobileFeedbackSuggest },
     {
       id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllCReq, value: ENEssentialsToSave.mobileManagerFeedbackAllC, url: EN_Routes.mobileFeedbackAllC, defaultReq: {
@@ -1089,23 +1101,24 @@ export class CloseTabService {
       , defaultValue_2: []
     },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamic },
-    { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.rrimageAttribution, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild, defaultValue: [] },
-    { id: 1, value: ENEssentialsToSave.ipFilterRes, url: EN_Routes.ipFilter },
+    { id: 1, value: ENEssentialsToSave.ipFilterRes, url: EN_Routes.ipFilter, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, defaultValue_2: '', url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },
-    { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.wrmrkar },
+    { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.rrkarbari, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqtr },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: EN_Routes.wrmrrpt },
-    { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: EN_Routes.wrmrnob },
+    { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: EN_Routes.wrmrnob, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.wrmrnobautoImport },
-    { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: EN_Routes.wrmrtxtout },
+    { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: EN_Routes.textOutputManager, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: EN_Routes.wrmrapk },
     { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, defaultValue: [], url: EN_Routes.wrmrrcd },
     { id: 1, value: ENEssentialsToSave.saveDataForReadingPeriodKindManager, url: EN_Routes.wrmrrpkm },
+    { id: 1, value: ENEssentialsToSave.saveDataForReadingPeriodManager, url: EN_Routes.readingPeriod, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterFormula, url: EN_Routes.wrmrformulaab },
     { id: 1, value: ENEssentialsToSave.saveDataForBadgetFormula, url: EN_Routes.wrmrformulabudget },
     { id: 1, value: ENEssentialsToSave.saveDataForTabsare2Formula, url: EN_Routes.wrmrformulatabsare2 },
@@ -1148,9 +1161,9 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRoleHistory, url: EN_Routes.roleHistory },
     { id: 1, value: ENEssentialsToSave.saveDataForCountry, url: EN_Routes.wrmzsc },
     { id: 1, value: ENEssentialsToSave.saveDataForProvince, url: EN_Routes.wrmzsp },
-    { id: 1, value: ENEssentialsToSave.saveDataForRegion, url: EN_Routes.wrmzsr },
-    { id: 1, value: ENEssentialsToSave.saveDataForZone, url: EN_Routes.wrmzsz },
-    { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: EN_Routes.wrmzszb },
+    { id: 1, value: ENEssentialsToSave.saveDataForRegion, url: EN_Routes.region, defaultValue: [] },
+    { id: 1, value: ENEssentialsToSave.saveDataForZone, url: EN_Routes.zone, defaultValue: [] },
+    { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: EN_Routes.zoneBound, defaultValue: [] },
     {
       id: 1, req: ENEssentialsToSave.importDynamicReq, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd, defaultReq: {
         fromEshterak: '',
@@ -1507,6 +1520,7 @@ export class CloseTabService {
     },
     { id: 2, value: ENEssentialsToSave.IOPolicyHistory, url: EN_Routes.IOPolicyHistory, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.iOPolicy, url: EN_Routes.IOPolicy },
+    { id: 2, value: ENEssentialsToSave.errorsBackup, url: EN_Routes.errorsBackup, defaultValue: [] },
     {
       id: 2, req: ENEssentialsToSave.authenticityAttemptsReq, value: ENEssentialsToSave.authenticityAttempts, url: EN_Routes.requestLogsAuthenticityAttempts, defaultReq: {
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),

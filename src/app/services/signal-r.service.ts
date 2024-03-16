@@ -13,7 +13,7 @@ import { ENToastColors, EN_messages } from 'interfaces/enums.enum';
 })
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
-  private readonly retryTimes: number[] = [0, 2000, 4000, 16000, null];
+  private readonly retryTimes: number[] = [0, 2000, 4000, 32000, null];
 
   constructor(
     public utilsService: UtilsService,

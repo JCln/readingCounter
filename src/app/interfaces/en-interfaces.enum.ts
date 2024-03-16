@@ -127,6 +127,7 @@ export enum ENInterfaces {
     unlockUser = 'V1/User/Unlock',
     userRemove = 'V1/User/Remove',
     userACTIVATE = 'V1/User/Activate',
+    logoutAUser = 'V1/User/Logout',
     userDEACTIVATE = 'V1/User/Deactivate',
     userOnlines = 'V1/User/Onlines',
     postUserKarkardSummary = 'V1/Tracking/UserKarkardSummary',
@@ -287,6 +288,7 @@ export enum ENInterfaces {
     requestLogUploadAttempts = 'V1/RequestLog/UploadAttempts',
     requestLogGetUploaded = 'V1/Upload/GetUploaded',
     requestLogInactiveEntity = 'V1/InactiveEntityLog/GetLazy',
+    requestLogErrorsBackup = 'V1/Server/ErrorsBackup',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

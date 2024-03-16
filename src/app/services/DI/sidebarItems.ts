@@ -5,6 +5,7 @@ export const sidebarItemsTest = {
         {
             route: '', title: '', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
                 { route: EN_Routes.myLogins, title: 'ورود های من', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.wrprofile, title: 'تنظیمات کاربری', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 0 },
                 { route: EN_Routes.wrmlallfalse, title: 'لیست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrrptsmamkarkardchart, title: 'چ_کارکرد', isClosable: true, isRefreshable: false, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrrptsmamdhchart, title: 'چ_پراکندگی ساعت', isClosable: true, isRefreshable: false, cssClass: '', logicalOrder: 2 },

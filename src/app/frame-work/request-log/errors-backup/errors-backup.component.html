@@ -1,0 +1,12 @@
+<app-prime-table 
+[dataSource]="closeTabService.errorsBackup"
+[_numberOfExtraColumns]="[1,2]"
+[_outputFileName]="'errorsBackup'"
+[_checkUpName]="'errorsBackup'"    
+[_sessionName]="'errorsBackup-session'"
+[_selectedColumnsToRemember]="'selectedRequestLogErrorsBackup'"
+(refreshedTable)="callAPI()"    
+(routedToEditPage)="showStackTraceDialog($event)"
+(routedToLoggs)="showMessageDialog($event)"
+>
+</app-prime-table>

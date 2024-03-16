@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-karbari',
@@ -39,28 +40,25 @@ export class KarbariComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForKarbari = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForKarbari) {
-      this.closeTabService.saveDataForKarbari = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariAll);
-    }
+  callAPI = async () => {
+    this.closeTabService.saveDataForKarbari = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariAll);
     this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
-
     Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'provinceId');
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForKarbari = this.closeTabService.saveDataForKarbari.slice(0, index).concat(this.closeTabService.saveDataForKarbari.slice(index + 1));
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForKarbari)) {
+      this.callAPI();
+    }
+  }
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  استان: ' + rowData['dataSource'].provinceId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.KarbariRemove, rowData['dataSource'].id);
-      this.refetchTable(rowData['ri']);
+      this.callAPI();
     }
   }
   onRowEditInit(dataSource: object) {
@@ -80,7 +78,7 @@ export class KarbariComponent extends FactoryONE {
       dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
     await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.KarbariEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'provinceId');
+    this.callAPI();
   }
 
 }
