@@ -1,3 +1,4 @@
+import { PageSignsService } from 'services/page-signs.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
@@ -20,13 +21,11 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 export class FragmentManagerService {
   fragmentDetails: IFragmentDetails;
   zoneDictionary: IDictionaryManager[] = [];
-  fragmentDetails_pageSign = {
-    GUid: null
-  };
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
+    public pageSignsService: PageSignsService,
     public utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
@@ -35,20 +34,12 @@ export class FragmentManagerService {
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, body);
     this.utilsService.snackBarMessageSuccess(res.message);
   }
-  getRouteParams = () => {
-    return this.utilsService.getRouteBySplit('/');
-  }
   routeToFragmentDetails = (route: string) => {
-    this.fragmentDetails_pageSign.GUid = route;
-    console.log(route);
-
-    this.utilsService.routeToByUrl(EN_Routes.wrmrnobDetail);
-  }
-  routeToAutomaticImport = () => {
-    this.utilsService.routeTo(EN_Routes.wrmrnobautoImport);
+    this.pageSignsService.fragmentDetails_pageSign.GUid = route;
+    this.utilsService.routeToByUrl(EN_Routes.fragmentDetail);
   }
   routeToFragmentMaster = () => {
-    this.utilsService.routeTo(EN_Routes.wrmrnob);
+    this.utilsService.routeTo(EN_Routes.fragment);
   }
   /* VALIDATION */
   private nullValidation = (sth: string | number, message?: string): boolean => {
@@ -257,18 +248,4 @@ export class FragmentManagerService {
     return this.detailsValidation();
   }
 
-  findIDFromTitleZoneDictionary = (title: number | string): number => {
-    let a = null;
-    this.zoneDictionary.find(item => {
-      if (item.title === title)
-        a = item.id
-    })
-    return a;
-  }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
 }

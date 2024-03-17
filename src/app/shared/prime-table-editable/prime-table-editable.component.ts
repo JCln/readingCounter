@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/enums.enum';
 import { PrimeNGConfig, SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -16,7 +16,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
   templateUrl: './prime-table-editable.component.html',
   styleUrls: ['./prime-table-editable.component.scss']
 })
-export class PrimeTableEditableComponent extends FactorySharedPrime {
+export class PrimeTableEditableComponent extends FactorySharedPrime{
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   onRowEditing: any;
   @ViewChild(Table) dtable: Table;
@@ -177,6 +177,11 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   hasFilters = (dtable: Table) => {
     this.hasFiltersInTable = this.utilsService.hasFilters(dtable);
+  }
+  ngOnChanges(): void {
+    if (this.dataSource) {
+      this.restoreLatestColumnChanges();
+    }
   }
 
 }

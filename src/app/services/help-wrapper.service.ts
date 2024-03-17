@@ -604,7 +604,7 @@ export class HelpWrapperService {
         title: 'گزارش های Excel',
         messageOne: 'پس از ساخت گزارش مدنظر خود در قسمت ابزار/گزارش ساز، در این قسمت پارامتر های ساخته شده را با مقادیر دلخواه پر کرده و نسبت به دانلود  اقدام می کنیم.'
       }
-    else if (currentRoute.includes(EN_Routes.wrmrnob))
+    else if (currentRoute.includes(EN_Routes.fragment))
       return {
         title: 'نوبتی',
         messageOne: 'اطلاعات کلی نوبتی در این بخش قابل مشاهده است',

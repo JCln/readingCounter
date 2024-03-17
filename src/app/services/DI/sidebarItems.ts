@@ -22,7 +22,7 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.wrmlpd, title: 'اطلاعات روزانه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrLicense, title: 'مجوز', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.NotificationMessages, title: 'پیام ها', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: EN_Routes.wrmrnobDetail, title: 'جزئیات نوبتی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.fragmentDetail, title: 'جزئیات نوبتی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.userRoleHistoryDetails, title: 'تغییرات گروه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.userMasterHistory, title: 'تغییرات دسترسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.userDetailsHistory, title: 'جزئیات تغییرات دسترسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },

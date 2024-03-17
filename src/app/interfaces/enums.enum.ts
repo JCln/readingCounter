@@ -741,7 +741,7 @@ export enum ENLocalStorageNames {
     virtuallScrollable = 'virtuallScrollable',
     defaultAggregateTracks = 'defaultAggregateTracks',
 }
-// ENSelectedColumnVariables enum
+// ENSelectedColumnVariables enum to Remember selected columns
 //  variable name MUST be the same as columnManagerName of the columns data
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
@@ -756,6 +756,9 @@ export enum ENSelectedColumnVariables {
     selectedTrackReading = 'reading',
     selectedMomentFlash = 'momentLs',
     selectedTrackOffloadedDetails = 'offloadedDetails',
+    selectedRRMaster = '_fragmentMaster',
+    selectedFragmentDetails = 'fragmentDetails',
+    selectedRRFragment = 'rrFragmentKarkardReq',
     selectedSimpleMasterByFragmentDetails = 'simpleMasterByFragmentDetails',
     selectedMasterByFragmentLazy = 'listMasterByFragmentLazy',
     selectedMasterByFragmentAllInGroupLazy = 'listMasterByFragmentAllInGroupLazy',
@@ -803,7 +806,6 @@ export enum ENSelectedColumnVariables {
     selectedAuth4 = 'auth4',
     selectedRRAnalyzeByParam = 'analyzePrfm',
     selectedDMAnalyze = 'analysis',
-    selectedRRMaster = '_fragmentMaster',
     selectedRRDetails = 'rrDetails',
     selectedImportedEdited = 'importedEdited',
     selectedRRGuildsParams = 'rrGuildsParams',
@@ -831,7 +833,6 @@ export enum ENSelectedColumnVariables {
     selectedRRLocked = 'rrLocked',
     selectedRRPreNumShown = 'rrPreNumber',
     selectedRROffloadedKarkard = 'karkardOffload',
-    selectedRRFragment = 'rrFragmentKarkardReq',
     selectedRRKarkardDaily = 'karkardDaily',
     selectedRRDisposalHours = 'disposalHs',
     selectedAbFormulas = 'abBaha',

@@ -840,8 +840,8 @@ export class CloseTabService {
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: IFragmentMaster[] = [];
-  saveDataForFragmentNOBDetails: IFragmentDetails[];
-  fragmentNOBDetailsGUID: any;
+  saveDataForFragmentNOBDetails: IFragmentDetails[] = [];
+  fragmentNOBDetailsGUID: string = '';
 
   saveDataForTextOutput: ITextOutput[] = [];
   saveDataForToolsExcelViewer: IDynamicExcelReq[];
@@ -1112,7 +1112,6 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqtr },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: EN_Routes.wrmrrpt },
-    { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: EN_Routes.wrmrnob, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.wrmrnobautoImport },
     { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: EN_Routes.textOutputManager, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: EN_Routes.wrmrapk },
@@ -1622,7 +1621,12 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForLMModifyReq, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
     { id: 2, req: ENEssentialsToSave.saveDataForEditUsersGUID, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },
     { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.userLoggins },
-    { id: 2, req: ENEssentialsToSave.fragmentNOBDetailsGUID, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: EN_Routes.wrmrnob },
+    { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: EN_Routes.fragment, defaultValue: [] },
+    {
+      id: 2, req: ENEssentialsToSave.fragmentNOBDetailsGUID, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: EN_Routes.fragmentDetail,
+      defaultValue: [],
+      defaultReq: ''
+    },
     {
       id: 13, req: ENEssentialsToSave.searchReqMosh, value: ENEssentialsToSave.saveDataForSearchMoshtarakin, url: EN_Routes.wrmssearchMosh, defaultValue: [], defaultReq: {
         zoneId: null,

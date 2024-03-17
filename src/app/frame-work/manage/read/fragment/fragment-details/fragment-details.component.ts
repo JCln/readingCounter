@@ -6,6 +6,7 @@ import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -16,11 +17,12 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class FragmentDetailsComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
-  private fragmentDetailsColumns: string = 'fragmentDetails';
+  readonly fragmentDetailsColumns: string = 'fragmentDetails';
 
-  zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
+
+  zoneDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
@@ -30,33 +32,24 @@ export class FragmentDetailsComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => {
-    this.closeTabService.saveDataForFragmentNOBDetails = null;
-    this.closeTabService.fragmentNOBDetailsGUID = null;
+  callAPI = async () => {
+    this.closeTabService.saveDataForFragmentNOBDetails = await this.fragmentManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.fragmentDETAILSDETAILS, this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid);
+    this.closeTabService.fragmentNOBDetailsGUID = this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid;
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    console.log(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
-    if (!this.fragmentManagerService.fragmentDetails_pageSign.GUid) {
+  classWrapper = async () => {
+    console.log(this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid);
+    if (!this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid) {
       this.fragmentManagerService.routeToFragmentMaster();
     }
 
     else {
-      console.log(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
-      if (canRefresh) {
-        this.nullSavedSource();
-      }
       console.log(this.closeTabService.fragmentNOBDetailsGUID);
 
       if (
-        this.closeTabService.fragmentNOBDetailsGUID != this.fragmentManagerService.fragmentDetails_pageSign.GUid ||
-        !this.closeTabService.saveDataForFragmentNOBDetails
+        this.closeTabService.fragmentNOBDetailsGUID != this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid ||
+        MathS.isNull(this.closeTabService.saveDataForFragmentNOBDetails)
       ) {
-        if (this.fragmentManagerService.fragmentDetails_pageSign.GUid.length < 6) {
-          this.fragmentManagerService.routeToFragmentMaster();
-          return;
-        }
-        this.closeTabService.saveDataForFragmentNOBDetails = await this.fragmentManagerService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.fragmentDETAILSDETAILS, this.fragmentManagerService.fragmentDetails_pageSign.GUid);
-        this.closeTabService.fragmentNOBDetailsGUID = this.fragmentManagerService.fragmentDetails_pageSign.GUid;
+        this.callAPI();
       }
       this.defaultAddStatus();
       this.insertSelectedColumns();
@@ -65,14 +58,16 @@ export class FragmentDetailsComponent extends FactoryONE {
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnManager.getColumnsMenus(this.fragmentDetailsColumns);
-    this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
+    this._selectedColumns = this.fragmentManagerService.columnManager.customizeSelectedColumns(this._selectCols);
+    console.log(this._selectedColumns);
+    console.log(this._selectCols);
+
   }
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForFragmentNOBDetails = this.closeTabService.saveDataForFragmentNOBDetails.slice(0, index).concat(this.closeTabService.saveDataForFragmentNOBDetails.slice(index + 1));
   newRow(): IFragmentDetails {
-    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this.fragmentManagerService.fragmentDetails_pageSign.GUid, isNew: true };
+    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid, isNew: true };
   }
   onRowEditInit(dataSource: IFragmentDetails) {
     // this.insertSelectedColumns();
@@ -87,6 +82,8 @@ export class FragmentDetailsComponent extends FactoryONE {
     return;
   }
   removeRow = async (dataSource: any) => {
+    console.log(dataSource);
+    
     this.newRowLimit = 1;
 
     if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource']))
@@ -98,7 +95,7 @@ export class FragmentDetailsComponent extends FactoryONE {
     if (a) {
       this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       delete this.closeTabService.saveDataForFragmentNOBDetails[dataSource['dataSource'].id];
-      this.refetchTable(dataSource['ri']);
+      this.callAPI();
     }
   }
   onRowEditSave(dataSource: object) {
@@ -121,8 +118,7 @@ export class FragmentDetailsComponent extends FactoryONE {
   private async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
     const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSADD, dataSource);
     if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   @Input() get selectedColumns(): any[] {
@@ -132,5 +128,6 @@ export class FragmentDetailsComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+
 
 }

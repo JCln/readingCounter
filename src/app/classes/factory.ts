@@ -144,14 +144,17 @@ export class FactorySharedPrime implements OnChanges {
     }
     restoreLatestColumnChanges = () => {
         if (!MathS.isNull(this._outputFileName)) {
+            console.log(this._outputFileName);
 
             if (this.browserStorageService.isExists(this._outputFileName)) {
                 this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
             }
             else {
+                console.log(this.columnManager.getColumnsMenus(this._outputFileName));
                 this._selectCols = this.columnManager.getColumnsMenus(this._outputFileName);
             }
             this._selectedColumns = this.profileService.columnManager.customizeSelectedColumns(this._selectCols);
+            console.log(this._selectedColumns);
         }
     }
     resetSavedColumns = () => {

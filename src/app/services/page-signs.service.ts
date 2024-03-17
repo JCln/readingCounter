@@ -71,6 +71,10 @@ export class PageSignsService {
     trackNumberOrGroupId: '',
     zoneTitle: ''
   };
+  fragmentDetails_pageSign: IOnOffLoadNessessities = {
+    GUid: '',
+    listNumber: null,
+  }
   masterByFragmentLazy_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,

@@ -26,7 +26,7 @@ export class FragmentComponent extends FactoryONE {
   _selectCols: any[];
   _selectedColumns: any[];
   isAddingNewRow: boolean = false;
-  private fragmentMasterColumns: string = '_fragmentMaster';
+  private readonly fragmentMasterColumns: string = '_fragmentMaster';
   clonedProducts: { [s: string]: IFragmentMaster; } = {};
 
   fragmentMasterId: string = '';
@@ -58,17 +58,17 @@ export class FragmentComponent extends FactoryONE {
     this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.fragmentMASTERALL);
     this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');
-    this.defaultAddStatus();
-    this.insertSelectedColumns();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForFragmentNOB)) {
       this.callAPI();
     }
+    this.defaultAddStatus();
+    this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnManager.getColumnsMenus(this.fragmentMasterColumns);
-    this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
+    this._selectedColumns = this.fragmentManagerService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   newRow(): IFragmentMaster {

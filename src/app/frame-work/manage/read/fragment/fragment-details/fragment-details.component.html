@@ -1,13 +1,12 @@
 <app-prime-table-editable     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
-    [dataSource]="closeTabService.saveDataForFragmentNOBDetails" 
+    [dataSource]="closeTabService.saveDataForFragmentNOBDetails"     
+    [_outputFileName]="fragmentDetailsColumns"
+    [_selectedColumnsToRemember]="'selectedFragmentDetails'"    
+    [_sessionName]="'fragmentdetails-session'"
     [_numberOfExtraColumns]="[1, 2]"
-    [_isInRowEditing]=true
-    [_hasSaveColumns]=false
-    [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
+    [_isInRowEditing]=true
     (newedRowChangedStatus)="testChangedValue()"
     (onRowEditedSave)="onRowEditSave($event)"
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
@@ -15,3 +14,7 @@
     (removedRowEditing)="removeRow($event)"
  > 
 </app-prime-table-editable>
+<!-- 
+    [newRow]="newRow()"      
+-->
+    
