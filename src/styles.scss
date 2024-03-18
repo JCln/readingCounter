@@ -145,6 +145,10 @@ li {
   font-family: var(--font-family);
 }
 
+.p-dialog {
+  min-height: 12rem;
+}
+
 .p-dialog,
 .p-dialog-header,
 .p-dialog-title {

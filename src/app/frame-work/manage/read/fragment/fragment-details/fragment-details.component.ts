@@ -2,11 +2,13 @@ import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentDetails } from 'interfaces/ireads-manager';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { FdDgComponent } from './fd-dg/fd-dg.component';
 
 
 @Component({
@@ -17,17 +19,16 @@ import { MathS } from 'src/app/classes/math-s';
 export class FragmentDetailsComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
+  ref: DynamicDialogRef;
   readonly fragmentDetailsColumns: string = 'fragmentDetails';
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   zoneDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
     public closeTabService: CloseTabService,
-    public fragmentManagerService: FragmentManagerService
+    public fragmentManagerService: FragmentManagerService,
+    private dialogService: DialogService
   ) {
     super();
   }
@@ -43,8 +44,6 @@ export class FragmentDetailsComponent extends FactoryONE {
     }
 
     else {
-      console.log(this.closeTabService.fragmentNOBDetailsGUID);
-
       if (
         this.closeTabService.fragmentNOBDetailsGUID != this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid ||
         MathS.isNull(this.closeTabService.saveDataForFragmentNOBDetails)
@@ -52,22 +51,25 @@ export class FragmentDetailsComponent extends FactoryONE {
         this.callAPI();
       }
       this.defaultAddStatus();
-      this.insertSelectedColumns();
     }
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnManager.getColumnsMenus(this.fragmentDetailsColumns);
-    this._selectedColumns = this.fragmentManagerService.columnManager.customizeSelectedColumns(this._selectCols);
-    console.log(this._selectedColumns);
-    console.log(this._selectCols);
 
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  newRow(): IFragmentDetails {
-    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid, isNew: true };
+  newRow = () => {
+    this.ref = this.dialogService.open(FdDgComponent, {
+      data: this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid,
+      rtl: true,
+      width: '80%'
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res) {
+        console.log(1);
+        this.callAPI();
+      }
+    });
   }
   onRowEditInit(dataSource: IFragmentDetails) {
     // this.insertSelectedColumns();
@@ -82,21 +84,22 @@ export class FragmentDetailsComponent extends FactoryONE {
     return;
   }
   removeRow = async (dataSource: any) => {
-    console.log(dataSource);
-    
     this.newRowLimit = 1;
 
     if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource']))
       return;
     const textMessage = 'از اشتراک: ' + dataSource['dataSource'].fromEshterak + ' تا اشتراک: ' + dataSource['dataSource'].toEshterak;
     const confirmed = await this.fragmentManagerService.firstConfirmDialog(textMessage);
-    if (!confirmed) return;
-    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
-    if (a) {
-      this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
-      delete this.closeTabService.saveDataForFragmentNOBDetails[dataSource['dataSource'].id];
-      this.callAPI();
+    console.log(confirmed);
+
+    if (confirmed) {
+      const res = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
+      if (res) {
+        this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
+        this.callAPI();
+      }
     }
+
   }
   onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
@@ -108,25 +111,9 @@ export class FragmentDetailsComponent extends FactoryONE {
       this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       return;
     }
-    if (!dataSource['dataSource'].id) {
-      this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
-    }
-    else {
+    if (dataSource['dataSource'].id) {
       this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSEDIT, dataSource['dataSource']);
     }
-  }
-  private async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
-    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSADD, dataSource);
-    if (a) {
-      this.callAPI();
-    }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 

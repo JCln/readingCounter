@@ -1,0 +1,21 @@
+<section>
+    <h2 class="title">افزودن جزئیات نوبتی (مسیر)</h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+
+            <div class="input_2" *ngFor="let mainDatas of columnManager.getColumnsMenus('fragmentDetailsAddDialog')">
+                <div class="_key">{{mainDatas.header}}</div>
+                <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="routeTitle[mainDatas.field]">
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                افزودن مسیر
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

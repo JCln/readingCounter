@@ -1,5 +1,6 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForFragmentNOBDetails"     
+    [_checkUpName]="'addItem'"
     [_outputFileName]="fragmentDetailsColumns"
     [_selectedColumnsToRemember]="'selectedFragmentDetails'"    
     [_sessionName]="'fragmentdetails-session'"
@@ -12,6 +13,7 @@
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
     (onRowEditedInit)="onRowEditInit($event)"
     (removedRowEditing)="removeRow($event)"
+    (openedAddDialog)="newRow()"
  > 
 </app-prime-table-editable>
 <!-- 

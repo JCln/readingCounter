@@ -502,6 +502,13 @@ export class ColumnManager {
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
     ]
+    fragmentDetailsAddDialog: IObjectIteratation[] = [
+        { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
+    ]
     _fragmentMaster: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: false, isSelectOption: true },
         { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },

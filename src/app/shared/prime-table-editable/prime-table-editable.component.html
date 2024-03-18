@@ -16,8 +16,8 @@
 
         <div class="header_icons_wrap">
             <div class="right_side">
-                <i *ngIf="_checkUpName == 'zoneBound' || _checkUpName == 'zone' || _checkUpName == 'region' || _checkUpName == 'province' || _checkUpName == 'country' || _checkUpName == 'karbari' || _checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3' || _checkUpName == 'tabsare2' ||  _checkUpName == 'auth1'||  _checkUpName == 'auth2'||  _checkUpName == 'auth3'||  _checkUpName == 'auth4'|| _checkUpName=='periodKind' "
-                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                <i *ngIf="_checkUpName == 'addItem'" (click)="openAddDialog()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
                 <!-- <i *ngIf="_checkUpName == 'abBaha' " (click)="openBatchAddDialog()"
@@ -68,7 +68,7 @@
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
-                <i *ngIf="_checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3'"
+                <i *ngIf="_outputFileName == 'abBaha' || _outputFileName == 'Budget'|| _outputFileName == 'tabsare3'"
                     (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
                     <div class="tooltip_text_right">افزودن فایل Excel</div>
                 </i>

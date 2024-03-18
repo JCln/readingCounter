@@ -35,7 +35,6 @@ export class MyPreviousFailuresComponent implements OnInit {
     this._selectCols = this.columnManager.getColumnsMenus(this.myPreviousFailuresColumns);
   }
   ngOnInit(): void {
-    console.log(this.config.data);
     this.dataSource = this.config.data;
     this.invalidLoginReasonIdDictionary = this.utilsService.getInvalidLoginReason();
     this.insertSelectedColumns();
