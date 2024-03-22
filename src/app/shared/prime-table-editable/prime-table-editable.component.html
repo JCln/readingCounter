@@ -20,10 +20,6 @@
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
-                <!-- <i *ngIf="_checkUpName == 'abBaha' " (click)="openBatchAddDialog()"
-                    class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن دسته ای</div>
-                </i> -->
                 <i *ngIf="_isInRowEditing && _checkUpName !== 'generalListModify'" appAddRow [table]="dtable"
                     [newRow]="newRow" [newRowLimit]="newRowLimit" (click)="newRowChangedStatus()"
                     class="tooltip _circle_border p_icons fa fa-plus">
@@ -72,7 +68,7 @@
                     (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
                     <div class="tooltip_text_right">افزودن فایل Excel</div>
                 </i>
-                <i *ngIf="_checkUpName == 'fragmentDetails'" (click)="routeToParent()"
+                <i *ngIf="_outputFileName == 'fragmentDetails'" (click)="routeToParent()"
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
                     <div class="tooltip_text_right">بازگشت به نوبتی</div>
                 </i>
@@ -111,7 +107,7 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
-                                    [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                    [ngClass]="{'p-dropdown-editable': true}" optionLabel="title" optionValue="id"
                                     (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                     [filter]="true" [showClear]="true">
                                 </p-dropdown>

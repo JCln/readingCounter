@@ -51,9 +51,9 @@ export class AutoImportDgComponent implements OnInit {
   }
   async save() {
     if (this.fragmentManagerService.verificationAutoImportAdd(this.dataReq)) {
-      const temp = await this.fragmentManagerService.postBody(ENInterfaces.automaticImportAdd, this.dataReq);
+      const temp = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.automaticImportAdd, this.dataReq);
       if (temp) {
-        this.fragmentManagerService.showSnack(temp.message, ENSnackBarColors.success);
+        this.fragmentManagerService.utilsService.snackBarMessageSuccess(temp.message);
         this.ref.close(this.dataReq);
       }
     }

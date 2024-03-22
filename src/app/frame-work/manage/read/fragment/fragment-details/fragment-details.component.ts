@@ -38,7 +38,6 @@ export class FragmentDetailsComponent extends FactoryONE {
     this.closeTabService.fragmentNOBDetailsGUID = this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid;
   }
   classWrapper = async () => {
-    console.log(this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid);
     if (!this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid) {
       this.fragmentManagerService.routeToFragmentMaster();
     }
@@ -66,7 +65,6 @@ export class FragmentDetailsComponent extends FactoryONE {
     })
     this.ref.onClose.subscribe(async res => {
       if (res) {
-        console.log(1);
         this.callAPI();
       }
     });
@@ -90,10 +88,9 @@ export class FragmentDetailsComponent extends FactoryONE {
       return;
     const textMessage = 'از اشتراک: ' + dataSource['dataSource'].fromEshterak + ' تا اشتراک: ' + dataSource['dataSource'].toEshterak;
     const confirmed = await this.fragmentManagerService.firstConfirmDialog(textMessage);
-    console.log(confirmed);
 
     if (confirmed) {
-      const res = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
+      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
       if (res) {
         this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
         this.callAPI();
@@ -101,7 +98,7 @@ export class FragmentDetailsComponent extends FactoryONE {
     }
 
   }
-  onRowEditSave(dataSource: object) {
+  async onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
     if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
@@ -112,7 +109,9 @@ export class FragmentDetailsComponent extends FactoryONE {
       return;
     }
     if (dataSource['dataSource'].id) {
-      this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSEDIT, dataSource['dataSource']);
+      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSEDIT, dataSource['dataSource']);
+      this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
     }
   }
 

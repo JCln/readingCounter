@@ -30,10 +30,6 @@ export class FragmentManagerService {
     public columnManager: ColumnManager
   ) { }
 
-  postBody = async (method: ENInterfaces, body: object): Promise<any> => {
-    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, body);
-    this.utilsService.snackBarMessageSuccess(res.message);
-  }
   routeToFragmentDetails = (route: string) => {
     this.pageSignsService.fragmentDetails_pageSign.GUid = route;
     this.utilsService.routeToByUrl(EN_Routes.fragmentDetail);
@@ -58,10 +54,7 @@ export class FragmentManagerService {
     }
     return true;
   }
-  showSnack = (message: string, color: ENSnackBarColors) => {
-    this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);
-  }
-
+  
   /* VERIFICATION */
 
   firstConfirmDialog = (text?: string): Promise<any> => {

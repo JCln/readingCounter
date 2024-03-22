@@ -19,6 +19,14 @@
     font-size: var(--font_ss);
   }
 
+  /*
+   //on small screens and overflow situations have 
+  // to set overflow so every content could be available
+  */
+  .cdk-overlay-pane {
+    overflow: auto;
+  }
+
   .mat-dialog-container {
     position: relative;
     background: var(--secondary_1);

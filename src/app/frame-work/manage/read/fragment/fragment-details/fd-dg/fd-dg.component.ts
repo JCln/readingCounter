@@ -31,12 +31,11 @@ export class FdDgComponent implements OnInit {
     this.ref.close(true);
   }
   async onRowAdd(dataSource: IFragmentDetails) {
-    console.log(dataSource);
-    
-    const res = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSADD, dataSource);
-    this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
-    console.log(2);
-    this.closeSuccess();
+    const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSADD, dataSource);
+    if (res) {
+      this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.closeSuccess();
+    }
   }
   verification = () => {
     if (this.fragmentManagerService.verificationDetails(this.routeTitle))

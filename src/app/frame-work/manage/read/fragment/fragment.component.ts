@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentMaster } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
@@ -41,23 +41,22 @@ export class FragmentComponent extends FactoryONE {
   ) {
     super();
   }
-  clickedDropDowns = (event: any, element: string, dataId: any) => {
-    for (let index = 0; index < this.closeTabService.saveDataForFragmentNOB.length; index++) {
-      if (this.closeTabService.saveDataForFragmentNOB[index].id === dataId) {
-        this.closeTabService.saveDataForFragmentNOB[index][element] = event.title;
-      }
-    }
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
   getLocalReOrderable = (): boolean => {
     return this.profileService.getLocalReOrderable();
   }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForFragmentNOB.forEach(item => {
+      item.changableZoneId = item.zoneId;
+    })
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.fragmentMASTERALL);
     this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');
+    this.insertToAuxZoneid();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'changableZoneId');
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForFragmentNOB)) {
@@ -72,16 +71,10 @@ export class FragmentComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   newRow(): IFragmentMaster {
-    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isNew: true };
+    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', changableZoneId: null, isNew: true };
   }
   onRowEditInit(dataSource: any) {
     this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
-  }
-  convertTitleToId = (data: any): any => {
-    return this.zoneDictionary.find(item => {
-      if (item.title === data)
-        return item;
-    })
   }
   onRowEditSave = async (dataSource: IFragmentMaster, rowIndex: number) => {
     dataSource = dataSource['dataSource'];
@@ -95,29 +88,21 @@ export class FragmentComponent extends FactoryONE {
     dataSource.toEshterak = Converter.persianToEngNumbers(dataSource.toEshterak);
 
     if (dataSource.zoneId == null) {
-      dataSource.zoneId = this.zoneDictionary[0];
-    }
-    if (typeof dataSource.zoneId !== 'object') {
-      this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
-      })
-    } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource.zoneId = this.zoneDictionary[0].id;
     }
 
     if (this.fragmentManagerService.masterValidation(dataSource)) {
       // convert a zone to id
 
       if (dataSource.isNew) {
-        const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
-        if (a) {
-          this.callAPI();
-        }
+        const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERADD, dataSource);
+        this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
+        this.callAPI();
       }
       else {
         this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
-        this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTEREDIT, dataSource);
+        const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTEREDIT, dataSource);
+        this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
         this.callAPI();
       }
     }
@@ -126,6 +111,8 @@ export class FragmentComponent extends FactoryONE {
     }
   }
   shiftFromFirst = (dataSource: IFragmentMaster) => {
+    console.log(this.table);
+
     if (dataSource.isNew) {
       this.table.value.shift();
     }
@@ -145,18 +132,15 @@ export class FragmentComponent extends FactoryONE {
     const textMessage = 'ناحیه: ' + dataSource.zoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
     if (this.fragmentManagerService.masterValidation(dataSource)) {
       if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
-        dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
-        if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, dataSource))
+        if (await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERREMOVE, dataSource))
           this.callAPI();
       }
     }
   }
 
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
-    dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
-
     if (this.fragmentManagerService.masterValidation(dataSource)) {
-      if (this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, dataSource))
+      if (this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERVALIDATE, dataSource))
         this.callAPI();
     }
   }
@@ -175,7 +159,7 @@ export class FragmentComponent extends FactoryONE {
         this.zoneId = dataSource.zoneId;
       }
       else {
-        this.fragmentManagerService.showSnack(EN_messages.isNotValidatedFragment, ENSnackBarColors.warn);
+        this.fragmentManagerService.utilsService.snackBarMessageWarn(EN_messages.isNotValidatedFragment);
       }
     }
   }

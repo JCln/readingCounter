@@ -6,17 +6,13 @@
     [_sessionName]="'fragmentdetails-session'"
     [_numberOfExtraColumns]="[1, 2]"
     [newRowLimit]="newRowLimit"
-    (refreshedTable)="callAPI()"
-    [_isInRowEditing]=true
+    (refreshedTable)="callAPI()"    
     (newedRowChangedStatus)="testChangedValue()"
     (onRowEditedSave)="onRowEditSave($event)"
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
     (onRowEditedInit)="onRowEditInit($event)"
-    (removedRowEditing)="removeRow($event)"
+    (removedRow)="removeRow($event)"
     (openedAddDialog)="newRow()"
+    (routedToParent)="fragmentManagerService.routeToFragmentMaster()"
  > 
 </app-prime-table-editable>
-<!-- 
-    [newRow]="newRow()"      
--->
-    
