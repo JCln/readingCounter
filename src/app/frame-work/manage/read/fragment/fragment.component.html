@@ -1,15 +1,13 @@
 <main *ngIf="route.children.length === 0 && !fragmentMasterId" class="main">
     <app-prime-table-editable     
         [dataSource]="closeTabService.saveDataForFragmentNOB" 
-        [_selectCols]="_selectCols" 
-        [_selectedColumns]="selectedColumns"
+        [_outputFileName]="fragmentMasterColumns"
         [_dictionaryName]="'changableZoneId'"
         [_checkUpName]="'fragmentMaster'"
         [dictionary]="zoneDictionary"    
         [_numberOfExtraColumns]="[1,2,3,4,5]"
         [_outputEnabled]=false
         [_isInRowEditing]=true
-        [_hasSaveColumns]=false
         [newRow]="newRow()"
         [newRowLimit]="newRowLimit"
         [_sessionName]="'fragmentmaster-session'"

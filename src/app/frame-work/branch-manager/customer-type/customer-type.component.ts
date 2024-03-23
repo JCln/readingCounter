@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ICustomerType } from 'interfaces/i-branch';
 import { BranchesVerificationService } from 'services/branches-verification.service';
@@ -14,10 +14,8 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class CustomerTypeComponent extends FactoryONE {
   clonedProducts: { [s: string]: ICustomerType; } = {};
-  private customerTypeColumns: string = 'customerType';
+  readonly customerTypeColumns: string = 'customerType';
   newRowLimit: number = 1;
-  _selectCols: any[];
-  _selectedColumns: any[];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -34,27 +32,13 @@ export class CustomerTypeComponent extends FactoryONE {
       this.callAPI();
     }
   }
-  columnSelectedMenuDefault = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.customerTypeColumns);
-    this._selectedColumns = this.branchesService.columnManager.customizeSelectedColumns(this._selectCols);
-  }
   ngOnInit(): void {
     this.classWrapper();
-    this.columnSelectedMenuDefault();
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refetchTable = (index: number) => this.closeTabService.customerType = this.closeTabService.customerType.slice(0, index).concat(this.closeTabService.customerType.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
       await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.customerTypeRemove, rowData['dataSource']);
-      this.refetchTable(rowData['ri']);
       this.callAPI();
     }
   }
@@ -83,7 +67,6 @@ export class CustomerTypeComponent extends FactoryONE {
     const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.customerTypeAdd, dataSource);
     if (res) {
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
-      this.refetchTable(rowIndex);
       this.callAPI();
     }
   }

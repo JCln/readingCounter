@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDynamicTraverse } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-dynamic-traverse',
@@ -13,9 +14,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class DynamicTraverseComponent extends FactoryONE {
   newRowLimit: number = 1;
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-  private dynamicTraverseColumns: string = 'dynamicTraverse';
+  readonly dynamicTraverseColumns: string = 'dynamicTraverse';
 
   clonedProducts: { [s: string]: IDynamicTraverse; } = {};
 
@@ -26,22 +25,16 @@ export class DynamicTraverseComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForDynamicTraverse = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
+  callAPI = async() => {
+    this.closeTabService.saveDataForDynamicTraverse = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.dynamicTraverseAll);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForDynamicTraverse)) {
+      this.callAPI();
     }
-    if (!this.closeTabService.saveDataForDynamicTraverse) {
-      this.closeTabService.saveDataForDynamicTraverse = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.dynamicTraverseAll);
-    }
-    this.defaultAddStatus();
-    this.insertSelectedColumns();
+    this.defaultAddStatus();  
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.dynamicTraverseColumns);
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
@@ -77,7 +70,7 @@ export class DynamicTraverseComponent extends FactoryONE {
     if (!confirmed) return;
     const route = ENInterfaces.dynamicTraverseRemove;
     if (await this.readManagerService.postObjectWithSuccessMessage(route, dataSource['dataSource']))
-      this.refreshTable();
+      this.callAPI();
   }
   async onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
@@ -95,22 +88,15 @@ export class DynamicTraverseComponent extends FactoryONE {
     else {
       const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.dynamicTraverseEdit, dataSource['dataSource']);
       if (a) {
-        this.refreshTable();
+        this.callAPI();
       }
     }
   }
   private async onRowAdd(dataSource: IDynamicTraverse) {
     const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.dynamicTraverseAdd, dataSource);
     if (a) {
-      this.refreshTable();
+      this.callAPI();
     }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+  }  
 
 }

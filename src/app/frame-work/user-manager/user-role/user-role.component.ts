@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -17,8 +17,6 @@ import { MathS } from 'src/app/classes/math-s';
 export class UserRoleComponent extends FactoryONE {
   regionDictionary: IDictionaryManager[] = [];
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: IRoleManager; } = {};
   table: Table;
   newRowLimit: number = 1;
@@ -31,16 +29,11 @@ export class UserRoleComponent extends FactoryONE {
   }
   callAPI = async () => {
     this.closeTabService.saveDataForRoleManager = await this.userService.ajaxReqWrapperService.getDataSource(ENInterfaces.RoleGET);
-    this.insertSelectedColumns();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForRoleManager)) {
       this.callAPI();
     }
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.userService.columnUserRoles();
-    this._selectedColumns = this.userService.customizeSelectedColumns(this._selectCols);
   }
   removeRow = async (rowData: object) => {
     const a = await this.userService.firstConfirmDialog(
@@ -88,13 +81,6 @@ export class UserRoleComponent extends FactoryONE {
       return;
     }
     this.closeTabService.saveDataForRoleManager[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   newRow(): IRoleManager {
     return {

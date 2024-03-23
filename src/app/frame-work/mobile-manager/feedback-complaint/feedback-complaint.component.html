@@ -1,14 +1,13 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.mobileManagerFeedbackTypeIsComplaint" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"    
+    [_outputFileName]="feedbackComplaintColumns"
     [_isInRowEditing]=true    
     [_numberOfExtraColumns]="[1,2]"
     [_sessionName]="'feedbackcomplaint-session'"
     [_selectedColumnsToRemember]="'selectedFeedbackComplaint'"
     [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (newedRowChangedStatus)="testChangedValue()"
     (onRowEditedSave)="onRowEditSave($event)"
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)"

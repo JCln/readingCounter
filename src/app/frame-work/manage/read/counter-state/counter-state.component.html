@@ -1,7 +1,6 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForCounterState" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
+    [_outputFileName]="counterStateDto"
     [_dictionaryName]="'zoneId'"
     [_checkUpName]="'counterState'"
     [dictionary]="zoneDictionary"    

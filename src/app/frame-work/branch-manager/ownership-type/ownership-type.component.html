@@ -1,8 +1,7 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.ownershipType" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
     [_checkUpName]="'ownershipType'"
+    [_outputFileName]="ownershipColumns"
     [_numberOfExtraColumns]="[1, 2]"
     [_isInRowEditing]=true
     [newRow]="newRow()"

@@ -1,5 +1,5 @@
 import { InteractionService } from 'services/interaction.service';
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENColumnResizeMode, ENImageTypes, ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
@@ -43,7 +43,7 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
 @Component({
     template: ''
 })
-export class FactorySharedPrime implements OnChanges {
+export class FactorySharedPrime implements OnChanges, AfterViewInit {
 
     _reOrderableTable: boolean;
     tempOriginDataSource: any[] = [];
@@ -54,7 +54,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() dataSource: any;
     @Input() _selectCols: any = [];
     @Input() _selectedColumns: any[];
-    @Input() _outputFileName: string;
+    @Input() readonly _outputFileName: string;
     @Input() _rowsPerPage: number[] = [10, 20, 50, 100];
     @Input() _paginator: boolean = true;
     @Input() _tooltipText: string;
@@ -144,17 +144,13 @@ export class FactorySharedPrime implements OnChanges {
     }
     restoreLatestColumnChanges = () => {
         if (!MathS.isNull(this._outputFileName)) {
-            console.log(this._outputFileName);
-
             if (this.browserStorageService.isExists(this._outputFileName)) {
                 this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
             }
             else {
-                console.log(this.columnManager.getColumnsMenus(this._outputFileName));
                 this._selectCols = this.columnManager.getColumnsMenus(this._outputFileName);
             }
             this._selectedColumns = this.profileService.columnManager.customizeSelectedColumns(this._selectCols);
-            console.log(this._selectedColumns);
         }
     }
     resetSavedColumns = () => {
@@ -181,8 +177,10 @@ export class FactorySharedPrime implements OnChanges {
         this.interactionService.setRefresh(url);
     }
     ngOnChanges(): void {
-        this.restoreLatestColumnChanges();
         this.hasBeenReadsToggler();
+    }
+    ngAfterViewInit(): void {
+        this.restoreLatestColumnChanges();
     }
     setTraslateToPrimeNgTable = () => {
         this.config.setTranslation(ENPrimeNGTranslator);

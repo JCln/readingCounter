@@ -1,7 +1,6 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.waterSource" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
+    [_outputFileName]="waterSourceColumns"
     [_checkUpName]="'waterSource'"
     [_numberOfExtraColumns]="[1, 2]"
     [_isInRowEditing]=true

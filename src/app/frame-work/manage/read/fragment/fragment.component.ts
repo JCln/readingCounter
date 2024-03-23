@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -23,10 +23,8 @@ export class FragmentComponent extends FactoryONE {
   newRowLimit: number = 1;
 
   zoneDictionary: IDictionaryManager[] = [];
-  _selectCols: any[];
-  _selectedColumns: any[];
   isAddingNewRow: boolean = false;
-  private readonly fragmentMasterColumns: string = '_fragmentMaster';
+  readonly fragmentMasterColumns: string = '_fragmentMaster';
   clonedProducts: { [s: string]: IFragmentMaster; } = {};
 
   fragmentMasterId: string = '';
@@ -63,11 +61,6 @@ export class FragmentComponent extends FactoryONE {
       this.callAPI();
     }
     this.defaultAddStatus();
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnManager.getColumnsMenus(this.fragmentMasterColumns);
-    this._selectedColumns = this.fragmentManagerService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   newRow(): IFragmentMaster {
@@ -143,13 +136,6 @@ export class FragmentComponent extends FactoryONE {
       if (this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERVALIDATE, dataSource))
         this.callAPI();
     }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   routeToAutomaticImport = (dataSource: any) => {
     dataSource.id = MathS.trimation(dataSource.id);

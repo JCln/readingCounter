@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFeedbackType } from 'interfaces/imobile-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -14,10 +14,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class FeedbackComplaintComponent extends FactoryONE {
   newRowLimit: number = 1;
   readonly isComplaint: boolean = true;
-  private feedbackComplaintColumns: string = 'feedbackComplaint';
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
+  readonly feedbackComplaintColumns: string = 'feedbackComplaint';
 
   clonedProducts: { [s: string]: IFeedbackType; } = {};
 
@@ -28,26 +25,19 @@ export class FeedbackComplaintComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.mobileManagerFeedbackTypeIsComplaint = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
+  callAPI = async () => {
+    this.closeTabService.mobileManagerFeedbackTypeIsComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSource(ENInterfaces.feedbackTypeManagerGetC);
+  }
+  classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.mobileManagerFeedbackTypeIsComplaint)) {
-      this.closeTabService.mobileManagerFeedbackTypeIsComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSource(ENInterfaces.feedbackTypeManagerGetC);
+      this.callAPI();
     }
     this.defaultAddStatus();
-    this.insertSelectedColumns();
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  insertSelectedColumns = () => {
-    this._selectCols = this.mobileAppService.columnManager.getColumnsMenus(this.feedbackComplaintColumns);
-    this._selectedColumns = this.mobileAppService.columnManager.customizeSelectedColumns(this._selectCols);
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refetchTable = (index: number) => this.closeTabService.mobileManagerFeedbackTypeIsComplaint = this.closeTabService.mobileManagerFeedbackTypeIsComplaint.slice(0, index).concat(this.closeTabService.mobileManagerFeedbackTypeIsComplaint.slice(index + 1));
   newRow(): IFeedbackType {
     return {
       id: 0,
@@ -81,10 +71,7 @@ export class FeedbackComplaintComponent extends FactoryONE {
 
     if (res) {
       this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
-      this.closeTabService.mobileManagerFeedbackTypeIsComplaint[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      delete this.closeTabService.mobileManagerFeedbackTypeIsComplaint[dataSource['dataSource'].id];
-      this.refetchTable(dataSource['ri']);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   async onRowEditSave(dataSource: object) {
@@ -104,26 +91,17 @@ export class FeedbackComplaintComponent extends FactoryONE {
     else {
       const res = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerEditC, dataSource['dataSource']);
       if (res) {
-        this.refreshTable();
-      }
-      else {
-        this.refetchTable(dataSource['ri']);
+        this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
+        this.callAPI();
       }
     }
   }
   private async onRowAdd(dataSource: IFeedbackType, rowIndex: number) {
-    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAddC, dataSource);
-    if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
+    const res = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAddC, dataSource);
+    if (res) {
+      this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
     }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IBranchState } from 'interfaces/i-branch';
 import { BranchesVerificationService } from 'services/branches-verification.service';
@@ -14,11 +14,9 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class StateComponent extends FactoryONE {
   clonedProducts: { [s: string]: IBranchState; } = {};
-  private branchStateColumns: string = 'branchState';
+  readonly branchStateColumns: string = 'branchState';
   newRowLimit: number = 1;
-  _selectCols: any[];
-  _selectedColumns: any[];
-
+  
   constructor(
     public closeTabService: CloseTabService,
     public branchesService: BranchesService,
@@ -34,27 +32,13 @@ export class StateComponent extends FactoryONE {
       this.callAPI();
     }
   }
-  columnSelectedMenuDefault = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.branchStateColumns);
-    this._selectedColumns = this.branchesService.columnManager.customizeSelectedColumns(this._selectCols);
-  }
   ngOnInit(): void {
-    this.classWrapper();
-    this.columnSelectedMenuDefault();
+    this.classWrapper();  
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refetchTable = (index: number) => this.closeTabService.branchState = this.closeTabService.branchState.slice(0, index).concat(this.closeTabService.branchState.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateRemove, rowData['dataSource']);
-      this.refetchTable(rowData['ri']);
+      await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateRemove, rowData['dataSource']);  
       this.callAPI();
     }
   }
@@ -83,8 +67,7 @@ export class StateComponent extends FactoryONE {
   private async onRowAdd(dataSource: IBranchState, rowIndex: number) {
     const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.branchStateAdd, dataSource);
     if (res) {
-      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
-      this.refetchTable(rowIndex);
+      this.branchesService.utilsService.snackBarMessageSuccess(res.message);      
       this.callAPI();
     }
   }
@@ -94,4 +77,4 @@ export class StateComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   testChangedValue() { this.newRowLimit = 2; }
-}
+F}

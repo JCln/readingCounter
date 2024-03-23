@@ -1,4 +1,5 @@
-<p-table #dtable id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll"
+<!-- Should not use ngif for make table show or hide, because add new row needs for this kind of table -->
+<p-table #dtable id="tdm" [columns]=" selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll"
     [rows]=_rowsNumbers [showCurrentPageReport]="true" [currentPageReportTemplate]="footerInfos"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" stateStorage="session"
     (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"

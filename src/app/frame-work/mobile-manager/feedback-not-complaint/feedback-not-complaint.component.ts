@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFeedbackType } from 'interfaces/imobile-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -14,10 +14,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class FeedbackNotComplaintComponent extends FactoryONE {
   newRowLimit: number = 1;
   readonly isComplaint: boolean = false;
-  private feedbackNotComplaintColumns: string = 'feedbackNotComplaint';
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
+  readonly feedbackNotComplaintColumns: string = 'feedbackNotComplaint';
 
   clonedProducts: { [s: string]: IFeedbackType; } = {};
 
@@ -28,26 +25,19 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
+  callAPI = async () => {
+    this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSource(ENInterfaces.feedbackTypeManagerGetS);
+  }
+  classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint)) {
-      this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint = await this.mobileAppService.ajaxReqWrapperService.getDataSource(ENInterfaces.feedbackTypeManagerGetS);
+      this.callAPI();
     }
     this.defaultAddStatus();
-    this.insertSelectedColumns();
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  insertSelectedColumns = () => {
-    this._selectCols = this.mobileAppService.columnManager.getColumnsMenus(this.feedbackNotComplaintColumns);
-    this._selectedColumns = this.mobileAppService.columnManager.customizeSelectedColumns(this._selectCols);
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refetchTable = (index: number) => this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint = this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint.slice(0, index).concat(this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint.slice(index + 1));
   // this is feedback NOT complaint
   newRow(): IFeedbackType {
     return {
@@ -84,7 +74,7 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
       this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
       this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       delete this.closeTabService.mobileManagerFeedbackTypeIsNotComplaint[dataSource['dataSource'].id];
-      this.refreshTable();
+      this.callAPI();
     }
   }
   async onRowEditSave(dataSource: object) {
@@ -101,28 +91,19 @@ export class FeedbackNotComplaintComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerEditS, dataSource['dataSource']);
-      if (a) {
-        this.refreshTable();
-      }
-      else {
-        this.refetchTable(dataSource['ri']);
+      const res = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerEditS, dataSource['dataSource']);
+      if (res) {
+        this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
+        this.callAPI();
       }
     }
   }
   private async onRowAdd(dataSource: IFeedbackType, rowIndex: number) {
-    const a = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAddS, dataSource);
-    if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
+    const res = await this.mobileAppService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.feedbackTypeManagerAddS, dataSource);
+    if (res) {
+      this.mobileAppService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
     }
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-
+  
 }

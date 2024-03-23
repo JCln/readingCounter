@@ -2726,6 +2726,9 @@ export class ColumnManager {
         { field: 'sizeInByte', header: 'اندازه(بایت)', isSelected: false, isSelectedOrigin: false },
         { field: 'imageDescription', header: 'توضیحات', isSelected: false, isSelectedOrigin: false },
     ]
+    imageAttribution: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true }
+    ]
     counterReport: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },

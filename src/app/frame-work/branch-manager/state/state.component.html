@@ -1,7 +1,6 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.branchState" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
+    [_outputFileName]="branchStateColumns"
     [_checkUpName]="'branchState'"
     [_numberOfExtraColumns]="[1, 2]"
     [_isInRowEditing]=true

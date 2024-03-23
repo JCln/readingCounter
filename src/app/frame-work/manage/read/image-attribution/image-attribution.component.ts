@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IImageAttribution } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -14,9 +14,6 @@ import { MathS } from 'src/app/classes/math-s';
 export class ImageAttributionComponent extends FactoryONE {
   newRowLimit: number = 1;
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   clonedProducts: { [s: string]: IImageAttribution; } = {};
 
   constructor(
@@ -27,8 +24,7 @@ export class ImageAttributionComponent extends FactoryONE {
   }
   callAPI = async () => {
     this.closeTabService.saveDataForImageAttribution = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.imageAttributionGet);
-    this.defaultAddStatus();
-    this.insertSelectedColumns();
+    this.defaultAddStatus();    
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForImageAttribution)) {
@@ -36,10 +32,6 @@ export class ImageAttributionComponent extends FactoryONE {
     }
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  insertSelectedColumns = () => {
-    this._selectCols = [{ field: 'title', header: 'عنوان', isSelected: true }];
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
@@ -104,12 +96,5 @@ export class ImageAttributionComponent extends FactoryONE {
       this.callAPI();
     }
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-
+  
 }

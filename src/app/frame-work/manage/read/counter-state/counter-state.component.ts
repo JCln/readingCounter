@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ICounterState } from 'interfaces/ireads-manager';
@@ -17,10 +17,8 @@ export class CounterStateComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
 
   clonedProducts: { [s: string]: ICounterState; } = {};
-  private counterStateDto: string = 'counterStateDto';
+  readonly counterStateDto: string = 'counterStateDto';
   newRowLimit: number = 1;
-  _selectCols: any[];
-  _selectedColumns: any[];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -38,20 +36,9 @@ export class CounterStateComponent extends FactoryONE {
       this.callAPI();
     }
   }
-  columnSelectedMenuDefault = () => {
-    this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.counterStateDto);
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
-  }
+  
   ngOnInit(): void {
-    this.classWrapper();
-    this.columnSelectedMenuDefault();
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+    this.classWrapper();    
   }
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  ناحیه: ' + rowData['dataSource'].zoneId);
@@ -101,7 +88,23 @@ export class CounterStateComponent extends FactoryONE {
   }
 
   newRow(): ICounterState {
-    return { moshtarakinId: null, title: '', zoneId: null, clientOrder: null, canEnterNumber: false, isMane: false, canNumberBeLessThanPre: false, isTavizi: false, shouldEnterNumber: false, isXarab: false, isFaqed: false, hasImage: false, displayDebt: false, displayIcons: false, isNew: true };
+    return {
+      moshtarakinId: null,
+      title: '',
+      zoneId: null,
+      clientOrder: null,
+      canEnterNumber: false,
+      isMane: false,
+      canNumberBeLessThanPre: false,
+      isTavizi: false,
+      shouldEnterNumber: false,
+      isXarab: false,
+      isFaqed: false,
+      hasImage: false,
+      displayDebt: false,
+      displayIcons: false,
+      isNew: true
+    };
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   testChangedValue() { this.newRowLimit = 2; }

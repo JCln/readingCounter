@@ -275,7 +275,7 @@ export class CloseTabService {
     outputMaxCountPerDay: null,
   };
   ipFilterRes: IBlockOrSafeIp[] = [];
-  saveDataForDynamicTraverse: IDynamicTraverse[];
+  saveDataForDynamicTraverse: IDynamicTraverse[] = [];
   saveDataForKarbari: IKarbari[] = [];
   saveDataForReadingConfig: IReadingConfigDefault[] = [];
   saveDataForReadingPeriodManager: IReadingPeriod[] = [];
@@ -1026,7 +1026,7 @@ export class CloseTabService {
   /////////////////////////////////////////////////////////////////////////////////////
 
   private val: ISidebarVals[] = [
-    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackComplaint },
+    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsComplaint, url: EN_Routes.mobileFeedbackComplaint, defaultValue: [] },
     {
       id: 1, value: ENEssentialsToSave.inactiveEntitiy, url: EN_Routes.inactiveEntity,
       defaultValue: {
@@ -1034,7 +1034,7 @@ export class CloseTabService {
         totalRecords: 0
       }
     },
-    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsNotComplaint, url: EN_Routes.mobileFeedbackSuggest },
+    { id: 1, value: ENEssentialsToSave.mobileManagerFeedbackTypeIsNotComplaint, url: EN_Routes.mobileFeedbackSuggest, defaultValue: [] },
     {
       id: 1, req: ENEssentialsToSave.mobileManagerFeedbackAllCReq, value: ENEssentialsToSave.mobileManagerFeedbackAllC, url: EN_Routes.mobileFeedbackAllC, defaultReq: {
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
@@ -1104,7 +1104,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.rrimageAttribution, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForGuild, url: EN_Routes.guild, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.ipFilterRes, url: EN_Routes.ipFilter, defaultValue: [] },
-    { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse },
+    { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, defaultValue_2: '', url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },

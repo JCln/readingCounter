@@ -39,15 +39,11 @@ export class UsersAllService {
     public ajaxReqWrapperService: AjaxReqWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
-    public dictionaryWrapperService: DictionaryWrapperService,
-    private columnManager: ColumnManager,
+    public dictionaryWrapperService: DictionaryWrapperService,  
     private mapService: MapService
   ) { }
 
-  /* COLUMNS */
-  columnUserRoles = (): IObjectIteratation[] => {
-    return this.columnManager._userRoles;
-  }
+  
   customizeSelectedColumns = (_selectCols: any[]) => {
     return _selectCols.filter(items => {
       if (items.isSelected)

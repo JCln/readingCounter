@@ -1,7 +1,6 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.customerType" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
+    [_outputFileName]="customerTypeColumns"
     [_checkUpName]="'customerType'"
     [_numberOfExtraColumns]="[1, 2]"
     [_isInRowEditing]=true

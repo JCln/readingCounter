@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IWaterSource } from 'interfaces/i-branch';
 import { BranchesVerificationService } from 'services/branches-verification.service';
@@ -14,10 +14,8 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class WaterSourceComponent extends FactoryONE {
   clonedProducts: { [s: string]: IWaterSource; } = {};
-  private waterSourceColumns: string = 'waterSource';
+  readonly waterSourceColumns: string = 'waterSource';
   newRowLimit: number = 1;
-  _selectCols: any[];
-  _selectedColumns: any[];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -34,27 +32,13 @@ export class WaterSourceComponent extends FactoryONE {
       this.callAPI();
     }
   }
-  columnSelectedMenuDefault = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.waterSourceColumns);
-    this._selectedColumns = this.branchesService.columnManager.customizeSelectedColumns(this._selectCols);
-  }
   ngOnInit(): void {
     this.classWrapper();
-    this.columnSelectedMenuDefault();
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refetchTable = (index: number) => this.closeTabService.waterSource = this.closeTabService.waterSource.slice(0, index).concat(this.closeTabService.waterSource.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
       await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.waterSourceRemove, rowData['dataSource']);
-      this.refetchTable(rowData['ri']);
       this.callAPI();
     }
   }
@@ -83,7 +67,6 @@ export class WaterSourceComponent extends FactoryONE {
     const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.waterSourceAdd, dataSource);
     if (res) {
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
-      this.refetchTable(rowIndex);
       this.callAPI();
     }
   }

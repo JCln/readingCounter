@@ -14,6 +14,13 @@ export class AddRowDirective {
   @Input() newRow: object;
   @Input() newRowLimit: number;
 
+  measureRowEdit = (): number => {
+    // if there is filtered value, then first clear all filters.
+    if (this.table.hasFilter()) {
+      this.utilsService.clearFilters(this.table);
+    }
+    return this.table._first;
+  }
   @HostListener('click', ['$event'])
   onClick(event: Event) {
 
@@ -23,7 +30,7 @@ export class AddRowDirective {
     }
 
     // Insert a new row
-    this.table.value.splice(this.table.first, 0, this.newRow);
+    this.table.value.splice(this.measureRowEdit(), 0, this.newRow);
     // Set the new row in edit mode
     this.table.initRowEdit(this.newRow);
 

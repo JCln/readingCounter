@@ -1,7 +1,6 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForGuild" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"    
+    [_outputFileName]="guildColumns"
     [_isInRowEditing]=true
     [_checkUpName]="'guild'"    
     [_numberOfExtraColumns]="[1,2]"
@@ -17,4 +16,3 @@
     (removedRowEditing)="removeRow($event)"
  > 
 </app-prime-table-editable>
-<!-- [_outputFileName]="'imgattr'" on prime table editable accur table not show data -->

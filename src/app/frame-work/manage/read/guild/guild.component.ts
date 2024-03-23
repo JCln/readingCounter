@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IGuild } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -14,10 +14,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class GuildComponent extends FactoryONE {
   newRowLimit: number = 1;
 
-  private guildColumns: string = 'guild';
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
+  readonly guildColumns: string = 'guild';
   clonedProducts: { [s: string]: IGuild; } = {};
 
   constructor(
@@ -25,10 +22,6 @@ export class GuildComponent extends FactoryONE {
     public readManagerService: ReadManagerService,
   ) {
     super();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnManager.getColumnsMenus(this.guildColumns);
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   callAPI = async () => {
     this.closeTabService.saveDataForGuild = await this.readManagerService.dictionaryWrapperService.getGuildDictionary(true);
@@ -42,7 +35,6 @@ export class GuildComponent extends FactoryONE {
       this.callAPI();
     }
     this.defaultAddStatus();
-    this.insertSelectedColumns();
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForGuild = this.closeTabService.saveDataForGuild.slice(0, index).concat(this.closeTabService.saveDataForGuild.slice(index + 1));
   newRow(): IGuild {
@@ -111,13 +103,6 @@ export class GuildComponent extends FactoryONE {
       this.refetchTable(rowIndex);
       this.callAPI();
     }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

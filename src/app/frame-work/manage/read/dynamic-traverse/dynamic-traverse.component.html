@@ -1,7 +1,6 @@
 <app-prime-table-editable     
-    [dataSource]="closeTabService.saveDataForDynamicTraverse" 
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"    
+    [dataSource]="closeTabService.saveDataForDynamicTraverse"     
+    [_outputFileName]="dynamicTraverseColumns"
     [_isInRowEditing]=true
     [_checkUpName]="'dynamicTraverse'"    
     [_numberOfExtraColumns]="[1,2]"
@@ -9,7 +8,7 @@
     [_selectedColumnsToRemember]="'selectedDynamicTraverse'"
     [newRow]="newRow()"
     [newRowLimit]="newRowLimit"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (newedRowChangedStatus)="testChangedValue()"
     (onRowEditedSave)="onRowEditSave($event)"
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
@@ -17,4 +16,3 @@
     (removedRowEditing)="removeRow($event)"
  > 
 </app-prime-table-editable>
-<!-- [_outputFileName]="'imgattr'" on prime table editable accur table not show data -->
