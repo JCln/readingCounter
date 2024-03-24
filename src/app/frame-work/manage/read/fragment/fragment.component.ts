@@ -125,16 +125,22 @@ export class FragmentComponent extends FactoryONE {
     const textMessage = 'ناحیه: ' + dataSource.zoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
     if (this.fragmentManagerService.masterValidation(dataSource)) {
       if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
-        if (await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERREMOVE, dataSource))
+        const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERREMOVE, dataSource)
+        if (res) {
+          this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
           this.callAPI();
+        }
       }
     }
   }
 
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
     if (this.fragmentManagerService.masterValidation(dataSource)) {
-      if (this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERVALIDATE, dataSource))
+      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERVALIDATE, dataSource)
+      if (res) {
+        this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
         this.callAPI();
+      }
     }
   }
   routeToAutomaticImport = (dataSource: any) => {
