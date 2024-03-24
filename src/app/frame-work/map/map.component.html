@@ -1,18 +1,15 @@
 <section class="top_info">
     <div class="unit">
-        <label (click)="showDashboard(false)" class="clickable_map tooltip" for="_map">
-            <i class="fa fa-dashboard"></i>
-            <div class="tooltip_text">داشبورد</div>
-        </label>
-        <input type="radio" id="_map" name="radio">
-
-        <button class="unit_toggle"></button>
-
-        <label (click)="showDashboard(true)" class="clickable_dash tooltip" for="_dash">
+        <button class="btn_3" (click)="showDashboard(true)" [routerLink]="['/wr']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
             <i class="fa fa-map-o"></i>
-            <div class="tooltip_text">نقشه</div>
-        </label>
-        <input type="radio" id="_dash" name="radio">
+            نقشه
+        </button>
+        <button class="btn_3" (click)="showDashboard(false)" [routerLink]="['/wr/db']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <i class="fa fa-dashboard"></i>
+            داشبورد
+        </button>
     </div>
 
     <app-locations [hidden]="!isShowMap" (sendlocations)="showCounterReaders($event.data, $event.showCluster)">
@@ -29,8 +26,8 @@
         </div>
     </section>
 
-    <div [hidden]="!isShowMap" class="_backto_previous">
-        <button style="z-index: 1;" (click)="utilsService.backToPreviousPage()" class="tooltip">
+    <div [hidden]="!isShowMap" class="back_tobutton">
+        <button style="z-index: 1;" (click)="utilsService.backToPreviousPage()" class="small_button tooltip">
             <i class="pi pi-arrow-left"></i>
             <div class="tooltip_text">بازگشت</div>
         </button>

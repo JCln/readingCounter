@@ -199,6 +199,12 @@ p-tabview {
   font-size: var(--font_l);
 }
 
+.app-version {
+  text-align: center;
+  font-family: var(--font-family);
+  font-size: var(--font_s);
+}
+
 .input_2 {
   min-width: 100%;
   color: var(--secondary_5);

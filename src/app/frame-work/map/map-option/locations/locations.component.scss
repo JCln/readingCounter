@@ -1,65 +1,22 @@
 @import 'variable.scss';
 @import 'button.scss';
 @import 'tooltip.scss';
+@import '../../map.component.scss';
 
 .polyline_config {
-  position: absolute;
   gap: .25rem;
-  left: 0rem;
-  top: calc(-1 * var(--font_3));
-  z-index: 2;
-  background: var(--white);
-  width: 20rem;
-  margin: var(--font_xs);
-  padding: var(--font_xs);
-  text-align: right;
   display: flex;
-  direction: rtl;
-  font-weight: 600;
-  border-radius: 15px;
-  box-shadow: 0px 2px 3px 1px var(--thirdy_3);
-
-  @media (max-width: 550px) {
-    margin: var(--font_l) 0;
-    width: 18rem;
-  }
 }
 
 ._dialog {
   position: relative;
 }
 
-.polyline_switch {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: $border_100vmax;
-  width: var(--font_25);
-  height: var(--font_25);
-  padding: 0rem;
-  border: 0;
-  background-color: var(--secondary_3);
-  color: var(--thirdy_1);
-
-  i {
-    color: var(--primary_5);
-    background: var(--secondary_3);
-    font-size: var(--font_m);
-    font-weight: 600;
-  }
-
-  &:hover,
-  &:focus-visible,
-  &:active {
-    outline: 1px solid var(--primary_5);
-  }
-}
-
 .btn_1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
   gap: var(--font_05);
   font-size: var(--font_s);
 }

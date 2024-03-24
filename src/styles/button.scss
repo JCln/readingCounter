@@ -58,3 +58,29 @@
     background: var(--orange_600);
   }
 }
+
+.btn_3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  user-select: none;
+  width: auto;
+  min-width: 8rem;
+  height: var(--font_26);
+  text-align: center;
+  border-radius: $border_10;
+  font-size: var(--font_s);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background-color: var(--white);
+  color: var(--primary_3);
+  transition: box-shadow cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302), 0 4px 8px 3px rgba(60, 64, 67, 0.149);
+  }
+}

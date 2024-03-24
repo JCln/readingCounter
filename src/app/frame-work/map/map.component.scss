@@ -41,83 +41,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  direction: rtl;
+  gap: var(--font_05);
   z-index: 0;
-
-  .unit_toggle {
-    cursor: pointer;
-    border: 2px solid var(--orange_500);
-    border-radius: $border_100vmax;
-    width: var(--font_5);
-    transition: all ease-in-out 250ms;
-
-    &::after {
-      content: '';
-      display: block;
-      margin-left: auto;
-      height: var(--font_s);
-      width: var(--font_s);
-      border-radius: $border_50;
-      background: var(--orange_500);
-      transition: all ease-in-out 250ms;
-
-    }
-  }
-
-  input:checked~.unit_toggle::after {
-    margin-left: 0;
-  }
-
-  input {
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    height: 1px;
-    width: 1px;
-  }
-
-  label {
-    display: flex;
-    position: relative;
-    font-size: var(--font_m);
-    margin: 0 var(--font_05);
-    color: var(--primary_5);
-    background: var(--secondary_3);
-    border-radius: $border_50;
-    padding: var(--font_05);
-    cursor: pointer;
-
-    &:hover,
-    &:focus-visible,
-    &:active {
-      outline: 1px solid var(--primary_5);
-    }
-  }
 }
 
-.clickable_dash {
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: var(--font_52);
-    height: var(--font_3);
-    top: calc(-1 * var(--font_025));
-    right: 0;
-  }
-}
-
-.clickable_map {
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: var(--font_55);
-    height: var(--font_3);
-    top: calc(-1 * var(--font_025));
-    left: 0;
-  }
+.active {
+  border: 1px solid;
 }
 
 // map option configs
@@ -131,7 +61,7 @@
   height: var(--font_25);
   padding: 0rem;
   border: 0;
-  background-color: var(--secondary_3);
+  background: var(--secondary_3);
   color: var(--primary_5);
 
   i {
@@ -211,32 +141,33 @@ h2 .btn_2 {
   }
 }
 
-._backto_previous {
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-right: 2px;
-  font-size: var(--font_m);
+.small_button {
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $border_10;
+  width: var(--font_25);
+  height: var(--font_25);
+  padding: 0rem;
+  border: 0;
+  background: var(--white);
+  color: var(--primary_3);
 
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: var(--font_25);
-    height: var(--font_25);
-    padding: 0;
-    border-radius: 50%;
-    color: var(--primary_5);
-    background: var(--secondary_3);
-    border: none;
-
-    &:hover,
-    &:focus-visible,
-    &:active {
-      outline: 1px solid var(--primary_5);
-    }
+  i {
+    font-size: var(--font_s);
+    font-weight: 600;
   }
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    outline: 1px solid var(--primary_5);
+  }
+}
+
+.back_tobutton {
+  margin-right: 5px;
 }
 
 // 

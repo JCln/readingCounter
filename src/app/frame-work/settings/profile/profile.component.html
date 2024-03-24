@@ -11,7 +11,7 @@
                     <div class="_desc">
                         <div *ngFor="let item of _selectCols" class="input_2">
                             <div class="_key">{{item.header}}</div>
-                            <div class="_value">{{myInfoDataSource[item.field]}}</div>
+                            <div class="_value">{{closeTabService.saveDataForProfile[item.field]}}</div>
                         </div>
                     </div>
                 </div>
@@ -264,7 +264,7 @@
                                 </div>
                             </div>
                         </button>
-                    </div>            
+                    </div>
                 </div>
             </section>
             <section>
@@ -273,6 +273,20 @@
                     <button class="btn_1 _pdf reset_all" (click)="profileService.resetAllSavedLocals()">
                         اعمال
                     </button>
+                </div>
+            </section>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel>
+        <ng-template pTemplate="header">
+            <i class="_icon pi pi-info-circle"></i>
+            <span>نسخه</span>
+        </ng-template>
+        <div class="over_all">
+            <section>
+                <div class="content">
+                    <h1 class="title">نسخه</h1>
+                    <div class="app-version">{{closeTabService.saveDataForProfile.appVersion}}</div>
                 </div>
             </section>
         </div>

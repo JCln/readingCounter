@@ -63,7 +63,7 @@ export class ProfileService {
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     public columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
     private jwtService: JwtService,

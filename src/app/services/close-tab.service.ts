@@ -59,7 +59,7 @@ import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IInactiveEntityLazy, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat, IOnOffLoadFlatLazy } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
 import { IRequestLog, IRequestLogInput, IServerOSInfo, IManageDrivesInfo, IManageServerErrorsRes, IUserActivation, IUserActivationREQ, IBlockOrSafeIp, IGetBlocked, IGetBlockedCompareVals, IIOPolicy, IIOPolicyHistory, IIOAttemptsLog, ILogMemoryStatus, IServerAuthenticityBrief, IServerGetAuthenticity, IAuthenticityAttempts, ITextBackupLog } from 'interfaces/iserver-manager';
-import { IWaterMarkConfig, ILicenseInfo, INotificationMessage } from 'interfaces/isettings';
+import { IWaterMarkConfig, ILicenseInfo, INotificationMessage, IProfile } from 'interfaces/isettings';
 import { ENEssentialsToSave, ENRandomNumbers, ITimesType } from 'interfaces/enums.enum';
 import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -985,7 +985,15 @@ export class CloseTabService {
     zoneIds: [0]
   }
   saveDataForFNB: IForbiddenManager[] = [];
-  saveDataForProfile: any;
+  saveDataForProfile: IProfile = {
+    firstName: '',
+    sureName: '',
+    username: '',
+    email: '',
+    displayName: '',
+    userCode: null,
+    appVersion: ''
+  };
   myPreviousLogins: IUsersLoginBriefInfo[] = [];
   saveDataForMomentLastRead: ILatestReads[] = [];
   saveDataForRRGallery = [];
@@ -1350,7 +1358,17 @@ export class CloseTabService {
       }
     },
     { id: 1, value: ENEssentialsToSave.saveDataForPoliciesHistory, url: EN_Routes.policyHistory },
-    { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile },
+    {
+      id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile, defaultValue: {
+        firstName: '',
+        sureName: '',
+        username: '',
+        email: '',
+        displayName: '',
+        userCode: null,
+        appVersion: ''
+      }
+    },
     { id: 1, value: ENEssentialsToSave.myPreviousLogins, url: EN_Routes.myLogins },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded, defaultValue: [] },

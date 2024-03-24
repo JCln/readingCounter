@@ -5,7 +5,8 @@ export interface IProfile {
     username: string,
     email: string,
     displayName: string,
-    userCode: number
+    userCode: number,
+    appVersion?: string
 }
 export interface ILicenseInfo {
     license: string,

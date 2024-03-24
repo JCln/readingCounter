@@ -113,29 +113,21 @@ export class ProfileComponent extends FactoryONE {
     },
   ];
   private profileColumns: string = 'profile';
-  myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 
   constructor(
     public profileService: ProfileService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public fontService: FontService
   ) {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForProfile;
-    }
-    if (this.closeTabService.saveDataForProfile) {
-      this.myInfoDataSource = this.closeTabService.saveDataForProfile;
-    }
-    else {
-      this.myInfoDataSource = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getMyProfile);
-      this.closeTabService.saveDataForProfile = this.myInfoDataSource;
-    }
+  classWrapper = async () => {
 
+    this.closeTabService.saveDataForProfile = await this.profileService.ajaxReqWrapperService.getDataSource(ENInterfaces.getMyProfile);
+
+    this.getCurrentVersion();
     this.getBasedOnDate();
     this.getFontStyle();
     this.getFontFamily();
@@ -151,6 +143,9 @@ export class ProfileComponent extends FactoryONE {
     this.getOutputConfig();
     this.getHasColumnsResizable();
     this.getWidthExpandMode();
+  }
+  getCurrentVersion = () => {
+    this.closeTabService.saveDataForProfile.appVersion = this.profileService.utilsService.getAppVersion();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnManager.getColumnsMenus(this.profileColumns);
