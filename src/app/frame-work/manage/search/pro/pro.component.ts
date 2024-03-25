@@ -51,7 +51,7 @@ export class ProComponent extends AllListsFactory {
   callApi = async () => {
     if (this.closeTabService.saveDataForSearchProReq.zoneId) {
       this.closeTabService.saveDataForSearchPro = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchPro, this.closeTabService.saveDataForSearchProReq);
-      this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
+      this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
       this.getNesseseriesByZone();
     }
     else {
@@ -95,7 +95,7 @@ export class ProComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.highLowStateDictionary, 'highLowStateId');
 
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForSearchPro);
-    this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

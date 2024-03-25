@@ -99,7 +99,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.getMasterInZone();
     this.converts();
     this.insertReadingConfigDefaults(this.readingConfigDefault);
-    this.importDynamicService.makeHadPicturesToBoolean(this.closeTabService.saveDataForAssessPre);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForAssessPre);
     this.setAllIsSelected(this.checkedItemsChanged());
   }
   doEmptyAssessPreData = () => {
@@ -133,7 +133,7 @@ export class AssessPreComponent extends AllListsFactory {
   }
   searchData() {
     this.importDynamicService.pageSignsService.assessPre_pageSign.listNumber = MathS.trimation(this.importDynamicService.pageSignsService.assessPre_pageSign.listNumber);
-    if (this.importDynamicService.verificationAssessPre(this.importDynamicService.pageSignsService.assessPre_pageSign))
+    if (this.importDynamicService.verificationService.verificationAssessPre(this.importDynamicService.pageSignsService.assessPre_pageSign))
       this.connectToServer();
   }
   getOnOffLoadIdsFromDataSource = () => {
@@ -145,9 +145,9 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService._assessAddReq.onOffLoadIds = a;
   }
   registerAssessAdd = async () => {
-    if (this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService._assessAddReq)) {
+    if (this.importDynamicService.verificationService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService._assessAddReq)) {
       this.getOnOffLoadIdsFromDataSource();
-      if (this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq)) {
+      if (this.importDynamicService.verificationService.verificationAssessAdd(this.importDynamicService._assessAddReq)) {
         this.importDynamicService.showResDialog(await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
         this.doEmptyAssessPreData();
       }
@@ -159,7 +159,7 @@ export class AssessPreComponent extends AllListsFactory {
       this.importDynamicService.showCheckboxDialog(a, false, EN_messages.insert_rrDetails);
       return;
     }
-    this.importDynamicService.snackEmptyValue();
+    this.importDynamicService.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
   makeDataSourceOptionsChecked = () => {
     this.closeTabService.saveDataForAssessPre.forEach(item => {

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IWaterSource } from 'interfaces/i-branch';
-import { BranchesVerificationService } from 'services/branches-verification.service';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -19,8 +18,7 @@ export class WaterSourceComponent extends FactoryONE {
 
   constructor(
     public closeTabService: CloseTabService,
-    public branchesService: BranchesService,
-    public branchesVerificationService: BranchesVerificationService
+    public branchesService: BranchesService    
   ) {
     super();
   }
@@ -45,7 +43,7 @@ export class WaterSourceComponent extends FactoryONE {
   onRowEditSave = async (dataSource: IWaterSource) => {
     this.defaultAddStatus();
 
-    if (!this.branchesVerificationService.stateVerification(dataSource['dataSource'])) {
+    if (!this.branchesService.verificationService.stateVerification(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
         this.closeTabService.waterSource.shift();
         return;

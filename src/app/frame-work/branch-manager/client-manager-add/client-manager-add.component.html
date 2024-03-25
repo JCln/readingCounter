@@ -104,7 +104,7 @@
                         <div class="_key">تاریخ نصب آب</div>
                         <div class="_value">
                             <app-date-jalali name="watarInstallationJalaliDay"
-                                (dateJalEvent)="closeTabService.receiveDateJalali(closeTabService.ENReadingReports.clientAddReq, $event)"
+                                (dateJalEvent)="closeTabService.receiveFromDateInstallation(closeTabService.ENReadingReports.clientAddReq, $event)"
                                 [dateObject]="closeTabService.clientAddReq.watarInstallationJalaliDay">
                             </app-date-jalali>
                         </div>
@@ -116,7 +116,7 @@
                         <div class="_key">تاریخ نصب فاضلاب</div>
                         <div class="_value">
                             <app-date-jalali name="sewageInstallationJalaliDay"
-                                (dateJalEvent)="closeTabService.receiveDateJalali(closeTabService.ENReadingReports.clientAddReq, $event)"
+                                (dateJalEvent)="closeTabService.receiveToDateInstallation(closeTabService.ENReadingReports.clientAddReq, $event)"
                                 [dateObject]="closeTabService.clientAddReq.sewageInstallationJalaliDay">
                             </app-date-jalali>
                         </div>
@@ -133,13 +133,28 @@
                             [(ngModel)]="closeTabService.listLatestInfo[col.field]">
                     </div>
                 </div>
-                <div class="input_icon" *ngIf="!col.readonly">
+                <div class="input_icon" *ngIf="!col.readonly && !col.isGIS">
                     <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
                     <div class="input_3">
                         <div class="_key">{{col.header}}</div>
                         <input [readonly]="col.readonly" [tabindex]="col.tabIndex"
                             [type]="col.isNumber ? 'number' : 'text'" class="_value" name="{{col.field}}"
                             [(ngModel)]="closeTabService.clientAddReq[col.field]">
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="!col.readonly && col.isGIS" (click)="showInMap()">
+                    <i class="pi pi-map-marker _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                    <div class="input_3">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngIf="closeTabService.clientAddReq[col.field]">
+                                <i class="pi pi-check-square"></i>
+                                مکان مشخص شده
+                            </div>
+                            <div *ngIf="!closeTabService.clientAddReq[col.field]">
+                                انتخاب روی نقشه
+                            </div>
+                        </div>
                     </div>
                 </div>
             </ng-template>

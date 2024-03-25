@@ -73,7 +73,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
       this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.pageSignsService.generalModifyLists_pageSign.groupId + '/', val);
-      this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
+      this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
       this.closeTabService.saveDataForLMGeneralModifyReq.GUid = this.pageSignsService.generalModifyLists_pageSign.GUid;
       this.closeTabService.saveDataForLMGeneralModifyReq.groupId = this.pageSignsService.generalModifyLists_pageSign.groupId;
       this.karbariDictionaryCode = await this.listManagerService.dictionaryWrapperService.getkarbariCodeDictionary();

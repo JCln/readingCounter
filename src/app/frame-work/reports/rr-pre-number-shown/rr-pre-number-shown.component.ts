@@ -96,7 +96,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
     this.converts();
   }
 

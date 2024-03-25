@@ -58,6 +58,3 @@ export interface ISearchProReportInput {
     _selectedKindId: string,
     searchByText: string,
 }
-export enum ENSearchs {
-    simple = '_searchSimpleReq'
-}

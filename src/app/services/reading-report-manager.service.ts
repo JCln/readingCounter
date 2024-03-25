@@ -275,9 +275,6 @@ export class ReadingReportManagerService {
       return this.utilsService.getSearchInOrderTo;
     }
   }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
-  }
   getApiUrl = (): string => {
     return this.utilsService.envService.API_URL;
   }
@@ -297,7 +294,7 @@ export class ReadingReportManagerService {
     public dictionaryWrapperService: DictionaryWrapperService,
     private jwtService: JwtService,
     private mapService: MapService,
-    private profileService: ProfileService,
+    public profileService: ProfileService,
     public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 

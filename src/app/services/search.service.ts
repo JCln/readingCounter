@@ -6,7 +6,7 @@ import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
   IObjectIteratation
 } from 'interfaces/ioverall-config';
-import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
+import { ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 
@@ -21,7 +21,6 @@ import { ColumnManager } from '../classes/column-manager';
   providedIn: 'root'
 })
 export class SearchService {
-  ENSearchs = ENSearchs;
   private readonly _searchProExcel: string = '_searchProExcel';
 
   constructor(
@@ -200,20 +199,6 @@ export class SearchService {
   }
   getMasrafStates = () => {
     return IMasrafStates;
-  }
-  makeHadPicturesToBoolean = (dataSource: any) => {
-    dataSource.forEach(item => {
-      if (item.imageCount > 0)
-        item.imageCount = true;
-      else
-        item.imageCount = false;
-    })
-  }
-  receiveFromDateJalali = (variable: ENSearchs, $event: string) => {
-    this[variable].fromDate = $event;
-  }
-  receiveToDateJalali = (variable: ENSearchs, $event: string) => {
-    this[variable].toDate = $event;
   }
   routeToLMAll = (row: ISearchSimpleOutput, whereToBack: EN_Routes) => {
     this.pageSignsService.allLists_pageSign.trackNumber = row.trackNumber;

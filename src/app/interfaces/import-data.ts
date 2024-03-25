@@ -122,6 +122,3 @@ export interface IReadingProgramRes {
     readingPeriodId: number,
     canContinue: boolean
 }
-export enum ENImportDatas {
-    importDynamic = 'importDynamicReq'
-}

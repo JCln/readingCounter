@@ -91,7 +91,7 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" dataKey="groupId"
     styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" stateKey="simplemasterbyfragment"
-    [reorderableColumns]="trackingManagerService.getLocalReOrderable()" appUnSortTable rowExpandMode="single">
+    [reorderableColumns]="trackingManagerService.profileService.getLocalReOrderable()" appUnSortTable rowExpandMode="single">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"

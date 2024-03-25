@@ -8,6 +8,7 @@ import { Converter } from 'src/app/classes/converter';
 import { Search } from 'src/app/classes/search';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
+import { CloseTabService } from 'services/close-tab.service';
 
 @Component({
   selector: 'app-list-search-mosh-dg',
@@ -27,6 +28,7 @@ export class ListSearchMoshDgComponent implements OnInit {
 
   constructor(
     public listManagerService: ListManagerService,
+    public closeTabService: CloseTabService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private cdr: ChangeDetectorRef,
@@ -77,7 +79,7 @@ export class ListSearchMoshDgComponent implements OnInit {
       return;
     this.dataSource = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchMoshtarak, this.listManagerService.searchReqMoshDialog);
     this.converts();
-    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
+    this.closeTabService.makeHadPicturesToBoolean(this.dataSource);
   }
   close() {
     this.ref.close();

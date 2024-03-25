@@ -5,6 +5,19 @@ import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
 
 declare let L;
+const iconRetinaUrl = 'assets/imgs/leaflet/marker-icon-2x.png';
+const iconUrl = 'assets/imgs/leaflet/marker-icon.png';
+const shadowUrl = 'assets/imgs/leaflet/marker-shadow.png';
+const simpleIcon = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+L.Marker.prototype.options.icon = simpleIcon;
+const MAX_LENGTH = 1;
+let _markerValue = [];
 
 @Component({
   selector: 'app-map-dg',
@@ -12,8 +25,8 @@ declare let L;
   styleUrls: ['./map-dg.component.scss']
 })
 export class MapDgComponent implements OnInit {
-  private layerGroup = new L.FeatureGroup();
-  private map: L.Map;
+  private layerGroup3 = new L.FeatureGroup();
+  private map3: L.Map;
 
   constructor(
     public ref: DynamicDialogRef,
@@ -28,12 +41,12 @@ export class MapDgComponent implements OnInit {
     lat = parseFloat(lat.toString().substring(0, 6));
     lag = parseFloat(lag.toString().substring(0, 6));
 
-    this.map.flyTo([(lat), (lag)], zoom);
+    this.map3.flyTo([(lat), (lag)], zoom);
   }
 
   private markSingle = (items: any) => {
     this.flyToDes(items.y, items.x, 12);
-    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup3)
       .bindPopup(
         `${items.firstName} <br>` + `${items.sureName} <br> اشتراک: ${items.eshterak} <br> ${items.trackNumber ? 'ش.پ :' + items.trackNumber : ''}`
       );
@@ -43,28 +56,64 @@ export class MapDgComponent implements OnInit {
   }
   private getOverlays = () => {
     return {
-      "لایه ها": this.layerGroup
+      "لایه ها": this.layerGroup3
     };
   }
   initMap = () => {
-    this.map = L.map('map', {
+    this.map3 = L.map('map3', {
       center: this.envService.mapCenter,
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup3]
     });
-    this.map.attributionControl.setPrefix(ENCompanyName.title);
-    L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
+    this.map3.attributionControl.setPrefix(ENCompanyName.title);
+    L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map3);
+  }
+  initMapNewMarker = () => {
+    this.map3 = L.map('map3', {
+      center: this.envService.mapCenter,
+      zoom: ENRandomNumbers.fifteen,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup3]
+    });
+
+    this.map3.attributionControl.setPrefix(ENCompanyName.title);
+    var markersGroup = L.layerGroup();
+    this.map3.addLayer(markersGroup);
+
+    this.map3.on('mouseup', function (e) {
+      // get the count of currently displayed markers
+      var markersCount = markersGroup.getLayers().length;
+
+      if (markersCount < MAX_LENGTH) {
+        // var marker = L.marker(e.latlng).addTo(markersGroup);
+        L.marker([e.latlng.lat, e.latlng.lng]).addTo(markersGroup);
+        _markerValue = [e.latlng.lat, e.latlng.lng];
+        return;
+      }
+      // remove the markers when MARKERS_MAX is reached
+      _markerValue = [];
+      markersGroup.clearLayers();
+    });
   }
   ngOnInit(): void {
-    this.initMap();
-    const x = this.config.data.x;
-    const y = this.config.data.y;
-    this.simpleMarkSingleLocation(x, y);
+    if (this.config.data.newMarker) {
+      this.initMapNewMarker();
+    }
+    else {
+      this.initMap();
+      const x = this.config.data.x;
+      const y = this.config.data.y;
+      this.simpleMarkSingleLocation(x, y);
+    }
   }
   close() {
     this.ref.close();
+  }
+  closeWithMarkerValue() {
+    this.ref.close(_markerValue);
   }
 
 }

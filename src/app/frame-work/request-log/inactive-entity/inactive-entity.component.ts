@@ -85,9 +85,6 @@ export class InactiveEntityComponent extends FactoryONE {
     this.closeTabService.utilsService.clearFilters(table);
     this.hasFiltersInTable = false;
   }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }

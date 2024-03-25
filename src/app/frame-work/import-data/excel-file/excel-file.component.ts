@@ -41,9 +41,9 @@ export class ExcelFileComponent extends FactoryONE {
   connectToServer = async () => {
     if (!MathS.isNull(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId)) {
 
-      if (this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.saveDataForImportDataFileExcelReq)) {
+      if (this.importDynamicService.verificationService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.saveDataForImportDataFileExcelReq)) {
         console.log(this.closeTabService.saveDataForImportDataFileExcelReq);
-        const validation = this.importDynamicService.checkExcelFileVertification(this.closeTabService.saveDataForImportDataFileExcelReq);
+        const validation = this.importDynamicService.verificationService.checkExcelFileVertification(this.closeTabService.saveDataForImportDataFileExcelReq);
         if (validation) {
           this.uploadFile(this.closeTabService.saveDataForImportDataFileExcelReq);
           // this._canShowAddButton = false;
@@ -51,7 +51,7 @@ export class ExcelFileComponent extends FactoryONE {
       }
     }
     else {
-      this.importDynamicService.snackMessage(EN_messages.insert_zone);
+      this.importDynamicService.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
     }
   }
   private insertReadingConfigDefaults = (rcd: any) => {
@@ -106,7 +106,7 @@ export class ExcelFileComponent extends FactoryONE {
 
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
-      if (this.importDynamicService.verificationExcelFile(fileInput.files)) {
+      if (this.importDynamicService.verificationService.verificationExcelFile(fileInput.files)) {
         this.importDynamicService.postExcelFile(ENInterfaces.postImportDataFileExcel, form, fileInput.files);
       }
     }

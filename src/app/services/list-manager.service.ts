@@ -286,15 +286,7 @@ export class ListManagerService {
 
 
     return true;
-  }
-  makeHadPicturesToBoolean = (dataSource: any) => {
-    dataSource.forEach(item => {
-      if (item.imageCount > 0)
-        item.imageCount = true;
-      else
-        item.imageCount = false;
-    })
-  }
+  }  
   getReadingReportTitles = async ($event) => {
     const a = await this.ajaxReqWrapperService.postDataSourceById(ENInterfaces.ReadingReportTitles, $event)
     if (a.length) {

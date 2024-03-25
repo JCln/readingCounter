@@ -6,7 +6,7 @@
                 <div *ngFor="let orderType of importDynamicService.utilsService.getSearchInOrderTo">
                     <div class="p-field-radiobutton">
                         <p-radioButton name="orderByDate" [value]="orderType.isSelected"
-                            [(ngModel)]="importDynamicService._isOrderByDate" [inputId]="orderType.key">
+                            [(ngModel)]="closeTabService._isOrderByDate" [inputId]="orderType.key">
                         </p-radioButton>
                         <label [for]="orderType.key">{{orderType.title}}</label>
                     </div>
@@ -50,7 +50,7 @@
                 </section>
                 <section class="content_inline">
                     <div class="input_2"
-                        [hidden]="importDynamicService._isOrderByDate || !readingPeriodKindsDictionary.length">
+                        [hidden]="closeTabService._isOrderByDate || !readingPeriodKindsDictionary.length">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="input_2"
-                        [hidden]="importDynamicService._isOrderByDate || !readingPeriodDictionary.length">
+                        [hidden]="closeTabService._isOrderByDate || !readingPeriodDictionary.length">
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
@@ -87,20 +87,20 @@
                     </div>
                 </section>
                 <section class="content_inline">
-                    <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="importDynamicService.receiveFromDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.importDynamic, $event)"
                                 [dateObject]="closeTabService.importDynamicReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="importDynamicService.receiveToDateJalali(importDynamicService.ENImportDatas.importDynamic, $event)"
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.importDynamic, $event)"
                                 [dateObject]="closeTabService.importDynamicReq.toDate">
                             </app-date-jalali>
                         </div>

@@ -32,9 +32,9 @@ export class SimafaSingleComponent extends FactoryONE {
     super();
   }
   connectToServer = async () => {
-    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.simafaSingleReq))
+    if (!this.importDynamicService.verificationService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.simafaSingleReq))
       return;
-    const validation = this.importDynamicService.checkSimafaSingleVertification(this.closeTabService.simafaSingleReq);
+    const validation = this.importDynamicService.verificationService.checkSimafaSingleVertification(this.closeTabService.simafaSingleReq);
     if (!validation)
       return;
     const a = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaSingle, this.closeTabService.simafaSingleReq);

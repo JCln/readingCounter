@@ -2020,6 +2020,14 @@ export class ColumnManager {
         { field: 'year', header: 'سال', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
     ]
+    _simafaBatch: IObjectIteratation[] = [
+        { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'orderDigit', header: 'ترتیب عددی', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'orderPersian', header: 'ترتیب', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'routeAndReaderIds', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: false, isSelectOption: true }
+    ]
 
     tabsare3: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true, isSelectOption: true },
@@ -2997,7 +3005,7 @@ export class ColumnManager {
         { field: 'nationalId', header: 'کد ملی', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'mobiles', header: 'موبایل ها', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2" },
-        { field: 'customerNumber', header: 'شماره اشتراک', isSelected: false, isSelectedOrigin: false, readonly: true },
+        { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'readingNumber', header: 'شماره قرائت', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'billId', header: 'ش.قبض', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'fullName', header: 'نام و نام‌خانوادگی', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2" },
@@ -3048,7 +3056,7 @@ export class ColumnManager {
         { field: 'nationalId', header: 'کد ملی', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false },
         { field: 'mobiles', header: 'موبایل ها', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2" },
-        { field: 'customerNumber', header: 'شماره اشتراک', isSelected: false, isSelectedOrigin: false },
+        { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false },
         { field: 'readingNumber', header: 'شماره قرائت', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'billId', header: 'ش.قبض', isSelected: false, isSelectedOrigin: false },
         { field: 'fullName', header: 'نام و نام‌خانوادگی', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2" },
@@ -3082,9 +3090,9 @@ export class ColumnManager {
         // { field: 'isLast', header: 'آخرین', isSelected: false, isSelectedOrigin: false },
         // { field: 'fromDateTime', header: 'از تاریخ', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false },
-        // { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false },
-        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, icon: "grid-column: auto/ span 2" },
+        { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true },
+        // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
 
     getColumnsMenus = (name: string): IObjectIteratation[] => {

@@ -75,7 +75,7 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     this.closeTabService.offloadedAllInGroupLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInGroupLazy + this.pageSignsService.offloadedListAllInGroupLazy_pageSign.groupId, event);
     this.totalRecords = this.closeTabService.offloadedAllInGroupLazy.totalRecords;
 
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllInGroupLazy.data);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllInGroupLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
@@ -345,9 +345,6 @@ export class AllIngroupLazyComponent extends AllListsFactory implements AfterVie
     }
     else
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.done);
-  }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
   }
   clearFilters(table: Table) {
     this.closeTabService.allInGroupLazyReq.multiSelectCounterStateId = [];

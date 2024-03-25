@@ -37,5 +37,7 @@ export enum ENReadingReports {
     feedbackAllSReq = 'mobileManagerFeedbackAllSReq',
     forbidden = 'forbiddenReq',
     forbiddenTypeReq = 'mobileManagerforbiddenTypeReq',
-    clientAddReq = 'clientManagerAdd'
+    clientAddReq = 'clientManagerAdd',
+    importDynamic = 'importDynamicReq',
+    simple = '_searchSimpleReq'
 }

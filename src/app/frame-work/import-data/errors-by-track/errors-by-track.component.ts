@@ -29,7 +29,7 @@ export class ErrorsByTrackComponent extends FactoryONE {
     }
   }
   connectToServer = async () => {
-    if (this.importDynamicService.verificationTrackNumber(this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber)) {
+    if (this.importDynamicService.verificationService.verificationTrackNumber(this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber)) {
       this.closeTabService.saveDataForImportErrorsByTrackNumber = await this.importDynamicService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.postImportErrorsByTrackNumber, this.closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber.toString());
     }
   }

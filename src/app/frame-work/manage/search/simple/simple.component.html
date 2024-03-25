@@ -59,7 +59,7 @@
                 <div class="_key">از</div>
                 <div class="_value">
                     <app-date-jalali name="fromDate"
-                        (dateJalEvent)="searchService.receiveFromDateJalali(searchService.ENSearchs.simple, $event)"
+                        (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.simple, $event)"
                         [dateObject]="closeTabService._searchSimpleReq.fromDate">
                     </app-date-jalali>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="_key">تا</div>
                 <div class="_value">
                     <app-date-jalali name="toDate"
-                        (dateJalEvent)="searchService.receiveToDateJalali(searchService.ENSearchs.simple, $event)"
+                        (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.simple, $event)"
                         [dateObject]="closeTabService._searchSimpleReq.toDate">
                     </app-date-jalali>
                 </div>

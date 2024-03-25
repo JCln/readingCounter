@@ -81,12 +81,12 @@
             [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
             styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session"
             stateKey="simafa-batchsession" dataKey="id"
-            [reorderableColumns]="importDynamicService.getLocalReOrderable()">
+            [reorderableColumns]="importDynamicService.profileService.getLocalReOrderable()">
 
             <ng-template pTemplate="caption">
                 <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
                     name="selectOptions" optionLabel="header"
-                    (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables.selectedSimafaBatch ,$event)"
+                    (ngModelChange)="importDynamicService.columnManager.setColumnsChanges(importDynamicService.ENSelectedColumnVariables.selectedSimafaBatch ,$event)"
                     selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
                 </p-multiSelect>
                 <div class="header_icons_wrap">

@@ -87,7 +87,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       )) {
         this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.pageSignsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
         this.closeTabService.AUXSaveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
-        this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
+        this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
         this.closeTabService.saveDataForLMGeneralGroupModifyReq.GUid = this.pageSignsService.generalModifyListsGrouped_pageSign.GUid;
         this.closeTabService.saveDataForLMGeneralGroupModifyReq.groupId = this.pageSignsService.generalModifyListsGrouped_pageSign.groupId;
       }
@@ -444,9 +444,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
     else
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.done);
-  }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);

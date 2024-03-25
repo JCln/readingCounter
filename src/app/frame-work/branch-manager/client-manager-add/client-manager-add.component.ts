@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
@@ -46,14 +47,20 @@ export class ClientManagerAddComponent extends FactoryONE {
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }
   callAPI = async () => {
-    console.log(this.closeTabService.clientAddReq);
+    if (this.branchesService.verificationService.clientAdd(this.closeTabService.clientAddReq)) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.clientAdd, this.closeTabService.clientAddReq);
+      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
+    }
 
   }
   classWrapper = async () => {
     this.dictionaryWrapper();
     this.insertSelectedColumns();
-    this.insertSelectedColumns();
     console.log(this._selectCols);
-
+  }
+  async showInMap() {
+    const res = await this.branchesService.openMapDialog([], true);
+    this.closeTabService.clientAddReq.x = res.x;
+    this.closeTabService.clientAddReq.y = res.y;
   }
 }

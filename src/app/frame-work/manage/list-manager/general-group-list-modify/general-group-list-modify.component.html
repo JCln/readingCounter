@@ -37,7 +37,7 @@
         styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session"
         (onFilter)="filteredTableEvent($event)" (sortFunction)="listManagerService.customSort($event)"
         [stateKey]="_sessionName" editMode="row" dataKey="id" responsiveLayout="scroll"
-        [reorderableColumns]="getLocalReOrderable()" appUnSortTable>
+        [reorderableColumns]="profileService.getLocalReOrderable()" appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"

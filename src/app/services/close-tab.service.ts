@@ -8,7 +8,6 @@ import {
   IFileExcelReq,
   IImportDynamicDefault,
   IImportErrors,
-  IImportSimafaBatchReq,
   IImportSimafaReadingProgramsReq,
   IImportSimafaSingleReq,
   IReadingProgramRes,
@@ -95,6 +94,7 @@ export class CloseTabService {
   waterSource: IWaterSource[] = [];
   ownershipType: IOwnershipType[] = [];
   clientAddReq: IClientAll = {
+    id: 0,
     zoneId: null,
     nationalId: '',
     postalCode: '',
@@ -119,31 +119,24 @@ export class CloseTabService {
     commercialArea: null,
     otherArea: null,
     capacity: null,
-    watarInstallationJalaliDay: '',
-    waterInstallationDateTime: '',
+    watarInstallationJalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
     sewageInstallationJalaliDay: '',
-    sewageInstallationDateTime: '',
     guildId: null,
     ownershipTypeId: null,
     branchStateId: null,
     waterSourceId: null,
     customerTypeId: null,
     previousClientId: null,
-    changeOrInsertLogId: '',
     description: '',
     isLast: false,
-    fromDateTime: '',
-    toDateTime: '',
     x: '',
     y: '',
-    zoneTitle: {},
-    usageTitle: {},
-    branchDiameterTitle: '',
     guildTitle: '',
     branchStateTitle: '',
     ownershipTypeTitle: '',
     customerTypeTitle: '',
-    waterSourceTitle: ''
+    waterSourceTitle: '',
+
   };
   clientGet: IClientAll[] = [];
 
@@ -1658,60 +1651,57 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.waterSource, url: EN_Routes.waterSource, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.ownershipType, url: EN_Routes.ownershipType, defaultValue: [] },
-    { id: 2, value: ENEssentialsToSave.clientAdd, url: EN_Routes.clientAdd, defaultValue: [] },
-    // {
-    //   id: 2, value: ENEssentialsToSave.clientGet, url: EN_Routes.clientGet, defaultValue: {
-    //     zoneId: null,
-    //     nationalId: '',
-    //     postalCode: '',
-    //     mobiles: '',
-    //     customerNumber: null,
-    //     readingNumber: '',
-    //     billId: '',
-    //     fullName: '',
-    //     fatherName: '',
-    //     address: '',
-    //     usageId: null,
-    //     branchDiameterId: null,
-    //     siphon1Count: null,
-    //     siphon2Count: null,
-    //     siphon3Count: null,
-    //     siphon4Count: null,
-    //     domesticCount: null,
-    //     commercialCount: null,
-    //     otherCount: null,
-    //     familyCount: null,
-    //     domesticArea: null,
-    //     commercialArea: null,
-    //     otherArea: null,
-    //     capacity: null,
-    //     watarInstallationJalaliDay: '',
-    //     waterInstallationDateTime: '',
-    //     sewageInstallationJalaliDay: '',
-    //     sewageInstallationDateTime: '',
-    //     guildId: null,
-    //     ownershipTypeId: null,
-    //     branchStateId: null,
-    //     waterSourceId: null,
-    //     customerTypeId: null,
-    //     previousClientId: null,
-    //     changeOrInsertLogId: '',
-    //     description: '',
-    //     isLast: false,
-    //     fromDateTime: '',
-    //     toDateTime: '',
-    //     x: '',
-    //     y: '',
-    //     zoneTitle: {},
-    //     usageTitle: {},
-    //     branchDiameterTitle: '',
-    //     guildTitle: '',
-    //     branchStateTitle: '',
-    //     ownershipTypeTitle: '',
-    //     customerTypeTitle: '',
-    //     waterSourceTitle: ''
-    //   }
-    // },
+    {
+      id: 2, req: ENEssentialsToSave.clientAddReq, value: ENEssentialsToSave.clientAdd, url: EN_Routes.clientAdd,
+      defaultValue: [],
+      defaultReq: {
+        id: 0,
+        zoneId: null,
+        nationalId: '',
+        postalCode: '',
+        mobiles: '',
+        customerNumber: null,
+        readingNumber: '',
+        billId: '',
+        fullName: '',
+        fatherName: '',
+        address: '',
+        usageId: null,
+        branchDiameterId: null,
+        siphon1Count: null,
+        siphon2Count: null,
+        siphon3Count: null,
+        siphon4Count: null,
+        domesticCount: null,
+        commercialCount: null,
+        otherCount: null,
+        familyCount: null,
+        domesticArea: null,
+        commercialArea: null,
+        otherArea: null,
+        capacity: null,
+        watarInstallationJalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+        sewageInstallationJalaliDay: '',
+        guildId: null,
+        ownershipTypeId: null,
+        branchStateId: null,
+        waterSourceId: null,
+        customerTypeId: null,
+        previousClientId: null,
+        description: '',
+        isLast: false,
+        x: '',
+        y: '',
+        guildTitle: '',
+        branchStateTitle: '',
+        ownershipTypeTitle: '',
+        customerTypeTitle: '',
+        waterSourceTitle: ''
+      }
+    },
+    {
+      id: 2, value: ENEssentialsToSave.clientGet, url: EN_Routes.clientGet, defaultValue: []
+    },
 
   ]
 
@@ -1749,6 +1739,13 @@ export class CloseTabService {
   receiveToDateJalali = (variable: ENReadingReports, $event: string) => {//just to date
     this[variable].toDate = $event;
   }
+  receiveFromDateInstallation = (variable: ENReadingReports, $event: string) => {//just watarInstallationJalaliDay date
+    this[variable].watarInstallationJalaliDay = $event;
+  }
+  receiveToDateInstallation = (variable: ENReadingReports, $event: string) => {//just sewageInstallationJalaliDay date
+    this[variable].sewageInstallationJalaliDay = $event;
+  }
+
   getSearchInOrderTo = (): ISearchInOrderTo[] => {
     if (this.profileService.getLocalValue()) {
       this._isOrderByDate = false;
@@ -1758,6 +1755,14 @@ export class CloseTabService {
       this._isOrderByDate = true;
       return this.utilsService.getSearchInOrderTo;
     }
+  }
+  makeHadPicturesToBoolean = (dataSource: any) => {
+    dataSource.forEach(item => {
+      if (item.imageCount > 0)
+        item.imageCount = true;
+      else
+        item.imageCount = false;
+    })
   }
 
 }

@@ -62,7 +62,7 @@ export class AllComponent extends AllListsFactory {
           qotrCode: 'qotrCode'
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMAll);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMAll);
     return new Promise((resolve) => {
       resolve(true);
     });

@@ -22,8 +22,7 @@ import { PageSignsService } from './page-signs.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  ENRoutes = EN_Routes;
-
+  
   dbfOutput: IOutputManager = {
     zoneId: 0,
     fromDate: null,
@@ -62,7 +61,7 @@ export class TrackingManagerService {
     public dictionaryWrapperService: DictionaryWrapperService,
     private pageSignsService: PageSignsService,
     public columnManager: ColumnManager,
-    private profileService: ProfileService,
+    public profileService: ProfileService,
     private followUpService: FollowUpService,
     public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
@@ -356,8 +355,5 @@ export class TrackingManagerService {
     }
     return true;
   }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
-  }
-
+  
 }

@@ -150,7 +150,8 @@ export interface IObjectIteratation {
     isSelectOption?: boolean;
     enableTooltip?: boolean;
     tabIndex?: number;
-    type?: string
+    type?: string;
+    isGIS?:boolean
 }
 export type BookType = 'xlsx' | 'csv' | 'xls';
 export interface INotificationAlertTypes {

@@ -42,9 +42,6 @@ export class FragmentComponent extends FactoryONE {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
-  }
   insertToAuxZoneid = () => {
     this.closeTabService.saveDataForFragmentNOB.forEach(item => {
       item.changableZoneId = item.zoneId;

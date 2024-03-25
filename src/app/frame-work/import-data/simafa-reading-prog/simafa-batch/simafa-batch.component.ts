@@ -42,7 +42,7 @@ export class SimafaBatchComponent extends FactoryONE {
       this.importDynamicService.noRouteToImportMessage();
     }
     else {
-      const validation = this.importDynamicService.verificationSimafaBatch(this.allImportsService.allImports_batch);
+      const validation = this.importDynamicService.verificationService.verificationSimafaBatch(this.allImportsService.allImports_batch);
       if (validation) {
         this._batchResponse = await this.importDynamicService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
         this.insertColumnsToTableAfterSuccess();
@@ -105,7 +105,7 @@ export class SimafaBatchComponent extends FactoryONE {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.importDynamicService.columnSimafaBatch();
-    this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
+    this._selectedColumns = this.importDynamicService.columnManager.customizeSelectedColumns(this._selectCols);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

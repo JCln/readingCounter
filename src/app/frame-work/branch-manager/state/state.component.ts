@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IBranchState } from 'interfaces/i-branch';
-import { BranchesVerificationService } from 'services/branches-verification.service';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -20,7 +19,7 @@ export class StateComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public branchesService: BranchesService,
-    public branchesVerificationService: BranchesVerificationService
+    
   ) {
     super();
   }
@@ -46,7 +45,7 @@ export class StateComponent extends FactoryONE {
     this.defaultAddStatus();
 
 
-    if (!this.branchesVerificationService.stateVerification(dataSource['dataSource'])) {
+    if (!this.branchesService.verificationService.stateVerification(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
         this.closeTabService.branchState.shift();
         return;

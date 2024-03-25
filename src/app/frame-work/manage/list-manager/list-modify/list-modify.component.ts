@@ -46,7 +46,7 @@ export class ListModifyComponent extends AllListsFactory {
       }
       if (this.closeTabService.saveDataForLMModifyReq != this.pageSignsService.modifyLists_pageSign.GUid || !this.closeTabService.saveDataForLMModify) {
         this.closeTabService.saveDataForLMModify = await this.listManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedALL, this.pageSignsService.modifyLists_pageSign.GUid);
-        this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMModify);
+        this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMModify);
         this.closeTabService.saveDataForLMModifyReq = this.pageSignsService.modifyLists_pageSign.GUid;
       }
       // setDynamics should implement before new instance of dataSource create

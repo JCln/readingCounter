@@ -68,7 +68,7 @@ export class MoshtarakComponent extends AllListsFactory {
     if (this.searchService.verificationMosh(this.closeTabService.searchReqMosh)) {
       this.closeTabService.saveDataForSearchMoshtarakin = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchMoshtarak, this.closeTabService.searchReqMosh);
       this.converts();
-      this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchMoshtarakin);
+      this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchMoshtarakin);
     }
   }
   classWrapper = async () => {

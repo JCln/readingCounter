@@ -75,7 +75,7 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     this.closeTabService.offloadedAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.pageSignsService.offloadedListLazy_pageSign.GUid, event);
     this.totalRecords = this.closeTabService.offloadedAllLazy.totalRecords;
 
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.offloadedAllLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
@@ -347,9 +347,6 @@ export class AllLazyComponent extends AllListsFactory implements AfterViewInit {
     }
     else
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.done);
-  }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
   }
   clearFilters(table: Table) {
     this.closeTabService.saveDataForOffloadedAllLazyReq.multiSelectCounterStateId = [];

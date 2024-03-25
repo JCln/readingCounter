@@ -71,7 +71,7 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
     this.closeTabService.simpleMasterByFragmentAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAllInLazy + this.pageSignsService.masterByFragmentLazy_pageSign.GUid, event);
     this.totalRecords = this.closeTabService.simpleMasterByFragmentAllLazy.totalRecords;
 
-    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.simpleMasterByFragmentAllLazy.data);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.simpleMasterByFragmentAllLazy.data);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.masrafStateIdDictionary = this.listManagerService.getMasrafStateDictionary();
@@ -247,9 +247,6 @@ export class MasterByFragmentAllLazyComponent extends AllListsFactory implements
     }
     else
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.done);
-  }
-  getLocalReOrderable = (): boolean => {
-    return this.profileService.getLocalReOrderable();
   }
   clearFilters(table: Table) {
     this.closeTabService.masterByFragmentLazyReq.multiSelectCounterStateId = [];
