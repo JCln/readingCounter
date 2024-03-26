@@ -21,12 +21,57 @@ export class MathS {
     static isBoolean = (val: any): boolean => {
         return typeof val == 'boolean' ? true : false;
     }
+    static postalCodeValidation = (val: string): boolean => {
+        const regex = /\b(?!(\d)\1{3})[13-9]{4}[1346-9][013-9]{5}\b/;
+        return regex.test(val);
+    }
     static isEmailValid = (email: string): boolean => {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(email)) {
             return false;
         }
         return true;
+    }
+    static validationMobiles(phonesString: string): boolean {
+        const PHONE_NUMBER_REGEX = /(0|\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}/;
+        let valid = true;
+        let phones = [];
+        phones = phonesString.split(',');
+
+        for (var i = 0; i < phones.length; i++) {
+            var phone = phones[i];
+            if (phone === '' || !PHONE_NUMBER_REGEX.test(phone)) {
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
+    static validateNationalId(code): boolean {
+        var str = code.toString();
+
+        // validate the string length and value
+        var strLen = str.length, strVal = parseInt(str);
+        if (strLen < 8 || strLen > 10 || isNaN(strVal) || strVal == 0)
+            return false;
+
+        // make sure the string is padded with zeros
+        while (str.length < 10) str = '0' + str;
+
+        // invalidate consecutive arrangement of the same digit
+        if (str.match(/^(\d)\1+$/g)) return false;
+
+        var checkDigit = parseInt(str.slice(-1)), // rightmost digit
+            str = str.slice(0, -1); // remove the check digit
+
+        for (var sum = 0, i = str.length; i > 0; i--)
+            sum += (i + 1) * str.substr(-i, 1);
+
+        // calculate sum modulo 11
+        var mod = sum % 11;
+
+        return (mod < 2 && mod === checkDigit) || (mod >= 2 && mod + checkDigit === 11);
+
     }
     static persentCheck = (val: number): boolean => {
         if (val === undefined || val === null)

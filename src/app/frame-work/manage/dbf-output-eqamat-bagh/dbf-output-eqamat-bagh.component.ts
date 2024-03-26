@@ -24,7 +24,7 @@ export class DbfOutputEqamatBaghComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    if (this.trackingManagerService.checkVertificationDBFEqamatBagh(this.trackingManagerService.dbfOutputEqamatBagh)) {
+    if (this.trackingManagerService.verificationService.checkVertificationDBFEqamatBagh(this.trackingManagerService.dbfOutputEqamatBagh)) {
       console.log(this.trackingManagerService.dbfOutputEqamatBagh);
 
       const res = await this.trackingManagerService.downloadOutputDBFEqamatBagh(ENInterfaces.OutputDBFEqamatBagh, this.trackingManagerService.dbfOutputEqamatBagh);

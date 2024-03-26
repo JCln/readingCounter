@@ -151,7 +151,8 @@ export interface IObjectIteratation {
     enableTooltip?: boolean;
     tabIndex?: number;
     type?: string;
-    isGIS?:boolean
+    isGIS?:boolean;
+    isNotHaveSort?:boolean
 }
 export type BookType = 'xlsx' | 'csv' | 'xls';
 export interface INotificationAlertTypes {

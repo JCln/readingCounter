@@ -125,8 +125,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.checkNetwork, ENSnackBarColors.danger);
                 break;
               case ENClientServerErrors.cs500:
-                if (error.message)
-                  this.utilsService.snackWrapperService.openSnackBar(error.message, ENSnackBarColors.danger);
+                if (messageText)
+                  this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
                 else
                   this.utilsService.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarColors.danger);
                 break;

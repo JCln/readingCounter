@@ -486,5 +486,8 @@ export enum ENInterfaces {
     ownershipTypeRemove = 'V1/ownershipType/Remove',
 
     clientGet = 'V1/Client/Get',
-    clientAdd = 'V1/Client/Add'
+    clientAdd = 'V1/Client/Add',
+    clientGetLazy = 'V1/Client/GetLazy',
+    clientEdit = 'V1/Client/Edit',
+    clientRemove = 'V1/Client/Remove',
 }

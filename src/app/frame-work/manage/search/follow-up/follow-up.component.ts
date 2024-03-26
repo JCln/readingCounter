@@ -75,7 +75,7 @@ export class FollowUpComponent extends FactoryONE {
   connectToServer = async () => {
     if (this.trackingManagerService.verificationTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
       this.closeTabService.saveDataForFollowUp = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
-      if (this.trackingManagerService.isValidationNull(this.closeTabService.saveDataForFollowUp))
+      if (this.trackingManagerService.verificationService.isValidationNull(this.closeTabService.saveDataForFollowUp))
         return;
 
       this.dataSourceAUX = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedPERDAY, this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());

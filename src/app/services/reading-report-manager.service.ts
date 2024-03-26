@@ -13,8 +13,6 @@ import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
-
-import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import {
   ConfirmDialogExcelViewComponent,

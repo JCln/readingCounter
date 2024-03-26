@@ -58,7 +58,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   verification = async () => {
-    const temp = this.trackingManagerService.userKarkardValidation(this.closeTabService.saveDataForUserKarkardSummaryReq);
+    const temp = this.trackingManagerService.verificationService.userKarkardValidation(this.closeTabService.saveDataForUserKarkardSummaryReq);
     if (temp)
       this.connectToServer();
   }

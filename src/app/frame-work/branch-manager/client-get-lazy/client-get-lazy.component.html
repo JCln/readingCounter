@@ -1,0 +1,155 @@
+<main style="position: relative; ">
+    <p-table #datatableG id="tdm" *ngIf="closeTabService.clientGetLazy.data" [columns]="selectedColumns"
+        [value]="closeTabService.clientGetLazy.data" [lazy]="true" (onLazyLoad)="LazyLoading($event)"
+        (onLazyLoad)="hasFilters()" dataKey="id" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        [totalRecords]="totalRecords" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+        [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl"
+        styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" [stateKey]="_sessionName"
+        editMode="row" [reorderableColumns]="profileService.getLocalReOrderable()" [filterDelay]="500" appUnSortTable>
+
+        <ng-template pTemplate="caption">
+            <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
+                optionLabel="header"
+                (ngModelChange)="listManagerService.columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+                selectedItemsLabel="{0} ستون انتخاب شده" placeholder="ستون ها" [filter]="true">
+            </p-multiSelect>
+
+            <div class="header_icons_wrap">
+                <div class="right_side">
+                    <i (click)="saveColumns()" class="tooltip fa_icons _circle_border p_icons _save_columns fa fa-save">
+                        <div class="tooltip_text">ذخیره ستونها</div>
+                    </i>
+                    <i (click)="resetSavedColumns()"
+                        class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
+                        <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
+                    </i>
+                </div>
+                <div class="left_side">
+                    <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
+                        class="_circle_border p_icons tooltip pi pi-filter-slash">
+                        <div class="tooltip_text_right">حذف فیلترها</div>
+                    </i>
+                    <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                        <div class="tooltip_text">بارگیری مجدد جدول</div>
+                    </i>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns" [pSortableColumnDisabled]="col?.isNotHaveSort" pSortableColumn="{{col.field}}">
+                    <p-sortIcon *ngIf="!col?.isNotHaveSort" field="{{col.field}}"></p-sortIcon>
+                    <div class="_rotate tooltip">
+                        {{col.header}}
+                        <div class="tooltip_text_bottom">{{col.header}}</div>
+                    </div>
+                </th>
+                <th class="__icon-columns" *ngFor="let item of _numberOfExtraColumns"></th>
+            </tr>
+            <tr>
+                <th class="__headers" pReorderableColumn *ngFor="let col of _selectedColumns">
+
+                    <p-columnFilter *ngIf="col?.isBoolean && col?.type !== 'disabled'" type="boolean"
+                        field="{{col.field}}"></p-columnFilter>
+
+                    <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption && col?.type !== 'disabled'"
+                        [type]="col.type == 'numeric'? 'numeric': 'text'"
+                        [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
+                        {{col.type}}
+                    </p-columnFilter>
+
+                <th pReorderableColumn class="__icon-columns" *ngFor="let item of _numberOfExtraColumns">
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing"
+            let-columns="columns" let-ri=rowIndex>
+            <tr [ngClass]="{'has_error': dataSource.editedErrorDescription}">
+                <td class="__columns" pEditableColumn *ngFor="let col of columns"
+                    [ngClass]="{'d_ltr': col.ltr, '_editable': col.icon}">
+                    <span class="ui-column-title">{{col.header}}</span>
+                    <ng-container *ngIf="col.isBoolean; else editableForm">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <mat-checkbox [disabled]="col.readonly"
+                                    [ngClass]="{'mat-checkbox-editable': !col.readonly}"
+                                    [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-container>
+                    <ng-template #editableForm>
+                        <ng-container *ngIf="col.enableTooltip; else simpleText">
+                            <div *ngIf="col.icon"
+                                (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): true">
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input [(ngModel)]="dataSource[col.field]">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        <div class="tooltip">
+                                            {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                            dataSource[col.field].toString().split(' ')[0]
+                                            : ''}}
+                                            <div *ngIf="dataSource[col.field]?.length > 0" class="tooltip_text_right"
+                                                [ngClass]="
+                                                    {
+                                                    'tooltip_long2':dataSource[col.field]?.length >= 20,
+                                                    'tooltip_long3':dataSource[col.field]?.length >= 30,
+                                                    'tooltip_long4':dataSource[col.field]?.length >= 40
+                                                    }">
+                                                {{dataSource[col.field]}}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-cellEditor>
+                            </div>
+                            <div *ngIf="!col.icon">
+                                <div class="tooltip"
+                                    (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): true">
+                                    {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                    dataSource[col.field].toString().split(' ')[0] :
+                                    ''}}
+                                    <div *ngIf="dataSource[col.field]?.length > 0" class="tooltip_text_right" [ngClass]="
+                                            {'tooltip_long2':dataSource[col.field]?.length >= 20,
+                                            'tooltip_long3':dataSource[col.field]?.length >= 30,
+                                            'tooltip_long4':dataSource[col.field]?.length >= 40}">
+                                        {{dataSource[col.field]}}</div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-template #simpleText>
+                            <div (contextmenu)="col.enableTooltip? copyContext(dataSource[col.field]): true">
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input [type]="col.isNumber ? 'number': 'text'"
+                                            [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{dataSource[col.field]}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </div>
+                        </ng-template>
+
+                    </ng-template>
+                </td>
+            </tr>
+
+        </ng-template>
+
+    </p-table>
+    <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+    </app-carousel-woum>
+
+    <section *ngIf="!closeTabService.clientGetLazy.data || closeTabService.clientGetLazy.data.length === 0">
+        <tr class="empty_data">
+            موردی پیدا نشد
+            <i class="fa fa-folder-blank"></i>
+        </tr>
+    </section>
+</main>

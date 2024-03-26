@@ -36,7 +36,7 @@ export class ImportedEditedComponent extends FactoryONE {
     this.closeTabService.importedEditedRes = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingGetImportedEdited, this.closeTabService.importedEditedReq);
   }
   verification = async () => {
-    const temp = this.trackingManagerService.validationImportedEdited(this.closeTabService.importedEditedReq);
+    const temp = this.trackingManagerService.verificationService.validationImportedEdited(this.closeTabService.importedEditedReq);
     if (temp)
       this.connectToServer();
   }

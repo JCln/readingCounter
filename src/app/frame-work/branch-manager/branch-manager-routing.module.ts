@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'ownershipType', loadChildren: () => import('./ownership-type/ownership-type.module').then(ownershipType => ownershipType.OwnershipTypeModule) },
   { path: 'clients', loadChildren: () => import('./client-manager/client-manager.module').then(clientManagerGet => clientManagerGet.ClientManagerModule) },
   { path: 'addClients', loadChildren: () => import('./client-manager-add/client-manager-add.module').then(addClientManager => addClientManager.ClientManagerAddModule) },
+  { path: 'clientLazy', loadChildren: () => import('./client-get-lazy/client-get-lazy.module').then(clientGetLazy => clientGetLazy.ClientGetLazyModule) },
 ];
 
 @NgModule({

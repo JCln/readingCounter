@@ -32,3 +32,10 @@ h2 {
   max-width: 100%;
   margin: 1rem auto;
 }
+
+h3,
+h5 {
+  font-family: var(--font-family);
+  margin-right: 3rem;
+  text-align: right;
+}

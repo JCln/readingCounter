@@ -64,7 +64,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -99,7 +99,7 @@ export class CloseTabService {
     nationalId: '',
     postalCode: '',
     mobiles: '',
-    customerNumber: null,
+    customerNumber: 0,
     readingNumber: '',
     billId: '',
     fullName: '',
@@ -120,7 +120,7 @@ export class CloseTabService {
     otherArea: null,
     capacity: null,
     watarInstallationJalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
-    sewageInstallationJalaliDay: '',
+    sewageInstallationJalaliDay: null,
     guildId: null,
     ownershipTypeId: null,
     branchStateId: null,
@@ -207,7 +207,10 @@ export class CloseTabService {
       toTime: toTimeH + ':' + toTimeM
     }
   }
-
+  clientGetLazy: IClientGetAllLazy = {
+    data: [],
+    totalRecords: 0
+  };
   saveDataForOffloadedAllLazyReq = {
     counterStateValue: null,
     multiSelectCounterStateId: [],
@@ -1495,6 +1498,7 @@ export class CloseTabService {
         multiSelectHazf: []// 
       }
     },
+    { id: 2, value: ENEssentialsToSave.clientGetLazy, url: EN_Routes.clientGetLazy, defaultValue: { data: [], totalRecords: 0 } },
     { id: 2, value: ENEssentialsToSave.simpleMasterByFragmentAllLazy, url: EN_Routes.simpleMasterByFragmentAllLazy, defaultValue: { data: [], totalRecords: 0 } },
     {
       id: 2, req: ENEssentialsToSave.masterByFragmentallInGroupLazyReq, value: ENEssentialsToSave.masterByFragmentAllInGroupLazy, url: EN_Routes.masterByFragmentAllInGroupLazy, defaultValue: { data: [], totalRecords: 0 }, defaultReq: {
@@ -1660,7 +1664,7 @@ export class CloseTabService {
         nationalId: '',
         postalCode: '',
         mobiles: '',
-        customerNumber: null,
+        customerNumber: 0,
         readingNumber: '',
         billId: '',
         fullName: '',
@@ -1681,7 +1685,7 @@ export class CloseTabService {
         otherArea: null,
         capacity: null,
         watarInstallationJalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
-        sewageInstallationJalaliDay: '',
+        sewageInstallationJalaliDay: null,
         guildId: null,
         ownershipTypeId: null,
         branchStateId: null,

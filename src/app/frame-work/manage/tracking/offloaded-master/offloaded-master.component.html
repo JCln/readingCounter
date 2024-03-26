@@ -3,7 +3,8 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" dataKey="groupId"
     styleClass="p-datatable-responsive _unset_overflow_tables" stateStorage="session" stateKey="offloadedmaster"
-    [reorderableColumns]="trackingManagerService.profileService.getLocalReOrderable()" appUnSortTable rowExpandMode="single">
+    [reorderableColumns]="trackingManagerService.profileService.getLocalReOrderable()" appUnSortTable
+    rowExpandMode="single">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -38,9 +39,14 @@
         <tr>
             <th></th>
             <th class="__headers" pReorderableColumn *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                <p-columnFilter *ngIf="col?.isBoolean && col?.type !== 'disabled'" type="boolean" field="{{col.field}}">
                 </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+
+                <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption && col?.type !== 'disabled'"
+                    [type]="col.type == 'numeric'? 'numeric': 'text'"
+                    [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
+                    {{col.type}}
+                </p-columnFilter>
             </th>
             <th class="__icon-columns">
             <th class="__icon-columns">

@@ -49,7 +49,15 @@ export class ClientManagerAddComponent extends FactoryONE {
   callAPI = async () => {
     if (this.branchesService.verificationService.clientAdd(this.closeTabService.clientAddReq)) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.clientAdd, this.closeTabService.clientAddReq);
-      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
+      const config = {
+        messageTitle: res.message,
+        width: '21rem',
+        isInput: false,
+        isImportant: false,
+        icon: 'pi pi-check',
+        closable: true,
+      }
+      this.branchesService.utilsService.primeConfirmDialog(config);
     }
 
   }

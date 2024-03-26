@@ -147,7 +147,7 @@ export class OffloadComponent implements OnChanges {
       return true;
     }
     else {
-      this.trackingManagerService.showWarnMessage(EN_messages.insert_counterState);
+      this.trackingManagerService.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
       return false;
     }
   }

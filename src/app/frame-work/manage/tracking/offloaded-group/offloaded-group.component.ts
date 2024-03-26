@@ -80,7 +80,7 @@ export class OffloadedGroupComponent extends FactoryONE {
   }
   routeToAssessPre = (dataSource: ITracking) => {
     if (MathS.isNull(dataSource.listNumber)) {
-      this.trackingManagerService.showWarnMessage(EN_messages.no_listNumberExist);
+      this.trackingManagerService.utilsService.snackBarMessageWarn(EN_messages.no_listNumberExist);
     }
     else {
       this.trackingManagerService.routeToAssessPre(dataSource);

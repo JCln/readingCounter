@@ -66,3 +66,7 @@ export interface IClientAll {
     customerTypeTitle: string,
     waterSourceTitle: string,
 }
+export interface IClientGetAllLazy {
+    data: IClientAll[],
+    totalRecords: number
+}

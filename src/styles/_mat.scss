@@ -23,7 +23,7 @@
    //on small screens and overflow situations have 
   // to set overflow so every content could be available
   */
-  .cdk-overlay-pane {
+  .cdk-overlay-pane:fullscreen {
     overflow: auto;
   }
 
