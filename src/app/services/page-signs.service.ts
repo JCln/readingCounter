@@ -15,7 +15,13 @@ export interface IOnOffLoadNessessities {
   routeCount?: number // for all in group lazy list
   prePage?: string // for all list component
 }
-
+export interface IFragmentNessessities {
+  GUid: string,
+  zoneTitle: string,
+  fromEshterak: string,
+  toEshterak: string
+  routeTitle: string
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -46,6 +52,13 @@ export class PageSignsService {
     trackNumber: null,
     zoneTitle: ''
   };
+  fragmentDetails_pageSign: IFragmentNessessities = {
+    GUid: null,
+    routeTitle: '',
+    zoneTitle: '',
+    fromEshterak: '',
+    toEshterak: ''
+  };
   generalModifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,
@@ -71,10 +84,6 @@ export class PageSignsService {
     trackNumberOrGroupId: '',
     zoneTitle: ''
   };
-  fragmentDetails_pageSign: IOnOffLoadNessessities = {
-    GUid: '',
-    listNumber: null,
-  }
   masterByFragmentLazy_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,

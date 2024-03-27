@@ -1,3 +1,28 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zoneTitle"
+                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.zoneTitle">
+        </div>
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input [readOnly]="true" class="_value" name="title"
+                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.routeTitle">
+        </div>
+        <div class="input_2">
+            <div class="_key">از اشتراک</div>
+            <input [readOnly]="true" class="_value" name="fromEshterak"
+                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.fromEshterak">
+        </div>
+        <div class="input_2">
+            <div class="_key">تا اشتراک</div>
+            <input [readOnly]="true" class="_value" name="toEshterak"
+                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.toEshterak">
+        </div>
+    </div>
+</section>
+
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForFragmentNOBDetails"     
     [_checkUpName]="'addItem'"

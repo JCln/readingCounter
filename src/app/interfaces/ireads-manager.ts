@@ -85,7 +85,7 @@ export interface IAutomaticImport {
 export interface IFragmentMaster {
     id?: string,
     zoneId: any,
-    changableZoneId: number,
+    changableZoneId: string, // temp zone for converting dictionaies
     zoneTempId?: number,
     routeTitle: string,
     fromEshterak: string,

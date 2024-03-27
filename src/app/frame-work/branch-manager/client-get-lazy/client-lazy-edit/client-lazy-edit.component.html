@@ -1,0 +1,97 @@
+<section *ngIf="dataSource">
+
+    <h1 class="title">ویرایش اطلاعات مشترک</h1>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="callAPI()" class="content">
+        <div class="_desc">
+            <div *ngFor="let mainDatas of _selectedDatas" [ngClass]="{'double_size':mainDatas.icon}">
+                <ng-container *ngIf="mainDatas.isBoolean; else elseTemplate">
+                    <ng-container *ngIf="mainDatas.isBoolean; else editableCheckboxes">
+                        <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                            [(ngModel)]="dataSource[mainDatas.field]">
+                            {{mainDatas.header}}
+                        </mat-checkbox>
+                    </ng-container>
+                    <ng-template #editableCheckboxes>
+                        <div class="check_boxes">
+                            <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                                [(ngModel)]="dataSource[mainDatas.field]">
+                                {{mainDatas.header}}
+                            </mat-checkbox>
+                        </div>
+                    </ng-template>
+                </ng-container>
+
+                <ng-template #elseTemplate>
+                    <ng-container *ngIf="mainDatas.isSelectOption;else simple">
+                        <div class="input_icon" *ngIf="mainDatas.field == 'watarInstallationJalaliDay'">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">تاریخ نصب آب</div>
+                                <div class="_value">
+                                    <app-date-jalali name="watarInstallationJalaliDay"
+                                        (dateJalEvent)="receiveFromDateInstallation($event)"
+                                        [dateObject]="dataSource.watarInstallationJalaliDay">
+                                    </app-date-jalali>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input_icon" *ngIf="mainDatas.field == 'sewageInstallationJalaliDay'">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">تاریخ نصب فاضلاب</div>
+                                <div class="_value">
+                                    <app-date-jalali name="sewageInstallationJalaliDay"
+                                        (dateJalEvent)="receiveToDateInstallation($event)"
+                                        [dateObject]="dataSource.sewageInstallationJalaliDay">
+                                    </app-date-jalali>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input_icon"
+                            *ngIf="mainDatas.dictionaryName.optionsNameInComponent && !mainDatas.isDate">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-dropdown [name]="mainDatas.dictionaryName.title"
+                                        [options]="dics[mainDatas.dictionaryName.optionsNameInComponent]"
+                                        [(ngModel)]="dataSource[mainDatas.dictionaryName.title]"
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #simple>
+                        <div class="input_icon" *ngIf="!mainDatas.readonly && mainDatas.isGIS" (click)="showInMap()">
+                            <i class="pi pi-map-marker _bookmark" [ngClass]="{special_input: mainDatas.borderize}"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <div *ngIf="dataSource[mainDatas.field]">
+                                        <i class="pi pi-check-square"></i>
+                                        مکان مشخص شده
+                                    </div>
+                                    <div *ngIf="!dataSource[mainDatas.field]">
+                                        انتخاب روی نقشه
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input_icon" *ngIf="!mainDatas.isGIS">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <input class="_value" [ngClass]="{'d_ltr': mainDatas.ltr}"
+                                    [readonly]="mainDatas.readonly" name="{{mainDatas.field}}"
+                                    [(ngModel)]="dataSource[mainDatas.field]">
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+        <button class="btn_1" type="submit">ویرایش مشترک</button>
+    </form>
+</section>

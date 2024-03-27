@@ -59,12 +59,10 @@ export class ClientManagerAddComponent extends FactoryONE {
       }
       this.branchesService.utilsService.primeConfirmDialog(config);
     }
-
   }
   classWrapper = async () => {
     this.dictionaryWrapper();
-    this.insertSelectedColumns();
-    console.log(this._selectCols);
+    this.insertSelectedColumns();  
   }
   async showInMap() {
     const res = await this.branchesService.openMapDialog([], true);

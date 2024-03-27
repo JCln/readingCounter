@@ -44,7 +44,7 @@ export class BranchesService {
         width: '80%'
       })
       this.ref.onClose.subscribe(async res => {
-        if (res) {
+        if (res[0]) {
           resolve({ x: res[0], y: res[1] });
         }
         resolve('');

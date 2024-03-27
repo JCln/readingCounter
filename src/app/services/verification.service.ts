@@ -438,7 +438,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
       return false;
     }
-    if (MathS.isLowerThanMinLength(body.address, ENRandomNumbers.eighteen)) {
+    if (!MathS.isLowerThanMinLength(body.address, ENRandomNumbers.eighteen)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
       return false;
     }

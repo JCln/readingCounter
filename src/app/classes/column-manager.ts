@@ -511,7 +511,7 @@ export class ColumnManager {
     ]
     _fragmentMaster: IObjectIteratation[] = [
         { field: 'changableZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: false, isSelectOption: true },
-        { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'routeTitle', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'isValidated', header: 'تایید شده', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
@@ -2280,296 +2280,296 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: true, enableTooltip: true }
     ]
     listMasterByFragmentLazy: IObjectIteratation[] = [
-        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//سریال کنتور
-        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric' },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//رقم قبلی
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '', type: 'numeric' },//رقم فعلی
-        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//وضعیت قبلی
+        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//سریال کنتور
+        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//رقم قبلی
+        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '', type: 'numeric', matchMode: 'equals' },//رقم فعلی
+        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت قبلی
         // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false,isSelectedOrigin:false, readonly: true , icon: '',type:},
-        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric' },//وضعیت فعلی
-        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },//گزارش بازرسی
-        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },// تاریخ قبلی
-        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '', isNumber: false, type: 'texture' },// تاریخ فعلی
-        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین قبلی
-        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین فعلی
+        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت فعلی
+        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },//گزارش بازرسی
+        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ قبلی
+        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ فعلی
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین قبلی
+        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین فعلی
         { field: 'masrafStateId', header: 'هایلو', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },//وضعیت مصرف        
         { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true, icon: '', isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین روزانه
-        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//2میانگین روزانه
-        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric' },//اختلاف میانگین
-        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین روزانه
+        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//2میانگین روزانه
+        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//اختلاف میانگین
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'disabled' },// disable the type to disable filtering
         { field: 'mobiles', header: 'موبایل‌ها', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
-        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
-        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'hazf', header: 'حذف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, isSelectOption: true },
-        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric' },//مانده حساب
-        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ تعویض
-        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ نصب
-        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//مانده حساب
+        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ تعویض
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ نصب
+        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},
         // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},        
-        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
     ]
     listMasterByFragmentAllInGroupLazy: IObjectIteratation[] = [
-        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//سریال کنتور
-        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric' },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//رقم قبلی
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '', type: 'numeric' },//رقم فعلی
-        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//وضعیت قبلی
+        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//سریال کنتور
+        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//رقم قبلی
+        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '', type: 'numeric', matchMode: 'equals' },//رقم فعلی
+        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت قبلی
         // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false,isSelectedOrigin:false, readonly: true , icon: '',type:},
-        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric' },//وضعیت فعلی
-        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },//گزارش بازرسی
-        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },// تاریخ قبلی
-        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '', isNumber: false, type: 'texture' },// تاریخ فعلی
-        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین قبلی
-        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین فعلی
+        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت فعلی
+        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },//گزارش بازرسی
+        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ قبلی
+        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ فعلی
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین قبلی
+        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین فعلی
         { field: 'masrafStateId', header: 'هایلو', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },//وضعیت مصرف        
         { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true, icon: '', isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین روزانه
-        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//2میانگین روزانه
-        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric' },//اختلاف میانگین
-        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین روزانه
+        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//2میانگین روزانه
+        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//اختلاف میانگین
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'disabled' },// disable the type to disable filtering
         { field: 'mobiles', header: 'موبایل‌ها', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
-        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
-        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'hazf', header: 'حذف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, isSelectOption: true },
-        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric' },//مانده حساب
-        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ تعویض
-        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ نصب
-        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//مانده حساب
+        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ تعویض
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ نصب
+        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},
         // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},        
-        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
     ]
     listOffloadedLazy: IObjectIteratation[] = [
-        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//سریال کنتور
-        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric' },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//رقم قبلی
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '_editable', type: 'numeric' },//رقم فعلی
-        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//وضعیت قبلی
+        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//سریال کنتور
+        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//رقم قبلی
+        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '_editable', type: 'numeric', matchMode: 'equals' },//رقم فعلی
+        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت قبلی
         // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false,isSelectedOrigin:false, readonly: true , icon: '',type:},
-        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric' },//وضعیت فعلی
-        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },//گزارش بازرسی
-        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },// تاریخ قبلی
-        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '_editable', isNumber: false, type: 'texture' },// تاریخ فعلی
-        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین قبلی
-        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین فعلی
+        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت فعلی
+        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },//گزارش بازرسی
+        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ قبلی
+        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '_editable', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ فعلی
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین قبلی
+        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین فعلی
         { field: 'masrafStateId', header: 'هایلو', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },//وضعیت مصرف        
         { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true, icon: '_editable', isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین روزانه
-        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//2میانگین روزانه
-        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric' },//اختلاف میانگین
-        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین روزانه
+        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//2میانگین روزانه
+        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//اختلاف میانگین
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'disabled' },// disable the type to disable filtering
         { field: 'mobiles', header: 'موبایل‌ها', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
-        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
-        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'hazf', header: 'حذف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, isSelectOption: true },
-        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric' },//مانده حساب
-        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ تعویض
-        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ نصب
-        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//مانده حساب
+        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ تعویض
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ نصب
+        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},
         // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},        
-        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric' },
+        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric', matchMode: 'equals' },
     ]
     listOffloadedAllInGroupLazy: IObjectIteratation[] = [
-        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//سریال کنتور
-        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric' },
-        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//رقم قبلی
-        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '_editable', type: 'numeric' },//رقم فعلی
-        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//وضعیت قبلی
+        { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterSerial', header: 'بدنه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//سریال کنتور
+        { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, isSelectOption: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preNumber', header: 'ر قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//رقم قبلی
+        { field: 'counterNumber', header: 'ر فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, isNumber: true, icon: '_editable', type: 'numeric', matchMode: 'equals' },//رقم فعلی
+        { field: 'preCounterStateCode', header: 'و قبلی', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت قبلی
         // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false,isSelectedOrigin:false, readonly: true , icon: '',type:},
-        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric' },//وضعیت فعلی
-        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },//گزارش بازرسی
-        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },// تاریخ قبلی
-        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '_editable', isNumber: false, type: 'texture' },// تاریخ فعلی
-        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین قبلی
-        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین فعلی
+        { field: 'counterStateId', header: 'و فعلی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric', matchMode: 'equals' },//وضعیت فعلی
+        { field: 'readingReportTitles', header: 'گزارشات', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },//گزارش بازرسی
+        { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preDate', header: 'ت قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ قبلی
+        { field: 'offloadDateJalali', header: 'ت فعلی', isSelected: true, isSelectedOrigin: true, readonly: false, icon: '_editable', isNumber: false, type: 'text', matchMode: 'contains' },// تاریخ فعلی
+        { field: 'counterReaderName', header: 'قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterReaderCode', header: 'کد قرائت کننده', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'dateDifference', header: 'مدت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'masraf', header: 'مصرف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'preAverage', header: 'م قبلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین قبلی
+        { field: 'newRate', header: 'م فعلی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین فعلی
         { field: 'masrafStateId', header: 'هایلو', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },//وضعیت مصرف// disable the type to disable filtering
         { field: 'highLowStateId', header: 'هایلو موبایل', isSelected: true, isSelectedOrigin: true, readonly: true, isNumber: true, type: 'disabled' },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true, icon: '_editable', isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },//میانگین روزانه
-        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },//2میانگین روزانه
-        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric' },//اختلاف میانگین
-        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
+        { field: 'newRateDaily', header: 'م روزانه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//میانگین روزانه
+        { field: 'newRateDaily2', header: '2م روزانه', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },//2میانگین روزانه
+        { field: 'reteDifference', header: 'اختلاف', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//اختلاف میانگین
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qotrCode', header: 'قطر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'zarfiat', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
         { field: 'mobile', header: 'موبایل', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'disabled' },// disable the type to disable filtering
         { field: 'mobiles', header: 'موبایل‌ها', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'disabled' },// disable the type to disable filtering
-        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
-        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'offLoadTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'phoneDateTime', header: 'زمان دستگاه', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'locationDateTime', header: 'زمان GPS', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', isNumber: true, type: 'disabled' },
-        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'eslahType', header: 'علت اصلاح', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
-        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
+        { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
         { field: 'hasError', header: 'خطا', isSelected: false, isSelectedOrigin: false, isBoolean: true, readonly: true, icon: '', type: 'disabled' },
         { field: 'hazf', header: 'حذف', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, isSelectOption: true },
-        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric' },//مانده حساب
-        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ تعویض
-        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },//تاریخ نصب
-        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric' },
-        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'texture' },
-        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'texture' },
+        { field: 'balance', header: 'بدهی', isSelected: false, isSelectedOrigin: false, ltr: true, isNumber: true, type: 'numeric', matchMode: 'equals' },//مانده حساب
+        { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'tavizDate', header: 'ت تعویض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ تعویض
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'pelak', header: 'پلاک', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'counterInstallDate', header: 'ت نصب', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },//تاریخ نصب
+        { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, ltr: true, readonly: true, icon: '', isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '', isNumber: false, type: 'text', matchMode: 'contains' },
+        { field: 'offloaderDisplayName', header: 'قرائت کننده/ اصلاح کننده', isSelected: false, isSelectedOrigin: false, isNumber: false, type: 'text', matchMode: 'contains' },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},
         // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false,isSelectedOrigin:false, , readonly: true, icon: '',type:},        
-        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric' },
+        { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, icon: '_editable', isNumber: true, type: 'numeric', matchMode: 'equals' },
     ]
     generalGroupModify: IObjectIteratation[] = [
         { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true, icon: '' },
@@ -3087,47 +3087,90 @@ export class ColumnManager {
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
     clientManagerGetLazy: IObjectIteratation[] = [
-        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, isNotHaveSort: true },
-        { field: 'nationalId', header: 'کد ملی', isSelected: true, isSelectedOrigin: true, enableTooltip: true },
-        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false },
-        { field: 'mobiles', header: 'موبایل/ها', isSelected: true, isSelectedOrigin: true, enableTooltip: true },
-        // { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false },
-        { field: 'readingNumber', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, enableTooltip: true },
-        // { field: 'billId', header: 'ش.قبض', isSelected: false, isSelectedOrigin: false },
-        { field: 'fullName', header: 'نام کامل', isSelected: true, isSelectedOrigin: true, enableTooltip: true },
-        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false },
-        { field: 'usageTitle', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'branchDiameterTitle', header: 'قطر', isSelected: true, isSelectedOrigin: true, enableTooltip: true, isSelectOption: true },
-        { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isNumber: true, type: 'numeric' },
-        { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'siphon4Count', header: 'تعداد سیفون 4', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isNumber: true, type: 'numeric' },
-        { field: 'domesticCount', header: 'آحاد خانگی', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'commercialCount', header: 'آحاد تجاری', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isNumber: true, type: 'numeric' },
-        { field: 'otherCount', header: 'آحاد سایر', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric' },
-        { field: 'familyCount', header: 'تعداد خانوار', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'domesticArea', header: 'عرصه خانگی', isSelected: false, isSelectedOrigin: false },
-        { field: 'commercialArea', header: 'عرصه تجاری', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'otherArea', header: 'عرصه سایر', isSelected: false, isSelectedOrigin: false },
-        { field: 'capacity', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isNumber: true, type: 'numeric' },
-        { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
-        // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'sewageInstallationJalaliDay', header: 'تاریخ نصب فاضلاب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
-        // { field: 'sewageInstallationDateTime', header: 'زمان نصب فاضلاب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'guildTitle', header: 'صنف', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true },
-        { field: 'ownershipTypeTitle', header: 'نوع مالک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true, isNotHaveSort: true },
-        { field: 'branchStateTitle', header: 'وضعیت انشعاب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true },
-        { field: 'waterSourceTitle', header: 'منبع آب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true, isNotHaveSort: true },
-        { field: 'customerTypeTitle', header: 'نوع اشتراک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true },
-        // { field: 'previousClientId', header: 'اشتراک قبلی', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        // { field: 'changeOrInsertLogId', header: 'تغییر یا ایجاد لاگ', isSelected: false, isSelectedOrigin: false },
-        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        // { field: 'isLast', header: 'آخرین', isSelected: false, isSelectedOrigin: false },
-        // { field: 'fromDateTime', header: 'از تاریخ', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false },
-        { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true, isNumber: true, type: 'numeric' },
-        // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },
-        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'nationalId', header: 'کد ملی', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains' },
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, type: 'text', matchMode: 'contains' },
+        { field: 'mobiles', header: 'موبایل/ها', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains' },
+        // { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'readingNumber', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains' },
+        // { field: 'billId', header: 'ش.قبض', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'fullName', header: 'نام کامل', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains' },
+        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, type: 'text', matchMode: 'contains' },
+        { field: 'usageTitle', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true, type: 'text', matchMode: 'contains' },
+        { field: 'branchDiameterTitle', header: 'قطر', isSelected: true, isSelectedOrigin: true, isSelectOption: true, type: 'text', matchMode: 'contains' },
+        { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'siphon4Count', header: 'تعداد سیفون 4', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'domesticCount', header: 'آحاد خانگی', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'commercialCount', header: 'آحاد تجاری', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'otherCount', header: 'آحاد سایر', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'familyCount', header: 'تعداد خانوار', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals' },
+        { field: 'domesticArea', header: 'عرصه خانگی', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals' },
+        { field: 'commercialArea', header: 'عرصه تجاری', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals' },
+        { field: 'otherArea', header: 'عرصه سایر', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals' },
+        { field: 'capacity', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب', isSelected: false, isSelectedOrigin: false, type: 'text', matchMode: 'contains' },
+        // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        { field: 'sewageInstallationJalaliDay', header: 'تاریخ نصب فاضلاب', isSelected: false, isSelectedOrigin: false, type: 'text', matchMode: 'contains' },
+        // { field: 'sewageInstallationDateTime', header: 'زمان نصب فاضلاب', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        { field: 'guildTitle', header: 'صنف', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'ownershipTypeTitle', header: 'نوع مالک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'branchStateTitle', header: 'وضعیت انشعاب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'waterSourceTitle', header: 'منبع آب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'customerTypeTitle', header: 'نوع اشتراک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        // { field: 'previousClientId', header: 'اشتراک قبلی', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        // { field: 'changeOrInsertLogId', header: 'تغییر یا ایجاد لاگ', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, type: 'text', matchMode: 'contains' },
+        // { field: 'isLast', header: 'آخرین', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        // { field: 'fromDateTime', header: 'از تاریخ', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true , type:'text',matchMode: 'contains'},
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, type: 'text', matchMode: 'contains' },
+    ]
+    clientGetLazyEditColumns: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, dictionaryName: { id: 1, title: 'zoneId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'zoneDictionary' }, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'nationalId', header: 'کد ملی', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains', ltr: true },
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, type: 'text', matchMode: 'contains', ltr: true },
+        { field: 'mobiles', header: 'موبایل/ها', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains', icon: "grid-column: auto/ span 2", ltr: true },
+        // { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'readingNumber', header: 'اشتراک', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains', ltr: true },
+        // { field: 'billId', header: 'ش.قبض', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'fullName', header: 'نام کامل', isSelected: true, isSelectedOrigin: true, type: 'text', matchMode: 'contains' },
+        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, type: 'text', matchMode: 'contains' },
+        { field: 'usageTitle', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true, dictionaryName: { id: 1, title: 'usageId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'usageDictionary' }, type: 'text', matchMode: 'contains' },
+        { field: 'branchDiameterTitle', header: 'قطر', isSelected: true, isSelectedOrigin: true, isSelectOption: true, dictionaryName: { id: 1, title: 'branchDiameterId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'branchDiameterDictionary' }, type: 'text', matchMode: 'contains' },
+        { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'siphon4Count', header: 'تعداد سیفون 4', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'domesticCount', header: 'آحاد خانگی', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'commercialCount', header: 'آحاد تجاری', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'otherCount', header: 'آحاد سایر', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'familyCount', header: 'تعداد خانوار', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'domesticArea', header: 'عرصه خانگی', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'commercialArea', header: 'عرصه تجاری', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'otherArea', header: 'عرصه سایر', isSelected: false, isSelectedOrigin: false, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'capacity', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, isNumber: true, type: 'numeric', matchMode: 'equals', ltr: true },
+        { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب', isSelected: false, isSelectOption: true, isDate: true, dictionaryName: { id: 1, title: '', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: '' }, isSelectedOrigin: false, type: 'text', matchMode: 'contains' },
+        // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        { field: 'sewageInstallationJalaliDay', header: 'تاریخ نصب فاضلاب', isSelected: false, isSelectOption: true, isDate: true, dictionaryName: { id: 1, title: '', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: '' }, isSelectedOrigin: false, type: 'text', matchMode: 'contains' },
+        // { field: 'sewageInstallationDateTime', header: 'زمان نصب فاضلاب', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        { field: 'guildTitle', header: 'صنف', isSelected: false, isSelectedOrigin: false, isSelectOption: true, dictionaryName: { id: 1, title: 'guildId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'guildDictionary' }, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'ownershipTypeTitle', header: 'نوع مالک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, dictionaryName: { id: 1, title: 'ownershipTypeId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'ownershipTypeDictionary' }, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'branchStateTitle', header: 'وضعیت انشعاب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, dictionaryName: { id: 1, title: 'branchStateId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'branchStateDictionary' }, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'waterSourceTitle', header: 'منبع آب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, dictionaryName: { id: 1, title: 'waterSourceId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'waterSourceDictionary' }, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        { field: 'customerTypeTitle', header: 'نوع اشتراک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, dictionaryName: { id: 1, title: 'customerTypeId', titleUnicode: '', isSelected: '', selectedValue: '', optionsNameInComponent: 'customerTypeDictionary' }, isNotHaveSort: true, type: 'text', matchMode: 'contains' },
+        // { field: 'previousClientId', header: 'اشتراک قبلی', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        // { field: 'changeOrInsertLogId', header: 'تغییر یا ایجاد لاگ', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true, type: 'text', matchMode: 'contains', icon: "grid-column: auto/ span 2" },
+        // { field: 'isLast', header: 'آخرین', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        // { field: 'fromDateTime', header: 'از تاریخ', isSelected: false, isSelectedOrigin: false, enableTooltip: true , type:'text',matchMode: 'contains'},
+        // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false , type:'text',matchMode: 'contains'},
+        { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true, isNumber: true, type: 'numeric', matchMode: 'equals' },
+        // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true , type:'text',matchMode: 'contains'},
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, type: 'text', matchMode: 'contains', icon: "grid-column: auto/ span 2" },
     ]
 
     getColumnsMenus = (name: string): IObjectIteratation[] => {

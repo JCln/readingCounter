@@ -60,11 +60,13 @@ export interface IClientAll {
     isLast: boolean,
     x: string,
     y: string,
+    usageTitle: string,
     guildTitle: string,
     branchStateTitle: string,
     ownershipTypeTitle: string,
     customerTypeTitle: string,
     waterSourceTitle: string,
+    zoneTitle: string,
 }
 export interface IClientGetAllLazy {
     data: IClientAll[],

@@ -7,7 +7,6 @@ import { IFragmentMaster } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
-import { ProfileService } from 'services/profile.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -34,8 +33,7 @@ export class FragmentComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    public route: ActivatedRoute,
-    private profileService: ProfileService
+    public route: ActivatedRoute
   ) {
     super();
   }

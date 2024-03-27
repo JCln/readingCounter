@@ -12,6 +12,8 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { ClientLazyEditComponent } from './client-lazy-edit/client-lazy-edit.component';
+import { IClientAll } from 'interfaces/i-branch';
 
 @Component({
   selector: 'app-client-get-lazy',
@@ -24,7 +26,7 @@ export class ClientGetLazyComponent extends AllListsFactory implements AfterView
   @ViewChild(Table) datatableG: Table;
   hasFiltersInTable: boolean = false;
 
-  _numberOfExtraColumns: number[] = [];
+  _numberOfExtraColumns: number[] = [1, 2];
   _selectedColumnsToRemember: string = 'selectedClientGetlazy';
   _sessionName: string = 'clientManagerGetLazy';
   _outputFileName: string = 'clientManagerGetLazy';
@@ -130,6 +132,35 @@ export class ClientGetLazyComponent extends AllListsFactory implements AfterView
     }
     else
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.done);
+  }
+  removeSingleRow = async (rowDataAndIndex: IClientAll): Promise<any> => {
+    const config = {
+      messageTitle: EN_messages.confirm_remove,
+      text: 'ناحیه: ' + rowDataAndIndex.zoneTitle + '،   شناسه قبض: ' + rowDataAndIndex.billId + '،   کاربری: ' + rowDataAndIndex.usageTitle,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-trash'
+    }
+    const confirmed = await this.listManagerService.utilsService.firstConfirmDialog(config);
+    if (confirmed) {
+      const res = await this.listManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.clientRemove, rowDataAndIndex.id);
+      this.listManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.refreshTable();
+    }
+  }
+  editSingleRow = (data: IClientAll) => {
+    this.ref = this.dialogService.open(ClientLazyEditComponent, {
+      data: data,
+      rtl: true,
+      width: '70%'
+    })
+    this.ref.onClose.subscribe((res: IClientAll) => {
+      console.log(this.ref);
+
+      // if (res)
+      // this.onRowEditSave(res);
+    });
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);

@@ -51,7 +51,7 @@ export class MapDgComponent implements OnInit {
         `${items.firstName} <br>` + `${items.sureName} <br> اشتراک: ${items.eshterak} <br> ${items.trackNumber ? 'ش.پ :' + items.trackNumber : ''}`
       );
   }
-  private simpleMarkSingleLocation = (x: string, y: string) => {
+  private markSingleLocation = (x: string, y: string) => {
     this.markSingle({ x: x, y: y, firstName: this.config.data.firstName, sureName: this.config.data.sureName, eshterak: this.config.data.eshterak, trackNumber: this.config.data.trackNumber });
   }
   private getOverlays = () => {
@@ -83,7 +83,39 @@ export class MapDgComponent implements OnInit {
     var markersGroup = L.layerGroup();
     this.map3.addLayer(markersGroup);
 
-    this.map3.on('mouseup', function (e) {
+    this.map3.on('click', function (e) {
+      // get the count of currently displayed markers
+      var markersCount = markersGroup.getLayers().length;
+
+      if (markersCount < MAX_LENGTH) {
+        // var marker = L.marker(e.latlng).addTo(markersGroup);
+        L.marker([e.latlng.lat, e.latlng.lng]).addTo(markersGroup);
+        _markerValue = [e.latlng.lat, e.latlng.lng];
+        return;
+      }
+      // remove the markers when MARKERS_MAX is reached
+      _markerValue = [];
+      markersGroup.clearLayers();
+    });
+  }
+  initMapMarkerExisted = () => {
+    this.map3 = L.map('map3', {
+      center: this.envService.mapCenter,
+      zoom: ENRandomNumbers.fifteen,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup3]
+    });
+
+    this.map3.attributionControl.setPrefix(ENCompanyName.title);
+    const x = this.config.data.dataSource.x;
+    const y = this.config.data.dataSource.y;
+    var markersGroup = L.layerGroup();
+    this.flyToDes(x, y, ENRandomNumbers.fifteen);
+    L.marker([x, y]).addTo(markersGroup);
+    this.map3.addLayer(markersGroup);
+
+    this.map3.on('click', function (e) {
       // get the count of currently displayed markers
       var markersCount = markersGroup.getLayers().length;
 
@@ -100,13 +132,15 @@ export class MapDgComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.config.data.newMarker) {
-      this.initMapNewMarker();
+      this.config.data.dataSource.x ?
+        this.initMapMarkerExisted() :
+        this.initMapNewMarker();
     }
     else {
       this.initMap();
       const x = this.config.data.x;
       const y = this.config.data.y;
-      this.simpleMarkSingleLocation(x, y);
+      this.markSingleLocation(x, y);
     }
   }
   close() {

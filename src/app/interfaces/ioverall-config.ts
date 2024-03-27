@@ -151,8 +151,18 @@ export interface IObjectIteratation {
     enableTooltip?: boolean;
     tabIndex?: number;
     type?: string;
-    isGIS?:boolean;
-    isNotHaveSort?:boolean
+    matchMode?: string;// working for primeng tables(headers)
+    isGIS?: boolean;
+    isNotHaveSort?: boolean,
+    isDate?: boolean,
+    dictionaryName?: {
+        id: number,
+        title: string,
+        titleUnicode: string,
+        isSelected: string,
+        selectedValue: string,
+        optionsNameInComponent: string
+    }
 }
 export type BookType = 'xlsx' | 'csv' | 'xls';
 export interface INotificationAlertTypes {

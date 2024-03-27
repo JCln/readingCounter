@@ -131,6 +131,8 @@ export class CloseTabService {
     isLast: false,
     x: '',
     y: '',
+    zoneTitle: '',
+    usageTitle: '',
     guildTitle: '',
     branchStateTitle: '',
     ownershipTypeTitle: '',
@@ -1700,7 +1702,9 @@ export class CloseTabService {
         branchStateTitle: '',
         ownershipTypeTitle: '',
         customerTypeTitle: '',
-        waterSourceTitle: ''
+        waterSourceTitle: '',
+        zoneTitle: '',
+        usageTitle: ''
       }
     },
     {

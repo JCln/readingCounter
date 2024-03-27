@@ -9,6 +9,7 @@ import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { FdDgComponent } from './fd-dg/fd-dg.component';
+import { PageSignsService } from 'services/page-signs.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class FragmentDetailsComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    public pageSignsService: PageSignsService
   ) {
     super();
   }

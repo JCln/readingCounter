@@ -30,8 +30,12 @@ export class FragmentManagerService {
     public columnManager: ColumnManager
   ) { }
 
-  routeToFragmentDetails = (route: string) => {
-    this.pageSignsService.fragmentDetails_pageSign.GUid = route;
+  routeToFragmentDetails = (body: IFragmentMaster) => {
+    this.pageSignsService.fragmentDetails_pageSign.GUid = body.id;
+    this.pageSignsService.fragmentDetails_pageSign.zoneTitle = body.changableZoneId;
+    this.pageSignsService.fragmentDetails_pageSign.routeTitle = body.routeTitle;
+    this.pageSignsService.fragmentDetails_pageSign.fromEshterak = body.fromEshterak;
+    this.pageSignsService.fragmentDetails_pageSign.toEshterak = body.toEshterak;
     this.utilsService.routeToByUrl(EN_Routes.fragmentDetail);
   }
   routeToFragmentMaster = () => {
@@ -54,7 +58,7 @@ export class FragmentManagerService {
     }
     return true;
   }
-  
+
   /* VERIFICATION */
 
   firstConfirmDialog = (text?: string): Promise<any> => {

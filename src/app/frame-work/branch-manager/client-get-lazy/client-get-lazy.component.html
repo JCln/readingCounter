@@ -30,14 +30,15 @@
                         <div class="tooltip_text_right">حذف فیلترها</div>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                        <div class="tooltip_text">بارگیری مجدد جدول</div>
+                        <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                     </i>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th class="__headers" pReorderableColumn *ngFor="let col of columns" [pSortableColumnDisabled]="col?.isNotHaveSort" pSortableColumn="{{col.field}}">
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns"
+                    [pSortableColumnDisabled]="col?.isNotHaveSort" pSortableColumn="{{col.field}}">
                     <p-sortIcon *ngIf="!col?.isNotHaveSort" field="{{col.field}}"></p-sortIcon>
                     <div class="_rotate tooltip">
                         {{col.header}}
@@ -53,8 +54,7 @@
                         field="{{col.field}}"></p-columnFilter>
 
                     <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption && col?.type !== 'disabled'"
-                        [type]="col.type == 'numeric'? 'numeric': 'text'"
-                        [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
+                        [type]="col.type" [matchMode]="col.matchMode" field="{{col.field}}">
                         {{col.type}}
                     </p-columnFilter>
 
@@ -134,11 +134,21 @@
                                 </p-cellEditor>
                             </div>
                         </ng-template>
-
                     </ng-template>
                 </td>
+                <td class="__icon-columns" class="edit_button" (click)="editSingleRow(dataSource)">
+                    <span class="ui-column-title">ویرایش</span>
+                    <i class="tooltip _edit pi pi-pencil">
+                        <div class="tooltip_text">ویرایش</div>
+                    </i>
+                </td>
+                <td class="__icon-columns" class="edit_button" (click)="removeSingleRow(dataSource)">
+                    <span class="ui-column-title">حذف مورد</span>
+                    <i class="tooltip p_icons fa fa-trash-o">
+                        <div class="tooltip_text_right">حذف مورد</div>
+                    </i>
+                </td>
             </tr>
-
         </ng-template>
 
     </p-table>

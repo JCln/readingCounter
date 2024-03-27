@@ -54,7 +54,7 @@
                         <div class="tooltip_text_right">حذف فیلترها</div>
                     </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                        <div class="tooltip_text">بارگیری مجدد جدول</div>
+                        <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                     </i>
                 </div>
             </div>
@@ -77,8 +77,7 @@
                         field="{{col.field}}"></p-columnFilter>
 
                     <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption && col?.type !== 'disabled'"
-                        [type]="col.type == 'numeric'? 'numeric': 'text'"
-                        [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
+                        [type]="col.type" [matchMode]="col.matchMode" field="{{col.field}}">
                         {{col.type}}
                     </p-columnFilter>
 
