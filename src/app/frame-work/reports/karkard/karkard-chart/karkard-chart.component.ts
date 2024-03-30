@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportChartKarkard } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 
 
@@ -100,7 +101,8 @@ export class KarkardChartComponent implements OnInit {
   subscription: Subscription[] = [];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService
+    private readingReportManagerService: ReadingReportManagerService,
+    public closeTabService: CloseTabService
   ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
@@ -130,7 +132,7 @@ export class KarkardChartComponent implements OnInit {
     this.pieChartDataRegion.push(this.dataSource.inRegion.xarabCount);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardChart, this.readingReportManagerService.karkardReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardChart, this.closeTabService.karkardReq);
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();

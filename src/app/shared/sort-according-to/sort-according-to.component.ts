@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { CloseTabService } from 'services/close-tab.service';
 
 @Component({
   selector: 'app-sort-according-to',
@@ -9,7 +9,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 export class SortAccordingToComponent implements OnInit {
 
   constructor(
-    public readingReportManagerService: ReadingReportManagerService  
+    public closeTabService: CloseTabService
   ) { }
 
   ngOnInit(): void {

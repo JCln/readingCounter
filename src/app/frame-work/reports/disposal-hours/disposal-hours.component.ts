@@ -26,25 +26,21 @@ export class DisposalHoursComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForRRDisposalHours = null;
-      this.verification();
-    }
+  classWrapper = async () => {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamdhchart);
   }
   validation = (): boolean => {
-    return this.readingReportManagerService.verificationRRDisposalHours(this.readingReportManagerService.disposalhoursReq);
+    return this.readingReportManagerService.verificationService.verificationRRDisposalHours(this.closeTabService.disposalhoursReq);
   }
   verification = async () => {
     if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRDisposalHours = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportManagerService.disposalhoursReq);
+    this.closeTabService.saveDataForRRDisposalHours = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.closeTabService.disposalhoursReq);
   }
   refreshTable = () => {
     if (this.validation())

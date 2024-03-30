@@ -35,46 +35,42 @@ export class KarkardComponent extends FactoryONE {
   routeToChartView = () => {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamkarkardchart);
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForRRKarkard = null;
-      this.verification();
-    }
-    if (this.closeTabService.saveDataForRRKarkard) {
+  classWrapper = async () => {
+    if (!MathS.isNull(this.closeTabService.saveDataForRRKarkard)) {
       this.setGetRanges();
     }
-    this.readingReportManagerService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.karkardReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.karkardReq.zoneId);
+    if (this.closeTabService.karkardReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.karkardReq.zoneId);
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.karkardReq.fragmentMasterIds = [];
+    this.closeTabService.karkardReq.fragmentMasterIds = [];
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.karkardReq.readingPeriodId = null;
-    this.readingReportManagerService.karkardReq._selectedKindId = null;
+    this.closeTabService.karkardReq.readingPeriodId = null;
+    this.closeTabService.karkardReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.karkardReq.readingPeriodId = null;
+    this.closeTabService.karkardReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.karkardReq.zoneId, +this.readingReportManagerService.karkardReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.karkardReq.zoneId, +this.closeTabService.karkardReq._selectedKindId);
   }
   validation = (): boolean => {
-    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardReq, this.readingReportManagerService._isOrderByDate);
+    return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())
       document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.readingReportManagerService.karkardReq);
+    this.closeTabService.saveDataForRRKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.closeTabService.karkardReq);
     this.setGetRanges();
     this.closeTabService.saveDataForRRKarkard = this.closeTabService.saveDataForRRKarkard;
   }

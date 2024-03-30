@@ -5,8 +5,9 @@ import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { IBranchState, IClientAll } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
-import { IOutputManager } from 'interfaces/imanage';
+import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
+import { IReadingReportGISReq, IUserKarkardInput, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 
 @Injectable({
   providedIn: 'root'
@@ -587,4 +588,119 @@ export class VerificationService {
     }
     return true;
   }
+  private datesValidation = (dataSource: object): boolean => {
+    if (dataSource.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(dataSource['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('statusId')) {
+      if (MathS.isNull(dataSource['statusId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_statusId);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (MathS.isNull(dataSource['fromDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+        return false;
+      }
+      if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (MathS.isNull(dataSource['toDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+        return false;
+      }
+      if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+        return false;
+      }
+    }
+
+    return true;
+  }
+  showInMapSingleValidation = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return false;
+    }
+    return true;
+  }
+  private periodValidations = (dataSource: object): boolean => {
+    if (dataSource.hasOwnProperty('zoneId'))
+      if (MathS.isNull(dataSource['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    if (dataSource.hasOwnProperty('readingPeriodId'))
+      if (MathS.isNull(dataSource['readingPeriodId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
+        return false;
+      }
+    if (dataSource.hasOwnProperty('year'))
+      if (MathS.isNull(dataSource['year'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
+        return false;
+      }
+    return true;
+  }
+  private periodValidationGIS = (readingReportGISReq: IReadingReportGISReq): boolean => {
+    if (readingReportGISReq.hasOwnProperty('zoneId'))
+      if (MathS.isNull(readingReportGISReq['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    if (readingReportGISReq.isForbidden === true) {
+      this.utilsService.snackBarMessageWarn(EN_messages.allowed_forbiddenByDate);
+      return false;
+    }
+    if (readingReportGISReq.isCounterState === true) {
+      if (MathS.isNull(readingReportGISReq.counterStateId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // VerificationS 
+  verificationUserKarkard = (readingReportReq: IUserKarkardInput): boolean => {
+    return this.datesValidation(readingReportReq);
+  }
+  verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
+  }
+  verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
+  }
+  verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
+    return this.datesValidation(readingReportReq);
+  }
+  verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
+    if (isValidateByDate) {
+      readingReportGISReq.readingPeriodId = null;
+      if (readingReportGISReq.hasOwnProperty('isCounterState')) {
+        if (readingReportGISReq.isCounterState === true) {
+          if (MathS.isNull(readingReportGISReq.counterStateId)) {
+            this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
+            return false;
+          }
+        }
+      }
+      return this.datesValidation(readingReportGISReq);
+    }
+    else {
+      return this.periodValidationGIS(readingReportGISReq);
+    }
+  }
+  verificationRRAnalyzePerformance = (readingReportReq: IMostReportInput, isValidateByDate: boolean): boolean => {
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
+  }
+
+
 }

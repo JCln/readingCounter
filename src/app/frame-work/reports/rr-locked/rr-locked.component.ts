@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
@@ -43,7 +42,7 @@ export class RrLockedComponent extends AllListsFactory {
     if (this.closeTabService.saveDataForRRLocked) {
       this.converts();
     }
-    this.readingReportManagerService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
@@ -80,26 +79,25 @@ export class RrLockedComponent extends AllListsFactory {
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.lockedReq.readingPeriodId = null;
-    this.readingReportManagerService.lockedReq._selectedKindId = null;
+    this.closeTabService.lockedReq.readingPeriodId = null;
+    this.closeTabService.lockedReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.lockedReq.readingPeriodId = null;
+    this.closeTabService.lockedReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.lockedReq.zoneId, +this.readingReportManagerService.lockedReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.lockedReq.zoneId, +this.closeTabService.lockedReq._selectedKindId);
   }
-  verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.lockedReq, this.readingReportManagerService._isOrderByDate);
-    if (temp)
-      this.connectToServer();
-  }
-
-  connectToServer = async () => {
-    this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
+  callAPI = async () => {
+    this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.closeTabService.lockedReq);
     this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRLocked);
     this.converts();
+  }
+  verification = async () => {
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.lockedReq, this.closeTabService._isOrderByDate);
+    if (temp)
+      this.callAPI();
   }
 
 }

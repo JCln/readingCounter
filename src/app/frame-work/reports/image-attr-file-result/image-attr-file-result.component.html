@@ -7,8 +7,8 @@
                     <div class="_key">از</div>
                     <div class="_value">
                         <app-date-jalali name="fromDate"
-                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.imgAttrResult, $event)"
-                            [dateObject]="readingReportManagerService.imgAttrResultReq.fromDate">
+                            (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.imgAttrResult, $event)"
+                            [dateObject]="closeTabService.imgAttrResultReq.fromDate">
                         </app-date-jalali>
                     </div>
                 </div>
@@ -16,8 +16,8 @@
                     <div class="_key">تا</div>
                     <div class="_value">
                         <app-date-jalali name="toDate"
-                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.imgAttrResult, $event)"
-                            [dateObject]="readingReportManagerService.imgAttrResultReq.toDate">
+                            (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.imgAttrResult, $event)"
+                            [dateObject]="closeTabService.imgAttrResultReq.toDate">
                         </app-date-jalali>
                     </div>
                 </div>
@@ -34,6 +34,6 @@
         [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult = !readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="verification()">
     </app-prime-table>
 </main>

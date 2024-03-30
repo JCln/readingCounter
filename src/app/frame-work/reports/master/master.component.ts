@@ -14,7 +14,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class MasterComponent extends FactoryONE {
-  rowGroupMetadata: any;
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   aggregateOptions = [
@@ -32,28 +31,22 @@ export class MasterComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForRRMaster = null;
-      this.verification();
-    }
-
-    this.readingReportManagerService.getSearchInOrderTo();
+  classWrapper = async () => {
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     // this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.readingReportManagerService.masterReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.masterReq._selectedKindId);
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForRRMaster = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.closeTabService.masterReq);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.masterReq, this.readingReportManagerService._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.masterReq, this.closeTabService._isOrderByDate);
     if (temp) {
-      this.connectToServer();
+      this.callAPI();
     }
-  }
-
-  connectToServer = async () => {
-    this.closeTabService.saveDataForRRMaster = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportManagerService.masterReq);
   }
 
 }

@@ -15,7 +15,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 export class GuildsParamsComponent extends FactoryONE {
 
   zoneDictionary: IDictionaryManager[] = [];
-  // karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -29,41 +28,36 @@ export class GuildsParamsComponent extends FactoryONE {
   }
 
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.guildsWithParamsReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.guildsWithParamsReq.zoneId);
+    if (this.closeTabService.guildsWithParamsReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.guildsWithParamsReq.zoneId);
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.RRGuildsWithParam = null;
-      this.verification();
-    }
-    this.readingReportManagerService.getSearchInOrderTo();
-
+  classWrapper = async () => {
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.guildsWithParamsReq.fragmentMasterIds = [];
+    this.closeTabService.guildsWithParamsReq.fragmentMasterIds = [];
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.guildsWithParamsReq.readingPeriodId = null;
-    this.readingReportManagerService.guildsWithParamsReq._selectedKindId = null;
+    this.closeTabService.guildsWithParamsReq.readingPeriodId = null;
+    this.closeTabService.guildsWithParamsReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.guildsWithParamsReq.readingPeriodId = null;
+    this.closeTabService.guildsWithParamsReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.guildsWithParamsReq.zoneId, +this.readingReportManagerService.guildsWithParamsReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.guildsWithParamsReq.zoneId, +this.closeTabService.guildsWithParamsReq._selectedKindId);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.guildsWithParamsReq, this.readingReportManagerService._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.guildsWithParamsReq, this.closeTabService._isOrderByDate);
     if (temp)
-      this.connectToServer();
+      this.callAPI();
   }
-  connectToServer = async () => {
-    this.closeTabService.RRGuildsWithParam = await this.readingReportManagerService.portRRTest(ENInterfaces.postRRGuildWithParams, this.readingReportManagerService.guildsWithParamsReq);
+  callAPI = async () => {
+    this.closeTabService.RRGuildsWithParam = await this.readingReportManagerService.portRRTest(ENInterfaces.postRRGuildWithParams, this.closeTabService.guildsWithParamsReq);
     // this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     // Converter.convertIdToTitle(this.closeTabService.RRGuildsWithParam, this.karbariByCodeDictionary, 'possibleKarbariCode');
     // Converter.convertIdToTitle(this.closeTabService.RRGuildsWithParam, this.karbariByCodeDictionary, 'karbariCode');

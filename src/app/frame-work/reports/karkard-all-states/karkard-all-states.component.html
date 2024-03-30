@@ -26,7 +26,7 @@
                             </p-multiSelect>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
@@ -36,8 +36,7 @@
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2"
-                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
@@ -46,7 +45,7 @@
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">سال</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
@@ -58,20 +57,20 @@
                         </div>
                     </div>
 
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.karkardAllStates, $event)"
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.karkardAllStates, $event)"
                                 [dateObject]="closeTabService.offKarkardAllStatesReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.karkardAllStates, $event)"
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.karkardAllStates, $event)"
                                 [dateObject]="closeTabService.offKarkardAllStatesReq.toDate">
                             </app-date-jalali>
                         </div>
@@ -94,8 +93,8 @@
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="closeTabService._rowsPerPage" dir="rtl" [tableStyle]="{'width': '100%'}"
         (onFilter)="filteredTableEvent($event)" styleClass="p-datatable-responsive" stateStorage="session"
-        stateKey="karkard-allstates" [reorderableColumns]="readingReportManagerService.profileService.getLocalReOrderable()"
-        appUnSortTable>
+        stateKey="karkard-allstates"
+        [reorderableColumns]="readingReportManagerService.profileService.getLocalReOrderable()" appUnSortTable>
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="1" [options]="_selectCols" [(ngModel)]="selectedColumns"

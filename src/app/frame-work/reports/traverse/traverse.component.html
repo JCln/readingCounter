@@ -10,7 +10,7 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="readingReportManagerService.traverseReq.zoneId" placeholder="انتخاب مورد"
+                                [(ngModel)]="closeTabService.traverseReq.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
                                 (onChange)="afterZoneChanged()">
                             </p-dropdown>
@@ -20,38 +20,36 @@
                         <div class="_key">نوبتی</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
-                                [(ngModel)]="readingReportManagerService.traverseReq.fragmentMasterIds"
-                                optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                                [(ngModel)]="closeTabService.traverseReq.fragmentMasterIds" optionLabel="routeTitle"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                                [filter]="true" showClear="true">
                             </p-multiSelect>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
-                                [(ngModel)]="readingReportManagerService.traverseReq._selectedKindId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
-                                (click)="getReadingPeriod()" (onChange)="afterPeriodChanged()">
+                                [(ngModel)]="closeTabService.traverseReq._selectedKindId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
+                                (onChange)="afterPeriodChanged()">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2"
-                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
-                                [(ngModel)]="readingReportManagerService.traverseReq.readingPeriodId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                [(ngModel)]="closeTabService.traverseReq.readingPeriodId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">سال</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="readingReportManagerService.traverseReq.year"
-                                [(value)]="readingReportManagerService.traverseReq.year" name="year">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.traverseReq.year"
+                                [(value)]="closeTabService.traverseReq.year" name="year">
                                 <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                     {{truefalse.title}}
                                 </mat-option>
@@ -59,21 +57,21 @@
                         </div>
                     </div>
 
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.traverse, $event)"
-                                [dateObject]="readingReportManagerService.traverseReq.fromDate">
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.traverse, $event)"
+                                [dateObject]="closeTabService.traverseReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.traverse, $event)"
-                                [dateObject]="readingReportManagerService.traverseReq.toDate">
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.traverse, $event)"
+                                [dateObject]="closeTabService.traverseReq.toDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -92,6 +90,6 @@
         [_checkUpName]="'rr-traverse'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedTrv"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedTrv = !readingReportManagerService.utilsService.collapser.isCollapsedTrv"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="verification()">
     </app-prime-table>
 </main>

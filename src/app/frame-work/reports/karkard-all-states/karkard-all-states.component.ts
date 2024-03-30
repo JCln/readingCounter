@@ -87,7 +87,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.offKarkardAllStatesReq.zoneId, +this.closeTabService.offKarkardAllStatesReq._selectedKindId);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.closeTabService.offKarkardAllStatesReq, this.readingReportManagerService._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.offKarkardAllStatesReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }

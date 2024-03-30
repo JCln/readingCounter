@@ -1,3 +1,4 @@
+import { CloseTabService } from 'services/close-tab.service';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -17,18 +18,19 @@ export class RrInstateComponent extends FactoryONE {
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
     private outputManagerService: OutputManagerService,
+    public closeTabService: CloseTabService
   ) {
     super();
   }
 
   connectToServer = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.inStateReq, true);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.inStateReq, true);
     if (temp) {
-      const res = await this.readingReportManagerService.ajaxReqWrapperService.postBlob(ENInterfaces.rrInStatePost, this.readingReportManagerService.inStateReq);
+      const res = await this.readingReportManagerService.ajaxReqWrapperService.postBlob(ENInterfaces.rrInStatePost, this.closeTabService.inStateReq);
       this.outputManagerService.downloadFileWithContentDisposition(res);
     }
   }
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
 

@@ -25,21 +25,17 @@ export class UserKarkardComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForUserKarkard = null;
-    }
+  classWrapper = async () => {
     this.trackingStatesDictionary = await this.readingReportManagerService.dictionaryWrapperService.getTrackingStatesDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
-
   }
-  connectToServer = async () => {
-    this.closeTabService.saveDataForUserKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingUserKarkard, this.readingReportManagerService.userKarkardReq);
+  callAPI = async () => {
+    this.closeTabService.saveDataForUserKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingUserKarkard, this.closeTabService.userKarkardReq);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationUserKarkard(this.readingReportManagerService.userKarkardReq);
+    const temp = this.readingReportManagerService.verificationService.verificationUserKarkard(this.closeTabService.userKarkardReq);
     if (temp)
-      this.connectToServer();
+      this.callAPI();
   }
 
 }

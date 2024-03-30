@@ -14,7 +14,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class ImageAttrFileResultComponent extends FactoryONE {
   chartColors: any;
-  _isOrderByDate: boolean = true;
+  readonly _isOrderByDate: boolean = true;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -23,21 +23,16 @@ export class ImageAttrFileResultComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForImageAttrResult = null;
-      this.verification();
-    }
-  }
+  classWrapper = async () => { }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrResultReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.imgAttrResultReq, this._isOrderByDate);
     if (temp) {
-      this.connectToServer();
+      this.callAPI();
     }
   }
 
-  connectToServer = async () => {
-    this.closeTabService.saveDataForImageAttrResult = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionResult, this.readingReportManagerService.imgAttrResultReq);
+  callAPI = async () => {
+    this.closeTabService.saveDataForImageAttrResult = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionResult, this.closeTabService.imgAttrResultReq);
     this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.closeTabService.saveDataForImageAttrResult.length) }]
   }
 

@@ -4,9 +4,8 @@
         <div class="input_2">
             <div class="_key">ناحیه</div>
             <div class="_value">
-                <p-dropdown name="zones" [options]="zoneDictionary"
-                    [(ngModel)]="readingReportManagerService.inStateReq.zoneId" placeholder="انتخاب مورد"
-                    optionValue="id" optionLabel="title" filter="true">
+                <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="closeTabService.inStateReq.zoneId"
+                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
                 </p-dropdown>
             </div>
         </div>
@@ -14,8 +13,8 @@
             <div class="_key">از</div>
             <div class="_value">
                 <app-date-jalali name="fromDate"
-                    (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.inState, $event)"
-                    [dateObject]="readingReportManagerService.inStateReq.fromDate">
+                    (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.inState, $event)"
+                    [dateObject]="closeTabService.inStateReq.fromDate">
                 </app-date-jalali>
             </div>
         </div>
@@ -23,14 +22,14 @@
             <div class="_key">تا</div>
             <div class="_value">
                 <app-date-jalali name="toDate"
-                    (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.inState, $event)"
-                    [dateObject]="readingReportManagerService.inStateReq.toDate">
+                    (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.inState, $event)"
+                    [dateObject]="closeTabService.inStateReq.toDate">
                 </app-date-jalali>
             </div>
         </div>
         <button type="submit" class="tooltip btn_1">
             <i class="pi pi-file-excel"></i>
-            Excel دانلود
+            دانلود Excel
         </button>
     </section>
 </form>

@@ -33,14 +33,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForRRTraverseDifferential = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
-
-    this.readingReportManagerService.getSearchInOrderTo();
+  classWrapper = async () => {
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.dictionaryWrapperService.getTraverseDifferentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
@@ -50,35 +44,35 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamtrvchchart);
   }
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.trvchReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.trvchReq.zoneId);
+    if (this.closeTabService.trvchReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.trvchReq.zoneId);
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.trvchReq.fragmentMasterIds = [];
+    this.closeTabService.trvchReq.fragmentMasterIds = [];
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.trvchReq.readingPeriodId = null;
-    this.readingReportManagerService.trvchReq._selectedKindId = null;
+    this.closeTabService.trvchReq.readingPeriodId = null;
+    this.closeTabService.trvchReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.trvchReq.readingPeriodId = null;
+    this.closeTabService.trvchReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.trvchReq.zoneId, +this.readingReportManagerService.trvchReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.trvchReq.zoneId, +this.closeTabService.trvchReq._selectedKindId);
   }
   validation = (): boolean => {
-    return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportManagerService.trvchReq, this.readingReportManagerService._isOrderByDate);
+    return this.readingReportManagerService.verificationService.verificationRRTraverseDifferential(this.closeTabService.trvchReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRTraverseDifferential = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
+    this.closeTabService.saveDataForRRTraverseDifferential = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.closeTabService.trvchReq);
     this.karbariDictionaryByCode = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
 
-    if (this.readingReportManagerService.trvchReq.traverseType == 0) {
+    if (this.closeTabService.trvchReq.traverseType == 0) {
       Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverseDifferential, this.karbariDictionaryByCode, 'newValue');
       Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverseDifferential, this.karbariDictionaryByCode, 'value');
     }

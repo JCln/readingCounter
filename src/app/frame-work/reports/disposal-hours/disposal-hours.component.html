@@ -9,8 +9,8 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="readingReportManagerService.disposalhoursReq.zoneId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                [(ngModel)]="closeTabService.disposalhoursReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
@@ -18,8 +18,8 @@
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
-                                [dateObject]="readingReportManagerService.disposalhoursReq.fromDate">
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.dh, $event)"
+                                [dateObject]="closeTabService.disposalhoursReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -27,8 +27,8 @@
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
-                                [dateObject]="readingReportManagerService.disposalhoursReq.toDate">
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.dh, $event)"
+                                [dateObject]="closeTabService.disposalhoursReq.toDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -47,10 +47,11 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRRDisposalHours" [_outputFileName]="'disposalHs'"
-        [_checkUpName]="'rr-disposalHs'" [_sessionName]="'disposalHours-session'" [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
+        [_checkUpName]="'rr-disposalHs'" [_sessionName]="'disposalHours-session'"
+        [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDH"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDH = !readingReportManagerService.utilsService.collapser.isCollapsedDH"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="verification()">
     </app-prime-table>
 </main>
 <router-outlet></router-outlet>

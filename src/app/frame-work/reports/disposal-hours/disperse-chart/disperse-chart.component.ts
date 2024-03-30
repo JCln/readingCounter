@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportChartDisposeRes } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 
 @Component({
@@ -77,7 +78,8 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService
+    private readingReportManagerService: ReadingReportManagerService,
+    private closeTabService: CloseTabService
   ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
@@ -105,7 +107,7 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
     this.pieChartDataZone.push(this.dataSource.inZone._16To18);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalChart, this.readingReportManagerService.disposalhoursReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalChart, this.closeTabService.disposalhoursReq);
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();

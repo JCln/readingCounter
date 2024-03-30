@@ -1,3 +1,4 @@
+import { CloseTabService } from 'services/close-tab.service';
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -77,7 +78,8 @@ export class TrvchChartComponent implements OnInit {
   subscription: Subscription[] = [];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService
+    private readingReportManagerService: ReadingReportManagerService,
+    public closeTabService: CloseTabService
   ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
@@ -104,7 +106,7 @@ export class TrvchChartComponent implements OnInit {
     this.pieChartDataRegion.push(this.dataSource.inRegion.emptyCount);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferntialChart, this.readingReportManagerService.trvchReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferntialChart, this.closeTabService.trvchReq);
 
     this.insertToPieChartProvince();
     this.insertToPieChartZone();

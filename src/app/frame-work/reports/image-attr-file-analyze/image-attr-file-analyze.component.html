@@ -9,8 +9,8 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="readingReportManagerService.imgAttrAnalyzeReq.zoneId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                [(ngModel)]="closeTabService.imgAttrAnalyzeReq.zoneId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
@@ -18,8 +18,8 @@
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.imgAttrAnalyze, $event)"
-                                [dateObject]="readingReportManagerService.imgAttrAnalyzeReq.fromDate">
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.imgAttrAnalyze, $event)"
+                                [dateObject]="closeTabService.imgAttrAnalyzeReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -27,8 +27,8 @@
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.imgAttrAnalyze, $event)"
-                                [dateObject]="readingReportManagerService.imgAttrAnalyzeReq.toDate">
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.imgAttrAnalyze, $event)"
+                                [dateObject]="closeTabService.imgAttrAnalyzeReq.toDate">
                             </app-date-jalali>
 
                         </div>
@@ -44,10 +44,11 @@
     </section>
 
     <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [_outputFileName]="'_imageAttrAnalyze'"
-        [_checkUpName]="'_imageAttrAnalyze'" [_sessionName]="'imgattrFile-session'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
+        [_checkUpName]="'_imageAttrAnalyze'" [_sessionName]="'imgattrFile-session'"
+        [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz = !readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="verification()">
     </app-prime-table>
 </main>
 

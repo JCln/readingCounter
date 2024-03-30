@@ -10,7 +10,7 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="readingReportManagerService.detailsReq.zoneId" placeholder="انتخاب مورد"
+                                [(ngModel)]="closeTabService.detailsReq.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
                                 (onChange)="afterZoneChanged()">
                             </p-dropdown>
@@ -20,58 +20,57 @@
                         <div class="_key">نوبتی</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
-                                [(ngModel)]="readingReportManagerService.detailsReq.fragmentMasterIds"
-                                optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                                [(ngModel)]="closeTabService.detailsReq.fragmentMasterIds" optionLabel="routeTitle"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                                [filter]="true" showClear="true">
                             </p-multiSelect>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
-                                [(ngModel)]="readingReportManagerService.detailsReq._selectedKindId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
-                                (click)="getReadingPeriod()" (onChange)="afterPeriodChanged()">
+                                [(ngModel)]="closeTabService.detailsReq._selectedKindId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
+                                (onChange)="afterPeriodChanged()">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2"
-                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
-                                [(ngModel)]="readingReportManagerService.detailsReq.readingPeriodId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                [(ngModel)]="closeTabService.detailsReq.readingPeriodId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">سال</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="readingReportManagerService.detailsReq.year" name="year">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.detailsReq.year"
+                                name="year">
                                 <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                     {{truefalse.title}}
                                 </mat-option>
                             </mat-select>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
-                                [dateObject]="readingReportManagerService.detailsReq.fromDate">
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.details, $event)"
+                                [dateObject]="closeTabService.detailsReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
-                                [dateObject]="readingReportManagerService.detailsReq.toDate">
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.details, $event)"
+                                [dateObject]="closeTabService.detailsReq.toDate">
                             </app-date-jalali>
 
                         </div>
@@ -91,6 +90,6 @@
         [_selectedColumnsToRemember]="'selectedRRDetails'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedDetails"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedDetails = !readingReportManagerService.utilsService.collapser.isCollapsedDetails"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="verification()">
     </app-prime-table>
 </main>

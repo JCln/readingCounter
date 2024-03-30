@@ -36,39 +36,39 @@ export class RrFragmentComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRRFragment) {
       this.setGetRanges();
     }
-    this.readingReportManagerService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.rrFragmentKarkardReq.fragmentMasterIds = [];
+    this.closeTabService.rrFragmentKarkardReq.fragmentMasterIds = [];
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.rrFragmentKarkardReq.readingPeriodId = null;
-    this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId = null;
+    this.closeTabService.rrFragmentKarkardReq.readingPeriodId = null;
+    this.closeTabService.rrFragmentKarkardReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.rrFragmentKarkardReq.readingPeriodId = null;
+    this.closeTabService.rrFragmentKarkardReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    if (this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId)
-      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.rrFragmentKarkardReq.zoneId, +this.readingReportManagerService.rrFragmentKarkardReq._selectedKindId);
+    if (this.closeTabService.rrFragmentKarkardReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.rrFragmentKarkardReq.zoneId, +this.closeTabService.rrFragmentKarkardReq._selectedKindId);
   }
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.rrFragmentKarkardReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.rrFragmentKarkardReq.zoneId);
+    if (this.closeTabService.rrFragmentKarkardReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.rrFragmentKarkardReq.zoneId);
   }
   validation = (): boolean => {
-    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.rrFragmentKarkardReq, this.readingReportManagerService._isOrderByDate);
+    return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.rrFragmentKarkardReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRFragment = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardByFragment, this.readingReportManagerService.rrFragmentKarkardReq);
+    this.closeTabService.saveDataForRRFragment = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardByFragment, this.closeTabService.rrFragmentKarkardReq);
     this.setGetRanges();
   }
   refreshTable = () => {

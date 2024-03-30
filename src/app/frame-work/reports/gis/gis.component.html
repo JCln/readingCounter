@@ -21,7 +21,7 @@
                 <div *ngFor="let datePeriod of readingReportManagerService.utilsService.getSearchInOrderTo">
                     <div class="p-field-radiobutton">
                         <p-radioButton name="orderByDate" [value]="datePeriod.isSelected"
-                            [(ngModel)]="readingReportManagerService._isOrderByDate" [inputId]="datePeriod.key">
+                            [(ngModel)]="closeTabService._isOrderByDate" [inputId]="datePeriod.key">
                         </p-radioButton>
                         <label [for]="datePeriod.key">{{datePeriod.title}}</label>
                     </div>
@@ -31,10 +31,10 @@
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
                     <div class="_value">
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
-                            optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
-                            (onChange)="getCounterStateByZoneId()" (onChange)="afterZoneChanged()">
+                        <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="closeTabService.gisReq.zoneId"
+                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                            (onChange)="getFragmentByZone()" (onChange)="getCounterStateByZoneId()"
+                            (onChange)="afterZoneChanged()">
                         </p-dropdown>
                     </div>
                 </div>
@@ -42,74 +42,73 @@
                     <div class="_key">نوبتی</div>
                     <div class="_value">
                         <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
-                            [(ngModel)]="readingReportManagerService.gisReq.fragmentMasterIds" optionLabel="routeTitle"
+                            [(ngModel)]="closeTabService.gisReq.fragmentMasterIds" optionLabel="routeTitle"
                             optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
                             [filter]="true" showClear="true">
                         </p-multiSelect>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                     <div class="_key">نوع دوره</div>
                     <div class="_value">
                         <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
-                            [(ngModel)]="readingReportManagerService.gisReq._selectedKindId" placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.gisReq._selectedKindId" placeholder="انتخاب مورد"
                             optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
                             (onChange)="afterPeriodChanged()">
                         </p-dropdown>
                     </div>
                 </div>
-                <div class="input_2"
-                    [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
                     <div class="_key">دوره قرائت</div>
                     <div class="_value">
                         <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
-                            [(ngModel)]="readingReportManagerService.gisReq.readingPeriodId" placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.gisReq.readingPeriodId" placeholder="انتخاب مورد"
                             optionValue="id" optionLabel="title" filter="true">
                         </p-dropdown>
                     </div>
                 </div>
                 <div class="input_2"
-                    [hidden]="!readingReportManagerService.gisReq.isCounterState || !counterStateDictionary.length">
+                    [hidden]="!closeTabService.gisReq.isCounterState || !counterStateDictionary.length">
                     <div class="_key">وضعیت کنتور</div>
                     <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.gisReq.counterStateId" name="counterStateId">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.gisReq.counterStateId"
+                            name="counterStateId">
                             <mat-option *ngFor="let truefalse of counterStateDictionary" [value]="truefalse.id">
                                 {{truefalse.title}}
                             </mat-option>
                         </mat-select>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                     <div class="_key">سال</div>
                     <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.gisReq.year"
-                            [(value)]="readingReportManagerService.gisReq.year" name="year">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.gisReq.year"
+                            [(value)]="closeTabService.gisReq.year" name="year">
                             <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                 {{truefalse.title}}
                             </mat-option>
                         </mat-select>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
                         <app-date-jalali name="fromDate"
-                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.gis, $event)"
-                            [dateObject]="readingReportManagerService.gisReq.fromDate">
+                            (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.gis, $event)"
+                            [dateObject]="closeTabService.gisReq.fromDate">
                         </app-date-jalali>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
                         <app-date-jalali name="toDate"
-                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.gis, $event)"
-                            [dateObject]="readingReportManagerService.gisReq.toDate">
+                            (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.gis, $event)"
+                            [dateObject]="closeTabService.gisReq.toDate">
                         </app-date-jalali>
                     </div>
                 </div>
-                <mat-checkbox name="isCluster" [(ngModel)]="readingReportManagerService.gisReq.isCluster">خوشه بندی
+                <mat-checkbox name="isCluster" [(ngModel)]="closeTabService.gisReq.isCluster">خوشه بندی
                 </mat-checkbox>
 
             </section>

@@ -26,46 +26,41 @@ export class DmAnalysisComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForDMAAnalyze = null;
-      this.verification();
-    }
-    if (this.closeTabService.saveDataForDMAAnalyze) {
+  classWrapper = async () => {
+    if (!MathS.isNull(this.closeTabService.saveDataForDMAAnalyze)) {
       // this.insertSelectedColumns(); /* TO CHECKOUT THIS FUNC */
       this.setRanges();
     }
-    this.dataMiningAnalysesService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getPeriodKindDictionary();
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
     this.readingPeriodDictionary = [];
-    this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null;
-    this.dataMiningAnalysesService.dataMiningReq._selectedKindId = null;
+    this.closeTabService.dataMiningReq.readingPeriodId = null;
+    this.closeTabService.dataMiningReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null;
+    this.closeTabService.dataMiningReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.dataMiningAnalysesService.dataMiningReq.zoneId, +this.dataMiningAnalysesService.dataMiningReq._selectedKindId);
-  }
-  verification = async () => {
-    const temp = this.dataMiningAnalysesService.verificationRRShared(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);
-    if (temp)
-      this.connectToServer();
+    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.dataMiningReq.zoneId, +this.closeTabService.dataMiningReq._selectedKindId);
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
+    this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.dataMiningReadingTime, this.closeTabService.dataMiningReq);
     if (!MathS.isNull(this.closeTabService.saveDataForDMAAnalyze)) {
       this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
       Converter.convertIdToTitle(this.closeTabService.saveDataForDMAAnalyze, this.zoneDictionary, 'zoneId');
       this.setRanges();
     }
   }
-
+  verification = async () => {
+    const temp = this.dataMiningAnalysesService.verificationService.verificationRRShared(this.closeTabService.dataMiningReq, this.closeTabService._isOrderByDate);
+    if (temp)
+      this.connectToServer();
+  }
   private setRanges = () => {
     this.closeTabService.saveDataForDMAAnalyze.forEach(item => {
       item.averageBetweenTwoMinute = parseFloat(MathS.getRange(item.averageBetweenTwoMinute));

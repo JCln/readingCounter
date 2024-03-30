@@ -59,7 +59,7 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
       }
 
     } else {
-      this.readingReportManagerService.snackWarn(EN_messages.access_denied);
+      this.readingReportManagerService.utilsService.snackBarMessageWarn(EN_messages.access_denied);
     }
   }
 

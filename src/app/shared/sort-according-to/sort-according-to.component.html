@@ -1,9 +1,9 @@
 <section class="order_by">
     <h2>جستجو بر اساس :</h2>
-    <div *ngFor="let orderType of readingReportManagerService.utilsService.getSearchInOrderTo">
+    <div *ngFor="let orderType of closeTabService.utilsService.getSearchInOrderTo">
         <div class="p-field-radiobutton">
             <p-radioButton name="orderByDate" [value]="orderType.isSelected"
-                [(ngModel)]="readingReportManagerService._isOrderByDate" [inputId]="orderType.key">
+                [(ngModel)]="closeTabService._isOrderByDate" [inputId]="orderType.key">
             </p-radioButton>
             <label [for]="orderType.key">{{orderType.title}}</label>
         </div>

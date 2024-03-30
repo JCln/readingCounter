@@ -8,7 +8,7 @@
                     <div *ngFor="let orderType of dataMiningAnalysesService.utilsService.getSearchInOrderTo">
                         <div class="p-field-radiobutton">
                             <p-radioButton name="orderByDate" [value]="orderType.isSelected"
-                                [(ngModel)]="dataMiningAnalysesService._isOrderByDate" [inputId]="orderType.key">
+                                [(ngModel)]="closeTabService._isOrderByDate" [inputId]="orderType.key">
                             </p-radioButton>
                             <label [for]="orderType.key">{{orderType.title}}</label>
                         </div>
@@ -20,36 +20,35 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="dataMiningAnalysesService.dataMiningReq.zoneId" placeholder="انتخاب مورد"
+                                [(ngModel)]="closeTabService.dataMiningReq.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true" (onChange)="afterZoneChanged()">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="dataMiningAnalysesService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
-                                [(ngModel)]="dataMiningAnalysesService.dataMiningReq._selectedKindId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
-                                (click)="getReadingPeriod()" (onChange)="afterPeriodChanged()">
+                                [(ngModel)]="closeTabService.dataMiningReq._selectedKindId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
+                                (onChange)="afterPeriodChanged()">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2"
-                        [hidden]="!readingPeriodDictionary.length || dataMiningAnalysesService._isOrderByDate">
+                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
-                                [(ngModel)]="dataMiningAnalysesService.dataMiningReq.readingPeriodId"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                [(ngModel)]="closeTabService.dataMiningReq.readingPeriodId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="dataMiningAnalysesService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">سال</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="dataMiningAnalysesService.dataMiningReq.year" name="year">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.dataMiningReq.year"
+                                name="year">
                                 <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                     {{truefalse.title}}
                                 </mat-option>
@@ -57,21 +56,21 @@
                         </div>
                     </div>
 
-                    <div class="input_2" [hidden]="!dataMiningAnalysesService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="dataMiningAnalysesService.receiveFromDateJalali(dataMiningAnalysesService.ENReadingReports.dataMining, $event)"
-                                [dateObject]="dataMiningAnalysesService.dataMiningReq.fromDate">
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.dataMining, $event)"
+                                [dateObject]="closeTabService.dataMiningReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!dataMiningAnalysesService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="dataMiningAnalysesService.receiveToDateJalali(dataMiningAnalysesService.ENReadingReports.dataMining, $event)"
-                                [dateObject]="dataMiningAnalysesService.dataMiningReq.toDate">
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.dataMining, $event)"
+                                [dateObject]="closeTabService.dataMiningReq.toDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -93,7 +92,7 @@
         [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
         [_isCollaped]="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (collapsed)="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz = !dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="verification()">
     </app-prime-table>
 
 </main>

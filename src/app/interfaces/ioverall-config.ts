@@ -24,7 +24,7 @@ export interface ISidebarItems {
 export interface ISidebarVals {
     readonly id: number,
     req?: ENEssentialsToSave;
-    value: ENEssentialsToSave;
+    value?: ENEssentialsToSave;
     value_2?: ENEssentialsToSave;
     readonly url: string,
     readonly defaultReq?: any,

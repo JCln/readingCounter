@@ -6,12 +6,11 @@
                 <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="readingReportManagerService.masterReq._selectedKindId"
-                                name="_selectedKindId">
+                                [(ngModel)]="closeTabService.masterReq._selectedKindId" name="_selectedKindId">
                                 <mat-option (click)="getReadingPeriod()"
                                     *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
                                     {{truefalse.title}}
@@ -19,45 +18,43 @@
                             </mat-select>
                         </div>
                     </div>
-                    <div class="input_2"
-                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <div class="_value">
                             <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="readingReportManagerService.masterReq.readingPeriodId"
-                                name="readingPeriodId">
+                                [(ngModel)]="closeTabService.masterReq.readingPeriodId" name="readingPeriodId">
                                 <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                                     {{truefalse.title}}
                                 </mat-option>
                             </mat-select>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
                         <div class="_key">سال</div>
                         <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="readingReportManagerService.masterReq.year" name="year">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.masterReq.year"
+                                name="year">
                                 <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
                                     {{truefalse.title}}
                                 </mat-option>
                             </mat-select>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.master, $event)"
-                                [dateObject]="readingReportManagerService.masterReq.fromDate">
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.master, $event)"
+                                [dateObject]="closeTabService.masterReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.master, $event)"
-                                [dateObject]="readingReportManagerService.masterReq.toDate">
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.master, $event)"
+                                [dateObject]="closeTabService.masterReq.toDate">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -76,6 +73,6 @@
         [_selectedAggregatedName]="ENGroupByNames.selectedAggregateMaster"
         [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedMaster"
         (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedMaster = !readingReportManagerService.utilsService.collapser.isCollapsedMaster"
-        (refreshedTable)="refreshTable()">
+        (refreshedTable)="verification()">
     </app-prime-table>
 </main>

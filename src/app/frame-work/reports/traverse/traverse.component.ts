@@ -27,45 +27,40 @@ export class TraverseComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForRRTraverse = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-      this.verification();
-    }
-    this.readingReportManagerService.getSearchInOrderTo();
+  classWrapper = async () => {
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.traverseReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.traverseReq.zoneId);
+    if (this.closeTabService.traverseReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.traverseReq.zoneId);
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.traverseReq.fragmentMasterIds = [];
+    this.closeTabService.traverseReq.fragmentMasterIds = [];
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.traverseReq.readingPeriodId = null;
-    this.readingReportManagerService.traverseReq._selectedKindId = null;
+    this.closeTabService.traverseReq.readingPeriodId = null;
+    this.closeTabService.traverseReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.traverseReq.readingPeriodId = null;
+    this.closeTabService.traverseReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.traverseReq.zoneId, +this.readingReportManagerService.traverseReq._selectedKindId);
-  }
-  verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.traverseReq, this.readingReportManagerService._isOrderByDate);
-    if (temp)
-      this.connectToServer();
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.traverseReq.zoneId, +this.closeTabService.traverseReq._selectedKindId);
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRTraverse = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.readingReportManagerService.traverseReq);
+    this.closeTabService.saveDataForRRTraverse = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.closeTabService.traverseReq);
     this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverse, this.karbariByCodeDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverse, this.karbariByCodeDictionary, 'karbariCode');
+  }
+  verification = async () => {
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.traverseReq, this.closeTabService._isOrderByDate);
+    if (temp)
+      this.connectToServer();
   }
 
 }

@@ -24,49 +24,48 @@ export class GisComponent extends FactoryONE {
   }
 
   getCounterStateByZoneId = async () => {
-    if (this.readingReportManagerService.gisReq.zoneId)
-      this.counterStateDictionary = await this.readingReportManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
+    if (this.closeTabService.gisReq.zoneId)
+      this.counterStateDictionary = await this.readingReportManagerService.dictionaryWrapperService.getCounterStateByZoneIdDictionary(this.closeTabService.gisReq.zoneId);
   }
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.gisReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
+    if (this.closeTabService.gisReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.gisReq.zoneId);
   }
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.getCounterStateByZoneId();
-    this.readingReportManagerService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.getFragmentByZone();
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.gisReq.fragmentMasterIds = [];
-    this.readingReportManagerService.gisReq.counterStateId = null;
+    this.closeTabService.gisReq.fragmentMasterIds = [];
+    this.closeTabService.gisReq.counterStateId = null;
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.gisReq.readingPeriodId = null;
-    this.readingReportManagerService.gisReq._selectedKindId = null;
+    this.closeTabService.gisReq.readingPeriodId = null;
+    this.closeTabService.gisReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.gisReq.readingPeriodId = null;
+    this.closeTabService.gisReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.gisReq.zoneId, +this.readingReportManagerService.gisReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.gisReq.zoneId, +this.closeTabService.gisReq._selectedKindId);
   }
   changeRadio = (event: any) => {
     this.readingReportManagerService.showGisInOrderTo.forEach(item => {
       if (item.id == event)
-        this.readingReportManagerService.gisReq[item.id] = true;
+        this.closeTabService.gisReq[item.id] = true;
       else
-        this.readingReportManagerService.gisReq[item.id] = false;
+        this.closeTabService.gisReq[item.id] = false;
     })
-    event == 'isForbidden' ? this.readingReportManagerService._isOrderByDate = true : ''
-    console.log(this.readingReportManagerService.gisReq);
+    event == 'isForbidden' ? this.closeTabService._isOrderByDate = true : ''
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportManagerService.gisReq, this.readingReportManagerService._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationService.verificationRRGIS(this.closeTabService.gisReq, this.closeTabService._isOrderByDate);
     if (temp)
-      this.readingReportManagerService.routeToMapGIS(this.readingReportManagerService.gisReq);
+      this.readingReportManagerService.routeToMapGIS(this.closeTabService.gisReq);
   }
 
 }

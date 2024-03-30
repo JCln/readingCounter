@@ -39,11 +39,15 @@ import {
   IRRChartResWrapper,
   IReadingGuildReportOutput,
   IReadingReportDetails,
+  IReadingReportGISReq,
   IReadingReportKarkard,
   IReadingReportMaster,
+  IReadingReportReq,
   IReadingReportTraverse,
+  IReadingReportTraverseDifferentialReq,
   IReadingReportTraverseDifferentialRes,
   IUserKarkard,
+  IUserKarkardInput,
 } from 'interfaces/ireports';
 import { IFollowUp } from 'interfaces/isearchs';
 import { IDynamicExcelReq } from 'interfaces/itools';
@@ -507,8 +511,206 @@ export class CloseTabService {
     searchType: [],
     _isCollapsed: false
   }
+  masterReq: IReadingReportReq = {
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    _selectedAggregate: ''// Default group by
+  };
+  imgAttrResultReq: IReadingReportReq = {
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear()
+  };
+  imgAttrAnalyzeReq: IReadingReportReq = {
+    zoneId: null,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear()
+  };
+  userKarkardReq: IUserKarkardInput = {
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    zoneId: null,
+    statusId: 0
+  };
+  detailsReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
+  }
+  guildsWithParamsReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
+  }
+  disposalhoursReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear()
+  }
+  karkardReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
+  }
+  lockedReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    _selectedKindId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear()
+  }
+  preNumberShownReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear()
+  }
+  rrFragmentKarkardReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    isCollapsed: false,
+    fragmentMasterIds: []
+  }
+  karkardOffloadReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
+  }
+  karkardDailyReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    _selectedKindId: '',
+    beginFromImported: true,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
+  }
+  gisReq: IReadingReportGISReq = {
+    zoneId: 0,
+    isCounterState: true,
+    counterStateId: 0,
+    isKarbariChange: false,
+    isAhadChange: false,
+    isForbidden: false,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    _selectedKindId: '',
+    readingPeriodId: null,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: [],
+    isCluster: true
+  }
+  anlzPrfmReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    _selectedKindId: '',
+    year: this.utilsService.getFirstYear(),
+    zoneIds: [0]
+  }
+  dataMiningReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    zoneIds: null
+  }
+  trvchReq: IReadingReportTraverseDifferentialReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    readingPeriodId: null,
+    _selectedKindId: '',
+    year: this.utilsService.getFirstYear(),
+    traverseType: 0,
+    zoneIds: null,
+    fragmentMasterIds: []
+  }
+  traverseReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    _selectedKindId: '',
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
+  }
+  // inStateReq doesn't need _isSeletedKind
+  inStateReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear()
+  }
   offlineSingleReadingCounter: IOnOffLoadFlat[];
-  // track manager
   saveDataForTrackImported: ITracking[] = [];
   saveDataForTrackLoaded: ITracking[] = [];
   saveDataForTrackReading: ITracking[] = [];
@@ -529,7 +731,7 @@ export class CloseTabService {
     displayDebt: false,
     displayIcons: false,
   }
-  saveDataForUserKarkard: IUserKarkard[];
+  saveDataForUserKarkard: IUserKarkard[] = [];
   saveDataForTrackOffloaded: ITracking[] = [];
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
@@ -724,21 +926,21 @@ export class CloseTabService {
   saveDataForOutputDBF: any;
   saveDataForOutputDBFEqamatBagh: any;
   // reading reports 
-  saveDataForRRTraverse: IReadingReportTraverse[];
-  saveDataForRRTraverseDifferential: IReadingReportTraverseDifferentialRes[];
-  saveDataForRRKarkard: IReadingReportKarkard[];
-  saveDataForRROffloadedKarkard: IReadingReportKarkard[];
-  saveDataForRRFragment: IReadingReportKarkard[];
-  saveDataForRRkarkardDaily: IReadingReportKarkard[];
+  saveDataForRRTraverse: IReadingReportTraverse[] = [];
+  saveDataForRRTraverseDifferential: IReadingReportTraverseDifferentialRes[] = [];
+  saveDataForRRKarkard: IReadingReportKarkard[] = [];
+  saveDataForRROffloadedKarkard: IReadingReportKarkard[] = [];
+  saveDataForRRFragment: IReadingReportKarkard[] = [];
+  saveDataForRRkarkardDaily: IReadingReportKarkard[] = [];
   saveDataForRRPreNumShown: IOnOffLoadFlat[] = [];
   saveDataForRRLocked: IOnOffLoadFlat[] = [];
-  saveDataForRRMaster: IReadingReportMaster[];
-  saveDataForImageAttrResult: IImageAttributionResult[];
+  saveDataForRRMaster: IReadingReportMaster[] = [];
+  saveDataForImageAttrResult: IImageAttributionResult[] = [];
   saveDataForImageAttrAnalyze: IImageAttributionAnalyze[] = [];
-  saveDataForRRPerformance: IAnalyzeRes[];
-  saveDataForDMAAnalyze: IReadingTimeRes[];
-  saveDataForRRDetails: IReadingReportDetails[];
-  RRGuildsWithParam: IReadingGuildReportOutput[];
+  saveDataForRRPerformance: IAnalyzeRes[] = [];
+  saveDataForDMAAnalyze: IReadingTimeRes[] = [];
+  saveDataForRRDetails: IReadingReportDetails[] = [];
+  RRGuildsWithParam: IReadingGuildReportOutput[] = [];
   errorsBackup: ITextBackupLog[] = [];
   saveDataForRequestLogListUser: IRequestLog[];
   saveDataForRequestLogAnonymous: IRequestLog[] = [];
@@ -835,8 +1037,7 @@ export class CloseTabService {
     remainedCount: 0,
     systemDateTime: ''
   };
-  saveDataForRRDisposalHours: IRRChartResWrapper[];
-  saveDataForRRGIS: any;
+  saveDataForRRDisposalHours: IRRChartResWrapper[] = [];
   saveDataForFragmentNOB: IFragmentMaster[] = [];
   saveDataForFragmentNOBDetails: IFragmentDetails[] = [];
   fragmentNOBDetailsGUID: string = '';
@@ -1112,8 +1313,30 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.ipFilterRes, url: EN_Routes.ipFilter, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicTraverse, url: EN_Routes.dynamicTraverse, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, defaultValue_2: '', url: EN_Routes.wrmusearch },
-    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
-    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },
+    {
+      id: 1, req: ENEssentialsToSave.imgAttrResultReq, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.imageAttributionFileResult,
+      defaultValue: [],
+      defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        year: this.utilsService.getFirstYear()
+      }
+    },
+    {
+      id: 1, req: ENEssentialsToSave.imgAttrAnalyzeReq, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.imageAttributionFileAnalyze, defaultValue: [],
+      defaultReq: {
+        zoneId: null,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        year: this.utilsService.getFirstYear()
+      }
+    },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.rrkarbari, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqtr },
@@ -1372,7 +1595,9 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading, defaultValue: [] },
     {
-      id: 1, req: ENEssentialsToSave.importedEditedReq, value: ENEssentialsToSave.importedEditedRes, url: EN_Routes.importedEdited, defaultValue: [], defaultReq: {
+      id: 1, req: ENEssentialsToSave.importedEditedReq, value: ENEssentialsToSave.importedEditedRes, url: EN_Routes.importedEdited,
+      defaultValue: [],
+      defaultReq: {
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
         toDate: this.utilsService.dateJalaliService.getCurrentDate(),
         zoneId: null,
@@ -1401,7 +1626,9 @@ export class CloseTabService {
       }
     },
     {
-      id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme, defaultReq: {
+      id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme,
+
+      defaultReq: {
         zoneId: null,
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
         toDate: this.utilsService.dateJalaliService.getCurrentDate(),
@@ -1420,7 +1647,9 @@ export class CloseTabService {
       defaultValue: []
     },
     {
-      id: 1, req: ENEssentialsToSave._searchSimpleReq, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple, defaultValue: [], defaultReq: {
+      id: 1, req: ENEssentialsToSave._searchSimpleReq, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple,
+      defaultValue: [],
+      defaultReq: {
         zoneId: null,
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
         toDate: this.utilsService.dateJalaliService.getCurrentDate(),
@@ -1431,7 +1660,8 @@ export class CloseTabService {
       }
     },
     {
-      id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn, defaultReq: {
+      id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn,
+      defaultReq: {
         zoneId: 0,
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
         toDate: this.utilsService.dateJalaliService.getCurrentDate(),
@@ -1446,9 +1676,49 @@ export class CloseTabService {
     { id: 1, req: ENEssentialsToSave.saveDataForLMPDTrackNumber, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes.wrmlpd },
     { id: 1, value: ENEssentialsToSave.saveDataForOutputDBF, url: EN_Routes.wrmdbf },
     { id: 1, value: ENEssentialsToSave.saveDataForOutputDBFEqamatBagh, url: EN_Routes.wrDbfEqamatBagh },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRTraverse, url: EN_Routes.wrrptsmamtrv },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: EN_Routes.wrrptsmamtrvch },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: EN_Routes.wrrptsmamdh },
+    {
+      id: 1, req: ENEssentialsToSave.traverseReq, value: ENEssentialsToSave.saveDataForRRTraverse, url: EN_Routes.reportTraverse,
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        fragmentMasterIds: []
+      },
+      defaultValue: []
+    },
+    {
+      id: 1, req: ENEssentialsToSave.trvchReq, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: EN_Routes.reportTraverseDiffrential,
+      defaultValue: [],
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        readingPeriodId: null,
+        _selectedKindId: '',
+        year: this.utilsService.getFirstYear(),
+        traverseType: 0,
+        zoneIds: null,
+        fragmentMasterIds: []
+      }
+    },
+    {
+      id: 1, req: ENEssentialsToSave.disposalhoursReq, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: EN_Routes.disposalHours,
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        year: this.utilsService.getFirstYear()
+      },
+      defaultValue: []
+    },
     {
       id: 1, req: ENEssentialsToSave.offKarkardAllStatesReq, value: ENEssentialsToSave.saveDataForKarkardAllStates,
       value_2: ENEssentialsToSave.saveDataForKarkardAllStatesTWO,
@@ -1470,14 +1740,111 @@ export class CloseTabService {
       defaultValue_2: '',
       url: EN_Routes.wrrptsmamKarkardAllStates
     },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRKarkard, url: EN_Routes.wrrptsmamkarkard },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRPreNumShown, url: EN_Routes.wrrptsmampns },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRLocked, url: EN_Routes.wrrptsmamlocked },
-    { id: 1, value: ENEssentialsToSave.saveDataForRROffloadedKarkard, url: EN_Routes.wrrptsmamoffkarkard },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRFragment, url: EN_Routes.wrRptsMamFragment },
+    {
+      id: 1, req: ENEssentialsToSave.karkardReq, value: ENEssentialsToSave.saveDataForRRKarkard, url: EN_Routes.wrrptsmamkarkard,
+      defaultValue: [],
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        fragmentMasterIds: []
+      }
+    },
+    {
+      id: 1, req: ENEssentialsToSave.preNumberShownReq, value: ENEssentialsToSave.saveDataForRRPreNumShown, url: EN_Routes.preNumberShown,
+      defaultReq:
+      {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear()
+      },
+      defaultValue: []
+    },
+    {
+      id: 1, req: ENEssentialsToSave.lockedReq, value: ENEssentialsToSave.saveDataForRRLocked, url: EN_Routes.reportLocked,
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        _selectedKindId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        year: this.utilsService.getFirstYear()
+      },
+      defaultValue: []
+    },
+    {
+      id: 1, req: ENEssentialsToSave.karkardOffloadReq, value: ENEssentialsToSave.saveDataForRROffloadedKarkard, url: EN_Routes.reportOffloadKarkard,
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        fragmentMasterIds: []
+      },
+      defaultValue: []
+    },
+    {
+      id: 1, req: ENEssentialsToSave.rrFragmentKarkardReq, value: ENEssentialsToSave.saveDataForRRFragment, url: EN_Routes.wrRptsMamFragment,
+      defaultValue: [],
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        isCollapsed: false,
+        fragmentMasterIds: []
+      }
+    },
     { id: 2, value: ENEssentialsToSave.notificationMessages, url: EN_Routes.NotificationMessages },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRMaster, url: EN_Routes.wrrptsexmmaster },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm },
+    {
+      id: 1, req: ENEssentialsToSave.masterReq, value: ENEssentialsToSave.saveDataForRRMaster, url: EN_Routes.reportMaster,
+      defaultValue: [],
+      defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        _selectedAggregate: ''// Default group by
+      }
+    },
+    {
+      id: 1, req: ENEssentialsToSave.anlzPrfmReq, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm,
+      defaultValue: [],
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        _selectedKindId: '',
+        year: this.utilsService.getFirstYear(),
+        zoneIds: [0]
+      }
+    },
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, defaultValue_2: null, url: EN_Routes.wrrptsgalleryai },
     {
       id: 2, req: ENEssentialsToSave.notificationListByDateReq, value: ENEssentialsToSave.notificationListByDate, url: EN_Routes.NotificationListByUrl, defaultReq: {
@@ -1486,9 +1853,63 @@ export class CloseTabService {
       },
       defaultValue: []
     },
-    { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
-    { id: 2, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam },
+    {
+      id: 1, req: ENEssentialsToSave.dataMiningReq, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.dataMiningAnalysis,
+      defaultValue: [],
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        zoneIds: null
+      }
+    },
+    {
+      id: 2, req: ENEssentialsToSave.detailsReq, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.reportDetails,
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        fragmentMasterIds: []
+      },
+      defaultValue: []
+    },
+    {
+      id: 2, req: ENEssentialsToSave.inStateReq, url: EN_Routes.reportInState,
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        year: this.utilsService.getFirstYear()
+      }
+    },
+    {
+      id: 2, req: ENEssentialsToSave.guildsWithParamsReq, value: ENEssentialsToSave.RRGuildsWithParam, url: EN_Routes.guildsWithParam,
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        _selectedKindId: '',
+        reportCode: 0,
+        year: this.utilsService.getFirstYear(),
+        fragmentMasterIds: []
+      },
+      defaultValue: []
+    },
     { id: 2, value: ENEssentialsToSave.ipfilterHistory, url: EN_Routes.ipFilterHistory, defaultValue: [] },
     {
       id: 2, req: ENEssentialsToSave.saveDataForOffloadedAllLazyReq, value: ENEssentialsToSave.offloadedAllLazy, url: EN_Routes.listAllLazy, defaultValue: { data: [], totalRecords: 0 }, defaultReq: {
@@ -1619,7 +2040,16 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForMsDriveInfo, url: EN_Routes.driveInfo },
     { id: 2, value: ENEssentialsToSave.serverGetAuthenticity, url: EN_Routes.serverGetAuthenticity },
     { id: 2, value: ENEssentialsToSave.serverAuthenticityBrief, url: EN_Routes.serverAuthenticityBrief },
-    { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
+    {
+      id: 2, req: ENEssentialsToSave.userKarkardReq, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.userKarkard,
+      defaultValue: [],
+      defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        zoneId: null,
+        statusId: 0
+      }
+    },
     {
       id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, defaultValue: null, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, defaultValue_2: null, url: EN_Routes.userKarkardSummary, defaultReq: {
         zoneId: null,
@@ -1628,8 +2058,40 @@ export class CloseTabService {
         _isCollapsed: false
       }
     },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
+    {
+      id: 2, req: ENEssentialsToSave.karkardDailyReq, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptsKarkardDaily,
+      defaultValue: [],
+      defaultReq: {
+        zoneId: 0,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        reportCode: 0,
+        _selectedKindId: '',
+        beginFromImported: true,
+        year: this.utilsService.getFirstYear(),
+        fragmentMasterIds: []
+      }
+    },
+    {
+      id: 2, req: ENEssentialsToSave.gisReq, url: EN_Routes.wrrptsmamgis,
+      defaultReq: {
+        zoneId: 0,
+        isCounterState: true,
+        counterStateId: 0,
+        isKarbariChange: false,
+        isAhadChange: false,
+        isForbidden: false,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        _selectedKindId: '',
+        readingPeriodId: null,
+        year: this.utilsService.getFirstYear(),
+        fragmentMasterIds: [],
+        isCluster: true
+      }
+    },
     {
       id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes.wrmlallfalse, defaultValue: [], defaultReq: {
         GUID: ''

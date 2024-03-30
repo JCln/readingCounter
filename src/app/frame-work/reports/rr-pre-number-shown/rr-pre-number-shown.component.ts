@@ -7,6 +7,7 @@ import { ListManagerService } from 'services/list-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
@@ -35,33 +36,34 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     super(dialogService, listManagerService);
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.verification();
-    }
-    if (this.closeTabService.saveDataForRRPreNumShown) {
-      this.closeTabService.saveDataForRRPreNumShown = this.closeTabService.saveDataForRRPreNumShown;
+  classWrapper = async () => {
+    if (!MathS.isNull(this.closeTabService.saveDataForRRPreNumShown)) {
       this.converts();
     }
-    this.readingReportManagerService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.preNumberShownReq.readingPeriodId = null;
-    this.readingReportManagerService.preNumberShownReq._selectedKindId = null;
+    this.closeTabService.preNumberShownReq.readingPeriodId = null;
+    this.closeTabService.preNumberShownReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.preNumberShownReq.readingPeriodId = null;
+    this.closeTabService.preNumberShownReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.preNumberShownReq.zoneId, +this.readingReportManagerService.preNumberShownReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.preNumberShownReq.zoneId, +this.closeTabService.preNumberShownReq._selectedKindId);
+  }
+  connectToServer = async () => {
+    this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.closeTabService.preNumberShownReq);
+    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
+    this.converts();
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.preNumberShownReq, this.readingReportManagerService._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.preNumberShownReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
@@ -93,11 +95,6 @@ export class RrPreNumberShownComponent extends AllListsFactory {
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.karbariDictionaryCode, 'karbariCode');
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRPreNumShown);
-  }
-  connectToServer = async () => {
-    this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);
-    this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
-    this.converts();
   }
 
 }

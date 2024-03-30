@@ -25,21 +25,17 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForImageAttrAnalyze = null;
-      this.verification();
-    }
+  classWrapper = async () => {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrAnalyzeReq, true);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.imgAttrAnalyzeReq, true);
 
     if (temp)
-      this.connectToServer();
+      this.callAPI();
   }
-  connectToServer = async () => {
-    this.closeTabService.saveDataForImageAttrAnalyze = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionAnalyze, this.readingReportManagerService.imgAttrAnalyzeReq);
+  callAPI = async () => {
+    this.closeTabService.saveDataForImageAttrAnalyze = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionAnalyze, this.closeTabService.imgAttrAnalyzeReq);
     this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.closeTabService.saveDataForImageAttrAnalyze.length) }]
   }
 

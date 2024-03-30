@@ -28,45 +28,40 @@ export class KarkardDaylyComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForRRkarkardDaily = null;
-      this.verification();
-    }
+  classWrapper = async () => {
     if (this.closeTabService.saveDataForRRkarkardDaily) {
       this.setGetRanges();
     }
-    this.readingReportManagerService.getSearchInOrderTo();
+    this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
-    if (this.readingReportManagerService.karkardDailyReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.readingReportManagerService.karkardDailyReq.zoneId);
+    if (this.closeTabService.karkardDailyReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.karkardDailyReq.zoneId);
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingReportManagerService.karkardDailyReq.fragmentMasterIds = [];
+    this.closeTabService.karkardDailyReq.fragmentMasterIds = [];
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.karkardDailyReq.readingPeriodId = null;
-    this.readingReportManagerService.karkardDailyReq._selectedKindId = null;
+    this.closeTabService.karkardDailyReq.readingPeriodId = null;
+    this.closeTabService.karkardDailyReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
-    this.readingReportManagerService.karkardDailyReq.readingPeriodId = null;
+    this.closeTabService.karkardDailyReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.readingReportManagerService.karkardDailyReq.zoneId, +this.readingReportManagerService.karkardDailyReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.karkardDailyReq.zoneId, +this.closeTabService.karkardDailyReq._selectedKindId);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this.readingReportManagerService._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardDailyReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
-
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRkarkardDaily = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
+    this.closeTabService.saveDataForRRkarkardDaily = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.closeTabService.karkardDailyReq);
     this.setGetRanges();
   }
   private setGetRanges = () => {
