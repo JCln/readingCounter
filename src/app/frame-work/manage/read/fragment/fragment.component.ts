@@ -79,7 +79,7 @@ export class FragmentComponent extends FactoryONE {
       dataSource.zoneId = this.zoneDictionary[0].id;
     }
 
-    if (this.fragmentManagerService.masterValidation(dataSource)) {
+    if (this.fragmentManagerService.verificationService.masterValidation(dataSource)) {
       // convert a zone to id
 
       if (dataSource.isNew) {
@@ -118,7 +118,7 @@ export class FragmentComponent extends FactoryONE {
     dataSource = dataSource['dataSource'];
 
     const textMessage = 'ناحیه: ' + dataSource.zoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
-    if (this.fragmentManagerService.masterValidation(dataSource)) {
+    if (this.fragmentManagerService.verificationService.masterValidation(dataSource)) {
       if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
         const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERREMOVE, dataSource)
         if (res) {
@@ -130,7 +130,7 @@ export class FragmentComponent extends FactoryONE {
   }
 
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
-    if (this.fragmentManagerService.masterValidation(dataSource)) {
+    if (this.fragmentManagerService.verificationService.masterValidation(dataSource)) {
       const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERVALIDATE, dataSource)
       if (res) {
         this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);

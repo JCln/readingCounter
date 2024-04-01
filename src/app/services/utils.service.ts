@@ -8,7 +8,7 @@ import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confir
 import { CompositeService } from './composite.service';
 import { Location } from '@angular/common';
 import { Collapser } from '../classes/collapser';
-import { ENImageTypes, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENImageTypes, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Table } from 'primeng/table';
 import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
@@ -162,7 +162,7 @@ export class UtilsService {
   snackBarMessageInfo = (message: string) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarColors.info);
   }
-  snackBarMessage = (message: string, time: ENSnackBarTimes, color: ENSnackBarColors) => {
+  snackBarMessage = (message: string, color: ENSnackBarColors) => {
     this.snackWrapperService.openSnackBar(message, color);
   }
   goOutInMessage = () => {

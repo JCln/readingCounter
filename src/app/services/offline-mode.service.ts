@@ -2,7 +2,7 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { MathS } from '../classes/math-s';
@@ -60,14 +60,14 @@ export class OfflineModeService {
   }
   isNull = (): boolean => {
     if (MathS.isNull(this.fileForm)) {
-      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
   isZIPOfflineTxtOut = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'zip') {
-      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -81,11 +81,11 @@ export class OfflineModeService {
   }
   vertificationLoadManual = (): boolean => {
     if (MathS.isNull(this.loadForm.zoneId)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarColors.warn);
       return false;
     }
     if (MathS.isNull(this.loadForm.counterReaderId)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -94,11 +94,11 @@ export class OfflineModeService {
     this.fileForm = filesList;
     this.desc = data;
     if (MathS.isNull(this.offlineTextOut.zoneId)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarColors.warn);
       return false;
     }
     if (MathS.isNull(this.offlineTextOut.counterReaderId)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarColors.warn);
       return false;
     }
     if (!this.vertificationOfflineTxtOut())
@@ -110,27 +110,27 @@ export class OfflineModeService {
     const allowedNames = ['jpeg', 'jpg', 'png'];
 
     if (MathS.isNull(this.fileUploadSingle.searchBy)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarColors.warn);
       return false;
     }
     if (MathS.isNull(this.fileUploadSingle.item.toString().trim())) {
-      this.utilsService.snackBarMessage(EN_messages.insert_value, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_value, ENSnackBarColors.warn);
       return false;
     }
     if (MathS.isNull(this.fileUploadSingleForm)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insert_Image, ENSnackBarColors.warn);
       return false;
     }
     if (allowedExtension.indexOf(this.fileUploadSingleForm[0].type) == -1) {
-      this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarColors.warn);
       return false;
     }
     if (allowedNames.indexOf(this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase()) == -1) {
-      this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarColors.warn);
       return false;
     }
     if (this.fileUploadSingleForm[0].size / 1024 > ioPolicy.inputMaxSizeKb) {
-      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarColors.warn);
       return false;
     }
 
@@ -148,7 +148,7 @@ export class OfflineModeService {
     return true;
   }
   showSuccessMessage = (message: string) => {
-    this.utilsService.snackBarMessage(message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+    this.utilsService.snackBarMessage(message, ENSnackBarColors.success);
   }
   postTicketOfflineTxtOut = (): Observable<any> => {
     const formData: FormData = new FormData();

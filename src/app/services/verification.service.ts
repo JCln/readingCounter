@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
-import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { IBranchState, IClientAll } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
-import { IOffloadModifyReq } from 'interfaces/inon-manage';
+import { INotifyDirectImage, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IReadingReportGISReq, IUserKarkardInput, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
+import { IAUserEditSave, IUserEditOnRole } from 'interfaces/iuser-manager';
+import { IIOPolicy } from 'interfaces/iserver-manager';
+import { IAutomaticImportAddEdit, IFragmentDetails, IFragmentMaster } from 'interfaces/ireads-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -83,14 +86,6 @@ export class VerificationService {
   validationOnNull = (val: any): boolean => {
     if (MathS.isNull(val))
       return false;
-    return true;
-  }
-  private NANValidation = (sth: string, message?: EN_messages): boolean => {
-    if (MathS.isNaN(sth)) {
-      if (message)
-        this.utilsService.snackBarMessageWarn(message);
-      return false;
-    }
     return true;
   }
   checkExcelFileVertification = (val: IFileExcelReq): boolean => {
@@ -701,6 +696,547 @@ export class VerificationService {
   verificationRRAnalyzePerformance = (readingReportReq: IMostReportInput, isValidateByDate: boolean): boolean => {
     return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
+  verificationEditOnRoleGroupAccess = (dataSource: any) => {
+    if (MathS.isNull(dataSource)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_group_access, ENSnackBarColors.warn);
+      return false;
+    }
+    return true;
+  }
+  verificationEditOnRole = (dataSource: IUserEditOnRole) => {
+    if (MathS.isNull(dataSource.selectedActions[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
+      return false;
+    }
+    return true;
+  }
 
+  checkEmptyUserInfos = (dataSource: IAUserEditSave) => {
+    if (MathS.isNull(dataSource.firstName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_name);
+      return false;
+    }
+    if (MathS.isNull(dataSource.sureName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_surename);
+      return false;
+    }
+    if (MathS.isNull(dataSource.mobile)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_mobile);
+      return false;
+    }
+    if (MathS.isNull(dataSource.displayName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_showName);
+      return false;
+    }
+    if (MathS.isNull(dataSource.selectedRoles[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_group_access);
+      return false;
+    }
+    if (MathS.isNull(dataSource.selectedActions[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
+      return false;
+    }
+    if (MathS.isNull(dataSource.selectedZones)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_roleAccess);
+      return false;
+    }
+
+    return true;
+  }
+  userEditSave = (dataSource: IAUserEditSave) => {
+    if (!this.checkEmptyUserInfos(dataSource)) {
+      return false;
+    }
+    if (!MathS.mobileValidation(dataSource.mobile)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobile);
+      return false;
+    }
+    // if (!MathS.isNull(dataSource.email))
+    //   if (!MathS.isEmailValid(dataSource.email)) {
+    //     this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
+    //     return false;
+    //   }
+
+    return true;
+  }
+  checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage, ioPolicy: IIOPolicy): boolean => {
+    const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
+    const allowedNames = ['jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG'];
+
+    if (MathS.isNull(val.caption)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
+      return false;
+    }
+    if (MathS.isNull(fileForm)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_Image);
+      return false;
+    }
+    if (allowedNames.indexOf(fileForm[0].name.split('.').pop().toLowerCase()) == -1) {
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_image);
+      return false;
+    }
+    if (allowedExtension.indexOf(fileForm[0].type) == -1) {
+      this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarColors.warn);
+      return false;
+    }
+    if (fileForm[0].size / 1024 > ioPolicy.inputMaxSizeKb) {
+      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarColors.warn);
+      return false;
+    }
+
+    return true;
+  }
+  checkVertiticationNotifDirectVideo = (fileForm: FileList, val: INotifyDirectImage): boolean => {
+    const allowedNames = ['mp4', 'MP4', 'ogg', 'OGG`'];
+    if (MathS.isNull(val.caption)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
+      return false;
+    }
+    if (MathS.isNull(fileForm)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_video);
+      return false;
+    }
+    if (allowedNames.indexOf(fileForm[0].name.split('.').pop()) == -1) {
+      this.utilsService.snackBarMessageWarn(EN_messages.should_insert_video);
+      return false;
+    }
+
+    return true;
+  }
+  sectionsNullVertificate = (value: any): boolean => {
+    if (value.hasOwnProperty('id')) {
+      if (MathS.isNull(value.id)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_Id);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('title')) {
+      if (MathS.isNull(value.title)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('days')) {
+      if (MathS.isNull(value.days)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_days);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('provinceId')) {
+      if (MathS.isNull(value.provinceId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_province);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('countryId')) {
+      if (MathS.isNull(value.countryId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_country);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('regionId')) {
+      if (MathS.isNull(value.regionId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_region);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(value.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('logicalOrder')) {
+      if (MathS.isNull(value.logicalOrder)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_logicalOrder);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('govermentalCode')) {
+      if (MathS.isNull(value.govermentalCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_govermentalCode);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('fromEshterak')) {
+      if (MathS.isNull(value.fromEshterak)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromEshterak);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toEshterak')) {
+      if (MathS.isNull(value.toEshterak)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_ToEshterak);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('fromRadif')) {
+      if (MathS.isNull(value.fromRadif)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_radif);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toRadif')) {
+      if (MathS.isNull(value.toRadif)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_radif);
+        return false;
+      }
+    }
+    // periods
+    if (value.hasOwnProperty('moshtarakinId')) {
+      if (MathS.isNull(value.moshtarakinId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_moshtarakinId);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('readingPeriodKindId')) {
+      if (MathS.isNull(value.readingPeriodKindId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriodKind);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('clientOrder')) {
+      if (MathS.isNull(value.clientOrder)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_clientOrder);
+        return false;
+      }
+    }
+    // 
+    // formulas
+    if (value.hasOwnProperty('karbariMoshtarakinCode')) {
+      if (MathS.isNull(value.karbariMoshtarakinCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_karbariMoshtarakinCode);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('fromDate')) {
+      if (MathS.isNull(value.fromDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toDate')) {
+      if (MathS.isNull(value.toDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('fromRate')) {
+      if (MathS.isNull(value.fromRate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromRate);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toRate')) {
+      if (MathS.isNull(value.toRate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toRate);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('abFormula')) {
+      if (MathS.isNull(value.abFormula)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_abFormula);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('fazelabFormula')) {
+      if (MathS.isNull(value.fazelabFormula)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fazelabFormula);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('formula')) {
+      if (MathS.isNull(value.formula)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_formula);
+        return false;
+      }
+    }
+    // users        
+    if (value.hasOwnProperty('titleUnicode')) {
+      if (MathS.isNull(value.titleUnicode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+        return false;
+      }
+    }
+    //   // reading managers
+    if (value.hasOwnProperty('itemTitle')) {
+      if (MathS.isNull(value.itemTitle)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+        return false;
+      }
+    }
+
+    return true;
+  }
+  fromToValidation = (value: any): boolean => {
+    if (value.hasOwnProperty('toEshterak')) {
+      const a = value;
+      if (!MathS.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('fromDate')) {
+      const a = value;
+      if (!MathS.lengthControl(a.fromDate, a.fromDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toDate')) {
+      const a = value;
+      if (!MathS.lengthControl(a.toDate, a.toDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+        return false;
+      }
+    }
+    return true;
+  }
+  isFromLowerThanTo = (value: any): boolean => {
+    if (value.hasOwnProperty('toEshterak')) {
+      const a = value;
+      if (!MathS.isFromLowerThanTo(a.fromEshterak, a.toEshterak)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toRate')) {
+      const a = value;
+      if (!MathS.isFromLowerThanTo(a.fromRate, a.toRate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
+        return false;
+      }
+    }
+    return true;
+  }
+  private NANValidation = (sth: string, message?: string): boolean => {
+    if (MathS.isNaN(sth)) {
+      if (message)
+        this.utilsService.snackBarMessageWarn(message);
+      return false;
+    }
+    return true;
+  }
+
+  textOutput = (value: any): boolean => {
+    if (value.hasOwnProperty('endIndex')) {
+      if (MathS.isNaN(value.endIndex)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('startIndex')) {
+      if (MathS.isNaN(value.startIndex)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('length')) {
+      if (MathS.isNaN(value['length'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('fromEshterak')) {
+      if (MathS.isNaN(value['fromEshterak'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toEshterak')) {
+      if (MathS.isNaN(value['toEshterak'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths);
+        return false;
+      }
+    }
+    return true;
+  }
+  sectionVertification(value: any): boolean {
+    if (!this.sectionsNullVertificate(value))
+      return false;
+    if (!this.fromToValidation(value))
+      return false;
+    if (!this.isFromLowerThanTo(value))
+      return false;
+
+    return true;
+  }
+  masterValidation = (body: IFragmentMaster): boolean => {
+    if (MathS.isNull(body.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(body.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromEshterak);
+      return false;
+    }
+    if (MathS.isNull(body.toEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_ToEshterak);
+      return false;
+    }
+    if (MathS.isNull(body.routeTitle)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title_route);
+      return false;
+    }
+    if (!this.NANValidation(body.fromEshterak, EN_messages.format_invalid_from_eshterak))
+      return false;
+    if (!this.NANValidation(body.fromEshterak, EN_messages.format_invalid_to_eshterak))
+      return false;
+
+    if (!MathS.isSameLength(body.fromEshterak, body.toEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
+      return false;
+    }
+
+    if (!MathS.isFromLowerThanToByString(body.fromEshterak, body.toEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
+      return false;
+    }
+
+    if (!MathS.lengthControl(body.fromEshterak, body.toEshterak, 5, 15)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
+      return false;
+    }
+
+    return true;
+  }
+  private nullValidation = (sth: string | number, message?: string): boolean => {
+    if (MathS.isNull(sth)) {
+      if (message)
+        this.utilsService.snackBarMessageWarn(message);
+      return false;
+    }
+    return true;
+  }
+  ValidationMasterNoMessage = (fragmentMaster: IFragmentMaster): boolean => {
+    if (!this.nullValidation(fragmentMaster.zoneId))
+      return false;
+    if (!this.nullValidation(fragmentMaster.fromEshterak))
+      return false;
+    if (!this.nullValidation(fragmentMaster.toEshterak))
+      return false;
+    if (!this.nullValidation(fragmentMaster.routeTitle))
+      return false;
+
+    if (!this.NANValidation(fragmentMaster.fromEshterak))
+      return false;
+    if (!this.NANValidation(fragmentMaster.fromEshterak))
+      return false;
+
+    if (!MathS.isSameLength(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
+      return false;
+    }
+
+    if (!MathS.isFromLowerThanToByString(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
+      return false;
+    }
+
+    if (!MathS.lengthControl(fragmentMaster.fromEshterak, fragmentMaster.toEshterak, 5, 15)) {
+      return false;
+    }
+    return true;
+  }
+  ValidationDetailsNoMessage = (fragmentDetails: IFragmentDetails): boolean => {
+    if (!this.nullValidation(fragmentDetails.fragmentMasterId))
+      return false;
+    if (!this.nullValidation(fragmentDetails.fromEshterak))
+      return false;
+    if (!this.nullValidation(fragmentDetails.toEshterak))
+      return false;
+    if (!this.nullValidation(fragmentDetails.routeTitle))
+      return false;
+
+    if (!this.NANValidation(fragmentDetails.fromEshterak))
+      return false;
+    if (!this.NANValidation(fragmentDetails.toEshterak))
+      return false;
+
+    if (!MathS.isFromLowerThanToByString(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
+      return false;
+    if (!MathS.isSameLength(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
+      return false;
+    if (!MathS.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 15))
+      return false;
+    return true;
+  }
+  verificationAutoImportAdd = (body: IAutomaticImportAddEdit): boolean => {
+    if (MathS.isNull(body.startDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_startDay);
+      return false;
+    }
+    if (MathS.isNull(body.endDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_endDay);
+      return false;
+    }
+    if (MathS.isNull(body.startTime)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_startTime);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.startTime, ENRandomNumbers.five)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.startDay, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.endDay, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+    if (MathS.isNull(body.readingPeriodKindId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriodKind);
+      return false;
+    }
+    if (!MathS.persentCheck(body.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_alalhesab);
+      return false;
+    }
+    if (!MathS.persentCheck(body.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_pictures);
+      return false;
+    }
+    if (MathS.isNaN(body.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
+      return false;
+    }
+    if (MathS.isNaN(body.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
+      return false;
+    }
+    return true;
+  }
+  verificationDetails = (fragmentDetails: IFragmentDetails): boolean => {
+    if (!this.nullValidation(fragmentDetails.fragmentMasterId, EN_messages.call_supportGroup))
+      return false;
+    if (!this.nullValidation(fragmentDetails.fromEshterak, EN_messages.insert_fromEshterak))
+      return false;
+    if (!this.nullValidation(fragmentDetails.toEshterak, EN_messages.insert_ToEshterak))
+      return false;
+    if (!this.nullValidation(fragmentDetails.routeTitle, EN_messages.insert_title_route))
+      return false;
+
+    if (!this.NANValidation(fragmentDetails.fromEshterak, EN_messages.format_invalid_from_eshterak))
+      return false;
+
+    if (!this.NANValidation(fragmentDetails.toEshterak, EN_messages.format_invalid_to_eshterak))
+      return false;
+    if (!MathS.isFromLowerThanToByString(fragmentDetails.fromEshterak, fragmentDetails.toEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
+      return false;
+    }
+
+    if (!MathS.isSameLength(fragmentDetails.fromEshterak, fragmentDetails.toEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
+      return false;
+    }
+
+    if (!MathS.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 15)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
+      return false;
+    }
+
+    return true;
+  }
 
 }

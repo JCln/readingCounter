@@ -22,11 +22,17 @@ export interface IFragmentNessessities {
   toEshterak: string
   routeTitle: string
 }
+export interface IUserEditNessessities {
+  GUid: string
+}
 @Injectable({
   providedIn: 'root'
 })
 export class PageSignsService {
 
+  userEdit_pageSign: IUserEditNessessities = {
+    GUid: null
+  };
   perday_pageSign: IPerdayNessessities = {
     trackNumber: null,
     zone: null,

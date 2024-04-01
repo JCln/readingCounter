@@ -1,7 +1,7 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { IManageServerErrors } from 'interfaces/iserver-manager';
 
 import { JwtService } from '../auth/jwt.service';
@@ -37,7 +37,7 @@ export class ManageServerService {
     window.open(this.utilsService.envService.API_URL + ENInterfaces.serverManagerHealthCheck, '_blank');
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
-    this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);
+    this.utilsService.snackBarMessage(message, color);
   }
   private datesValidation = (body: object): boolean => {
     if (body.hasOwnProperty('jalaliDay')) {

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { AuthsManagerService } from 'services/auths-manager.service';
-import { SectionsService } from 'services/sections.service';
+import { VerificationService } from 'services/verification.service';
 
 @Component({
   selector: 'app-auth3-add-dg',
@@ -17,7 +17,7 @@ export class Auth3AddDgComponent {
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth3AddDgComponent>,
-    private sectionsService: SectionsService,
+    private verificationService: VerificationService,
     public authsManagerService: AuthsManagerService
   ) {
     data = data.di;
@@ -34,8 +34,7 @@ export class Auth3AddDgComponent {
   }
   async save() {
     this.form.value['route'] = this.form.value['route'].trim();
-    this.sectionsService.setSectionsValue(this.form.value);
-    if (!this.sectionsService.sectionVertification()) {
+    if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
     const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3ADD, this.form.value);

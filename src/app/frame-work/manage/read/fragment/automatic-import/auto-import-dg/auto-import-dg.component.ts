@@ -50,7 +50,7 @@ export class AutoImportDgComponent implements OnInit {
     this.cdr.detectChanges();
   }
   async save() {
-    if (this.fragmentManagerService.verificationAutoImportAdd(this.dataReq)) {
+    if (this.fragmentManagerService.verificationService.verificationAutoImportAdd(this.dataReq)) {
       const temp = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.automaticImportAdd, this.dataReq);
       if (temp) {
         this.fragmentManagerService.utilsService.snackBarMessageSuccess(temp.message);

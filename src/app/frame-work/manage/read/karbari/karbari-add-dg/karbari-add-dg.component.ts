@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ReadManagerService } from 'services/read-manager.service';
-import { SectionsService } from 'services/sections.service';
+import { VerificationService } from 'services/verification.service';
 
 @Component({
   selector: 'app-karbari-add-dg',
@@ -19,7 +19,7 @@ export class KarbariAddDgComponent {
     private dialogRef: MatDialogRef<KarbariAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private readManagerService: ReadManagerService,
-    private sectionsService: SectionsService
+    private verificationService: VerificationService
   ) {
     data = data.di;
     this.form = fb.group({
@@ -35,8 +35,7 @@ export class KarbariAddDgComponent {
 
   }
   async save() {
-    this.sectionsService.setSectionsValue(this.form.value);
-    if (!this.sectionsService.sectionVertification()) {
+    if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
     if (!await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.KarbariAdd, this.form.value))

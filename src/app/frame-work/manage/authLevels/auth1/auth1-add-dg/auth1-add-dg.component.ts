@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { AuthsManagerService } from 'services/auths-manager.service';
-import { SectionsService } from 'services/sections.service';
+import { VerificationService } from 'services/verification.service';
 
 @Component({
   selector: 'app-auth1-add-dg',
@@ -16,7 +16,7 @@ export class Auth1AddDgComponent {
   constructor(
     fb: FormBuilder,
     private dialogRef: MatDialogRef<Auth1AddDgComponent>,
-    private sectionsService: SectionsService,
+    private verificationService: VerificationService,
     private authsManagerService: AuthsManagerService
   ) {
     this.form = fb.group({
@@ -28,8 +28,7 @@ export class Auth1AddDgComponent {
     })
   }
   async save() {
-    this.sectionsService.setSectionsValue(this.form.value);
-    if (!this.sectionsService.sectionVertification()) {
+    if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
     const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel1ADD, this.form.value);

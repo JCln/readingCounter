@@ -1,7 +1,7 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENSelectedColumnVariables, EN_messages } from 'interfaces/enums.enum';
-import { SectionsService } from 'services/sections.service';
+import { VerificationService } from 'services/verification.service';
 
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -15,7 +15,7 @@ export class AuthsManagerService {
   constructor(
     public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
-    private sectionsService: SectionsService,
+    private verificationService: VerificationService,
     public ajaxReqWrapperService: AjaxReqWrapperService
   ) { }
 
@@ -32,8 +32,7 @@ export class AuthsManagerService {
   }
   /* VERIFICATION & VALIDATION */
   verification = (dataSource: any): boolean => {
-    this.sectionsService.setSectionsValue(dataSource);
-    if (!this.sectionsService.sectionVertification())
+    if (!this.verificationService.sectionVertification(dataSource))
       return false;
     return true;
   }

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { AuthsManagerService } from 'services/auths-manager.service';
-import { SectionsService } from 'services/sections.service';
+import { VerificationService } from 'services/verification.service';
 
 @Component({
   selector: 'app-auth2-add-dg',
@@ -17,7 +17,7 @@ export class Auth2AddDgComponent {
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth2AddDgComponent>,
-    private sectionsService: SectionsService,
+    private verificationService: VerificationService,
     private authsManagerService: AuthsManagerService
   ) {
     data = data.di;
@@ -31,8 +31,7 @@ export class Auth2AddDgComponent {
     })
   }
   async save() {
-    this.sectionsService.setSectionsValue(this.form.value);
-    if (!this.sectionsService.sectionVertification()) {
+    if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
     const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel2ADD, this.form.value);

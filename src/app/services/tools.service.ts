@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { ENReadingReports } from 'interfaces/reading-reports';
 
 import { MathS } from '../classes/math-s';
@@ -267,7 +267,7 @@ export class ToolsService {
     return this.followUPValidation(id);
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
-    this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);
+    this.utilsService.snackBarMessage(message, color);
   }
 
 }

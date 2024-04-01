@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ReadManagerService } from 'services/read-manager.service';
-import { SectionsService } from 'services/sections.service';
+import { VerificationService } from 'services/verification.service';
 
 @Component({
   selector: 'app-rpm-add-dg',
@@ -18,7 +18,7 @@ export class RpmAddDgComponent {
     fb: FormBuilder,
     private dialogRef: MatDialogRef<RpmAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private sectionsService: SectionsService,
+    private verificationService: VerificationService,
     private readManagerService: ReadManagerService
   ) {
     this.readingPeriodKindId = data.rpkmId;
@@ -33,8 +33,7 @@ export class RpmAddDgComponent {
     })
   }
   async save() {
-    this.sectionsService.setSectionsValue(this.form.value);
-    if (!this.sectionsService.sectionVertification()) {
+    if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
     if (!await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.readingPeriodAdd, this.form.value))

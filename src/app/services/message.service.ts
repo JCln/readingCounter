@@ -75,7 +75,7 @@ export class MessageService {
     return true;
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
-    this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);
+    this.utilsService.snackBarMessage(message, color);
   }
 
 }

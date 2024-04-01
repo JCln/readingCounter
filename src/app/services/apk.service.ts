@@ -1,7 +1,7 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { Observable } from 'rxjs/internal/Observable';
 import { UtilsService } from 'services/utils.service';
 
@@ -76,7 +76,7 @@ export class ApkService {
     return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.APKUpload, formData);
   }
   showSuccessMessage = (message: string, color: ENSnackBarColors) => {
-    this.utilsService.snackBarMessage(message, ENSnackBarTimes.sevenMili, color);
+    this.utilsService.snackBarMessage(message, color);
   }
   firstConfirmDialog = (text: string): Promise<any> => {
     const a = {

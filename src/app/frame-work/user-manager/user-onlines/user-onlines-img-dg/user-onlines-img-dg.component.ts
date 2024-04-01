@@ -46,7 +46,7 @@ export class UserOnlinesImgDgComponent implements OnInit {
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
       this.ioPolicy = await this.usersAllService.dictionaryWrapperService.getIOPolicy(false);
-      if (this.usersAllService.checkVertiticationNotifDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq, this.ioPolicy)) {
+      if (this.usersAllService.verificationService.checkVertiticationNotifDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq, this.ioPolicy)) {
         this.usersAllService.postNotifyDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq).subscribe({
           next: (event: HttpEvent<any>) => {
             switch (event.type) {

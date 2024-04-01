@@ -179,6 +179,7 @@ export enum EN_messages {
     should_insert_ZIP = 'فرمت ارسالی باید فایل zip باشد',
     should_insert_image = 'فایل ارسالی باید تصویر با فرمت (jpg-jpeg-png) باشد',
     should_insert_video = 'فرمت ارسالی باید ogg و یا mp4 باشد',
+    incorrectFormat = 'فرمت فایل اشتباه است',
     format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
     format_invalid = 'فرمت ناصحیح است',
     format_isNotExactLengthNumber = 'تعداد ارقام تاریخ اشتباه است',

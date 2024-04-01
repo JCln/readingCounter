@@ -1,4 +1,4 @@
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { Component, ViewChild } from '@angular/core';
 import { CloseTabService } from 'services/close-tab.service';
 import { SecurityService } from 'services/security.service';
@@ -54,60 +54,60 @@ export class PrivacyComponent extends FactoryONE {
   plusOrMinusDeactiveTerminationMinutes = (value: number) => {
     this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes = MathS.isNull(this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes) ? 2 : this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes;
     if (value > this.privacyOptions.maxLengthDeactiveTerminationMinutes) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.oneHundredAndTwenty + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.oneHundredAndTwenty + ENMessages.is);
       return;
     }
 
     if (value < this.privacyOptions.minLengthDeactiveTerminationMinutes) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.three + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.three + ENMessages.is);
       return;
     }
     this.closeTabService.saveDataForPolicies.deactiveTerminationMinutes = value;
   }
   lockInvalidAttemps = (value: number) => {
     if (value > this.privacyOptions.max_LockInvalidAttemps) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.ten + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.ten + ENMessages.is);
       return;
     }
 
     if (value < this.privacyOptions.min_LockInvalidAttemps) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.one + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.one + ENMessages.is);
       return;
     }
     this.closeTabService.saveDataForPolicies.lockInvalidAttempts = value;
   }
   lockMin = (value: number) => {
     if (value > this.privacyOptions.max_LockMin) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.oneHundredAndTwenty + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.oneHundredAndTwenty + ENMessages.is);
       return;
     }
 
     if (value < this.privacyOptions.min_LockMin) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.ten + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.ten + ENMessages.is);
       return;
     }
     this.closeTabService.saveDataForPolicies.lockMin = value;
   }
   captchaPlusMinus = (value: number) => {
     if (value > this.privacyOptions.max_captcha) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.ten + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.ten + ENMessages.is);
       return;
     }
 
     if (value < this.privacyOptions.min_captcha) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.two + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.two + ENMessages.is);
       return;
     }
     this.closeTabService.saveDataForPolicies.requireCaptchaInvalidAttempts = value;
   }
   reCaptchaPlusMinus = (value: number) => {
     if (value > this.privacyOptions.max_ReCaptcha) {
-      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.ten + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.maxLength + ENRandomNumbers.ten + ENMessages.is);
       return;
     }
 
     if (value < this.privacyOptions.min_ReCaptcha) {
-      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.two + ENMessages.is, ENSnackBarTimes.threeMili);
+      this.openSnackBar(ENMessages.minLength + ENRandomNumbers.two + ENMessages.is);
       return;
     }
     this.closeTabService.saveDataForPolicies.requireRecaptchaInvalidAttempts = value;
@@ -136,11 +136,11 @@ export class PrivacyComponent extends FactoryONE {
       this.securityService.editPolicy(this.closeTabService.saveDataForPolicies) :
       this.closeTabService.utilsService.snackBarMessageWarn(EN_messages.needMoreAccess);
   }
-  openSnackBar(message: string, duration: ENSnackBarTimes) {
-    this.closeTabService.utilsService.snackBarMessage(message, duration, ENSnackBarColors.warn);
+  openSnackBar(message: string) {
+    this.closeTabService.utilsService.snackBarMessage(message, ENSnackBarColors.warn);
   }
   accessDenied(event) {
-    this.closeTabService.utilsService.snackBarMessage(EN_messages.needMoreAccess, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
+    this.closeTabService.utilsService.snackBarMessage(EN_messages.needMoreAccess, ENSnackBarColors.warn);
     this.ref._checked = event;
   }
 }

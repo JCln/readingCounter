@@ -86,7 +86,7 @@ export class FragmentDetailsComponent extends FactoryONE {
   removeRow = async (dataSource: any) => {
     this.newRowLimit = 1;
 
-    if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource']))
+    if (!this.fragmentManagerService.verificationService.verificationDetails(dataSource['dataSource']))
       return;
     const textMessage = 'از اشتراک: ' + dataSource['dataSource'].fromEshterak + ' تا اشتراک: ' + dataSource['dataSource'].toEshterak;
     const confirmed = await this.fragmentManagerService.firstConfirmDialog(textMessage);
@@ -102,7 +102,7 @@ export class FragmentDetailsComponent extends FactoryONE {
   }
   async onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
-    if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource'])) {
+    if (!this.fragmentManagerService.verificationService.verificationDetails(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
         this.closeTabService.saveDataForFragmentNOBDetails.shift();
         return;

@@ -4,7 +4,7 @@ import { ProfileService } from 'services/profile.service';
 import { Converter } from 'src/app/classes/converter';
 import { ImageAttributionFile } from 'interfaces/tools';
 import { UtilsService } from 'services/utils.service';
-import { ENSnackBarTimes, ENSnackBarColors } from 'interfaces/enums.enum';
+import { ENSnackBarColors } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 @Component({
@@ -57,7 +57,7 @@ export class RandomImageCarouselDetailsComponent implements OnChanges, AfterView
 
     const res = await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getImageAttributionAddOrEdit, this._addOrEdit);
     if (res)
-      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+      this.utilsService.snackBarMessage(res.message, ENSnackBarColors.success);
 
   }
   rotateRightImg = () => {

@@ -49,7 +49,7 @@ export class AutoImportEditDgComponent {
   }
   async save() {
     console.log(this.form.value);
-    if (this.fragmentManagerService.verificationAutoImportAdd(this.form.value)) {
+    if (this.fragmentManagerService.verificationService.verificationAutoImportAdd(this.form.value)) {
       const temp = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.automaticImportEdit, this.form.value);
       if (temp) {
         this.fragmentManagerService.utilsService.snackBarMessageSuccess(temp.message);

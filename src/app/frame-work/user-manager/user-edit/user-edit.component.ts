@@ -18,10 +18,10 @@ export class UserEditComponent extends FactoryONE {
     super();
   }
   connectToServer = () => {
-    this.usersAllService.userEditA(this.usersAllService.userEdit_pageSign.GUid, this.closeTabService.saveDataForEditUsers);
+    this.usersAllService.userEditA(this.usersAllService.pageSignsService.userEdit_pageSign.GUid, this.closeTabService.saveDataForEditUsers);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    if (!this.usersAllService.userEdit_pageSign.GUid) {
+    if (!this.usersAllService.pageSignsService.userEdit_pageSign.GUid) {
       this.usersAllService.routeToUsersAll();
     }
     else {
@@ -31,10 +31,10 @@ export class UserEditComponent extends FactoryONE {
       }
       if (
         !this.closeTabService.saveDataForEditUsers ||
-        this.closeTabService.saveDataForEditUsersGUID !== this.usersAllService.userEdit_pageSign.GUid
+        this.closeTabService.saveDataForEditUsersGUID !== this.usersAllService.pageSignsService.userEdit_pageSign.GUid
       ) {
-        this.closeTabService.saveDataForEditUsers = await this.usersAllService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userEDIT, this.usersAllService.userEdit_pageSign.GUid);
-        this.closeTabService.saveDataForEditUsersGUID = this.usersAllService.userEdit_pageSign.GUid;
+        this.closeTabService.saveDataForEditUsers = await this.usersAllService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.userEDIT, this.usersAllService.pageSignsService.userEdit_pageSign.GUid);
+        this.closeTabService.saveDataForEditUsersGUID = this.usersAllService.pageSignsService.userEdit_pageSign.GUid;
       }
       this.usersAllService.getLatestZoneViewType();
     }

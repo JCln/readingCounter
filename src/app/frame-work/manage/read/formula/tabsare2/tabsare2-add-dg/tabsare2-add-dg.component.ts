@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { FormulasService } from 'services/formulas.service';
-import { SectionsService } from 'services/sections.service';
+import { VerificationService } from 'services/verification.service';
 
 @Component({
   selector: 'app-tabsare2-add-dg',
@@ -19,7 +19,7 @@ export class Tabsare2AddDgComponent {
     private dialogRef: MatDialogRef<Tabsare2AddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formulasService: FormulasService,
-    private sectionsService: SectionsService
+    private verificationService: VerificationService
   ) {
 
     this.form = fb.group({
@@ -30,8 +30,7 @@ export class Tabsare2AddDgComponent {
   }
 
   async save() {
-    this.sectionsService.setSectionsValue(this.form.value);
-    if (!this.sectionsService.sectionVertification()) {
+    if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
     if (!await this.formulasService.postFormulaAdd(ENInterfaces.FormulaTabsare2Add, this.form.value))

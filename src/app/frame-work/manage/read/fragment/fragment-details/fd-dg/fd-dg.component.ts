@@ -38,7 +38,7 @@ export class FdDgComponent implements OnInit {
     }
   }
   verification = () => {
-    if (this.fragmentManagerService.verificationDetails(this.routeTitle))
+    if (this.fragmentManagerService.verificationService.verificationDetails(this.routeTitle))
       this.onRowAdd(this.routeTitle);
   }
   ngOnInit(): void {

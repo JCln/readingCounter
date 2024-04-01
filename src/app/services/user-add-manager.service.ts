@@ -1,8 +1,7 @@
 import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
-import { CloseTabService } from 'services/close-tab.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, ENSnackBarTimes, EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems, ISearchUsersManager } from 'interfaces/iuser-manager';
 
 import { MathS } from '../classes/math-s';
@@ -16,8 +15,7 @@ export class UserAddManagerService {
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
-    private utilsService: UtilsService,
-    private closeTabService: CloseTabService
+    private utilsService: UtilsService
   ) { }
 
   addAUserPersonalInfo = (personalItems: any) => {
@@ -150,7 +148,7 @@ export class UserAddManagerService {
 
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
     if (res) {
-      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+      this.utilsService.snackBarMessage(res.message, ENSnackBarColors.success);
       this.utilsService.routeTo(EN_Routes.wrmuall);
       // this.toDefaultValsUserAddInfos();
     }

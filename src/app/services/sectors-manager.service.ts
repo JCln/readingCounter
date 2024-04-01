@@ -2,11 +2,10 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IResponses } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { SectionsService } from './sections.service';
+import { VerificationService } from './verification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class SectorsManagerService {
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
     public utilsService: UtilsService,
-    private sectionsService: SectionsService
+    private verificationService: VerificationService
   ) { }
 
   postByIdSuccessBool = async (method: ENInterfaces, id: number) => {
@@ -43,8 +42,7 @@ export class SectorsManagerService {
   }
   /* VALIDATION & VERIFICATION */
   verification = (dataSource: any): boolean => {
-    this.sectionsService.setSectionsValue(dataSource);
-    if (!this.sectionsService.sectionVertification())
+    if (!this.verificationService.sectionVertification(dataSource))
       return false;
     return true;
   }

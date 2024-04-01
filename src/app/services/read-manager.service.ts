@@ -7,9 +7,9 @@ import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
 import { ICounterState, IGuild, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
-import { SectionsService } from './sections.service';
 import { UtilsService } from './utils.service';
 import { IBlockOrSafeIp } from 'interfaces/iserver-manager';
+import { VerificationService } from './verification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class ReadManagerService {
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    private sectionsService: SectionsService,
+    private verificationService: VerificationService,
     public utilsService: UtilsService,
     public columnManager: ColumnManager
   ) { }
@@ -66,8 +66,7 @@ export class ReadManagerService {
     return true;
   }
   verification = (dataSource: any): boolean => {
-    this.sectionsService.setSectionsValue(dataSource);
-    if (!this.sectionsService.sectionVertification())
+    if (!this.verificationService.sectionVertification(dataSource))
       return false;
     return true;
   }
@@ -113,10 +112,9 @@ export class ReadManagerService {
     return true;
   }
   verificationTextOutputEditedRow = (dataSource: ITextOutput): boolean => {
-    this.sectionsService.setSectionsValue(dataSource);
-    if (!this.sectionsService.sectionVertification())
+    if (!this.verificationService.sectionVertification(dataSource))
       return false;
-    if (!this.sectionsService.verfificationIsNaN())
+    if (!this.verificationService.textOutput(dataSource))
       return false;
     return true;
   }
