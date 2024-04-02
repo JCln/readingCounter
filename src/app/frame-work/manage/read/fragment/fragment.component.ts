@@ -45,17 +45,22 @@ export class FragmentComponent extends FactoryONE {
       item.changableZoneId = item.zoneId;
     })
   }
-  callAPI = async () => {
-    this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.fragmentMASTERALL);
+  doDictionaryConfigs = async () => {
     this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
     this.insertToAuxZoneid();
     Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'changableZoneId');
   }
+  callAPI = async () => {
+    this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.fragmentMASTERALL);
+    this.doDictionaryConfigs();
+  }
+
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForFragmentNOB)) {
       this.callAPI();
     }
     this.defaultAddStatus();
+    this.doDictionaryConfigs();
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   newRow(): IFragmentMaster {

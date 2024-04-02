@@ -68,7 +68,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOwnershipType, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -285,6 +285,8 @@ export class CloseTabService {
   saveDataForAPKManager: IAPK[];
   saveDataForCounterReport: ICounterReport[];
   saveDataForQotrManager: any;
+
+  tarrifTypeItem: ITarrifTypeItem[] = [];
 
   // zones
   saveDataForCountry: ICountryManager[];
@@ -744,8 +746,8 @@ export class CloseTabService {
   saveDataForTrackOffloadedGroup: ITracking[] = [];
   offKarkardAllStatesReq: IMostReportInput = {
     zoneId: 0,
-    fromDate: '',
-    toDate: '',
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
@@ -1490,7 +1492,8 @@ export class CloseTabService {
     },
     { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: EN_Routes.wrpolicies },
     {
-      id: 1, req: ENEssentialsToSave.listLatestInfoReq, value: ENEssentialsToSave.listLatestInfo, url: EN_Routes.listLatestInfo, defaultReq: {
+      id: 1, req: ENEssentialsToSave.listLatestInfoReq, value: ENEssentialsToSave.listLatestInfo, url: EN_Routes.listLatestInfo,
+      defaultReq: {
         searchBy: Search.eshterak.id,
         item: '',
       },
@@ -1724,8 +1727,8 @@ export class CloseTabService {
       value_2: ENEssentialsToSave.saveDataForKarkardAllStatesTWO,
       defaultReq: {
         zoneId: 0,
-        fromDate: '',
-        toDate: '',
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
         counterReaderId: '',
         readingPeriodId: null,
         reportCode: 0,
@@ -1945,7 +1948,10 @@ export class CloseTabService {
     },
     { id: 2, value: ENEssentialsToSave.trackingOffloadedMaster, value_2: ENEssentialsToSave.trackingOffloadedDetails, url: EN_Routes.trackOffloadedMaster, defaultValue: [], defaultValue_2: [] },
     {
-      id: 2, req: ENEssentialsToSave.simpleMasterByFragmentReq, value: ENEssentialsToSave.simpleMasterByFragment, value_2: ENEssentialsToSave.simpleMasterByFragmentDetails, url: EN_Routes.simpleMasterByFragment, defaultValue: [], defaultValue_2: [], defaultReq: {
+      id: 2, req: ENEssentialsToSave.simpleMasterByFragmentReq, value: ENEssentialsToSave.simpleMasterByFragment, value_2: ENEssentialsToSave.simpleMasterByFragmentDetails, url: EN_Routes.simpleMasterByFragment,
+      defaultValue: [],
+      defaultValue_2: [],
+      defaultReq: {
         zoneId: null,
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
         toDate: this.utilsService.dateJalaliService.getCurrentDate(),

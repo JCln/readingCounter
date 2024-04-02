@@ -55,7 +55,6 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.getCounterStateHeaders(this.tempData);
-    console.log(this._selectCols);
 
     this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
     this.closeTabService.saveDataForKarkardAllStatesTWO = this._selectCols;

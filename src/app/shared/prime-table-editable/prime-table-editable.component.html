@@ -1,7 +1,8 @@
 <!-- Should not use ngif for make table show or hide, because add new row needs for this kind of table -->
 <p-table #dtable id="tdm" [columns]=" selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll"
     [rows]=_rowsNumbers [showCurrentPageReport]="true" [currentPageReportTemplate]="footerInfos"
-    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" stateStorage="session"
+    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive"
+    [ngClass]="{'mintable_height': dataSource && dataSource.length > 0}" stateStorage="session"
     (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
     [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
     [resizableColumns]="_hasColumnsResizable" editMode="row" dataKey="id" [reorderableColumns]=_reOrderableTable
@@ -109,7 +110,6 @@
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
                                     [ngClass]="{'p-dropdown-editable': true}" optionLabel="title" optionValue="id"
-                                    (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                     [filter]="true" [showClear]="true">
                                 </p-dropdown>
                             </ng-template>
@@ -124,9 +124,7 @@
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
                                         [placeholder]="dataSource[col.field]" [ngClass]="{'p-dropdown-editable': true}"
-                                        optionLabel="title"
-                                        (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
-                                        [filter]="true">
+                                        optionLabel="title" optionValue="id" [filter]="true">
                                     </p-dropdown>
                                 </ng-template>
                                 <ng-template pTemplate="output">

@@ -490,4 +490,24 @@ export enum ENInterfaces {
     clientGetLazy = 'V1/Client/GetLazy',
     clientEdit = 'V1/Client/Edit',
     clientRemove = 'V1/Client/Remove',
+
+    tarriffTypeItemManagerGet = 'V1/TariffTypeItem/All',
+    tarriffTypeItemManagerAdd = 'V1/TariffTypeItem/Add',
+    tarriffTypeItemManagerEdit = 'V1/TariffTypeItem/Edit',
+    tarriffTypeItemManagerRemove = 'V1/TariffTypeItem/Remove',
+
+    tariffParameterManagerGet = 'V1/TariffParameter/All',
+    tariffParameterManagerAdd = 'V1/TariffParameter/Add',
+    tariffParameterManagerEdit = 'V1/TariffParameter/Edit',
+    tariffParameterManagerRemove = 'V1/TariffParameter/Remove',
+
+    offeringGet = 'V1/Offering/All',
+    offeringAdd = 'V1/Offering/Add',
+    offeringEdit = 'V1/Offering/Edit',
+    offeringRemove = 'V1/Offering/Remove',
+
+    offeringUnitGet = 'V1/OfferingUnit/All',
+    offeringUnitAdd = 'V1/OfferingUnit/Add',
+    offeringUnitEdit = 'V1/OfferingUnit/Edit',
+    offeringUnitRemove = 'V1/OfferingUnit/Remove',
 }

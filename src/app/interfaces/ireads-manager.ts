@@ -132,7 +132,8 @@ export interface ICounterState {
     id?: number,
     moshtarakinId: number,
     title: string,
-    zoneId: number,
+    zoneId: any,
+    changableZoneId: string, // temp zone for converting dictionaies
     clientOrder: number,
     canEnterNumber: boolean,
     isMane: boolean,
@@ -144,7 +145,7 @@ export interface ICounterState {
     shouldEnterNumber: boolean,
     isXarab: boolean,
     isFaqed: boolean,
-    isNew?: boolean
+    isNew?: boolean,
 }
 // export interface IGridFriendlyFilter {
 //     field: string,

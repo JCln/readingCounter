@@ -164,11 +164,11 @@
             <td class="dtable_wrapper" colspan="7">
                 <app-prime-table [dataSource]="closeTabService.simpleMasterByFragmentDetails[ri]"
                     [_outputFileName]="'simpleMasterByFragmentDetails'" [_checkUpName]="'simpleMasterByFragmentDetails'"
-                    [_numberOfExtraColumns]="[1]" [_sessionName]="'simpleMasterByFragmentDetails-session'"
+                    [_numberOfExtraColumns]="[1,2]" [_sessionName]="'simpleMasterByFragmentDetails-session'"
                     [_selectedColumnsToRemember]="'selectedSimpleMasterByFragmentDetails'" [_outputEnabled]="false"
                     [_isSortable]="false" [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
                     [_paginator]="false" [_hasRefreshTable]="false" [_captionEnabled]="false"
-                    (routedToLoggs)="routeToOffloadLazy($event)">
+                    (routedToLoggs)="routeToOffloadLazy($event)" (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)">
                 </app-prime-table>
             </td>
         </tr>

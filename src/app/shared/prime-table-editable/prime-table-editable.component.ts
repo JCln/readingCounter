@@ -74,11 +74,15 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     );
   }
   clickedDropDowns = (event: any, element: string, dataId: any) => {
-    for (let index = 0; index < this.dataSource.length; index++) {
-      if (this.dataSource[index].id === dataId) {
-        this.dataSource[index][element] = event.title;
-      }
-    }
+    console.log(event.title);
+    console.log(element);
+    console.log(dataId);
+
+    // for (let index = 0; index < this.dataSource.length; index++) {
+    //   if (this.dataSource[index].id === dataId) {
+    //     this.dataSource[index][element] = event.title;
+    //   }
+    // }
   }
   refreshTable() {
     this.refreshedTable.emit(true);
@@ -103,6 +107,12 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     }
     this.onRowEditedCancel.emit({ dataSource, ri });
   }
+  onRowEditCancelRowEditing = (dataSource: object, ri: number, secondDictionaryName: any) => {
+    console.log(dataSource);
+    console.log(this.dataSource[0]);
+    
+    this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
+  }
   removeRow = (dataSource: object, ri: number) => {
     this.removedRow.emit({ dataSource, ri });
   }
@@ -117,9 +127,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   newRowChangedStatus = () => {
     this.newedRowChangedStatus.emit();
-  }
-  onRowEditCancelRowEditing = (dataSource: object, ri: number, secondDictionaryName: any) => {
-    this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
   }
   getExcelSample = () => {
     this.getedExcelSample.emit();
@@ -177,6 +184,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   hasFilters = (dtable: Table) => {
     this.hasFiltersInTable = this.utilsService.hasFilters(dtable);
-  }  
+  }
 
 }

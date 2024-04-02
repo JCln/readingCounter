@@ -26,19 +26,29 @@ export class CounterStateComponent extends FactoryONE {
   ) {
     super();
   }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForCounterState.forEach(item => {
+      item.changableZoneId = item.zoneId;
+    })
+  }
+  doDictionaryConfigs = async () => {
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.insertToAuxZoneid();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'changableZoneId');
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForCounterState = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateAll);
-    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
+    this.doDictionaryConfigs();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForCounterState)) {
       this.callAPI();
     }
+    this.doDictionaryConfigs();
   }
-  
+
   ngOnInit(): void {
-    this.classWrapper();    
+    this.classWrapper();
   }
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  ناحیه: ' + rowData['dataSource'].zoneId);
@@ -52,7 +62,6 @@ export class CounterStateComponent extends FactoryONE {
 
     dataSource['dataSource'].moshtarakinId = Number(dataSource['dataSource'].moshtarakinId);
     dataSource['dataSource'].clientOrder = Number(dataSource['dataSource'].clientOrder);
-
 
     if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
@@ -73,25 +82,25 @@ export class CounterStateComponent extends FactoryONE {
     }
 
     if (dataSource['dataSource'].isNew) {
-      this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
+      this.onRowAdd(dataSource['dataSource']);
     }
     else {
       await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.counterStateEdit, dataSource['dataSource']);
     }
     this.callAPI();
   }
-  private async onRowAdd(dataSource: ICounterState, rowIndex: number) {
+  private async onRowAdd(dataSource: ICounterState) {
     const a = await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.counterStateAdd, dataSource);
     if (a) {
       this.callAPI();
     }
   }
-
   newRow(): ICounterState {
     return {
       moshtarakinId: null,
       title: '',
       zoneId: null,
+      changableZoneId: null,
       clientOrder: null,
       canEnterNumber: false,
       isMane: false,

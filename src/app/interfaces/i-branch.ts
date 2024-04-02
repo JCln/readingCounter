@@ -72,3 +72,11 @@ export interface IClientGetAllLazy {
     data: IClientAll[],
     totalRecords: number
 }
+export interface ITarrifTypeItem {
+    id: number,
+    tarrifTypeId: number,
+    tarrifCalculationMode: number,
+    title: string,
+    description: string,
+    isActive: boolean
+}
