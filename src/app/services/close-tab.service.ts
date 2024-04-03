@@ -57,7 +57,7 @@ import { ICountryManager, IProvinceManager, IRegionManager, IZoneBoundManager, I
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-import { IPolicies, IRoleHistory, IUsersLoginBriefInfo, LoginBriefInfo } from './DI/privacies';
+import { IPolicies, IRoleHistory, IUsersLoginBriefInfo } from './DI/privacies';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { IForbiddenManager, IInactiveEntityLazy, IListLatestInfoReq, IMostReportInput, IOnOffLoadFlat, IOnOffLoadFlatLazy } from 'interfaces/imanage';
 import { IFeedbackList, IFeedbackListReq, IFeedbackType } from 'interfaces/imobile-manager';
@@ -68,7 +68,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOwnershipType, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -287,6 +287,9 @@ export class CloseTabService {
   saveDataForQotrManager: any;
 
   tarrifTypeItem: ITarrifTypeItem[] = [];
+  tarrifParameter: ITarrifParameter[] = [];
+  offering: IOffering[] = [];
+  offeringUnit: IOfferingUnit[] = [];
 
   // zones
   saveDataForCountry: ICountryManager[];
@@ -2122,6 +2125,10 @@ export class CloseTabService {
       }
     },
     { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.tarrifTypeItem, url: EN_Routes.tarrifTypes, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.tarrifParameter, url: EN_Routes.tariffParameter, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.offering, url: EN_Routes.offering, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.offeringUnit, url: EN_Routes.offeringUnit, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.waterSource, url: EN_Routes.waterSource, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.ownershipType, url: EN_Routes.ownershipType, defaultValue: [] },

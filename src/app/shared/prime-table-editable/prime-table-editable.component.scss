@@ -12,7 +12,9 @@
   color: var(--orange_600);
 }
 
-.mintable_height {
-  min-height: 15vh;
-  min-height: 15svh;
+::ng-deep .mintable_height {
+  .p-datatable-wrapper {
+    min-height: 60vh;
+    min-height: 60svh;
+  }
 }

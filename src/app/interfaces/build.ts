@@ -34,7 +34,7 @@ export interface IENV {
         license: number,
         incorrect_time: number
     }
-    getLogoutReasonDictionary: { id: number, title: string }[],
+    getLogoutReasonDictionary: { id: number, field: string, title: string }[],
     shouldSaveTokensInLocal: boolean,
     getMasrafStateDictionary: {
         id: number,
@@ -43,7 +43,9 @@ export interface IENV {
         icon: string,
         className: string,
         value: number
-    }[]
+    }[],
+    getInvalidLoginReasonDictionary: { id: number, title: string, field: string }[],
+    getTarrifTypeDictionary: { id: number, title: string, field: string }[],
 }
 export enum ENURLs {
     // LOCAL = 'http://192.168.99.131:7529',
@@ -238,9 +240,25 @@ export class getLogoutReasonDictionary {
         { id: 6, field: 'ResetPassword', title: 'بازنشانی گذرواژه' },
         { id: 7, field: 'ChangeTwoStep', title: 'تغییر نوع ورود' }
     ]);
-    private constructor(public readonly value: { id: number, title: string, field: string }[]) {
+    private constructor(public readonly value: { id: number, field: string, title: string }[]) {
 
     }
+}
+export class getTarrifTypeDictionary {
+    static readonly DEFAULT = new getTarrifTypeDictionary([
+        { id: 0, field: 'Bill', title: 'مبلغ' },
+        { id: 1, field: 'Off', title: 'تخفیف' },
+        { id: 2, field: 'Commission', title: 'کمیسیون' },
+        { id: 3, field: 'Tax', title: 'مالیات' },
+    ]);
+    private constructor(public readonly value: { id: number, title: string, field: string }[]) { }
+}
+export class getTarrifCalculationModeDictionary {
+    static readonly DEFAULT = new getTarrifCalculationModeDictionary([
+        { id: 1, field: 'Interval', title: 'فوری' },
+        { id: 2, field: 'AccurateTime', title: 'بازه‌ای' },
+    ]);
+    private constructor(public readonly value: { id: number, title: string, field: string }[]) { }
 }
 export class getInvalidLoginReasonDictionary {
     static readonly DEFAULT = new getInvalidLoginReasonDictionary([

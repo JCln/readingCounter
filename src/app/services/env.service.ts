@@ -4,7 +4,7 @@ import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
 
-  temp = ActivatedProvince.TEH;
+  temp = ActivatedProvince.RDPServer;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
@@ -30,6 +30,8 @@ export class EnvService implements IENV {
   shouldSaveTokensInLocal = this.temp.shouldSaveTokensInLocal;
   getMasrafStateDictionary = this.temp.getMasrafStateDictionary;
   getHighLowStateId = this.temp.getHighLowStateId;
+  getTarrifTypeDictionary = this.temp.getTarrifTypeDictionary;
+  getTarrifCalculationModeDictionary = this.temp.getTarrifCalculationModeDictionary;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

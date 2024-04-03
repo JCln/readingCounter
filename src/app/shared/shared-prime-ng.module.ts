@@ -70,6 +70,7 @@ import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.com
     UserBlockingComponent,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     TableModule,
     TabViewModule,
     MatCheckboxModule,

@@ -52,6 +52,16 @@
         { id: 13, title: 'empty', value: 3, titleUnicode: 'صفر', icon: 'صفر', className: '_empty' },
         { id: 14, title: 'unCalculable', value: 4, titleUnicode: 'غیرقابل محاسبه', icon: '!', className: '_mark' }
     ];
+    window.__env.getTarrifTypeDictionary = [
+        { id: 0, field: 'Bill', title: 'مبلغ' },
+        { id: 1, field: 'Off', title: 'تخفیف' },
+        { id: 2, field: 'Commission', title: 'کمیسیون' },
+        { id: 3, field: 'Tax', title: 'مالیات' },
+    ]
+    window.__env.getTarrifCalculationModeDictionary = [
+        { id: 1, field: 'Interval', title: 'فوری' },
+        { id: 2, field: 'AccurateTime', title: 'بازه‌ای' },
+    ]
     window.__env.getLogoutReasonDictionary = [
         { id: 0, title: 'توسط کاربر' },
         { id: 1, title: 'ویرایش شده' },
@@ -111,7 +121,7 @@
         security: 8,
         license: 16,
         incorrect_time: 32
-    }    
+    }
     window.__env.aboutUs = { email: 'infohivaatlas@gmail.com', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
 
 

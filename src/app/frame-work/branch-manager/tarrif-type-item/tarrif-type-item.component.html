@@ -1,1 +1,14 @@
-<p>tarrif-type-item works!</p>
+<app-prime-table     
+    [dataSource]="closeTabService.tarrifTypeItem" 
+    [_checkUpName]="'tarrifTypeItem'"
+    [_outputFileName]="'tariffTypeItem'"
+    [_numberOfExtraColumns]="[1, 2]"
+    [isAddableTable]="true"    
+    [_sessionName]="'tariffTypeItem-session'"
+    [_selectedColumnsToRemember]="'selectedTariffTypeItem'"
+    (refreshedTable)="callAPI()"     
+    (removedRowEditing)="removeRow($event)"    
+    (openedAddDialog)="openAddDialog()"    
+    (openedEditDialog)="openEditDialog($event)" 
+ > 
+</app-prime-table>

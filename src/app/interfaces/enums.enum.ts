@@ -676,7 +676,11 @@ export enum ENEssentialsToSave {
   anlzPrfmReq = "anlzPrfmReq",
   dataMiningReq = "dataMiningReq",
   trvchReq = "trvchReq",
-  inStateReq = "inStateReq"
+  inStateReq = "inStateReq",
+  tarrifTypeItem = "tarrifTypeItem",
+  tarrifParameter = "tarrifParameter",
+  offering = "offering",
+  offeringUnit = "offeringUnit"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -898,6 +902,9 @@ export enum ENSelectedColumnVariables {
     selectedCustomerType = 'customerType',
     selectedWaterSource = 'waterSource',
     selectedOwnershipType = 'ownershipType',
+    selectedTariffTypeItem = 'tariffTypeItem',
+    selectedOffering = 'offering',
+    selectedOfferingUnit = 'offeringUnit',
     selectedIpFilter = 'ipFilter',
     selectedFeedbackComplaint = 'feedbackComplaint',
     selectedFeedbackNotComplaint = 'feedbackNotComplaint',

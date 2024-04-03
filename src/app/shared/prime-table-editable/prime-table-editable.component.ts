@@ -74,15 +74,11 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     );
   }
   clickedDropDowns = (event: any, element: string, dataId: any) => {
-    console.log(event.title);
-    console.log(element);
-    console.log(dataId);
-
-    // for (let index = 0; index < this.dataSource.length; index++) {
-    //   if (this.dataSource[index].id === dataId) {
-    //     this.dataSource[index][element] = event.title;
-    //   }
-    // }
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (this.dataSource[index].id === dataId) {
+        this.dataSource[index][element] = event.title;
+      }
+    }
   }
   refreshTable() {
     this.refreshedTable.emit(true);
@@ -110,7 +106,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   onRowEditCancelRowEditing = (dataSource: object, ri: number, secondDictionaryName: any) => {
     console.log(dataSource);
     console.log(this.dataSource[0]);
-    
+
     this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
   }
   removeRow = (dataSource: object, ri: number) => {

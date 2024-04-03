@@ -1,9 +1,12 @@
 import { BranchesService } from 'services/branches.service';
 import { Component } from '@angular/core';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { TarriftypeAddDgComponent } from './tarriftype-add-dg/tarriftype-add-dg.component';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { TarriftypeEditDgComponent } from './tarriftype-edit-dg/tarriftype-edit-dg.component';
 
 @Component({
   selector: 'app-tarrif-type-item',
@@ -11,58 +14,43 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./tarrif-type-item.component.scss']
 })
 export class TarrifTypeItemComponent extends FactoryONE {
+  ref: DynamicDialogRef;
 
   constructor(
     public closeTabService: CloseTabService,
-    public branchesService: BranchesService
+    public branchesService: BranchesService,
+    private dialogService: DialogService,
   ) {
     super();
   }
-
-  // openAddDialog = () => {
-  //   return new Promise(() => {
-  //     const dialogRef = this.dialog.open(RdAddDgComponent, {
-  //       disableClose: true,
-  //       minWidth: '65vw',
-  //       width: '100%',
-  //       data: {
-  //         di: this.zoneDictionary
-  //       }
-  //     });
-  //     dialogRef.afterClosed().subscribe(async result => {
-  //       if (result)
-  //         this.callAPI();
-  //     });
-  //   });
-  // }
-  // openEditDialog = (row: any) => {
-  //   return new Promise(() => {
-  //     const dialogRef = this.dialog.open(RdEditDgComponent, {
-  //       disableClose: true,
-  //       minWidth: '65vw',
-  //       width: '100%',
-  //       data: {
-  //         row,
-  //         di: this.zoneDictionary
-  //       }
-  //     });
-  //     dialogRef.afterClosed().subscribe(async result => {
-  //       if (result) {
-  //         if (await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.ReadingConfigEDIT, result)) {
-  //           this.callAPI();
-  //         }
-  //       }
-  //     });
-  //   })
-  // }
   callAPI = async () => {
-    // this.closeTabService.saveDataForReadingConfig = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ReadingConfigALL);
-
-
-
+    this.closeTabService.tarrifTypeItem = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tarriffTypeItemManagerGet)
+  }
+  openAddDialog = () => {
+    this.ref = this.dialogService.open(TarriftypeAddDgComponent, {
+      rtl: true,
+      width: '80%'
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res) {
+        this.callAPI();
+      }
+    });
+  }
+  openEditDialog = (row: any) => {
+    this.ref = this.dialogService.open(TarriftypeEditDgComponent, {
+      data: row,
+      rtl: true,
+      width: '80%'
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res) {
+        this.callAPI();
+      }
+    });
   }
   classWrapper = async () => {
-    if (MathS.isNull(this.closeTabService.saveDataForReadingConfig)) {
+    if (MathS.isNull(this.closeTabService.tarrifTypeItem)) {
       this.callAPI();
     }
   }

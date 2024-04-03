@@ -1,0 +1,21 @@
+<section>
+    <h2 class="title">افزودن نوع تعرفه</h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+
+            <div class="input_2" *ngFor="let mainDatas of columnManager.getColumnsMenus('tariffTypeItem')">
+                <div class="_key">{{mainDatas.header}}</div>
+                <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="tarrifTypeReq[mainDatas.field]">
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                افزودن مسیر
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

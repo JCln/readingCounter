@@ -80,3 +80,28 @@ export interface ITarrifTypeItem {
     description: string,
     isActive: boolean
 }
+export interface ITarrifParameter {
+    id: number,
+    tag: string
+    title: string,
+    isActive: boolean
+}
+export interface IOffering {
+    id: number,
+    title: string,
+    offeringUnitId: number,
+    description: string,
+    isActive: true,
+    offeringUnit: {
+        id: number,
+        title: string,
+        symbol: string,
+        isActive: true
+    }
+}
+export interface IOfferingUnit {
+    id: number,
+    title: string,
+    symbol: string,
+    isActive: boolean
+}

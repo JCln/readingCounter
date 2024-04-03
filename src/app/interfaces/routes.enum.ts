@@ -172,6 +172,10 @@ export enum EN_Routes {
     mobileForbiddenType = '/wr/app/fbnType',
 
     branchState = '/wr/branch/state',
+    tarrifTypes = '/wr/branch/tarrifTypes',
+    tariffParameter = '/wr/branch/tarrifParameter',
+    offering = '/wr/branch/offering',
+    offeringUnit = '/wr/branch/offeringUnit',
     customerType = '/wr/branch/customerType',
     waterSource = '/wr/branch/waterSource',
     ownershipType = '/wr/branch/ownershipType',

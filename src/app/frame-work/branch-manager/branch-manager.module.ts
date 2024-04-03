@@ -2,13 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BranchManagerRoutingModule } from './branch-manager-routing.module';
-import { TarrifTypeItemComponent } from './tarrif-type-item/tarrif-type-item.component';
-
 
 @NgModule({
-  declarations: [
-    TarrifTypeItemComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     BranchManagerRoutingModule

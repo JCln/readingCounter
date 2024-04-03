@@ -502,6 +502,32 @@ export class ColumnManager {
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
     ]
+    tariffTypeItem: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'tarrifTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'tarrifCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'description', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
+        { field: 'isActive', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true }
+    ]
+    offeringAdd: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'offeringUnitId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, ltr: true, icon: 'grid-column: auto/ span 2;' }
+    ]
+    offering: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'offeringUnitId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, ltr: true, icon: 'grid-column: auto/ span 2;' }
+    ]
+    offeringUnit: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true }
+        // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
+    offeringUnitAdd: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
+    ]
     fragmentDetailsAddDialog: IObjectIteratation[] = [
         { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },

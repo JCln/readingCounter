@@ -1,0 +1,14 @@
+<app-prime-table    
+    [dataSource]="closeTabService.offering" 
+    [_checkUpName]="'offering'"
+    [_outputFileName]="'offering'"
+    [_numberOfExtraColumns]="[1, 2]"
+    [isAddableTable]="true"    
+    [_sessionName]="'offering-session'"
+    [_selectedColumnsToRemember]="'selectedOffering'"
+    (refreshedTable)="callAPI()"     
+    (removedRowEditing)="removeRow($event)"    
+    (openedAddDialog)="openAddDialog()"    
+    (openedEditDialog)="openEditDialog($event)"
+ > 
+</app-prime-table>
