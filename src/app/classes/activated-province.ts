@@ -464,8 +464,8 @@ export class ActivatedProvince implements IENV {
             className: string,
             value: number
         }[],
-        public readonly getTarrifTypeDictionary: { id: number, title: string, field: string }[],
-        public readonly getTarrifCalculationModeDictionary: { id: number, title: string, field: string }[],
+        public readonly getTarrifTypeDictionary: { id: number, dynamicId: number, title: string, field: string }[],
+        public readonly getTarrifCalculationModeDictionary: { id: number, dynamicId: number, title: string, field: string }[],
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

@@ -13,8 +13,8 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 export class TarriftypeEditDgComponent implements OnInit {
   tarrifTypeReq: ITarrifTypeItem = {
     id: 0,
-    tarrifTypeId: 0,
-    tarrifCalculationMode: 0,
+    tariffTypeId: 0,
+    tariffCalculationMode: 0,
     title: '',
     description: '',
     isActive: true

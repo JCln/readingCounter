@@ -1241,9 +1241,9 @@ export class VerificationService {
   tarrifTypeItem = (item: ITarrifTypeItem): boolean => {
     if (!this.nullValidation(item.title, EN_messages.insert_title))
       return false;
-    if (!this.nullValidation(item.tarrifTypeId, EN_messages.insert_fromEshterak))
+    if (!this.nullValidation(item.tariffTypeId, EN_messages.insert_fromEshterak))
       return false;
-    if (!this.nullValidation(item.tarrifCalculationMode, EN_messages.insert_ToEshterak))
+    if (!this.nullValidation(item.tariffCalculationMode, EN_messages.insert_ToEshterak))
       return false;
 
     return true;

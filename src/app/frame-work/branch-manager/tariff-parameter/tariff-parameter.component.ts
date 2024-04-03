@@ -24,7 +24,7 @@ export class TariffParameterComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.tarrifParameter = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffParameterManagerGet);
+    this.closeTabService.tariffParameter = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffParameterManagerGet);
   }
   openAddDialog = () => {
     this.ref = this.dialogService.open(TariffParameterAddDgComponent, {
@@ -50,16 +50,17 @@ export class TariffParameterComponent extends FactoryONE {
     });
   }
   classWrapper = async () => {
-    if (MathS.isNull(this.closeTabService.tarrifParameter)) {
+    if (MathS.isNull(this.closeTabService.tariffParameter)) {
       this.callAPI();
     }
   }
   removeRow = async (rowData: object) => {
-    // const a = await this.readManagerService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId);
-    // if (a) {
-    //   await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource'].id);
-    //   this.callAPI();
-    // }
+    const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['title'] + ' tag: ' + rowData['tag']);
+    if (a) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.tariffParameterManagerRemove, rowData);
+      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
+    }
   }
 
 }

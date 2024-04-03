@@ -74,8 +74,8 @@ export interface IClientGetAllLazy {
 }
 export interface ITarrifTypeItem {
     id: number,
-    tarrifTypeId: number,
-    tarrifCalculationMode: number,
+    tariffTypeId: number,
+    tariffCalculationMode: number,
     title: string,
     description: string,
     isActive: boolean
@@ -90,6 +90,7 @@ export interface IOffering {
     id: number,
     title: string,
     offeringUnitId: number,
+    changableOfferingUnitId: any,
     description: string,
     isActive: true,
     offeringUnit: {

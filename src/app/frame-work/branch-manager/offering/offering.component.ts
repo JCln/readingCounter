@@ -7,6 +7,8 @@ import { OfferingAddDgComponent } from './offering-add-dg/offering-add-dg.compon
 import { OfferingEditDgComponent } from './offering-edit-dg/offering-edit-dg.component';
 import { MathS } from 'src/app/classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { Converter } from 'src/app/classes/converter';
+import { IOfferingUnit } from 'interfaces/i-branch';
 
 @Component({
   selector: 'app-offering',
@@ -15,6 +17,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 })
 export class OfferingComponent extends FactoryONE {
   ref: DynamicDialogRef;
+  offeringUnitIdDictionary: IOfferingUnit[] = [];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -23,8 +26,17 @@ export class OfferingComponent extends FactoryONE {
   ) {
     super();
   }
+  insertToAuxItem = () => {
+    this.closeTabService.offering.forEach(item => {
+      item.changableOfferingUnitId = item.offeringUnitId;
+    })
+  }
+
   callAPI = async () => {
     this.closeTabService.offering = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGet);
+    this.insertToAuxItem();
+    this.offeringUnitIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
+    Converter.convertIdsToTitles(this.closeTabService.offering, { offeringUnitIdDictionary: this.offeringUnitIdDictionary }, { changableOfferingUnitId: 'changableOfferingUnitId' })
   }
   openAddDialog = () => {
     this.ref = this.dialogService.open(OfferingAddDgComponent, {
@@ -55,11 +67,12 @@ export class OfferingComponent extends FactoryONE {
     }
   }
   removeRow = async (rowData: object) => {
-    // const a = await this.readManagerService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId);
-    // if (a) {
-    //   await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource'].id);
-    //   this.callAPI();
-    // }
+    const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['title']);
+    if (a) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offeringRemove, rowData);
+      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
+    }
   }
 
 }

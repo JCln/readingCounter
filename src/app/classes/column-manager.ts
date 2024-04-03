@@ -504,10 +504,17 @@ export class ColumnManager {
     ]
     tariffTypeItem: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
-        { field: 'tarrifTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, readonly: false },
-        { field: 'tarrifCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
-        { field: 'description', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
-        { field: 'isActive', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true }
+        { field: 'tariffTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
+        { field: 'tariffCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, ltr: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },        
+    ]
+    tariffParameter: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'tag', header: 'tag', isSelected: true, isSelectedOrigin: true },
+    ]
+    tariffParameterAdd: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'tag', header: 'tag', isSelected: true, isSelectedOrigin: true },
     ]
     offeringAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
@@ -516,8 +523,8 @@ export class ColumnManager {
     ]
     offering: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'offeringUnitId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, ltr: true, icon: 'grid-column: auto/ span 2;' }
+        { field: 'changableOfferingUnitId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true }
     ]
     offeringUnit: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

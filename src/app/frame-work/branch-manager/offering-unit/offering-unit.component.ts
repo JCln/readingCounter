@@ -55,11 +55,12 @@ export class OfferingUnitComponent extends FactoryONE {
     }
   }
   removeRow = async (rowData: object) => {
-    // const a = await this.readManagerService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId);
-    // if (a) {
-    //   await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource'].id);
-    //   this.callAPI();
-    // }
+    const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['title']);
+    if (a) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offeringUnitRemove, rowData);
+      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
+    }
   }
 
 }

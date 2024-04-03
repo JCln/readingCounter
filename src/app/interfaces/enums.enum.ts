@@ -678,7 +678,7 @@ export enum ENEssentialsToSave {
   trvchReq = "trvchReq",
   inStateReq = "inStateReq",
   tarrifTypeItem = "tarrifTypeItem",
-  tarrifParameter = "tarrifParameter",
+  tariffParameter = "tariffParameter",
   offering = "offering",
   offeringUnit = "offeringUnit"
 }
@@ -903,6 +903,7 @@ export enum ENSelectedColumnVariables {
     selectedWaterSource = 'waterSource',
     selectedOwnershipType = 'ownershipType',
     selectedTariffTypeItem = 'tariffTypeItem',
+    selectedTariffParameter = 'tariffParameter',
     selectedOffering = 'offering',
     selectedOfferingUnit = 'offeringUnit',
     selectedIpFilter = 'ipFilter',

@@ -1,7 +1,7 @@
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage, IPrimeConfirmDialog } from 'interfaces/ioverall-config';
+import { ISearchInOrderTo, ITitleValue, ISimafaImportStatus, INotificationAlertTypes, IDialogMessage, IPrimeConfirmDialog, IDictionaryManager } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confirm-text-dialog.component';
@@ -42,6 +42,12 @@ export class UtilsService {
 
   getSimafaImportStatus = (): ISimafaImportStatus => {
     return this.envService.simafaImportStatus;
+  }
+  getTarrifTypeDictionary = () => {
+    return this.envService.getTarrifTypeDictionary;
+  }
+  getTarrifCalculationModeDictionary = () => {
+    return this.envService.getTarrifCalculationModeDictionary;
   }
   getDenyTracking = (): boolean => {
     const jwtRole = this.compositeService.getAuthUser();

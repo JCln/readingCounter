@@ -16,6 +16,21 @@ export class Converter {
         }
         return dataSource;
     }
+    static convertIdsToTitlesByIdname = <T>(dataSource: T[], dictionaries: object, toConvert: object, idName: string): T[] => {
+        for (let dictionaryIndex = 0; dictionaryIndex < Object.keys(dictionaries).length; dictionaryIndex++) {
+            let objectValue = Object.values(dictionaries)[dictionaryIndex];
+            let toConvertTemp = Object.keys(toConvert)[dictionaryIndex];
+
+            for (let index = 0; index < dataSource.length; index++) {
+                for (let j = 0; j < objectValue.length; j++) {
+                    if (objectValue[j][idName] == dataSource[index][toConvertTemp]) {
+                        dataSource[index][toConvertTemp] = objectValue[j]['title'];
+                    }
+                }
+            }
+        }
+        return dataSource;
+    }
     static convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
         dictionary.map(dictionary => {
             dataSource.map(dataSource => {

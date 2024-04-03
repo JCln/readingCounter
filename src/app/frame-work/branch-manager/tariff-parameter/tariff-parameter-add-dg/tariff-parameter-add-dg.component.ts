@@ -31,7 +31,7 @@ export class TariffParameterAddDgComponent implements OnInit {
     this.ref.close(true);
   }
   async onRowAdd(dataSource: ITarrifParameter) {
-    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offeringUnitAdd, dataSource);
+    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.tariffParameterManagerAdd, dataSource);
     if (res) {
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       this.closeSuccess();

@@ -13,12 +13,15 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 export class TarriftypeAddDgComponent implements OnInit {
   tarrifTypeReq: ITarrifTypeItem = {
     id: 0,
-    tarrifTypeId: 0,
-    tarrifCalculationMode: 0,
+    tariffTypeId: 0,
+    tariffCalculationMode: 0,
     title: '',
     description: '',
     isActive: true
   }
+  getTarrifCalculationModeDictionary: any[] = [];
+  getTarrifTypeDictionary: any[] = [];
+
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
@@ -44,6 +47,7 @@ export class TarriftypeAddDgComponent implements OnInit {
       this.onRowAdd(this.tarrifTypeReq);
   }
   ngOnInit(): void {
-
+    this.getTarrifCalculationModeDictionary = this.branchesService.utilsService.getTarrifCalculationModeDictionary();
+    this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
   }
 }

@@ -287,7 +287,7 @@ export class CloseTabService {
   saveDataForQotrManager: any;
 
   tarrifTypeItem: ITarrifTypeItem[] = [];
-  tarrifParameter: ITarrifParameter[] = [];
+  tariffParameter: ITarrifParameter[] = [];
   offering: IOffering[] = [];
   offeringUnit: IOfferingUnit[] = [];
 
@@ -2126,7 +2126,7 @@ export class CloseTabService {
     },
     { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.tarrifTypeItem, url: EN_Routes.tarrifTypes, defaultValue: [] },
-    { id: 2, value: ENEssentialsToSave.tarrifParameter, url: EN_Routes.tariffParameter, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.tariffParameter, url: EN_Routes.tariffParameter, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offering, url: EN_Routes.offering, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offeringUnit, url: EN_Routes.offeringUnit, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
