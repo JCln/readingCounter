@@ -4,17 +4,9 @@
   width: 100% !important;
 }
 
-.pi-check-circle {
-  color: var(--green_500);
-}
-
-.pi-info-circle {
-  color: var(--orange_600);
-}
-
 ::ng-deep .mintable_height {
   .p-datatable-wrapper {
-    min-height: 60vh;
-    min-height: 60svh;
+    min-height: 50vh;
+    min-height: 50svh;
   }
 }

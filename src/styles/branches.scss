@@ -1,0 +1,67 @@
+@import 'primeNG.scss';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat';
+
+section {
+    min-height: 90vh;
+    min-height: 90svh;
+    font-family: var(--font-family);
+
+    @media (min-width:550px) {
+        min-height: 50vh;
+        min-height: 50svh;
+    }
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr;
+    direction: rtl;
+    background: var(--secondary_1);
+    gap: 0 var(--font_05);
+
+    direction: rtl;
+    background: var(--secondary_1);
+
+    @media (min-width:550px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+._value {
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    color: var(--thirdy_1);
+    text-align: center;
+    font-size: var(--font_l2);
+}
+
+.btn_1 {
+    margin: 1rem auto;
+}
+
+input {
+    color: var(--secondary_5);
+    margin: 0 auto;
+}
+
+// dialog conf
+:host ::ng-deep {
+    .p-dialog .p-dialog-header {
+        background: var(--secondary_1);
+        direction: rtl;
+    }
+}
+
+.check_boxes {
+    padding: var(--font_025);
+}

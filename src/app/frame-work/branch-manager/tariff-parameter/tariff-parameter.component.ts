@@ -6,7 +6,6 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { TariffParameterAddDgComponent } from './tariff-parameter-add-dg/tariff-parameter-add-dg.component';
-import { TariffParameterEditDgComponent } from './tariff-parameter-edit-dg/tariff-parameter-edit-dg.component';
 
 @Component({
   selector: 'app-tariff-parameter',
@@ -26,20 +25,9 @@ export class TariffParameterComponent extends FactoryONE {
   callAPI = async () => {
     this.closeTabService.tariffParameter = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffParameterManagerGet);
   }
-  openAddDialog = () => {
+  openDialog = (item?: any) => {
     this.ref = this.dialogService.open(TariffParameterAddDgComponent, {
-      rtl: true,
-      width: '80%'
-    })
-    this.ref.onClose.subscribe(async res => {
-      if (res) {
-        this.callAPI();
-      }
-    });
-  }
-  openEditDialog = (row: any) => {
-    this.ref = this.dialogService.open(TariffParameterEditDgComponent, {
-      data: row,
+      data: item,
       rtl: true,
       width: '80%'
     })

@@ -1,10 +1,10 @@
 <section>
-    <h2 class="title">افزودن واحد</h2>
+    <h2 class="title">{{offeringUnitReq.isEditing? 'ویرایش واحد': 'افزودن واحد'}}</h2>
     <hr>
     <form #form="ngForm" (ngSubmit)="verification()">
         <div class="content">
 
-            <div class="input_2" *ngFor="let mainDatas of columnManager.getColumnsMenus('offeringAdd')">
+            <div class="input_2" *ngFor="let mainDatas of columnManager.getColumnsMenus('offeringUnitAdd')">
                 <div class="_key">{{mainDatas.header}}</div>
                 <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="offeringUnitReq[mainDatas.field]">
             </div>
@@ -12,7 +12,7 @@
 
         <footer>
             <button type="submit" class="btn_1">
-                افزودن واحد
+                {{offeringUnitReq.isEditing? 'ویرایش واحد': 'افزودن واحد'}}
                 <i class="pi pi-list"></i>
             </button>
         </footer>

@@ -1,9 +1,9 @@
 <!-- Should not use ngif for make table show or hide, because add new row needs for this kind of table -->
 <p-table #dtable id="tdm" [columns]=" selectedColumns" [value]="dataSource" [paginator]="_paginator && !_virtualScroll"
     [rows]=_rowsNumbers [showCurrentPageReport]="true" [currentPageReportTemplate]="footerInfos"
-    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive mintable_height" stateStorage="session"
-    (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
-    [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
+    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive mintable_height"
+    stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
+    (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
     [resizableColumns]="_hasColumnsResizable" editMode="row" dataKey="id" [reorderableColumns]=_reOrderableTable
     [scrollable]="_virtualScroll" [scrollHeight]="_virtualScroll ? '70vh' : ''" [virtualScroll]="_virtualScroll"
     [columnResizeMode]="_widthExpandMode" appUnSortTable>
@@ -108,9 +108,9 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
-                                    [ngClass]="{'p-dropdown-editable': true}" optionLabel="title" optionValue="id"
-                                    [filter]="true" [showClear]="true"
-                                    (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
+                                    [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                    (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
+                                    [filter]="true" [showClear]="true">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -124,7 +124,9 @@
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
                                         [placeholder]="dataSource[col.field]" [ngClass]="{'p-dropdown-editable': true}"
-                                        optionLabel="title" optionValue="id" [filter]="true">
+                                        optionLabel="title"
+                                        (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
+                                        [filter]="true">
                                     </p-dropdown>
                                 </ng-template>
                                 <ng-template pTemplate="output">
@@ -282,28 +284,6 @@
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_checkUpName == 'fragmentMaster'">
-                <span class="ui-column-title">مدیریت مسیرها</span>
-                <i *ngIf="!editing" (click)="openMoshtarakinDialog(dataSource)"
-                    class="tooltip p_icons pi pi-folder-open">
-                    <div class="tooltip_text_right">مدیریت مسیرها</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_checkUpName == 'fragmentMaster'">
-                <span class="ui-column-title">صدور لیست خودکار</span>
-                <i *ngIf="!editing" (click)="showPictures(dataSource)" class="tooltip p_icons pi pi-directions-alt">
-                    <div class="tooltip_text">صدور لیست خودکار</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_checkUpName == 'fragmentMaster'">
-                <span class="ui-column-title">تایید نوبتی</span>
-                <i *ngIf="!editing" class="tooltip p_icons"
-                    [ngClass]="dataSource.isValidated ? 'pi pi-check-circle' : 'pi pi-info-circle'"
-                    (click)="showInMapSingle(dataSource)">
-                    <div class="tooltip_text_right">{{dataSource.isValidated ? 'نوبتی تایید شده': 'تایید نوبتی'}}
-                    </div>
                 </i>
             </td>
             <td class="__icon-columns">

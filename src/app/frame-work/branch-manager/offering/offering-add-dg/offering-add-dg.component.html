@@ -1,5 +1,7 @@
 <section>
-    <h2 class="title">افزودن اقلام</h2>
+    <h2 class="title">
+        {{offeringReq.isEditing? 'ویرایش اقلام': 'افزودن اقلام'}}
+    </h2>
     <hr>
     <form #form="ngForm" (ngSubmit)="verification()">
         <div class="content">
@@ -52,7 +54,7 @@
 
         <footer>
             <button type="submit" class="btn_1">
-                افزودن اقلام
+                {{offeringReq.isEditing? 'ویرایش اقلام': 'افزودن اقلام'}}
                 <i class="pi pi-list"></i>
             </button>
         </footer>

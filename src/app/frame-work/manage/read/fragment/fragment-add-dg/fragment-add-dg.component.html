@@ -1,35 +1,21 @@
 <section>
-    <h2 class="title">
-        {{tarrifTypeReq.isEditing? 'ویرایش نوع تعرفه': 'افزودن نوع تعرفه'}}
-    </h2>
+    <h2 class="title">{{fragmentReq.isEditing? 'ویرایش نوبتی': 'افزودن نوبتی'}}</h2>
     <hr>
     <form #form="ngForm" (ngSubmit)="verification()">
         <div class="content">
 
-            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('tariffTypeItem')"
+            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('fragmentMasterAdd')"
                 [ngClass]="{'double_size':mainDatas.icon}">
                 <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
                     <!-- only for single select option -->
-                    <div class="input_icon" *ngIf="mainDatas.field == 'tariffTypeId'">
+                    <div class="input_icon">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="getTarrifTypeDictionary"
-                                    [(ngModel)]="tarrifTypeReq.tariffTypeId" placeholder="انتخاب مورد" optionValue="id"
+                                <p-dropdown name="zoneDictionary" [options]="zoneDictionary"
+                                    [(ngModel)]="fragmentReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
                                     optionLabel="title" filter="true">
-                                </p-dropdown>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'tariffCalculationMode'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="getTarrifCalculationModeDictionary"
-                                    [(ngModel)]="tarrifTypeReq.tariffCalculationMode" placeholder="انتخاب مورد"
-                                    optionValue="id" optionLabel="title" filter="true">
                                 </p-dropdown>
                             </div>
                         </div>
@@ -42,7 +28,7 @@
                                 <i class="pi pi-bookmark _bookmark"></i>
                                 <div class="input_3">
                                     <div class="_key">{{mainDatas.header}}</div>
-                                    <mat-checkbox name="isCluster" [(ngModel)]="tarrifTypeReq[mainDatas.field]">
+                                    <mat-checkbox name="isCluster" [(ngModel)]="fragmentReq[mainDatas.field]">
                                         {{mainDatas.isSelected}}
                                     </mat-checkbox>
                                 </div>
@@ -57,7 +43,7 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <input [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
-                                [(ngModel)]="tarrifTypeReq[mainDatas.field]">
+                                [(ngModel)]="fragmentReq[mainDatas.field]">
                         </div>
                     </div>
                 </ng-template>
@@ -66,7 +52,7 @@
 
         <footer>
             <button type="submit" class="btn_1">
-                {{tarrifTypeReq.isEditing? 'ویرایش نوع تعرفه': 'افزودن نوع تعرفه'}}
+                {{fragmentReq.isEditing? 'ویرایش نوبتی': 'افزودن نوبتی'}}
                 <i class="pi pi-list"></i>
             </button>
         </footer>

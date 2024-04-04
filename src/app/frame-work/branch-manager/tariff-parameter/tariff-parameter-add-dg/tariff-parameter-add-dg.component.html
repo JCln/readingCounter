@@ -1,5 +1,7 @@
 <section>
-    <h2 class="title">افزودن پارامتر های تعرفه</h2>
+    <h2 class="title">
+        {{tariffParameterReq.isEditing? 'ویرایش پارامتر های تعرفه': 'افزودن پارامتر های تعرفه'}}
+    </h2>
     <hr>
     <form #form="ngForm" (ngSubmit)="verification()">
         <div class="content">
@@ -52,7 +54,7 @@
 
         <footer>
             <button type="submit" class="btn_1">
-                افزودن پارامتر های تعرفه
+                {{tariffParameterReq.isEditing? 'ویرایش پارامتر های تعرفه': 'افزودن پارامتر های تعرفه'}}
                 <i class="pi pi-list"></i>
             </button>
         </footer>

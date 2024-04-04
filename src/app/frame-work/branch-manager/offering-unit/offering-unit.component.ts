@@ -4,7 +4,6 @@ import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { OfferingUnitAddDgComponent } from './offering-unit-add-dg/offering-unit-add-dg.component';
-import { OfferingUnitEditDgComponent } from './offering-unit-edit-dg/offering-unit-edit-dg.component';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -26,20 +25,9 @@ export class OfferingUnitComponent extends FactoryONE {
   callAPI = async () => {
     this.closeTabService.offeringUnit = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
   }
-  openAddDialog = () => {
+  openDialog = (item?: any) => {
     this.ref = this.dialogService.open(OfferingUnitAddDgComponent, {
-      rtl: true,
-      width: '80%'
-    })
-    this.ref.onClose.subscribe(async res => {
-      if (res) {
-        this.callAPI();
-      }
-    });
-  }
-  openEditDialog = (row: any) => {
-    this.ref = this.dialogService.open(OfferingUnitEditDgComponent, {
-      data: row,
+      data: item,
       rtl: true,
       width: '80%'
     })

@@ -10,6 +10,8 @@ import { FragmentManagerService } from 'services/fragment-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { FragmentAddDgComponent } from './fragment-add-dg/fragment-add-dg.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class FragmentComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
 
+  ref: DynamicDialogRef;
   zoneDictionary: IDictionaryManager[] = [];
   isAddingNewRow: boolean = false;
   readonly fragmentMasterColumns: string = '_fragmentMaster';
@@ -33,12 +36,10 @@ export class FragmentComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public dialogService: DialogService
   ) {
     super();
-  }
-  testChangedValue() {
-    this.newRowLimit = 2;
   }
   insertToAuxZoneid = () => {
     this.closeTabService.saveDataForFragmentNOB.forEach(item => {
@@ -59,81 +60,30 @@ export class FragmentComponent extends FactoryONE {
     if (MathS.isNull(this.closeTabService.saveDataForFragmentNOB)) {
       this.callAPI();
     }
-    this.defaultAddStatus();
     this.doDictionaryConfigs();
   }
-  defaultAddStatus = () => this.newRowLimit = 1;
-  newRow(): IFragmentMaster {
-    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', changableZoneId: null, isNew: true };
-  }
-  onRowEditInit(dataSource: any) {
-    this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
-  }
-  onRowEditSave = async (dataSource: IFragmentMaster, rowIndex: number) => {
-    dataSource = dataSource['dataSource'];
-
-    this.newRowLimit = 1;
-    /* TODO: 
-    1- Make first item of dictionary if no value inserted on new row
-    2- eshteraks should convert to english numbers
-    */
-    dataSource.fromEshterak = Converter.persianToEngNumbers(dataSource.fromEshterak);
-    dataSource.toEshterak = Converter.persianToEngNumbers(dataSource.toEshterak);
-
-    if (dataSource.zoneId == null) {
-      dataSource.zoneId = this.zoneDictionary[0].id;
-    }
-
-    if (this.fragmentManagerService.verificationService.masterValidation(dataSource)) {
-      // convert a zone to id
-
-      if (dataSource.isNew) {
-        const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERADD, dataSource);
-        this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
+  openDialog = (item?: IFragmentMaster) => {
+    this.ref = this.dialogService.open(FragmentAddDgComponent, {
+      data: item,
+      rtl: true,
+      width: '80%'
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res) {
         this.callAPI();
       }
-      else {
-        this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
-        const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTEREDIT, dataSource);
-        this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
-        this.callAPI();
-      }
-    }
-    else {
-      this.shiftFromFirst(dataSource);
-    }
-  }
-  shiftFromFirst = (dataSource: IFragmentMaster) => {
-    console.log(this.table);
-
-    if (dataSource.isNew) {
-      this.table.value.shift();
-    }
-  }
-  onRowEditCancel(dataSource: IFragmentMaster) {
-    this.newRowLimit = 1;
-    for (let index = 0; index < this.closeTabService.saveDataForFragmentNOB.length; index++) {
-      if (dataSource.id === this.closeTabService.saveDataForFragmentNOB[index].id) {
-        this.closeTabService.saveDataForFragmentNOB[index] = this.onRowEditing;
-      }
-    }
-    this.shiftFromFirst(dataSource);
+    });
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
-    dataSource = dataSource['dataSource'];
-
     const textMessage = 'ناحیه: ' + dataSource.zoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
-    if (this.fragmentManagerService.verificationService.masterValidation(dataSource)) {
-      if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
-        const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERREMOVE, dataSource)
-        if (res) {
-          this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
-          this.callAPI();
-        }
+    if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
+      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERREMOVE, dataSource)
+      if (res) {
+        this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
+        this.callAPI();
       }
     }
   }
-
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
     if (this.fragmentManagerService.verificationService.masterValidation(dataSource)) {
       const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERVALIDATE, dataSource)
@@ -144,6 +94,8 @@ export class FragmentComponent extends FactoryONE {
     }
   }
   routeToAutomaticImport = (dataSource: any) => {
+    console.log(dataSource);
+
     dataSource.id = MathS.trimation(dataSource.id);
     if (!MathS.isNull(dataSource.id)) {
       if (dataSource.isValidated) {

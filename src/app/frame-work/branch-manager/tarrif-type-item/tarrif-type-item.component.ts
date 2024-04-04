@@ -6,7 +6,6 @@ import { MathS } from 'src/app/classes/math-s';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TarriftypeAddDgComponent } from './tarriftype-add-dg/tarriftype-add-dg.component';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { TarriftypeEditDgComponent } from './tarriftype-edit-dg/tarriftype-edit-dg.component';
 import { Converter } from 'src/app/classes/converter';
 
 @Component({
@@ -43,20 +42,9 @@ export class TarrifTypeItemComponent extends FactoryONE {
     //   },
     //   'dynamicId')
   }
-  openAddDialog = () => {
+  openDialog = (item?: any) => {
     this.ref = this.dialogService.open(TarriftypeAddDgComponent, {
-      rtl: true,
-      width: '80%'
-    })
-    this.ref.onClose.subscribe(async res => {
-      if (res) {
-        this.callAPI();
-      }
-    });
-  }
-  openEditDialog = (row: any) => {
-    this.ref = this.dialogService.open(TarriftypeEditDgComponent, {
-      data: row,
+      data: item,
       rtl: true,
       width: '80%'
     })

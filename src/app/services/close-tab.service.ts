@@ -68,7 +68,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITariff, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -290,6 +290,7 @@ export class CloseTabService {
   tariffParameter: ITarrifParameter[] = [];
   offering: IOffering[] = [];
   offeringUnit: IOfferingUnit[] = [];
+  tariff: ITariff[] = []
 
   // zones
   saveDataForCountry: ICountryManager[];
@@ -2129,6 +2130,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.tariffParameter, url: EN_Routes.tariffParameter, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offering, url: EN_Routes.offering, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offeringUnit, url: EN_Routes.offeringUnit, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.tariff, url: EN_Routes.tariff, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.waterSource, url: EN_Routes.waterSource, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.ownershipType, url: EN_Routes.ownershipType, defaultValue: [] },

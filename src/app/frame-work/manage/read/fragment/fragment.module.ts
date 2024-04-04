@@ -8,10 +8,11 @@ import { AutomaticImportComponent } from './automatic-import/automatic-import.co
 import { FragmentRoutingModule } from './fragment-routing.module';
 import { FragmentComponent } from './fragment.component';
 import { AutoImportEditDgComponent } from './automatic-import/auto-import-edit-dg/auto-import-edit-dg.component';
+import { FragmentAddDgComponent } from './fragment-add-dg/fragment-add-dg.component';
 
 
 @NgModule({
-  declarations: [FragmentComponent, AutomaticImportComponent, AutoImportDgComponent, AutoImportEditDgComponent],
+  declarations: [FragmentComponent, AutomaticImportComponent, AutoImportDgComponent, AutoImportEditDgComponent, FragmentAddDgComponent],
   imports: [
     SharedPrimeNgModule,
     SharedModule,

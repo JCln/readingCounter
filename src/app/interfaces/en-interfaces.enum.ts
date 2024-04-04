@@ -510,4 +510,11 @@ export enum ENInterfaces {
     offeringUnitAdd = 'V1/OfferingUnit/Add',
     offeringUnitEdit = 'V1/OfferingUnit/Edit',
     offeringUnitRemove = 'V1/OfferingUnit/Remove',
+
+    tariffExcelSample = 'V1/Tariff/ExcelSample',
+    tariffExcelToFill = 'V1/Tariff/ExcelToFill',
+    tariffAddExcel = 'V1/Tariff/AddExcel',
+    tariffAdd = 'V1/Tariff/Add',
+    tariffEdit = 'V1/Tariff/Edit',
+    tariffRemove = 'V1/Tariff/Remove',
 }

@@ -66,7 +66,7 @@ $border_15: 10px;
 
 // with icon
 
-:host ::ng-deep .input_icon {
+.input_icon {
   background: var(--secondary_3);
   color: var(--secondary_3);
   display: flex;
@@ -101,7 +101,18 @@ $border_15: 10px;
     font-family: var(--font-family);
   }
 
-  .p-dropdown {
+  ._value {
+    margin: 2px;
+    width: 100%;
+    max-width: 17rem;
+    flex: 1;
+    text-align: center;
+    background: var(--white);
+    border: 0;
+    border-radius: inherit;
+  }
+
+  :host .p-dropdown {
     max-width: 100%;
     height: var(--font_26);
     border-radius: 10px;

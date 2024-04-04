@@ -503,10 +503,10 @@ export class ColumnManager {
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
     ]
     tariffTypeItem: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'tariffTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
         { field: 'tariffCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, ltr: true },
-        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },        
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
     ]
     tariffParameter: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
@@ -519,7 +519,7 @@ export class ColumnManager {
     offeringAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'offeringUnitId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, ltr: true, icon: 'grid-column: auto/ span 2;' }
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' }
     ]
     offering: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
@@ -532,7 +532,7 @@ export class ColumnManager {
         // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
     ]
     offeringUnitAdd: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
     ]
     fragmentDetailsAddDialog: IObjectIteratation[] = [
@@ -541,6 +541,13 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
+    ]
+    fragmentMasterAdd: IObjectIteratation[] = [
+        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'routeTitle', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
+        // zoneId
     ]
     _fragmentMaster: IObjectIteratation[] = [
         { field: 'changableZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: false, isSelectOption: true },

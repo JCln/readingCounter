@@ -680,7 +680,8 @@ export enum ENEssentialsToSave {
   tarrifTypeItem = "tarrifTypeItem",
   tariffParameter = "tariffParameter",
   offering = "offering",
-  offeringUnit = "offeringUnit"
+  offeringUnit = "offeringUnit",
+  tariff = "tariff"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

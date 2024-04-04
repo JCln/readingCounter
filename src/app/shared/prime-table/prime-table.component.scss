@@ -10,6 +10,14 @@
   visibility: visible;
 }
 
+._green_500 {
+  color: var(--green_500);
+}
+
+._orange_600 {
+  color: var(--orange_600);
+}
+
 // 
 ._map_frame_show::after {
   position: absolute;

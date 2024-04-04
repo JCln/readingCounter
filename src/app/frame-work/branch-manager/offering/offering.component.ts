@@ -4,7 +4,6 @@ import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { OfferingAddDgComponent } from './offering-add-dg/offering-add-dg.component';
-import { OfferingEditDgComponent } from './offering-edit-dg/offering-edit-dg.component';
 import { MathS } from 'src/app/classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { Converter } from 'src/app/classes/converter';
@@ -38,20 +37,9 @@ export class OfferingComponent extends FactoryONE {
     this.offeringUnitIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
     Converter.convertIdsToTitles(this.closeTabService.offering, { offeringUnitIdDictionary: this.offeringUnitIdDictionary }, { changableOfferingUnitId: 'changableOfferingUnitId' })
   }
-  openAddDialog = () => {
+  openDialog = (item?: any) => {
     this.ref = this.dialogService.open(OfferingAddDgComponent, {
-      rtl: true,
-      width: '80%'
-    })
-    this.ref.onClose.subscribe(async res => {
-      if (res) {
-        this.callAPI();
-      }
-    });
-  }
-  openEditDialog = (row: any) => {
-    this.ref = this.dialogService.open(OfferingEditDgComponent, {
-      data: row,
+      data: item,
       rtl: true,
       width: '80%'
     })
@@ -67,8 +55,7 @@ export class OfferingComponent extends FactoryONE {
     }
   }
   removeRow = async (rowData: object) => {
-    const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['title']);
-    if (a) {
+    if (await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['title'])) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offeringRemove, rowData);
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       this.callAPI();

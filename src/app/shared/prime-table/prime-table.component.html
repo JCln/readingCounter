@@ -627,15 +627,41 @@
                     <div class="tooltip_text_right">مشاهده</div>
                 </i>
             </td>
-            <td class="__icon-columns"
-                *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'ipspecialrules' || _checkUpName == 'automaticImport' ||_checkUpName == 'dynamicReport'"
-                class="edit_button" (click)="openEditDialog(dataSource)">
+            <td class="__icon-columns" *ngIf="_outputFileName == '_fragmentMaster'">
+                <span class="ui-column-title">مدیریت مسیرها</span>
+                <i (click)="openMoshtarakinDialog(dataSource)" class="tooltip p_icons pi pi-folder-open">
+                    <div class="tooltip_text_right">مدیریت مسیرها</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == '_fragmentMaster'">
+                <span class="ui-column-title">صدور لیست خودکار</span>
+                <i (click)="showPictures(dataSource)" class="tooltip p_icons pi pi-directions-alt">
+                    <div class="tooltip_text">صدور لیست خودکار</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == '_fragmentMaster'">
+                <span class="ui-column-title">تایید نوبتی</span>
+                <i class="tooltip p_icons"
+                    [ngClass]="dataSource.isValidated ? 'pi pi-check-circle _green_500' : 'pi pi-info-circle _orange_600'"
+                    (click)="showInMapSingle(dataSource)">
+                    <div class="tooltip_text_right">{{dataSource.isValidated ? 'نوبتی تایید شده': 'تایید نوبتی'}}
+                    </div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="
+                _checkUpName == 'readingConfig' ||
+                _checkUpName == 'ipspecialrules' ||
+                _checkUpName == 'automaticImport' ||
+                _checkUpName == 'dynamicReport' ||
+                _checkUpName == 'branches'
+                " class="edit_button" (click)="openEditDialog(dataSource)">
                 <span class="ui-column-title">ویرایش</span>
                 <i class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_checkUpName== 'dynamicReport' || _checkUpName == 'ipFilter' || _checkUpName == 'branches'"
+            <td class="__icon-columns"
+                *ngIf="_checkUpName== 'dynamicReport' || _checkUpName == 'ipFilter' || _checkUpName == 'branches'"
                 (click)="showMoreDetails(dataSource)">
                 <span class="ui-column-title">حذف</span>
                 <i class="tooltip p_icons fa fa-trash-o">

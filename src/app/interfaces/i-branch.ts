@@ -78,13 +78,15 @@ export interface ITarrifTypeItem {
     tariffCalculationMode: number,
     title: string,
     description: string,
-    isActive: boolean
+    isActive: boolean,
+    isEditing?: boolean
 }
 export interface ITarrifParameter {
     id: number,
     tag: string
     title: string,
-    isActive: boolean
+    isActive: boolean,
+    isEditing?: boolean
 }
 export interface IOffering {
     id: number,
@@ -92,17 +94,32 @@ export interface IOffering {
     offeringUnitId: number,
     changableOfferingUnitId: any,
     description: string,
-    isActive: true,
+    isActive: boolean,
+    isEditing?: boolean
     offeringUnit: {
         id: number,
         title: string,
         symbol: string,
-        isActive: true
+        isActive: boolean
     }
 }
 export interface IOfferingUnit {
     id: number,
     title: string,
     symbol: string,
-    isActive: boolean
+    isActive: boolean,
+    isEditing?: boolean
+}
+export interface ITariff {
+    id: number,
+    formula: string,
+    zoneId: number,
+    usageId: number,
+    fromDate: string,
+    toDate: string,
+    fromRate: number,
+    toRate: number,
+    offeringId: number,
+    calulcationOrder: number,
+    tarrifTypeItemId: number
 }

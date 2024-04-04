@@ -4,6 +4,7 @@ import { IOffering, IOfferingUnit } from 'interfaces/i-branch';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { BranchesService } from 'services/branches.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-offering-add-dg',
@@ -19,7 +20,8 @@ export class OfferingAddDgComponent implements OnInit {
     offeringUnit: null,
     changableOfferingUnitId: null,
     offeringUnitId: 0,
-    isActive: true
+    isActive: true,
+    isEditing: false
   }
   constructor(
     public ref: DynamicDialogRef,
@@ -41,16 +43,27 @@ export class OfferingAddDgComponent implements OnInit {
       this.closeSuccess();
     }
   }
+  async onRowEdit(dataSource: IOffering) {
+    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offeringEdit, dataSource);
+    if (res) {
+      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
+      this.closeSuccess();
+    }
+  }
   verification = () => {
-    if (this.branchesService.verificationService.offering(this.offeringReq))
-      this.onRowAdd(this.offeringReq);
+    if (this.branchesService.verificationService.offering(this.offeringReq)) {
+      MathS.isNull(this.config.data) ? this.onRowAdd(this.offeringReq) : this.onRowEdit(this.offeringReq)
+    }
   }
   getDictionary = async () => {
     this.offeringUnitIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
-    console.log(this.offeringUnitIdDictionary);
-
   }
   ngOnInit(): void {
     this.getDictionary();
+    if (this.config.data) {
+      this.offeringReq = this.config.data;
+      // isEditing = true; should be last line
+      this.offeringReq.isEditing = true;
+    }
   }
 }
