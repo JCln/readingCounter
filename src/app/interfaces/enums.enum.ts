@@ -681,7 +681,8 @@ export enum ENEssentialsToSave {
   tariffParameter = "tariffParameter",
   offering = "offering",
   offeringUnit = "offeringUnit",
-  tariff = "tariff"
+  tariff = "tariff",
+  tariffExcelToFillInput = "tariffExcelToFillInput"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -690,6 +691,21 @@ export enum ENHubMessages {
     Reconnecting = 'درحال اتصال به سامانه «لحظه»',
     Connected = 'متصل به سامانه «لحظه»',
     toastDisconnected = 'ارتباط شما با سامانه «لحظه» قطع شده است'
+}
+export interface ITariffManager {
+    name: string;
+    icon: string;
+    background: string;
+    color?: string;
+    clickFunction?: EN_tariff;
+    description?: EN_messages
+}
+export enum EN_tariff {
+    getSampleExcel = 'getSampleExcel',
+    postExcelToFill = 'postExcelToFill',
+    AddExcel = 'AddExcel',
+    viewGrid = 'viewGrid',
+    calculation = 'calculation',
 }
 export enum ENSnackBarColors {
     warn = 'snack_warn',

@@ -1,4 +1,4 @@
-import { EN_messages } from "./enums.enum"
+import { EN_messages, EN_tariff } from "./enums.enum"
 
 export enum ENClientServerErrors {
     'cs400' = 400,

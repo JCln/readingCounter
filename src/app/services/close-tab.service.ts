@@ -68,7 +68,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITariff, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITariff, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -290,7 +290,21 @@ export class CloseTabService {
   tariffParameter: ITarrifParameter[] = [];
   offering: IOffering[] = [];
   offeringUnit: IOfferingUnit[] = [];
-  tariff: ITariff[] = []
+  tariff: ITariff[] = [];
+  tariffExcelToFillInput: ITariffExcelToFillInput = {
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    zoneIds: [],
+    usageIds: [],
+    offeringIds: [],
+    itemTypeIds: [],
+    rates: [
+      {
+        fromRate: null,
+        toRate: null
+      }
+    ]
+  }
 
   // zones
   saveDataForCountry: ICountryManager[];
@@ -2130,6 +2144,22 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.tariffParameter, url: EN_Routes.tariffParameter, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offering, url: EN_Routes.offering, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offeringUnit, url: EN_Routes.offeringUnit, defaultValue: [] },
+    {
+      id: 2, req: ENEssentialsToSave.tariffExcelToFillInput, url: EN_Routes.tariffExcelToFill, defaultReq: {
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        zoneIds: [],
+        usageIds: [],
+        offeringIds: [],
+        itemTypeIds: [],
+        rates: [
+          {
+            fromRate: null,
+            toRate: null
+          }
+        ]
+      }
+    },
     { id: 2, value: ENEssentialsToSave.tariff, url: EN_Routes.tariff, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.customerType, url: EN_Routes.customerType, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.waterSource, url: EN_Routes.waterSource, defaultValue: [] },

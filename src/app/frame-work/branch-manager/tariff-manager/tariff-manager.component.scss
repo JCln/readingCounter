@@ -1,0 +1,41 @@
+@import 'variable';
+@import 'button';
+
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    direction: rtl;
+    gap: var(--font_xxs);
+}
+
+.items {
+    position: relative;
+    border-radius: $border_15;
+    padding: var(--font_s);
+    cursor: pointer;
+    background: var(--white);
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+        outline: 2px solid var(--primary_3);
+    }
+}
+
+.icons {
+    font-size: var(--font_3);
+    white-space: nowrap;
+    color: var(--primary_3);
+}
+
+h3 {
+    margin-top: var(--font_s);
+    font-weight: 600;
+    color: var(--secondary_8);
+}
+
+img {
+    width: 4rem;
+    height: 4rem;
+}

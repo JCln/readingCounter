@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'tarrifParameter', loadChildren: () => import('./tariff-parameter/tariff-parameter.module').then(tarrifParameterManager => tarrifParameterManager.TariffParameterModule) },
   { path: 'offering', loadChildren: () => import('./offering/offering.module').then(offering => offering.OfferingModule) },
   { path: 'offeringUnit', loadChildren: () => import('./offering-unit/offering-unit.module').then(offeringUnit => offeringUnit.OfferingUnitModule) },
+  { path: 'tariff', loadChildren: () => import('./tariff-manager/tariff-manager.module').then(tariffManager => tariffManager.TariffManagerModule) },
 ];
 
 @NgModule({

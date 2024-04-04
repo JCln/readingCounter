@@ -123,3 +123,17 @@ export interface ITariff {
     calulcationOrder: number,
     tarrifTypeItemId: number
 }
+export interface ITariffExcelToFillInput {
+    fromDate: string,
+    toDate: string,
+    zoneIds: number[],
+    usageIds: number[],
+    offeringIds: number[],
+    itemTypeIds: number[],
+    rates: [
+        {
+            fromRate: number,
+            toRate: number
+        }
+    ]
+}

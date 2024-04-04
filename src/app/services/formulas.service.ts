@@ -3,8 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { UtilsService } from 'services/utils.service';
-
-import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { IAbBahaFormula, ITabsare2Formula } from '../interfaces/ireads-manager';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
