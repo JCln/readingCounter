@@ -29,6 +29,7 @@
 
   .mat-dialog-container {
     position: relative;
+    user-select: none;
     background: var(--secondary_1);
     color: var(--primary_7);
     direction: rtl;

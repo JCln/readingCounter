@@ -89,6 +89,7 @@ h2 {
 
 .mat-dialog-container {
   position: relative;
+  user-select: none;
   border: 1px solid var(--primary_2);
 }
 

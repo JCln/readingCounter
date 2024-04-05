@@ -12,6 +12,7 @@
 
 .mat-dialog-container {
   position: relative;
+  user-select: none;
   padding: var(--font_2);
 }
 

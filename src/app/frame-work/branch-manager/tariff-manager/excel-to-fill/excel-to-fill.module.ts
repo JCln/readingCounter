@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ExcelToFillRoutingModule } from './excel-to-fill-routing.module';
 import { ExcelToFillComponent } from './excel-to-fill.component';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 
 @NgModule({
   declarations: [ExcelToFillComponent],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     ExcelToFillRoutingModule
   ]
 })

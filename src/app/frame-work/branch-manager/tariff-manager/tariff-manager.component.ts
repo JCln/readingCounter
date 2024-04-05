@@ -45,20 +45,16 @@ export class TariffManagerComponent implements OnInit {
 
     }
     if (clickFunction == EN_tariff.postExcelToFill) {
-      console.log('route to fill');
       this.branchesService.utilsService.routeTo(EN_Routes.tariffExcelToFill);
-
-      // const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.tariffExcelToFill,);
-      // console.log(res);      
     }
     if (clickFunction == EN_tariff.AddExcel) {
       this.openAddExcelDialog();
     }
     if (clickFunction == EN_tariff.viewGrid) {
-      console.log(2);
+      console.log('view grid');
     }
     if (clickFunction == EN_tariff.calculation) {
-      console.log(2);
+      console.log('calculation');
     }
   }
 

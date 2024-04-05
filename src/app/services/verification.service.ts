@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBranchState, IClientAll, IOffering, IOfferingUnit, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IOffering, IOfferingUnit, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -1235,6 +1235,16 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
+
+    return true;
+  }
+  tarriffManager = (item: ITariffExcelToFillInput): boolean => {
+    // if (!this.nullValidation(item., EN_messages.insert_title))
+    //   return false;
+    // if (!this.nullValidation(item.tariffTypeId, EN_messages.insert_fromEshterak))
+    //   return false;
+    // if (!this.nullValidation(item.tariffCalculationMode, EN_messages.insert_ToEshterak))
+    //   return false;
 
     return true;
   }

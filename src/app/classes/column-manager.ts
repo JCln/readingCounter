@@ -502,6 +502,14 @@ export class ColumnManager {
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
     ]
+    tariffExcelToFill: IObjectIteratation[] = [
+        { field: 'zoneIds', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'fromDate', header: 'از', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'toDate', header: 'تا', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'usageIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'offeringIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'itemTypeIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
     tariffTypeItem: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'tariffTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
