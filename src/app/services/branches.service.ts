@@ -61,7 +61,6 @@ export class BranchesService {
         resolve('');
       });
     });
-
   }
 
 }

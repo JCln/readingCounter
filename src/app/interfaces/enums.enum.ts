@@ -10,7 +10,7 @@ export enum EN_messages {
     sameLength_notValid = 'مقادیر ابتدا و انتهایی را وارد نمایید',
 
     server_noDataFounded = 'اطلاعاتی جهت دانلود وجود ندارد',
-    lessThan_rate = 'از نرخ کمتر از تا نرخ است!',
+    lessThan_rate = 'از نرخ بیشتر از تا نرخ است!',
     percent_pictures = 'درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     percent_alalhesab = 'درصد علی الحساب نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     thereis_no_reader = 'قرائت کننده‌ای در این ناحیه انتخاب نشده است',
@@ -80,6 +80,8 @@ export enum EN_messages {
     insert_date = 'تاریخ را وارد نمایید',
     insert_fromRate = 'از نرخ را وارد نمایید',
     insert_toRate = 'تا نرخ را وارد نمایید',
+    wrong_fromRate = 'مقدار از نرخ اشتباه است',
+    wrong_toRate = 'مقدار تا نرخ اشتباه است',
     insert_readingPeriod = 'دوره قرائت را وارد نمایید',
     insert_readingPeriodKind = 'نوع دوره قرائت را وارد نمایید',
     insert_year = 'سالی وارد نمایید',

@@ -8,25 +8,26 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="zoneDictionary" name="zones"
-                                [(ngModel)]="closeTabService.tariffExcelToFillInput.zoneIds" optionLabel="header"
-                                optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده"
-                                [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                                [(ngModel)]="closeTabService.tariffExcelToFillInput.zoneIds" optionLabel="title"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                                placeholder="انتخاب مورد">
                             </p-multiSelect>
                         </div>
                     </div>
-                    
-                    
+
+
                 </div>
-                                
+
                 <div class="input_icon" *ngIf="col.field == 'usageIds'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
                         <div class="_key">کاربری</div>
                         <div class="_value">
-                            <p-dropdown name="usage" [options]="karbariDictionary"
-                                [(ngModel)]="closeTabService.tariffExcelToFillInput.usageIds" placeholder="انتخاب مورد"
-                                optionValue="id" optionLabel="title" filter="true">
-                            </p-dropdown>
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="usageId"
+                                [(ngModel)]="closeTabService.tariffExcelToFillInput.usageIds" optionLabel="title"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                                placeholder="انتخاب مورد">
+                            </p-multiSelect>
                         </div>
                     </div>
                 </div>
@@ -35,10 +36,11 @@
                     <div class="input_3">
                         <div class="_key">قطر</div>
                         <div class="_value">
-                            <p-dropdown name="zones" [options]="offeringDictionary"
-                                [(ngModel)]="closeTabService.tariffExcelToFillInput.offeringIds" placeholder="انتخاب مورد"
-                                optionValue="id" optionLabel="title" filter="true">
-                            </p-dropdown>
+                             <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="usageId"
+                                [(ngModel)]="closeTabService.tariffExcelToFillInput.usageIds" optionLabel="title"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                                placeholder="انتخاب مورد">
+                            </p-multiSelect>
                         </div>
                     </div>
                 </div> -->
@@ -47,10 +49,11 @@
                     <div class="input_3">
                         <div class="_key">نوع تعرفه</div>
                         <div class="_value">
-                            <p-dropdown name="zones" [options]="getTarrifTypeDictionary"
-                                [(ngModel)]="closeTabService.tariffExcelToFillInput.itemTypeIds" placeholder="انتخاب مورد"
-                                optionValue="id" optionLabel="title" filter="true">
-                            </p-dropdown>
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="getTarrifTypeDictionary"
+                                name="item-typeIds" [(ngModel)]="closeTabService.tariffExcelToFillInput.itemTypeIds"
+                                optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                            </p-multiSelect>
                         </div>
                     </div>
                 </div>
@@ -80,9 +83,16 @@
                 </div>
             </ng-container>
             <ng-template #rateInputWrapper>
-              <div>
-                
-              </div>
+                <div>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3" (click)="openRatesDialog()">
+                            <div class="_key">افزودن میزان</div>
+                            <div class="_value">                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ng-template>
         </div>
     </div>

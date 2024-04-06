@@ -1,0 +1,31 @@
+<section class="content">
+    <section class="main_title">
+        <h3>نرخ اضافه کنید</h3>
+        <button class="btn_2_o" (click)="addRate()">افزودن</button>
+    </section>
+    <hr>
+
+    <div class="rate_item" *ngFor="let item of rates; index as i">
+        <div class="head_item">
+            <p class="_time_title">مقدار نرخ</p>
+            <button class="btn_remote pi pi-times-circle tooltip" (click)="deleteRate(i)">
+                <div class="tooltip_text_right">حذف نرخ</div>
+            </button>
+        </div>
+        <div class="_time">
+            <div class="t_input_2">
+                <div class="t_key">از مقدار</div>
+                <input class="t_value" name="fromRate" maxlength="3" [(ngModel)]="item.fromRate">
+            </div>
+            <div class="t_input_2">
+                <div class="t_key">تا مقدار</div>
+                <input class="t_value" name="toRate" maxlength="3" [(ngModel)]="item.toRate">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <button class="btn_1" (click)="accepted()" *ngIf="rates.length > 0">
+            تایید
+        </button>
+    </footer>
+</section>

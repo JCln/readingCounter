@@ -4,7 +4,8 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { Converter } from 'src/app/classes/converter';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { RatesDgComponent } from './rates-dg/rates-dg.component';
 
 @Component({
   selector: 'app-excel-to-fill',
@@ -12,15 +13,17 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
   styleUrls: ['./excel-to-fill.component.scss']
 })
 export class ExcelToFillComponent extends FactoryONE {
-  private readonly columnName: string = 'tariffManager';
+  private readonly columnName: string = 'tariffExcelToFill';
   _selectCols: any[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   getTarrifTypeDictionary: any[] = [];
+  ref: DynamicDialogRef;
 
   constructor(
     public closeTabService: CloseTabService,
-    public branchesService: BranchesService
+    public branchesService: BranchesService,
+    private dialogService: DialogService
   ) {
     super();
   }
@@ -33,7 +36,7 @@ export class ExcelToFillComponent extends FactoryONE {
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.karbariDictionary, 'karbariCode');
-    Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifTypeDictionary, 'tariffTypeId');    
+    Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifTypeDictionary, 'tariffTypeId');
   }
   classWrapper = async () => {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.columnName);
@@ -44,9 +47,23 @@ export class ExcelToFillComponent extends FactoryONE {
   verification = () => {
     console.log(this.closeTabService.tariffExcelToFillInput);
     if (this.branchesService.verificationService.tarriffManager(this.closeTabService.tariffExcelToFillInput)) {
-      const res = this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.tariffExcelToFill, this.closeTabService.tariffExcelToFillInput);
-      console.log(res);
+      // const res = this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.tariffExcelToFill, this.closeTabService.tariffExcelToFillInput);
+      // console.log(res);
     }
+  }
+  openRatesDialog = (): Promise<any> => {
+    return new Promise((resolve) => {
+      this.ref = this.dialogService.open(RatesDgComponent, {
+        data: this.closeTabService.tariffExcelToFillInput.rates ? this.closeTabService.tariffExcelToFillInput.rates : '',
+        rtl: true,
+        width: '21rem'
+      })
+      this.ref.onClose.subscribe(async res => {
+        if (res) {
+          this.closeTabService.tariffExcelToFillInput.rates = res;
+        }
+      });
+    });
   }
 
 

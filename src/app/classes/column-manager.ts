@@ -509,6 +509,7 @@ export class ColumnManager {
         { field: 'usageIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'offeringIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'itemTypeIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'rates', header: 'rates', isSelected: true, isSelectedOrigin: true },
     ]
     tariffTypeItem: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
