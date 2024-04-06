@@ -17,7 +17,7 @@ export class ListUnAuthorizedComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     this.insertToTimes();
   }
   insertToTimes = () => {
@@ -28,6 +28,8 @@ export class ListUnAuthorizedComponent extends FactoryONE {
     this.closeTabService.requestLogUnAuthorized = await this.manageServerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogUnAuthorized, this.closeTabService.requestLogUnAuthorizedReq);
   }
   verification = async () => {
+    this.closeTabService.requestLogUnAuthorizedReq.fromTime = this.closeTabService.requestLogUnAuthorizedReq.fromTimeH + ':' + this.closeTabService.requestLogUnAuthorizedReq.fromTimeM;
+    this.closeTabService.requestLogUnAuthorizedReq.toTime = this.closeTabService.requestLogUnAuthorizedReq.toTimeH + ':' + this.closeTabService.requestLogUnAuthorizedReq.toTimeM;
     const temp = this.manageServerService.verificationRequestLogInput(this.closeTabService.requestLogUnAuthorizedReq);
     if (temp)
       this.connectToServer();

@@ -28,6 +28,8 @@ export class ListAnonymousComponent extends FactoryONE {
     this.closeTabService.saveDataForRequestLogAnonymous = await this.manageServerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogAnonymous, this.closeTabService.saveDataForRequestLogAnonymousReq);
   }
   verification = async () => {
+    this.closeTabService.saveDataForRequestLogAnonymousReq.fromTime = this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeH + ':' + this.closeTabService.saveDataForRequestLogAnonymousReq.fromTimeM;
+    this.closeTabService.saveDataForRequestLogAnonymousReq.toTime = this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeH + ':' + this.closeTabService.saveDataForRequestLogAnonymousReq.toTimeM;
     const temp = this.manageServerService.verificationRequestLogInput(this.closeTabService.saveDataForRequestLogAnonymousReq);
     if (temp)
       this.connectToServer();
