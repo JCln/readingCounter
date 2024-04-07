@@ -66,3 +66,7 @@ footer {
 .input_2 ._value:focus {
     outline: 2px solid var(--primary_3);
 }
+
+._selectable {
+    cursor: pointer;
+}

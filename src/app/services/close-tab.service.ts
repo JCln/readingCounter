@@ -298,12 +298,7 @@ export class CloseTabService {
     usageIds: [],
     offeringIds: [],
     itemTypeIds: [],
-    rates: [
-      {
-        fromRate: null,
-        toRate: null
-      }
-    ]
+    rates: []
   }
 
   // zones

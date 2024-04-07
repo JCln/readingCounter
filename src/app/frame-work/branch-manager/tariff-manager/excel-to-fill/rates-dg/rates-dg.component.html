@@ -1,13 +1,13 @@
 <section class="content">
     <section class="main_title">
-        <h3>نرخ اضافه کنید</h3>
-        <button class="btn_2_o" (click)="addRate()">افزودن</button>
+        <h3>تعیین نرخ</h3>
+        <button class="btn_2_o" (click)="addRate()">افزودن نرخ</button>
     </section>
     <hr>
 
     <div class="rate_item" *ngFor="let item of rates; index as i">
         <div class="head_item">
-            <p class="_time_title">مقدار نرخ</p>
+            <p class="_time_title">نرخ {{i+1}}</p>
             <button class="btn_remote pi pi-times-circle tooltip" (click)="deleteRate(i)">
                 <div class="tooltip_text_right">حذف نرخ</div>
             </button>
@@ -27,5 +27,9 @@
         <button class="btn_1" (click)="accepted()" *ngIf="rates.length > 0">
             تایید
         </button>
+        <div class="empty_data" *ngIf="!rates || rates.length === 0">
+            نرخی تعیین نشده است
+            <i class="fa fa-folder-blank"></i>
+        </div>
     </footer>
 </section>

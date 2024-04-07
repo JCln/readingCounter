@@ -507,9 +507,9 @@ export class ColumnManager {
         { field: 'fromDate', header: 'از', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'toDate', header: 'تا', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'usageIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'offeringIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'itemTypeIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'rates', header: 'rates', isSelected: true, isSelectedOrigin: true },
+        { field: 'offeringIds', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'itemTypeIds', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'rates', header: 'نرخ', isSelected: true, isSelectedOrigin: true },
     ]
     tariffTypeItem: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },

@@ -130,10 +130,9 @@ export interface ITariffExcelToFillInput {
     usageIds: number[],
     offeringIds: number[],
     itemTypeIds: number[],
-    rates: [
-        {
-            fromRate: number,
-            toRate: number
-        }
-    ]
+    rates: []
+    // {
+    //     fromRate: number,
+    //     toRate: number
+    // }
 }

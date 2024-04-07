@@ -5,7 +5,7 @@
                 <div class="input_icon" *ngIf="col.field == 'zoneIds'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
-                        <div class="_key">ناحیه</div>
+                        <div class="_key">{{col.header}}</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="zoneDictionary" name="zones"
                                 [(ngModel)]="closeTabService.tariffExcelToFillInput.zoneIds" optionLabel="title"
@@ -21,7 +21,7 @@
                 <div class="input_icon" *ngIf="col.field == 'usageIds'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
-                        <div class="_key">کاربری</div>
+                        <div class="_key">{{col.header}}</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="usageId"
                                 [(ngModel)]="closeTabService.tariffExcelToFillInput.usageIds" optionLabel="title"
@@ -31,23 +31,23 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="input_icon" *ngIf="col.field == 'offeringIds'">
+                <div class="input_icon" *ngIf="col.field == 'offeringIds'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
-                        <div class="_key">قطر</div>
+                        <div class="_key">{{col.header}}</div>
                         <div class="_value">
-                             <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="usageId"
-                                [(ngModel)]="closeTabService.tariffExcelToFillInput.usageIds" optionLabel="title"
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="offeringDictionary" name="usageId"
+                                [(ngModel)]="closeTabService.tariffExcelToFillInput.offeringIds" optionLabel="title"
                                 optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
                                 placeholder="انتخاب مورد">
                             </p-multiSelect>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="input_icon" *ngIf="col.field == 'itemTypeIds'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
-                        <div class="_key">نوع تعرفه</div>
+                        <div class="_key">{{col.header}}</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="getTarrifTypeDictionary"
                                 name="item-typeIds" [(ngModel)]="closeTabService.tariffExcelToFillInput.itemTypeIds"
@@ -60,7 +60,7 @@
                 <div class="input_icon" *ngIf="col.field == 'fromDate'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
-                        <div class="_key">از تاریخ</div>
+                        <div class="_key">{{col.header}}</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
                                 (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.tariffExcelToFill, $event)"
@@ -72,7 +72,7 @@
                 <div class="input_icon" *ngIf="col.field == 'toDate'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
-                        <div class="_key">از تاریخ</div>
+                        <div class="_key">{{col.header}}</div>
                         <div class="_value">
                             <app-date-jalali name="ToDate"
                                 (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.tariffExcelToFill, $event)"
@@ -84,11 +84,15 @@
             </ng-container>
             <ng-template #rateInputWrapper>
                 <div>
-                    <div class="input_icon">
+                    <div class="input_icon _selectable">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3" (click)="openRatesDialog()">
-                            <div class="_key">افزودن میزان</div>
-                            <div class="_value">                                
+                            <div class="_key">افزودن نرخ</div>
+                            <div class="_value">
+                                {{
+                                closeTabService.tariffExcelToFillInput.rates.length > 0 ?
+                                closeTabService.tariffExcelToFillInput.rates.length + ' مورد انتخاب شده' : 'انتخاب کنید'
+                                }}
                             </div>
                         </div>
                     </div>
