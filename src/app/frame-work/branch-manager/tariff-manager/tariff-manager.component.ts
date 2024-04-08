@@ -40,9 +40,8 @@ export class TariffManagerComponent implements OnInit {
   }
   manageFuncs = async (clickFunction: EN_tariff, description: string) => {
     if (clickFunction == EN_tariff.getSampleExcel) {
-      const res = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffExcelSample);
-      console.log(res);
-
+      const res = await this.branchesService.ajaxReqWrapperService.getBlobAsJsonObserve(ENInterfaces.tariffExcelSample);
+      this.branchesService.outputManagerService.downloadFileWithContentDisposition(res);
     }
     if (clickFunction == EN_tariff.postExcelToFill) {
       this.branchesService.utilsService.routeTo(EN_Routes.tariffExcelToFill);

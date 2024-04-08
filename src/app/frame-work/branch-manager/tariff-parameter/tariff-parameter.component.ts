@@ -29,7 +29,7 @@ export class TariffParameterComponent extends FactoryONE {
     this.ref = this.dialogService.open(TariffParameterAddDgComponent, {
       data: item,
       rtl: true,
-      width: '80%'
+      contentStyle: { minWidth: '21rem' }
     })
     this.ref.onClose.subscribe(async res => {
       if (res) {

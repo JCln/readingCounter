@@ -238,14 +238,5 @@ export class OutputManagerService {
       this.makePDF(datas, fileName) :
       this.makeEXCEL(datas, outputConfig, fileName)
   }
-  saveAsExcelABuffer = (buffer: any, name: string) => {
-    console.log(buffer);
-    import("file-saver").then(FileSaver => {
-      const data: Blob = new Blob([buffer], {
-        type: this._exportType
-      });
-      FileSaver.saveAs(data, name);
-    })
-  }
-
+  
 }

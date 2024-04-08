@@ -3,18 +3,21 @@
 
 section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, 12rem);
+    grid-template-rows: 12rem 12rem;
     text-align: center;
     direction: rtl;
     gap: var(--font_xxs);
 }
 
 .items {
+    display: grid;
     position: relative;
     border-radius: $border_15;
     padding: var(--font_s);
     cursor: pointer;
     background: var(--white);
+    box-shadow: 0px 0px 11px -5px var(--thirdy_3);
 
     &:hover,
     &:focus-visible,
@@ -24,7 +27,7 @@ section {
 }
 
 .icons {
-    font-size: var(--font_3);
+    font-size: var(--font_55);
     white-space: nowrap;
     color: var(--primary_3);
 }

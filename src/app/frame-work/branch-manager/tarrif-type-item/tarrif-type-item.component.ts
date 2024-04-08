@@ -25,12 +25,19 @@ export class TarrifTypeItemComponent extends FactoryONE {
   ) {
     super();
   }
+  insertToAux = () => {
+    this.closeTabService.tarrifTypeItem.forEach(item => {
+      item.dynamicTariffCalculationMode = item.tariffCalculationMode;
+      item.dynamicTariffTypeId = item.tariffTypeId;
+    })
+  }
   callAPI = async () => {
     this.closeTabService.tarrifTypeItem = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tarriffTypeItemManagerGet);
     this.getTarrifCalculationModeDictionary = this.branchesService.utilsService.getTarrifCalculationModeDictionary();
     this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
-    Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifCalculationModeDictionary, 'tariffCalculationMode');
-    Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifTypeDictionary, 'tariffTypeId');
+    this.insertToAux();
+    Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifCalculationModeDictionary, 'dynamicTariffCalculationMode');
+    Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifTypeDictionary, 'dynamicTariffTypeId');
     // Converter.convertIdsToTitlesByIdname(this.closeTabService.tarrifTypeItem,
     //   {
     //     getTarrifCalculationModeDictionary: 'getTarrifCalculationModeDictionary',
@@ -46,7 +53,7 @@ export class TarrifTypeItemComponent extends FactoryONE {
     this.ref = this.dialogService.open(TarriftypeAddDgComponent, {
       data: item,
       rtl: true,
-      width: '80%'
+      contentStyle: { minWidth: '21rem' }
     })
     this.ref.onClose.subscribe(async res => {
       if (res) {

@@ -8,11 +8,12 @@ import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { VerificationService } from './verification.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
+import { OutputManagerService } from './output-manager.service';
 
 export const tarrifItems: ITariffManager[] = [
-  { name: 'دریافت نمونه فایل', clickFunction: EN_tariff.getSampleExcel, icon: 'pi pi-cloud-download', background: '#F68038', color: '', description: EN_messages.confirmResetIIS },
-  { name: 'Excel', clickFunction: EN_tariff.postExcelToFill, icon: 'fa fa-desktop', background: '#969696', color: '', description: EN_messages.confirmResetApp },
-  { name: 'افزودن فایل', clickFunction: EN_tariff.AddExcel, icon: 'pi pi-file-excel', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
+  { name: 'دریافت نمونه فایل Excel', clickFunction: EN_tariff.getSampleExcel, icon: 'pi pi-cloud-download', background: '#F68038', color: '', description: EN_messages.confirmResetIIS },
+  { name: 'دریافت فایل Excel تعرفه', clickFunction: EN_tariff.postExcelToFill, icon: 'fa fa-desktop', background: '#969696', color: '', description: EN_messages.confirmResetApp },
+  { name: 'افزودن فایل تکی Excel', clickFunction: EN_tariff.AddExcel, icon: 'pi pi-file-excel', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
   { name: 'نمایش جدول', clickFunction: EN_tariff.viewGrid, icon: 'pi pi-file-excel', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
   { name: 'محاسبات', clickFunction: EN_tariff.calculation, icon: 'pi pi-calculator', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
 ]
@@ -30,7 +31,8 @@ export class BranchesService {
     public pageSignsService: PageSignsService,
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public verificationService: VerificationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    public outputManagerService: OutputManagerService
   ) { }
 
   getManageServerItems = () => {

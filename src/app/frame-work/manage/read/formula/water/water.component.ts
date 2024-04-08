@@ -27,8 +27,7 @@ export class WaterComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public formulasService: FormulasService,
-    private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -149,6 +148,6 @@ export class WaterComponent extends FactoryONE {
   }
   onRowEditCancel() { }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.ajaxReqWrapperService.getBlob(ENInterfaces.FormulaWaterExcelSample), 'waterSample');
+    this.formulasService.outputManagerService.downloadFileWithContentDisposition(await this.formulasService.ajaxReqWrapperService.getBlobAsJsonObserve(ENInterfaces.FormulaWaterExcelSample));
   }
 }

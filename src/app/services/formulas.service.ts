@@ -6,6 +6,7 @@ import { UtilsService } from 'services/utils.service';
 import { MathS } from '../classes/math-s';
 import { IAbBahaFormula, ITabsare2Formula } from '../interfaces/ireads-manager';
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
+import { OutputManagerService } from './output-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class FormulasService {
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    public outputManagerService: OutputManagerService
   ) { }
 
   /* API CALLS */

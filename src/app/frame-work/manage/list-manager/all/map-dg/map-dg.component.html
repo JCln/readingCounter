@@ -1,8 +1,11 @@
 <h3 *ngIf="config.data.newMarker">با کلیک برروی نقشه یک نقطه انتخاب خواهد شد</h3>
-<h5 *ngIf="config.data.newMarker">برای ثبت نقطه برروی انتخاب کلیک نمایید. با کلیک مجدد برروی نقشه، نقطه برداشته شده و مکانی ثبت نخواهد شد</h5>
+<h5 *ngIf="config.data.newMarker">برای ثبت نقطه برروی انتخاب کلیک نمایید. با کلیک مجدد برروی نقشه، نقطه برداشته شده و
+    مکانی ثبت نخواهد شد</h5>
 <div class="map-frame">
     <div id="map3"></div>
 </div>
-<button *ngIf="config.data.newMarker" class="btn_1" (click)="closeWithMarkerValue()">
-    انتخاب
-</button>
+<footer>
+    <button *ngIf="config.data.newMarker" class="btn_1" (click)="closeWithMarkerValue()">
+        انتخاب
+    </button>
+</footer>

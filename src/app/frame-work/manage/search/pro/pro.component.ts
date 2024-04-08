@@ -41,7 +41,6 @@ export class ProComponent extends AllListsFactory {
     public closeTabService: CloseTabService,
     public searchService: SearchService,
     private outputManagerService: OutputManagerService,
-    private dateJalaliService: DateJalaliService,
     public dialogService: DialogService,
     public listManagerService: ListManagerService
   ) {
@@ -123,7 +122,7 @@ export class ProComponent extends AllListsFactory {
   async connectToServer() {
     if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.closeTabService._isOrderByDate)) {
       if (document.activeElement.id == 'excel_download') {
-        this.outputManagerService.saveAsExcelABuffer(await this.searchService.ajaxReqWrapperService.postBlob(ENInterfaces.ListGetProExcel, this.closeTabService.saveDataForSearchProReq), this.dateJalaliService.getCurrentDate());
+        this.outputManagerService.downloadFileWithContentDisposition(await this.searchService.ajaxReqWrapperService.postBlobObserve(ENInterfaces.ListGetProExcel, this.closeTabService.saveDataForSearchProReq));
       }
       else {
         this.callApi();

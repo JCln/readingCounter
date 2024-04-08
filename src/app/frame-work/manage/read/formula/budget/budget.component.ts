@@ -27,8 +27,7 @@ export class BudgetComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public formulasService: FormulasService,
-    private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -131,6 +130,6 @@ export class BudgetComponent extends FactoryONE {
   }
   onRowEditCancel() { }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.ajaxReqWrapperService.getBlob(ENInterfaces.FormulaBudgetExcelSample), 'budgetSample');
+    this.formulasService.outputManagerService.downloadFileWithContentDisposition(await this.formulasService.ajaxReqWrapperService.getBlobAsJsonObserve(ENInterfaces.FormulaBudgetExcelSample));
   }
 }

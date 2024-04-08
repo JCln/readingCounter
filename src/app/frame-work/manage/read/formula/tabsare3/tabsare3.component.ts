@@ -25,8 +25,7 @@ export class Tabsare3Component extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public formulasService: FormulasService,
-    private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    private dialog: MatDialog    
   ) {
     super();
   }
@@ -132,6 +131,6 @@ export class Tabsare3Component extends FactoryONE {
   }
   onRowEditCancel() { }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.ajaxReqWrapperService.getBlob(ENInterfaces.FormulaTabsare3ExcelSample), 'tabsare3Sample');
+    this.formulasService.outputManagerService.downloadFileWithContentDisposition(await this.formulasService.ajaxReqWrapperService.getBlobAsJsonObserve(ENInterfaces.FormulaTabsare3ExcelSample));
   }
 }

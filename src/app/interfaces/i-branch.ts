@@ -76,6 +76,8 @@ export interface ITarrifTypeItem {
     id: number,
     tariffTypeId: number,
     tariffCalculationMode: number,
+    dynamicTariffCalculationMode: number,
+    dynamicTariffTypeId: number,
     title: string,
     description: string,
     isActive: boolean,

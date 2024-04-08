@@ -22,17 +22,17 @@ export class MainService {
   GETID = (ID: string, URL: string) => {
     return this.http.get<any>(this.environment.API_URL + '/' + URL + '/' + ID);
   }
+  GETBLOB = (URL: string) => {
+    return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' });
+  }
+  GETBLOBAsJsonObserve = (URL: string) => {
+    return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' as 'json', observe: 'response' });
+  }
   POSTBLOB = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { responseType: 'blob' as 'json' });
   }
   POSTBLOBObserve = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { responseType: 'blob' as 'json', observe: 'response' });
-  }
-  GETBLOB = (URL: string) => {
-    return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' });
-  }
-  GETBLOBAsJson = (URL: string) => {
-    return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' as 'json', observe: 'response' });
   }
   POSTById = (URL: string, ID: number) => {
     return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');

@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { Converter } from 'src/app/classes/converter';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { RatesDgComponent } from './rates-dg/rates-dg.component';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -28,8 +27,7 @@ export class ExcelToFillComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public branchesService: BranchesService,
-    private dialogService: DialogService,
-    private outputManagerService: OutputManagerService
+    private dialogService: DialogService
   ) {
     super();
   }
@@ -46,22 +44,20 @@ export class ExcelToFillComponent extends FactoryONE {
   }
   async connectToServer() {
   }
-  verification = () => {
+  verification = async () => {
     if (this.branchesService.verificationService.tarriffManager(this.closeTabService.tariffExcelToFillInput)) {
-      const res = this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.tariffExcelToFill, this.closeTabService.tariffExcelToFillInput);
-      this.outputManagerService.downloadFileWithContentDisposition(res);
+      const res = await this.branchesService.ajaxReqWrapperService.postBlobObserve(ENInterfaces.tariffExcelToFill, this.closeTabService.tariffExcelToFillInput);
+      this.branchesService.outputManagerService.downloadFileWithContentDisposition(res);
     }
   }
-  async emptyBeforeClose(res: any) {
-    console.log(res);
+  async emptyBeforeCloseRatesDialog() {
+    let res: any = this.closeTabService.tariffExcelToFillInput.rates;
 
     let haveValueNumbers: number = 0;
     for (let index = 0; index < res.length; index++) {
       if (!MathS.isNull(res[index].fromRate) || !MathS.isNull(res[index].toRate))
         haveValueNumbers++;
     }
-    console.log(haveValueNumbers);
-
     // if there is a value in any item of rates than warn user, else empty the array
     if (haveValueNumbers > 0) {
       const config = {
@@ -74,25 +70,32 @@ export class ExcelToFillComponent extends FactoryONE {
         icon: 'pi pi-minus-circle'
       }
       const confirmed = await this.closeTabService.utilsService.primeConfirmDialog(config);
+
       if (confirmed) {
-        res = [];
-        // this.closeDialogWihoutData();
+        this.closeTabService.tariffExcelToFillInput.rates = [];
+      }
+      else {
+        // reOpen dialog to complete by user
+        this.openRatesDialog();
       }
     }
     else {
-      res = [];
-      // this.closeDialogWihoutData();
+      this.closeTabService.tariffExcelToFillInput.rates = [];
     }
   }
   openRatesDialog = () => {
     this.ref = this.dialogService.open(RatesDgComponent, {
       data: this.closeTabService.tariffExcelToFillInput.rates ? this.closeTabService.tariffExcelToFillInput.rates : null,
       rtl: true,
-      width: '21rem'
+      contentStyle: { minWidth: '21rem' }
     })
     this.ref.onClose.subscribe(async res => {
-      // this.emptyBeforeClose(res);
-      this.closeTabService.tariffExcelToFillInput.rates = res;
+      if (res) {
+        this.closeTabService.tariffExcelToFillInput.rates = res;
+      }
+      else {
+        this.emptyBeforeCloseRatesDialog();
+      }
     });
   }
 

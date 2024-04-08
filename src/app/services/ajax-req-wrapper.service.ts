@@ -57,7 +57,7 @@ export class AjaxReqWrapperService {
   // TODO: Get header response which contains content-disposition
   getBlobByIdAsJson = (method: ENInterfaces, id: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETBlobByIdAsJson(method, id).subscribe(res => {
+      this.interfaceManagerService.GETBlobByIdAsJsonObserve(method, id).subscribe(res => {
         resolve(res)
       });
     })
@@ -114,5 +114,12 @@ export class AjaxReqWrapperService {
         resolve(res)
       })
     })
+  }
+  getBlobAsJsonObserve = (URL: ENInterfaces) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETBlOBASJSONObserve(URL).subscribe(res => {
+        resolve(res)
+      });
+    });
   }
 }

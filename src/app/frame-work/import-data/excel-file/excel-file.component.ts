@@ -112,7 +112,7 @@ export class ExcelFileComponent extends FactoryONE {
     }
   }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.importDynamicService.ajaxReqWrapperService.getBlob(ENInterfaces.getImportDataFileExcelSample), 'importDataFSample');
+    this.outputManagerService.downloadFileWithContentDisposition(await this.importDynamicService.ajaxReqWrapperService.getBlobAsJsonObserve(ENInterfaces.getImportDataFileExcelSample));
   }
 
 }

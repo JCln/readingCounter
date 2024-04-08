@@ -22,8 +22,11 @@ export class InterfaceManagerService {
   GETBlobById = (URL: string, fileRepositoryId: string): Observable<any> => {
     return this.mainService.GETBLOB(URL + '/' + fileRepositoryId);
   }
-  GETBlobByIdAsJson = (URL: string, fileRepositoryId: string): Observable<any> => {
-    return this.mainService.GETBLOBAsJson(URL + '/' + fileRepositoryId);
+  GETBlobByIdAsJsonObserve = (URL: string, fileRepositoryId: string): Observable<any> => {
+    return this.mainService.GETBLOBAsJsonObserve(URL + '/' + fileRepositoryId);
+  }
+  GETBlOBASJSONObserve = (URL: string): Observable<any> => {
+    return this.mainService.GETBLOBAsJsonObserve(URL);
   }
   GETBLOB = (URL: string): Observable<any> => {
     return this.mainService.GETBLOB(URL);

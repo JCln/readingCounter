@@ -62,6 +62,8 @@ export class GlobalErrorHandlerService implements ErrorHandler {
       })
     })
   }
+
+  // Multi time operation problem should fix
   handleError(error: any) {
     if (this.chunkFailedMessage.test(error.message)) {
       this.$getChunkFailedStatus().subscribe(async res => {

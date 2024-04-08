@@ -104,7 +104,7 @@
 
 </p-table>
 
-<section *ngIf="!closeTabService.trackingOffloadedMaster">
+<section *ngIf="!closeTabService.trackingOffloadedMaster || closeTabService.trackingOffloadedMaster.length === 0">
     <tr class="empty_data">
         موردی پیدا نشد
         <i class="fa fa-folder-blank"></i>

@@ -37,45 +37,43 @@ export class RatesDgComponent implements OnInit {
   closeData(item: any) {
     this.ref.close(item);
   }
-  // async emptyBeforeClose() {
-  //   console.log(1);
-    
-  //   let haveValueNumbers: number = 0;
-  //   for (let index = 0; index < this.rates.length; index++) {
-  //     if (!MathS.isNull(this.rates[index].fromRate) || !MathS.isNull(this.rates[index].toRate))
-  //       haveValueNumbers++;
-  //   }
-  //   console.log(haveValueNumbers);
-    
-  //   // if there is a value in any item of rates than warn user, else empty the array
-  //   if (haveValueNumbers > 0) {
-  //     const config = {
-  //       messageTitle: `تعداد ${haveValueNumbers} نرخ تعیین شده است`,
-  //       text: EN_messages.confirm_removeAll,
-  //       width: '21rem',
-  //       isInput: false,
-  //       isDelete: true,
-  //       isImportant: true,
-  //       icon: 'pi pi-minus-circle'
-  //     }
-  //     const confirmed = await this.closeTabService.utilsService.primeConfirmDialog(config);
-  //     if (confirmed) {
-  //       this.rates = [];
-  //       this.closeDialogWihoutData();
-  //     }
-  //   }
-  //   else {
-  //     this.rates = [];
-  //     this.closeDialogWihoutData();
-  //   }
-  // }
+  async emptyBeforeClose() {
+    console.log(1);
+
+    let haveValueNumbers: number = 0;
+    for (let index = 0; index < this.rates.length; index++) {
+      if (!MathS.isNull(this.rates[index].fromRate) || !MathS.isNull(this.rates[index].toRate))
+        haveValueNumbers++;
+    }
+    console.log(haveValueNumbers);
+
+    // if there is a value in any item of rates than warn user, else empty the array
+    if (haveValueNumbers > 0) {
+      const config = {
+        messageTitle: `تعداد ${haveValueNumbers} نرخ تعیین شده است`,
+        text: EN_messages.confirm_removeAll,
+        width: '21rem',
+        isInput: false,
+        isDelete: true,
+        isImportant: true,
+        icon: 'pi pi-minus-circle'
+      }
+      const confirmed = await this.closeTabService.utilsService.primeConfirmDialog(config);
+      if (confirmed) {
+        this.rates = [];
+        this.closeDialogWihoutData();
+      }
+    }
+    else {
+      this.rates = [];
+      this.closeDialogWihoutData();
+    }
+  }
   closeDialogWihoutData() {
     this.ref.close();
   }
   close() {
-    console.log(1);
-    
-    // this.emptyBeforeClose();
+    this.emptyBeforeClose();
   }
   addRate() {
     this.rates.unshift({ fromRate: null, toRate: null });

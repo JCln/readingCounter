@@ -504,14 +504,20 @@ export class ColumnManager {
     ]
     tariffExcelToFill: IObjectIteratation[] = [
         { field: 'zoneIds', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'usageIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'fromDate', header: 'از', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'toDate', header: 'تا', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'usageIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'offeringIds', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'itemTypeIds', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'rates', header: 'نرخ', isSelected: true, isSelectedOrigin: true },
     ]
     tariffTypeItem: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'dynamicTariffTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
+        { field: 'dynamicTariffCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, ltr: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
+    ]
+    tariffTypeItemAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'tariffTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
         { field: 'tariffCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, ltr: true },
@@ -519,11 +525,11 @@ export class ColumnManager {
     ]
     tariffParameter: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'tag', header: 'tag', isSelected: true, isSelectedOrigin: true },
+        { field: 'tag', header: 'تگ', isSelected: true, isSelectedOrigin: true },
     ]
     tariffParameterAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'tag', header: 'tag', isSelected: true, isSelectedOrigin: true },
+        { field: 'tag', header: 'تگ', isSelected: true, isSelectedOrigin: true },
     ]
     offeringAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

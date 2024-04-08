@@ -29,7 +29,7 @@ export class OfferingUnitComponent extends FactoryONE {
     this.ref = this.dialogService.open(OfferingUnitAddDgComponent, {
       data: item,
       rtl: true,
-      width: '80%'
+      contentStyle: { minWidth: '21rem' }
     })
     this.ref.onClose.subscribe(async res => {
       if (res) {

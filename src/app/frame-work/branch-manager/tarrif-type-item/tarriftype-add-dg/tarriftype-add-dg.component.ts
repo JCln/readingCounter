@@ -16,6 +16,8 @@ export class TarriftypeAddDgComponent implements OnInit {
     id: 0,
     tariffTypeId: 0,
     tariffCalculationMode: 0,
+    dynamicTariffCalculationMode: 0,
+    dynamicTariffTypeId: 0,
     title: '',
     description: '',
     isActive: true,
@@ -60,8 +62,7 @@ export class TarriftypeAddDgComponent implements OnInit {
     this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
     if (this.config.data) {
       this.tarrifTypeReq = this.config.data;
-      console.log(this.tarrifTypeReq);
-      
+
       // isEditing = true; should be last line
       this.tarrifTypeReq.isEditing = true;
     }

@@ -6,7 +6,7 @@
     <form #form="ngForm" (ngSubmit)="verification()">
         <div class="content">
 
-            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('tariffTypeItem')"
+            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('tariffTypeItemAdd')"
                 [ngClass]="{'double_size':mainDatas.icon}">
                 <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
                     <!-- only for single select option -->

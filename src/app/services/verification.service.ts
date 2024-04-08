@@ -1251,9 +1251,9 @@ export class VerificationService {
   tarrifTypeItem = (item: ITarrifTypeItem): boolean => {
     if (!this.nullValidation(item.title, EN_messages.insert_title))
       return false;
-    if (!this.nullValidation(item.tariffTypeId, EN_messages.insert_fromEshterak))
+    if (!this.nullValidation(item.tariffTypeId, EN_messages.insert_tariffType))
       return false;
-    if (!this.nullValidation(item.tariffCalculationMode, EN_messages.insert_ToEshterak))
+    if (!this.nullValidation(item.tariffCalculationMode, EN_messages.insert_tariffCalculationMode))
       return false;
 
     return true;
@@ -1267,7 +1267,7 @@ export class VerificationService {
   offering = (item: IOffering): boolean => {
     if (!this.nullValidation(item.title, EN_messages.insert_title))
       return false;
-    if (!this.nullValidation(item.offeringUnitId, EN_messages.insert_title))
+    if (!this.nullValidation(item.offeringUnitId, EN_messages.insert_offeringUnitId))
       return false;
 
     return true;
@@ -1275,7 +1275,7 @@ export class VerificationService {
   tarrifParameter = (item: ITarrifParameter): boolean => {
     if (!this.nullValidation(item.title, EN_messages.insert_title))
       return false;
-    if (!this.nullValidation(item.tag, EN_messages.insert_title))
+    if (!this.nullValidation(item.tag, EN_messages.insert_tag))
       return false;
 
     return true;
