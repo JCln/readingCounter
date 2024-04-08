@@ -30,6 +30,8 @@ export enum ENInterfaces {
     AuthLevel1EDIT = 'V1/AuthLevel1/Edit',
     AuthLevel1ADD = 'V1/AuthLevel1/Add',
 
+    GetProvinceHierarchy = 'V1/Province/DictionaryHierachy',
+    GetProvinceHierarchyPrimeNg = 'V1/Province/DictionaryHierachyPrimeNg',
     ZoneBoundGET = 'V1/ZoneBound/All',
     ZoneBoundDICTIONARY = 'V1/ZoneBound/Dictionary',
     ZoneBoundREMOVE = 'V1/ZoneBound/Remove',

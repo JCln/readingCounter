@@ -118,6 +118,25 @@ export interface IDictionaryManager {
     title: string;
     isSelected: boolean;
 }
+export interface IProvinceHierarchy {
+    provinceId: number,
+    provinceTitle: string,
+    isSelected: boolean,
+    regionNode: [
+        {
+            id: number,
+            title: string,
+            isSelected: boolean,
+            zoneNode: [
+                {
+                    id: number,
+                    title: string,
+                    isSelected: boolean
+                }
+            ]
+        }
+    ]
+}
 export interface ITrueFalse {
     name: string;
     value: string | boolean;

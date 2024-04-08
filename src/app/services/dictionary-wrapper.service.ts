@@ -19,6 +19,7 @@ export class DictionaryWrapperService {
   private provinceDictionary: any = [];
   private regionDictionary: any = [];
   private zoneDictionary: any = [];
+  private provinceHierarchy: any = [];
   private zoneBoundDictionary: any = [];
   private countryDictionary: any = [];
   private authLev1Dictionary: any = [];
@@ -361,6 +362,13 @@ export class DictionaryWrapperService {
     this.setZoneBoundDictionary(res);
     return this.zoneBoundDictionary;
   }
+  async getProvinceHierarchy(): Promise<any> {
+    if (!MathS.isNull(this.provinceHierarchy))
+      return this.provinceHierarchy;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetProvinceHierarchyPrimeNg);
+    this.setProvinceHierarchy(res);
+    return this.provinceHierarchy;
+  }
 
 
   private setKarbariDictionaryCode(v: any) {
@@ -377,6 +385,9 @@ export class DictionaryWrapperService {
   }
   private setZoneBoundDictionary(v: any) {
     this.zoneBoundDictionary = v;
+  }
+  private setProvinceHierarchy(v: any) {
+    this.provinceHierarchy = v;
   }
   private setCountryDictionary(v: any) {
     this.countryDictionary = v;
@@ -496,6 +507,7 @@ export class DictionaryWrapperService {
     this.regionDictionary = [];
     this.zoneDictionary = [];
     this.zoneBoundDictionary = [];
+    this.provinceHierarchy = [];
     this.countryDictionary = [];
     this.authLev1Dictionary = [];
     this.authLev2Dictionary = [];

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -16,7 +16,9 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class DetailsComponent extends FactoryONE {
 
+  selectedNodes: any;
   zoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -37,6 +39,9 @@ export class DetailsComponent extends FactoryONE {
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.provinceHierarchy = [await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy()];
+    console.log(this.provinceHierarchy);
+    
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getReadingPeriod();
     this.getFragmentByZone();

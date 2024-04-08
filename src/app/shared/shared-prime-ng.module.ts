@@ -12,7 +12,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
-
+import { TreeSelectModule } from 'primeng/treeselect';
 import { ImageViewerComponent } from './carousel-woum/woum/image-viewer/image-viewer.component';
 import { PrimeTableEditableComponent } from './prime-table-editable/prime-table-editable.component';
 import { PrimeTableComponent } from './prime-table/prime-table.component';
@@ -47,6 +47,7 @@ import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.com
     MatCheckboxModule,
     MultiSelectModule,
     CheckboxModule,
+    TreeSelectModule,
     DropdownModule,
     InputMaskModule,
     AccordionModule,
@@ -76,6 +77,7 @@ import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.com
     MatCheckboxModule,
     MultiSelectModule,
     CheckboxModule,
+    TreeSelectModule,
     DropdownModule,
     InputMaskModule,
     AccordionModule,

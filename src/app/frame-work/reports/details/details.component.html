@@ -9,12 +9,18 @@
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
                         <div class="_value">
+                        <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full" [(ngModel)]="selectedNodes"
+                            [options]="provinceHierarchy" display="chip"  [metaKeySelection]="false"
+                            selectionMode="checkbox" placeholder="Select Item" label>
+                        </p-treeSelect>
+                        </div>
+                        <!-- <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="closeTabService.detailsReq.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
                                 (onChange)="afterZoneChanged()">
                             </p-dropdown>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="input_2">
                         <div class="_key">نوبتی</div>
