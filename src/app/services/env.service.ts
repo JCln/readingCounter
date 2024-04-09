@@ -14,7 +14,7 @@ export class EnvService implements IENV {
   browserVersions = this.temp.browserVersions;
   years = this.temp.years;
   getDeleteDictionary = this.temp.getDeleteDictionary;
-  hasCanclableSpinner = this.temp.hasCanclableSpinner;
+  hasCancelableSpinner = this.temp.hasCancelableSpinner;
   timeout = this.temp.timeout;
   reOrderableTable = this.temp.reOrderableTable;
   defaultAggregateTracks = this.temp.defaultAggregateTracks;

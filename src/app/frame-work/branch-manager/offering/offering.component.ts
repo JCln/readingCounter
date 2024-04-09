@@ -32,10 +32,14 @@ export class OfferingComponent extends FactoryONE {
   }
 
   callAPI = async () => {
-    this.closeTabService.offering = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGet);
+    this.closeTabService.offering = await this.branchesService.dictionaryWrapperService.getOffering();
     this.insertToAuxItem();
-    this.offeringUnitIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
-    Converter.convertIdsToTitles(this.closeTabService.offering, { offeringUnitIdDictionary: this.offeringUnitIdDictionary }, { changableOfferingUnitId: 'changableOfferingUnitId' })
+    this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit();
+    Converter.convertIdsToTitles(
+      this.closeTabService.offering,
+      { offeringUnitIdDictionary: this.offeringUnitIdDictionary },
+      { changableOfferingUnitId: 'changableOfferingUnitId' }
+    )
   }
   openDialog = (item?: any) => {
     this.ref = this.dialogService.open(OfferingAddDgComponent, {

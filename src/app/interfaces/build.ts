@@ -12,7 +12,7 @@ export interface IENV {
         hasSingle: boolean,
         hasBatch: boolean
     }
-    hasCanclableSpinner: boolean,
+    hasCancelableSpinner: boolean,
     timeout: number,
     defaultAggregateTracks: boolean,
     version: string,
@@ -353,14 +353,14 @@ export class shouldSaveTokensInLocal {
     private constructor(public readonly value: boolean) {
     }
 }
-export class ENHasCanclableSpinner {
-    static readonly DEFAULT = new ENHasCanclableSpinner(true);
-    static readonly ESF = new ENHasCanclableSpinner(false);
-    static readonly TEH = new ENHasCanclableSpinner(false);
-    static readonly TEH_ZONE4 = new ENHasCanclableSpinner(false);
-    static readonly TEH_SE = new ENHasCanclableSpinner(false);
-    static readonly TEH_SE_LOCAL = new ENHasCanclableSpinner(false);
-    static readonly KERMANSHAH = new ENHasCanclableSpinner(false);
+export class ENHasCancelableSpinner {
+    static readonly DEFAULT = new ENHasCancelableSpinner(true);
+    static readonly ESF = new ENHasCancelableSpinner(false);
+    static readonly TEH = new ENHasCancelableSpinner(false);
+    static readonly TEH_ZONE4 = new ENHasCancelableSpinner(false);
+    static readonly TEH_SE = new ENHasCancelableSpinner(false);
+    static readonly TEH_SE_LOCAL = new ENHasCancelableSpinner(false);
+    static readonly KERMANSHAH = new ENHasCancelableSpinner(false);
 
     private constructor(public readonly value: boolean) {
     }

@@ -38,7 +38,7 @@ export class ProfileService {
   showStateVals = {
     groupImgs: false,
     searchBasedOnDate: false,
-    hasCanclableSpinner: false,
+    hasCancelableSpinner: true,
     defaultFontStyle: 1,
     defaultFontFamily: ENFontFamily.BLotus,// value of default is sync with font.service.ts
     reOrderableTable: false,
@@ -118,8 +118,8 @@ export class ProfileService {
   setLocalTableGeneralSearch = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.tablesGeneralSearch, bol);
   }
-  setCanclableSpinner = (hasCanclableSpinner: boolean) => {
-    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCanclableSpinner, hasCanclableSpinner);
+  setCanclableSpinner = (bool: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCancelableSpinner, bool);
   }
   setFontStyle = (fontStyle: number) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
@@ -159,7 +159,7 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.utilsService.envService.defaultAggregateTracks);
   }
   getHasCanclableSpinner = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.utilsService.envService.hasCanclableSpinner);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCancelableSpinner, this.utilsService.envService.hasCancelableSpinner);
   }
   getFontStyle = (): number => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, ENFontStyle.fontXS);
@@ -179,7 +179,7 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontFamily, ENFontFamily.BLotus);
   }
   getTableGeneralSearch = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.tablesGeneralSearch, false);
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.tablesGeneralSearch, true);
   }
   verification = (password: IChangePassword) => {
     if (MathS.isNull(password.oldPassword)) {

@@ -56,7 +56,7 @@ export class OfferingAddDgComponent implements OnInit {
     }
   }
   getDictionary = async () => {
-    this.offeringUnitIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
+    this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit();
   }
   ngOnInit(): void {
     this.getDictionary();

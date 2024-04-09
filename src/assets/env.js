@@ -125,7 +125,7 @@
     window.__env.aboutUs = { email: 'infohivaatlas@gmail.com', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
 
 
-    window.__env.hasCanclableSpinner = false;
+    window.__env.hasCanclableSpinner = true;
     window.__env.timeout = 18000;
     window.__env.hasNextBazdid = false;
     window.__env.reOrderableTable = false;

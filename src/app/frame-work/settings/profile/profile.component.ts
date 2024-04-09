@@ -133,7 +133,7 @@ export class ProfileComponent extends FactoryONE {
     this.getFontFamily();
     this.getNotifyPosition();
     this.getSelectedColumns();
-    this.getHasCanclableSpinner();
+    this.getHasCancelableSpinner();
     this.getValueOfShowCarouselMedia();
     this.getDefaultAggregationTrackings();
     this.getReOrderable();
@@ -219,8 +219,8 @@ export class ProfileComponent extends FactoryONE {
   getTableGeneralSearch = () => {
     this.profileService._agg.hasGeneralSearch = this.profileService.getTableGeneralSearch();
   }
-  getHasCanclableSpinner = () => {
-    this.profileService.showStateVals.hasCanclableSpinner = this.profileService.getHasCanclableSpinner();
+  getHasCancelableSpinner = () => {
+    this.profileService.showStateVals.hasCancelableSpinner = this.profileService.getHasCanclableSpinner();
   }
   getFontStyle = () => {
     this.profileService.showStateVals.defaultFontStyle = this.profileService.getFontStyle();

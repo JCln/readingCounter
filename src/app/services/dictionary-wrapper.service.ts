@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from '../classes/math-s';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { VerificationService } from './verification.service';
-import { IBranchState, ICustomerType, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,8 @@ export class DictionaryWrapperService {
   private zoneDictionary: any = [];
   private provinceHierarchy: any = [];
   private zoneBoundDictionary: any = [];
+  private offeringUnit: IOfferingUnit[] = [];
+  private offering: IOffering[] = [];
   private countryDictionary: any = [];
   private authLev1Dictionary: any = [];
   private userActivationLogTypes: any = [];
@@ -355,6 +357,20 @@ export class DictionaryWrapperService {
     this.setRoleDictionary(res);
     return this.roleDictionary;
   }
+  async getOfferingUnit(): Promise<any> {
+    if (!MathS.isNull(this.offeringUnit))
+      return this.offeringUnit;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
+    this.setOfferingUnit(res);
+    return this.offeringUnit;
+  }
+  async getOffering(): Promise<any> {
+    if (!MathS.isNull(this.offering))
+      return this.offering;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGet);
+    this.setOffering(res);
+    return this.offering;
+  }
   async getZoneBoundDictionary(): Promise<any> {
     if (!MathS.isNull(this.zoneBoundDictionary))
       return this.zoneBoundDictionary;
@@ -385,6 +401,12 @@ export class DictionaryWrapperService {
   }
   private setZoneBoundDictionary(v: any) {
     this.zoneBoundDictionary = v;
+  }
+  private setOfferingUnit(v: any) {
+    this.offeringUnit = v;
+  }
+  private setOffering(v: any) {
+    this.offering = v;
   }
   private setProvinceHierarchy(v: any) {
     this.provinceHierarchy = v;
@@ -506,6 +528,8 @@ export class DictionaryWrapperService {
     this.provinceDictionary = [];
     this.regionDictionary = [];
     this.zoneDictionary = [];
+    this.offeringUnit = [];
+    this.offering = [];
     this.zoneBoundDictionary = [];
     this.provinceHierarchy = [];
     this.countryDictionary = [];

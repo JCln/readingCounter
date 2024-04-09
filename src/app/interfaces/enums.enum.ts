@@ -805,7 +805,7 @@ export enum ENLocalStorageNames {
     hasColumnsResizable = 'hasColumnsResizable',
     widthExpandMode = 'widthExpandMode',
     notifyPosition = 'notifyPosition',
-    hasCanclableSpinner = 'hasCanclableSpinner',
+    hasCancelableSpinner = 'hasCancelableSpinner',
     imageOption = 'imageOption',
     fontStyle = 'fontStyle',
     outputConfigs = 'outputConfigs',

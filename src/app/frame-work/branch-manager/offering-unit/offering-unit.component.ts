@@ -23,7 +23,7 @@ export class OfferingUnitComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    this.closeTabService.offeringUnit = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
+    this.closeTabService.offeringUnit = await this.branchesService.dictionaryWrapperService.getOfferingUnit();
   }
   openDialog = (item?: any) => {
     this.ref = this.dialogService.open(OfferingUnitAddDgComponent, {
