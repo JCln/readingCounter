@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { OffloadedMasterRoutingModule } from './offloaded-master-routing.module';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { OffloadedMasterComponent } from './offloaded-master.component';
+import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { OffloadedMasterComponent } from './offloaded-master.component';
   ],
   imports: [
     SharedPrimeNgModule,
+    SharedThreeModule,
     OffloadedMasterRoutingModule
   ]
 })

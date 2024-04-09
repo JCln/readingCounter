@@ -25,7 +25,7 @@ export enum EN_Routes {
     'wrmrrpt' = '/wr/m/r/rpt',
     fragment = '/wr/m/r/nob',
     fragmentDetail = '/wr/m/r/nob/detail',
-    'wrmrnobautoImport' = '/wr/m/r/nob/autoImport',
+    fragmentAutoImport = '/wr/m/r/nob/autoImport',
     textOutputManager = '/wr/m/r/txt/out',
     'wrmrapk' = '/wr/m/r/apk',
     'wrmrrcd' = '/wr/m/r/rcd',

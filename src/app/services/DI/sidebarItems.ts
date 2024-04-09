@@ -5,6 +5,7 @@ export const sidebarItemsTest = {
         {
             route: '', title: '', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
                 { route: EN_Routes.myLogins, title: 'ورود های من', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.fragmentAutoImport, title: 'صدور لیست خودکار', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.tariffExcelToFill, title: 'دریافت تعرفه Excel', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrprofile, title: 'تنظیمات کاربری', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 0 },
                 { route: EN_Routes.wrmlallfalse, title: 'لیست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },

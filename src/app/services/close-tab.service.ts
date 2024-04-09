@@ -173,6 +173,10 @@ export class CloseTabService {
     this.trackingOffloadedMaster = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.trackingOffloadedMaster);
     return this.trackingOffloadedMaster;
   }
+  offloadedMasterMudifyBulk = {
+    day: this.utilsService.dateJalaliService.getCurrentDate(),
+    groupId: ''
+  }
   simpleMasterByFragmentDetails: ITracking[] = [];
   simpleMasterByFragment: ITrackingMasterDto[] = [];
   simpleMasterByFragmentAllLazy: IOnOffLoadFlatLazy = {
@@ -786,7 +790,7 @@ export class CloseTabService {
   }
   saveDataForFollowUpAUX: any;
   // import dynamic
-  saveDataForAutomaticImport: IAutomaticImport[];
+  saveDataForAutomaticImport: IAutomaticImport[] = [];
   importDynamicReq: IImportDynamicDefault = {
     fromEshterak: '',
     toEshterak: '',
@@ -1356,7 +1360,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqtr },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: EN_Routes.wrmrrpt },
-    { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.wrmrnobautoImport },
+    { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.fragmentAutoImport, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: EN_Routes.textOutputManager, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: EN_Routes.wrmrapk },
     { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, defaultValue: [], url: EN_Routes.wrmrrcd },
@@ -2254,6 +2258,9 @@ export class CloseTabService {
   }
   receiveToDateInstallation = (variable: ENReadingReports, $event: string) => {//just sewageInstallationJalaliDay date
     this[variable].sewageInstallationJalaliDay = $event;
+  }
+  receiveDay = (variable: ENReadingReports, $event: string) => {
+    this[variable].day = $event;
   }
 
   getSearchInOrderTo = (): ISearchInOrderTo[] => {

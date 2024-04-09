@@ -23,21 +23,20 @@
     </div>
 </section>
 
-<app-prime-table-editable     
+<app-prime-table
     [dataSource]="closeTabService.saveDataForFragmentNOBDetails"     
-    [_checkUpName]="'addItem'"
+    [_checkUpName]="'branches'"
     [_outputFileName]="fragmentDetailsColumns"
     [_selectedColumnsToRemember]="'selectedFragmentDetails'"    
     [_sessionName]="'fragmentdetails-session'"
     [_numberOfExtraColumns]="[1, 2]"
-    [newRowLimit]="newRowLimit"
-    (refreshedTable)="callAPI()"    
-    (newedRowChangedStatus)="testChangedValue()"
-    (onRowEditedSave)="onRowEditSave($event)"
-    (onRowEditedCancelRowEditing)="onRowEditCancel($event)"
-    (onRowEditedInit)="onRowEditInit($event)"
-    (removedRow)="removeRow($event)"
-    (openedAddDialog)="newRow()"
-    (routedToParent)="fragmentManagerService.routeToFragmentMaster()"
+    [isAddableTable]="true"    
+    [_backToPreviousEnabled]="true"
+    [_backToPreviousText]="'بازگشت به نوبتی'"
+    (refreshedTable)="callAPI()"                 
+    (showedMoreDetails)="removeRow($event)"    
+    (openedAddDialog)="openDialog(false)"    
+    (openedEditDialog)="openDialog(true, $event)"    
+    (backedToPrevious)="fragmentManagerService.routeToFragmentMaster()"
  > 
-</app-prime-table-editable>
+</app-prime-table>

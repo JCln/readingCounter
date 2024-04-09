@@ -6,7 +6,6 @@ import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 

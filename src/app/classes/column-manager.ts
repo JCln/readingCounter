@@ -550,7 +550,7 @@ export class ColumnManager {
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
     ]
-    fragmentDetailsAddDialog: IObjectIteratation[] = [
+    fragmentDetailsAddEditDialog: IObjectIteratation[] = [
         { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },

@@ -20,23 +20,13 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrls: ['./fragment.component.scss']
 })
 export class FragmentComponent extends FactoryONE {
-  table: Table;
-  newRowLimit: number = 1;
-
   ref: DynamicDialogRef;
   zoneDictionary: IDictionaryManager[] = [];
-  isAddingNewRow: boolean = false;
   readonly fragmentMasterColumns: string = '_fragmentMaster';
-  clonedProducts: { [s: string]: IFragmentMaster; } = {};
-
-  fragmentMasterId: string = '';
-  zoneId: number = 0;
-  onRowEditing: IFragmentMaster;
 
   constructor(
     public closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    public route: ActivatedRoute,
     public dialogService: DialogService
   ) {
     super();
@@ -93,18 +83,13 @@ export class FragmentComponent extends FactoryONE {
       }
     }
   }
-  routeToAutomaticImport = (dataSource: any) => {
-    console.log(dataSource);
-
+  routeToAutomaticImport = (dataSource: IFragmentMaster) => {
     dataSource.id = MathS.trimation(dataSource.id);
-    if (!MathS.isNull(dataSource.id)) {
-      if (dataSource.isValidated) {
-        this.fragmentMasterId = dataSource.id;
-        this.zoneId = dataSource.zoneId;
-      }
-      else {
-        this.fragmentManagerService.utilsService.snackBarMessageWarn(EN_messages.isNotValidatedFragment);
-      }
+    if (dataSource.isValidated) {
+      this.fragmentManagerService.routeToAutomaticImport(dataSource);
+    }
+    else {
+      this.fragmentManagerService.utilsService.snackBarMessageWarn(EN_messages.isNotValidatedFragment);
     }
   }
 }

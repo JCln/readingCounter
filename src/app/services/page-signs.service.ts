@@ -17,6 +17,7 @@ export interface IOnOffLoadNessessities {
 }
 export interface IFragmentNessessities {
   GUid: string,
+  zoneId: number,
   zoneTitle: string,
   fromEshterak: string,
   toEshterak: string
@@ -61,6 +62,15 @@ export class PageSignsService {
   fragmentDetails_pageSign: IFragmentNessessities = {
     GUid: null,
     routeTitle: '',
+    zoneId: null,
+    zoneTitle: '',
+    fromEshterak: '',
+    toEshterak: ''
+  };
+  fragmentAutomaticImport_pageSign: IFragmentNessessities = {
+    GUid: null,
+    routeTitle: '',
+    zoneId: null,
     zoneTitle: '',
     fromEshterak: '',
     toEshterak: ''

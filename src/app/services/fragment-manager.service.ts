@@ -1,6 +1,6 @@
 import { VerificationService } from './verification.service';
 import { PageSignsService } from 'services/page-signs.service';
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { UtilsService } from 'services/utils.service';
@@ -29,6 +29,15 @@ export class FragmentManagerService {
     this.pageSignsService.fragmentDetails_pageSign.fromEshterak = body.fromEshterak;
     this.pageSignsService.fragmentDetails_pageSign.toEshterak = body.toEshterak;
     this.utilsService.routeToByUrl(EN_Routes.fragmentDetail);
+  }
+  routeToAutomaticImport = (body: IFragmentMaster) => {
+    this.pageSignsService.fragmentAutomaticImport_pageSign.GUid = body.id;
+    this.pageSignsService.fragmentAutomaticImport_pageSign.zoneId = body.zoneId;
+    this.pageSignsService.fragmentAutomaticImport_pageSign.zoneTitle = body.changableZoneId;
+    this.pageSignsService.fragmentAutomaticImport_pageSign.routeTitle = body.routeTitle;
+    this.pageSignsService.fragmentAutomaticImport_pageSign.fromEshterak = body.fromEshterak;
+    this.pageSignsService.fragmentAutomaticImport_pageSign.toEshterak = body.toEshterak;
+    this.utilsService.routeToByUrl(EN_Routes.fragmentAutoImport);
   }
   routeToFragmentMaster = () => {
     this.utilsService.routeTo(EN_Routes.fragment);

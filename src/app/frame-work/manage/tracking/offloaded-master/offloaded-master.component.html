@@ -35,6 +35,7 @@
             </th>
             <th class="__icon-columns">
             <th class="__icon-columns">
+            <th class="__icon-columns">
         </tr>
         <tr>
             <th></th>
@@ -48,6 +49,7 @@
                     {{col.type}}
                 </p-columnFilter>
             </th>
+            <th class="__icon-columns">
             <th class="__icon-columns">
             <th class="__icon-columns">
         </tr>
@@ -82,6 +84,12 @@
                 <span class="ui-column-title">دریافت Excel</span>
                 <i class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text_right">دریافت Excel</div>
+                </i>
+            </td>
+            <td class="__icon-columns" (click)="modifyBulkClicked(dataSource)">
+                <span class="ui-column-title">تغییر تاریخ</span>
+                <i class="tooltip _circle_border p_icons pi pi-calendar-times">
+                    <div class="tooltip_text_right">تغییر تاریخ</div>
                 </i>
             </td>
         </tr>

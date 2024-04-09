@@ -60,7 +60,7 @@ export class TrackingManagerService {
   constructor(
     public utilsService: UtilsService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    private pageSignsService: PageSignsService,
+    public pageSignsService: PageSignsService,
     public columnManager: ColumnManager,
     public profileService: ProfileService,
     private followUpService: FollowUpService,

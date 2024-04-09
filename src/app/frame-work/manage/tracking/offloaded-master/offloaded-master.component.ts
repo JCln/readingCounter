@@ -8,6 +8,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking, ITrackingMasterDto } from 'interfaces/itrackings';
 import { OutputManagerService } from 'services/output-manager.service';
 import { Table } from 'primeng/table';
+import { EN_messages } from 'interfaces/enums.enum';
 
 @Component({
   selector: 'app-offloaded-master',
@@ -20,7 +21,6 @@ export class OffloadedMasterComponent extends FactoryONE {
 
   _selectCols: any = [];
   _selectedColumns: any[];
-
   constructor(
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
@@ -71,6 +71,28 @@ export class OffloadedMasterComponent extends FactoryONE {
   }
   routeToAllInGroupLazy = (dataSource: ITrackingMasterDto) => {
     this.trackingManagerService.routeToOffloadAllInGroupLazy(dataSource);
+  }
+
+  selectDateMudifyBulkClicked = async () => {
+    const a = {
+      messageTitle: EN_messages.toModifyBulk,
+      minWidth: '21rem',
+      icon: 'pi pi-calendar-times',
+      isInput: false,
+      isDelete: false,
+      isSelectableDate: true,
+    }
+    return this.closeTabService.utilsService.firstConfirmDialog(a);
+  }
+  modifyBulkClicked = async (dataSource: ITrackingMasterDto) => {
+    if (await this.selectDateMudifyBulkClicked()) {
+      const body = {
+        day: this.closeTabService.offloadedMasterMudifyBulk.day,
+        groupId: dataSource.groupId
+      }
+      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offloadModifyBulk, body);
+      this.trackingManagerService.utilsService.snackBarMessageSuccess(res.message);
+    }
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

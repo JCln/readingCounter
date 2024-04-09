@@ -29,6 +29,7 @@ export enum EN_messages {
     timoutInterval = 'زمان ارسال کد به اتمام رسید. لطفا مجددا تلاش نمایید.',
     insertTwoStepLength = 'ارقام کد تایید اشتباه است',
     userPassEnterCaptcha = 'لطفا عبارت تصویر امنیتی را وارد نمایید',
+    toModifyBulk = 'تاریخ را وارد نمایید',
     access_denied = 'دسترسی کافی به شما داده نشده است',
     access_whenLoginAgain = 'برای ذخیره تغییرات از برنامه خارج و مجددا وارد شوید',
     insert_without_decimal = 'شماره نسخه را بدون اعشار وارد نمایید',

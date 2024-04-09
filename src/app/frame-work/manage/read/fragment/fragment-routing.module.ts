@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AutomaticImportComponent } from './automatic-import/automatic-import.component';
 import { FragmentComponent } from './fragment.component';
 
 const routes: Routes = [
   { path: '', component: FragmentComponent },
-  { path: 'autoImport', component: AutomaticImportComponent },
+  { path: 'autoImport', loadChildren: () => import('./automatic-import/automatic-import.module').then(automaticImport => automaticImport.AutomaticImportModule) },
   { path: 'detail', loadChildren: () => import('./fragment-details/fragment-details.module').then(fragmentDetails => fragmentDetails.FragmentDetailsModule) },
 ];
 

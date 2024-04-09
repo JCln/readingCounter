@@ -8,7 +8,7 @@
     [_selectedColumnsToRemember]="'selectedRAutoImport'"        
     [_backToPreviousEnabled]=true
     [_backToPreviousText]="'بازگشت'"
-    (backedToPrevious)="fragmentToNull()"
+    (backedToPrevious)="fragmentManagerService.routeToFragmentMaster()"
     (refreshedTable)="refreshTable()"    
     (firstConfirmedDialog)="removeRow($event)"
     (openedAddDialog)="openAddDialog()"

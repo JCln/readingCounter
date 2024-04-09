@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 

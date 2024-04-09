@@ -101,11 +101,10 @@ export interface IFragmentDetails {
     toEshterak: string,
     orderDigit?: number,
     orderPersian?: string,
-    isNew?: boolean
-    // for batch   
     trackNumber?: number,
     count?: number,
-    counterReaderName?: string
+    counterReaderName?: string,
+    isEditing?: boolean
 }
 export interface IImageAttribution {
     id?: number,

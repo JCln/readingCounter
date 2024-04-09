@@ -27,6 +27,7 @@ export enum ENReadingReports {
     imgResultDetailsGridBased = 'imgResultDetailsGridBased',
     userActivationLog = 'saveDataForServerUserActivationReq',
     usersLogins = 'usersLoginsReq',
+    offloadedMasterMudifyBulk = 'offloadedMasterMudifyBulk',
     ipFilterGetBlocked = 'ipFilterGetBlockedReq',
     authenticityAttempts = 'authenticityAttemptsReq',
     ipFilterGetInvalidTime = 'ipFilterGetInvalidTimeReq',

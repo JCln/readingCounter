@@ -1,4 +1,4 @@
-<main *ngIf="route.children.length === 0 && !fragmentMasterId" class="main">
+<main class="main">
     <app-prime-table  
         [dataSource]="closeTabService.saveDataForFragmentNOB" 
         [_outputFileName]="fragmentMasterColumns"
@@ -17,8 +17,4 @@
         (openedMoshtarakinDialog)="fragmentManagerService.routeToFragmentDetails($event)"
     > 
     </app-prime-table>
-
-
-<app-automatic-import *ngIf="fragmentMasterId" [fragmentMasterId]="fragmentMasterId" [zoneId]="zoneId"
-    (fragmentLatestValue)="fragmentMasterId = $event">
-</app-automatic-import>
+</main>

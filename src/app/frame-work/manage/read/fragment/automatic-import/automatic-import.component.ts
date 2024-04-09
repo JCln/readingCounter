@@ -16,11 +16,6 @@ import { AutoImportEditDgComponent } from './auto-import-edit-dg/auto-import-edi
   styleUrls: ['./automatic-import.component.scss']
 })
 export class AutomaticImportComponent extends FactoryONE {
-
-  @Input() fragmentMasterId: string;
-  @Input() zoneId: any;
-  @Output() fragmentLatestValue = new EventEmitter<any>();
-
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -28,28 +23,22 @@ export class AutomaticImportComponent extends FactoryONE {
 
   constructor(
     public closeTabService: CloseTabService,
-    private fragmentManagerService: FragmentManagerService,
+    public fragmentManagerService: FragmentManagerService,
     private dialog: MatDialog,
     private dialogService: DialogService,
   ) {
     super();
   }
 
-  fragmentToNull = () => {
-    //available to back to previous page by makeFragment null;
-    this.fragmentMasterId = '';
-    this.fragmentLatestValue.emit(this.fragmentMasterId);
-  }
-  classWrapper = async (canRefresh?: boolean) => {
-    this.closeTabService.saveDataForAutomaticImport = await this.fragmentManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
+  classWrapper = async () => {
+    if (!this.fragmentManagerService.pageSignsService.fragmentAutomaticImport_pageSign.GUid) {
+      this.fragmentManagerService.routeToFragmentMaster();
+      return;
+    }
+    this.closeTabService.saveDataForAutomaticImport = await this.fragmentManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentManagerService.pageSignsService.fragmentAutomaticImport_pageSign.GUid);
     this.readingPeriodKindDictionary = await this.fragmentManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
-    this.zoneDictionary.find(item => {
-      if (item.title === this.zoneId)
-        this.zoneId = item.id
-    })
-
-    this.userCounterReader = await this.fragmentManagerService.dictionaryWrapperService.getUserCounterReaderDictionary(this.zoneId);
+    this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();  
+    this.userCounterReader = await this.fragmentManagerService.dictionaryWrapperService.getUserCounterReaderDictionary(this.fragmentManagerService.pageSignsService.fragmentAutomaticImport_pageSign.zoneId);
   }
   removeRow = async (rowData: string) => {
     if (await this.fragmentManagerService.firstConfirmDialog()) {
@@ -61,12 +50,12 @@ export class AutomaticImportComponent extends FactoryONE {
   openAddDialog = () => {
     this.ref = this.dialogService.open(AutoImportDgComponent, {
       data: {
+        fragmentMasterId: this.fragmentManagerService.pageSignsService.fragmentAutomaticImport_pageSign.GUid,
         dictionary: this.readingPeriodKindDictionary,
-        fragmentMasterId: this.fragmentMasterId,
         counterReaders: this.userCounterReader
       },
       rtl: true,
-      width: '70%'
+      contentStyle: { minWidth: '21rem' }
     })
     this.ref.onClose.subscribe(async res => {
       if (res)

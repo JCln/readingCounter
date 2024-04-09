@@ -1,9 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { IFragmentDetails } from 'interfaces/ireads-manager';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -18,13 +16,10 @@ import { PageSignsService } from 'services/page-signs.service';
   styleUrls: ['./fragment-details.component.scss']
 })
 export class FragmentDetailsComponent extends FactoryONE {
-  table: Table;
-  newRowLimit: number = 1;
   ref: DynamicDialogRef;
   readonly fragmentDetailsColumns: string = 'fragmentDetails';
 
   zoneDictionary: IDictionaryManager[] = [];
-  clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
     public closeTabService: CloseTabService,
@@ -51,19 +46,19 @@ export class FragmentDetailsComponent extends FactoryONE {
       ) {
         this.callAPI();
       }
-      this.defaultAddStatus();
     }
   }
-  defaultAddStatus = () => this.newRowLimit = 1;
-
-  testChangedValue() {
-    this.newRowLimit = 2;
-  }
-  newRow = () => {
+  openDialog = (isEditing: boolean, item?: any) => {
+    const test = !item ? this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid : item;
+    console.log(test);
+    // TODO: if there is no item ( user click on add button) then send fragment master GUID 
     this.ref = this.dialogService.open(FdDgComponent, {
-      data: this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid,
+      data: {
+        data: !item ? this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid : item,
+        isEditing: isEditing
+      },
       rtl: true,
-      width: '80%'
+      contentStyle: { minWidth: '21rem' }
     })
     this.ref.onClose.subscribe(async res => {
       if (res) {
@@ -71,50 +66,20 @@ export class FragmentDetailsComponent extends FactoryONE {
       }
     });
   }
-  onRowEditInit(dataSource: IFragmentDetails) {
-    // this.insertSelectedColumns();
-    this.clonedProducts[dataSource.fragmentMasterId] = { ...dataSource };
-  }
-  onRowEditCancel(dataSource: object) {
-    this.newRowLimit = 1;
-    this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
-    delete this.closeTabService.saveDataForFragmentNOBDetails[dataSource['dataSource'].id];
-    if (dataSource['dataSource'].isNew)
-      this.closeTabService.saveDataForFragmentNOBDetails.shift();
-    return;
-  }
   removeRow = async (dataSource: any) => {
-    this.newRowLimit = 1;
-
-    if (!this.fragmentManagerService.verificationService.verificationDetails(dataSource['dataSource']))
+    if (!this.fragmentManagerService.verificationService.verificationDetails(dataSource))
       return;
-    const textMessage = 'از اشتراک: ' + dataSource['dataSource'].fromEshterak + ' تا اشتراک: ' + dataSource['dataSource'].toEshterak;
+    const textMessage = 'از اشتراک: ' + dataSource.fromEshterak + ' تا اشتراک: ' + dataSource.toEshterak;
     const confirmed = await this.fragmentManagerService.firstConfirmDialog(textMessage);
 
     if (confirmed) {
-      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
+      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSREMOVE, dataSource);
       if (res) {
         this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
         this.callAPI();
       }
     }
 
-  }
-  async onRowEditSave(dataSource: object) {
-    this.newRowLimit = 1;
-    if (!this.fragmentManagerService.verificationService.verificationDetails(dataSource['dataSource'])) {
-      if (dataSource['dataSource'].isNew) {
-        this.closeTabService.saveDataForFragmentNOBDetails.shift();
-        return;
-      }
-      this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
-      return;
-    }
-    if (dataSource['dataSource'].id) {
-      const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentDETAILSEDIT, dataSource['dataSource']);
-      this.fragmentManagerService.utilsService.snackBarMessageSuccess(res.message);
-      this.callAPI();
-    }
   }
 
 
