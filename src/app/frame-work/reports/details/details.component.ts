@@ -18,7 +18,65 @@ export class DetailsComponent extends FactoryONE {
 
   selectedNodes: any;
   zoneDictionary: IDictionaryManager[] = [];
-  provinceHierarchy: IProvinceHierarchy[] = [];
+  // provinceHierarchy: IProvinceHierarchy[] = [];
+  // provinceHierarchy = {
+  //   key: '0',
+  //   label: 'تهران',
+  //   data: 'Documents Folder',
+  //   icon: 'pi pi-fw pi-inbox',
+  //   children: [
+  //     {
+  //       key: '0-0',
+  //       label: 'منطقه1',
+  //       data: 'Work Folder',
+  //       icon: 'pi pi-fw pi-cog',
+  //       children: [
+  //         { key: 'افجه', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+  //         { key: 'لاطره', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+  //       ]
+  //     },
+  //     {
+  //       key: '0-1',
+  //       label: 'منطقه 2',
+  //       data: 'Home Folder',
+  //       icon: 'pi pi-fw pi-home',
+  //       children: [
+  //         {
+  //           key: '0-1-0',
+  //           label: 'ناحیه 2',
+  //           icon: 'pi pi-fw pi-file',
+  //           data: 'Invoices for this month'
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
+  provinceHierarchy = {
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+      {
+        key: '0-0',
+        label: 'Work',
+        data: 'Work Folder',
+        icon: 'pi pi-fw pi-cog',
+        children: [
+          { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+          { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+        ]
+      },
+      {
+        key: '0-1',
+        label: 'Home',
+        data: 'Home Folder',
+        icon: 'pi pi-fw pi-home',
+        children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+      }
+    ]
+  }
+
   karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -39,9 +97,9 @@ export class DetailsComponent extends FactoryONE {
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.provinceHierarchy = [await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy()];
+    // this.provinceHierarchy = [await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy()];
     console.log(this.provinceHierarchy);
-    
+
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getReadingPeriod();
     this.getFragmentByZone();
@@ -62,6 +120,8 @@ export class DetailsComponent extends FactoryONE {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.detailsReq.zoneId, +this.closeTabService.detailsReq._selectedKindId);
   }
   verification = async () => {
+    console.log(this.selectedNodes);
+
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.detailsReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();

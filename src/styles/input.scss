@@ -81,11 +81,21 @@ $border_15: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     color: var(--input_icon);
-    min-width: 2.2rem;
+    min-width: 2rem;
     height: 100%;
     border-radius: 0 $border_7 $border_7 0;
     font-size: 1.3rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      border: 0.1px dashed;
+      height: 70%;
+      left: 0;
+      top: 15%;
+    }
   }
 
   .input_3 {
@@ -103,12 +113,23 @@ $border_15: 10px;
 
   ._value {
     margin: 2px;
-    width: 100%;    
+    width: 100%;
     flex: 1;
     text-align: center;
     background: var(--white);
     border: 0;
     border-radius: inherit;
+  }
+
+  ._key {
+    text-align: left;
+    padding-right: 3px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    min-width: 5rem;
+    text-align: center;
+    margin-left: auto;
   }
 
   :host .p-dropdown {
