@@ -4,28 +4,26 @@
             <section class="_card"
                 [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedDetails ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
-                <hr>
                 <section class="content">
-                    <div class="input_2">
+                    <div class="input_2" [hidden]="closeTabService.profileService.showStateVals.isSingleZone">
+                        <div class="_key">نواحی</div>
+                        <div class="_value">
+                            <p-tree [value]="provinceHierarchy" selectionMode="checkbox" class="select_tree"
+                                [(selection)]="closeTabService.detailsReq.selectedNodes">
+                            </p-tree>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!closeTabService.profileService.showStateVals.isSingleZone">
                         <div class="_key">ناحیه</div>
                         <div class="_value">
-                            <!-- <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full" [(ngModel)]="selectedNodes"
-                            [options]="provinceHierarchy" display="chip"  [metaKeySelection]="false"
-                            selectionMode="checkbox" placeholder="انتخاب مورد">
-                        </p-treeSelect> -->
-                            <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
-                                [(ngModel)]="selectedNodes" [options]="provinceHierarchy" display="chip" [metaKeySelection]="false"
-                                selectionMode="checkbox" placeholder="Select Item"></p-treeSelect>
-                        </div>
-                        <!-- <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="closeTabService.detailsReq.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
                                 (onChange)="afterZoneChanged()">
                             </p-dropdown>
-                        </div> -->
+                        </div>
                     </div>
-                    <div class="input_2">
+                    <div class="input_2" [hidden]="!closeTabService.profileService.showStateVals.isSingleZone">
                         <div class="_key">نوبتی</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"

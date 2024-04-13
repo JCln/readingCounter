@@ -13,7 +13,8 @@ export interface IRegionManager {
     provinceId: number | string;
     logicalOrder: number;
     title: string;
-    connectionString: string
+    connectionString: string,
+    dynamicId: any
 }
 export interface IZoneManager {
     title: string;
@@ -21,6 +22,7 @@ export interface IZoneManager {
     regionId: number | string;
     isMetro: boolean
     logicalOrder: number;
+    dynamicId: any
 }
 export interface IZoneBoundManager {
     id: number;

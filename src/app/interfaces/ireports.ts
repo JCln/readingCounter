@@ -1,3 +1,5 @@
+import { TreeNode } from "primeng/api"
+
 export interface IReadingReportChartDisposeRes {
     inProvince: IRRChartResWrapper,
     inRegion: IRRChartResWrapper,
@@ -40,7 +42,10 @@ export interface IReadingReportReq {
     _selectedAggregate?: string,
     beginFromImported?: boolean,
     isCollapsed?: boolean,
-    fragmentMasterIds?: string[]
+    fragmentMasterIds?: string[],
+    zoneIds: number[],
+    selectedNodes: TreeNode[],
+    isSingleZone: boolean
 }
 export interface IKarkardAllStatesDto {
     offloadDayalali: string,

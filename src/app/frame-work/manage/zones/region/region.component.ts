@@ -45,10 +45,19 @@ export class RegionComponent extends FactoryONE {
       });
     });
   }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForRegion.forEach(item => {
+      item.dynamicId = item.provinceId;
+    })
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForRegion = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionGET);
+    this.insertToAuxZoneid();
+    console.log(this.closeTabService.saveDataForRegion);
+
     this.provinceDictionary = await this.sectorsManagerService.dictionaryWrapperService.getProvinceDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'dynamicId');
+    console.log(this.provinceDictionary);
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForRegion)) {
@@ -56,7 +65,7 @@ export class RegionComponent extends FactoryONE {
     }
   }
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  استان: ' + rowDataAndIndex['dataSource'].provinceId);
+    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  استان: ' + rowDataAndIndex['dataSource'].dynamicId);
 
     if (a) {
       await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource'].id);
@@ -71,19 +80,9 @@ export class RegionComponent extends FactoryONE {
       this.closeTabService.saveDataForRegion[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource['dataSource'].provinceId !== 'object') {
-      this.provinceDictionary.find(item => {
-        if (item.title === dataSource['dataSource'].provinceId)
-          dataSource['dataSource'].provinceId = item.id
-      })
-    } else {
-      dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
-    }
-
     const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.RegionEDIT, dataSource['dataSource']);
     if (res) {
       this.callAPI();
-      Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'provinceId');
     }
   }
   onRowEditCancel() {

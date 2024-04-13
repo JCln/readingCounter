@@ -1,4 +1,4 @@
-<section class="order_by">
+<section class="order_by" *ngIf="closeTabService.profileService.showStateVals.isSingleZone">
     <h2>جستجو بر اساس :</h2>
     <div *ngFor="let orderType of closeTabService.utilsService.getSearchInOrderTo">
         <div class="p-field-radiobutton">
@@ -8,4 +8,5 @@
             <label [for]="orderType.key">{{orderType.title}}</label>
         </div>
     </div>
+    <hr>
 </section>

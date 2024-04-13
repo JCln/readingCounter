@@ -51,7 +51,7 @@ export class CounterStateComponent extends FactoryONE {
     this.classWrapper();
   }
   removeRow = async (rowData: object) => {
-    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  ناحیه: ' + rowData['dataSource'].zoneId);
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  ناحیه: ' + rowData['dataSource'].changableZoneId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.counterStateRemove, rowData['dataSource'].id);
       this.callAPI();
@@ -62,15 +62,6 @@ export class CounterStateComponent extends FactoryONE {
 
     dataSource['dataSource'].moshtarakinId = Number(dataSource['dataSource'].moshtarakinId);
     dataSource['dataSource'].clientOrder = Number(dataSource['dataSource'].clientOrder);
-
-    if (typeof dataSource['dataSource'].zoneId !== 'object') {
-      this.zoneDictionary.find(item => {
-        if (item.title === dataSource['dataSource'].zoneId)
-          dataSource['dataSource'].zoneId = item.id
-      })
-    } else {
-      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
-    }
 
     if (!this.readManagerService.verificationCounterState(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {

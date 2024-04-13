@@ -32,9 +32,11 @@ export interface IMostReportInput {
     zoneIds: [
         number
     ],
+    selectedNodes: [],
     beginFromImported?: boolean,
     fragmentMasterIds?: string[],
-    isCollapsed?: boolean
+    isCollapsed?: boolean,
+    isSingleZone: boolean
 }
 export interface IBriefKardex {
     item: string,

@@ -107,6 +107,13 @@ export class UtilsService {
     this.compositeService.jwtService.browserStorageService.removeSession(session.stateKey);
     session.reset();
   }
+  getZoneHierarical = (item: any[]): number[] => {
+    let datas: number[] = [];
+    for (let index = 0; index < item.length; index++) {
+      datas.push(item[index].data);
+    }
+    return datas;
+  }
   hasFilters(session: Table): boolean {
     if (session) {
       for (let index = 0; index < Object.keys(session.filters).length; index++) {

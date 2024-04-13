@@ -7,11 +7,14 @@ export interface IKarbari {
     isMaskooni: boolean,
     isTejari: boolean,
     isSaxt: boolean,
-    hasReadingVibrate: boolean
+    hasReadingVibrate: boolean,
+    dynamicID: any
 }
-// export interface IQotr {
-
-// }
+export interface IQotr {
+    id: number,
+    title: string,
+    provinceId: any
+}
 export interface IReadingPeriod {
     id: number,
     title: string,
@@ -32,6 +35,7 @@ export interface ICounterReport {
     moshtarakinId: number,
     title: string,
     zoneId: number | string,
+    dynamicZoneId: any,
     isAhad: boolean,
     isKarbari: boolean,
     canNumberBeLessThanPre: boolean,

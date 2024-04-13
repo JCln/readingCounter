@@ -11,6 +11,7 @@ import { IReadingReportGISReq, IUserKarkardInput, IReadingReportReq, IReadingRep
 import { IAUserEditSave, IUserEditOnRole } from 'interfaces/iuser-manager';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { IAutomaticImportAddEdit, IFragmentDetails, IFragmentMaster } from 'interfaces/ireads-manager';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ import { IAutomaticImportAddEdit, IFragmentDetails, IFragmentMaster } from 'inte
 export class VerificationService {
 
   constructor(
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    private profileService: ProfileService
   ) { }
 
   verificationZone(dataSource: any): boolean {
@@ -583,9 +585,12 @@ export class VerificationService {
     }
     return true;
   }
-  private datesValidation = (dataSource: object): boolean => {
-    if (dataSource.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(dataSource['zoneId'])) {
+  private datesValidation = (dataSource: object): boolean => {        
+    if (dataSource.hasOwnProperty('zoneIds')) {
+      // if (this.profileService.getIsSingleZone()) {
+
+      // }
+      if (MathS.isNull(dataSource['zoneIds'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
@@ -627,8 +632,8 @@ export class VerificationService {
     return true;
   }
   private periodValidations = (dataSource: object): boolean => {
-    if (dataSource.hasOwnProperty('zoneId'))
-      if (MathS.isNull(dataSource['zoneId'])) {
+    if (dataSource.hasOwnProperty('zoneIds'))
+      if (MathS.isNull(dataSource['zoneIds'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
@@ -645,8 +650,8 @@ export class VerificationService {
     return true;
   }
   private periodValidationGIS = (readingReportGISReq: IReadingReportGISReq): boolean => {
-    if (readingReportGISReq.hasOwnProperty('zoneId'))
-      if (MathS.isNull(readingReportGISReq['zoneId'])) {
+    if (readingReportGISReq.hasOwnProperty('zoneIds'))
+      if (MathS.isNull(readingReportGISReq['zoneIds'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }

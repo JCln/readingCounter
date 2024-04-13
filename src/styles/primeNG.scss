@@ -30,6 +30,23 @@
     }
   }
 
+  .p-tree {
+    min-width: 12rem;
+    margin-top: 3rem;
+    padding: 1rem 0.1rem 0.1rem 0.1rem;
+
+    @media (min-width: 550px) {
+      padding: 0.1rem;
+      margin-top: 0;
+    }
+  }
+
+  .p-tree-wrapper {
+    overflow: auto;
+    max-height: 50vh;
+    max-height: 50svh;
+  }
+
   .p-datatable table {
     font-family: var(--font-family);
     font-size: var(--font_s);
@@ -418,6 +435,10 @@
   .p-dropdown-item {
     font-family: var(--font-family);
     font-weight: 600;
+  }
+
+  .select_tree {
+    z-index: 1;
   }
 
   .p-dropdown-panel .p-dropdown-items {

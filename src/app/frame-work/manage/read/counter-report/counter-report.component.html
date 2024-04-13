@@ -1,14 +1,14 @@
 <!-- auth4 means 'actions' -->
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForCounterReport" 
-    [_checkUpName]="'auth4'"
+    [_checkUpName]="'addItem'"
     [_outputFileName]="'counterReport'"
-    [_dictionaryName]="'zoneId'"
+    [_dictionaryName]="'dynamicZoneId'"
     [dictionary]="zoneDictionary"    
     [_numberOfExtraColumns]="[1, 2]"
     [_sessionName]="'counterreport-session'"
     [_selectedColumnsToRemember]="'selectedCounterReport'"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (dropDownChanges)="closeTabService.saveDataForCounterReport['counterReport']"
     (removedRow)="removeRow($event)"

@@ -45,10 +45,16 @@ export class ZoneComponent extends FactoryONE {
       });
     });
   }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForZone.forEach(item => {
+      item.dynamicId = item.regionId;
+    })
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForZone = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneGET);
+    this.insertToAuxZoneid();
     this.regionDictionary = await this.sectorsManagerService.dictionaryWrapperService.getRegionDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'regionId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'dynamicId');
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForZone)) {
@@ -56,7 +62,7 @@ export class ZoneComponent extends FactoryONE {
     }
   }
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  منطقه: ' + rowDataAndIndex['dataSource'].regionId);
+    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  منطقه: ' + rowDataAndIndex['dataSource'].dynamicId);
 
     if (a) {
       await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.ZoneREMOVE, rowDataAndIndex['dataSource'].id);
@@ -70,14 +76,6 @@ export class ZoneComponent extends FactoryONE {
     if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
       this.closeTabService.saveDataForZone[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
-    }
-    if (typeof dataSource['dataSource'].regionId !== 'object') {
-      this.regionDictionary.find(item => {
-        if (item.title === dataSource['dataSource'].regionId)
-          dataSource['dataSource'].regionId = item.id
-      })
-    } else {
-      dataSource['dataSource'].regionId = dataSource['dataSource'].regionId['id'];
     }
     const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneEDIT, dataSource['dataSource']);
     if (res) {

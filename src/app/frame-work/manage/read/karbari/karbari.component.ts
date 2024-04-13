@@ -44,10 +44,16 @@ export class KarbariComponent extends FactoryONE {
       });
     });
   }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForKarbari.forEach(item => {
+      item.dynamicID = item.provinceId;
+    })
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForKarbari = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariAll);
     this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'provinceId');
+    this.insertToAuxZoneid();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'dynamicID');
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForKarbari)) {
@@ -55,7 +61,7 @@ export class KarbariComponent extends FactoryONE {
     }
   }
   removeRow = async (rowData: object) => {
-    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  استان: ' + rowData['dataSource'].provinceId);
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  استان: ' + rowData['dataSource'].dynamicID);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.KarbariRemove, rowData['dataSource'].id);
       this.callAPI();
@@ -68,14 +74,6 @@ export class KarbariComponent extends FactoryONE {
     if (!this.readManagerService.verification(dataSource)) {
       this.closeTabService.saveDataForKarbari[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
-    }
-    if (typeof dataSource['dataSource'].provinceId !== 'object') {
-      this.provinceDictionary.find(item => {
-        if (item.title === dataSource['dataSource'].provinceId)
-          dataSource['dataSource'].provinceId = item.id
-      })
-    } else {
-      dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
     await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.KarbariEdit, dataSource['dataSource']);
     this.callAPI();

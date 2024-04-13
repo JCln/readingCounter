@@ -7,7 +7,7 @@
     [_numberOfExtraColumns]="[1, 2]"
     [_sessionName]="'readingPKind-session'"
     [_selectedColumnsToRemember]="'selectedReadingPeriodKind'"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (removedRow)="removeRow($event)"    
     (onRowEditedInit)="onRowEditInit($event)"

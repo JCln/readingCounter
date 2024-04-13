@@ -348,7 +348,7 @@ export class defaultAggregateTracks {
     }
 }
 export class shouldSaveTokensInLocal {
-    static readonly DEFAULT = new shouldSaveTokensInLocal(false);
+    static readonly DEFAULT = new shouldSaveTokensInLocal(true);
 
     private constructor(public readonly value: boolean) {
     }

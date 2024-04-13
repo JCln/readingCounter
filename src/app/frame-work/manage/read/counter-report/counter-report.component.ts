@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { CrAddDgComponent } from './cr-add-dg/cr-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-counter-report',
@@ -43,27 +44,31 @@ export class CounterReportComponent extends FactoryONE {
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForCounterReport = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForCounterReport) {
-      this.closeTabService.saveDataForCounterReport = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.CounterReportAll);
-    }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForCounterReport.forEach(item => {
+      item.dynamicZoneId = item.zoneId;
+    })
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForCounterReport = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.CounterReportAll);
+    this.insertToAuxZoneid();
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
-
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForCounterReport)) {
+      this.callAPI();
+    }
   }
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].zoneId);
+    const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].dynamicZoneId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowDataAndIndex['dataSource'].id);
       this.refreshTable();
     }
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
@@ -73,16 +78,8 @@ export class CounterReportComponent extends FactoryONE {
       this.closeTabService.saveDataForCounterReport[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource['dataSource'].zoneId !== 'object') {
-      this.zoneDictionary.find(item => {
-        if (item.title === dataSource['dataSource'].zoneId)
-          dataSource['dataSource'].zoneId = item.id
-      })
-    } else {
-      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
-    }
     await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.CounterReportEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
     this.refreshTable();
   }
 

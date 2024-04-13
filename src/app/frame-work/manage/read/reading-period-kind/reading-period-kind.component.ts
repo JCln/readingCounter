@@ -7,6 +7,7 @@ import { ReadManagerService } from 'services/read-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-reading-period-kind',
@@ -36,13 +37,12 @@ export class ReadingPeriodKindComponent extends FactoryONE {
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForReadingPeriodKindManager = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForReadingPeriodKindManager) {
-      this.closeTabService.saveDataForReadingPeriodKindManager = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodKindAll);
+  callAPI = async () => {
+    this.closeTabService.saveDataForReadingPeriodKindManager = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.readingPeriodKindAll);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForReadingPeriodKindManager)) {
+      this.callAPI();
     }
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForReadingPeriodKindManager = this.closeTabService.saveDataForReadingPeriodKindManager.slice(0, index).concat(this.closeTabService.saveDataForReadingPeriodKindManager.slice(index + 1));

@@ -382,7 +382,7 @@ export class DictionaryWrapperService {
     if (!MathS.isNull(this.provinceHierarchy))
       return this.provinceHierarchy;
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GetProvinceHierarchyPrimeNg);
-    this.setProvinceHierarchy(res);
+    this.setProvinceHierarchy([res]);
     return this.provinceHierarchy;
   }
 

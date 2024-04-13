@@ -63,7 +63,7 @@ export class FragmentComponent extends FactoryONE {
     });
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
-    const textMessage = 'ناحیه: ' + dataSource.zoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
+    const textMessage = 'ناحیه: ' + dataSource.changableZoneId + '، از اشتراک: ' + dataSource.fromEshterak + '،  تا اشتراک: ' + dataSource.toEshterak;
     if (await this.fragmentManagerService.firstConfirmDialog(textMessage)) {
       const res = await this.fragmentManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMASTERREMOVE, dataSource)
       if (res) {

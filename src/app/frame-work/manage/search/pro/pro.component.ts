@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager, ITHV } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
-import { DateJalaliService } from 'services/date-jalali.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';

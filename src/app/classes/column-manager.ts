@@ -1952,7 +1952,7 @@ export class ColumnManager {
     ]
     region: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'provinceId', header: 'استان', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'استان', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true }
     ]
     zone: IObjectIteratation[] = [

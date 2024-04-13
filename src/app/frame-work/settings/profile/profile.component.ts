@@ -18,6 +18,7 @@ export class ProfileComponent extends FactoryONE {
 
   stateOptions: any[] = [{ label: 'تکی', value: false }, { label: 'گروهی', value: true }];
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
+  stateOptionsIsSingleZone: any[] = [{ label: 'با یک ناحیه', value: true }, { label: 'با چند ناحیه', value: false }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
@@ -129,6 +130,7 @@ export class ProfileComponent extends FactoryONE {
 
     this.getCurrentVersion();
     this.getBasedOnDate();
+    this.getBasedAZone();
     this.getFontStyle();
     this.getFontFamily();
     this.getNotifyPosition();
@@ -201,6 +203,9 @@ export class ProfileComponent extends FactoryONE {
   getBasedOnDate = () => {
     this.profileService.showStateVals.searchBasedOnDate = this.profileService.getLocalValue();
   }
+  getBasedAZone = () => {
+    this.profileService.showStateVals.isSingleZone = this.profileService.getIsSingleZone();
+  }
   getReOrderable = () => {
     this.profileService.showStateVals.reOrderableTable = this.profileService.getLocalReOrderable();
   }
@@ -232,8 +237,25 @@ export class ProfileComponent extends FactoryONE {
     this.profileService.showStateVals.notifyPosition = this.profileService.getLocalNotifyPosition();
   }
   setBasedOnDate = (val: any) => {
+    if (val && !this.profileService.getIsSingleZone()) {
+      this.profileService.utilsService.snackBarMessageWarn(EN_messages.setReportsToIsSingle);
+      return;
+    }
     this.profileService.setLocalValue(val);
     val ? this.profileService.showMessage(EN_messages.basedOnDateShowDisabled) : this.profileService.showMessage(EN_messages.basedOnDateShowEnabled);
+  }
+  setBasedAZone = (val: any) => {
+    if (!val && this.profileService.getLocalValue()) {
+      this.profileService.utilsService.snackBarMessageWarn(EN_messages.setBasedOnDateFirst);
+      return;
+    }
+    this.profileService.setIsSingleZone(val);
+    if (val) {
+      this.profileService.showMessage(EN_messages.setBasedAZoneEnabled);
+    }
+    else {
+      this.profileService.showMessage(EN_messages.setBasedAZoneDisabled);
+    }
   }
   setCanclableSpinner = (val: any) => {
     this.profileService.setCanclableSpinner(val);
