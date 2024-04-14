@@ -585,7 +585,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedNodes: [],
-    isSingleZone: this.profileService.getIsSingleZone()
+    isSingleZone: false
   }
   guildsWithParamsReq: IReadingReportReq = {
     zoneId: 0,

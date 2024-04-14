@@ -62,8 +62,11 @@ export class ReadingReportManagerService {
   getAuthToken = (): string => {
     return this.jwtService.getAccessToken();
   }
-  portRRTest = (method: ENInterfaces, val: object): Promise<any> => {
-    const res = this.ajaxReqWrapperService.postDataSourceByObject(method, val);
+  portRRTest = async (method: ENInterfaces, val: object): Promise<any> => {
+    
+    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, val);
+    console.log(res);
+    
     if (MathS.isNull(res))
       this.emptyMessage();
     return res;

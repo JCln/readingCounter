@@ -132,13 +132,15 @@ export class DetailsComponent extends FactoryONE {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.detailsReq.zoneId, +this.closeTabService.detailsReq._selectedKindId);
   }
   verification = async () => {
-    this.closeTabService.detailsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.detailsReq.selectedNodes);
+    if (!this.closeTabService.detailsReq.isSingleZone) {
+      this.closeTabService.detailsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.detailsReq.selectedNodes);
+    }
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.detailsReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();
   }
   callAPI = async () => {
-    this.closeTabService.saveDataForRRDetails = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportDETAILSWithParam, this.closeTabService.detailsReq);
+    this.closeTabService.saveDataForRRDetails = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ReadingReportDETAILSWithParam, this.closeTabService.detailsReq);
     this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'karbariCode');

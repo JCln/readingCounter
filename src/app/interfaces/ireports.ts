@@ -135,6 +135,7 @@ export interface IImageAttributionResult {
 }
 export interface IReadingReportDetails {
     id: string,
+    zoneId: number
     billId: number,
     radif: number,
     eshterak: number,
@@ -152,7 +153,8 @@ export interface IReadingReportDetails {
     counterReaderName: string,
     offloadDateJalali: string,
     counterSerial: string,
-    possibleCounterSerial: string
+    possibleCounterSerial: string,
+    imageCount: number,
 }
 export interface IReadingGuildReportOutput {
     id: string,

@@ -41,6 +41,17 @@
     }
   }
 
+  .select_tree {
+    z-index: 1;
+    max-height: 50vh;
+    max-height: 50svh;
+
+    @media (min-width: 550px) {
+      max-height: 30vh;
+      max-height: 30svh;
+    }
+  }
+
   .p-tree-wrapper {
     overflow: auto;
     max-height: 50vh;
@@ -435,10 +446,6 @@
   .p-dropdown-item {
     font-family: var(--font-family);
     font-weight: 600;
-  }
-
-  .select_tree {
-    z-index: 1;
   }
 
   .p-dropdown-panel .p-dropdown-items {

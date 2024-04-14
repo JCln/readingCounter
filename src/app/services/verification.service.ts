@@ -585,13 +585,17 @@ export class VerificationService {
     }
     return true;
   }
-  private datesValidation = (dataSource: object): boolean => {        
-    if (dataSource.hasOwnProperty('zoneIds')) {
-      // if (this.profileService.getIsSingleZone()) {
+  private datesValidation = (dataSource: object): boolean => {
+    console.log(this.profileService.getIsSingleZone());
 
-      // }
-      if (MathS.isNull(dataSource['zoneIds'])) {
+    if (this.profileService.getIsSingleZone()) {
+      if (MathS.isNull(dataSource['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    } else {
+      if (MathS.isNull(dataSource['zoneIds'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zoneIds);
         return false;
       }
     }
@@ -632,11 +636,17 @@ export class VerificationService {
     return true;
   }
   private periodValidations = (dataSource: object): boolean => {
-    if (dataSource.hasOwnProperty('zoneIds'))
-      if (MathS.isNull(dataSource['zoneIds'])) {
+    if (this.profileService.getIsSingleZone()) {
+      if (MathS.isNull(dataSource['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
+    } else {
+      if (MathS.isNull(dataSource['zoneIds'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zoneIds);
+        return false;
+      }
+    }
     if (dataSource.hasOwnProperty('readingPeriodId'))
       if (MathS.isNull(dataSource['readingPeriodId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
@@ -673,6 +683,8 @@ export class VerificationService {
     return this.datesValidation(readingReportReq);
   }
   verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+    console.log(isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq));
+
     return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {

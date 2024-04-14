@@ -5,7 +5,7 @@
                 [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedDetails ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <section class="content">
-                    <div class="input_2" [hidden]="closeTabService.profileService.showStateVals.isSingleZone">
+                    <div class="input_2" [hidden]="closeTabService.profileService.getIsSingleZone()">
                         <div class="_key">نواحی</div>
                         <div class="_value">
                             <p-tree [value]="provinceHierarchy" selectionMode="checkbox" class="select_tree"
@@ -13,7 +13,7 @@
                             </p-tree>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!closeTabService.profileService.showStateVals.isSingleZone">
+                    <div class="input_2" [hidden]="!closeTabService.profileService.getIsSingleZone()">
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
@@ -23,7 +23,7 @@
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!closeTabService.profileService.showStateVals.isSingleZone">
+                    <div class="input_2" [hidden]="!closeTabService.profileService.getIsSingleZone()">
                         <div class="_key">نوبتی</div>
                         <div class="_value">
                             <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
