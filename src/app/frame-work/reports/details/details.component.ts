@@ -129,12 +129,14 @@ export class DetailsComponent extends FactoryONE {
   }
   getReadingPeriod = async () => {
     if (this.closeTabService.detailsReq._selectedKindId)
-      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.detailsReq.zoneId, +this.closeTabService.detailsReq._selectedKindId);
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.detailsReq._selectedKindId);
   }
   verification = async () => {
     if (!this.closeTabService.detailsReq.isSingleZone) {
-      this.closeTabService.detailsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.detailsReq.selectedNodes);
+      this.closeTabService.detailsReq.zoneId = 0;
+      this.closeTabService.detailsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.detailsReq.selectedZoneIds);
     }
+
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.detailsReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();

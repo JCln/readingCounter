@@ -32,7 +32,7 @@ export class ImageAttrFileResultComponent extends FactoryONE {
   }
 
   callAPI = async () => {
-    this.closeTabService.saveDataForImageAttrResult = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionResult, this.closeTabService.imgAttrResultReq);
+    this.closeTabService.saveDataForImageAttrResult = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ImageAttributionResult, this.closeTabService.imgAttrResultReq);
     this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.closeTabService.saveDataForImageAttrResult.length) }]
   }
 

@@ -38,7 +38,6 @@ export class ProfileService {
   showStateVals = {
     groupImgs: false,
     searchBasedOnDate: false,
-    isSingleZone: true,
     hasCancelableSpinner: true,
     defaultFontStyle: 1,
     defaultFontFamily: ENFontFamily.BLotus,// value of default is sync with font.service.ts
@@ -104,9 +103,6 @@ export class ProfileService {
   setLocalValue = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, bol);
   }
-  setIsSingleZone = (bol: boolean) => {
-    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.isSingleZone, bol);
-  }
   setLocalNotifyPosition = (val: string) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.notifyPosition, val);
   }
@@ -139,9 +135,6 @@ export class ProfileService {
   }
   getLocalValue = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
-  }
-  getIsSingleZone = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.isSingleZone, true);
   }
   getTwoStepsAuth = async (): Promise<any> => {
     // TODO return from server value

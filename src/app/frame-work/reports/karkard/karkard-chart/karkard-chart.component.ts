@@ -132,7 +132,7 @@ export class KarkardChartComponent implements OnInit {
     this.pieChartDataRegion.push(this.dataSource.inRegion.xarabCount);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardChart, this.closeTabService.karkardReq);
+    this.dataSource = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardChart, this.closeTabService.karkardReq);
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();

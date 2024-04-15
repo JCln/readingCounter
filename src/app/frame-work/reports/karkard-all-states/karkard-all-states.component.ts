@@ -132,7 +132,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
   connectToServer = async () => {
 
-    this.tempData = await this.readingReportManagerService.portRRTest(ENInterfaces.postKarkardAllStates, this.closeTabService.offKarkardAllStatesReq);
+    this.tempData = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postKarkardAllStates, this.closeTabService.offKarkardAllStatesReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForKarkardAllStates = this.getCounterStateData(this.tempData);
     console.log(this.closeTabService.saveDataForKarkardAllStates);

@@ -6,12 +6,12 @@
 
                 <section class="content">
                     <div class="input_2">
-                        <div class="_key">ناحیه</div>
+                        <div class="_key">نواحی</div>
                         <div class="_value">
-                            <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="closeTabService.disposalhoursReq.zoneId" placeholder="انتخاب مورد"
-                                optionValue="id" optionLabel="title" filter="true">
-                            </p-dropdown>
+                            <p-tree class="w-full md:w-20rem" containerStyleClass="w-full" [value]="provinceHierarchy"
+                                [metaKeySelection]="false" display="comma" selectionMode="checkbox" class="select_tree"
+                                [(selection)]="closeTabService.disposalhoursReq.selectedZoneIds">
+                            </p-tree>
                         </div>
                     </div>
                     <div class="input_2">

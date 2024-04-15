@@ -58,7 +58,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.preNumberShownReq.zoneId, +this.closeTabService.preNumberShownReq._selectedKindId);
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.closeTabService.preNumberShownReq);
+    this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListRRPreNumberShown, this.closeTabService.preNumberShownReq);
     this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
     this.converts();
   }

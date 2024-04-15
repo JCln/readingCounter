@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -17,6 +17,7 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
   chartColors: any[];
 
   zoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -26,16 +27,19 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
   }
 
   classWrapper = async () => {
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   verification = async () => {
+    this.closeTabService.imgAttrAnalyzeReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.imgAttrAnalyzeReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.imgAttrAnalyzeReq, true);
 
     if (temp)
       this.callAPI();
   }
   callAPI = async () => {
-    this.closeTabService.saveDataForImageAttrAnalyze = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionAnalyze, this.closeTabService.imgAttrAnalyzeReq);
+    this.closeTabService.imgAttrAnalyzeReq.selectedZoneIds = [];
+    this.closeTabService.saveDataForImageAttrAnalyze = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ImageAttributionAnalyze, this.closeTabService.imgAttrAnalyzeReq);
     this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.closeTabService.saveDataForImageAttrAnalyze.length) }]
   }
 

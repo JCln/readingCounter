@@ -62,18 +62,6 @@ export class ReadingReportManagerService {
   getAuthToken = (): string => {
     return this.jwtService.getAccessToken();
   }
-  portRRTest = async (method: ENInterfaces, val: object): Promise<any> => {
-    
-    const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, val);
-    console.log(res);
-    
-    if (MathS.isNull(res))
-      this.emptyMessage();
-    return res;
-  }
-  emptyMessage = () => {
-    this.utilsService.snackBarMessageFailed(EN_messages.notFound);
-  }
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
   }
@@ -91,14 +79,14 @@ export class ReadingReportManagerService {
   }
   routeToMapGIS = async (readingReportGISReq: any) => {
     // insert into gis request and should valiation before route to map     
-    const temp = await this.portRRTest(ENInterfaces.ListToGis, readingReportGISReq);
+    const temp = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListToGis, readingReportGISReq);
     if (temp.length) {
       this.mapService.gisReqAux = readingReportGISReq;
       this.mapService.responseGisAux.value = temp;
       this.utilsService.compositeService.routeToExtras([EN_Routes.wr, readingReportGISReq]);
     }
     else {
-      this.emptyMessage();
+      this.utilsService.snackBarMessageFailed(EN_messages.notFound);
     }
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {

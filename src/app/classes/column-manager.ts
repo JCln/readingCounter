@@ -479,6 +479,7 @@ export class ColumnManager {
     ];
     master: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'کد ناحیه', isSelected: true,isSelectedOrigin:true, readonly: false },
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'reportTitle', header: 'عنوان گزارش', isSelected: true, isSelectedOrigin: true, readonly: true },
         // { field: 'reportId', header: 'گزارش', isSelected: true,isSelectedOrigin:true, readonly: true },

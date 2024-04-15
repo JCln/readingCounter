@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -15,6 +15,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class TraverseComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -29,8 +30,9 @@ export class TraverseComponent extends FactoryONE {
 
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
@@ -49,15 +51,18 @@ export class TraverseComponent extends FactoryONE {
     this.closeTabService.traverseReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.traverseReq.zoneId, +this.closeTabService.traverseReq._selectedKindId);
+    if (this.closeTabService.traverseReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.traverseReq._selectedKindId);
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRTraverse = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.closeTabService.traverseReq);
+    this.closeTabService.traverseReq.selectedZoneIds = [];
+    this.closeTabService.saveDataForRRTraverse = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListTraverse, this.closeTabService.traverseReq);
     this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverse, this.karbariByCodeDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverse, this.karbariByCodeDictionary, 'karbariCode');
   }
   verification = async () => {
+    this.closeTabService.traverseReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.traverseReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.traverseReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();

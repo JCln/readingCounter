@@ -50,7 +50,7 @@ export class PerformanceComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRPerformance = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingAnalyzeByParam, this.closeTabService.anlzPrfmReq);
+    this.closeTabService.saveDataForRRPerformance = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAnalyzeByParam, this.closeTabService.anlzPrfmReq);
     if (MathS.isNull(this.closeTabService.saveDataForRRPerformance))
       return;
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();

@@ -212,15 +212,6 @@
             </section>
             <section>
                 <div class="content">
-                    <h1 class="title">جستجوی گزارش ها</h1>
-                    <p-selectButton [options]="stateOptionsIsSingleZone"
-                        [(ngModel)]="profileService.showStateVals.isSingleZone" optionLabel="label" optionValue="value"
-                        (onChange)="setBasedAZone(profileService.showStateVals.isSingleZone)">
-                    </p-selectButton>
-                </div>
-            </section>
-            <section>
-                <div class="content">
                     <h1 class="title">اندازه فونت</h1>
                     <p-selectButton [options]="stateFontStyleOptions"
                         [(ngModel)]="profileService.showStateVals.defaultFontStyle" optionLabel="label"

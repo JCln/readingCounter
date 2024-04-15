@@ -68,7 +68,7 @@ export class RrFragmentComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRFragment = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardByFragment, this.closeTabService.rrFragmentKarkardReq);
+    this.closeTabService.saveDataForRRFragment = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardByFragment, this.closeTabService.rrFragmentKarkardReq);
     this.setGetRanges();
   }
   refreshTable = () => {

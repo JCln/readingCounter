@@ -44,7 +44,7 @@ export class InterfaceManagerService {
   POSTARRAYS = (URL: string, arr: any[]) => {
     return this.mainService.POSTARRAY(URL, arr);
   }
-  POSTBODY = (URL: string, body: object) => {
+  POSTBODY = (URL: string, body: object): Observable<any> => {
     return this.mainService.POSTBODY(URL, body);
   }
   POSTBODYPROGRESS = (URL: string, body: object): Observable<any> => {

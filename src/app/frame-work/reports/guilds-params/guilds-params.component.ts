@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -18,7 +18,7 @@ export class GuildsParamsComponent extends FactoryONE {
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-
+  provinceHierarchy: IProvinceHierarchy[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -33,6 +33,7 @@ export class GuildsParamsComponent extends FactoryONE {
   }
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
@@ -52,12 +53,14 @@ export class GuildsParamsComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.guildsWithParamsReq.zoneId, +this.closeTabService.guildsWithParamsReq._selectedKindId);
   }
   verification = async () => {
+    this.closeTabService.guildsWithParamsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.guildsWithParamsReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.guildsWithParamsReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();
   }
   callAPI = async () => {
-    this.closeTabService.RRGuildsWithParam = await this.readingReportManagerService.portRRTest(ENInterfaces.postRRGuildWithParams, this.closeTabService.guildsWithParamsReq);
+    this.closeTabService.guildsWithParamsReq.selectedZoneIds = [];
+    this.closeTabService.RRGuildsWithParam = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postRRGuildWithParams, this.closeTabService.guildsWithParamsReq);
     // this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     // Converter.convertIdToTitle(this.closeTabService.RRGuildsWithParam, this.karbariByCodeDictionary, 'possibleKarbariCode');
     // Converter.convertIdToTitle(this.closeTabService.RRGuildsWithParam, this.karbariByCodeDictionary, 'karbariCode');

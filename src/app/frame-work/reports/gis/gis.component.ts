@@ -1,6 +1,6 @@
 import { CloseTabService } from 'services/close-tab.service';
 import { Component } from '@angular/core';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -11,6 +11,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class GisComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -32,6 +33,7 @@ export class GisComponent extends FactoryONE {
       this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.gisReq.zoneId);
   }
   classWrapper = async () => {
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.getCounterStateByZoneId();
@@ -63,6 +65,7 @@ export class GisComponent extends FactoryONE {
     event == 'isForbidden' ? this.closeTabService._isOrderByDate = true : ''
   }
   verification = async () => {
+    this.closeTabService.gisReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.gisReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRGIS(this.closeTabService.gisReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.readingReportManagerService.routeToMapGIS(this.closeTabService.gisReq);

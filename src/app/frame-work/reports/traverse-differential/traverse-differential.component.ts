@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -23,7 +23,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
   traverseDiffrentialDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-
+  provinceHierarchy: IProvinceHierarchy[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -35,6 +35,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
 
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.dictionaryWrapperService.getTraverseDifferentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
@@ -65,11 +66,13 @@ export class TraverseDifferentialComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRTraverseDifferential(this.closeTabService.trvchReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
+    this.closeTabService.trvchReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.trvchReq.selectedZoneIds);
     if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRTraverseDifferential = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.closeTabService.trvchReq);
+    this.closeTabService.trvchReq.selectedZoneIds = [];
+    this.closeTabService.saveDataForRRTraverseDifferential = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListTraverseDifferential, this.closeTabService.trvchReq);
     this.karbariDictionaryByCode = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
 
     if (this.closeTabService.trvchReq.traverseType == 0) {

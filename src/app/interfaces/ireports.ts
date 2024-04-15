@@ -32,6 +32,7 @@ export interface IReadingReportChartKarkard {
 }
 export interface IReadingReportReq {
     zoneId?: number,
+    zoneIds: number[],
     fromDate: string,
     toDate: string,
     counterReaderId: string,
@@ -43,8 +44,7 @@ export interface IReadingReportReq {
     beginFromImported?: boolean,
     isCollapsed?: boolean,
     fragmentMasterIds?: string[],
-    zoneIds: number[],
-    selectedNodes: TreeNode[],
+    selectedZoneIds: TreeNode[],
     isSingleZone: boolean
 }
 export interface IKarkardAllStatesDto {
@@ -94,6 +94,8 @@ export interface IUserKarkard {
 }
 export interface IReadingReportGISReq {
     zoneId: number,
+    zoneIds: number[],
+    selectedZoneIds: any[],
     isCounterState: boolean,
     counterStateId: number,
     isKarbariChange: boolean,
@@ -266,9 +268,8 @@ export interface IReadingReportTraverseDifferentialReq {
     _selectedKindId: string,
     year: number,
     traverseType: number,
-    zoneIds: [
-        number
-    ],
+    zoneIds: number[],
+    selectedZoneIds: [],
     fragmentMasterIds: []
 }
 export interface IRRChartResWrapper {

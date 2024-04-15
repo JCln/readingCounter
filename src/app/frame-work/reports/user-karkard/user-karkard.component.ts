@@ -30,7 +30,7 @@ export class UserKarkardComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   callAPI = async () => {
-    this.closeTabService.saveDataForUserKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingUserKarkard, this.closeTabService.userKarkardReq);
+    this.closeTabService.saveDataForUserKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingUserKarkard, this.closeTabService.userKarkardReq);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationService.verificationUserKarkard(this.closeTabService.userKarkardReq);

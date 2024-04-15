@@ -90,7 +90,7 @@ export class RrLockedComponent extends AllListsFactory {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.lockedReq.zoneId, +this.closeTabService.lockedReq._selectedKindId);
   }
   callAPI = async () => {
-    this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.closeTabService.lockedReq);
+    this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListRRLocked, this.closeTabService.lockedReq);
     this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRLocked);
     this.converts();
   }

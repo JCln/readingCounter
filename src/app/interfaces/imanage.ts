@@ -32,7 +32,7 @@ export interface IMostReportInput {
     zoneIds: [
         number
     ],
-    selectedNodes: [],
+    selectedZoneIds: [],
     beginFromImported?: boolean,
     fragmentMasterIds?: string[],
     isCollapsed?: boolean,

@@ -95,8 +95,12 @@ export class AjaxReqWrapperService {
   }
   // should check performance for all callings functions
   postDataSourceByObject = (place: ENInterfaces | string, object: object): Promise<any> => {
+    console.log(1);
+
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(place, object).toPromise().then((res: any) => {
+      this.interfaceManagerService.POSTBODY(place, object).toPromise().then(res => {
+        console.log(res);
+
         resolve(res);
       })
     });

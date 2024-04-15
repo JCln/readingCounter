@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENGroupByNames } from 'interfaces/enums.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({
@@ -16,12 +17,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 export class MasterComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  aggregateOptions = [
-    { field: 'zoneTitle', header: 'ناحیه' },
-    { field: 'reportTitle', header: 'عنوان گزارش' },
-    { field: 'itemCount', header: 'تعداد' },
-  ];
-  canShowTable: boolean = true;
+  provinceHierarchy: IProvinceHierarchy[] = [];
   ENGroupByNames = ENGroupByNames;
 
   constructor(
@@ -34,19 +30,20 @@ export class MasterComponent extends FactoryONE {
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     // this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.masterReq._selectedKindId);
   }
   callAPI = async () => {
-    this.closeTabService.saveDataForRRMaster = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.closeTabService.masterReq);
+    this.closeTabService.masterReq.selectedZoneIds = [];
+    this.closeTabService.saveDataForRRMaster = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ReadingReportMasterWithParam, this.closeTabService.masterReq);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.masterReq, this.closeTabService._isOrderByDate);
-    if (temp) {
+    this.closeTabService.masterReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.masterReq.selectedZoneIds);
+    if (this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.masterReq, this.closeTabService._isOrderByDate))
       this.callAPI();
-    }
   }
 
 }

@@ -70,7 +70,7 @@ export class KarkardComponent extends FactoryONE {
       document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.closeTabService.karkardReq);
+    this.closeTabService.saveDataForRRKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListOFFKarkard, this.closeTabService.karkardReq);
     this.setGetRanges();
     this.closeTabService.saveDataForRRKarkard = this.closeTabService.saveDataForRRKarkard;
   }

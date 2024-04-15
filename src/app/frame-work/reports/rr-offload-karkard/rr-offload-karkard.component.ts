@@ -64,7 +64,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRROffloadedKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardOffloaded, this.closeTabService.karkardOffloadReq);
+    this.closeTabService.saveDataForRROffloadedKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardOffloaded, this.closeTabService.karkardOffloadReq);
     this.setGetRanges();
   }
   private setGetRanges = () => {

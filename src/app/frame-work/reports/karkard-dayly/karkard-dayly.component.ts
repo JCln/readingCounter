@@ -61,7 +61,7 @@ export class KarkardDaylyComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForRRkarkardDaily = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.closeTabService.karkardDailyReq);
+    this.closeTabService.saveDataForRRkarkardDaily = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardDaily, this.closeTabService.karkardDailyReq);
     this.setGetRanges();
   }
   private setGetRanges = () => {
