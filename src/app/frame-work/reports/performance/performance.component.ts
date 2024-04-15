@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
-import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
@@ -17,7 +16,8 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 export class PerformanceComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  zoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
+
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -28,7 +28,7 @@ export class PerformanceComponent extends FactoryONE {
 
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getReadingPeriod = async () => {
@@ -45,16 +45,16 @@ export class PerformanceComponent extends FactoryONE {
     this.closeTabService.anlzPrfmReq.readingPeriodId = null;
   }
   verification = async () => {
+    this.closeTabService.anlzPrfmReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.anlzPrfmReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRAnalyzePerformance(this.closeTabService.anlzPrfmReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
   connectToServer = async () => {
+    this.closeTabService.anlzPrfmReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRPerformance = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAnalyzeByParam, this.closeTabService.anlzPrfmReq);
     if (MathS.isNull(this.closeTabService.saveDataForRRPerformance))
       return;
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPerformance, this.zoneDictionary, 'zoneId');
     this.setGetRanges();
     this.closeTabService.saveDataForRRPerformance = this.closeTabService.saveDataForRRPerformance;
   }

@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { IKarkardAllStatesDto } from 'interfaces/ireports';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
@@ -22,9 +22,9 @@ export class KarkardAllStatesComponent extends FactoryONE {
   tempData: IKarkardAllStatesDto[] = [];
   header: any[] = [];
   hasFiltersInTable: boolean = false;
+  provinceHierarchy: IProvinceHierarchy[] = [];
   public readonly routerLink: string = this.closeTabService.utilsService.compositeService.getRouterUrl();
 
-  zoneDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -48,7 +48,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
     }
 
     this.closeTabService.getSearchInOrderTo();
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.getFragmentByZone();
 
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
@@ -86,6 +86,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.offKarkardAllStatesReq.zoneId, +this.closeTabService.offKarkardAllStatesReq._selectedKindId);
   }
   verification = async () => {
+    this.closeTabService.offKarkardAllStatesReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.offKarkardAllStatesReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.offKarkardAllStatesReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
@@ -131,7 +132,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
     return auxData;
   }
   connectToServer = async () => {
-
+    this.closeTabService.offKarkardAllStatesReq.selectedZoneIds = [];
     this.tempData = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postKarkardAllStates, this.closeTabService.offKarkardAllStatesReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForKarkardAllStates = this.getCounterStateData(this.tempData);

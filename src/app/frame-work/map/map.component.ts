@@ -161,6 +161,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     return {
       zoneId: parseInt(this.routeParams['zoneId']),
+      zoneIds: this.routeParams['zoneIds'],
       isCounterState: this.routeParams['isCounterState'] === 'true' ? true : false,
       counterStateId: parseInt(this.routeParams['counterStateId']),
       isKarbariChange: this.routeParams['isKarbariChange'] === 'true' ? true : false,

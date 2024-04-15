@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -15,9 +15,9 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class KarkardDaylyComponent extends FactoryONE {
-  zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
@@ -33,8 +33,8 @@ export class KarkardDaylyComponent extends FactoryONE {
       this.setGetRanges();
     }
     this.closeTabService.getSearchInOrderTo();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
@@ -56,11 +56,13 @@ export class KarkardDaylyComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.karkardDailyReq.zoneId, +this.closeTabService.karkardDailyReq._selectedKindId);
   }
   verification = async () => {
+    this.closeTabService.karkardDailyReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.karkardDailyReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardDailyReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
   connectToServer = async () => {
+    this.closeTabService.karkardDailyReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRkarkardDaily = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardDaily, this.closeTabService.karkardDailyReq);
     this.setGetRanges();
   }

@@ -8,11 +8,15 @@
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
                         <div class="_value">
-                            <p-dropdown name="zones" [options]="zoneDictionary"
+                            <p-tree class="w-full md:w-20rem" containerStyleClass="w-full" [value]="provinceHierarchy"
+                                [metaKeySelection]="false" display="comma" selectionMode="checkbox" class="select_tree"
+                                [(selection)]="closeTabService.karkardReq.selectedZoneIds">
+                            </p-tree>
+                            <!-- <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="closeTabService.karkardReq.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
                                 (onChange)="afterZoneChanged()">
-                            </p-dropdown>
+                            </p-dropdown> -->
                         </div>
                     </div>
                     <div class="input_2">

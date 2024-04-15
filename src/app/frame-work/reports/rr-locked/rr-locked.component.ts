@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
@@ -16,7 +16,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class RrLockedComponent extends AllListsFactory {
-  zoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   highLowStateDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -44,7 +44,7 @@ export class RrLockedComponent extends AllListsFactory {
     }
     this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
   }
   converts = async () => {
     const tempZone: number = parseInt(this.closeTabService.saveDataForRRLocked[0].zoneId.toString());
@@ -90,11 +90,13 @@ export class RrLockedComponent extends AllListsFactory {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.lockedReq.zoneId, +this.closeTabService.lockedReq._selectedKindId);
   }
   callAPI = async () => {
+    this.closeTabService.lockedReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListRRLocked, this.closeTabService.lockedReq);
     this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRLocked);
     this.converts();
   }
   verification = async () => {
+    this.closeTabService.lockedReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.lockedReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.lockedReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();

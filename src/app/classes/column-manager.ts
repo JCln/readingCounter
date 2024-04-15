@@ -465,7 +465,7 @@ export class ColumnManager {
     ];
     analyzePrfm: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true,isSelectedOrigin:true, readonly: false },
-        // { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true,isSelectedOrigin:true, readonly: false },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
         // { field: 'regionTitle', header: 'منطقه', isSelected: false,isSelectedOrigin:false, readonly: false },
         { field: 'statusTitle', header: 'وضعیت', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'min', header: 'کمینه', isSelected: true, isSelectedOrigin: true, readonly: false },

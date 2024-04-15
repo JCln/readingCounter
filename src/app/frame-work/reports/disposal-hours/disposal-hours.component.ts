@@ -17,7 +17,6 @@ import { EN_Routes } from 'interfaces/routes.enum';
 })
 export class DisposalHoursComponent extends FactoryONE {
   provinceHierarchy: IProvinceHierarchy[] = [];
-  zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -29,7 +28,6 @@ export class DisposalHoursComponent extends FactoryONE {
 
   classWrapper = async () => {
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamdhchart);

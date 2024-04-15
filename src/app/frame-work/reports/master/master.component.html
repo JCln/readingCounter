@@ -6,18 +6,18 @@
                 <app-sort-according-to></app-sort-according-to>
                 <section class="content">
                     <div class="input_2">
-                        <div class="_key">نواحی</div>
+                        <div class="_key">ناحیه</div>
 
                         <div class="_value">
-                            <!-- <p-treeSelect class="w-full md:w-20rem select_tree" containerStyleClass="w-full"
+                            <p-treeSelect class="w-full md:w-20rem select_tree" containerStyleClass="w-full"
                                 [(ngModel)]="closeTabService.masterReq.selectedZoneIds" [options]="provinceHierarchy"
                                 [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب کنید"
                                 emptyMessage="موردی وجود ندارد">
-                            </p-treeSelect> -->
-                            <p-tree class="w-full md:w-20rem" containerStyleClass="w-full" [value]="provinceHierarchy"
+                            </p-treeSelect>
+                            <!-- <p-tree class="w-full md:w-20rem" containerStyleClass="w-full" [value]="provinceHierarchy"
                                 [metaKeySelection]="false" display="comma" selectionMode="checkbox" class="select_tree"
                                 [(selection)]="closeTabService.masterReq.selectedZoneIds">
-                            </p-tree>
+                            </p-tree> -->
                         </div>
                     </div>
                     <div class="input_2" [hidden]="closeTabService._isOrderByDate">
@@ -81,18 +81,12 @@
             </section>
         </form>
     </section>
-    <app-prime-table 
-    [dataSource]="closeTabService.saveDataForRRMaster" 
-    [_outputFileName]="'master'"
-    [_sessionName]="'master-session'"
-    [_selectedColumnsToRemember]="'selectedRRMaster'"
-    [_calculableSUM]=true
-    [_hasCollapsible]=true
-    [_hasAggregating]=true
-    [_checkUpName]="'Kartables'"
-    [_selectedAggregatedName]="ENGroupByNames.selectedAggregateMaster"
-    [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedMaster"
-    (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedMaster = !readingReportManagerService.utilsService.collapser.isCollapsedMaster"
-    (refreshedTable)="verification()">
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRMaster" [_outputFileName]="'master'"
+        [_sessionName]="'master-session'" [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true
+        [_hasCollapsible]=true [_hasAggregating]=true [_checkUpName]="'Kartables'"
+        [_selectedAggregatedName]="ENGroupByNames.selectedAggregateMaster"
+        [_isCollaped]="readingReportManagerService.utilsService.collapser.isCollapsedMaster"
+        (collapsed)="readingReportManagerService.utilsService.collapser.isCollapsedMaster = !readingReportManagerService.utilsService.collapser.isCollapsedMaster"
+        (refreshedTable)="verification()">
     </app-prime-table>
 </main>

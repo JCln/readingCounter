@@ -14,7 +14,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class GuildsParamsComponent extends FactoryONE {
 
-  zoneDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -35,7 +34,6 @@ export class GuildsParamsComponent extends FactoryONE {
     this.closeTabService.getSearchInOrderTo();
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   afterZoneChanged() {
@@ -50,7 +48,7 @@ export class GuildsParamsComponent extends FactoryONE {
     this.closeTabService.guildsWithParamsReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.guildsWithParamsReq.zoneId, +this.closeTabService.guildsWithParamsReq._selectedKindId);
+    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.guildsWithParamsReq._selectedKindId);
   }
   verification = async () => {
     this.closeTabService.guildsWithParamsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.guildsWithParamsReq.selectedZoneIds);

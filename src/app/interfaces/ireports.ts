@@ -44,8 +44,7 @@ export interface IReadingReportReq {
     beginFromImported?: boolean,
     isCollapsed?: boolean,
     fragmentMasterIds?: string[],
-    selectedZoneIds: TreeNode[],
-    isSingleZone: boolean
+    selectedZoneIds: TreeNode[]
 }
 export interface IKarkardAllStatesDto {
     offloadDayalali: string,
@@ -64,10 +63,11 @@ export interface IKarkardAllStatesDto {
     ]
 }
 export interface IUserKarkardInput {
-    zoneId: number,
+    zoneIds: number[],
     fromDate: string,
     toDate: string,
     statusId: number,
+    selectedZoneIds: any[]
 }
 export interface IUserKarkard {
     userId: string,
@@ -95,7 +95,7 @@ export interface IUserKarkard {
 export interface IReadingReportGISReq {
     zoneId: number,
     zoneIds: number[],
-    selectedZoneIds: any[],
+    selectedZoneIds?: any[],//optional because map component
     isCounterState: boolean,
     counterStateId: number,
     isKarbariChange: boolean,

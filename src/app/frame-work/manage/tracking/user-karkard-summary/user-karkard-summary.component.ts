@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { IUserKarkardSummary } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
@@ -19,6 +19,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
   header: any[] = [];
   @ViewChild(Table) dtable: Table;
   hasFiltersInTable: boolean = false;
+  provinceHierarchy: IProvinceHierarchy[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
 
@@ -42,7 +43,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
       this._selectCols = this.closeTabService.saveDataForUserKarkardSummaryTwo;
       this._selectedColumns = this.trackingManagerService.columnManager.customizeSelectedColumns(this._selectCols);
     }
-
+    this.provinceHierarchy = await this.trackingManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.zoneDictionary = await this.trackingManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   insertSelectedColumns = () => {
@@ -58,6 +59,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   verification = async () => {
+    this.closeTabService.saveDataForUserKarkardSummaryReq.zoneIds = this.trackingManagerService.utilsService.getZoneHierarical(this.closeTabService.saveDataForUserKarkardSummaryReq.selectedZoneIds);
     const temp = this.trackingManagerService.verificationService.userKarkardValidation(this.closeTabService.saveDataForUserKarkardSummaryReq);
     if (temp)
       this.connectToServer();
@@ -93,7 +95,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
     return auxData;
   }
   connectToServer = async () => {
-
+    this.closeTabService.saveDataForUserKarkardSummaryReq.selectedZoneIds = [];
     this.tempData = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postUserKarkardSummary, this.closeTabService.saveDataForUserKarkardSummaryReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForUserKarkardSummary = this.getCounterStateData(this.tempData);

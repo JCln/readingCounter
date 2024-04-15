@@ -90,7 +90,7 @@ export enum EN_Routes {
     reportOffloadKarkard = '/wr/rpts/mam/offkarkard',
     'wrRptsMamFragment' = '/wr/rpts/mam/fragment',
     reportMaster = '/wr/rpts/exm/master',
-    'wrrptsanlzprfm' = '/wr/rpts/anlz/prfm',
+    regionAnalyzePerformance = '/wr/rpts/anlz/prfm',
     'wrrptsgalleryai' = '/wr/rpts/gallery/ai',
     dataMiningAnalysis = '/wr/m/dma/cranlz',
     reportDetails = '/wr/rpts/exm/details',

@@ -15,7 +15,6 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class DetailsComponent extends FactoryONE {
-  zoneDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
   // provinceHierarchy = {
   //   key: '0',
@@ -110,9 +109,7 @@ export class DetailsComponent extends FactoryONE {
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
-
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();    
     this.getReadingPeriod();
     this.getFragmentByZone();
   }
@@ -132,11 +129,7 @@ export class DetailsComponent extends FactoryONE {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.detailsReq._selectedKindId);
   }
   verification = async () => {
-    if (!this.closeTabService.detailsReq.isSingleZone) {
-      this.closeTabService.detailsReq.zoneId = 0;
-      this.closeTabService.detailsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.detailsReq.selectedZoneIds);
-    }
-
+    this.closeTabService.detailsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.detailsReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.detailsReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();

@@ -543,7 +543,7 @@ export class CloseTabService {
     _selectedAggregate: '',// Default group by
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   };
   imgAttrResultReq: IReadingReportReq = {
     fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
@@ -554,7 +554,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
     zoneId: null,
@@ -566,13 +566,14 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   };
   userKarkardReq: IUserKarkardInput = {
     fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
     toDate: this.utilsService.dateJalaliService.getCurrentDate(),
-    zoneId: null,
-    statusId: 0
+    statusId: 0,
+    zoneIds: [],
+    selectedZoneIds: []
   };
   detailsReq: IReadingReportReq = {
     zoneId: 0,
@@ -586,7 +587,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   guildsWithParamsReq: IReadingReportReq = {
     zoneId: 0,
@@ -600,7 +601,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
@@ -612,7 +613,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   karkardReq: IReadingReportReq = {
     zoneId: 0,
@@ -626,7 +627,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   lockedReq: IReadingReportReq = {
     zoneId: 0,
@@ -639,7 +640,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   preNumberShownReq: IReadingReportReq = {
     zoneId: 0,
@@ -652,7 +653,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   rrFragmentKarkardReq: IReadingReportReq = {
     zoneId: 0,
@@ -667,7 +668,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
@@ -681,7 +682,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   karkardDailyReq: IReadingReportReq = {
     zoneId: 0,
@@ -696,7 +697,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -724,9 +725,9 @@ export class CloseTabService {
     reportCode: 0,
     _selectedKindId: '',
     year: this.utilsService.getFirstYear(),
-    zoneIds: [0],
+    zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   dataMiningReq: IMostReportInput = {
     zoneId: 0,
@@ -737,9 +738,9 @@ export class CloseTabService {
     _selectedKindId: '',
     reportCode: 0,
     year: this.utilsService.getFirstYear(),
-    zoneIds: null,
+    zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   trvchReq: IReadingReportTraverseDifferentialReq = {
     zoneId: 0,
@@ -765,7 +766,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   // inStateReq doesn't need _isSeletedKind
   inStateReq: IReadingReportReq = {
@@ -778,7 +779,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   offlineSingleReadingCounter: IOnOffLoadFlat[];
   saveDataForTrackImported: ITracking[] = [];
@@ -804,7 +805,8 @@ export class CloseTabService {
   saveDataForUserKarkard: IUserKarkard[] = [];
   saveDataForTrackOffloaded: ITracking[] = [];
   saveDataForUserKarkardSummaryReq = {
-    zoneId: null,
+    zoneIds: [],
+    selectedZoneIds: [],
     fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
     toDate: this.utilsService.dateJalaliService.getCurrentDate(),
     _isCollapsed: false
@@ -826,7 +828,6 @@ export class CloseTabService {
     fragmentMasterIds: [],
     isCollapsed: false,
     selectedZoneIds: [],
-    isSingleZone: false
   }
   saveDataForKarkardAllStates: IKarkardAllStatesDto[] = [];
   saveDataForKarkardAllStatesTWO: any;
@@ -1255,7 +1256,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [0],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   saveDataForFNB: IForbiddenManager[] = [];
   saveDataForProfile: IProfile = {
@@ -1300,7 +1301,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [0],
     selectedZoneIds: [],
-    isSingleZone: false
+
   }
   mobileManagerforbiddenType: IForbiddenManager[];
 
@@ -1344,7 +1345,7 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         zoneIds: [0],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     { id: 1, value: ENEssentialsToSave.logMemoryStatus, url: EN_Routes.reqLogMemoryStatus },
@@ -1415,7 +1416,7 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     {
@@ -1430,7 +1431,7 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.rrkarbari, defaultValue: [] },
@@ -1796,7 +1797,7 @@ export class CloseTabService {
         fragmentMasterIds: [],
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       },
       defaultValue: []
     },
@@ -1827,7 +1828,7 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       },
       defaultValue: []
     },
@@ -1845,7 +1846,6 @@ export class CloseTabService {
         _selectedKindId: '',
         zoneIds: [0],
         selectedZoneIds: [],
-        isSingleZone: false,
         beginFromImported: false,
         fragmentMasterIds: [],
         isCollapsed: false
@@ -1869,7 +1869,7 @@ export class CloseTabService {
         fragmentMasterIds: [],
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     {
@@ -1886,7 +1886,7 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       },
       defaultValue: []
     },
@@ -1903,7 +1903,7 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       },
       defaultValue: []
     },
@@ -1921,7 +1921,7 @@ export class CloseTabService {
         fragmentMasterIds: [],
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       },
       defaultValue: []
     },
@@ -1941,7 +1941,7 @@ export class CloseTabService {
         fragmentMasterIds: [],
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     { id: 2, value: ENEssentialsToSave.notificationMessages, url: EN_Routes.NotificationMessages },
@@ -1958,11 +1958,11 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         _selectedAggregate: '',// Default group by
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     {
-      id: 1, req: ENEssentialsToSave.anlzPrfmReq, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm,
+      id: 1, req: ENEssentialsToSave.anlzPrfmReq, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.regionAnalyzePerformance,
       defaultValue: [],
       defaultReq: {
         zoneId: 0,
@@ -1973,9 +1973,9 @@ export class CloseTabService {
         reportCode: 0,
         _selectedKindId: '',
         year: this.utilsService.getFirstYear(),
-        zoneIds: [0],
+        zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, defaultValue_2: null, url: EN_Routes.wrrptsgalleryai },
@@ -1998,9 +1998,8 @@ export class CloseTabService {
         _selectedKindId: '',
         reportCode: 0,
         year: this.utilsService.getFirstYear(),
-        zoneIds: null,
+        zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
       }
     },
     {
@@ -2017,7 +2016,7 @@ export class CloseTabService {
         fragmentMasterIds: [],
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       },
       defaultValue: []
     },
@@ -2033,7 +2032,7 @@ export class CloseTabService {
         year: this.utilsService.getFirstYear(),
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     {
@@ -2050,7 +2049,7 @@ export class CloseTabService {
         fragmentMasterIds: [],
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       },
       defaultValue: []
     },
@@ -2193,13 +2192,15 @@ export class CloseTabService {
       defaultReq: {
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
         toDate: this.utilsService.dateJalaliService.getCurrentDate(),
-        zoneId: null,
+        zoneIds: [],
+        selectedZoneIds: [],
         statusId: 0
       }
     },
     {
       id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, defaultValue: null, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, defaultValue_2: null, url: EN_Routes.userKarkardSummary, defaultReq: {
-        zoneId: null,
+        zoneIds: [],
+        selectedZoneIds: [],
         fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
         toDate: this.utilsService.dateJalaliService.getCurrentDate(),
         _isCollapsed: false
@@ -2221,7 +2222,7 @@ export class CloseTabService {
         fragmentMasterIds: [],
         zoneIds: [],
         selectedZoneIds: [],
-        isSingleZone: false
+
       }
     },
     {

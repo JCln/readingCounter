@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -17,8 +17,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
   animations: [transitionAnimation]
 })
 export class KarkardComponent extends FactoryONE {
-  zoneDictionary: IDictionaryManager[] = [];
-
+  provinceHierarchy: IProvinceHierarchy[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
@@ -40,8 +39,8 @@ export class KarkardComponent extends FactoryONE {
       this.setGetRanges();
     }
     this.closeTabService.getSearchInOrderTo();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
@@ -66,10 +65,12 @@ export class KarkardComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
+    this.closeTabService.karkardReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.karkardReq.selectedZoneIds);
     if (this.validation())
       document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
+    this.closeTabService.karkardReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListOFFKarkard, this.closeTabService.karkardReq);
     this.setGetRanges();
     this.closeTabService.saveDataForRRKarkard = this.closeTabService.saveDataForRRKarkard;

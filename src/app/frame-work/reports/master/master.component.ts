@@ -5,7 +5,6 @@ import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-conf
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 
 @Component({

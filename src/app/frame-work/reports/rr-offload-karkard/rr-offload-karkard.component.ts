@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -17,6 +17,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 export class RrOffloadKarkardComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -34,6 +35,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
       this.setGetRanges();
     }
     this.closeTabService.getSearchInOrderTo();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
@@ -60,10 +62,12 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardOffloadReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
+    this.closeTabService.karkardOffloadReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.karkardOffloadReq.selectedZoneIds);
     if (this.validation())
       this.connectToServer();
   }
   connectToServer = async () => {
+    this.closeTabService.karkardOffloadReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRROffloadedKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardOffloaded, this.closeTabService.karkardOffloadReq);
     this.setGetRanges();
   }

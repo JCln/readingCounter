@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
@@ -22,6 +22,8 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
+
   highLowStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -41,6 +43,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.converts();
     }
     this.closeTabService.getSearchInOrderTo();
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
@@ -58,11 +61,13 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.preNumberShownReq.zoneId, +this.closeTabService.preNumberShownReq._selectedKindId);
   }
   connectToServer = async () => {
+    this.closeTabService.preNumberShownReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListRRPreNumberShown, this.closeTabService.preNumberShownReq);
     this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
     this.converts();
   }
   verification = async () => {
+    this.closeTabService.preNumberShownReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.preNumberShownReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.preNumberShownReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
