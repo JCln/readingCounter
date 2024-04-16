@@ -59,7 +59,8 @@ export class KarkardComponent extends FactoryONE {
     this.closeTabService.karkardReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.karkardReq.zoneId, +this.closeTabService.karkardReq._selectedKindId);
+    if (this.closeTabService.karkardReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.karkardReq._selectedKindId);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardReq, this.closeTabService._isOrderByDate);

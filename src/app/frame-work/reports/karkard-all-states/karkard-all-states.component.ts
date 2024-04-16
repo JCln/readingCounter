@@ -83,7 +83,8 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
 
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.offKarkardAllStatesReq.zoneId, +this.closeTabService.offKarkardAllStatesReq._selectedKindId);
+    if (this.closeTabService.offKarkardAllStatesReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.offKarkardAllStatesReq._selectedKindId);
   }
   verification = async () => {
     this.closeTabService.offKarkardAllStatesReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.offKarkardAllStatesReq.selectedZoneIds);
@@ -101,6 +102,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
       { field: 'duration', header: 'مدت', isSelected: false, isNumber: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
+      { field: 'regionTitle', header: 'منطقه', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true }
     ]
     for (let index = 0; index < data[0].counterStateAndCounts.length; index++) {

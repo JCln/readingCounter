@@ -48,7 +48,8 @@ export class GuildsParamsComponent extends FactoryONE {
     this.closeTabService.guildsWithParamsReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.guildsWithParamsReq._selectedKindId);
+    if (this.closeTabService.guildsWithParamsReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.guildsWithParamsReq._selectedKindId);
   }
   verification = async () => {
     this.closeTabService.guildsWithParamsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.guildsWithParamsReq.selectedZoneIds);

@@ -32,7 +32,8 @@ export class PerformanceComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.anlzPrfmReq.zoneId, +this.closeTabService.anlzPrfmReq._selectedKindId);
+    if (this.closeTabService.anlzPrfmReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.anlzPrfmReq._selectedKindId);
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values

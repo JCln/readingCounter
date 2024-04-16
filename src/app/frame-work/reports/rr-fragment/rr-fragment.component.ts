@@ -56,7 +56,7 @@ export class RrFragmentComponent extends FactoryONE {
   }
   getReadingPeriod = async () => {
     if (this.closeTabService.rrFragmentKarkardReq._selectedKindId)
-      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.rrFragmentKarkardReq.zoneId, +this.closeTabService.rrFragmentKarkardReq._selectedKindId);
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.rrFragmentKarkardReq._selectedKindId);
   }
   getFragmentByZone = async () => {
     if (this.closeTabService.rrFragmentKarkardReq.zoneId)

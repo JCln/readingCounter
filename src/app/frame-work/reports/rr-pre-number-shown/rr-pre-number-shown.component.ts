@@ -58,7 +58,8 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.closeTabService.preNumberShownReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.preNumberShownReq.zoneId, +this.closeTabService.preNumberShownReq._selectedKindId);
+    if (this.closeTabService.preNumberShownReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.preNumberShownReq._selectedKindId);
   }
   connectToServer = async () => {
     this.closeTabService.preNumberShownReq.selectedZoneIds = [];

@@ -48,7 +48,8 @@ export class DmAnalysisComponent extends FactoryONE {
     this.closeTabService.dataMiningReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.dataMiningReq.zoneId, +this.closeTabService.dataMiningReq._selectedKindId);
+    if (this.closeTabService.dataMiningReq._selectedKindId)
+      this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.dataMiningReq._selectedKindId);
   }
   connectToServer = async () => {
     this.closeTabService.dataMiningReq.selectedZoneIds = [];

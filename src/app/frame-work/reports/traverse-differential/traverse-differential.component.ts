@@ -60,7 +60,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.closeTabService.trvchReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.trvchReq.zoneId, +this.closeTabService.trvchReq._selectedKindId);
+    if (this.closeTabService.trvchReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.trvchReq._selectedKindId);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationService.verificationRRTraverseDifferential(this.closeTabService.trvchReq, this.closeTabService._isOrderByDate);

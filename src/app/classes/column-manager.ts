@@ -465,6 +465,7 @@ export class ColumnManager {
     ];
     analyzePrfm: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true,isSelectedOrigin:true, readonly: false },
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
         // { field: 'regionTitle', header: 'منطقه', isSelected: false,isSelectedOrigin:false, readonly: false },
         { field: 'statusTitle', header: 'وضعیت', isSelected: true, isSelectedOrigin: true, readonly: false },
@@ -497,7 +498,7 @@ export class ColumnManager {
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, isSelectedOrigin: true, readonly: true },
     ]
     fragmentDetails: IObjectIteratation[] = [
-        { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false, icon: 'grid-column: auto/ span 2;' },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -552,11 +553,11 @@ export class ColumnManager {
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
     ]
     fragmentDetailsAddEditDialog: IObjectIteratation[] = [
-        { field: 'routeTitle', header: 'مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
-        { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
+        // { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
+        // { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
     ]
     fragmentMasterAdd: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
@@ -573,18 +574,20 @@ export class ColumnManager {
         { field: 'isValidated', header: 'تایید شده', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
     ]
     rrkarkardAllStates: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true, isSelectedOrigin: false },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, isSelectedOrigin: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isSelectedOrigin: false },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isSelectedOrigin: false },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true },
         { field: 'duration', header: 'مدت', isSelected: false, isNumber: true, isSelectedOrigin: false },
         { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true, isSelectedOrigin: true },
-        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true, isSelectedOrigin: false }
     ]
     rrUserKarkard: IObjectIteratation[] = [
         // { field: 'userId', header: 'کد کاربر', isSelected: true,isSelectedOrigin:true },
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true, isSelectedOrigin: true },
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false, readonly: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true },
         { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, isSelectedOrigin: true, isNumber: true },
@@ -1170,6 +1173,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
     ]
     rrDetails: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -1208,6 +1212,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, readonly: false, enableTooltip: true },
     ]
     trv: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -1232,6 +1237,7 @@ export class ColumnManager {
         { field: 'guildTitle', header: 'صنف', isSelected: false, isSelectedOrigin: false, readonly: true }
     ]
     trvDiff: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -1249,6 +1255,7 @@ export class ColumnManager {
     ]
     karkard: IObjectIteratation[] = [
         // { field: 'offloadDayalali', header: 'روز', isSelected: true,isSelectedOrigin:true, readonly: true },
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         // { field: 'fromTime', header: 'از ساعت', isSelected: true,isSelectedOrigin:true, readonly: true },
@@ -1265,6 +1272,7 @@ export class ColumnManager {
         { field: 'saierCount', header: 'سایر', isSelected: true, isSelectedOrigin: true, readonly: true },
     ]
     karkardDaily: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'fromTime', header: 'از', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -1282,6 +1290,7 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isSelectedOrigin: false, readonly: true }
     ]
     karkardOffload: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false, readonly: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -1302,6 +1311,7 @@ export class ColumnManager {
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, readonly: true },
     ]
     fragmentKarkard: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false, readonly: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -1322,6 +1332,7 @@ export class ColumnManager {
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, readonly: true },
     ]
     disposalHs: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'dayJalali', header: 'روز', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'overalCount', header: 'تعداد کل', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -1343,6 +1354,7 @@ export class ColumnManager {
         { field: 'listNumber', header: 'ش لیست', isSelected: false, isSelectedOrigin: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false },
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true },
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false },
         { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true },
@@ -1418,6 +1430,7 @@ export class ColumnManager {
         { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false },
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true },
         // { field: 'zoneId', header: 'ناحیه', isSelected: false,isSelectedOrigin:false },
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false },
         { field: 'firstName', header: 'نام', isSelected: true, isSelectedOrigin: true },
         { field: 'sureName', header: 'نام خانوادگی', isSelected: true, isSelectedOrigin: true },

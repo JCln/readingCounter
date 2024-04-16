@@ -571,8 +571,8 @@ export class VerificationService {
     return true;
   }
   userKarkardValidation = (dataSource: object): boolean => {
-    if (MathS.isNull(dataSource['zoneId'])) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+    if (MathS.isNull(dataSource['zoneIds'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zoneIds);
       return false;
     }
     if (MathS.isNull(dataSource['fromDate'])) {
@@ -583,6 +583,42 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
+    return true;
+  }
+  private datesValidationGIS = (dataSource: IReadingReportGISReq): boolean => {
+    if (dataSource.isSingleZone) {
+      if (MathS.isNull(dataSource.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    else {
+      if (MathS.isNull(dataSource.zoneIds)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zoneIds);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (MathS.isNull(dataSource['fromDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+        return false;
+      }
+      if (!MathS.lengthControl(dataSource['fromDate'], dataSource['fromDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (MathS.isNull(dataSource['toDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+        return false;
+      }
+      if (!MathS.lengthControl(dataSource['toDate'], dataSource['toDate'], 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_toDate);
+        return false;
+      }
+    }
+
     return true;
   }
   private datesValidation = (dataSource: object): boolean => {
@@ -645,11 +681,18 @@ export class VerificationService {
     return true;
   }
   private periodValidationGIS = (readingReportGISReq: IReadingReportGISReq): boolean => {
-    if (readingReportGISReq.hasOwnProperty('zoneIds'))
-      if (MathS.isNull(readingReportGISReq['zoneIds'])) {
+    if (readingReportGISReq.isSingleZone) {
+      if (MathS.isNull(readingReportGISReq.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
+    }
+    else {
+      if (MathS.isNull(readingReportGISReq.zoneIds)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zoneIds);
+        return false;
+      }
+    }
     if (readingReportGISReq.isForbidden === true) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_forbiddenByDate);
       return false;
@@ -687,7 +730,7 @@ export class VerificationService {
           }
         }
       }
-      return this.datesValidation(readingReportGISReq);
+      return this.datesValidationGIS(readingReportGISReq);
     }
     else {
       return this.periodValidationGIS(readingReportGISReq);

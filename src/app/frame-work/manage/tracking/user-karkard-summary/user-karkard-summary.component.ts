@@ -67,6 +67,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
 
   getCounterStateHeaders = (data: any): any => {
     let c = [
+      { field: 'regionTitle', header: 'منطقه', isSelected: true },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
       { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },

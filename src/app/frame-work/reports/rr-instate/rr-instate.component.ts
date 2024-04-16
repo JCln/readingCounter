@@ -24,11 +24,11 @@ export class RrInstateComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    this.closeTabService.disposalhoursReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.disposalhoursReq.selectedZoneIds);
+    this.closeTabService.inStateReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.inStateReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.inStateReq, true);
     if (temp) {
-      this.closeTabService.disposalhoursReq.selectedZoneIds = [];
-      const res = await this.readingReportManagerService.ajaxReqWrapperService.postBlob(ENInterfaces.rrInStatePost, this.closeTabService.inStateReq);
+      this.closeTabService.inStateReq.selectedZoneIds = [];
+      const res = await this.readingReportManagerService.ajaxReqWrapperService.postBlobObserve(ENInterfaces.rrInStatePost, this.closeTabService.inStateReq);
       this.outputManagerService.downloadFileWithContentDisposition(res);
     }
   }

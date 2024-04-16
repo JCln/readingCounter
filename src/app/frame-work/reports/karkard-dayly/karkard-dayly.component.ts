@@ -53,7 +53,8 @@ export class KarkardDaylyComponent extends FactoryONE {
     this.closeTabService.karkardDailyReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.karkardDailyReq.zoneId, +this.closeTabService.karkardDailyReq._selectedKindId);
+    if (this.closeTabService.karkardDailyReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.karkardDailyReq._selectedKindId);
   }
   verification = async () => {
     this.closeTabService.karkardDailyReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.karkardDailyReq.selectedZoneIds);

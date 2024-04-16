@@ -702,6 +702,7 @@ export class CloseTabService {
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
     zoneIds: [],
+    regionTitle: '',
     selectedZoneIds: [],
     isCounterState: true,
     counterStateId: 0,
@@ -714,7 +715,8 @@ export class CloseTabService {
     readingPeriodId: null,
     year: this.utilsService.getFirstYear(),
     fragmentMasterIds: [],
-    isCluster: true
+    isCluster: true,
+    isSingleZone: true
   }
   anlzPrfmReq: IMostReportInput = {
     zoneId: 0,

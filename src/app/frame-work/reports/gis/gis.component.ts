@@ -13,6 +13,7 @@ export class GisComponent extends FactoryONE {
   provinceHierarchy: IProvinceHierarchy[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
 
@@ -32,7 +33,8 @@ export class GisComponent extends FactoryONE {
       this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.gisReq.zoneId);
   }
   classWrapper = async () => {
-    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();    
+    this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.getCounterStateByZoneId();
     this.closeTabService.getSearchInOrderTo();
@@ -60,9 +62,14 @@ export class GisComponent extends FactoryONE {
       else
         this.closeTabService.gisReq[item.id] = false;
     })
+
+    event == 'isCounterState' ? this.closeTabService.gisReq.isSingleZone = true : this.closeTabService.gisReq.isSingleZone = false
     event == 'isForbidden' ? this.closeTabService._isOrderByDate = true : ''
   }
   verification = async () => {
+    if (!this.closeTabService.gisReq.isSingleZone) {
+      this.closeTabService.gisReq.zoneId = 0;
+    }
     this.closeTabService.gisReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.gisReq.selectedZoneIds);
     const temp = this.readingReportManagerService.verificationService.verificationRRGIS(this.closeTabService.gisReq, this.closeTabService._isOrderByDate);
     if (temp)

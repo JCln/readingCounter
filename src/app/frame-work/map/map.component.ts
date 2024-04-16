@@ -161,7 +161,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
     return {
       zoneId: parseInt(this.routeParams['zoneId']),
-      zoneIds: this.routeParams['zoneIds'],
+      zoneIds: typeof this.routeParams['zoneIds'] == 'string' ? this.routeParams['zoneIds'].split(',') : this.routeParams['zoneIds'],
+      regionTitle: this.routeParams['regionTitle'],
       isCounterState: this.routeParams['isCounterState'] === 'true' ? true : false,
       counterStateId: parseInt(this.routeParams['counterStateId']),
       isKarbariChange: this.routeParams['isKarbariChange'] === 'true' ? true : false,
@@ -303,7 +304,7 @@ export class MapComponent implements OnInit, OnDestroy {
       return;
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
-        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        `${items.info1} <br>` + `${items.info2} <br> ${items.info3} <br> ${items.info4}`
       );
   }
   private getXYMarkerClusterPosition = (xyData: any) => {
@@ -311,7 +312,7 @@ export class MapComponent implements OnInit, OnDestroy {
     xyData.map((items) => {
       this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
-        .bindPopup(`اشتراک${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        .bindPopup(`اشتراک${items.info1} <br>` + `${items.info2} <br> ${items.info3} <br> ${items.info4}`
         ));
     })
     this.layerGroup.addLayer(markers);
@@ -330,8 +331,9 @@ export class MapComponent implements OnInit, OnDestroy {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
       this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
-      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
-        .bindPopup(`${items.info1} <br>` + `اشتراک قبلی:${items.info2} <br> اشتراک بعدی:${items.info3}`
+      // items.gisAccuracy <= 1000 is for under 1000 meter gis accuracy accepted to make circle marker
+      markers.addLayer(L.circleMarker([parseFloat(items.y), parseFloat(items.x)], { weight: 4, radius: parseFloat(items.gisAccuracy <= 1000 ? items.gisAccuracy : 10), color: this.color_normal })
+        .bindPopup(`${items.info1} <br>` + `اشتراک قبلی:${items.info2} <br> اشتراک بعدی:${items.info3}, <br> منطقه:${items.info4}`
         ));
     })
     this.layerGroup.addLayer(markers);
@@ -341,7 +343,7 @@ export class MapComponent implements OnInit, OnDestroy {
     xyData.map((items) => {
       this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
-        .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3} <br> ${items.info4}`
         ));
     })
     this.layerGroup.addLayer(markers);

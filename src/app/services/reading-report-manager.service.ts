@@ -78,7 +78,8 @@ export class ReadingReportManagerService {
     window.open(this.utilsService.getAPIUrl() + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + + '/' + ENInterfaces.accessTokenTile + this.getAuthToken(), ENInterfaces._blank);
   }
   routeToMapGIS = async (readingReportGISReq: any) => {
-    // insert into gis request and should valiation before route to map     
+    // insert into gis request and should valiation before route to map    
+    readingReportGISReq.selectedZoneIds = [];
     const temp = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListToGis, readingReportGISReq);
     if (temp.length) {
       this.mapService.gisReqAux = readingReportGISReq;

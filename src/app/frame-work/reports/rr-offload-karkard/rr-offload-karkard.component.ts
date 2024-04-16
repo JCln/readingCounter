@@ -56,7 +56,8 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     this.closeTabService.karkardOffloadReq.readingPeriodId = null;
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService.karkardOffloadReq.zoneId, +this.closeTabService.karkardOffloadReq._selectedKindId);
+    if (this.closeTabService.karkardOffloadReq._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.karkardOffloadReq._selectedKindId);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardOffloadReq, this.closeTabService._isOrderByDate);

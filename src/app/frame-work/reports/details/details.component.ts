@@ -16,79 +16,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class DetailsComponent extends FactoryONE {
   provinceHierarchy: IProvinceHierarchy[] = [];
-  // provinceHierarchy = {
-  //   key: '0',
-  //   label: 'تهران',
-  //   data: 'Documents Folder',
-  //   icon: 'pi pi-fw pi-inbox',
-  //   children: [
-  //     {
-  //       key: '0-0',
-  //       label: 'منطقه1',
-  //       data: 'Work Folder',
-  //       icon: 'pi pi-fw pi-cog',
-  //       children: [
-  //         { key: 'افجه', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-  //         { key: 'لاطره', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
-  //       ]
-  //     },
-  //     {
-  //       key: '0-1',
-  //       label: 'منطقه 2',
-  //       data: 'Home Folder',
-  //       icon: 'pi pi-fw pi-home',
-  //       children: [
-  //         {
-  //           key: '0-1-0',
-  //           label: 'ناحیه 2',
-  //           icon: 'pi pi-fw pi-file',
-  //           data: 'Invoices for this month'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
-  // provinceHierarchy = [{
-  //   data: 13,
-  //   label: ' تهران',
-  //   children: [
-  //     {
-  //       data: 1,
-  //       label: ' لواسان',
-  //       children: [
-  //         {
-  //           data: 1,
-  //           label: ' افجه'
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       data: 1,
-  //       label: ' منطقه 2',
-  //       children: [
-  //         {
-  //           data: 1,
-  //           label: ' ناحیه دو'
-  //         },
-  //         {
-  //           data: 2,
-  //           label: ' ناحیه دو-سه'
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       data: 1,
-  //       label: ' منطقه سه',
-  //       children: [
-  //         {
-  //           data: 1,
-  //           label: ' ناحیه سه'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }]
-
+ 
   karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -135,6 +63,7 @@ export class DetailsComponent extends FactoryONE {
       this.callAPI();
   }
   callAPI = async () => {
+    this.closeTabService.detailsReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRDetails = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ReadingReportDETAILSWithParam, this.closeTabService.detailsReq);
     this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'possibleKarbariCode');
