@@ -695,7 +695,9 @@ export enum ENEssentialsToSave {
     offering = "offering",
     offeringUnit = "offeringUnit",
     tariff = "tariff",
-    tariffExcelToFillInput = "tariffExcelToFillInput"
+    tariffExcelToFillInput = "tariffExcelToFillInput",
+    importHiwaReq = "importHiwaReq",
+    importHiwa = "importHiwa"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

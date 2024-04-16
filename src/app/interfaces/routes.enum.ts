@@ -48,6 +48,7 @@ export enum EN_Routes {
     zone = '/wr/m/zs/z',
     zoneBound = '/wr/m/zs/zb',
     'wrimpimd' = '/wr/imp/imd',
+    importHiwa = '/wr/imp/hiwa',
     'wrimpFileExcel' = '/wr/imp/fileExcel',
     'wrimperr' = '/wr/imp/err',
     'wrImportErrByTrackNumber' = '/wr/imp/errByTrackNumber',

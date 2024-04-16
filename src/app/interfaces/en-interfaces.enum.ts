@@ -404,6 +404,8 @@ export enum ENInterfaces {
     postSimafaSingle = 'V1/Import/Simafa/single',
     postSimafaAssessPre = 'V1/Import/Simafa/AssessPre',
     postSimafaAssessAdd = 'V1/Import/Simafa/AssessAdd',
+    postImportHiwa = 'V1/Import/Hiwa',
+    postImportHiwaCount = 'V1/Import/HiwaCount',
 
     getImportDataFileExcelSample = 'V1/Import/File/ExcelSample',
     postImportDataFileExcel = 'V1/Import/File/Excel',

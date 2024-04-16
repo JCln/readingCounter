@@ -41,5 +41,6 @@ export enum ENReadingReports {
     clientAddReq = 'clientManagerAdd',
     tariffExcelToFill = 'tariffExcelToFill',
     importDynamic = 'importDynamicReq',
+    importHiwa = 'importHiwaReq',
     simple = '_searchSimpleReq'
 }

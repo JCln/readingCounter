@@ -866,7 +866,27 @@ export class CloseTabService {
     displayDebt: false,
     displayIcons: false,
   }
+  importHiwaReq: IImportDynamicDefault = {
+    fromEshterak: '',
+    toEshterak: '',
+    zoneId: null,
+    alalHesabPercent: 0,
+    imagePercent: 0,
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+    fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+    counterReaderId: '',
+    readingPeriodId: null,
+    displayPreDate: false,
+    displayMobile: false,
+    hasImage: false,
+    displayDebt: false,
+    displayIcons: false,
+  }
   saveDataForImportDynamic: any;
+  importHiwa: any;
   saveDataForImportErrors: IImportErrors[] = [];
   saveDataForImportErrorsByTrackNumber = [];
   saveDataForImportErrorsByTrackNumberReq = {
@@ -1502,6 +1522,27 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: EN_Routes.zoneBound, defaultValue: [] },
     {
       id: 1, req: ENEssentialsToSave.importDynamicReq, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd, defaultReq: {
+        fromEshterak: '',
+        toEshterak: '',
+        zoneId: null,
+        alalHesabPercent: 0,
+        imagePercent: 0,
+        hasPreNumber: false,
+        displayBillId: false,
+        displayRadif: false,
+        fromDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        toDate: this.utilsService.dateJalaliService.getCurrentDate(),
+        counterReaderId: '',
+        readingPeriodId: null,
+        displayPreDate: false,
+        displayMobile: false,
+        hasImage: false,
+        displayDebt: false,
+        displayIcons: false,
+      }
+    },
+    {
+      id: 1, req: ENEssentialsToSave.importHiwaReq, value: ENEssentialsToSave.importHiwa, url: EN_Routes.importHiwa, defaultReq: {
         fromEshterak: '',
         toEshterak: '',
         zoneId: null,
