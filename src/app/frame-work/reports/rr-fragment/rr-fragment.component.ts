@@ -22,7 +22,7 @@ export class RrFragmentComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -46,13 +46,6 @@ selectedZoneIds= [];
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
   }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.closeTabService.rrFragmentKarkardReq.fragmentMasterIds = [];
-    this.readingPeriodDictionary = [];
-    this.closeTabService.rrFragmentKarkardReq.readingPeriodId = null;
-    this.closeTabService.rrFragmentKarkardReq._selectedKindId = null;
-  }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
     this.closeTabService.rrFragmentKarkardReq.readingPeriodId = null;
@@ -62,8 +55,7 @@ selectedZoneIds= [];
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.rrFragmentKarkardReq._selectedKindId);
   }
   getFragmentByZone = async () => {
-    if (this.closeTabService.rrFragmentKarkardReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.rrFragmentKarkardReq.zoneId);
+    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.rrFragmentKarkardReq, this.closeTabService._isOrderByDate);

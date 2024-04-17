@@ -89,6 +89,12 @@ export class ReadingReportManagerService {
       this.utilsService.snackBarMessageFailed(EN_messages.notFound);
     }
   }
+  getFragmentMastersInZones = async (value: any): Promise<any> => {
+    if (value)
+      return await this.dictionaryWrapperService.getFragmentMasterInZonesDictionary(
+        this.utilsService.getZoneHierarical(value)
+      );
+  }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {

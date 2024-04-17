@@ -19,7 +19,7 @@ export class PerformanceComponent extends FactoryONE {
   readingPeriodDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
 
   constructor(
@@ -37,12 +37,6 @@ selectedZoneIds= [];
   getReadingPeriod = async () => {
     if (this.closeTabService.anlzPrfmReq._selectedKindId)
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.anlzPrfmReq._selectedKindId);
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingPeriodDictionary = [];
-    this.closeTabService.anlzPrfmReq.readingPeriodId = null;
-    this.closeTabService.anlzPrfmReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

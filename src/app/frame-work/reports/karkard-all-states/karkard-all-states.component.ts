@@ -26,7 +26,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
   provinceHierarchy: IProvinceHierarchy[] = [];
   public readonly routerLink: string = this.closeTabService.utilsService.compositeService.getRouterUrl();
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -70,21 +70,12 @@ selectedZoneIds= [];
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   getFragmentByZone = async () => {
-    if (this.closeTabService.offKarkardAllStatesReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.offKarkardAllStatesReq.zoneId);
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.closeTabService.offKarkardAllStatesReq.fragmentMasterIds = [];
-    this.readingPeriodDictionary = [];
-    this.closeTabService.offKarkardAllStatesReq.readingPeriodId = null;
-    this.closeTabService.offKarkardAllStatesReq._selectedKindId = null;
+    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
     this.closeTabService.offKarkardAllStatesReq.readingPeriodId = null;
   }
-
   getReadingPeriod = async () => {
     if (this.closeTabService.offKarkardAllStatesReq._selectedKindId)
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.offKarkardAllStatesReq._selectedKindId);

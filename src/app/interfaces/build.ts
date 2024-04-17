@@ -250,7 +250,7 @@ export class getTarrifTypeDictionary {
     static readonly DEFAULT = new getTarrifTypeDictionary([
         { id: 0, dynamicId: 0, field: 'Bill', title: 'مبلغ' },
         { id: 1, dynamicId: 1, field: 'Off', title: 'تخفیف' },
-        { id: 2, dynamicId: 2, field: 'Commission', title: 'کمیسیون' },
+        { id: 2, dynamicId: 2, field: 'Commission', title: 'کارمزد' },
         { id: 3, dynamicId: 3, field: 'Tax', title: 'مالیات' },
     ]);
     private constructor(public readonly value: { id: number, dynamicId: number, title: string, field: string }[]) { }

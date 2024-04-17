@@ -27,7 +27,7 @@ export class RrLockedComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -78,12 +78,6 @@ selectedZoneIds= [];
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'karbariCode');
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingPeriodDictionary = [];
-    this.closeTabService.lockedReq.readingPeriodId = null;
-    this.closeTabService.lockedReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

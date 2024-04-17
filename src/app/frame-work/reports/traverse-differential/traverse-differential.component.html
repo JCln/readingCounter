@@ -11,18 +11,19 @@
                             <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
                                 [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
                                 [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                                emptyMessage="موردی وجود ندارد" #myTreeSelect>
+                                emptyMessage="موردی وجود ندارد" #myTreeSelect (onHide)="getFragmentByZone()">
                             </p-treeSelect>
                         </div>
                     </div>
                     <div class="input_2">
                         <div class="_key">نوبتی</div>
                         <div class="_value">
-                            <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
-                                [(ngModel)]="closeTabService.trvchReq.fragmentMasterIds" optionLabel="routeTitle"
-                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
-                                [filter]="true" showClear="true">
-                            </p-multiSelect>
+                            <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
+                                [(ngModel)]="closeTabService.trvchReq.fragmentMasterIds"
+                                [options]="fragmentByZoneDictionary" display="chip" [metaKeySelection]="false"
+                                selectionMode="checkbox" placeholder="انتخاب مورد" emptyMessage="موردی وجود ندارد"
+                                #myTreeSelect>
+                            </p-treeSelect>
                         </div>
                     </div>
                     <div class="input_2">

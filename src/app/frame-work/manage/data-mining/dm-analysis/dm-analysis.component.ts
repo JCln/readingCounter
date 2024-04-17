@@ -40,12 +40,6 @@ selectedZoneIds= [];
     this.provinceHierarchy = await this.dataMiningAnalysesService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getPeriodKindDictionary();
   }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingPeriodDictionary = [];
-    this.closeTabService.dataMiningReq.readingPeriodId = null;
-    this.closeTabService.dataMiningReq._selectedKindId = null;
-  }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
     this.closeTabService.dataMiningReq.readingPeriodId = null;

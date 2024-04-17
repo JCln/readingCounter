@@ -19,7 +19,7 @@ export class UserKarkardComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,

@@ -141,6 +141,7 @@ export enum ENInterfaces {
     fragmentMASTERADD = 'V1/Fragment/Master/Add',
     fragmentMASTERVALIDATE = 'V1/Fragment/Master/Validate',
     fragmentMasterInZone = `V1/Fragment/Master/InZone/`,
+    fragmentMasterInZones = 'V1/Fragment/Master/InZones',
     fragmentDETAILSDETAILS = 'V1/Fragment/Details',
     fragmentDETAILSREMOVE = 'V1/Fragment/Detials/Remove',
     fragmentDETAILSEDIT = 'V1/Fragment/Details/Edit',

@@ -4,6 +4,7 @@ import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-conf
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { TreeSelect } from 'primeng/treeselect';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-gis',
@@ -34,6 +35,8 @@ export class GisComponent extends FactoryONE {
   getFragmentByZone = async () => {
     if (this.closeTabService.gisReq.zoneId)
       this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.gisReq.zoneId);
+    if (!this.closeTabService.gisReq.isSingleZone && this.myTreeSelect.value)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   classWrapper = async () => {
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();

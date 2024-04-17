@@ -71,6 +71,10 @@ export class DictionaryWrapperService {
     dictionary: null,
     zoneId: null
   };
+  private fragmentMasterInZonesDictionary = {
+    dictionary: null,
+    zoneId: null
+  };
   private counterStateByZoneIdDictionary = {
     dictionary: null,
     zoneId: null
@@ -276,6 +280,13 @@ export class DictionaryWrapperService {
     const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.fragmentMasterInZone, zoneId);
     this.setFragmentMasterByZoneDictionary(res, zoneId);
     return res;
+  }
+  // Without Caching
+  getFragmentMasterInZonesDictionary = async (zoneIds: number[]): Promise<any> => {
+    console.log(zoneIds);
+    console.log({ zoneIds: zoneIds });
+
+    return await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMasterInZones, { zoneIds: zoneIds });
   }
   async getCounterStateDictionary(): Promise<any> {
     if (!MathS.isNull(this.counterStateDictionary))

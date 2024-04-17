@@ -15,7 +15,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class GuildsParamsComponent extends FactoryONE {
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -29,21 +29,13 @@ selectedZoneIds= [];
   }
 
   getFragmentByZone = async () => {
-    if (this.closeTabService.guildsWithParamsReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.guildsWithParamsReq.zoneId);
+    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.getFragmentByZone();
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.closeTabService.guildsWithParamsReq.fragmentMasterIds = [];
-    this.readingPeriodDictionary = [];
-    this.closeTabService.guildsWithParamsReq.readingPeriodId = null;
-    this.closeTabService.guildsWithParamsReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

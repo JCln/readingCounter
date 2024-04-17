@@ -17,7 +17,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class DetailsComponent extends FactoryONE {
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
 
   karbariByCodeDictionary: IDictionaryManager[] = [];
@@ -34,8 +34,7 @@ selectedZoneIds= [];
   }
 
   getFragmentByZone = async () => {
-    if (this.closeTabService.detailsReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.detailsReq.zoneId);
+    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();
@@ -43,13 +42,6 @@ selectedZoneIds= [];
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.getReadingPeriod();
     this.getFragmentByZone();
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.closeTabService.detailsReq.fragmentMasterIds = [];
-    this.readingPeriodDictionary = [];
-    this.closeTabService.detailsReq.readingPeriodId = null;
-    this.closeTabService.detailsReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

@@ -57,7 +57,7 @@
     window.__env.getTarrifTypeDictionary = [
         { id: 0, field: 'Bill', title: 'مبلغ' },
         { id: 1, field: 'Off', title: 'تخفیف' },
-        { id: 2, field: 'Commission', title: 'کمیسیون' },
+        { id: 2, field: 'Commission', title: 'کارمزد' },
         { id: 3, field: 'Tax', title: 'مالیات' },
     ]
     window.__env.getTarrifCalculationModeDictionary = [

@@ -22,7 +22,7 @@ export class TraverseComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -39,15 +39,7 @@ selectedZoneIds= [];
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
-    if (this.closeTabService.traverseReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.traverseReq.zoneId);
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.closeTabService.traverseReq.fragmentMasterIds = [];
-    this.readingPeriodDictionary = [];
-    this.closeTabService.traverseReq.readingPeriodId = null;
-    this.closeTabService.traverseReq._selectedKindId = null;
+    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

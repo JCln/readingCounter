@@ -30,7 +30,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -49,12 +49,6 @@ selectedZoneIds= [];
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.readingPeriodDictionary = [];
-    this.closeTabService.preNumberShownReq.readingPeriodId = null;
-    this.closeTabService.preNumberShownReq._selectedKindId = null;
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

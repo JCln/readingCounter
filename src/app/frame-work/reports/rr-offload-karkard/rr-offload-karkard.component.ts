@@ -23,7 +23,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
 
 
   constructor(
@@ -45,15 +45,7 @@ selectedZoneIds= [];
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
-    if (this.closeTabService.karkardOffloadReq.zoneId)
-      this.fragmentByZoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(this.closeTabService.karkardOffloadReq.zoneId);
-  }
-  afterZoneChanged() {
-    // TODO: CLEAR period dictionaries and selected periodId and kindId values
-    this.closeTabService.karkardOffloadReq.fragmentMasterIds = [];
-    this.readingPeriodDictionary = [];
-    this.closeTabService.karkardOffloadReq.readingPeriodId = null;
-    this.closeTabService.karkardOffloadReq._selectedKindId = null;
+    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
