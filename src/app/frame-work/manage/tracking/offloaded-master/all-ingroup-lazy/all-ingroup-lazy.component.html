@@ -63,8 +63,9 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th class="__headers" pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                    <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                <th class="__headers" pReorderableColumn *ngFor="let col of columns"
+                    [pSortableColumnDisabled]="col?.isNotHaveSort" pSortableColumn="{{col.field}}">
+                    <p-sortIcon *ngIf="!col?.isNotHaveSort" field="{{col.field}}"></p-sortIcon>
                     <div class="_rotate tooltip">
                         {{col.header}}
                         <div class="tooltip_text_bottom">{{col.header}}</div>
