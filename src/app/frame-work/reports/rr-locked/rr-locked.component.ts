@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -25,6 +26,7 @@ export class RrLockedComponent extends AllListsFactory {
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -91,13 +93,12 @@ export class RrLockedComponent extends AllListsFactory {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.lockedReq._selectedKindId);
   }
   callAPI = async () => {
-    this.closeTabService.lockedReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListRRLocked, this.closeTabService.lockedReq);
     this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRLocked);
     this.converts();
   }
   verification = async () => {
-    this.closeTabService.lockedReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.lockedReq.selectedZoneIds);
+    this.closeTabService.lockedReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.lockedReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();

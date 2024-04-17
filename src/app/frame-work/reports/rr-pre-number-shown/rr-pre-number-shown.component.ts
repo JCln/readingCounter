@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -28,6 +29,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -62,13 +64,12 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.preNumberShownReq._selectedKindId);
   }
   connectToServer = async () => {
-    this.closeTabService.preNumberShownReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListRRPreNumberShown, this.closeTabService.preNumberShownReq);
     this.closeTabService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
     this.converts();
   }
   verification = async () => {
-    this.closeTabService.preNumberShownReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.preNumberShownReq.selectedZoneIds);
+    this.closeTabService.preNumberShownReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.preNumberShownReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();

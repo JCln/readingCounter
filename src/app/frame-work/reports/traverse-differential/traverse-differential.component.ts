@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
@@ -8,6 +8,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { TreeSelect } from 'primeng/treeselect';
 
 @Component({
   selector: 'app-traverse-differential',
@@ -24,6 +25,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -67,12 +69,11 @@ export class TraverseDifferentialComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRTraverseDifferential(this.closeTabService.trvchReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
-    this.closeTabService.trvchReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.trvchReq.selectedZoneIds);
+    this.closeTabService.trvchReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.trvchReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRTraverseDifferential = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListTraverseDifferential, this.closeTabService.trvchReq);
     this.karbariDictionaryByCode = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
 

@@ -1,11 +1,12 @@
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
+import { TreeSelect } from 'primeng/treeselect';
 
 @Component({
   selector: 'app-user-karkard',
@@ -17,6 +18,7 @@ export class UserKarkardComponent extends FactoryONE {
   trackingStatesDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -32,11 +34,10 @@ export class UserKarkardComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   callAPI = async () => {
-    this.closeTabService.userKarkardReq.selectedZoneIds = [];
     this.closeTabService.saveDataForUserKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingUserKarkard, this.closeTabService.userKarkardReq);
   }
   verification = async () => {
-    this.closeTabService.userKarkardReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.userKarkardReq.selectedZoneIds);
+    this.closeTabService.userKarkardReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationUserKarkard(this.closeTabService.userKarkardReq);
     if (temp)
       this.callAPI();

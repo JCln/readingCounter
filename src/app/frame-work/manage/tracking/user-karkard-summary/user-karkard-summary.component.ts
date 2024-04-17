@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { IUserKarkardSummary } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -15,6 +16,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class UserKarkardSummaryComponent extends FactoryONE {
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
   tempData: IUserKarkardSummary[] = [];
   header: any[] = [];
   @ViewChild(Table) dtable: Table;
@@ -59,7 +61,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   verification = async () => {
-    this.closeTabService.saveDataForUserKarkardSummaryReq.zoneIds = this.trackingManagerService.utilsService.getZoneHierarical(this.closeTabService.saveDataForUserKarkardSummaryReq.selectedZoneIds);
+    this.closeTabService.saveDataForUserKarkardSummaryReq.zoneIds = this.trackingManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.trackingManagerService.verificationService.userKarkardValidation(this.closeTabService.saveDataForUserKarkardSummaryReq);
     if (temp)
       this.connectToServer();
@@ -96,7 +98,6 @@ export class UserKarkardSummaryComponent extends FactoryONE {
     return auxData;
   }
   connectToServer = async () => {
-    this.closeTabService.saveDataForUserKarkardSummaryReq.selectedZoneIds = [];
     this.tempData = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postUserKarkardSummary, this.closeTabService.saveDataForUserKarkardSummaryReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForUserKarkardSummary = this.getCounterStateData(this.tempData);

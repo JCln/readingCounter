@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -17,6 +18,7 @@ export class PerformanceComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
 
   constructor(
@@ -46,13 +48,12 @@ export class PerformanceComponent extends FactoryONE {
     this.closeTabService.anlzPrfmReq.readingPeriodId = null;
   }
   verification = async () => {
-    this.closeTabService.anlzPrfmReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.anlzPrfmReq.selectedZoneIds);
+    this.closeTabService.anlzPrfmReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationRRAnalyzePerformance(this.closeTabService.anlzPrfmReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.anlzPrfmReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRPerformance = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.trackingAnalyzeByParam, this.closeTabService.anlzPrfmReq);
     if (MathS.isNull(this.closeTabService.saveDataForRRPerformance))
       return;

@@ -1,8 +1,9 @@
 import { CloseTabService } from 'services/close-tab.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { TreeSelect } from 'primeng/treeselect';
 
 @Component({
   selector: 'app-gis',
@@ -16,6 +17,7 @@ export class GisComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -70,7 +72,7 @@ export class GisComponent extends FactoryONE {
     if (!this.closeTabService.gisReq.isSingleZone) {
       this.closeTabService.gisReq.zoneId = 0;
     }
-    this.closeTabService.gisReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.gisReq.selectedZoneIds);
+    this.closeTabService.gisReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationRRGIS(this.closeTabService.gisReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.readingReportManagerService.routeToMapGIS(this.closeTabService.gisReq);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
@@ -8,6 +8,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { TreeSelect } from 'primeng/treeselect';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class KarkardComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -66,12 +68,11 @@ export class KarkardComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
-    this.closeTabService.karkardReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.karkardReq.selectedZoneIds);
+    this.closeTabService.karkardReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     if (this.validation())
       document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.karkardReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListOFFKarkard, this.closeTabService.karkardReq);
     this.setGetRanges();
     this.closeTabService.saveDataForRRKarkard = this.closeTabService.saveDataForRRKarkard;

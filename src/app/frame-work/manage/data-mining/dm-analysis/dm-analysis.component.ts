@@ -1,5 +1,5 @@
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
@@ -7,6 +7,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
+import { TreeSelect } from 'primeng/treeselect';
 
 @Component({
   selector: 'app-dm-analysis',
@@ -15,6 +16,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class DmAnalysisComponent extends FactoryONE {
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -34,7 +36,6 @@ export class DmAnalysisComponent extends FactoryONE {
     }
     this.closeTabService.getSearchInOrderTo();
     this.provinceHierarchy = await this.dataMiningAnalysesService.dictionaryWrapperService.getProvinceHierarchy();
-    this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getPeriodKindDictionary();
   }
   afterZoneChanged() {
@@ -52,7 +53,6 @@ export class DmAnalysisComponent extends FactoryONE {
       this.readingPeriodDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.dataMiningReq._selectedKindId);
   }
   connectToServer = async () => {
-    this.closeTabService.dataMiningReq.selectedZoneIds = [];
     this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.dataMiningReadingTime, this.closeTabService.dataMiningReq);
     if (!MathS.isNull(this.closeTabService.saveDataForDMAAnalyze)) {
       this.zoneDictionary = await this.dataMiningAnalysesService.dictionaryWrapperService.getZoneDictionary();
@@ -61,7 +61,7 @@ export class DmAnalysisComponent extends FactoryONE {
     }
   }
   verification = async () => {
-    this.closeTabService.dataMiningReq.zoneIds = this.dataMiningAnalysesService.utilsService.getZoneHierarical(this.closeTabService.dataMiningReq.selectedZoneIds);
+    this.closeTabService.dataMiningReq.zoneIds = this.dataMiningAnalysesService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.dataMiningAnalysesService.verificationService.verificationRRShared(this.closeTabService.dataMiningReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();

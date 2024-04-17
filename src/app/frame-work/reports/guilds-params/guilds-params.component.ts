@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,7 +14,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class GuildsParamsComponent extends FactoryONE {
-
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -52,13 +53,12 @@ export class GuildsParamsComponent extends FactoryONE {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.guildsWithParamsReq._selectedKindId);
   }
   verification = async () => {
-    this.closeTabService.guildsWithParamsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.guildsWithParamsReq.selectedZoneIds);
+    this.closeTabService.guildsWithParamsReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.guildsWithParamsReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.callAPI();
   }
   callAPI = async () => {
-    this.closeTabService.guildsWithParamsReq.selectedZoneIds = [];
     this.closeTabService.RRGuildsWithParam = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postRRGuildWithParams, this.closeTabService.guildsWithParamsReq);
     // this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
     // Converter.convertIdToTitle(this.closeTabService.RRGuildsWithParam, this.karbariByCodeDictionary, 'possibleKarbariCode');

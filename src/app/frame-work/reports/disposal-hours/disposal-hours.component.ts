@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
+import { IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { TreeSelect } from 'primeng/treeselect';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
 })
 export class DisposalHoursComponent extends FactoryONE {
   provinceHierarchy: IProvinceHierarchy[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -36,12 +38,11 @@ export class DisposalHoursComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRDisposalHours(this.closeTabService.disposalhoursReq);
   }
   verification = async () => {
-    this.closeTabService.disposalhoursReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.disposalhoursReq.selectedZoneIds);
+    this.closeTabService.disposalhoursReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.closeTabService.disposalhoursReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRDisposalHours = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListDispersalHours, this.closeTabService.disposalhoursReq);
   }
   refreshTable = () => {

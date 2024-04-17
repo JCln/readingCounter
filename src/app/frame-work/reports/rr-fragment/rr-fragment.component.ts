@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -20,6 +21,7 @@ export class RrFragmentComponent extends FactoryONE {
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -66,12 +68,11 @@ export class RrFragmentComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.rrFragmentKarkardReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
-    this.closeTabService.rrFragmentKarkardReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.rrFragmentKarkardReq.selectedZoneIds);
+    this.closeTabService.rrFragmentKarkardReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     if (this.validation())
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.rrFragmentKarkardReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRFragment = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardByFragment, this.closeTabService.rrFragmentKarkardReq);
     this.setGetRanges();
   }

@@ -8,10 +8,11 @@
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
                         <div class="_value">
-                            <p-tree class="w-full md:w-20rem" containerStyleClass="w-full" [value]="provinceHierarchy"
-                                [metaKeySelection]="false" display="comma" selectionMode="checkbox" class="select_tree"
-                                [(selection)]="closeTabService.karkardReq.selectedZoneIds">
-                            </p-tree>
+                            <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
+                                [(ngModel)]="closeTabService.karkardReq.selectedZoneIds" [options]="provinceHierarchy"
+                                display="chip" [metaKeySelection]="false" selectionMode="checkbox"
+                                placeholder="انتخاب مورد" emptyMessage="موردی وجود ندارد" #myTreeSelect>
+                            </p-treeSelect>
                             <!-- <p-dropdown name="zones" [options]="zoneDictionary"
                                 [(ngModel)]="closeTabService.karkardReq.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true" (onChange)="getFragmentByZone()"

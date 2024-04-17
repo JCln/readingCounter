@@ -79,7 +79,6 @@ export class ReadingReportManagerService {
   }
   routeToMapGIS = async (readingReportGISReq: any) => {
     // insert into gis request and should valiation before route to map    
-    readingReportGISReq.selectedZoneIds = [];
     const temp = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListToGis, readingReportGISReq);
     if (temp.length) {
       this.mapService.gisReqAux = readingReportGISReq;

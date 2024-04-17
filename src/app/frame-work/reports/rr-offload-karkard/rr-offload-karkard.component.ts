@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -21,6 +22,8 @@ export class RrOffloadKarkardComponent extends FactoryONE {
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -63,12 +66,11 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.karkardOffloadReq, this.closeTabService._isOrderByDate);
   }
   verification = async () => {
-    this.closeTabService.karkardOffloadReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.karkardOffloadReq.selectedZoneIds);
+    this.closeTabService.karkardOffloadReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     if (this.validation())
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.closeTabService.karkardOffloadReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRROffloadedKarkard = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListKarkardOffloaded, this.closeTabService.karkardOffloadReq);
     this.setGetRanges();
   }

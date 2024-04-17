@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation, IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { IKarkardAllStatesDto } from 'interfaces/ireports';
 import { Table } from 'primeng/table';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -24,6 +25,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
   hasFiltersInTable: boolean = false;
   provinceHierarchy: IProvinceHierarchy[] = [];
   public readonly routerLink: string = this.closeTabService.utilsService.compositeService.getRouterUrl();
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
 
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -87,7 +89,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.offKarkardAllStatesReq._selectedKindId);
   }
   verification = async () => {
-    this.closeTabService.offKarkardAllStatesReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.offKarkardAllStatesReq.selectedZoneIds);
+    this.closeTabService.offKarkardAllStatesReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.offKarkardAllStatesReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.connectToServer();
@@ -134,7 +136,6 @@ export class KarkardAllStatesComponent extends FactoryONE {
     return auxData;
   }
   connectToServer = async () => {
-    this.closeTabService.offKarkardAllStatesReq.selectedZoneIds = [];
     this.tempData = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postKarkardAllStates, this.closeTabService.offKarkardAllStatesReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForKarkardAllStates = this.getCounterStateData(this.tempData);
