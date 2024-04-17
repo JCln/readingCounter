@@ -22,6 +22,7 @@ export class RrFragmentComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,

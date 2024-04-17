@@ -16,6 +16,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class MasterComponent extends FactoryONE {
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+  selectedZoneIds = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
@@ -29,7 +30,6 @@ export class MasterComponent extends FactoryONE {
   }
 
   classWrapper = async () => {
-    console.log(this.closeTabService.masterReq.selectedZoneIds)
     this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();

@@ -18,6 +18,7 @@ export class GisComponent extends FactoryONE {
   counterStateDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+  selectedZoneIds = [];
 
   constructor(
     public closeTabService: CloseTabService,

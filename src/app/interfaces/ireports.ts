@@ -43,8 +43,7 @@ export interface IReadingReportReq {
     _selectedAggregate?: string,
     beginFromImported?: boolean,
     isCollapsed?: boolean,
-    fragmentMasterIds?: string[],
-    selectedZoneIds: any[]
+    fragmentMasterIds?: string[]
 }
 export interface IKarkardAllStatesDto {
     offloadDayalali: string,
@@ -66,8 +65,7 @@ export interface IUserKarkardInput {
     zoneIds: number[],
     fromDate: string,
     toDate: string,
-    statusId: number,
-    selectedZoneIds: any[]
+    statusId: number    
 }
 export interface IUserKarkard {
     userId: string,
@@ -272,7 +270,6 @@ export interface IReadingReportTraverseDifferentialReq {
     year: number,
     traverseType: number,
     zoneIds: number[],
-    selectedZoneIds: [],
     fragmentMasterIds: []
 }
 export interface IRRChartResWrapper {

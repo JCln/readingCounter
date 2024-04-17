@@ -30,6 +30,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,

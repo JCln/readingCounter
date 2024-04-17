@@ -15,6 +15,7 @@ import { TreeSelect } from 'primeng/treeselect';
 export class RrInstateComponent extends FactoryONE {
   provinceHierarchy: IProvinceHierarchy[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,

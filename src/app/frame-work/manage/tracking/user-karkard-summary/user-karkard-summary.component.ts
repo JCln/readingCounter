@@ -17,6 +17,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class UserKarkardSummaryComponent extends FactoryONE {
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
   tempData: IUserKarkardSummary[] = [];
   header: any[] = [];
   @ViewChild(Table) dtable: Table;

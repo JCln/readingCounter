@@ -26,6 +26,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
   readingPeriodDictionary: IDictionaryManager[] = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,

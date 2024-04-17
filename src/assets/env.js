@@ -2,7 +2,7 @@
     window.__env = window.__env || {};
 
     // API url
-    window.__env.version = '1.0.32';
+    window.__env.version = '1.0.40';
     window.__env.headerProvinceTitle = 'ENV';
     window.__env.API_URL = 'https://37.191.92.157/kontoriNew'
     // for map instantiation    
@@ -28,6 +28,8 @@
         }
     };
     window.__env.years = [
+        { title: '1403', value: 1403 },
+        { title: '1402', value: 1402 },
         { title: '1401', value: 1401 },
         { title: '1400', value: 1400 },
         { title: '1399', value: 1399 },
@@ -35,7 +37,7 @@
         { title: '1397', value: 1397 },
         { title: '1396', value: 1396 },
         { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
+        { title: '1404', value: 1404 },
     ];
     window.__env.getDeleteDictionary = [
         { id: 0, title: 'فعال' },
@@ -125,13 +127,13 @@
     window.__env.aboutUs = { email: 'infohivaatlas@gmail.com', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
 
 
-    window.__env.hasCanclableSpinner = true;
+    window.__env.hasCancelableSpinner = true;
     window.__env.timeout = 18000;
     window.__env.hasNextBazdid = false;
     window.__env.reOrderableTable = false;
     window.__env.defaultAggregateTracks = false;
-    window.__env.shouldSaveTokensInLocal = false;
-    window.__env.simafaImportStatus = { hasSingle: false, hasBatch: false };
+    window.__env.shouldSaveTokensInLocal = true;
+    window.__env.simafaImportStatus = { hasSingle: true, hasBatch: true };
 
     // Whether or not to enable debug mode
     // Setting this to false will disable console output

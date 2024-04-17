@@ -23,6 +23,7 @@ export class KarkardComponent extends FactoryONE {
   readingPeriodDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,

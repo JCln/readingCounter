@@ -26,6 +26,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
   provinceHierarchy: IProvinceHierarchy[] = [];
   public readonly routerLink: string = this.closeTabService.utilsService.compositeService.getRouterUrl();
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
 
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];

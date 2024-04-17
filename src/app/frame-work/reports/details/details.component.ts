@@ -17,6 +17,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class DetailsComponent extends FactoryONE {
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+selectedZoneIds= [];
   provinceHierarchy: IProvinceHierarchy[] = [];
 
   karbariByCodeDictionary: IDictionaryManager[] = [];
