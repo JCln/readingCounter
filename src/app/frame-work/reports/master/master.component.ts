@@ -36,8 +36,11 @@ export class MasterComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.masterReq._selectedKindId);
   }
   callAPI = async () => {
-    this.closeTabService.masterReq.selectedZoneIds = [];
+    // this.closeTabService.masterReq.selectedZoneIds = [];
     this.closeTabService.saveDataForRRMaster = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ReadingReportMasterWithParam, this.closeTabService.masterReq);
+    console.log('end');
+
+
   }
   verification = async () => {
     this.closeTabService.masterReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.closeTabService.masterReq.selectedZoneIds);
