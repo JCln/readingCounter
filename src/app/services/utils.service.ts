@@ -108,6 +108,10 @@ export class UtilsService {
     session.reset();
   }
   getZoneHierarical = (item: any[]): number[] => {
+    if (MathS.isNull(item)) {
+      this.snackBarMessageWarn(EN_messages.insert_zoneIds);
+      return [];
+    }
     let datas: number[] = [];
     for (let index = 0; index < item.length; index++) {
       datas.push(item[index].data);
