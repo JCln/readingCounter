@@ -18,12 +18,11 @@
                     <div class="input_2">
                         <div class="_key">نوبتی</div>
                         <div class="_value">
-                            <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
-                                [(ngModel)]="closeTabService.karkardDailyReq.fragmentMasterIds"
-                                [options]="fragmentByZoneDictionary" display="chip" [metaKeySelection]="false"
-                                selectionMode="checkbox" placeholder="انتخاب مورد" emptyMessage="موردی وجود ندارد"
-                                #myTreeSelect>
-                            </p-treeSelect>
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
+                                [(ngModel)]="closeTabService.karkardDailyReq.fragmentMasterIds" optionLabel="routeTitle"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                                [filter]="true" showClear="true">
+                            </p-multiSelect>
                         </div>
                     </div>
                     <div class="input_2" [hidden]="closeTabService._isOrderByDate">

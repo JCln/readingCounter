@@ -1595,10 +1595,15 @@ export class CloseTabService {
     },
     { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: EN_Routes.wrpolicies },
     {
-      id: 1, req: ENEssentialsToSave.listLatestInfoReq, value: ENEssentialsToSave.listLatestInfo, url: EN_Routes.listLatestInfo,
+      id: 1, req: ENEssentialsToSave.editModifyReq, value: ENEssentialsToSave.listLatestInfo, url: EN_Routes.listLatestInfo,
       defaultReq: {
-        searchBy: Search.eshterak.id,
-        item: '',
+        id: '',
+        modifyType: null,
+        checkedItems: [],
+        counterStateId: null,
+        counterNumber: null,
+        jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+        description: ''
       },
       defaultValue: {
         id: '',
@@ -1649,7 +1654,7 @@ export class CloseTabService {
         possibleAhadTejariOrFari: null,
         possibleAhadSaierOrAbBaha: null,
         possibleKarbariCode: null,
-        offloadDateJalali: '',
+        offloadDateJalali: this.utilsService.dateJalaliService.getCurrentDate(),
         offLoadTime: '',
         y: '',
         x: '',

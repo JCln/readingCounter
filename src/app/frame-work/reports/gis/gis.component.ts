@@ -75,8 +75,8 @@ export class GisComponent extends FactoryONE {
   verification = async () => {
     if (!this.closeTabService.gisReq.isSingleZone) {
       this.closeTabService.gisReq.zoneId = 0;
+      this.closeTabService.gisReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     }
-    this.closeTabService.gisReq.zoneIds = this.readingReportManagerService.utilsService.getZoneHierarical(this.myTreeSelect.value);
     const temp = this.readingReportManagerService.verificationService.verificationRRGIS(this.closeTabService.gisReq, this.closeTabService._isOrderByDate);
     if (temp)
       this.readingReportManagerService.routeToMapGIS(this.closeTabService.gisReq);

@@ -333,7 +333,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.flyToDes(this.mapService.envService.mapCenter[0], this.mapService.envService.mapCenter[1], 11);
       // items.gisAccuracy <= 1000 is for under 1000 meter gis accuracy accepted to make circle marker
       markers.addLayer(L.circleMarker([parseFloat(items.y), parseFloat(items.x)], { weight: 4, radius: parseFloat(items.gisAccuracy <= 1000 ? items.gisAccuracy : 10), color: this.color_normal })
-        .bindPopup(`${items.info1} <br>` + `اشتراک قبلی:${items.info2} <br> اشتراک بعدی:${items.info3}, <br> منطقه:${items.info4}`
+        .bindPopup(`${items.info1} <br>` + `اشتراک قبلی:${items.info2}` + ` <br> اشتراک بعدی:${items.info3} <br> ` + ` منطقه:${items.info4} <br> `
         ));
     })
     this.layerGroup.addLayer(markers);

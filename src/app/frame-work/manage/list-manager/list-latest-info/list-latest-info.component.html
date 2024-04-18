@@ -2,13 +2,14 @@
     <div class="input_2">
         <div class="_key">نوع جستجو</div>
         <div class="_value">
-            <p-dropdown name="searchby" [options]="searchType" [(ngModel)]="closeTabService.listLatestInfoReq.searchBy"
-                optionLabel="searchBy" optionValue="id" placeholder="انتخاب مورد">
+            <p-dropdown name="searchby" [options]="searchType" (click)="changeTitle()"
+                [(ngModel)]="closeTabService.listLatestInfoReq.searchBy" optionLabel="searchBy" optionValue="id"
+                placeholder="انتخاب مورد">
             </p-dropdown>
         </div>
     </div>
     <div class="input_2">
-        <div class="_key">مقدار</div>
+        <div class="_key">{{_searchByInfo}}</div>
         <input class="input_1" placeholder="{{_searchByInfo}} را وارد نمایید " name="counterNumber"
             [(ngModel)]="closeTabService.listLatestInfoReq.item" autofocus>
     </div>

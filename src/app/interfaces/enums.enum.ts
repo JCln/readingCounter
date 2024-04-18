@@ -357,6 +357,7 @@ export enum ENPrimeNGTranslator {
     after = 'بعد',
     clear = 'پاک کردن',
     apply = 'تایید',
+    Apply = 'تایید',
     matchAll = 'مطابقت با همه',
     matchAny = ' مطابقت',
     addRule = 'جستجو براساس',
@@ -697,7 +698,8 @@ export enum ENEssentialsToSave {
     tariff = "tariff",
     tariffExcelToFillInput = "tariffExcelToFillInput",
     importHiwaReq = "importHiwaReq",
-    importHiwa = "importHiwa"
+    importHiwa = "importHiwa",
+    editModifyReq = "editModifyReq"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

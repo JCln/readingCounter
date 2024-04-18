@@ -384,17 +384,27 @@
   }
 
   .p-column-filter-overlay-menu .p-column-filter-buttonbar .p-button.p-button-outlined {
-    visibility: hidden;
-    opacity: 0;
+    display: none;
+  }
+
+  .p-column-filter-buttonbar .p-button {
+    width: 100%;
+  }
+
+  .p-column-filter-buttonbar {
+    justify-content: center;
   }
 
   .p-column-filter-overlay-menu .p-column-filter-buttonbar {
+    padding: 0 .5rem 0.5rem;
+
     .p-button.p-button-outlined {
       background-color: var(--thirdy_1);
     }
   }
 
   .p-column-filter-overlay {
+    min-width: 11rem;
     background: var(--secondary_2);
   }
 

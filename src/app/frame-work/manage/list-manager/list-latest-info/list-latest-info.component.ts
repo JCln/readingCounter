@@ -12,6 +12,7 @@ import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { Search } from 'src/app/classes/search';
 import { GeneralGroupInfoResComponent } from '../general-group-list-modify/general-group-info-res/general-group-info-res.component';
 import { MathS } from 'src/app/classes/math-s';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Component({
   selector: 'app-list-latest-info',
@@ -46,12 +47,17 @@ export class ListLatestInfoComponent extends AllListsFactory {
   }
 
   uploadSingleToModifyBatch = async () => {
+    console.log(this.closeTabService.editModifyReq);
     if (this.listManagerService.vertificationLatestInfoModifyBatchReq(this.closeTabService.editModifyReq)) {
+
       const res = await this.listManagerService.ajaxReqWrapperService.postDataSourceArray(ENInterfaces.trackingToOffloadedGroupModifyBatch, [this.closeTabService.editModifyReq]);
       this.openEditedModifyBatch(res);
     }
     // TODO: Should convert Arabic Numbers to ENG to counterNumbers
     // to upload valid data to server and get valid response      
+  }
+  changeTitle() {
+    this._searchByInfo = this.searchType.find((element) => element.id == this.closeTabService.listLatestInfoReq.searchBy).searchBy;
   }
   getCounterStateDictionaryAndAddSelectable = (zone: number): Promise<any> => {
     return new Promise(async (resolve) => {
@@ -81,7 +87,7 @@ export class ListLatestInfoComponent extends AllListsFactory {
       checkedItems: [0],
       counterStateId: this.closeTabService.listLatestInfo.counterStateId,
       counterNumber: this.closeTabService.listLatestInfo.counterNumber,
-      jalaliDay: '',//this.closeTabService.listLatestInfo.offloadDateJalali ? this.closeTabService.listLatestInfo.offloadDateJalali : this.dateJalaliService.getCurrentDate()
+      jalaliDay: this.closeTabService.listLatestInfo.offloadDateJalali ? this.closeTabService.listLatestInfo.offloadDateJalali : this.dateJalaliService.getCurrentDate(),
       description: ''
     }
   }
@@ -104,12 +110,15 @@ export class ListLatestInfoComponent extends AllListsFactory {
     this.listManagerService.setDynamicPartRanges([this.closeTabService.listLatestInfo]);
   }
   connectToServer = async (canRefresh?: boolean) => {
-    this.closeTabService.listLatestInfo = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getLatestOnOffloadInfo, this.closeTabService.listLatestInfoReq);
-    this.dictionaryWrapper();
-    this.insertSelectedColumns();
-    console.log(this.closeTabService.listLatestInfo);
-    // insert server response to modifyReq for any future user edit
-    this.insertToModifyReq();
+    await this.listManagerService.ajaxReqWrapperService.interfaceManagerService.POSTBODY(ENInterfaces.getLatestOnOffloadInfo, this.closeTabService.listLatestInfoReq).toPromise().then(res => {
+      this.closeTabService.listLatestInfo = res;
+      this.dictionaryWrapper();
+      this.insertSelectedColumns();
+      // insert server response to modifyReq for any future user edit
+      this.insertToModifyReq();
+    }).catch(() => {
+      this.closeTabService.cleanData(EN_Routes.listLatestInfo);
+    });
   }
   verification = async (canRefresh?: boolean) => {
     this.closeTabService.listLatestInfoReq.item = this.closeTabService.listLatestInfoReq.item.length > 0 ? this.closeTabService.listLatestInfoReq.item.trim() : '';

@@ -48,17 +48,7 @@
                         </p-dropdown>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="closeTabService.gisReq.isSingleZone">
-                    <div class="_key">نوبتی</div>
-                    <div class="_value">
-                        <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
-                            [(ngModel)]="closeTabService.gisReq.fragmentMasterIds" [options]="fragmentByZoneDictionary"
-                            display="chip" [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                            emptyMessage="موردی وجود ندارد" #myTreeSelect>
-                        </p-treeSelect>
-                    </div>
-                </div>
-                <div class="input_2" [hidden]="!closeTabService.gisReq.isSingleZone">
+                <div class="input_2">
                     <div class="_key">نوبتی</div>
                     <div class="_value">
                         <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentByZoneDictionary" name="masterIds"
