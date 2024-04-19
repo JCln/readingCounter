@@ -1,6 +1,5 @@
 import { BranchesService } from 'services/branches.service';
 import { Component, OnInit } from '@angular/core';
-import { ENManageServers, IManageServer } from 'interfaces/iserver-manager';
 import { EN_tariff, ITariffManager } from 'interfaces/enums.enum';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { AddExcelFileComponent } from '../../manage/read/formula/add-excel-file/add-excel-file.component';
@@ -53,7 +52,7 @@ export class TariffManagerComponent implements OnInit {
       console.log('view grid');
     }
     if (clickFunction == EN_tariff.calculation) {
-      console.log('calculation');
+      this.branchesService.utilsService.routeTo(EN_Routes.calculation);
     }
   }
 
