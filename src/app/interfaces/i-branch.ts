@@ -94,7 +94,7 @@ export interface IOffering {
     id: number,
     title: string,
     offeringUnitId: number,
-    changableOfferingUnitId: any,
+    dynamicId: any,
     description: string,
     isActive: boolean,
     isEditing?: boolean

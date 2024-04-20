@@ -27,7 +27,7 @@ export class OfferingComponent extends FactoryONE {
   }
   insertToAuxItem = () => {
     this.closeTabService.offering.forEach(item => {
-      item.changableOfferingUnitId = item.offeringUnitId;
+      item.dynamicId = item.offeringUnitId;
     })
   }
 
@@ -38,7 +38,7 @@ export class OfferingComponent extends FactoryONE {
     Converter.convertIdsToTitles(
       this.closeTabService.offering,
       { offeringUnitIdDictionary: this.offeringUnitIdDictionary },
-      { changableOfferingUnitId: 'changableOfferingUnitId' }
+      { dynamicId: 'dynamicId' }
     )
   }
   openDialog = (item?: any) => {

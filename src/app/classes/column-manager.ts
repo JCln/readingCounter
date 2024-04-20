@@ -451,7 +451,7 @@ export class ColumnManager {
     counterStateDto: IObjectIteratation[] = [
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'changableZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'clientOrder', header: 'ترتیب', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'forProvince', header: 'همه نواحی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'canEnterNumber', header: 'رقم اختیاری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
@@ -540,7 +540,7 @@ export class ColumnManager {
     ]
     offering: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'changableOfferingUnitId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true }
     ]
     offeringUnit: IObjectIteratation[] = [
@@ -1971,7 +1971,7 @@ export class ColumnManager {
     ]
     zone: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'regionId', header: 'منطقه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'منطقه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'isMetro', header: 'شهری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
@@ -2808,7 +2808,7 @@ export class ColumnManager {
     ]
     counterReport: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true, isSelectedOrigin: true },
         { field: 'isAhad', header: 'آحاد', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'isKarbari', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
@@ -2820,7 +2820,7 @@ export class ColumnManager {
         { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true }
     ]
     readingConfigDefault: IObjectIteratation[] = [
-        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'defaultAlalHesab', header: 'علی‌الحساب پیشفرض', isSelected: true, isSelectedOrigin: true },
         { field: 'minAlalHesab', header: 'علی‌الحساب کمینه %', isSelected: false, isSelectedOrigin: false },
         { field: 'maxAlalHesab', header: 'علی‌الحساب بیشینه %', isSelected: false, isSelectedOrigin: false },
@@ -2881,7 +2881,7 @@ export class ColumnManager {
     ]
     karbari: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'provinceId', header: 'استان', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicID', header: 'استان', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true, isSelectedOrigin: true },
         { field: 'isMaskooni', header: 'مسکونی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'isTejari', header: 'تجاری', isSelected: true, isSelectedOrigin: true, isBoolean: true },

@@ -21,7 +21,7 @@ export class RdEditDgComponent {
     private utilsService: UtilsService
   ) {
     data = data.row;
-    this.selected = data.zoneId;
+    this.selected = data.dynamicId;
 
     this.form = fb.group({
       id: data.id,
@@ -34,7 +34,7 @@ export class RdEditDgComponent {
       hasImage: data.hasImage === null ? false : data.hasImage,
       displayDebt: data.displayDebt === null ? false : data.displayDebt,
       displayIcons: data.displayIcons === null ? false : data.displayIcons,
-      zoneId: data.staticID,
+      zoneId: data.zoneId,
       defaultAlalHesab: data.defaultAlalHesab,
       maxAlalHesab: data.maxAlalHesab,
       minAlalHesab: data.minAlalHesab,
@@ -70,27 +70,15 @@ export class RdEditDgComponent {
       return false;
     if (!MathS.persentCheck(this.form.value.minImagePercent))
       return false;
-    if (!MathS.persentCheck(this.form.value.lowConstBoundMaskooni))
-      return false;
     if (!MathS.persentCheck(this.form.value.lowPercentBoundMaskooni))
-      return false;
-    if (!MathS.persentCheck(this.form.value.highConstBoundMaskooni))
       return false;
     if (!MathS.persentCheck(this.form.value.highPercentBoundMaskooni))
       return false;
-    if (!MathS.persentCheck(this.form.value.lowConstBoundSaxt))
-      return false;
     if (!MathS.persentCheck(this.form.value.lowPercentBoundSaxt))
-      return false;
-    if (!MathS.persentCheck(this.form.value.highConstBoundSaxt))
       return false;
     if (!MathS.persentCheck(this.form.value.highPercentBoundSaxt))
       return false;
-    if (!MathS.persentCheck(this.form.value.lowConstZarfiatBound))
-      return false;
     if (!MathS.persentCheck(this.form.value.lowPercentZarfiatBound))
-      return false;
-    if (!MathS.persentCheck(this.form.value.highConstZarfiatBound))
       return false;
     if (!MathS.persentCheck(this.form.value.highPercentZarfiatBound))
       return false;

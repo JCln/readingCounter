@@ -18,7 +18,7 @@ export class OfferingAddDgComponent implements OnInit {
     title: '',
     description: '',
     offeringUnit: null,
-    changableOfferingUnitId: null,
+    dynamicId: null,
     offeringUnitId: 0,
     isActive: true,
     isEditing: false

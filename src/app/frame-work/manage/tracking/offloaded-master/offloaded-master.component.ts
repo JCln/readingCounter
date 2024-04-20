@@ -85,11 +85,13 @@ export class OffloadedMasterComponent extends FactoryONE {
     return this.closeTabService.utilsService.firstConfirmDialog(a);
   }
   modifyBulkClicked = async (dataSource: ITrackingMasterDto) => {
-    if (await this.selectDateMudifyBulkClicked()) {
+    const hasSelectedDate = await this.selectDateMudifyBulkClicked();
+    if (hasSelectedDate) {
       const body = {
-        day: this.closeTabService.offloadedMasterMudifyBulk.day,
+        day: hasSelectedDate,
         groupId: dataSource.groupId
       }
+
       const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offloadModifyBulk, body);
       this.trackingManagerService.utilsService.snackBarMessageSuccess(res.message);
     }

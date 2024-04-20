@@ -69,7 +69,7 @@ export class ReadingConfigComponent extends FactoryONE {
   }
   insertToAuxZoneid = () => {
     this.closeTabService.saveDataForReadingConfig.forEach(item => {
-      item.staticID = item.zoneId;
+      item.dynamicId = item.zoneId;
     })
   }
   callAPI = async () => {
@@ -77,7 +77,7 @@ export class ReadingConfigComponent extends FactoryONE {
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
     this.insertToAuxZoneid();
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingConfig, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingConfig, this.zoneDictionary, 'dynamicId');
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForReadingConfig)) {
@@ -85,7 +85,7 @@ export class ReadingConfigComponent extends FactoryONE {
     }
   }
   removeRow = async (rowData: object) => {
-    const a = await this.readManagerService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].zoneId);
+    const a = await this.readManagerService.firstConfirmDialog('ناحیه: ' + rowData['dataSource'].dynamicId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource'].id);
       this.callAPI();

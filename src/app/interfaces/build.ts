@@ -57,7 +57,7 @@ export enum ENURLs {
     TEH_ZONE4 = 'http://81.12.106.167:8081/kontoriNew',
     TEH_SE = 'http://46.209.181.2:9098/kontoriNew',
     TEH_SE_LOCAL = 'http://172.28.5.40/kontoriNew',
-    KERMANSHAH = 'http://46.225.241.211:25123/kontoriNew',
+    KERMANSHAH = 'http://82.99.252.21:25123/kontoriNew',
     // REY = 'http://85.133.190.218:4121/kontoriNew', to be on next version
     REY = 'http://85.133.190.221:4121/kontoriNew',//Teh6
     TSW = 'http://81.90.148.25:880/kontoriNew',

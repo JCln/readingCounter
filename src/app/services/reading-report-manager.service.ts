@@ -90,7 +90,7 @@ export class ReadingReportManagerService {
     }
   }
   getFragmentMastersInZones = async (value: any): Promise<any> => {
-    if (value)
+    if (!MathS.isNull(value))
       return await this.dictionaryWrapperService.getFragmentMasterInZonesDictionary(
         this.utilsService.getZoneHierarical(value)
       );
