@@ -48,7 +48,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamtrvchchart);
   }
   getFragmentByZone = async () => {
-    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
+    if (this.myTreeSelect.value)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

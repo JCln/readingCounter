@@ -70,7 +70,8 @@ export class KarkardAllStatesComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   getFragmentByZone = async () => {
-    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
+    if (this.myTreeSelect.value)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

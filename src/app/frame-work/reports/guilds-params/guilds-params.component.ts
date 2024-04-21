@@ -29,7 +29,8 @@ export class GuildsParamsComponent extends FactoryONE {
   }
 
   getFragmentByZone = async () => {
-    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
+    if (this.myTreeSelect.value)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   classWrapper = async () => {
     this.closeTabService.getSearchInOrderTo();

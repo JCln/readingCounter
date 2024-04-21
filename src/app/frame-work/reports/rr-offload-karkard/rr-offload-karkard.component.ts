@@ -45,7 +45,8 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     this.getFragmentByZone();
   }
   getFragmentByZone = async () => {
-    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
+    if (this.myTreeSelect.value)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];

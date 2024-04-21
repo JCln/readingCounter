@@ -55,7 +55,8 @@ export class RrFragmentComponent extends FactoryONE {
       this.readingPeriodDictionary = await this.readingReportManagerService.dictionaryWrapperService.getReadingPeriodDictionary(this.closeTabService.rrFragmentKarkardReq._selectedKindId);
   }
   getFragmentByZone = async () => {
-    this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
+    if (this.myTreeSelect.value)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.rrFragmentKarkardReq, this.closeTabService._isOrderByDate);
