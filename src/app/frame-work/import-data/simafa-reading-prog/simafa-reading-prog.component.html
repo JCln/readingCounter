@@ -2,43 +2,55 @@
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="_card"
             [@openClose]="closeTabService.importSimafaReadingProgramReq._isCollapsed ? 'slideUp' : 'slideDown'">
-            <div class="input_2">
-                <div class="_key">ناحیه</div>
-                <div class="_value">
-                    <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.zoneId" placeholder="انتخاب مورد"
-                        optionValue="id" optionLabel="title" filter="true" (onChange)="afterZoneChanged()">
-                    </p-dropdown>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.zoneId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true" (onChange)="afterZoneChanged()">
+                        </p-dropdown>
+                    </div>
                 </div>
             </div>
-            <div class="input_2">
-                <div class="_key">نوع دوره</div>
-                <div class="_value">
-                    <p-dropdown name="kindId" [options]="readingPeriodKindsDictionary"
-                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.kindId" placeholder="انتخاب مورد"
-                        optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
-                        (onChange)="afterPeriodChanged()">
-                    </p-dropdown>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">>
+                    <div class="_key">نوع دوره</div>
+                    <div class="_value">
+                        <p-dropdown name="kindId" [options]="readingPeriodKindsDictionary"
+                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.kindId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
+                            (onChange)="afterPeriodChanged()">
+                        </p-dropdown>
+                    </div>
                 </div>
             </div>
-            <div class="input_2" [hidden]="!readingPeriodDictionary.length">
-                <div class="_key">دوره قرائت</div>
-                <div class="_value">
-                    <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
-                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.readingPeriodId"
-                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
-                    </p-dropdown>
+            <div class="input_icon" [hidden]="!readingPeriodDictionary.length">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">دوره قرائت</div>
+                    <div class="_value">
+                        <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
+                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.readingPeriodId"
+                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
                 </div>
             </div>
-            <div class="input_2">
-                <div class="_key">سال</div>
-                <div class="_value">
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.year" name="year">
-                        <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">سال</div>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.importSimafaReadingProgramReq.year" name="year">
+                            <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn_1">

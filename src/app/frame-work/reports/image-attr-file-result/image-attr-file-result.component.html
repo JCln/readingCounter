@@ -3,22 +3,28 @@
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="_card"
                 [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedImageAttrFileResult ? 'slideUp' : 'slideDown'">
-                <div class="input_2" [hidden]="!_isOrderByDate">
-                    <div class="_key">از</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate"
-                            (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.imgAttrResult, $event)"
-                            [dateObject]="closeTabService.imgAttrResultReq.fromDate">
-                        </app-date-jalali>
+                <div class="input_icon" [hidden]="!_isOrderByDate">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.imgAttrResult, $event)"
+                                [dateObject]="closeTabService.imgAttrResultReq.fromDate">
+                            </app-date-jalali>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!_isOrderByDate">
-                    <div class="_key">تا</div>
-                    <div class="_value">
-                        <app-date-jalali name="toDate"
-                            (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.imgAttrResult, $event)"
-                            [dateObject]="closeTabService.imgAttrResultReq.toDate">
-                        </app-date-jalali>
+                <div class="input_icon" [hidden]="!_isOrderByDate">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.imgAttrResult, $event)"
+                                [dateObject]="closeTabService.imgAttrResultReq.toDate">
+                            </app-date-jalali>
+                        </div>
                     </div>
                 </div>
 

@@ -1,9 +1,12 @@
 <form #form="ngForm" class="_card" (ngSubmit)="connectToServer()"
     [@openClose]="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed ? 'slideUp' : 'slideDown'">
-    <div class="input_2">
-        <div class="_key">شماره پیگیری</div>
-        <input class="_value" type="number" name="trackNumber"
-            [(ngModel)]="closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber" autofocus>
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">شماره پیگیری</div>
+            <input class="_value" type="number" name="trackNumber"
+                [(ngModel)]="closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber" autofocus>
+        </div>
     </div>
     <button type="submit" class="btn_1">
         مشاهده
@@ -12,10 +15,8 @@
 </form>
 
 <app-prime-table [dataSource]="closeTabService.saveDataForImportErrorsByTrackNumber"
-    [_outputFileName]="'errorsByTrackNumber'" 
-    [_sessionName]="'errbytracknumber'"
-     [_selectedColumnsToRemember]="'selectedErrorsByTrackNumber'"
-    (refreshedTable)="callAPI()" [_hasCollapsible]=true
+    [_outputFileName]="'errorsByTrackNumber'" [_sessionName]="'errbytracknumber'"
+    [_selectedColumnsToRemember]="'selectedErrorsByTrackNumber'" (refreshedTable)="callAPI()" [_hasCollapsible]=true
     [_isCollaped]="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed"
     (collapsed)="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed = !closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed">
 </app-prime-table>

@@ -4,34 +4,44 @@
 
             <section class="content">
 
-                <div class="input_2" [hidden]="!zoneDictionary.length">
-                    <div class="_key">ناحیه</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="allImportsService.allImports_batch.zoneId"
-                            name="zoneId">
-                            <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                <div class="input_icon" [hidden]="!zoneDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="allImportsService.allImports_batch.zoneId" name="zoneId">
+                                <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">ش.لیست</div>
-                    <input [readOnly]="true" class="_value _smaller_font" name="listNumber"
-                        [(ngModel)]="allImportsService.allImports_batch.listNumber">
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ش.لیست</div>
+                        <input [readOnly]="true" class="_value _smaller_font" name="listNumber"
+                            [(ngModel)]="allImportsService.allImports_batch.listNumber">
+                    </div>
                 </div>
-
-                <div class="input_2">
-                    <div class="_key">درصد علی‌الحساب</div>
-                    <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
-                        [(ngModel)]="allImportsService.allImports_batch.alalHesabPercent">
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">درصد علی‌الحساب</div>
+                        <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                            [(ngModel)]="allImportsService.allImports_batch.alalHesabPercent">
+                    </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">درصد تصویر</div>
-                    <input class="_value" min="0" max="100" type="number" name="imagePercent"
-                        [(ngModel)]="allImportsService.allImports_batch.imagePercent">
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">درصد تصویر</div>
+                        <input class="_value" min="0" max="100" type="number" name="imagePercent"
+                            [(ngModel)]="allImportsService.allImports_batch.imagePercent">
+                    </div>
                 </div>
-
             </section>
 
             <div class="check_boxes" *ngIf="!importDynamicService.utilsService.getDenyTracking()">

@@ -16,63 +16,83 @@
                 </section>
                 <hr>
                 <section class="content">
-                    <div class="input_2">
-                        <div class="_key">ناحیه</div>
-                        <div class="_value">
-                            <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
-                                [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
-                                [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                                emptyMessage="موردی وجود ندارد" #myTreeSelect>
-                            </p-treeSelect>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">ناحیه</div>
+                            <div class="_value">
+                                <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
+                                    [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
+                                    [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
+                                    emptyMessage="موردی وجود ندارد" #myTreeSelect>
+                                </p-treeSelect>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                        <div class="_key">نوع دوره</div>
-                        <div class="_value">
-                            <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
-                                [(ngModel)]="closeTabService.dataMiningReq._selectedKindId" placeholder="انتخاب مورد"
-                                optionValue="id" optionLabel="title" filter="true" (click)="getReadingPeriod()"
-                                (onChange)="afterPeriodChanged()">
-                            </p-dropdown>
+                    <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">نوع دوره</div>
+                            <div class="_value">
+                                <p-dropdown name="kindId" [options]="readingPeriodKindDictionary"
+                                    [(ngModel)]="closeTabService.dataMiningReq._selectedKindId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                    (click)="getReadingPeriod()" (onChange)="afterPeriodChanged()">
+                                </p-dropdown>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
-                        <div class="_key">دوره قرائت</div>
-                        <div class="_value">
-                            <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
-                                [(ngModel)]="closeTabService.dataMiningReq.readingPeriodId" placeholder="انتخاب مورد"
-                                optionValue="id" optionLabel="title" filter="true">
-                            </p-dropdown>
+                    <div class="input_icon" [hidden]="!readingPeriodDictionary.length ||
+                    closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">دوره قرائت</div>
+                            <div class="_value">
+                                <p-dropdown name="readingPeriodId" [options]="readingPeriodDictionary"
+                                    [(ngModel)]="closeTabService.dataMiningReq.readingPeriodId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                        <div class="_key">سال</div>
-                        <div class="_value">
-                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.dataMiningReq.year"
-                                name="year">
-                                <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
-                                    {{truefalse.title}}
-                                </mat-option>
-                            </mat-select>
+                    <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">سال</div>
+                            <div class="_value">
+                                <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.dataMiningReq.year"
+                                    name="year">
+                                    <mat-option *ngFor="let truefalse of closeTabService.years"
+                                        [value]="truefalse.value">
+                                        {{truefalse.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                        <div class="_key">از</div>
-                        <div class="_value">
-                            <app-date-jalali name="fromDate"
-                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.dataMining, $event)"
-                                [dateObject]="closeTabService.dataMiningReq.fromDate">
-                            </app-date-jalali>
+                    <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">از</div>
+                            <div class="_value">
+                                <app-date-jalali name="fromDate"
+                                    (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.dataMining, $event)"
+                                    [dateObject]="closeTabService.dataMiningReq.fromDate">
+                                </app-date-jalali>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                        <div class="_key">تا</div>
-                        <div class="_value">
-                            <app-date-jalali name="toDate"
-                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.dataMining, $event)"
-                                [dateObject]="closeTabService.dataMiningReq.toDate">
-                            </app-date-jalali>
+                    <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">تا</div>
+                            <div class="_value">
+                                <app-date-jalali name="toDate"
+                                    (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.dataMining, $event)"
+                                    [dateObject]="closeTabService.dataMiningReq.toDate">
+                                </app-date-jalali>
+                            </div>
                         </div>
                     </div>
 

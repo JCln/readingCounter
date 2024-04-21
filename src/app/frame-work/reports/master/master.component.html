@@ -5,66 +5,87 @@
                 [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedMaster ? 'slideUp' : 'slideDown'">
                 <app-sort-according-to></app-sort-according-to>
                 <section class="content">
-                    <div class="input_2">
-                        <div class="_key">ناحیه</div>
-                        <div class="_value">
-                            <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
-                                [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
-                                [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                                emptyMessage="موردی وجود ندارد" #myTreeSelect>
-                            </p-treeSelect>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">ناحیه</div>
+                            <div class="_value">
+                                <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
+                                    [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
+                                    [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
+                                    emptyMessage="موردی وجود ندارد" #myTreeSelect>
+                                </p-treeSelect>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                        <div class="_key">نوع دوره</div>
-                        <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="closeTabService.masterReq._selectedKindId" name="_selectedKindId">
-                                <mat-option (click)="getReadingPeriod()"
-                                    *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                                    {{truefalse.title}}
-                                </mat-option>
-                            </mat-select>
+                    <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">نوع دوره</div>
+                            <div class="_value">
+                                <mat-select placeholder="انتخاب مورد"
+                                    [(ngModel)]="closeTabService.masterReq._selectedKindId" name="_selectedKindId">
+                                    <mat-option (click)="getReadingPeriod()"
+                                        *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                        {{truefalse.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
-                        <div class="_key">دوره قرائت</div>
-                        <div class="_value">
-                            <mat-select placeholder="انتخاب مورد"
-                                [(ngModel)]="closeTabService.masterReq.readingPeriodId" name="readingPeriodId">
-                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                    {{truefalse.title}}
-                                </mat-option>
-                            </mat-select>
+                    <div class="input_icon" [hidden]="!readingPeriodDictionary.length ||
+                    closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">دوره قرائت</div>
+                            <div class="_value">
+                                <mat-select placeholder="انتخاب مورد"
+                                    [(ngModel)]="closeTabService.masterReq.readingPeriodId" name="readingPeriodId">
+                                    <mat-option *ngFor="let truefalse of readingPeriodDictionary"
+                                        [value]="truefalse.id">
+                                        {{truefalse.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                        <div class="_key">سال</div>
-                        <div class="_value">
-                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.masterReq.year"
-                                name="year">
-                                <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
-                                    {{truefalse.title}}
-                                </mat-option>
-                            </mat-select>
+                    <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">سال</div>
+                            <div class="_value">
+                                <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.masterReq.year"
+                                    name="year">
+                                    <mat-option *ngFor="let truefalse of closeTabService.years"
+                                        [value]="truefalse.value">
+                                        {{truefalse.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                        <div class="_key">از</div>
-                        <div class="_value">
-                            <app-date-jalali name="fromDate"
-                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.master, $event)"
-                                [dateObject]="closeTabService.masterReq.fromDate">
-                            </app-date-jalali>
+                    <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">از</div>
+                            <div class="_value">
+                                <app-date-jalali name="fromDate"
+                                    (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.master, $event)"
+                                    [dateObject]="closeTabService.masterReq.fromDate">
+                                </app-date-jalali>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                        <div class="_key">تا</div>
-                        <div class="_value">
-                            <app-date-jalali name="toDate"
-                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.master, $event)"
-                                [dateObject]="closeTabService.masterReq.toDate">
-                            </app-date-jalali>
+                    <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">تا</div>
+                            <div class="_value">
+                                <app-date-jalali name="toDate"
+                                    (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.master, $event)"
+                                    [dateObject]="closeTabService.masterReq.toDate">
+                                </app-date-jalali>
+                            </div>
                         </div>
                     </div>
 

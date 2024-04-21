@@ -5,32 +5,41 @@
                 [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedDH ? 'slideUp' : 'slideDown'">
 
                 <section class="content">
-                    <div class="input_2">
-                        <div class="_key">ناحیه</div>
-                        <div class="_value">
-                            <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
-                                [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
-                                [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                                emptyMessage="موردی وجود ندارد" #myTreeSelect>
-                            </p-treeSelect>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">ناحیه</div>
+                            <div class="_value">
+                                <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
+                                    [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
+                                    [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
+                                    emptyMessage="موردی وجود ندارد" #myTreeSelect>
+                                </p-treeSelect>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2">
-                        <div class="_key">از</div>
-                        <div class="_value">
-                            <app-date-jalali name="fromDate"
-                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.dh, $event)"
-                                [dateObject]="closeTabService.disposalhoursReq.fromDate">
-                            </app-date-jalali>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">از</div>
+                            <div class="_value">
+                                <app-date-jalali name="fromDate"
+                                    (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.dh, $event)"
+                                    [dateObject]="closeTabService.disposalhoursReq.fromDate">
+                                </app-date-jalali>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2">
-                        <div class="_key">تا</div>
-                        <div class="_value">
-                            <app-date-jalali name="toDate"
-                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.dh, $event)"
-                                [dateObject]="closeTabService.disposalhoursReq.toDate">
-                            </app-date-jalali>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">تا</div>
+                            <div class="_value">
+                                <app-date-jalali name="toDate"
+                                    (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.dh, $event)"
+                                    [dateObject]="closeTabService.disposalhoursReq.toDate">
+                                </app-date-jalali>
+                            </div>
                         </div>
                     </div>
                     <button id="grid_view" type="submit" class="btn_1">

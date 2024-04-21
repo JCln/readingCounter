@@ -5,32 +5,41 @@
                 [@openClose]="readingReportManagerService.utilsService.collapser.isCollapsedImgAttrAnlz ? 'slideUp' : 'slideDown'">
 
                 <section class="content">
-                    <div class="input_2">
-                        <div class="_key">ناحیه</div>
-                        <div class="_value">
-                            <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="closeTabService.imgAttrAnalyzeReq.zoneId" placeholder="انتخاب مورد"
-                                optionValue="id" optionLabel="title" filter="true">
-                            </p-dropdown>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">ناحیه</div>
+                            <div class="_value">
+                                <p-dropdown name="zones" [options]="zoneDictionary"
+                                    [(ngModel)]="closeTabService.imgAttrAnalyzeReq.zoneId" placeholder="انتخاب مورد"
+                                    optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
                         </div>
                     </div>
-                    <div class="input_2">
-                        <div class="_key">از</div>
-                        <div class="_value">
-                            <app-date-jalali name="fromDate"
-                                (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.imgAttrAnalyze, $event)"
-                                [dateObject]="closeTabService.imgAttrAnalyzeReq.fromDate">
-                            </app-date-jalali>
-                        </div>
-                    </div>
-                    <div class="input_2">
-                        <div class="_key">تا</div>
-                        <div class="_value">
-                            <app-date-jalali name="toDate"
-                                (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.imgAttrAnalyze, $event)"
-                                [dateObject]="closeTabService.imgAttrAnalyzeReq.toDate">
-                            </app-date-jalali>
 
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">از</div>
+                            <div class="_value">
+                                <app-date-jalali name="fromDate"
+                                    (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.imgAttrAnalyze, $event)"
+                                    [dateObject]="closeTabService.imgAttrAnalyzeReq.fromDate">
+                                </app-date-jalali>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">تا</div>
+                            <div class="_value">
+                                <app-date-jalali name="toDate"
+                                    (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.imgAttrAnalyze, $event)"
+                                    [dateObject]="closeTabService.imgAttrAnalyzeReq.toDate">
+                                </app-date-jalali>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn_1">

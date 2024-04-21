@@ -2,70 +2,97 @@
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="_container">
             <section class="__readonly_s">
-                <div class="input_2">
-                    <div class="_key">نام‌و نام‌خانوادگی</div>
-                    <div class="_value">
-                        {{firstName}}{{sureName}}
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نام‌و نام‌خانوادگی</div>
+                        <div class="_value">
+                            {{firstName}}{{sureName}}
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">ش پرونده</div>
-                    <div class="_value">
-                        {{radif}}
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ش پرونده</div>
+                        <div class="_value">
+                            {{radif}}
+                        </div>
                     </div>
                 </div>
-                <div class="input_2 coloring_border" [hidden]="!counterStatesDictionary.length">
-                    <div class="_key">وضعیت کنتور</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(value)]="counterStateId" name="counterState">
-                            <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.title">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                <div class="input_icon coloring_border" [hidden]="!counterStatesDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">وضعیت کنتور</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(value)]="counterStateId" name="counterState">
+                                <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.title">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2 coloring_border">
-                    <div class="_key">نوع اصلاح</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType"
-                            name="modifyType">
-                            <mat-option *ngFor="let truefalse of modifyType" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                <div class="input_icon coloring_border">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نوع اصلاح</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType"
+                                name="modifyType">
+                                <mat-option *ngFor="let truefalse of modifyType" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">تاریخ قبلی</div>
-                    <div class="_value">
-                        {{preDate}}
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">تاریخ قبلی</div>
+                        <div class="_value">
+                            {{preDate}}
+                        </div>
                     </div>
                 </div>
-                <div class="input_2 coloring_border">
-                    <div class="_key">تاریخ فعلی</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
-                            [dateObject]="offloadModifyReq.jalaliDay">
-                        </app-date-jalali>
+                <div class="input_icon coloring_border">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">تاریخ فعلی</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                                [dateObject]="offloadModifyReq.jalaliDay">
+                            </app-date-jalali>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">رقم قبلی</div>
-                    <div class="_value">
-                        {{preNumber}}
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">رقم قبلی</div>
+                        <div class="_value">
+                            {{preNumber}}
+                        </div>
                     </div>
                 </div>
-                <div class="input_2 coloring_border">
-                    <div class="_key">رقم فعلی</div>
-                    <div class="_value">
-                        <input class="_value" type="number" name="counterNumber"
-                            [(ngModel)]="offloadModifyReq.counterNumber">
+                <div class="input_icon coloring_border">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">رقم فعلی</div>
+                        <div class="_value">
+                            <input class="_value" type="number" name="counterNumber"
+                                [(ngModel)]="offloadModifyReq.counterNumber">
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">توضیح قرائت کننده</div>
-                    <div class="_value">
-                        {{description}}
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">توضیح قرائت کننده</div>
+                        <div class="_value">
+                            {{description}}
+                        </div>
                     </div>
                 </div>
                 <input class="input_1 coloring_border" type="text" placeholder="توضیحات : " name="description"

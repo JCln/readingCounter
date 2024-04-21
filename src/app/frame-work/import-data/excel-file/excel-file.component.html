@@ -3,80 +3,107 @@
         <section class="static_part">
 
             <section class="content">
-                <div class="input_2" [hidden]="!zoneDictionary.length">
-                    <div class="_key">ناحیه</div>
-                    <div class="_value">
-                        <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.zoneId"
-                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
-                            (onChange)="verificationACounterReaderId()">
-                        </p-dropdown>
+                <div class="input_icon" [hidden]="!zoneDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.zoneId"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                                (onChange)="verificationACounterReaderId()">
+                            </p-dropdown>
+                        </div>
                     </div>
                 </div>
                 <!-- when zone id and kind id get -->
-                <div class="input_2" [hidden]="!readingPeriodKindsDictionary.length">
-                    <div class="_key">نوع دوره</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
-                            <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
-                                (click)="verificationReadingPeriod()">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                <div class="input_icon" [hidden]="!readingPeriodKindsDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">>
+                        <div class="_key">نوع دوره</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
+                                <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary"
+                                    [value]="truefalse.id" (click)="verificationReadingPeriod()">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!readingPeriodDictionary.length">
-                    <div class="_key">دوره قرائت</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.readingPeriodId"
-                            name="readingPeriodId">
-                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                <div class="input_icon" [hidden]="!readingPeriodDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">دوره قرائت</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.readingPeriodId"
+                                name="readingPeriodId">
+                                <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="userCounterReader.length">
-                    <div class="_key">قرائت کننده</div>
-                    <div class="_value">
-                        <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
-                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.counterReaderId"
-                            optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                            placeholder="انتخاب مورد">
-                        </p-dropdown>
+                <div class="input_icon" *ngIf="userCounterReader.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">قرائت کننده</div>
+                        <div class="_value">
+                            <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
+                                [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.counterReaderId"
+                                optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                                placeholder="انتخاب مورد">
+                            </p-dropdown>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">سال</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.year" name="year">
-                            <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">سال</div>
+                        <div class="_value">
+                            <mat-select placeholder="انتخاب مورد"
+                                [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.year" name="year">
+                                <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">ش لیست</div>
-                    <input class="_value double_size" name="listNumber"
-                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.listNumber">
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ش لیست</div>
+                        <input class="_value double_size" name="listNumber"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.listNumber">
+                    </div>
                 </div>
-                <div class="input_2 double_size">
-                    <div class="_key">توضیحات</div>
-                    <input class="_value" name="desc"
-                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.description">
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3 double_size">
+                        <div class="_key">توضیحات</div>
+                        <input class="_value" name="desc"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.description">
+                    </div>
                 </div>
-                <div class="input_2" [hidden]="!_showAlalHesabPercent">
-                    <div class="_key">درصد علی‌الحساب</div>
-                    <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
-                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent">
+                <div class="input_icon" [hidden]="!_showAlalHesabPercent">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">درصد علی‌الحساب</div>
+                        <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent">
+                    </div>
                 </div>
-                <div class="input_2" [hidden]="!_showimagePercent">
-                    <div class="_key">درصد تصویر</div>
-                    <input class="_value" type="number" min="0" max="100" name="imagePercent"
-                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.imagePercent">
+                <div class="input_icon" [hidden]="!_showimagePercent">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">درصد تصویر</div>
+                        <input class="_value" type="number" min="0" max="100" name="imagePercent"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.imagePercent">
+                    </div>
                 </div>
             </section>
 

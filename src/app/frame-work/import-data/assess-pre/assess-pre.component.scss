@@ -47,7 +47,7 @@ footer {
 
 section.dynamic_content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 17rem));
   gap: var(--font_05);
   align-items: center;
   border-radius: $border_15;

@@ -1,13 +1,16 @@
 <form #form="ngForm" (ngSubmit)="connectToServer()">
     <section class="_card">
 
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <div class="_value">
-                <p-dropdown name="zones" [options]="zoneDictionary"
-                    [(ngModel)]="trackingManagerService.dbfOutputEqamatBagh.zoneId" placeholder="انتخاب مورد"
-                      optionValue="id" optionLabel="title" filter="true">
-                </p-dropdown>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="trackingManagerService.dbfOutputEqamatBagh.zoneId" placeholder="انتخاب مورد"
+                        optionValue="id" optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
             </div>
         </div>
 

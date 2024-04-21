@@ -8,21 +8,27 @@
     <main class="main_content">
         <section class="_toselect _card">
             <section class="__content">
-                <div class="input_2">
-                    <div class="_key">ناحیه</div>
-                    <div class="_value">
-                        <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
-                            [(ngModel)]="importDynamicService.pageSignsService.assessPre_pageSign.zoneId" optionLabel="title"
-                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                            placeholder="انتخاب مورد" (onClick)="getMasterInZone()"
-                            (onChange)="emptyPreviousValuesFromSelectOptions()">
-                        </p-dropdown>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
+                                [(ngModel)]="importDynamicService.pageSignsService.assessPre_pageSign.zoneId"
+                                optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                                placeholder="انتخاب مورد" (onClick)="getMasterInZone()"
+                                (onChange)="emptyPreviousValuesFromSelectOptions()">
+                            </p-dropdown>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">شماره لیست</div>
-                    <input class="_value" name="listNumber"
-                        [(ngModel)]="importDynamicService.pageSignsService.assessPre_pageSign.listNumber">
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">شماره لیست</div>
+                        <input class="_value" name="listNumber"
+                            [(ngModel)]="importDynamicService.pageSignsService.assessPre_pageSign.listNumber">
+                    </div>
                 </div>
                 <div class="check_boxes">
                     <mat-checkbox name="noImages" [(ngModel)]="closeTabService.saveDataForAssessPreReq.noImages">
@@ -33,53 +39,68 @@
                         انتخاب شود
                     </mat-checkbox>
                 </div>
+
                 <footer class="footer_with_background">
                     <button class="btn_1" type="submit">جستجو</button>
                 </footer>
             </section>
 
+
         </section>
 
         <section class="_more_options">
             <div class="__container">
-                <div class="input_2" *ngIf="masrafState">
-                    <div class="_key">وضعیت مصرف</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="masrafState" name="masraf"
-                            [(ngModel)]="closeTabService.saveDataForAssessPreReq.masrafStates" optionLabel="header"
-                            optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                            placeholder="انتخاب مورد">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="masrafState">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">وضعیت مصرف</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="masrafState" name="masraf"
+                                [(ngModel)]="closeTabService.saveDataForAssessPreReq.masrafStates" optionLabel="header"
+                                optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده"
+                                [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="counterReportDictionary.length">
-                    <div class="_key">گزارش بازرسی</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="counterReportDictionary" name="counterReport"
-                            [(ngModel)]="closeTabService.saveDataForAssessPreReq.reportIds" optionLabel="title"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="counterReportDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">گزارش بازرسی</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="counterReportDictionary"
+                                name="counterReport" [(ngModel)]="closeTabService.saveDataForAssessPreReq.reportIds"
+                                optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                [style]="{minWidth: '100%'}" placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="counterStateDictionary.length">
-                    <div class="_key">وضعیت کنتور</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="counterStateDictionary" name="counterState"
-                            [(ngModel)]="closeTabService.saveDataForAssessPreReq.counterStateIds" optionLabel="title"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="counterStateDictionary.length">
+                    <i class=" pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">وضعیت کنتور</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="counterStateDictionary"
+                                name="counterState"
+                                [(ngModel)]="closeTabService.saveDataForAssessPreReq.counterStateIds"
+                                optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                [style]="{minWidth: '100%'}" placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="karbariDictionary.length">
-                    <div class="_key">کاربری</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="karbari"
-                            [(ngModel)]="closeTabService.saveDataForAssessPreReq.karbariCodes" optionLabel="title"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="karbariDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">>
+                        <div class="_key">کاربری</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="karbari"
+                                [(ngModel)]="closeTabService.saveDataForAssessPreReq.karbariCodes" optionLabel="title"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,25 +114,35 @@
     <section class="static_part">
 
         <section class="dynamic_content">
-            <div class="input_2" *ngIf="userCounterReaderDictionary.length">
-                <div class="_key">قرائت کننده</div>
-                <div class="_value">
-                    <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
-                        [(ngModel)]="importDynamicService._assessAddReq.counterReaderId" optionLabel="title"
-                        [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
-                    </p-dropdown>
+            <div class="input_icon" *ngIf="userCounterReaderDictionary.length">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">>
+                    <div class="_key">قرائت کننده</div>
+                    <div class="_value">
+                        <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
+                            [(ngModel)]="importDynamicService._assessAddReq.counterReaderId" optionLabel="title"
+                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                            placeholder="انتخاب مورد">
+                        </p-dropdown>
+                    </div>
                 </div>
             </div>
 
-            <div class="input_2">
-                <div class="_key">درصد علی‌الحساب</div>
-                <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
-                    [(ngModel)]="importDynamicService._assessAddReq.alalHesabPercent">
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">درصد علی‌الحساب</div>
+                    <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                        [(ngModel)]="importDynamicService._assessAddReq.alalHesabPercent">
+                </div>
             </div>
-            <div class="input_2">
-                <div class="_key">درصد تصویر</div>
-                <input class="_value" min="0" max="100" type="number" name="imagePercent"
-                    [(ngModel)]="importDynamicService._assessAddReq.imagePercent">
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">درصد تصویر</div>
+                    <input class="_value" min="0" max="100" type="number" name="imagePercent"
+                        [(ngModel)]="importDynamicService._assessAddReq.imagePercent">
+                </div>
             </div>
         </section>
         <div class="check_boxes">
