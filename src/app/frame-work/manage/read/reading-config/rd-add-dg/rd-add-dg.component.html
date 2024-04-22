@@ -2,95 +2,158 @@
 
 <form [formGroup]="form" dir="rtl" (ngSubmit)="save()">
     <main class="_contents">
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
-                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                        <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
         </div>
-        <div class="input_2">
-            <div class="_key">علی‌الحساب پیشفرض</div>
-            <input class="_value" type="number" formControlName="defaultAlalHesab">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">علی‌الحساب پیشفرض</div>
+                <input class="_value" type="number" formControlName="defaultAlalHesab">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">علی‌الحساب بیشینه %</div>
-            <input class="_value" type="number" formControlName="maxAlalHesab">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">علی‌الحساب بیشینه %</div>
+                <input class="_value" type="number" formControlName="maxAlalHesab">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">علی‌الحساب کمینه %</div>
-            <input class="_value" type="number" formControlName="minAlalHesab">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">علی‌الحساب کمینه %</div>
+                <input class="_value" type="number" formControlName="minAlalHesab">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">تصویر پیشفرض %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="defaultImagePercent">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تصویر پیشفرض %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="defaultImagePercent">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">تصویر بیشینه %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="maxImagePercent">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تصویر بیشینه %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="maxImagePercent">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">تصویر کمینه %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="minImagePercent">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تصویر کمینه %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="minImagePercent">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">ثابت مسکونی پایین</div>
-            <input class="_value" type="number" formControlName="lowConstBoundMaskooni">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ثابت مسکونی پایین</div>
+                <input class="_value" type="number" formControlName="lowConstBoundMaskooni">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین مسکونی پایین %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentBoundMaskooni">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین مسکونی پایین %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="lowPercentBoundMaskooni">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">ثابت مسکونی بالا</div>
-            <input class="_value" type="number" formControlName="highConstBoundMaskooni">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ثابت مسکونی بالا</div>
+                <input class="_value" type="number" formControlName="highConstBoundMaskooni">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین مسکونی بالا %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="highPercentBoundMaskooni">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین مسکونی بالا %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="highPercentBoundMaskooni">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">ثابت ساخت پایین</div>
-            <input class="_value" type="number" formControlName="lowConstBoundSaxt">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ثابت ساخت پایین</div>
+                <input class="_value" type="number" formControlName="lowConstBoundSaxt">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین ساخت پایین %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentBoundSaxt">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین ساخت پایین %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="lowPercentBoundSaxt">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">ثابت ساخت بالا</div>
-            <input class="_value" type="number" formControlName="highConstBoundSaxt">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ثابت ساخت بالا</div>
+                <input class="_value" type="number" formControlName="highConstBoundSaxt">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین ساخت بالا %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="highPercentBoundSaxt">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین ساخت بالا %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="highPercentBoundSaxt">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">ثابت تجاری پایین</div>
-            <input class="_value" type="number" formControlName="lowConstZarfiatBound">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ثابت تجاری پایین</div>
+                <input class="_value" type="number" formControlName="lowConstZarfiatBound">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین تجاری پایین %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentZarfiatBound">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین تجاری پایین %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="lowPercentZarfiatBound">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">ثابت تجاری بالا</div>
-            <input class="_value" type="number" formControlName="highConstZarfiatBound">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ثابت تجاری بالا</div>
+                <input class="_value" type="number" formControlName="highConstZarfiatBound">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین تجاری بالا %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="highPercentZarfiatBound">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین تجاری بالا %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="highPercentZarfiatBound">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین غیرمسکونی پایین %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentRateBoundNonMaskooni">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین غیرمسکونی پایین %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="lowPercentRateBoundNonMaskooni">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">میانگین غیرمسکونی بالا %</div>
-            <input class="_value" type="number" min="0" max="100" formControlName="highPercentRateBoundNonMaskooni">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">میانگین غیرمسکونی بالا %</div>
+                <input class="_value" type="number" min="0" max="100" formControlName="highPercentRateBoundNonMaskooni">
+            </div>
         </div>
 
         <mat-checkbox formControlName="isOnQeraatCode">کد قرائت</mat-checkbox>

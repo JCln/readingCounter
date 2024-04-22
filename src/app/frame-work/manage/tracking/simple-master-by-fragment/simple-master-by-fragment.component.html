@@ -13,68 +13,94 @@
         </section>
         <hr>
         <section class="content">
-            <div class="input_2">
-                <div class="_key">ناحیه</div>
-                <div class="_value">
-                    <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="closeTabService.simpleMasterByFragmentReq.zoneId" placeholder="انتخاب مورد"
-                        optionValue="id" optionLabel="title" filter="true">
-                    </p-dropdown>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="closeTabService.simpleMasterByFragmentReq.zoneId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
                 </div>
             </div>
 
-            <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                <div class="_key">نوع دوره</div>
-                <div class="_value">
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="closeTabService.simpleMasterByFragmentReq._selectedKindId" name="_selectedKindId">
-                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
-                            [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+            <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+
+                    <div class="_key">نوع دوره</div>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.simpleMasterByFragmentReq._selectedKindId"
+                            name="_selectedKindId">
+                            <mat-option (click)="getReadingPeriod()"
+                                *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
             </div>
 
-            <div class="input_2" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
-                <div class="_key">دوره قرائت</div>
-                <div class="_value">
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="closeTabService.simpleMasterByFragmentReq.readingPeriodId" name="readingPeriodId">
-                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+            <div class="input_icon" [hidden]="!readingPeriodDictionary.length || closeTabService._isOrderByDate">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+
+                    <div class="_key">دوره قرائت</div>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.simpleMasterByFragmentReq.readingPeriodId"
+                            name="readingPeriodId">
+                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
             </div>
 
-            <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                <div class="_key">سال</div>
-                <div class="_value">
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.simpleMasterByFragmentReq.year"
-                        name="year">
-                        <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+            <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+
+                    <div class="_key">سال</div>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.simpleMasterByFragmentReq.year" name="year">
+                            <mat-option *ngFor="let truefalse of closeTabService.years" [value]="truefalse.value">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
             </div>
-            <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                <div class="_key">از</div>
-                <div class="_value">
-                    <app-date-jalali name="fromDate"
-                        (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.selectedSimpleMasterByFragmentReq, $event)"
-                        [dateObject]="closeTabService.simpleMasterByFragmentReq.fromDate">
-                    </app-date-jalali>
+
+            <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.selectedSimpleMasterByFragmentReq, $event)"
+                            [dateObject]="closeTabService.simpleMasterByFragmentReq.fromDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
             </div>
-            <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                <div class="_key">تا</div>
-                <div class="_value">
-                    <app-date-jalali name="toDate"
-                        (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.selectedSimpleMasterByFragmentReq, $event)"
-                        [dateObject]="closeTabService.simpleMasterByFragmentReq.toDate">
-                    </app-date-jalali>
+            <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate"
+                            (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.selectedSimpleMasterByFragmentReq, $event)"
+                            [dateObject]="closeTabService.simpleMasterByFragmentReq.toDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
             </div>
         </section>
@@ -168,7 +194,8 @@
                     [_selectedColumnsToRemember]="'selectedSimpleMasterByFragmentDetails'" [_outputEnabled]="false"
                     [_isSortable]="false" [_hasSaveColumns]="false" (refreshedTable)="refreshTable()"
                     [_paginator]="false" [_hasRefreshTable]="false" [_captionEnabled]="false"
-                    (routedToLoggs)="routeToOffloadLazy($event)" (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)">
+                    (routedToLoggs)="routeToOffloadLazy($event)"
+                    (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)">
                 </app-prime-table>
             </td>
         </tr>

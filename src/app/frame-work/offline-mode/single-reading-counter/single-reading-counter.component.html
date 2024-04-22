@@ -8,24 +8,30 @@
         [@openClose]="closeTabService.offlineSingleReadingCounterReq._isCollapsed ? 'slideUp' : 'slideDown'">
         <div class="_desc">
 
-            <div class="input_2">
-                <div class="_key">نوع جستجو</div>
-                <div class="_value">
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="closeTabService.offlineSingleReadingCounterReq.searchBy" name="searchType">
-                        <mat-option (click)="_searchByInfo = truefalse.searchBy"
-                            *ngFor="let truefalse of closeTabService.offlineSingleReadingCounterReq.searchType"
-                            [value]="truefalse.id">
-                            {{truefalse.searchBy}}
-                        </mat-option>
-                    </mat-select>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">نوع جستجو</div>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.offlineSingleReadingCounterReq.searchBy" name="searchType">
+                            <mat-option (click)="_searchByInfo = truefalse.searchBy"
+                                *ngFor="let truefalse of closeTabService.offlineSingleReadingCounterReq.searchType"
+                                [value]="truefalse.id">
+                                {{truefalse.searchBy}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
             </div>
 
-            <div class="input_2">
-                <div class="_key">{{_searchByInfo}}</div>
-                <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
-                    [(ngModel)]="closeTabService.offlineSingleReadingCounterReq.item" autofocus>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">{{_searchByInfo}}</div>
+                    <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
+                        [(ngModel)]="closeTabService.offlineSingleReadingCounterReq.item" autofocus>
+                </div>
             </div>
 
             <button class="btn_1" type="submit">

@@ -3,20 +3,26 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <main class="_contents">
 
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
-                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                        <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">فرمول</div>
-            <input class="_value" formControlName="formula">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">فرمول</div>
+                <input class="_value" formControlName="formula">
+            </div>
         </div>
 
     </main>

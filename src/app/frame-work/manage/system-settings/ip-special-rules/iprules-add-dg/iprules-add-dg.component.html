@@ -2,29 +2,47 @@
 
 <form [formGroup]="form" dir="rtl" (ngSubmit)="save()">
     <main class="_contents">
-        <div class="input_2">
-            <div class="_key">IP</div>
-            <input class="_value" formControlName="ip">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">IP</div>
+                <input class="_value" formControlName="ip">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">endpoint</div>
-            <input class="_value" formControlName="endpoint">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">endpoint</div>
+                <input class="_value" formControlName="endpoint">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">مدت</div>
-            <input class="_value" formControlName="period">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">مدت</div>
+                <input class="_value" formControlName="period">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">مدت زمان</div>
-            <input class="_value" type="number" formControlName="periodTimespan">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">مدت زمان</div>
+                <input class="_value" type="number" formControlName="periodTimespan">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">حداکثر تعداد</div>
-            <input class="_value" type="number" formControlName="limit">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">حداکثر تعداد</div>
+                <input class="_value" type="number" formControlName="limit">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">کد هدر خطا</div>
-            <input class="_value" type="number" formControlName="quotaExceededResponse">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کد هدر خطا</div>
+                <input class="_value" type="number" formControlName="quotaExceededResponse">
+            </div>
         </div>
 
         <mat-checkbox formControlName="monitorMode">پایش</mat-checkbox>

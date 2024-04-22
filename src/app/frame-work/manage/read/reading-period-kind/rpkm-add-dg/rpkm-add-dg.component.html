@@ -3,25 +3,40 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <main class="_contents">
 
-        <div class="input_2">
-            <div class="_key">کد</div>
-            <input class="_value" type="number" formControlName="id">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کد</div>
+                <input class="_value" type="number" formControlName="id">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">عنوان</div>
-            <input class="_value" formControlName="title">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">عنوان</div>
+                <input class="_value" formControlName="title">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">کد مشترکین</div>
-            <input class="_value" type="number" formControlName="moshtarakinId">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کد مشترکین</div>
+                <input class="_value" type="number" formControlName="moshtarakinId">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">روزها</div>
-            <input class="_value" type="number" formControlName="days">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">روزها</div>
+                <input class="_value" type="number" formControlName="days">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">ترتیب</div>
-            <input class="_value" type="number" formControlName="clientOrder">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ترتیب</div>
+                <input class="_value" type="number" formControlName="clientOrder">
+            </div>
         </div>
         <mat-checkbox formControlName="isEnabled">فعال</mat-checkbox>
     </main>

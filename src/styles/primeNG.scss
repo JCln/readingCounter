@@ -55,6 +55,14 @@
     }
   }
 
+  p-multiselect.p-multiselect-clearable .p-multiselect-label-container {
+    padding-right: 0;
+  }
+
+  .p-multiselect-label-container {
+    justify-content: center;
+  }
+
   .p-treeselect-label-container {
     font-family: var(--font-family);
     overflow: hidden;

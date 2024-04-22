@@ -6,30 +6,39 @@
     <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="_card">
         <div class="_desc">
 
-            <div class="input_2">
-                <div class="_key">نوع جستجو</div>
-                <div class="_value">
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="offlineModeService.fileUploadSingle.searchBy"
-                        name="searchType">
-                        <mat-option (click)="_searchByInfo = truefalse.searchBy"
-                            *ngFor="let truefalse of offlineModeService.fileUploadSingle.searchType"
-                            [value]="truefalse.id">
-                            {{truefalse.searchBy}}
-                        </mat-option>
-                    </mat-select>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">نوع جستجو</div>
+                    <div class="_value">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="offlineModeService.fileUploadSingle.searchBy"
+                            name="searchType">
+                            <mat-option (click)="_searchByInfo = truefalse.searchBy"
+                                *ngFor="let truefalse of offlineModeService.fileUploadSingle.searchType"
+                                [value]="truefalse.id">
+                                {{truefalse.searchBy}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
             </div>
 
-            <div class="input_2">
-                <div class="_key">{{_searchByInfo}}</div>
-                <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
-                    [(ngModel)]="offlineModeService.fileUploadSingle.item" autofocus>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">{{_searchByInfo}}</div>
+                    <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
+                        [(ngModel)]="offlineModeService.fileUploadSingle.item" autofocus>
+                </div>
             </div>
 
-            <div class="input_2">
-                <div class="_key">توضیحات</div>
-                <input class="_value" placeholder="توضیحات" name="description"
-                    [(ngModel)]="offlineModeService.fileUploadSingleReq.description">
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">توضیحات</div>
+                    <input class="_value" placeholder="توضیحات" name="description"
+                        [(ngModel)]="offlineModeService.fileUploadSingleReq.description">
+                </div>
             </div>
 
             <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="تصویری انتخاب نشده است">

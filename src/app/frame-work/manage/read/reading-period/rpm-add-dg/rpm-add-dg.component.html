@@ -3,42 +3,61 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <main class="_contents">
 
-        <div class="input_2">
-            <div class="_key">کد</div>
-            <input class="_value" type="number" formControlName="id">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کد</div>
+                <input class="_value" type="number" formControlName="id">
+            </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">کد مشترکین</div>
-            <input class="_value" type="number" formControlName="moshtarakinId">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کد مشترکین</div>
+                <input class="_value" type="number" formControlName="moshtarakinId">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">عنوان</div>
-            <input class="_value" formControlName="title">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">عنوان</div>
+                <input class="_value" formControlName="title">
+            </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
-                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                        <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ترتیب</div>
+                <input class="_value" type="number" formControlName="clientOrder">
+            </div>
+        </div>
+
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">نوع دوره</div>
+                <mat-select placeholder="انتخاب مورد" formControlName="readingPeriodKindId">
+                    <mat-option *ngFor="let truefalse of readingPeriodKindId" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>
                 </mat-select>
             </div>
-        </div>
-
-        <div class="input_2">
-            <div class="_key">ترتیب</div>
-            <input class="_value" type="number" formControlName="clientOrder">
-        </div>
-        <div class="input_2">
-            <div class="_key">نوع دوره</div>
-            <mat-select placeholder="انتخاب مورد" formControlName="readingPeriodKindId">
-                <mat-option *ngFor="let truefalse of readingPeriodKindId" [value]="truefalse.id">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
         </div>
 
     </main>

@@ -1,10 +1,13 @@
-<div class="input_2">
-    <div class="_key">ناحیه</div>
-    <div class="_value">
-        <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="dashboardService._selectedZone"
-            (onChange)="refreshPageToRebuild()" placeholder="انتخاب مورد" optionValue="id" optionLabel="title"
-            filter="true">
-        </p-dropdown>
+<div class="input_icon">
+    <i class="pi pi-bookmark _bookmark"></i>
+    <div class="input_3">
+        <div class="_key">ناحیه</div>
+        <div class="_value">
+            <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="dashboardService._selectedZone"
+                (onChange)="refreshPageToRebuild()" placeholder="انتخاب مورد" optionValue="id" optionLabel="title"
+                filter="true">
+            </p-dropdown>
+        </div>
     </div>
 </div>
 

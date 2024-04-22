@@ -523,4 +523,5 @@ export enum ENInterfaces {
     tariffAdd = 'V1/Tariff/Add',
     tariffEdit = 'V1/Tariff/Edit',
     tariffRemove = 'V1/Tariff/Remove',
+    calculation = 'V1/Tariff/calculation',
 }

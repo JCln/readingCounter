@@ -17,63 +17,81 @@
             <hr>
 
             <section class="__content">
-                <div class="input_2">
-                    <div class="_key">ناحیه</div>
-                    <div class="_value">
-                        <p-dropdown name="zones" #zoneId [options]="zoneDictionary"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId" optionLabel="title"
-                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                            placeholder="انتخاب مورد" (onClick)="getNesseseriesByZone()"
-                            (onChange)="emptyPreviousValuesFromSelectOptions()">
-                        </p-dropdown>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" #zoneId [options]="zoneDictionary"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId" optionLabel="title"
+                                [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                                placeholder="انتخاب مورد" (onClick)="getNesseseriesByZone()"
+                                (onChange)="emptyPreviousValuesFromSelectOptions()">
+                            </p-dropdown>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                    <div class="_key">سال</div>
-                    <div class="_value">
-                        <p-dropdown #year [options]="closeTabService.years" name="year"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq.year" optionLabel="title"
-                            [filter]="true" filterBy="value" optionValue="value" [showClear]="true"
-                            placeholder="انتخاب مورد">
-                        </p-dropdown>
+                <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">سال</div>
+                        <div class="_value">
+                            <p-dropdown #year [options]="closeTabService.years" name="year"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq.year" optionLabel="title"
+                                [filter]="true" filterBy="value" optionValue="value" [showClear]="true"
+                                placeholder="انتخاب مورد">
+                            </p-dropdown>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                    <div class="_key">نوع دوره</div>
-                    <div class="_value">
-                        <p-dropdown name="kindId" #kindId [options]="readingPeriodKindDictionary"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq._selectedKindId" optionLabel="title"
-                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                            placeholder="انتخاب مورد" (onClick)="getReadingPeriod()">
-                        </p-dropdown>
+                <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نوع دوره</div>
+                        <div class="_value">
+                            <p-dropdown name="kindId" #kindId [options]="readingPeriodKindDictionary"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq._selectedKindId"
+                                optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                                placeholder="انتخاب مورد" (onClick)="getReadingPeriod()">
+                            </p-dropdown>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="closeTabService._isOrderByDate">
-                    <div class="_key">دوره قرائت</div>
-                    <div class="_value">
+                <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">دوره قرائت</div>
+                        <div class="_value">
 
-                        <p-dropdown name="period" #period [options]="readingPeriodDictionary"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId" optionLabel="title"
-                            [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                            placeholder="انتخاب مورد">
-                        </p-dropdown>
+                            <p-dropdown name="period" #period [options]="readingPeriodDictionary"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId"
+                                optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                                placeholder="انتخاب مورد">
+                            </p-dropdown>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                    <div class="_key">از</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
-                            [dateObject]="closeTabService.saveDataForSearchProReq.fromDate">
-                        </app-date-jalali>
+                <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                                [dateObject]="closeTabService.saveDataForSearchProReq.fromDate">
+                            </app-date-jalali>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!closeTabService._isOrderByDate">
-                    <div class="_key">تا</div>
-                    <div class="_value">
+                <div class="input_icon" [hidden]="!closeTabService._isOrderByDate">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">تا</div>
+                        <div class="_value">
 
-                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
-                            [dateObject]="closeTabService.saveDataForSearchProReq.toDate">
-                        </app-date-jalali>
+                            <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
+                                [dateObject]="closeTabService.saveDataForSearchProReq.toDate">
+                            </app-date-jalali>
+                        </div>
                     </div>
                 </div>
                 <div class="check_boxes">
@@ -96,54 +114,70 @@
 
         <section class="_more_options">
             <div class="__container">
-                <div class="input_2" *ngIf="masrafState">
-                    <div class="_key">وضعیت مصرف</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="masrafState" name="masraf"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
-                            optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
-                            [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="masrafState">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">وضعیت مصرف</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="masrafState" name="masraf"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
+                                optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                                [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="counterReportDictionary.length">
-                    <div class="_key">گزارش بازرسی</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="counterReportDictionary" name="counterReport"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds" optionLabel="title"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
-                            [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="counterReportDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">گزارش بازرسی</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="counterReportDictionary"
+                                name="counterReport" [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds"
+                                optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="counterStateByZoneIdDictionary.length">
-                    <div class="_key">وضعیت کنتور</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="counterStateByZoneIdDictionary"
-                            name="counterState" [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds"
-                            optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="counterStateByZoneIdDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">وضعیت کنتور</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="counterStateByZoneIdDictionary"
+                                name="counterState"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds"
+                                optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="karbariDictionary.length">
-                    <div class="_key">کاربری</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="karbari"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
-                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
-                            [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="karbariDictionary.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">کاربری</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="karbariDictionary" name="karbari"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                                [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="fragmentMasterIds.length">
-                    <div class="_key">نوبتی ها</div>
-                    <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentMasterIds" name="fragmentId"
-                            [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds"
-                            optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                            placeholder="انتخاب مورد" [filter]="true" showClear="true">
-                        </p-multiSelect>
+                <div class="input_icon" *ngIf="fragmentMasterIds.length">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نوبتی ها</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="fragmentMasterIds" name="fragmentId"
+                                [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds"
+                                optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                            </p-multiSelect>
+                        </div>
                     </div>
                 </div>
             </div>

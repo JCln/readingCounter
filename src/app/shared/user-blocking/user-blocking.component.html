@@ -3,22 +3,31 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <main class="_contents">
 
-        <div class="input_2">
-            <div class="_key">IP</div>
-            <input class="_value d_ltr" formControlName="ip">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">IP</div>
+                <input class="_value d_ltr" formControlName="ip">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">تا IP</div>
-            <input class="_value" formControlName="subnet">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا IP</div>
+                <input class="_value" formControlName="subnet">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">کاربر</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="userId">
-                    <mat-option *ngFor="let truefalse of userAllDictionary" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کاربر</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="userId">
+                        <mat-option *ngFor="let truefalse of userAllDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
         </div>
         <div></div> <!--Make ip filter dialog better UI through linear checkboxes-->

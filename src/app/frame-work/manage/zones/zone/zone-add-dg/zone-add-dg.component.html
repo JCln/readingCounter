@@ -3,29 +3,41 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <main class="_contents">
 
-        <div class="input_2">
-            <div class="_key">کد</div>
-            <input class="_value" type="number" formControlName="id">
-        </div>
-
-        <div class="input_2">
-            <div class="_key">عنوان</div>
-            <input class="_value" formControlName="title">
-        </div>
-        <div class="input_2">
-            <div class="_key">منطقه</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="regionId">
-                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کد</div>
+                <input class="_value" type="number" formControlName="id">
             </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">ترتیب</div>
-            <input class="_value" type="number" formControlName="logicalOrder">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">عنوان</div>
+                <input class="_value" formControlName="title">
+            </div>
+        </div>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">منطقه</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="regionId">
+                        <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ترتیب</div>
+                <input class="_value" type="number" formControlName="logicalOrder">
+            </div>
         </div>
 
         <mat-checkbox formControlName="isMetro">شهری</mat-checkbox>

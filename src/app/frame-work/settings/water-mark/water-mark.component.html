@@ -13,40 +13,64 @@
         </div>
     </div>
     <form #form="ngForm" (ngSubmit)="connectToServer()" class="_card">
-        <div class="input_2">
-            <div class="_key">قرمز</div>
-            <input class="_value" (keyup)="textColorState()" type="number" name="red" [(ngModel)]=" this.rgba[0]">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">قرمز</div>
+                <input class="_value" (keyup)="textColorState()" type="number" name="red" [(ngModel)]=" this.rgba[0]">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">سبز</div>
-            <input class="_value" (keyup)="textColorState()" type="number" name="green" [(ngModel)]="this.rgba[1]">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">سبز</div>
+                <input class="_value" (keyup)="textColorState()" type="number" name="green" [(ngModel)]="this.rgba[1]">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">آبی</div>
-            <input class="_value" (keyup)="textColorState()" type="number" name="blue" [(ngModel)]="this.rgba[2]">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">آبی</div>
+                <input class="_value" (keyup)="textColorState()" type="number" name="blue" [(ngModel)]="this.rgba[2]">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">آلفا</div>
-            <input class="_value" (keyup)="textColorState()" type="number" name="alfa" [(ngModel)]="this.rgba[3]">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">آلفا</div>
+                <input class="_value" (keyup)="textColorState()" type="number" name="alfa" [(ngModel)]="this.rgba[3]">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">اندازه (px)</div>
-            <input class="_value" (ngModelChange)="changeFontSize($event)" type="number" name="size"
-                [(ngModel)]="closeTabService.saveDataForWaterMark.fontSize">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">اندازه (px)</div>
+                <input class="_value" (ngModelChange)="changeFontSize($event)" type="number" name="size"
+                    [(ngModel)]="closeTabService.saveDataForWaterMark.fontSize">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">X</div>
-            <input class="_value" (ngModelChange)="changeXPosition($event)" type="number" name="x"
-                [(ngModel)]="closeTabService.saveDataForWaterMark.x">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">X</div>
+                <input class="_value" (ngModelChange)="changeXPosition($event)" type="number" name="x"
+                    [(ngModel)]="closeTabService.saveDataForWaterMark.x">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">Y</div>
-            <input class="_value" (ngModelChange)="changeYPosition($event)" type="number" name="y"
-                [(ngModel)]="closeTabService.saveDataForWaterMark.y">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">Y</div>
+                <input class="_value" (ngModelChange)="changeYPosition($event)" type="number" name="y"
+                    [(ngModel)]="closeTabService.saveDataForWaterMark.y">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key tooltip" style="cursor: pointer;">کاربر
-                <div class="tooltip_text_right">آخرین کاربر تغییر دهنده</div>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key tooltip" style="cursor: pointer;">کاربر
+                    <div class="tooltip_text_right">آخرین کاربر تغییر دهنده</div>
+                </div>
             </div>
             <input disabled="true" class="_value" name="userDisplay"
                 [(ngModel)]="closeTabService.saveDataForWaterMark.userDisplayName">

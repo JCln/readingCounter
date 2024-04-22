@@ -1,32 +1,53 @@
 <form class="_user-input" #form="ngForm">
-    <div class="input_2">
-        <div class="_key">نام</div>
-        <input class="_value" [(ngModel)]="editInfo.firstName" name="firstName">
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">نام</div>
+            <input class="_value" [(ngModel)]="editInfo.firstName" name="firstName">
+        </div>
     </div>
-    <div class="input_2">
-        <div class="_key">نام خانوادگی</div>
-        <input class="_value" [(ngModel)]="editInfo.sureName" name="sureName">
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">نام خانوادگی</div>
+            <input class="_value" [(ngModel)]="editInfo.sureName" name="sureName">
+        </div>
     </div>
-    <div class="input_2 _double_size">
-        <div class="_key">ایمیل</div>
-        <input class="_value" [(ngModel)]="editInfo.email" name="email">
+    <div class="input_icon _double_size">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">ایمیل</div>
+            <input class="_value" [(ngModel)]="editInfo.email" name="email">
+        </div>
     </div>
-    <div class="input_2">
-        <div class="_key">شماره موبایل</div>
-        <input class="_value d_ltr" [(ngModel)]="editInfo.mobile" name="mobile" maxlength=11 minlength=11>
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">شماره موبایل</div>
+            <input class="_value d_ltr" [(ngModel)]="editInfo.mobile" name="mobile" maxlength=11 minlength=11>
+        </div>
     </div>
-    <div class="input_2 _double_size tooltip">
-        <div class="_key">نام نمایش</div>
-        <input class="_value" [(ngModel)]="editInfo.displayName" name="displayName">
-        <div class="tooltip_text_bottom">این فیلد جهت نمایش نام کاربر در برنامه استفاده می‌شود</div>
+    <div class="input_icon _double_size tooltip">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">نام نمایش</div>
+            <input class="_value" [(ngModel)]="editInfo.displayName" name="displayName">
+            <div class="tooltip_text_bottom">این فیلد جهت نمایش نام کاربر در برنامه استفاده می‌شود</div>
+        </div>
     </div>
-    <div class="input_2">
-        <div class="_key">شناسه دستگاه</div>
-        <input class="_value d_ltr" [(ngModel)]="editInfo.deviceId" name="deviceId">
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">شناسه دستگاه</div>
+            <input class="_value d_ltr" [(ngModel)]="editInfo.deviceId" name="deviceId">
+        </div>
     </div>
-    <div class="input_2">
-        <div class="_key">کد کاربری</div>
-        <input class="_value d_ltr" [(ngModel)]="editInfo.userCode" name="userCode" readonly>
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">کد کاربری</div>
+            <input class="_value d_ltr" [(ngModel)]="editInfo.userCode" name="userCode" readonly>
+        </div>
     </div>
 
     <div class="checkbox_s">

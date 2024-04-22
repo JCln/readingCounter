@@ -293,6 +293,12 @@ export class CloseTabService {
 
   tarrifTypeItem: ITarrifTypeItem[] = [];
   tariffParameter: ITarrifParameter[] = [];
+  caculationReq = {
+    trackNumber: null,
+    counterStateNumber: null,
+    counterState: null,
+    region: null
+  };
   offering: IOffering[] = [];
   offeringUnit: IOfferingUnit[] = [];
   tariff: ITariff[] = [];
@@ -2245,6 +2251,14 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.tarrifTypeItem, url: EN_Routes.tarrifTypes, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.tariffParameter, url: EN_Routes.tariffParameter, defaultValue: [] },
+    {
+      id: 2, req: ENEssentialsToSave.caculationReq, url: EN_Routes.calculation, defaultReq: {
+        trackNumber: null,
+        counterStateNumber: null,
+        counterState: null,
+        region: null
+      }
+    },
     { id: 2, value: ENEssentialsToSave.offering, url: EN_Routes.offering, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offeringUnit, url: EN_Routes.offeringUnit, defaultValue: [] },
     {

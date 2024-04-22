@@ -1,13 +1,16 @@
 <div class="map-frame">
     <div id="map2"></div>
 </div>
-<div class="input_2">
-    <div class="_key">حداکثر سطر جدول</div>
-    <div class="_value">
-        <p-dropdown (onChange)="onNextReadViewable()" name="zones" [options]="atMostNumbers"
-            [(ngModel)]="_selectedMostNumbers" placeholder="انتخاب مورد" optionValue="val" optionLabel="title"
-            filter="true">
-        </p-dropdown>
+<div class="input_icon">
+    <i class="pi pi-bookmark _bookmark"></i>
+    <div class="input_3">
+        <div class="_key">حداکثر سطر جدول</div>
+        <div class="_value">
+            <p-dropdown (onChange)="onNextReadViewable()" name="zones" [options]="atMostNumbers"
+                [(ngModel)]="_selectedMostNumbers" placeholder="انتخاب مورد" optionValue="val" optionLabel="title"
+                filter="true">
+            </p-dropdown>
+        </div>
     </div>
 </div>
 <app-prime-table [dataSource]="closeTabService.saveDataForMomentLastRead" [_outputFileName]="'momentLs'"

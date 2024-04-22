@@ -3,44 +3,53 @@
 </app-collapsable>
 <form #form="ngForm" class="_card"
     [@openClose]="closeTabService.saveDataForFollowUpReq._isCollapsed ? 'slideUp' : 'slideDown'">
-    <div class="input_2">
-        <div class="_key">شماره پیگیری</div>
-        <input class="_value" type="number" name="trackNumber"
-            [(ngModel)]="closeTabService.saveDataForFollowUpReq.trackNumber" autofocus>
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">شماره پیگیری</div>
+            <input class="_value" type="number" name="trackNumber"
+                [(ngModel)]="closeTabService.saveDataForFollowUpReq.trackNumber" autofocus>
+        </div>
     </div>
     <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده</button>
 </form>
 
 <section class="contain" *ngIf="closeTabService.saveDataForFollowUp">
-    <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
-        <div class="_key">{{item.header}}</div>
-        <ng-container *ngIf="item.isBoolean; else elseTemplate">
-            <mat-checkbox [disabled]="true" name="{{item.field}}"
-                [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
-            </mat-checkbox>
-        </ng-container> 
-        <ng-template #elseTemplate>
-            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
-        </ng-template>
-    </div>
-    <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
-        <ng-container *ngIf="item.isBoolean; else elseTemplate">
-            <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
-                {{item.header}}
-            </mat-checkbox>
-        </ng-container>
-        <ng-template #elseTemplate>
-            <div class="_key" [ngClass]="{'special_icon': item.enableTooltip}">{{item.header}}</div>
-            <div class="tooltip _double_width">
+    <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">{{item.header}}</div>
+            <ng-container *ngIf="item.isBoolean; else elseTemplate">
+                <mat-checkbox [disabled]="true" name="{{item.field}}"
+                    [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+                </mat-checkbox>
+            </ng-container>
+            <ng-template #elseTemplate>
                 <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                    [(ngModel)]="dataSourceAUX[item.field]">
-                <div *ngIf="item.enableTooltip" class="tooltip_text">
-                    درصد مانع صادر شده
-                    {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
+                    [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+            </ng-template>
+        </div>
+    </div>
+    <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <ng-container *ngIf="item.isBoolean; else elseTemplate">
+                <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
+                    {{item.header}}
+                </mat-checkbox>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <div class="_key" [ngClass]="{'special_icon': item.enableTooltip}">{{item.header}}</div>
+                <div class="tooltip _double_width">
+                    <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                        [(ngModel)]="dataSourceAUX[item.field]">
+                    <div *ngIf="item.enableTooltip" class="tooltip_text">
+                        درصد مانع صادر شده
+                        {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
+                    </div>
                 </div>
-            </div>
-        </ng-template>
+            </ng-template>
+        </div>
     </div>
 </section>
 

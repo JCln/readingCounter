@@ -1,73 +1,124 @@
 <section>
     <div class="overall-info">
-        <div class="input_2 double_size" *ngIf="firstName || sureName">
-            <div class="_key">نام و نام خانوادگی</div>
-            <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName.trim() + ' '+ sureName">
+        <div class="input_icon double_size" *ngIf="firstName || sureName">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">نام و نام خانوادگی</div>
+                <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName.trim() + ' '+ sureName">
+            </div>
         </div>
-        <div class="input_2 double_size" *ngIf="fulName">
-            <div class="_key">نام و نام خانوادگی</div>
-            <input [readOnly]="true" class="_value" name="names" [(ngModel)]="fulName">
+        <div class="input_icon double_size" *ngIf="fulName">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">نام و نام خانوادگی</div>
+                <input [readOnly]="true" class="_value" name="names" [(ngModel)]="fulName">
+            </div>
         </div>
-        <div class="input_2 double_size" *ngIf="displayName">
-            <div class="_key">قرائت کننده</div>
-            <input [readOnly]="true" class="_value" name="displayName" [(ngModel)]="displayName">
+        <div class="input_icon double_size" *ngIf="displayName">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">قرائت کننده</div>
+                <input [readOnly]="true" class="_value" name="displayName" [(ngModel)]="displayName">
+            </div>
         </div>
-        <div class="input_2 double_size" *ngIf="userDisplayName">
-            <div class="_key">نام کاربر</div>
-            <input [readOnly]="true" class="_value" name="userDisplayName" [(ngModel)]="userDisplayName">
+        <div class="input_icon double_size" *ngIf="userDisplayName">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">نام کاربر</div>
+                <input [readOnly]="true" class="_value" name="userDisplayName" [(ngModel)]="userDisplayName">
+            </div>
         </div>
-        <div class="input_2" *ngIf="zoneId">
-            <div class="_key">ناحیه</div>
-            <input [readOnly]="true" class="_value" name="zoneId" [(ngModel)]="zoneId">
+        <div class="input_icon" *ngIf="zoneId">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <input [readOnly]="true" class="_value" name="zoneId" [(ngModel)]="zoneId">
+            </div>
         </div>
-        <div class="input_2" *ngIf="eshterak">
-            <div class="_key">اشتراک</div>
-            <input [readOnly]="true" class="_value" name="eshterak" [(ngModel)]="eshterak">
+        <div class="input_icon" *ngIf="eshterak">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">اشتراک</div>
+                <input [readOnly]="true" class="_value" name="eshterak" [(ngModel)]="eshterak">
+            </div>
         </div>
-        <div class="input_2" *ngIf="radif">
-            <div class="_key">ش.پرونده</div>
-            <input [readOnly]="true" class="_value" name="radif" [(ngModel)]="radif">
+        <div class="input_icon" *ngIf="radif">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ش.پرونده</div>
+                <input [readOnly]="true" class="_value" name="radif" [(ngModel)]="radif">
+            </div>
         </div>
-        <div class="input_2" *ngIf="counterNumber">
-            <div class="_key">رقم فعلی</div>
-            <input [readOnly]="true" class="_value" name="counterNumber" [(ngModel)]="counterNumber">
+        <div class="input_icon" *ngIf="counterNumber">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">رقم فعلی</div>
+                <input [readOnly]="true" class="_value" name="counterNumber" [(ngModel)]="counterNumber">
+            </div>
         </div>
-        <div class="input_2" *ngIf="counterStateId">
-            <div class="_key">وضعیت فعلی</div>
-            <input [readOnly]="true" class="_value" name="counterStateId" [(ngModel)]="counterStateId">
+        <div class="input_icon" *ngIf="counterStateId">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">وضعیت فعلی</div>
+                <input [readOnly]="true" class="_value" name="counterStateId" [(ngModel)]="counterStateId">
+            </div>
         </div>
-        <div class="input_2" *ngIf="_feedbackTypeTitle">
-            <div class="_key">عنوان</div>
-            <input [readOnly]="true" class="_value" name="feedbackTypeTitle" [(ngModel)]="_feedbackTypeTitle">
+        <div class="input_icon" *ngIf="_feedbackTypeTitle">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">عنوان</div>
+                <input [readOnly]="true" class="_value" name="feedbackTypeTitle" [(ngModel)]="_feedbackTypeTitle">
+            </div>
         </div>
-        <div class="input_2" *ngIf="_insertDayJalali">
-            <div class="_key">تاریخ</div>
-            <input [readOnly]="true" class="_value" name="insertDayJalali" [(ngModel)]="_insertDayJalali">
+        <div class="input_icon" *ngIf="_insertDayJalali">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تاریخ</div>
+                <input [readOnly]="true" class="_value" name="insertDayJalali" [(ngModel)]="_insertDayJalali">
+            </div>
         </div>
-        <div class="input_2" *ngIf="_mobile">
-            <div class="_key">موبایل</div>
-            <input [readOnly]="true" class="_value" name="mobile" [(ngModel)]="_mobile">
+        <div class="input_icon" *ngIf="_mobile">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">موبایل</div>
+                <input [readOnly]="true" class="_value" name="mobile" [(ngModel)]="_mobile">
+            </div>
         </div>
-        <div class="input_2" *ngIf="_solution">
-            <div class="_key">راهکار</div>
-            <input [readOnly]="true" class="_value" name="solution" [(ngModel)]="_solution">
+        <div class="input_icon" *ngIf="_solution">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">راهکار</div>
+                <input [readOnly]="true" class="_value" name="solution" [(ngModel)]="_solution">
+            </div>
         </div>
-        <div class="input_2" *ngIf="sizeInByte">
-            <div class="_key">اندازه (بایت)</div>
-            <input [readOnly]="true" class="_value" name="sizeInByte" [(ngModel)]="sizeInByte">
+        <div class="input_icon" *ngIf="sizeInByte">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">اندازه (بایت)</div>
+                <input [readOnly]="true" class="_value" name="sizeInByte" [(ngModel)]="sizeInByte">
+            </div>
         </div>
-        <div class="input_2 double_size" *ngIf="description">
-            <div class="_key">توضیحات</div>
-            <input [readOnly]="true" class="_value _smaller" name="description" [(ngModel)]="description">
+        <div class="input_icon double_size" *ngIf="description">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">توضیحات</div>
+                <input [readOnly]="true" class="_value _smaller" name="description" [(ngModel)]="description">
+            </div>
         </div>
-        <div class="input_2 double_size" *ngIf="_reportTitle">
-            <div class="_key">گزارش</div>
-            <input [readOnly]="true" class="_value _smaller" name="_reportTitle" [(ngModel)]="_reportTitle">
+        <div class="input_icon double_size" *ngIf="_reportTitle">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">گزارش</div>
+                <input [readOnly]="true" class="_value _smaller" name="_reportTitle" [(ngModel)]="_reportTitle">
+            </div>
         </div>
-        <div class="input_2" *ngFor="let item of interationOnOverallInfo">
-            <div class="_key">{{item.header}}</div>
-            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                [(ngModel)]="overAllInfo[item.field]">
+        <div class="input_icon" *ngFor="let item of interationOnOverallInfo">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">{{item.header}}</div>
+                <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                    [(ngModel)]="overAllInfo[item.field]">
+            </div>
         </div>
 
     </div>

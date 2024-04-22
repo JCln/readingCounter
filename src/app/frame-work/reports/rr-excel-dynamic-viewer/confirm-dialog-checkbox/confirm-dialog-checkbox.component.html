@@ -6,59 +6,83 @@
 <form #form="ngForm" (ngSubmit)="confirm()">
     <mat-dialog-content>
 
-        <div class="input_2" *ngIf="data.data.includes('zoneId')">
-            <div class="_key">ناحیه</div>
-            <div class="_value">
-                <p-dropdown name="zones" [options]="zoneDictionary" placeholder="انتخاب مورد"
-                    [(ngModel)]="_content['zoneId']" optionValue="id" optionLabel="title" filter="true">
-                </p-dropdown>
+        <div class="input_icon" *ngIf="data.data.includes('zoneId')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <p-dropdown name="zones" [options]="zoneDictionary" placeholder="انتخاب مورد"
+                        [(ngModel)]="_content['zoneId']" optionValue="id" optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
             </div>
         </div>
-        <div class="input_2" *ngIf="data.data.includes('karbari')">
-            <div class="_key">کاربری</div>
-            <div class="_value">
-                <p-dropdown name="karbari" [options]="karbariByCodeDictionary" placeholder="انتخاب مورد"
-                    [(ngModel)]="_content['karbari']" optionValue="id" optionLabel="title" filter="true">
-                </p-dropdown>
+        <div class="input_icon" *ngIf="data.data.includes('karbari')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کاربری</div>
+                <div class="_value">
+                    <p-dropdown name="karbari" [options]="karbariByCodeDictionary" placeholder="انتخاب مورد"
+                        [(ngModel)]="_content['karbari']" optionValue="id" optionLabel="title" filter="true">
+                    </p-dropdown>
+                </div>
             </div>
         </div>
-        <div class="input_2" *ngIf="data.data.includes('fromDate')">
-            <div class="_key">از</div>
-            <div class="_value">
-                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
-                </app-date-jalali>
+        <div class="input_icon" *ngIf="data.data.includes('fromDate')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                    </app-date-jalali>
+                </div>
             </div>
         </div>
-        <div class="input_2" *ngIf="data.data.includes('toDate')">
-            <div class="_key">تا</div>
-            <div class="_value">
-                <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
-                </app-date-jalali>
+        <div class="input_icon" *ngIf="data.data.includes('toDate')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا</div>
+                <div class="_value">
+                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                    </app-date-jalali>
+                </div>
             </div>
         </div>
-        <div class="input_2" *ngIf="data.data.includes('jalaliDate')">
-            <div class="_key">تاریخ</div>
-            <div class="_value">
-                <app-date-jalali name="jalaliDate" (dateJalEvent)="receivejalaliDateJalali($event)">
-                </app-date-jalali>
+        <div class="input_icon" *ngIf="data.data.includes('jalaliDate')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تاریخ</div>
+                <div class="_value">
+                    <app-date-jalali name="jalaliDate" (dateJalEvent)="receivejalaliDateJalali($event)">
+                    </app-date-jalali>
+                </div>
             </div>
         </div>
-        <div class="input_2" *ngIf="data.data.includes('fromMasraf')">
-            <div class="_key">از مصرف</div>
-            <div class="_value">
-                <input class="_value" type="number" name="fromMasraf" [(ngModel)]="_content['fromMasraf']">
+        <div class="input_icon" *ngIf="data.data.includes('fromMasraf')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">از مصرف</div>
+                <div class="_value">
+                    <input class="_value" type="number" name="fromMasraf" [(ngModel)]="_content['fromMasraf']">
+                </div>
             </div>
         </div>
-        <div class="input_2" *ngIf="data.data.includes('toMasraf')">
-            <div class="_key">تا مصرف</div>
-            <div class="_value">
-                <input class="_value" type="number" name="toMasraf" [(ngModel)]="_content['toMasraf']">
+        <div class="input_icon" *ngIf="data.data.includes('toMasraf')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا مصرف</div>
+                <div class="_value">
+                    <input class="_value" type="number" name="toMasraf" [(ngModel)]="_content['toMasraf']">
+                </div>
             </div>
         </div>
-        <div class="input_2" *ngIf="data.data.includes('masraf')">
-            <div class="_key">مصرف</div>
-            <div class="_value">
-                <input class="_value" type="number" name="masraf" [(ngModel)]="_content['masraf']">
+        <div class="input_icon" *ngIf="data.data.includes('masraf')">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">مصرف</div>
+                <div class="_value">
+                    <input class="_value" type="number" name="masraf" [(ngModel)]="_content['masraf']">
+                </div>
             </div>
         </div>
     </mat-dialog-content>

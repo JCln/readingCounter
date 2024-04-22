@@ -9,9 +9,12 @@
                 <div class="content">
                     <h1 class="title">مشخصات کاربری</h1>
                     <div class="_desc">
-                        <div *ngFor="let item of _selectCols" class="input_2">
-                            <div class="_key">{{item.header}}</div>
-                            <div class="_value">{{closeTabService.saveDataForProfile[item.field]}}</div>
+                        <div *ngFor="let item of _selectCols" class="input_icon">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{item.header}}</div>
+                                <div class="_value">{{closeTabService.saveDataForProfile[item.field]}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,61 +3,85 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <main class="_contents">
 
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
-                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                        <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">کاربری مشترکین</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="karbariMoshtarakinCode">
-                    <mat-option *ngFor="let truefalse of data.karbariCodeDic" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کاربری مشترکین</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="karbariMoshtarakinCode">
+                        <mat-option *ngFor="let truefalse of data.karbariCodeDic" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
             </div>
         </div>
 
-        <div class="input_2" dir="rtl">
-            <div class="_key">از</div>
-            <div class="_value">
-                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
-                </app-date-jalali>
+        <div class="input_icon" dir="rtl">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                    </app-date-jalali>
+                </div>
             </div>
         </div>
 
-        <div class="input_2" dir="rtl">
-            <div class="_key">تا</div>
-            <div class="_value">
-                <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
-                </app-date-jalali>
+        <div class="input_icon" dir="rtl">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا</div>
+                <div class="_value">
+                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                    </app-date-jalali>
+                </div>
             </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">از نرخ</div>
-            <input class="_value" formControlName="fromRate">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">از نرخ</div>
+                <input class="_value" formControlName="fromRate">
+            </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">تا نرخ</div>
-            <input class="_value" formControlName="toRate">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا نرخ</div>
+                <input class="_value" formControlName="toRate">
+            </div>
         </div>
 
-        <div class="input_2">
-            <div class="_key">فرمول آب</div>
-            <input class="_value" formControlName="abFormula">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">فرمول آب</div>
+                <input class="_value" formControlName="abFormula">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">فرمول فاضلاب</div>
-            <input class="_value" formControlName="fazelabFormula">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">فرمول فاضلاب</div>
+                <input class="_value" formControlName="fazelabFormula">
+            </div>
         </div>
 
     </main>

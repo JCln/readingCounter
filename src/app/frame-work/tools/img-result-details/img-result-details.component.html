@@ -5,40 +5,53 @@
 <section [@openClose]="toolsService.utilsService.collapser._isCollapsedImageAttrDetails ? 'slideUp' : 'slideDown'">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="_card">
-            <div class="input_2" [hidden]="!zoneDictionary.length">
-                <div class="_key">ناحیه</div>
-                <div class="_value">
-                    <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="toolsService.imgResultDetails.zoneId" placeholder="انتخاب مورد" optionValue="id"
-                        optionLabel="title" filter="true">
-                    </p-dropdown>
+            <div class="input_icon" [hidden]="!zoneDictionary.length">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="toolsService.imgResultDetails.zoneId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
                 </div>
             </div>
-            <div class="input_2" *ngIf="imageAttrAllDictionary.length">
-                <div class="_key">توصیف تصویر</div>
-                <div class="_value">
-                    <p-multiSelect [maxSelectedLabels]="1" [options]="imageAttrAllDictionary" name="imgAttr"
-                        [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
-                        optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
-                        [filter]="true" showClear="true">
-                    </p-multiSelect>
+            <div class="input_icon" *ngIf="imageAttrAllDictionary.length">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">توصیف تصویر</div>
+                    <div class="_value">
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="imageAttrAllDictionary" name="imgAttr"
+                            [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
+                            [filter]="true" showClear="true">
+                        </p-multiSelect>
+                    </div>
                 </div>
             </div>
-            <div class="input_2">
-                <div class="_key">از تاریخ</div>
-                <div class="_value">
-                    <app-date-jalali name="fromDate"
-                        (dateJalEvent)="toolsService.receiveFromDateJalaliImgResult($event)"
-                        [dateObject]="toolsService.imgResultDetails.fromDate">
-                    </app-date-jalali>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">از تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="toolsService.receiveFromDateJalaliImgResult($event)"
+                            [dateObject]="toolsService.imgResultDetails.fromDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
             </div>
-            <div class="input_2">
-                <div class="_key">تا تاریخ</div>
-                <div class="_value">
-                    <app-date-jalali name="fromDate" (dateJalEvent)="toolsService.receiveToDateJalaliImgResult($event)"
-                        [dateObject]="toolsService.imgResultDetails.toDate">
-                    </app-date-jalali>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">تا تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="toolsService.receiveToDateJalaliImgResult($event)"
+                            [dateObject]="toolsService.imgResultDetails.toDate">
+                        </app-date-jalali>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn_1">
@@ -51,19 +64,26 @@
 
 <section class="_card" *ngIf="allImagesDataSource && allImagesDataSource.imageUrlAndInfos.length > 0">
     <h1 class="title">فیلتر نمایش</h1>
-    <div class="input_2">
-        <div class="_key">جستجو براساس</div>
-        <div class="_value">
-            <p-dropdown #drop name="zones" [options]="toolsService.searchInOrder" placeholder="ش پرونده"
-                optionValue="value" optionLabel="name" filter="true" (onChange)="userInputValue = drop.selectedOption">
-            </p-dropdown>
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">جستجو براساس</div>
+            <div class="_value">
+                <p-dropdown #drop name="zones" [options]="toolsService.searchInOrder" placeholder="ش پرونده"
+                    optionValue="value" optionLabel="name" filter="true"
+                    (onChange)="userInputValue = drop.selectedOption">
+                </p-dropdown>
+            </div>
         </div>
     </div>
-    <div class="input_2">
-        <div class="_key">{{userInputValue.name}}</div>
-        <input class="_value" type="{{userInputValue.type}}" name="searchInOrder"
-            [(ngModel)]="userInputValue.insertedValue" placeholder="{{userInputValue.name}} را وارد نمایید"
-            (ngModelChange)="showItemOnSearch(userInputValue.value)">
+    <div class="input_icon">
+        <i class="pi pi-bookmark _bookmark"></i>
+        <div class="input_3">
+            <div class="_key">{{userInputValue.name}}</div>
+            <input class="_value" type="{{userInputValue.type}}" name="searchInOrder"
+                [(ngModel)]="userInputValue.insertedValue" placeholder="{{userInputValue.name}} را وارد نمایید"
+                (ngModelChange)="showItemOnSearch(userInputValue.value)">
+        </div>
     </div>
 </section>
 <main *ngIf="allImagesDataSource" style="position: relative;">

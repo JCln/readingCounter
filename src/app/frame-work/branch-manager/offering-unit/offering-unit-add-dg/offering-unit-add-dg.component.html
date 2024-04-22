@@ -3,10 +3,12 @@
     <hr>
     <form #form="ngForm" (ngSubmit)="verification()">
         <div class="content">
-
-            <div class="input_2" *ngFor="let mainDatas of columnManager.getColumnsMenus('offeringUnitAdd')">
-                <div class="_key">{{mainDatas.header}}</div>
-                <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="offeringUnitReq[mainDatas.field]">
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3" *ngFor="let mainDatas of columnManager.getColumnsMenus('offeringUnitAdd')">
+                    <div class="_key">{{mainDatas.header}}</div>
+                    <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="offeringUnitReq[mainDatas.field]">
+                </div>
             </div>
         </div>
 

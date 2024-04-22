@@ -1,42 +1,44 @@
 <section>
     <div class="overall-info">
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <input [readOnly]="true" class="_value" name="zoneTitle"
-                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.zoneTitle">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <input [readOnly]="true" class="_value" name="zoneTitle"
+                    [(ngModel)]="pageSignsService.fragmentDetails_pageSign.zoneTitle">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">عنوان</div>
-            <input [readOnly]="true" class="_value" name="title"
-                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.routeTitle">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">عنوان</div>
+                <input [readOnly]="true" class="_value" name="title"
+                    [(ngModel)]="pageSignsService.fragmentDetails_pageSign.routeTitle">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">از اشتراک</div>
-            <input [readOnly]="true" class="_value" name="fromEshterak"
-                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.fromEshterak">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">از اشتراک</div>
+                <input [readOnly]="true" class="_value" name="fromEshterak"
+                    [(ngModel)]="pageSignsService.fragmentDetails_pageSign.fromEshterak">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک</div>
-            <input [readOnly]="true" class="_value" name="toEshterak"
-                [(ngModel)]="pageSignsService.fragmentDetails_pageSign.toEshterak">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا اشتراک</div>
+                <input [readOnly]="true" class="_value" name="toEshterak"
+                    [(ngModel)]="pageSignsService.fragmentDetails_pageSign.toEshterak">
+            </div>
         </div>
     </div>
 </section>
 
-<app-prime-table
-    [dataSource]="closeTabService.saveDataForFragmentNOBDetails"     
-    [_checkUpName]="'branches'"
-    [_outputFileName]="fragmentDetailsColumns"
-    [_selectedColumnsToRemember]="'selectedFragmentDetails'"    
-    [_sessionName]="'fragmentdetails-session'"
-    [_numberOfExtraColumns]="[1, 2]"
-    [isAddableTable]="true"    
-    [_backToPreviousEnabled]="true"
-    [_backToPreviousText]="'بازگشت به نوبتی'"
-    (refreshedTable)="callAPI()"                 
-    (showedMoreDetails)="removeRow($event)"    
-    (openedAddDialog)="openDialog(false)"    
-    (openedEditDialog)="openDialog(true, $event)"    
-    (backedToPrevious)="fragmentManagerService.routeToFragmentMaster()"
- > 
+<app-prime-table [dataSource]="closeTabService.saveDataForFragmentNOBDetails" [_checkUpName]="'branches'"
+    [_outputFileName]="fragmentDetailsColumns" [_selectedColumnsToRemember]="'selectedFragmentDetails'"
+    [_sessionName]="'fragmentdetails-session'" [_numberOfExtraColumns]="[1, 2]" [isAddableTable]="true"
+    [_backToPreviousEnabled]="true" [_backToPreviousText]="'بازگشت به نوبتی'" (refreshedTable)="callAPI()"
+    (showedMoreDetails)="removeRow($event)" (openedAddDialog)="openDialog(false)"
+    (openedEditDialog)="openDialog(true, $event)" (backedToPrevious)="fragmentManagerService.routeToFragmentMaster()">
 </app-prime-table>

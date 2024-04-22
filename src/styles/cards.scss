@@ -12,6 +12,17 @@
   box-shadow: 0px 2px 6px 2px var(--secondary_7);
 }
 
+:host ::ng-deep,
+::ng-deep,
+:host {
+  ._card {
+    .p-multiselect {
+      min-width: 14rem;
+      max-width: 14rem;
+    }
+  }
+}
+
 .btn_1 {
   max-width: initial;
 }

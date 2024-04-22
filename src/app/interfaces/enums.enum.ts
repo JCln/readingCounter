@@ -699,7 +699,8 @@ export enum ENEssentialsToSave {
     tariffExcelToFillInput = "tariffExcelToFillInput",
     importHiwaReq = "importHiwaReq",
     importHiwa = "importHiwa",
-    editModifyReq = "editModifyReq"
+    editModifyReq = "editModifyReq",
+    caculationReq = "caculationReq"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

@@ -3,56 +3,89 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <main class="_contents">
 
-        <div class="input_2">
-            <div class="_key">عنوان</div>
-            <input class="_value" formControlName="title">
-        </div>
-
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <div class="_value">
-                <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
-                    <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">عنوان</div>
+                <input class="_value" formControlName="title">
             </div>
         </div>
-        <div class="input_2">
-            <div class="_key">کد دولتی</div>
-            <input class="_value" formControlName="govermentalCode">
+
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">ناحیه</div>
+                <div class="_value">
+                    <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                        <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">از اشتراک</div>
-            <input class="_value" formControlName="fromEshterak">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کد دولتی</div>
+                <input class="_value" formControlName="govermentalCode">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک</div>
-            <input class="_value" formControlName="toEshterak">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">از اشتراک</div>
+                <input class="_value" formControlName="fromEshterak">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">از ش.پرونده</div>
-            <input class="_value" type="number" formControlName="fromRadif">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا اشتراک</div>
+                <input class="_value" formControlName="toEshterak">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">تا ش.پرونده</div>
-            <input class="_value" type="number" formControlName="toRadif">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">از ش.پرونده</div>
+                <input class="_value" type="number" formControlName="fromRadif">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">هاست</div>
-            <input class="_value" formControlName="host">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">تا ش.پرونده</div>
+                <input class="_value" type="number" formControlName="toRadif">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">کاربری</div>
-            <input class="_value" formControlName="dbUserName">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">هاست</div>
+                <input class="_value" formControlName="host">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">گذرواژه</div>
-            <input class="_value" formControlName="dbPassword">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کاربری</div>
+                <input class="_value" formControlName="dbUserName">
+            </div>
         </div>
-        <div class="input_2">
-            <div class="_key">کاتالوگ</div>
-            <input class="_value" formControlName="dbInitialCatalog">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">گذرواژه</div>
+                <input class="_value" formControlName="dbPassword">
+            </div>
+        </div>
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">کاتالوگ</div>
+                <input class="_value" formControlName="dbInitialCatalog">
+            </div>
         </div>
 
     </main>
