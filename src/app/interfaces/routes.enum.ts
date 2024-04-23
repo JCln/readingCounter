@@ -85,7 +85,7 @@ export enum EN_Routes {
     reportTraverseDiffrential = '/wr/rpts/mam/trvch',
     disposalHours = '/wr/rpts/mam/dh',
     'wrrptsmamkarkard' = '/wr/rpts/mam/karkard',
-    'wrrptsmamKarkardAllStates' = '/wr/rpts/mam/karkardAllStates',
+    rrKarkardAllStates = '/wr/rpts/mam/karkardAllStates',
     preNumberShown = '/wr/rpts/mam/pns',
     reportLocked = '/wr/rpts/mam/locked',
     reportOffloadKarkard = '/wr/rpts/mam/offkarkard',

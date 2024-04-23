@@ -8,17 +8,27 @@
                 <ng-container *ngIf="mainDatas.isBoolean; else elseTemplate">
                     <ng-container
                         *ngIf="mainDatas.field === 'isBazdid' || mainDatas.field ===  'isRoosta'; else editableCheckboxes">
-                        <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
-                            [(ngModel)]="dataSource[mainDatas.field]">
-                            {{mainDatas.header}}
-                        </mat-checkbox>
+                        <div class="input_icon">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                                    [(ngModel)]="dataSource[mainDatas.field]">
+                                    {{mainDatas.header}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
                     </ng-container>
                     <ng-template #editableCheckboxes>
                         <div class="check_boxes" *ngIf="!trackingManagerService.utilsService.getDenyTracking()">
-                            <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
-                                [(ngModel)]="dataSource[mainDatas.field]">
-                                {{mainDatas.header}}
-                            </mat-checkbox>
+                            <div class="input_icon">
+                                <i class="pi pi-pencil _bookmark"></i>
+                                <div class="input_3">
+                                    <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                                        [(ngModel)]="dataSource[mainDatas.field]">
+                                        {{mainDatas.header}}
+                                    </mat-checkbox>
+                                </div>
+                            </div>
                         </div>
                     </ng-template>
                 </ng-container>

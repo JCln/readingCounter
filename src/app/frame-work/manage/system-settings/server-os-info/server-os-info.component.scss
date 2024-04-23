@@ -3,12 +3,17 @@
 @import 'input.scss';
 @import 'cards';
 
+
 .over_all {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 20rem));
   direction: rtl;
   justify-content: center;
   gap: var(--font_xs);
+}
+
+._card {
+  width: 100%;
 }
 
 section {

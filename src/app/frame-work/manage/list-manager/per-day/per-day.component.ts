@@ -17,8 +17,8 @@ export class PerDayComponent extends FactoryONE {
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _selectMainDatas: any[];
-  private listManagerPerDayPositions: string = 'lMPerDayPositions';
-  private listManagerPerDay: string = 'lMPerDay';
+  private readonly listManagerPerDayPositions: string = 'lMPerDayPositions';
+  private readonly listManagerPerDay: string = 'lMPerDay';
 
   constructor(
     public closeTabService: CloseTabService,

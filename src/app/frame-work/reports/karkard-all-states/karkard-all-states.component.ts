@@ -90,14 +90,14 @@ export class KarkardAllStatesComponent extends FactoryONE {
 
   getCounterStateHeaders = (data: any): any => {
     let c = [
+      { field: 'regionTitle', header: 'منطقه', isSelected: true },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
       { field: 'offloadDayalali', header: 'روز', isSelected: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
       { field: 'duration', header: 'مدت', isSelected: false, isNumber: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
-      { field: 'regionTitle', header: 'منطقه', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true }
     ]
     for (let index = 0; index < data[0].counterStateAndCounts.length; index++) {

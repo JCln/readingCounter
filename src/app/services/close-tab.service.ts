@@ -1857,7 +1857,7 @@ export class CloseTabService {
       },
       defaultValue: [],
       defaultValue_2: '',
-      url: EN_Routes.wrrptsmamKarkardAllStates
+      url: EN_Routes.rrKarkardAllStates
     },
     {
       id: 1, req: ENEssentialsToSave.karkardReq, value: ENEssentialsToSave.saveDataForRRKarkard, url: EN_Routes.wrrptsmamkarkard,

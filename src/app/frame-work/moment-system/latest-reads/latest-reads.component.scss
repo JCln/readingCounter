@@ -1,4 +1,5 @@
 @import 'variable.scss';
+@import 'input';
 
 .map-frame {
   margin: var(--font_xs) var(--font_02) 0.5rem;
@@ -20,17 +21,9 @@
   color: var(--primary_5);
 }
 
-.input_2 {
-  display: flex;
-  align-items: center;
-  gap: var(--font_s);
+.input_icon {
   margin-left: auto;
-  padding-right: 3px;
-  font-weight: 600;
-  border-radius: $border_7;
   direction: rtl;
-  width: 16rem;
-  background: var(--white);
-  margin-bottom: 3px;
-  border: 1px solid;
+  width: 17rem;
+  display: flex;
 }

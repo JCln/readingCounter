@@ -34,8 +34,8 @@
         <i class="pi pi-bookmark _bookmark"></i>
         <div class="input_3">
             <ng-container *ngIf="item.isBoolean; else elseTemplate">
+                <div class="_key">{{item.header}}</div>
                 <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
-                    {{item.header}}
                 </mat-checkbox>
             </ng-container>
             <ng-template #elseTemplate>

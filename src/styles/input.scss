@@ -112,13 +112,13 @@ $border_15: 10px;
   }
 
   ._value {
-    margin: 2px;
-    width: 100%;
+    margin: 0 2px;
+    width: 98%;
     flex: 1;
     text-align: center;
     background: var(--white);
     border: 0;
-    border-radius: inherit;
+    border-radius: $border_5;
   }
 
   ._key {

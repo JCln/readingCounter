@@ -486,7 +486,7 @@ export class HelpWrapperService {
         title: 'خلاصه وضعیت ها',
         messageOne: 'بررسی تعدادی از وضعیت های قرائت ارائه شده است. این قسمت بعلت بررسی وضعیت های ثبت شده برای مدیران و کارشناسان پرکاربرد می‌باشد. همچنین امکان مشاهده نموداری این گزارش وجود دارد.',
       }
-    else if (currentRoute === EN_Routes.wrrptsmamKarkardAllStates)
+    else if (currentRoute === EN_Routes.rrKarkardAllStates)
       return {
         title: 'همه وضعیت های قرائت شده',
         messageOne: 'بررسی کلیه وضعیت های قرائت ارائه شده است. این قسمت بعلت بررسی کلیه وضعیت های ثبت شده برای مدیران و کارشناسان پرکاربرد می‌باشد.',

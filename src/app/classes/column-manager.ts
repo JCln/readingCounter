@@ -574,8 +574,8 @@ export class ColumnManager {
         { field: 'isValidated', header: 'تایید شده', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
     ]
     rrkarkardAllStates: IObjectIteratation[] = [
-        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
         { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true, isSelectedOrigin: false },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, isSelectedOrigin: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isSelectedOrigin: false },
