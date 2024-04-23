@@ -2,6 +2,7 @@
   display: grid;
   align-items: center;
   width: fit-content;
+  min-width: 19rem;
   padding: var(--font_05);
   justify-content: initial;
   direction: rtl;
@@ -10,6 +11,10 @@
   background: var(--white);
   border-radius: 10px;
   box-shadow: 0px 2px 6px 2px var(--secondary_7);
+
+  @media (min-width:550px) {
+    min-width: 22rem;
+  }
 }
 
 :host ::ng-deep,

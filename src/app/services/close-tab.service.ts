@@ -205,6 +205,9 @@ export class CloseTabService {
     if (fromTimeH < ENRandomNumbers.ten) {
       fromTimeH = '0'.concat(fromTimeH.toString());
     }
+    if (hour == '00') {
+      fromTimeH = '23';
+    }
     if (hour == '24') {
       toTimeH = '00';
     }
@@ -2121,7 +2124,7 @@ export class CloseTabService {
       defaultValue: []
     },
     {
-      id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, defaultValue: [], url: EN_Routes.wrmRequestLogsUser, defaultReq: {
+      id: 2, req: ENEssentialsToSave.saveDataForRequestLogListUserReq, value: ENEssentialsToSave.saveDataForRequestLogListUser, defaultValue: [], url: EN_Routes.reqLogUser, defaultReq: {
         jalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
         fromTimeH: this.insertToTimes().fromTimeH,
         fromTimeM: this.insertToTimes().fromTimeM,

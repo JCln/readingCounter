@@ -68,7 +68,7 @@
                 <i *ngIf="_outputFileName == 'abBaha' || _outputFileName == 'Budget'|| _outputFileName == 'tabsare3'"
                     (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
                     <div class="tooltip_text_right">افزودن فایل Excel</div>
-                </i>               
+                </i>
             </div>
         </div>
     </ng-template>
@@ -280,6 +280,12 @@
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == 'auth3'">
+                <span class="ui-column-title">برو به صفحه</span>
+                <i (click)="showPictures(dataSource)" class="tooltip p_icons pi pi-arrow-up-right">
+                    <div class="tooltip_text_right">برو به صفحه</div>
                 </i>
             </td>
             <td class="__icon-columns">

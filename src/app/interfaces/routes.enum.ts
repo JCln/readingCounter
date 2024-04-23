@@ -135,7 +135,7 @@ export enum EN_Routes {
     serverGetAuthenticity = '/wr/m/system/authenticityResult',
     'userActivation' = '/wr/reqLog/userActivation',
     userActivationByuserId = '/wr/m/system/userRoleHistory/byUserId',
-    'wrmRequestLogsUser' = '/wr/reqLog/User',
+    reqLogUser = '/wr/reqLog/User',
     reqLogUsersLogins = '/wr/m/system/usersLogins',
     reqLogDownloadAttempts = '/wr/reqLog/downloadAttempts',
     reqLogUploadAttempts = '/wr/reqLog/uploadAttempts',

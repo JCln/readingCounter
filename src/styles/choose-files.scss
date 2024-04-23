@@ -15,8 +15,9 @@
   white-space: nowrap;
   direction: rtl;
   width: 100%;
+  max-width: 100%;
   padding: var(--font_05);
-  background-color: var(--white);
+  background: var(--white);
   color: var(--secondary_6);
   font-size: var(--font_s);
   font-weight: 600;
@@ -35,7 +36,7 @@
   direction: ltr;
   padding: var(--font_05);
   width: 100%;
-  max-width: 19rem;
+  max-width: 100%;
   background-color: var(--white);
   color: var(--secondary_6);
   text-align: center;

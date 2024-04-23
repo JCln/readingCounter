@@ -14,7 +14,7 @@
 
 ._desc {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
@@ -50,7 +50,7 @@
 .card_wrapper {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 11rem));
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
   gap: var(--font_05);
   margin-bottom: var(--font_xs);
   background: var(--secondary_1);
@@ -91,6 +91,6 @@
   }
 }
 
-.input_2 {
+.input_icon {
   margin: 0;
 }

@@ -5,7 +5,7 @@
     [_dictionaryName]="'authLevel2Id'"
     [dictionary]="authLevel2Dictionary"
     [_outputEnabled]= false
-    [_numberOfExtraColumns]="[1, 2]"
+    [_numberOfExtraColumns]="[1, 2,3]"
     [_selectedColumnsToRemember]="'selectedAuth3'"
     [_sessionName]="'auth3-session'"
     (refreshedTable)="refreshTable()"
@@ -15,5 +15,6 @@
     (onRowEditedCancel)="onRowEditCancel()"
     (onRowEditedInit)="onRowEditInit($event)"
     (onRowEditedSave)="onRowEditSave($event)"
+    (showedPictures)="closeTabService.utilsService.routeTo($event.route)"
  > 
 </app-prime-table-editable>
