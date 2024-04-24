@@ -37,7 +37,7 @@ export class FollowUpComponent extends FactoryONE {
     }
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
-  // dataSource: IFollowUp;
+
   dataSourceAUX: IOffLoadPerDay;
   changeHsty: IFollowUpHistory[] = [];
   _selectColumnsAUX: IObjectIteratation[];

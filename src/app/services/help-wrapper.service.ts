@@ -496,7 +496,7 @@ export class HelpWrapperService {
         title: 'بارگذاری شده',
         messageOne: 'بررسی لیست قرائت شده قابل مشاهده است. مدت(h) به معنای مدت زمان قرائت تا بارگذاری شده است. و جزئیات لیست قرائت شده به تفکیک وضعیت ها.',
       }
-    else if (currentRoute === EN_Routes.wrRptsMamFragment)
+    else if (currentRoute === EN_Routes.karkardByFragment)
       return {
         title: 'نوبتی- بارگذاری',
         messageOne: 'نمایش قرائت کننده ها به تفکیک روز، شماره پیگیری و تعدادی از وضعیت های کنتور.',

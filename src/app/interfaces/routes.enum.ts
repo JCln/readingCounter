@@ -89,7 +89,7 @@ export enum EN_Routes {
     preNumberShown = '/wr/rpts/mam/pns',
     reportLocked = '/wr/rpts/mam/locked',
     reportOffloadKarkard = '/wr/rpts/mam/offkarkard',
-    'wrRptsMamFragment' = '/wr/rpts/mam/fragment',
+    karkardByFragment = '/wr/rpts/mam/fragment',
     reportMaster = '/wr/rpts/exm/master',
     regionAnalyzePerformance = '/wr/rpts/anlz/prfm',
     'wrrptsgalleryai' = '/wr/rpts/gallery/ai',

@@ -89,16 +89,17 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
 
   getCounterStateHeaders = (data: any): any => {
+    // should add to getCounterStateData method too.
     let c = [
-      { field: 'regionTitle', header: 'منطقه', isSelected: true },
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
+      { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true },
       { field: 'offloadDayalali', header: 'روز', isSelected: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true },
       { field: 'duration', header: 'مدت', isSelected: false, isNumber: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, isNumber: true }
     ]
     for (let index = 0; index < data[0].counterStateAndCounts.length; index++) {
       c.push({ field: 'c' + index, header: data[0].counterStateAndCounts[index].counterStateTitle, isSelected: true });
@@ -118,7 +119,8 @@ export class KarkardAllStatesComponent extends FactoryONE {
         offloadDayalali: data[index].offloadDayalali,
         overalCount: data[index].overalCount,
         trackNumber: data[index].trackNumber,
-        zoneTitle: data[index].zoneTitle
+        zoneTitle: data[index].zoneTitle,
+        regionTitle: data[index].regionTitle
       };
       for (let j = 0; j < data[index].counterStateAndCounts.length; j++) {
         a['c' + j] = data[index].counterStateAndCounts[j].count

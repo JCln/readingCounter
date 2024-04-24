@@ -1926,7 +1926,7 @@ export class CloseTabService {
       defaultValue: []
     },
     {
-      id: 1, req: ENEssentialsToSave.rrFragmentKarkardReq, value: ENEssentialsToSave.saveDataForRRFragment, url: EN_Routes.wrRptsMamFragment,
+      id: 1, req: ENEssentialsToSave.rrFragmentKarkardReq, value: ENEssentialsToSave.saveDataForRRFragment, url: EN_Routes.karkardByFragment,
       defaultValue: [],
       defaultReq: {
         zoneId: 0,

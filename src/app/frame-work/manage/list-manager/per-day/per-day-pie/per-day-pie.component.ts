@@ -10,7 +10,7 @@ import { ProfileService } from 'services/profile.service';
 })
 export class PerDayPieComponent implements AfterViewInit {
   @Input() dataSource: any[];
-  public chartColors: any[] = [{ backgroundColor: ["#6FC8CE", "#24959b", "#FF7360"] }];
+  public chartColors: any[] = [{ backgroundColor: ["#FF7360", "#6FC8CE"] }];
 
 
   private defaultOptions = {
@@ -71,8 +71,8 @@ export class PerDayPieComponent implements AfterViewInit {
       }
     }
   };
-  public pieChartLabels: Label[] = [['تعداد کل'], ['قرائت شده'], ['تعداد مانع']];
-  public pieChartData: SingleDataSet[] = [[26.8, 73.2, 26.8]]; // should attention to code changed ": SingleDataSet = [];"
+  public pieChartLabels: Label[] = [['قرائت نشده'], ['قرائت شده']];
+  public pieChartData: SingleDataSet[] = [[26.8, 73.2]]; // should attention to code changed ": SingleDataSet = [];"
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
@@ -87,7 +87,7 @@ export class PerDayPieComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.pieChartData = this.dataSource;
-    this.chartColors = ['rgb(246, 62, 56)', 'rgb(36, 149, 155)', 'rgb(246, 128, 56)']
+    this.chartColors = ['rgb(36, 149, 155)', 'rgb(246, 62, 56)']
   }
 
 }

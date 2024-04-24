@@ -17,7 +17,7 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 })
 export class UserKarkardSummaryComponent extends FactoryONE {
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
-selectedZoneIds= [];
+  selectedZoneIds = [];
   tempData: IUserKarkardSummary[] = [];
   header: any[] = [];
   @ViewChild(Table) dtable: Table;
@@ -86,6 +86,7 @@ selectedZoneIds= [];
     for (let index = 0; index < data.length; index++) {
       let a =
       {
+        regionTitle: data[index].regionTitle,
         zoneTitle: data[index].zoneTitle,
         userDisplayName: data[index].userDisplayName,
         overalCount: data[index].overalCount,

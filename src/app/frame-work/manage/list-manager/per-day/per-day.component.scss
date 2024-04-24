@@ -7,9 +7,11 @@
 .content {
   background: var(--secondary_1);
   text-align: center;
-  justify-content: space-around;
   border-radius: $border_15;
+  padding: .5rem;
+  margin: 1rem 0;
   box-shadow: 0px 2px 6px 2px var(--secondary_7);
+  direction: rtl;
 }
 
 ._desc {

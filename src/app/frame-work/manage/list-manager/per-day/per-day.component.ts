@@ -17,9 +17,11 @@ export class PerDayComponent extends FactoryONE {
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _selectMainDatas: any[];
+  _selectPerDayCountInfo: any[];
   chartTemp: any[] = [];
   private readonly listManagerPerDayPositions: string = 'lMPerDayPositions';
   private readonly listManagerPerDay: string = 'lMPerDay';
+  private readonly perDayCountInfo: string = 'perDayCountInfo';
 
   constructor(
     public closeTabService: CloseTabService,
@@ -41,9 +43,8 @@ export class PerDayComponent extends FactoryONE {
   }
   getObjectParameters = (sth: any): any[] => {
     let b = [];
-    b.push(sth.overalCount);
-    b.push(sth.readCount);
-    b.push(sth.maneCount);
+    b.push(sth.overalCount - sth.readCount);// unreads
+    b.push(sth.readCount); // all reads with mane count   
     return b;
   }
   doSth = () => {
@@ -52,6 +53,7 @@ export class PerDayComponent extends FactoryONE {
   private insertSelectedColumns = () => {
     this._selectMainDatas = this.listManagerService.columnManager.getColumnsMenus(this.listManagerPerDayPositions);
     this._selectCols = this.listManagerService.columnManager.getColumnsMenus(this.listManagerPerDay);
+    this._selectPerDayCountInfo = this.listManagerService.columnManager.getColumnsMenus(this.perDayCountInfo);
     this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
     this.dateJalaliService.sortByDate(this.closeTabService.saveDataForLMPD.offLoadPerDayHistory, 'day');
   }
