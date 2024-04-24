@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { IImageAttributionAnalyze } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-pie-img-attr-anlz',
@@ -13,7 +14,7 @@ export class PieImgAttrAnlzComponent implements OnChanges {
   @Input() chartColors: any[];
 
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 14,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -28,9 +29,9 @@ export class PieImgAttrAnlzComponent implements OnChanges {
       labels: this.defaultOptions
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
@@ -45,7 +46,9 @@ export class PieImgAttrAnlzComponent implements OnChanges {
   public pieChartPlugins = [];
   // 
 
-  constructor() {
+  constructor(
+    public profileService: ProfileService
+  ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }

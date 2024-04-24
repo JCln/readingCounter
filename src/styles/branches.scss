@@ -20,9 +20,7 @@ section {
     direction: rtl;
     background: var(--secondary_1);
     gap: 0 var(--font_05);
-
     direction: rtl;
-    background: var(--secondary_1);
 
     @media (min-width:550px) {
         grid-template-columns: 1fr 1fr;

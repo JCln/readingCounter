@@ -99,9 +99,6 @@ export class ProComponent extends AllListsFactory {
     if (canRefresh) {
       this.closeTabService.saveDataForSearchPro = null;
     }
-    if (this.closeTabService.saveDataForSearchMoshtarakin) {
-      this.getNesseseriesByZone();
-    }
     this.getNesseseriesByZone();
     this.getReadingPeriod();
     this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();

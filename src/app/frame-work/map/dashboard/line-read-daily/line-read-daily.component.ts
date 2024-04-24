@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardReadDaily } from 'interfaces/idashboard-map';
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-line-read-daily',
@@ -32,7 +33,7 @@ export class LineReadDailyComponent implements OnInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -43,6 +44,7 @@ export class LineReadDailyComponent implements OnInit {
   /* END LINE CHART*/
 
   constructor(
+    public profileService: ProfileService,
     private dashboardService: DashboardService
   ) { }
 
@@ -71,9 +73,9 @@ export class LineReadDailyComponent implements OnInit {
       maintainAspectRatio: false,
       tooltips: {
         mode: 'single',
-        footerFontFamily: 'Blotus',
-        bodyFontFamily: 'Blotus',
-        titleFontFamily: 'Blotus',
+        footerFontFamily: this.profileService.getFontFamily(),
+        bodyFontFamily: this.profileService.getFontFamily(),
+        titleFontFamily: this.profileService.getFontFamily(),
         bodyFontSize: 18,
         titleFontSize: 18,
         footerFontSize: 18,

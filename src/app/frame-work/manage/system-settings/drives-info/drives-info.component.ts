@@ -35,7 +35,6 @@ export class DrivesInfoComponent implements OnInit {
     for (let index = 0; index < this.closeTabService.saveDataForMsDriveInfo.length; index++) {
       this.temp[index] = this.getObjectParameters(this.closeTabService.saveDataForMsDriveInfo[index])
     }
-
   }
 
 

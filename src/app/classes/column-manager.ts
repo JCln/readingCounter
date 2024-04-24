@@ -498,7 +498,7 @@ export class ColumnManager {
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, isSelectedOrigin: true, readonly: true },
     ]
     fragmentDetails: IObjectIteratation[] = [
-        { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false, icon: 'grid-column: auto/ span 2;' },
+        { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -553,7 +553,7 @@ export class ColumnManager {
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
     ]
     fragmentDetailsAddEditDialog: IObjectIteratation[] = [
-        { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false, icon: 'grid-column: auto/ span 2;' },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
         // { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -2178,8 +2178,8 @@ export class ColumnManager {
         { field: 'isRoosta', header: 'روستایی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
     ];
     lMPerDayPositions: IObjectIteratation[] = [
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'counterReaders', header: 'قرائت کننده(ها)', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },

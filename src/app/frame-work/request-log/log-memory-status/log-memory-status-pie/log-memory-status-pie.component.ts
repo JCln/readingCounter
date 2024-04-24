@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend } from 'ng2-charts';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-log-memory-status-pie',
@@ -13,7 +14,7 @@ export class LogMemoryStatusPieComponent implements AfterViewInit {
 
 
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -46,9 +47,9 @@ export class LogMemoryStatusPieComponent implements AfterViewInit {
       }
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
@@ -90,7 +91,9 @@ export class LogMemoryStatusPieComponent implements AfterViewInit {
   public pieChartPlugins = [];
   // 
 
-  constructor() {
+  constructor(
+    public profileService: ProfileService
+  ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
@@ -99,7 +102,7 @@ export class LogMemoryStatusPieComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.pieChartData = this.dataSource;
     console.log(this.pieChartData);
-    
+
     this.chartColors = ['rgb(246, 62, 56)', 'rgb(246, 128, 56)']
   }
 

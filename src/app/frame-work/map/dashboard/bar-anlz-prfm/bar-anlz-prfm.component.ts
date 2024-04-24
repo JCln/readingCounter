@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-bar-anlz-prfm',
@@ -11,7 +12,7 @@ export class BarAnlzPrfmComponent implements OnChanges {
   @Input() barAnalyze: any[];
 
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -30,9 +31,9 @@ export class BarAnlzPrfmComponent implements OnChanges {
       yAxes: [{ ticks: this.defaultOptions }]
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
@@ -45,7 +46,9 @@ export class BarAnlzPrfmComponent implements OnChanges {
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] = [];
 
-  constructor() { }
+  constructor(
+    public profileService: ProfileService
+  ) { }
 
   ngOnChanges(): void {
     setTimeout(() => {

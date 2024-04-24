@@ -6,6 +6,7 @@ import { IReadingReportChartTraverseDifferential } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-trvch-chart',
@@ -16,7 +17,7 @@ export class TrvchChartComponent implements OnInit {
   dataSource: IReadingReportChartTraverseDifferential;
 
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 14,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -31,9 +32,9 @@ export class TrvchChartComponent implements OnInit {
       labels: this.defaultOptions
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
@@ -79,7 +80,8 @@ export class TrvchChartComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    public closeTabService: CloseTabService
+    public closeTabService: CloseTabService,
+    public profileService: ProfileService
   ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();

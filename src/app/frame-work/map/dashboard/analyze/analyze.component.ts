@@ -3,6 +3,7 @@ import { ChartDataSets, ChartType, RadialChartOptions } from 'chart.js';
 import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { Label } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
+import { ProfileService } from 'services/profile.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class AnalyzeComponent implements OnInit {
   @Output() barAnalyzeEvent = new EventEmitter<any[]>();
 
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -35,9 +36,9 @@ export class AnalyzeComponent implements OnInit {
       yAxes: [{ ticks: this.defaultOptions }]
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
@@ -50,6 +51,7 @@ export class AnalyzeComponent implements OnInit {
   public radarChartType: ChartType = 'radar';
 
   constructor(
+    public profileService: ProfileService,
     private dashboardService: DashboardService
   ) { }
 

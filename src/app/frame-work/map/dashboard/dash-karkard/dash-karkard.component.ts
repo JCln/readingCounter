@@ -4,13 +4,14 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardKarkardTimed } from 'interfaces/idashboard-map';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, MultiDataSet, SingleDataSet } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-dash-karkard',
   templateUrl: './dash-karkard.component.html',
   styleUrls: ['./dash-karkard.component.scss']
 })
-export class DashKarkardComponent implements OnInit {  
+export class DashKarkardComponent implements OnInit {
   karkardDataSource: IDashboardKarkardTimed;
   doughnutTemp: any[] = [];
 
@@ -30,7 +31,7 @@ export class DashKarkardComponent implements OnInit {
     }
   ];
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -64,9 +65,9 @@ export class DashKarkardComponent implements OnInit {
       }
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
@@ -111,6 +112,7 @@ export class DashKarkardComponent implements OnInit {
   /* END PIE CHART CONFIGS*/
 
   constructor(
+    public profileService: ProfileService,
     public dashboardService: DashboardService
   ) {
     monkeyPatchChartJsTooltip();

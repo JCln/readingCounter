@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { IDashboardSpecial } from 'interfaces/idashboard-map';
 import { Label } from 'ng2-charts';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-bar-dispersalrate',
@@ -10,9 +11,11 @@ import { Label } from 'ng2-charts';
 })
 export class BarDispersalrateComponent implements OnChanges {
   @Input() dataSourceBar: IDashboardSpecial;
-
+  constructor(
+    public profileService: ProfileService
+  ) { }
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -30,9 +33,9 @@ export class BarDispersalrateComponent implements OnChanges {
       yAxes: [{ ticks: this.defaultOptions }]
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,

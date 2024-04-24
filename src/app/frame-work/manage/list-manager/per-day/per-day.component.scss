@@ -38,6 +38,7 @@
   grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
   justify-content: center;
   direction: rtl;
+  text-align: right;
   gap: var(--font_025);
   box-shadow: none;
   background: inherit;
@@ -93,4 +94,12 @@
 
 .input_icon {
   margin: 0;
+}
+
+
+.overall_info_top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
+  direction: rtl;
+  padding: 1rem 0;
 }

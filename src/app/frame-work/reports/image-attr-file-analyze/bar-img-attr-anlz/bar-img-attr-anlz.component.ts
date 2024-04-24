@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { IImageAttributionAnalyze } from 'interfaces/ireports';
 import { Label } from 'ng2-charts';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-bar-img-attr-anlz',
@@ -12,8 +13,11 @@ export class BarImgAttrAnlzComponent implements OnChanges {
   @Input() dataSource: IImageAttributionAnalyze[];
   @Input() chartColors: any[];
 
+  constructor(
+    public profileService: ProfileService
+  ) { }
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)',
@@ -32,9 +36,9 @@ export class BarImgAttrAnlzComponent implements OnChanges {
       yAxes: [{ ticks: this.defaultOptions }]
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,

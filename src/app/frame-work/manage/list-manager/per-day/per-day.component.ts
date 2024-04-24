@@ -17,6 +17,7 @@ export class PerDayComponent extends FactoryONE {
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _selectMainDatas: any[];
+  chartTemp: any[] = [];
   private readonly listManagerPerDayPositions: string = 'lMPerDayPositions';
   private readonly listManagerPerDay: string = 'lMPerDay';
 
@@ -37,6 +38,16 @@ export class PerDayComponent extends FactoryONE {
       if (items.isSelected)
         return items
     })
+  }
+  getObjectParameters = (sth: any): any[] => {
+    let b = [];
+    b.push(sth.overalCount);
+    b.push(sth.readCount);
+    b.push(sth.maneCount);
+    return b;
+  }
+  doSth = () => {
+    this.chartTemp = this.getObjectParameters(this.closeTabService.saveDataForLMPD);
   }
   private insertSelectedColumns = () => {
     this._selectMainDatas = this.listManagerService.columnManager.getColumnsMenus(this.listManagerPerDayPositions);
@@ -70,6 +81,7 @@ export class PerDayComponent extends FactoryONE {
         this.closeTabService.saveDataForLMPDTrackNumber = this.pageSignsService.perday_pageSign.trackNumber;
         this.closeTabService.saveDataForLMPD.zoneTitle = this.pageSignsService.perday_pageSign.zone;
       }
+      this.doSth();
       this.setGetRanges();
       this.setDynamicPartRanges();
 

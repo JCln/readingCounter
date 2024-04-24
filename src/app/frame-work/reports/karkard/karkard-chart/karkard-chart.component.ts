@@ -5,6 +5,7 @@ import { IReadingReportChartKarkard } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
+import { ProfileService } from 'services/profile.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 
 
@@ -17,7 +18,7 @@ export class KarkardChartComponent implements OnInit {
   dataSource: IReadingReportChartKarkard;
 
   private defaultOptions = {
-    fontFamily: 'Blotus',
+    fontFamily: this.profileService.getFontFamily(),
     fontSize: 14,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
@@ -53,9 +54,9 @@ export class KarkardChartComponent implements OnInit {
       }
     },
     tooltips: {
-      footerFontFamily: 'Blotus',
-      bodyFontFamily: 'Blotus',
-      titleFontFamily: 'Blotus',
+      footerFontFamily: this.profileService.getFontFamily(),
+      bodyFontFamily: this.profileService.getFontFamily(),
+      titleFontFamily: this.profileService.getFontFamily(),
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
@@ -102,7 +103,8 @@ export class KarkardChartComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    public closeTabService: CloseTabService
+    public closeTabService: CloseTabService,
+    public profileService: ProfileService
   ) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();

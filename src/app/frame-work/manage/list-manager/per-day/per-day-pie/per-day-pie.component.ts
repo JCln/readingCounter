@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
+import { Label, SingleDataSet, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import { ProfileService } from 'services/profile.service';
 
 @Component({
-  selector: 'app-drive-info-pie',
-  templateUrl: './drive-info-pie.component.html',
-  styleUrls: ['./drive-info-pie.component.scss']
+  selector: 'app-per-day-pie',
+  templateUrl: './per-day-pie.component.html',
+  styleUrls: ['./per-day-pie.component.scss']
 })
-export class DriveInfoPieComponent implements AfterViewInit {
+export class PerDayPieComponent implements AfterViewInit {
   @Input() dataSource: any[];
-  public chartColors: any[] = [{ backgroundColor: ["#6FC8CE", "#FF7360"] }];
+  public chartColors: any[] = [{ backgroundColor: ["#6FC8CE", "#24959b", "#FF7360"] }];
 
 
   private defaultOptions = {
@@ -71,25 +71,11 @@ export class DriveInfoPieComponent implements AfterViewInit {
       }
     }
   };
-  public pieChartLabels: Label[] = [['درصد فضای آزاد'], ['درصد استفاده شده']];
-  public pieChartData: SingleDataSet[] = [[26.8, 73.2]]; // should attention to code changed ": SingleDataSet = [];"
+  public pieChartLabels: Label[] = [['تعداد کل'], ['قرائت شده'], ['تعداد مانع']];
+  public pieChartData: SingleDataSet[] = [[26.8, 73.2, 26.8]]; // should attention to code changed ": SingleDataSet = [];"
   public pieChartType: ChartType = 'pie';
-
-  // pieChartColor: any = [
-  //   {
-  //     backgroundColor: [
-  //       'rgb(125, 131, 255)',
-  //       'rgb(117, 188, 84)',
-  //       'rgb(0, 69, 203)',
-  //       'rgb(246, 62, 56)',
-  //       'rgb(246, 128, 56)',
-  //       'rgba(139, 136, 136, 0.9)',
-  //     ]
-  //   }
-  // ]
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  // 
 
   constructor(
     public profileService: ProfileService
@@ -101,7 +87,7 @@ export class DriveInfoPieComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.pieChartData = this.dataSource;
-    this.chartColors = ['rgb(246, 62, 56)', 'rgb(246, 128, 56)']
+    this.chartColors = ['rgb(246, 62, 56)', 'rgb(36, 149, 155)', 'rgb(246, 128, 56)']
   }
 
 }

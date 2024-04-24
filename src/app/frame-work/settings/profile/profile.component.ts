@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
-import { IProfile } from 'interfaces/isettings';
 import { ENFontFamily, ENFontFamilyExactName, ENFontStyle, ENOutputConfigColWidth } from 'interfaces/istyles';
 import { CloseTabService } from 'services/close-tab.service';
 import { FontService } from 'services/font.service';
