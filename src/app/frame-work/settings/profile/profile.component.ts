@@ -220,7 +220,7 @@ export class ProfileComponent extends FactoryONE {
     this.profileService._agg.hasGeneralSearch = this.profileService.getTableGeneralSearch();
   }
   getHasCancelableSpinner = () => {
-    this.profileService.showStateVals.hasCancelableSpinner = this.profileService.getHasCanclableSpinner();
+    this.profileService.showStateVals.hasCancelableSpinner = this.profileService.getHasCancelableSpinner();
   }
   getFontStyle = () => {
     this.profileService.showStateVals.defaultFontStyle = this.profileService.getFontStyle();

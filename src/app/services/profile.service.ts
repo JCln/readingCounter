@@ -158,7 +158,7 @@ export class ProfileService {
   getLocalDefaultAggregateTracks = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.utilsService.envService.defaultAggregateTracks);
   }
-  getHasCanclableSpinner = (): boolean => {
+  getHasCancelableSpinner = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCancelableSpinner, this.utilsService.envService.hasCancelableSpinner);
   }
   getFontStyle = (): number => {

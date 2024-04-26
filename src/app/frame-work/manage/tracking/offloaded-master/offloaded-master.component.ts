@@ -84,16 +84,29 @@ export class OffloadedMasterComponent extends FactoryONE {
     }
     return this.closeTabService.utilsService.firstConfirmDialog(a);
   }
+  confirmationMudifyBulk = async () => {
+    const a = {
+      messageTitle: 'اصلاح لیست',
+      messageTitleTwo: EN_messages.confirmModifyBulk1,
+      text: EN_messages.confirmModifyBulk2 + '' + EN_messages.confirmModifyBulk3,
+      minWidth: '21rem',
+      icon: 'pi pi-info',
+      isInput: false,
+      isDelete: true
+    }
+    return this.closeTabService.utilsService.firstConfirmDialog(a);
+  }
   modifyBulkClicked = async (dataSource: ITrackingMasterDto) => {
-    const hasSelectedDate = await this.selectDateMudifyBulkClicked();
-    if (hasSelectedDate) {
-      const body = {
-        day: hasSelectedDate,
-        groupId: dataSource.groupId
+    if (await this.confirmationMudifyBulk()) {
+      const hasSelectedDate = await this.selectDateMudifyBulkClicked();
+      if (hasSelectedDate) {
+        const body = {
+          day: hasSelectedDate,
+          groupId: dataSource.groupId
+        }
+        const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offloadModifyBulk, body);
+        this.trackingManagerService.utilsService.snackBarMessageSuccess(res.message);
       }
-
-      const res = await this.trackingManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.offloadModifyBulk, body);
-      this.trackingManagerService.utilsService.snackBarMessageSuccess(res.message);
     }
   }
   classWrapper = async (canRefresh?: boolean) => {

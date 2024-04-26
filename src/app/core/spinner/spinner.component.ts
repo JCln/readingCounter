@@ -33,7 +33,7 @@ export class SpinnerComponent implements OnInit {
 
   spinnerJob = () => {
     this.spinnerWrapper.loadingStatus$.subscribe((res: any) => {
-      this._hasSpinner = this.profileService.getHasCanclableSpinner() ? true : false;
+      this._hasSpinner = this.profileService.getHasCancelableSpinner() ? true : false;
       res.shouldShow ? this.showSpinner(res) : this.removeSpinner();
     })
   }
