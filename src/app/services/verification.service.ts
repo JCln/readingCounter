@@ -12,6 +12,8 @@ import { IAUserEditSave, IUserEditOnRole } from 'interfaces/iuser-manager';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { IAutomaticImportAddEdit, IFragmentDetails, IFragmentMaster } from 'interfaces/ireads-manager';
 import { ProfileService } from './profile.service';
+import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
+import { IDynamicExcelReq } from 'interfaces/itools';
 
 @Injectable({
   providedIn: 'root'
@@ -1322,6 +1324,119 @@ export class VerificationService {
       return false;
 
     return true;
+  }
+  validationDownloadAllImages = (dataSource: IDownloadFileAllImages): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.day)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
+      return false;
+    }
+
+    return true;
+  }
+  validationDownloadAllImagesTwo2 = (dataSource: IDownloadFileAllImagesTwo): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.fromDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource.toDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+
+    return true;
+  }
+  verificationExcelBuilder = (dataSource: IDynamicExcelReq) => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    if (MathS.isNull(dataSource.description)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_desc);
+      return false;
+    }
+    if (MathS.isNull(dataSource.url)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_url);
+      return false;
+    }
+    if (MathS.isNull(dataSource.acceptVerb)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_AcceptVerbs);
+      return false;
+    }
+    if (MathS.isNull(dataSource.jsonInfo)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_jsonInfo);
+      return false;
+    }
+    if (MathS.isNull(dataSource.paramSendType)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_parameterSendType);
+      return false;
+    }
+
+    return true;
+  }
+  verificationImageCarousel = (dataSource: IRandomImages) => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.day)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
+      return false;
+    }
+    if (MathS.isNull(dataSource.quantity)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_quantity);
+      return false;
+    }
+    if (MathS.isNaN(dataSource.quantity)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths);
+      return false;
+    }
+    if (MathS.isNull(dataSource.userId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_reader);
+      return false;
+    }
+
+    if (!MathS.isExactLengthYouNeed(dataSource.day, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+
+    return true;
+  }
+  verificationImageResultDetails = (dataSource: IImageResultDetails) => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.fromDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource.toDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+
+    if (!MathS.isExactLengthYouNeed(dataSource.fromDate, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(dataSource.toDate, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+
+    return true;
+  }
+  verificationFollowUPTrackNumber = (id: number): boolean => {
+    return this.followUPValidation(id);
   }
 
 }

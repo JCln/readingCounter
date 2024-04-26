@@ -20,7 +20,7 @@ export class PerDayComponent extends FactoryONE {
   _selectPerDayCountInfo: any[];
   chartTemp: any[] = [];
   private readonly listManagerPerDayPositions: string = 'lMPerDayPositions';
-  private readonly listManagerPerDay: string = 'lMPerDay';
+  private readonly listManagerPerDay: string = 'perDayDetails';
   private readonly perDayCountInfo: string = 'perDayCountInfo';
 
   constructor(
@@ -43,8 +43,9 @@ export class PerDayComponent extends FactoryONE {
   }
   getObjectParameters = (sth: any): any[] => {
     let b = [];
+    this.closeTabService.saveDataForLMPD.unreadCounts = sth.overalCount - sth.readCount;
+    b.push(sth.readCount); // all reads
     b.push(sth.overalCount - sth.readCount);// unreads
-    b.push(sth.readCount); // all reads with mane count   
     return b;
   }
   doSth = () => {

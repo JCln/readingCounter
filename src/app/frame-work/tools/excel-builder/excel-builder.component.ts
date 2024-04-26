@@ -4,6 +4,7 @@ import { ToolsService } from 'services/tools.service';
 import { ENAcceptVerb, IAcceptVerb, IJsonInfo, IParamSendType } from 'interfaces/itools';
 import { UtilsService } from 'services/utils.service';
 import { ENSnackBarColors } from 'interfaces/enums.enum';
+import { CloseTabService } from 'services/close-tab.service';
 
 
 @Component({
@@ -22,21 +23,22 @@ export class ExcelBuilderComponent implements OnInit {
 
   constructor(
     public toolsService: ToolsService,
+    public closeTabService: CloseTabService,
     private utilsService: UtilsService
   ) { }
 
   ngOnInit(): void {
   }
   connectToServer = async () => {
-    const a = await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.addToolsDynamicExcel, this.toolsService.dynamicReq);
-    this.toolsService.showSnack(a.message, ENSnackBarColors.success);
+    const a = await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.addToolsDynamicExcel, this.closeTabService.dynamicReq);
+    this.toolsService.utilsService.snackBarMessageSuccess(a.message);
   }
   verification = () => {
-    this.toolsService.dynamicReq.jsonInfo = JSON.stringify(this._selectedJsonInfo);
-    this.toolsService.dynamicReq.acceptVerb = this._selectedMethod;
-    this.toolsService.dynamicReq.paramSendType = this._selectedParamSendType;
+    this.closeTabService.dynamicReq.jsonInfo = JSON.stringify(this._selectedJsonInfo);
+    this.closeTabService.dynamicReq.acceptVerb = this._selectedMethod;
+    this.closeTabService.dynamicReq.paramSendType = this._selectedParamSendType;
 
-    if (this.toolsService.verificationExcelBuilder(this.toolsService.dynamicReq))
+    if (this.toolsService.verificationService.verificationExcelBuilder(this.closeTabService.dynamicReq))
       this.connectToServer();
 
   }

@@ -73,6 +73,7 @@ export interface IOffLoadPerDay {
     readCount: number,
     maneCount: number,
     manePercent: number,
+    unreadCounts: number,
     hasPreNumber: boolean,
     displayBillId: boolean,
     displayRadif: boolean,

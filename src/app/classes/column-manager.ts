@@ -2121,22 +2121,38 @@ export class ColumnManager {
         // { field: 'hasDetails', header: 'جزئیات' },
     ];
     followUpView: IObjectIteratation[] = [
-        { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
         { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
-        { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
         { field: 'fromDate', header: 'از ', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'toDate', header: 'تا ', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'overallQuantity', header: 'تعداد کل', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'itemQuantity', header: 'تعداد ', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'year', header: 'سال', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'overallQuantity', header: 'تعداد کل', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'itemQuantity', header: 'تعداد ', isSelected: true, isSelectedOrigin: true, readonly: true },
+    ];
+    followUpViewCheckboxes: IObjectIteratation[] = [
         { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
+        { field: 'isBazdid', header: 'بازدید', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
+        { field: 'isRoosta', header: 'روستایی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true }
+    ]
+    // For Follow UP component
+    LMPerDayFollowUpPositions: IObjectIteratation[] = [
+        { field: 'counterReaders', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        // { field: 'readCount', header: 'قرائت شده', isSelected: true, isSelectedOrigin: true, readonly: true },
+        // { field: 'maneCount', header: 'تعداد مانع', isSelected: true, isSelectedOrigin: true, readonly: true },
+        // { field: 'manePercent', header: 'درصد مانع', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true }
     ];
     importedListDetails: IObjectIteratation[] = [
         { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, readonly: true, isBoolean: true },
@@ -2164,20 +2180,13 @@ export class ColumnManager {
         { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ];
-    // For Follow UP component
-    LMPerDayFollowUpPositions: IObjectIteratation[] = [
-        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
-        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
-        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
-        { field: 'isBazdid', header: 'بازدید', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
-        { field: 'isRoosta', header: 'روستایی', isSelected: true, isSelectedOrigin: true, readonly: true, isBoolean: true },
-        { field: 'counterReaders', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+    followUpCountInfo: IObjectIteratation[] = [
+        { field: 'overalCount', header: 'تعداد', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'unreadCounts', header: 'قرائت نشده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'maneCount', header: 'تعداد مانع', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'manePercent', header: 'درصد مانع', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true }
-    ];
+        { field: 'manePercent', header: 'درصد مانع', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true },
+    ]
     lMPerDayPositions: IObjectIteratation[] = [
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
@@ -2185,17 +2194,18 @@ export class ColumnManager {
         { field: 'counterReaders', header: 'قرائت کننده(ها)', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-        { field: 'overalCount', header: 'تعداد کل', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, isSelectedOrigin: true, readonly: true },
     ];
     perDayCountInfo: IObjectIteratation[] = [
+        { field: 'overalCount', header: 'تعداد کل', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'unreadCounts', header: 'قرائت نشده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'maneCount', header: 'تعداد مانع', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'manePercent', header: 'درصد مانع', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true },
     ]
-    lMPerDay: IObjectIteratation[] = [
-        { field: 'day', header: 'روز', isSelected: true, isSelectedOrigin: true, readonly: true },
+    perDayDetails: IObjectIteratation[] = [
+        { field: 'day', header: 'روز', isSelected: true, isSelectedOrigin: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true, icon: 'grid-column: auto/ span 2;' },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, isSelectedOrigin: true, readonly: true },

@@ -111,7 +111,7 @@
         [_selectedColumnsToRemember]="'selectedRRFragment'" [_hasCollapsible]=true [_calculableSUM]="true"
         [_isCollaped]="closeTabService.rrFragmentKarkardReq.isCollapsed" [_numberOfExtraColumns]="[1]"
         (collapsed)="closeTabService.rrFragmentKarkardReq.isCollapsed= !closeTabService.rrFragmentKarkardReq.isCollapsed"
-        (refreshedTable)="refreshTable()" (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)">
+        (refreshedTable)="verification()" (routedToFollowUp)="trackingManagerService.routeToFollowUp($event)">
     </app-prime-table>
     <!-- TODO: EXCEPTION this refresh table is exceptional on implementation -->
 </main>

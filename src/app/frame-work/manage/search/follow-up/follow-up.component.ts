@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
-import { IFollowUpHistory } from 'interfaces/isearchs';
+import { IFollowUp, IFollowUpHistory } from 'interfaces/isearchs';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { CloseTabService } from 'services/close-tab.service';
@@ -20,9 +20,12 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
 export class FollowUpComponent extends FactoryONE {
   shouldActive: boolean = false;
   _showDesc: IObjectIteratation[] = [];
+  _showDescCheckboxes: IObjectIteratation[] = [];
   _defColumns: any[];
+  _selectPerDayCountInfo: any[];
   private readonly listManagerPerdayFollowColumns: string = 'LMPerDayFollowUpPositions';
   private readonly followupViewColumns: string = 'followUpView';
+  private readonly followupViewCheckboxesColumns: string = 'followUpViewCheckboxes';
   private readonly defColumns: string = 'defColumns';
   showInOrderTo: ISearchInOrderTo[] = [
     {
@@ -38,9 +41,11 @@ export class FollowUpComponent extends FactoryONE {
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
 
+  chartTemp: any[] = [];
   dataSourceAUX: IOffLoadPerDay;
   changeHsty: IFollowUpHistory[] = [];
   _selectColumnsAUX: IObjectIteratation[];
+  private readonly followUpCountInfo: string = 'followUpCountInfo';
 
 
   constructor(
@@ -50,6 +55,17 @@ export class FollowUpComponent extends FactoryONE {
   ) {
     super();
     this.classWrapper();
+  }
+  getObjectParameters = (sth: any): any[] => {
+    let b = [];
+    this.closeTabService.saveDataForFollowUpAUX.unreadCounts = sth.overalCount - sth.readCount;
+    b.push(sth.readCount); // all reads
+    b.push(sth.overalCount - sth.readCount);// unreads
+    return b;
+  }
+  doSth = () => {
+    this._selectPerDayCountInfo = this.trackingManagerService.columnManager.getColumnsMenus(this.followUpCountInfo);
+    this.chartTemp = this.getObjectParameters(this.closeTabService.saveDataForFollowUpAUX);
   }
   toPreStatus = async (dataSource: IFollowUpHistory) => {
     const config = {
@@ -75,12 +91,14 @@ export class FollowUpComponent extends FactoryONE {
   connectToServer = async () => {
     if (this.trackingManagerService.verificationTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
       this.closeTabService.saveDataForFollowUp = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
-      if (this.trackingManagerService.verificationService.isValidationNull(this.closeTabService.saveDataForFollowUp))
-        return;
-
+      // if (this.trackingManagerService.verificationService.isValidationNull(this.closeTabService.saveDataForFollowUp.))
+      //   return;
       this.dataSourceAUX = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedPERDAY, this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
+      console.log(this.closeTabService.saveDataForFollowUpAUX);
+      console.log(this._selectPerDayCountInfo);
 
+      this.doSth();
       this.makeConfigs();
     }
   }
@@ -97,8 +115,9 @@ export class FollowUpComponent extends FactoryONE {
       this.followUpService.setTrackNumber(null);
       return;
     }
-    if (this.closeTabService.saveDataForFollowUp) {
+    if (this.closeTabService.saveDataForFollowUp.trackNumber) {
       this.dataSourceAUX = this.closeTabService.saveDataForFollowUpAUX;
+      this.doSth();
       this.makeConfigs();
       return;
     }
@@ -129,6 +148,7 @@ export class FollowUpComponent extends FactoryONE {
       this._selectColumnsAUX = this.trackingManagerService.columnManager.getColumnsMenus(this.listManagerPerdayFollowColumns);
     }
     this._showDesc = this.trackingManagerService.columnManager.getColumnsMenus(this.followupViewColumns);
+    this._showDescCheckboxes = this.trackingManagerService.columnManager.getColumnsMenus(this.followupViewCheckboxesColumns);
     this._defColumns = this.trackingManagerService.columnManager.getColumnsMenus(this.defColumns);
     this.clearUNUsables();
   }

@@ -12,31 +12,76 @@
 
 .contain {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 19rem));
-  align-items: center;
-  justify-content: center;
   direction: rtl;
   text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
   gap: var(--font_05);
   margin: 0 0 var(--font_xxs) 0;
   background: var(--secondary_1);
   padding: var(--font_05);
-  border-radius: $border_15;
+  border-radius: $border_10;
   box-shadow: 0px 2px 6px 2px var(--secondary_7);
 
   @media (min-width: 550px) {
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 19rem));
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 24rem));
   }
+}
+
+.pie_wrapper {
+  align-items: center;
+  display: grid;
+  height: 100%;
+  background: var(--secondary_2);
+  box-shadow: 0 0 -10px -6px var(--secondary_4);
+  border-radius: $border_5;
+}
+
+.input_2 {
+  border: 0;
+}
+
+.pie_info {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  gap: 5px;
+
+  @media (min-width: 1000px) {
+    margin: 0 0.5rem;
+    margin-bottom: auto;
+  }
+}
+
+.statistics_wrapper,
+.checkbox_wrapper,
+.route_info_wrapper {
+  background: var(--white);
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 -10px -6px var(--secondary_4);
+}
+
+.statistics,
+.route_info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_05);
+  border-radius: $border_15;
+}
+
+.checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
+  gap: 5px;
 }
 
 .input_icon {
   position: relative;
-}
 
-._value {
-  border: 0;
-  border-radius: $border_7;
-  width: 97%;
+  ._key {
+    min-width: 3rem;
+  }
 }
 
 .order_by {

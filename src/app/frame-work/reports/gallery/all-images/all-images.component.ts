@@ -31,7 +31,7 @@ export class AllImagesComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    if (!this.toolsService.verificationFollowUPTrackNumber(this.toolsService.trackNumberAllImages))
+    if (!this.toolsService.verificationService.verificationFollowUPTrackNumber(this.toolsService.trackNumberAllImages))
       return;
     this.allImagesDataSource = null;
 

@@ -12,7 +12,7 @@
                     <div class="_key">ناحیه</div>
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="toolsService.randomImages.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                            [(ngModel)]="closeTabService.randomImages.zoneId" placeholder="انتخاب مورد" optionValue="id"
                             optionLabel="title" filter="true" (click)="verificationACounterReaderId()">
                         </p-dropdown>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="_key">قرائت کننده</div>
                     <div class="_value">
                         <p-dropdown name="counterreader" #counterreader [options]="userCounterReader"
-                            name="counter-reader" [(ngModel)]="toolsService.randomImages.userId" optionLabel="title"
+                            name="counter-reader" [(ngModel)]="closeTabService.randomImages.userId" optionLabel="title"
                             [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                             placeholder="انتخاب مورد">
                         </p-dropdown>
@@ -36,8 +36,9 @@
                 <div class="input_3">
                     <div class="_key">تاریخ</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="toolsService.receiveFromDateJalali($event)"
-                            [dateObject]="toolsService.randomImages.day">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="closeTabService.receiveDay(closeTabService.ENReadingReports.randomImages, $event)"
+                            [dateObject]="closeTabService.randomImages.day">
                         </app-date-jalali>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
                     <div class="_key">تعداد</div>
                     <div class="_value">
                         <p-dropdown name="quantity" [filter]="true" placeholder="تعداد تصاویر" [options]="_quantity"
-                            [(ngModel)]="toolsService.randomImages.quantity" [editable]="true" optionValue="value"
+                            [(ngModel)]="closeTabService.randomImages.quantity" [editable]="true" optionValue="value"
                             optionLabel="title">
                         </p-dropdown>
                     </div>

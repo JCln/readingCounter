@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label, SingleDataSet, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend } from 'ng2-charts';
 import { ProfileService } from 'services/profile.service';
 
 @Component({
-  selector: 'app-per-day-pie',
-  templateUrl: './per-day-pie.component.html',
-  styleUrls: ['./per-day-pie.component.scss']
+  selector: 'app-follow-up-pie',
+  templateUrl: './follow-up-pie.component.html',
+  styleUrls: ['./follow-up-pie.component.scss']
 })
-export class PerDayPieComponent implements AfterViewInit {
+export class FollowUpPieComponent implements AfterViewInit {
   @Input() dataSource: any[];
   public chartColors: any[] = [{ backgroundColor: ["#6FC8CE", "#FF7360"] }];
 

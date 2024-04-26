@@ -32,14 +32,8 @@ export class RrFragmentComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.closeTabService.saveDataForRRFragment = null;
-      this.verification();
-    }
-    if (this.closeTabService.saveDataForRRFragment) {
-      this.setGetRanges();
-    }
+  classWrapper = async () => {
+    this.setGetRanges();
     this.closeTabService.getSearchInOrderTo();
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
@@ -75,6 +69,9 @@ export class RrFragmentComponent extends FactoryONE {
       this.connectToServer();
   }
   private setGetRanges = () => {
+    if (this.closeTabService.saveDataForRRFragment) {
+      this.setGetRanges();
+    }
     this.closeTabService.saveDataForRRFragment.forEach(item => {
       item.duration = parseFloat(MathS.getRange(item.duration));
     })

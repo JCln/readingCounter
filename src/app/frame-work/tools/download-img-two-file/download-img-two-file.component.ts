@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { CloseTabService } from 'services/close-tab.service';
 import { ToolsService } from 'services/tools.service';
 import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -15,7 +16,8 @@ export class DownloadImgTwoFileComponent extends FactoryONE {
 
   constructor(
     public toolsService: ToolsService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -24,8 +26,8 @@ export class DownloadImgTwoFileComponent extends FactoryONE {
     this.zoneDictionary = await this.toolsService.dictionaryWrapperService.getZoneDictionary();
   }
   connectToServer = async () => {
-    if (this.toolsService.validationDownloadAllImagesTwo2(this.toolsService.fileDownloadAllImagesTwo2)) {
-      window.open(this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileAllImagesTWO + this.utilsService.compositeService.getAccessToken() + '&zoneId=' + this.toolsService.fileDownloadAllImagesTwo2.zoneId + '&fromDay=' + this.toolsService.fileDownloadAllImagesTwo2.fromDay + '&toDay=' + this.toolsService.fileDownloadAllImagesTwo2.toDay, ENInterfaces._blank);
+    if (this.toolsService.verificationService.validationDownloadAllImagesTwo2(this.closeTabService.fileDownloadAllImagesTwo2)) {
+      window.open(this.utilsService.getAPIUrl() + '/' + ENInterfaces.downloadFileAllImagesTWO + this.utilsService.compositeService.getAccessToken() + '&zoneId=' + this.closeTabService.fileDownloadAllImagesTwo2.zoneId + '&fromDay=' + this.closeTabService.fileDownloadAllImagesTwo2.fromDay + '&toDay=' + this.closeTabService.fileDownloadAllImagesTwo2.toDay, ENInterfaces._blank);
     }
   }
 

@@ -84,10 +84,7 @@ export class ListManagerService {
       item.reteDifference = MathS.getFormatRange(item.reteDifference);
       item.newRateDaily = MathS.getFormatRange(item.newRateDaily);
       item.newRateDaily2 = MathS.getFormatRange(item.newRateDaily2);
-      item.x = MathS.getFormatRange(item.x);
-      item.y = MathS.getFormatRange(item.y);
-      item.gisAccuracy = MathS.getFormatRange(item.gisAccuracy);
-      // item.x = item.x ? MathS.getFormatRange(item.x) : ''; format for string should be like this
+      //  format for string should be like this
     })
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
@@ -286,7 +283,7 @@ export class ListManagerService {
 
 
     return true;
-  }  
+  }
   getReadingReportTitles = async ($event) => {
     const a = await this.ajaxReqWrapperService.postDataSourceById(ENInterfaces.ReadingReportTitles, $event)
     if (a.length) {

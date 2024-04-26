@@ -15,44 +15,89 @@
 </form>
 
 <section class="contain" *ngIf="closeTabService.saveDataForFollowUp">
-    <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
-        <i class="pi pi-bookmark _bookmark"></i>
-        <div class="input_3">
-            <div class="_key">{{item.header}}</div>
-            <ng-container *ngIf="item.isBoolean; else elseTemplate">
-                <mat-checkbox [disabled]="true" name="{{item.field}}"
-                    [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
-                </mat-checkbox>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                    [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
-            </ng-template>
+
+    <div class="statistics_wrapper">
+        <h1 class="title">اطلاعات مسیر</h1>
+        <div class="statistics">
+            <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">{{item.header}}</div>
+                    <ng-container *ngIf="item.isBoolean; else elseTemplate">
+                        <mat-checkbox [disabled]="true" name="{{item.field}}"
+                            [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+                        </mat-checkbox>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                            [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+                    </ng-template>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
-        <i class="pi pi-bookmark _bookmark"></i>
-        <div class="input_3">
-            <ng-container *ngIf="item.isBoolean; else elseTemplate">
-                <div class="_key">{{item.header}}</div>
-                <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
-                </mat-checkbox>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <div class="_key" [ngClass]="{'special_icon': item.enableTooltip}">{{item.header}}</div>
-                <div class="tooltip _double_width">
-                    <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                        [(ngModel)]="dataSourceAUX[item.field]">
-                    <div *ngIf="item.enableTooltip" class="tooltip_text">
-                        درصد مانع صادر شده
-                        {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
+    <div class="pie_wrapper">
+        <section class="_charts">
+            <app-follow-up-pie *ngIf="chartTemp.length > 0" [dataSource]="chartTemp"></app-follow-up-pie>
+            <div class="pie_info">
+                <div class="input_icon" *ngFor="let followupinfo of _selectPerDayCountInfo"
+                    [ngClass]="{'double_size':followupinfo.icon}">
+                    <div class="input_2">
+                        <div class="_key">{{followupinfo.header}}</div>
+                        <input [readOnly]="followupinfo.readonly" class="_value" name="{{followupinfo.field}}"
+                            [(ngModel)]="closeTabService.saveDataForFollowUpAUX[followupinfo.field]">
                     </div>
                 </div>
-            </ng-template>
+            </div>
+        </section>
+    </div>
+    <div class="route_info_wrapper">
+        <h1 class="title">اطلاعات آماری</h1>
+        <div class="route_info">
+            <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <ng-container *ngIf="item.isBoolean; else elseTemplate">
+                        <div class="_key">{{item.header}}</div>
+                        <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
+                        </mat-checkbox>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <div class="_key" [ngClass]="{'special_icon': item.enableTooltip}">{{item.header}}</div>
+                        <div class="tooltip _double_width">
+                            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                                [(ngModel)]="dataSourceAUX[item.field]">
+                            <div *ngIf="item.enableTooltip" class="tooltip_text">
+                                درصد مانع صادر شده
+                                {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="checkbox_wrapper">
+        <h1 class="title">ویژگی مسیر</h1>
+        <div class="checkboxes">
+            <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDescCheckboxes">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">{{item.header}}</div>
+                    <ng-container *ngIf="item.isBoolean; else elseTemplate">
+                        <mat-checkbox [disabled]="true" name="{{item.field}}"
+                            [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+                        </mat-checkbox>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                            [(ngModel)]="closeTabService.saveDataForFollowUp[item.field]">
+                    </ng-template>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-
 <section *ngIf="closeTabService.saveDataForFollowUp" class="order_by">
     <div *ngFor="let orderType of showInOrderTo">
         <div class="p-field-radiobutton">

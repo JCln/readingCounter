@@ -11,7 +11,7 @@
                     <div class="_key">ناحیه</div>
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
-                            [(ngModel)]="toolsService.imgResultDetails.zoneId" placeholder="انتخاب مورد"
+                            [(ngModel)]="closeTabService.imgResultDetails.zoneId" placeholder="انتخاب مورد"
                             optionValue="id" optionLabel="title" filter="true">
                         </p-dropdown>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="_key">توصیف تصویر</div>
                     <div class="_value">
                         <p-multiSelect [maxSelectedLabels]="1" [options]="imageAttrAllDictionary" name="imgAttr"
-                            [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
+                            [(ngModel)]="closeTabService.imgResultDetails.imageAttributionIds" optionLabel="title"
                             optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" placeholder="انتخاب مورد"
                             [filter]="true" showClear="true">
                         </p-multiSelect>
@@ -36,8 +36,8 @@
                     <div class="_key">از تاریخ</div>
                     <div class="_value">
                         <app-date-jalali name="fromDate"
-                            (dateJalEvent)="toolsService.receiveFromDateJalaliImgResult($event)"
-                            [dateObject]="toolsService.imgResultDetails.fromDate">
+                            (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.imgResultDetails,$event)"
+                            [dateObject]="closeTabService.imgResultDetails.fromDate">
                         </app-date-jalali>
                     </div>
                 </div>
@@ -48,8 +48,8 @@
                     <div class="_key">تا تاریخ</div>
                     <div class="_value">
                         <app-date-jalali name="fromDate"
-                            (dateJalEvent)="toolsService.receiveToDateJalaliImgResult($event)"
-                            [dateObject]="toolsService.imgResultDetails.toDate">
+                            (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.imgResultDetails,$event)"
+                            [dateObject]="closeTabService.imgResultDetails.toDate">
                         </app-date-jalali>
                     </div>
                 </div>

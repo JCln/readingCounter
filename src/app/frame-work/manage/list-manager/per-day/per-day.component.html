@@ -8,16 +8,39 @@
     <form #form="ngForm" class="content">
         <h1 class="title">اطلاعات کلی</h1>
         <div class="overall_info_top">
-            <div class="_desc">
-                <div class="input_icon" *ngFor="let mainDatas of _selectMainDatas"
-                    [ngClass]="{'double_size':mainDatas.icon}">
-                    <i class="pi pi-bookmark _bookmark"></i>
-                    <div class="input_3">
-                        <div class="_key">{{mainDatas.header}}</div>
-                        <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
-                            [(ngModel)]="closeTabService.saveDataForLMPD[mainDatas.field]">
+            <div class="statistics_wrapper">
+                <h3 class="title">اطلاعات مسیر</h3>
+                <div class="statistics">
+                    <div class="input_icon" *ngFor="let mainDatas of _selectMainDatas"
+                        [ngClass]="{'double_size':mainDatas.icon}">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
+                                [(ngModel)]="closeTabService.saveDataForLMPD[mainDatas.field]">
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="pie_wrapper">
+                <section class="_charts" *ngIf="chartTemp.length > 0">
+                    <app-per-day-pie [dataSource]="chartTemp"></app-per-day-pie>
+                    <div class="pie_info">
+                        <div class="input_icon" *ngFor="let mainDatas of _selectPerDayCountInfo"
+                            [ngClass]="{'double_size':mainDatas.icon}">
+                            <div class="input_2">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
+                                    [(ngModel)]="closeTabService.saveDataForLMPD[mainDatas.field]">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="checkbox_wrapper">
+            <h3 class="title">ویژگی مسیر</h3>
+            <div class="checkboxes">
                 <div class="input_icon">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="_key">رقم قبلی</div>
@@ -89,45 +112,33 @@
                     </mat-checkbox>
                 </div>
             </div>
-            <section class="_charts" *ngIf="chartTemp.length > 0">
-                <app-per-day-pie [dataSource]="chartTemp"></app-per-day-pie>
-                <div>
-                    <div class="input_icon" *ngFor="let mainDatas of _selectPerDayCountInfo"
-                        [ngClass]="{'double_size':mainDatas.icon}">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
-                                [(ngModel)]="closeTabService.saveDataForLMPD[mainDatas.field]">
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
-
+        <!-- <div class="route_info_wrapper"> -->
     </form>
 
 </section>
 
 <section class="content">
     <h1 class="title">اطلاعات روزانه قرائت</h1>
-    <main *ngFor="let history of closeTabService.saveDataForLMPD.offLoadPerDayHistory" class="card_wrapper">
-        <div class="card__content" *ngFor="let item of _selectCols" [ngClass]="{'double_size':item.icon}">
-            <div class="input_icon">
-                <i class="pi pi-bookmark _bookmark"></i>
-                <div class="input_3">
-                    <div class="_key">{{item.header}}</div>
-                    <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                        [(ngModel)]="history[item.field]">
+    <div class="_card_daily">
+        <main *ngFor="let history of closeTabService.saveDataForLMPD.offLoadPerDayHistory;index as i"
+            class="card_wrapper">
+            <div class="card__content" *ngFor="let item of _selectCols" [ngClass]="{'double_size':item.icon}">
+                <div class="_number">{{i+1}}</div>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">{{item.header}}</div>
+                        <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                            [(ngModel)]="history[item.field]">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="disable_grid_temp">
             <button class="btn_1 d_rtl" (click)="routeToLMPDXY(history.day)">
                 مشاهده روی نقشه
-                <i class="p_icons pi pi-map-marker"></i>
+                <i class="pi pi-map-marker"></i>
             </button>
-        </div>
-    </main>
+        </main>
+    </div>
 </section>

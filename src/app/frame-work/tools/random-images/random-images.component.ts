@@ -42,16 +42,16 @@ export class RandomImagesComponent extends FactoryONE {
   }
   verificationACounterReaderId = async () => {
     let temp: IDictionaryManager[] = [];
-    if (!MathS.isNull(this.toolsService.randomImages.zoneId)) {
-      temp = await this.toolsService.dictionaryWrapperService.getUserCounterReaderDictionary(this.toolsService.randomImages.zoneId);
+    if (!MathS.isNull(this.closeTabService.randomImages.zoneId)) {
+      temp = await this.toolsService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.randomImages.zoneId);
       if (!MathS.isNull(temp)) {
         this.userCounterReader = temp;
       }
     }
   }
   connectToServer = async () => {
-    if (this.toolsService.verificationImageCarousel(this.toolsService.randomImages)) {
-      this.allImagesDataSource = await this.closeTabService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postToolsRandomImages, this.toolsService.randomImages);
+    if (this.toolsService.verificationService.verificationImageCarousel(this.closeTabService.randomImages)) {
+      this.allImagesDataSource = await this.closeTabService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.postToolsRandomImages, this.closeTabService.randomImages);
       this.closeTabService.saveDataForRandomImgsRSFirst = this.allImagesDataSource;
       this.showAllImgs();
       this.addCanShowElementToImages();

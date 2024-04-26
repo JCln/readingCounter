@@ -8,7 +8,7 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="toolsService.fileDownloadAllImagesTwo2.zoneId" placeholder="انتخاب مورد"
+                                [(ngModel)]="closeTabService.fileDownloadAllImagesTwo2.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
@@ -20,8 +20,8 @@
                         <div class="_key">از تاریخ</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="toolsService.receiveFromDateJalali2($event)"
-                                [dateObject]="toolsService.fileDownloadAllImagesTwo2.fromDay">
+                                (dateJalEvent)="closeTabService.receiveFromDay(closeTabService.ENReadingReports.fileDownloadAllImagesTwo2,$event)"
+                                [dateObject]="closeTabService.fileDownloadAllImagesTwo2.fromDay">
                             </app-date-jalali>
                         </div>
                     </div>
@@ -31,8 +31,9 @@
                     <div class="input_3">
                         <div class="_key">تا تاریخ</div>
                         <div class="_value">
-                            <app-date-jalali name="toDate" (dateJalEvent)="toolsService.receiveToDateJalali2($event)"
-                                [dateObject]="toolsService.fileDownloadAllImagesTwo2.toDay">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="closeTabService.receivetoDay(closeTabService.ENReadingReports.fileDownloadAllImagesTwo2, $event)"
+                                [dateObject]="closeTabService.fileDownloadAllImagesTwo2.toDay">
                             </app-date-jalali>
                         </div>
                     </div>

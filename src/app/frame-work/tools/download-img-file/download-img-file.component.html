@@ -8,7 +8,7 @@
                         <div class="_key">ناحیه</div>
                         <div class="_value">
                             <p-dropdown name="zones" [options]="zoneDictionary"
-                                [(ngModel)]="toolsService.fileDownloadAllImages.zoneId" placeholder="انتخاب مورد"
+                                [(ngModel)]="closeTabService.fileDownloadAllImages.zoneId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
@@ -19,8 +19,9 @@
                     <div class="input_3">
                         <div class="_key">تاریخ</div>
                         <div class="_value">
-                            <app-date-jalali name="date" (dateJalEvent)="toolsService.receiveDateJalali($event)"
-                                [dateObject]="toolsService.fileDownloadAllImages.day">
+                            <app-date-jalali name="date"
+                                (dateJalEvent)="closeTabService.receiveDay(closeTabService.ENReadingReports.fileDownloadAllImages, $event)"
+                                [dateObject]="closeTabService.fileDownloadAllImages.day">
                             </app-date-jalali>
                         </div>
                     </div>

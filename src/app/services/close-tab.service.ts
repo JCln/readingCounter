@@ -70,6 +70,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
 import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITariff, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
   providedIn: 'root'
@@ -220,6 +221,44 @@ export class CloseTabService {
       fromTime: fromTimeH + ':' + fromTimeM,
       toTime: toTimeH + ':' + toTimeM
     }
+  }
+  public imgResultDetails: IImageResultDetails = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    imageAttributionIds: []
+  }
+  public imgResultDetailsGridBased: IImageResultDetails = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    imageAttributionIds: []
+  }
+  public randomImages: IRandomImages = {
+    userId: '',
+    quantity: null,
+    day: '',
+    zoneId: null
+  }
+  public fileDownloadAllImages: IDownloadFileAllImages = {
+    zoneId: null,
+    day: ''
+  }
+  public fileDownloadAllImagesTwo2: IDownloadFileAllImagesTwo = {
+    zoneId: null,
+    fromDay: '',
+    toDay: ''
+  }
+  public dynamicReq: IDynamicExcelReq = {
+    id: 0,
+    title: '',
+    description: '',
+    url: '',
+    acceptVerb: '',
+    jsonInfo: '',
+    paramSendType: '',
+    // createDateTime: '',
+    // isActive: false
   }
   clientGetLazy: IClientGetAllLazy = {
     data: [],
@@ -2365,6 +2404,13 @@ export class CloseTabService {
       }
     })
   }
+  /* to make Dates to work property 
+  1- need to assign the exact name of the property
+  2- name value exists in enum 
+  3- the object which have variable live in this service and no other place because use 
+  for e.g this[name].fromDate = event;
+  */
+
   receiveDateJalali = (variable: ENReadingReports, $event: string) => {//just JalaliDay
     this[variable].jalaliDay = $event;
   }
@@ -2382,6 +2428,12 @@ export class CloseTabService {
   }
   receiveDay = (variable: ENReadingReports, $event: string) => {
     this[variable].day = $event;
+  }
+  receiveFromDay = (variable: ENReadingReports, $event: string) => {// just fromDay
+    this[variable].fromDay = $event;
+  }
+  receivetoDay = (variable: ENReadingReports, $event: string) => {// just fromDay
+    this[variable].toDay = $event;
   }
 
   getSearchInOrderTo = (): ISearchInOrderTo[] => {
