@@ -33,12 +33,12 @@ export class RrFragmentComponent extends FactoryONE {
   }
 
   classWrapper = async () => {
-    this.setGetRanges();
-    this.closeTabService.getSearchInOrderTo();
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
+    this.closeTabService.getSearchInOrderTo();
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
     this.getFragmentByZone();
+    this.setGetRanges();
   }
   afterPeriodChanged() {
     this.readingPeriodDictionary = [];
