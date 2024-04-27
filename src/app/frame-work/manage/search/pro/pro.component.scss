@@ -96,7 +96,7 @@ footer {
 
   .__container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(9rem, 15rem));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 19rem));
     justify-content: center;
     gap: var(--font_02);
   }

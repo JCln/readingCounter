@@ -52,7 +52,7 @@ export enum ENURLs {
     // LOCAL = 'http://192.168.99.131:7529',
     LOCAL = 'http://192.168.100.18:7529',
     DEFAULT = 'https://37.191.92.157/kontoriNew',
-    TEH = 'http://85.133.245.143/kontoriNew',
+    TEH = 'http://85.133.148.71/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
     TEH_ZONE4 = 'http://81.12.106.167:8081/kontoriNew',
     TEH_SE = 'http://46.209.181.2:9098/kontoriNew',
