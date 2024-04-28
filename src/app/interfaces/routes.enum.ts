@@ -178,6 +178,7 @@ export enum EN_Routes {
     offering = '/wr/branch/offering',
     offeringUnit = '/wr/branch/offeringUnit',
     tariffExcelToFill = '/wr/branch/tariff/excelToFill',
+    tariffAllLazy = '/wr/branch/tariff/allLazy',
     calculation = '/wr/branch/tariff/calculation',
     tariff = '/wr/branch/tariff',
     customerType = '/wr/branch/customerType',

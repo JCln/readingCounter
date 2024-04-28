@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITariff, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -261,6 +261,10 @@ export class CloseTabService {
     // isActive: false
   }
   clientGetLazy: IClientGetAllLazy = {
+    data: [],
+    totalRecords: 0
+  };
+  tariffAllLazy: ITariffAllLazy = {
     data: [],
     totalRecords: 0
   };
@@ -2092,6 +2096,7 @@ export class CloseTabService {
       }
     },
     { id: 2, value: ENEssentialsToSave.clientGetLazy, url: EN_Routes.clientGetLazy, defaultValue: { data: [], totalRecords: 0 } },
+    { id: 2, value: ENEssentialsToSave.tariffAllLazy, url: EN_Routes.tariffAllLazy, defaultValue: { data: [], totalRecords: 0 } },
     { id: 2, value: ENEssentialsToSave.simpleMasterByFragmentAllLazy, url: EN_Routes.simpleMasterByFragmentAllLazy, defaultValue: { data: [], totalRecords: 0 } },
     {
       id: 2, req: ENEssentialsToSave.masterByFragmentallInGroupLazyReq, value: ENEssentialsToSave.masterByFragmentAllInGroupLazy, url: EN_Routes.masterByFragmentAllInGroupLazy, defaultValue: { data: [], totalRecords: 0 }, defaultReq: {

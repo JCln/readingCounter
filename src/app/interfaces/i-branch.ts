@@ -72,6 +72,28 @@ export interface IClientGetAllLazy {
     data: IClientAll[],
     totalRecords: number
 }
+
+export interface ITariffAll {
+    id: number,
+    zoneId: number,
+    zoneTitle
+    formula: string,
+    usageId: number,
+    fromDate: string,
+    toDate: string,
+    fromRate: number,
+    toRate: number,
+    offeringId: number,
+    calulcationOrder: number,
+    tarrifTypeItemId: number,
+    usageTitle: string,
+    offeringTitle: string,
+    tarrifTypeItemTitle: string,
+}
+export interface ITariffAllLazy {
+    data: ITariffAll[],
+    totalRecords: number
+}
 export interface ITarrifTypeItem {
     id: number,
     tariffTypeId: number,

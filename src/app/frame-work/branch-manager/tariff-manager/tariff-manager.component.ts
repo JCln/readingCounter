@@ -49,7 +49,7 @@ export class TariffManagerComponent implements OnInit {
       this.openAddExcelDialog();
     }
     if (clickFunction == EN_tariff.viewGrid) {
-      console.log('view grid');
+      this.branchesService.utilsService.routeTo(EN_Routes.tariffAllLazy);
     }
     if (clickFunction == EN_tariff.calculation) {
       this.branchesService.utilsService.routeTo(EN_Routes.calculation);

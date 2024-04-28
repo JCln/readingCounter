@@ -703,7 +703,8 @@ export enum ENEssentialsToSave {
     importHiwaReq = "importHiwaReq",
     importHiwa = "importHiwa",
     editModifyReq = "editModifyReq",
-    caculationReq = "caculationReq"
+    caculationReq = "caculationReq",
+    tariffAllLazy = "tariffAllLazy"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -878,6 +879,7 @@ export enum ENSelectedColumnVariables {
     selectedGeneralGroupModify = 'generalGroupModify',
     selectedOffloadedLazy = 'listOffloadedLazy',
     selectedClientGetlazy = 'clientManagerGetLazy',
+    selectedTariffAllLazy = 'tariffAllLazy',
     selectedReqLogInactiveEntity = 'reqLogInactiveEntity',
     selectedOffloadedAllInGroupLazy = 'listOffloadedAllInGroupLazy',
     selectedListManagerModify = 'ModifyList',

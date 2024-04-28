@@ -520,8 +520,9 @@ export enum ENInterfaces {
     tariffExcelSample = 'V1/Tariff/ExcelSample',
     tariffExcelToFill = 'V1/Tariff/ExcelToFill',
     tariffAddExcel = 'V1/Tariff/AddExcel',
-    tariffAdd = 'V1/Tariff/Add',
-    tariffEdit = 'V1/Tariff/Edit',
     tariffRemove = 'V1/Tariff/Remove',
     calculation = 'V1/Tariff/calculation',
+    tariffAllLazy = 'V1/Tariff/AllLazy',
+    tariffAdd = 'V1/Tariff/Add',
+    tariffEdit = 'V1/Tariff/Edit',
 }

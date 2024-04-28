@@ -504,6 +504,22 @@ export class ColumnManager {
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
     ]
+    tariffAllLazy: IObjectIteratation[] = [
+        // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true, isSelectOption: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true },
+        { field: 'formula', header: 'فرمول', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true },
+        // { field: 'usageId', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'fromDate', header: 'از', isSelected: true, isSelectedOrigin: true },
+        { field: 'toDate', header: 'تا', isSelected: true, isSelectedOrigin: true },
+        { field: 'fromRate', header: 'از نرخ', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'toRate', header: 'تا نرخ', isSelected: true, isSelectedOrigin: true, readonly: true },
+        // { field: 'offeringId', header: 'اقلام', isSelected: true, isSelectedOrigin: true },
+        { field: 'calulcationOrder', header: 'ترتیب محاسبه', isSelected: true, isSelectedOrigin: true },
+        // { field: 'tarrifTypeItemId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true },
+        { field: 'usageTitle', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
+        { field: 'offeringTitle', header: 'اقلام', isSelected: true, isSelectedOrigin: true },
+        { field: 'tarrifTypeItemTitle', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true },
+    ]
     tariffExcelToFill: IObjectIteratation[] = [
         { field: 'zoneIds', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'usageIds', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
