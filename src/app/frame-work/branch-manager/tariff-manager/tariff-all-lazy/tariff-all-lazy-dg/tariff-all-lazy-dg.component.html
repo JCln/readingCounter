@@ -1,0 +1,99 @@
+<section>
+    <h2 class="title">
+        {{tarrifReq.isEditing? 'ویرایش تعرفه': 'افزودن تعرفه'}}
+    </h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+
+            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('tariffManagerAddEdit')"
+                [ngClass]="{'double_size':mainDatas.icon}">
+                <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
+                    <!-- only for single select option -->
+                    <div class="input_icon" *ngIf="mainDatas.field == 'tarrifTypeItemId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="offeringUnitId" [options]="getTarrifTypeDictionary"
+                                    [(ngModel)]="tarrifReq.tarrifTypeItemId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'zoneId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="offeringUnitId" [options]="zoneDictionary"
+                                    [(ngModel)]="tarrifReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'usageId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="offeringUnitId" [options]="usageDictionary"
+                                    [(ngModel)]="tarrifReq.usageId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'offeringId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="offeringUnitId" [options]="offeringDictionary"
+                                    [(ngModel)]="tarrifReq.offeringId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #checkboxes>
+                    <ng-container>
+                        <ng-template *ngIf="mainDatas.isBoolean; else simpleText">
+                            <div class="input_icon">
+                                <i class="pi pi-bookmark _bookmark"></i>
+                                <div class="input_3">
+                                    <div class="_key">{{mainDatas.header}}</div>
+                                    <mat-checkbox name="isCluster" [(ngModel)]="tarrifReq[mainDatas.field]">
+                                        {{mainDatas.isSelected}}
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+
+                </ng-template>
+                <ng-template #simpleText>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <input [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
+                                [(ngModel)]="tarrifReq[mainDatas.field]">
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                {{tarrifReq.isEditing? 'ویرایش تعرفه': 'افزودن تعرفه'}}
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

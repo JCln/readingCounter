@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBranchState, IClientAll, IOffering, IOfferingUnit, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IOffering, IOfferingUnit, ITariffAll, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -1299,6 +1299,28 @@ export class VerificationService {
     if (!this.nullValidation(item.tariffTypeId, EN_messages.insert_tariffType))
       return false;
     if (!this.nullValidation(item.tariffCalculationMode, EN_messages.insert_tariffCalculationMode))
+      return false;
+
+    return true;
+  }
+  tarrifManager = (item: ITariffAll): boolean => {
+    if (item.isEditing) {
+      if (!this.nullValidation(item.id, EN_messages.call_supportGroup))
+        return false;
+    }
+    if (!this.nullValidation(item.zoneId, EN_messages.insert_zone))
+      return false;
+    if (!this.nullValidation(item.usageId, EN_messages.insert_usage))
+      return false;
+    if (!this.nullValidation(item.fromRate, EN_messages.insert_fromRate))
+      return false;
+    if (!this.nullValidation(item.toRate, EN_messages.insert_toRate))
+      return false;
+    if (!this.nullValidation(item.offeringId, EN_messages.insert_offeringId))
+      return false;
+    if (!this.nullValidation(item.calulcationOrder, EN_messages.insert_calculationOrder))
+      return false;
+    if (!this.nullValidation(item.tarrifTypeItemId, EN_messages.insert_tariffType))
       return false;
 
     return true;

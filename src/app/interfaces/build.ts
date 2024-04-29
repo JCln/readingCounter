@@ -50,7 +50,7 @@ export interface IENV {
 }
 export enum ENURLs {
     // LOCAL = 'http://192.168.99.131:7529',
-    LOCAL = 'http://192.168.100.18:7529',
+    LOCAL = 'http://192.168.100.18:5001',
     DEFAULT = 'https://37.191.92.157/kontoriNew',
     TEH = 'http://85.133.148.71/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',

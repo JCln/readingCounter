@@ -6,5 +6,11 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . index.html [L]
   ExpiresActive On
-  ExpiresDefault "access plus 2 hours"
+  ExpiresDefault "access plus 0 hours"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires 0
 </IfModule>

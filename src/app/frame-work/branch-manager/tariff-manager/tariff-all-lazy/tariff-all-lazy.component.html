@@ -23,6 +23,9 @@
                         class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
                         <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
                     </i>
+                    <i (click)="openDialog(false)" class="tooltip _circle_border p_icons fa fa-plus">
+                        <div class="tooltip_text">افزودن</div>
+                    </i>
                 </div>
                 <div class="left_side">
                     <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
@@ -136,7 +139,7 @@
                         </ng-template>
                     </ng-template>
                 </td>
-                <td class="__icon-columns" class="edit_button" (click)="editSingleRow(dataSource)">
+                <td class="__icon-columns" class="edit_button" (click)="openDialog(true,dataSource)">
                     <span class="ui-column-title">ویرایش</span>
                     <i class="tooltip _edit pi pi-pencil">
                         <div class="tooltip_text">ویرایش</div>
@@ -152,7 +155,7 @@
         </ng-template>
 
     </p-table>
-    
+
     <section *ngIf="!closeTabService.tariffAllLazy.data || closeTabService.tariffAllLazy.data.length === 0">
         <tr class="empty_data">
             موردی پیدا نشد

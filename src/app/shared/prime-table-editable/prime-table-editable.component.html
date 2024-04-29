@@ -106,7 +106,7 @@
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
                                     [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                     (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
-                                    [filter]="true" [showClear]="true">
+                                    [filter]="true" [showClear]="true" [disabled]="col.readonly">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -122,7 +122,7 @@
                                         [placeholder]="dataSource[col.field]" [ngClass]="{'p-dropdown-editable': true}"
                                         optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
-                                        [filter]="true">
+                                        [filter]="true" [disabled]="col.readonly">
                                     </p-dropdown>
                                 </ng-template>
                                 <ng-template pTemplate="output">
@@ -138,7 +138,8 @@
                             <ng-template pTemplate="input">
                                 <mat-checkbox [disabled]="col.readonly"
                                     [ngClass]="{'mat-checkbox-editable': !col.readonly}"
-                                    [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                                    [(ngModel)]="dataSource[col.field]">
+                                </mat-checkbox>
                             </ng-template>
                             <ng-template pTemplate="output">
                                 <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>

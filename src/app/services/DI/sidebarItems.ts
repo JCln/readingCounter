@@ -34,6 +34,7 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.listAllInGroupLazy, title: 'اصلاح 2', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.simpleMasterByFragmentAllLazy, title: 'مشاهده لیست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.masterByFragmentAllInGroupLazy, title: 'مشاهده نوبتی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.tariffAllLazy, title: 'نمایش تعرفه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
             ]
         }
     ]

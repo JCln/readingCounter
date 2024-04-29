@@ -13,6 +13,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { TariffAllLazyDgComponent } from './tariff-all-lazy-dg/tariff-all-lazy-dg.component';
 
 @Component({
   selector: 'app-tariff-all-lazy',
@@ -138,7 +139,8 @@ export class TariffAllLazyComponent extends AllListsFactory implements AfterView
 
     const config = {
       messageTitle: EN_messages.confirm_remove,
-      text: 'ناحیه: ' + rowDataAndIndex.zoneTitle + '،   اقلام: ' + rowDataAndIndex.offeringTitle + '،   کاربری: ' + rowDataAndIndex.usageTitle,
+      messageTitleTwo: 'ناحیه: ' + rowDataAndIndex.zoneTitle + '،   اقلام: ' + rowDataAndIndex.offeringTitle,
+      text: 'فرمول: ' + rowDataAndIndex.formula,
       minWidth: '19rem',
       isInput: false,
       isDelete: true,
@@ -151,15 +153,41 @@ export class TariffAllLazyComponent extends AllListsFactory implements AfterView
       this.refreshTable();
     }
   }
-  editSingleRow = (data: ITariffAll) => {
-    // this.ref = this.dialogService.open(ClientLazyEditComponent, {
-    //   data: data,
-    //   rtl: true,
-    //   width: '70%'
-    // })
-    // this.ref.onClose.subscribe((res: ITariffAll) => {
-    //   console.log(this.ref);
-    // });
+  // openDialog = (isEditing: boolean, item?: any) => {
+  //   const test = !item ? this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid : item;
+  //   console.log(test);
+  //   // TODO: if there is no item ( user click on add button) then send fragment master GUID 
+  //   this.ref = this.dialogService.open(FdDgComponent, {
+  //     data: {
+  //       data: !item ? this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid : item,
+  //       isEditing: isEditing
+  //     },
+  //     rtl: true,
+  //     contentStyle: { minWidth: '21rem' }
+  //   })
+  //   this.ref.onClose.subscribe(async res => {
+  //     if (res) {
+  //       this.callAPI();
+  //     }
+  //   });
+  // }
+  openDialog = (isEditing: boolean, item?: ITariffAll) => {
+    console.log(isEditing);
+    console.log(item);
+    // TODO: if there is no item ( user click on add button) then send fragment master GUID 
+    this.ref = this.dialogService.open(TariffAllLazyDgComponent, {
+      data: {
+        data: isEditing ? item : null,
+        isEditing: isEditing
+      },
+      rtl: true,
+      contentStyle: { minWidth: '21rem' }
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res) {
+        this.refreshTable();
+      }
+    });
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);

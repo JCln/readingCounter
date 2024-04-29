@@ -39,7 +39,7 @@ export class CounterReportComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          this.refreshTable();
+          this.callAPI();
         }
       });
     });
@@ -64,7 +64,7 @@ export class CounterReportComponent extends FactoryONE {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].dynamicZoneId);
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowDataAndIndex['dataSource'].id);
-      this.refreshTable();
+      this.callAPI();
     }
   }
   onRowEditCancel() {
@@ -80,7 +80,7 @@ export class CounterReportComponent extends FactoryONE {
     }
     await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.CounterReportEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
-    this.refreshTable();
+    this.callAPI();
   }
 
 }

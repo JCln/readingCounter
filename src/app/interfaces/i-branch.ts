@@ -76,19 +76,20 @@ export interface IClientGetAllLazy {
 export interface ITariffAll {
     id: number,
     zoneId: number,
-    zoneTitle
+    zoneTitle: string,
     formula: string,
     usageId: number,
+    usageTitle: string,
     fromDate: string,
     toDate: string,
     fromRate: number,
     toRate: number,
     offeringId: number,
+    offeringTitle: string,
     calulcationOrder: number,
     tarrifTypeItemId: number,
-    usageTitle: string,
-    offeringTitle: string,
     tarrifTypeItemTitle: string,
+    isEditing?: boolean,
 }
 export interface ITariffAllLazy {
     data: ITariffAll[],
