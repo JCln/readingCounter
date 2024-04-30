@@ -28,31 +28,31 @@ export class SimpleComponent implements OnInit {
   }
 
   converts = async () => {
-    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchSimple, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchSimple, this.zoneDictionary, 'changableZoneId');
+  }
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForSearchSimple.forEach(item => {
+      item.changableZoneId = item.zoneId;
+    })
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForSearchSimple = [];
     if (!this.searchService.verificationSimpleSearch(this.closeTabService._searchSimpleReq, this.closeTabService._isOrderByDate))
       return;
     this.closeTabService.saveDataForSearchSimple = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchSimple, this.closeTabService._searchSimpleReq);
-    if (this.closeTabService.saveDataForSearchSimple.length) {
-      this.converts();
-    }
+    this.insertToAuxZoneid();
+    this.converts();
   }
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     if (!MathS.isNull(this.closeTabService.saveDataForSearchSimple)) {
       this.converts();
     }
-
     this.readingPeriodKindDictionary = await this.searchService.dictionaryWrapperService.getPeriodKindDictionary();
     this.zoneDictionary = await this.searchService.dictionaryWrapperService.getZoneDictionary();
     this.closeTabService.getSearchInOrderTo();
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  refreshTable = () => {
-    this.connectToServer();
   }
   afterZoneChanged() {
     // TODO: CLEAR period dictionaries and selected periodId and kindId values
@@ -68,9 +68,6 @@ export class SimpleComponent implements OnInit {
     this.readingPeriodDictionary = await this.searchService.dictionaryWrapperService.getReadingPeriodDictionaryByZoneAndKind(this.closeTabService._searchSimpleReq.zoneId, +this.closeTabService._searchSimpleReq._selectedKindId);
   }
   routeToLMAll = ($event: any) => {
-    const tempZoneId = Converter.convertTitleToIdByName($event.zoneId, this.zoneDictionary);
-    $event.zoneTitle = $event.zoneId;
-    $event.zoneId = tempZoneId.id;
     this.searchService.routeToLMAll($event, EN_Routes.wrmssimple);
   }
 }

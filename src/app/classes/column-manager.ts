@@ -1202,6 +1202,7 @@ export class ColumnManager {
     ]
     rrDetails: IObjectIteratation[] = [
         { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true },
+        { field: 'changableZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, readonly: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, readonly: true },
@@ -1921,7 +1922,7 @@ export class ColumnManager {
             { field: 'isSelected', header: 'انتخاب', isSelected: true, isSelectedOrigin: true, isBoolean: true }
         ]
     simpleSearch: IObjectIteratation[] = [
-        // { field: 'zoneId', header: 'ناحیه', isSelected: true,isSelectedOrigin:true, isSelectOption: true },
+        { field: 'changableZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
         { field: 'counterReaderName', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true },
         { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, isSelectedOrigin: true, isNumber: true },
@@ -2034,7 +2035,9 @@ export class ColumnManager {
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
         { field: 'isSidebar', header: 'در سایدبار', isSelected: false, isSelectedOrigin: false, isBoolean: true }
     ];
-    analysis: IObjectIteratation[] = [
+    dataMiningAnalysis: IObjectIteratation[] = [
+        { field: 'regionTitle', header: 'منطقه', isSelected: true, isSelectedOrigin: true, readonly: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'counterReader', header: 'قرائت کننده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'overalCount', header: 'تعداد قرائت', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'maxBetweenTwoMinute', header: 'حداکثر زمان بین دو', isSelected: true, isSelectedOrigin: true, readonly: true },

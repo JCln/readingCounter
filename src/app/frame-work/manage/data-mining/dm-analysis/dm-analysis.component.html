@@ -24,7 +24,7 @@
                                 <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
                                     [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
                                     [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                                    emptyMessage="موردی وجود ندارد" #myTreeSelect>
+                                    emptyMessage="موردی وجود ندارد" [filter]="true" #myTreeSelect>
                                 </p-treeSelect>
                             </div>
                         </div>
@@ -108,9 +108,9 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="closeTabService.saveDataForDMAAnalyze" [_outputFileName]="'analysis'"
+    <app-prime-table [dataSource]="closeTabService.saveDataForDMAAnalyze" [_outputFileName]="'dataMiningAnalysis'"
         [_checkUpName]="'dm-analysis'" [_sessionName]="'dmanalysis-session'"
-        [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
+        [_selectedColumnsToRemember]="'selectedDataMiningAnalyze'" [_hasCollapsible]=true
         [_isCollaped]="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (collapsed)="dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz = !dataMiningAnalysesService.utilsService.collapser.isCollapsedCranlz"
         (refreshedTable)="verification()">

@@ -28,6 +28,7 @@ export interface ISearchSimpleOutput {
     listNumber: string,
     insertDateJalali: string,
     zoneId: number,
+    changableZoneId: any,
     zoneTitle: string,
     isBazdid: boolean,
     isRoosta: boolean,

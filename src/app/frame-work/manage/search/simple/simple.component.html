@@ -104,7 +104,7 @@
     [_checkUpName]="'simpleSearch'" [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
     [_numberOfExtraColumns]="[1,2,3,4]" [_calculableSUM]="true" [_hasAggregating]=true
     [_selectedAggregatedName]="ENGroupByNames.selectedAggregateSimpleSearch" [_sessionName]="'simpleSearch-session'"
-    (refreshedTable)="refreshTable()" (routedToLMAll)="routeToLMAll($event)"
+    (refreshedTable)="connectToServer()" (routedToLMAll)="routeToLMAll($event)"
     (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
     (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)"
     [_hasCollapsible]=true [_isCollaped]="closeTabService._searchSimpleReq.isCollapsed"

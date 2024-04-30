@@ -19,7 +19,7 @@ export class DetailsComponent extends FactoryONE {
   @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
   selectedZoneIds = [];
   provinceHierarchy: IProvinceHierarchy[] = [];
-
+  zoneDictionary: IDictionaryManager[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
   fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -33,6 +33,11 @@ export class DetailsComponent extends FactoryONE {
     super();
   }
 
+  insertToAuxZoneid = () => {
+    this.closeTabService.saveDataForRRDetails.forEach(item => {
+      item.changableZoneId = item.zoneId;
+    })
+  }
   getFragmentByZone = async () => {
     if (this.myTreeSelect.value)
       this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMastersInZones(this.myTreeSelect.value);
@@ -41,6 +46,8 @@ export class DetailsComponent extends FactoryONE {
     this.closeTabService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.dictionaryWrapperService.getPeriodKindDictionary();
     this.provinceHierarchy = await this.readingReportManagerService.dictionaryWrapperService.getProvinceHierarchy();
+    console.log(this.provinceHierarchy);
+
     this.getReadingPeriod();
     this.getFragmentByZone();
   }
@@ -61,8 +68,11 @@ export class DetailsComponent extends FactoryONE {
   callAPI = async () => {
     this.closeTabService.saveDataForRRDetails = await this.readingReportManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ReadingReportDETAILSWithParam, this.closeTabService.detailsReq);
     this.karbariByCodeDictionary = await this.readingReportManagerService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
+    this.insertToAuxZoneid();
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.zoneDictionary, 'changableZoneId');
   }
 
 }

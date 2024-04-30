@@ -13,7 +13,7 @@
                                 <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
                                     [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
                                     [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                                    emptyMessage="موردی وجود ندارد" #myTreeSelect (onHide)="getFragmentByZone()">
+                                    emptyMessage="موردی وجود ندارد" [filter]="true" #myTreeSelect (onHide)="getFragmentByZone()">
                                 </p-treeSelect>
                             </div>
                         </div>

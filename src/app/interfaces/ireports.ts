@@ -65,7 +65,7 @@ export interface IUserKarkardInput {
     zoneIds: number[],
     fromDate: string,
     toDate: string,
-    statusId: number    
+    statusId: number
 }
 export interface IUserKarkard {
     userId: string,
@@ -138,6 +138,7 @@ export interface IImageAttributionResult {
 export interface IReadingReportDetails {
     id: string,
     zoneId: number,
+    changableZoneId: any,
     regionTitle: string,
     billId: number,
     radif: number,

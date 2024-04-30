@@ -204,8 +204,7 @@ export class SearchService {
     this.pageSignsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.pageSignsService.allLists_pageSign.GUid = row.trackingId;
     this.pageSignsService.allLists_pageSign.zoneId = row.zoneId;
-    this.pageSignsService.allLists_pageSign.zoneTitle = row.zoneTitle;
-    this.pageSignsService.allLists_pageSign.listNumber = row.listNumber;
+    this.pageSignsService.allLists_pageSign.zoneTitle = row.changableZoneId;
     this.pageSignsService.allLists_pageSign.listNumber = row.listNumber;
     this.pageSignsService.allLists_pageSign.prePage = whereToBack;
     this.utilsService.routeTo(EN_Routes.wrmlallfalse);
