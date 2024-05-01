@@ -126,11 +126,11 @@ export class PrivacyComponent extends FactoryONE {
       this.securityService.utilsService.snackBarMessageWarn(EN_messages.insert_minPasswordLength);
       return;
     }
-    if (!this.securityService.verificationTimes(this.closeTabService.saveDataForPolicies))
+    if (!this.securityService.verificationService.verificationTimes(this.closeTabService.saveDataForPolicies))
       return;
-    if (!this.securityService.verificationDates(this.closeTabService.saveDataForPolicies))
+    if (!this.securityService.verificationService.verificationDates(this.closeTabService.saveDataForPolicies))
       return;
-    if (!this.securityService.verificationPolicy(this.closeTabService.saveDataForPolicies))
+    if (!this.securityService.verificationService.verificationPolicy(this.closeTabService.saveDataForPolicies))
       return;
     this.closeTabService.utilsService.getIsAdminRole() ?
       this.securityService.editPolicy(this.closeTabService.saveDataForPolicies) :

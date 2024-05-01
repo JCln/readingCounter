@@ -26,7 +26,7 @@ export class DownloadAttemptsComponent extends FactoryONE {
     this.closeTabService.downloadAttempts = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogDownloadAttempts, this.closeTabService.downloadAttemptsReq);
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.downloadAttemptsReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.downloadAttemptsReq);
     if (temp)
       this.connectToServer();
   }

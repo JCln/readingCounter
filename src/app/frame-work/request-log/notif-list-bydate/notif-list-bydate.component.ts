@@ -38,7 +38,7 @@ export class NotifListBydateComponent extends FactoryONE {
     this.convertIdToTitle(this.closeTabService.notificationListByDate, this.closeTabService.utilsService.getNotificationAlertTypes(), 'alertTypeId')
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.notificationListByDateReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.notificationListByDateReq);
     if (temp)
       this.connectToServer();
   }

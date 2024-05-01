@@ -25,7 +25,7 @@ export class GetUploadedComponent extends FactoryONE {
     this.closeTabService.getUploaded = await this.securityService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestLogGetUploaded, this.closeTabService.getUploadedReq);
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.getUploadedReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.getUploadedReq);
     if (temp)
       this.connectToServer();
   }

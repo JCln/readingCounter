@@ -80,7 +80,7 @@ export class InputOutputPolicyComponent extends FactoryONE {
     // join input values time     
     const _addOrEditInterface = MathS.isNull(this.closeTabService.iOPolicy.id) ? ENInterfaces.AddIOPolicy : ENInterfaces.EditIOPolicy
 
-    if (this.securityService.verificationIOPolicyAdd(this.closeTabService.iOPolicy)) {
+    if (this.securityService.verificationService.verificationIOPolicyAdd(this.closeTabService.iOPolicy)) {
       this.securityService.ajaxReqWrapperService.interfaceManagerService.POSTBODY(_addOrEditInterface, this.closeTabService.iOPolicy)
         .toPromise()
         .then((res: any) => {

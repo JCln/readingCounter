@@ -4,7 +4,6 @@ import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-conf
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { TreeSelect } from 'primeng/treeselect';
-import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-gis',

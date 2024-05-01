@@ -29,7 +29,7 @@ export class AuthenticityAttemptsComponent extends FactoryONE {
     this.convertLoginTime();
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.authenticityAttemptsReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.authenticityAttemptsReq);
     if (temp)
       this.connectToServer();
   }

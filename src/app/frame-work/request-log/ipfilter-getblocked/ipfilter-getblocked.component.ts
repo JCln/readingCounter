@@ -29,7 +29,7 @@ export class IpfilterGetblockedComponent extends FactoryONE {
     this.convertLoginTime();
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.ipFilterGetBlockedReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.ipFilterGetBlockedReq);
     if (temp)
       this.connectToServer();
   }

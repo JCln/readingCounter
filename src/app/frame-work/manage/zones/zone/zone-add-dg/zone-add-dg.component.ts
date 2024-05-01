@@ -26,6 +26,8 @@ export class ZoneAddDgComponent {
       id: [''],
       title: [''],
       regionId: data.regionId,
+      fromEshterak: data.fromEshterak,
+      toEshterak: data.toEshterak,
       isMetro: true,
       logicalOrder: ['']
     })
@@ -34,11 +36,12 @@ export class ZoneAddDgComponent {
     if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
-    if (!await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneADD, this.form.value))
-      return;
-
-    this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('zoneDictionary');
-    this.dialogRef.close(this.form.value);
+    const res = await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneADD, this.form.value);
+    if (res) {
+      this.sectorsManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('zoneDictionary');
+      this.dialogRef.close(this.form.value);
+    }
   }
   close() {
     this.dialogRef.close();

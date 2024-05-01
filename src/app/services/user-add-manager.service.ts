@@ -1,13 +1,14 @@
 import { AjaxReqWrapperService } from 'services/ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors } from 'interfaces/enums.enum';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems, ISearchUsersManager } from 'interfaces/iuser-manager';
 
 import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { UtilsService } from './utils.service';
 import { Converter } from '../classes/converter';
+import { VerificationService } from './verification.service';
 
 @Injectable()
 export class UserAddManagerService {
@@ -15,7 +16,8 @@ export class UserAddManagerService {
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    public verificationService: VerificationService
   ) { }
 
   addAUserPersonalInfo = (personalItems: any) => {
@@ -58,99 +60,14 @@ export class UserAddManagerService {
     })
     return selectedActions;
   }
-  checkEmptyUserInfos = (vals: IAddAUserManager) => {
-    if (MathS.isNull(vals.userCode)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_karbaricode);
-      return false;
-    }
-    if (MathS.isNull(vals.username)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_karbari);
-      return false;
-    }
-    if (MathS.isNull(vals.password)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_password);
-      return false;
-    }
-    if (MathS.isNull(vals.confirmPassword)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_confirm_pass);
-      return false;
-    }
-    if (!MathS.isSameLength(vals.password, vals.confirmPassword)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.passwords_notFetch);
-      return false;
-    }
-    if (!MathS.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.password_notExactly)
-      return false;
-    }
-    if (MathS.isNull(vals.firstName)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_name);
-      return false;
-    }
-    if (MathS.isNull(vals.sureName)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_surename);
-      return false;
-    }
-    if (MathS.isNull(vals.mobile)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_mobile);
-      return false;
-    }
-    if (!MathS.mobileValidation(vals.mobile)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobile);
-      return false;
-    }
-    if (MathS.isNull(vals.displayName)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_showName);
-      return false;
-    }
-    // if (!MathS.isNull(vals.email) && !MathS.isEmailValid(vals.email)) {
-    //   this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
-    //   return false;
-    // }
-    if (MathS.isNull(vals.selectedRoles[0])) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_group_access);
-      return false;
-    }
-    if (MathS.isNull(vals.selectedActions[0])) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
-      return false;
-    }
-    if (MathS.isNull(vals.selectedZones[0])) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_roleAccess);
-      return false;
-    }
-
-    return true;
-  }
-  // toDefaultValsUserAddInfos = () => {
-  //   this.closeTabService.saveDataForAddUsers = {
-  //     userCode: 0,
-  //     username: 0,
-  //     password: 0,
-  //     confirmPassword: 0,
-  //     firstName: '',
-  //     sureName: '',
-  //     email: '',
-  //     mobile: '',
-  //     displayMobile: false,
-  //     displayName: '',
-  //     isActive: true,
-  //     deviceId: '',
-  //     roleItems: [],
-  //     provinceItems: [],
-  //     appItems: []
-  //   }
-  // }
   private connectToServer = async (vals: IAddAUserManager) => {
-    if (!this.checkEmptyUserInfos(vals))
+    if (!this.verificationService.checkUserAddInfos(vals))
       return false;
-
 
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.userADD, vals);
     if (res) {
       this.utilsService.snackBarMessage(res.message, ENSnackBarColors.success);
       this.utilsService.routeTo(EN_Routes.wrmuall);
-      // this.toDefaultValsUserAddInfos();
     }
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {

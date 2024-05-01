@@ -56,7 +56,7 @@ export class ReqlogUsersLoginsComponent extends FactoryONE {
     Converter.convertIdToTitle(this.closeTabService.usersLogins, this.invalidLoginReasonDictionary, 'invalidLoginReasonId');
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.usersLoginsReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.usersLoginsReq);
     if (temp)
       this.connectToServer();
   }

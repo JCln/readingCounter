@@ -34,7 +34,7 @@ export class UploadAttemptsComponent extends FactoryONE {
     this.convertDateTime();
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.uploadAttemptsReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.uploadAttemptsReq);
     if (temp)
       this.connectToServer();
   }

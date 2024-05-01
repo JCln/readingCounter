@@ -29,7 +29,7 @@ export class IpfilterGetInvalidTimeComponent extends FactoryONE {
     this.convertLoginTime();
   }
   verification = async () => {
-    const temp = this.securityService.verificationDates(this.closeTabService.ipFilterGetInvalidTimeReq);
+    const temp = this.securityService.verificationService.verificationDates(this.closeTabService.ipFilterGetInvalidTimeReq);
     if (temp)
       this.connectToServer();
   }
