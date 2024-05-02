@@ -85,10 +85,7 @@ export class RegionComponent extends FactoryONE {
       this.callAPI();
     }
   }
-  onRowEditCancel() {
-    // this.closeTabService.saveDataForRegion[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
-    // delete this.closeTabService.saveDataForRegion[rowDataAndIndex['dataSource']];
-    // return;
+  onRowEditCancel() {    
   }
 
 }
