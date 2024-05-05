@@ -525,4 +525,9 @@ export enum ENInterfaces {
     tariffAllLazy = 'V1/Tariff/AllLazy',
     tariffAdd = 'V1/Tariff/Add',
     tariffEdit = 'V1/Tariff/Edit',
+
+    invoiceTypeAll = 'V1/InvoiceType/All',
+    invoiceTypeEdit = 'V1/InvoiceType/Edit',
+    invoiceTypeAdd = 'V1/InvoiceType/Add',
+    invoiceTypeRemove = 'V1/InvoiceType/Remove',
 }

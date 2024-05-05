@@ -1,3 +1,4 @@
+import { CloseTabService } from 'services/close-tab.service';
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITariffAll } from 'interfaces/i-branch';
@@ -18,8 +19,8 @@ export class TariffAllLazyDgComponent implements OnInit {
     zoneTitle: '',
     formula: '',
     usageId: 0,
-    fromDate: '',
-    toDate: '',
+    fromDate: this.closeTabService.utilsService.dateJalaliService.getCurrentDate(),
+    toDate: this.closeTabService.utilsService.dateJalaliService.getCurrentDate(),
     fromRate: 0,
     toRate: 0,
     offeringId: 0,
@@ -39,7 +40,8 @@ export class TariffAllLazyDgComponent implements OnInit {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     public columnManager: ColumnManager,
-    private branchesService: BranchesService
+    private branchesService: BranchesService,
+    public closeTabService: CloseTabService
   ) { }
 
   close() {

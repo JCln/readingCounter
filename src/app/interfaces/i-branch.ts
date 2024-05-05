@@ -135,6 +135,13 @@ export interface IOfferingUnit {
     isActive: boolean,
     isEditing?: boolean
 }
+export interface IInvoiceType {
+    id: number,
+    title: string,
+    description: string,
+    isActive: boolean,
+    isEditing?: boolean
+}
 export interface ITariff {
     id: number,
     formula: string,

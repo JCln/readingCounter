@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'offering', loadChildren: () => import('./offering/offering.module').then(offering => offering.OfferingModule) },
   { path: 'offeringUnit', loadChildren: () => import('./offering-unit/offering-unit.module').then(offeringUnit => offeringUnit.OfferingUnitModule) },
   { path: 'tariff', loadChildren: () => import('./tariff-manager/tariff-manager.module').then(tariffManager => tariffManager.TariffManagerModule) },
+  { path: 'invoiceType', loadChildren: () => import('./invoice-type/invoice-type.module').then(invoiceTypeManager => invoiceTypeManager.InvoiceTypeModule) },
 ];
 
 @NgModule({

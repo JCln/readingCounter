@@ -525,8 +525,8 @@ export class ColumnManager {
         { field: 'usageId', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'offeringId', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'tarrifTypeItemId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'fromDate', header: 'از تاریخ', isSelected: true, isSelectedOrigin: true },
-        { field: 'toDate', header: 'تا تاریخ', isSelected: true, isSelectedOrigin: true },
+        { field: 'fromDate', header: 'از تاریخ', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'toDate', header: 'تا تاریخ', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'fromRate', header: 'از', isSelected: true, isSelectedOrigin: true },
         { field: 'toRate', header: 'تا', isSelected: true, isSelectedOrigin: true },
         { field: 'calulcationOrder', header: 'ترتیب محاسبه', isSelected: true, isSelectedOrigin: true },
@@ -579,6 +579,15 @@ export class ColumnManager {
     offeringUnitAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
+    ]
+    invoiceType: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true }
+        // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
+    invoiceTypeAdd: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true }
     ]
     fragmentDetailsAddEditDialog: IObjectIteratation[] = [
         { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false, icon: 'grid-column: auto/ span 2;' },

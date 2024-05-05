@@ -706,7 +706,8 @@ export enum ENEssentialsToSave {
     importHiwa = "importHiwa",
     editModifyReq = "editModifyReq",
     caculationReq = "caculationReq",
-    tariffAllLazy = "tariffAllLazy"
+    tariffAllLazy = "tariffAllLazy",
+    invoiceType = "invoiceType"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -948,6 +949,7 @@ export enum ENSelectedColumnVariables {
     selectedTariffParameter = 'tariffParameter',
     selectedOffering = 'offering',
     selectedOfferingUnit = 'offeringUnit',
+    selectedInvoiceType = 'invoiceType',
     selectedIpFilter = 'ipFilter',
     selectedFeedbackComplaint = 'feedbackComplaint',
     selectedFeedbackNotComplaint = 'feedbackNotComplaint',

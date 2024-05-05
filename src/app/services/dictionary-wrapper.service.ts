@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from '../classes/math-s';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { VerificationService } from './verification.service';
-import { IBranchState, ICustomerType, IOffering, IOfferingUnit, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, ICustomerType, IInvoiceType, IOffering, IOfferingUnit, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class DictionaryWrapperService {
   private provinceHierarchy: any = [];
   private zoneBoundDictionary: any = [];
   private offeringUnit: IOfferingUnit[] = [];
+  private invoiceType: IInvoiceType[] = [];
   private offering: IOffering[] = [];
   private countryDictionary: any = [];
   private authLev1Dictionary: any = [];
@@ -283,9 +284,6 @@ export class DictionaryWrapperService {
   }
   // Without Caching
   getFragmentMasterInZonesDictionary = async (zoneIds: number[]): Promise<any> => {
-    console.log(zoneIds);
-    console.log({ zoneIds: zoneIds });
-
     return await this.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.fragmentMasterInZones, { zoneIds: zoneIds });
   }
   async getCounterStateDictionary(): Promise<any> {
@@ -375,6 +373,13 @@ export class DictionaryWrapperService {
     this.setOfferingUnit(res);
     return this.offeringUnit;
   }
+  async getInvoiceType(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.invoiceType) && !canRefresh)
+      return this.invoiceType;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.invoiceTypeAll);
+    this.setInvoiceType(res);
+    return this.invoiceType;
+  }
   async getOffering(): Promise<any> {
     if (!MathS.isNull(this.offering))
       return this.offering;
@@ -415,6 +420,9 @@ export class DictionaryWrapperService {
   }
   private setOfferingUnit(v: any) {
     this.offeringUnit = v;
+  }
+  private setInvoiceType(v: any) {
+    this.invoiceType = v;
   }
   private setOffering(v: any) {
     this.offering = v;
@@ -540,6 +548,7 @@ export class DictionaryWrapperService {
     this.regionDictionary = [];
     this.zoneDictionary = [];
     this.offeringUnit = [];
+    this.invoiceType = [];
     this.offering = [];
     this.zoneBoundDictionary = [];
     this.provinceHierarchy = [];

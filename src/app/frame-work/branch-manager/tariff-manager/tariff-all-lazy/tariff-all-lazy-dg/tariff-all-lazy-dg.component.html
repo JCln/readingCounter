@@ -58,6 +58,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'fromDate'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <app-date-jalali name="fromDate"
+                                    (dateJalEvent)="closeTabService.receiveFromDateJalali(closeTabService.ENReadingReports.tariffAllLazy, $event)"
+                                    [dateObject]="tarrifReq.fromDate">
+                                </app-date-jalali>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'toDate'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <app-date-jalali name="ToDate"
+                                    (dateJalEvent)="closeTabService.receiveToDateJalali(closeTabService.ENReadingReports.tariffAllLazy, $event)"
+                                    [dateObject]="tarrifReq.toDate">
+                                </app-date-jalali>
+                            </div>
+                        </div>
+                    </div>
                 </ng-container>
                 <ng-template #checkboxes>
                     <ng-container>

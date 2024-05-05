@@ -65,6 +65,7 @@ export class MoshtarakComponent extends AllListsFactory {
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForSearchMoshtarakin);
   }
   connectToServer = async () => {
+    this.closeTabService.searchReqMosh.item = Converter.persianToEngNumbers(this.closeTabService.searchReqMosh.item).trim();
     if (this.searchService.verificationMosh(this.closeTabService.searchReqMosh)) {
       this.closeTabService.saveDataForSearchMoshtarakin = await this.searchService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ListSearchMoshtarak, this.closeTabService.searchReqMosh);
       this.converts();
