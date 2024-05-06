@@ -10,11 +10,11 @@
             <p class="_time_title">نرخ {{i+1}}:</p>
             <div class="t_input_2">
                 <div class="t_key">از مقدار</div>
-                <input class="t_value" name="fromRate" maxlength="3" [(ngModel)]="item.fromRate">
+                <input class="t_value" name="fromRate" maxlength="6" [(ngModel)]="item.fromRate">
             </div>
             <div class="t_input_2">
                 <div class="t_key">تا مقدار</div>
-                <input class="t_value" name="toRate" maxlength="3" [(ngModel)]="item.toRate">
+                <input class="t_value" name="toRate" maxlength="6" [(ngModel)]="item.toRate">
             </div>
             <button class="btn_remove pi pi-times-circle tooltip" (click)="deleteRate(i)">
                 <div class="tooltip_text_right">حذف نرخ</div>

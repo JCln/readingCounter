@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
+import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { Converter } from 'src/app/classes/converter';
@@ -14,7 +15,9 @@ import { transitionAnimation } from 'src/app/directives/animation.directive';
   animations: [transitionAnimation]
 })
 export class ForbiddenComponent extends FactoryONE {
-  fbnZoneDictionary: IDictionaryManager[] = [];
+  provinceHierarchy: IProvinceHierarchy[] = [];
+  @ViewChild('myTreeSelect', { static: false }) myTreeSelect!: TreeSelect;
+  selectedZoneIds = [];
 
   constructor(
     public forbiddenService: ForbiddenService,
@@ -24,16 +27,14 @@ export class ForbiddenComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.closeTabService.saveDataForFNB = await this.forbiddenService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.forbidden, this.closeTabService.forbiddenReq);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForFNB, this.fbnZoneDictionary, 'zoneId');
     this.forbiddenService.setDynamicPartRanges(this.closeTabService.saveDataForFNB);
   }
   classWrapper = async () => {
-    this.fbnZoneDictionary = JSON.parse(JSON.stringify(await this.forbiddenService.dictionaryWrapperService.getZoneDictionary()));
-    if (this.fbnZoneDictionary[0].id !== 0)
-      this.fbnZoneDictionary.unshift({ id: 0, title: 'نامشخص', isSelected: true })
+    this.provinceHierarchy = await this.forbiddenService.dictionaryWrapperService.getProvinceHierarchy();
   }
   verification = async () => {
-    const temp = this.forbiddenService.verificationForbidden(this.closeTabService.forbiddenReq);
+    this.closeTabService.forbiddenReq.zoneIds = this.forbiddenService.utilsService.getZoneHieraricalWithoutZoneCheck(this.myTreeSelect.value);
+    const temp = this.forbiddenService.verificationService.verificationDates(this.closeTabService.forbiddenReq);
     if (temp)
       this.connectToServer();
   }

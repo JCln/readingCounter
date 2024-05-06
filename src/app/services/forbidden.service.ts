@@ -1,3 +1,4 @@
+import { VerificationService } from './verification.service';
 import { Injectable } from '@angular/core';
 import { ENRandomNumbers, ENSelectedColumnVariables, EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
@@ -18,30 +19,25 @@ export class ForbiddenService {
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public dictionaryWrapperService: DictionaryWrapperService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public verificationService: VerificationService
   ) { }
 
-  /* VALIDATION */
-  private datesValidationForbidden = (data: IMostReportInput): boolean => {
-    if (MathS.isNull(data.fromDate)) {
+  verificationForbidden = (forbidden: IMostReportInput) => {
+    if (MathS.isNull(forbidden.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
-    if (MathS.isNull(data.toDate)) {
+    if (MathS.isNull(forbidden.toDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
-
-  /* VERIFICATION */
-  verificationForbidden = (forbidden: IMostReportInput) => {
-    return this.datesValidationForbidden(forbidden);
-  }
   setDynamicPartRanges = (dataSource: IForbiddenManager[]) => {
     dataSource.forEach(item => {
       if (item.gisAccuracy)
-        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
+        item.gisAccuracy = MathS.getFormatRange(item.gisAccuracy)
     })
   }
   showInMapSingle = (dataSource: any) => {

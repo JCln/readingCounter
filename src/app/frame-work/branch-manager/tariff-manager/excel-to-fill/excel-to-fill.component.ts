@@ -36,7 +36,7 @@ export class ExcelToFillComponent extends FactoryONE {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.karbariDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering();
-    this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
+    this.getTarrifTypeDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tarriffTypeItemManagerGet);
   }
   classWrapper = async () => {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this.columnName);

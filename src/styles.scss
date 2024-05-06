@@ -169,6 +169,10 @@ li {
   padding: 0 var(--font_05) !important;
   margin-top: -1.7rem !important; // it's not dynamic because button width & hight are statics
   background: var(--secondary_1) !important;
+
+  @media (min-width: 550px) {
+    min-width: 33rem;
+  }
 }
 
 /* ACCORDION */

@@ -76,7 +76,7 @@ export class RatesDgComponent implements OnInit {
     this.emptyBeforeClose();
   }
   addRate() {
-    this.rates.unshift({ fromRate: null, toRate: null });
+    this.rates.push({ fromRate: null, toRate: null });
   }
   deleteRate(index: number) {
     this.rates.splice(index, 1);

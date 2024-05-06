@@ -118,6 +118,16 @@ export class UtilsService {
     }
     return datas;
   }
+  getZoneHieraricalWithoutZoneCheck = (item: any[]): number[] => {
+    if (MathS.isNull(item)) {
+      return [];
+    }
+    let datas: number[] = [];
+    for (let index = 0; index < item.length; index++) {
+      datas.push(item[index].data);
+    }
+    return datas;
+  }
   hasFilters(session: Table): boolean {
     if (session) {
       for (let index = 0; index < Object.keys(session.filters).length; index++) {
