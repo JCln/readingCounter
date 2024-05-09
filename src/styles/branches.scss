@@ -24,6 +24,8 @@ section {
 
     @media (min-width:550px) {
         grid-template-columns: 1fr 1fr;
+        min-height: 35vh;
+        min-height: 35svh;
     }
 }
 
@@ -35,6 +37,16 @@ section {
 footer {
     display: flex;
     justify-content: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px -4px 9px -5px;
+    position: absolute;
+
+    @media (min-width:550px) {
+        position: unset;
+        box-shadow: none;
+    }
 }
 
 .title {

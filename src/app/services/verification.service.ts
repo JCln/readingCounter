@@ -1376,16 +1376,22 @@ export class VerificationService {
       return false;
     if (!this.nullValidation(item.usageId, EN_messages.insert_usage))
       return false;
-    if (!this.nullValidation(item.fromRate, EN_messages.insert_fromRate))
+    if (MathS.isNullZero(item.fromRate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromRate);
       return false;
+    }
     if (!this.nullValidation(item.toRate, EN_messages.insert_toRate))
       return false;
     if (!this.nullValidation(item.offeringId, EN_messages.insert_offeringId))
       return false;
-    if (!this.nullValidation(item.calulcationOrder, EN_messages.insert_calculationOrder))
+    if (MathS.isNullZero(item.calulcationOrder)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_calculationOrder);
       return false;
-    if (!this.nullValidation(item.tarrifTypeItemId, EN_messages.insert_tariffType))
+    }
+    if (MathS.isNullZero(item.tarrifTypeItemId)) {// tarrifTypeItemId could be null
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_tariffType);
       return false;
+    }
 
     return true;
   }
