@@ -530,4 +530,10 @@ export enum ENInterfaces {
     invoiceTypeEdit = 'V1/InvoiceType/Edit',
     invoiceTypeAdd = 'V1/InvoiceType/Add',
     invoiceTypeRemove = 'V1/InvoiceType/Remove',
+
+    counterNumberChangeGet = 'V1/CounterNumberChange/Get',
+    counterNumberChangeGetLazy = 'V1/CounterNumberChange/GetLazy',
+    counterNumberChangeAdd = 'V1/CounterNumberChange/Add',
+    counterNumberChangeEdit = 'V1/CounterNumberChange/Edit',
+    counterNumberChangeRemove = 'V1/CounterNumberChange/Remove',
 }
