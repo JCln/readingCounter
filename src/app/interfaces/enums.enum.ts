@@ -707,7 +707,8 @@ export enum ENEssentialsToSave {
     editModifyReq = "editModifyReq",
     caculationReq = "caculationReq",
     tariffAllLazy = "tariffAllLazy",
-    invoiceType = "invoiceType"
+    invoiceType = "invoiceType",
+    counterNumberChangeGetLazy = "counterNumberChangeGetLazy"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -882,6 +883,7 @@ export enum ENSelectedColumnVariables {
     selectedGeneralGroupModify = 'generalGroupModify',
     selectedOffloadedLazy = 'listOffloadedLazy',
     selectedClientGetlazy = 'clientManagerGetLazy',
+    selectedCounterNumberChange = 'counterNumberChange',
     selectedTariffAllLazy = 'tariffAllLazy',
     selectedReqLogInactiveEntity = 'reqLogInactiveEntity',
     selectedOffloadedAllInGroupLazy = 'listOffloadedAllInGroupLazy',

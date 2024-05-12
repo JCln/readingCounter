@@ -264,6 +264,10 @@ export class CloseTabService {
     data: [],
     totalRecords: 0
   };
+  counterNumberChangeGetLazy: IClientGetAllLazy = {
+    data: [],
+    totalRecords: 0
+  };
   tariffAllLazy: ITariffAllLazy = {
     data: [],
     totalRecords: 0
@@ -2097,6 +2101,7 @@ export class CloseTabService {
       }
     },
     { id: 2, value: ENEssentialsToSave.clientGetLazy, url: EN_Routes.clientGetLazy, defaultValue: { data: [], totalRecords: 0 } },
+    { id: 2, value: ENEssentialsToSave.counterNumberChangeGetLazy, url: EN_Routes.counterNumberChangeGetLazy, defaultValue: { data: [], totalRecords: 0 } },
     { id: 2, value: ENEssentialsToSave.tariffAllLazy, url: EN_Routes.tariffAllLazy, defaultValue: { data: [], totalRecords: 0 } },
     { id: 2, value: ENEssentialsToSave.simpleMasterByFragmentAllLazy, url: EN_Routes.simpleMasterByFragmentAllLazy, defaultValue: { data: [], totalRecords: 0 } },
     {

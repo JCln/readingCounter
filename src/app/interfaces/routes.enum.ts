@@ -188,4 +188,5 @@ export enum EN_Routes {
     clientGet = '/wr/branch/clients',
     clientAdd = '/wr/branch/addClients',
     clientGetLazy = '/wr/branch/clientLazy',
+    counterNumberChangeGetLazy = '/wr/branch/counterNumberChange',
 }

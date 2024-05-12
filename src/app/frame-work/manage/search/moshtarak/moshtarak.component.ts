@@ -28,7 +28,7 @@ export class MoshtarakComponent extends AllListsFactory {
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   highLowStateDictionary: IDictionaryManager[] = [];
-  counterStateDictionary: IDictionaryManager[] = [];
+  // counterStateDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
 
@@ -42,12 +42,6 @@ export class MoshtarakComponent extends AllListsFactory {
   }
 
   converts = async () => {
-    if (this.closeTabService.searchReqMosh.zoneId) {
-      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(this.closeTabService.searchReqMosh.zoneId);
-    }
-    else {
-      this.counterStateDictionary = await this.searchService.dictionaryWrapperService.getCounterStateDictionary();
-    }
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.highLowStateDictionary = this.listManagerService.getHighLowDictionary();
     this.karbariDictionaryCode = await this.searchService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -58,7 +52,7 @@ export class MoshtarakComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.qotrDictionary, 'qotrCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateDictionary, 'counterStateId');
+    // Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.eslahType, 'eslahType');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.highLowStateDictionary, 'highLowStateId');
 
