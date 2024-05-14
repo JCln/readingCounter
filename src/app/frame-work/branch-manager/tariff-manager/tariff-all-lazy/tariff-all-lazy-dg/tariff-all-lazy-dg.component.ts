@@ -69,12 +69,16 @@ export class TariffAllLazyDgComponent implements OnInit {
       MathS.isNull(this.config.data.data) ? this.onRowAdd(this.tarrifReq) : this.onRowEdit(this.tarrifReq)
   }
   classWrapper = async () => {
+    console.log(this.config.data.data);
+    console.log(this.tarrifReq);
+    
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering();
     this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
+    console.log(this.config.data);
+
     if (this.config.data.isEditing) {
-      console.log(this.config.data.data);
 
       this.tarrifReq = this.config.data.data;
 

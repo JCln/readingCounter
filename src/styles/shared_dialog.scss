@@ -53,8 +53,8 @@
 
 .btn_1,
 .btn_2 {
-  width: 50%;
-  max-width: 8rem;
+  max-width: 100%;
+  width: 100%;
   font-size: var(--font_s);
 
   &:hover,
@@ -62,6 +62,11 @@
   &:active {
     background: var(--secondary_5);
     box-shadow: 0px 2px 1px 1px var(--secondary_4);
+  }
+
+  @media (min-width:550px) {
+    width: 50%;
+    max-width: 8rem;
   }
 }
 

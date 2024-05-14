@@ -51,7 +51,6 @@ export class TariffAllLazyComponent extends AllListsFactory implements AfterView
   updateOnChangedCounterState = async (event: any) => {
     this.closeTabService.tariffAllLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.tariffAllLazy, event);
     this.totalRecords = this.closeTabService.tariffAllLazy.totalRecords;
-
   }
   classWrapper = async () => {
     if (this.browserStorageService.isExists(this._outputFileName)) {
@@ -153,24 +152,6 @@ export class TariffAllLazyComponent extends AllListsFactory implements AfterView
       this.refreshTable();
     }
   }
-  // openDialog = (isEditing: boolean, item?: any) => {
-  //   const test = !item ? this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid : item;
-  //   console.log(test);
-  //   // TODO: if there is no item ( user click on add button) then send fragment master GUID 
-  //   this.ref = this.dialogService.open(FdDgComponent, {
-  //     data: {
-  //       data: !item ? this.fragmentManagerService.pageSignsService.fragmentDetails_pageSign.GUid : item,
-  //       isEditing: isEditing
-  //     },
-  //     rtl: true,
-  //     contentStyle: { minWidth: '21rem' }
-  //   })
-  //   this.ref.onClose.subscribe(async res => {
-  //     if (res) {
-  //       this.callAPI();
-  //     }
-  //   });
-  // }
   openDialog = (isEditing: boolean, item?: ITariffAll) => {
     console.log(isEditing);
     console.log(item);
@@ -178,7 +159,7 @@ export class TariffAllLazyComponent extends AllListsFactory implements AfterView
     this.ref = this.dialogService.open(TariffAllLazyDgComponent, {
       data: {
         data: isEditing ? item : null,
-        isEditing: isEditing
+        isEditing: isEditing ? isEditing : false
       },
       rtl: true,
       contentStyle: { minWidth: '21rem' }
