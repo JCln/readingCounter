@@ -27,7 +27,7 @@ export class UserLogginsComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     if (!this.securityService.userLoggins_pageSign.GUid) {
       this.securityService.utilsService.routeTo(EN_Routes.userRoleHistory);
     }

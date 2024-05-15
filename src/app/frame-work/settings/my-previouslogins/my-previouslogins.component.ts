@@ -36,7 +36,7 @@ export class MyPreviousloginsComponent extends FactoryONE {
     Converter.convertIdToTitle(this.closeTabService.myPreviousLogins, this.invalidLoginReasonDictionary, 'invalidLoginReasonId');
   }
   classWrapper = async () => {
-    if (MathS.isNull(this.closeTabService.saveDataForTrackReading)) {
+    if (MathS.isNull(this.closeTabService.myPreviousLogins)) {
       this.callAPI();
     }
   }
