@@ -1,4 +1,4 @@
-<form (ngSubmit)="callAPI()">
+<!-- <form (ngSubmit)="callAPI()">
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
             <ng-container *ngIf="col.isSelectOption;else simpleInput">
@@ -166,4 +166,9 @@
             <i class="pi pi-list"></i>
         </button>
     </footer>
-</form>
+</form> -->
+
+<div class="card">    
+    <p-steps [model]="items" [readonly]="false"></p-steps>
+</div>
+<router-outlet></router-outlet>

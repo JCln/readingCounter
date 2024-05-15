@@ -30,6 +30,11 @@
     }
   }
 
+  .p-steps ul {
+    flex-wrap: wrap;
+    direction: rtl;
+  }
+
   .p-treeselect {
     height: var(--font_26);
     background-color: var(--white);

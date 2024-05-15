@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { MenuItem } from 'primeng/api';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -15,6 +16,7 @@ export class ClientManagerAddComponent extends FactoryONE {
   private readonly _outputFileNameAccordion: string = '';
   _selectCols: any = [];
   _selectColsAccordion: any = [];
+  items: MenuItem[];
 
   qotrDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -60,9 +62,34 @@ export class ClientManagerAddComponent extends FactoryONE {
       this.branchesService.utilsService.primeConfirmDialog(config);
     }
   }
+  addStepperItems(): void {
+    this.items = [
+      {
+        label: 'firstDescription',
+        routerLink: 'desc'
+      },
+      {
+        label: 'اصلاعات شخصی',
+        routerLink: 'personal'
+      },
+      {
+        label: 'اطلاعات آب/ تعرفه',
+        routerLink: 'others'
+      },
+      {
+        label: 'اطلاعات مکانی',
+        routerLink: 'location'
+      },
+      {
+        label: 'تایید نهایی',
+        routerLink: 'confirmation'
+      }
+    ];
+  }
   classWrapper = async () => {
+    this.addStepperItems();
     this.dictionaryWrapper();
-    this.insertSelectedColumns();  
+    this.insertSelectedColumns();
   }
   async showInMap() {
     const res = await this.branchesService.openMapDialog([], true);

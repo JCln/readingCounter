@@ -12,6 +12,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
+import { StepsModule } from 'primeng/steps';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { ImageViewerComponent } from './carousel-woum/woum/image-viewer/image-viewer.component';
 import { PrimeTableEditableComponent } from './prime-table-editable/prime-table-editable.component';
@@ -52,6 +53,7 @@ import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.com
     InputMaskModule,
     AccordionModule,
     SliderModule,
+    StepsModule,
     DynamicDialogModule,
     RadioButtonModule,
     TabViewModule,
@@ -71,6 +73,7 @@ import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.com
     UserBlockingComponent,
     CommonModule,
     FormsModule,
+    StepsModule,
     ReactiveFormsModule,
     TableModule,
     TabViewModule,
