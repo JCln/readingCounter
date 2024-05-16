@@ -8,6 +8,7 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { DescriptionComponent } from './description/description.component';
 import { LocationComponent } from './location/location.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { TechnicalComponent } from './technical/technical.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     PersonalInfoComponent,
     DescriptionComponent,
     LocationComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    TechnicalComponent
   ],
   imports: [
     SharedPrimeNgModule,

@@ -425,7 +425,8 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.rptsKarkardDaily)
       return {
         title: 'گزارش لیست قرائت کننده',
-        messageOne: 'اشتراک های قرائت شده را با جزئیات نمایش میدهد. تیک نمایش همه برای نمایش لیست پس از قرائت است و توسط قرائت کننده بارگذاری انجام شده است.',
+        messageOne: 'اشتراک های قرائت شده را با جزئیات نمایش میدهد.',
+        messageTwo: '✔️	تیک نمایش همه برای نمایش لیست پس از اتمام قرائت است.'
       }
     else if (currentRoute === EN_Routes.wrofflinetxtout)
       return {
@@ -528,6 +529,7 @@ export class HelpWrapperService {
       return {
         title: 'آنالیز قرائت کننده',
         messageOne: 'بررسی دقیقتر عملکرد قرائت کننده در بازه دلخواه قابل مشاهده است. از جمله اطلاعات ارائه شده، تعداد قرائت، حداقل و حداکثر زمان بین دو قرائت، تعداد و درصد بسته ها و .. اشاره نمود. این قسمت بعلت آمار کلی قرائت های ثبت شده برای متخصصان آمار، مدیران و کارشناسان نیز پرکاربرد می‌باشد.',
+        messageTwo: '\n ✔️	زمان براساس دقیقه می‌باشد'
       }
     else if (currentRoute === EN_Routes.disposalHours)
       return {

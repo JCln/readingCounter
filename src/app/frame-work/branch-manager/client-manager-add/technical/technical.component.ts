@@ -1,22 +1,17 @@
 import { Component } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { MenuItem } from 'primeng/api';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
-  selector: 'app-client-manager-add',
-  templateUrl: './client-manager-add.component.html',
-  styleUrls: ['./client-manager-add.component.scss']
+  selector: 'app-technical',
+  templateUrl: './technical.component.html',
+  styleUrls: ['./technical.component.scss']
 })
-export class ClientManagerAddComponent extends FactoryONE {
-  private readonly _outputFileName: string = 'clientManagerAdd';
+export class TechnicalComponent extends FactoryONE {
+  private readonly _outputFileName: string = 'clientAddTechnical';
   _selectCols: any = [];
-  _selectColsAccordion: any = [];
-  items: MenuItem[];
-
   qotrDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   usageDictionary: IDictionaryManager[] = [];
@@ -33,9 +28,6 @@ export class ClientManagerAddComponent extends FactoryONE {
   ) {
     super();
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
-  }
   dictionaryWrapper = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -46,36 +38,12 @@ export class ClientManagerAddComponent extends FactoryONE {
     this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }
-  addStepperItems(): void {
-    this.items = [
-      {
-        label: 'راهنما',// توضیح اضافه برای عنوان اضافه بشه در افزودن کاربر
-        routerLink: 'desc'
-      },
-      {
-        label: 'اطلاعات شخصی',
-        routerLink: 'personal'
-      },
-      {
-        label: 'اطلاعات فنی',
-        routerLink: 'technical'
-      },
-      {
-        label: 'سایر اطلاعات',
-        routerLink: 'others'
-      },
-      {
-        label: 'اطلاعات مکانی',
-        routerLink: 'location'
-      },
-      {
-        label: 'تایید',
-        routerLink: 'confirmation'
-      }
-    ];
+  insertSelectedColumns = () => {
+    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
   }
   classWrapper = async () => {
-    this.addStepperItems();
+    this.insertSelectedColumns();
+    this.dictionaryWrapper();
   }
 
 }

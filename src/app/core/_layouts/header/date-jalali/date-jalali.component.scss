@@ -1,6 +1,10 @@
 @import 'variable.scss';
 
 ::ng-deep {
+  dp-day-calendar .dp-day-calendar-container {
+    padding: 5px;
+  }
+
   dp-calendar-nav .dp-nav-btns-container {
     direction: rtl !important;
   }

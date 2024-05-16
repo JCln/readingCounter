@@ -33,6 +33,13 @@
   .p-steps ul {
     flex-wrap: wrap;
     direction: rtl;
+    background: var(--white);
+    border-radius: $border_5;
+    padding: .5rem 0;
+  }
+
+  .p-steps .p-steps-item .p-menuitem-link {
+    background: var(--white);
   }
 
   .p-treeselect {
