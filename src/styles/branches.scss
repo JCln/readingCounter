@@ -18,9 +18,9 @@ section {
     display: grid;
     grid-template-columns: 1fr;
     direction: rtl;
+    align-content: flex-start;
     background: var(--secondary_1);
     gap: 0 var(--font_05);
-    direction: rtl;
 
     @media (min-width:550px) {
         grid-template-columns: 1fr 1fr;

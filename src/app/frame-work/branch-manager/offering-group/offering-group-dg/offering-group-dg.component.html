@@ -1,0 +1,23 @@
+<section>
+    <h2 class="title">{{offeringGroupReq.isEditing? 'ویرایش گروه اقلام': 'افزودن گروه اقلام'}}</h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+            <div class="input_icon" *ngFor="let mainDatas of columnManager.getColumnsMenus('offeringGroupAdd')">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">{{mainDatas.header}}</div>
+                    <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="offeringGroupReq[mainDatas.field]">
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                {{offeringGroupReq.isEditing? 'ویرایش گروه اقلام': 'افزودن گروه اقلام'}}
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

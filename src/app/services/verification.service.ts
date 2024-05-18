@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBranchState, IClientAll, IInvoiceType, IOffering, IOfferingUnit, ITariffAll, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, ITariffAll, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -1396,6 +1396,12 @@ export class VerificationService {
     return true;
   }
   offeringUnit = (item: IOfferingUnit): boolean => {
+    if (!this.nullValidation(item.title, EN_messages.insert_title))
+      return false;
+
+    return true;
+  }
+  offeringGroup = (item: IOfferingGroup): boolean => {
     if (!this.nullValidation(item.title, EN_messages.insert_title))
       return false;
 

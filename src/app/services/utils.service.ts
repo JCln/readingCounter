@@ -303,7 +303,7 @@ export class UtilsService {
     this.ref = this.dialogService.open(UserConfigComponent, {
       data: { _data: dataSource },
       rtl: true,
-      width: '21rem',
+      contentStyle: { minWidth: '21rem' }
     })
     this.ref.onClose.subscribe(async res => {
       if (res)

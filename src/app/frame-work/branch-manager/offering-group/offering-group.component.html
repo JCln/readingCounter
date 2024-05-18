@@ -1,0 +1,14 @@
+<app-prime-table
+    [dataSource]="closeTabService.offeringGroup" 
+    [_checkUpName]="'branches'"
+    [_outputFileName]="'offeringGroup'"
+    [_numberOfExtraColumns]="[1, 2]"
+    [isAddableTable]="true"    
+    [_sessionName]="'offeringGroup-session'"
+    [_selectedColumnsToRemember]="'selectedOfferingGroup'"
+    (refreshedTable)="callAPI()"     
+    (showedMoreDetails)="removeRow($event)"    
+    (openedAddDialog)="openDialog()"    
+    (openedEditDialog)="openDialog($event)"
+ > 
+</app-prime-table>

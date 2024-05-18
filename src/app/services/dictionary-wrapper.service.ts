@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from '../classes/math-s';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { VerificationService } from './verification.service';
-import { IBranchState, ICustomerType, IInvoiceType, IOffering, IOfferingUnit, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class DictionaryWrapperService {
   private provinceHierarchy: any = [];
   private zoneBoundDictionary: any = [];
   private offeringUnit: IOfferingUnit[] = [];
+  private offeringGroup: IOfferingGroup[] = [];
   private invoiceType: IInvoiceType[] = [];
   private offering: IOffering[] = [];
   private countryDictionary: any = [];
@@ -373,6 +374,13 @@ export class DictionaryWrapperService {
     this.setOfferingUnit(res);
     return this.offeringUnit;
   }
+  async getOfferingGroup(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.offeringGroup) && !canRefresh)
+      return this.offeringGroup;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+    this.setOfferingGroup(res);
+    return this.offeringGroup;
+  }
   async getInvoiceType(canRefresh: boolean): Promise<any> {
     if (!MathS.isNull(this.invoiceType) && !canRefresh)
       return this.invoiceType;
@@ -420,6 +428,9 @@ export class DictionaryWrapperService {
   }
   private setOfferingUnit(v: any) {
     this.offeringUnit = v;
+  }
+  private setOfferingGroup(v: any) {
+    this.offeringGroup = v;
   }
   private setInvoiceType(v: any) {
     this.invoiceType = v;
@@ -548,6 +559,7 @@ export class DictionaryWrapperService {
     this.regionDictionary = [];
     this.zoneDictionary = [];
     this.offeringUnit = [];
+    this.offeringGroup = [];
     this.invoiceType = [];
     this.offering = [];
     this.zoneBoundDictionary = [];

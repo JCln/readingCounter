@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'tarrifParameter', loadChildren: () => import('./tariff-parameter/tariff-parameter.module').then(tarrifParameterManager => tarrifParameterManager.TariffParameterModule) },
   { path: 'offering', loadChildren: () => import('./offering/offering.module').then(offering => offering.OfferingModule) },
   { path: 'offeringUnit', loadChildren: () => import('./offering-unit/offering-unit.module').then(offeringUnit => offeringUnit.OfferingUnitModule) },
+  { path: 'offeringGroup', loadChildren: () => import('./offering-group/offering-group.module').then(offeringGroup => offeringGroup.OfferingGroupModule) },
   { path: 'tariff', loadChildren: () => import('./tariff-manager/tariff-manager.module').then(tariffManager => tariffManager.TariffManagerModule) },
   { path: 'invoiceType', loadChildren: () => import('./invoice-type/invoice-type.module').then(invoiceTypeManager => invoiceTypeManager.InvoiceTypeModule) },
   { path: 'counterNumberChange', loadChildren: () => import('./counter-number-change/counter-number-change.module').then(counterNumberChange => counterNumberChange.CounterNumberChangeModule) },

@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingUnit, IOwnershipType, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -351,6 +351,7 @@ export class CloseTabService {
   };
   offering: IOffering[] = [];
   offeringUnit: IOfferingUnit[] = [];
+  offeringGroup: IOfferingGroup[] = [];
   invoiceType: IInvoiceType[] = [];
   tariff: ITariff[] = [];
   tariffExcelToFillInput: ITariffExcelToFillInput = {
@@ -2314,6 +2315,7 @@ export class CloseTabService {
     },
     { id: 2, value: ENEssentialsToSave.offering, url: EN_Routes.offering, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.offeringUnit, url: EN_Routes.offeringUnit, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.offeringGroup, url: EN_Routes.offeringGroup, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.invoiceType, url: EN_Routes.invoiceType, defaultValue: [] },
     {
       id: 2, req: ENEssentialsToSave.tariffExcelToFillInput, url: EN_Routes.tariffExcelToFill, defaultReq: {

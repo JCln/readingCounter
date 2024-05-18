@@ -576,9 +576,17 @@ export class ColumnManager {
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true }
         // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
     ]
+    offeringGroup: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
     offeringUnitAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
+    ]
+    offeringGroupAdd: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
+        // { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
     ]
     invoiceType: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

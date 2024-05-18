@@ -185,6 +185,12 @@ export interface IOfferingUnit {
     isActive: boolean,
     isEditing?: boolean
 }
+export interface IOfferingGroup {
+    id: number,
+    title: string,
+    isActive: boolean,
+    isEditing?: boolean
+}
 export interface IInvoiceType {
     id: number,
     title: string,
