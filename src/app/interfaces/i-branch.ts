@@ -167,7 +167,9 @@ export interface IOffering {
     id: number,
     title: string,
     offeringUnitId: number,
+    offeringGroupId: number,
     dynamicId: any,
+    dynamicGroupId: any,
     description: string,
     isActive: boolean,
     isEditing?: boolean
@@ -175,6 +177,11 @@ export interface IOffering {
         id: number,
         title: string,
         symbol: string,
+        isActive: boolean
+    },
+    offeringGroup: {
+        id: number,
+        title: string,
         isActive: boolean
     }
 }

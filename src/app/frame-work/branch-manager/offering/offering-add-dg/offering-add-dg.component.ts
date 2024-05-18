@@ -13,13 +13,17 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class OfferingAddDgComponent implements OnInit {
   offeringUnitIdDictionary: IOfferingUnit[] = [];
+  offeringGroupIdDictionary: IOfferingUnit[] = [];
   offeringReq: IOffering = {
     id: 0,
     title: '',
     description: '',
     offeringUnit: null,
+    offeringGroup: null,
+    dynamicGroupId: null,
     dynamicId: null,
     offeringUnitId: 0,
+    offeringGroupId: 0,
     isActive: true,
     isEditing: false
   }
@@ -57,6 +61,7 @@ export class OfferingAddDgComponent implements OnInit {
   }
   getDictionary = async () => {
     this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit();
+    this.offeringGroupIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
   }
   ngOnInit(): void {
     this.getDictionary();

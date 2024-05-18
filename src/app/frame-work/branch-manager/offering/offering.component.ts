@@ -7,7 +7,7 @@ import { OfferingAddDgComponent } from './offering-add-dg/offering-add-dg.compon
 import { MathS } from 'src/app/classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { Converter } from 'src/app/classes/converter';
-import { IOfferingUnit } from 'interfaces/i-branch';
+import { IOfferingGroup, IOfferingUnit } from 'interfaces/i-branch';
 
 @Component({
   selector: 'app-offering',
@@ -17,6 +17,7 @@ import { IOfferingUnit } from 'interfaces/i-branch';
 export class OfferingComponent extends FactoryONE {
   ref: DynamicDialogRef;
   offeringUnitIdDictionary: IOfferingUnit[] = [];
+  offeringGroupIdDictionary: IOfferingGroup[] = [];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -28,17 +29,25 @@ export class OfferingComponent extends FactoryONE {
   insertToAuxItem = () => {
     this.closeTabService.offering.forEach(item => {
       item.dynamicId = item.offeringUnitId;
+      item.dynamicGroupId = item.offeringGroupId;
     })
   }
 
   callAPI = async () => {
-    this.closeTabService.offering = await this.branchesService.dictionaryWrapperService.getOffering();
+    this.closeTabService.offering = await this.branchesService.dictionaryWrapperService.getOffering(true);
     this.insertToAuxItem();
     this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit();
+    this.offeringGroupIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
     Converter.convertIdsToTitles(
       this.closeTabService.offering,
-      { offeringUnitIdDictionary: this.offeringUnitIdDictionary },
-      { dynamicId: 'dynamicId' }
+      {
+        offeringUnitIdDictionary: this.offeringUnitIdDictionary,
+        offeringGroupIdDictionary: this.offeringGroupIdDictionary
+      },
+      {
+        dynamicId: 'dynamicId',
+        dynamicGroupId: 'dynamicGroupId'
+      }
     )
   }
   openDialog = (item?: any) => {

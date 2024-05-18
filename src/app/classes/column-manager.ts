@@ -563,11 +563,13 @@ export class ColumnManager {
     ]
     offeringAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'offeringGroupId', header: 'گروه اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'offeringUnitId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' }
     ]
     offering: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'dynamicGroupId', header: 'گروه اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'dynamicId', header: 'واحد', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true }
     ]

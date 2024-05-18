@@ -388,8 +388,8 @@ export class DictionaryWrapperService {
     this.setInvoiceType(res);
     return this.invoiceType;
   }
-  async getOffering(): Promise<any> {
-    if (!MathS.isNull(this.offering))
+  async getOffering(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.offering) && !canRefresh)
       return this.offering;
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGet);
     this.setOffering(res);
