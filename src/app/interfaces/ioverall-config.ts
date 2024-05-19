@@ -168,6 +168,7 @@ export interface IObjectIteratation {
     isNumber?: boolean;
     isSelectOption?: boolean;
     enableTooltip?: boolean;
+    bookmarkName?: string;
     tabIndex?: number;
     type?: string;
     matchMode?: string;// working for primeng tables(headers)

@@ -9,7 +9,9 @@
                     <ng-container
                         *ngIf="mainDatas.field === 'isBazdid' || mainDatas.field ===  'isRoosta'; else editableCheckboxes">
                         <div class="input_icon">
-                            <i class="pi pi-bookmark _bookmark"></i>
+                            <i class="_bookmark"
+                                [ngClass]="mainDatas.bookmarkName ? mainDatas.bookmarkName : 'pi pi-bookmark'">
+                            </i>
                             <div class="input_3">
                                 <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
                                     [(ngModel)]="dataSource[mainDatas.field]">
@@ -36,7 +38,8 @@
                 <ng-template #elseTemplate>
                     <ng-container *ngIf="mainDatas.isSelectOption;else selectOption">
                         <div class="input_icon" [ngClass]="{coloring_border: mainDatas.borderize}">
-                            <i class="pi pi-bookmark _bookmark"></i>
+                            <i class="_bookmark"
+                                [ngClass]="mainDatas.bookmarkName ? mainDatas.bookmarkName : 'pi pi-bookmark'"></i>
                             <div class="input_3">
                                 <div class="_key">قرائت کننده جدید</div>
                                 <div class="_value">
@@ -50,7 +53,9 @@
                     </ng-container>
                     <ng-template #selectOption>
                         <div class="input_icon" [ngClass]="{coloring_border: mainDatas.borderize}">
-                            <i class="pi pi-bookmark _bookmark"></i>
+                            <i class="_bookmark"
+                                [ngClass]="mainDatas.bookmarkName ? mainDatas.bookmarkName : 'pi pi-bookmark'">
+                            </i>
                             <div class="input_3">
                                 <div class="_key">{{mainDatas.header}}</div>
                                 <input [readonly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"

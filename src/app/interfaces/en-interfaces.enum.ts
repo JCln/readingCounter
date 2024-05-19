@@ -541,4 +541,10 @@ export enum ENInterfaces {
     counterNumberChangeAdd = 'V1/CounterNumberChange/Add',
     counterNumberChangeEdit = 'V1/CounterNumberChange/Edit',
     counterNumberChangeRemove = 'V1/CounterNumberChange/Remove',
+
+    requestDraftGet = 'V1/requestDraft/Get',
+    requestDraftGetLazy = 'V1/requestDraft/GetLazy',
+    requestDraftAdd = 'V1/requestDraft/Add',
+    requestDraftEdit = 'V1/requestDraft/Edit',
+    requestDraftRemove = 'V1/requestDraft/Remove',
 }
