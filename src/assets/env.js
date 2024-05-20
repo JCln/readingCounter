@@ -115,6 +115,12 @@
         video: 2,
         audio: 4
     }
+    window.__env.getRequestDraftIds = {
+        requestDraft: 0
+    }
+    window.__env.getOfferingIds = {
+        offeringId: 1
+    }
     window.__env.NotificationAlertTypesIds = {
         confidential: 0,
         ordinary: 1,

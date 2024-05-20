@@ -1,0 +1,68 @@
+@import 'primeNG';
+@import 'input';
+@import 'button';
+@import '_mat';
+@import 'tooltip';
+
+._req_content {
+    display: grid;
+    align-items: center;
+    width: 23rem;
+    padding: var(--font_05);
+    justify-content: initial;
+    direction: rtl;
+    margin: auto auto var(--font_m) auto;
+    gap: var(--font_02);
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
+
+form {
+    background: var(--white);
+    border-radius: $border_10;
+    padding: .1rem;
+}
+
+._changables {
+    background-color: var(--light_1);
+}
+
+._search_button {
+    max-width: 100%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+.btn_1 {
+    margin-top: var(--font_2);
+}
+
+._desc {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
+    padding: 6px;
+    direction: rtl;
+    justify-content: center;
+    gap: var(--font_05);
+    align-items: center;
+    border-radius: $border_15;
+    text-align: right;
+}
+
+.check_boxes {
+    direction: ltr;
+}
+
+.checkboxes {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.input_icon ._value:active,
+.input_icon ._value:focus {
+    outline: 2px solid var(--primary_3);
+}

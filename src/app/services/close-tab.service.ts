@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -145,6 +145,53 @@ export class CloseTabService {
     customerTypeTitle: '',
     waterSourceTitle: '',
 
+  };
+  requestDraftReq: IRequestDraft = {
+    id: 0,
+    zoneId: null,
+    nationalId: '',
+    postalCode: '',
+    mobiles: '',
+    customerNumber: 0,
+    readingNumber: '',
+    billId: '',
+    fullName: '',
+    fatherName: '',
+    address: '',
+    usageId: null,
+    branchDiameterId: null,
+    siphon1Count: null,
+    siphon2Count: null,
+    siphon3Count: null,
+    siphon4Count: null,
+    domesticCount: null,
+    commercialCount: null,
+    otherCount: null,
+    familyCount: null,
+    domesticArea: null,
+    commercialArea: null,
+    otherArea: null,
+    capacity: null,
+    watarInstallationJalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+    sewageInstallationJalaliDay: null,
+    guildId: null,
+    ownershipTypeId: null,
+    branchStateId: null,
+    waterSourceId: null,
+    customerTypeId: null,
+    previousClientId: null,
+    description: '',
+    isLast: false,
+    x: '',
+    y: '',
+    zoneTitle: '',
+    usageTitle: '',
+    guildTitle: '',
+    branchStateTitle: '',
+    ownershipTypeTitle: '',
+    customerTypeTitle: '',
+    waterSourceTitle: '',
+    offeringIds: null
   };
   clientGet: IClientAll[] = [];
 
@@ -2339,6 +2386,56 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.ownershipType, url: EN_Routes.ownershipType, defaultValue: [] },
     {
       id: 2, req: ENEssentialsToSave.clientAddReq, value: ENEssentialsToSave.clientAdd, url: EN_Routes.clientAdd,
+      defaultValue: [],
+      defaultReq: {
+        id: 0,
+        zoneId: null,
+        nationalId: '',
+        postalCode: '',
+        mobiles: '',
+        customerNumber: 0,
+        readingNumber: '',
+        billId: '',
+        fullName: '',
+        fatherName: '',
+        address: '',
+        usageId: null,
+        branchDiameterId: null,
+        siphon1Count: null,
+        siphon2Count: null,
+        siphon3Count: null,
+        siphon4Count: null,
+        domesticCount: null,
+        commercialCount: null,
+        otherCount: null,
+        familyCount: null,
+        domesticArea: null,
+        commercialArea: null,
+        otherArea: null,
+        capacity: null,
+        watarInstallationJalaliDay: this.utilsService.dateJalaliService.getCurrentDate(),
+        sewageInstallationJalaliDay: null,
+        guildId: null,
+        ownershipTypeId: null,
+        branchStateId: null,
+        waterSourceId: null,
+        customerTypeId: null,
+        previousClientId: null,
+        description: '',
+        isLast: false,
+        x: '',
+        y: '',
+        guildTitle: '',
+        branchStateTitle: '',
+        ownershipTypeTitle: '',
+        customerTypeTitle: '',
+        waterSourceTitle: '',
+        zoneTitle: '',
+        usageTitle: ''
+      }
+    },
+    {
+      id: 2, req: ENEssentialsToSave.requestDraftReq, url: EN_Routes.requestDraft,
       defaultValue: [],
       defaultReq: {
         id: 0,

@@ -32,6 +32,8 @@ export class EnvService implements IENV {
   getHighLowStateId = this.temp.getHighLowStateId;
   getTarrifTypeDictionary = this.temp.getTarrifTypeDictionary;
   getTarrifCalculationModeDictionary = this.temp.getTarrifCalculationModeDictionary;
+  getRequestDraftIds = this.temp.getRequestDraftIds;
+  getOfferingIds = this.temp.getOfferingIds;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

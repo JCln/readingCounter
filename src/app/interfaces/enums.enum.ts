@@ -709,7 +709,9 @@ export enum ENEssentialsToSave {
     tariffAllLazy = 'tariffAllLazy',
     invoiceType = 'invoiceType',
     counterNumberChangeGetLazy = 'counterNumberChangeGetLazy',
-    offeringGroup = 'offeringGroup'
+    offeringGroup = 'offeringGroup',
+    requestDraftReq = "requestDraftReq",
+    requestDraft = "requestDraft"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

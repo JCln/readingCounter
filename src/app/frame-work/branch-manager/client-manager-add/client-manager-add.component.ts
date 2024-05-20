@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { MenuItem } from 'primeng/api';
 import { BranchesService } from 'services/branches.service';

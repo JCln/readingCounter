@@ -1,0 +1,18 @@
+<form>
+    <div class="_desc">
+        <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="offeringGroup" [options]="offeringGroupDictionary"
+                            [(ngModel)]="closeTabService.requestDraftReq.offeringIds" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

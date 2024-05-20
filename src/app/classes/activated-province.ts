@@ -14,6 +14,8 @@ import {
     getInvalidLoginReasonDictionary,
     getLogoutReasonDictionary,
     getMasrafStateDictionary,
+    getOfferingIds,
+    getRequestDraftIds,
     getTarrifCalculationModeDictionary,
     getTarrifTypeDictionary,
     IENV,
@@ -58,6 +60,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly DEFAULT = new ActivatedProvince(
         ENActivateProvinceTitle.DEFAULT,
@@ -86,6 +90,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly RDPServer = new ActivatedProvince(
         ENActivateProvinceTitle.RDPServer,
@@ -114,6 +120,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
@@ -142,6 +150,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly TEH = new ActivatedProvince(
         ENActivateProvinceTitle.TEH,
@@ -170,6 +180,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
@@ -198,6 +210,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
@@ -226,6 +240,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
@@ -254,6 +270,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
@@ -282,6 +300,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     // ZONE 6 TEHRAN
     public static readonly REY = new ActivatedProvince(
@@ -311,6 +331,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly TSW = new ActivatedProvince(
         ENActivateProvinceTitle.TSW,
@@ -339,6 +361,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly TEH1 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH1,
@@ -367,6 +391,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
     public static readonly TEH5 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH5,
@@ -395,6 +421,8 @@ export class ActivatedProvince implements IENV {
         getHighLowStateId.DEFAULT.value,
         getTarrifTypeDictionary.DEFAULT.value,
         getTarrifCalculationModeDictionary.DEFAULT.value,
+        getRequestDraftIds,
+        getOfferingIds,
     );
 
     private constructor(
@@ -466,8 +494,13 @@ export class ActivatedProvince implements IENV {
         }[],
         public readonly getTarrifTypeDictionary: { id: number, dynamicId: number, title: string, field: string }[],
         public readonly getTarrifCalculationModeDictionary: { id: number, dynamicId: number, title: string, field: string }[],
+        public readonly getRequestDraftIds: {
+            requestDraft: number
+        },
+        public readonly getOfferingIds: {
+            offeringId: number
+        }
     ) { }
-
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {
         return ActivatedProvince[provinceName];
     }

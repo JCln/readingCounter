@@ -1,0 +1,19 @@
+@import 'primeNG';
+
+._content {
+    direction: rtl;
+    background: var(--white);
+    border-radius: $border_5;
+    padding: var(--font_2) var(--font_s);
+    margin: var(--font_2) 0;
+}
+
+h2 {
+    color: var(--primary_3);
+}
+
+ul {}
+
+li {
+    color: var(--primary_5);
+}

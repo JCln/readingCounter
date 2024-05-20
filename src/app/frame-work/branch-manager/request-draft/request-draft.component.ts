@@ -52,6 +52,10 @@ export class RequestDraftComponent extends FactoryONE {
         routerLink: 'desc'
       },
       {
+        label: 'نوع خدمت',
+        routerLink: 'offering'
+      },
+      {
         label: 'اطلاعات شخصی',
         routerLink: 'personal'
       },

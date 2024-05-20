@@ -508,6 +508,7 @@ export enum ENInterfaces {
     tariffParameterManagerRemove = 'V1/TariffParameter/Remove',
 
     offeringGet = 'V1/Offering/All',
+    offeringAllInGroup = 'V1/Offering/AllInGroup/',
     offeringAdd = 'V1/Offering/Add',
     offeringEdit = 'V1/Offering/Edit',
     offeringRemove = 'V1/Offering/Remove',

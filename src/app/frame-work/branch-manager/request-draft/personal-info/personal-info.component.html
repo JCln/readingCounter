@@ -1,1 +1,14 @@
-<p>personal-info works!</p>
+<form>
+    <div class="_desc">
+        <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                <div class="input_3">
+                    <div class="_key">{{col.header}}</div>
+                    <input [readonly]="col.readonly" [tabindex]="col.tabIndex" [type]="col.isNumber ? 'number' : 'text'"
+                        class="_value" name="{{col.field}}" [(ngModel)]="closeTabService.requestDraftReq[col.field]">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

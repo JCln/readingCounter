@@ -75,6 +75,12 @@ export class UtilsService {
   getNotificationMediaTypeIds = () => {
     return this.envService.NotificationMediaTypeIds;
   }
+  getRequestDraftIds = () => {
+    return this.envService.getRequestDraftIds;
+  }
+  getOfferingIds = () => {
+    return this.envService.getOfferingIds;
+  }
   getYears = (): ITitleValue[] => {
     return this.envService.years;
   }

@@ -43,6 +43,7 @@ export enum ENReadingReports {
     forbidden = 'forbiddenReq',
     forbiddenTypeReq = 'mobileManagerforbiddenTypeReq',
     clientAddReq = 'clientManagerAdd',
+    requestDraftReq = 'requestDraftAdd',
     tariffExcelToFill = 'tariffExcelToFill',
     tariffAllLazy = 'tariffManagerAddEdit',
     importDynamic = 'importDynamicReq',

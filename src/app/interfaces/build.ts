@@ -255,6 +255,12 @@ export class getTarrifTypeDictionary {
     ]);
     private constructor(public readonly value: { id: number, dynamicId: number, title: string, field: string }[]) { }
 }
+export class getRequestDraftIds {
+    static requestDraft = 8;
+}
+export class getOfferingIds {
+    static offeringId = 0;
+}
 export class getTarrifCalculationModeDictionary {
     static readonly DEFAULT = new getTarrifCalculationModeDictionary([
         { id: 1, dynamicId: 1, field: 'Interval', title: 'فوری' },

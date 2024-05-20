@@ -188,6 +188,7 @@ export enum EN_Routes {
     ownershipType = '/wr/branch/ownershipType',
     clientGet = '/wr/branch/clients',
     clientAdd = '/wr/branch/addClients',
+    requestDraft = '/wr/branch/requestDraft',
     clientGetLazy = '/wr/branch/clientLazy',
     counterNumberChangeGetLazy = '/wr/branch/counterNumberChange',
 }

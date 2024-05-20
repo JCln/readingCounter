@@ -1,0 +1,20 @@
+@import 'primeNG';
+@import 'input';
+
+form {
+    display: grid;
+    justify-content: center;
+}
+
+._desc {
+    display: grid;
+    align-items: center;
+    padding: var(--font_05);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
+    direction: rtl;
+    margin: var(--font_m);
+    gap: var(--font_02);
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
