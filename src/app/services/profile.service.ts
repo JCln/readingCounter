@@ -39,6 +39,7 @@ export class ProfileService {
     groupImgs: false,
     searchBasedOnDate: false,
     hasCancelableSpinner: true,
+    hasStepperView: true,
     defaultFontStyle: 1,
     defaultFontFamily: ENFontFamily.BLotus,// value of default is sync with font.service.ts
     reOrderableTable: false,
@@ -121,6 +122,9 @@ export class ProfileService {
   setCanclableSpinner = (bool: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCancelableSpinner, bool);
   }
+  setStepperView = (bool: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasStepperView, bool);
+  }
   setFontStyle = (fontStyle: number) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
   }
@@ -160,6 +164,9 @@ export class ProfileService {
   }
   getHasCancelableSpinner = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCancelableSpinner, this.utilsService.envService.hasCancelableSpinner);
+  }
+  getStepperView = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasStepperView, this.showStateVals.hasStepperView);
   }
   getFontStyle = (): number => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, ENFontStyle.fontXS);

@@ -9,6 +9,7 @@ import { DescriptionComponent } from './description/description.component';
 import { LocationComponent } from './location/location.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { TechnicalComponent } from './technical/technical.component';
+import { ClientManagerAddFullViewComponent } from './client-manager-add-full-view/client-manager-add-full-view.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TechnicalComponent } from './technical/technical.component';
     DescriptionComponent,
     LocationComponent,
     ConfirmationComponent,
-    TechnicalComponent
+    TechnicalComponent,
+    ClientManagerAddFullViewComponent
   ],
   imports: [
     SharedPrimeNgModule,

@@ -1,4 +1,9 @@
-<div class="card">
-    <p-steps [model]="items" [readonly]="false"></p-steps>
+<div *ngIf="hasStepperView">
+    <div class="card">
+        <p-steps [model]="items" [readonly]="false"></p-steps>
+    </div>
+    <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
+<div *ngIf="!hasStepperView">
+    <app-request-draft-full-view></app-request-draft-full-view>
+</div>

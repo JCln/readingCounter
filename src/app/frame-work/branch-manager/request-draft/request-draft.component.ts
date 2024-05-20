@@ -15,6 +15,7 @@ export class RequestDraftComponent extends FactoryONE {
   _selectCols: any = [];
   _selectColsAccordion: any = [];
   items: MenuItem[];
+  hasStepperView: boolean;
 
   qotrDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -77,8 +78,12 @@ export class RequestDraftComponent extends FactoryONE {
       }
     ];
   }
+  stepperViewStatus(): void {
+    this.hasStepperView = this.closeTabService.profileService.getStepperView();
+  }
   classWrapper = async () => {
     this.addStepperItems();
+    this.stepperViewStatus();
   }
 
 }

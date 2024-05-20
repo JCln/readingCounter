@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBranchState, IClientAll, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, ITariffAll, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, ITariffAll, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -357,6 +357,122 @@ export class VerificationService {
   clientAdd = (body: IClientAll): boolean => {
     if (MathS.isNull(body.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(body.nationalId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_nationaId);
+      return false;
+    }
+    if (MathS.isNull(body.fullName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fullName);
+      return false;
+    }
+    if (MathS.isNull(body.readingNumber)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingNumber);
+      return false;
+    }
+    if (MathS.isNull(body.usageId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_usage);
+      return false;
+    }
+    if (MathS.isNull(body.branchDiameterId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
+      return false;
+    }
+    if (MathS.isNull(body.siphon1Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon1);
+      return false;
+    }
+    if (MathS.isNull(body.siphon2Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon2);
+      return false;
+    }
+    if (MathS.isNull(body.siphon3Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon3);
+      return false;
+    }
+    if (MathS.isNull(body.siphon4Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon4);
+      return false;
+    }
+    if (MathS.isNull(body.domesticArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_domesticArea);
+      return false;
+    }
+    if (MathS.isNull(body.domesticCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_domesticCount);
+      return false;
+    }
+    if (MathS.isNull(body.commercialCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_commercialCount);
+      return false;
+    }
+    if (MathS.isNull(body.commercialArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_commercialArea);
+      return false;
+    }
+    if (MathS.isNull(body.otherCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_otherCount);
+      return false;
+    }
+    if (MathS.isNull(body.familyCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_familyCount);
+      return false;
+    }
+    if (MathS.isNull(body.otherArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_otherArea);
+      return false;
+    }
+    if (MathS.isNull(body.ownershipTypeId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertـownershipTypeId);
+      return false;
+    }
+    if (MathS.isNull(body.branchStateId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertـbranchStateId);
+      return false;
+    }
+    if (MathS.isNull(body.customerTypeId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertـcustomerTypeId);
+      return false;
+    }
+    if (MathS.isNull(body.address)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
+      return false;
+    }
+    if (!MathS.isLowerThanMinLength(body.address, ENRandomNumbers.eighteen)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.watarInstallationJalaliDay, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.postalCode, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
+      return false;
+    }
+    if (!MathS.postalCodeValidation(body.postalCode)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
+      return false;
+    }
+    if (!MathS.validationMobiles(body.mobiles)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobileFormat);
+      return false;
+    }
+    if (!MathS.validateNationalId(body.nationalId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.incorrect_nationalId);
+      return false;
+    }
+
+    return true;
+  }
+  requestDraftAdd = (body: IRequestDraft): boolean => {
+    if (MathS.isNull(body.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(body.offeringIds)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_offeringUnitId);
       return false;
     }
     if (MathS.isNull(body.nationalId)) {

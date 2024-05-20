@@ -233,6 +233,15 @@
             </section>
             <section>
                 <div class="content">
+                    <h1 class="title">پرکردن فرم ها مرحله به مرحله باشد</h1>
+                    <p-selectButton [options]="stateOptionsStepperView"
+                        [(ngModel)]="profileService.showStateVals.hasStepperView" optionLabel="label"
+                        optionValue="value" (onChange)="setStepperView(profileService.showStateVals.hasStepperView)">
+                    </p-selectButton>
+                </div>
+            </section>
+            <section>
+                <div class="content">
                     <h1 class="title">امکان لغو درخواست</h1>
                     <p-selectButton [options]="stateOptionsSpinner"
                         [(ngModel)]="profileService.showStateVals.hasCancelableSpinner" optionLabel="label"

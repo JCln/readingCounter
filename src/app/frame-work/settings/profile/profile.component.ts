@@ -19,6 +19,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsIsSingleZone: any[] = [{ label: 'با یک ناحیه', value: true }, { label: 'با چند ناحیه', value: false }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsStepperView: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsOutputConfig: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
@@ -143,6 +144,7 @@ export class ProfileComponent extends FactoryONE {
     this.getOutputConfig();
     this.getHasColumnsResizable();
     this.getWidthExpandMode();
+    this.getHasStepperView();
   }
   getCurrentVersion = () => {
     this.closeTabService.saveDataForProfile.appVersion = this.profileService.utilsService.getAppVersion();
@@ -222,6 +224,9 @@ export class ProfileComponent extends FactoryONE {
   getHasCancelableSpinner = () => {
     this.profileService.showStateVals.hasCancelableSpinner = this.profileService.getHasCancelableSpinner();
   }
+  getHasStepperView = () => {
+    this.profileService.showStateVals.hasStepperView = this.profileService.getStepperView();
+  }
   getFontStyle = () => {
     this.profileService.showStateVals.defaultFontStyle = this.profileService.getFontStyle();
   }
@@ -238,6 +243,10 @@ export class ProfileComponent extends FactoryONE {
   setCanclableSpinner = (val: any) => {
     this.profileService.setCanclableSpinner(val);
     val ? this.profileService.showMessage(EN_messages.spinnerHasActive) : this.profileService.showMessage(EN_messages.spinnerHasCancelable);
+  }
+  setStepperView = (val: any) => {
+    this.profileService.setStepperView(val);
+    val ? this.profileService.showMessage(EN_messages.stepperViewEnabled) : this.profileService.showMessage(EN_messages.stepperViewDisabled);
   }
   setFontStyle = (val: ENFontStyle) => {
     this.profileService.setFontStyle(val);

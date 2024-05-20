@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { MenuItem } from 'primeng/api';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
-  selector: 'app-client-manager-add',
-  templateUrl: './client-manager-add.component.html',
-  styleUrls: ['./client-manager-add.component.scss']
+  selector: 'app-request-draft-full-view',
+  templateUrl: './request-draft-full-view.component.html',
+  styleUrls: ['./request-draft-full-view.component.scss']
 })
-export class ClientManagerAddComponent extends FactoryONE {
-  private readonly _outputFileName: string = 'clientManagerAdd';
+export class RequestDraftFullViewComponent extends FactoryONE {
+  private readonly _outputFileName: string = 'requestDraftAdd';
+  private readonly _outputFileNameAccordion: string = '';
   _selectCols: any = [];
   _selectColsAccordion: any = [];
-  items: MenuItem[];
-  hasStepperView: boolean;
 
+  offeringGroupDictionary: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   usageDictionary: IDictionaryManager[] = [];
@@ -35,6 +35,7 @@ export class ClientManagerAddComponent extends FactoryONE {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
+    this._selectColsAccordion = this.branchesService.columnManager.getColumnsMenus(this._outputFileNameAccordion);
   }
   dictionaryWrapper = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
@@ -45,45 +46,29 @@ export class ClientManagerAddComponent extends FactoryONE {
     this.branchStateDictionary = await this.branchesService.dictionaryWrapperService.getBranchStateDictionary(false);
     this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
+    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
   }
-  addStepperItems(): void {
-    this.items = [
-      {
-        label: 'راهنما',// توضیح اضافه برای عنوان اضافه بشه در افزودن کاربر
-        routerLink: 'desc'
-      },
-      // {
-      //   label: 'نوع خدمت',
-      //   routerLink: 'offering'
-      // },
-      {
-        label: 'اطلاعات شخصی',
-        routerLink: 'personal'
-      },
-      {
-        label: 'اطلاعات فنی',
-        routerLink: 'technical'
-      },
-      {
-        label: 'سایر اطلاعات',
-        routerLink: 'others'
-      },
-      {
-        label: 'اطلاعات مکانی',
-        routerLink: 'location'
-      },
-      {
-        label: 'تایید',
-        routerLink: 'confirmation'
+  callAPI = async () => {
+    if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.requestDraftReq)) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
+      const config = {
+        messageTitle: res.message,
+        width: '21rem',
+        isInput: false,
+        isImportant: false,
+        icon: 'pi pi-check',
+        closable: true,
       }
-    ];
-  }
-  stepperViewStatus(): void {
-    this.hasStepperView = this.closeTabService.profileService.getStepperView();
+      this.branchesService.utilsService.primeConfirmDialog(config);
+    }
   }
   classWrapper = async () => {
-    this.addStepperItems();
-    this.stepperViewStatus();
+    this.dictionaryWrapper();
+    this.insertSelectedColumns();
   }
-
+  async showInMap() {
+    const res = await this.branchesService.openMapDialog([], true);
+    this.closeTabService.requestDraftReq.x = res.x;
+    this.closeTabService.requestDraftReq.y = res.y;
+  }
 }
