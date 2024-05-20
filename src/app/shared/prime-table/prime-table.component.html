@@ -620,6 +620,12 @@
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == 'offering'">
+                <span class="ui-column-title">id: {{dataSource.id}}</span>
+                <i class="tooltip p_icons pi pi-id-card">
+                    <div class="tooltip_text_right">id: {{dataSource.id}}</div>
+                </i>
+            </td>
             <td class="__icon-columns" *ngIf="_checkUpName == 'dynamicReport'" class="edit_button"
                 (click)="downloadExcel(dataSource)">
                 <span class="ui-column-title">مشاهده</span>

@@ -2,7 +2,7 @@
     [dataSource]="closeTabService.offering" 
     [_checkUpName]="'branches'"
     [_outputFileName]="'offering'"
-    [_numberOfExtraColumns]="[1, 2]"
+    [_numberOfExtraColumns]="[1, 2, 3]"
     [isAddableTable]="true"    
     [_sessionName]="'offering-session'"
     [_selectedColumnsToRemember]="'selectedOffering'"
@@ -10,5 +10,6 @@
     (showedMoreDetails)="removeRow($event)"    
     (openedAddDialog)="openDialog()"    
     (openedEditDialog)="openDialog($event)"
+    
  > 
 </app-prime-table>
