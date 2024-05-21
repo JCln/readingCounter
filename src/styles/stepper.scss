@@ -1,0 +1,125 @@
+@import 'primeNG';
+@import 'input';
+@import 'button';
+
+@import 'primeNG';
+@import 'input';
+@import 'button';
+@import '_mat';
+@import 'tooltip';
+
+._req_content {
+    display: grid;
+    align-items: center;
+    width: 23rem;
+    padding: var(--font_05);
+    justify-content: initial;
+    direction: rtl;
+    margin: auto auto var(--font_m) auto;
+    gap: var(--font_03);
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px 2px var(--secondary_7);
+}
+
+form {
+    background: var(--white);
+    border-radius: $border_10;
+    padding: .1rem;
+    margin: var(--font_s) 0;
+}
+
+._changables {
+    background-color: var(--light_1);
+}
+
+._search_button {
+    max-width: 100%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+.btn_1 {
+    margin-top: var(--font_2);
+}
+
+.check_boxes {
+    direction: ltr;
+}
+
+.checkboxes {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.input_icon ._value:active,
+.input_icon ._value:focus {
+    outline: 2px solid var(--primary_3);
+}
+
+.confirmation-form {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px 2px var(--secondary_7);
+    pointer-events: none;
+
+    ._desc {
+        opacity: 0.7;
+    }
+}
+
+footer {
+    pointer-events: all;
+}
+
+._desc {
+    margin: var(--font_m);
+    display: grid;
+    align-items: center;
+    padding: var(--font_05);
+    grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
+    direction: rtl;
+    gap: var(--font_03);
+
+    @media (min-width: 550px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.map-frame {
+    margin: var(--font_xs) var(--font_02);
+    height: 100%;
+    min-height: 70vh;
+    box-shadow: -1px 2px 5px 5px var(--secondary_4);
+    position: relative;
+}
+
+#map3 {
+    height: 10rem;
+    width: 10rem;
+    z-index: 1;
+}
+
+._description {
+    direction: rtl;
+    background: var(--white);
+    border-radius: $border_5;
+    padding: var(--font_2) var(--font_s);
+    margin: var(--font_2) 0;
+
+    h2 {
+        color: var(--primary_3);
+    }
+
+    li {
+        color: var(--primary_5);
+    }
+}
+
+.location-form {
+    display: grid;
+    justify-content: center;
+}

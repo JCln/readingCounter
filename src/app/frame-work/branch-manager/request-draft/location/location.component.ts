@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -10,6 +11,8 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class LocationComponent extends FactoryONE {
   private readonly _outputFileName: string = 'requestDraftLocation';
+  zoneDictionary: IDictionaryManager[] = [];
+
   _selectCols: any = [];
 
   constructor(
@@ -23,12 +26,13 @@ export class LocationComponent extends FactoryONE {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
   }
   classWrapper = async () => {
+    this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.insertSelectedColumns();
   }
   async showInMap() {
     const res = await this.branchesService.openMapDialog([], true);
-    this.closeTabService.clientAddReq.x = res.x;
-    this.closeTabService.clientAddReq.y = res.y;
+    this.closeTabService.requestDraftReq.x = res.x;
+    this.closeTabService.requestDraftReq.y = res.y;
   }
 
 }

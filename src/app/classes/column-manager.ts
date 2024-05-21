@@ -3220,6 +3220,9 @@ export class ColumnManager {
         // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
+    requestDraftOfferingGroup: IObjectIteratation[] = [
+        { field: 'offeringGroupId', header: 'گروه اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
     requestDraftAdd: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'nationalId', header: 'کد ملی', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
@@ -3266,9 +3269,9 @@ export class ColumnManager {
     requestDraftTechnical: IObjectIteratation[] = [
         { field: 'usageId', header: 'کاربری', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
-        { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
-        // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
+        { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب آب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
         { field: 'sewageInstallationJalaliDay', header: 'تاریخ نصب فاضلاب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
+        // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'sewageInstallationDateTime', header: 'زمان نصب فاضلاب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'guildId', header: 'صنف', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'ownershipTypeId', header: 'نوع مالک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true },
@@ -3306,7 +3309,7 @@ export class ColumnManager {
         // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false },        
     ]
     requestDraftLocation: IObjectIteratation[] = [
-        { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
+        { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false },
         { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true },
         // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },

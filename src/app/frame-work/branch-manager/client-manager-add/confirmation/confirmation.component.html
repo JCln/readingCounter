@@ -1,5 +1,5 @@
-<form><!--(ngSubmit)="callAPI()"-->
-    <div class="_desc">
+<form (ngSubmit)="callAPI()" class="confirmation-form">
+    <div class="_desc confirmation-form">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
             <ng-container *ngIf="col.isSelectOption;else simpleInput">
                 <div class="input_icon" *ngIf="col.field == 'zoneId'">

@@ -256,10 +256,10 @@ export class getTarrifTypeDictionary {
     private constructor(public readonly value: { id: number, dynamicId: number, title: string, field: string }[]) { }
 }
 export class getRequestDraftIds {
-    static requestDraft = 8;
+    static requestDraft = 1;
 }
 export class getOfferingIds {
-    static offeringId = 0;
+    static offeringId = 1;
 }
 export class getTarrifCalculationModeDictionary {
     static readonly DEFAULT = new getTarrifCalculationModeDictionary([

@@ -11,9 +11,9 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./offering-group.component.scss']
 })
 export class OfferingGroupComponent extends FactoryONE {
-  // private readonly _outputFileName: string = 'requestDraftOffering';
+  private readonly _outputFileName: string = 'requestDraftOfferingGroup';
   _selectCols: any = [];
-  offeringGroupDictionary: IDictionaryManager[] = [];
+  offeringGroupDictionary: any[] = [];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -22,15 +22,13 @@ export class OfferingGroupComponent extends FactoryONE {
     super();
   }
   dictionaryWrapper = async () => {
-    console.log(this.branchesService.utilsService.getRequestDraftIds().requestDraft);
-
     this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
   }
-  // insertSelectedColumns = () => {
-  //   this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
-  // }
+  insertSelectedColumns = () => {
+    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
+  }
   classWrapper = async () => {
-    // this.insertSelectedColumns();
+    this.insertSelectedColumns();
     this.dictionaryWrapper();
   }
 
