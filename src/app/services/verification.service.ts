@@ -1096,13 +1096,13 @@ export class VerificationService {
       }
     }
     if (value.hasOwnProperty('fromRadif')) {
-      if (MathS.isNull(value.fromRadif)) {
+      if (MathS.isNullZero(value.fromRadif)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_radif);
         return false;
       }
     }
     if (value.hasOwnProperty('toRadif')) {
-      if (MathS.isNull(value.toRadif)) {
+      if (MathS.isNullZero(value.toRadif)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_radif);
         return false;
       }
