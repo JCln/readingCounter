@@ -115,6 +115,10 @@ export interface IRequestDraft {
     zoneTitle: string,
     offeringIds: any
 }
+export interface IRequestDraftLazy {
+    data: IRequestDraft[],
+    totalRecords: number
+}
 export interface ICounterNumberChangeAll {
     id?: number,
     zoneId: number,

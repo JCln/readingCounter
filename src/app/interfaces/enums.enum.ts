@@ -48,6 +48,9 @@ export enum EN_messages {
     insert_readingNumber = 'اشتراک را وارد نمایید',
     insert_surename = 'نام خانوادگی را وارد نمایید',
     insert_userName = 'نام کاربری را وارد نمایید',
+    insert_dbUserName = 'نام کاربری پایگاه داده را وارد نمایید',
+    insert_dbPassword = 'گذرواژه پایگاه داده را وارد نمایید',
+    insert_dbInitialCatalog = 'کاتالوگ پایگاه داده را وارد نمایید',
     insert_mobile = 'شماره موبایل را وارد نمایید',
     insert_showName = 'نام قابل نمایش را وارد نمایید',
     insert_work = 'خدمتی را مشخص نمایید',
@@ -713,7 +716,8 @@ export enum ENEssentialsToSave {
     counterNumberChangeGetLazy = 'counterNumberChangeGetLazy',
     offeringGroup = 'offeringGroup',
     requestDraftReq = "requestDraftReq",
-    requestDraft = "requestDraft"
+    requestDraft = "requestDraft",
+    requestDraftLazy = "requestDraftLazy"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -889,6 +893,7 @@ export enum ENSelectedColumnVariables {
     selectedGeneralGroupModify = 'generalGroupModify',
     selectedOffloadedLazy = 'listOffloadedLazy',
     selectedClientGetlazy = 'clientManagerGetLazy',
+    selectedRequestDraftGetLazy = 'requestDraftGetLazy',
     selectedCounterNumberChange = 'counterNumberChange',
     selectedTariffAllLazy = 'tariffAllLazy',
     selectedReqLogInactiveEntity = 'reqLogInactiveEntity',

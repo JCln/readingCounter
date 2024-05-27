@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'offeringUnit', loadChildren: () => import('./offering-unit/offering-unit.module').then(offeringUnit => offeringUnit.OfferingUnitModule) },
   { path: 'offeringGroup', loadChildren: () => import('./offering-group/offering-group.module').then(offeringGroup => offeringGroup.OfferingGroupModule) },
   { path: 'requestDraft', loadChildren: () => import('./request-draft/request-draft.module').then(requestDraft => requestDraft.RequestDraftModule) },
+  { path: 'requestDraftLazy', loadChildren: () => import('./request-draft-getlazy/request-draft-getlazy.module').then(requestDraftGetLazy => requestDraftGetLazy.RequestDraftGetlazyModule) },
   { path: 'tariff', loadChildren: () => import('./tariff-manager/tariff-manager.module').then(tariffManager => tariffManager.TariffManagerModule) },
   { path: 'invoiceType', loadChildren: () => import('./invoice-type/invoice-type.module').then(invoiceTypeManager => invoiceTypeManager.InvoiceTypeModule) },
   { path: 'counterNumberChange', loadChildren: () => import('./counter-number-change/counter-number-change.module').then(counterNumberChange => counterNumberChange.CounterNumberChangeModule) },

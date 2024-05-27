@@ -190,5 +190,6 @@ export enum EN_Routes {
     clientAdd = '/wr/branch/addClients',
     requestDraft = '/wr/branch/requestDraft',
     clientGetLazy = '/wr/branch/clientLazy',
+    requestDraftLazy = '/wr/branch/requestDraftLazy',
     counterNumberChangeGetLazy = '/wr/branch/counterNumberChange',
 }

@@ -6,10 +6,11 @@
                 <div class="input_3">
                     <div class="_key">نوع خدمت</div>
                     <div class="_value">
-                        <p-dropdown name="offeringGroup" [options]="offeringGroupDictionary"
-                            [(ngModel)]="closeTabService.requestDraftReq.offeringIds" placeholder="انتخاب مورد"
-                            optionValue="id" optionLabel="title" filter="true">
-                        </p-dropdown>
+                        <p-multiSelect [maxSelectedLabels]="1" [options]="offeringGroupDictionary" name="usageId"
+                            [(ngModel)]="closeTabService.requestDraftReq.offeringIds" optionLabel="title"
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                            placeholder="انتخاب مورد">
+                        </p-multiSelect>
                     </div>
                 </div>
             </div>

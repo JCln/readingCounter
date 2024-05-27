@@ -1083,6 +1083,30 @@ export class VerificationService {
         return false;
       }
     }
+    if (value.hasOwnProperty('host')) {
+      if (MathS.isNull(value.host)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_host);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('dbUserName')) {
+      if (MathS.isNull(value.dbUserName)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_dbUserName);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('dbPassword')) {
+      if (MathS.isNull(value.dbPassword)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_dbPassword);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('dbInitialCatalog')) {
+      if (MathS.isNull(value.dbInitialCatalog)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_dbInitialCatalog);
+        return false;
+      }
+    }
     if (value.hasOwnProperty('fromEshterak')) {
       if (MathS.isNull(value.fromEshterak)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromEshterak);

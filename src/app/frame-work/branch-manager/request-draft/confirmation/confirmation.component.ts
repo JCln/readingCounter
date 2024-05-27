@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENRandomNumbers } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import * as L from 'leaflet';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
 import { FactoryONE } from 'src/app/classes/factory';
+
+declare let L;
 
 @Component({
   selector: 'app-confirmation',
@@ -46,6 +47,11 @@ export class ConfirmationComponent extends FactoryONE {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
     this._selectColsAccordion = this.branchesService.columnManager.getColumnsMenus(this._outputFileNameAccordion);
   }
+  private getOverlays = () => {
+    return {
+      "لایه ها": this.layerGroup3
+    };
+  }
   initMapMarkerExisted = () => {
     this.map3 = L.map('map3', {
       center: this.envService.mapCenter,
@@ -54,6 +60,7 @@ export class ConfirmationComponent extends FactoryONE {
       maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup3]
     });
+    L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map3);
   }
   classWrapper = async () => {
     this.insertSelectedColumns();
