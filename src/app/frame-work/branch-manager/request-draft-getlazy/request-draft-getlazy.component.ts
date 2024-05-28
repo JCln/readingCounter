@@ -14,6 +14,7 @@ import { ProfileService } from 'services/profile.service';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { RequestDraftDgComponent } from './request-draft-dg/request-draft-dg.component';
+import { BranchesService } from 'services/branches.service';
 
 @Component({
   selector: 'app-request-draft-getlazy',
@@ -25,6 +26,15 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
   tempMainDataSource = { totalNum: 0, data: [] };
   @ViewChild(Table) datatableG: Table;
   hasFiltersInTable: boolean = false;
+  zoneDictionary: [];
+  usageDictionary: [];
+  branchDiameterDictionary: [];
+  guildDictionary: [];
+  ownershipTypeDictionary: [];
+  branchStateDictionary: [];
+  waterSourceDictionary: [];
+  customerTypeDictionary: [];
+  offeringGroupDictionary: any[] = [];
 
   _numberOfExtraColumns: number[] = [1, 2];
   _selectedColumnsToRemember: string = 'selectedRequestDraftGetLazy';
@@ -44,6 +54,7 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
+    public branchesService: BranchesService,
   ) {
     super(dialogService, listManagerService);
   }
@@ -52,6 +63,18 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
     this.totalRecords = this.closeTabService.requestDraftLazy.totalRecords;
 
   }
+  dictionaryWrapper = async () => {
+    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
+    this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
+    this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.branchDiameterDictionary = await this.branchesService.dictionaryWrapperService.getQotrDictionary();
+    this.guildDictionary = await this.branchesService.dictionaryWrapperService.getGuildDictionary(false);
+    this.ownershipTypeDictionary = await this.branchesService.dictionaryWrapperService.getOwnershipTypeDictionary(false);
+    this.branchStateDictionary = await this.branchesService.dictionaryWrapperService.getBranchStateDictionary(false);
+    this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
+    this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
+  }
+
   classWrapper = async () => {
     if (this.browserStorageService.isExists(this._outputFileName)) {
       this._selectCols = this.browserStorageService.getLocal(this._outputFileName);
@@ -59,7 +82,7 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
       this._selectCols = this.listManagerService.columnManager.getColumnsMenus(this._outputFileName);
     }
     this._selectedColumns = this.listManagerService.columnManager.customizeSelectedColumns(this._selectCols);
-    // setDynamics should implement before new instance of dataSource create           
+    this.dictionaryWrapper();
   }
   refreshTable = () => {
     this.datatableG.onLazyLoad.emit({
@@ -156,10 +179,10 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
       width: '70%'
     })
     this.ref.onClose.subscribe((res: IRequestDraft) => {
-      console.log(this.ref);
+      console.log(res);
 
-      // if (res)
-      // this.onRowEditSave(res);
+      if (res)
+        this.refreshTable();
     });
   }
   clearFilters(table: Table) {

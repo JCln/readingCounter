@@ -472,7 +472,7 @@ export class VerificationService {
       return false;
     }
     if (MathS.isNull(body.offeringIds)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_offeringUnitId);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_offeringIds);
       return false;
     }
     if (MathS.isNull(body.nationalId)) {

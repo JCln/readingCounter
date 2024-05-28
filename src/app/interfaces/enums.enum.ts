@@ -155,6 +155,7 @@ export enum EN_messages {
     insert_tariffType = 'نوع تعرفه را وارد نمایید',
     insert_tariffCalculationMode = 'نوع محاسبه را وارد نمایید',
     insert_offeringUnitId = 'واحد را وارد نمایید',
+    insert_offeringIds = 'نوع خدمتی وارد نمایید',
     insert_offeringId = 'اقلام را وارد نمایید',
     insert_ToEshterak = 'تا اشتراک را وارد نمایید',
     insert_radif = 'شماره پرونده را وارد نمایید',

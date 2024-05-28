@@ -46,6 +46,7 @@ export enum ENReadingReports {
     requestDraftReq = 'requestDraftAdd',
     tariffExcelToFill = 'tariffExcelToFill',
     tariffAllLazy = 'tariffManagerAddEdit',
+    requestDraftLazyEdit = 'requestDraftLazyEditColumns',
     importDynamic = 'importDynamicReq',
     importHiwa = 'importHiwaReq',
     simple = '_searchSimpleReq'

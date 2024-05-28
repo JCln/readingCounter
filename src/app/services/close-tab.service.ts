@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftLazy, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -311,7 +311,7 @@ export class CloseTabService {
     data: [],
     totalRecords: 0
   };
-  requestDraftLazy: IClientGetAllLazy = {
+  requestDraftLazy: IRequestDraftLazy = {
     data: [],
     totalRecords: 0
   };
