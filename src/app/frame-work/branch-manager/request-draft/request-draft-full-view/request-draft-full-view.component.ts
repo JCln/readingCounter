@@ -53,7 +53,7 @@ export class RequestDraftFullViewComponent extends FactoryONE {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
       const config = {
         messageTitle: res.message,
-        width: '21rem',
+        minWidth: '21rem',
         isInput: false,
         isImportant: false,
         icon: 'pi pi-check',

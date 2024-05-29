@@ -52,7 +52,7 @@ export class RatesDgComponent implements OnInit {
       const config = {
         messageTitle: `تعداد ${haveValueNumbers} نرخ تعیین شده است`,
         text: EN_messages.confirm_removeAll,
-        width: '21rem',
+        minWidth: '21rem',
         isInput: false,
         isDelete: true,
         isImportant: true,

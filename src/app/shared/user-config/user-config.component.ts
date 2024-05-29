@@ -42,7 +42,7 @@ export class UserConfigComponent implements OnInit {
     const config = {
       messageTitle: EN_messages.confirm_removeingUser1 + this.dataSource.displayName + EN_messages.confirm_removeingUser2 + this.dataSource.username + EN_messages.confirm_IS,
       text: EN_messages.confirm_removeUser,
-      width: '21rem',
+      minWidth: '21rem',
       isInput: false,
       isDelete: true,
       isImportant: true,

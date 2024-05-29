@@ -74,7 +74,7 @@ export class ConfirmationComponent extends FactoryONE {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.clientAdd, this.closeTabService.clientAddReq);
       const config = {
         messageTitle: res.message,
-        width: '21rem',
+        minWidth: '21rem',
         isInput: false,
         isImportant: false,
         icon: 'pi pi-check',

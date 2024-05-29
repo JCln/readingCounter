@@ -31,7 +31,7 @@ export class InterceptorService implements HttpInterceptor {
     const config = {
       messageTitle: error,
       text: EN_Mess.access_denied401Msg,
-      width: '21rem',
+      minWidth: '21rem',
       isInput: false,
       isImportant: true,
       icon: 'pi pi-ban',
@@ -42,7 +42,7 @@ export class InterceptorService implements HttpInterceptor {
   accessDeniedSpecial = async (message: string) => {
     const config = {
       messageTitle: message,
-      width: '21rem',
+      minWidth: '21rem',
       isInput: false,
       isImportant: true,
       icon: 'pi pi-ban',

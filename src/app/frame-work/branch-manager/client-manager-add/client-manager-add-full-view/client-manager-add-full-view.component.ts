@@ -10,7 +10,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   templateUrl: './client-manager-add-full-view.component.html',
   styleUrls: ['./client-manager-add-full-view.component.scss']
 })
-export class ClientManagerAddFullViewComponent  extends FactoryONE {
+export class ClientManagerAddFullViewComponent extends FactoryONE {
   private readonly _outputFileName: string = 'clientManagerAdd';
   private readonly _outputFileNameAccordion: string = '';
   _selectCols: any = [];
@@ -53,7 +53,7 @@ export class ClientManagerAddFullViewComponent  extends FactoryONE {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.clientAdd, this.closeTabService.requestDraftReq);
       const config = {
         messageTitle: res.message,
-        width: '21rem',
+        minWidth: '21rem',
         isInput: false,
         isImportant: false,
         icon: 'pi pi-check',

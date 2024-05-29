@@ -265,6 +265,7 @@ export class UtilsService {
         isImportant: config.isImportant
       },
       rtl: true,
+      contentStyle: { minWidth: config.minWidth },
       width: config.width,
       closable: config.closable
     })

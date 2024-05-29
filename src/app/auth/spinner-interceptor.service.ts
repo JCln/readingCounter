@@ -26,7 +26,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     const config = {
       messageTitle: EN_Mess.youHaveNotAccess,
       text: EN_Mess.youHaveNotAccessMsg,
-      width: '21',
+      minWidth: '21rem',
       isInput: false,
       isImportant: true,
       icon: 'pi pi-ban'
