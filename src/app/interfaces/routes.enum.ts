@@ -173,6 +173,7 @@ export enum EN_Routes {
     mobileForbiddenType = '/wr/app/fbnType',
 
     branchState = '/wr/branch/state',
+    siphon = '/wr/branch/siphon',
     tarrifTypes = '/wr/branch/tarrifTypes',
     tariffParameter = '/wr/branch/tarrifParameter',
     offering = '/wr/branch/offering',

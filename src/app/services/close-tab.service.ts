@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftLazy, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftLazy, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -112,6 +112,7 @@ export class CloseTabService {
     fatherName: '',
     address: '',
     usageId: null,
+    siphonId: null,
     branchDiameterId: null,
     siphon1Count: null,
     siphon2Count: null,
@@ -159,6 +160,7 @@ export class CloseTabService {
     fatherName: '',
     address: '',
     usageId: null,
+    siphonId: null,
     branchDiameterId: null,
     siphon1Count: null,
     siphon2Count: null,
@@ -391,6 +393,7 @@ export class CloseTabService {
   saveDataForAPKManager: IAPK[];
   saveDataForCounterReport: ICounterReport[] = [];
   saveDataForQotrManager: IQotr[] = [];
+  siphon: ISiphon[] = [];
 
   tarrifTypeItem: ITarrifTypeItem[] = [];
   tariffParameter: ITarrifParameter[] = [];
@@ -411,8 +414,10 @@ export class CloseTabService {
     zoneIds: [],
     usageIds: [],
     offeringIds: [],
+    diameterIds: [],
     itemTypeIds: [],
-    rates: []
+    rates: [],
+    siphonIds: []
   }
 
   // zones
@@ -1528,6 +1533,10 @@ export class CloseTabService {
       defaultValue: []
     },
     {
+      id: 1, value: ENEssentialsToSave.siphon, url: EN_Routes.siphon,
+      defaultValue: []
+    },
+    {
       id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: EN_Routes.counterReport,
       defaultValue: []
     },
@@ -2376,6 +2385,8 @@ export class CloseTabService {
         zoneIds: [],
         usageIds: [],
         offeringIds: [],
+        siphonIds: [],
+        diameterIds: [],
         itemTypeIds: [],
         rates: [
           {
@@ -2405,6 +2416,7 @@ export class CloseTabService {
         fatherName: '',
         address: '',
         usageId: null,
+        siphonId: null,
         branchDiameterId: null,
         siphon1Count: null,
         siphon2Count: null,
@@ -2455,6 +2467,7 @@ export class CloseTabService {
         fatherName: '',
         address: '',
         usageId: null,
+        siphonId: null,
         branchDiameterId: null,
         siphon1Count: null,
         siphon2Count: null,

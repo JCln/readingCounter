@@ -375,6 +375,10 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_usage);
       return false;
     }
+    if (MathS.isNull(body.siphonId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon);
+      return false;
+    }
     if (MathS.isNull(body.branchDiameterId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
       return false;
@@ -493,6 +497,10 @@ export class VerificationService {
     }
     if (MathS.isNull(body.branchDiameterId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
+      return false;
+    }
+    if (MathS.isNull(body.siphonId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon);
       return false;
     }
     if (MathS.isNull(body.siphon1Count)) {

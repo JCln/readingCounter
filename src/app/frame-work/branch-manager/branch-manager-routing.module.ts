@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'waterSource', loadChildren: () => import('./water-source/water-source.module').then(waterSource => waterSource.WaterSourceModule) },
   { path: 'ownershipType', loadChildren: () => import('./ownership-type/ownership-type.module').then(ownershipType => ownershipType.OwnershipTypeModule) },
   { path: 'clients', loadChildren: () => import('./client-manager/client-manager.module').then(clientManagerGet => clientManagerGet.ClientManagerModule) },
+  { path: 'siphon', loadChildren: () => import('./siphon/siphon.module').then(siphonManager => siphonManager.SiphonModule) },
   { path: 'addClients', loadChildren: () => import('./client-manager-add/client-manager-add.module').then(addClientManager => addClientManager.ClientManagerAddModule) },
   { path: 'clientLazy', loadChildren: () => import('./client-get-lazy/client-get-lazy.module').then(clientGetLazy => clientGetLazy.ClientGetLazyModule) },
   { path: 'tarrifTypes', loadChildren: () => import('./tarrif-type-item/tarrif-type-item.module').then(tarrifTypeItemsManager => tarrifTypeItemsManager.TarrifTypeItemModule) },

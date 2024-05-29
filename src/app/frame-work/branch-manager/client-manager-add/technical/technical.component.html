@@ -37,6 +37,18 @@
                     </div>
                 </div>
             </div>
+            <div class="input_icon" *ngIf="col.field == 'siphonId'">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">سیفون</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="siphonDictionary"
+                            [(ngModel)]="closeTabService.clientAddReq.siphonId" placeholder="انتخاب مورد"
+                            optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
             <div class="input_icon" *ngIf="col.field == 'guildId'">
                 <i class="pi pi-bookmark _bookmark"></i>
                 <div class="input_3">

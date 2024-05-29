@@ -23,6 +23,7 @@ export class DictionaryWrapperService {
   private zoneBoundDictionary: any = [];
   private offeringUnit: IOfferingUnit[] = [];
   private offeringGroup: IOfferingGroup[] = [];
+  private siphonDictionary: any[] = [];
   private invoiceType: IInvoiceType[] = [];
   private offering: IOffering[] = [];
   private countryDictionary: any = [];
@@ -381,6 +382,13 @@ export class DictionaryWrapperService {
     this.setOfferingGroup(res);
     return this.offeringGroup;
   }
+  async getSiphonDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.siphonDictionary) && !canRefresh)
+      return this.siphonDictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.siphonDictionary);
+    this.setSiphonDictionary(res);
+    return this.siphonDictionary;
+  }
   async getInvoiceType(canRefresh: boolean): Promise<any> {
     if (!MathS.isNull(this.invoiceType) && !canRefresh)
       return this.invoiceType;
@@ -431,6 +439,9 @@ export class DictionaryWrapperService {
   }
   private setOfferingGroup(v: any) {
     this.offeringGroup = v;
+  }
+  private setSiphonDictionary(v: any) {
+    this.siphonDictionary = v;
   }
   private setInvoiceType(v: any) {
     this.invoiceType = v;
@@ -560,6 +571,7 @@ export class DictionaryWrapperService {
     this.zoneDictionary = [];
     this.offeringUnit = [];
     this.offeringGroup = [];
+    this.siphonDictionary = [];
     this.invoiceType = [];
     this.offering = [];
     this.zoneBoundDictionary = [];

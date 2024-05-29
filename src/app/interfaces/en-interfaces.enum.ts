@@ -548,4 +548,7 @@ export enum ENInterfaces {
     requestDraftAdd = 'V1/requestDraft/Add',
     requestDraftEdit = 'V1/requestDraft/Edit',
     requestDraftRemove = 'V1/requestDraft/Remove',
+
+    siphonAll = 'V1/siphon/All',
+    siphonDictionary = 'V1/siphon/Dictionary',
 }

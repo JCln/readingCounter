@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, IProvinceHierarchy } from 'interfaces/ioverall-config';
+import { IProvinceHierarchy } from 'interfaces/ioverall-config';
 import { TreeSelect } from 'primeng/treeselect';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
-import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { transitionAnimation } from 'src/app/directives/animation.directive';
 

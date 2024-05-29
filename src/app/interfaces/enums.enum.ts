@@ -160,6 +160,7 @@ export enum EN_messages {
     insert_ToEshterak = 'تا اشتراک را وارد نمایید',
     insert_radif = 'شماره پرونده را وارد نمایید',
     insert_usage = 'کاربری را وارد نمایید',
+    insert_siphon = 'سیفون را وارد نمایید',
     insert_Diameter = 'قطر را وارد نمایید',
     insert_siphon1 = 'سیفون1 را وارد نمایید',
     insert_siphon2 = 'سیفون2 را وارد نمایید',
@@ -718,7 +719,8 @@ export enum ENEssentialsToSave {
     offeringGroup = 'offeringGroup',
     requestDraftReq = "requestDraftReq",
     requestDraft = "requestDraft",
-    requestDraftLazy = "requestDraftLazy"
+    requestDraftLazy = "requestDraftLazy",
+    siphon = "siphon"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

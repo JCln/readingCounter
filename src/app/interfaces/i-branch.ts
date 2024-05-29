@@ -10,6 +10,11 @@ export interface ICustomerType {
     isActive: boolean,
     isNew?: boolean
 }
+export interface ISiphon {
+    id: number,
+    title: string,
+    isActive: boolean,
+}
 export interface IWaterSource {
     id: number,
     title: string,
@@ -36,6 +41,7 @@ export interface IClientAll {
     address: string,
     usageId: number,
     branchDiameterId: number,
+    siphonId: number,
     siphon1Count: number,
     siphon2Count: number,
     siphon3Count: number,
@@ -81,6 +87,7 @@ export interface IRequestDraft {
     fatherName: string,
     address: string,
     usageId: number,
+    siphonId: number,
     branchDiameterId: number,
     siphon1Count: number,
     siphon2Count: number,
@@ -133,6 +140,7 @@ export interface ICounterNumberChangeAll {
     address: string,
     usageId: number,
     branchDiameterId: number,
+    siphonId: number,
     siphon1Count: number,
     siphon2Count: number,
     siphon3Count: number,
@@ -274,6 +282,8 @@ export interface ITariffExcelToFillInput {
     toDate: string,
     zoneIds: number[],
     usageIds: number[],
+    siphonIds: number[],
+    diameterIds: number[],
     offeringIds: number[],
     itemTypeIds: number[],
     rates: []

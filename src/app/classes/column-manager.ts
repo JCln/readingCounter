@@ -539,6 +539,8 @@ export class ColumnManager {
         { field: 'toDate', header: 'تا', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'offeringIds', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'itemTypeIds', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'diameterIds', header: 'قطر', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'siphonIds', header: 'سیفون', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'rates', header: 'نرخ', isSelected: true, isSelectedOrigin: true },
     ]
     tariffTypeItem: IObjectIteratation[] = [
@@ -579,6 +581,10 @@ export class ColumnManager {
         // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
     ]
     offeringGroup: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
+    siphon: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
     ]
@@ -3189,6 +3195,7 @@ export class ColumnManager {
         { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false },
         { field: 'usageId', header: 'کاربری', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
+        { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
         { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false },
         { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false },
@@ -3237,6 +3244,7 @@ export class ColumnManager {
         // { field: 'usageId', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'usageTitle', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
+        { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false },
         { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false },
         { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false },
@@ -3286,6 +3294,7 @@ export class ColumnManager {
         { field: 'fatherName', header: 'نام پدر', isSelected: true, isSelectedOrigin: true },
         { field: 'usageId', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
+        { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
         { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false },
         { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false },
@@ -3329,6 +3338,7 @@ export class ColumnManager {
         { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false },
         { field: 'usageId', header: 'کاربری', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
+        { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
         { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false },
         { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false },
@@ -3363,6 +3373,7 @@ export class ColumnManager {
     requestDraftTechnical: IObjectIteratation[] = [
         { field: 'usageId', header: 'کاربری', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
+        { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
         { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب آب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
         { field: 'sewageInstallationJalaliDay', header: 'تاریخ نصب فاضلاب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
         // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
@@ -3412,6 +3423,7 @@ export class ColumnManager {
     clientAddTechnical: IObjectIteratation[] = [
         { field: 'usageId', header: 'کاربری', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
+        { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
         { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
         // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'sewageInstallationJalaliDay', header: 'تاریخ نصب فاضلاب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },

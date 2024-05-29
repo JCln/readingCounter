@@ -31,6 +31,32 @@
                         </div>
                     </div>
                 </div>
+                <div class="input_icon" *ngIf="col.field == 'siphonIds'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="siphonDictionary" name="siphon"
+                                [(ngModel)]="closeTabService.tariffExcelToFillInput.siphonIds" optionLabel="title"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                                placeholder="انتخاب مورد">
+                            </p-multiSelect>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon" *ngIf="col.field == 'diameterIds'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <p-multiSelect [maxSelectedLabels]="1" [options]="diameterDictionary" name="siphon"
+                                [(ngModel)]="closeTabService.tariffExcelToFillInput.diameterIds" optionLabel="title"
+                                optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                                placeholder="انتخاب مورد">
+                            </p-multiSelect>
+                        </div>
+                    </div>
+                </div>
                 <div class="input_icon" *ngIf="col.field == 'offeringIds'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">

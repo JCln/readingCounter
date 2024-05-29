@@ -18,6 +18,7 @@ export class RequestDraftComponent extends FactoryONE {
   hasStepperView: boolean;
 
   qotrDictionary: IDictionaryManager[] = [];
+  siphonDictionary: any[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   usageDictionary: IDictionaryManager[] = [];
   branchDiameterDictionary: IDictionaryManager[] = [];
@@ -38,6 +39,7 @@ export class RequestDraftComponent extends FactoryONE {
   }
   dictionaryWrapper = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
+    this.siphonDictionary = await this.branchesService.dictionaryWrapperService.getSiphonDictionary(false);
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.branchDiameterDictionary = await this.branchesService.dictionaryWrapperService.getQotrDictionary();
     this.guildDictionary = await this.branchesService.dictionaryWrapperService.getGuildDictionary(false);

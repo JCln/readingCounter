@@ -13,6 +13,7 @@ export class TechnicalComponent extends FactoryONE {
   private readonly _outputFileName: string = 'clientAddTechnical';
   _selectCols: any = [];
   qotrDictionary: IDictionaryManager[] = [];
+  siphonDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   usageDictionary: IDictionaryManager[] = [];
   branchDiameterDictionary: IDictionaryManager[] = [];
@@ -31,6 +32,7 @@ export class TechnicalComponent extends FactoryONE {
   dictionaryWrapper = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
+    this.siphonDictionary = await this.branchesService.dictionaryWrapperService.getSiphonDictionary(false);
     this.branchDiameterDictionary = await this.branchesService.dictionaryWrapperService.getQotrDictionary();
     this.guildDictionary = await this.branchesService.dictionaryWrapperService.getGuildDictionary(false);
     this.ownershipTypeDictionary = await this.branchesService.dictionaryWrapperService.getOwnershipTypeDictionary(false);

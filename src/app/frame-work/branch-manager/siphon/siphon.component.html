@@ -1,0 +1,9 @@
+<app-prime-table 
+    [dataSource]="closeTabService.siphon" 
+    [_checkUpName]="''"
+    [_outputFileName]="'siphon'"
+    [_sessionName]="'siphon-session'"
+    [_selectedColumnsToRemember]="'selectedSiphon'"
+    (refreshedTable)="callAPI()"         
+ > 
+</app-prime-table>

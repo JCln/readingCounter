@@ -19,9 +19,11 @@ export class ExcelToFillComponent extends FactoryONE {
   private readonly columnName: string = 'tariffExcelToFill';
   _selectCols: any[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  siphonDictionary: any[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   getTarrifTypeDictionary: any[] = [];
   offeringDictionary: any[] = [];
+  diameterDictionary: any[] = [];
   ref: DynamicDialogRef;
 
   constructor(
@@ -34,6 +36,8 @@ export class ExcelToFillComponent extends FactoryONE {
 
   getNesseseriesByZone = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
+    this.siphonDictionary = await this.branchesService.dictionaryWrapperService.getSiphonDictionary(false);
+    this.diameterDictionary = await this.branchesService.dictionaryWrapperService.getQotrDictionary();
     this.karbariDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering(false);
     this.getTarrifTypeDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tarriffTypeItemManagerGet);
