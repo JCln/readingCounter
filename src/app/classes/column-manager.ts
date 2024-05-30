@@ -545,13 +545,13 @@ export class ColumnManager {
     ]
     tariffTypeItem: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
-        { field: 'dynamicTariffTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
+        { field: 'dynamicTariffTypeId', header: 'گروه تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
         { field: 'dynamicTariffCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, ltr: true },
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
     ]
     tariffTypeItemAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
-        { field: 'tariffTypeId', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
+        { field: 'tariffTypeId', header: 'گروه تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false },
         { field: 'tariffCalculationMode', header: 'calculation', isSelected: true, isSelectedOrigin: true, isSelectOption: true, readonly: false, ltr: true },
         { field: 'description', header: 'توضیحات', isSelected: true, isSelectedOrigin: true },
     ]

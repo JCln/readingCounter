@@ -72,7 +72,7 @@ export class TariffAllLazyDgComponent implements OnInit {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering(false);
-    this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
+    this.getTarrifTypeDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tarriffTypeItemManagerGet);
     console.log(this.config.data);
 
     if (this.config.data.isEditing) {

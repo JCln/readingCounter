@@ -368,8 +368,8 @@ export class DictionaryWrapperService {
     this.setRoleDictionary(res);
     return this.roleDictionary;
   }
-  async getOfferingUnit(): Promise<any> {
-    if (!MathS.isNull(this.offeringUnit))
+  async getOfferingUnit(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.offeringUnit) && !canRefresh)
       return this.offeringUnit;
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringUnitGet);
     this.setOfferingUnit(res);

@@ -36,7 +36,7 @@ export class OfferingComponent extends FactoryONE {
   callAPI = async () => {
     this.closeTabService.offering = await this.branchesService.dictionaryWrapperService.getOffering(true);
     this.insertToAuxItem();
-    this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit();
+    this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit(false);
     this.offeringGroupIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
     Converter.convertIdsToTitles(
       this.closeTabService.offering,

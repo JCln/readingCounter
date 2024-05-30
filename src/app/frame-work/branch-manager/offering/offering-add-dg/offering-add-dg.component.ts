@@ -60,7 +60,7 @@ export class OfferingAddDgComponent implements OnInit {
     }
   }
   getDictionary = async () => {
-    this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit();
+    this.offeringUnitIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingUnit(false);
     this.offeringGroupIdDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
   }
   ngOnInit(): void {

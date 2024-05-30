@@ -146,7 +146,12 @@ li {
 }
 
 .p-dialog {
-  min-height: 12rem;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  @media (min-width:550px) {
+    min-height: 16rem;
+  }
 }
 
 .p-dialog,
