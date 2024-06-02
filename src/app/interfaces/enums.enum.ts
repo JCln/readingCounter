@@ -721,7 +721,11 @@ export enum ENEssentialsToSave {
     requestDraftReq = "requestDraftReq",
     requestDraft = "requestDraft",
     requestDraftLazy = "requestDraftLazy",
-    siphon = "siphon"
+    siphon = "siphon",
+    bank = "bank",
+    tariffType = "tariffType",
+    scheduledPaymentMethod = "scheduledPaymentMethod",
+    village = "village"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -965,6 +969,10 @@ export enum ENSelectedColumnVariables {
     selectedTariffTypeItem = 'tariffTypeItem',
     selectedTariffParameter = 'tariffParameter',
     selectedOffering = 'offering',
+    selectedVillage = 'village',
+    selectedTariffType = 'tariffType',
+    selectedBank = 'bank',
+    selectedSchedulePaymentMethod = 'schedulePaymentMethod',
     selectedOfferingUnit = 'offeringUnit',
     selectedOfferingGroup = 'offeringGroup',
     selectedInvoiceType = 'invoiceType',

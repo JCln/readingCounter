@@ -123,6 +123,29 @@ export interface IRequestDraft {
     zoneTitle: string,
     offeringIds: any
 }
+export interface IBank {
+    id: number,
+    code: number,
+    title: string,
+    css: string
+}
+export interface ITariffType {
+    id: number,
+    title: string,
+    isPositive: boolean
+}
+export interface IScheduledPaymentMethod {
+    id: number,
+    title: string,
+    isActive: boolean
+}
+export interface IVillage {
+    id: number,
+    title: string,
+    zoneId: number,
+    isMetro: boolean,
+    logicalOrder: number
+}
 export interface ICalculationRequestDraft {
     requestDraftId: number,
     offeringIds: number[]

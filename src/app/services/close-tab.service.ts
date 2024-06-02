@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftLazy, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITarrifParameter, ITarrifTypeItem, IWaterSource } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -151,6 +151,11 @@ export class CloseTabService {
     requestDraftId: null,
     offeringIds: []
   }
+  bank: IBank[] = [];
+  tariffType: ITariffType[] = [];
+  scheduledPaymentMethod: IScheduledPaymentMethod[] = [];
+  village: IVillage[] = [];
+
   requestDraftReq: IRequestDraft = {
     id: 0,
     zoneId: null,
@@ -2368,6 +2373,10 @@ export class CloseTabService {
       }
     },
     { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.bank, url: EN_Routes.bank, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.tariffType, url: EN_Routes.tariffType, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.scheduledPaymentMethod, url: EN_Routes.scheduledPaymentMethod, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.village, url: EN_Routes.village, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.tarrifTypeItem, url: EN_Routes.tarrifTypes, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.tariffParameter, url: EN_Routes.tariffParameter, defaultValue: [] },
     {

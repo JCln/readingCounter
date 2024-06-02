@@ -553,4 +553,24 @@ export enum ENInterfaces {
 
     siphonAll = 'V1/siphon/All',
     siphonDictionary = 'V1/siphon/Dictionary',
+
+    bankAll = 'v1/bank/All',
+    bankEdit = 'v1/bank/Edit',
+    bankAdd = 'v1/bank/Add',
+    bankRemove = 'v1/bank/Remove',
+
+    tariffTypeAll = 'v1/tariffType/All',
+    tariffTypeEdit = 'v1/tariffType/Edit',
+    tariffTypeAdd = 'v1/tariffType/Add',
+    tariffTypeRemove = 'v1/tariffType/Remove',
+
+    scheduledPaymentMethodAll = 'v1/scheduledPaymentMethod/All',
+    scheduledPaymentMethodEdit = 'v1/scheduledPaymentMethod/Edit',
+    scheduledPaymentMethodAdd = 'v1/scheduledPaymentMethod/Add',
+    scheduledPaymentMethodRemove = 'v1/scheduledPaymentMethod/Remove',
+
+    villageAll = 'v1/village/All',
+    villageEdit = 'v1/village/Edit',
+    villageAdd = 'v1/village/Add',
+    villageRemove = 'v1/village/Remove',
 }
