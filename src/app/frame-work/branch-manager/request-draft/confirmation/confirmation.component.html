@@ -1,7 +1,9 @@
 <form (ngSubmit)="callAPI()" class="confirmation-form">
+    <h2>خلاصه اطلاعات</h2>
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
             <ng-container *ngIf="col.isSelectOption;else simpleInput">
+                <h2>اطلاعات فنی</h2>
                 <div class="input_icon" *ngIf="col.field == 'zoneId'">
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
@@ -143,6 +145,7 @@
                     </div>
                 </div>
                 <div class="input_icon" *ngIf="!col.readonly && col.isGIS">
+                    <h2>اطلاعات مکانی</h2>
                     <i class="pi pi-map-marker _bookmark" [ngClass]="{special_input: col.borderize}"></i>
                     <div class="input_3">
                         <div class="_key">{{col.header}}</div>
@@ -165,7 +168,7 @@
     </div>
     <footer>
         <button type="submit" class="btn_1">
-            درخواست
+            تایید اطلاعات و درخواست
             <i class="pi pi-list"></i>
         </button>
     </footer>

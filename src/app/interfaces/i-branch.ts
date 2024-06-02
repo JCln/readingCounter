@@ -76,6 +76,7 @@ export interface IClientAll {
 }
 export interface IRequestDraft {
     id?: number,
+    requestDraftId?: number,
     zoneId: number,
     nationalId: string,
     postalCode: string,
@@ -121,6 +122,10 @@ export interface IRequestDraft {
     waterSourceTitle: string,
     zoneTitle: string,
     offeringIds: any
+}
+export interface ICalculationRequestDraft {
+    requestDraftId: number,
+    offeringIds: number[]
 }
 export interface IRequestDraftLazy {
     data: IRequestDraft[],

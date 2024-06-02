@@ -119,6 +119,12 @@ footer {
     }
 }
 
+.top_title {
+    padding: var(--font_05);
+    color: var(--primary_3);
+    text-align: right;
+}
+
 .location-form {
     display: grid;
     justify-content: center;

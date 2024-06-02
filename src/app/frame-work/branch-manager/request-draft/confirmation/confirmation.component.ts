@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENRandomNumbers } from 'interfaces/enums.enum';
+import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
@@ -81,15 +82,23 @@ export class ConfirmationComponent extends FactoryONE {
 
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.requestDraftReq)) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
+      console.log(res);
+      this.closeTabService.calculationRequestDraft.requestDraftId = res.id;
       const config = {
         messageTitle: res.message,
         minWidth: '21rem',
+        text: EN_messages.continueToCalculation,
         isInput: false,
         isImportant: false,
         icon: 'pi pi-check',
         closable: true,
       }
-      this.branchesService.utilsService.primeConfirmDialog(config);
+      const dialogRes = await this.branchesService.utilsService.primeConfirmDialog(config);
+      console.log(dialogRes);
+
+      if (!!dialogRes || !dialogRes) {
+        this.branchesService.utilsService.routeTo(EN_Routes.requestDraftCalculation);
+      }
     }
   }
 }

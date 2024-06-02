@@ -30,6 +30,7 @@ export enum EN_messages {
     insertTwoStepLength = 'ارقام کد تایید اشتباه است',
     userPassEnterCaptcha = 'لطفا عبارت تصویر امنیتی را وارد نمایید',
     toModifyBulk = 'تاریخ را وارد نمایید',
+    continueToCalculation = 'برای محاسبه هزینه درخواست به صفحه محاسبه منتقل خواهید شد',
     access_denied = 'دسترسی کافی به شما داده نشده است',
     access_whenLoginAgain = 'برای ذخیره تغییرات از برنامه خارج و مجددا وارد شوید',
     insert_without_decimal = 'شماره نسخه را بدون اعشار وارد نمایید',

@@ -77,6 +77,10 @@ export class RequestDraftComponent extends FactoryONE {
       {
         label: 'تایید',
         routerLink: 'confirmation'
+      },
+      {
+        label: 'محسابه',
+        routerLink: 'calculation'
       }
     ];
   }

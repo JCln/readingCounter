@@ -256,7 +256,7 @@ export class getTarrifTypeDictionary {
     private constructor(public readonly value: { id: number, dynamicId: number, title: string, field: string }[]) { }
 }
 export class getRequestDraftIds {
-    static requestDraft = 1;
+    static requestDraft = 6;
 }
 export class getOfferingIds {
     static offeringId = 1;
