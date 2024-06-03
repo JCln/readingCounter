@@ -3,25 +3,19 @@
         <h2>درخواست محاسبه</h2>
         <hr>
         <h5>درخواست های شما بصورت زیر است</h5>
-        <li *ngFor="let item of closeTabService.requestDraftReq.offeringIds">
-            0
-            {{item}}
-            1
-            {{offeringGroupDictionary}}
-            {{offeringGroupDictionary['title']}}
-            2
-            {{offeringGroupDictionary[item]}}
-            3
-            {{offeringGroupDictionary[item].title}}
-            <!-- {{item.title}}
-        {{item.description}} -->
-        </li>
+        <div *ngFor="let offeringDic of offeringGroupDictionary">
+            <div *ngFor="let item of closeTabService.requestDraftReq.offeringIds">
+                <li class="selected_offering" *ngIf="offeringDic.id == item">
+                    {{offeringDic.title}}
+                </li>
+            </div>
+        </div>
     </div>
 
     <footer>
         <button type="submit" class="btn_1">
             محاسبه
-            <i class="pi pi-list"></i>
+            <i class="pi pi-calculator"></i>
         </button>
     </footer>
 </form>

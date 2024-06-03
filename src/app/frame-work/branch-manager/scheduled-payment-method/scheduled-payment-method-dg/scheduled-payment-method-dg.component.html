@@ -1,1 +1,23 @@
-<p>scheduled-payment-method-dg works!</p>
+<section>
+    <h2 class="title">{{schedulePaymentReq.isEditing? 'ویرایش روش پرداخت': 'افزودن روش پرداخت'}}</h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+            <div class="input_icon" *ngFor="let mainDatas of columnManager.getColumnsMenus('scheduledPaymentMethodDialog')">
+                <i class="pi pi-bookmark _bookmark"></i>
+                <div class="input_3">
+                    <div class="_key">{{mainDatas.header}}</div>
+                    <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="schedulePaymentReq[mainDatas.field]">
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                {{schedulePaymentReq.isEditing? 'ویرایش روش پرداخت': 'افزودن روش پرداخت'}}
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

@@ -127,24 +127,28 @@ export interface IBank {
     id: number,
     code: number,
     title: string,
-    css: string
+    css: string,
+    isEditing: boolean
 }
 export interface ITariffType {
     id: number,
     title: string,
-    isPositive: boolean
+    isPositive: boolean,
+    isEditing: boolean
 }
 export interface IScheduledPaymentMethod {
     id: number,
     title: string,
-    isActive: boolean
+    isActive: boolean,
+    isEditing: boolean
 }
 export interface IVillage {
     id: number,
     title: string,
     zoneId: number,
     isMetro: boolean,
-    logicalOrder: number
+    logicalOrder: number,
+    isEditing: boolean
 }
 export interface ICalculationRequestDraft {
     requestDraftId: number,

@@ -1,1 +1,33 @@
 @import 'stepper';
+
+._desc {
+    display: grid;
+    direction: rtl;
+    align-items: center;
+    padding: var(--font_05);
+    // margin: var(--font_m);
+    gap: var(--font_xs);
+}
+
+._sections {}
+
+.selected_offering_wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 10rem));
+    direction: rtl;
+    gap: var(--font_xs);
+    margin-bottom: var(--font_xs);
+    padding: 0 var(--font_m);
+
+    .selected_offering {
+        padding: var(--font_05);
+        border: 1px solid var(--primary_3);
+        border-radius: $border_7;
+        text-align: center;
+        font-size: var(--font_s);
+        font-weight: 600;
+        background-color: var(--white);
+        color: var(--primary_3);
+        transition: box-shadow cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
+    }
+}

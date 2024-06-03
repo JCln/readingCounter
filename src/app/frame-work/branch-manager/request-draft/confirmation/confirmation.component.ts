@@ -17,8 +17,6 @@ declare let L;
   styleUrls: ['./confirmation.component.scss']
 })
 export class ConfirmationComponent extends FactoryONE {
-  private readonly _outputFileName: string = 'requestDraftAdd';
-  private readonly _outputFileNameAccordion: string = '';
   private layerGroup3 = new L.FeatureGroup();
   private map3: L.Map;
 
@@ -31,6 +29,7 @@ export class ConfirmationComponent extends FactoryONE {
   branchStateDictionary: IDictionaryManager[] = [];
   waterSourceDictionary: IDictionaryManager[] = [];
   customerTypeDictionary: IDictionaryManager[] = [];
+  offeringGroupDictionary: any[] = [];
 
   _selectCols: any = [];
   _selectColsAccordion: any = [];
@@ -44,10 +43,6 @@ export class ConfirmationComponent extends FactoryONE {
     super();
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
-    this._selectColsAccordion = this.branchesService.columnManager.getColumnsMenus(this._outputFileNameAccordion);
-  }
   private getOverlays = () => {
     return {
       "لایه ها": this.layerGroup3
@@ -64,7 +59,7 @@ export class ConfirmationComponent extends FactoryONE {
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map3);
   }
   classWrapper = async () => {
-    this.insertSelectedColumns();
+    this.dictionaryWrapper();
     this.initMapMarkerExisted();
   }
   dictionaryWrapper = async () => {
@@ -76,6 +71,7 @@ export class ConfirmationComponent extends FactoryONE {
     this.branchStateDictionary = await this.branchesService.dictionaryWrapperService.getBranchStateDictionary(false);
     this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
+    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
   }
   callAPI = async () => {
     console.log(this.closeTabService.requestDraftReq);

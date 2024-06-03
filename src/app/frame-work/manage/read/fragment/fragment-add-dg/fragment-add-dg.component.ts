@@ -60,8 +60,6 @@ export class FragmentAddDgComponent implements OnInit {
   }
   getDictionary = async () => {
     this.zoneDictionary = await this.fragmentManagerService.dictionaryWrapperService.getZoneDictionary();
-    console.log(this.zoneDictionary);
-
   }
   ngOnInit(): void {
     this.getDictionary();
