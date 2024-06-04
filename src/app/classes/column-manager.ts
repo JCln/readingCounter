@@ -575,6 +575,10 @@ export class ColumnManager {
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'isPositive', header: 'isPositive', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
+    tariffType: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'isPositive', header: 'isPositive', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
     villageDialog: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
@@ -3390,6 +3394,13 @@ export class ColumnManager {
         { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false },
         { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true },
+        // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
+    ]
+    requestDraft_confirmtionLocation: IObjectIteratation[] = [
+        { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false },
+        // { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true },
         // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]

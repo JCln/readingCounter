@@ -43,9 +43,6 @@ export class UtilsService {
   getSimafaImportStatus = (): ISimafaImportStatus => {
     return this.envService.simafaImportStatus;
   }
-  getTarrifTypeDictionary = () => {
-    return this.envService.getTarrifTypeDictionary;
-  }
   getTarrifCalculationModeDictionary = () => {
     return this.envService.getTarrifCalculationModeDictionary;
   }

@@ -1,1 +1,33 @@
 @import 'branches';
+
+textarea {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    direction: ltr;
+    border: none;
+    outline: none;
+    padding: var(--font_05);
+    height: 10rem;
+    width: 100%;
+    min-width: 100%;
+    max-width: 34rem;
+    border-radius: $border_15;
+    background: var(--secondary_3);
+    color: var(--primary_7);
+    font-size: var(--font_s);
+    font-weight: 600;
+    font-family: var(--font-family);
+
+    @media (max-width:549px) {
+        max-width: 21rem;
+    }
+}
+
+.formula {
+    border: 1px solid var(--primary_3);
+    border-radius: 7px;
+    padding: 5px;
+    margin-top: 1rem;
+    background: var(--secondary_2);
+}

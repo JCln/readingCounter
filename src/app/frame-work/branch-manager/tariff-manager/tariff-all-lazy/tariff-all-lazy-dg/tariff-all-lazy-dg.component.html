@@ -99,8 +99,9 @@
                     </ng-container>
 
                 </ng-template>
+                <!-- double size is text area in this component -->
                 <ng-template #simpleText>
-                    <div class="input_icon">
+                    <div class="input_icon" *ngIf="!mainDatas.icon">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
@@ -108,6 +109,18 @@
                                 [(ngModel)]="tarrifReq[mainDatas.field]">
                         </div>
                     </div>
+                    <div class="formula" *ngIf="mainDatas.icon">
+                        <div class="input_icon">
+                            <i class="pi pi-pencil _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">فرمول</div>
+                            </div>
+                        </div>
+                        <textarea placeholder="فرمول در اینجا نوشته شود" name="{{mainDatas.field}}" id="text" cols="30"
+                            rows="10" [(ngModel)]="tarrifReq[mainDatas.field]">
+                    </textarea>
+                    </div>
+
                 </ng-template>
             </div>
         </div>

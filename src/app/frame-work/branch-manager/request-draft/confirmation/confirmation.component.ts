@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
+import { ENCompanyName, ENRandomNumbers, EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
@@ -31,9 +31,6 @@ export class ConfirmationComponent extends FactoryONE {
   customerTypeDictionary: IDictionaryManager[] = [];
   offeringGroupDictionary: any[] = [];
 
-  _selectCols: any = [];
-  _selectColsAccordion: any = [];
-
   constructor(
     public closeTabService: CloseTabService,
     public branchesService: BranchesService,
@@ -48,6 +45,14 @@ export class ConfirmationComponent extends FactoryONE {
       "لایه ها": this.layerGroup3
     };
   }
+  private flyToDes = (lat: number, lag: number, zoom: number) => {
+    if (lat === 0 || lag === 0)
+      return;
+    lat = parseFloat(lat.toString().substring(0, 6));
+    lag = parseFloat(lag.toString().substring(0, 6));
+
+    this.map3.flyTo([(lat), (lag)], zoom);
+  }
   initMapMarkerExisted = () => {
     this.map3 = L.map('map3', {
       center: this.envService.mapCenter,
@@ -56,7 +61,14 @@ export class ConfirmationComponent extends FactoryONE {
       maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup3]
     });
-    L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map3);
+
+    this.map3.attributionControl.setPrefix(ENCompanyName.title);
+    const x = Number(this.closeTabService.requestDraftReq.x);
+    const y = Number(this.closeTabService.requestDraftReq.y);
+    var markersGroup = L.layerGroup();
+    this.flyToDes(x, y, ENRandomNumbers.fifteen);
+    L.marker([x, y]).addTo(markersGroup);
+    this.map3.addLayer(markersGroup);
   }
   classWrapper = async () => {
     this.dictionaryWrapper();

@@ -145,6 +145,7 @@ $border_15: 10px;
   }
 }
 
+//label on top input under
 .input_simple {
   width: 100%;
   line-height: 3rem;
@@ -152,4 +153,24 @@ $border_15: 10px;
   font-size: 2rem;
   border: 0;
   background: none;
+}
+
+// linear input without border/ between key and value gap exists
+.input_linear {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.2rem;
+  border: 0;
+  background: none;
+
+  ._value {
+    margin: 0 2px;
+    flex: 1;
+    text-align: left;
+    background: none;
+    border: 0;
+    border-radius: $border_5;
+  }
+
 }

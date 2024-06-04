@@ -29,8 +29,7 @@ export class EnvService implements IENV {
   getInvalidLoginReasonDictionary = this.temp.getInvalidLoginReasonDictionary;
   shouldSaveTokensInLocal = this.temp.shouldSaveTokensInLocal;
   getMasrafStateDictionary = this.temp.getMasrafStateDictionary;
-  getHighLowStateId = this.temp.getHighLowStateId;
-  getTarrifTypeDictionary = this.temp.getTarrifTypeDictionary;
+  getHighLowStateId = this.temp.getHighLowStateId;  
   getTarrifCalculationModeDictionary = this.temp.getTarrifCalculationModeDictionary;
   getRequestDraftIds = this.temp.getRequestDraftIds;
   getOfferingIds = this.temp.getOfferingIds;

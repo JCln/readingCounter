@@ -18,6 +18,10 @@ const routes: Routes = [
   { path: 'requestDraft', loadChildren: () => import('./request-draft/request-draft.module').then(requestDraft => requestDraft.RequestDraftModule) },
   { path: 'requestDraftLazy', loadChildren: () => import('./request-draft-getlazy/request-draft-getlazy.module').then(requestDraftGetLazy => requestDraftGetLazy.RequestDraftGetlazyModule) },
   { path: 'tariff', loadChildren: () => import('./tariff-manager/tariff-manager.module').then(tariffManager => tariffManager.TariffManagerModule) },
+  { path: 'bank', loadChildren: () => import('./bank/bank.module').then(bankManager => bankManager.BankModule) },
+  { path: 'tariffType', loadChildren: () => import('./tariff-type/tariff-type.module').then(tariffTypeManager => tariffTypeManager.TariffTypeModule) },
+  { path: 'scheduledPaymentMethod', loadChildren: () => import('./scheduled-payment-method/scheduled-payment-method.module').then(scheduledPaymentMethod => scheduledPaymentMethod.ScheduledPaymentMethodModule) },
+  { path: 'village', loadChildren: () => import('./village/village.module').then(villageModule => villageModule.VillageModule) },
   { path: 'invoiceType', loadChildren: () => import('./invoice-type/invoice-type.module').then(invoiceTypeManager => invoiceTypeManager.InvoiceTypeModule) },
   { path: 'counterNumberChange', loadChildren: () => import('./counter-number-change/counter-number-change.module').then(counterNumberChange => counterNumberChange.CounterNumberChangeModule) },
 ];

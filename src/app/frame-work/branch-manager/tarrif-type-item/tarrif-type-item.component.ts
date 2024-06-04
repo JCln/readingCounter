@@ -34,7 +34,7 @@ export class TarrifTypeItemComponent extends FactoryONE {
   callAPI = async () => {
     this.closeTabService.tarrifTypeItem = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tarriffTypeItemManagerGet);
     this.getTarrifCalculationModeDictionary = this.branchesService.utilsService.getTarrifCalculationModeDictionary();
-    this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
+    this.getTarrifTypeDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffTypeAll);
     this.insertToAux();
     Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifCalculationModeDictionary, 'dynamicTariffCalculationMode');
     Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifTypeDictionary, 'dynamicTariffTypeId');

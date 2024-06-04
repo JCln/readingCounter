@@ -42,6 +42,17 @@
     background: var(--white);
   }
 
+  .p-steps .p-steps-item.p-highlight .p-steps-number {
+    background: var(--green_500);
+    color: var(--white);
+  }
+
+  .p-steps .p-steps-item .p-menuitem-link:not(.p-disabled):focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem var(--green_500);
+  }
+
   .p-treeselect {
     height: var(--font_26);
     background-color: var(--white);

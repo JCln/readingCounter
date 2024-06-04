@@ -57,14 +57,17 @@ export class TarriftypeAddDgComponent implements OnInit {
     if (this.branchesService.verificationService.tarrifTypeItem(this.tarrifTypeReq))
       MathS.isNull(this.config.data) ? this.onRowAdd(this.tarrifTypeReq) : this.onRowEdit(this.tarrifTypeReq)
   }
-  ngOnInit(): void {
+  classWrapper = async () => {
     this.getTarrifCalculationModeDictionary = this.branchesService.utilsService.getTarrifCalculationModeDictionary();
-    this.getTarrifTypeDictionary = this.branchesService.utilsService.getTarrifTypeDictionary();
+    this.getTarrifTypeDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffTypeAll);
     if (this.config.data) {
       this.tarrifTypeReq = this.config.data;
 
       // isEditing = true; should be last line
       this.tarrifTypeReq.isEditing = true;
     }
+  }
+  ngOnInit(): void {
+    this.classWrapper();
   }
 }
