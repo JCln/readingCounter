@@ -146,6 +146,7 @@ export interface IVillage {
     id: number,
     title: string,
     zoneId: number,
+    changableZoneId?: any,
     isMetro: boolean,
     logicalOrder: number,
     isEditing: boolean

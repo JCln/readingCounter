@@ -583,6 +583,13 @@ export class ColumnManager {
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
+        { field: 'isMetro', header: 'شهری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
+    village: IObjectIteratation[] = [
+        { field: 'changableZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
+        { field: 'isMetro', header: 'شهری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
     offeringAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

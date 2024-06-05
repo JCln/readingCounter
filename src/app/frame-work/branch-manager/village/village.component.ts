@@ -6,6 +6,8 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { VillageDgComponent } from './village-dg/village-dg.component';
+import { Converter } from 'src/app/classes/converter';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 @Component({
   selector: 'app-village',
@@ -13,6 +15,7 @@ import { VillageDgComponent } from './village-dg/village-dg.component';
   styleUrls: ['./village.component.scss']
 })
 export class VillageComponent extends FactoryONE {
+  zoneDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
   constructor(
@@ -22,8 +25,16 @@ export class VillageComponent extends FactoryONE {
   ) {
     super();
   }
+  insertToAuxZoneid = () => {
+    this.closeTabService.village.forEach(item => {
+      item.changableZoneId = item.zoneId;
+    })
+  }
   callAPI = async () => {
     this.closeTabService.village = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.villageAll);
+    this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
+    this.insertToAuxZoneid();
+    Converter.convertIdToTitle(this.closeTabService.village, this.zoneDictionary, 'changableZoneId');
   }
   openDialog = (item?: any) => {
     this.ref = this.dialogService.open(VillageDgComponent, {
