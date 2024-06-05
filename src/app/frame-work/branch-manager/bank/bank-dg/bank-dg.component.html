@@ -1,3 +1,18 @@
+<p-dropdown [options]="bankItems" [(ngModel)]="selectedBank" optionLabel="name" [filter]="true" filterBy="name"
+    [showClear]="true" placeholder="انتخاب کنید">
+    <ng-template pTemplate="selectedItem">
+        <div class="inline_bank">
+            <i [class]="'ibl32 '+ selectedBank.name"></i>
+            <div>{{ selectedBank.header }}</div>
+        </div>
+    </ng-template>
+    <ng-template let-bank pTemplate="item">
+        <div class="inline_bank">
+            <div>{{ bank.header }}</div>
+            <i [class]="'ibl32 '+ bank.name"></i>
+        </div>
+    </ng-template>
+</p-dropdown>
 <section>
     <h2 class="title">{{bankReq.isEditing? 'ویرایش بانک': 'افزودن بانک'}}</h2>
     <hr>
