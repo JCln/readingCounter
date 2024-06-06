@@ -507,7 +507,7 @@ export class ColumnManager {
     tariffAllLazy: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true, isSelectOption: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true },
-        { field: 'formula', header: 'فرمول', isSelected: true, isSelectedOrigin: true, readonly: true, ltr: true },
+        { field: 'formula', header: 'فرمول', isSelected: false, isSelectedOrigin: false, readonly: true, ltr: true },
         // { field: 'usageId', header: 'کاربری', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'fromDate', header: 'از تاریخ', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'toDate', header: 'تا تاریخ', isSelected: true, isSelectedOrigin: true, readonly: true },
@@ -566,9 +566,17 @@ export class ColumnManager {
     bankDialog: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'code', header: 'کد بانک', isSelected: true, isSelectedOrigin: true },
-        { field: 'CSS', header: 'CSS', isSelected: true, isSelectedOrigin: true },
+        { field: 'CSS', header: 'CSS', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
+    bank: IObjectIteratation[] = [
+        { field: 'CSS', header: 'CSS/Logo', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'code', header: 'کد بانک', isSelected: true, isSelectedOrigin: true },
     ]
     scheduledPaymentMethodDialog: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+    ]
+    scheduledPaymentMethod: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
     ]
     tariffTypeDialog: IObjectIteratation[] = [

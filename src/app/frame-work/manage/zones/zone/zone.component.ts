@@ -50,16 +50,20 @@ export class ZoneComponent extends FactoryONE {
       item.dynamicId = item.regionId;
     })
   }
+  callDictionaries = async () => {
+    this.regionDictionary = await this.sectorsManagerService.dictionaryWrapperService.getRegionDictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'dynamicId');
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForZone = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneGET);
     this.insertToAuxZoneid();
-    this.regionDictionary = await this.sectorsManagerService.dictionaryWrapperService.getRegionDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForZone, this.regionDictionary, 'dynamicId');
+    this.callDictionaries();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForZone)) {
       this.callAPI();
     }
+    this.callDictionaries();
   }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  منطقه: ' + rowDataAndIndex['dataSource'].dynamicId);

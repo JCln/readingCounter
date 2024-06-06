@@ -46,15 +46,20 @@ export class ZoneBoundComponent extends FactoryONE {
       });
     });
   }
-  callAPI = async () => {
-    this.closeTabService.saveDataForZoneBound = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneBoundGET);
+  callDictionaries = async () => {
     this.zoneDictionary = await this.sectorsManagerService.dictionaryWrapperService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'zoneId');
+  }
+
+  callAPI = async () => {
+    this.closeTabService.saveDataForZoneBound = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneBoundGET);
+    this.callDictionaries();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForZoneBound)) {
       this.callAPI();
     }
+    this.callDictionaries();
   }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].zoneId);

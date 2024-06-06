@@ -50,19 +50,20 @@ export class RegionComponent extends FactoryONE {
       item.dynamicId = item.provinceId;
     })
   }
+  callDictionaries = async () => {
+    this.provinceDictionary = await this.sectorsManagerService.dictionaryWrapperService.getProvinceDictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'dynamicId');
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForRegion = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.RegionGET);
     this.insertToAuxZoneid();
-    console.log(this.closeTabService.saveDataForRegion);
-
-    this.provinceDictionary = await this.sectorsManagerService.dictionaryWrapperService.getProvinceDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRegion, this.provinceDictionary, 'dynamicId');
-    console.log(this.provinceDictionary);
+    this.callDictionaries();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForRegion)) {
       this.callAPI();
     }
+    this.callDictionaries();
   }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  استان: ' + rowDataAndIndex['dataSource'].dynamicId);
@@ -85,7 +86,7 @@ export class RegionComponent extends FactoryONE {
       this.callAPI();
     }
   }
-  onRowEditCancel() {    
+  onRowEditCancel() {
   }
 
 }

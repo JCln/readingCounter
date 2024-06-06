@@ -1116,7 +1116,7 @@ export class VerificationService {
       }
     }
     if (value.hasOwnProperty('fromEshterak')) {
-      if (MathS.isNull(value.fromEshterak)) {
+      if (MathS.isNullZero(value.fromEshterak)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromEshterak);
         return false;
       }
@@ -1226,20 +1226,20 @@ export class VerificationService {
     return true;
   }
   fromToValidation = (value: any): boolean => {
-    if (value.hasOwnProperty('toEshterak')) {
-      const a = value;
-      if (!MathS.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
-        return false;
-      }
-    }
-    if (value.hasOwnProperty('fromDate')) {
-      const a = value;
-      if (!MathS.lengthControl(a.fromDate, a.fromDate, 9, 10)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
-        return false;
-      }
-    }
+    // if (value.hasOwnProperty('toEshterak')) {
+    //   const a = value;
+    //   if (!MathS.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
+    //     this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
+    //     return false;
+    //   }
+    // }
+    // if (value.hasOwnProperty('fromDate')) {
+    //   const a = value;
+    //   if (!MathS.lengthControl(a.fromDate, a.fromDate, 9, 10)) {
+    //     this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_fromDate);
+    //     return false;
+    //   }
+    // }
     if (value.hasOwnProperty('toDate')) {
       const a = value;
       if (!MathS.lengthControl(a.toDate, a.toDate, 9, 10)) {

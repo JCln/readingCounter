@@ -1,10 +1,10 @@
 <app-prime-table    
-    [dataSource]="closeTabService.bank" 
+    [dataSource]="closeTabService.scheduledPaymentMethod" 
     [_checkUpName]="'branches'"
-    [_outputFileName]="'bank'"
+    [_outputFileName]="'scheduledPaymentMethod'"
     [_numberOfExtraColumns]="[1, 2]"
     [isAddableTable]="true"    
-    [_sessionName]="'bank-session'"
+    [_sessionName]="'scheduledPaymentMethod-session'"
     [_selectedColumnsToRemember]="'selectedSchedulePaymentMethod'"
     (refreshedTable)="callAPI()"     
     (showedMoreDetails)="removeRow($event)"    

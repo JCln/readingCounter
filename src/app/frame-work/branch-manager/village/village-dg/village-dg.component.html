@@ -22,20 +22,16 @@
                     </div>
                 </ng-container>
                 <ng-template #checkboxes>
-                    <ng-container>
-                        <ng-template *ngIf="mainDatas.isBoolean; else simpleText">
-                            <div class="input_icon">
-                                <i class="pi pi-bookmark _bookmark"></i>
-                                <div class="input_3">
-                                    <div class="_key">{{mainDatas.header}}</div>
-                                    <mat-checkbox name="isCluster" [(ngModel)]="villageReq[mainDatas.field]">
-                                        {{mainDatas.isSelected}}
-                                    </mat-checkbox>
-                                </div>
+                    <ng-container *ngIf="mainDatas.isBoolean; else simpleText">
+                        <div class="input_icon">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <mat-checkbox name="isCluster" [(ngModel)]="villageReq[mainDatas.field]">
+                                </mat-checkbox>
                             </div>
-                        </ng-template>
+                        </div>
                     </ng-container>
-
                 </ng-template>
                 <ng-template #simpleText>
                     <div class="input_icon">
