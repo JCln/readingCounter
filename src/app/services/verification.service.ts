@@ -475,7 +475,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (MathS.isNull(body.offeringIds)) {
+    if (MathS.isNull(body.offeringGroupIds)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_offeringIds);
       return false;
     }

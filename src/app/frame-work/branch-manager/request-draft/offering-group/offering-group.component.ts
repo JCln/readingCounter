@@ -22,7 +22,7 @@ export class OfferingGroupComponent extends FactoryONE {
     super();
   }
   dictionaryWrapper = async () => {
-    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
+    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
   }
   insertSelectedColumns = () => {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);

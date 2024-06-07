@@ -5,7 +5,7 @@
         <h3 class="top_title">نوع خدمت</h3>
         <div class="selected_offering_wrapper">
             <div *ngFor="let offeringDic of offeringGroupDictionary">
-                <div *ngFor="let item of closeTabService.requestDraftReq.offeringIds">
+                <div *ngFor="let item of closeTabService.requestDraftReq.offeringGroupIds">
                     <div class="selected_offering" *ngIf="offeringDic.id == item">
                         {{offeringDic.title}}
                     </div>

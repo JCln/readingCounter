@@ -1,1 +1,45 @@
 @import 'stepper';
+@import 'variable';
+
+table {
+    display: grid;
+    direction: rtl;
+    justify-content: center;
+    background: var(--white);
+    border-radius: $border_7;
+    border: 2px dotted var(--primary_3);
+    padding: var(--font_05);
+}
+
+._head {
+    background-color: var(--secondary_8);
+    color: var(--white);
+}
+
+tr {
+    text-align: center;
+    font-weight: 600;
+    font-size: var(--font_s);
+}
+
+td {
+    min-width: 10rem;
+}
+
+.green_response {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    direction: rtl;
+
+    padding: var(--font_xs);
+    margin: var(--font_05);
+    background: var(--white);
+    color: var(--green_500);
+    border: 1px solid var(--green_500);
+    border-radius: $border_5;
+
+    i {
+        margin-left: var(--font_xs);
+    }
+}

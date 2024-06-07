@@ -82,6 +82,8 @@ export class TariffAllLazyDgComponent implements OnInit {
       // isEditing = true; should be last line
       this.tarrifReq.isEditing = true;
     }
+    console.log(this.tarrifReq);
+
   }
   ngOnInit(): void {
     this.classWrapper();

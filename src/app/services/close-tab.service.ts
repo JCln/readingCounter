@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -145,11 +145,11 @@ export class CloseTabService {
     ownershipTypeTitle: '',
     customerTypeTitle: '',
     waterSourceTitle: '',
-
   };
+  requestDraftCalculationRes: IRequestDraftCalculationRes[] = [];
   calculationRequestDraft: ICalculationRequestDraft = {
     requestDraftId: null,
-    offeringIds: []
+    offeringGroupIds: []
   }
   bank: IBank[] = [];
   tariffType: ITariffType[] = [];
@@ -202,7 +202,8 @@ export class CloseTabService {
     ownershipTypeTitle: '',
     customerTypeTitle: '',
     waterSourceTitle: '',
-    offeringIds: null
+    offeringIds: null,
+    offeringGroupIds: null
   };
   clientGet: IClientAll[] = [];
 
@@ -2512,7 +2513,9 @@ export class CloseTabService {
         customerTypeTitle: '',
         waterSourceTitle: '',
         zoneTitle: '',
-        usageTitle: ''
+        usageTitle: '',
+        offeringIds: null,
+        offeringGroupIds: null,
       }
     },
     {

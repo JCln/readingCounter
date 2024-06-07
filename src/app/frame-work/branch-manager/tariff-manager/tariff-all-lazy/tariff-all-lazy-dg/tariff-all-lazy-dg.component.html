@@ -15,7 +15,7 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="getTarrifTypeDictionary"
+                                <p-dropdown name="tarrifTypeItem" [options]="getTarrifTypeDictionary"
                                     [(ngModel)]="tarrifReq.tarrifTypeItemId" placeholder="انتخاب مورد" optionValue="id"
                                     optionLabel="title" filter="true">
                                 </p-dropdown>
@@ -27,7 +27,7 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="zoneDictionary"
+                                <p-dropdown name="zoneId" [options]="zoneDictionary"
                                     [(ngModel)]="tarrifReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
                                     optionLabel="title" filter="true">
                                 </p-dropdown>
@@ -39,7 +39,7 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="usageDictionary"
+                                <p-dropdown name="usage" [options]="usageDictionary"
                                     [(ngModel)]="tarrifReq.usageId" placeholder="انتخاب مورد" optionValue="id"
                                     optionLabel="title" filter="true">
                                 </p-dropdown>
@@ -51,7 +51,7 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="offeringDictionary"
+                                <p-dropdown name="offeringId" [options]="offeringDictionary"
                                     [(ngModel)]="tarrifReq.offeringId" placeholder="انتخاب مورد" optionValue="id"
                                     optionLabel="title" filter="true">
                                 </p-dropdown>

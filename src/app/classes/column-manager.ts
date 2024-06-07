@@ -581,11 +581,11 @@ export class ColumnManager {
     ]
     tariffTypeDialog: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'isPositive', header: 'isPositive', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'isPositive', header: 'ضریب مثبت', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
     tariffType: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'isPositive', header: 'isPositive', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'isPositive', header: 'ضریب مثبت', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
     villageDialog: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
@@ -621,7 +621,7 @@ export class ColumnManager {
         // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
     ]
     siphon: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, ltr: true },
         // { field: 'isActive', header: 'نوع تعرفه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
     ]
     offeringUnitAdd: IObjectIteratation[] = [
@@ -629,7 +629,7 @@ export class ColumnManager {
         { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
     ]
     offeringGroupAdd: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, readonly: false, icon: 'grid-column: auto/ span 2;' },
         // { field: 'symbol', header: 'symbol', isSelected: true, isSelectedOrigin: true, readonly: false },
     ]
     invoiceType: IObjectIteratation[] = [

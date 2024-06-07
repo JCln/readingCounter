@@ -40,8 +40,11 @@ export class ZoneBoundAddDgComponent {
     if (!this.verificationService.sectionVertification(this.form.value)) {
       return;
     }
-    if (!await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneBoundADD, this.form.value))
+    const res = await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneBoundADD, this.form.value);
+    if (res) {
+      this.sectorsManagerService.utilsService.snackBarMessageSuccess(res.message);
       return;
+    }
 
     this.dialogRef.close(this.form.value);
   }

@@ -73,6 +73,8 @@ export class ConfirmationComponent extends FactoryONE {
   classWrapper = async () => {
     this.dictionaryWrapper();
     this.initMapMarkerExisted();
+    console.log(this.closeTabService.calculationRequestDraft);
+
   }
   dictionaryWrapper = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
@@ -83,15 +85,17 @@ export class ConfirmationComponent extends FactoryONE {
     this.branchStateDictionary = await this.branchesService.dictionaryWrapperService.getBranchStateDictionary(false);
     this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
-    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
+    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
   }
   callAPI = async () => {
     console.log(this.closeTabService.requestDraftReq);
 
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.requestDraftReq)) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
-      console.log(res);
+
       this.closeTabService.calculationRequestDraft.requestDraftId = res.id;
+      console.log(this.closeTabService.calculationRequestDraft);
+
       const config = {
         messageTitle: res.message,
         minWidth: '21rem',

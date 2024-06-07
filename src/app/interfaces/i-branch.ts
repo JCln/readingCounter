@@ -121,7 +121,8 @@ export interface IRequestDraft {
     customerTypeTitle: string,
     waterSourceTitle: string,
     zoneTitle: string,
-    offeringIds: any
+    offeringIds: any,
+    offeringGroupIds: any
 }
 export interface IBank {
     id: number,
@@ -153,7 +154,12 @@ export interface IVillage {
 }
 export interface ICalculationRequestDraft {
     requestDraftId: number,
-    offeringIds: number[]
+    offeringGroupIds: number[]
+}
+export interface IRequestDraftCalculationRes {
+    value: number,
+    offeringTitle: string,
+    typeTitle: string
 }
 export interface IRequestDraftLazy {
     data: IRequestDraft[],
