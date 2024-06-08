@@ -18,10 +18,8 @@ export class TechnicalComponent extends FactoryONE {
   usageDictionary: IDictionaryManager[] = [];
   branchDiameterDictionary: IDictionaryManager[] = [];
   guildDictionary: IDictionaryManager[] = [];
-  ownershipTypeDictionary: IDictionaryManager[] = [];
   branchStateDictionary: IDictionaryManager[] = [];
   waterSourceDictionary: IDictionaryManager[] = [];
-  customerTypeDictionary: IDictionaryManager[] = [];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -35,10 +33,8 @@ export class TechnicalComponent extends FactoryONE {
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.branchDiameterDictionary = await this.branchesService.dictionaryWrapperService.getQotrDictionary();
     this.guildDictionary = await this.branchesService.dictionaryWrapperService.getGuildDictionary(false);
-    this.ownershipTypeDictionary = await this.branchesService.dictionaryWrapperService.getOwnershipTypeDictionary(false);
     this.branchStateDictionary = await this.branchesService.dictionaryWrapperService.getBranchStateDictionary(false);
     this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
-    this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }
   insertSelectedColumns = () => {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);

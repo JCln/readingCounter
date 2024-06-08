@@ -17,6 +17,7 @@ export interface IForbiddenManager {
     x: string,
     y: string,
     zoneId: string,
+    changableZoneId: any,
     activate: boolean,
     type: string,
 }

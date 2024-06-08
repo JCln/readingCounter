@@ -1,15 +1,43 @@
 <form>
-    <h2 class="top_title">اطلاعات شخصی را تکمیل نمایید</h2>
+    <h2 class="top_title">اطلاعات مالک را تکمیل نمایید</h2>
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
-            <div class="input_icon">
-                <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
-                <div class="input_3">
-                    <div class="_key">{{col.header}}</div>
-                    <input [readonly]="col.readonly" [tabindex]="col.tabIndex" [type]="col.isNumber ? 'number' : 'text'"
-                        class="_value" name="{{col.field}}" [(ngModel)]="closeTabService.requestDraftReq[col.field]">
+            <ng-container *ngIf="col.isSelectOption;else simpleInput">
+                <div class="input_icon" *ngIf="col.field == 'ownershipTypeId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نوع مالکیت</div>
+                        <div class="_value">
+                            <p-dropdown name="ownershipTypeId" [options]="ownershipTypeDictionary"
+                                [(ngModel)]="closeTabService.requestDraftReq.ownershipTypeId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="input_icon" *ngIf="col.field == 'customerTypeId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">نوع مشترک</div>
+                        <div class="_value">
+                            <p-dropdown name="customerTypeId" [options]="customerTypeDictionary"
+                                [(ngModel)]="closeTabService.requestDraftReq.customerTypeId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #simpleInput>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                    <div class="input_3">
+                        <div class="_key">{{col.header}}</div>
+                        <input [readonly]="col.readonly" [type]="col.isNumber ? 'number' : 'text'" class="_value"
+                            name="{{col.field}}" [(ngModel)]="closeTabService.requestDraftReq[col.field]">
+                    </div>
+                </div>
+            </ng-template>
         </div>
     </div>
 </form>

@@ -15,6 +15,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="input_icon" *ngIf="col.field == 'villageId'">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">روستا</div>
+                        <div class="_value">
+                            <p-dropdown name="village" [options]="villageDictionary"
+                                [(ngModel)]="closeTabService.requestDraftReq.villageId" placeholder="انتخاب مورد"
+                                optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
             </ng-container>
             <ng-template #simpleInput>
                 <div class="input_icon" *ngIf="!col.readonly && !col.isGIS">

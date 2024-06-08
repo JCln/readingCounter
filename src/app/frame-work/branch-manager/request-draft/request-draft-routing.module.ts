@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RequestDraftComponent } from './request-draft.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { OtherInfoComponent } from './other-info/other-info.component';
-import { DescriptionComponent } from './description/description.component';
 import { LocationComponent } from './location/location.component';
 import { TechnicalComponent } from './technical/technical.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
@@ -13,11 +12,10 @@ import { CalculationComponent } from './calculation/calculation.component';
 const routes: Routes = [
   {
     path: '', component: RequestDraftComponent, children: [
-      { path: '', redirectTo: 'desc', pathMatch: 'full' },
+      { path: '', redirectTo: 'offering', pathMatch: 'full' },
       { path: 'personal', component: PersonalInfoComponent },
       { path: 'offering', component: OfferingGroupComponent },
-      { path: 'others', component: OtherInfoComponent },
-      { path: 'desc', component: DescriptionComponent },
+      { path: 'others', component: OtherInfoComponent },      
       { path: 'location', component: LocationComponent },
       { path: 'technical', component: TechnicalComponent },
       { path: 'confirmation', component: ConfirmationComponent },

@@ -52,7 +52,7 @@
     </section>
 
     <section class="_sections">
-        <h3 class="top_title">اطلاعات شخصی</h3>
+        <h3 class="top_title">اطلاعات مالک</h3>
         <div class="_desc">
             <div *ngFor="let col of branchesService.columnManager.getColumnsMenus('requestDraftPersonalInfo')"
                 [ngClass]="{'double_size':col.icon}">
@@ -172,7 +172,7 @@
     </section>
 
     <section class="_sections">
-        <h3 class="top_title">سایر اطلاعات</h3>
+        <h3 class="top_title">اطلاعات ملک</h3>
         <div class="_desc">
             <div *ngFor="let col of branchesService.columnManager.getColumnsMenus('requestDraftOtherInfo')">
                 <div class="input_linear">

@@ -19,6 +19,7 @@ export class DictionaryWrapperService {
   private provinceDictionary: any = [];
   private regionDictionary: any = [];
   private zoneDictionary: any = [];
+  private villageDictionary: any = [];
   private provinceHierarchy: any = [];
   private zoneBoundDictionary: any = [];
   private offeringUnit: IOfferingUnit[] = [];
@@ -135,6 +136,13 @@ export class DictionaryWrapperService {
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneDICTIONARY);
     this.setZoneDictionary(res);
     return this.zoneDictionary;
+  }
+  async getVillageDictionary(): Promise<any> {
+    if (!MathS.isNull(this.villageDictionary))
+      return this.villageDictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.villageAll);
+    this.setVillageDictionary(res);
+    return this.villageDictionary;
   }
   async getCountryDictionary(): Promise<any> {
     if (!MathS.isNull(this.countryDictionary))
@@ -431,6 +439,9 @@ export class DictionaryWrapperService {
   private setZoneDictionary(v: any) {
     this.zoneDictionary = v;
   }
+  private setVillageDictionary(v: any) {
+    this.villageDictionary = v;
+  }
   private setZoneBoundDictionary(v: any) {
     this.zoneBoundDictionary = v;
   }
@@ -569,6 +580,7 @@ export class DictionaryWrapperService {
     this.provinceDictionary = [];
     this.regionDictionary = [];
     this.zoneDictionary = [];
+    this.villageDictionary = [];
     this.offeringUnit = [];
     this.offeringGroup = [];
     this.siphonDictionary = [];

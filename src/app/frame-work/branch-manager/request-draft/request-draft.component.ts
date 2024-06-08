@@ -51,15 +51,11 @@ export class RequestDraftComponent extends FactoryONE {
   addStepperItems(): void {
     this.items = [
       {
-        label: 'راهنما',// توضیح اضافه برای عنوان اضافه بشه در افزودن کاربر
-        routerLink: 'desc'
-      },
-      {
         label: 'نوع خدمت',
         routerLink: 'offering'
       },
       {
-        label: 'اطلاعات شخصی',
+        label: 'اطلاعات مالک',
         routerLink: 'personal'
       },
       {
@@ -67,7 +63,7 @@ export class RequestDraftComponent extends FactoryONE {
         routerLink: 'technical'
       },
       {
-        label: 'سایر اطلاعات',
+        label: 'اطلاعات ملک',
         routerLink: 'others'
       },
       {

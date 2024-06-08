@@ -159,6 +159,7 @@ export class CloseTabService {
   requestDraftReq: IRequestDraft = {
     id: 0,
     zoneId: null,
+    villageId: null,
     nationalId: '',
     postalCode: '',
     mobiles: '',
@@ -175,6 +176,9 @@ export class CloseTabService {
     siphon2Count: null,
     siphon3Count: null,
     siphon4Count: null,
+    commercialConstructionArea: null,
+    domesticConstructionArea: null,
+    otherConstructionArea: null,
     domesticCount: null,
     commercialCount: null,
     otherCount: null,

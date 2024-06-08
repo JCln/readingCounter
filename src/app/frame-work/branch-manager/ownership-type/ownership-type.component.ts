@@ -36,7 +36,8 @@ export class OwnershipTypeComponent extends FactoryONE {
   removeRow = async (rowData: object) => {
     const a = await this.branchesService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
-      await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ownershipTypeRemove, rowData['dataSource']);
+      const res = await this.branchesService.utilsService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ownershipTypeRemove, rowData['dataSource']);
+      this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       this.callAPI();
     }
   }

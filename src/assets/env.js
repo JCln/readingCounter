@@ -1,11 +1,19 @@
 (function (window) {
     window.__env = window.__env || {};
+    window.__env.enableDebug = true;
+    window.__env.enableENV = false;
 
     // API url
-    window.__env.version = '1.0.40';
+    window.__env.version = '1.0.47';
     window.__env.headerProvinceTitle = 'ENV';
     window.__env.API_URL = 'https://37.191.92.157/kontoriNew'
-    // for map instantiation    
+    window.__env.hasCancelableSpinner = true;
+    window.__env.timeout = 18000;
+    window.__env.hasNextBazdid = false;
+    window.__env.reOrderableTable = false;
+    window.__env.defaultAggregateTracks = false;
+    window.__env.shouldSaveTokensInLocal = true;
+    window.__env.simafaImportStatus = { hasSingle: true, hasBatch: true };
     window.__env.mapUrls = [
         { title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
         { title: 'sattelite', url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg' }
@@ -55,8 +63,8 @@
         { id: 14, title: 'unCalculable', value: 4, titleUnicode: 'غیرقابل محاسبه', icon: '!', className: '_mark' }
     ];
     window.__env.getTarrifCalculationModeDictionary = [
-        { id: 1, field: 'Interval', title: 'فوری' },
-        { id: 2, field: 'AccurateTime', title: 'بازه‌ای' },
+        { id: 1, dynamicId: 1, field: 'Interval', title: 'فوری' },
+        { id: 2, dynamicId: 2, field: 'AccurateTime', title: 'بازه‌ای' },
     ]
     window.__env.getLogoutReasonDictionary = [
         { id: 0, title: 'توسط کاربر' },
@@ -125,18 +133,6 @@
         incorrect_time: 32
     }
     window.__env.aboutUs = { email: 'infohivaatlas@gmail.com', tel: '031-32121764', address: 'اصفهان، ارگ جهان نما، واحد 107', coName: 'هیوا پرداز اطلس' };
-
-
-    window.__env.hasCancelableSpinner = true;
-    window.__env.timeout = 18000;
-    window.__env.hasNextBazdid = false;
-    window.__env.reOrderableTable = false;
-    window.__env.defaultAggregateTracks = false;
-    window.__env.shouldSaveTokensInLocal = true;
-    window.__env.simafaImportStatus = { hasSingle: true, hasBatch: true };
-
     // Whether or not to enable debug mode
     // Setting this to false will disable console output
-    window.__env.enableDebug = true;
-    window.__env.enableENV = false;
 }(this));

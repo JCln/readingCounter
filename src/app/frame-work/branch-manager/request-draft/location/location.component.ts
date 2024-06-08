@@ -12,6 +12,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class LocationComponent extends FactoryONE {
   private readonly _outputFileName: string = 'requestDraftLocation';
   zoneDictionary: IDictionaryManager[] = [];
+  villageDictionary: IDictionaryManager[] = [];
 
   _selectCols: any = [];
 
@@ -27,6 +28,7 @@ export class LocationComponent extends FactoryONE {
   }
   classWrapper = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
+    this.villageDictionary = await this.branchesService.dictionaryWrapperService.getVillageDictionary();
     this.insertSelectedColumns();
   }
   async showInMap() {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -10,6 +11,8 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class PersonalInfoComponent extends FactoryONE {
   private readonly _outputFileName: string = 'requestDraftPersonalInfo';
+  ownershipTypeDictionary: IDictionaryManager[] = [];
+  customerTypeDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
 
   constructor(
@@ -18,12 +21,16 @@ export class PersonalInfoComponent extends FactoryONE {
   ) {
     super();
   }
-
+  dictionaryWrapper = async () => {
+    this.ownershipTypeDictionary = await this.branchesService.dictionaryWrapperService.getOwnershipTypeDictionary(false);
+    this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
+  }
   insertSelectedColumns = () => {
     this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
   }
   classWrapper = async () => {
     this.insertSelectedColumns();
+    this.dictionaryWrapper();
   }
 
 }

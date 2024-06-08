@@ -475,6 +475,18 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
+    if (MathS.isNullZero(body.commercialConstructionArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_commercialConstructionArea);
+      return false;
+    }
+    if (MathS.isNullZero(body.domesticConstructionArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_domesticConstructionArea);
+      return false;
+    }
+    if (MathS.isNullZero(body.otherConstructionArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_otherConstructionArea);
+      return false;
+    }
     if (MathS.isNull(body.offeringGroupIds)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_offeringIds);
       return false;

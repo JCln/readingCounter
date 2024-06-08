@@ -49,6 +49,7 @@ export class ForbiddenService {
       x: dataSource.x,
       y: dataSource.y,
       zoneId: dataSource.zoneId,
+      zoneTitle: dataSource.changableZoneId,
       insertDateJalali: dataSource.insertDateJalali,
       displayName: dataSource.displayName,
       description: dataSource.description,

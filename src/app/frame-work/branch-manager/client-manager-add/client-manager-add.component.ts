@@ -57,7 +57,7 @@ export class ClientManagerAddComponent extends FactoryONE {
       //   routerLink: 'offering'
       // },
       {
-        label: 'اطلاعات شخصی',
+        label: 'اطلاعات مالک',
         routerLink: 'personal'
       },
       {
@@ -65,7 +65,7 @@ export class ClientManagerAddComponent extends FactoryONE {
         routerLink: 'technical'
       },
       {
-        label: 'سایر اطلاعات',
+        label: 'اطلاعات ملک',
         routerLink: 'others'
       },
       {

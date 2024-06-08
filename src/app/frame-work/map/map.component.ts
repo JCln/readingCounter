@@ -192,7 +192,8 @@ export class MapComponent implements OnInit, OnDestroy {
       description: this.routeParams['description'],
       displayName: this.routeParams['displayName'],
       insertDateJalali: this.routeParams['insertDateJalali'],
-      zone: this.routeParams['zoneId'],
+      zoneId: this.routeParams['zoneId'],
+      zoneTitle: this.routeParams['zoneTitle'],
       gisAccuracy: this.routeParams['gisAccuracy'],
       tedadVahed: this.routeParams['tedadVahed'],
       preEshterak: this.routeParams['preEshterak'],
@@ -445,7 +446,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     L.circleMarker([item.y, item.x], { weight: 4, radius: parseInt(item.gisAccuracy), color: this.color_normal }).addTo(this.layerGroup)
       .bindPopup(
-        `${'ناحیه :' + item.zone} <br>` +
+        `${'ناحیه :' + item.zoneTitle} <br>` +
         `${'تاریخ :' + item.insertDateJalali} <br>` +
         `${'قرائت کننده :' + item.displayName} <br>` +
         `${'اشتراک قبلی :' + item.preEshterak} <br>` +
