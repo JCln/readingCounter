@@ -12,10 +12,10 @@ import { CalculationComponent } from './calculation/calculation.component';
 const routes: Routes = [
   {
     path: '', component: RequestDraftComponent, children: [
-      { path: '', redirectTo: 'offering', pathMatch: 'full' },
+      { path: '', component: OfferingGroupComponent, pathMatch: 'full' },
       { path: 'personal', component: PersonalInfoComponent },
       { path: 'offering', component: OfferingGroupComponent },
-      { path: 'others', component: OtherInfoComponent },      
+      { path: 'others', component: OtherInfoComponent },
       { path: 'location', component: LocationComponent },
       { path: 'technical', component: TechnicalComponent },
       { path: 'confirmation', component: ConfirmationComponent },

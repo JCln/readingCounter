@@ -89,12 +89,15 @@ export class ConfirmationComponent extends FactoryONE {
   }
   callAPI = async () => {
     console.log(this.closeTabService.requestDraftReq);
+    console.log(this.closeTabService.calculationRequestDraft);
+    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
+    console.log(res);
+    console.log(res.targetObject);
+    console.log(res.targetObject.id);
 
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.requestDraftReq)) {
-      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
 
-      this.closeTabService.calculationRequestDraft.requestDraftId = res.id;
-      console.log(this.closeTabService.calculationRequestDraft);
+      this.closeTabService.calculationRequestDraft.requestDraftId = res.targetObject.id;
 
       const config = {
         messageTitle: res.message,

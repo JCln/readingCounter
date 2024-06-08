@@ -27,7 +27,8 @@ export class CalculationComponent extends FactoryONE {
   }
   classWrapper(): void {
     this.dictionaryWrapper();
-    
+    console.log(this.closeTabService.calculationRequestDraft);
+
   }
 
 }
