@@ -88,15 +88,8 @@ export class ConfirmationComponent extends FactoryONE {
     this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
   }
   callAPI = async () => {
-    console.log(this.closeTabService.requestDraftReq);
-    console.log(this.closeTabService.calculationRequestDraft);
-    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
-    console.log(res);
-    console.log(res.targetObject);
-    console.log(res.targetObject.id);
-
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.requestDraftReq)) {
-
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
       this.closeTabService.calculationRequestDraft.requestDraftId = res.targetObject.id;
 
       const config = {

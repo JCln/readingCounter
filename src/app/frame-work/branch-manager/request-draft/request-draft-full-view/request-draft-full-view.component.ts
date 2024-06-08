@@ -11,7 +11,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./request-draft-full-view.component.scss']
 })
 export class RequestDraftFullViewComponent extends FactoryONE {
-  private readonly _outputFileName: string = 'requestDraftAdd';
+  private readonly _outputFileName: string = 'requestDraftFullView';
   private readonly _outputFileNameAccordion: string = '';
   _selectCols: any = [];
   _selectColsAccordion: any = [];
