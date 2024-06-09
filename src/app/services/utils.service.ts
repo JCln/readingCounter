@@ -1,3 +1,4 @@
+import { VerificationService } from './verification.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';

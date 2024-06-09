@@ -11,7 +11,6 @@ import { IReadingReportGISReq, IUserKarkardInput, IReadingReportReq, IReadingRep
 import { IAUserEditSave, IAddAUserManager, IUserEditOnRole } from 'interfaces/iuser-manager';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { IAutomaticImportAddEdit, IFragmentDetails, IFragmentMaster } from 'interfaces/ireads-manager';
-import { ProfileService } from './profile.service';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IPolicies } from './DI/privacies';
@@ -22,8 +21,7 @@ import { IPolicies } from './DI/privacies';
 export class VerificationService {
 
   constructor(
-    public utilsService: UtilsService,
-    private profileService: ProfileService
+    public utilsService: UtilsService
   ) { }
 
   verificationZone(dataSource: any): boolean {
@@ -469,6 +467,44 @@ export class VerificationService {
     }
 
     return true;
+  }
+  requestDraftPersonal = (body: IRequestDraft): boolean => {
+    if (MathS.isNull(body.fullName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fullName);
+      return false;
+    }
+    if (MathS.isNull(body.fatherName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fatherName);
+      return false;
+    }
+    if (MathS.isNull(body.nationalId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_nationaId);
+      return false;
+    }
+    if (!MathS.validateNationalId(body.nationalId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.incorrect_nationalId);
+      return false;
+    }
+    if (MathS.isNull(body.mobiles)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_mobile);
+      return false;
+    }
+    if (!MathS.validationMobiles(body.mobiles)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobileFormat);
+      return false;
+    }
+    if (MathS.isNull(body.familyCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_familyCount);
+      return false;
+    }
+    if (MathS.isNull(body.ownershipTypeId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_ownershipType);
+      return false;
+    }
+    if (MathS.isNull(body.customerTypeId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertـcustomerTypeId);
+      return false;
+    }
   }
   requestDraftAdd = (body: IRequestDraft): boolean => {
     if (MathS.isNull(body.zoneId)) {

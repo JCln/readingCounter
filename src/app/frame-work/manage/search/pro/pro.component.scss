@@ -63,7 +63,7 @@ footer {
 
   .__content {
     display: grid;
-    gap: var(--font_02);
+    gap: 5px;
     align-items: center;
 
     .check_boxes {
@@ -98,7 +98,7 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 19rem));
     justify-content: center;
-    gap: var(--font_02);
+    gap: 5px;
   }
 }
 

@@ -194,6 +194,7 @@ export enum EN_Routes {
     scheduledPaymentMethod = '/wr/branch/scheduledPaymentMethod',
     village = '/wr/branch/village',
     requestDraft = '/wr/branch/requestDraft',
+    requestDraftTechnical = '/wr/branch/requestDraft/technical',
     requestDraftCalculation = '/wr/branch/requestDraft/calculation',
     clientGetLazy = '/wr/branch/clientLazy',
     requestDraftLazy = '/wr/branch/requestDraftLazy',

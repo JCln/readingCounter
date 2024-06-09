@@ -20,7 +20,7 @@
                     <div class="input_3">
                         <div class="_key">کاربری</div>
                         <div class="_value">
-                            <p-dropdown name="zones" [options]="usageDictionary"
+                            <p-dropdown name="usageId" [options]="usageDictionary"
                                 [(ngModel)]="closeTabService.requestDraftReq.usageId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
@@ -32,7 +32,7 @@
                     <div class="input_3">
                         <div class="_key">قطر</div>
                         <div class="_value">
-                            <p-dropdown name="zones" [options]="branchDiameterDictionary"
+                            <p-dropdown name="branchDiameter" [options]="branchDiameterDictionary"
                                 [(ngModel)]="closeTabService.requestDraftReq.branchDiameterId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>
@@ -44,7 +44,7 @@
                     <div class="input_3">
                         <div class="_key">سیفون</div>
                         <div class="_value">
-                            <p-dropdown name="zones" [options]="siphonDictionary"
+                            <p-dropdown name="siphon" [options]="siphonDictionary"
                                 [(ngModel)]="closeTabService.requestDraftReq.siphonId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true">
                             </p-dropdown>

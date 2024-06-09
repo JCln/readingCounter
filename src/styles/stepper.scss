@@ -1,12 +1,9 @@
 @import 'primeNG';
 @import 'input';
 @import 'button';
-
-@import 'primeNG';
-@import 'input';
-@import 'button';
 @import '_mat';
 @import 'tooltip';
+
 
 ._req_content {
     display: grid;
@@ -129,4 +126,8 @@ footer {
 .location-form {
     display: grid;
     justify-content: center;
+}
+
+.input_icon ._key {
+    min-width: 8rem;
 }

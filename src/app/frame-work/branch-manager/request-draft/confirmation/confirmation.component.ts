@@ -102,7 +102,8 @@ export class ConfirmationComponent extends FactoryONE {
         closable: true,
       }
       const dialogRes = await this.branchesService.utilsService.primeConfirmDialog(config);
-      console.log(dialogRes);
+      // empty the previous calculation
+      this.closeTabService.requestDraftCalculationRes = [];
 
       if (!!dialogRes || !dialogRes) {
         this.branchesService.utilsService.routeTo(EN_Routes.requestDraftCalculation);

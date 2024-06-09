@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -14,6 +15,7 @@ export class PersonalInfoComponent extends FactoryONE {
   ownershipTypeDictionary: IDictionaryManager[] = [];
   customerTypeDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
+  submitted: boolean = false;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -31,6 +33,13 @@ export class PersonalInfoComponent extends FactoryONE {
   classWrapper = async () => {
     this.insertSelectedColumns();
     this.dictionaryWrapper();
+  }
+  nextPage() {
+    if (this.branchesService.verificationService.requestDraftPersonal(this.closeTabService.requestDraftReq)) {
+      this.closeTabService.utilsService.routeTo(EN_Routes.requestDraftTechnical);
+      return;
+    }
+    this.submitted = true;
   }
 
 }

@@ -40,4 +40,13 @@
             </ng-template>
         </div>
     </div>
+    <div class="grid grid-nogutter justify-content-end">
+        <button class="btn_1 pi pi-angle-right" (onClick)="nextPage()">تایید و ادامه</button>
+    </div>
 </form>
+<!-- [ngClass]="{ 'ng-dirty': 
+                            (closeTabService.requestDraftReq[col.field].invalid && submitted) ||
+                            (closeTabService.requestDraftReq[col.field].dirty && closeTabService.requestDraftReq[col.field].invalid) }" required>
+                        <small
+                            *ngIf="(closeTabService.requestDraftReq[col.field].invalid && submitted) || (closeTabService.requestDraftReq[col.field].dirty && closeTabService.requestDraftReq[col.field].invalid)"
+                            class="p-error">{{col.header}} را کامل کنید</small> -->
