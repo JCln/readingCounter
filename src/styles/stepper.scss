@@ -79,7 +79,7 @@ footer {
     padding: var(--font_05);
     grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
     direction: rtl;
-    gap: var(--font_03);
+    gap: 2rem 0.5rem;
 
     @media (min-width: 550px) {
         grid-template-columns: 1fr 1fr;

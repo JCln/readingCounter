@@ -505,6 +505,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insertـcustomerTypeId);
       return false;
     }
+    return true;
   }
   requestDraftAdd = (body: IRequestDraft): boolean => {
     if (MathS.isNull(body.zoneId)) {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ENRandomNumbers } from 'interfaces/enums.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 
 @Injectable({
@@ -3380,13 +3381,13 @@ export class ColumnManager {
         { field: 'capacity', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true },
     ]
     requestDraftPersonalInfo: IObjectIteratation[] = [
-        { field: 'fullName', header: 'نام کامل', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false },
-        { field: 'nationalId', header: 'کد ملی', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'mobiles', header: 'موبایل/ها', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'familyCount', header: 'تعداد خانوار', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true },
-        { field: 'ownershipTypeId', header: 'نوع مالکیت', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true },
-        { field: 'customerTypeId', header: 'نوع اشتراک', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
+        { field: 'fullName', header: 'نام کامل', isSelected: false, isSelectedOrigin: false, enableTooltip: true, minLength: ENRandomNumbers.five, isRequired: true },
+        { field: 'fatherName', header: 'نام پدر', isSelected: false, isSelectedOrigin: false, isRequired: true },
+        { field: 'nationalId', header: 'کد ملی', isSelected: false, isSelectedOrigin: false, enableTooltip: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten, isRequired: true },
+        { field: 'mobiles', header: 'موبایل/ها', isSelected: false, isSelectedOrigin: false, enableTooltip: true, minLength: ENRandomNumbers.eleven, isRequired: true },
+        { field: 'familyCount', header: 'تعداد خانوار', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, isRequired: true, minLength: ENRandomNumbers.one, maxLength: ENRandomNumbers.two },
+        { field: 'ownershipTypeId', header: 'نوع مالکیت', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true, isRequired: true },
+        { field: 'customerTypeId', header: 'نوع اشتراک', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
     ]
     requestDraftOtherInfo: IObjectIteratation[] = [
         // { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false },

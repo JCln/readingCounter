@@ -161,6 +161,9 @@ export interface IObjectIteratation {
     header: string;
     isSelected: boolean;
     readonly isSelectedOrigin: boolean;
+    minLength?: number,
+    maxLength?: number,
+    isRequired?: boolean,
     ltr?: boolean;
     readonly?: boolean;
     borderize?: boolean;
