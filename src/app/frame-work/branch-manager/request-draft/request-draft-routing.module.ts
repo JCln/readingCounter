@@ -13,11 +13,11 @@ const routes: Routes = [
   {
     path: '', component: RequestDraftComponent, children: [
       { path: '', component: OfferingGroupComponent, pathMatch: 'full' },
-      { path: 'personal', component: PersonalInfoComponent },
       { path: 'offering', component: OfferingGroupComponent },
+      { path: 'personal', component: PersonalInfoComponent },
+      { path: 'technical', component: TechnicalComponent },
       { path: 'others', component: OtherInfoComponent },
       { path: 'location', component: LocationComponent },
-      { path: 'technical', component: TechnicalComponent },
       { path: 'confirmation', component: ConfirmationComponent },
       { path: 'calculation', component: CalculationComponent },
 

@@ -15,6 +15,7 @@ export class PersonalInfoComponent extends FactoryONE {
   ownershipTypeDictionary: IDictionaryManager[] = [];
   customerTypeDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
+  submitted: boolean = false;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -34,13 +35,11 @@ export class PersonalInfoComponent extends FactoryONE {
     this.dictionaryWrapper();
   }
   nextPage() {
-    console.log(1);
-    
     if (this.branchesService.verificationService.requestDraftPersonal(this.closeTabService.requestDraftReq)) {
-      console.log(1);
       this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftTechnical);
+    } else {
+      this.submitted = true;
     }
-
   }
 
 }

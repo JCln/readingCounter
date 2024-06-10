@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,7 +14,7 @@ export class LocationComponent extends FactoryONE {
   private readonly _outputFileName: string = 'requestDraftLocation';
   zoneDictionary: IDictionaryManager[] = [];
   villageDictionary: IDictionaryManager[] = [];
-
+  submitted: boolean = false;
   _selectCols: any = [];
 
   constructor(
@@ -35,6 +36,13 @@ export class LocationComponent extends FactoryONE {
     const res = await this.branchesService.openMapDialog([], true);
     this.closeTabService.requestDraftReq.x = res.x;
     this.closeTabService.requestDraftReq.y = res.y;
+  }
+  nextPage() {
+    if (this.branchesService.verificationService.requestDraftLocation(this.closeTabService.requestDraftReq)) {
+      this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftConfirmation);
+    } else {
+      this.submitted = true;
+    }
   }
 
 }

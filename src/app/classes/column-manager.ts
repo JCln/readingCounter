@@ -3156,7 +3156,7 @@ export class ColumnManager {
     ]
     dynamicTraverse: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'storageTitle', header: 'عنوان لاتین', isSelected: true, isSelectedOrigin: true },
+        { field: 'storageTitle', header: 'عنوان لاتین', isSelected: false, isSelectedOrigin: false },
         { field: 'isChangeable', header: 'قابل تغییر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'defaultValue', header: 'مقدار پیشفرض', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         // { field: 'isActive', header: 'فعال', isSelected: true,isSelectedOrigin:true, isBoolean: true },
@@ -3265,7 +3265,7 @@ export class ColumnManager {
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
     requestDraftOfferingGroup: IObjectIteratation[] = [
-        { field: 'offeringGroupId', header: 'گروه اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'offeringGroupId', header: 'گروه اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true, isRequired: true },
     ]
     requestDraftGetLazy: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
@@ -3364,20 +3364,20 @@ export class ColumnManager {
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
     requestDraftTechnical: IObjectIteratation[] = [
-        { field: 'usageId', header: 'کاربری', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
-        { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
+        { field: 'usageId', header: 'کاربری', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
+        { field: 'branchDiameterId', header: 'قطر', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true, isRequired: true },
         { field: 'watarInstallationJalaliDay', header: 'تاریخ نصب آب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
         { field: 'sewageInstallationJalaliDay', header: 'تاریخ نصب فاضلاب', isSelected: false, isSelectOption: true, isSelectedOrigin: false },
         // { field: 'waterInstallationDateTime', header: 'زمان نصب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'sewageInstallationDateTime', header: 'زمان نصب فاضلاب', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         { field: 'guildId', header: 'صنف', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
-        { field: 'branchStateId', header: 'وضعیت انشعاب', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
+        { field: 'branchStateId', header: 'وضعیت انشعاب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
         { field: 'waterSourceId', header: 'منبع آب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true },
         { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
-        { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false, isNumber: true },
-        { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true },
-        { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false, isNumber: true },
-        { field: 'siphon4Count', header: 'تعداد سیفون 4', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true },
+        { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false, isNumber: true, isRequired: true, maxLength: 2 },
+        { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, isRequired: true, maxLength: 2 },
+        { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false, isNumber: true, isRequired: true, maxLength: 2 },
+        { field: 'siphon4Count', header: 'تعداد سیفون 4', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, isRequired: true, maxLength: 2 },
         { field: 'capacity', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true },
     ]
     requestDraftPersonalInfo: IObjectIteratation[] = [
@@ -3393,15 +3393,15 @@ export class ColumnManager {
         // { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false },
         { field: 'readingNumber', header: 'اشتراک', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'billId', header: 'ش.قبض', isSelected: false, isSelectedOrigin: false },
-        { field: 'domesticCount', header: 'آحاد مسکونی', isSelected: false, isSelectedOrigin: false, isNumber: true },
-        { field: 'commercialCount', header: 'آحاد تجاری', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true },
-        { field: 'otherCount', header: 'آحاد سایر', isSelected: false, isSelectedOrigin: false, isNumber: true },
-        { field: 'domesticArea', header: 'عرصه مسکونی', isSelected: false, isSelectedOrigin: false },
-        { field: 'commercialArea', header: 'عرصه تجاری', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
-        { field: 'otherArea', header: 'عرصه سایر', isSelected: false, isSelectedOrigin: false },
-        { field: 'domesticConstructionArea', header: 'اعیانی مسکونی', isSelected: false, isSelectedOrigin: false },
-        { field: 'commercialConstructionArea', header: 'اعیانی تجاری', isSelected: false, isSelectedOrigin: false },
-        { field: 'otherConstructionArea', header: 'اعیانی سایر', isSelected: false, isSelectedOrigin: false },
+        { field: 'domesticCount', header: 'آحاد مسکونی', isSelected: false, isSelectedOrigin: false, isNumber: true, isRequired: true },
+        { field: 'commercialCount', header: 'آحاد تجاری', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, isRequired: true },
+        { field: 'otherCount', header: 'آحاد سایر', isSelected: false, isSelectedOrigin: false, isNumber: true, isRequired: true },
+        { field: 'domesticArea', header: 'عرصه مسکونی', isSelected: false, isSelectedOrigin: false, isRequired: true },
+        { field: 'commercialArea', header: 'عرصه تجاری', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isRequired: true },
+        { field: 'otherArea', header: 'عرصه سایر', isSelected: false, isSelectedOrigin: false, isRequired: true },
+        { field: 'domesticConstructionArea', header: 'اعیانی مسکونی', isSelected: false, isSelectedOrigin: false, isRequired: true },
+        { field: 'commercialConstructionArea', header: 'اعیانی تجاری', isSelected: false, isSelectedOrigin: false, isRequired: true },
+        { field: 'otherConstructionArea', header: 'اعیانی سایر', isSelected: false, isSelectedOrigin: false, isRequired: true },
         // { field: 'ownershipTypeId', header: 'نوع مالکیت', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true },
         // { field: 'previousClientId', header: 'اشتراک قبلی', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'changeOrInsertLogId', header: 'تغییر یا ایجاد لاگ', isSelected: false, isSelectedOrigin: false },        
@@ -3410,12 +3410,12 @@ export class ColumnManager {
         // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false },        
     ]
     requestDraftLocation: IObjectIteratation[] = [
-        { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
-        { field: 'villageId', header: 'روستا', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
-        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false },
-        { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true },
+        { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
+        { field: 'villageId', header: 'روستا', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
+        { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },
+        { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true, isRequired: true },
         // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },
-        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
+        { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2", isRequired: true, minLength: ENRandomNumbers.eight },
     ]
     requestDraft_confirmtionLocation: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },

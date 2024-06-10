@@ -195,8 +195,14 @@ export enum EN_Routes {
     village = '/wr/branch/village',
     requestDraft = '/wr/branch/requestDraft',
     requestDraftTechnical = '/wr/branch/requestDraft/technical',
+    requestDraftPersonal = '/wr/branch/requestDraft/personal',
+    requestDraftOffering = '/wr/branch/requestDraft/offering',
+    requestDraftOthers = '/wr/branch/requestDraft/others',
+    requestDraftLocation = '/wr/branch/requestDraft/location',
     requestDraftCalculation = '/wr/branch/requestDraft/calculation',
+    requestDraftConfirmation = '/wr/branch/requestDraft/confirmation',
     clientGetLazy = '/wr/branch/clientLazy',
     requestDraftLazy = '/wr/branch/requestDraftLazy',
     counterNumberChangeGetLazy = '/wr/branch/counterNumberChange',
+
 }

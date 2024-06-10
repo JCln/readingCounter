@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -11,6 +12,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class OtherInfoComponent extends FactoryONE {
   private readonly _outputFileName: string = 'requestDraftOtherInfo';
   _selectCols: any = [];
+  submitted: boolean = false;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -24,6 +26,13 @@ export class OtherInfoComponent extends FactoryONE {
   }
   classWrapper = async () => {
     this.insertSelectedColumns();
+  }
+  nextPage() {
+    if (this.branchesService.verificationService.requestDraftOther(this.closeTabService.requestDraftReq)) {
+      this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftLocation);
+    } else {
+      this.submitted = true;
+    }
   }
 
 }

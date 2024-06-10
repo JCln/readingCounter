@@ -1,21 +1,34 @@
-<form>
+<form (ngSubmit)="nextPage()">
     <h2 class="top_title">درخواست خود را انتخاب نمایید</h2>
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
-            <div class="input_icon">
+            <div class="input_icon"
+                [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
                 <i class="pi pi-bookmark _bookmark"></i>
                 <div class="input_3">
                     <div class="_key">نوع خدمت</div>
                     <div class="_value">
-                        <p-multiSelect [maxSelectedLabels]="1" [options]="offeringGroupDictionary" name="usageId"
-                            [(ngModel)]="closeTabService.requestDraftReq.offeringGroupIds"
+                        <p-multiSelect #itemdrop="ngModel" [maxSelectedLabels]="1" [options]="offeringGroupDictionary"
+                            name="usageId" [(ngModel)]="closeTabService.requestDraftReq.offeringGroupIds"
                             [(ngModel)]="closeTabService.calculationRequestDraft.offeringGroupIds" optionLabel="title"
                             optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                            placeholder="انتخاب مورد">
+                            placeholder="انتخاب مورد" [required]="col.isRequired? true : false">
                         </p-multiSelect>
                     </div>
                 </div>
             </div>
+            <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                <div *ngIf="itemdrop.errors?.['required']">
+                    <i class="pi pi-times"></i>
+                    {{col.header}} را وارد نمایید
+                </div>
+            </div>
         </div>
     </div>
+    <footer>
+        <button type="submit" class="btn_1">
+            <i class="pi pi-angle-left"></i>
+            تایید و ادامه
+        </button>
+    </footer>
 </form>

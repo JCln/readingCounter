@@ -118,7 +118,8 @@ export class UtilsService {
     }
     let datas: number[] = [];
     for (let index = 0; index < item.length; index++) {
-      datas.push(item[index].data);
+      if (!item[index].children)
+        datas.push(item[index].data);
     }
     return datas;
   }

@@ -4,7 +4,8 @@
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
             <ng-container *ngIf="col.isSelectOption;else simpleInput">
                 <div *ngIf="col.field == 'ownershipTypeId'">
-                    <div class="input_icon">
+                    <div class="input_icon"
+                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">نوع مالکیت</div>
@@ -18,7 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched" class="icon_validation alert">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
                         <div *ngIf="itemdrop.errors?.['required']">
                             <i class="pi pi-times"></i>
                             {{col.header}} را وارد نمایید
@@ -26,7 +27,8 @@
                     </div>
                 </div>
                 <div *ngIf="col.field == 'customerTypeId'">
-                    <div class="input_icon">
+                    <div class="input_icon"
+                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">نوع مشترک</div>
@@ -39,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched" class="icon_validation alert">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
                         <div *ngIf="itemdrop.errors?.['required']">
                             <i class="pi pi-times"></i>
                             {{col.header}} را وارد نمایید
@@ -48,7 +50,8 @@
                 </div>
             </ng-container>
             <ng-template #simpleInput>
-                <div class="input_icon">
+                <div class="input_icon"
+                    [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
                     <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
                     <div class="input_3">
                         <div class="_key">{{col.header}}</div>
@@ -61,7 +64,8 @@
                 <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
                     <i class="pi pi-check-square"></i>
                 </div>
-                <div *ngIf="item.invalid && (item.dirty || item.touched)" class="icon_validation alert">
+                <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid"
+                    class="icon_validation alert">
                     <div *ngIf="item.errors?.['required']">
                         <i class="pi pi-times"></i>
                         {{col.header}} را وارد نمایید

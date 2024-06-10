@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -12,6 +13,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class TechnicalComponent extends FactoryONE {
   private readonly _outputFileName: string = 'requestDraftTechnical';
   _selectCols: any = [];
+  submitted: boolean = false;
   qotrDictionary: IDictionaryManager[] = [];
   siphonDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -42,6 +44,16 @@ export class TechnicalComponent extends FactoryONE {
   classWrapper = async () => {
     this.insertSelectedColumns();
     this.dictionaryWrapper();
+  }
+  nextPage() {
+    console.log(1);
+    
+    if (this.branchesService.verificationService.requestDraftTechnical(this.closeTabService.requestDraftReq)) {
+      console.log(1);
+      this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftOthers);
+    } else {
+      this.submitted = true;
+    }
   }
 
 }

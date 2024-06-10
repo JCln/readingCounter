@@ -441,7 +441,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
       return false;
     }
-    if (!MathS.isLowerThanMinLength(body.address, ENRandomNumbers.eighteen)) {
+    if (!MathS.isLowerThanMinLength(body.address, ENRandomNumbers.ten)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
       return false;
     }
@@ -507,6 +507,127 @@ export class VerificationService {
     }
     return true;
   }
+  requestDraftOther = (body: IRequestDraft): boolean => {
+    if (MathS.isNull(body.domesticCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_domesticCount);
+      return false;
+    }
+    if (MathS.isNull(body.commercialCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_commercialCount);
+      return false;
+    }
+    if (MathS.isNull(body.otherCount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_otherCount);
+      return false;
+    }
+    if (MathS.isNull(body.domesticArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_domesticArea);
+      return false;
+    }
+    if (MathS.isNull(body.commercialArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_commercialArea);
+      return false;
+    }
+    if (MathS.isNull(body.otherArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_otherArea);
+      return false;
+    }
+    if (MathS.isNullZero(body.domesticConstructionArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_domesticConstructionArea);
+      return false;
+    }
+    if (MathS.isNullZero(body.commercialConstructionArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_commercialConstructionArea);
+      return false;
+    }
+    if (MathS.isNullZero(body.otherConstructionArea)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_otherConstructionArea);
+      return false;
+    }
+    return true;
+  }
+  requestDraftLocation = (body: IRequestDraft): boolean => {
+    if (MathS.isNull(body.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.postalCode, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
+      return false;
+    }
+    if (!MathS.postalCodeValidation(body.postalCode)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
+      return false;
+    }
+    if (MathS.isNull(body.address)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
+      return false;
+    }
+    if (!MathS.isLowerThanMinLength(body.address, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
+      return false;
+    }
+    return true;
+  }
+  requestDraftTechnical = (body: IRequestDraft): boolean => {
+    if (MathS.isNull(body.usageId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_usage);
+      return false;
+    }
+    if (MathS.isNull(body.branchDiameterId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
+      return false;
+    }
+    if (MathS.isNull(body.guildId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_guild);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.watarInstallationJalaliDay, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
+      return false;
+    }
+    // if (!MathS.isExactLengthYouNeed(body.sewageInstallationJalaliDay, ENRandomNumbers.ten)) {
+    //   this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
+    //   return false;
+    // }
+    if (MathS.isNull(body.branchStateId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertـbranchStateId);
+      return false;
+    }
+    if (MathS.isNull(body.siphonId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon);
+      return false;
+    }
+    if (MathS.isNull(body.siphon1Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon1);
+      return false;
+    }
+    if (MathS.isNull(body.siphon2Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon2);
+      return false;
+    }
+    if (MathS.isNull(body.siphon3Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon3);
+      return false;
+    }
+    if (MathS.isNull(body.siphon4Count)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon4);
+      return false;
+    }
+    if (MathS.isNull(body.capacity)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_capacity);
+      return false;
+    }
+
+    return true;
+  }
+  requestDraftOffering = (body: IRequestDraft): boolean => {
+    if (MathS.isNull(body.offeringGroupIds)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_offeringIds);
+      return false;
+    }
+    return true;
+  }
   requestDraftAdd = (body: IRequestDraft): boolean => {
     if (MathS.isNull(body.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
@@ -534,10 +655,6 @@ export class VerificationService {
     }
     if (MathS.isNull(body.fullName)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fullName);
-      return false;
-    }
-    if (MathS.isNull(body.readingNumber)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingNumber);
       return false;
     }
     if (MathS.isNull(body.usageId)) {
@@ -612,7 +729,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
       return false;
     }
-    if (!MathS.isLowerThanMinLength(body.address, ENRandomNumbers.eighteen)) {
+    if (!MathS.isLowerThanMinLength(body.address, ENRandomNumbers.ten)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_address);
       return false;
     }
