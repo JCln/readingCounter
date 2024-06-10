@@ -56,7 +56,7 @@
                     <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
                         <i class="pi pi-check-square"></i>
                     </div>
-                    <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid"
+                    <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted"
                         class="icon_validation alert">
                         <div *ngIf="item.errors?.['required']">
                             <i class="pi pi-times"></i>
