@@ -19,12 +19,21 @@
                         <p class="module_text">{{item.title}}</p>
                     </li>
                 </ul>
+            </div>
+            <div class="modules_controller">
                 <div *ngFor="let app of currentRoute">
-                    <div *ngFor="let item of app.items">
-                        <div class="controller" *ngFor="let subItem of item.subItems" [hidden]="!item.isOpen">                            
-                            {{app.title}}/ {{item.title}}/ {{subItem.title}}
+                    <div *ngFor="let item of app.items, index as i">
+                        <div class="controller">
+                            <div class="controller_items" *ngFor="let subItem of item.subItems, index as j"
+                                [hidden]="!item.isOpen">
+                                <i class="controller_icons {{subItem.cssClass}}"></i>
+                                <p class="controller_text">{{subItem.title}}</p>
+                            </div>
+                            <!-- <p *ngIf="j == 0">
+                                {{app.title}}/ {{item.title}}/ {{subItem.title}}
+                            </p>
+                            <button *ngIf="j == 0" (click)="backToModule(item)">back</button> -->
                         </div>
-                        <button (click)="backToModule(item)">back</button>
                     </div>
                 </div>
             </div>
