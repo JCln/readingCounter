@@ -2994,7 +2994,8 @@ export class ColumnManager {
         { field: 'isMaskooni', header: 'مسکونی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'isTejari', header: 'تجاری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'isSaxt', header: 'ساخت', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-        { field: 'hasReadingVibrate', header: 'لرزش', isSelected: true, isSelectedOrigin: true, isBoolean: true }
+        { field: 'hasReadingVibrate', header: 'لرزش', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'isInGuilds', header: 'صنف', isSelected: true, isSelectedOrigin: true, isBoolean: true }
     ]
     dashboardUserAll: IObjectIteratation[] = [
         { field: 'all', header: 'مجموع', isSelected: true, isSelectedOrigin: true, readonly: true },
