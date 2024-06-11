@@ -6,6 +6,7 @@ export interface IKarbari {
     provinceId: number | string,
     isMaskooni: boolean,
     isTejari: boolean,
+    isInGuilds: boolean,
     isSaxt: boolean,
     hasReadingVibrate: boolean,
     dynamicID: any
