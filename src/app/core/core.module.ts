@@ -34,6 +34,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
 import { CaptchaComponent } from '../shared/captcha/captcha.component';
 import { SharedChangePassModule } from '../shared/shared-change-pass.module';
 import { MyPreviousFailuresComponent } from './_layouts/header/my-previous-failures/my-previous-failures.component';
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MyPreviousFailuresComponent } from './_layouts/header/my-previous-failu
     ColorPaletteComponent,
     MyPreviousFailuresComponent,
     CodeMessageDgComponent,
+    MenuBarComponent,
   ]
   ,
   imports: [

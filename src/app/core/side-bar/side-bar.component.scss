@@ -65,7 +65,10 @@ ul {
     }
   }
 
-  .app_title {}
+  .app_title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
 
   ._list_title {
     margin-left: auto;

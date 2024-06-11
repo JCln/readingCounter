@@ -1,9 +1,13 @@
 <ul [ngClass]="{'_ul_not_show': sid_isSmall}">
     <div *ngFor="let app of currentRoute">
         <div class="app_header" (click)="toggleApps(app)">
-            <i class="{{app.cssClass}} icons"></i>
-            <div class="app_title">{{app.title}}</div>
-            <i class="app-angle pi pi-angle-down"></i>
+            <div>
+                <div class="_"></div>
+                
+                <i class="{{app.cssClass}} icons"></i>
+                <div class="app_title">{{app.title}}</div>
+            </div>
+
             <div [@openClose]="!app.isOpen ? 'closeSubItems' : 'openSubItems'">
                 <li *ngFor="let item of app.items" routerLinkActive="active_list" (click)="$event.stopPropagation()">
                     <div class="_list_out">

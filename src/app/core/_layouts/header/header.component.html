@@ -2,9 +2,9 @@
     <li class="_theme_mode">
         <app-color-palette></app-color-palette>
     </li>
-    <li class="_borders">
+    <!-- <li class="_borders">
         <app-date-jalali [_disabled]="true"></app-date-jalali>
-    </li>
+    </li> -->
     <ul>
         <li class="notif" [routerLink]="[routeToMyMessages]">
             <div class="_badge_wrapper">
@@ -14,6 +14,12 @@
         </li>
         <li>
             <app-dropdown (isLogout)="logout()"></app-dropdown>
+        </li>
+        <li>
+            <app-small-spinner></app-small-spinner>
+        </li>
+        <li class="_name">
+            {{displayName}}
         </li>
         <li class="_status" [ngSwitch]="signalRService.getConnectionStatus()">
             <div class="tooltip">
@@ -41,20 +47,13 @@
                 <div class="tooltip_text_bottom">{{ENHubMessages.Connected}}</div>
             </div>
         </li>
-        <li>
-            <app-small-spinner></app-small-spinner>
-        </li>
-        <li class="_name">
-            {{displayName}}
-        </li>
-        <li class="menu_toggle" (click)="setSidebar()" [ngClass]="{'__rotate_sidebar_toggler':sideBar}">
-            <span></span>
-            <span></span>
-            <span></span>
-        </li>
         <li class="_fullscreen" (click)="fullScreenService.toggleFullScreen()">
             <i [ngClass]="fullScreenService._isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
         </li>
+        <li class="menu_toggle" (click)="setMenuBar()">
+            <i class='pi pi-th-large'></i>
+        </li>
+        <app-menu-bar [hidden]="!menuBar"></app-menu-bar>
 
     </ul>
 

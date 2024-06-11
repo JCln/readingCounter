@@ -131,11 +131,8 @@ li {
 }
 
 .menu_toggle {
-  display: block;
   border-radius: $border_50;
-  cursor: pointer;
-  padding: .3rem;
-  transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
+  padding: .5rem;
 
   &:hover,
   &:focus-visible,
@@ -144,10 +141,6 @@ li {
     box-shadow: 0px 0px 1px 1px var(--thirdy_1);
     background-color: var(--thirdy_opacity);
   }
-}
-
-.__rotate_sidebar_toggler {
-  transform: rotate(90deg);
 }
 
 ::ng-deep {
@@ -207,7 +200,6 @@ li {
   display: flex;
   align-items: center;
   border-radius: 50%;
-  margin-right: 2rem;
   cursor: pointer;
 
   i {

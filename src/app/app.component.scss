@@ -75,12 +75,11 @@
 app-clock {
   position: fixed;
   right: var(--font_xs);
-  top: var(--font_2);
+  top: 0;
   margin: var(--font_02);
   z-index: 200;
 
   @media (min-width:700px) {
     z-index: 102;
-    top: var(--font_05);
   }
 }

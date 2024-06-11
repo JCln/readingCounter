@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENHubMessages, EN_messages } from 'interfaces/enums.enum';
 import { ENThemeColor } from 'interfaces/istyles';
@@ -16,13 +16,10 @@ import { FullScreenService } from 'services/full-screen.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterContentInit, OnChanges {
+export class HeaderComponent implements AfterContentInit {
   routeToMyMessages = EN_Routes.NotificationMessages;
+  menuBar: boolean = true;
   ENHubMessages = ENHubMessages;
-  sideBar: boolean;
-  @Input() sid_isSmall: boolean;
-  @Output() sidebarEvent = new EventEmitter<boolean>();
-
   displayName: string = '';
   badgeNumber: number = 0;
   _showColorPalete: boolean = false;
@@ -37,10 +34,6 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     public fullScreenService: FullScreenService
   ) { }
 
-  setSidebar = () => {
-    this.sideBar = !this.sideBar;
-    this.sidebarEvent.emit(this.sideBar);
-  }
   changePasswordFromDialog = async (): Promise<any> => {
     const config = {
       messageTitle: EN_messages.passwordShouldChange,
@@ -94,11 +87,13 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
   logout = () => {
     this.authService.logout();
   }
-  ngOnChanges(): void {
-    this.sideBar = this.sid_isSmall;
-  }
   changeColor = (id: ENThemeColor) => {
     this.themeService.setThemeColor(id);
+  }
+  setMenuBar() {
+    this.menuBar = !this.menuBar;
+    console.log(this.menuBar);
+
   }
 
 }

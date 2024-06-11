@@ -27,7 +27,6 @@ export class SideBarComponent {
 
   }
   toggleSubItems = (item: any): void => {
-    console.log(item);
     if (item.title !== item.title) {
       item.isOpen = false;
       // a[i].classList.remove('_toggle_angule');
@@ -38,17 +37,12 @@ export class SideBarComponent {
     }
   }
   toggleApps = (app: any): void => {
-    console.log(app);
-
-    let a = document.querySelectorAll('.app-angle');
-    this.currentRoute.forEach((aApp, i) => {
+    this.currentRoute.forEach((aApp) => {
       if (app.title !== aApp.title) {
         aApp.isOpen = false;
-        a[i].classList.remove('_toggle_angule');
       }
       else {
         aApp.isOpen = !aApp.isOpen;
-        a[i].classList.toggle('_toggle_angule');
       }
     })
   }
