@@ -1,9 +1,9 @@
-<ul [ngClass]="{'_ul_not_show': sid_isSmall}">
+<ul>
     <div *ngFor="let app of currentRoute">
         <div class="app_header" (click)="toggleApps(app)">
             <div>
                 <div class="_"></div>
-                
+
                 <i class="{{app.cssClass}} icons"></i>
                 <div class="app_title">{{app.title}}</div>
             </div>

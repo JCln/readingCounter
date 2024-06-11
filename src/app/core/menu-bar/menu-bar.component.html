@@ -2,26 +2,9 @@
     <div class="wrapper">
         <div class="app_section">
             <ul>
-                <li>
-                    <!-- <i class="{{item.cssClass}} icons"></i> -->
+                <li *ngFor="let app of currentRoute" (click)="appClicked(app)">
                     <i class="icons pi pi-folder"></i>
-                    درخت دسترسی
-                </li>
-                <li>
-                    <i class="icons pi pi-folder"></i>
-                    مدیریت کاربران
-                </li>
-                <li>
-                    <i class="icons pi pi-folder"></i>
-                    مدیریت نواحی
-                </li>
-                <li>
-                    <i class="icons pi pi-folder"></i>
-                    گزارشات
-                </li>
-                <li>
-                    <i class="icons pi pi-folder"></i>
-                    کارکردها
+                    {{app.title}}
                 </li>
                 <li class="date">
                     <app-date-jalali [_disabled]="true"></app-date-jalali>
@@ -30,44 +13,20 @@
         </div>
         <div class="main_section">
             <div class="modules">
-                <ul>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
-                    </li>
-                    <li>
-                        <i class="module_icons pi pi-folder"></i>
-                        <p class="module_text">2</p>
+                <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen">
+                    <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen">
+                        <i class="module_icons {{item.cssClass}}"></i>
+                        <p class="module_text">{{item.title}}</p>
                     </li>
                 </ul>
+                <div *ngFor="let app of currentRoute">
+                    <div *ngFor="let item of app.items">
+                        <div class="controller" *ngFor="let subItem of item.subItems" [hidden]="!item.isOpen">                            
+                            {{app.title}}/ {{item.title}}/ {{subItem.title}}
+                        </div>
+                        <button (click)="backToModule(item)">back</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

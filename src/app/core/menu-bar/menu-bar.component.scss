@@ -29,6 +29,7 @@
     padding: 1rem;
 
     ul {
+        position: relative;
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -42,6 +43,7 @@
         height: 7rem;
         background: var(--secondary_1);
         border-radius: $border_10;
+        cursor: pointer;
         margin-bottom: 1rem;
         user-select: none;
     }
@@ -52,14 +54,17 @@
     }
 
     .date {
+        position: absolute;
         background-color: transparent;
         height: 3rem;
+        right: 0;
+        bottom: 0;
     }
 }
 
 .main_section {
-    width: 100%;
     display: grid;
+    width: 100%;
     background: var(--white);
     height: 90vh;
     border-radius: $border_10;
@@ -67,12 +72,20 @@
     margin-right: 1rem;
 
     .modules {
+        overflow: auto;
+
         ul {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(7rem, 12rem));
+            justify-content: center;
             gap: 1rem;
             list-style-type: none;
             border-radius: $border_7;
+        }
+
+        [hidden] {
+            display: none;
+
         }
 
         li {
@@ -87,6 +100,7 @@
         }
 
         .module_icons {
+            color: var(--primary_4);
             font-size: 5rem;
             text-align: center;
         }

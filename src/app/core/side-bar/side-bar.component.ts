@@ -10,7 +10,7 @@ import { transitionSideBar } from 'src/app/directives/animation.directive';
   animations: [transitionSideBar]
 })
 export class SideBarComponent {
-  @Input() sid_isSmall: boolean;
+  // @Input() sid_isSmall: boolean;
   currentRoute: any;
 
   constructor(
