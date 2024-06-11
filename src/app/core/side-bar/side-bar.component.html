@@ -1,20 +1,30 @@
 <ul [ngClass]="{'_ul_not_show': sid_isSmall}">
-    <li *ngFor="let item of currentRoute" routerLinkActive="active_list">
-        <div class="_list_out">
-            <div class="_list_show_details" (click)="toggleSubItems(item)">
-                <div class="_list_header">
-                    <i class="{{item.cssClass}} icons"></i>
-                    <div class="_list_title">{{item.title}}</div>
-                    <i class="pi pi-angle-down"></i>
-                </div>
-                <div [@openClose]="!item.isOpen ? 'closeSubItems' : 'openSubItems'" class="__list_items_out">
-                    <div class="__list_items_in" *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
-                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                        (click)="$event.stopPropagation()">
-                        {{subItem.title}}
+    <div *ngFor="let app of currentRoute">
+        <div class="app_header" (click)="toggleApps(app)">
+            <i class="{{app.cssClass}} icons"></i>
+            <div class="app_title">{{app.title}}</div>
+            <i class="app-angle pi pi-angle-down"></i>
+            <div [@openClose]="!app.isOpen ? 'closeSubItems' : 'openSubItems'">
+                <li *ngFor="let item of app.items" routerLinkActive="active_list" (click)="$event.stopPropagation()">
+                    <div class="_list_out">
+                        <div class="_list_show_details" (click)="toggleSubItems(item)">
+                            <div class="_list_header">
+                                <i class="{{item.cssClass}} icons"></i>
+                                <div class="_list_title">{{item.title}}</div>
+                                <i class="item-angle pi pi-angle-down"></i>
+                            </div>
+                            <div [@openClose]="!item.isOpen ? 'closeSubItems' : 'openSubItems'"
+                                class="__list_items_out">
+                                <div class="__list_items_in" *ngFor="let subItem of item.subItems"
+                                    [routerLink]="subItem.route" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{ exact: true }" (click)="$event.stopPropagation()">
+                                    {{subItem.title}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </li>
             </div>
         </div>
-    </li>
+    </div>
 </ul>

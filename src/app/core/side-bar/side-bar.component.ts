@@ -21,22 +21,36 @@ export class SideBarComponent {
   }
   getSidebar = async () => {
     const sidebars = await this.sideBarItemsService.getSideBarItems();
-    this.currentRoute = sidebars.items;
+    this.currentRoute = sidebars.sidebarApps;
     // this.currentRoute = this.testSidebarService.getTestSideTest();
     // this.currentRoute = this.currentRoute.items;
 
   }
   toggleSubItems = (item: any): void => {
-    let a = document.querySelectorAll('.pi-angle-down');
-    this.currentRoute.forEach((aItem, i) => {
-      if (item.title !== aItem.title) {
-        aItem.isOpen = false;
+    console.log(item);
+    if (item.title !== item.title) {
+      item.isOpen = false;
+      // a[i].classList.remove('_toggle_angule');
+    }
+    else {
+      item.isOpen = !item.isOpen;
+      // a[i].classList.toggle('_toggle_angule');
+    }
+  }
+  toggleApps = (app: any): void => {
+    console.log(app);
+
+    let a = document.querySelectorAll('.app-angle');
+    this.currentRoute.forEach((aApp, i) => {
+      if (app.title !== aApp.title) {
+        aApp.isOpen = false;
         a[i].classList.remove('_toggle_angule');
       }
       else {
-        aItem.isOpen = !aItem.isOpen;
+        aApp.isOpen = !aApp.isOpen;
         a[i].classList.toggle('_toggle_angule');
       }
     })
   }
+
 }

@@ -1,21 +1,29 @@
 import { ENEssentialsToSave, ENSnackBarTimes, ENSnackBarColors } from "./enums.enum";
 
 export interface ISidebarItems {
-    items: [
+    sidebarApps: [
         {
-            title: string;
-            cssClass: string;
-            logicalOrder: number;
-            route: string;
-            isOpen: boolean;
-            subItems?: [
+            id: number,
+            title: string,
+            cssClass: string,
+            logicalOrder: number,
+            items: [
                 {
                     title: string;
-                    isClosable: boolean;
-                    isRefreshable: boolean;
-                    route: string;
                     cssClass: string;
                     logicalOrder: number;
+                    route: string;
+                    isOpen: boolean;
+                    subItems?: [
+                        {
+                            title: string;
+                            isClosable: boolean;
+                            isRefreshable: boolean;
+                            route: string;
+                            cssClass: string;
+                            logicalOrder: number;
+                        }
+                    ]
                 }
             ]
         }

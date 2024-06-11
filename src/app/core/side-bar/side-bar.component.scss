@@ -44,6 +44,29 @@ ul {
     }
   }
 
+  .app_header {
+    align-items: center;
+    background-color: var(--sidebar_3);
+    border-radius: $border_7;
+    padding: 8px 3px;
+    cursor: pointer;
+    user-select: none;
+    pointer-events: all;
+
+    .icons {
+      font-size: var(--font_m2);
+      width: 1.87rem;
+      color: var(--sidebar_1);
+    }
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: 0 0px 0px 1px var(--sidebar_5);
+    }
+  }
+
+  .app_title {}
+
   ._list_title {
     margin-left: auto;
     margin-right: 2px;

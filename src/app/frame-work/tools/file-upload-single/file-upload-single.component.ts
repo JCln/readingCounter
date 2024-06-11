@@ -51,6 +51,8 @@ export class FileUploadSingleComponent {
 
       this.offlineModeService.fileUploadSingleForm = fileInput.files;
       this.ioPolicy = await this.offlineModeService.dictionaryWrapperService.getIOPolicy(false);
+      console.log(this.ioPolicy);
+      
       if (this.offlineModeService.checkVertiticationFileUploadSingle(this.ioPolicy)) {
         await this.getLatestOnOffloadId();
         this.offlineModeService.postTicketFileUploadSingle(fileInput.files).subscribe({
