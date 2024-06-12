@@ -8,6 +8,7 @@
                 </li>
             </ul>
             <div class="date">
+                <img class="_logo" [src]="utilsService.logoAddress" alt="">
                 <app-date-jalali [_disabled]="true"></app-date-jalali>
             </div>
         </div>
@@ -28,7 +29,7 @@
                         </div>
                         <button class="_back" [hidden]="!item.isInController" (click)="backToModule(app)">
                             <i class="pi pi-arrow-left"></i>
-                            بازگشت
+                            <p>بازگشت</p>
                         </button>
                     </li>
                 </ul>

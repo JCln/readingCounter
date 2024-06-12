@@ -75,7 +75,7 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        height: 80vh;
+        height: 76vh;
         overflow: auto;
     }
 
@@ -109,6 +109,21 @@
         &:active {
             outline: 1px solid var(--primary_3);
         }
+
+        &:nth-child(1) {
+            background: linear-gradient(360deg, #fe6857, #de4020);
+            color: white;
+        }
+
+        &:nth-child(2) {
+            background: #3464B6;
+            color: white;
+        }
+
+        &:nth-child(3) {
+            background: #4996c3;
+            color: white;
+        }
     }
 
     .icons {
@@ -117,12 +132,18 @@
     }
 
     .date {
+        display: grid;
         width: 100%;
         margin: auto;
         text-align: center;
         border-radius: $border_7;
         background: var(--secondary_2);
-        height: 2rem;
+
+        ._logo {
+            width: 3rem;
+            height: 3rem;
+            margin: auto;
+        }
     }
 }
 
@@ -146,6 +167,7 @@
 
     .modules {
         overflow: auto;
+        margin-top: 3rem;
 
         ul {
             display: grid;
@@ -154,10 +176,8 @@
             gap: 1rem;
             list-style-type: none;
             border-radius: $border_7;
-
-            @media (max-width: 550px) {
-                padding: 0;
-            }
+            margin: 3px 0;
+            padding: 0;
         }
 
         .module_listwrapper {
@@ -209,6 +229,10 @@
         .active {
             outline: 1px solid var(--primary_3);
         }
+
+        &.active {
+            outline: 1px solid var(--primary_3) !important;
+        }
     }
 
     .controller {
@@ -222,6 +246,7 @@
     ._breadcrumb {
         position: absolute;
         right: 1rem;
+        top: 0.5rem;
         border-bottom: 1px solid;
         color: var(--primary_3);
         border-color: var(--primary_3);
@@ -235,6 +260,7 @@
         position: absolute;
         gap: 1rem;
         left: 1rem;
+        top: 0.5rem;
         border-radius: $border_10;
         width: auto;
         height: var(--font_25);
@@ -243,6 +269,17 @@
         background: var(--secondary_1);
         color: var(--primary_3);
         cursor: pointer;
+
+        p {
+            display: none;
+        }
+
+        @media (min-width: 550px) {
+            p {
+                display: block;
+            }
+
+        }
     }
 
     .controller_items {
@@ -281,16 +318,11 @@
     overflow: auto;
     width: 100%;
     padding: 1rem;
-    margin-top: 3rem;
-}
-
-.active_list {
-    color: red;
-    background-color: red;
+    margin-top: 1rem;
 }
 
 .active {
-    outline: 1px solid var(--primary_3);
+    outline: 1px solid var(--primary_3) !important;
 }
 
 [hidden] {

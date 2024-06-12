@@ -6,8 +6,7 @@ import { UtilsService } from 'services/utils.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent {
-  logoAddress = '/assets/imgs/header/logo_Atlas.png';
+export class AboutComponent {  
   aboutUs: { email: string, tel: string, address: string, coName: string };
 
   constructor(

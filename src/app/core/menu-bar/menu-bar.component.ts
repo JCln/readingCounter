@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
+import { UtilsService } from 'services/utils.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -11,7 +12,8 @@ export class MenuBarComponent {
   @Output() routeClick = new EventEmitter<any>();
 
   constructor(
-    private sideBarItemsService: SidebarItemsService
+    private sideBarItemsService: SidebarItemsService,
+    public utilsService: UtilsService
   ) {
     this.getSidebar();
   }

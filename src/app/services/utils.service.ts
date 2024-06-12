@@ -1,4 +1,3 @@
-import { VerificationService } from './verification.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,6 +26,7 @@ export class UtilsService {
   private readonly adminUser: string = 'admin';
   private readonly denyTracking: string = 'denytracking';
   private readonly httpProtocol: string = 'http:';
+  readonly logoAddress: string = '/assets/imgs/header/logo_Atlas.png';
 
   constructor(
     public compositeService: CompositeService,
