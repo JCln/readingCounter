@@ -10,7 +10,7 @@ import { sidebarItemsTest } from './sidebarItems';
   providedIn: 'root'
 })
 export class SidebarItemsService {
-  private tabItemsSource = new BehaviorSubject<any>([]);
+  private tabItemsSource = new BehaviorSubject<any>({ sidebarApps: [] });
 
   constructor(
     private ajaxReqWrapperService: AjaxReqWrapperService
@@ -24,7 +24,10 @@ export class SidebarItemsService {
   }
   getSideBarItems = async (): Promise<ISidebarItems> => {
     const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.getSideBar);
-    this.tabItemsSource.next(res.items);
+    console.log(res);
+    console.log(res.sidebarApps);
+
+    this.tabItemsSource.next(res.sidebarApps);
     this.tabItemsSource.next(this.getTestSideTest());
     return res;
   }

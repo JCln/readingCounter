@@ -2,21 +2,24 @@
     <div class="wrapper">
         <div class="app_section">
             <ul>
-                <li *ngFor="let app of currentRoute" (click)="appClicked(app)">
+                <li *ngFor="let app of currentRoute" (click)="appClicked(app)" routerLinkActive="active">
                     <i class="icons pi pi-folder"></i>
                     {{app.title}}
                 </li>
-                <li class="date">
-                    <app-date-jalali [_disabled]="true"></app-date-jalali>
-                </li>
             </ul>
+            <div class="date">
+                <app-date-jalali [_disabled]="true"></app-date-jalali>
+            </div>
         </div>
         <div class="main_section">
             <div class="modules">
-                <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen">
+                <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen" routerLinkActive="active">
+                    <div class="_breadcrumb" [hidden]="!app.isOpen">
+                        <p class="module_text"> {{app.title}}</p>
+                    </div>
                     <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen"
-                        routerLinkActive="active_list">
-                        <div class="module_inner" [hidden]="item.isInController">
+                        routerLinkActive="active">
+                        <div class="module_inner" [hidden]="item.isInController" routerLinkActive="active">
                             <i class="module_icons {{item.cssClass}}"></i>
                             <p class="module_text">{{item.title}}</p>
                         </div>
@@ -38,7 +41,7 @@
                                 [hidden]="!item.isOpen || !subItem.isOpen" [routerLink]="subItem.route"
                                 routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                                 (click)="routeClicked()">
-                                <i class="controller_icons {{subItem.cssClass}}"></i>
+                                <i class="controller_icons pi pi-bookmark {{subItem.cssClass}}"></i>
                                 <p class="controller_text">{{subItem.title}}</p>
                             </div>
                         </div>

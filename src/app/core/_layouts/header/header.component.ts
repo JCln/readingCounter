@@ -92,8 +92,6 @@ export class HeaderComponent implements AfterContentInit {
   }
   toggleMenuBar() {
     this.menuBar = !this.menuBar;
-    console.log(this.menuBar);
-
   }
 
 }

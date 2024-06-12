@@ -19,11 +19,19 @@ export class MenuBarComponent {
   getSidebar = async () => {
     const sidebars = await this.sideBarItemsService.getSideBarItems();
     this.currentRoute = sidebars.sidebarApps;
+    this.showFirstModuleView();
     // this.currentRoute = this.testSidebarService.getTestSideTest();
     // this.currentRoute = this.currentRoute.items;
   }
   routeClicked = () => {
     this.routeClick.emit();
+  }
+  showFirstModuleView() {
+    const showElement: number = 1;
+    this.currentRoute[showElement].isOpen = true;
+    this.currentRoute[showElement].items.forEach(element => {
+      element.isOpen = true;
+    })
   }
   appClicked(item: any) {
     this.currentRoute.forEach((aApp) => {
@@ -64,20 +72,9 @@ export class MenuBarComponent {
   }
   backToModule(item: any) {
     this.currentRoute.forEach((aApp) => {
-      if (item.title !== aApp.title) {
-        aApp.isOpen = false;
-      }
-      else {
-        aApp.isOpen = true;
-        aApp.items.forEach((_item) => {
-          // _item.isOpen = true;
-          _item.isInController = false;
-        })
-      }
-    })
-    this.currentRoute.forEach(aApp => {
-      aApp.items.forEach((item2) => {
-        item2.isInController = false;
+      aApp.items.forEach((_item) => {
+        // _item.isOpen = true;
+        _item.isInController = false;
       })
     })
     console.log(this.currentRoute);
