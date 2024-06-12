@@ -14,6 +14,7 @@ export interface ISidebarItems {
                     logicalOrder: number;
                     route: string;
                     isOpen: boolean;
+                    isInController: boolean; // for menu bar
                     subItems?: [
                         {
                             title: string;
@@ -22,6 +23,7 @@ export interface ISidebarItems {
                             route: string;
                             cssClass: string;
                             logicalOrder: number;
+                            isOpen: boolean;
                         }
                     ]
                 }

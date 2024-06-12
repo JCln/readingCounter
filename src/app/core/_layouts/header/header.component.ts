@@ -90,7 +90,7 @@ export class HeaderComponent implements AfterContentInit {
   changeColor = (id: ENThemeColor) => {
     this.themeService.setThemeColor(id);
   }
-  setMenuBar() {
+  toggleMenuBar() {
     this.menuBar = !this.menuBar;
     console.log(this.menuBar);
 

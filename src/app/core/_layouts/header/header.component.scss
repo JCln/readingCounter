@@ -207,3 +207,15 @@ li {
     color: var(--primary_5);
   }
 }
+
+// for app menu-bar
+app-menu-bar {
+  transition: all ease-in-out 250ms;
+  width: 0;
+}
+
+[hidden] {
+  visibility: hidden;
+  opacity: 0;
+  width: 0;
+}

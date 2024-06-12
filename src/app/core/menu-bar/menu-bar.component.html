@@ -14,29 +14,40 @@
         <div class="main_section">
             <div class="modules">
                 <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen">
-                    <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen">
-                        <i class="module_icons {{item.cssClass}}"></i>
-                        <p class="module_text">{{item.title}}</p>
+                    <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen"
+                        routerLinkActive="active_list">
+                        <div class="module_inner" [hidden]="item.isInController">
+                            <i class="module_icons {{item.cssClass}}"></i>
+                            <p class="module_text">{{item.title}}</p>
+                        </div>
+                        <div class="_breadcrumb" [hidden]="!item.isInController">
+                            <p class="module_text"> {{app.title}}/ {{item.title}}</p>
+                        </div>
+                        <button class="_back" [hidden]="!item.isInController" (click)="backToModule(app)">
+                            <i class="pi pi-arrow-left"></i>
+                            بازگشت
+                        </button>
                     </li>
                 </ul>
             </div>
             <div class="modules_controller">
                 <div *ngFor="let app of currentRoute">
-                    <div *ngFor="let item of app.items, index as i">
+                    <div *ngFor="let item of app.items, index as i" [hidden]="!item.isOpen">
                         <div class="controller">
                             <div class="controller_items" *ngFor="let subItem of item.subItems, index as j"
-                                [hidden]="!item.isOpen">
+                                [hidden]="!item.isOpen || !subItem.isOpen" [routerLink]="subItem.route"
+                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                                (click)="routeClicked()">
                                 <i class="controller_icons {{subItem.cssClass}}"></i>
                                 <p class="controller_text">{{subItem.title}}</p>
                             </div>
-                            <!-- <p *ngIf="j == 0">
-                                {{app.title}}/ {{item.title}}/ {{subItem.title}}
-                            </p>
-                            <button *ngIf="j == 0" (click)="backToModule(item)">back</button> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <button class="close_button" (click)="routeClicked()">
+        <i class="pi pi-times-circle"></i>
+    </button>
 </div>
