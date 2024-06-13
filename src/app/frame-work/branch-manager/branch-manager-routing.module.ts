@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'siphon', loadChildren: () => import('./siphon/siphon.module').then(siphonManager => siphonManager.SiphonModule) },
   { path: 'addClients', loadChildren: () => import('./client-manager-add/client-manager-add.module').then(addClientManager => addClientManager.ClientManagerAddModule) },
   { path: 'clientLazy', loadChildren: () => import('./client-get-lazy/client-get-lazy.module').then(clientGetLazy => clientGetLazy.ClientGetLazyModule) },
+  { path: 'flowState', loadChildren: () => import('./flow-state/flow-state.module').then(flowStateManager => flowStateManager.FlowStateModule) },
+  { path: 'flowRule', loadChildren: () => import('./flow-rule/flow-rule.module').then(flowRuleManager => flowRuleManager.FlowRuleModule) },
   { path: 'tarrifTypes', loadChildren: () => import('./tarrif-type-item/tarrif-type-item.module').then(tarrifTypeItemsManager => tarrifTypeItemsManager.TarrifTypeItemModule) },
   { path: 'tarrifParameter', loadChildren: () => import('./tariff-parameter/tariff-parameter.module').then(tarrifParameterManager => tarrifParameterManager.TariffParameterModule) },
   { path: 'offering', loadChildren: () => import('./offering/offering.module').then(offering => offering.OfferingModule) },

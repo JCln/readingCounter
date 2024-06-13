@@ -4,6 +4,8 @@ import { ConfirmTextDialogComponent } from '../shared/confirm-text-dialog/confir
 import { IDialogMessage } from 'interfaces/ioverall-config';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { share } from 'rxjs/internal/operators/share';
+import { take } from 'rxjs/internal/operators/take';
 
 @Injectable()
 
@@ -66,7 +68,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
   // Multi time operation problem should fix
   handleError(error: any) {
     if (this.chunkFailedMessage.test(error.message)) {
-      this.$getChunkFailedStatus().subscribe(async res => {
+      this.$getChunkFailedStatus().pipe(share(), take(1)).subscribe(async res => {
         if (res) {
           this.dontShowFailedChunkDialogAnymore();
           const config = {

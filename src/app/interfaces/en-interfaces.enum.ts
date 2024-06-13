@@ -476,6 +476,16 @@ export enum ENInterfaces {
     branchStateAdd = 'V1/BranchState/Add',
     branchStateRemove = 'V1/BranchState/Remove',
 
+    flowStateGet = 'V1/FlowState/All',
+    flowStateEdit = 'V1/FlowState/Edit',
+    flowStateAdd = 'V1/FlowState/Add',
+    flowStateRemove = 'V1/FlowState/Remove',
+
+    flowRuleGet = 'V1/FlowRule/All',
+    flowRuleEdit = 'V1/FlowRule/Edit',
+    flowRuleAdd = 'V1/FlowRule/Add',
+    flowRuleRemove = 'V1/FlowRule/Remove',
+
     customerTypeGet = 'V1/customerType/All',
     customerTypeEdit = 'V1/customerType/Edit',
     customerTypeAdd = 'V1/customerType/Add',

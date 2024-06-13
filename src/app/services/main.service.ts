@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { EnvService } from './env.service';
+import { share } from 'rxjs/internal/operators/share';
 // import { retry } from 'rxjs/internal/operators/retry';
 
 @Injectable({
@@ -38,7 +39,7 @@ export class MainService {
     return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
   }
   POST = (URL: string) => {
-    return this.http.post(this.environment.API_URL + '/' + URL, '');
+    return this.http.post(this.environment.API_URL + '/' + URL, '').pipe(share());
   }
   POSTARRAY = (URL: string, arr: any[]) => {
     return this.http.post(this.environment.API_URL + '/' + URL, arr);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBank, IBranchState, IClientAll, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IScheduledPaymentMethod, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage } from 'interfaces/i-branch';
+import { IBank, IBranchState, IClientAll, IFlowRule, IFlowState, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IScheduledPaymentMethod, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -1769,6 +1769,28 @@ export class VerificationService {
     if (!this.nullValidation(item.title, EN_messages.insert_title))
       return false;
     if (!this.nullValidation(item.tag, EN_messages.insert_tag))
+      return false;
+
+    return true;
+  }
+  flowState = (item: IFlowState): boolean => {
+    if (!this.nullValidation(item.title, EN_messages.insert_title))
+      return false;
+
+    return true;
+  }
+  flowRule = (item: IFlowRule): boolean => {
+    // if (!this.nullValidation(item.fromFlowStateId, EN_messages.))
+    //   return false;
+    // if (!this.nullValidation(item.toFlowStateId, EN_messages.))
+    //   return false;
+    if (!this.nullValidation(item.offeringGroupId, EN_messages.insert_offeringIds))
+      return false;
+
+    return true;
+  }
+  flowRuleReq = (item: any): boolean => {
+    if (!this.nullValidation(item.offeringGroupId, EN_messages.insert_offeringIds))
       return false;
 
     return true;

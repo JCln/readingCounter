@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -95,6 +95,11 @@ export class CloseTabService {
   saveDataForTabsare3Formula: IAbBahaFormula[];
   // 
   /*BranchState*/
+  flowState: IFlowState[] = [];
+  flowRule: IFlowRule[] = [];
+  flowRuleReq = {
+    offeringGroupId: null
+  };
   branchState: IBranchState[] = [];
   customerType: ICustomerType[] = [];
   waterSource: IWaterSource[] = [];
@@ -2377,6 +2382,12 @@ export class CloseTabService {
         showAll: false
       }
     },
+    {
+      id: 2, req: ENEssentialsToSave.flowRuleReq, value: ENEssentialsToSave.flowRule, url: EN_Routes.flowRule, defaultValue: [], defaultReq: {
+        offeringGroupId: null
+      }
+    },
+    { id: 2, value: ENEssentialsToSave.flowState, url: EN_Routes.flowState, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.bank, url: EN_Routes.bank, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.tariffType, url: EN_Routes.tariffType, defaultValue: [] },

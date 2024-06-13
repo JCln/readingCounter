@@ -354,7 +354,7 @@ export enum EN_messages {
     broadMessage2 = 'لطفا از سامانه خارج و سپس یکبار صفحه را رفرش نمایید',
     broadMessage3 = 'همکار گرامی خسته نباشید، باتوجه به بروزرسانی نسخه نرم‌افزار درصورت بروز هرگونه مشکل با راهبر سامانه تماس حاصل نمایید',
 
-    call_supportGroup = 'خطای سرور، با پشتیبانی تماس حاصل نمایید',
+    call_supportGroup = 'خطای داخلی، با پشتیبانی تماس حاصل نمایید',
     reLoginPlease = 'لطفا مجددا وارد سامانه شوید',
     checkPlease = 'لطفا نسبت به اصلاح مورد اقدام نمایید',
     browserSupport_alarm = 'نسخه مرورگر شما برنامه را پشتیبانی نمی‌کند',
@@ -734,7 +734,10 @@ export enum ENEssentialsToSave {
     bank = "bank",
     tariffType = "tariffType",
     scheduledPaymentMethod = "scheduledPaymentMethod",
-    village = "village"
+    village = "village",
+    flowState = "flowState",
+    flowRule = "flowRule",
+    flowRuleReq = "flowRuleReq"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -977,6 +980,8 @@ export enum ENSelectedColumnVariables {
     selectedOwnershipType = 'ownershipType',
     selectedTariffTypeItem = 'tariffTypeItem',
     selectedTariffParameter = 'tariffParameter',
+    selectedFlowState = 'flowState',
+    selectedFlowRule = 'flowRule',
     selectedOffering = 'offering',
     selectedVillage = 'village',
     selectedTariffType = 'tariffType',

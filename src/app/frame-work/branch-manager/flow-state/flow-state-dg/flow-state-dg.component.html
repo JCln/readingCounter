@@ -1,0 +1,63 @@
+<section>
+    <h2 class="title">
+        {{flowStateReq.isEditing? 'ویرایش وضعیت فرآیند': 'افزودن وضعیت فرآیند'}}
+    </h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+
+            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('flowStateDialog')"
+                [ngClass]="{'double_size':mainDatas.icon}">
+                <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
+                    <!-- only for single select option -->
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <!-- <p-dropdown name="offeringUnitId" [options]="'offeringUnitIdDictionary'"
+                                    [(ngModel)]="" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown> -->
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #checkboxes>
+                    <ng-container>
+                        <ng-template *ngIf="mainDatas.isBoolean; else simpleText">
+                            <div class="input_icon">
+                                <i class="pi pi-bookmark _bookmark"></i>
+                                <div class="input_3">
+                                    <div class="_key">{{mainDatas.header}}</div>
+                                    <mat-checkbox name="isCluster" [(ngModel)]="flowStateReq[mainDatas.field]">
+                                        {{mainDatas.isSelected}}
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+
+                </ng-template>
+                <ng-template #simpleText>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <input [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
+                                [(ngModel)]="flowStateReq[mainDatas.field]">
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                {{flowStateReq.isEditing? 'ویرایش وضعیت فرآیند': 'افزودن وضعیت فرآیند'}}
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

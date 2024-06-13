@@ -10,6 +10,27 @@ export interface ICustomerType {
     isActive: boolean,
     isNew?: boolean
 }
+export interface IFlowState {
+    id: number,
+    title: string,
+    isInternal: boolean,
+    order: number,
+    canGoPrevious: boolean,
+    flowsAutomaticly: boolean,
+    isEditing: boolean
+}
+export interface IFlowRule {
+    id: number,
+    fromFlowStateId: number,
+    toFlowStateId: number,
+    condition: string,
+    bpmsStateId: string,
+    offeringGroupId: any,
+    changableOfferingGroupId: any,
+    changableFromFlow?: any,
+    changableToFlow?: any,
+    isEditing: boolean
+}
 export interface ISiphon {
     id: number,
     title: string,
