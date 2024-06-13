@@ -26,7 +26,6 @@ import { AnonyHeaderComponent } from './anony-header/anony-header.component';
 import { ClockComponent } from './clock/clock.component';
 import { ColorPaletteComponent } from './color-palette/color-palette.component';
 import { CoreRoutingModule } from './core-routing.module';
-import { SideBarComponent } from './side-bar/side-bar.component';
 import { SmallSpinnerComponent } from './small-spinner/small-spinner.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -39,7 +38,6 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 @NgModule({
   declarations: [
     LayoutComponent,
-    SideBarComponent,
     CaptchaComponent,
     TabWrapperComponent,
     HfcComponent,

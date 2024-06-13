@@ -18,7 +18,7 @@ import { FullScreenService } from 'services/full-screen.service';
 })
 export class HeaderComponent implements AfterContentInit {
   routeToMyMessages = EN_Routes.NotificationMessages;
-  menuBar: boolean = true;
+  menuBar: boolean = false;
   ENHubMessages = ENHubMessages;
   displayName: string = '';
   badgeNumber: number = 0;
