@@ -81,13 +81,13 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   getTabWrapper = async () => {
     this.sideBarItemsService.getLatestItems().subscribe(res => {
       res.forEach((apps: any) => {
-        console.log(apps);
+        // console.log(apps);
         apps.items.forEach((subItem: any) => {
-          console.log(subItem);
+          // console.log(subItem);
           subItem.subItems.forEach((subItems: any) => {
             console.log(subItems);
-            // this.currentRoute.push(subItems);
-            // this.verification();
+            this.currentRoute.push(subItems);
+            this.verification();
           })
         })
       })
