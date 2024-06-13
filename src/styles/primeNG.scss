@@ -554,6 +554,15 @@
     font-weight: 600;
   }
 
+  .p-overlay {
+    z-index: 1001;
+    min-width: 144px;
+    transform-origin: center top;
+    top: 42px;
+    left: auto !important;
+    right: 0px !important;
+  }
+
   .p-hidden-space {
     display: none !important;
   }

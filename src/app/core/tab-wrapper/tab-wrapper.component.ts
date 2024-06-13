@@ -16,7 +16,7 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class TabWrapperComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = []
-  currentRoute;
+  currentRoute: any[] = [];
   @Output() childPageTitle = new EventEmitter<string>();
 
   constructor(
@@ -36,20 +36,13 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     })
     this.childPageTitle.emit(a);
   }
-  DoesCurrentRouteFound = (): ITabs => {
-    console.log(1);
-    console.log(this.currentRoute);
+  doesCurrentRouteFound = (): ITabs => {
     return this.currentRoute.find((item: any) => {
-      console.log(item);
-
       return item.route === this.getRouterUrl()
     })
   }
   DoesTabsHaveThisRouteNow = (): ITabs => {
     const found = this.closeTabService.tabs.find((item: any) => {
-      console.log(item);
-      console.log(this.getRouterUrl());
-
       return item.route === this.getRouterUrl()
     })
     if (found)
@@ -63,11 +56,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   }
   getRouterUrl = (): string => { return this.router.url; }
   verification = () => {
-    console.log(1);
-
-    const currentRouteFound = this.DoesCurrentRouteFound();
-    console.log(currentRouteFound);
-
+    const currentRouteFound = this.doesCurrentRouteFound();
     if (currentRouteFound) {
       if (this.DoesTabsHaveThisRouteNow()) {
         this.reFetchPageTitle();
@@ -81,11 +70,8 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   getTabWrapper = async () => {
     this.sideBarItemsService.getLatestItems().subscribe(res => {
       res.forEach((apps: any) => {
-        // console.log(apps);
-        apps.items.forEach((subItem: any) => {
-          // console.log(subItem);
-          subItem.subItems.forEach((subItems: any) => {
-            console.log(subItems);
+        apps.items.forEach((item: any) => {
+          item.subItems.forEach((subItems: any) => {
             this.currentRoute.push(subItems);
             this.verification();
           })

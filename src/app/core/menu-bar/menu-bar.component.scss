@@ -1,21 +1,11 @@
 @import 'variable';
 
 .menu {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    align-items: center;
+    --app-width: 8.5rem;
     overflow: auto;
     z-index: 1000;
-    width: 100vw;
-    height: 100%;
-    min-height: 100vh;
-    min-height: 100svh;
     padding-top: 2.3rem;
     background: linear-gradient(58deg, #3464B6, #5589f3);
-    transition: all ease-in-out 250ms;
 }
 
 .close_button {
@@ -75,7 +65,7 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        height: 76vh;
+        height: 80vh;
         overflow: auto;
     }
 
@@ -95,8 +85,8 @@
         user-select: none;
 
         @media (min-width:550px) {
-            width: 8.5rem;
-            height: 8.5rem;
+            width: var(--app-width);
+            height: var(--app-width);
             font-size: 1rem;
         }
 
@@ -124,6 +114,16 @@
             background: #4996c3;
             color: white;
         }
+
+        &:nth-child(4) {
+            background: #629aae;
+            color: white;
+        }
+
+        &:nth-child(5) {
+            background: #49bdc3;
+            color: white;
+        }
     }
 
     .icons {
@@ -132,16 +132,17 @@
     }
 
     .date {
-        display: grid;
-        width: 100%;
+        display: flex;
+        align-items: center;
+        width: var(--app-width);
         margin: auto;
         text-align: center;
         border-radius: $border_7;
         background: var(--secondary_2);
 
         ._logo {
-            width: 3rem;
-            height: 3rem;
+            width: 2.5rem;
+            height: 2.5rem;
             margin: auto;
         }
     }

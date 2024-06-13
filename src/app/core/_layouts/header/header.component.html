@@ -53,8 +53,10 @@
         <li class="menu_toggle" (click)="toggleMenuBar()">
             <i class='pi pi-th-large'></i>
         </li>
-        <app-menu-bar [hidden]="!menuBar" (routeClick)="toggleMenuBar()"></app-menu-bar>
-
+        <div class="menu-bar" [ngClass]="!menuBar ? 'menu-close': 'menu-bar'">
+            <app-menu-bar (routeClick)="toggleMenuBar()">
+            </app-menu-bar>
+        </div>
     </ul>
 
 </div>

@@ -34,6 +34,12 @@ export class MenuBarComponent {
     this.currentRoute[showElement].items.forEach(element => {
       element.isOpen = true;
     })
+    for (let index = 0; index < this.currentRoute.length; index++) {
+
+      for (let j = 0; j < this.currentRoute[index].items.length; j++) {
+        this.currentRoute[index].items[j].isInController = false;
+      }
+    }
   }
   appClicked(item: any) {
     this.currentRoute.forEach((aApp) => {
@@ -73,12 +79,26 @@ export class MenuBarComponent {
     })
   }
   backToModule(item: any) {
-    this.currentRoute.forEach((aApp) => {
-      aApp.items.forEach((_item) => {
-        // _item.isOpen = true;
-        _item.isInController = false;
-      })
-    })
+    console.log(item);
+    // item.isOpen = false;
+    for (let index = 0; index < this.currentRoute.length; index++) {
+
+      for (let j = 0; j < this.currentRoute[index].items.length; j++) {
+        this.currentRoute[index].items[j].isInController = false;
+        this.currentRoute[index].items[j].isOpen = false;
+
+        // if (item.title == this.currentRoute[index].title)
+        //   this.currentRoute[index].items[j].isOpen = true;
+        // else
+      }
+      // this.currentRoute.forEach((aApp) => {
+      //   aApp.items.forEach((_item) => {
+      //     // _item.isOpen = true;
+      //     _item.isInController = false;
+      //   })
+      // })
+    }
     console.log(this.currentRoute);
   }
+
 }
