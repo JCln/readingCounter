@@ -29,7 +29,7 @@ export class MenuBarComponent {
     this.routeClick.emit();
   }
   showFirstModuleView() {
-    const showElement: number = 1;
+    const showElement: number = 0;
     this.currentRoute[showElement].isOpen = true;
     this.currentRoute[showElement].items.forEach(element => {
       element.isOpen = true;

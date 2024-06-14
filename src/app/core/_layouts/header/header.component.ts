@@ -92,6 +92,7 @@ export class HeaderComponent implements AfterContentInit {
   }
   toggleMenuBar() {
     this.menuBar = !this.menuBar;
+    document.body.style.overflow = this.menuBar ? 'hidden' : 'auto';
   }
 
 }

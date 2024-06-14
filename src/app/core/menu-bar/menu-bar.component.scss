@@ -1,9 +1,8 @@
 @import 'variable';
 
 .menu {
-    --app-width: 8.5rem;
+    --app-width: 9rem;
     overflow: auto;
-    z-index: 1000;
     padding-top: 2.3rem;
     background: linear-gradient(58deg, #3464B6, #5589f3);
 }
@@ -81,7 +80,7 @@
         background: var(--secondary_1);
         border-radius: $border_10;
         cursor: pointer;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         user-select: none;
 
         @media (min-width:550px) {
@@ -202,18 +201,10 @@
                 background: var(--secondary_1);
             }
 
-            &:focus-visible,
-            &:active {
+            &:focus-visible {
                 outline: 1px solid var(--primary_3);
             }
 
-            .active {
-                outline: 1px solid var(--primary_3);
-            }
-
-            &.active {
-                outline: 1px solid var(--primary_3);
-            }
         }
 
         .module_icons {
@@ -226,14 +217,6 @@
             font-size: 1rem;
             text-align: center;
             font-weight: 600;
-        }
-
-        .active {
-            outline: 1px solid var(--primary_3);
-        }
-
-        &.active {
-            outline: 1px solid var(--primary_3) !important;
         }
     }
 
@@ -260,6 +243,7 @@
         justify-content: center;
         align-items: center;
         position: absolute;
+        user-select: none;
         gap: 1rem;
         left: 1rem;
         top: 0.5rem;
@@ -324,11 +308,17 @@
 }
 
 .active {
-    outline: 1px solid var(--primary_3) !important;
+    outline: 1px solid var(--primary_3);
+    border-radius: $border_7;
+    border: 2px solid var(--white); // making outline border distanced from border to make it more visible
 }
 
 [hidden] {
     display: none !important;
+}
+
+.hide-outline {
+    outline: none;
 }
 
 ::-webkit-scrollbar {

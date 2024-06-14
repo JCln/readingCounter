@@ -5,6 +5,11 @@
                 <li *ngFor="let app of currentRoute" (click)="appClicked(app)" routerLinkActive="active">
                     <i class="icons pi pi-folder"></i>
                     {{app.title}}
+                    <div *ngFor="let item of app.items" [hidden]="true">
+                        <div *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        </div>
+                    </div>
                 </li>
             </ul>
             <div class="date">
@@ -14,13 +19,13 @@
         </div>
         <div class="main_section">
             <div class="modules">
-                <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen" routerLinkActive="active">
+                <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen">
                     <div class="_breadcrumb" [hidden]="!app.isOpen">
                         <p class="module_text"> {{app.title}}</p>
                     </div>
                     <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen"
-                        routerLinkActive="active">
-                        <div class="module_inner" [hidden]="item.isInController" routerLinkActive="active">
+                        routerLinkActive="active" [ngClass]="{'hide-outline': item.isInController}">
+                        <div class="module_inner" [hidden]="item.isInController">
                             <i class="module_icons {{item.cssClass}}"></i>
                             <p class="module_text">{{item.title}}</p>
                         </div>
@@ -31,14 +36,17 @@
                             <i class="pi pi-arrow-left"></i>
                             <p>بازگشت</p>
                         </button>
+                        <div *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [hidden]="true">
+                        </div>
                     </li>
                 </ul>
             </div>
             <div class="modules_controller">
                 <div *ngFor="let app of currentRoute">
-                    <div *ngFor="let item of app.items, index as i" [hidden]="!item.isOpen">
+                    <div *ngFor="let item of app.items" [hidden]="!item.isOpen">
                         <div class="controller">
-                            <div class="controller_items" *ngFor="let subItem of item.subItems, index as j"
+                            <div class="controller_items" *ngFor="let subItem of item.subItems"
                                 [hidden]="!item.isOpen || !subItem.isOpen" [routerLink]="subItem.route"
                                 routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                                 (click)="routeClicked()">
