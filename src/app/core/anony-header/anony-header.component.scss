@@ -26,7 +26,17 @@
   }
 }
 
+app-clock {
+  position: fixed;
+  right: var(--font_xs);
+  top: 0;
+  margin: var(--font_02);
+  z-index: 10;
+}
+
 ul {
+  display: flex;
+  align-items: center;
   margin-left: auto;
 
   @media (max-width: 550px) {

@@ -71,15 +71,3 @@
   min-height: 100%;
   z-index: -1;
 }
-
-app-clock {
-  position: fixed;
-  right: var(--font_xs);
-  top: 0;
-  margin: var(--font_02);
-  z-index: 200;
-
-  @media (min-width:700px) {
-    z-index: 102;
-  }
-}

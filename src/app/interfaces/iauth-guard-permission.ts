@@ -43,4 +43,5 @@ export interface IAuthUser {
     userName: string;
     displayName: string;
     roles: string[] | null;
+    userCode: string | number | null
 }

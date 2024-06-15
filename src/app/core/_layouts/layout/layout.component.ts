@@ -6,19 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
-  sidebarStatus: boolean;
   pageTitle: string = 'نقشه/ داشبورد';
   refreshPage: boolean;
 
-  sideBarPageSize = () => {
-    const a = document.querySelector('._sidebar_container') as HTMLElement;
-    a.classList.toggle('_sidebar_small_screen_toggle');
-  }
-
-  changeSidebarStatus($event: boolean) {
-    this.sidebarStatus = $event;
-    this.sideBarPageSize();
-  }
   changePageTitle($vent: string) {
     this.pageTitle = $vent;
   }

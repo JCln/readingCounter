@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { UtilsService } from 'services/utils.service';
@@ -9,6 +9,7 @@ import { UtilsService } from 'services/utils.service';
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent {
+  @Input() displayName: string;
   @Output() isLogout = new EventEmitter<boolean>();
   routeToProfile = EN_Routes.wrprofile;
   myPreviousLogins = EN_Routes.myLogins;

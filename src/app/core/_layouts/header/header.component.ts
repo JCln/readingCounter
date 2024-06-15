@@ -1,4 +1,4 @@
-import { AfterContentInit, Component } from '@angular/core';
+import { AfterContentInit, Component, HostListener } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENHubMessages, EN_messages } from 'interfaces/enums.enum';
 import { ENThemeColor } from 'interfaces/istyles';
@@ -10,6 +10,7 @@ import { UtilsService } from 'services/utils.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MyPreviousFailuresComponent } from './my-previous-failures/my-previous-failures.component';
 import { FullScreenService } from 'services/full-screen.service';
+import { IAuthUser } from 'interfaces/iauth-guard-permission';
 
 @Component({
   selector: 'app-header',
@@ -20,9 +21,15 @@ export class HeaderComponent implements AfterContentInit {
   routeToMyMessages = EN_Routes.NotificationMessages;
   menuBar: boolean = false;
   ENHubMessages = ENHubMessages;
-  displayName: string = '';
   badgeNumber: number = 0;
   _showColorPalete: boolean = false;
+  authUser: IAuthUser = {
+    displayName: '',
+    roles: [],
+    userCode: '',
+    userId: '',
+    userName: ''
+  }
   ref: DynamicDialogRef;
 
   constructor(
@@ -79,8 +86,7 @@ export class HeaderComponent implements AfterContentInit {
     this.signalRService.startConnection();
   }
   ngAfterContentInit(): void {
-    const authUser = this.authService.getAuthUser();
-    this.displayName = authUser ? authUser.displayName : '';
+    this.authUser = this.authService.getAuthUser();
     this.hubConnect();
     this.getNotification();
   }
@@ -89,6 +95,10 @@ export class HeaderComponent implements AfterContentInit {
   }
   changeColor = (id: ENThemeColor) => {
     this.themeService.setThemeColor(id);
+  }
+  @HostListener('document:keyup.escape', ['$event']) onKeyup(event: KeyboardEvent) {
+    if (this.menuBar)
+      this.toggleMenuBar();
   }
   toggleMenuBar() {
     this.menuBar = !this.menuBar;

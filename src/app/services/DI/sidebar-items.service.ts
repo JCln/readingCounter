@@ -20,7 +20,7 @@ export class SidebarItemsService {
     return this.tabItemsSource.asObservable();
   }
   getTestSideTest = () => {
-    return sidebarItemsTest.addStaticSubRoutes;
+    return sidebarItemsTest.sidebarApps;
   }
   getSideBarItems = async (): Promise<ISidebarItems> => {
     const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.getSideBar);

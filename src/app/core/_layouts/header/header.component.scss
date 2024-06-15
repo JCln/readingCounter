@@ -8,6 +8,7 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
   background-color: var(--white);
   width: 100%;
@@ -21,15 +22,11 @@ ul {
   display: flex;
   align-items: center;
   gap: 2px;
-  height: 100%;
-  width: 82%;
   margin: 0;
   padding: 0;
 
   @media (min-width:550px) {
-    padding-right: 2rem;
-    padding-left: 2rem;
-    gap: .5rem;
+    gap: 1.5rem;
   }
 
 }
@@ -54,28 +51,6 @@ li {
   }
 }
 
-._name {
-  margin-left: auto;
-  padding-right: 0;
-  font-size: .87rem;
-  color: var(--primary_5);
-  cursor: auto;
-  @include _borders();
-  width: 4.5rem;
-  text-wrap: nowrap;
-  overflow: auto;
-
-  @media (min-width:550px) {
-    width: auto;
-    font-size: var(--font_ss);
-    padding-right: 0.87rem;
-  }
-
-  @media (min-width:780px) {
-    font-size: var(--font_m);
-  }
-}
-
 .notif {
   position: relative;
   color: var(--primary_5);
@@ -90,8 +65,23 @@ li {
   top: 1.6rem;
 
   @media (min-width: 550px) {
-    top: .87rem;
+    top: 1rem;
   }
+}
+
+._user {
+  position: relative;
+}
+
+._badge_usercode {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0rem;
+  bottom: -0.4rem;
+  font-size: .8rem;
+  color: var(--primary_5);
 }
 
 ._notif_icon {
@@ -115,7 +105,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font_ss);
+  font-size: 0.87rem;
   max-height: 1.87rem;
   min-width: 1.5rem;
   padding: 0 0.3rem;
@@ -126,7 +116,7 @@ li {
   background-color: var(--red_600);
 
   @media (min-width: 550px) {
-    font-size: var(--font_s);
+    font-size: 0.87rem;
   }
 }
 

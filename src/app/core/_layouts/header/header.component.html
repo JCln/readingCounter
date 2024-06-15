@@ -1,62 +1,66 @@
 <div class="header">
-    <li class="_theme_mode">
-        <app-color-palette></app-color-palette>
-    </li>
-    <!-- <li class="_borders">
-        <app-date-jalali [_disabled]="true"></app-date-jalali>
-    </li> -->
-    <ul>
-        <li class="notif" [routerLink]="[routeToMyMessages]">
-            <div class="_badge_wrapper">
-                <i class="_badge">{{badgeNumber}}</i>
+    <div class="left">
+        <ul>
+            <li class="_theme_mode">
+                <app-color-palette></app-color-palette>
+            </li>
+            <li class="notif" [routerLink]="[routeToMyMessages]">
+                <div class="_badge_wrapper">
+                    <i class="_badge">{{badgeNumber}}</i>
+                </div>
+                <i class="_notif_icon far fa-bell"></i>
+            </li>
+            <li class="_user">
+                <div class="_badge_usercode">
+                    {{authUser.userCode}}
+                </div>
+                <app-dropdown [displayName]="authUser.displayName" (isLogout)="logout()"></app-dropdown>
+            </li>
+            <li>
+                <app-small-spinner></app-small-spinner>
+            </li>
+        </ul>
+    </div>
+
+    <div class="right">
+        <ul>
+            <li class="_status" [ngSwitch]="signalRService.getConnectionStatus()">
+                <div class="tooltip">
+                    <i class="pi pi-times-circle" *ngSwitchCase="'Disconnected'">
+                        <div class="tooltip_text_bottom">{{ENHubMessages.Disconnected}}</div>
+                    </i>
+                </div>
+                <button class="btn_2_o" (click)="signalRService.reconnectManualy()" *ngSwitchCase="'Disconnected'">
+                    تلاش مجدد
+                </button>
+                <div class="tooltip">
+                    <i class="pi pi-spin pi-spinner" *ngSwitchCase="'Connecting'"></i>
+                    <div class="tooltip_text_bottom">{{ENHubMessages.Connecting}}</div>
+                </div>
+                <div class="tooltip">
+                    <i class="Disconnecting pi pi-spin pi-spinner" *ngSwitchCase="'Disconnecting'"></i>
+                    <div class="tooltip_text_bottom">{{ENHubMessages.Disconnecting}}</div>
+                </div>
+                <div class="tooltip">
+                    <i class="Reconnecting pi pi-spin pi-spinner" *ngSwitchCase="'Reconnecting'"></i>
+                    <div class="tooltip_text_bottom">{{ENHubMessages.Reconnecting}}</div>
+                </div>
+                <div class="tooltip">
+                    <i class="pi pi-check-circle" *ngSwitchCase="'Connected'"></i>
+                    <div class="tooltip_text_bottom">{{ENHubMessages.Connected}}</div>
+                </div>
+            </li>
+            <li class="_fullscreen" (click)="fullScreenService.toggleFullScreen()">
+                <i [ngClass]="fullScreenService._isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
+            </li>
+            <li class="menu_toggle" (click)="toggleMenuBar()">
+                <i class='pi pi-th-large'></i>
+            </li>
+            <div class="menu-bar" [ngClass]="!menuBar ? 'menu-close': 'menu-bar'">
+                <app-menu-bar (routeClick)="toggleMenuBar()">
+                </app-menu-bar>
             </div>
-            <i class="_notif_icon far fa-bell"></i>
-        </li>
-        <li>
-            <app-dropdown (isLogout)="logout()"></app-dropdown>
-        </li>
-        <li>
-            <app-small-spinner></app-small-spinner>
-        </li>
-        <li class="_name">
-            {{displayName}}
-        </li>
-        <li class="_status" [ngSwitch]="signalRService.getConnectionStatus()">
-            <div class="tooltip">
-                <i class="pi pi-times-circle" *ngSwitchCase="'Disconnected'">
-                    <div class="tooltip_text_bottom">{{ENHubMessages.Disconnected}}</div>
-                </i>
-            </div>
-            <button class="btn_2_o" (click)="signalRService.reconnectManualy()" *ngSwitchCase="'Disconnected'">
-                تلاش مجدد
-            </button>
-            <div class="tooltip">
-                <i class="pi pi-spin pi-spinner" *ngSwitchCase="'Connecting'"></i>
-                <div class="tooltip_text_bottom">{{ENHubMessages.Connecting}}</div>
-            </div>
-            <div class="tooltip">
-                <i class="Disconnecting pi pi-spin pi-spinner" *ngSwitchCase="'Disconnecting'"></i>
-                <div class="tooltip_text_bottom">{{ENHubMessages.Disconnecting}}</div>
-            </div>
-            <div class="tooltip">
-                <i class="Reconnecting pi pi-spin pi-spinner" *ngSwitchCase="'Reconnecting'"></i>
-                <div class="tooltip_text_bottom">{{ENHubMessages.Reconnecting}}</div>
-            </div>
-            <div class="tooltip">
-                <i class="pi pi-check-circle" *ngSwitchCase="'Connected'"></i>
-                <div class="tooltip_text_bottom">{{ENHubMessages.Connected}}</div>
-            </div>
-        </li>
-        <li class="_fullscreen" (click)="fullScreenService.toggleFullScreen()">
-            <i [ngClass]="fullScreenService._isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
-        </li>
-        <li class="menu_toggle" (click)="toggleMenuBar()">
-            <i class='pi pi-th-large'></i>
-        </li>
-        <div class="menu-bar" [ngClass]="!menuBar ? 'menu-close': 'menu-bar'">
-            <app-menu-bar (routeClick)="toggleMenuBar()">
-            </app-menu-bar>
-        </div>
-    </ul>
+        </ul>
+    </div>
 
 </div>

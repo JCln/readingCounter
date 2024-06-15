@@ -78,27 +78,32 @@ export class MenuBarComponent {
       })
     })
   }
-  backToModule(item: any) {
-    console.log(item);
-    // item.isOpen = false;
-    for (let index = 0; index < this.currentRoute.length; index++) {
-
-      for (let j = 0; j < this.currentRoute[index].items.length; j++) {
-        this.currentRoute[index].items[j].isInController = false;
-        this.currentRoute[index].items[j].isOpen = false;
-
-        // if (item.title == this.currentRoute[index].title)
-        //   this.currentRoute[index].items[j].isOpen = true;
-        // else
+  doGatherCleanToBackToModule(test, item): any {
+    test.forEach((aApp) => {
+      if (item.title !== aApp.title) {
+        aApp.isOpen = false;
       }
-      // this.currentRoute.forEach((aApp) => {
-      //   aApp.items.forEach((_item) => {
-      //     // _item.isOpen = true;
-      //     _item.isInController = false;
-      //   })
-      // })
-    }
-    console.log(this.currentRoute);
+      else {
+        aApp.isOpen = true;
+        aApp.items.forEach((_item) => {
+          _item.isOpen = true;
+          _item.isInController = false;
+        })
+      }
+      //when app clicked all controllers should hide
+      aApp.items.forEach((_item) => {
+        _item.subItems.forEach((_subItem) => {
+          _subItem.isOpen = false;
+        })
+      })
+    })
+    console.log(test);
+    return test;
+
+  }
+  backToModule(item: any) {
+    let test = JSON.parse(JSON.stringify(this.currentRoute));
+    this.currentRoute = this.doGatherCleanToBackToModule(test, item);
   }
 
 }

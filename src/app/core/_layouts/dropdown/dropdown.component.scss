@@ -4,6 +4,13 @@ i {
   color: var(--primary_5);
 }
 
+._name {
+  cursor: auto;
+  font-size: 1rem;
+  padding: .5rem 0;
+  color: var(--primary_5);
+}
+
 .dropdown {
   position: relative;
   place-items: center;
