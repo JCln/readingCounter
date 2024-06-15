@@ -22,7 +22,11 @@ export interface IZoneManager {
     regionId: number | string;
     isMetro: boolean
     logicalOrder: number;
-    dynamicId: any
+    dynamicId: any,
+    fromEshterak: string,
+    toEshterak: string,
+    fromPostalCode: string,
+    toPostalCode: string,
 }
 export interface IZoneBoundManager {
     id: number;

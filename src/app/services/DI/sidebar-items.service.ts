@@ -24,9 +24,6 @@ export class SidebarItemsService {
   }
   getSideBarItems = async (): Promise<ISidebarItems> => {
     const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.getSideBar);
-    console.log(res);
-    console.log(res.sidebarApps);
-
     this.tabItemsSource.next(res.sidebarApps);
     this.tabItemsSource.next(this.getTestSideTest());
     return res;

@@ -1293,6 +1293,35 @@ export class VerificationService {
         return false;
       }
     }
+    if (value.hasOwnProperty('fromPostalCode')) {
+      if (MathS.isNull(value.fromPostalCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromPostalCode);
+        return false;
+      }
+      if (!MathS.isExactLengthYouNeed(value.fromPostalCode, ENRandomNumbers.ten)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_fromPostalCode);
+        return false;
+      }
+      if (!MathS.postalCodeValidation(value.fromPostalCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_fromPostalCode);
+        return false;
+      }
+    }
+    if (value.hasOwnProperty('toPostalCode')) {
+      if (MathS.isNullZero(value.toPostalCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toPostalCode);
+        return false;
+      }
+      if (!MathS.isExactLengthYouNeed(value.toPostalCode, ENRandomNumbers.ten)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_toPostalCode);
+        return false;
+      }
+      if (!MathS.postalCodeValidation(value.toPostalCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_toPostalCode);
+        return false;
+      }
+    }
+
     if (value.hasOwnProperty('fromRadif')) {
       if (MathS.isNullZero(value.fromRadif)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_radif);

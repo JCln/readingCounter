@@ -259,6 +259,12 @@
             display: none;
         }
 
+        &:hover,
+        &:focus-visible,
+        &:active {
+            outline: 1px solid var(--primary_3);
+        }
+
         @media (min-width: 550px) {
             p {
                 display: block;

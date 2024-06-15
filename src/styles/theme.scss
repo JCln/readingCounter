@@ -20,6 +20,13 @@
         place-content: center;
         color: var(--primary_5);
         background: var(--primary_1);
+
+        &:hover,
+        &:focus-visible,
+        &:active {
+            --thirdy_opacity: rgba(108, 159, 214, 0.3);
+            box-shadow: 0px 0px 1px 1px var(--thirdy_1);
+        }
     }
 
     .test {

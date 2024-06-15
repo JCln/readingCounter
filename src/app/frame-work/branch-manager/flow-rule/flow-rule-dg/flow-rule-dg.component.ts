@@ -17,10 +17,13 @@ export class FlowRuleDgComponent implements OnInit {
     isEditing: false,
     bpmsStateId: '',
     changableOfferingGroupId: null,
+    isStart: false,
+    isEnd: false,
+    flowActivityId: null,
     condition: '',
     fromFlowStateId: null,
     toFlowStateId: null,
-    offeringGroupId: null
+    offeringGroupId: null,
   }
   constructor(
     public ref: DynamicDialogRef,

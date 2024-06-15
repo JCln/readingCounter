@@ -28,6 +28,8 @@ export class ZoneAddDgComponent {
       regionId: data.regionId,
       fromEshterak: data.fromEshterak,
       toEshterak: data.toEshterak,
+      toPostalCode: data.toPostalCode,
+      fromPostalCode: data.fromPostalCode,
       isMetro: true,
       logicalOrder: ['']
     })

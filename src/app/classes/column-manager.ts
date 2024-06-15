@@ -2070,6 +2070,8 @@ export class ColumnManager {
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'fromPostalCode', header: 'از کد پستی', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'toPostalCode', header: 'تا کد پستی', isSelected: true, isSelectedOrigin: true, ltr: true },
     ]
     zoneBound: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
@@ -3168,13 +3170,8 @@ export class ColumnManager {
         { field: 'isInternal', header: 'داخلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'canGoPrevious', header: 'بازگشت به قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'flowsAutomaticly', header: 'خودکار', isSelected: true, isSelectedOrigin: true, isBoolean: true },
-    ]
-    flowRule: IObjectIteratation[] = [
-        { field: 'changableFromFlow', header: 'از وضعیت', isSelected: true, isSelectedOrigin: true },
-        { field: 'changableToFlow', header: 'به وضعیت', isSelected: true, isSelectedOrigin: true },
-        { field: 'condition', header: 'شرط', isSelected: true, isSelectedOrigin: true },
-        { field: 'bpmsStateId', header: 'BPMS', isSelected: true, isSelectedOrigin: true },
-        { field: 'changableOfferingGroupId', header: 'نوع خدمت', isSelected: true, isSelectedOrigin: true },
+        { field: 'css', header: 'CSS', isSelected: false, isSelectedOrigin: false },
+        { field: 'hasDetails', header: 'جزئیات', isSelected: false, isSelectedOrigin: false, isBoolean: true },
     ]
     flowStateDialog: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
@@ -3182,13 +3179,28 @@ export class ColumnManager {
         { field: 'isInternal', header: 'داخلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'canGoPrevious', header: 'بازگشت به قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'flowsAutomaticly', header: 'خودکار', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'css', header: 'CSS', isSelected: true, isSelectedOrigin: true },
+        { field: 'hasDetails', header: 'جزئیات', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
+    flowRule: IObjectIteratation[] = [
+        { field: 'changableFromFlow', header: 'از وضعیت', isSelected: true, isSelectedOrigin: true },
+        { field: 'changableToFlow', header: 'به وضعیت', isSelected: true, isSelectedOrigin: true },
+        { field: 'condition', header: 'شرط', isSelected: true, isSelectedOrigin: true },
+        { field: 'isStart', header: 'به وضعیت', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'isEnd', header: 'از وضعیت', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'bpmsStateId', header: 'BPMS', isSelected: true, isSelectedOrigin: true },
+        { field: 'changableOfferingGroupId', header: 'نوع خدمت', isSelected: true, isSelectedOrigin: true },
+        { field: 'changableFlowActivityId', header: 'فعالیت', isSelected: true, isSelectedOrigin: true }
     ]
     flowRuleDialog: IObjectIteratation[] = [
-        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'order', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
-        { field: 'isInternal', header: 'داخلی', isSelected: true, isSelectedOrigin: true },
-        { field: 'canGoPrevious', header: 'بازگشت به قبلی', isSelected: true, isSelectedOrigin: true },
-        { field: 'flowsAutomaticly', header: 'خودکار', isSelected: true, isSelectedOrigin: true },
+        { field: 'fromFlowStateId', header: 'از وضعیت', isSelected: true, isSelectedOrigin: true },
+        { field: 'toFlowStateId', header: 'به وضعیت', isSelected: true, isSelectedOrigin: true },
+        { field: 'condition', header: 'شرط', isSelected: true, isSelectedOrigin: true },
+        { field: 'isStart', header: 'شروع', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'isEnd', header: 'پایان', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'bpmsStateId', header: 'BPMS', isSelected: true, isSelectedOrigin: true },
+        { field: 'offeringGroupId', header: 'نوع خدمت', isSelected: true, isSelectedOrigin: true },
+        { field: 'flowActivityId', header: 'فعالیت', isSelected: true, isSelectedOrigin: true }
     ]
     branchState: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

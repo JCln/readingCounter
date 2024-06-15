@@ -97,9 +97,7 @@ export class MenuBarComponent {
         })
       })
     })
-    console.log(test);
     return test;
-
   }
   backToModule(item: any) {
     let test = JSON.parse(JSON.stringify(this.currentRoute));

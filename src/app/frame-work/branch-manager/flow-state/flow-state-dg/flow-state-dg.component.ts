@@ -20,6 +20,8 @@ export class FlowStateDgComponent implements OnInit {
     canGoPrevious: false,
     flowsAutomaticly: false,
     isEditing: false,
+    css: '',
+    hasDetails: false
   }
   constructor(
     public ref: DynamicDialogRef,

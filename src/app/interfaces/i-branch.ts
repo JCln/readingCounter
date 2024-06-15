@@ -17,6 +17,8 @@ export interface IFlowState {
     order: number,
     canGoPrevious: boolean,
     flowsAutomaticly: boolean,
+    css: string,
+    hasDetails: boolean,
     isEditing: boolean
 }
 export interface IFlowRule {
@@ -26,6 +28,10 @@ export interface IFlowRule {
     condition: string,
     bpmsStateId: string,
     offeringGroupId: any,
+    isStart: boolean,
+    isEnd: boolean,
+    flowActivityId: number,
+    changableFlowActivityId?: any,
     changableOfferingGroupId: any,
     changableFromFlow?: any,
     changableToFlow?: any,

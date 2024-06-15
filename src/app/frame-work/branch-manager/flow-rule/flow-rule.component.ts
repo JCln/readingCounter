@@ -16,6 +16,7 @@ import { IFlowRule, IFlowState } from 'interfaces/i-branch';
 export class FlowRuleComponent extends FactoryONE {
   offeringGroupIdDictionary: any[] = [];
   flowState: any[] = [];
+  flowActivityDictionary: any[] = [];
   ref: DynamicDialogRef;
 
   constructor(
@@ -52,6 +53,7 @@ export class FlowRuleComponent extends FactoryONE {
       item.changableOfferingGroupId = item.offeringGroupId;
       item.changableFromFlow = item.fromFlowStateId;
       item.changableToFlow = item.toFlowStateId;
+      item.changableFlowActivityId = item.flowActivityId;
     })
   }
   classWrapper = async () => {
@@ -65,9 +67,11 @@ export class FlowRuleComponent extends FactoryONE {
   callAPI = async () => {
     this.closeTabService.flowRule = await this.branchesService.ajaxReqWrapperService.getDataSourceById(ENInterfaces.flowRuleGet, this.closeTabService.flowRuleReq.offeringGroupId);
     this.flowState = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.flowStateGet);
+    this.flowActivityDictionary = await this.branchesService.dictionaryWrapperService.getFlowActivityDictionary(false);
     this.insertToAuxId();
     Converter.convertIdToTitle(this.closeTabService.flowRule, this.offeringGroupIdDictionary, 'changableOfferingGroupId');//TODO WHAT SHOULD CONVERT
     Converter.convertIdToTitle(this.closeTabService.flowRule, this.flowState, 'changableFromFlow');
+    Converter.convertIdToTitle(this.closeTabService.flowRule, this.flowActivityDictionary, 'changableFlowActivityId');
     Converter.convertIdToTitle(this.closeTabService.flowRule, this.flowState, 'changableToFlow');
   }
 

@@ -13,7 +13,8 @@
                                 <p-treeSelect class="w-full md:w-20rem" containerStyleClass="w-full"
                                     [(ngModel)]="selectedZoneIds" [options]="provinceHierarchy" display="chip"
                                     [metaKeySelection]="false" selectionMode="checkbox" placeholder="انتخاب مورد"
-                                    emptyMessage="موردی وجود ندارد" [filter]="true" #myTreeSelect (onHide)="getFragmentByZone()">
+                                    emptyMessage="موردی وجود ندارد" [filter]="true" #myTreeSelect
+                                    (onHide)="getFragmentByZone()">
                                 </p-treeSelect>
                             </div>
                         </div>
@@ -32,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon">
+                    <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">نوع دوره</div>
@@ -58,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon">
+                    <div class="input_icon" [hidden]="closeTabService._isOrderByDate">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">سال</div>

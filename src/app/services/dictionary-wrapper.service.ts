@@ -25,6 +25,7 @@ export class DictionaryWrapperService {
   private offeringUnit: IOfferingUnit[] = [];
   private offeringGroup: IOfferingGroup[] = [];
   private siphonDictionary: any[] = [];
+  private flowActivityDictionary: any[] = [];
   private invoiceType: IInvoiceType[] = [];
   private offering: IOffering[] = [];
   private countryDictionary: any = [];
@@ -397,6 +398,13 @@ export class DictionaryWrapperService {
     this.setSiphonDictionary(res);
     return this.siphonDictionary;
   }
+  async getFlowActivityDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.flowActivityDictionary) && !canRefresh)
+      return this.flowActivityDictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.flowRuleActivityDictionary);
+    this.setFlowActivityDictionary(res);
+    return this.flowActivityDictionary;
+  }
   async getInvoiceType(canRefresh: boolean): Promise<any> {
     if (!MathS.isNull(this.invoiceType) && !canRefresh)
       return this.invoiceType;
@@ -453,6 +461,9 @@ export class DictionaryWrapperService {
   }
   private setSiphonDictionary(v: any) {
     this.siphonDictionary = v;
+  }
+  private setFlowActivityDictionary(v: any) {
+    this.flowActivityDictionary = v;
   }
   private setInvoiceType(v: any) {
     this.invoiceType = v;
@@ -584,6 +595,7 @@ export class DictionaryWrapperService {
     this.offeringUnit = [];
     this.offeringGroup = [];
     this.siphonDictionary = [];
+    this.flowActivityDictionary = [];
     this.invoiceType = [];
     this.offering = [];
     this.zoneBoundDictionary = [];

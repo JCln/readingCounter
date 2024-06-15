@@ -485,6 +485,7 @@ export enum ENInterfaces {
     flowRuleEdit = 'V1/FlowRule/Edit',
     flowRuleAdd = 'V1/FlowRule/Add',
     flowRuleRemove = 'V1/FlowRule/Remove',
+    flowRuleActivityDictionary = 'V1/FlowRule/ActivityDictionary',
 
     customerTypeGet = 'V1/customerType/All',
     customerTypeEdit = 'V1/customerType/Edit',
