@@ -17,6 +17,8 @@ export class FlowStateDgComponent implements OnInit {
     title: '',
     isInternal: false,
     order: null,
+    bpmsStateId: '',
+    flowActivityId: null,
     canGoPrevious: false,
     flowsAutomaticly: false,
     isEditing: false,

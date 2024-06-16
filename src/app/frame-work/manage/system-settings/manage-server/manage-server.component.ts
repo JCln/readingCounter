@@ -50,6 +50,32 @@ export class ManageServerComponent implements OnInit {
       }
     }
   }
+  clearNotification = async () => {
+    const config = {
+      messageTitle: EN_messages.insertLocalKey,
+      minWidth: '19rem',
+      isInput: true,
+      placeHolder: EN_messages.insertLocalKey,
+      isDelete: false,
+      inputMinLength: 3,
+      icon: 'pi pi-key'
+    }
+    const insertedKey = await this.manageServerService.utilsService.firstConfirmDialog(config);
+    if (insertedKey) {
+      if (MathS.isNullTextValidation(insertedKey)) {
+        this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insertLocalKey);
+      }
+      else {
+        if (insertedKey == this.localPass) {
+          const temp: any = await this.manageServerService.ajaxReqWrapperService.postDataServer(ENInterfaces.serverManagerClearNotifications);
+          if (temp)
+            this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+        }
+        else
+          this.manageServerService.utilsService.snackBarMessageWarn(EN_messages.insert_TrueKey);
+      }
+    }
+  }
   linkToHangfire = async () => {
     const config = {
       messageTitle: EN_messages.insertLocalKey,
@@ -289,6 +315,11 @@ export class ManageServerComponent implements OnInit {
         config.icon = 'fa fa-eraser';
         if (await this.manageServerService.utilsService.firstConfirmDialog(config))
           this.serverDelete();
+      }
+      if (clickFunction == ENManageServers.clearNotification) {
+        config.icon = 'far fa-bell-slash';
+        if (await this.manageServerService.utilsService.firstConfirmDialog(config))
+          this.clearNotification();
       }
       if (clickFunction == ENManageServers.linkToHangfire) {
         this.linkToHangfire();

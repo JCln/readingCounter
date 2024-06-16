@@ -265,6 +265,7 @@ export enum ENInterfaces {
     signalRReceiveMessage = 'receiveMessage',
 
     serverManagerDelete = 'V1/Server/Delete',
+    serverManagerClearNotifications = 'V1/Server/ClearNotification',
     serverManagerHangFire = '/main/admin/hangFire?access_token=',
     serverManagerHealthCheck = '/healthchecks-ui',
     serverManagerErrorsElmah = '/elmah/detail/',

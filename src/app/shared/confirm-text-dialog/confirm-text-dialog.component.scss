@@ -50,6 +50,7 @@ p {
   text-align: center;
   color: var(--secondary_8);
   font-size: var(--font_ss);
+  user-select: text;
 
   @media (min-width:550px) {
     width: 21rem;

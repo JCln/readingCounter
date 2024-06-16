@@ -56,9 +56,14 @@ i {
   top: 105%;
   left: 0;
   background-color: var(--secondary_1);
-  min-width: 160px;
+  min-width: 13rem;
+  padding: 0 0.5rem;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+
+._rotate {
+  transform: rotate(180deg);
 }
 
 .dropdown-content a {

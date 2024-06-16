@@ -13,6 +13,7 @@ export const serverTasts: IManageServer[] = [
     { name: 'کاهش زمان', clickFunction: ENManageServers.compressLicenseTime, icon: 'fas fa-compress-arrows-alt', background: '#431866', color: '', description: EN_messages.compressExpireLicense },
     { name: 'پایان زمان', clickFunction: ENManageServers.expireLicense, icon: 'pi pi-stopwatch', background: '#f63e38', color: '', description: EN_messages.confirmExpireLicense },
     { name: 'اعتبار سنجی', clickFunction: ENManageServers.checkAuthenticiy, icon: 'pi pi-check-square', background: '#914900', color: '', description: EN_messages.checkAuthenticity },
+    { name: 'حذف پیام ها', clickFunction: ENManageServers.clearNotification, icon: 'far fa-bell-slash', background: '#203759', color: '', description: EN_messages.clearNotification },
     { name: 'NTP', clickFunction: ENManageServers.ntpServer, icon: 'pi pi-clock', background: '#9380db', color: '', description: EN_messages.NTPCheck },
     { name: 'dataBase', clickFunction: ENManageServers.toggleDbConnection, icon: 'pi pi-database', background: '#256542', color: '', description: EN_messages.dBConnection },
 ]

@@ -301,6 +301,7 @@ export enum EN_messages {
     confirmExpireLicense = 'از پایان زمان اطمینان دارید',
     compressExpireLicense = 'از کاهش زمان اطمینان دارید',
     checkAuthenticity = 'از بررسی اعتبار سنجی اطمینان دارید',
+    clearNotification = 'از حذف پیام ها اطمینان دارید',
     NTPCheck = 'از بررسی پروتکل زمان شبکه اطمینان دارید',
     savedToClipboard = 'در کلیپبورد ذخیره شد',
     cannotSaveToClipbloard = 'به علت عدم پشتیبانی از پروتکل امن امکان ذخیره خودکار در کلیپبورد وجود ندارد',

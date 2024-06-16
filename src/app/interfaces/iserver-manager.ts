@@ -216,6 +216,7 @@ export interface IManageServer {
 }
 export enum ENManageServers {
     serverDelete = 'serverDelete',
+    clearNotification = 'clearNotification',
     linkToHangfire = 'linkToHangfire',
     linkToHealthCheck = 'linkToHealthCheck',
     expireLicense = 'expireLicense',

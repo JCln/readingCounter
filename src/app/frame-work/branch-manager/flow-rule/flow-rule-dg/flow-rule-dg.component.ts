@@ -15,11 +15,9 @@ export class FlowRuleDgComponent implements OnInit {
   flowRuleReq: IFlowRule = {
     id: 0,
     isEditing: false,
-    bpmsStateId: '',
     changableOfferingGroupId: null,
     isStart: false,
     isEnd: false,
-    flowActivityId: null,
     condition: '',
     fromFlowStateId: null,
     toFlowStateId: null,

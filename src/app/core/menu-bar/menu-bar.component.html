@@ -21,7 +21,7 @@
             <div class="modules">
                 <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen">
                     <div class="_breadcrumb" [hidden]="!app.isOpen">
-                        <p class="module_text"> {{app.title}}</p>
+                        <p>{{app.title}}</p>
                     </div>
                     <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen"
                         routerLinkActive="active" [ngClass]="{'hide-outline': item.isInController}">
@@ -30,7 +30,7 @@
                             <p class="module_text">{{item.title}}</p>
                         </div>
                         <div class="_breadcrumb" [hidden]="!item.isInController">
-                            <p class="module_text"> {{app.title}}/ {{item.title}}</p>
+                            <p>{{app.title}}/ {{item.title}}</p>
                         </div>
                         <button class="_back" [hidden]="!item.isInController" (click)="backToModule(app)">
                             <i class="pi pi-arrow-left"></i>
@@ -62,7 +62,7 @@
     <button class="close_button tooltip" (click)="routeClicked()">
         <i class="pi pi-times"></i>
         <div class="tooltip_text_right">
-            <p>«Esc» کلید</p>            
+            <p>«Esc» کلید</p>
         </div>
     </button>
 </div>
