@@ -39,7 +39,7 @@ export class FlowRuleComponent extends FactoryONE {
     });
   }
   removeRow = async (rowData: IFlowRule) => {
-    const a = await this.branchesService.firstConfirmDialog('از وضعیت :' + rowData.changableFromFlow + 'به وضعیت :' + rowData.changableToFlow);
+    const a = await this.branchesService.firstConfirmDialog('از وضعیت :' + rowData.changableFromFlow + '، به وضعیت :' + rowData.changableToFlow);
     if (a) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.flowRuleRemove, rowData);
       this.branchesService.utilsService.snackBarMessageSuccess(res.message);
