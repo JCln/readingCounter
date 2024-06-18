@@ -1562,7 +1562,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.fragmentAutoImport, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: EN_Routes.textOutputManager, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: EN_Routes.wrmrapk },
-    { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, defaultValue: [], url: EN_Routes.wrmrrcd },
+    { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, defaultValue: [], url: EN_Routes.readingDefaultConfig },
     {
       id: 1, value: ENEssentialsToSave.saveDataForReadingPeriodKindManager, url: EN_Routes.readingPeriodKind,
       defaultValue: []

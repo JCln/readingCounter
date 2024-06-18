@@ -130,7 +130,7 @@ export class HelpWrapperService {
         messageOne: 'این بخش جهت مدیریت کاربری ها درنظر گرفته شده است. ',
         messageTwo: '✔️	وضعیت کنتور ها در اپلیکیشن قرائت، سایر بخش های برنامه ازجمله نمایش لیست مسیر ها کاربرد دارد.',
       }
-    else if (currentRoute === EN_Routes.wrmrrcd)
+    else if (currentRoute === EN_Routes.readingDefaultConfig)
       return {
         title: 'تنظیمات پیش‌فرض',
         messageOne: 'این بخش جهت مدیریت تنظیمات پیش فرض در برنامه و اپلیکیشن اندروید درنظر گرفته شده است.',

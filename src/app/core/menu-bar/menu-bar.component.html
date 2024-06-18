@@ -2,8 +2,9 @@
     <div class="wrapper">
         <div class="app_section">
             <ul>
-                <li *ngFor="let app of currentRoute" (click)="appClicked(app)" routerLinkActive="active">
-                    <i class="icons pi pi-folder"></i>
+                <li *ngFor="let app of currentRoute" (click)="appClicked(app)" routerLinkActive="active"
+                    #rla="routerLinkActive">
+                    <i class="icons" [ngClass]="rla.isActive? 'fa fa-folder-open-o': 'pi pi-folder'"></i>
                     {{app.title}}
                     <div *ngFor="let item of app.items" [hidden]="true">
                         <div *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
@@ -26,7 +27,7 @@
                     <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen"
                         routerLinkActive="active" [ngClass]="{'hide-outline': item.isInController}">
                         <div class="module_inner" [hidden]="item.isInController">
-                            <i class="module_icons {{item.cssClass}}"></i>
+                            <i class="module_icons" [ngClass]="item.cssClass.trim() ? item.cssClass : 'pi pi-folder'"></i>
                             <p class="module_text">{{item.title}}</p>
                         </div>
                         <div class="_breadcrumb" [hidden]="!item.isInController">
@@ -50,7 +51,8 @@
                                 [hidden]="!item.isOpen || !subItem.isOpen" [routerLink]="subItem.route"
                                 routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                                 (click)="routeClicked()">
-                                <i class="controller_icons pi pi-bookmark {{subItem.cssClass}}"></i>
+                                <i class="controller_icons"
+                                    [ngClass]="subItem.cssClass.trim() ? subItem.cssClass : 'pi pi-bookmark'"></i>
                                 <p class="controller_text">{{subItem.title}}</p>
                             </div>
                         </div>

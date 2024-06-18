@@ -28,7 +28,7 @@ export enum EN_Routes {
     fragmentAutoImport = '/wr/m/r/nob/autoImport',
     textOutputManager = '/wr/m/r/txt/out',
     'wrmrapk' = '/wr/m/r/apk',
-    'wrmrrcd' = '/wr/m/r/rcd',
+    readingDefaultConfig = '/wr/m/r/rcd',
     readingPeriodKind = '/wr/m/r/rpkm',
     'wrmrformulaab' = '/wr/m/r/formula/ab',
     'wrmrformulabudget' = '/wr/m/r/formula/budget',
