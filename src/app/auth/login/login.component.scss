@@ -43,6 +43,7 @@ main {
   color: var(--primary_7);
   font-size: var(--font_25);
   margin-bottom: var(--font_s);
+  user-select: none;
 
   @media (max-width: 550px) {
     font-size: var(--font_2);
@@ -86,6 +87,7 @@ main {
   color: var(--primary_7);
   font-size: var(--font_m);
   font-weight: 600;
+  user-select: none;
 }
 
 input,

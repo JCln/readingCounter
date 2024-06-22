@@ -27,6 +27,7 @@ ul {
 
   @media (min-width:550px) {
     gap: 1.5rem;
+    margin: 4px 0;
   }
 
 }
@@ -218,7 +219,7 @@ li {
 }
 
 .menu-close {
-  top: 100vh;
+  top: 110vh;
   height: 0;
   min-height: 0;
 }

@@ -5,7 +5,7 @@
                 <li *ngFor="let app of currentRoute" (click)="appClicked(app)" routerLinkActive="active"
                     #rla="routerLinkActive">
                     <i class="icons" [ngClass]="rla.isActive? 'fa fa-folder-open-o': 'pi pi-folder'"></i>
-                    {{app.title}}
+                    <p class="app_text">{{app.title}}</p>
                     <div *ngFor="let item of app.items" [hidden]="true">
                         <div *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
                             routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -27,7 +27,8 @@
                     <li *ngFor="let item of app.items" (click)="moduleClicked(item)" [hidden]="!item.isOpen"
                         routerLinkActive="active" [ngClass]="{'hide-outline': item.isInController}">
                         <div class="module_inner" [hidden]="item.isInController">
-                            <i class="module_icons" [ngClass]="item.cssClass.trim() ? item.cssClass : 'pi pi-folder'"></i>
+                            <i class="module_icons" [ngClass]="item.cssClass.trim() ? item.cssClass : 'pi pi-folder'">
+                            </i>
                             <p class="module_text">{{item.title}}</p>
                         </div>
                         <div class="_breadcrumb" [hidden]="!item.isInController">
