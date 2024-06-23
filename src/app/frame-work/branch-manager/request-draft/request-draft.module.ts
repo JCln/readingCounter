@@ -11,6 +11,7 @@ import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { OfferingGroupComponent } from './offering-group/offering-group.component';
 import { RequestDraftFullViewComponent } from './request-draft-full-view/request-draft-full-view.component';
 import { CalculationComponent } from './calculation/calculation.component';
+import { ValidationComponent } from './validation/validation.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CalculationComponent } from './calculation/calculation.component';
     TechnicalComponent,
     OfferingGroupComponent,
     RequestDraftFullViewComponent,
-    CalculationComponent
+    CalculationComponent,
+    ValidationComponent
   ],
   imports: [
     SharedPrimeNgModule,

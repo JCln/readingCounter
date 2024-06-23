@@ -51,6 +51,10 @@ export class RequestDraftComponent extends FactoryONE {
   addStepperItems(): void {
     this.items = [
       {
+        label: 'احراز اطلاعات',
+        routerLink: 'validation'
+      },
+      {
         label: 'نوع خدمت',
         routerLink: 'offering'
       },

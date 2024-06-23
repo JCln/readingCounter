@@ -468,6 +468,18 @@ export class VerificationService {
 
     return true;
   }
+  requestDraftValidation = (body: IRequestDraft): boolean => {
+    if (!MathS.isExactLengthYouNeed(body.postalCode, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
+      return false;
+    }
+    if (!MathS.postalCodeValidation(body.postalCode)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
+      return false;
+    }
+    
+    return true;
+  }
   requestDraftPersonal = (body: IRequestDraft): boolean => {
     if (MathS.isNull(body.fullName)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fullName);
