@@ -164,6 +164,8 @@ export class CloseTabService {
 
   requestDraftReq: IRequestDraft = {
     id: 0,
+    provinceId: null,
+    regionId: null,
     zoneId: null,
     villageId: null,
     nationalId: '',

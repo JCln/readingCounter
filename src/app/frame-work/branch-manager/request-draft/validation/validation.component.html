@@ -1,7 +1,6 @@
 <form class="validation-form" #form="ngForm" (ngSubmit)="nextPage()">
-    <h2 class="top_title">احراز با کد پستی و یا شناسه قبض همسایه را تکمیل نمایید</h2>
+    <h2 class="top_title">کد پستی و یا شناسه قبض همسایه را تکمیل نمایید</h2>
     <section class="order_by">
-        <!-- <h2> :</h2> -->
         <div *ngFor="let orderType of closeTabService.validationInOrderTo">
             <div class="p-field-radiobutton">
                 <p-radioButton name="orderByDate" [value]="orderType.isSelected"

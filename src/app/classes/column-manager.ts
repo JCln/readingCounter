@@ -3457,6 +3457,8 @@ export class ColumnManager {
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },
     ]
     requestDraftLocation: IObjectIteratation[] = [
+        { field: 'provinceId', header: 'استان', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
+        { field: 'regionId', header: 'منطقه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
         { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
         { field: 'villageId', header: 'روستا', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },

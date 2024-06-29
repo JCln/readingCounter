@@ -104,6 +104,8 @@ export interface IClientAll {
 export interface IRequestDraft {
     id?: number,
     requestDraftId?: number,
+    provinceId: null,
+    regionId: null,
     zoneId: number,
     villageId: number,
     nationalId: string,

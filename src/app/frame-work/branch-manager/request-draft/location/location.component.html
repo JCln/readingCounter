@@ -3,6 +3,51 @@
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
             <ng-container *ngIf="col.isSelectOption;else simpleInput">
+                <div *ngIf="col.field == 'provinceId'">
+                    <div class="input_icon"
+                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">استان</div>
+                            <div class="_value">
+                                <p-dropdown #itemdrop="ngModel" name="province" [options]="provinceDictionary"
+                                    [(ngModel)]="closeTabService.requestDraftReq.provinceId" placeholder="انتخاب مورد"
+                                    optionValue="id" optionLabel="title" filter="true"
+                                    [required]="col.isRequired? true : false" (click)="getRegionsByProvinceId()">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                        <div *ngIf="itemdrop.errors?.['required']">
+                            <i class="pi pi-times"></i>
+                            {{col.header}} را وارد نمایید
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="col.field == 'regionId'">
+                    <div class="input_icon"
+                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">منطقه</div>
+                            <div class="_value">
+                                <p-dropdown #itemdrop="ngModel" name="region"
+                                    [options]="regionsByProvinceIdDictionary"
+                                    [(ngModel)]="closeTabService.requestDraftReq.regionId" placeholder="انتخاب مورد"
+                                    optionValue="id" optionLabel="title" filter="true"
+                                    [required]="col.isRequired? true : false" (click)="getZonesByRegionId()">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                        <div *ngIf="itemdrop.errors?.['required']">
+                            <i class="pi pi-times"></i>
+                            {{col.header}} را وارد نمایید
+                        </div>
+                    </div>
+                </div>
                 <div *ngIf="col.field == 'zoneId'">
                     <div class="input_icon"
                         [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
@@ -10,10 +55,10 @@
                         <div class="input_3">
                             <div class="_key">ناحیه</div>
                             <div class="_value">
-                                <p-dropdown #itemdrop="ngModel" name="zones" [options]="zoneDictionary"
+                                <p-dropdown #itemdrop="ngModel" name="zones" [options]="zonesByRegionIdDictionary"
                                     [(ngModel)]="closeTabService.requestDraftReq.zoneId" placeholder="انتخاب مورد"
                                     optionValue="id" optionLabel="title" filter="true"
-                                    [required]="col.isRequired? true : false">
+                                    [required]="col.isRequired? true : false" (click)="getVillagesByZoneId()">
                                 </p-dropdown>
                             </div>
                         </div>
@@ -31,7 +76,7 @@
                     <div class="input_3">
                         <div class="_key">روستا</div>
                         <div class="_value">
-                            <p-dropdown #itemdrop="ngModel" name="village" [options]="villageDictionary"
+                            <p-dropdown #itemdrop="ngModel" name="village" [options]="villagesByZoneIdDictionary"
                                 [(ngModel)]="closeTabService.requestDraftReq.villageId" placeholder="انتخاب مورد"
                                 optionValue="id" optionLabel="title" filter="true"
                                 [required]="col.isRequired? true : false">

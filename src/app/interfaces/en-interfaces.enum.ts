@@ -40,12 +40,14 @@ export enum ENInterfaces {
 
     ZoneGET = 'V1/Zone/All',
     ZoneDICTIONARY = 'V1/Zone/Dictionary',
+    ZoneDictionaryByRegionId = 'V1/Zone/GetDictionaryByRegionId/',
     ZoneREMOVE = 'V1/Zone/Remove',
     ZoneEDIT = 'V1/Zone/Edit',
     ZoneADD = 'V1/Zone/Add',
 
     RegionGET = 'V1/Region/All',
     RegionDICTIONARY = 'V1/Region/Dictionary',
+    RegionDictionaryByProvinceId = 'V1/Region/GetDictionaryByProvinceId/',
     RegionREMOVE = 'V1/Region/Remove',
     RegionEDIT = 'V1/Region/Edit',
     RegionADD = 'V1/Region/Add',
@@ -583,6 +585,7 @@ export enum ENInterfaces {
 
     villageAll = 'v1/village/All',
     villageEdit = 'v1/village/Edit',
+    villagesByZoneId = 'V1/Village/GetDictionaryByZoneId/',
     villageAdd = 'v1/village/Add',
     villageRemove = 'v1/village/Remove',
 
