@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -10,10 +12,12 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./validation.component.scss']
 })
 export class ValidationComponent extends FactoryONE {
-  private readonly _outputFileName: string = 'requestDraftValidation';
+  private readonly _outputFileNamePostal: string = 'requestDraftValidationPostal';
+  private readonly _outputFileNameBillId: string = 'requestDraftValidationBill';
   ownershipTypeDictionary: IDictionaryManager[] = [];
   customerTypeDictionary: IDictionaryManager[] = [];
-  _selectCols: any = [];
+  _selectColsPostal: any = [];
+  _selectColsBillId: any = [];
   submitted: boolean = false;
 
   constructor(
@@ -27,18 +31,38 @@ export class ValidationComponent extends FactoryONE {
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
+    this._selectColsBillId = this.branchesService.columnManager.getColumnsMenus(this._outputFileNameBillId);
+    this._selectColsPostal = this.branchesService.columnManager.getColumnsMenus(this._outputFileNamePostal);
   }
   classWrapper = async () => {
     this.insertSelectedColumns();
     this.dictionaryWrapper();
   }
-  nextPage() {
-    if (this.branchesService.verificationService.requestDraftValidation(this.closeTabService.requestDraftReq)) {
-      //   this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftOffering);
-      // } else {
-      //   this.submitted = true;
-      // }
+  async nextPage() {
+    console.log(this.closeTabService.requestDraftReq.postalCode);
+    console.log(this.closeTabService.requestDraftReq.billId);
+    if (this.closeTabService._validationIsByPostalCode) {
+      if (this.branchesService.verificationService.requestDraftValidationPostal(this.closeTabService.requestDraftReq)) {
+        const req = { postalCode: this.closeTabService.requestDraftReq.postalCode };
+        // call api to complete available datas
+        const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.CustomerLocationManagerGetPostalCode, req);
+        console.log(res);
+
+        this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftOffering);
+      } else {
+        this.submitted = true;
+      }
+    }
+    else {
+      if (this.branchesService.verificationService.requestDraftValidationBillId(this.closeTabService.requestDraftReq)) {
+        const req = { neighbourBillId: this.closeTabService.requestDraftReq.billId };
+        const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.CustomerLocationManagerGetNeighbourBillId, req);
+        console.log(res);
+
+        this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftOffering);
+      } else {
+        this.submitted = true;
+      }
     }
   }
 

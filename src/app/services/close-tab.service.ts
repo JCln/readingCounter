@@ -77,6 +77,7 @@ import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails,
 })
 export class CloseTabService {
   _isOrderByDate: boolean = false;//TODO: Show order by date in order to personal config
+  _validationIsByPostalCode: boolean = true;//TODO: Show order by date in order to personal config
   ENReadingReports = ENReadingReports;
 
   constructor(
@@ -2606,6 +2607,30 @@ export class CloseTabService {
       return this.utilsService.getSearchInOrderTo;
     }
   }
+  validationInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'کد پستی',
+      isSelected: true,
+      key: 'Date'
+    },
+    {
+      title: 'شناسه قبض همسایه',
+      isSelected: false,
+      key: 'period'
+    }
+  ]
+  getValidationInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'کد پستی',
+      isSelected: true,
+      key: 'Date'
+    },
+    {
+      title: 'شناسه قبض همسایه',
+      isSelected: false,
+      key: 'period'
+    }
+  ]
   makeHadPicturesToBoolean = (dataSource: any) => {
     dataSource.forEach(item => {
       if (item.imageCount > 0)

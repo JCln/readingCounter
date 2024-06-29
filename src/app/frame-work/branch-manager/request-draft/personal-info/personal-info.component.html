@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="nextPage()">
+<form class="personal-form" #form="ngForm" (ngSubmit)="nextPage()">
     <h2 class="top_title">اطلاعات مالک را تکمیل نمایید</h2>
     <div class="_desc form-group">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">

@@ -3450,9 +3450,11 @@ export class ColumnManager {
         // { field: 'fromDateTime', header: 'از تاریخ', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false },        
     ]
-    requestDraftValidation: IObjectIteratation[] = [
+    requestDraftValidationBill: IObjectIteratation[] = [
+        { field: 'billId', header: 'شناسه قبض همسایه', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.five, maxLength: ENRandomNumbers.fifteen },
+    ]
+    requestDraftValidationPostal: IObjectIteratation[] = [
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },
-        { field: 'billId', header: 'شناسه قبض همسایه', isSelected: false, isSelectedOrigin: false, readonly: true },
     ]
     requestDraftLocation: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },

@@ -13,7 +13,7 @@ import { ValidationComponent } from './validation/validation.component';
 const routes: Routes = [
   {
     path: '', component: RequestDraftComponent, children: [
-      { path: '', component: OfferingGroupComponent, pathMatch: 'full' },
+      { path: '', component: ValidationComponent, pathMatch: 'full' },
       { path: 'offering', component: OfferingGroupComponent },
       { path: 'validation', component: ValidationComponent },
       { path: 'personal', component: PersonalInfoComponent },

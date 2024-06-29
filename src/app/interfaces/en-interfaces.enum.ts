@@ -585,4 +585,8 @@ export enum ENInterfaces {
     villageEdit = 'v1/village/Edit',
     villageAdd = 'v1/village/Add',
     villageRemove = 'v1/village/Remove',
+
+    CustomerLocationManagerGetPostalCode = 'V1/FlowRule/GetByPostalCode',
+    CustomerLocationManagerGetNeighbourBillId = 'V1/FlowRule/GetByNeighbourBillId',
+
 }

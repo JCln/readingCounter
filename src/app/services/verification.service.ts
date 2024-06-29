@@ -468,16 +468,32 @@ export class VerificationService {
 
     return true;
   }
-  requestDraftValidation = (body: IRequestDraft): boolean => {
+  requestDraftValidationPostal = (body: IRequestDraft): boolean => {
     if (!MathS.isExactLengthYouNeed(body.postalCode, ENRandomNumbers.ten)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
+      this.utilsService.snackBarMessageWarn(EN_messages.invalidLength_postalCode);
       return false;
     }
     if (!MathS.postalCodeValidation(body.postalCode)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_postalCode);
       return false;
     }
-    
+
+    return true;
+  }
+  requestDraftValidationBillId = (body: IRequestDraft): boolean => {
+    if (MathS.isNull(body.billId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_neighbourBillId);
+      return false;
+    }
+    if (MathS.isNaN(body.billId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalidFormat_neighbourBillId);
+      return false;
+    }
+    if (!MathS.isLowerThanMinLength(body.billId, ENRandomNumbers.five) || !MathS.isLowerThanMaxLength(body.billId, ENRandomNumbers.fifteen)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalidNumbers_neighbourBillId);
+      return false;
+    }
+
     return true;
   }
   requestDraftPersonal = (body: IRequestDraft): boolean => {

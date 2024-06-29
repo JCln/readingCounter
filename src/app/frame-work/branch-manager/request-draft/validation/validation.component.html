@@ -1,58 +1,71 @@
-<form #form="ngForm" (ngSubmit)="nextPage()">
-    <h2 class="top_title">اطلاعات مالک را تکمیل نمایید</h2>
+<form class="validation-form" #form="ngForm" (ngSubmit)="nextPage()">
+    <h2 class="top_title">احراز با کد پستی و یا شناسه قبض همسایه را تکمیل نمایید</h2>
+    <section class="order_by">
+        <!-- <h2> :</h2> -->
+        <div *ngFor="let orderType of closeTabService.validationInOrderTo">
+            <div class="p-field-radiobutton">
+                <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                    [(ngModel)]="closeTabService._validationIsByPostalCode" [inputId]="orderType.key">
+                </p-radioButton>
+                <label [for]="orderType.key">{{orderType.title}}</label>
+            </div>
+        </div>
+        <hr>
+    </section>
     <div class="_desc form-group">
-        <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
-            <ng-container *ngIf="col.isSelectOption;else simpleInput">
-                <!-- <div *ngIf="col.field == 'ownershipTypeId'">
-                    <div class="input_icon"
-                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">نوع مالکیت</div>
-                            <div class="_value">
-                                <p-dropdown #itemdrop="ngModel" name="ownershipTypeId"
-                                    [options]="ownershipTypeDictionary"
-                                    [(ngModel)]="closeTabService.requestDraftReq.ownershipTypeId"
-                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
-                                    [required]="col.isRequired? true : false">
-                                </p-dropdown>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
-                        <div *ngIf="itemdrop.errors?.['required']">
-                            <i class="pi pi-times"></i>
-                            {{col.header}} را وارد نمایید
-                        </div>
-                    </div>
-                </div> -->
-            </ng-container>
-            <ng-template #simpleInput>
-                <div class="input_icon"
-                    [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
-                    <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
-                    <div class="input_3">
-                        <div class="_key">{{col.header}}</div>
-                        <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field"
-                            [name]="col.field" class="form-control" [required]="col.isRequired? true : false"
-                            minlength="{{col.minLength}}" [(ngModel)]="closeTabService.requestDraftReq[col.field]"
-                            [readonly]="col.readonly" maxlength="{{col.maxLength}}" class="_value">
-                    </div>
+        <div *ngFor="let col of _selectColsPostal" [ngClass]="{'double_size':col.icon}"
+            [hidden]="!closeTabService._validationIsByPostalCode">
+            <div class="input_icon"
+                [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
+                <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                <div class="input_3">
+                    <div class="_key">{{col.header}}</div>
+                    <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field" [name]="col.field"
+                        class="form-control" [required]="col.isRequired? true : false" minlength="{{col.minLength}}"
+                        [(ngModel)]="closeTabService.requestDraftReq[col.field]" [readonly]="col.readonly"
+                        maxlength="{{col.maxLength}}" class="_value">
                 </div>
-                <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
-                    <i class="pi pi-check-square"></i>
+            </div>
+            <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
+                <i class="pi pi-check-square"></i>
+            </div>
+            <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
+                <div *ngIf="item.errors?.['required']">
+                    <i class="pi pi-times"></i>
+                    {{col.header}} را وارد نمایید
                 </div>
-                <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
-                    <div *ngIf="item.errors?.['required']">
-                        <i class="pi pi-times"></i>
-                        {{col.header}} را وارد نمایید
-                    </div>
-                    <div *ngIf="item.errors?.['minlength']">
-                        <i class="pi pi-times"></i>
-                        حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
-                    </div>
+                <div *ngIf="item.errors?.['minlength']">
+                    <i class="pi pi-times"></i>
+                    حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
                 </div>
-            </ng-template>
+            </div>
+        </div>
+        <div *ngFor="let col of _selectColsBillId" [ngClass]="{'double_size':col.icon}"
+            [hidden]="closeTabService._validationIsByPostalCode">
+            <div class="input_icon"
+                [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
+                <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                <div class="input_3">
+                    <div class="_key">{{col.header}}</div>
+                    <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field" [name]="col.field"
+                        class="form-control" [required]="col.isRequired? true : false" minlength="{{col.minLength}}"
+                        [(ngModel)]="closeTabService.requestDraftReq[col.field]" [readonly]="col.readonly"
+                        maxlength="{{col.maxLength}}" class="_value">
+                </div>
+            </div>
+            <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
+                <i class="pi pi-check-square"></i>
+            </div>
+            <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
+                <div *ngIf="item.errors?.['required']">
+                    <i class="pi pi-times"></i>
+                    {{col.header}} را وارد نمایید
+                </div>
+                <div *ngIf="item.errors?.['minlength']">
+                    <i class="pi pi-times"></i>
+                    حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                </div>
+            </div>
         </div>
     </div>
     <footer>

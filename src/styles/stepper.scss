@@ -156,11 +156,48 @@ footer {
     text-align: right;
 }
 
-.location-form {
+.location-form,
+.validation-form,
+.offering-group-form,
+.other-info-form,
+.technical-form,
+.personal-form {
     display: grid;
     justify-content: center;
 }
 
+.location_selected {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--green_600);
+}
+
+.offering-group-form {
+    ._desc {
+        grid-template-columns: auto;
+    }
+
+    .top_title {
+        text-align: center;
+    }
+}
+
 .input_icon ._key {
     min-width: 8rem;
+}
+
+.order_by {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    direction: rtl;
+}
+
+h2 {
+    white-space: nowrap;
+    color: var(--primary_3);
+    margin-left: var(--font_05);
+    font-size: var(--font_s);
 }
