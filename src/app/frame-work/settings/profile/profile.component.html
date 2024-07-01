@@ -70,6 +70,16 @@
                     </p-selectButton>
                 </div>
             </section>
+            <section>
+                <div class="content">
+                    <h1 class="title">بزرگنمایی تصاویر بصورت خودکار</h1>
+                    <p-selectButton [options]="stateOptionsWouldShowBigImage"
+                        [(ngModel)]="profileService.showStateVals.wouldShowBigImage" optionLabel="label"
+                        optionValue="value"
+                        (onChange)="setWouldShowBigImage(profileService.showStateVals.wouldShowBigImage)">
+                    </p-selectButton>
+                </div>
+            </section>
         </div>
     </p-tabPanel>
 

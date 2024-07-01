@@ -18,6 +18,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptions: any[] = [{ label: 'تکی', value: false }, { label: 'گروهی', value: true }];
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsIsSingleZone: any[] = [{ label: 'با یک ناحیه', value: true }, { label: 'با چند ناحیه', value: false }];
+  stateOptionsWouldShowBigImage: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsStepperView: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
@@ -136,6 +137,7 @@ export class ProfileComponent extends FactoryONE {
     this.getSelectedColumns();
     this.getHasCancelableSpinner();
     this.getValueOfShowCarouselMedia();
+    this.getWouldShowBigImage();
     this.getDefaultAggregationTrackings();
     this.getReOrderable();
     this.getTwoStepsStatus();
@@ -199,6 +201,13 @@ export class ProfileComponent extends FactoryONE {
   setValueOfShowCarouselMedia = (val) => {
     this.profileService.setUseCarouselMedia(val);
     val ? this.profileService.showMessage(EN_messages.carouselShowEnabled) : this.profileService.showMessage(EN_messages.carouselShowDisabled);
+  }
+  getWouldShowBigImage = () => {
+    this.profileService.showStateVals.wouldShowBigImage = this.profileService.getWouldShowBigImage();
+  }
+  setWouldShowBigImage = (val) => {
+    this.profileService.setWouldShowBigImage(val);
+    val ? this.profileService.showMessage(EN_messages.wouldShowBigImageEnabled) : this.profileService.showMessage(EN_messages.wouldShowBigImageDisabled);
   }
   getBasedOnDate = () => {
     this.profileService.showStateVals.searchBasedOnDate = this.profileService.getLocalValue();

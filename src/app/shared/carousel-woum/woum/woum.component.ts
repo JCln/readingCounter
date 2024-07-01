@@ -122,7 +122,10 @@ export class WoumComponent implements OnChanges {
   canShowBigScreen = () => {
     // if image number is one then show on fullScreen
     if (!this.profileService.getUseCarouselMedia() && this.originImages.length === ENRandomNumbers.one) {
-      this.showBigImage(this.originImages[0]);
+      // if user profile config is true to show big size image when image is single then show big image size otherwise don't show
+      if (this.profileService.getWouldShowBigImage()) {
+        this.showBigImage(this.originImages[0]);
+      }
     }
   }
   getDownloadListInfo = () => {

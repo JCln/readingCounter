@@ -40,6 +40,7 @@ export class ProfileService {
     searchBasedOnDate: false,
     hasCancelableSpinner: true,
     hasStepperView: true,
+    wouldShowBigImage: true,
     defaultFontStyle: 1,
     defaultFontFamily: ENFontFamily.BLotus,// value of default is sync with font.service.ts
     reOrderableTable: false,
@@ -81,6 +82,9 @@ export class ProfileService {
   getUseCarouselMedia = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, false);
   }
+  getWouldShowBigImage = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.wouldShowBigImage, this.showStateVals.wouldShowBigImage);
+  }
   getImg = (): any => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.imageOption,
       {
@@ -100,6 +104,9 @@ export class ProfileService {
   }
   setUseCarouselMedia = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
+  }
+  setWouldShowBigImage = (bool: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.wouldShowBigImage, bool);
   }
   setLocalValue = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, bol);
