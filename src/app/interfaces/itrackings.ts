@@ -86,6 +86,7 @@ export interface IOffLoadPerDay {
     isRoosta: boolean,
     overalDistance: number,
     overalDuration: number,
+    alalHesabPercent?: number,
     offLoadPerDayHistory: [
         {
             day: string,

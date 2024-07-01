@@ -27,6 +27,7 @@ export class FollowUpComponent extends FactoryONE {
   private readonly followupViewColumns: string = 'followUpView';
   private readonly followupViewCheckboxesColumns: string = 'followUpViewCheckboxes';
   private readonly defColumns: string = 'defColumns';
+  private readonly followUpCountInfo: string = 'followUpCountInfo';
   showInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'گراف',
@@ -45,7 +46,6 @@ export class FollowUpComponent extends FactoryONE {
   dataSourceAUX: IOffLoadPerDay;
   changeHsty: IFollowUpHistory[] = [];
   _selectColumnsAUX: IObjectIteratation[];
-  private readonly followUpCountInfo: string = 'followUpCountInfo';
 
 
   constructor(
@@ -64,6 +64,7 @@ export class FollowUpComponent extends FactoryONE {
     return b;
   }
   doSth = () => {
+    this.dataSourceAUX.alalHesabPercent = this.closeTabService.saveDataForFollowUp.alalHesabPercent;
     this._selectPerDayCountInfo = this.trackingManagerService.columnManager.getColumnsMenus(this.followUpCountInfo);
     this.chartTemp = this.getObjectParameters(this.closeTabService.saveDataForFollowUpAUX);
   }
@@ -95,8 +96,6 @@ export class FollowUpComponent extends FactoryONE {
       //   return;
       this.dataSourceAUX = await this.trackingManagerService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ListOffloadedPERDAY, this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
-      console.log(this.closeTabService.saveDataForFollowUpAUX);
-      console.log(this._selectPerDayCountInfo);
 
       this.doSth();
       this.makeConfigs();

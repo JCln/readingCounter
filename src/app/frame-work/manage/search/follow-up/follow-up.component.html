@@ -57,22 +57,11 @@
             <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
                 <i class="pi pi-bookmark _bookmark"></i>
                 <div class="input_3">
-                    <ng-container *ngIf="item.isBoolean; else elseTemplate">
+                    <ng-container *ngIf="item.isBoolean">
                         <div class="_key">{{item.header}}</div>
                         <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
                         </mat-checkbox>
                     </ng-container>
-                    <ng-template #elseTemplate>
-                        <div class="_key" [ngClass]="{'special_icon': item.enableTooltip}">{{item.header}}</div>
-                        <div class="tooltip _double_width">
-                            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                                [(ngModel)]="dataSourceAUX[item.field]">
-                            <div *ngIf="item.enableTooltip" class="tooltip_text">
-                                درصد مانع صادر شده
-                                {{closeTabService.saveDataForFollowUp['alalHesabPercent']}}
-                            </div>
-                        </div>
-                    </ng-template>
                 </div>
             </div>
         </div>

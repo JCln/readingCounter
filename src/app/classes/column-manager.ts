@@ -2257,6 +2257,7 @@ export class ColumnManager {
         { field: 'unreadCounts', header: 'قرائت نشده', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'maneCount', header: 'تعداد مانع', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'manePercent', header: 'درصد مانع', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true },
+        { field: 'alalHesabPercent', header: 'درصد مانع صادر شده', isSelected: true, isSelectedOrigin: true, readonly: true, enableTooltip: true },
     ]
     importedListDetails: IObjectIteratation[] = [
         { field: 'isBazdid', header: 'بازدید', isSelected: false, isSelectedOrigin: false, readonly: true, isBoolean: true },
