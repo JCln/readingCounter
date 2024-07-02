@@ -6,28 +6,8 @@
   .p-datatable {
     position: relative;
     direction: ltr;
-    width: 83vw;
+    width: 100%;
     min-width: 100%;
-
-    @media (min-width: 550px) {
-      width: 61vw;
-    }
-
-    @media (min-width: 700px) {
-      width: 68vw;
-    }
-
-    @media (min-width: 850px) {
-      width: 71vw;
-    }
-
-    @media (min-width: 1000px) {
-      width: 75vw;
-    }
-
-    @media (min-width: 1200px) {
-      width: 81vw;
-    }
   }
 
   .p-steps ul {

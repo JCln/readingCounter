@@ -205,6 +205,7 @@ export enum EN_Routes {
     requestDraftConfirmation = '/wr/branch/requestDraft/confirmation',
     clientGetLazy = '/wr/branch/clientLazy',
     requestDraftLazy = '/wr/branch/requestDraftLazy',
+    flowRuleGetRegisteredLazy = '/wr/branch/flowRuleRegisteredLazy',
     counterNumberChangeGetLazy = '/wr/branch/counterNumberChange',
 
 }

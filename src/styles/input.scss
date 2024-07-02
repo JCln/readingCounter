@@ -41,6 +41,7 @@ $border_15: 10px;
   min-width: var(--font_3);
   text-align: center;
   margin-left: auto;
+  user-select: none;
 }
 
 ._value {
@@ -130,6 +131,7 @@ $border_15: 10px;
     min-width: 5rem;
     text-align: center;
     margin-left: auto;
+    user-select: none;
   }
 
   :host .p-dropdown {

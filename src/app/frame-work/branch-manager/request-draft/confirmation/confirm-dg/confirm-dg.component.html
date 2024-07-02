@@ -1,0 +1,25 @@
+<h2>
+    <i class="p_icons pi pi-check _circle_border"></i>
+    <div class="_text">
+        {{data.title}}
+    </div>
+</h2>
+
+<div class="_content">
+    <div class="_key_value" *ngFor="let item of _selectCols">
+        <div class="_key">{{item.header}}</div>
+        <div class="_value">
+            <strong>
+                {{data.data[item.field]}}
+            </strong>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <button class="close_dg" type="button" (click)="cancel()">
+        <i class="pi pi-times"></i>
+    </button>
+    <button class="btn_2 _custom" (click)="cancel()">تایید</button>
+    <button class="btn_1 _custom" (click)="confirm()">تکرار درخواست</button>
+</div>

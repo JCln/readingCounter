@@ -46,10 +46,7 @@ export class TechnicalComponent extends FactoryONE {
     this.dictionaryWrapper();
   }
   nextPage() {
-    console.log(1);
-    
     if (this.branchesService.verificationService.requestDraftTechnical(this.closeTabService.requestDraftReq)) {
-      console.log(1);
       this.closeTabService.utilsService.routeToByUrl(EN_Routes.requestDraftOthers);
     } else {
       this.submitted = true;

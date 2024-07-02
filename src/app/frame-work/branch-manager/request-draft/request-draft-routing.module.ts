@@ -7,7 +7,7 @@ import { LocationComponent } from './location/location.component';
 import { TechnicalComponent } from './technical/technical.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { OfferingGroupComponent } from './offering-group/offering-group.component';
-import { CalculationComponent } from './calculation/calculation.component';
+// import { CalculationComponent } from './calculation/calculation.component';
 import { ValidationComponent } from './validation/validation.component';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
       { path: 'others', component: OtherInfoComponent },
       { path: 'location', component: LocationComponent },
       { path: 'confirmation', component: ConfirmationComponent },
-      { path: 'calculation', component: CalculationComponent },
+      // { path: 'calculation', component: CalculationComponent },
 
     ]
   }

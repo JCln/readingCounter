@@ -12,6 +12,7 @@ import { OfferingGroupComponent } from './offering-group/offering-group.componen
 import { RequestDraftFullViewComponent } from './request-draft-full-view/request-draft-full-view.component';
 import { CalculationComponent } from './calculation/calculation.component';
 import { ValidationComponent } from './validation/validation.component';
+import { ConfirmDgComponent } from './confirmation/confirm-dg/confirm-dg.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ValidationComponent } from './validation/validation.component';
     OfferingGroupComponent,
     RequestDraftFullViewComponent,
     CalculationComponent,
-    ValidationComponent
+    ValidationComponent,
+    ConfirmDgComponent
   ],
   imports: [
     SharedPrimeNgModule,

@@ -31,6 +31,7 @@ export enum EN_messages {
     userPassEnterCaptcha = 'لطفا عبارت تصویر امنیتی را وارد نمایید',
     toModifyBulk = 'تاریخ را وارد نمایید',
     continueToCalculation = 'برای محاسبه هزینه درخواست به صفحه محاسبه منتقل خواهید شد',
+    requestAddedSuccessfully = 'درخواست با موفقیت اضافه گردید',
     access_denied = 'دسترسی کافی به شما داده نشده است',
     access_whenLoginAgain = 'برای ذخیره تغییرات از برنامه خارج و مجددا وارد شوید',
     insert_without_decimal = 'شماره نسخه را بدون اعشار وارد نمایید',
@@ -748,7 +749,8 @@ export enum ENEssentialsToSave {
     village = "village",
     flowState = "flowState",
     flowRule = "flowRule",
-    flowRuleReq = "flowRuleReq"
+    flowRuleReq = "flowRuleReq",
+    flowRuleGetRegisteredLazy = "flowRuleGetRegisteredLazy"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',

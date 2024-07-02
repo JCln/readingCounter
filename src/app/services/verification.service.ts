@@ -622,26 +622,6 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insertـbranchStateId);
       return false;
     }
-    if (MathS.isNull(body.siphonId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon);
-      return false;
-    }
-    if (MathS.isNull(body.siphon1Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon1);
-      return false;
-    }
-    if (MathS.isNull(body.siphon2Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon2);
-      return false;
-    }
-    if (MathS.isNull(body.siphon3Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon3);
-      return false;
-    }
-    if (MathS.isNull(body.siphon4Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon4);
-      return false;
-    }
     if (MathS.isNull(body.capacity)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_capacity);
       return false;
@@ -691,26 +671,6 @@ export class VerificationService {
     }
     if (MathS.isNull(body.branchDiameterId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
-      return false;
-    }
-    if (MathS.isNull(body.siphonId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon);
-      return false;
-    }
-    if (MathS.isNull(body.siphon1Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon1);
-      return false;
-    }
-    if (MathS.isNull(body.siphon2Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon2);
-      return false;
-    }
-    if (MathS.isNull(body.siphon3Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon3);
-      return false;
-    }
-    if (MathS.isNull(body.siphon4Count)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_siphon4);
       return false;
     }
     if (MathS.isNull(body.domesticArea)) {

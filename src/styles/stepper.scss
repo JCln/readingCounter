@@ -174,18 +174,25 @@ footer {
     color: var(--green_600);
 }
 
+.input_icon ._key {
+    min-width: 8rem;
+}
+
 .offering-group-form {
     ._desc {
-        grid-template-columns: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
+        margin: auto;
+        margin-bottom: var(--font_m);
+    }
+
+    .input_icon ._key {
+        min-width: auto;
     }
 
     .top_title {
         text-align: center;
     }
-}
-
-.input_icon ._key {
-    min-width: 8rem;
 }
 
 .order_by {

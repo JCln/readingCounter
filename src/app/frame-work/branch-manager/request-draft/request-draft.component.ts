@@ -78,10 +78,10 @@ export class RequestDraftComponent extends FactoryONE {
         label: 'پیش نمایش',
         routerLink: 'confirmation'
       },
-      {
-        label: 'محاسبه',
-        routerLink: 'calculation'
-      }
+      // {
+      //   label: 'محاسبه',
+      //   routerLink: 'calculation'
+      // }
     ];
   }
   stepperViewStatus(): void {

@@ -1,0 +1,51 @@
+@import 'shared_dialog';
+
+._content {
+  color: var(--secondary_7);
+  font-size: var(--font_s);
+  text-align: right;
+  word-spacing: var(--font_03);
+}
+
+strong {
+  color: var(--primary_4);
+}
+
+._circle_border {
+  color: var(--green_500);
+  border: 2px solid var(--green_500);
+  margin-left: var(--font_xs);
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+._key_value {
+  columns: 2;
+  text-align: center;
+  column-rule: 1px dashed var(--primary_2);
+  margin-bottom: 5px;
+  direction: rtl;
+}
+
+._key,
+._value {
+  font-weight: 600;
+  background: inherit;
+}
+
+._key {
+  color: var(--primary_4);
+}
+
+._text {
+  margin-left: var(--font_xs);
+}

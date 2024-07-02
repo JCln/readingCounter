@@ -10,15 +10,39 @@
                 [ngClass]="{'double_size':mainDatas.icon}">
                 <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
                     <!-- only for single select option -->
-                    <div class="input_icon">
+                    <div class="input_icon" *ngIf="mainDatas.field == 'fromFlowStateId'">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <!-- <p-dropdown name="offeringUnitId" [options]="'offeringUnitIdDictionary'"
-                                    [(ngModel)]="" placeholder="انتخاب مورد" optionValue="id"
+                                <p-dropdown name="fromFlow" [options]="flowState"
+                                    [(ngModel)]="flowRuleReq.fromFlowStateId" placeholder="انتخاب مورد" optionValue="id"
                                     optionLabel="title" filter="true">
-                                </p-dropdown> -->
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'toFlowStateId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="flowState" [options]="flowState"
+                                    [(ngModel)]="flowRuleReq.toFlowStateId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'offeringGroupId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="zones" [options]="offeringGroupDictionary"
+                                    [(ngModel)]="flowRuleReq.offeringGroupId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
                             </div>
                         </div>
                     </div>

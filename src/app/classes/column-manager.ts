@@ -1984,6 +1984,17 @@ export class ColumnManager {
             { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
             { field: 'isSelected', header: 'انتخاب', isSelected: true, isSelectedOrigin: true, isBoolean: true }
         ]
+    assess_pre_dialog: IObjectIteratation[] =
+        [
+            { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectedOrigin: false },
+            { field: 'billId', header: 'شناسه قبض', isSelected: true, isSelectedOrigin: true, ltr: true },
+            { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, isSelectedOrigin: true, ltr: true },
+            { field: 'listNumber', header: 'ش لیست', isSelected: true, isSelectedOrigin: true, ltr: true },
+            { field: 'radif', header: 'ش.پرونده', isSelected: true, isSelectedOrigin: true, ltr: true },
+            { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true, isSelectedOrigin: true },
+            { field: 'karbariCode', header: 'کاربری', isSelected: true, isSelectedOrigin: true },
+            { field: 'masrafStateTitle', header: 'مصرف', isSelected: true, isSelectedOrigin: true },
+        ]
     simpleSearch: IObjectIteratation[] = [
         { field: 'changableZoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true },
@@ -3196,10 +3207,10 @@ export class ColumnManager {
         { field: 'isEnd', header: 'پایان', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
     flowRuleDialog: IObjectIteratation[] = [
-        { field: 'fromFlowStateId', header: 'از وضعیت', isSelected: true, isSelectedOrigin: true },
-        { field: 'toFlowStateId', header: 'به وضعیت', isSelected: true, isSelectedOrigin: true },
+        { field: 'fromFlowStateId', header: 'از وضعیت', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'toFlowStateId', header: 'به وضعیت', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'condition', header: 'شرط', isSelected: true, isSelectedOrigin: true },
-        { field: 'offeringGroupId', header: 'نوع خدمت', isSelected: true, isSelectedOrigin: true },
+        { field: 'offeringGroupId', header: 'نوع خدمت', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'isStart', header: 'شروع', isSelected: true, isSelectedOrigin: true, isBoolean: true },
         { field: 'isEnd', header: 'پایان', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
@@ -3307,7 +3318,7 @@ export class ColumnManager {
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
     requestDraftOfferingGroup: IObjectIteratation[] = [
-        { field: 'offeringGroupId', header: 'گروه اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true, isRequired: true },
+        { field: 'offeringGroupId', header: 'نوع خدمتی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, isRequired: true },
     ]
     requestDraftGetLazy: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
@@ -3416,10 +3427,10 @@ export class ColumnManager {
         { field: 'branchStateId', header: 'وضعیت انشعاب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },
         { field: 'waterSourceId', header: 'منبع آب', isSelected: false, isSelectedOrigin: false, isSelectOption: true, enableTooltip: true },
         { field: 'siphonId', header: 'سیفون', isSelected: false, isSelectedOrigin: false, enableTooltip: true, isSelectOption: true },
-        { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false, isNumber: true, isRequired: true, maxLength: 2 },
-        { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, isRequired: true, maxLength: 2 },
-        { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false, isNumber: true, isRequired: true, maxLength: 2 },
-        { field: 'siphon4Count', header: 'تعداد سیفون 4', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, isRequired: true, maxLength: 2 },
+        { field: 'siphon1Count', header: 'تعداد سیفون 1', isSelected: false, isSelectedOrigin: false, isNumber: true, maxLength: 2 },
+        { field: 'siphon2Count', header: 'تعداد سیفون 2', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, maxLength: 2 },
+        { field: 'siphon3Count', header: 'تعداد سیفون 3', isSelected: false, isSelectedOrigin: false, isNumber: true, maxLength: 2 },
+        { field: 'siphon4Count', header: 'تعداد سیفون 4', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true, maxLength: 2 },
         { field: 'capacity', header: 'ظرفیت', isSelected: false, isSelectedOrigin: false, isNumber: true, enableTooltip: true },
     ]
     requestDraftPersonalInfo: IObjectIteratation[] = [
@@ -3473,6 +3484,12 @@ export class ColumnManager {
         // { field: 'x', header: 'مکان', isSelected: false, isSelectedOrigin: false, isGIS: true },
         // { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false, isGIS: true },
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
+    ]
+    requestDraft_confirmDialog: IObjectIteratation[] = [
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
+        { field: 'fullName', header: 'نام کامل', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
+        { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false },
+        { field: 'trackNumber', header: 'کد پیگیری', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
     requestDraftFullView: IObjectIteratation[] = [
         // //// personal

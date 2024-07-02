@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFlowRule } from 'interfaces/i-branch';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { BranchesService } from 'services/branches.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
@@ -12,6 +13,9 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./flow-rule-dg.component.scss']
 })
 export class FlowRuleDgComponent implements OnInit {
+  flowState: any[] = [];
+  offeringGroupDictionary: IDictionaryManager[] = [];
+
   flowRuleReq: IFlowRule = {
     id: 0,
     isEditing: false,
@@ -54,11 +58,16 @@ export class FlowRuleDgComponent implements OnInit {
     if (this.branchesService.verificationService.flowRule(this.flowRuleReq))
       MathS.isNull(this.config.data) ? this.onRowAdd(this.flowRuleReq) : this.onRowEdit(this.flowRuleReq)
   }
+  classWrapper = async () => {
+    this.flowState = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.flowStateGet);
+    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+  }
   ngOnInit(): void {
     if (this.config.data) {
       this.flowRuleReq = this.config.data;
       // isEditing = true; should be last line
       this.flowRuleReq.isEditing = true;
     }
+    this.classWrapper();
   }
 }

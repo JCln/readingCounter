@@ -8,6 +8,8 @@ import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { ConfirmDgComponent } from './confirm-dg/confirm-dg.component';
+import { MatDialog } from '@angular/material/dialog';
 
 declare let L;
 
@@ -19,7 +21,7 @@ declare let L;
 export class ConfirmationComponent extends FactoryONE {
   private layerGroup3 = new L.FeatureGroup();
   private map3: L.Map;
-
+  private readonly outputConfirmDialog: string = 'requestDraft_confirmDialog';
   qotrDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   usageDictionary: IDictionaryManager[] = [];
@@ -35,7 +37,8 @@ export class ConfirmationComponent extends FactoryONE {
     public closeTabService: CloseTabService,
     public branchesService: BranchesService,
     private envService: EnvService,
-    private mapService: MapService
+    private mapService: MapService,
+    public dialog: MatDialog,
   ) {
     super();
   }
@@ -87,27 +90,54 @@ export class ConfirmationComponent extends FactoryONE {
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
     this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
   }
+  showResDialog = (res: any, disableClose: boolean, title: string): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDgComponent,
+        {
+          disableClose: disableClose,
+          minWidth: '21rem',
+          data: {
+            data: res,
+            outputFileName: this.outputConfirmDialog,
+            title: title,
+            isConfirm: disableClose,
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result) {
+          resolve(true);
+        }
+      })
+    });
+
+  }
   callAPI = async () => {
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.requestDraftReq)) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftAdd, this.closeTabService.requestDraftReq);
-      this.closeTabService.calculationRequestDraft.requestDraftId = res.targetObject.id;
-
-      const config = {
-        messageTitle: res.message,
-        minWidth: '21rem',
-        text: EN_messages.continueToCalculation,
-        isInput: false,
-        isImportant: false,
-        icon: 'pi pi-check',
-        closable: true,
+      const text = EN_messages.requestAddedSuccessfully;
+      // if request repeated then same request call api should trigger
+      if (await this.showResDialog(res, false, text)) {
+        this.callAPI();
       }
-      const dialogRes = await this.branchesService.utilsService.primeConfirmDialog(config);
+      // this.closeTabService.calculationRequestDraft.requestDraftId = res.targetObject.id;
+
+      // const config = {
+      //   messageTitle: res.message,
+      //   minWidth: '21rem',
+      //   text: EN_messages.continueToCalculation,
+      //   isInput: false,
+      //   isImportant: false,
+      //   icon: 'pi pi-check',
+      //   closable: true,
+      // }
+      // const dialogRes = await this.branchesService.utilsService.primeConfirmDialog(config);
       // empty the previous calculation
-      this.closeTabService.requestDraftCalculationRes = [];
+      // this.closeTabService.requestDraftCalculationRes = [];
 
-      if (!!dialogRes || !dialogRes) {
-        this.branchesService.utilsService.routeTo(EN_Routes.requestDraftCalculation);
-      }
+      // if (!!dialogRes || !dialogRes) {
+      //   this.branchesService.utilsService.routeTo(EN_Routes.requestDraftCalculation);
+      // }
     }
   }
 }
