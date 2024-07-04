@@ -37,9 +37,9 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
   offeringGroupDictionary: any[] = [];
 
   _numberOfExtraColumns: number[] = [1, 2];
-  _selectedColumnsToRemember: string = 'selectedRequestDraftGetLazy';
-  _sessionName: string = 'requestDraftGetLazy';
-  _outputFileName: string = 'requestDraftGetLazy';
+  _selectedColumnsToRemember: string = 'selectedFlowRuleGetRegisteredLazy';
+  _sessionName: string = 'flowRuleGetRegisteredLazy';
+  _outputFileName: string = 'flowRuleGetRegisteredLazy';
   _selectCols: any = [];
   _selectedColumns: IObjectIteratation[] = [];
   totalRecords: number;
@@ -59,7 +59,7 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
     super(dialogService, listManagerService);
   }
   updateOnChangedCounterState = async (event: any) => {
-    this.closeTabService.flowRuleGetRegisteredLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.flowRuleGetRegistered, event);
+    this.closeTabService.flowRuleGetRegisteredLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.flowRequestGetRegistered, event);
     this.totalRecords = this.closeTabService.flowRuleGetRegisteredLazy.totalRecords;
 
   }
@@ -167,7 +167,7 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
     }
     const confirmed = await this.listManagerService.utilsService.firstConfirmDialog(config);
     if (confirmed) {
-      const res = await this.listManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.clientRemove, rowDataAndIndex.id);
+      const res = await this.listManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.flowRuleRemove, rowDataAndIndex.id);
       this.listManagerService.utilsService.snackBarMessageSuccess(res.message);
       this.refreshTable();
     }

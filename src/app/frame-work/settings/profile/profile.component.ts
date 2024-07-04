@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENWidthExpandMode, EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { ENFontFamily, ENFontFamilyExactName, ENFontStyle, ENOutputConfigColWidth } from 'interfaces/istyles';
 import { CloseTabService } from 'services/close-tab.service';
@@ -30,8 +30,8 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsVirtualScroll: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsHasColumnsResizable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsWidthExpandMode: any[] = [
-    { label: 'بله', value: 'expand' },
-    { label: 'خیر', value: 'fit' }
+    { label: 'بله', value: ENWidthExpandMode.expand },
+    { label: 'خیر', value: ENWidthExpandMode.fit }
   ];
   stateFontStyleOptions: any[] = [
     { label: 'خیلی کوچک', value: ENFontStyle.fontXXS },

@@ -27,9 +27,8 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="zoneId" [options]="zoneDictionary"
-                                    [(ngModel)]="tarrifReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
-                                    optionLabel="title" filter="true">
+                                <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="tarrifReq.zoneId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
                                 </p-dropdown>
                             </div>
                         </div>
@@ -39,9 +38,8 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="usage" [options]="usageDictionary"
-                                    [(ngModel)]="tarrifReq.usageId" placeholder="انتخاب مورد" optionValue="id"
-                                    optionLabel="title" filter="true">
+                                <p-dropdown name="usage" [options]="usageDictionary" [(ngModel)]="tarrifReq.usageId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
                                 </p-dropdown>
                             </div>
                         </div>
@@ -113,11 +111,11 @@
                         <div class="input_icon">
                             <i class="pi pi-pencil _bookmark"></i>
                             <div class="input_3">
-                                <div class="_key">فرمول</div>
+                                <div class="_key">{{mainDatas.header}}</div>
                             </div>
                         </div>
-                        <textarea placeholder="فرمول در اینجا نوشته شود" name="{{mainDatas.field}}" id="text" cols="30"
-                            rows="10" [(ngModel)]="tarrifReq[mainDatas.field]">
+                        <textarea [placeholder]="mainDatas.header + ' در اینجا نوشته شود'" name="{{mainDatas.field}}"
+                            id="text" cols="30" rows="10" [(ngModel)]="tarrifReq[mainDatas.field]">
                     </textarea>
                     </div>
 

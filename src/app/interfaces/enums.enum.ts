@@ -856,6 +856,10 @@ export enum ENHasCount {
     hasCount = 'true',
     hasNotCount = 'false'
 }
+export enum ENWidthExpandMode {
+    expand = 'expand',
+    fit = 'fit'
+}
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
@@ -928,6 +932,7 @@ export enum ENSelectedColumnVariables {
     selectedOffloadedLazy = 'listOffloadedLazy',
     selectedClientGetlazy = 'clientManagerGetLazy',
     selectedRequestDraftGetLazy = 'requestDraftGetLazy',
+    selectedFlowRuleGetRegisteredLazy = 'flowRuleGetRegisteredLazy',
     selectedCounterNumberChange = 'counterNumberChange',
     selectedTariffAllLazy = 'tariffAllLazy',
     selectedReqLogInactiveEntity = 'reqLogInactiveEntity',

@@ -1,7 +1,7 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENLocalStorageNames, EN_messages } from 'interfaces/enums.enum';
+import { ENLocalStorageNames, ENWidthExpandMode, EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -48,7 +48,7 @@ export class ProfileService {
     virtualScrollStatus: false,
     hasColumnsResizable: true, // true for has columns resizable default value
     notifyPosition: 'top-right',
-    widthExpandMode: 'expand', // true ? expand : fit
+    widthExpandMode: ENWidthExpandMode.expand, // true ? expand : fit
     imgOptions: {
       width: '40rem',
       height: '40rem',
@@ -154,8 +154,8 @@ export class ProfileService {
   getHasColumnsResizable = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasColumnsResizable, true);// true for hasColumns resizable
   }
-  getWidthExpandMode = (): string => {
-    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.widthExpandMode, 'expand');
+  getWidthExpandMode = (): ENWidthExpandMode => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.widthExpandMode, this.showStateVals.widthExpandMode);
   }
   getLocalNotifyPosition = (): string => {
     return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'top-right');

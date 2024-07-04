@@ -51,8 +51,9 @@ i {
 }
 
 .dropdown-content {
-  display: none;
   position: absolute;
+  direction: ltr;
+  display: none;
   top: 105%;
   left: 0;
   background-color: var(--secondary_1);

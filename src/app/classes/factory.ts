@@ -1,7 +1,7 @@
 import { InteractionService } from 'services/interaction.service';
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENColumnResizeMode, ENImageTypes, ENPrimeNGTranslator, EN_messages } from 'interfaces/enums.enum';
+import { ENColumnResizeMode, ENImageTypes, ENPrimeNGTranslator, ENWidthExpandMode, EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -76,7 +76,7 @@ export class FactorySharedPrime implements OnChanges, AfterViewInit {
     @Input() _virtualScroll: boolean = false;
     @Input() _columnResizeMode: ENColumnResizeMode = ENColumnResizeMode.true;
     @Input() _hasColumnsResizable: boolean = false;
-    @Input() _widthExpandMode: string = 'expand';
+    @Input() _widthExpandMode: string = ENWidthExpandMode.expand;
 
     constructor(
         public browserStorageService: BrowserStorageService,
