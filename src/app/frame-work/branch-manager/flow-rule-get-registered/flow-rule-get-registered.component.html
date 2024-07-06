@@ -136,6 +136,12 @@
                         </ng-template>
                     </ng-template>
                 </td>
+                <td class="__icon-columns" class="edit_button" (click)="routeToCalculationSteps(dataSource)">
+                    <span class="ui-column-title">محاسبه</span>
+                    <i class="tooltip _edit pi pi-pencil">
+                        <div class="tooltip_text">محاسبه</div>
+                    </i>
+                </td>
                 <td class="__icon-columns" class="edit_button" (click)="editSingleRow(dataSource)">
                     <span class="ui-column-title">ویرایش</span>
                     <i class="tooltip _edit pi pi-pencil">
@@ -153,7 +159,8 @@
 
     </p-table>
 
-    <section *ngIf="!closeTabService.flowRuleGetRegisteredLazy.data || closeTabService.flowRuleGetRegisteredLazy.data.length === 0">
+    <section
+        *ngIf="!closeTabService.flowRuleGetRegisteredLazy.data || closeTabService.flowRuleGetRegisteredLazy.data.length === 0">
         <tr class="empty_data">
             موردی پیدا نشد
             <i class="fa fa-folder-blank"></i>

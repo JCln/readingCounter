@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IRequestDraft } from 'interfaces/i-branch';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { MenuItem } from 'primeng/api';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
-  selector: 'app-request-draft',
-  templateUrl: './request-draft.component.html',
-  styleUrls: ['./request-draft.component.scss']
+  selector: 'app-flow-rule-get-registered-dg',
+  templateUrl: './flow-rule-get-registered-dg.component.html',
+  styleUrls: ['./flow-rule-get-registered-dg.component.scss']
 })
-export class RequestDraftComponent extends FactoryONE {
-  private readonly _outputFileName: string = 'requestDraftAdd';
+export class FlowRuleGetRegisteredDgComponent extends FactoryONE {
+  private readonly _outputFileName: string = 'flowRuleGetRegisteredStepperEditColumns';
   _selectCols: any = [];
   items: MenuItem[];
-  hasStepperView: boolean;
 
   qotrDictionary: IDictionaryManager[] = [];
   siphonDictionary: any[] = [];
@@ -50,45 +52,35 @@ export class RequestDraftComponent extends FactoryONE {
   addStepperItems(): void {
     this.items = [
       {
-        label: 'احراز اطلاعات',
-        routerLink: 'validation'
+        label: 'ویرایش',
+        routerLink: 'edit'
       },
       {
-        label: 'نوع خدمت',
-        routerLink: 'offering'
+        label: 'محاسبه شده',
+        routerLink: 'calculated'
       },
       {
-        label: 'اطلاعات مالک',
-        routerLink: 'personal'
+        label: 'کسورات اضافات',
+        routerLink: 'extras'
       },
       {
-        label: 'اطلاعات فنی',
-        routerLink: 'technical'
+        label: 'تقسیط/ روش پرداخت',
+        routerLink: 'installment'
       },
       {
-        label: 'اطلاعات ملک',
-        routerLink: 'others'
+        label: 'محاسبه مجدد',
+        routerLink: 'reCalc'
       },
       {
-        label: 'اطلاعات مکانی',
-        routerLink: 'location'
-      },
-      {
-        label: 'پیش نمایش',
+        label: 'تایید',
         routerLink: 'confirmation'
-      },
-      // {
-      //   label: 'محاسبه',
-      //   routerLink: 'calculation'
-      // }
+      }
     ];
   }
-  stepperViewStatus(): void {
-    this.hasStepperView = this.closeTabService.profileService.getStepperView();
-  }
   classWrapper = async () => {
+    console.log(1);
+
     this.addStepperItems();
-    this.stepperViewStatus();
   }
 
 }

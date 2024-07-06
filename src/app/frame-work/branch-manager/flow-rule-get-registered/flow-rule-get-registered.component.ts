@@ -15,6 +15,7 @@ import { MathS } from 'src/app/classes/math-s';
 import { RequestDraftDgComponent } from '../request-draft-getlazy/request-draft-dg/request-draft-dg.component';
 import { Table } from 'primeng/table';
 import { LazyLoadEvent } from 'primeng/api';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 @Component({
   selector: 'app-flow-rule-get-registered',
@@ -36,7 +37,7 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
   customerTypeDictionary: [];
   offeringGroupDictionary: any[] = [];
 
-  _numberOfExtraColumns: number[] = [1, 2];
+  _numberOfExtraColumns: number[] = [1, 2, 3];
   _selectedColumnsToRemember: string = 'selectedFlowRuleGetRegisteredLazy';
   _sessionName: string = 'flowRuleGetRegisteredLazy';
   _outputFileName: string = 'flowRuleGetRegisteredLazy';
@@ -195,6 +196,9 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
   ngAfterViewInit(): void {
     this.hasFilters();
   }
-
+  routeToCalculationSteps(dataSource: any) {
+    console.log(dataSource);
+    this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredEdit);
+  }
 
 }

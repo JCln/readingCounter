@@ -62,6 +62,7 @@ export class CounterStateComponent extends FactoryONE {
 
     dataSource['dataSource'].moshtarakinId = Number(dataSource['dataSource'].moshtarakinId);
     dataSource['dataSource'].clientOrder = Number(dataSource['dataSource'].clientOrder);
+    dataSource['dataSource'].zoneId = dataSource['dataSource'].changableZoneId;
 
     if (!this.readManagerService.verificationCounterState(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {

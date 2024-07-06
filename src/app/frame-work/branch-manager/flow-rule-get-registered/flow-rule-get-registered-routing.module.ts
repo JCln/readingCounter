@@ -3,7 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlowRuleGetRegisteredComponent } from './flow-rule-get-registered.component';
 
 const routes: Routes = [
-  { path: '', component: FlowRuleGetRegisteredComponent }
+  {
+    path: '', component: FlowRuleGetRegisteredComponent, children: [
+      { path: 'edit', loadChildren: () => import('./flow-rule-get-registered-dg/flow-rule-get-registered-dg.module').then(registeredStepperEdit => registeredStepperEdit.FlowRuleGetRegisteredDgModule) },
+    ]
+  }
 ];
 
 @NgModule({
