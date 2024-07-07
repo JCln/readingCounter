@@ -11,16 +11,16 @@ import { FlowRuleGetRegisteredDgComponent } from './flow-rule-get-registered-dg.
 const routes: Routes = [
   {
     path: '', component: FlowRuleGetRegisteredDgComponent
+    , children: [
+      { path: '', component: RegisteredEditComponent, pathMatch: 'full' },
+      { path: 'edit', component: RegisteredEditComponent },
+      { path: 'calculated', component: RegisteredCalculatedComponent },
+      { path: 'extras', component: RegisteredExtrasComponent },
+      { path: 'installment', component: RegisteredInstallmentComponent },
+      { path: 'reCalc', component: RegisteredRecalcComponent },
+      { path: 'confirmation', component: RegisteredConfirmationComponent },
+    ]
   },
-  // , children: [
-  //   { path: '', component: RegisteredEditComponent, pathMatch: 'full' },
-  //   { path: 'edit', component: RegisteredEditComponent },
-  //   { path: 'calculated', component: RegisteredCalculatedComponent },
-  //   { path: 'extras', component: RegisteredExtrasComponent },
-  //   { path: 'installment', component: RegisteredInstallmentComponent },
-  //   { path: 'reCalc', component: RegisteredRecalcComponent },
-  //   { path: 'confirmation', component: RegisteredConfirmationComponent },
-  // ]
 ];
 
 @NgModule({

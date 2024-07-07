@@ -1,1 +1,108 @@
-<p>registered-edit works!</p>
+<section>
+    <h2 class="title">
+        ویرایش انشعاب
+    </h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="callAPI()">
+        <div class="content">
+
+            <div *ngFor="let mainDatas of _selectedDatas" [ngClass]=" {'double_size':mainDatas.icon}">
+                <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
+                    <!-- only for single select option -->
+                    <div class="input_icon" *ngIf="mainDatas.field == 'zoneId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="offeringUnitId" [options]="zoneDictionary"
+                                    [(ngModel)]="dataSource.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'usageId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="offeringUnitId" [options]="usageDictionary"
+                                    [(ngModel)]="dataSource.usageId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'offeringIds'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">نوع خدمت</div>
+                            <div class="_value">
+                                <p-multiSelect [maxSelectedLabels]="1" [options]="offeringGroupDictionary"
+                                    name="usageId" [(ngModel)]="dataSource.offeringIds" optionLabel="title"
+                                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                    [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                                </p-multiSelect>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'sewageInstallationJalaliDay'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <app-date-jalali name="sewageInstallationJalaliDay"
+                                    (dateJalEvent)="closeTabService.receiveToDateInstallation(closeTabService.ENReadingReports.requestDraftLazyEdit, $event)"
+                                    [dateObject]="dataSource.sewageInstallationJalaliDay">
+                                </app-date-jalali>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'watarInstallationJalaliDay'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <app-date-jalali name="watarInstallationJalaliDay"
+                                    (dateJalEvent)="closeTabService.receiveFromDateInstallation(closeTabService.ENReadingReports.requestDraftLazyEdit, $event)"
+                                    [dateObject]="dataSource.watarInstallationJalaliDay">
+                                </app-date-jalali>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #checkboxes>
+                    <ng-container *ngIf="mainDatas.isBoolean; else simpleText">
+                        <div class="input_icon">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <mat-checkbox name="isCluster" [(ngModel)]="dataSource[mainDatas.field]">
+                                    {{mainDatas.isSelected}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-template>
+                <ng-template #simpleText>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <input [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
+                                [(ngModel)]="dataSource[mainDatas.field]">
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                ویرایش انشعاب
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>
