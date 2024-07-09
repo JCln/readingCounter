@@ -1,10 +1,6 @@
 <section>
-    <h2 class="title">
-        ویرایش انشعاب
-    </h2>
-    <hr>
     <form #form="ngForm" (ngSubmit)="callAPI()">
-        <div class="content">
+        <div class="_desc">
 
             <div *ngFor="let mainDatas of _selectedDatas" [ngClass]=" {'double_size':mainDatas.icon}">
                 <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
@@ -14,9 +10,9 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="zoneDictionary"
-                                    [(ngModel)]="dataSource.zoneId" placeholder="انتخاب مورد" optionValue="id"
-                                    optionLabel="title" filter="true">
+                                <p-dropdown name="{{mainDatas.field}}" [options]="zoneDictionary"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.zoneId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
                                 </p-dropdown>
                             </div>
                         </div>
@@ -26,23 +22,73 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
-                                <p-dropdown name="offeringUnitId" [options]="usageDictionary"
-                                    [(ngModel)]="dataSource.usageId" placeholder="انتخاب مورد" optionValue="id"
-                                    optionLabel="title" filter="true">
+                                <p-dropdown name="{{mainDatas.field}}" [options]="usageDictionary"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.usageId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
                                 </p-dropdown>
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'offeringIds'">
+                    <div class="input_icon" *ngIf="mainDatas.field == 'branchDiameterId'">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
-                            <div class="_key">نوع خدمت</div>
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="{{mainDatas.field}}" [options]="branchDiameterDictionary"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.branchDiameterId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'siphonId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="{{mainDatas.field}}" [options]="siphonDictionary"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.siphonId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'offeringGroupIds'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
                             <div class="_value">
                                 <p-multiSelect [maxSelectedLabels]="1" [options]="offeringGroupDictionary"
-                                    name="usageId" [(ngModel)]="dataSource.offeringIds" optionLabel="title"
-                                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                    name="{{mainDatas.field}}"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.offeringGroupIds"
+                                    [(ngModel)]="closeTabService.calculationRequestDraft.offeringGroupIds"
+                                    optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
                                     [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                                 </p-multiSelect>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'guildId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="{{mainDatas.field}}" [options]="guildDictionary"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.guildId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_icon" *ngIf="mainDatas.field == 'ownershipTypeId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="{{mainDatas.field}}" [options]="ownershipTypeDictionary"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.ownershipTypeId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
                             </div>
                         </div>
                     </div>
@@ -53,7 +99,7 @@
                             <div class="_value">
                                 <app-date-jalali name="sewageInstallationJalaliDay"
                                     (dateJalEvent)="closeTabService.receiveToDateInstallation(closeTabService.ENReadingReports.requestDraftLazyEdit, $event)"
-                                    [dateObject]="dataSource.sewageInstallationJalaliDay">
+                                    [dateObject]="closeTabService.flowRuleRegisteredEdit.sewageInstallationJalaliDay">
                                 </app-date-jalali>
                             </div>
                         </div>
@@ -65,7 +111,7 @@
                             <div class="_value">
                                 <app-date-jalali name="watarInstallationJalaliDay"
                                     (dateJalEvent)="closeTabService.receiveFromDateInstallation(closeTabService.ENReadingReports.requestDraftLazyEdit, $event)"
-                                    [dateObject]="dataSource.watarInstallationJalaliDay">
+                                    [dateObject]="closeTabService.flowRuleRegisteredEdit.watarInstallationJalaliDay">
                                 </app-date-jalali>
                             </div>
                         </div>
@@ -77,7 +123,8 @@
                             <i class="pi pi-bookmark _bookmark"></i>
                             <div class="input_3">
                                 <div class="_key">{{mainDatas.header}}</div>
-                                <mat-checkbox name="isCluster" [(ngModel)]="dataSource[mainDatas.field]">
+                                <mat-checkbox name="{{mainDatas.field}}"
+                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit[mainDatas.field]">
                                     {{mainDatas.isSelected}}
                                 </mat-checkbox>
                             </div>
@@ -90,7 +137,7 @@
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
                             <input [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
-                                [(ngModel)]="dataSource[mainDatas.field]">
+                                [(ngModel)]="closeTabService.flowRuleRegisteredEdit[mainDatas.field]">
                         </div>
                     </div>
                 </ng-template>

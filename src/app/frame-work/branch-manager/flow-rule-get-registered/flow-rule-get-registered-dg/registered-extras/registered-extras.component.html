@@ -1,1 +1,44 @@
-<p>registered-extras works!</p>
+<form>
+    <div class="_description">
+        <section class="main_title">
+            <h2>درخواست محاسبه</h2>
+            <button class="btn_2_o" (click)="addNewItem()">افزودن</button>
+        </section>
+        <hr>
+        <div class="rate_item" *ngFor="let item of items; index as i">
+            <div class="_time">
+                <!-- <p class="_time_title">نرخ {{i+1}}:</p> -->
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">اقلام</div>
+                        <div class="_value">
+                            <p-dropdown [name]="item[i]" [options]="offeringDictionary" [(ngModel)]="item.fromRate"
+                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">مبلغ/ مقدار</div>
+                        <input #item="ngModel" [name]="item[i]" class="form-control" maxlength="6"
+                            [(ngModel)]="item.toRate" class="_value">
+                    </div>
+                </div>
+
+                <button class="btn_remove pi pi-times-circle tooltip" (click)="deleteRate(i)">
+                    <div class="tooltip_text_right">حذف نرخ</div>
+                </button>
+            </div>
+        </div>
+        <footer>
+            <button (click)="callAPI()" class="btn_1">
+                تایید
+                <i class="pi pi-check-square"></i>
+            </button>
+        </footer>
+    </div>
+
+</form>

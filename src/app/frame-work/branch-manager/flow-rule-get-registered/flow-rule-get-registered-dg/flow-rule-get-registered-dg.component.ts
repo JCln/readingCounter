@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IRequestDraft } from 'interfaces/i-branch';
-import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
+import { Component } from '@angular/core';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { MenuItem } from 'primeng/api';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -78,8 +75,6 @@ export class FlowRuleGetRegisteredDgComponent extends FactoryONE {
     ];
   }
   classWrapper = async () => {
-    console.log(1);
-
     this.addStepperItems();
   }
 

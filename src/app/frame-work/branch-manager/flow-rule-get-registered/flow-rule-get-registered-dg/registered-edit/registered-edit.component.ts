@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IRequestDraft } from 'interfaces/i-branch';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-registered-edit',
@@ -11,8 +12,8 @@ import { CloseTabService } from 'services/close-tab.service';
   styleUrls: ['./registered-edit.component.scss']
 })
 export class RegisteredEditComponent implements OnInit {
-  dataSource: IRequestDraft;
   zoneDictionary: [];
+  siphonDictionary: any[] = [];
   usageDictionary: [];
   branchDiameterDictionary: [];
   guildDictionary: [];
@@ -30,15 +31,17 @@ export class RegisteredEditComponent implements OnInit {
   ) {
   }
   callAPI = async () => {
-    if (this.branchesService.verificationService.requestDraftAdd(this.dataSource)) {
-      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftEdit, this.dataSource);
+    if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.flowRuleRegisteredEdit)) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftEdit, this.closeTabService.flowRuleRegisteredEdit);
       if (res) {
+        this.closeTabService.calculationRequestDraft.requestDraftId = res.targetObject.id;
         this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       }
     }
   }
   dictionaryWrapper = async () => {
-    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
+    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+    this.siphonDictionary = await this.branchesService.dictionaryWrapperService.getSiphonDictionary(false);
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
     this.branchDiameterDictionary = await this.branchesService.dictionaryWrapperService.getQotrDictionary();
@@ -48,17 +51,22 @@ export class RegisteredEditComponent implements OnInit {
     this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }
-  counterWrapper = async () => {
+  classWrapper = async () => {
     this.dictionaryWrapper();
-    this._selectedDatas = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);    
+    this._selectedDatas = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
   }
   async showInMap() {
-    const res = await this.branchesService.openMapDialog(this.dataSource, true);
-    this.dataSource.x = res.x;
-    this.dataSource.y = res.y;
+    const res = await this.branchesService.openMapDialog(this.closeTabService.flowRuleRegisteredEdit, true);
+    this.closeTabService.flowRuleRegisteredEdit.x = res.x;
+    this.closeTabService.flowRuleRegisteredEdit.y = res.y;
   }
   ngOnInit(): void {
-    this.counterWrapper();
+    if (MathS.isNull(this.closeTabService.flowRuleRegisteredEdit)) {
+      // backto previous page if there is no object(data)
+      this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredLazy);
+      return;
+    }
+    this.classWrapper();
   }
 
 }

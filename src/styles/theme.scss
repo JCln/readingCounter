@@ -32,6 +32,7 @@
     .test {
         display: grid;
         position: absolute;
+        direction: ltr;
         gap: var(--font_025);
         top: 2rem;
         left: 0;

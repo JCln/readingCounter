@@ -1,1 +1,42 @@
-<p>registered-calculated works!</p>
+<form *ngIf="!closeTabService.requestDraftCalculationRes || closeTabService.requestDraftCalculationRes.length === 0"
+    (ngSubmit)="callAPI()">
+    <div class="_description">
+        <h2>درخواست محاسبه</h2>
+        <hr>
+        <h5>درخواست های شما بصورت زیر است</h5>
+        <div *ngFor="let offeringDic of offeringGroupDictionary">
+            <div *ngFor="let item of closeTabService.flowRuleRegisteredEdit.offeringGroupIds">
+                <li class="selected_offering" *ngIf="offeringDic.id == item">
+                    {{offeringDic.title}}
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <button type="submit" class="btn_1">
+            محاسبه
+            <i class="pi pi-calculator"></i>
+        </button>
+    </footer>
+</form>
+
+<section class="content" *ngIf="closeTabService.requestDraftCalculationRes.length > 0">
+    <h1 class="green_response">نتیجه محاسبه</h1>
+
+    <table>
+        <tbody>
+            <div>
+                <tr>
+                    <td>شرح خدمات</td>
+                    <td>مبلغ</td>
+                </tr>
+                <tr *ngFor="let item of closeTabService.requestDraftCalculationRes">
+                    <td>{{item.offeringTitle}}</td>
+                    <td class="_value">{{item.value}}</td>
+                </tr>
+            </div>
+        </tbody>
+
+    </table>
+</section>

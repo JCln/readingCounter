@@ -3322,6 +3322,9 @@ export class ColumnManager {
     requestDraftOfferingGroup: IObjectIteratation[] = [
         { field: 'offeringGroupId', header: 'نوع خدمتی', isSelected: true, isSelectedOrigin: true, isSelectOption: true, isRequired: true },
     ]
+    registeredExtrasOfferingGroup: IObjectIteratation[] = [
+        { field: 'offeringId', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+    ]
     requestDraftGetLazy: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
@@ -3426,7 +3429,7 @@ export class ColumnManager {
     ]
     flowRuleGetRegisteredStepperEditColumns: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'offeringIds', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'offeringGroupIds', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'nationalId', header: 'کد ملی', isSelected: true, isSelectedOrigin: true, enableTooltip: true },
         { field: 'postalCode', header: 'کد پستی', isSelected: true, isSelectedOrigin: true },
         { field: 'mobiles', header: 'موبایل/ها', isSelected: true, isSelectedOrigin: true, enableTooltip: true },

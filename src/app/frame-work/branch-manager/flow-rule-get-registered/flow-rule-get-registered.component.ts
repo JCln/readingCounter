@@ -198,6 +198,7 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
   }
   routeToCalculationSteps(dataSource: any) {
     console.log(dataSource);
+    this.closeTabService.flowRuleRegisteredEdit = dataSource;
     this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStep);
   }
 

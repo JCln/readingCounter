@@ -343,6 +343,7 @@ export class CloseTabService {
     data: [],
     totalRecords: 0
   };
+  flowRuleRegisteredEdit: IRequestDraft;// no clean or logout actions affect on registered edit right now
   counterNumberChangeGetLazy: IClientGetAllLazy = {
     data: [],
     totalRecords: 0

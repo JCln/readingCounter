@@ -21,6 +21,8 @@ section {
     align-content: flex-start;
     background: var(--secondary_1);
     gap: 0 var(--font_05);
+    padding: .5rem;
+    border-radius: $border_5;
 
     @media (min-width:550px) {
         grid-template-columns: 1fr 1fr;

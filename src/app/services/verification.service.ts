@@ -1698,6 +1698,14 @@ export class VerificationService {
 
     return true;
   }
+  registeredOffering = (item: IRequestDraft): boolean => {
+    if (MathS.isNullZero(item.offeringIds)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_offeringId);
+      return false;
+    }
+
+    return true;
+  }
   tarrifManager = (item: ITariffAll): boolean => {
     if (item.isEditing) {
       if (!this.nullValidation(item.id, EN_messages.call_supportGroup))
