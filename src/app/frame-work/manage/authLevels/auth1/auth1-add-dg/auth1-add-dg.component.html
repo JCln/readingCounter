@@ -14,7 +14,7 @@
             <i class="pi pi-bookmark _bookmark"></i>
             <div class="input_3">
                 <div class="_key">عنوان</div>
-                <input class="_value" formControlName="title">
+                <input [maxlength]="titleMaxLength" class="_value" formControlName="title">
             </div>
         </div>
         <div class="input_icon">
@@ -31,7 +31,7 @@
                 <input class="_value" type="number" formControlName="logicalOrder">
             </div>
         </div>
-        
+
         <mat-checkbox formControlName="inSidebar">سایدبار</mat-checkbox>
     </main>
 

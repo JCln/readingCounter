@@ -606,10 +606,6 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
       return false;
     }
-    if (MathS.isNull(body.guildId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_guild);
-      return false;
-    }
     if (!MathS.isExactLengthYouNeed(body.watarInstallationJalaliDay, ENRandomNumbers.ten)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
       return false;
@@ -1500,7 +1496,7 @@ export class VerificationService {
       return false;
 
     return true;
-  }
+  }  
   masterValidation = (body: IFragmentMaster): boolean => {
     if (MathS.isNull(body.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);

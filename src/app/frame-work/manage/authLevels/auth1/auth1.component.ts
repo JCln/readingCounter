@@ -7,6 +7,8 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
+import { EN_messages, ENRandomNumbers } from 'interfaces/enums.enum';
 
 
 @Component({
@@ -63,6 +65,12 @@ export class Auth1Component extends FactoryONE {
       this.closeTabService.saveDataForAppLevel1[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
+    // app title should be less than much number
+    if (!MathS.isLowerThanMaxLength(dataSource['dataSource'].title, ENRandomNumbers.twelve)) {
+      this.authsManagerService.utilsService.snackBarMessageWarn(EN_messages.limitedLengthTitle);
+      return;
+    }
+
     const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel1EDIT, dataSource['dataSource']);
     this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
   }
