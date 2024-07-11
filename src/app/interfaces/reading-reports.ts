@@ -1,6 +1,6 @@
 // name of the ENReadingReports should be exactly the same with usable name of variable(usually in column manager)
 export enum ENReadingReports {
-    selectedSimpleMasterByFragmentReq = 'simpleMasterByFragment',
+    selectedSimpleMasterByFragmentReq = 'simpleMasterByFragmentReq',
     master = 'masterReq',
     inState = 'inStateReq',
     details = 'detailsReq',
