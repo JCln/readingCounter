@@ -3,10 +3,11 @@
 
 main {
   direction: rtl;
+  min-height: 40vh;
 }
 
 ._content {
-  background: var(--thirdy_2);
+  // background: var(--thirdy_2);
   padding: var(--font_02);
   margin: var(--font_02);
   border-radius: $border_15;
@@ -104,20 +105,28 @@ main {
   font-family: var(--font-family);
 }
 
+.toggle_show_zones {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 // switch buttons
 .fa_icons {
   color: var(--pink_500);
   display: grid;
   place-content: center;
   padding: .87rem;
-  border-radius: 50%;
+  margin: 2px;
+  border-radius: $border_10;
   cursor: pointer;
   font-size: var(--font_s);
   border: none;
-  float: left;
 
   &:hover,
+  &:focus-visible,
   &:active {
+    outline: 1px solid var(--primary_5);
     opacity: 1;
   }
 }

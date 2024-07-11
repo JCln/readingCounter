@@ -6,11 +6,13 @@ import { SelectZoneComponent } from './select-zone/select-zone.component';
 import { UserEditRoutingModule } from './user-edit-routing.module';
 import { UserEditComponent } from './user-edit.component';
 import { UserInputsComponent } from './user-inputs/user-inputs.component';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 
 @NgModule({
   declarations: [UserEditComponent, SelectZoneComponent, UserInputsComponent, SelectActionComponent],
   imports: [
+    SharedPrimeNgModule,
     SharedModule,
     UserEditRoutingModule
   ]

@@ -16,14 +16,6 @@ export class SelectZoneComponent {
   title: string = '';
   allComplete: boolean = false;
 
-  someComplete(): boolean {
-    const a: Array<any> = [];
-    a.push(this.provinceItemsData);
-    if (this.provinceItemsData.regionItems == null) {
-      return false;
-    }
-    return this.provinceItemsData.regionItem.filter(t => t.isSelected).length > 0 && !this.allComplete
-  }
   setAll(completed: boolean) {
     this.allComplete = completed;
     this.provinceItemsData.forEach(l1 => {

@@ -150,6 +150,36 @@ li {
   font-family: var(--font-family);
 }
 
+.p-accordion .p-accordion-content {
+  background: var(--secondary_1) !important;
+}
+
+.p-accordion .p-accordion-header .p-accordion-header-link {
+  display: flex;
+  direction: ltr;
+  justify-content: flex-end;
+  background: var(--white) !important;
+  color: var(--thirdy_4) !important;
+}
+
+.p-accordion p-accordiontab:first-child .p-accordion-header .p-accordion-header-link {
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-radius: 7px;
+}
+
+.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+  box-shadow: none !important;
+}
+
+.p-accordion-header-text {
+  line-height: 1;
+  font-size: 1.3rem;
+  margin: 0 1rem;
+  flex: 1;
+  min-width: fit-content;
+}
+
 .p-dialog {
   min-height: 100vh;
   min-height: 100svh;

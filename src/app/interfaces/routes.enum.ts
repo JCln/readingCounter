@@ -125,7 +125,7 @@ export enum EN_Routes {
     'userRoleHistoryDetails' = '/wr/m/system/userRoleHistory/details',
     reqLogBlockedUsers = '/wr/m/system/userRoleHistory/blockedUsers',
     'userMasterHistory' = '/wr/reqLog/userMaster',
-    'userDetailsHistory' = '/wr/reqLog/userDetails',
+    userDetailsHistory = '/wr/reqLog/userDetails',
     userCompare = '/wr/reqLog/userCompare',
     errorsBackup = '/wr/reqLog/errorsBackup',
     wrmmserr = '/wr/m/system/mserr',
