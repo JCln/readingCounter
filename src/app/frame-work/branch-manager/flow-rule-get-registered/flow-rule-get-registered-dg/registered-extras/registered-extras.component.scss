@@ -3,6 +3,18 @@
 @import 'button';
 @import 'tooltip';
 
+.input_icon {
+    ._key {
+        flex: 1;
+        min-width: fit-content;
+        min-width: 5rem;
+    }
+
+    ._value {
+        min-width: 9rem;
+    }
+}
+
 ._description {
     display: grid;
     justify-content: center;

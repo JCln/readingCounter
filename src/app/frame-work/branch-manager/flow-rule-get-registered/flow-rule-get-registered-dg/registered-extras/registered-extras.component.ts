@@ -32,7 +32,7 @@ export class RegisteredExtrasComponent extends FactoryONE {
     this.dictionaryWrapper();
   }
   addNewItem() {
-    this.items.push({ fromRate: null, toRate: null });
+    this.items.push({ fromRate: null, toRate: this.offeringDictionary });
   }
   deleteRate(index: number) {
     this.items.splice(index, 1);
