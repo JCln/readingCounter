@@ -250,6 +250,7 @@
 
     ._breadcrumb {
         position: absolute;
+        user-select: none;
         right: 1rem;
         top: 0.5rem;
         border-bottom: 1px solid;

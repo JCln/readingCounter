@@ -5,90 +5,159 @@
             <div *ngFor="let mainDatas of _selectedDatas" [ngClass]=" {'double_size':mainDatas.icon}">
                 <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
                     <!-- only for single select option -->
-                    <div class="input_icon" *ngIf="mainDatas.field == 'zoneId'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-dropdown name="{{mainDatas.field}}" [options]="zoneDictionary"
-                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.zoneId"
-                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
-                                </p-dropdown>
+                    <div *ngIf="mainDatas.field == 'zoneId'">
+                        <div class="input_icon"
+                            [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-dropdown #itemdrop="ngModel" name="{{mainDatas.field}}"
+                                        [options]="zoneDictionary"
+                                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.zoneId"
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{mainDatas.header}} را وارد نمایید
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'usageId'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-dropdown name="{{mainDatas.field}}" [options]="usageDictionary"
-                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.usageId"
-                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
-                                </p-dropdown>
+                    <div *ngIf="mainDatas.field == 'usageId'">
+                        <div class="input_icon"
+                            [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-dropdown #itemdrop="ngModel" name="{{mainDatas.field}}"
+                                        [options]="usageDictionary"
+                                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.usageId"
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{mainDatas.header}} را وارد نمایید
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'branchDiameterId'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-dropdown name="{{mainDatas.field}}" [options]="branchDiameterDictionary"
-                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.branchDiameterId"
-                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
-                                </p-dropdown>
+                    <div *ngIf="mainDatas.field == 'branchDiameterId'">
+                        <div class="input_icon"
+                            [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-dropdown #itemdrop="ngModel" name="{{mainDatas.field}}"
+                                        [options]="branchDiameterDictionary"
+                                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.branchDiameterId"
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{mainDatas.header}} را وارد نمایید
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'siphonId'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-dropdown name="{{mainDatas.field}}" [options]="siphonDictionary"
-                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.siphonId"
-                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
-                                </p-dropdown>
+                    <div *ngIf="mainDatas.field == 'siphonId'">
+                        <div class="input_icon"
+                            [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-dropdown #itemdrop="ngModel" name="{{mainDatas.field}}"
+                                        [options]="siphonDictionary"
+                                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.siphonId"
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{mainDatas.header}} را وارد نمایید
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'offeringGroupIds'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-multiSelect [maxSelectedLabels]="1" [options]="offeringGroupDictionary"
-                                    name="{{mainDatas.field}}"
-                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.offeringGroupIds"
-                                    [(ngModel)]="closeTabService.calculationRequestDraft.offeringGroupIds"
-                                    optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                                    [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
-                                </p-multiSelect>
+                    <div *ngIf="mainDatas.field == 'offeringGroupIds'">
+                        <div class="input_icon"
+                            [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-multiSelect #itemdrop="ngModel" [maxSelectedLabels]="1"
+                                        [options]="offeringGroupDictionary" name="{{mainDatas.field}}"
+                                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.offeringGroupIds"
+                                        [(ngModel)]="closeTabService.calculationRequestDraft.offeringGroupIds"
+                                        optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                                        [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                                    </p-multiSelect>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{mainDatas.header}} را وارد نمایید
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'guildId'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-dropdown name="{{mainDatas.field}}" [options]="guildDictionary"
-                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.guildId"
-                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
-                                </p-dropdown>
+                    <div *ngIf="mainDatas.field == 'guildId'">
+                        <div class="input_icon"
+                            [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-dropdown #itemdrop="ngModel" name="{{mainDatas.field}}"
+                                        [options]="guildDictionary"
+                                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.guildId"
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{mainDatas.header}} را وارد نمایید
                             </div>
                         </div>
                     </div>
-                    <div class="input_icon" *ngIf="mainDatas.field == 'ownershipTypeId'">
-                        <i class="pi pi-bookmark _bookmark"></i>
-                        <div class="input_3">
-                            <div class="_key">{{mainDatas.header}}</div>
-                            <div class="_value">
-                                <p-dropdown name="{{mainDatas.field}}" [options]="ownershipTypeDictionary"
-                                    [(ngModel)]="closeTabService.flowRuleRegisteredEdit.ownershipTypeId"
-                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
-                                </p-dropdown>
+                    <div *ngIf="mainDatas.field == 'ownershipTypeId'">
+                        <div class="input_icon"
+                            [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <div class="_value">
+                                    <p-dropdown #itemdrop="ngModel" name="{{mainDatas.field}}"
+                                        [options]="ownershipTypeDictionary"
+                                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.ownershipTypeId"
+                                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{mainDatas.header}} را وارد نمایید
                             </div>
                         </div>
                     </div>
@@ -132,12 +201,20 @@
                     </ng-container>
                 </ng-template>
                 <ng-template #simpleText>
-                    <div class="input_icon">
+                    <div class="input_icon"
+                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
                         <i class="pi pi-bookmark _bookmark"></i>
                         <div class="input_3">
                             <div class="_key">{{mainDatas.header}}</div>
-                            <input [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
+                            <input #itemdrop="ngModel" [ngClass]="{'double_size':mainDatas.icon}" class="_value"
+                                name="{{mainDatas.field}}"
                                 [(ngModel)]="closeTabService.flowRuleRegisteredEdit[mainDatas.field]">
+                        </div>
+                    </div>
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                        <div *ngIf="itemdrop.errors?.['required']">
+                            <i class="pi pi-times"></i>
+                            {{mainDatas.header}} را وارد نمایید
                         </div>
                     </div>
                 </ng-template>
@@ -146,7 +223,7 @@
 
         <footer>
             <button type="submit" class="btn_1">
-                ویرایش انشعاب
+                مرحله بعد
                 <i class="pi pi-list"></i>
             </button>
         </footer>

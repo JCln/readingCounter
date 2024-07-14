@@ -12,6 +12,7 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./registered-edit.component.scss']
 })
 export class RegisteredEditComponent implements OnInit {
+  submitted: boolean = false;
   zoneDictionary: [];
   siphonDictionary: any[] = [];
   usageDictionary: [];
@@ -67,6 +68,13 @@ export class RegisteredEditComponent implements OnInit {
       return;
     }
     this.classWrapper();
+  }
+  nextPage() {
+    if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.flowRuleRegisteredEdit)) {
+      this.closeTabService.utilsService.routeToByUrl(EN_Routes.flowRuleGetRegisteredStepCalc);
+    } else {
+      this.submitted = true;
+    }
   }
 
 }
