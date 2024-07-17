@@ -23,7 +23,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     private jwtService: JwtService,
     private authService: AuthService,
-    private utilsService: UtilsService,
+    private utilsService: UtilsService
     // @Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number
   ) { }
 
@@ -87,10 +87,6 @@ export class InterceptorService implements HttpInterceptor {
       .pipe(
         catchError((error => {
           if (error instanceof HttpErrorResponse) {
-            // this.interactionService.$getShowExtraDialog().subscribe(res => {
-            //   if (res) {
-            //     this.interactionService.notShowExtraDialogAnymore();
-            //     console.log(res);
 
             if (error.status === ENClientServerErrors.cs401) {
               if (req.url.includes(EN_Routes.login)) {
@@ -105,7 +101,8 @@ export class InterceptorService implements HttpInterceptor {
                 // if user have logged in
                 const errTxt = error.error.message ? error.error.message : EN_Mess.access_denied401;
                 this.showDialog(errTxt);
-                this.authService.offlineLogout();
+                const returnUrl = this.utilsService.compositeService.getRouterUrl();
+                this.authService.offlineLogout(returnUrl);
               }
             }
             // system time

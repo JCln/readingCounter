@@ -11,7 +11,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class RegisteredExtrasComponent extends FactoryONE {
   offeringDictionary: any[] = [];
-  items: any = [];
+  items: any[] = [];
   extrasReq: any;
 
   constructor(
@@ -21,8 +21,11 @@ export class RegisteredExtrasComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInTime, this.closeTabService.calculationRequestDraft);
-    console.log(res);
+    // to do verification and post sth to extras datas
+    console.log(this.extrasReq);
+    console.log(this.items);
+    // const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInTime, this.closeTabService.calculationRequestDraft);
+    // console.log(res);
   }
   dictionaryWrapper = async () => {
     this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering(false);
@@ -32,7 +35,7 @@ export class RegisteredExtrasComponent extends FactoryONE {
     this.dictionaryWrapper();
   }
   addNewItem() {
-    this.items.push({ fromRate: null, toRate: this.offeringDictionary });
+    this.items.push({ fromRate: this.offeringDictionary, toRate: null });
   }
   deleteRate(index: number) {
     this.items.splice(index, 1);

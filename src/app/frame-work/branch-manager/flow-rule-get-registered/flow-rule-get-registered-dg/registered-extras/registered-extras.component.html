@@ -13,8 +13,9 @@
                     <div class="input_3">
                         <div class="_key">اقلام</div>
                         <div class="_value">
-                            <p-dropdown [name]="item[i]" [options]="offeringDictionary" [(ngModel)]="item.fromRate"
-                                placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                            <p-dropdown name="{{'offering'[i]}}" [options]="offeringDictionary"
+                                [(ngModel)]="item.fromRate" placeholder="انتخاب مورد" optionValue="id"
+                                optionLabel="title" filter="true">
                             </p-dropdown>
                         </div>
                     </div>
@@ -23,8 +24,7 @@
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
                         <div class="_key">مبلغ/ مقدار</div>
-                        <input #item="ngModel" [name]="item[i]" class="form-control" maxlength="6"
-                            [(ngModel)]="item.toRate" class="_value">
+                        <input name="{{'offeringvalue'[i]}}" maxlength="6" [(ngModel)]="item.toRate" class="_value">
                     </div>
                 </div>
 
@@ -33,12 +33,12 @@
                 </button>
             </div>
         </div>
-        <footer>
-            <button (click)="callAPI()" class="btn_1">
-                تایید
-                <i class="pi pi-check-square"></i>
-            </button>
-        </footer>
     </div>
+    <footer>
+        <button (click)="callAPI()" class="btn_1">
+            تایید
+            <i class="pi pi-check-square"></i>
+        </button>
+    </footer>
 
 </form>

@@ -43,6 +43,10 @@
 .btn_1 {
     // confirm button
     max-width: 100%;
+
+    @media (min-width: 550px) {
+        max-width: 19rem;
+    }
 }
 
 .main_title {
@@ -50,6 +54,12 @@
     justify-content: space-between;
     direction: rtl;
     margin: var(--font_s);
+    width: 100%;
+
+    @media (min-width: 550px) {
+        width: 100%;
+        min-width: 25rem;
+    }
 }
 
 ._time {
