@@ -19,6 +19,7 @@ export class InterceptorService implements HttpInterceptor {
   private readonly authorizationHeader = 'Authorization';
   private readonly bearer = `Bearer `;
   private readonly errorType = 'application/json';
+  private returnUrl: string = '';
 
   constructor(
     private jwtService: JwtService,
@@ -100,12 +101,16 @@ export class InterceptorService implements HttpInterceptor {
               else {
                 // if user have logged in
                 const errTxt = error.error.message ? error.error.message : EN_Mess.access_denied401;
-                this.showDialog(errTxt);
-                let returnUrl: string = '';
-                console.log(returnUrl);
-                returnUrl = this.utilsService.compositeService.getRouterUrl();
-                console.log(returnUrl);
-                this.authService.offlineLogout(returnUrl);
+                // if there return value no need to copy from router again
+                if (this.returnUrl.length === 0) {
+                  this.showDialog(errTxt);
+                  this.returnUrl = this.utilsService.compositeService.getRouterUrl();
+                }
+                // make returnUrl for next time single use. if no refresh has been happened
+                setTimeout(() => {
+                  this.returnUrl = '';
+                }, 1000);
+                this.authService.offlineLogout(this.returnUrl);
               }
             }
             // system time

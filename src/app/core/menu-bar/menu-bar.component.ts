@@ -44,6 +44,14 @@ export class MenuBarComponent {
   }
   emptyTheSearchInput() {
     this.searchItem = '';
+
+    this.currentRoute.forEach((aApp) => {
+      aApp.items.forEach((_item) => {
+        _item.subItems.forEach((_subItem) => {
+          _subItem.isOpen = false;
+        })
+      })
+    })
   }
   appClicked(item: any) {
     this.emptyTheSearchInput();
