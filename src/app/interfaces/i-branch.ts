@@ -164,6 +164,15 @@ export interface IBank {
     css: string,
     isEditing: boolean
 }
+export interface IAmountModifications {
+    offeringId: number,
+    amount: number
+}
+export interface IModification {
+    requestDraftId: number,
+    invoiceId: number,
+    amountModifications: IAmountModifications[]
+}
 export interface ITariffType {
     id: number,
     title: string,

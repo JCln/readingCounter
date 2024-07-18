@@ -544,6 +544,8 @@ export enum ENInterfaces {
     calculation = 'V1/Tariff/calculation',
     calculationByInterval = 'V1/calculation/ByInterval',
     calculationInTime = 'V1/calculation/InTime',
+    calculationAddModification = 'V1/calculation/AddModification',
+    calculationInstallment = 'V1/calculation/AddInstallment',
     tariffAllLazy = 'V1/Tariff/AllLazy',
     tariffAdd = 'V1/Tariff/Add',
     tariffEdit = 'V1/Tariff/Edit',

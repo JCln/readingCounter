@@ -36,6 +36,7 @@ export class RegisteredEditComponent implements OnInit {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftEdit, this.closeTabService.flowRuleRegisteredEdit);
       if (res) {
         this.closeTabService.calculationRequestDraft.requestDraftId = res.targetObject.id;
+        this.closeTabService.calculationModification.requestDraftId = res.targetObject.id;
         this.branchesService.utilsService.snackBarMessageSuccess(res.message);
       }
     }

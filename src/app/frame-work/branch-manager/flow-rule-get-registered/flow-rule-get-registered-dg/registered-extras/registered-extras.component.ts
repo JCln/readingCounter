@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IAmountModifications } from 'interfaces/i-branch';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -11,8 +13,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class RegisteredExtrasComponent extends FactoryONE {
   offeringDictionary: any[] = [];
-  items: any[] = [];
-  extrasReq: any;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -22,23 +22,30 @@ export class RegisteredExtrasComponent extends FactoryONE {
   }
   callAPI = async () => {
     // to do verification and post sth to extras datas
-    console.log(this.extrasReq);
-    console.log(this.items);
-    // const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInTime, this.closeTabService.calculationRequestDraft);
-    // console.log(res);
+    console.log(this.closeTabService.calculationModification);
+    if (this.branchesService.verificationService.registeredExtras(this.closeTabService.calculationModification)) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationAddModification, this.closeTabService.calculationModification);
+      console.log(res);
+      this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStepInstallment);
+    }
   }
   dictionaryWrapper = async () => {
     this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering(false);
   }
   classWrapper(): void {
     // if there is no data to request, route to first page which is edit step    
-    this.dictionaryWrapper();
+    if (this.branchesService.verificationService.registeredExtras(this.closeTabService.calculationModification)) {
+      this.dictionaryWrapper();
+    }
+    else {
+      this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStep);
+    }
   }
   addNewItem() {
-    this.items.push({ fromRate: this.offeringDictionary, toRate: null });
+    this.closeTabService.calculationModification.amountModifications.push({ offeringId: null, amount: null });
   }
   deleteRate(index: number) {
-    this.items.splice(index, 1);
+    this.closeTabService.calculationModification.amountModifications.splice(index, 1);
   }
 
 }

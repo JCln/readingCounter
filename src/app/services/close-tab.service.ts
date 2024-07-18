@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -156,6 +156,11 @@ export class CloseTabService {
   calculationRequestDraft: ICalculationRequestDraft = {
     requestDraftId: null,
     offeringGroupIds: []
+  }
+  calculationModification: IModification = {
+    requestDraftId: null,
+    invoiceId: 0,
+    amountModifications: [],
   }
   bank: IBank[] = [];
   tariffType: ITariffType[] = [];
