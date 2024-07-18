@@ -156,6 +156,7 @@ footer {
     text-align: right;
 }
 
+.installment-form,
 .location-form,
 .validation-form,
 .offering-group-form,
@@ -166,7 +167,8 @@ footer {
     justify-content: center;
 }
 
-.validation-form {
+.validation-form,
+.installment-form {
     ._desc {
         grid-template-columns: none;
     }
@@ -174,6 +176,10 @@ footer {
     .top_title {
         text-align: center;
     }
+}
+
+.installment-form {
+    direction: rtl;
 }
 
 .location_selected {

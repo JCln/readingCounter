@@ -480,6 +480,13 @@ export class VerificationService {
 
     return true;
   }
+  flowRuleInstallment = (body: IRequestDraft): boolean => {
+    // if (!MathS.isExactLengthYouNeed(body.co, ENRandomNumbers.ten)) {
+    //   this.utilsService.snackBarMessageWarn(EN_messages.invalidLength_postalCode);
+    //   return false;
+    // }
+    return true;
+  }
   requestDraftValidationBillId = (body: IRequestDraft): boolean => {
     if (MathS.isNull(body.billId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_neighbourBillId);
@@ -1496,7 +1503,7 @@ export class VerificationService {
       return false;
 
     return true;
-  }  
+  }
   masterValidation = (body: IFragmentMaster): boolean => {
     if (MathS.isNull(body.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);

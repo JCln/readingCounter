@@ -208,6 +208,7 @@ export enum EN_Routes {
     flowRuleGetRegisteredLazy = '/wr/branch/flowRuleRegisteredLazy',
     flowRuleGetRegisteredStep = '/wr/branch/flowRuleRegisteredLazy/steps/edit',
     flowRuleGetRegisteredStepCalc = '/wr/branch/flowRuleRegisteredLazy/steps/calculated',
+    flowRuleGetRegisteredStepReCalc = '/wr/branch/flowRuleRegisteredLazy/steps/reCalc',
     counterNumberChangeGetLazy = '/wr/branch/counterNumberChange',
 
 }

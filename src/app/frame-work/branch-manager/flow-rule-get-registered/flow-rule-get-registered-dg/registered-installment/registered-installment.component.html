@@ -1,19 +1,19 @@
-<form class="validation-form" #form="ngForm" (ngSubmit)="nextPage()">
+<form class="installment-form" #form="ngForm" (ngSubmit)="nextPage()">
     <h2 class="top_title">روش پرداخت را تعیین نمایید</h2>
-    <section class="order_by">
-        <div *ngFor="let orderType of paymentMethod">
-            <div class="p-field-radiobutton">
-                <p-radioButton name="orderByDate" [value]="orderType.isActive"
-                    [(ngModel)]="closeTabService._validationIsByPostalCode" [inputId]="orderType.id">
-                </p-radioButton>
-                <label [for]="orderType.id">{{orderType.title}}</label>
+    <div class="_desc form-group">
+        <div class="input_icon">
+            <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_3">
+                <div class="_key">روش پرداخت</div>
+                <div class="_value">
+                    <p-dropdown name="paymentMethod" [options]="paymentMethod" [(ngModel)]="_selectedPaymentMethod"
+                        placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true" (onClick)="showProperItems()">
+                    </p-dropdown>
+                </div>
             </div>
         </div>
-        <hr>
-    </section>
-    <div class="_desc form-group">
         <div *ngFor="let col of _selectColsPostal" [ngClass]="{'double_size':col.icon}"
-            [hidden]="!closeTabService._validationIsByPostalCode">
+            [hidden]="!_selectedPaymentMethod">
             <div class="input_icon"
                 [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
                 <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div *ngFor="let col of _selectColsBillId" [ngClass]="{'double_size':col.icon}"
-            [hidden]="closeTabService._validationIsByPostalCode">
+            [hidden]="_selectedPaymentMethod">
             <div class="input_icon"
                 [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
                 <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
