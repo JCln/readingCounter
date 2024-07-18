@@ -10,6 +10,7 @@ import { UtilsService } from 'services/utils.service';
 export class MenuBarComponent {
   currentRoute: any;
   @Output() routeClick = new EventEmitter<any>();
+  searchItem: string = '';
 
   constructor(
     private sideBarItemsService: SidebarItemsService,
@@ -41,7 +42,11 @@ export class MenuBarComponent {
       }
     }
   }
+  emptyTheSearchInput() {
+    this.searchItem = '';
+  }
   appClicked(item: any) {
+    this.emptyTheSearchInput();
     this.currentRoute.forEach((aApp) => {
       if (item.title !== aApp.title) {
         aApp.isOpen = false;
@@ -102,6 +107,32 @@ export class MenuBarComponent {
   backToModule(item: any) {
     let test = JSON.parse(JSON.stringify(this.currentRoute));
     this.currentRoute = this.doGatherCleanToBackToModule(test, item);
+  }
+  searchSubItems() {
+    if (this.searchItem.length === 0) {
+      this.currentRoute.forEach((aApp) => {
+        aApp.items.forEach((_item) => {
+          _item.subItems.forEach((_subItem) => {
+            _subItem.isOpen = false;
+          })
+        })
+      })
+    }
+    else {
+      this.currentRoute.forEach((aApp) => {
+        aApp.items.forEach((_item) => {
+          _item.subItems.forEach((_subItem) => {
+            if (_subItem.title.includes(this.searchItem)) {
+              _item.isOpen = true;
+              _subItem.isOpen = true;
+            }
+            else {
+              _subItem.isOpen = false;
+            }
+          })
+        })
+      })
+    }
   }
 
 }

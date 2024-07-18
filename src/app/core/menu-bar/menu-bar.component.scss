@@ -1,5 +1,6 @@
 @import 'variable';
 @import 'tooltip';
+@import 'input';
 
 .menu {
     --app-width: 9rem;
@@ -154,6 +155,39 @@
             height: 2.5rem;
             margin: auto;
         }
+    }
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .clear-filter {
+        width: 2rem;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+
+        i {
+            color: var(--primary_4);
+        }
+    }
+
+    .input_1 {
+        min-width: auto;
+    }
+
+    ._key {
+        min-width: 4rem;
+    }
+
+    ._value {
+        height: auto;
+    }
+
+    @media (max-width: 550px) {
+        display: none;
     }
 }
 
@@ -340,6 +374,36 @@
     @media (min-width:550px) {
         padding: 1rem;
     }
+}
+
+.modules_controller_onfilter {
+    overflow: auto;
+    width: 100%;
+    padding: 0rem;
+    margin-top: 1rem;
+
+    @media (min-width:550px) {
+        padding: 1rem;
+    }
+
+    .module_onfilter {
+        display: flex;
+    }
+
+    .controller_items {
+        // parent is flex so we can use flex configs
+        flex: 1;
+        flex-wrap: wrap;
+        min-width: fit-content;
+        flex-shrink: 0;
+        margin-bottom: 1px;
+    }
+}
+
+.controller_items_onfilter {
+    display: flex;
+    min-width: fit-content;
+    flex-wrap: wrap;
 }
 
 .active {

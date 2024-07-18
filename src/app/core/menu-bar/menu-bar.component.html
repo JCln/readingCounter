@@ -19,8 +19,23 @@
             </div>
         </div>
         <div class="main_section">
+            <div class="search">
+                <div class="input_icon">
+                    <i class="pi pi-search _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">جستجو</div>
+                        <div class="_value">
+                            <input class="input_1" placeholder="جستجو کنید" name="search" [(ngModel)]="searchItem"
+                                (input)="searchSubItems()">
+                        </div>
+                    </div>
+                    <div class="clear-filter" (click)="emptyTheSearchInput()">
+                        <i class="pi pi-times"></i>
+                    </div>
+                </div>
+            </div>
             <div class="modules">
-                <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen">
+                <ul *ngFor="let app of currentRoute" [hidden]="!app.isOpen || searchItem.trim().length > 0">
                     <div class="_breadcrumb" [hidden]="!app.isOpen">
                         <p>{{app.title}}</p>
                     </div>
@@ -44,10 +59,26 @@
                     </li>
                 </ul>
             </div>
-            <div class="modules_controller">
+            <div class="modules_controller" [hidden]="searchItem.trim().length > 0 && searchItem">
                 <div *ngFor="let app of currentRoute">
                     <div *ngFor="let item of app.items" [hidden]="!item.isOpen">
                         <div class="controller">
+                            <div class="controller_items" *ngFor="let subItem of item.subItems"
+                                [hidden]="!item.isOpen || !subItem.isOpen" [routerLink]="subItem.route"
+                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                                (click)="routeClicked()">
+                                <i class="controller_icons"
+                                    [ngClass]="subItem.cssClass.trim() ? subItem.cssClass : 'pi pi-bookmark'"></i>
+                                <p class="controller_text">{{subItem.title}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modules_controller_onfilter" [hidden]="searchItem.trim().length == 0 && !searchItem">
+                <div *ngFor="let app of currentRoute">
+                    <div class="module_onfilter" *ngFor="let item of app.items" [hidden]="!item.isOpen">
+                        <div class="controller_items_onfilter">
                             <div class="controller_items" *ngFor="let subItem of item.subItems"
                                 [hidden]="!item.isOpen || !subItem.isOpen" [routerLink]="subItem.route"
                                 routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"

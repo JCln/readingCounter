@@ -101,7 +101,10 @@ export class InterceptorService implements HttpInterceptor {
                 // if user have logged in
                 const errTxt = error.error.message ? error.error.message : EN_Mess.access_denied401;
                 this.showDialog(errTxt);
-                const returnUrl = this.utilsService.compositeService.getRouterUrl();
+                let returnUrl: string = '';
+                console.log(returnUrl);
+                returnUrl = this.utilsService.compositeService.getRouterUrl();
+                console.log(returnUrl);
                 this.authService.offlineLogout(returnUrl);
               }
             }
