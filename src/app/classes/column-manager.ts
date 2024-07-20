@@ -3574,7 +3574,7 @@ export class ColumnManager {
         { field: 'prePay', header: 'مبلغ پیش پرداخت', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },
     ]
     flowRuleInstallmentTwo: IObjectIteratation[] = [
-        { field: 'installmentCount', header: 'کلید تست', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },        
+        // { field: 'installmentCount', header: 'کلید تست', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },        
     ]
     requestDraftLocation: IObjectIteratation[] = [
         { field: 'provinceId', header: 'استان', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },

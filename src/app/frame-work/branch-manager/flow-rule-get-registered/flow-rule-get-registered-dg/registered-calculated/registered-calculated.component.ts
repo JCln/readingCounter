@@ -33,10 +33,10 @@ export class RegisteredCalculatedComponent extends FactoryONE {
       this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStep);
       return;
     }
-    console.log(this.closeTabService.requestDraftCalculationRes);
-    console.log(this.closeTabService.calculationRequestDraft);
+    console.log(this.closeTabService.flowRuleRegister.requestDraftId);
     this.dictionaryWrapper();
 
   }
+
 
 }

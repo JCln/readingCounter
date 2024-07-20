@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBank, IBranchState, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationInstallment, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -152,15 +152,26 @@ export class CloseTabService {
     customerTypeTitle: '',
     waterSourceTitle: '',
   };
+  flowRuleRegister = {
+    requestDraftId: null
+  }
   requestDraftCalculationRes: IRequestDraftCalculationRes[] = [];
   calculationRequestDraft: ICalculationRequestDraft = {
-    requestDraftId: null,
+    requestDraftId: this.flowRuleRegister.requestDraftId,
     offeringGroupIds: []
   }
   calculationModification: IModification = {
-    requestDraftId: null,
+    requestDraftId: this.flowRuleRegister.requestDraftId,
     invoiceId: 0,
     amountModifications: [],
+  }
+  calculationAddInstallment: ICalculationInstallment = {
+    requestDraftId: this.flowRuleRegister.requestDraftId,
+    invoiceId: 0,
+    schedulePaymentInput: {
+      inAdvancedPaymentPercentage: 100,
+      installmentNumber: 1
+    }
   }
   bank: IBank[] = [];
   tariffType: ITariffType[] = [];

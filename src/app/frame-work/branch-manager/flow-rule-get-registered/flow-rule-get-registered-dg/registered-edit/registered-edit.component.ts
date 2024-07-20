@@ -35,9 +35,11 @@ export class RegisteredEditComponent implements OnInit {
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.flowRuleRegisteredEdit)) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftEdit, this.closeTabService.flowRuleRegisteredEdit);
       if (res) {
-        this.closeTabService.calculationRequestDraft.requestDraftId = res.targetObject.id;
-        this.closeTabService.calculationModification.requestDraftId = res.targetObject.id;
+        console.log(this.closeTabService.flowRuleRegister.requestDraftId);
+        this.closeTabService.flowRuleRegister.requestDraftId = res.targetObject.id;
+        console.log(this.closeTabService.flowRuleRegister.requestDraftId);
         this.branchesService.utilsService.snackBarMessageSuccess(res.message);
+        this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStepCalculated);
       }
     }
   }

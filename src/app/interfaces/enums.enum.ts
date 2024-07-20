@@ -24,6 +24,8 @@ export enum EN_messages {
     notFoundDataToRegister = 'مقداری برای ثبت وجود ندارد',
     highLow100 = 'مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     userPass_empty = 'نام کاربری یا گذرواژه نمیتواند خالی باشد',
+    insertInAdvancedPaymentPercentage = 'مبلغ پیش پرداخت را وارد نمایید',
+    insertInstallmentNumber = 'تعداد اقساط را وارد نمایید',
     insertTwoStep = 'کد تایید را وارد نمایید',
     insertTwoStep2 = 'کد تایید اشتباه است',
     timoutInterval = 'زمان ارسال کد به اتمام رسید. لطفا مجددا تلاش نمایید.',

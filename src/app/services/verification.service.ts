@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBank, IBranchState, IClientAll, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IScheduledPaymentMethod, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationInstallment, IClientAll, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IScheduledPaymentMethod, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -480,11 +480,19 @@ export class VerificationService {
 
     return true;
   }
-  flowRuleInstallment = (body: IRequestDraft): boolean => {
-    // if (!MathS.isExactLengthYouNeed(body.co, ENRandomNumbers.ten)) {
-    //   this.utilsService.snackBarMessageWarn(EN_messages.invalidLength_postalCode);
-    //   return false;
-    // }
+  flowRuleInstallment = (body: ICalculationInstallment): boolean => {
+    if (MathS.isNull(body.requestDraftId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (MathS.isNull(body.schedulePaymentInput.inAdvancedPaymentPercentage)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertInAdvancedPaymentPercentage);
+      return false;
+    }
+    if (MathS.isNull(body.schedulePaymentInput.installmentNumber)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertInstallmentNumber);
+      return false;
+    }
     return true;
   }
   requestDraftValidationBillId = (body: IRequestDraft): boolean => {

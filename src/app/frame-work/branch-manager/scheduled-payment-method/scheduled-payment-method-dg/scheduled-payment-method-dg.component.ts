@@ -14,6 +14,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class ScheduledPaymentMethodDgComponent implements OnInit {
   schedulePaymentReq: IScheduledPaymentMethod = {
     id: 0,
+    isInstallment: false,
     title: '',
     isActive: true,
     isEditing: false

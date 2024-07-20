@@ -173,6 +173,15 @@ export interface IModification {
     invoiceId: number,
     amountModifications: IAmountModifications[]
 }
+export interface ICalculationSchedulePaymentInput {
+    installmentNumber: number,
+    inAdvancedPaymentPercentage: number
+}
+export interface ICalculationInstallment {
+    requestDraftId: number,
+    invoiceId: number,
+    schedulePaymentInput: ICalculationSchedulePaymentInput;
+}
 export interface ITariffType {
     id: number,
     title: string,
@@ -182,6 +191,7 @@ export interface ITariffType {
 export interface IScheduledPaymentMethod {
     id: number,
     title: string,
+    isInstallment: boolean,
     isActive: boolean,
     isEditing: boolean
 }

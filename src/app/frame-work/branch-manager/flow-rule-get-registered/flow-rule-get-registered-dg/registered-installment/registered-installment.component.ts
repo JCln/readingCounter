@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ENRandomNumbers } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
@@ -34,22 +35,23 @@ export class RegisteredInstallmentComponent extends FactoryONE {
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }
   insertSelectedColumns = () => {
-    this._selectColsBillId = this.branchesService.columnManager.getColumnsMenus(this._outputFileNameBillId);
-    this._selectColsPostal = this.branchesService.columnManager.getColumnsMenus(this._outputFileNamePostal);
+    if (this._selectedPaymentMethod.isInstallment) {
+      this._selectColsBillId = this.branchesService.columnManager.getColumnsMenus(this._outputFileNameBillId);
+      this._selectColsPostal = this.branchesService.columnManager.getColumnsMenus(this._outputFileNamePostal);
+    }
   }
   classWrapper = async () => {
-    this.insertSelectedColumns();
     this.dictionaryWrapper();
+    this.insertSelectedColumns();
   }
   async nextPage() {
-    console.log(this.closeTabService.requestDraftReq.postalCode);
-    console.log(this.closeTabService.requestDraftReq.billId);
-    if (this._selectedPaymentMethod) {
-      if (this.branchesService.verificationService.flowRuleInstallment(this.closeTabService.requestDraftReq)) {
-        // const req = { postalCode: this.closeTabService.requestDraftReq.postalCode };
+    console.log(this._selectedPaymentMethod.isInstallment);
+    // if isInstallment is true then do installment process
+    if (this._selectedPaymentMethod.isInstallment) {
+      if (this.branchesService.verificationService.flowRuleInstallment(this.closeTabService.calculationAddInstallment)) {
         // call api to complete available datas
-        // const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.CustomerLocationManagerGetPostalCode, req);
-        // console.log(res);
+        const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInstallment, this.closeTabService.calculationAddInstallment);
+        console.log(res);
 
         this.closeTabService.utilsService.routeToByUrl(EN_Routes.flowRuleGetRegisteredStepReCalc);
       } else {
@@ -57,19 +59,20 @@ export class RegisteredInstallmentComponent extends FactoryONE {
       }
     }
     else {
-      if (this.branchesService.verificationService.flowRuleInstallment(this.closeTabService.requestDraftReq)) {
-        // const req = { neighbourBillId: this.closeTabService.requestDraftReq.billId };
-        // const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.CustomerLocationManagerGetNeighbourBillId, req);
-        // console.log(res);
-
+      this.closeTabService.calculationAddInstallment.schedulePaymentInput.inAdvancedPaymentPercentage = ENRandomNumbers.oneHundred;
+      this.closeTabService.calculationAddInstallment.schedulePaymentInput.installmentNumber = ENRandomNumbers.one;
+      if (this.branchesService.verificationService.flowRuleInstallment(this.closeTabService.calculationAddInstallment)) {
+        const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInstallment, this.closeTabService.calculationAddInstallment);
+        console.log(res);
         this.closeTabService.utilsService.routeToByUrl(EN_Routes.flowRuleGetRegisteredStepReCalc);
       } else {
         this.submitted = true;
       }
     }
   }
-  showProperItems() {
-    // TODO: triggered proper items on click payment method
+  itemsChanged() {
+    // TODO: triggered proper items on click payment method    
+    this.insertSelectedColumns();
   }
 
 }
