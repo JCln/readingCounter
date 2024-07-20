@@ -44,9 +44,10 @@ export class MenuBarComponent {
   }
   emptyTheSearchInput() {
     this.searchItem = '';
-
     this.currentRoute.forEach((aApp) => {
       aApp.items.forEach((_item) => {
+        _item.isOpen = true;
+        _item.isInController = false;
         _item.subItems.forEach((_subItem) => {
           _subItem.isOpen = false;
         })
@@ -118,13 +119,7 @@ export class MenuBarComponent {
   }
   searchSubItems() {
     if (this.searchItem.length === 0) {
-      this.currentRoute.forEach((aApp) => {
-        aApp.items.forEach((_item) => {
-          _item.subItems.forEach((_subItem) => {
-            _subItem.isOpen = false;
-          })
-        })
-      })
+      this.emptyTheSearchInput();
     }
     else {
       this.currentRoute.forEach((aApp) => {
