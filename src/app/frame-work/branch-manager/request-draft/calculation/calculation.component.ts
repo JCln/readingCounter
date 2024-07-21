@@ -19,7 +19,7 @@ export class CalculationComponent extends FactoryONE {
     super();
   }
   callAPI = async () => {
-    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInTime, this.closeTabService.calculationRequestDraft);
+    const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInTime, this.closeTabService.flowRuleRegister);
     this.closeTabService.requestDraftCalculationRes = res;
   }
   dictionaryWrapper = async () => {
@@ -27,7 +27,7 @@ export class CalculationComponent extends FactoryONE {
   }
   classWrapper(): void {
     this.dictionaryWrapper();
-    console.log(this.closeTabService.calculationRequestDraft);
+    console.log(this.closeTabService.flowRuleRegister);
 
   }
 

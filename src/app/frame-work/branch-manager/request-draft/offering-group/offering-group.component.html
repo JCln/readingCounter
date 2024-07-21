@@ -10,7 +10,7 @@
                     <div class="_value">
                         <p-multiSelect #itemdrop="ngModel" [maxSelectedLabels]="1" [options]="offeringGroupDictionary"
                             name="offeringG" [(ngModel)]="closeTabService.requestDraftReq.offeringGroupIds"
-                            [(ngModel)]="closeTabService.calculationRequestDraft.offeringGroupIds" optionLabel="title"
+                            [(ngModel)]="closeTabService.flowRuleRegister.offeringGroupIds" optionLabel="title"
                             optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
                             placeholder="انتخاب مورد" [required]="col.isRequired? true : false">
                         </p-multiSelect>

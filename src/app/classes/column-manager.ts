@@ -3570,11 +3570,8 @@ export class ColumnManager {
         { field: 'postalCode', header: 'کد پستی', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },
     ]
     flowRuleInstallment: IObjectIteratation[] = [
-        { field: 'installmentCount', header: 'تعداد اقساط', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },
-        { field: 'prePay', header: 'مبلغ پیش پرداخت', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },
-    ]
-    flowRuleInstallmentTwo: IObjectIteratation[] = [
-        // { field: 'installmentCount', header: 'کلید تست', isSelected: false, isSelectedOrigin: false, isRequired: true, minLength: ENRandomNumbers.ten, maxLength: ENRandomNumbers.ten },        
+        { field: 'installmentNumber', header: 'تعداد اقساط', isSelected: false, isSelectedOrigin: false, isRequired: true, maxLength: ENRandomNumbers.three },
+        { field: 'inAdvancedPaymentPercentage', header: 'مبلغ پیش پرداخت', isSelected: false, isSelectedOrigin: false, isRequired: true, maxLength: ENRandomNumbers.ten },
     ]
     requestDraftLocation: IObjectIteratation[] = [
         { field: 'provinceId', header: 'استان', isSelected: false, isSelectedOrigin: false, isSelectOption: true, isRequired: true },

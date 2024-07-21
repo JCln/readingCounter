@@ -76,8 +76,6 @@ export class ConfirmationComponent extends FactoryONE {
   classWrapper = async () => {
     this.dictionaryWrapper();
     this.initMapMarkerExisted();
-    console.log(this.closeTabService.calculationRequestDraft);
-
   }
   dictionaryWrapper = async () => {
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();

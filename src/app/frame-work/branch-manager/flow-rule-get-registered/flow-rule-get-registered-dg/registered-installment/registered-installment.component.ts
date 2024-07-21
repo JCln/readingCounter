@@ -6,6 +6,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-registered-installment',
@@ -13,12 +14,17 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./registered-installment.component.scss']
 })
 export class RegisteredInstallmentComponent extends FactoryONE {
-  private readonly _outputFileNamePostal: string = 'flowRuleInstallment';
-  private readonly _outputFileNameBillId: string = 'flowRuleInstallmentTwo';
+  private readonly _outputFileName: string = 'flowRuleInstallment';
   ownershipTypeDictionary: IDictionaryManager[] = [];
   customerTypeDictionary: IDictionaryManager[] = [];
   paymentMethod: any[] = [];
-  _selectedPaymentMethod: any;
+  // default value of _selectedPaymentMethod is here
+  _selectedPaymentMethod = {
+    id: 2,
+    title: 'نقد',
+    isInstallment: false,
+    isActive: true
+  };
   _selectColsPostal: any = [];
   _selectColsBillId: any = [];
   submitted: boolean = false;
@@ -36,8 +42,7 @@ export class RegisteredInstallmentComponent extends FactoryONE {
   }
   insertSelectedColumns = () => {
     if (this._selectedPaymentMethod.isInstallment) {
-      this._selectColsBillId = this.branchesService.columnManager.getColumnsMenus(this._outputFileNameBillId);
-      this._selectColsPostal = this.branchesService.columnManager.getColumnsMenus(this._outputFileNamePostal);
+      this._selectColsPostal = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
     }
   }
   classWrapper = async () => {
@@ -47,27 +52,18 @@ export class RegisteredInstallmentComponent extends FactoryONE {
   async nextPage() {
     console.log(this._selectedPaymentMethod.isInstallment);
     // if isInstallment is true then do installment process
-    if (this._selectedPaymentMethod.isInstallment) {
-      if (this.branchesService.verificationService.flowRuleInstallment(this.closeTabService.calculationAddInstallment)) {
-        // call api to complete available datas
-        const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInstallment, this.closeTabService.calculationAddInstallment);
-        console.log(res);
-
-        this.closeTabService.utilsService.routeToByUrl(EN_Routes.flowRuleGetRegisteredStepReCalc);
-      } else {
-        this.submitted = true;
-      }
+    if (MathS.isNull(this._selectedPaymentMethod.isInstallment)) {
+      this.closeTabService.flowRuleRegister.schedulePaymentInput.inAdvancedPaymentPercentage = ENRandomNumbers.oneHundred;
+      this.closeTabService.flowRuleRegister.schedulePaymentInput.installmentNumber = ENRandomNumbers.one;
     }
-    else {
-      this.closeTabService.calculationAddInstallment.schedulePaymentInput.inAdvancedPaymentPercentage = ENRandomNumbers.oneHundred;
-      this.closeTabService.calculationAddInstallment.schedulePaymentInput.installmentNumber = ENRandomNumbers.one;
-      if (this.branchesService.verificationService.flowRuleInstallment(this.closeTabService.calculationAddInstallment)) {
-        const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInstallment, this.closeTabService.calculationAddInstallment);
-        console.log(res);
-        this.closeTabService.utilsService.routeToByUrl(EN_Routes.flowRuleGetRegisteredStepReCalc);
-      } else {
-        this.submitted = true;
-      }
+    if (this.branchesService.verificationService.flowRuleInstallment(this.closeTabService.flowRuleRegister)) {
+      // call api to complete available datas
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInstallment, this.closeTabService.flowRuleRegister);
+      console.log(res);
+
+      this.closeTabService.utilsService.routeToByUrl(EN_Routes.flowRuleGetRegisteredStepReCalc);
+    } else {
+      this.submitted = true;
     }
   }
   itemsChanged() {

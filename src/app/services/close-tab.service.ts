@@ -153,26 +153,16 @@ export class CloseTabService {
     waterSourceTitle: '',
   };
   flowRuleRegister = {
-    requestDraftId: null
-  }
-  requestDraftCalculationRes: IRequestDraftCalculationRes[] = [];
-  calculationRequestDraft: ICalculationRequestDraft = {
-    requestDraftId: this.flowRuleRegister.requestDraftId,
-    offeringGroupIds: []
-  }
-  calculationModification: IModification = {
-    requestDraftId: this.flowRuleRegister.requestDraftId,
+    requestDraftId: null,
+    offeringGroupIds: [],
     invoiceId: 0,
     amountModifications: [],
-  }
-  calculationAddInstallment: ICalculationInstallment = {
-    requestDraftId: this.flowRuleRegister.requestDraftId,
-    invoiceId: 0,
     schedulePaymentInput: {
       inAdvancedPaymentPercentage: 100,
       installmentNumber: 1
     }
   }
+  requestDraftCalculationRes: IRequestDraftCalculationRes[] = [];
   bank: IBank[] = [];
   tariffType: ITariffType[] = [];
   scheduledPaymentMethod: IScheduledPaymentMethod[] = [];

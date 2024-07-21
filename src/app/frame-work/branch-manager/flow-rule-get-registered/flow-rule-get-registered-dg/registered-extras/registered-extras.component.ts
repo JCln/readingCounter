@@ -22,9 +22,9 @@ export class RegisteredExtrasComponent extends FactoryONE {
   }
   callAPI = async () => {
     // to do verification and post sth to extras datas
-    console.log(this.closeTabService.calculationModification);
-    if (this.branchesService.verificationService.registeredExtras(this.closeTabService.calculationModification)) {
-      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationAddModification, this.closeTabService.calculationModification);
+    console.log(this.closeTabService.flowRuleRegister);
+    if (this.branchesService.verificationService.registeredExtras(this.closeTabService.flowRuleRegister)) {
+      const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationAddModification, this.closeTabService.flowRuleRegister);
       console.log(res);
       this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStepInstallment);
     }
@@ -34,7 +34,7 @@ export class RegisteredExtrasComponent extends FactoryONE {
   }
   classWrapper(): void {
     // if there is no data to request, route to first page which is edit step    
-    if (this.branchesService.verificationService.registeredExtras(this.closeTabService.calculationModification)) {
+    if (this.branchesService.verificationService.registeredExtras(this.closeTabService.flowRuleRegister)) {
       this.dictionaryWrapper();
     }
     else {
@@ -42,10 +42,10 @@ export class RegisteredExtrasComponent extends FactoryONE {
     }
   }
   addNewItem() {
-    this.closeTabService.calculationModification.amountModifications.push({ offeringId: null, amount: null });
+    this.closeTabService.flowRuleRegister.amountModifications.push({ offeringId: null, amount: null });
   }
   deleteRate(index: number) {
-    this.closeTabService.calculationModification.amountModifications.splice(index, 1);
+    this.closeTabService.flowRuleRegister.amountModifications.splice(index, 1);
   }
 
 }
