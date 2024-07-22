@@ -708,7 +708,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_familyCount);
       return false;
     }
-    if (MathS.isNull(body.otherArea)) {
+    if (MathS.isNullZero(body.otherArea)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_otherArea);
       return false;
     }

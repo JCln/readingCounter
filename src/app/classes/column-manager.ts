@@ -3429,7 +3429,7 @@ export class ColumnManager {
     ]
     flowRuleGetRegisteredStepperEditColumns: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
-        { field: 'offeringGroupIds', header: 'اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'offeringGroupIds', header: 'خدمات', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'nationalId', header: 'کد ملی', isSelected: true, isSelectedOrigin: true, enableTooltip: true },
         { field: 'postalCode', header: 'کد پستی', isSelected: true, isSelectedOrigin: true },
         { field: 'mobiles', header: 'موبایل/ها', isSelected: true, isSelectedOrigin: true, enableTooltip: true },

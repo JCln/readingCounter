@@ -593,6 +593,6 @@ export enum ENInterfaces {
 
     CustomerLocationManagerGetPostalCode = 'V1/FlowRule/GetByPostalCode',
     CustomerLocationManagerGetNeighbourBillId = 'V1/FlowRule/GetByNeighbourBillId',
-    flowRequestGetRegistered = 'V1/FlowRule/GetRegistered',
+    flowRequestGetRegistered = 'V1/FlowRequest/GetRegistered',
 
 }

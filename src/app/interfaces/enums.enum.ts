@@ -187,7 +187,7 @@ export enum EN_messages {
     insert_domesticCount = 'تعداد مسکونی را وارد نمایید',
     insert_commercialArea = 'منطقه تجاری را وارد نمایید',
     insert_commercialCount = 'تعداد تجاری را وارد نمایید',
-    insert_otherArea = 'سایر مناطق را وارد نمایید',
+    insert_otherArea = 'عرصه سایر را وارد نمایید',
     insertـownershipTypeId = 'نوع مالکیت را وارد نمایید',
     insertـbranchStateId = 'وضعیت انشعاب را وارد نمایید',
     insertـcustomerTypeId = 'نوع اشتراک را وارد نمایید',
