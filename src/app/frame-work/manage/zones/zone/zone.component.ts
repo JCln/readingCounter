@@ -19,6 +19,7 @@ import { MathS } from 'src/app/classes/math-s';
 export class ZoneComponent extends FactoryONE {
   regionDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IZoneManager; } = {};
+  shouldActive: boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -59,10 +60,14 @@ export class ZoneComponent extends FactoryONE {
     this.insertToAuxZoneid();
     this.callDictionaries();
   }
+  getUserRole = (): void => {
+    this.shouldActive = this.sectorsManagerService.utilsService.getIsAdminRole();
+  }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForZone)) {
       this.callAPI();
     }
+    this.getUserRole();
     this.callDictionaries();
   }
   removeRow = async (rowDataAndIndex: object) => {

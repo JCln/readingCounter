@@ -27,6 +27,7 @@ export interface IZoneManager {
     toEshterak: string,
     fromPostalCode: string,
     toPostalCode: string,
+    isPermitted: boolean
 }
 export interface IZoneBoundManager {
     id: number;

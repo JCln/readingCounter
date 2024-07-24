@@ -69,6 +69,7 @@
         </div>
 
         <mat-checkbox formControlName="isMetro">شهری</mat-checkbox>
+        <mat-checkbox *ngIf="shouldActive" formControlName="isPermitted">مجوز</mat-checkbox>
 
     </main>
 

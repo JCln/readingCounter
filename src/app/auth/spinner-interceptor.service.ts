@@ -22,28 +22,6 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     private utilsService: UtilsService
   ) { }
 
-  accessDenied_403 = async () => {
-    const config = {
-      messageTitle: EN_Mess.youHaveNotAccess,
-      text: EN_Mess.youHaveNotAccessMsg,
-      minWidth: '21rem',
-      isInput: false,
-      isImportant: true,
-      icon: 'pi pi-ban'
-    }
-    await this.utilsService.primeConfirmDialog(config);
-  }
-  accessDenied_402 = async (error: string) => {//License
-    const config = {
-      messageTitle: error,
-      minWidth: '19rem',
-      isInput: false,
-      isDelete: true,
-      icon: 'pi pi-credit-card',
-      disableClose: false,
-    }
-    await this.utilsService.firstConfirmDialog(config);
-  }
   showSpinnerConsiderSpecialRoutes = (): boolean => {
     const url = this.utilsService.compositeService.getRouterUrl();
     if (url === EN_Routes.wrdb)
@@ -89,9 +67,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             switch (error.status) {
               // License
               case ENClientServerErrors.cs402:
-                this.accessDenied_402(error.error.message);
+                break;
               case ENClientServerErrors.cs403:
-                this.accessDenied_403();
                 break;
               case ENClientServerErrors.cs404:
                 if (messageText)

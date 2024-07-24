@@ -1,7 +1,7 @@
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForZone" 
     [_checkUpName]="'addItem'"
-    [_outputFileName]="'zone'"
+    [_outputFileName]="shouldActive ? 'zone': 'UnPermissionZone'"
     [_dictionaryName]="'dynamicId'"
     [_sessionName]="'zone-session'"
     [_outputEnabled]= false    

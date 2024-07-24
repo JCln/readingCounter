@@ -2085,6 +2085,17 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'fromPostalCode', header: 'از کد پستی', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'toPostalCode', header: 'تا کد پستی', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'isPermitted', header: 'مجوز', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+    ]
+    UnPermissionZone: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'dynamicId', header: 'منطقه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'isMetro', header: 'شهری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'fromPostalCode', header: 'از کد پستی', isSelected: true, isSelectedOrigin: true, ltr: true },
+        { field: 'toPostalCode', header: 'تا کد پستی', isSelected: true, isSelectedOrigin: true, ltr: true }
     ]
     zoneBound: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

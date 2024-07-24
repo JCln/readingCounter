@@ -13,6 +13,7 @@ import { SectorsManagerService } from 'services/sectors-manager.service';
 export class ZoneAddDgComponent {
   selectedValue: string;
   form: FormGroup;
+  shouldActive: boolean = false;
 
   constructor(
     fb: FormBuilder,
@@ -31,6 +32,7 @@ export class ZoneAddDgComponent {
       toPostalCode: data.toPostalCode,
       fromPostalCode: data.fromPostalCode,
       isMetro: true,
+      isPermitted: true,
       logicalOrder: ['']
     })
   }
@@ -44,6 +46,9 @@ export class ZoneAddDgComponent {
       this.sectorsManagerService.dictionaryWrapperService.cleanSingleDictionary('zoneDictionary');
       this.dialogRef.close(this.form.value);
     }
+  }
+  getUserRole = (): void => {
+    this.shouldActive = this.sectorsManagerService.utilsService.getIsAdminRole();
   }
   close() {
     this.dialogRef.close();

@@ -40,6 +40,28 @@ export class InterceptorService implements HttpInterceptor {
     }
     await this.utilsService.primeConfirmDialog(config);
   }
+  accessDenied_402 = async (error: string) => {//License
+    const config = {
+      messageTitle: error,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true,
+      icon: 'pi pi-credit-card',
+      disableClose: false,
+    }
+    await this.utilsService.firstConfirmDialog(config);
+  }
+  accessDenied_403 = async () => {
+    const config = {
+      messageTitle: EN_Mess.youHaveNotAccess,
+      text: EN_Mess.youHaveNotAccessMsg,
+      minWidth: '21rem',
+      isInput: false,
+      isImportant: true,
+      icon: 'pi pi-ban'
+    }
+    await this.utilsService.primeConfirmDialog(config);
+  }
   accessDeniedSpecial = async (message: string) => {
     const config = {
       messageTitle: message,
@@ -112,6 +134,12 @@ export class InterceptorService implements HttpInterceptor {
                 }, 1000);
                 this.authService.offlineLogout(this.returnUrl);
               }
+            }
+            if (error.status === ENClientServerErrors.cs402) {
+              this.accessDenied_402(error.error.message);
+            }
+            if (error.status === ENClientServerErrors.cs403) {
+              this.accessDenied_403();
             }
             // system time
             if (error.status === ENClientServerErrors.cs428) {
