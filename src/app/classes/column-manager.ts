@@ -3086,7 +3086,7 @@ export class ColumnManager {
         { field: 'entityTitle', header: 'عنوان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
         { field: 'operationTitle', header: 'عملیات', isSelected: true, isSelectedOrigin: true, type: 'texture' },
         { field: 'ip', header: 'IP', isSelected: true, isSelectedOrigin: true, type: 'texture' },
-        { field: 'insertDateTime', header: 'تاریخ/زمان', isSelected: true, isSelectedOrigin: true, type: 'texture' },
+        { field: 'insertDateTime', header: 'تاریخ/زمان', isSelected: true, isSelectedOrigin: true, isSelectOption: true, type: 'texture' },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true, isSelectedOrigin: true, type: 'texture' },
         { field: 'insertTime', header: 'زمان', isSelected: false, isSelectedOrigin: false, type: 'texture' },
         { field: 'browserInfo', header: 'اطلاعات مرورگر', isSelected: true, isSelectedOrigin: true, type: 'texture' },
