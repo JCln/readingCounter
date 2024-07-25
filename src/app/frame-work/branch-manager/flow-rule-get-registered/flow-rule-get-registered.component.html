@@ -49,13 +49,31 @@
             </tr>
             <tr>
                 <th class="__headers" pReorderableColumn *ngFor="let col of _selectedColumns">
-
                     <p-columnFilter *ngIf="col?.isBoolean && col?.type !== 'disabled'" type="boolean"
-                        field="{{col.field}}"></p-columnFilter>
+                        field="{{col.field}}">
+                    </p-columnFilter>
 
                     <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption && col?.type !== 'disabled'"
-                        [type]="col.type" [matchMode]="col.matchMode" field="{{col.field}}">
+                        [type]="col.type == 'numeric'? 'numeric': 'text'"
+                        [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
                         {{col.type}}
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="!col?.isBoolean && col.isSelectOption && col.field == 'usageId'"
+                        field="usage" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false"
+                        [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [maxSelectedLabels]="1"
+                                [ngModel]="closeTabService.flowRuleGetRegisteredLazyReq.multiSelectkarbariCode"
+                                [options]="usageDictionary" optionLabel="title" optionValue="id" [filter]="true"
+                                showClear="true" placeholder="انتخاب کنید"
+                                (onChange)="changedFilterDropdowns($event.value , 'multiSelectkarbariCode' )">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <span class="ml-1">{{option.title}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
                     </p-columnFilter>
 
                 <th pReorderableColumn class="__icon-columns" *ngFor="let item of _numberOfExtraColumns">

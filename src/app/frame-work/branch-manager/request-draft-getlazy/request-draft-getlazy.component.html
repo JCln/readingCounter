@@ -51,10 +51,12 @@
                 <th class="__headers" pReorderableColumn *ngFor="let col of _selectedColumns">
 
                     <p-columnFilter *ngIf="col?.isBoolean && col?.type !== 'disabled'" type="boolean"
-                        field="{{col.field}}"></p-columnFilter>
+                        field="{{col.field}}">
+                    </p-columnFilter>
 
                     <p-columnFilter *ngIf="!col?.isBoolean && !col.isSelectOption && col?.type !== 'disabled'"
-                        [type]="col.type" [matchMode]="col.matchMode" field="{{col.field}}">
+                        [type]="col.type == 'numeric'? 'numeric': 'text'"
+                        [matchMode]="col.type == 'numeric'? 'equals': 'contains'" field="{{col.field}}">
                         {{col.type}}
                     </p-columnFilter>
 

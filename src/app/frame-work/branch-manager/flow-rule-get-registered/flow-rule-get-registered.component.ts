@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { EN_messages, ENPrimeNGTranslator } from 'interfaces/enums.enum';
 import { IRequestDraft } from 'interfaces/i-branch';
-import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { BranchesService } from 'services/branches.service';
 import { BrowserStorageService } from 'services/browser-storage.service';
@@ -14,7 +14,7 @@ import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { RequestDraftDgComponent } from '../request-draft-getlazy/request-draft-dg/request-draft-dg.component';
 import { Table } from 'primeng/table';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
 import { EN_Routes } from 'interfaces/routes.enum';
 
 @Component({
@@ -28,7 +28,7 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
   @ViewChild(Table) datatableG: Table;
   hasFiltersInTable: boolean = false;
   zoneDictionary: [];
-  usageDictionary: [];
+  usageDictionary: IDictionaryManager[];
   branchDiameterDictionary: [];
   guildDictionary: [];
   ownershipTypeDictionary: [];
@@ -56,6 +56,7 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
     public branchesService: BranchesService,
+    public config: PrimeNGConfig,
   ) {
     super(dialogService, listManagerService);
   }
@@ -110,6 +111,9 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
     if (event.sortField == '_defaultSortOrder') {
       event.sortField = '';
     }
+    if (event.filters.hasOwnProperty('usageId'))
+      event.filters['usageId'][0].value = this.closeTabService.flowRuleGetRegisteredLazyReq.multiSelectkarbariCode.length > 0 ? this.closeTabService.flowRuleGetRegisteredLazyReq.multiSelectkarbariCode : null;
+
 
     this.updateOnChangedCounterState(event);
   }
@@ -195,6 +199,13 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
   }
   ngAfterViewInit(): void {
     this.hasFilters();
+    this.setTraslateToPrimeNgTable();
+  }
+  setTraslateToPrimeNgTable = () => {
+    this.config.setTranslation(ENPrimeNGTranslator);
+  }
+  changedFilterDropdowns(eventValue: any, elementName: string) {
+    this.closeTabService.flowRuleGetRegisteredLazyReq[elementName] = eventValue;
   }
   routeToCalculationSteps(dataSource: any) {
     console.log(dataSource);

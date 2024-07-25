@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
+import { EN_messages, ENPrimeNGTranslator } from 'interfaces/enums.enum';
 import { IRequestDraft } from 'interfaces/i-branch';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
@@ -55,13 +55,13 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
     public browserStorageService: BrowserStorageService,
     public profileService: ProfileService,
     public branchesService: BranchesService,
+    public config: PrimeNGConfig,
   ) {
     super(dialogService, listManagerService);
   }
   updateOnChangedCounterState = async (event: any) => {
     this.closeTabService.requestDraftLazy = await this.listManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftGetLazy, event);
     this.totalRecords = this.closeTabService.requestDraftLazy.totalRecords;
-
   }
   dictionaryWrapper = async () => {
     this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.offeringAllInGroup, this.branchesService.utilsService.getRequestDraftIds().requestDraft);
@@ -83,6 +83,7 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
     }
     this._selectedColumns = this.listManagerService.columnManager.customizeSelectedColumns(this._selectCols);
     this.dictionaryWrapper();
+    this.setTraslateToPrimeNgTable();
   }
   refreshTable = () => {
     this.datatableG.onLazyLoad.emit({
@@ -184,6 +185,9 @@ export class RequestDraftGetlazyComponent extends AllListsFactory implements Aft
       if (res)
         this.refreshTable();
     });
+  }
+  setTraslateToPrimeNgTable = () => {
+    this.config.setTranslation(ENPrimeNGTranslator);
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);

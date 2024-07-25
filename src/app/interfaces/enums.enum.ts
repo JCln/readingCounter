@@ -376,6 +376,7 @@ export enum EN_messages {
     browserSupport_warn = 'برای پشتیبانی بهتر، مرورگر',
 }
 export enum ENPrimeNGTranslator {
+    noFilter = 'حذف فیلتر',
     accept = 'تایید',
     reject = 'بازگشت',
     startsWith = ' شروع با',
@@ -753,7 +754,8 @@ export enum ENEssentialsToSave {
     flowState = "flowState",
     flowRule = "flowRule",
     flowRuleReq = "flowRuleReq",
-    flowRuleGetRegisteredLazy = "flowRuleGetRegisteredLazy"
+    flowRuleGetRegisteredLazy = "flowRuleGetRegisteredLazy",
+    flowRuleGetRegisteredLazyReq = "flowRuleGetRegisteredLazyReq"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
