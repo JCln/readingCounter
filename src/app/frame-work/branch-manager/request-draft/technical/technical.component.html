@@ -3,10 +3,15 @@
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
             <ng-container *ngIf="col.isSelectOption;else simpleInput">
-                <div *ngIf="col.field == 'usageId'">
-                    <div class="input_icon"
-                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                        <i class="pi pi-bookmark _bookmark"></i>
+                <div *ngIf="col.field == 'usageId'" class="tooltip">
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark" [ngClass]="{
+                             'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted,
+                             'input_bookmark_valid':itemdrop.valid,
+                             'correct':itemdrop.valid && (itemdrop.dirty || itemdrop.touched)
+                            }
+                             ">
+                        </i>
                         <div class="input_3">
                             <div class="_key">کاربری</div>
                             <div class="_value">
@@ -17,18 +22,22 @@
                                 </p-dropdown>
                             </div>
                         </div>
-                    </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
-                        <div *ngIf="itemdrop.errors?.['required']">
-                            <i class="pi pi-times"></i>
-                            {{col.header}} را وارد نمایید
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
+                            class="tooltip_text_bottom icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                <p>{{col.header}} را وارد نمایید</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div *ngIf="col.field == 'branchDiameterId'">
-                    <div class="input_icon"
-                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                        <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark" [ngClass]="{
+                                'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted,
+                                 'input_bookmark_valid':itemdrop.valid
+                                }">
+                        </i>
                         <div class="input_3">
                             <div class="_key">قطر</div>
                             <div class="_value">
@@ -41,17 +50,19 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
-                        <div *ngIf="itemdrop.errors?.['required']">
-                            <i class="pi pi-times"></i>
-                            {{col.header}} را وارد نمایید
+                    <div class="tooltip_text_bottom">
+                        <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                            <div *ngIf="itemdrop.errors?.['required']">
+                                <i class="pi pi-times"></i>
+                                {{col.header}} را وارد نمایید
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="col.field == 'siphonId'">
-                    <div class="input_icon"
-                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                        <i class="pi pi-bookmark _bookmark"></i>
+                <div *ngIf="col.field == 'siphonId'" class="tooltip">
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"
+                            [ngClass]="{'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_bookmark_valid':itemdrop.valid}"></i>
                         <div class="input_3">
                             <div class="_key">سیفون</div>
                             <div class="_value">
@@ -63,17 +74,18 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
+                        class="tooltip_text_bottom icon_validation alert">
                         <div *ngIf="itemdrop.errors?.['required']">
                             <i class="pi pi-times"></i>
                             {{col.header}} را وارد نمایید
                         </div>
                     </div>
                 </div>
-                <div *ngIf="col.field == 'guildId'">
-                    <div class="input_icon"
-                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                        <i class="pi pi-bookmark _bookmark"></i>
+                <div *ngIf="col.field == 'guildId'" class="tooltip">
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"
+                            [ngClass]="{'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_bookmark_valid':itemdrop.valid}"></i>
                         <div class="input_3">
                             <div class="_key">صنف</div>
                             <div class="_value">
@@ -85,17 +97,18 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
+                        class="tooltip_text_bottom icon_validation alert">
                         <div *ngIf="itemdrop.errors?.['required']">
                             <i class="pi pi-times"></i>
                             {{col.header}} را وارد نمایید
                         </div>
                     </div>
                 </div>
-                <div *ngIf="col.field == 'branchStateId'">
-                    <div class="input_icon"
-                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                        <i class="pi pi-bookmark _bookmark"></i>
+                <div *ngIf="col.field == 'branchStateId'" class="tooltip">
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"
+                            [ngClass]="{'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_bookmark_valid':itemdrop.valid}"></i>
                         <div class="input_3">
                             <div class="_key">وضعیت انشعاب</div>
                             <div class="_value">
@@ -107,17 +120,18 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
+                        class="tooltip_text_bottom icon_validation alert">
                         <div *ngIf="itemdrop.errors?.['required']">
                             <i class="pi pi-times"></i>
                             {{col.header}} را وارد نمایید
                         </div>
                     </div>
                 </div>
-                <div *ngIf="col.field == 'waterSourceId'">
-                    <div class="input_icon"
-                        [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                        <i class="pi pi-bookmark _bookmark"></i>
+                <div *ngIf="col.field == 'waterSourceId'" class="tooltip">
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"
+                            [ngClass]="{'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_bookmark_valid':itemdrop.valid}"></i>
                         <div class="input_3">
                             <div class="_key">منبع آب</div>
                             <div class="_value">
@@ -129,7 +143,8 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
+                        class="tooltip_text_bottom icon_validation alert">
                         <div *ngIf="itemdrop.errors?.['required']">
                             <i class="pi pi-times"></i>
                             {{col.header}} را وارد نمایید
@@ -162,9 +177,14 @@
                 </div>
             </ng-container>
             <ng-template #simpleInput>
-                <div class="input_icon"
-                    [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
-                    <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark" [ngClass]="{
+                        special_input: col.borderize,
+                        'input_bookmark': item.invalid && (item.dirty || item.touched) || submitted,                        
+                        'input_bookmark_valid':item.valid,
+                        'correct':item.valid && (item.dirty || item.touched)
+                        }">
+                    </i>
                     <div class="input_3">
                         <div class="_key">{{col.header}}</div>
                         <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field"
@@ -173,17 +193,17 @@
                             [readonly]="col.readonly" maxlength="{{col.maxLength}}" class="_value">
                     </div>
                 </div>
-                <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
-                    <i class="pi pi-check-square"></i>
-                </div>
-                <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
-                    <div *ngIf="item.errors?.['required']">
-                        <i class="pi pi-times"></i>
-                        {{col.header}} را وارد نمایید
-                    </div>
-                    <div *ngIf="item.errors?.['minlength']">
-                        <i class="pi pi-times"></i>
-                        حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                <div class="tooltip">
+                    <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted"
+                        class="icon_validation alert">
+                        <div *ngIf="item.errors?.['required']">
+                            <i class="pi pi-times"></i>
+                            {{col.header}} را وارد نمایید
+                        </div>
+                        <div *ngIf="item.errors?.['minlength']">
+                            <i class="pi pi-times"></i>
+                            حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                        </div>
                     </div>
                 </div>
             </ng-template>

@@ -4,6 +4,11 @@
 @import '_mat';
 @import 'tooltip';
 
+// may have bugs
+.tooltip {
+    position: static;
+    display: inherit;
+}
 
 ._req_content {
     display: grid;
@@ -92,21 +97,12 @@ footer {
     div {
         display: flex;
         align-items: center;
+        font-weight: 600;
     }
 }
 
 .alert {
     color: var(--red_500);
-}
-
-.correct {
-    i {
-        color: var(--green_500);
-        outline: 1px solid var(--green_500);
-        font-size: 1.3rem;
-        background: var(--green_500);
-        color: var(--white);
-    }
 }
 
 .input_outline {
@@ -117,6 +113,24 @@ footer {
 .input_outline_valid {
     outline: transparent;
     border-radius: $border_7;
+}
+
+.input_icon {
+    .input_bookmark {
+        color: red;
+    }
+
+    .input_bookmark_valid {
+        color: var(--input_icon);
+    }
+
+    .correct {
+        color: var(--green_500);
+    }
+}
+
+.correct {
+    color: var(--green_500);
 }
 
 .map-frame {

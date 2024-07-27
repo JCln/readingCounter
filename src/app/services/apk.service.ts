@@ -1,7 +1,7 @@
 import { AjaxReqWrapperService } from './ajax-req-wrapper.service';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
+import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
 import { Observable } from 'rxjs/internal/Observable';
 import { UtilsService } from 'services/utils.service';
 
@@ -48,6 +48,17 @@ export class ApkService {
     }
     return true;
   }
+  isValidAPKSize = (): boolean => {
+    if (this.fileForm[0].size / ENRandomNumbers.oneK > ENRandomNumbers.twentyFiveK) {
+      this.utilsService.snackBarMessageWarn(EN_messages.entityTooLarge);
+      return false;
+    }
+    if (this.fileForm[0].size / ENRandomNumbers.oneK < ENRandomNumbers.sevenK) {
+      this.utilsService.snackBarMessageWarn(EN_messages.entityTooSmall);
+      return false;
+    }
+    return true;
+  }
   vertification = (): boolean => {
     if (!this.isNull())
       return false;
@@ -55,6 +66,9 @@ export class ApkService {
       return false;
     if (!this.isAPK())
       return false;
+    if (!this.isValidAPKSize())
+      return false;
+
     return true;
   }
   checkVertitication = (filesList: FileList, data: any): boolean => {

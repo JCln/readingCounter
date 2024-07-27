@@ -56,9 +56,11 @@ export class MenuBarComponent {
   }
   appClicked(item: any) {
     this.emptyTheSearchInput();
+    item.cssClass = 'fa fa-folder-open-o';
     this.currentRoute.forEach((aApp) => {
       if (item.title !== aApp.title) {
         aApp.isOpen = false;
+        aApp.cssClass = 'pi pi-folder';
       }
       else {
         aApp.isOpen = true;

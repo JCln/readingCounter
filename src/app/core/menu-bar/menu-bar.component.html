@@ -4,7 +4,7 @@
             <ul>
                 <li *ngFor="let app of currentRoute" (click)="appClicked(app)" routerLinkActive="active"
                     #rla="routerLinkActive">
-                    <i class="icons" [ngClass]="rla.isActive? 'fa fa-folder-open-o': 'pi pi-folder'"></i>
+                    <i class="icons {{app.cssClass? app.cssClass : 'pi pi-folder'}}"></i>
                     <p class="app_text">{{app.title}}</p>
                     <div *ngFor="let item of app.items" [hidden]="true">
                         <div *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"

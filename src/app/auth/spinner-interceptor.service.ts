@@ -88,6 +88,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               case ENClientServerErrors.cs410:
                 this.utilsService.snackWrapperService.openSnackBar(EN_Mess.dataNotFoundOrDeleted, ENSnackBarColors.danger);
                 break;
+              case ENClientServerErrors.cs413:
+                this.utilsService.snackWrapperService.openSnackBar(EN_Mess.entityTooLarge, ENSnackBarColors.danger);
+                break;
               case ENClientServerErrors.cs422:
                 this.utilsService.snackWrapperService.openSnackBar(messageText, ENSnackBarColors.danger);
                 break;

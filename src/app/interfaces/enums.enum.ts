@@ -361,6 +361,8 @@ export enum EN_messages {
     toReading = 'علت بازگشت به درحال قرائت',
     reason_toOffloaded = 'علت بازگشت به بارگذاری شده',
     toPrevious = 'علت بازگشت به مرحله قبلی',
+    entityTooLarge = 'حجم فایل انتخابی از مقدار مجاز بیشتر است',
+    entityTooSmall = 'حجم فایل انتخابی از مقدار مجاز کمتر است',
 
     broadTitle1 = 'قطع سامانه',
     broadTitle2 = 'رفرش صفحه',
@@ -832,6 +834,7 @@ export enum ENRandomNumbers {
     sixteen = 16,
     eighteen = 18,
     twenty = 20,
+    twentyFive = 25,
     thirdy = 30,
     forthy = 40,
     fifty = 50,
@@ -839,6 +842,9 @@ export enum ENRandomNumbers {
     oneHundred = 100,
     oneHundredAndTwenty = 120,
     twoHundred = 200,
+    oneK = 1024,
+    twentyFiveK = 25600,
+    sevenK = 7168,
 }
 export interface ITimesType {
     jalaliDay: string,
@@ -1071,7 +1077,8 @@ export enum EN_Mess {
     dataNotFoundOrDeleted = 'چنین آیتمی پیدا نشد، یا قبلاً حذف شده است',
     checkNetwork = 'از دسترسی به شبکه اطمینان حاصل نمایید',
     serviceError = 'خطای سرویس دهنده',
-    notResponse = 'پاسخی دریافت نشد'
+    notResponse = 'پاسخی دریافت نشد',
+    entityTooLarge = 'حجم فایل انتخابی مجاز نیست'
 }
 export enum ENGroupByNames {
     selectedAggregateSimpleSearch = 'selectedAggregateSimpleSearch',
