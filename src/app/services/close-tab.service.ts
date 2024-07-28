@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBank, IBranchState, ICalculationInstallment, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationInstallment, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITag, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource, IZoneConstants } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -164,6 +164,8 @@ export class CloseTabService {
   }
   requestDraftCalculationRes: IRequestDraftCalculationRes[] = [];
   bank: IBank[] = [];
+  tag: ITag[] = [];
+  zoneConstants: IZoneConstants[] = [];
   tariffType: ITariffType[] = [];
   scheduledPaymentMethod: IScheduledPaymentMethod[] = [];
   village: IVillage[] = [];
@@ -2413,6 +2415,8 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.flowState, url: EN_Routes.flowState, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.branchState, url: EN_Routes.branchState, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.bank, url: EN_Routes.bank, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.tag, url: EN_Routes.tagManager, defaultValue: [] },
+    { id: 2, value: ENEssentialsToSave.zoneConstants, url: EN_Routes.zoneConstants, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.tariffType, url: EN_Routes.tariffType, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.scheduledPaymentMethod, url: EN_Routes.scheduledPaymentMethod, defaultValue: [] },
     { id: 2, value: ENEssentialsToSave.village, url: EN_Routes.village, defaultValue: [] },

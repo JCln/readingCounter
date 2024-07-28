@@ -2,9 +2,19 @@
     <h2 class="top_title">درخواست خود را انتخاب نمایید</h2>
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
-            <div class="input_icon"
-                [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                <i class="pi pi-bookmark _bookmark"></i>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark tooltip" [ngClass]="{
+                    'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted,
+                    'input_bookmark_valid':itemdrop.valid,
+                    'correct':itemdrop.valid && (itemdrop.dirty || itemdrop.touched)
+                   }">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="tooltip_text_bottom alert">
+                        <div *ngIf="itemdrop.errors?.required">
+                            <i class="pi pi-times"></i>
+                            <p>{{col.header}} را وارد نمایید</p>
+                        </div>
+                    </div>
+                </i>
                 <div class="input_3">
                     <div class="_key">نوع خدمت</div>
                     <div class="_value">
@@ -15,12 +25,6 @@
                             placeholder="انتخاب مورد" [required]="col.isRequired? true : false">
                         </p-multiSelect>
                     </div>
-                </div>
-            </div>
-            <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
-                <div *ngIf="itemdrop.errors?.['required']">
-                    <i class="pi pi-times"></i>
-                    {{col.header}} را وارد نمایید
                 </div>
             </div>
         </div>

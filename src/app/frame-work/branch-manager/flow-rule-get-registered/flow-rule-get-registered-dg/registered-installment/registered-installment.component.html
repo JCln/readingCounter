@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
-                <div *ngIf="itemdrop.errors?.['required']">
+                <div *ngIf="itemdrop.errors?.required">
                     <i class="pi pi-times"></i>
                     روش پرداخت را وارد نمایید
                 </div>
@@ -39,11 +39,11 @@
                 <i class="pi pi-check-square"></i>
             </div>
             <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
-                <div *ngIf="item.errors?.['required']">
+                <div *ngIf="item.errors?.required">
                     <i class="pi pi-times"></i>
                     {{col.header}} را وارد نمایید
                 </div>
-                <div *ngIf="item.errors?.['minlength']">
+                <div *ngIf="item.errors?.minlength">
                     <i class="pi pi-times"></i>
                     حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
                 </div>

@@ -2,28 +2,30 @@
     <h2 class="top_title">موارد مورد نیاز را تکمیل نمایید</h2>
     <div class="_desc">
         <div *ngFor="let col of _selectCols" [ngClass]="{'double_size':col.icon}">
-            <div class="input_icon"
-                [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
-                <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+            <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark tooltip" [ngClass]="{
+                    special_input: col.borderize,
+                    'input_bookmark': item.invalid && (item.dirty || item.touched) || submitted,
+                    'input_bookmark_valid':item.valid,
+                    'correct':item.valid && (item.dirty || item.touched)
+                   }">
+                    <div *ngIf="item.errors && item.touched || submitted" class="tooltip_text_bottom alert">
+                        <div *ngIf="item.errors?.['required']">
+                            <i class="pi pi-times"></i>
+                            <p>{{col.header}} را وارد نمایید</p>
+                        </div>
+                    </div>
+                    <div *ngIf="item.errors?.minlength" class="tooltip_text_bottom alert">
+                        <i class="pi pi-times"></i>
+                        حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                    </div>
+                </i>
                 <div class="input_3">
                     <div class="_key">{{col.header}}</div>
                     <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field" [name]="col.field"
                         class="form-control" [required]="col.isRequired? true : false" minlength="{{col.minLength}}"
                         [(ngModel)]="closeTabService.requestDraftReq[col.field]" [readonly]="col.readonly"
                         maxlength="{{col.maxLength}}" class="_value">
-                </div>
-            </div>
-            <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
-                <i class="pi pi-check-square"></i>
-            </div>
-            <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
-                <div *ngIf="item.errors?.['required']">
-                    <i class="pi pi-times"></i>
-                    {{col.header}} را وارد نمایید
-                </div>
-                <div *ngIf="item.errors?.['minlength']">
-                    <i class="pi pi-times"></i>
-                    حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
                 </div>
             </div>
         </div>

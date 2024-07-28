@@ -757,7 +757,9 @@ export enum ENEssentialsToSave {
     flowRule = "flowRule",
     flowRuleReq = "flowRuleReq",
     flowRuleGetRegisteredLazy = "flowRuleGetRegisteredLazy",
-    flowRuleGetRegisteredLazyReq = "flowRuleGetRegisteredLazyReq"
+    flowRuleGetRegisteredLazyReq = "flowRuleGetRegisteredLazyReq",
+    tag = "tag",
+    zoneConstants = "zoneConstants"
 }
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
@@ -1015,6 +1017,8 @@ export enum ENSelectedColumnVariables {
     selectedFlowRule = 'flowRule',
     selectedOffering = 'offering',
     selectedVillage = 'village',
+    selectedZoneConstants = 'zoneConstantsManager',
+    selectedTagManager = 'tagManager',
     selectedTariffType = 'tariffType',
     selectedBank = 'bank',
     selectedSchedulePaymentMethod = 'schedulePaymentMethod',

@@ -12,6 +12,8 @@ const routes: Routes = [
   { path: 'clientLazy', loadChildren: () => import('./client-get-lazy/client-get-lazy.module').then(clientGetLazy => clientGetLazy.ClientGetLazyModule) },
   { path: 'flowState', loadChildren: () => import('./flow-state/flow-state.module').then(flowStateManager => flowStateManager.FlowStateModule) },
   { path: 'flowRule', loadChildren: () => import('./flow-rule/flow-rule.module').then(flowRuleManager => flowRuleManager.FlowRuleModule) },
+  { path: 'tag', loadChildren: () => import('./tag-manager/tag-manager.module').then(tagManager => tagManager.TagManagerModule) },
+  { path: 'zoneConstants', loadChildren: () => import('./zone-constant/zone-constant.module').then(zoneConstantManager => zoneConstantManager.ZoneConstantModule) },
   { path: 'tarrifTypes', loadChildren: () => import('./tarrif-type-item/tarrif-type-item.module').then(tarrifTypeItemsManager => tarrifTypeItemsManager.TarrifTypeItemModule) },
   { path: 'tarrifParameter', loadChildren: () => import('./tariff-parameter/tariff-parameter.module').then(tarrifParameterManager => tarrifParameterManager.TariffParameterModule) },
   { path: 'offering', loadChildren: () => import('./offering/offering.module').then(offering => offering.OfferingModule) },

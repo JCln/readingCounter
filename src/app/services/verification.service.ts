@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBank, IBranchState, ICalculationInstallment, IClientAll, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IScheduledPaymentMethod, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage } from 'interfaces/i-branch';
+import { IBank, IBranchState, ICalculationInstallment, IClientAll, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IScheduledPaymentMethod, ITag, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IZoneConstants } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -617,7 +617,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_usage);
       return false;
     }
-    if (MathS.isNull(body.branchDiameterId)) {
+    if (MathS.isNullZero(body.branchDiameterId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
       return false;
     }
@@ -633,10 +633,10 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insertـbranchStateId);
       return false;
     }
-    if (MathS.isNull(body.capacity)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_capacity);
-      return false;
-    }
+    // if (MathS.isNull(body.capacity)) {
+    //   this.utilsService.snackBarMessageWarn(EN_messages.insert_capacity);
+    //   return false;
+    // }
 
     return true;
   }
@@ -1786,6 +1786,30 @@ export class VerificationService {
       return false;
     if (!this.nullValidation(item.logicalOrder, EN_messages.insert_logicalOrder))
       return false;
+
+    return true;
+  }
+  zoneConstatns = (item: IZoneConstants): boolean => {
+    if (!this.nullValidation(item.zoneId, EN_messages.insert_zone))
+      return false;
+    if (!this.nullValidation(item.title, EN_messages.insert_title))
+      return false;
+    if (!this.nullValidation(item.tag, EN_messages.insert_tag))
+      return false;
+    if (!this.nullValidation(item.value, EN_messages.insert_value))
+      return false;
+
+    return true;
+  }
+  tagManager = (item: ITag): boolean => {
+    if (MathS.isNull(item.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    if (MathS.isNull(item.titleEn)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_LatinTitle);
+      return false;
+    }
 
     return true;
   }

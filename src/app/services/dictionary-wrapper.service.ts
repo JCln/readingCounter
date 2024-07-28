@@ -20,6 +20,8 @@ export class DictionaryWrapperService {
   private regionDictionary: any = [];
   private zoneDictionary: any = [];
   private villageDictionary: any = [];
+  private tagDictionary: any = [];
+  private zoneConstants: any = [];
   private provinceHierarchy: any = [];
   private zoneBoundDictionary: any = [];
   private offeringUnit: IOfferingUnit[] = [];
@@ -221,6 +223,20 @@ export class DictionaryWrapperService {
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.GuildManagerAll);
     this.setGuildDictionary(res);
     return this.guildDictionary;
+  }
+  async getTagDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.tagDictionary) && !canRefresh)
+      return this.tagDictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.TagAll);
+    this.setTagDictionary(res);
+    return this.tagDictionary;
+  }
+  async getZoneConstantsDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.zoneConstants) && !canRefresh)
+      return this.zoneConstants;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneConstantAll);
+    this.setZoneConstants(res);
+    return this.zoneConstants;
   }
   async getOwnershipTypeDictionary(canRefresh: boolean): Promise<any> {
     if (!MathS.isNull(this.ownershipType) && !canRefresh)
@@ -450,6 +466,12 @@ export class DictionaryWrapperService {
   private setVillageDictionary(v: any) {
     this.villageDictionary = v;
   }
+  private setTagDictionary(v: any) {
+    this.tagDictionary = v;
+  }
+  private setZoneConstants(v: any) {
+    this.zoneConstants = v;
+  }
   private setZoneBoundDictionary(v: any) {
     this.zoneBoundDictionary = v;
   }
@@ -592,6 +614,8 @@ export class DictionaryWrapperService {
     this.regionDictionary = [];
     this.zoneDictionary = [];
     this.villageDictionary = [];
+    this.tagDictionary = [];
+    this.zoneConstants = [];
     this.offeringUnit = [];
     this.offeringGroup = [];
     this.siphonDictionary = [];

@@ -192,6 +192,8 @@ export enum EN_Routes {
     clientGet = '/wr/branch/clients',
     clientAdd = '/wr/branch/addClients',
     bank = '/wr/branch/bank',
+    tagManager = '/wr/branch/tag',
+    zoneConstants = '/wr/branch/zoneConstants',
     tariffType = '/wr/branch/tariffType',
     scheduledPaymentMethod = '/wr/branch/scheduledPaymentMethod',
     village = '/wr/branch/village',

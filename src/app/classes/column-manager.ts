@@ -602,6 +602,26 @@ export class ColumnManager {
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
         { field: 'isMetro', header: 'شهری', isSelected: true, isSelectedOrigin: true, isBoolean: true },
     ]
+    tagDialog: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'titleEn', header: 'عنوان لاتین', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' },
+    ]
+    tagManager: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'titleEn', header: 'عنوان لاتین', isSelected: true, isSelectedOrigin: true },
+    ]
+    zoneConstantsDialog: IObjectIteratation[] = [
+        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'tag', header: 'تگ', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'value', header: 'مقدار', isSelected: true, isSelectedOrigin: true, icon: 'grid-column: auto/ span 2;' },
+    ]
+    zoneConstantsManager: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectedOrigin: true },
+        { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        { field: 'tag', header: 'تگ', isSelected: true, isSelectedOrigin: true },
+        { field: 'value', header: 'مقدار', isSelected: true, isSelectedOrigin: true },
+    ]
     offeringAdd: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         { field: 'offeringGroupId', header: 'گروه اقلام', isSelected: true, isSelectedOrigin: true, isSelectOption: true },

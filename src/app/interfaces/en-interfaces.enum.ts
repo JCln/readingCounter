@@ -595,4 +595,15 @@ export enum ENInterfaces {
     CustomerLocationManagerGetNeighbourBillId = 'V1/FlowRule/GetByNeighbourBillId',
     flowRequestGetRegistered = 'V1/FlowRequest/GetRegistered',
 
+    TagAll = 'v1/Tag/All',
+    TagEdit = 'v1/Tag/Edit',
+    TagAdd = 'v1/Tag/Add',
+    TagRemove = 'v1/Tag/Remove',
+
+    ZoneConstantAll = 'v1/ZoneConstant/All',
+    ZoneConstantEdit = 'v1/ZoneConstant/Edit',
+    ZoneConstantAdd = 'v1/ZoneConstant/Add',
+    ZoneConstantRemove = 'v1/ZoneConstant/Remove',
+
+
 }

@@ -1,0 +1,14 @@
+<app-prime-table    
+    [dataSource]="closeTabService.tag" 
+    [_checkUpName]="'branches'"
+    [_outputFileName]="'tagManager'"
+    [_numberOfExtraColumns]="[1, 2]"
+    [isAddableTable]="true"    
+    [_sessionName]="'tagmanager-session'"
+    [_selectedColumnsToRemember]="'selectedTagManager'"
+    (refreshedTable)="callAPI()"     
+    (showedMoreDetails)="removeRow($event)"    
+    (openedAddDialog)="openDialog()"    
+    (openedEditDialog)="openDialog($event)"    
+ > 
+</app-prime-table>

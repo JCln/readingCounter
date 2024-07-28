@@ -164,6 +164,23 @@ export interface IBank {
     css: string,
     isEditing: boolean
 }
+export interface ITag {
+    id: number,
+    title: string,
+    titleEn: string,
+    isActive: boolean,
+    isEditing: boolean
+}
+export interface IZoneConstants {
+    id: number,
+    value: string,
+    zoneId: number,
+    zoneTitle: string,
+    changableZoneId?: any,
+    title: string,
+    tag: string,
+    isEditing: boolean
+}
 export interface IAmountModifications {
     offeringId: number,
     amount: number
