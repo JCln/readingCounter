@@ -10,6 +10,14 @@
     display: inherit;
 }
 
+// this p means to use in tooltip and extra icon
+p {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
 ._req_content {
     display: grid;
     align-items: center;

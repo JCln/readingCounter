@@ -36,6 +36,12 @@ ul {
     color: var(--secondary_6);
 }
 
+h4 {
+    flex-basis: 37ch;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
 ._value {
     width: var(--font_5);
 }

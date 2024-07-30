@@ -13,8 +13,9 @@
                             <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
                                 class="tooltip_text_bottom alert">
                                 <div *ngIf="itemdrop.errors?.required">
-                                    <i class="pi pi-times"></i>
-                                    <p>{{col.header}} را وارد نمایید</p>
+                                    <p>{{col.header}} را وارد نمایید
+                                        <i class="pi pi-times"></i>
+                                    </p>
                                 </div>
                             </div>
                         </i>
@@ -40,8 +41,9 @@
                             <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
                                 class="tooltip_text_bottom alert">
                                 <div *ngIf="itemdrop.errors?.required">
-                                    <i class="pi pi-times"></i>
-                                    <p>{{col.header}} را وارد نمایید</p>
+                                    <p>{{col.header}} را وارد نمایید
+                                        <i class="pi pi-times"></i>
+                                    </p>
                                 </div>
                             </div>
                         </i>
@@ -68,8 +70,9 @@
                             <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
                                 class="tooltip_text_bottom alert">
                                 <div *ngIf="itemdrop.errors?.required">
-                                    <i class="pi pi-times"></i>
-                                    <p>{{col.header}} را وارد نمایید</p>
+                                    <p>{{col.header}} را وارد نمایید
+                                        <i class="pi pi-times"></i>
+                                    </p>
                                 </div>
                             </div>
                         </i>
@@ -95,8 +98,9 @@
                             <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
                                 class="tooltip_text_bottom alert">
                                 <div *ngIf="itemdrop.errors?.required">
-                                    <i class="pi pi-times"></i>
-                                    <p>{{col.header}} را وارد نمایید</p>
+                                    <p>{{col.header}} را وارد نمایید
+                                        <i class="pi pi-times"></i>
+                                    </p>
                                 </div>
                             </div>
                         </i>
@@ -122,8 +126,9 @@
                             <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
                                 class="tooltip_text_bottom alert">
                                 <div *ngIf="itemdrop.errors?.required">
-                                    <i class="pi pi-times"></i>
-                                    <p>{{col.header}} را وارد نمایید</p>
+                                    <p>{{col.header}} را وارد نمایید
+                                        <i class="pi pi-times"></i>
+                                    </p>
                                 </div>
                             </div>
                         </i>
@@ -200,13 +205,16 @@
                        }">
                         <div *ngIf="item.errors && item.touched || submitted" class="tooltip_text_bottom alert">
                             <div *ngIf="item.errors?.required">
-                                <i class="pi pi-times"></i>
-                                <p>{{col.header}} را وارد نمایید</p>
+                                <p>{{col.header}} را وارد نمایید
+                                    <i class="pi pi-times"></i>
+                                </p>
                             </div>
                         </div>
                         <div *ngIf="item.errors?.minlength" class="tooltip_text_bottom">
-                            <i class="pi pi-times"></i>
-                            حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                            <p>
+                                حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد'
+                                <i class="pi pi-times"></i>
+                            </p>
                         </div>
                     </i>
                     <div class="input_3">
