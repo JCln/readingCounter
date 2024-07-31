@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
+import { IAPK } from 'interfaces/inon-manage';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -37,6 +38,10 @@ export class ApkComponent extends FactoryONE {
   downloadAPK = async () => {
     const a = await this.apkService.ajaxReqWrapperService.getBlob(ENInterfaces.APKLast);
     this.outputManagerService.downloadFile(a, '.apk');
+  }
+  downloadPrevious = async (event: IAPK) => {
+    const res = await this.apkService.ajaxReqWrapperService.getBlobById(ENInterfaces.downloadFileGET, event.fileRepositoryId);
+    this.outputManagerService.downloadFile(res, '.apk');    
   }
   onChange(event) {
     const a = document.getElementById('files') as any;

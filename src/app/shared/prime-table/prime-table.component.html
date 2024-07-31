@@ -682,6 +682,13 @@
                     <div class="tooltip_text_right">حذف مورد</div>
                 </i>
             </td>
+            <td class="__icon-columns edit_button" *ngIf="_checkUpName == 'apk'"
+                (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود مجدد فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text_right">دانلود مجدد فایل</div>
+                </i>
+            </td>
             <td class="__icon-columns" *ngIf="_checkUpName == 'excelDynamic'" class="edit_button"
                 (click)="downloadExcel(dataSource)">
                 <span class="ui-column-title">دانلود Excel</span>
