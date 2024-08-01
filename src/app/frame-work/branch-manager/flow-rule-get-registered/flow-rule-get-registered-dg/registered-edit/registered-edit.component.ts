@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { ENCompanyName, ENRandomNumbers } from 'interfaces/enums.enum';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
+import { EnvService } from 'services/env.service';
+import { MapService } from 'services/map.service';
 import { MathS } from 'src/app/classes/math-s';
+
+declare let L;
 
 @Component({
   selector: 'app-registered-edit',
@@ -23,27 +28,35 @@ export class RegisteredEditComponent implements OnInit {
   waterSourceDictionary: [];
   customerTypeDictionary: [];
   offeringGroupDictionary: any[] = [];
+  regionsByProvinceIdDictionary: IDictionaryManager[] = [];
+  zonesByRegionIdDictionary: IDictionaryManager[] = [];
+  villagesByZoneIdDictionary: IDictionaryManager[] = [];
+  provinceDictionary: IDictionaryManager[] = [];
+
+  private map3: L.Map;
+  private layerGroup3 = new L.FeatureGroup();
   _selectedDatas: IObjectIteratation[] = [];
   private readonly _outputFileName: string = 'flowRuleGetRegisteredStepperEditColumns';
 
   constructor(
     public branchesService: BranchesService,
-    public closeTabService: CloseTabService
+    public closeTabService: CloseTabService,
+    public envService: EnvService,
+    public mapService: MapService
   ) {
   }
   callAPI = async () => {
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.flowRuleRegisteredEdit)) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.requestDraftEdit, this.closeTabService.flowRuleRegisteredEdit);
       if (res) {
-        console.log(this.closeTabService.flowRuleRegister.requestDraftId);
         this.closeTabService.flowRuleRegister.requestDraftId = res.targetObject.id;
-        console.log(this.closeTabService.flowRuleRegister.requestDraftId);
         this.branchesService.utilsService.snackBarMessageSuccess(res.message);
         this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStepCalculated);
       }
     }
   }
   dictionaryWrapper = async () => {
+    this.provinceDictionary = await this.branchesService.dictionaryWrapperService.getProvinceDictionary();
     this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
     this.siphonDictionary = await this.branchesService.dictionaryWrapperService.getSiphonDictionary(false);
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
@@ -58,11 +71,50 @@ export class RegisteredEditComponent implements OnInit {
   classWrapper = async () => {
     this.dictionaryWrapper();
     this._selectedDatas = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
+    this.initMapMarkerExisted();
   }
   async showInMap() {
     const res = await this.branchesService.openMapDialog(this.closeTabService.flowRuleRegisteredEdit, true);
     this.closeTabService.flowRuleRegisteredEdit.x = res.x;
     this.closeTabService.flowRuleRegisteredEdit.y = res.y;
+  }
+  private flyToDes = (lat: number, lag: number, zoom: number) => {
+    if (lat === 0 || lag === 0)
+      return;
+    lat = parseFloat(lat.toString().substring(0, 6));
+    lag = parseFloat(lag.toString().substring(0, 6));
+
+    this.map3.flyTo([(lat), (lag)], zoom);
+  }
+  initMapMarkerExisted = () => {
+    this.map3 = L.map('map3', {
+      center: this.envService.mapCenter,
+      zoom: ENRandomNumbers.fifteen,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup3]
+    });
+
+    this.map3.attributionControl.setPrefix(ENCompanyName.title);
+    const x = Number(this.closeTabService.flowRuleRegisteredEdit.x);
+    const y = Number(this.closeTabService.flowRuleRegisteredEdit.y);
+    var markersGroup = L.layerGroup();
+    this.flyToDes(x, y, ENRandomNumbers.fifteen);
+    L.marker([x, y]).addTo(markersGroup);
+    this.map3.addLayer(markersGroup);
+  }
+
+  async getRegionsByProvinceId() {
+    if (this.closeTabService.flowRuleRegisteredEdit.provinceId)
+      this.regionsByProvinceIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.RegionDictionaryByProvinceId, this.closeTabService.flowRuleRegisteredEdit.provinceId);
+  }
+  async getZonesByRegionId() {
+    if (this.closeTabService.flowRuleRegisteredEdit.regionId)
+      this.zonesByRegionIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ZoneDictionaryByRegionId, this.closeTabService.flowRuleRegisteredEdit.regionId);
+  }
+  async getVillagesByZoneId() {
+    if (this.closeTabService.flowRuleRegisteredEdit.zoneId)
+      this.villagesByZoneIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.villagesByZoneId, this.closeTabService.flowRuleRegisteredEdit.zoneId);
   }
   ngOnInit(): void {
     if (MathS.isNull(this.closeTabService.flowRuleRegisteredEdit)) {
