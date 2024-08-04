@@ -40,12 +40,22 @@
             </div>
             <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
                 <div *ngIf="item.errors?.required">
-                    <i class="pi pi-times"></i>
-                    {{col.header}} را وارد نمایید
+                    <p>
+                        {{col.header}} را وارد نمایید
+                        <i class="pi pi-times"></i>
+                    </p>
                 </div>
                 <div *ngIf="item.errors?.minlength">
-                    <i class="pi pi-times"></i>
-                    حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                    <p>
+                        حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                        <i class="pi pi-times"></i>
+                    </p>
+                </div>
+                <div *ngIf="item.errors?.maxlength" class="tooltip_text_bottom alert">
+                    <p>
+                        حداکثر تعداد نویسه {{col.maxLength}} عدد می‌باشد
+                        <i class="pi pi-times"></i>
+                    </p>
                 </div>
             </div>
         </div>

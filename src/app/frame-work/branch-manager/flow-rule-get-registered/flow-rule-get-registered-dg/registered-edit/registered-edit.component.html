@@ -439,6 +439,12 @@
                                         <i class="pi pi-times"></i>
                                     </p>
                                 </div>
+                                <div *ngIf="item.errors?.maxlength" class="tooltip_text_bottom alert">
+                                    <p>
+                                        حداکثر تعداد نویسه {{mainDatas.maxLength}} عدد می‌باشد
+                                        <i class="pi pi-times"></i>
+                                    </p>
+                                </div>
                             </i>
                             <div class="input_3">
                                 <div class="_key">{{mainDatas.header}}</div>
@@ -468,6 +474,8 @@
                     </div>
                 </ng-template>
             </div>
+        </div>
+        <div class="map_wrapper" (click)="showInMap()">
             <div class="map-frame">
                 <div id="map3"></div>
             </div>

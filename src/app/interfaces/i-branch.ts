@@ -185,11 +185,6 @@ export interface IAmountModifications {
     offeringId: number,
     amount: number
 }
-export interface IModification {
-    requestDraftId: number,
-    invoiceId: number,
-    amountModifications: IAmountModifications[]
-}
 export interface ICalculationSchedulePaymentInput {
     installmentNumber: number,
     inAdvancedPaymentPercentage: number
@@ -198,6 +193,13 @@ export interface ICalculationInstallment {
     requestDraftId: number,
     invoiceId: number,
     schedulePaymentInput: ICalculationSchedulePaymentInput;
+}
+export interface IModification {
+    offeringGroupIds: any[],
+    schedulePaymentInput: ICalculationSchedulePaymentInput,
+    requestDraftId: number,
+    invoiceId: number,
+    amountModifications: IAmountModifications[]
 }
 export interface ITariffType {
     id: number,

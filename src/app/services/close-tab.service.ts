@@ -152,7 +152,7 @@ export class CloseTabService {
     customerTypeTitle: '',
     waterSourceTitle: '',
   };
-  flowRuleRegister = {
+  flowRuleRegister: IModification = {
     requestDraftId: null,
     offeringGroupIds: [],
     invoiceId: 0,

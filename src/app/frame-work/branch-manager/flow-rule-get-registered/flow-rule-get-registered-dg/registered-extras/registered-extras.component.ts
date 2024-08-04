@@ -5,6 +5,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-registered-extras',
@@ -20,6 +21,33 @@ export class RegisteredExtrasComponent extends FactoryONE {
   ) {
     super();
   }
+  // verification(): boolean {
+  //   for (let index = 0; index < this.closeTabService.flowRuleRegister.amountModifications.length; index++) {
+  //     if (MathS.isNullTextValidation(this.closeTabService.flowRuleRegister.amountModifications[index].offeringId)) {
+  //       this.closeTabService.utilsService.snackBarMessageWarn(`نرخ شماره ${index + 1}:` + EN_messages.insert_offeringId);
+  //       return false;
+  //     }
+  //     if (MathS.isNullTextValidation(this.closeTabService.flowRuleRegister.amountModifications[index].amount)) {
+  //       this.closeTabService.utilsService.snackBarMessageWarn(`نرخ شماره ${index + 1}:` + EN_messages.insert_toRate);
+  //       return false;
+  //     }
+  //     if (MathS.isNaN(Number(this.closeTabService.flowRuleRegister.amountModifications[index].offeringId))) {
+  //       this.closeTabService.utilsService.snackBarMessageWarn(`نرخ شماره ${index + 1}:` + EN_messages.wrong_offeringId);
+  //       return false;
+  //     }
+  //     if (MathS.isNaN(Number(this.closeTabService.flowRuleRegister.amountModifications[index].amount))) {
+  //       this.closeTabService.utilsService.snackBarMessageWarn(`نرخ شماره ${index + 1}:` + EN_messages.wrong_toRate);
+  //       return false;
+  //     }
+  //     if (!MathS.isFromLowerThanTo(Number(this.closeTabService.flowRuleRegister.amountModifications[index].offeringId), Number(this.closeTabService.flowRuleRegister.amountModifications[index].amount))) {
+  //       this.closeTabService.utilsService.snackBarMessageWarn(`نرخ شماره ${index + 1}:` + EN_messages.lessThan_rate);
+  //       return false;
+  //     }
+  //     this.closeTabService.flowRuleRegister.amountModifications[index].offeringId = Number(this.closeTabService.flowRuleRegister.amountModifications[index].offeringId.trim());
+  //     this.closeTabService.flowRuleRegister.amountModifications[index].amount = Number(this.closeTabService.flowRuleRegister.amountModifications[index].amount.trim());
+  //   }
+  //   return true;
+  // }
   callAPI = async () => {
     // to do verification and post sth to extras datas
     console.log(this.closeTabService.flowRuleRegister);

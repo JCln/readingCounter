@@ -132,6 +132,12 @@
                                     <i class="pi pi-times"></i>
                                 </p>
                             </div>
+                            <div *ngIf="item.errors?.maxlength" class="tooltip_text_bottom alert">
+                                <p>
+                                    حداکثر تعداد نویسه {{col.maxLength}} عدد می‌باشد
+                                    <i class="pi pi-times"></i>
+                                </p>
+                            </div>
                         </i>
                         <div class="input_3">
                             <div class="_key">{{col.header}}</div>

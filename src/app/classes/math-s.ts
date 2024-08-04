@@ -15,8 +15,8 @@ export class MathS {
     static isNullZero(value: any): boolean {
         return typeof value === 'undefined' || value === null || value.length === 0;
     }
-    static isNullTextValidation(value: string): boolean {
-        return value === undefined || !value || value.trim().length === 0 || value.trim() === null;
+    static isNullTextValidation(value: any): boolean {
+        return value === undefined || !value || value.toString().trim().length === 0 || value.toString().trim() === null;
     }
     static isBoolean = (val: any): boolean => {
         return typeof val == 'boolean' ? true : false;
