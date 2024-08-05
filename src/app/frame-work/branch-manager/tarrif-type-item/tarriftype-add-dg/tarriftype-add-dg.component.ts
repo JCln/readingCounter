@@ -17,6 +17,8 @@ export class TarriftypeAddDgComponent implements OnInit {
     tariffTypeId: 0,
     tariffCalculationMode: 0,
     dynamicTariffCalculationMode: 0,
+    insertMode: 0,
+    dynamicTariffInsertMode: 0,
     dynamicTariffTypeId: 0,
     title: '',
     description: '',
@@ -24,6 +26,7 @@ export class TarriftypeAddDgComponent implements OnInit {
     isEditing: false,
   }
   getTarrifCalculationModeDictionary: any[] = [];
+  getTarrifInsertModeDictionary: any[] = [];
   getTarrifTypeDictionary: any[] = [];
 
   constructor(
@@ -59,6 +62,7 @@ export class TarriftypeAddDgComponent implements OnInit {
   }
   classWrapper = async () => {
     this.getTarrifCalculationModeDictionary = this.branchesService.utilsService.getTarrifCalculationModeDictionary();
+    this.getTarrifInsertModeDictionary = this.branchesService.utilsService.getTarrifInsertModeDictionary();
     this.getTarrifTypeDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffTypeAll);
     if (this.config.data) {
       this.tarrifTypeReq = this.config.data;

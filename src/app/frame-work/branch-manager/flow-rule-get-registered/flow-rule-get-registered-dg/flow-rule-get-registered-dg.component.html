@@ -1,5 +1,14 @@
 <div>
     <div class="card">
+        <section>
+            <div class="overall-info">
+                <div class="input_2">
+                    <div class="_key">ش.پیگیری</div>
+                    <input [readOnly]="true" class="_value" name="trackNumber"
+                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.trackNumber">
+                </div>
+            </div>
+        </section>
         <p-steps [model]="items" [readonly]="false"></p-steps>
     </div>
     <router-outlet></router-outlet>

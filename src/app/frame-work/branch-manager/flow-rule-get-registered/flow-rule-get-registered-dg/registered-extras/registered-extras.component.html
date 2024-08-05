@@ -1,7 +1,7 @@
 <form>
     <div class="_description">
         <section class="main_title">
-            <h2>درخواست محاسبه</h2>
+            <h2>اصلاحات محاسبه</h2>
             <button class="btn_2_o" (click)="addNewItem()">افزودن</button>
         </section>
         <hr>
@@ -23,7 +23,10 @@
                     <i class="pi pi-bookmark _bookmark"></i>
                     <div class="input_3">
                         <div class="_key">مبلغ/ مقدار</div>
-                        <input name="{{'offeringvalue'[i]}}" maxlength="6" [(ngModel)]="item.amount" class="_value">
+                        <p-inputNumber inputId="integeronly" name="{{'offeringvalue'[i]}}" maxlength="9"
+                            [(ngModel)]="item.amount" class="_value"> </p-inputNumber>
+                        <!-- <input inputId="integeronly" name="{{'offeringvalue'[i]}}" maxlength="9"
+                            [(ngModel)]="item.amount" class="_value"> -->
                     </div>
                 </div>
 

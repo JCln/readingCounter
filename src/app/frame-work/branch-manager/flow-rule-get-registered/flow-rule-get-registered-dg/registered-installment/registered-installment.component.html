@@ -1,64 +1,69 @@
 <form class="installment-form" #form="ngForm" (ngSubmit)="nextPage()">
-    <h2 class="top_title">روش پرداخت را تعیین نمایید</h2>
-    <div class="_desc form-group">
-        <div>
-            <div class="input_icon"
-                [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
-                <i class="pi pi-bookmark _bookmark"></i>
-                <div class="input_3">
-                    <div class="_key">روش پرداخت</div>
-                    <div class="_value">
-                        <p-dropdown #itemdrop="ngModel" name="paymentMethod" [options]="paymentMethod"
-                            [(ngModel)]="_selectedPaymentMethod" placeholder="انتخاب مورد" optionLabel="title"
-                            filter="true" (onChange)="itemsChanged()" required="true">
-                        </p-dropdown>
+    <div>
+        <h2 class="top_title">روش پرداخت را تعیین نمایید</h2>
+        <div class="_desc form-group">
+            <div>
+                <div class="input_icon"
+                    [ngClass]="{'input_outline': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted, 'input_outline_valid':itemdrop.valid}">
+                    <i class="pi pi-bookmark _bookmark"></i>
+                    <div class="input_3">
+                        <div class="_key">روش پرداخت</div>
+                        <div class="_value">
+                            <p-dropdown #itemdrop="ngModel" name="paymentMethod" [options]="paymentMethod"
+                                [(ngModel)]="_selectedPaymentMethod" placeholder="انتخاب مورد" optionLabel="title"
+                                filter="true" (onChange)="itemsChanged()" required="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
+                    <div *ngIf="itemdrop.errors?.required">
+                        <i class="pi pi-times"></i>
+                        روش پرداخت را وارد نمایید
                     </div>
                 </div>
             </div>
-            <div *ngIf="itemdrop.errors && itemdrop.touched || submitted" class="icon_validation alert">
-                <div *ngIf="itemdrop.errors?.required">
-                    <i class="pi pi-times"></i>
-                    روش پرداخت را وارد نمایید
+            <div *ngFor="let col of _selectColsBillId" [ngClass]="{'double_size':col.icon}"
+                [hidden]="!_selectedPaymentMethod.isInstallment">
+                <div class="input_icon"
+                    [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
+                    <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                    <div class="input_3">
+                        <div class="_key">{{col.header}}</div>
+                        <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field"
+                            [name]="col.field" class="form-control" [required]="col.isRequired? true : false"
+                            minlength="{{col.minLength}}" [(ngModel)]="closeTabService.requestDraftReq[col.field]"
+                            [readonly]="col.readonly" maxlength="{{col.maxLength}}" class="_value">
+                    </div>
+                </div>
+                <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
+                    <i class="pi pi-check-square"></i>
+                </div>
+                <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
+                    <div *ngIf="item.errors?.required">
+                        <p>
+                            {{col.header}} را وارد نمایید
+                            <i class="pi pi-times"></i>
+                        </p>
+                    </div>
+                    <div *ngIf="item.errors?.minlength">
+                        <p>
+                            حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                            <i class="pi pi-times"></i>
+                        </p>
+                    </div>
+                    <div *ngIf="item.errors?.maxlength" class="tooltip_text_bottom alert">
+                        <p>
+                            حداکثر تعداد نویسه {{col.maxLength}} عدد می‌باشد
+                            <i class="pi pi-times"></i>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div *ngFor="let col of _selectColsBillId" [ngClass]="{'double_size':col.icon}"
-            [hidden]="!_selectedPaymentMethod.isInstallment">
-            <div class="input_icon"
-                [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
-                <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
-                <div class="input_3">
-                    <div class="_key">{{col.header}}</div>
-                    <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field" [name]="col.field"
-                        class="form-control" [required]="col.isRequired? true : false" minlength="{{col.minLength}}"
-                        [(ngModel)]="closeTabService.requestDraftReq[col.field]" [readonly]="col.readonly"
-                        maxlength="{{col.maxLength}}" class="_value">
-                </div>
-            </div>
-            <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
-                <i class="pi pi-check-square"></i>
-            </div>
-            <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
-                <div *ngIf="item.errors?.required">
-                    <p>
-                        {{col.header}} را وارد نمایید
-                        <i class="pi pi-times"></i>
-                    </p>
-                </div>
-                <div *ngIf="item.errors?.minlength">
-                    <p>
-                        حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
-                        <i class="pi pi-times"></i>
-                    </p>
-                </div>
-                <div *ngIf="item.errors?.maxlength" class="tooltip_text_bottom alert">
-                    <p>
-                        حداکثر تعداد نویسه {{col.maxLength}} عدد می‌باشد
-                        <i class="pi pi-times"></i>
-                    </p>
-                </div>
-            </div>
-        </div>
+    </div>
+    <div>
+        <app-registered-recalc></app-registered-recalc>
     </div>
     <footer>
         <button type="submit" class="btn_1">

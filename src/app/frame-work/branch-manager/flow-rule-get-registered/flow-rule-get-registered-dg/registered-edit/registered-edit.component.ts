@@ -33,7 +33,7 @@ export class RegisteredEditComponent implements OnInit {
   villagesByZoneIdDictionary: IDictionaryManager[] = [];
   provinceDictionary: IDictionaryManager[] = [];
 
-  private map3: L.Map;
+  private map4: L.Map;
   private layerGroup3 = new L.FeatureGroup();
   _selectedDatas: IObjectIteratation[] = [];
   private readonly _outputFileName: string = 'flowRuleGetRegisteredStepperEditColumns';
@@ -70,7 +70,15 @@ export class RegisteredEditComponent implements OnInit {
   }
   classWrapper = async () => {
     this.dictionaryWrapper();
+    console.log(this.closeTabService.flowRuleRegisteredEdit.offeringGroupIds);
+
+    if (this.closeTabService.flowRuleRegisteredEdit.offeringGroupIds) {
+      this.closeTabService.flowRuleRegister.offeringGroupIds = this.closeTabService.flowRuleRegisteredEdit.offeringGroupIds;
+    }
     this._selectedDatas = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
+    this.getRegionsByProvinceId();
+    this.getZonesByRegionId();
+    this.getVillagesByZoneId();
     this.initMapMarkerExisted();
   }
   async showInMap() {
@@ -84,10 +92,10 @@ export class RegisteredEditComponent implements OnInit {
     lat = parseFloat(lat.toString().substring(0, 6));
     lag = parseFloat(lag.toString().substring(0, 6));
 
-    this.map3.flyTo([(lat), (lag)], zoom);
+    this.map4.flyTo([(lat), (lag)], zoom);
   }
   initMapMarkerExisted = () => {
-    this.map3 = L.map('map3', {
+    this.map4 = L.map('map4', {
       center: this.envService.mapCenter,
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
@@ -95,13 +103,13 @@ export class RegisteredEditComponent implements OnInit {
       layers: [this.mapService.getFirstItemUrl(), this.layerGroup3]
     });
 
-    this.map3.attributionControl.setPrefix(ENCompanyName.title);
+    this.map4.attributionControl.setPrefix(ENCompanyName.title);
     const x = Number(this.closeTabService.flowRuleRegisteredEdit.x);
     const y = Number(this.closeTabService.flowRuleRegisteredEdit.y);
     var markersGroup = L.layerGroup();
     this.flyToDes(x, y, ENRandomNumbers.fifteen);
     L.marker([x, y]).addTo(markersGroup);
-    this.map3.addLayer(markersGroup);
+    this.map4.addLayer(markersGroup);
   }
 
   async getRegionsByProvinceId() {

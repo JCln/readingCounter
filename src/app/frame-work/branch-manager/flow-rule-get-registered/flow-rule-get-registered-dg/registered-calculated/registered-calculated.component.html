@@ -1,25 +1,28 @@
-<form *ngIf="!closeTabService.requestDraftCalculationRes || closeTabService.requestDraftCalculationRes.length === 0"
-    (ngSubmit)="callAPI()">
-    <div class="_description">
-        <h2>درخواست محاسبه</h2>
-        <hr>
-        <h5>درخواست های شما بصورت زیر است</h5>
-        <div *ngFor="let offeringDic of offeringGroupDictionary">
-            <div *ngFor="let item of closeTabService.flowRuleRegisteredEdit.offeringGroupIds">
-                <li class="selected_offering" *ngIf="offeringDic.id == item">
-                    {{offeringDic.title}}
-                </li>
+<div class="calculated_form">
+    <!-- *ngIf="!closeTabService.requestDraftCalculationRes || closeTabService.requestDraftCalculationRes.length === 0" -->
+    <form class="flex-control" (ngSubmit)="callAPI()">
+        <div class="_description">
+            <h2>خدمات انتخاب شده</h2>
+            <hr>            
+            <div *ngFor="let offeringDic of offeringGroupDictionary">
+                <div *ngFor="let item of closeTabService.flowRuleRegisteredEdit.offeringGroupIds">
+                    <li class="selected_offering" *ngIf="offeringDic.id == item">
+                        {{offeringDic.title}}
+                    </li>
+                </div>
             </div>
         </div>
+        <footer>
+            <button type="submit" class="btn_1">
+                محاسبه
+                <i class="pi pi-calculator"></i>
+            </button>
+        </footer>
+    </form>
+    <div class="registered_extras_wrapper flex-control">
+        <app-registered-extras></app-registered-extras>
     </div>
-
-    <footer>
-        <button type="submit" class="btn_1">
-            محاسبه
-            <i class="pi pi-calculator"></i>
-        </button>
-    </footer>
-</form>
+</div>
 
 <section class="content" *ngIf="closeTabService.requestDraftCalculationRes.length > 0">
     <h1 class="green_response">نتیجه محاسبه</h1>

@@ -680,7 +680,7 @@ export class VerificationService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_usage);
       return false;
     }
-    if (MathS.isNull(body.branchDiameterId)) {
+    if (MathS.isNullZero(body.branchDiameterId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_Diameter);
       return false;
     }

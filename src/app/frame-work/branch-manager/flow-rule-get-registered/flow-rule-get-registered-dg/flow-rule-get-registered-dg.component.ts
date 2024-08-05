@@ -56,20 +56,20 @@ export class FlowRuleGetRegisteredDgComponent extends FactoryONE {
         label: 'محاسبه شده',
         routerLink: 'calculated'
       },
+      // {
+      //   label: 'کسورات اضافات',
+      //   routerLink: 'extras'
+      // },
       {
-        label: 'کسورات اضافات',
-        routerLink: 'extras'
-      },
-      {
-        label: 'تقسیط/ روش پرداخت',
+        label: 'روش پرداخت',
         routerLink: 'installment'
       },
+      // {
+      //   label: 'محاسبه',
+      //   routerLink: 'reCalc'
+      // },
       {
-        label: 'محاسبه مجدد',
-        routerLink: 'reCalc'
-      },
-      {
-        label: 'تایید',
+        label: 'پیش نمایش',
         routerLink: 'confirmation'
       }
     ];

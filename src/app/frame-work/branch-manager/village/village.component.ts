@@ -31,7 +31,7 @@ export class VillageComponent extends FactoryONE {
     })
   }
   callAPI = async () => {
-    this.closeTabService.village = await this.branchesService.dictionaryWrapperService.getVillageDictionary();
+    this.closeTabService.village = await this.branchesService.dictionaryWrapperService.getVillageDictionary(true);
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.insertToAuxZoneid();
     Converter.convertIdToTitle(this.closeTabService.village, this.zoneDictionary, 'changableZoneId');

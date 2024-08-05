@@ -104,6 +104,7 @@ export interface IClientAll {
 export interface IRequestDraft {
     id?: number,
     requestDraftId?: number,
+    trackNumber: number,
     provinceId: null,
     regionId: null,
     zoneId: number,
@@ -319,6 +320,8 @@ export interface ITarrifTypeItem {
     tariffTypeId: number,
     tariffCalculationMode: number,
     dynamicTariffCalculationMode: number,
+    insertMode: number,
+    dynamicTariffInsertMode: any,
     dynamicTariffTypeId: number,
     title: string,
     description: string,

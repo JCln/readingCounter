@@ -404,7 +404,9 @@ export enum ENPrimeNGTranslator {
     removeRule = 'حذف جستجو',
     choose = ' انتخاب',
     upload = 'ارسال',
-    cancel = 'بازگشت'
+    cancel = 'بازگشت',
+    emptyMessage = 'موردی یافت نشد',
+    emptyFilterMessage = 'موردی یافت نشد'
 }
 export enum ENExportTableTranslationName {
     myPreviousFailures = 'تلاش های ناموفق',

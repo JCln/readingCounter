@@ -190,6 +190,26 @@ footer {
     justify-content: center;
 }
 
+.flex-control {
+    width: 100%;
+
+    @media (min-width:550px) {
+        width: 50%;
+    }
+}
+
+.calculated_form {
+    display: flex;
+    direction: rtl;
+    gap: 1rem;
+
+    @media (min-width:550px) {
+        flex-wrap: wrap;
+    }
+}
+
+.registered_extras_wrapper {}
+
 .validation-form,
 .installment-form {
     ._desc {

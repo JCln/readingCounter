@@ -16,6 +16,7 @@ import { Converter } from 'src/app/classes/converter';
 export class TarrifTypeItemComponent extends FactoryONE {
   ref: DynamicDialogRef;
   getTarrifCalculationModeDictionary: any[] = [];
+  getTarrifInsertModeDictionary: any[] = [];
   getTarrifTypeDictionary: any[] = [];
 
   constructor(
@@ -28,16 +29,19 @@ export class TarrifTypeItemComponent extends FactoryONE {
   insertToAux = () => {
     this.closeTabService.tarrifTypeItem.forEach(item => {
       item.dynamicTariffCalculationMode = item.tariffCalculationMode;
+      item.dynamicTariffInsertMode = item.insertMode;
       item.dynamicTariffTypeId = item.tariffTypeId;
     })
   }
   callAPI = async () => {
     this.closeTabService.tarrifTypeItem = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tarriffTypeItemManagerGet);
     this.getTarrifCalculationModeDictionary = this.branchesService.utilsService.getTarrifCalculationModeDictionary();
+    this.getTarrifInsertModeDictionary = this.branchesService.utilsService.getTarrifInsertModeDictionary();
     this.getTarrifTypeDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.tariffTypeAll);
     this.insertToAux();
     Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifCalculationModeDictionary, 'dynamicTariffCalculationMode');
     Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifTypeDictionary, 'dynamicTariffTypeId');
+    Converter.convertIdToTitle(this.closeTabService.tarrifTypeItem, this.getTarrifInsertModeDictionary, 'dynamicTariffInsertMode');
     // Converter.convertIdsToTitlesByIdname(this.closeTabService.tarrifTypeItem,
     //   {
     //     getTarrifCalculationModeDictionary: 'getTarrifCalculationModeDictionary',

@@ -140,8 +140,8 @@ export class DictionaryWrapperService {
     this.setZoneDictionary(res);
     return this.zoneDictionary;
   }
-  async getVillageDictionary(): Promise<any> {
-    if (!MathS.isNull(this.villageDictionary))
+  async getVillageDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.villageDictionary) && !canRefresh)
       return this.villageDictionary;
     const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.villageAll);
     this.setVillageDictionary(res);

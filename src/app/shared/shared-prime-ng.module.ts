@@ -28,6 +28,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { SharedCarouselModule } from './shared_carousel';
 import { UnSortTableDirective } from '../directives/un-sort-table.directive';
 import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.com
     DynamicDialogModule,
     RadioButtonModule,
     TabViewModule,
+    InputNumberModule,
     SelectButtonModule,
     SharedThreeModule,
     SharedChangePassModule,
@@ -77,6 +79,7 @@ import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.com
     ReactiveFormsModule,
     TableModule,
     TabViewModule,
+    InputNumberModule,
     MatCheckboxModule,
     MultiSelectModule,
     CheckboxModule,

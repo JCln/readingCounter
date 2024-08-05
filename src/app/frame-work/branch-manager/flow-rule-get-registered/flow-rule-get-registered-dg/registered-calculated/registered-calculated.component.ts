@@ -31,10 +31,10 @@ export class RegisteredCalculatedComponent extends FactoryONE {
     // if there is no data to request, route to first page which is edit step
     console.log(this.closeTabService.flowRuleRegister.offeringGroupIds);
 
-    if (MathS.isNull(this.closeTabService.flowRuleRegister.offeringGroupIds)) {
-      this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStep);
-      return;
-    }
+    // if (MathS.isNull(this.closeTabService.flowRuleRegister.offeringGroupIds)) {
+    //   this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStep);
+    //   return;
+    // }
     this.dictionaryWrapper();
     console.log(this.closeTabService.flowRuleRegister.requestDraftId);
 

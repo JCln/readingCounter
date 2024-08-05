@@ -66,6 +66,10 @@
         { id: 1, dynamicId: 1, field: 'Interval', title: 'فوری' },
         { id: 2, dynamicId: 2, field: 'AccurateTime', title: 'بازه‌ای' },
     ]
+    window.__env.getTarrifInsertModeDictionary = [
+        { id: 1, dynamicId: 1, field: 'Automatic', title: 'خودکار' },
+        { id: 2, dynamicId: 2, field: 'Manual', title: 'دستی' },
+    ]
     window.__env.getLogoutReasonDictionary = [
         { id: 0, title: 'توسط کاربر' },
         { id: 1, title: 'ویرایش شده' },

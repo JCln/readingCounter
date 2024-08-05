@@ -253,8 +253,15 @@ export class getOfferingIds {
 }
 export class getTarrifCalculationModeDictionary {
     static readonly DEFAULT = new getTarrifCalculationModeDictionary([
-        { id: 1, dynamicId: 1, field: 'Interval', title: 'فوری' },
-        { id: 2, dynamicId: 2, field: 'AccurateTime', title: 'بازه‌ای' },
+        { id: 1, dynamicId: 1, field: 'Interval', title: 'بازه‌ای' },
+        { id: 2, dynamicId: 2, field: 'AccurateTime', title: 'فوری' },
+    ]);
+    private constructor(public readonly value: { id: number, dynamicId: number, title: string, field: string }[]) { }
+}
+export class getTarrifInsertModeDictionary {
+    static readonly DEFAULT = new getTarrifInsertModeDictionary([
+        { id: 1, dynamicId: 1, field: 'Automatic', title: 'خودکار' },
+        { id: 2, dynamicId: 2, field: 'Manual', title: 'دستی' },
     ]);
     private constructor(public readonly value: { id: number, dynamicId: number, title: string, field: string }[]) { }
 }

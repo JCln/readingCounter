@@ -47,6 +47,9 @@ export class UtilsService {
   getTarrifCalculationModeDictionary = () => {
     return this.envService.getTarrifCalculationModeDictionary;
   }
+  getTarrifInsertModeDictionary = () => {
+    return this.envService.getTarrifInsertModeDictionary;
+  }
   getDenyTracking = (): boolean => {
     const jwtRole = this.compositeService.getAuthUser();
     return !!jwtRole.roles.toString().includes(this.denyTracking);

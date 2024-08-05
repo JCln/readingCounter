@@ -69,7 +69,7 @@ import { MathS } from '../classes/math-s';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ProfileService } from './profile.service';
 import { Search } from '../classes/search';
-import { IBank, IBranchState, ICalculationInstallment, ICalculationRequestDraft, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITag, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource, IZoneConstants } from 'interfaces/i-branch';
+import { IBank, IBranchState, IClientAll, IClientGetAllLazy, ICustomerType, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IRequestDraft, IRequestDraftCalculationRes, IRequestDraftLazy, IScheduledPaymentMethod, ISiphon, ITag, ITariff, ITariffAllLazy, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IWaterSource, IZoneConstants } from 'interfaces/i-branch';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 
 @Injectable({
@@ -176,6 +176,7 @@ export class CloseTabService {
     regionId: null,
     zoneId: null,
     villageId: null,
+    trackNumber: 0,
     nationalId: '',
     postalCode: '',
     mobiles: '',
@@ -233,7 +234,7 @@ export class CloseTabService {
   // save data when route change 
   saveDataForAppLevel1: IAuthLevels[];
   saveDataForAppLevel2: IAuthLevel2[];
-  saveDataForAppLevel3: IAuthLevel3[];
+  saveDataForAppLevel3: IAuthLevel3[] = [];
   saveDataForAppLevel4: IAuthLevel4[] = [];
 
   saveDataForCounterState: ICounterState[] = [];
