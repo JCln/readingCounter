@@ -48,8 +48,8 @@ export class RegisteredExtrasComponent extends FactoryONE {
   //   }
   //   return true;
   // }
+  // to do verification and post sth to extras datas
   callAPI = async () => {
-    // to do verification and post sth to extras datas
     console.log(this.closeTabService.flowRuleRegister);
     if (this.branchesService.verificationService.registeredExtras(this.closeTabService.flowRuleRegister)) {
       const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationAddModification, this.closeTabService.flowRuleRegister);
