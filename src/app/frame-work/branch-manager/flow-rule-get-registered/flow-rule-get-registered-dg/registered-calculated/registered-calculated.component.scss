@@ -1,1 +1,126 @@
 @import 'stepper';
+
+.content {
+    --light-danger: #ffd7d4;
+    --light-info: #d4faff;
+    --light-success: #d6ffd4;
+    --light-yellow: #fffed4;
+}
+
+.to-pay {
+    background: var(--light-info);
+}
+
+._discount {
+    display: flex;
+    background: var(--light-success);
+}
+
+._sum {
+    display: flex;
+    background: var(--light-danger);
+    font-weight: 900;
+    font-size: calc(var(--font_s) + 3px);
+}
+
+._center {
+    text-align: center;
+}
+
+.green_response {
+    border: 0;
+    padding: 0;
+    color: var(--primary_3);
+}
+
+.selected_wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5px;
+    flex-wrap: wrap;
+    direction: rtl;
+    gap: var(--font_05);
+
+    .selected_offering {
+        display: flex;
+        gap: 5px;
+    }
+
+    .selected_offering_item {
+        max-width: 12rem;
+        width: 8rem;
+        padding: var(--font_05);
+        border-radius: $border_7;
+        text-align: center;
+        font-size: var(--font_s);
+        font-weight: 600;
+        background: var(--white);
+        color: var(--primary_3);
+        transition: box-shadow cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
+    }
+}
+
+._addable {
+    display: block;
+    padding: 5px 0;
+    background: var(--light-yellow) !important;
+}
+
+.input_addable {
+    font-weight: 600;
+    font-size: var(--font_s);
+    width: 100%;
+    padding: 0 5px;
+    border: 1px solid var(--secondary_2);
+}
+
+table {
+    border: none;
+    border-collapse: collapse;
+}
+
+td,
+tr {
+    border: 1px solid var(--secondary_2);
+    text-align: right;
+    padding: 0 5px;
+}
+
+[hidden] {
+    display: none;
+}
+
+.table-caption {
+    font-size: 2.5rem;
+    color: var(--thirdy_4);
+}
+
+.first_column {
+    min-width: 20rem;
+}
+
+.thead-title {
+    color: var(--primary_5);
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.p_icons {
+    vertical-align: middle;
+}
+
+::ng-deep .p-inputnumber-input,
+.p-inputtext {
+    direction: ltr;
+    box-shadow: none !important;
+    outline: 0 !important;
+    border: 0 !important;
+    pointer-events: none;
+    background: transparent !important;
+    font-size: var(--font_s);
+}
+
+::ng-deep .p-dropdown {
+    max-width: 100%;
+}

@@ -1599,7 +1599,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTabsare3Formula, url: EN_Routes.wrmrformulatabsare3 },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel1, url: EN_Routes.wrmalap },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel2, url: EN_Routes.wrmalme },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.wrmalcr },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.authLevel3 },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.userRoleHistory, defaultValue: [] },

@@ -69,6 +69,7 @@ export class ReadingPeriodComponent extends FactoryONE {
     if (MathS.isNull(this.closeTabService.saveDataForReadingPeriodManager)) {
       this.callAPI();
     }
+    this.toConvert();
   }
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  نوع دوره: ' + rowData['dataSource'].readingPeriodKindId + '،  ناحیه: ' + rowData['dataSource'].zoneId);

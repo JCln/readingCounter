@@ -36,7 +36,7 @@ export enum EN_Routes {
     'wrmrformulatabsare3' = '/wr/m/r/formula/tabsare3',
     'wrmalap' = '/wr/m/al/ap',
     'wrmalme' = '/wr/m/al/me',
-    'wrmalcr' = '/wr/m/al/cr',
+    authLevel3 = '/wr/m/al/cr',
     'wrmalac' = '/wr/m/al/ac',
     'wrmuall' = '/wr/mu/all',
     'wrmuadd' = '/wr/mu/add',

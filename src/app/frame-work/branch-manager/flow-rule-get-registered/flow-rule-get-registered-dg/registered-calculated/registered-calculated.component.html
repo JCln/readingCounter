@@ -1,42 +1,82 @@
-<div class="calculated_form">
-    <!-- *ngIf="!closeTabService.requestDraftCalculationRes || closeTabService.requestDraftCalculationRes.length === 0" -->
-    <form class="flex-control" (ngSubmit)="callAPI()">
-        <div class="_description">
-            <h2>خدمات انتخاب شده</h2>
-            <hr>            
+<section class="content" *ngIf="closeTabService.requestDraftCalculationRes.length > 0">
+    <div class="selected_wrapper">
+        <h2>خدمات انتخاب شده</h2>
+        <div class="selected_offering">
             <div *ngFor="let offeringDic of offeringGroupDictionary">
                 <div *ngFor="let item of closeTabService.flowRuleRegisteredEdit.offeringGroupIds">
-                    <li class="selected_offering" *ngIf="offeringDic.id == item">
+                    <div class="selected_offering_item" *ngIf="offeringDic.id == item">
                         {{offeringDic.title}}
-                    </li>
+                    </div>
                 </div>
             </div>
         </div>
-        <footer>
-            <button type="submit" class="btn_1">
-                محاسبه
-                <i class="pi pi-calculator"></i>
-            </button>
-        </footer>
-    </form>
-    <div class="registered_extras_wrapper flex-control">
-        <app-registered-extras></app-registered-extras>
     </div>
-</div>
-
-<section class="content" *ngIf="closeTabService.requestDraftCalculationRes.length > 0">
-    <h1 class="green_response">نتیجه محاسبه</h1>
 
     <table>
+        <h1 class="green_response">مشاهده اطلاعات محاسبه شده</h1>
+        <div class="hr_dashed"></div>
+        <h1 class="table-caption">
+            مبالغ، تخفیفات، کسورات و اضافات
+        </h1>
         <tbody>
+            <thead>
+            </thead>
             <div>
                 <tr>
-                    <td>شرح خدمات</td>
-                    <td>مبلغ</td>
+                    <td class="thead-title first_column">شرح خدمات</td>
+                    <td class="thead-title">مبلغ</td>
+                    <td class="thead-title">عنوان تخفیف</td>
+                    <td class="thead-title">تخفیف</td>
+                    <td class="thead-title">حذف</td>
                 </tr>
-                <tr *ngFor="let item of closeTabService.requestDraftCalculationRes">
+                <tr class="first_column" *ngFor="let item of closeTabService.requestDraftCalculationRes; i as index">
                     <td>{{item.offeringTitle}}</td>
-                    <td class="_value">{{item.value}}</td>
+                    <td>
+                        <p-inputNumber inputId="integeronly" name="itemvalue" [(ngModel)]="item.value">
+                        </p-inputNumber>
+                    </td>
+                    <td>{{null}}</td>
+                    <td>{{null}}</td>
+                    <td class="_center">
+                        <i class="p_icons pi pi-times-circle" (click)="removeItem(index)"> 
+                            <!-- [hidden]="this.closeTabService.requestDraftCalculationRes[index].isEditable" -->
+                        </i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="thead-title">مجموع</td>
+                    <td class="_sum">
+                        <p-inputNumber inputId="integeronly" name="lastestsum" [(ngModel)]="latestSum">
+                        </p-inputNumber>
+                        <p>ریال</p>
+                    </td>
+                    <td></td>
+                    <td class="_discount">
+                        <p-inputNumber inputId="integeronly" name="discount" [(ngModel)]="latestSum">
+                        </p-inputNumber>
+                        <p>ریال</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="thead-title">قابل پرداخت</td>
+                    <td class="to-pay"></td>
+                </tr>
+                <tr class="_addable"
+                    *ngFor="let item of closeTabService.flowRuleRegister.amountModifications; index as i">
+                    <td class="first_column">
+                        <p-dropdown name="{{'offering'[i]}}" [options]="offeringDictionary"
+                            [(ngModel)]="item.offeringId" placeholder="انتخاب مورد" optionValue="id" optionLabel="title"
+                            filter="true">
+                        </p-dropdown>
+                    </td>
+                    <td>
+                        <input class="input_addable" name="{{'offeringvalue'[i]}}" maxlength="9"
+                            [(ngModel)]="item.amount">
+                    </td>
+                    <td class="_center">
+                        <i class="p_icons pi pi-plus-circle" (click)="addNewItem(item)">
+                        </i>
+                    </td>
                 </tr>
             </div>
         </tbody>

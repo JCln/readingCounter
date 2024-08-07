@@ -80,6 +80,19 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
       }
     }
   }
+  clickedDropDownsFirst = (event: any, element: string, dataId: any, dictionary: any) => {
+    console.log(event);
+    console.log(dictionary);
+    console.log(element);
+    console.log(dataId);
+
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (this.dataSource[index].id === dataId.id) {
+        console.log(dataId);
+        this.dataSource[index][element] = event.title;
+      }
+    }
+  }
   refreshTable() {
     this.refreshedTable.emit(true);
   }

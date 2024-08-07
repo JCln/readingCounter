@@ -3,9 +3,19 @@
         <section>
             <div class="overall-info">
                 <div class="input_2">
+                    <div class="_key">نام کامل</div>
+                    <input [readOnly]="true" class="_value" name="fullname"
+                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.fullName">
+                </div>
+                <div class="input_2">
                     <div class="_key">ش.پیگیری</div>
                     <input [readOnly]="true" class="_value" name="trackNumber"
                         [(ngModel)]="closeTabService.flowRuleRegisteredEdit.trackNumber">
+                </div>
+                <div class="input_2">
+                    <div class="_key">شناسه قبض</div>
+                    <input [readOnly]="true" class="_value" name="billId"
+                        [(ngModel)]="closeTabService.flowRuleRegisteredEdit.billId">
                 </div>
             </div>
         </section>

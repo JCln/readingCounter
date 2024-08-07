@@ -95,7 +95,7 @@ export class ColumnManager {
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, isSelectedOrigin: false },
         { field: 'x', header: 'X', isSelected: false, isSelectedOrigin: false },
         { field: 'y', header: 'Y', isSelected: false, isSelectedOrigin: false },
-        { field: 'billId', header: 'ش.قبض', isSelected: false, isSelectedOrigin: false },
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false },
         { field: 'radif', header: 'ش پرونده', isSelected: true, isSelectedOrigin: true },
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isSelectedOrigin: true },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false },
@@ -2077,7 +2077,7 @@ export class ColumnManager {
     ];
     auth3: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'authLevel2Id', header: 'ماژول', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'ماژول', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'cssClass', header: 'کلاس css', isSelected: false, isSelectedOrigin: false },
         { field: 'route', header: 'مسیر', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
@@ -3635,10 +3635,10 @@ export class ColumnManager {
         { field: 'address', header: 'آدرس', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
     ]
     requestDraft_confirmDialog: IObjectIteratation[] = [
-        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
-        { field: 'fullName', header: 'نام کامل', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
-        { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false },
         { field: 'trackNumber', header: 'کد پیگیری', isSelected: false, isSelectedOrigin: false, enableTooltip: true, ltr: true, icon: "grid-column: auto/ span 2" },
+        { field: 'fullName', header: 'نام کامل', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, isSelectOption: true, icon: "grid-column: auto/ span 2" },
+        { field: 'customerNumber', header: 'شماره پرونده', isSelected: false, isSelectedOrigin: false },
     ]
     requestDraftFullView: IObjectIteratation[] = [
         // //// personal

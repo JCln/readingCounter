@@ -12,7 +12,6 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { RequestDraftDgComponent } from '../request-draft-getlazy/request-draft-dg/request-draft-dg.component';
 import { Table } from 'primeng/table';
 import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -37,7 +36,7 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
   customerTypeDictionary: [];
   offeringGroupDictionary: any[] = [];
 
-  _numberOfExtraColumns: number[] = [1, 2, 3];
+  _numberOfExtraColumns: number[] = [1, 2];
   _selectedColumnsToRemember: string = 'selectedFlowRuleGetRegisteredLazy';
   _sessionName: string = 'flowRuleGetRegisteredLazy';
   _outputFileName: string = 'flowRuleGetRegisteredLazy';
@@ -176,19 +175,6 @@ export class FlowRuleGetRegisteredComponent extends AllListsFactory implements A
       this.listManagerService.utilsService.snackBarMessageSuccess(res.message);
       this.refreshTable();
     }
-  }
-  editSingleRow = (data: IRequestDraft) => {
-    this.ref = this.dialogService.open(RequestDraftDgComponent, {
-      data: data,
-      rtl: true,
-      width: '70%'
-    })
-    this.ref.onClose.subscribe((res: IRequestDraft) => {
-      console.log(res);
-
-      if (res)
-        this.refreshTable();
-    });
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);

@@ -15,7 +15,8 @@ export interface IAuthLevel2 {
 
 export interface IAuthLevel3 {
     id: number;
-    authLevel2Id: number | string;
+    authLevel2Id: number;
+    dynamicId: any,
     title: string;
     cssClass: string;
     route: string;

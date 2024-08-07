@@ -59,6 +59,8 @@ export class CounterReportComponent extends FactoryONE {
     if (MathS.isNull(this.closeTabService.saveDataForCounterReport)) {
       this.callAPI();
     }
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
   }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].dynamicZoneId);
@@ -79,7 +81,6 @@ export class CounterReportComponent extends FactoryONE {
       return;
     }
     await this.readManagerService.postObjectWithSuccessMessage(ENInterfaces.CounterReportEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
     this.callAPI();
   }
 

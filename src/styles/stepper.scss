@@ -190,14 +190,6 @@ footer {
     justify-content: center;
 }
 
-.flex-control {
-    width: 100%;
-
-    @media (min-width:550px) {
-        width: 50%;
-    }
-}
-
 .calculated_form {
     display: flex;
     direction: rtl;
@@ -207,8 +199,6 @@ footer {
         flex-wrap: wrap;
     }
 }
-
-.registered_extras_wrapper {}
 
 .validation-form,
 .installment-form {
@@ -269,6 +259,12 @@ h2 {
     font-size: var(--font_s);
 }
 
+tbody {
+    border: 1px solid var(--secondary_2);
+}
+
+h1 {}
+
 // for calculation step
 
 table {
@@ -294,6 +290,7 @@ tr {
 
 td {
     min-width: 10rem;
+    color: var(--thirdy_3);
 }
 
 ._value {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IAmountModifications } from 'interfaces/i-branch';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
@@ -13,6 +14,8 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class RegisteredCalculatedComponent extends FactoryONE {
   offeringGroupDictionary: any[] = [];
+  offeringDictionary: any[] = [];
+  latestSum: number = null;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -23,19 +26,51 @@ export class RegisteredCalculatedComponent extends FactoryONE {
   callAPI = async () => {
     const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInTime, this.closeTabService.flowRuleRegister);
     this.closeTabService.requestDraftCalculationRes = res;
+    this.closeTabService.requestDraftCalculationRes.forEach(item => {
+      this.latestSum += item.value;
+    })
   }
   dictionaryWrapper = async () => {
     this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+    this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering(false);
   }
+  addNewItem(item: any) {
+    let titleValue: string = '';
+    this.offeringDictionary.forEach(offer => {
+      if (item.offeringId == offer.id) {
+        titleValue = offer.title;
+        return;
+      }
+    })
+    console.log(titleValue);
+
+    // this.closeTabService.flowRuleRegister.amountModifications.push({ offeringId: null, amount: null });
+    this.closeTabService.requestDraftCalculationRes.push(
+      {
+        offeringTitle: titleValue,
+        value: item.amount,
+        typeTitle: '',
+        isEditable: true
+      })
+  }
+  firstViewItemToAdd() {
+    if (this.closeTabService.flowRuleRegister.amountModifications.length == 0)
+      this.closeTabService.flowRuleRegister.amountModifications.push({ offeringId: this.offeringDictionary[0], amount: null });
+  }
+  removeItem(index: number) {
+    this.closeTabService.requestDraftCalculationRes.splice(index, 1);
+  }
+
   classWrapper(): void {
     // if there is no data to request, route to first page which is edit step
     console.log(this.closeTabService.flowRuleRegister.offeringGroupIds);
-
+    this.callAPI();
     // if (MathS.isNull(this.closeTabService.flowRuleRegister.offeringGroupIds)) {
     //   this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStep);
     //   return;
     // }
     this.dictionaryWrapper();
+    this.firstViewItemToAdd();
     console.log(this.closeTabService.flowRuleRegister.requestDraftId);
 
   }

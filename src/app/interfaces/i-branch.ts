@@ -231,7 +231,8 @@ export interface ICalculationRequestDraft {
 export interface IRequestDraftCalculationRes {
     value: number,
     offeringTitle: string,
-    typeTitle: string
+    typeTitle: string,
+    isEditable?:boolean
 }
 export interface IRequestDraftLazy {
     data: IRequestDraft[],

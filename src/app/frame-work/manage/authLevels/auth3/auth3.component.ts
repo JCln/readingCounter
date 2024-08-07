@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -40,21 +41,22 @@ export class Auth3Component extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.refreshTable();
+          this.callAPI();
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAppLevel3 = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForAppLevel3) {
-      this.closeTabService.saveDataForAppLevel3 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel3GET);
-    }
-
+  callAPI = async () => {
+    this.closeTabService.saveDataForAppLevel3 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel3GET);
+    this.insertToAux();
     this.authLevel2Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev2Dictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'authLevel2Id');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'dynamicId');
+  }
+  classWrapper = async (canRefresh?: boolean) => {
+    if (MathS.isNull(this.closeTabService.saveDataForAppLevel3)) {
+      this.callAPI();
+    }
+    this.authLevel2Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev2Dictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'dynamicId');
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel3 = this.closeTabService.saveDataForAppLevel3.slice(0, index).concat(this.closeTabService.saveDataForAppLevel3.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
@@ -63,35 +65,30 @@ export class Auth3Component extends FactoryONE {
       const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel3REMOVE, rowDataAndIndex['dataSource'].id);
       if (res) {
         this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-        this.refetchTable(rowDataAndIndex['ri']);
+        this.callAPI();
       }
     }
   }
+  insertToAux = () => {
+    this.closeTabService.saveDataForAppLevel3.forEach(item => {
+      item.dynamicId = item.authLevel2Id;
+    })
+  }
   onRowEditInit(dataSource: any) {
-    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    if (!this.authsManagerService.verification(dataSource)) {
+    console.log(dataSource['dataSource']);
+    if (!this.authsManagerService.verification(dataSource['dataSource'])) {
       this.closeTabService.saveDataForAppLevel3[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource['dataSource'].authLevel2Id !== 'object') {
-      this.authLevel2Dictionary.find(item => {
-        if (item.title === dataSource['dataSource'].authLevel2Id)
-          dataSource['dataSource'].authLevel2Id = item.id
-      })
-    } else {
-      dataSource['dataSource'].authLevel2Id = dataSource['dataSource'].authLevel2Id['id'];
-    }
     const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3EDIT, dataSource['dataSource']);
     this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'authLevel2Id');
+    this.callAPI();
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'authLevel2Id');
-    // this.closeTabService.saveDataForAppLevel3[index] = this.clonedProducts[dataSource.id];
-    // delete this.closeTabService.saveDataForAppLevel3[dataSource.id];
-    // return;
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'dynamicId');
   }
 
 }
