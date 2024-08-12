@@ -6,7 +6,8 @@ export interface IAuthLevels {
 }
 export interface IAuthLevel2 {
     id: number;
-    authLevel1Id: number | string;
+    authLevel1Id: number;
+    dynamicId: any;
     title: string;
     cssClass: string;
     inSidebar: boolean;
@@ -27,7 +28,8 @@ export interface IAuthLevel3 {
 }
 export interface IAuthLevel4 {
     id: number;
-    authLevel3Id: number | string;
+    authLevel3Id: number;
+    dynamicId: any;
     title: string;
     value: string;
     cssClass: string;

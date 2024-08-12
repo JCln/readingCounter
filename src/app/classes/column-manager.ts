@@ -2070,7 +2070,7 @@ export class ColumnManager {
     ];
     auth2: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'authLevel1Id', header: 'app', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'app', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'cssClass', header: 'کلاس css', isSelected: false, isSelectedOrigin: false },
         { field: 'inSidebar', header: 'سایدبار', isSelected: false, isSelectedOrigin: false, isBoolean: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true }
@@ -2140,7 +2140,7 @@ export class ColumnManager {
     ]
     auth4: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'کنترلر', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'value', header: 'مقدار', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'cssClass', header: 'کلاس css', isSelected: false, isSelectedOrigin: false, ltr: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },

@@ -49,18 +49,20 @@ export class CounterReportComponent extends FactoryONE {
       item.dynamicZoneId = item.zoneId;
     })
   }
+  async convertion() {
+    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForCounterReport = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.CounterReportAll);
     this.insertToAuxZoneid();
-    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
+    this.convertion();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForCounterReport)) {
       this.callAPI();
     }
-    this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterReport, this.zoneDictionary, 'dynamicZoneId');
+    this.convertion();
   }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].dynamicZoneId);

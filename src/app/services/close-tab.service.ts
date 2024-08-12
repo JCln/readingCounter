@@ -233,7 +233,7 @@ export class CloseTabService {
   /***///////////// */
   // save data when route change 
   saveDataForAppLevel1: IAuthLevels[];
-  saveDataForAppLevel2: IAuthLevel2[];
+  saveDataForAppLevel2: IAuthLevel2[] = [];
   saveDataForAppLevel3: IAuthLevel3[] = [];
   saveDataForAppLevel4: IAuthLevel4[] = [];
 
@@ -1598,9 +1598,9 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTabsare2Formula, url: EN_Routes.wrmrformulatabsare2 },
     { id: 1, value: ENEssentialsToSave.saveDataForTabsare3Formula, url: EN_Routes.wrmrformulatabsare3 },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel1, url: EN_Routes.wrmalap },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel2, url: EN_Routes.wrmalme },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel2, url: EN_Routes.authLevel2 },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.authLevel3 },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac, defaultValue: [] },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.authLevel4, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.userRoleHistory, defaultValue: [] },
     { id: 1, value: ENEssentialsToSave.saveDataForUserRoleHistory, url: EN_Routes.userRoleHistoryDetails },

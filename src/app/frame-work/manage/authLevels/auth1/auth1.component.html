@@ -6,7 +6,7 @@
     [_numberOfExtraColumns]="[1, 2]"
     [_selectedColumnsToRemember]="'selectedAuth1'"
     [_sessionName]="'auth1-session'"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (removedRow)="removeRow($event)"
     (onRowEditedInit)="onRowEditInit($event)"

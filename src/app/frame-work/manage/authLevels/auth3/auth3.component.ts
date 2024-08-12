@@ -51,14 +51,13 @@ export class Auth3Component extends FactoryONE {
     this.authLevel2Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev2Dictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'dynamicId');
   }
-  classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForAppLevel3)) {
       this.callAPI();
     }
     this.authLevel2Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev2Dictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'dynamicId');
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel3 = this.closeTabService.saveDataForAppLevel3.slice(0, index).concat(this.closeTabService.saveDataForAppLevel3.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ماژول: ' + rowDataAndIndex['dataSource'].authLevel2Id);
     if (a) {
@@ -78,14 +77,12 @@ export class Auth3Component extends FactoryONE {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    console.log(dataSource['dataSource']);
-    if (!this.authsManagerService.verification(dataSource['dataSource'])) {
-      this.closeTabService.saveDataForAppLevel3[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      return;
+    if (this.authsManagerService.verification(dataSource['dataSource'])) {
+      const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3EDIT, dataSource['dataSource']);
+      this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
     }
-    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel3EDIT, dataSource['dataSource']);
-    this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-    this.callAPI();
+
   }
   onRowEditCancel() {
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'dynamicId');

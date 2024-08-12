@@ -105,8 +105,8 @@
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
                                     [ngClass]="{'p-dropdown-editable': true}" optionValue="id" optionLabel="title"
-                                    (onChange)="clickedDropDownsFirst(dataSource[col.field], col.field , dataSource, dictionary)"
-                                    [filter]="true" [showClear]="true" [disabled]="col.readonly">
+                                    (onChange)="clickedDropDownsFirst(dataSource)" [filter]="true"
+                                    [showClear]="true" [disabled]="col.readonly">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">

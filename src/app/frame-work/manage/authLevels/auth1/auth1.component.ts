@@ -37,23 +37,20 @@ export class Auth1Component extends FactoryONE {
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAppLevel1 = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForAppLevel1) {
-      this.closeTabService.saveDataForAppLevel1 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel1GET);
+  callAPI = async () => {
+    this.closeTabService.saveDataForAppLevel1 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel1GET);
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForAppLevel1)) {
+      this.callAPI();
     }
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel1 = this.closeTabService.saveDataForAppLevel1.slice(0, index).concat(this.closeTabService.saveDataForAppLevel1.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title);
     if (a) {
       const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel1REMOVE, rowDataAndIndex['dataSource'].id)
       if (res) {
         this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-        this.refetchTable(rowDataAndIndex['ri']);
       }
     }
   }

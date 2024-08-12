@@ -31,20 +31,20 @@ export class CounterStateComponent extends FactoryONE {
       item.changableZoneId = item.zoneId;
     })
   }
-  doDictionaryConfigs = async () => {
+  convertion = async () => {
     this.zoneDictionary = await this.readManagerService.dictionaryWrapperService.getZoneDictionary();
-    this.insertToAuxZoneid();
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'changableZoneId');
   }
   callAPI = async () => {
     this.closeTabService.saveDataForCounterState = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.counterStateAll);
-    this.doDictionaryConfigs();
+    this.insertToAuxZoneid();
+    this.convertion();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForCounterState)) {
       this.callAPI();
     }
-    this.doDictionaryConfigs();
+    this.convertion();
   }
 
   ngOnInit(): void {
@@ -109,4 +109,7 @@ export class CounterStateComponent extends FactoryONE {
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   testChangedValue() { this.newRowLimit = 2; }
+  onRowEditCancel() {
+   this.convertion();
+  }
 }

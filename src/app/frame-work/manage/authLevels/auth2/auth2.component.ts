@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-auth2',
@@ -43,26 +44,33 @@ export class Auth2Component extends FactoryONE {
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAppLevel2 = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForAppLevel2) {
-      this.closeTabService.saveDataForAppLevel2 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel2GET);
-    }
-
-    this.authLevel1Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev1Dictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
+  insertToAux = () => {
+    this.closeTabService.saveDataForAppLevel2.forEach(item => {
+      item.dynamicId = item.authLevel1Id;
+    })
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel2 = this.closeTabService.saveDataForAppLevel2.slice(0, index).concat(this.closeTabService.saveDataForAppLevel2.slice(index + 1));
+  async callDictionary() {
+    this.authLevel1Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev1Dictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'dynamicId');
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForAppLevel2 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel2GET);
+    this.insertToAux();
+    this.callDictionary();
+  }
+
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForAppLevel2)) {
+      this.callAPI();
+    }
+    this.callDictionary();
+  }
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  app: ' + rowDataAndIndex['dataSource'].authLevel1Id);
     if (a) {
       const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel2REMOVE, rowDataAndIndex['dataSource'].id);
       if (res) {
         this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-        this.refetchTable(rowDataAndIndex['ri']);
         this.refreshTable();
       }
     }
@@ -71,24 +79,14 @@ export class Auth2Component extends FactoryONE {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    if (!this.authsManagerService.verification(dataSource)) {
-      this.closeTabService.saveDataForAppLevel2[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      return;
+    if (this.authsManagerService.verification(dataSource)) {
+      const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel2EDIT, dataSource['dataSource']);
+      this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
     }
-    if (typeof dataSource['dataSource'].authLevel1Id !== 'object') {
-      this.authLevel1Dictionary.find(item => {
-        if (item.title === dataSource['dataSource'].authLevel1Id)
-          dataSource['dataSource'].authLevel1Id = item.id
-      })
-    } else {
-      dataSource['dataSource'].authLevel1Id = dataSource['dataSource'].authLevel1Id['id'];
-    }
-    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel2EDIT, dataSource['dataSource']);
-    this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
+    this.callDictionary();
   }
 
 }

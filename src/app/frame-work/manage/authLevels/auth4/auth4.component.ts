@@ -47,10 +47,17 @@ export class Auth4Component extends FactoryONE {
   }
   convertion = async () => {
     this.authLevel3Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev3Dictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'dynamicId');
   }
+  insertToAux = () => {
+    this.closeTabService.saveDataForAppLevel4.forEach(item => {
+      item.dynamicId = item.authLevel3Id;
+    })
+  }
+
   callAPI = async () => {
     this.closeTabService.saveDataForAppLevel4 = await this.authsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.AuthLevel4GET);
+    this.insertToAux();
     this.convertion();
   }
   classWrapper = async () => {
@@ -59,14 +66,13 @@ export class Auth4Component extends FactoryONE {
     }
     this.convertion();
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel4 = this.closeTabService.saveDataForAppLevel4.slice(0, index).concat(this.closeTabService.saveDataForAppLevel4.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  کنترلر: ' + rowDataAndIndex['dataSource'].authLevel3Id);
     if (a) {
       const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel4REMOVE, rowDataAndIndex['dataSource'].id);
       if (res) {
         this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-        this.refetchTable(rowDataAndIndex['ri']);
+        this.callAPI();
       }
     }
   }
@@ -74,24 +80,14 @@ export class Auth4Component extends FactoryONE {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    if (!this.authsManagerService.verification(dataSource)) {
-      this.closeTabService.saveDataForAppLevel4[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      return;
+    if (this.authsManagerService.verification(dataSource['dataSource'])) {
+      const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel4EDIT, dataSource['dataSource']);
+      this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
     }
-    if (typeof dataSource['dataSource'].authLevel3Id !== 'object') {
-      this.authLevel3Dictionary.find(item => {
-        if (item.title === dataSource['dataSource'].authLevel3Id)
-          dataSource['dataSource'].authLevel3Id = item.id
-      })
-    } else {
-      dataSource['dataSource'].authLevel3Id = dataSource['dataSource'].authLevel3Id['id'];
-    }
-    const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.AuthLevel4EDIT, dataSource['dataSource']);
-    this.authsManagerService.utilsService.snackBarMessageSuccess(res.message);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
+    this.convertion();
   }
 
 }

@@ -1203,7 +1203,7 @@ export class VerificationService {
   }
   sectionsNullVertificate = (value: any): boolean => {
     if (value.hasOwnProperty('id')) {
-      if (MathS.isNull(value.id)) {
+      if (MathS.isNullZero(value.id)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_Id);
         return false;
       }
