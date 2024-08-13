@@ -9,6 +9,8 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { UserOnlinesDgComponent } from './user-onlines-dg/user-onlines-dg.component';
 import { UserOnlinesImgDgComponent } from './user-onlines-img-dg/user-onlines-img-dg.component';
 import { UserOnlinesVideoDgComponent } from './user-onlines-video-dg/user-onlines-video-dg.component';
+import { MathS } from 'src/app/classes/math-s';
+import { IUserOnlines } from 'interfaces/iuser-manager';
 
 @Component({
   selector: 'app-user-onlines',
@@ -17,6 +19,7 @@ import { UserOnlinesVideoDgComponent } from './user-onlines-video-dg/user-online
 })
 export class UserOnlinesComponent extends FactoryONE {
   ref: DynamicDialogRef;
+  shouldActive: boolean = false;
 
   constructor(
     public closeTabService: CloseTabService,
@@ -27,20 +30,29 @@ export class UserOnlinesComponent extends FactoryONE {
     super();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForUserOnlines = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForUserOnlines) {
-      this.closeTabService.saveDataForUserOnlines = await this.userService.ajaxReqWrapperService.getDataSource(ENInterfaces.userOnlines);
-    }
-    this.convertLoginTime();
-  }
   convertLoginTime = () => {
     this.closeTabService.saveDataForUserOnlines.forEach(item => {
       item.connectDateTime = this.dateJalaliService.getDate(item.connectDateTime) + '   ' + this.dateJalaliService.getTime(item.connectDateTime);
     })
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForUserOnlines = await this.userService.ajaxReqWrapperService.getDataSource(ENInterfaces.userOnlines);
+    this.convertLoginTime();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForUserOnlines)) {
+      this.callAPI();
+    }
+    this.getUserRole();
+    this.convertLoginTime();
+  }
+  getUserRole = (): void => {
+    this.shouldActive = this.closeTabService.utilsService.getIsAdminRole();
+  }
+  showExactConfig = (dataSource: IUserOnlines) => {
+    dataSource.id = dataSource.userId;
+    console.log(dataSource);
+    this.closeTabService.utilsService.showUserConfigDialog(dataSource);
   }
   textMessageToAContact = (value: any) => {
     this.ref = this.dialogService.open(UserOnlinesDgComponent, {

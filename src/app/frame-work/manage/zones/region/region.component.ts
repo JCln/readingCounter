@@ -77,12 +77,9 @@ export class RegionComponent extends FactoryONE {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.closeTabService.saveDataForRegion[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      return;
-    }
-    const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.RegionEDIT, dataSource['dataSource']);
-    if (res) {
+    if (this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      const res = await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.RegionEDIT, dataSource['dataSource']);
+      this.sectorsManagerService.utilsService.snackBarMessageSuccess(res.message);
       this.callAPI();
     }
   }

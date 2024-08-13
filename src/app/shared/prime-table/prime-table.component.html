@@ -725,7 +725,26 @@
                     <div class="tooltip_text_right">ویرایش مسدود سازی IP</div>
                 </i>
             </td>
-            <td class="__icon-columns" *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'"
+            <td class="__icon-columns" *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">ارسال پیام</span>
+                <i class="tooltip p_icons pi pi-envelope">
+                    <div class="tooltip_text_right">ارسال پیام</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">ارسال تصویر</span>
+                <i class="tooltip p_icons pi pi-image">
+                    <div class="tooltip_text_right">ارسال تصویر</div>
+                </i>
+            </td>
+            <td class="__icon-columns" *ngIf="_outputFileName == 'userOnlines'" (click)="openEditDialog(dataSource)">
+                <span class="ui-column-title">ارسال ویدیو</span>
+                <i class="tooltip p_icons pi pi-video">
+                    <div class="tooltip_text_right">ارسال ویدیو</div>
+                </i>
+            </td>
+            <td class="__icon-columns"
+                *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch' || _outputFileName == 'userOnlines'"
                 class="edit_button" (click)="showExactConfig(dataSource)">
                 <span class="ui-column-title">تغییر وضعیت</span>
                 <i class="tooltip _tooltip_special _map_frame_show p_icons pi pi-ellipsis-h">
@@ -760,24 +779,6 @@
                 <span class="ui-column-title">لیست قبلا صادر شده</span>
                 <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
                     <div class="tooltip_text_right">لیست قبلا صادر شده</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLMAll(dataSource)">
-                <span class="ui-column-title">ارسال پیام</span>
-                <i class="tooltip p_icons pi pi-envelope">
-                    <div class="tooltip_text_right">ارسال پیام</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLoggs(dataSource)">
-                <span class="ui-column-title">ارسال تصویر</span>
-                <i class="tooltip p_icons pi pi-image">
-                    <div class="tooltip_text_right">ارسال تصویر</div>
-                </i>
-            </td>
-            <td class="__icon-columns" *ngIf="_outputFileName == 'userOnlines'" (click)="openEditDialog(dataSource)">
-                <span class="ui-column-title">ارسال ویدیو</span>
-                <i class="tooltip p_icons pi pi-video">
-                    <div class="tooltip_text_right">ارسال ویدیو</div>
                 </i>
             </td>
         </tr>

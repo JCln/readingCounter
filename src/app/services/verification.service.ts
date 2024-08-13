@@ -9,8 +9,8 @@ import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
 import { INotifyDirectImage, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IReadingReportGISReq, IUserKarkardInput, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { IAUserEditSave, IAddAUserManager, IUserEditOnRole } from 'interfaces/iuser-manager';
-import { IIOPolicy } from 'interfaces/iserver-manager';
-import { IAutomaticImportAddEdit, IFragmentDetails, IFragmentMaster } from 'interfaces/ireads-manager';
+import { IBlockOrSafeIp, IIOPolicy } from 'interfaces/iserver-manager';
+import { IAutomaticImportAddEdit, ICounterState, IDynamicTraverse, IFragmentDetails, IFragmentMaster, IGuild, IImageAttribution, ITextOutput } from 'interfaces/ireads-manager';
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IPolicies } from './DI/privacies';
@@ -1199,6 +1199,88 @@ export class VerificationService {
       return false;
     }
 
+    return true;
+  }
+  counterStateVertification = (dataSource: ICounterState): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNullZero(dataSource.moshtarakinId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_moshtarakinId);
+      return false;
+    }
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+
+    if (MathS.isNaN(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (MathS.isNaN(dataSource.clientOrder)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (MathS.isNaN(dataSource.moshtarakinId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+
+    return true;
+  }
+  verificationTextOutput = (dataSource: any): boolean => {
+    if (!this.sectionVertification(dataSource))
+      return false;
+    return true;
+  }
+  verificationImageAttribution = (dataSource: IImageAttribution): boolean => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    return true;
+  }
+  verificationGuild = (dataSource: IGuild): boolean => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    return true;
+  }
+  verificationBlockOrSafeIP = (dataSource: IBlockOrSafeIp): boolean => {
+    if (MathS.isNullTextValidation(dataSource.ip)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_IP);
+      return false;
+    }
+    if (MathS.isNullTextValidation(dataSource.subnet)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_subnet);
+      return false;
+    }
+    return true;
+  }
+  verificationDynamicTraverse = (dataSource: IDynamicTraverse): boolean => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    if (MathS.isNull(dataSource.storageTitle)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_LatinTitle);
+      return false;
+    }
+    return true;
+  }
+  verificationCounterState = (dataSource: ICounterState): boolean => {
+    if (!this.counterStateVertification(dataSource))
+      return false;
+    return true;
+  }
+  verificationTextOutputEditedRow = (dataSource: ITextOutput): boolean => {
+    if (!this.sectionVertification(dataSource))
+      return false;
+    if (!this.textOutput(dataSource))
+      return false;
     return true;
   }
   sectionsNullVertificate = (value: any): boolean => {

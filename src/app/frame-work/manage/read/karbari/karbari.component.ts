@@ -49,16 +49,20 @@ export class KarbariComponent extends FactoryONE {
       item.dynamicID = item.provinceId;
     })
   }
+  async convertion() {
+    this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'dynamicID');
+  }
   callAPI = async () => {
     this.closeTabService.saveDataForKarbari = await this.readManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.KarbariAll);
-    this.provinceDictionary = await this.readManagerService.dictionaryWrapperService.getProvinceDictionary();
     this.insertToAuxZoneid();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'dynamicID');
+    this.convertion();
   }
   classWrapper = async () => {
     if (MathS.isNull(this.closeTabService.saveDataForKarbari)) {
       this.callAPI();
     }
+    this.convertion();
   }
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title + '،  استان: ' + rowData['dataSource'].dynamicID);

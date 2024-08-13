@@ -48,11 +48,17 @@ export class ZoneBoundComponent extends FactoryONE {
   }
   callDictionaries = async () => {
     this.zoneDictionary = await this.sectorsManagerService.dictionaryWrapperService.getZoneDictionary();
-    Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'dynamicId');
+  }
+  insertToAux = () => {
+    this.closeTabService.saveDataForZoneBound.forEach(item => {
+      item.dynamicId = item.zoneId;
+    })
   }
 
   callAPI = async () => {
     this.closeTabService.saveDataForZoneBound = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ZoneBoundGET);
+    this.insertToAux();
     this.callDictionaries();
   }
   classWrapper = async () => {
@@ -62,7 +68,7 @@ export class ZoneBoundComponent extends FactoryONE {
     this.callDictionaries();
   }
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].zoneId);
+    const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ناحیه: ' + rowDataAndIndex['dataSource'].dynamicId);
 
     if (a) {
       await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.ZoneBoundREMOVE, rowDataAndIndex['dataSource'].id);
@@ -73,20 +79,9 @@ export class ZoneBoundComponent extends FactoryONE {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.closeTabService.saveDataForZoneBound[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      return;
-    }
-    if (typeof dataSource['dataSource'].zoneId !== 'object') {
-      this.zoneDictionary.find(item => {
-        if (item.title === dataSource['dataSource'].zoneId)
-          dataSource['dataSource'].zoneId = item.id
-      })
-    } else {
-      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
-    }
-    const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
-    if (res) {
+    if (this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      const res = await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
+      this.sectorsManagerService.utilsService.snackBarMessageSuccess(res.message);
       this.callAPI()
     }
   }

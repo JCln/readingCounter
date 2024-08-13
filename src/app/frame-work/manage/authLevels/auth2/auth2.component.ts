@@ -66,7 +66,7 @@ export class Auth2Component extends FactoryONE {
     this.callDictionary();
   }
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  app: ' + rowDataAndIndex['dataSource'].authLevel1Id);
+    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  app: ' + rowDataAndIndex['dataSource'].dynamicId);
     if (a) {
       const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel2REMOVE, rowDataAndIndex['dataSource'].id);
       if (res) {

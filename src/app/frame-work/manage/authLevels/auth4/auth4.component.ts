@@ -67,7 +67,7 @@ export class Auth4Component extends FactoryONE {
     this.convertion();
   }
   removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  کنترلر: ' + rowDataAndIndex['dataSource'].authLevel3Id);
+    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  کنترلر: ' + rowDataAndIndex['dataSource'].dynamicId);
     if (a) {
       const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel4REMOVE, rowDataAndIndex['dataSource'].id);
       if (res) {

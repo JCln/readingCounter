@@ -58,8 +58,8 @@ export class Auth3Component extends FactoryONE {
     this.authLevel2Dictionary = await this.authsManagerService.dictionaryWrapperService.getAuthLev2Dictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'dynamicId');
   }
-  removeRow = async (rowDataAndIndex: object) => {
-    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ماژول: ' + rowDataAndIndex['dataSource'].authLevel2Id);
+  removeRow = async (rowDataAndIndex: IAuthLevel3) => {
+    const a = await this.authsManagerService.firstConfirmDialog('عنوان: ' + rowDataAndIndex['dataSource'].title + '،  ماژول: ' + rowDataAndIndex['dataSource'].dynamicId);
     if (a) {
       const res = await this.authsManagerService.ajaxReqWrapperService.postDataSourceById(ENInterfaces.AuthLevel3REMOVE, rowDataAndIndex['dataSource'].id);
       if (res) {

@@ -5,7 +5,8 @@ export interface ICountryManager {
 export interface IProvinceManager {
     readonly id: number;
     title: string;
-    countryId: number | string;
+    countryId: number;
+    dynamicId: any;
     logicalOrder: number;
 }
 export interface IRegionManager {
@@ -32,7 +33,8 @@ export interface IZoneManager {
 export interface IZoneBoundManager {
     id: number;
     title: string;
-    zoneId: number | string;
+    zoneId: number;
+    dynamicId: any;
     govermentalCode: number;
     fromEshterak: string;
     toEshterak: string;

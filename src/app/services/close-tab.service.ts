@@ -466,7 +466,7 @@ export class CloseTabService {
 
   // zones
   saveDataForCountry: ICountryManager[];
-  saveDataForProvince: IProvinceManager[];
+  saveDataForProvince: IProvinceManager[] = [];
   saveDataForRegion: IRegionManager[] = [];
   saveDataForZone: IZoneManager[] = [];
   saveDataForZoneBound: IZoneBoundManager[] = [];

@@ -82,12 +82,9 @@ export class ZoneComponent extends FactoryONE {
     // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.closeTabService.saveDataForZone[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      return;
-    }
-    const res = await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ZoneEDIT, dataSource['dataSource']);
-    if (res) {
+    if (this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      const res = await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ZoneEDIT, dataSource['dataSource']);
+      this.sectorsManagerService.utilsService.snackBarMessageSuccess(res.message);
       this.callAPI();
     }
   }

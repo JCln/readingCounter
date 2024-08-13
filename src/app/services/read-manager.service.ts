@@ -35,7 +35,6 @@ export class ReadManagerService {
     this.utilsService.snackBarMessageSuccess(res.message);
     return true;
   }
-  /* VERIFICATION & VALIDATION */
   counterStateVertification = (dataSource: ICounterState): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);

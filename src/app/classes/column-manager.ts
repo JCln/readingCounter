@@ -2090,7 +2090,7 @@ export class ColumnManager {
     ]
     province: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'countryId', header: 'کشور', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'کشور', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true, isSelectedOrigin: true },
     ]
     region: IObjectIteratation[] = [
@@ -2121,7 +2121,7 @@ export class ColumnManager {
     ]
     zoneBound: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
-        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'dynamicId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
         // { field: 'govermentalCode', header: 'کشور', isSelected: true,isSelectedOrigin:true },
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, ltr: true },
@@ -3026,6 +3026,15 @@ export class ColumnManager {
         { field: 'id', header: 'کد', isSelected: true, isSelectedOrigin: true, isNumber: true },
         { field: 'itemTitle', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
         // { field: 'columnId', header: '', isSelected: true,isSelectedOrigin:true },
+        { field: 'dynamicId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true, isSelectOption: true },
+        { field: 'startIndex', header: 'ابتدا', isSelected: true, isSelectedOrigin: true, isNumber: true },
+        { field: 'endIndex', header: 'انتها', isSelected: true, isSelectedOrigin: true, isNumber: true },
+        { field: 'length', header: 'طول', isSelected: true, isSelectedOrigin: true, isNumber: true }
+    ]
+    textOutputDg: IObjectIteratation[] = [
+        { field: 'id', header: 'کد', isSelected: true, isSelectedOrigin: true, isNumber: true, },
+        { field: 'itemTitle', header: 'عنوان', isSelected: true, isSelectedOrigin: true },
+        // { field: 'columnId', header: '', isSelected: true,isSelectedOrigin:true },
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, readonly: true, isSelectOption: true },
         { field: 'startIndex', header: 'ابتدا', isSelected: true, isSelectedOrigin: true, isNumber: true },
         { field: 'endIndex', header: 'انتها', isSelected: true, isSelectedOrigin: true, isNumber: true },
@@ -3145,6 +3154,11 @@ export class ColumnManager {
         { field: 'insertTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
     ]
     userOnlines: IObjectIteratation[] = [
+        { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },
+        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: true, isSelectedOrigin: true },
+        { field: 'connectDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },
+    ]
+    UnPermissionOnlineUsers: IObjectIteratation[] = [// It's true that the value of userOnlines and UnPermissionOnlineUsers are the same but i use this to restrict unadmin users
         { field: 'displayName', header: 'نام نمایش', isSelected: true, isSelectedOrigin: true, ltr: false },
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: true, isSelectedOrigin: true },
         { field: 'connectDateTime', header: 'زمان', isSelected: true, isSelectedOrigin: true },

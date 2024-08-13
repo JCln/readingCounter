@@ -1,13 +1,15 @@
+<!-- [// It's true that the value of userOnlines and UnPermissionOnlineUsers are the same but i use this to restrict unadmin users -->
 <app-prime-table     
     [dataSource]="closeTabService.saveDataForUserOnlines" 
-    [_numberOfExtraColumns]="[1,2,3]"
-    [_outputFileName]="'userOnlines'"
+    [_numberOfExtraColumns]="shouldActive ? [1,2,3,4] : [1,2,3]" 
+    [_outputFileName]=" shouldActive ? 'userOnlines': 'UnPermissionOnlineUsers'"
     [_checkUpName]="'userOnlines'"
     [_sessionName]="'userOnline-session'"
     [_selectedColumnsToRemember]="'selectedUserOnlines'"
-    (refreshedTable)="refreshTable()"    
+    (refreshedTable)="callAPI()"    
     (routedToLMAll)="textMessageToAContact($event)"
     (routedToLoggs)="imageToAContact($event)"
     (openedEditDialog)="videoToAContact($event)"
+    (showedExactConfig)="showExactConfig($event)"
  > 
 </app-prime-table>

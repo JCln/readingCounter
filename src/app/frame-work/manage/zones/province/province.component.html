@@ -1,15 +1,23 @@
+<!-- *******
+ *******
+*******
+*******
+dictionary origin name should be insert and have to configure on implement
+
+-->
 <app-prime-table-editable     
     [dataSource]="closeTabService.saveDataForProvince" 
     [_checkUpName]="'addItem'"
     [_outputFileName]="'province'"
-    [_dictionaryName]="'countryId'"
+    [_dictionaryName]="'dynamicId'"
+    [_dictionaryOriginName]="'countryId'"
     [_sessionName]="'province-session'"
     [dictionary]="countryDictionary"
     [_multiSelectEnable]=false
     [_outputEnabled]= false    
     [_hasSaveColumns]= false
     [_numberOfExtraColumns]="[1, 2]"
-    (refreshedTable)="refreshTable()"
+    (refreshedTable)="callAPI()"
     (openedAddDialog)="openAddDialog()"
     (removedRow)="removeRow($event)"
     (onRowEditedCancel)="onRowEditCancel()"

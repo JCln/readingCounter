@@ -93,6 +93,8 @@ export interface IUserEditManager {
     }
 }
 export interface IUserOnlines {
+    userId: string,
+    id?:string,//use case for open user config dialog
     displayName: string,
     defaultZoneTitle: string,
     connectDateTime: string

@@ -9,6 +9,7 @@ import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-province',
@@ -44,46 +45,41 @@ export class ProvinceComponent extends FactoryONE {
       });
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForProvince = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (!this.closeTabService.saveDataForProvince) {
-      this.closeTabService.saveDataForProvince = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ProvinceGET);
-    }
+  async convertion() {
     this.countryDictionary = await this.sectorsManagerService.dictionaryWrapperService.getCountryDictionary();
-
-    Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'dynamicId');
   }
-  refetchTable = (index: number) => this.closeTabService.saveDataForProvince = this.closeTabService.saveDataForProvince.slice(0, index).concat(this.closeTabService.saveDataForProvince.slice(index + 1));
+  insertToAux = () => {
+    this.closeTabService.saveDataForProvince.forEach(item => {
+      item.dynamicId = item.countryId;
+    })
+  }
+  callAPI = async () => {
+    this.closeTabService.saveDataForProvince = await this.sectorsManagerService.ajaxReqWrapperService.getDataSource(ENInterfaces.ProvinceGET);
+    this.insertToAux();
+    this.convertion();
+  }
+  classWrapper = async () => {
+    if (MathS.isNull(this.closeTabService.saveDataForProvince)) {
+      this.callAPI();
+    }
+    this.convertion();
+  }
   removeRow = async (rowData: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog('عنوان: ' + rowData['dataSource'].title);
     if (a) {
       await this.sectorsManagerService.postByIdSuccessBool(ENInterfaces.ProvinceREMOVE, rowData['dataSource'].id);
-      this.refetchTable(rowData['ri']);
+      this.callAPI();
     }
   }
   onRowEditInit(dataSource: any) {
     // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
-    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.closeTabService.saveDataForProvince[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      return;
-    }
-    if (typeof dataSource['dataSource'].countryId !== 'object') {
-      this.countryDictionary.find(item => {
-        if (item.title === dataSource['dataSource'].countryId)
-          dataSource['dataSource'].countryId = item.id
-      })
-    } else {
-      dataSource['dataSource'].countryId = dataSource['dataSource'].countryId['id'];
-    }
-
-    if (await this.sectorsManagerService.postObjectBySuccessMessage(ENInterfaces.ProvinceEDIT, dataSource['dataSource'])) {
-      this.refreshTable();
-      Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
+    if (this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      const res = await this.sectorsManagerService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.ProvinceEDIT, dataSource['dataSource']);
+      this.sectorsManagerService.utilsService.snackBarMessageSuccess(res.message);
+      this.callAPI();
     }
   }
   onRowEditCancel() {

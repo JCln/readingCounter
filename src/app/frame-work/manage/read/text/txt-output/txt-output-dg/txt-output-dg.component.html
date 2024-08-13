@@ -1,0 +1,63 @@
+<section>
+    <h2 class="title">
+        {{txtOutReq.isEditing? 'ویرایش تکست خروجی': 'افزودن تکست خروجی'}}
+    </h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+            <!-- should insert min & max length for inputs -->
+            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('textOutputDg')"
+                [ngClass]="{'double_size':mainDatas.icon}">
+                <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
+                    <!-- only for single select option -->
+                    <div class="input_icon" *ngIf="mainDatas.field == 'zoneId'">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="zone" [options]="zoneDictionary" [(ngModel)]="txtOutReq.zoneId"
+                                    placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #checkboxes>
+                    <ng-container>
+                        <ng-template *ngIf="mainDatas.isBoolean; else simpleText">
+                            <div class="input_icon">
+                                <i class="pi pi-bookmark _bookmark"></i>
+                                <div class="input_3">
+                                    <div class="_key">{{mainDatas.header}}</div>
+                                    <mat-checkbox name="isCluster" [(ngModel)]="txtOutReq[mainDatas.field]">
+                                        {{mainDatas.isSelected}}
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+
+                </ng-template>
+                <ng-template #simpleText>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <input [type]="mainDatas.isNumber? 'number': 'text'"
+                                [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
+                                [(ngModel)]="txtOutReq[mainDatas.field]">
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                {{txtOutReq.isEditing? 'ویرایش تکست خروجی': 'افزودن تکست خروجی'}}
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

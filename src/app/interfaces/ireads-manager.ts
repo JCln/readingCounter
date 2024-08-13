@@ -230,12 +230,14 @@ export interface ITabsare2Formula {
 }
 // 
 export interface ITextOutput {
-    id?: any,
+    id: number,
     columnId?: number,
-    zoneId: number | string,
+    zoneId: number,
+    dynamicId: any,
     itemTitle: string,
     startIndex: any,
     endIndex: any,
     length: any,
-    isNew?: boolean
+    isNew?: boolean,
+    isEditing?: boolean
 }
