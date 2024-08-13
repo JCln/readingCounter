@@ -11,11 +11,11 @@ import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map
 import { OutputManagerService } from './output-manager.service';
 
 export const tarrifItems: ITariffManager[] = [
-  { name: 'دریافت نمونه فایل Excel', clickFunction: EN_tariff.getSampleExcel, icon: 'pi pi-cloud-download', background: '#F68038', color: '', description: EN_messages.confirmResetIIS },
-  { name: 'دریافت تعرفه جهت تکمیل', clickFunction: EN_tariff.postExcelToFill, icon: 'fas fa-drafting-compass', background: '#969696', color: '', description: EN_messages.confirmResetApp },
-  { name: 'آپلود فایل Excel', clickFunction: EN_tariff.AddExcel, icon: 'pi pi-file-excel', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
+  // { name: 'دریافت نمونه فایل Excel', clickFunction: EN_tariff.getSampleExcel, icon: 'pi pi-cloud-download', background: '#F68038', color: '', description: EN_messages.confirmResetIIS },
+  // { name: 'دریافت تعرفه جهت تکمیل', clickFunction: EN_tariff.postExcelToFill, icon: 'fas fa-drafting-compass', background: '#969696', color: '', description: EN_messages.confirmResetApp },
+  // { name: 'آپلود فایل Excel', clickFunction: EN_tariff.AddExcel, icon: 'pi pi-file-excel', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
   { name: 'نمایش جدول', clickFunction: EN_tariff.viewGrid, icon: 'pi pi-file-excel', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
-  { name: 'محاسبات', clickFunction: EN_tariff.calculation, icon: 'pi pi-calculator', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
+  // { name: 'محاسبات', clickFunction: EN_tariff.calculation, icon: 'pi pi-calculator', background: '#006c75', color: '', description: EN_messages.confirmServerDelete },
 ]
 
 @Injectable({

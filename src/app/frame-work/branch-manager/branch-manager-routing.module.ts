@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'requestDraft', loadChildren: () => import('./request-draft/request-draft.module').then(requestDraft => requestDraft.RequestDraftModule) },
   { path: 'requestDraftLazy', loadChildren: () => import('./request-draft-getlazy/request-draft-getlazy.module').then(requestDraftGetLazy => requestDraftGetLazy.RequestDraftGetlazyModule) },
   { path: 'flowRuleRegisteredLazy', loadChildren: () => import('./flow-rule-get-registered/flow-rule-get-registered.module').then(flowRuleGetRegistered => flowRuleGetRegistered.FlowRuleGetRegisteredModule) },
-  { path: 'tariff', loadChildren: () => import('./tariff-manager/tariff-manager.module').then(tariffManager => tariffManager.TariffManagerModule) },
+  { path: 'tariff', loadChildren: () => import('./tariff-manager/tariff-all-lazy.module').then(tariffManager => tariffManager.TariffAllLazyModule) },
   { path: 'bank', loadChildren: () => import('./bank/bank.module').then(bankManager => bankManager.BankModule) },
   { path: 'tariffType', loadChildren: () => import('./tariff-type/tariff-type.module').then(tariffTypeManager => tariffTypeManager.TariffTypeModule) },
   { path: 'scheduledPaymentMethod', loadChildren: () => import('./scheduled-payment-method/scheduled-payment-method.module').then(scheduledPaymentMethod => scheduledPaymentMethod.ScheduledPaymentMethodModule) },
