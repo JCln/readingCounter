@@ -28,6 +28,14 @@
                     </i>
                 </div>
                 <div class="left_side">
+                    <i (click)="getSampleExcel()"
+                        class="_circle_border p_icons tooltip pi pi-cloud-download green_color">
+                        <div class="tooltip_text_right">دریافت نمونه فایل Excel</div>
+                    </i>
+                    <i (click)="openAddExcelDialog()"
+                        class="_circle_border p_icons tooltip pi pi-file-excel green_color">
+                        <div class="tooltip_text_right">آپلود فایل Excel</div>
+                    </i>
                     <i (click)="clearFilters(datatableG)" [ngClass]="{'has_filters': hasFiltersInTable}"
                         class="_circle_border p_icons tooltip pi pi-filter-slash">
                         <div class="tooltip_text_right">حذف فیلترها</div>

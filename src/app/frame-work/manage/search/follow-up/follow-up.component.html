@@ -57,11 +57,9 @@
             <div class="input_icon" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
                 <i class="pi pi-bookmark _bookmark"></i>
                 <div class="input_3">
-                    <ng-container *ngIf="item.isBoolean">
-                        <div class="_key">{{item.header}}</div>
-                        <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
-                        </mat-checkbox>
-                    </ng-container>
+                    <div class="_key">{{item.header}}</div>
+                    <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                        [(ngModel)]="closeTabService.saveDataForFollowUpAUX[item.field]">
                 </div>
             </div>
         </div>

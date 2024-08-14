@@ -45,7 +45,7 @@ export class FollowUpComponent extends FactoryONE {
   chartTemp: any[] = [];
   dataSourceAUX: IOffLoadPerDay;
   changeHsty: IFollowUpHistory[] = [];
-  _selectColumnsAUX: IObjectIteratation[];
+  _selectColumnsAUX: IObjectIteratation[] = [];
 
 
   constructor(

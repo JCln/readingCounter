@@ -13,7 +13,10 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { TariffAllLazyDgComponent } from './tariff-all-lazy/tariff-all-lazy-dg/tariff-all-lazy-dg.component';
+import { TariffAllLazyDgComponent } from './tariff-all-lazy-dg/tariff-all-lazy-dg.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FormulasService } from 'services/formulas.service';
+import { AddExcelFileComponent } from '../../manage/read/formula/add-excel-file/add-excel-file.component';
 
 @Component({
   selector: 'app-tariff-all-lazy',
@@ -44,7 +47,9 @@ export class TariffAllLazyComponent extends AllListsFactory implements AfterView
     public closeTabService: CloseTabService,
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    private dialog: MatDialog,
+    public formulasService: FormulasService,
   ) {
     super(dialogService, listManagerService);
   }
@@ -169,6 +174,26 @@ export class TariffAllLazyComponent extends AllListsFactory implements AfterView
         this.refreshTable();
       }
     });
+  }
+  async getSampleExcel() {
+    const res = await this.listManagerService.ajaxReqWrapperService.getBlobAsJsonObserve(ENInterfaces.tariffExcelSample);
+    this.outputManagerService.downloadFileWithContentDisposition(res);
+  }
+  openAddExcelDialog = () => {
+    return new Promise(() => {
+      const dialogRef = this.dialog.open(AddExcelFileComponent,
+        {
+          minWidth: '21rem',
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result) {
+          await this.formulasService.postExcelFile(ENInterfaces.tariffAddExcel);
+        }
+      });
+    });
+  }
+  uploadAExcelFile() {
+    this.openAddExcelDialog();
   }
   clearFilters(table: Table) {
     this.closeTabService.utilsService.clearFilters(table);

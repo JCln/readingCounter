@@ -771,21 +771,6 @@ export enum ENHubMessages {
     Connected = 'متصل به سامانه «لحظه»',
     toastDisconnected = 'ارتباط شما با سامانه «لحظه» قطع شده است'
 }
-export interface ITariffManager {
-    name: string;
-    icon: string;
-    background: string;
-    color?: string;
-    clickFunction?: EN_tariff;
-    description?: EN_messages
-}
-export enum EN_tariff {
-    getSampleExcel = 'getSampleExcel',
-    postExcelToFill = 'postExcelToFill',
-    AddExcel = 'AddExcel',
-    viewGrid = 'viewGrid',
-    calculation = 'calculation',
-}
 export enum ENSnackBarColors {
     warn = 'snack_warn',
     danger = 'snack_danger',

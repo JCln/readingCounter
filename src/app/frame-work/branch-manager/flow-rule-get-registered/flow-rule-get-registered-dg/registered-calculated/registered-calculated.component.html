@@ -38,7 +38,7 @@
                     <td>{{null}}</td>
                     <td>{{null}}</td>
                     <td class="_center">
-                        <i class="p_icons pi pi-times-circle" (click)="removeItem(index)"> 
+                        <i class="p_icons pi pi-times-circle" (click)="removeItem(index)">
                             <!-- [hidden]="this.closeTabService.requestDraftCalculationRes[index].isEditable" -->
                         </i>
                     </td>
@@ -70,7 +70,7 @@
                         </p-dropdown>
                     </td>
                     <td>
-                        <input class="input_addable" name="{{'offeringvalue'[i]}}" maxlength="9"
+                        <input class="input_addable" name="offeringvalue{{[i]}}" maxlength="9"
                             [(ngModel)]="item.amount">
                     </td>
                     <td class="_center">

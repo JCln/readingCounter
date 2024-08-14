@@ -25,10 +25,11 @@ export class RegisteredCalculatedComponent extends FactoryONE {
   }
   callAPI = async () => {
     const res = await this.branchesService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.calculationInTime, this.closeTabService.flowRuleRegister);
-    this.closeTabService.requestDraftCalculationRes = res;
-    this.closeTabService.requestDraftCalculationRes.forEach(item => {
+    res.forEach(item => {
+      item.isEditable = false;
       this.latestSum += item.value;
     })
+    this.closeTabService.requestDraftCalculationRes = res;
   }
   dictionaryWrapper = async () => {
     this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
@@ -63,12 +64,11 @@ export class RegisteredCalculatedComponent extends FactoryONE {
 
   classWrapper(): void {
     // if there is no data to request, route to first page which is edit step
+    console.log(1);
+
     console.log(this.closeTabService.flowRuleRegister.offeringGroupIds);
+
     this.callAPI();
-    // if (MathS.isNull(this.closeTabService.flowRuleRegister.offeringGroupIds)) {
-    //   this.branchesService.utilsService.routeTo(EN_Routes.flowRuleGetRegisteredStep);
-    //   return;
-    // }
     this.dictionaryWrapper();
     this.firstViewItemToAdd();
     console.log(this.closeTabService.flowRuleRegister.requestDraftId);
