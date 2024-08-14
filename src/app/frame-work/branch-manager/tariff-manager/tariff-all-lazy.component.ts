@@ -13,7 +13,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { TariffAllLazyDgComponent } from './tariff-all-lazy-dg/tariff-all-lazy-dg.component';
+import { TariffAllLazyDgComponent } from './tariff-all-lazy/tariff-all-lazy-dg/tariff-all-lazy-dg.component';
 
 @Component({
   selector: 'app-tariff-all-lazy',
