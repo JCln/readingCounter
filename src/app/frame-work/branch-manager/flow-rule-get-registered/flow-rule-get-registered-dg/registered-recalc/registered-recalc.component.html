@@ -1,1 +1,192 @@
-<p>registered-recalc works!</p>
+<form (ngSubmit)="callAPI()" class="confirmation-form">
+    <h2 class="top_title">خلاصه اطلاعات</h2>
+
+    <section class="_sections">
+        <h3 class="top_title">نوع خدمت</h3>
+        <div class="selected_offering_wrapper">
+            <div *ngFor="let offeringDic of offeringGroupDictionary">
+                <div *ngFor="let item of closeTabService.flowRuleRegisteredEdit.offeringGroupIds">
+                    <div class="selected_offering" *ngIf="offeringDic.id == item">
+                        {{offeringDic.title}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hr_dashed"></div>
+    </section>
+
+    <section class="_sections">
+        <h3 class="top_title">اطلاعات مکانی</h3>
+        <div class="_desc">
+            <div *ngFor="let col of branchesService.columnManager.getColumnsMenus('requestDraft_confirmtionLocation')"
+                [ngClass]="{'double_size':col.icon}">
+                <ng-container *ngIf="col.isSelectOption;else simpleInput">
+                    <div class="input_linear" *ngIf="col.field == 'zoneId'">
+                        <div class="input_linear">
+                            <div class="_key">{{col.header}}</div>
+                            <div class="_value">
+                                <div *ngFor="let dictionary of zoneDictionary">
+                                    <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.zoneId">
+                                        {{dictionary.title}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #simpleInput>
+                    <div class="input_linear" *ngIf="!col.isGIS">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">{{closeTabService.flowRuleRegisteredEdit[col.field]}}</div>
+                    </div>
+                    <div *ngIf="col.isGIS">
+                        <div class="_key">{{col.header}}</div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="map-frame">
+                <div id="map3"></div>
+            </div>
+        </div>
+        <div class="hr_dashed"></div>
+    </section>
+
+    <section class="_sections">
+        <h3 class="top_title">اطلاعات مالک</h3>
+        <div class="_desc">
+            <div *ngFor="let col of branchesService.columnManager.getColumnsMenus('requestDraftPersonalInfo')"
+                [ngClass]="{'double_size':col.icon}">
+                <div class="input_linear">
+                    <div class="_key">{{col.header}}</div>
+                    <div class="_value">{{closeTabService.flowRuleRegisteredEdit[col.field]}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="hr_dashed"></div>
+    </section>
+
+    <section class="_sections">
+        <h3 class="top_title">اطلاعات فنی</h3>
+        <div class="_desc">
+            <div *ngFor="let col of branchesService.columnManager.getColumnsMenus('requestDraftTechnical')"
+                [ngClass]="{'double_size':col.icon}">
+                <ng-container *ngIf="col.isSelectOption;else simpleInput">
+                    <div class="input_linear" *ngIf="col.field == 'usageId'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngFor="let dictionary of usageDictionary">
+                                <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.usageId">
+                                    {{dictionary.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'branchDiameterId'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngFor="let dictionary of branchDiameterDictionary">
+                                <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.branchDiameterId">
+                                    {{dictionary.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'guildId'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngFor="let dictionary of guildDictionary">
+                                <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.guildId">
+                                    {{dictionary.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'ownershipTypeId'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngFor="let dictionary of ownershipTypeDictionary">
+                                <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.ownershipTypeId">
+                                    {{dictionary.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'branchStateId'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngFor="let dictionary of branchStateDictionary">
+                                <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.branchStateId">
+                                    {{dictionary.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'waterSourceId'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngFor="let dictionary of waterSourceDictionary">
+                                <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.waterSourceId">
+                                    {{dictionary.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'customerTypeId'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <div *ngFor="let dictionary of customerTypeDictionary">
+                                <div *ngIf="dictionary.id == closeTabService.flowRuleRegisteredEdit.customerTypeId">
+                                    {{dictionary.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'watarInstallationJalaliDay'">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">
+                            <app-date-jalali name="watarInstallationJalaliDay"
+                                (dateJalEvent)="closeTabService.receiveFromDateInstallation(closeTabService.ENReadingReports.clientAddReq, $event)"
+                                [dateObject]="closeTabService.flowRuleRegisteredEdit.watarInstallationJalaliDay">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_linear" *ngIf="col.field == 'sewageInstallationJalaliDay'">
+                        <div class="_key">تاریخ نصب فاضلاب</div>
+                        <div class="_value">
+                            <app-date-jalali name="sewageInstallationJalaliDay"
+                                (dateJalEvent)="closeTabService.receiveToDateInstallation(closeTabService.ENReadingReports.clientAddReq, $event)"
+                                [dateObject]="closeTabService.flowRuleRegisteredEdit.sewageInstallationJalaliDay">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #simpleInput>
+                    <div class="input_linear">
+                        <div class="_key">{{col.header}}</div>
+                        <div class="_value">{{closeTabService.flowRuleRegisteredEdit[col.field]}}</div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="hr_dashed"></div>
+    </section>
+
+    <section class="_sections">
+        <h3 class="top_title">اطلاعات ملک</h3>
+        <div class="_desc">
+            <div *ngFor="let col of branchesService.columnManager.getColumnsMenus('requestDraftOtherInfo')">
+                <div class="input_linear">
+                    <div class="_key">{{col.header}}</div>
+                    <div class="_value">{{closeTabService.flowRuleRegisteredEdit[col.field]}}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <button type="submit" class="btn_1">
+            تایید اطلاعات و درخواست
+            <i class="pi pi-list"></i>
+        </button>
+    </footer>
+</form>

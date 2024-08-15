@@ -25,8 +25,7 @@ export class RegisteredInstallmentComponent extends FactoryONE {
     isInstallment: false,
     isActive: true
   };
-  _selectColsPostal: any = [];
-  _selectColsBillId: any = [];
+  _selectColsPostal: any[] = [];
   submitted: boolean = false;
 
   constructor(
@@ -41,8 +40,12 @@ export class RegisteredInstallmentComponent extends FactoryONE {
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }
   insertSelectedColumns = () => {
+    console.log(this._selectedPaymentMethod.isInstallment);
+
     if (this._selectedPaymentMethod.isInstallment) {
       this._selectColsPostal = this.branchesService.columnManager.getColumnsMenus(this._outputFileName);
+    } else {
+      this._selectColsPostal = [];
     }
   }
   classWrapper = async () => {

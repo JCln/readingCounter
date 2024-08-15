@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <table>
+    <table *ngIf="closeTabService.requestDraftCalculationRes">
         <h1 class="green_response">مشاهده اطلاعات محاسبه شده</h1>
         <div class="hr_dashed"></div>
         <h1 class="table-caption">
@@ -29,7 +29,7 @@
                     <td class="thead-title">تخفیف</td>
                     <td class="thead-title">حذف</td>
                 </tr>
-                <tr class="first_column" *ngFor="let item of closeTabService.requestDraftCalculationRes; i as index">
+                <tr class="first_column" *ngFor="let item of closeTabService.requestDraftCalculationRes; index as i">
                     <td>{{item.offeringTitle}}</td>
                     <td>
                         <p-inputNumber inputId="integeronly" name="itemvalue" [(ngModel)]="item.value">
@@ -38,8 +38,8 @@
                     <td>{{null}}</td>
                     <td>{{null}}</td>
                     <td class="_center">
-                        <i class="p_icons pi pi-times-circle" (click)="removeItem(index)">
-                            <!-- [hidden]="this.closeTabService.requestDraftCalculationRes[index].isEditable" -->
+                        <i class="p_icons pi pi-times-circle" [ngClass]="{'hidden': !item.isEditable}"
+                            (click)="removeItem(i)">
                         </i>
                     </td>
                 </tr>

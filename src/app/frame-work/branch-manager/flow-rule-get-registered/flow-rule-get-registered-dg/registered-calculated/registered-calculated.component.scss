@@ -87,8 +87,9 @@ tr {
     padding: 0 5px;
 }
 
-[hidden] {
+.hidden {
     display: none;
+    cursor: auto;
 }
 
 .table-caption {

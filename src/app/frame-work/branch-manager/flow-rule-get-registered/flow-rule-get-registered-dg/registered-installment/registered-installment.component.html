@@ -23,40 +23,73 @@
                     </div>
                 </div>
             </div>
-            <div *ngFor="let col of _selectColsBillId" [ngClass]="{'double_size':col.icon}"
+
+            <!-- <div class="input_icon">
+                <i class="pi pi-bookmark _bookmark tooltip" [ngClass]="{
+                    'input_bookmark': itemdrop.invalid && (itemdrop.dirty || itemdrop.touched) || submitted,
+                    'input_bookmark_valid':itemdrop.valid,
+                    'correct':itemdrop.valid && (itemdrop.dirty || itemdrop.touched)
+                   }">
+                    <div *ngIf="itemdrop.errors && itemdrop.touched || submitted"
+                        class="tooltip_text_bottom alert">
+                        <div *ngIf="itemdrop.errors?.required">
+                            <p>
+                                {{mainDatas.header}} را وارد نمایید
+                                <i class="pi pi-times"></i>
+                            </p>
+                        </div>
+                    </div>
+                </i>
+                <div class="input_3">
+                    <div class="_key">استان</div>
+                    <div class="_value">
+                        <p-dropdown #itemdrop="ngModel" name="province" [options]="provinceDictionary"
+                            [(ngModel)]="closeTabService.flowRuleRegisteredEdit.provinceId"
+                            placeholder="انتخاب مورد" optionValue="id" optionLabel="title" filter="true"
+                            [required]="mainDatas.isRequired? true : false"
+                            (click)="getRegionsByProvinceId()">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div> -->
+
+            <div *ngFor="let col of _selectColsPostal" [ngClass]="{'double_size':col.icon}"
                 [hidden]="!_selectedPaymentMethod.isInstallment">
-                <div class="input_icon"
-                    [ngClass]="{'input_outline': item.invalid && (item.dirty || item.touched) || submitted, 'input_outline_valid':item.valid}">
-                    <i class="pi pi-bookmark _bookmark" [ngClass]="{special_input: col.borderize}"></i>
+                <div class="input_icon">
+                    <i class="pi pi-bookmark _bookmark tooltip" [ngClass]="{
+                        special_input: col.borderize,
+                        'input_bookmark': item.invalid && (item.dirty || item.touched) || submitted,
+                        'input_bookmark_valid':item.valid,
+                        'correct':item.valid && (item.dirty || item.touched)
+                       }">
+                        <div *ngIf="item.errors && item.touched || submitted" class="tooltip_text_bottom alert">
+                            <div *ngIf="item.errors?.required">
+                                <p>
+                                    {{col.header}} را وارد نمایید
+                                    <i class="pi pi-times"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <div *ngIf="item.errors?.minlength" class="tooltip_text_bottom">
+                            <p>
+                                حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
+                                <i class="pi pi-times"></i>
+                            </p>
+                        </div>
+                        <div *ngIf="item.errors?.maxlength" class="tooltip_text_bottom alert">
+                            <p>
+                                حداکثر تعداد نویسه {{col.maxLength}} عدد می‌باشد
+                                <i class="pi pi-times"></i>
+                            </p>
+                        </div>
+                    </i>
                     <div class="input_3">
                         <div class="_key">{{col.header}}</div>
                         <input #item="ngModel" [type]="col.isNumber ? 'number' : 'text'" [id]="col.field"
                             [name]="col.field" class="form-control" [required]="col.isRequired? true : false"
-                            minlength="{{col.minLength}}" [(ngModel)]="closeTabService.requestDraftReq[col.field]"
-                            [readonly]="col.readonly" maxlength="{{col.maxLength}}" class="_value">
-                    </div>
-                </div>
-                <div *ngIf="item.valid && (item.dirty || item.touched)" class="icon_validation correct">
-                    <i class="pi pi-check-square"></i>
-                </div>
-                <div *ngIf="item.invalid && (item.dirty || item.touched) || submitted" class="icon_validation alert">
-                    <div *ngIf="item.errors?.required">
-                        <p>
-                            {{col.header}} را وارد نمایید
-                            <i class="pi pi-times"></i>
-                        </p>
-                    </div>
-                    <div *ngIf="item.errors?.minlength">
-                        <p>
-                            حداقل تعداد نویسه {{col.minLength}} عدد می‌باشد
-                            <i class="pi pi-times"></i>
-                        </p>
-                    </div>
-                    <div *ngIf="item.errors?.maxlength" class="tooltip_text_bottom alert">
-                        <p>
-                            حداکثر تعداد نویسه {{col.maxLength}} عدد می‌باشد
-                            <i class="pi pi-times"></i>
-                        </p>
+                            minlength="{{col.minLength}}"
+                            [(ngModel)]="closeTabService.flowRuleRegisteredEdit[col.field]" [readonly]="col.readonly"
+                            maxlength="{{col.maxLength}}" class="_value">
                     </div>
                 </div>
             </div>

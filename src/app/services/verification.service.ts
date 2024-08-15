@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 import { ENRandomNumbers, ENSnackBarColors, EN_messages } from 'interfaces/enums.enum';
-import { IBank, IBranchState, ICalculationInstallment, IClientAll, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IScheduledPaymentMethod, ITag, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IZoneConstants } from 'interfaces/i-branch';
+import { IAmountModifications, IBank, IBranchState, ICalculationInstallment, IClientAll, IFlowRule, IFlowState, IInvoiceType, IModification, IOffering, IOfferingGroup, IOfferingUnit, IRequestDraft, IRequestDraftCalculationRes, IScheduledPaymentMethod, ITag, ITariffAll, ITariffExcelToFillInput, ITariffType, ITarrifParameter, ITarrifTypeItem, IVillage, IZoneConstants } from 'interfaces/i-branch';
 import { IFileExcelReq, IImportDynamicDefault, IImportSimafaBatchReq, IImportSimafaReadingProgramsReq, IImportSimafaSingleReq } from 'interfaces/import-data';
 import { IAssessAddDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IMostReportInput, IOutputManager } from 'interfaces/imanage';
@@ -1281,6 +1281,25 @@ export class VerificationService {
       return false;
     if (!this.textOutput(dataSource))
       return false;
+    return true;
+  }
+  registerCalculated = (value: IAmountModifications): boolean => {
+    if (MathS.isNull(value.offeringId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_offering);
+      return false;
+    }
+    if (MathS.isNull(value.amount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insertPrice);
+      return false;
+    }
+    if (MathS.isNaN(value.offeringId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalidOffering);
+      return false;
+    }
+    if (MathS.isNaN(value.amount)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalidPrice);
+      return false;
+    }
     return true;
   }
   sectionsNullVertificate = (value: any): boolean => {

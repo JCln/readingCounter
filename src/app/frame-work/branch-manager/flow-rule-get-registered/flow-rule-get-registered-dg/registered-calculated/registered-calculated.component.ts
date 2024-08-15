@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IAmountModifications } from 'interfaces/i-branch';
-import { EN_Routes } from 'interfaces/routes.enum';
 import { BranchesService } from 'services/branches.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-registered-calculated',
@@ -43,16 +40,15 @@ export class RegisteredCalculatedComponent extends FactoryONE {
         return;
       }
     })
-    console.log(titleValue);
-
-    // this.closeTabService.flowRuleRegister.amountModifications.push({ offeringId: null, amount: null });
-    this.closeTabService.requestDraftCalculationRes.push(
-      {
-        offeringTitle: titleValue,
-        value: item.amount,
-        typeTitle: '',
-        isEditable: true
-      })
+    if (this.branchesService.verificationService.registerCalculated(item)) {
+      this.closeTabService.requestDraftCalculationRes.push(
+        {
+          offeringTitle: titleValue,
+          value: Number(item.amount),
+          typeTitle: '',
+          isEditable: true
+        })
+    }
   }
   firstViewItemToAdd() {
     if (this.closeTabService.flowRuleRegister.amountModifications.length == 0)
@@ -61,18 +57,11 @@ export class RegisteredCalculatedComponent extends FactoryONE {
   removeItem(index: number) {
     this.closeTabService.requestDraftCalculationRes.splice(index, 1);
   }
-
   classWrapper(): void {
     // if there is no data to request, route to first page which is edit step
-    console.log(1);
-
-    console.log(this.closeTabService.flowRuleRegister.offeringGroupIds);
-
     this.callAPI();
     this.dictionaryWrapper();
     this.firstViewItemToAdd();
-    console.log(this.closeTabService.flowRuleRegister.requestDraftId);
-
   }
 
 
