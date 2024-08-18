@@ -17,6 +17,12 @@ import { PageSignsService } from 'services/page-signs.service';
 })
 export class FragmentDetailsComponent extends FactoryONE {
   ref: DynamicDialogRef;
+  cellColorObject = {
+    from: this.pageSignsService.fragmentDetails_pageSign.fromEshterak,
+    fromName: 'fromEshterak',
+    to: this.pageSignsService.fragmentDetails_pageSign.toEshterak,
+    toName: 'toEshterak'
+  }
   readonly fragmentDetailsColumns: string = 'fragmentDetails';
 
   zoneDictionary: IDictionaryManager[] = [];

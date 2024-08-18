@@ -7,9 +7,9 @@
     [_numberOfExtraColumns]="[1, 2]"
     [_sessionName]="'readingconfig-session'"
     [_selectedColumnsToRemember]="'selectedReadingConfigDefault'"    
-    (openedAddDialog)="openAddDialog()"    
+    (openedAddDialog)="openDialog()"    
     (refreshedTable)="callAPI()"
     (removedRow)="removeRow($event)"
-    (openedEditDialog)="openEditDialog($event)"
+    (openedEditDialog)="openDialog($event)"
  > 
 </app-prime-table>

@@ -7,7 +7,7 @@ export interface IAssessPreDisplayDtoSimafa {
     listNumber: string,
     zoneId: number,
     noImages: boolean,
-    isCheckedItems:boolean
+    isCheckedItems: boolean
 }
 export interface IAssessAddDtoSimafa {
     onOffLoadIds: string[],
@@ -55,5 +55,6 @@ export interface IReadingConfigDefault {
     highConstZarfiatBound: number,
     highPercentZarfiatBound: number,
     lowPercentRateBoundNonMaskooni: number,
-    highPercentRateBoundNonMaskooni: number
+    highPercentRateBoundNonMaskooni: number,
+    isEditing?: boolean
 }

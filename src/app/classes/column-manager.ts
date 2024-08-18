@@ -500,8 +500,8 @@ export class ColumnManager {
     ]
     fragmentDetails: IObjectIteratation[] = [
         { field: 'routeTitle', header: 'عنوان مسیر', isSelected: true, isSelectedOrigin: true, readonly: false },
-        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
-        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true, cellColor: 'back_red_500' },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isSelectedOrigin: true, readonly: false, ltr: true, cellColor: 'back_red_500' },
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true },
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, isSelectedOrigin: true, readonly: true }
     ]
@@ -3007,6 +3007,56 @@ export class ColumnManager {
         { field: 'highPercentZarfiatBound', header: 'میانگین تجاری بالا %', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'lowPercentRateBoundNonMaskooni', header: 'میانگین غیرمسکونی پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },
         { field: 'highPercentRateBoundNonMaskooni', header: 'میانگین غیرمسکونی بالا %', isSelected: false, isSelectedOrigin: false, isNumber: true }
+    ]
+    readingConfigDefaultDgialog: IObjectIteratation[] = [
+        { field: 'dynamicId', header: 'ناحیه', isSelected: true, isSelectedOrigin: true, isSelectOption: true },
+        { field: 'defaultAlalHesab', header: 'علی‌الحساب پیشفرض', isSelected: true, isSelectedOrigin: true },
+        { field: 'minAlalHesab', header: 'علی‌الحساب کمینه %', isSelected: false, isSelectedOrigin: false },
+        { field: 'maxAlalHesab', header: 'علی‌الحساب بیشینه %', isSelected: false, isSelectedOrigin: false },
+        { field: 'minImagePercent', header: 'تصویر کمینه %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'defaultImagePercent', header: 'تصویر پیشفرض %', isSelected: true, isSelectedOrigin: true, isNumber: true },
+        { field: 'maxImagePercent', header: 'تصویر بیشینه %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'lowConstBoundMaskooni', header: 'ثابت مسکونی پایین', isSelected: false, isSelectedOrigin: false },
+        { field: 'lowPercentBoundMaskooni', header: 'میانگین مسکونی پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'highConstBoundMaskooni', header: 'ثابت مسکونی بالا', isSelected: false, isSelectedOrigin: false },
+        { field: 'highPercentBoundMaskooni', header: 'میانگین مسکونی بالا %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'lowConstBoundSaxt', header: 'ثابت ساخت پایین', isSelected: false, isSelectedOrigin: false },
+        { field: 'lowPercentBoundSaxt', header: 'میانگین ساخت پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'highConstBoundSaxt', header: 'ثابت ساخت بالا', isSelected: false, isSelectedOrigin: false },
+        { field: 'highPercentBoundSaxt', header: 'میانگین ساخت بالا %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'lowConstZarfiatBound', header: 'ثابت تجاری پایین', isSelected: false, isSelectedOrigin: false },
+        { field: 'lowPercentZarfiatBound', header: 'میانگین تجاری پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'highConstZarfiatBound', header: 'ثابت تجاری بالا', isSelected: false, isSelectedOrigin: false },
+        { field: 'highPercentZarfiatBound', header: 'میانگین تجاری بالا %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'lowPercentRateBoundNonMaskooni', header: 'میانگین غیرمسکونی پایین %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'highPercentRateBoundNonMaskooni', header: 'میانگین غیرمسکونی بالا %', isSelected: false, isSelectedOrigin: false, isNumber: true },
+        { field: 'defaultHasPreNumber', header: 'رقم قبلی', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'isOnQeraatCode', header: 'کد قرائت', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isSelectedOrigin: false, isBoolean: true },
+        { field: 'displayPreDate', header: 'تاریخ قبلی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayMobile', header: 'موبایل', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'hasImage', header: 'تصویر', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayDebt', header: 'بدهی', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        { field: 'displayIcons', header: 'آیکن', isSelected: true, isSelectedOrigin: true, isBoolean: true },
+        // maxImagePercent
+        // minImagePercent
+        // lowConstBoundMaskooni
+        // lowPercentBoundMaskooni
+        // highConstBoundMaskooni
+        // highPercentBoundMaskooni
+        // lowConstBoundSaxt
+        // lowPercentBoundSaxt
+        // highConstBoundSaxt
+        // highPercentBoundSaxt
+        // lowConstZarfiatBound
+        // lowPercentZarfiatBound
+        // highConstZarfiatBound
+        // highPercentZarfiatBound
+        // lowPercentRateBoundNonMaskooni
+        // highPercentRateBoundNonMaskooni
+        // defaultHasPreNumber
+
     ]
     readingPeriod: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true, isSelectedOrigin: true },

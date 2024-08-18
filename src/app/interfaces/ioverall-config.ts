@@ -189,6 +189,7 @@ export interface IObjectIteratation {
     isGIS?: boolean;
     isNotHaveSort?: boolean,
     isDate?: boolean,
+    cellColor?: string,
     dictionaryName?: {
         id: number,
         title: string,

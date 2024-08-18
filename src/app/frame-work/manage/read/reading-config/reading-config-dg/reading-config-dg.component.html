@@ -1,0 +1,57 @@
+<section>
+    <h2 class="title">{{readingConfigReq.isEditing? 'ویرایش تنظیمات': 'افزودن تنظیمات'}}</h2>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <div class="content">
+
+            <div *ngFor="let mainDatas of columnManager.getColumnsMenus('readingConfigDefaultDgialog')"
+                [ngClass]="{'double_size':mainDatas.icon}">
+                <ng-container *ngIf="mainDatas.isSelectOption; else checkboxes">
+                    <!-- only for single select option -->
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <div class="_value">
+                                <p-dropdown name="zoneDictionary" [options]="zoneDictionary"
+                                    [(ngModel)]="readingConfigReq.zoneId" placeholder="انتخاب مورد" optionValue="id"
+                                    optionLabel="title" filter="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #checkboxes>
+                    <ng-container *ngIf="mainDatas.isBoolean; else simpleText">
+                        <div class="input_icon">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <mat-checkbox name="isCluster" [(ngModel)]="readingConfigReq[mainDatas.field]">
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-template>
+                <ng-template #simpleText>
+                    <div class="input_icon">
+                        <i class="pi pi-bookmark _bookmark"></i>
+                        <div class="input_3">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <input [ngClass]="{'double_size':mainDatas.icon}" class="_value" name="{{mainDatas.field}}"
+                                [(ngModel)]="readingConfigReq[mainDatas.field]">
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                {{readingConfigReq.isEditing? 'ویرایش تنظیمات': 'افزودن تنظیمات'}}
+                <i class="pi pi-list"></i>
+            </button>
+        </footer>
+
+    </form>
+</section>

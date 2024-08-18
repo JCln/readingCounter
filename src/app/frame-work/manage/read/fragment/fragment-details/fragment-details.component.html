@@ -35,7 +35,7 @@
     </div>
 </section>
 
-<app-prime-table [dataSource]="closeTabService.saveDataForFragmentNOBDetails" [_checkUpName]="'branches'"
+<app-prime-table [dataSource]="closeTabService.saveDataForFragmentNOBDetails" [_checkUpName]="'branches'" [_cellColor]="cellColorObject"
     [_outputFileName]="fragmentDetailsColumns" [_selectedColumnsToRemember]="'selectedFragmentDetails'"
     [_sessionName]="'fragmentdetails-session'" [_numberOfExtraColumns]="[1, 2]" [isAddableTable]="true"
     [_backToPreviousEnabled]="true" [_backToPreviousText]="'بازگشت به نوبتی'" (refreshedTable)="callAPI()"

@@ -205,9 +205,14 @@
         [pTemplate]="_hasAggregating && profileService._agg.flag && profileService._agg[_selectedAggregatedName].length > 0 ? 'rowexpansion' : 'body'"
         let-dataSource let-columns="columns" let-ri=rowIndex>
         <tr>
-            <td class="__columns" *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr,'_editable': col.icon}">
+            <!-- col.cellColor only work for eshterak for now -->
+            <td class="__columns" *ngFor="let col of columns" [ngClass]="{
+                 'd_ltr': col.ltr,
+                 '_editable': col.icon,
+                 'back_red_500': _cellColor?.from > dataSource[_cellColor?.fromName] ||
+                 _cellColor?.to < dataSource[_cellColor?.toName]}">
                 <span class="ui-column-title">{{col.header}}</span>
-                <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                <ng-container *ngIf=" col.isBoolean; else elseTemplate">
                     <ng-container *ngIf="col.field !== 'isSelected'; else editableBooleans">
                         <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                     </ng-container>

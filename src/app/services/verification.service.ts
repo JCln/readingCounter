@@ -86,6 +86,70 @@ export class VerificationService {
     }
     return true;
   }
+  readingConfigDefault(val: IReadingConfigDefault) {
+    if (MathS.isNullZero(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (!MathS.persentCheck(val.defaultAlalHesab)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.maxAlalHesab)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.minAlalHesab)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.defaultImagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.maxImagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.minImagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.lowPercentBoundMaskooni)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.highPercentBoundMaskooni)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.lowPercentBoundSaxt)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.highPercentBoundSaxt)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.lowPercentZarfiatBound)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.highPercentZarfiatBound)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.lowPercentRateBoundNonMaskooni)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+    if (!MathS.persentCheck(val.highPercentRateBoundNonMaskooni)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
+      return false;
+    }
+
+    return true;
+  }
   validationOnNull = (val: any): boolean => {
     if (MathS.isNull(val))
       return false;
