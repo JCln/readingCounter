@@ -85,7 +85,7 @@ export class ConfirmationComponent extends FactoryONE {
     this.branchStateDictionary = await this.branchesService.dictionaryWrapperService.getBranchStateDictionary(false);
     this.waterSourceDictionary = await this.branchesService.dictionaryWrapperService.getWaterSourceDictionary(false);
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
-    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+    this.offeringGroupDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
   }
   showResDialog = (res: any, disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

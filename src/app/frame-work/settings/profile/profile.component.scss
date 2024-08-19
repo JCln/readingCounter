@@ -190,6 +190,11 @@ p-tabview {
   padding: var(--font_xs) 0;
   width: 100%;
   border-radius: $border_15;
+
+  .input_icon ._key {
+    min-width: 6rem;
+  }
+
 }
 
 .title {

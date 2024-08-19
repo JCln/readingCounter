@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'tarrifTypes', loadChildren: () => import('./tarrif-type-item/tarrif-type-item.module').then(tarrifTypeItemsManager => tarrifTypeItemsManager.TarrifTypeItemModule) },
   { path: 'tarrifParameter', loadChildren: () => import('./tariff-parameter/tariff-parameter.module').then(tarrifParameterManager => tarrifParameterManager.TariffParameterModule) },
   { path: 'offering', loadChildren: () => import('./offering/offering.module').then(offering => offering.OfferingModule) },
+  { path: 'excelToFill', loadChildren: () => import('./excel-to-fill/excel-to-fill.module').then(ExcelToFill => ExcelToFill.ExcelToFillModule) },
   { path: 'offeringUnit', loadChildren: () => import('./offering-unit/offering-unit.module').then(offeringUnit => offeringUnit.OfferingUnitModule) },
   { path: 'offeringGroup', loadChildren: () => import('./offering-group/offering-group.module').then(offeringGroup => offeringGroup.OfferingGroupModule) },
   { path: 'requestDraft', loadChildren: () => import('./request-draft/request-draft.module').then(requestDraft => requestDraft.RequestDraftModule) },

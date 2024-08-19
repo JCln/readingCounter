@@ -401,6 +401,18 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="mainDatas.field == 'tag'">
+                        <div class="input_icon">
+                            <i class="pi pi-bookmark _bookmark"></i>
+                            <div class="input_3">
+                                <div class="_key">{{mainDatas.header}}</div>
+                                <button class="btn_2" id="tag" type="button" (click)="addTag()">
+                                    افزودن تگ
+                                    <i class="pi pi-tag"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </ng-container>
                 <ng-template #checkboxes>
                     <ng-container *ngIf="mainDatas.isBoolean; else simpleText">

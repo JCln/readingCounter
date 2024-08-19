@@ -22,7 +22,7 @@ export class ScheduledPaymentMethodComponent extends FactoryONE {
   }
 
   callAPI = async () => {
-    this.closeTabService.scheduledPaymentMethod = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.scheduledPaymentMethodAll);
+    this.closeTabService.scheduledPaymentMethod = await this.branchesService.dictionaryWrapperService.getScheduledPaymentMethodDictionary(true);
   }
   openDialog = (item?: any) => {
     this.ref = this.dialogService.open(ScheduledPaymentMethodDgComponent, {

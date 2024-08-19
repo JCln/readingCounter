@@ -29,6 +29,7 @@ import { SharedCarouselModule } from './shared_carousel';
 import { UnSortTableDirective } from '../directives/un-sort-table.directive';
 import { PrimeConfirmDgComponent } from './prime-confirm-dg/prime-confirm-dg.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TagDialogComponent } from './tag-dialog/tag-dialog.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     UnSortTableDirective,
     PrimeTableComponent,
     PrimeTableEditableComponent,
+    TagDialogComponent,
     ImageViewerComponent,
     ConfirmTextDialogComponent,
     UserBlockingComponent,
@@ -71,6 +73,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
   exports: [
     PrimeTableComponent,
     PrimeTableEditableComponent,
+    TagDialogComponent,
     PrimeConfirmDgComponent,
     UserBlockingComponent,
     CommonModule,

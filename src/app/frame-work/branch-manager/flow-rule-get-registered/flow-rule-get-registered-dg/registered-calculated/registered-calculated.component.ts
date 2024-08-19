@@ -29,7 +29,7 @@ export class RegisteredCalculatedComponent extends FactoryONE {
     this.closeTabService.requestDraftCalculationRes = res;
   }
   dictionaryWrapper = async () => {
-    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+    this.offeringGroupDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
     this.offeringDictionary = await this.branchesService.dictionaryWrapperService.getOffering(false);
   }
   addNewItem(item: any) {

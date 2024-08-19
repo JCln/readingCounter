@@ -1,4 +1,3 @@
-import { OutputManagerService } from './../../../../services/output-manager.service';
 import { BranchesService } from 'services/branches.service';
 import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';

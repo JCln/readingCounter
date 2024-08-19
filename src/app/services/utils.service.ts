@@ -17,6 +17,7 @@ import { MathS } from '../classes/math-s';
 import { UserConfigComponent } from '../shared/user-config/user-config.component';
 import { PrimeConfirmDgComponent } from '../shared/prime-confirm-dg/prime-confirm-dg.component';
 import { DateJalaliService } from './date-jalali.service';
+import { TagDialogComponent } from '../shared/tag-dialog/tag-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -317,6 +318,23 @@ export class UtilsService {
     this.ref.onClose.subscribe(async res => {
       if (res)
         console.log(res);
+    });
+  }
+  showTagDialog = (dataSource?: any): Promise<any> => {
+    this.ref = this.dialogService.open(TagDialogComponent, {
+      data: {
+        _data: dataSource
+      },
+      rtl: true,
+      contentStyle: { minWidth: '21rem' },
+    })
+    return new Promise((resolve) => {
+      this.ref.onClose.subscribe(async res => {
+        if (res)
+          resolve(res);
+        else
+          resolve(false);
+      });
     });
   }
   /* END DIALOGS */

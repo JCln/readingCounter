@@ -41,15 +41,15 @@ export class LocationComponent extends FactoryONE {
   }
   async getRegionsByProvinceId() {
     if (this.closeTabService.requestDraftReq.provinceId)
-      this.regionsByProvinceIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.RegionDictionaryByProvinceId, this.closeTabService.requestDraftReq.provinceId);
+      this.regionsByProvinceIdDictionary = await this.branchesService.dictionaryWrapperService.getRegionDictionaryByProvinceId(this.closeTabService.requestDraftReq.provinceId);
   }
   async getZonesByRegionId() {
     if (this.closeTabService.requestDraftReq.regionId)
-      this.zonesByRegionIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ZoneDictionaryByRegionId, this.closeTabService.requestDraftReq.regionId);
+      this.zonesByRegionIdDictionary = await this.branchesService.dictionaryWrapperService.getZonesByRegionIdDictionary(this.closeTabService.requestDraftReq.regionId);
   }
   async getVillagesByZoneId() {
     if (this.closeTabService.requestDraftReq.zoneId)
-      this.villagesByZoneIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.villagesByZoneId, this.closeTabService.requestDraftReq.zoneId);
+      this.villagesByZoneIdDictionary = await this.branchesService.dictionaryWrapperService.getVillageDictionaryByZoneId(this.closeTabService.requestDraftReq.zoneId);
   }
   nextPage() {
     if (this.branchesService.verificationService.requestDraftLocation(this.closeTabService.requestDraftReq)) {

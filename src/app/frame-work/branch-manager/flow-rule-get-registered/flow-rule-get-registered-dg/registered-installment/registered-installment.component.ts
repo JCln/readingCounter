@@ -35,7 +35,7 @@ export class RegisteredInstallmentComponent extends FactoryONE {
     super();
   }
   dictionaryWrapper = async () => {
-    this.paymentMethod = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.scheduledPaymentMethodAll);
+    this.paymentMethod = await this.branchesService.dictionaryWrapperService.getScheduledPaymentMethodDictionary(false);
     this.ownershipTypeDictionary = await this.branchesService.dictionaryWrapperService.getOwnershipTypeDictionary(false);
     this.customerTypeDictionary = await this.branchesService.dictionaryWrapperService.getCustomerTypeDictionary(false);
   }

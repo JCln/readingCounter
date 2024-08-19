@@ -60,7 +60,7 @@ export class FlowRuleDgComponent implements OnInit {
   }
   classWrapper = async () => {
     this.flowState = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.flowStateGet);
-    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+    this.offeringGroupDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
   }
   ngOnInit(): void {
     if (this.config.data) {

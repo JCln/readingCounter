@@ -57,7 +57,7 @@ export class RegisteredEditComponent implements OnInit {
   }
   dictionaryWrapper = async () => {
     this.provinceDictionary = await this.branchesService.dictionaryWrapperService.getProvinceDictionary();
-    this.offeringGroupDictionary = await this.branchesService.ajaxReqWrapperService.getDataSource(ENInterfaces.offeringGroupGet);
+    this.offeringGroupDictionary = await this.branchesService.dictionaryWrapperService.getOfferingGroup(false);
     this.siphonDictionary = await this.branchesService.dictionaryWrapperService.getSiphonDictionary(false);
     this.zoneDictionary = await this.branchesService.dictionaryWrapperService.getZoneDictionary();
     this.usageDictionary = await this.branchesService.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -114,15 +114,15 @@ export class RegisteredEditComponent implements OnInit {
 
   async getRegionsByProvinceId() {
     if (this.closeTabService.flowRuleRegisteredEdit.provinceId)
-      this.regionsByProvinceIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.RegionDictionaryByProvinceId, this.closeTabService.flowRuleRegisteredEdit.provinceId);
+      this.regionsByProvinceIdDictionary = await this.branchesService.dictionaryWrapperService.getRegionDictionaryByProvinceId(this.closeTabService.flowRuleRegisteredEdit.provinceId);
   }
   async getZonesByRegionId() {
     if (this.closeTabService.flowRuleRegisteredEdit.regionId)
-      this.zonesByRegionIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ZoneDictionaryByRegionId, this.closeTabService.flowRuleRegisteredEdit.regionId);
+      this.zonesByRegionIdDictionary = await this.branchesService.dictionaryWrapperService.getZonesByRegionIdDictionary(this.closeTabService.flowRuleRegisteredEdit.regionId);
   }
   async getVillagesByZoneId() {
     if (this.closeTabService.flowRuleRegisteredEdit.zoneId)
-      this.villagesByZoneIdDictionary = await this.branchesService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.villagesByZoneId, this.closeTabService.flowRuleRegisteredEdit.zoneId);
+      this.villagesByZoneIdDictionary = await this.branchesService.dictionaryWrapperService.getVillageDictionaryByZoneId(this.closeTabService.flowRuleRegisteredEdit.zoneId);
   }
   ngOnInit(): void {
     if (MathS.isNull(this.closeTabService.flowRuleRegisteredEdit)) {
@@ -131,6 +131,10 @@ export class RegisteredEditComponent implements OnInit {
       return;
     }
     this.classWrapper();
+  }
+  async addTag() {
+    const confirmed = await this.branchesService.utilsService.showTagDialog();
+    console.log(confirmed);
   }
   nextPage() {
     if (this.branchesService.verificationService.requestDraftAdd(this.closeTabService.flowRuleRegisteredEdit)) {

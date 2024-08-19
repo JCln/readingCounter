@@ -4,7 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { MathS } from '../classes/math-s';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 import { VerificationService } from './verification.service';
-import { IBranchState, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IWaterSource } from 'interfaces/i-branch';
+import { IBranchState, ICustomerType, IInvoiceType, IOffering, IOfferingGroup, IOfferingUnit, IOwnershipType, IScheduledPaymentMethod, IWaterSource } from 'interfaces/i-branch';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,7 @@ export class DictionaryWrapperService {
   private counterStateDictionary: any = [];
   private guildDictionary: any = [];
   private ownershipType: IOwnershipType[] = [];
+  private scheduledPaymentMethod: IScheduledPaymentMethod[] = [];
   private branchState: IBranchState[] = [];
   private customerType: ICustomerType[] = [];
   private waterSource: IWaterSource[] = [];
@@ -65,6 +66,18 @@ export class DictionaryWrapperService {
   private counterReportByZoneDictionary = {
     dictionary: null,
     zoneId: null
+  };
+  private zonesDictionaryByRegionId = {
+    dictionary: null,
+    id: null
+  };
+  private regionDictionaryByProvinceId = {
+    dictionary: null,
+    id: null
+  };
+  private villageDictionaryByZoneId = {
+    dictionary: null,
+    id: null
   };
   private userCounterReadersByZoneDictionary = {
     dictionary: null,
@@ -245,6 +258,13 @@ export class DictionaryWrapperService {
     this.setOwnershipTypeDictionary(res);
     return this.ownershipType;
   }
+  async getScheduledPaymentMethodDictionary(canRefresh: boolean): Promise<any> {
+    if (!MathS.isNull(this.scheduledPaymentMethod) && !canRefresh)
+      return this.scheduledPaymentMethod;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSource(ENInterfaces.scheduledPaymentMethodAll);
+    this.setScheduledPaymentMethodDictionary(res);
+    return this.scheduledPaymentMethod;
+  }
   async getBranchStateDictionary(canRefresh: boolean): Promise<any> {
     if (!MathS.isNull(this.branchState) && !canRefresh)
       return this.branchState;
@@ -278,6 +298,27 @@ export class DictionaryWrapperService {
       return this.counterReportByZoneDictionary.dictionary;
     const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId);
     this.setCounterReportByZoneDictionary(res, zoneId);
+    return res;
+  }
+  async getRegionDictionaryByProvinceId(provinceId: number): Promise<any> {
+    if (this.regionDictionaryByProvinceId.id == provinceId && !MathS.isNull(this.regionDictionaryByProvinceId.dictionary))
+      return this.regionDictionaryByProvinceId.dictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.RegionDictionaryByProvinceId, provinceId);
+    this.setRegionDictionaryByProvinceId(res, provinceId);
+    return res;
+  }
+  async getZonesByRegionIdDictionary(regionId: number): Promise<any> {
+    if (this.zonesDictionaryByRegionId.id == regionId && !MathS.isNull(this.zonesDictionaryByRegionId.dictionary))
+      return this.zonesDictionaryByRegionId.dictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.ZoneDictionaryByRegionId, regionId);
+    this.setZonesDictionaryByRegionId(res, regionId);
+    return res;
+  }
+  async getVillageDictionaryByZoneId(zoneId: number): Promise<any> {
+    if (this.villageDictionaryByZoneId.id == zoneId && !MathS.isNull(this.villageDictionaryByZoneId.dictionary))
+      return this.villageDictionaryByZoneId.dictionary;
+    const res = await this.utilsService.ajaxReqWrapperService.getDataSourceByQuote(ENInterfaces.villagesByZoneId, zoneId);
+    this.setVillageDictionaryByZoneId(res, zoneId);
     return res;
   }
   getUserCounterReaderDictionary = async (zoneId: number): Promise<any> => {
@@ -530,6 +571,18 @@ export class DictionaryWrapperService {
     this.counterReportByZoneDictionary.dictionary = v;
     this.counterReportByZoneDictionary.zoneId = id;
   }
+  private setZonesDictionaryByRegionId(v: any, id: number) {
+    this.zonesDictionaryByRegionId.dictionary = v;
+    this.zonesDictionaryByRegionId.id = id;
+  }
+  private setRegionDictionaryByProvinceId(v: any, id: number) {
+    this.regionDictionaryByProvinceId.dictionary = v;
+    this.regionDictionaryByProvinceId.id = id;
+  }
+  private setVillageDictionaryByZoneId(v: any, id: number) {
+    this.villageDictionaryByZoneId.dictionary = v;
+    this.villageDictionaryByZoneId.id = id;
+  }
   private setReadingConfigDefaultByZoneDictionary(v: any, id: number) {
     this.readingConfigDefaultByZoneDictionary.dictionary = v;
     this.readingConfigDefaultByZoneDictionary.zoneId = id;
@@ -595,6 +648,9 @@ export class DictionaryWrapperService {
   private setOwnershipTypeDictionary(v: any) {
     this.ownershipType = v;
   }
+  private setScheduledPaymentMethodDictionary(v: any) {
+    this.scheduledPaymentMethod = v;
+  }
   private setBranchStateDictionary(v: any) {
     this.branchState = v;
   }
@@ -607,6 +663,7 @@ export class DictionaryWrapperService {
 
   cleanDictionaries = () => {
     this.ownershipType = [];
+    this.scheduledPaymentMethod = [];
     this.waterSource = [];
     this.customerType = [];
     this.branchState = [];
@@ -639,6 +696,12 @@ export class DictionaryWrapperService {
     this.guildDictionary = [];
     this.counterReportByZoneDictionary.dictionary = [];
     this.counterReportByZoneDictionary.zoneId = null;
+    this.zonesDictionaryByRegionId.dictionary = [];
+    this.zonesDictionaryByRegionId.id = null;
+    this.regionDictionaryByProvinceId.dictionary = [];
+    this.regionDictionaryByProvinceId.id = null;
+    this.villageDictionaryByZoneId.dictionary = [];
+    this.villageDictionaryByZoneId.id = null;
     this.iOPolicy.id = null;
     this.readingConfigDefaultByZoneDictionary.dictionary = [];
     this.readingConfigDefaultByZoneDictionary.zoneId = null;

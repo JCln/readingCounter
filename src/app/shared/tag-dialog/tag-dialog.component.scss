@@ -1,0 +1,40 @@
+@import 'variable';
+@import 'button';
+
+body {
+    font-family: var(--font-family);
+    direction: rtl;
+}
+
+.btn_3 {
+    min-width: 5rem;
+    width: fit-content;
+}
+
+.tag {}
+
+.title {
+    color: var(--primary_3);
+}
+
+._list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 20rem;
+}
+
+.list-item {
+    width: auto;
+    gap: 5px;
+    min-width: 4rem;
+    height: var(--font_26);
+    text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+    font-size: var(--font_s);
+    font-weight: 600;
+    background-color: var(--white);
+    color: var(--primary_3);
+    gap: 5px;
+    transition: box-shadow cubic-bezier(0.075, 0.82, 0.165, 1) 250ms;
+}

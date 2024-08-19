@@ -3569,6 +3569,7 @@ export class ColumnManager {
         // { field: 'isLast', header: 'آخرین', isSelected: false, isSelectedOrigin: false },
         // { field: 'fromDateTime', header: 'از تاریخ', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'toDateTime', header: 'تا تاریخ', isSelected: false, isSelectedOrigin: false },                
+        { field: 'tag', header: 'تگ', isSelected: false, isSelectedOrigin: false, isSelectOption: true },
         { field: 'description', header: 'توضیحات', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
         // { field: 'isLast', header: 'آخرین', isSelected: false, isSelectedOrigin: false },
         // { field: 'fromDateTime', header: 'از تاریخ', isSelected: false, isSelectedOrigin: false, enableTooltip: true },
