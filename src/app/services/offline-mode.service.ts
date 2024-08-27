@@ -11,11 +11,6 @@ import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { ISingleReadingCounterReq } from 'interfaces/isearchs';
 import { IIOPolicy } from 'interfaces/iserver-manager';
 
-interface IUploadForm {
-  file: any,
-  description: string,
-  onOffLoadId: string,
-}
 
 @Injectable({
   providedIn: 'root'
@@ -23,25 +18,10 @@ interface IUploadForm {
 export class OfflineModeService {
   private fileForm: FileList;
   private desc: any;
-  fileUploadSingleForm: FileList;
 
   loadForm = {
     zoneId: 0,
     counterReaderId: ''
-  }
-  fileUploadSingle = {
-    searchBy: 1,
-    item: '',
-    searchType: []
-  }
-  fileUploadSingleReq: IUploadForm = {
-    file: File,
-    description: '',
-    onOffLoadId: ''
-  }
-  offlineTextOut = {
-    zoneId: null,
-    counterReaderId: '',
   }
 
   constructor(
@@ -90,50 +70,19 @@ export class OfflineModeService {
     }
     return true;
   }
-  checkVertiticationOfflineTxtOut = (filesList: FileList, data: any): boolean => {
+  checkVertiticationOfflineTxtOut = (body: any, filesList: FileList, data: any): boolean => {
     this.fileForm = filesList;
     this.desc = data;
-    if (MathS.isNull(this.offlineTextOut.zoneId)) {
+    if (MathS.isNull(body.zoneId)) {
       this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarColors.warn);
       return false;
     }
-    if (MathS.isNull(this.offlineTextOut.counterReaderId)) {
+    if (MathS.isNull(body.counterReaderId)) {
       this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarColors.warn);
       return false;
     }
     if (!this.vertificationOfflineTxtOut())
       return false;
-    return true;
-  }
-  checkVertiticationFileUploadSingle = (ioPolicy: IIOPolicy): boolean => {
-    const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
-    const allowedNames = ['jpeg', 'jpg', 'png'];
-
-    if (MathS.isNull(this.fileUploadSingle.searchBy)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarColors.warn);
-      return false;
-    }
-    if (MathS.isNull(this.fileUploadSingle.item.toString().trim())) {
-      this.utilsService.snackBarMessage(EN_messages.insert_value, ENSnackBarColors.warn);
-      return false;
-    }
-    if (MathS.isNull(this.fileUploadSingleForm)) {
-      this.utilsService.snackBarMessage(EN_messages.insert_Image, ENSnackBarColors.warn);
-      return false;
-    }
-    if (allowedExtension.indexOf(this.fileUploadSingleForm[0].type) == -1) {
-      this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarColors.warn);
-      return false;
-    }
-    if (allowedNames.indexOf(this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase()) == -1) {
-      this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarColors.warn);
-      return false;
-    }
-    if (this.fileUploadSingleForm[0].size / 1024 > ioPolicy.inputMaxSizeKb) {
-      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarColors.warn);
-      return false;
-    }
-
     return true;
   }
   vertificationSingleReadingRequest = (dataSource: ISingleReadingCounterReq): boolean => {
@@ -150,19 +99,19 @@ export class OfflineModeService {
   showSuccessMessage = (message: string) => {
     this.utilsService.snackBarMessage(message, ENSnackBarColors.success);
   }
-  postTicketOfflineTxtOut = (): Observable<any> => {
+  postTicketOfflineTxtOut = (body: any): Observable<any> => {
     const formData: FormData = new FormData();
 
     formData.append('file', this.fileForm[0]);
-    formData.append('userId', this.offlineTextOut.counterReaderId);
+    formData.append('userId', body.counterReaderId);
     return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.offloadManual, formData);
   }
-  postTicketFileUploadSingle = (filesList: FileList): Observable<any> => {
+  postTicketFileUploadSingle = (body: any, filesList: FileList): Observable<any> => {
     const formData: FormData = new FormData();
 
     formData.append('file', filesList[0]);
-    formData.append('onOffLoadId', this.fileUploadSingleReq.onOffLoadId);
-    formData.append('description', this.fileUploadSingleReq.description);
+    formData.append('onOffLoadId', body.onOffLoadId);
+    formData.append('description', body.description);
 
     return this.ajaxReqWrapperService.postBodyProgress(ENInterfaces.fileUploadSingle, formData);
   }

@@ -1,3 +1,4 @@
+import { CloseTabService } from 'services/close-tab.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -33,8 +34,8 @@ export class OffTxtOutComponent {
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
 
-      if (this.offlineModeService.checkVertiticationOfflineTxtOut(fileInput.files, form.value)) {
-        this.offlineModeService.postTicketOfflineTxtOut().subscribe({
+      if (this.offlineModeService.checkVertiticationOfflineTxtOut(this.closeTabService.offlineTextOut, fileInput.files, form.value)) {
+        this.offlineModeService.postTicketOfflineTxtOut(this.closeTabService.offlineTextOut).subscribe({
           next: (event: HttpEvent<any>) => {
             switch (event.type) {
               case HttpEventType.Sent:
@@ -61,8 +62,8 @@ export class OffTxtOutComponent {
 
   }
   getCounterReader = async () => {
-    if (this.offlineModeService.offlineTextOut.zoneId) {
-      this.userCounterReaderDictionary = await this.offlineModeService.dictionaryWrapperService.getUserCounterReaderDictionary(this.offlineModeService.offlineTextOut.zoneId);
+    if (this.closeTabService.offlineTextOut.zoneId) {
+      this.userCounterReaderDictionary = await this.offlineModeService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.offlineTextOut.zoneId);
     }
   }
   getZoneDictionary = async () => {
@@ -70,7 +71,8 @@ export class OffTxtOutComponent {
   }
 
   constructor(
-    public offlineModeService: OfflineModeService
+    public offlineModeService: OfflineModeService,
+    public closeTabService: CloseTabService
   ) {
     this.getZoneDictionary();
     this.getCounterReader();
