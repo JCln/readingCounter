@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IIOPolicy } from 'interfaces/iserver-manager';
+import { CloseTabService } from 'services/close-tab.service';
 import { OfflineModeService } from 'services/offline-mode.service';
 
 @Component({
@@ -20,22 +21,23 @@ export class FileUploadSingleComponent {
   _searchByInfo: string = 'اشتراک';
 
   constructor(
-    public offlineModeService: OfflineModeService
+    public offlineModeService: OfflineModeService,
+    public closeTabService: CloseTabService
   ) {
     this.classWrapper();
   }
   // The classWrapper is not Overridden
   classWrapper = () => {
-    this.offlineModeService.fileUploadSingle.searchType = this.offlineModeService.getSearchTypes();
+    this.closeTabService.fileUploadSingle.searchType = this.offlineModeService.getSearchTypes();
   }
 
   getLatestOnOffloadId = async () => {
     await this.offlineModeService.ajaxReqWrapperService.postDataSourceByObject(ENInterfaces.getLatestOnOffloadId,
       {
-        searchBy: this.offlineModeService.fileUploadSingle.searchBy,
-        item: this.offlineModeService.fileUploadSingle.item
+        searchBy: this.closeTabService.fileUploadSingle.searchBy,
+        item: this.closeTabService.fileUploadSingle.item
       }
-    ).then(res => this.offlineModeService.fileUploadSingleReq.onOffLoadId = res.onOffLoadId)
+    ).then(res => this.closeTabService.fileUploadSingleReq.onOffLoadId = res.onOffLoadId)
   }
   onChange(event) {
     const a = document.getElementById('files') as any;
@@ -49,13 +51,13 @@ export class FileUploadSingleComponent {
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
 
-      this.offlineModeService.fileUploadSingleForm = fileInput.files;
+      this.closeTabService.saveDataForImportDataFileExcel.fileUploadSingleForm = fileInput.files;
       this.ioPolicy = await this.offlineModeService.dictionaryWrapperService.getIOPolicy(false);
       console.log(this.ioPolicy);
-      
-      if (this.offlineModeService.checkVertiticationFileUploadSingle(this.ioPolicy)) {
+
+      if (this.closeTabService.saveDataForImportDataFileExcel.checkVertiticationFileUploadSingle(this.closeTabService.fileUploadSingle, this.ioPolicy)) {
         await this.getLatestOnOffloadId();
-        this.offlineModeService.postTicketFileUploadSingle(fileInput.files).subscribe({
+        this.offlineModeService.postTicketFileUploadSingle(this.closeTabService.fileUploadSingleReq, fileInput.files).subscribe({
           next: (event: HttpEvent<any>) => {
             switch (event.type) {
               case HttpEventType.Sent:
