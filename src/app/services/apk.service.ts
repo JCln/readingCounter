@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
+import { IOService } from './io.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class ApkService {
 
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public iOService: IOService
   ) { }
 
   isNull = (): boolean => {
@@ -48,25 +50,15 @@ export class ApkService {
     }
     return true;
   }
-  isValidAPKSize = (): boolean => {
-    if (this.fileForm[0].size / ENRandomNumbers.oneK > ENRandomNumbers.twentyFiveK) {
-      this.utilsService.snackBarMessageWarn(EN_messages.entityTooLarge);
-      return false;
-    }
-    if (this.fileForm[0].size / ENRandomNumbers.oneK < ENRandomNumbers.sevenK) {
-      this.utilsService.snackBarMessageWarn(EN_messages.entityTooSmall);
-      return false;
-    }
-    return true;
-  }
-  vertification = (): boolean => {
+  vertification = async (): Promise<boolean> => {
     if (!this.isNull())
       return false;
     if (!this.isInteger())
       return false;
     if (!this.isAPK())
       return false;
-    if (!this.isValidAPKSize())
+
+    if (!await this.iOService.policyContent(this.fileForm))
       return false;
 
     return true;
