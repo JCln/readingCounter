@@ -10,6 +10,7 @@
     window.__env.hasCancelableSpinner = true;
     window.__env.timeout = 18000;
     window.__env.hasNextBazdid = false;
+    window.__env.isAfta = false;
     window.__env.reOrderableTable = false;
     window.__env.defaultAggregateTracks = false;
     window.__env.shouldSaveTokensInLocal = true;

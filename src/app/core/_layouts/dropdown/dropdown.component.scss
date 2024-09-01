@@ -5,11 +5,16 @@ i {
 }
 
 ._name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   font-size: 1rem;
   padding: .5rem 0;
   color: var(--primary_5);
   margin: 2px 0;
-  border-radius: $border_7;
+  border-radius: $border_7;  
+
 
   &:hover {
     background: var(--secondary_3);

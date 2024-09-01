@@ -4,7 +4,7 @@ import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
 
-  temp = ActivatedProvince.KERMANSHAH;
+  temp = ActivatedProvince.TEH;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
@@ -34,6 +34,7 @@ export class EnvService implements IENV {
   getRequestDraftIds = this.temp.getRequestDraftIds;
   getOfferingIds = this.temp.getOfferingIds;
   getTarrifInsertModeDictionary = this.temp.getTarrifInsertModeDictionary;
+  isAfta = this.temp.isAfta;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

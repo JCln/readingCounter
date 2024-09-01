@@ -32,12 +32,12 @@ export class InputOutputPolicyComponent extends FactoryONE {
   ) {
     super();
   }
-  classWrapper = async (canRefresh?: boolean) => {
-    this.iOPolicyOptions = this.securityService.getIOPolicyToggle();
-    // if (canRefresh) {
+  callAPI = async () => {
     this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(true);
-    // }
-    // this.closeTabService.iOPolicy = await this.securityService.dictionaryWrapperService.getIOPolicy(false);
+  }
+  classWrapper = async () => {
+    this.iOPolicyOptions = this.securityService.getIOPolicyToggle();
+    this.callAPI();
   }
 
   plusOrMinusOutputMaxCountPerDay = (value: number) => {
@@ -84,7 +84,9 @@ export class InputOutputPolicyComponent extends FactoryONE {
       this.securityService.ajaxReqWrapperService.interfaceManagerService.POSTBODY(_addOrEditInterface, this.closeTabService.iOPolicy)
         .toPromise()
         .then((res: any) => {
+          // should reset values on client( local machine) to have latest value
           this.securityService.utilsService.snackBarMessageSuccess(res.message);
+          this.callAPI();
         }).catch(error => {
           console.log(error);
           const config = {

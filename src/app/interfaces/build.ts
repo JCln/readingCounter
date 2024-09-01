@@ -335,6 +335,11 @@ export class ENHasNextBazdid {
     private constructor(public readonly value: boolean) {
     }
 }
+export class ENIsAfta {
+    static readonly DEFAULT = new ENIsAfta(false);
+
+    private constructor(public readonly value: boolean) { }
+}
 export class resizableTable {
     static readonly DEFAULT = new resizableTable(false);
 

@@ -10,6 +10,7 @@ import { Search } from '../classes/search';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { ISingleReadingCounterReq } from 'interfaces/isearchs';
 import { IIOPolicy } from 'interfaces/iserver-manager';
+import { IOService } from './io.service';
 
 interface IUploadForm {
   file: any,
@@ -47,7 +48,8 @@ export class OfflineModeService {
   constructor(
     public ajaxReqWrapperService: AjaxReqWrapperService,
     private utilsService: UtilsService,
-    public dictionaryWrapperService: DictionaryWrapperService
+    public dictionaryWrapperService: DictionaryWrapperService,
+    public iOService: IOService
   ) { }
 
   getSearchTypes = (): Search[] => {
@@ -105,7 +107,7 @@ export class OfflineModeService {
       return false;
     return true;
   }
-  checkVertiticationFileUploadSingle = (ioPolicy: IIOPolicy): boolean => {
+  checkVertiticationFileUploadSingle = (): boolean => {
     const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
     const allowedNames = ['jpeg', 'jpg', 'png'];
 
@@ -127,10 +129,6 @@ export class OfflineModeService {
     }
     if (allowedNames.indexOf(this.fileUploadSingleForm[0].name.split('.').pop().toLowerCase()) == -1) {
       this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarColors.warn);
-      return false;
-    }
-    if (this.fileUploadSingleForm[0].size / 1024 > ioPolicy.inputMaxSizeKb) {
-      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarColors.warn);
       return false;
     }
 
