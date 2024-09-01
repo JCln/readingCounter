@@ -1221,6 +1221,43 @@ export class VerificationService {
 
     return true;
   }
+  // checkVertiticationFileUploadSingle = (fileForm: FileList, body: any, ioPolicy: IIOPolicy): boolean => {
+  //   const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
+  //   const allowedNames = ['jpeg', 'jpg', 'png'];
+  //   if (MathS.isNull(body.searchBy)) {
+  //     this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarColors.warn);
+  //     return false;
+  //   }
+  //   if (MathS.isNull(body.item.toString().trim())) {
+  //     this.utilsService.snackBarMessage(EN_messages.insert_value, ENSnackBarColors.warn);
+  //     return false;
+  //   }
+  //   if (MathS.isNull(fileForm)) {
+  //     this.utilsService.snackBarMessage(EN_messages.insert_Image, ENSnackBarColors.warn);
+  //     return false;
+  //   }
+  //   if (allowedExtension.indexOf(fileForm[0].type) == -1) {
+  //     this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarColors.warn);
+  //     return false;
+  //   }
+  //   if (allowedNames.indexOf(fileForm[0].name.split('.').pop().toLowerCase()) == -1) {
+  //     this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarColors.warn);
+  //     return false;
+  //   }
+  //   if (!this.iOPolicyContent(fileForm, ioPolicy)) {
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
+  iOPolicyContent = (fileForm: FileList, body: IIOPolicy): boolean => {
+    if (fileForm[0].size / 1024 > body.inputMaxSizeKb) {
+      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarColors.warn);
+      return false;
+    }
+
+    return true;
+  }
   checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage, ioPolicy: IIOPolicy): boolean => {
     if (this.utilsService.getIsAfta()) {
       this.utilsService.snackBarMessageWarn(EN_messages.isAfta);
@@ -1245,8 +1282,7 @@ export class VerificationService {
       this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarColors.warn);
       return false;
     }
-    if (fileForm[0].size / 1024 > ioPolicy.inputMaxSizeKb) {
-      this.utilsService.snackBarMessage(EN_messages.uploadMaxCountPassed, ENSnackBarColors.warn);
+    if (!this.iOPolicyContent(fileForm, ioPolicy)) {
       return false;
     }
 

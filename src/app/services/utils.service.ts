@@ -1,3 +1,4 @@
+import { VerificationService } from 'services/verification.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -39,7 +40,8 @@ export class UtilsService {
     public snackWrapperService: SnackWrapperService,
     public ajaxReqWrapperService: AjaxReqWrapperService,
     public collapser: Collapser,
-    public spinnerWrapperService: SpinnerWrapperService
+    public spinnerWrapperService: SpinnerWrapperService,
+    public verificationService: VerificationService
   ) { }
 
   getSimafaImportStatus = (): ISimafaImportStatus => {
