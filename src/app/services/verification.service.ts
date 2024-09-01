@@ -1259,6 +1259,10 @@ export class VerificationService {
     return true;
   }
   checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage, ioPolicy: IIOPolicy): boolean => {
+    if (this.utilsService.getIsAfta()) {
+      this.utilsService.snackBarMessageWarn(EN_messages.isAfta);
+      return false;
+    }
     const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
     const allowedNames = ['jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG'];
 
@@ -1286,6 +1290,10 @@ export class VerificationService {
   }
   checkVertiticationNotifDirectVideo = (fileForm: FileList, val: INotifyDirectImage): boolean => {
     const allowedNames = ['mp4', 'MP4', 'ogg', 'OGG`'];
+    if (this.utilsService.getIsAfta()) {
+      this.utilsService.snackBarMessageWarn(EN_messages.isAfta);
+      return false;
+    }
     if (MathS.isNull(val.caption)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_caption);
       return false;

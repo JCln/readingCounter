@@ -50,7 +50,11 @@ export class ApkService {
     }
     return true;
   }
-  vertification = async (): Promise<boolean> => {
+  checkVertitication = (filesList: FileList, data: any): boolean => {
+    // ToDo: insert to values, not working perfectly unless
+    this.fileForm = filesList;
+    this.desc = data;
+
     if (!this.isNull())
       return false;
     if (!this.isInteger())
@@ -58,17 +62,10 @@ export class ApkService {
     if (!this.isAPK())
       return false;
 
-    if (!await this.iOService.policyContent(this.fileForm))
+    if (!this.iOService.policyAPKContent(this.fileForm)) {
       return false;
+    }
 
-    return true;
-  }
-  checkVertitication = (filesList: FileList, data: any): boolean => {
-    // ToDo: insert to values, not working perfectly unless
-    this.fileForm = filesList;
-    this.desc = data;
-    if (!this.vertification())
-      return false;
     return true;
   }
   postTicket = (): Observable<any> => {

@@ -53,6 +53,9 @@ export class UtilsService {
   getTarrifInsertModeDictionary = () => {
     return this.envService.getTarrifInsertModeDictionary;
   }
+  getIsAfta = (): boolean => {
+    return this.envService.isAfta;
+  }
   getDenyTracking = (): boolean => {
     const jwtRole = this.compositeService.getAuthUser();
     return !!jwtRole.roles.toString().includes(this.denyTracking);
