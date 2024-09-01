@@ -11,10 +11,10 @@
                 <div class="input_3">
                     <div class="_key">نوع جستجو</div>
                     <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="closeTabService.fileUploadSingle.searchBy"
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="offlineModeService.fileUploadSingle.searchBy"
                             name="searchType">
                             <mat-option (click)="_searchByInfo = truefalse.searchBy"
-                                *ngFor="let truefalse of closeTabService.fileUploadSingle.searchType"
+                                *ngFor="let truefalse of offlineModeService.fileUploadSingle.searchType"
                                 [value]="truefalse.id">
                                 {{truefalse.searchBy}}
                             </mat-option>
@@ -28,7 +28,7 @@
                 <div class="input_3">
                     <div class="_key">{{_searchByInfo}}</div>
                     <input class="_value" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="item"
-                        [(ngModel)]="closeTabService.fileUploadSingle.item" autofocus>
+                        [(ngModel)]="offlineModeService.fileUploadSingle.item" autofocus>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                 <div class="input_3">
                     <div class="_key">توضیحات</div>
                     <input class="_value" placeholder="توضیحات" name="description"
-                        [(ngModel)]="closeTabService.fileUploadSingleReq.description">
+                        [(ngModel)]="offlineModeService.fileUploadSingleReq.description">
                 </div>
             </div>
 

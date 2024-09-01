@@ -30,7 +30,6 @@ import {
   IReadingPeriodKind,
   ITabsare2Formula,
   ITextOutput,
-  IUploadForm,
 } from 'interfaces/ireads-manager';
 import {
   IDynamicReportsRes,
@@ -83,7 +82,7 @@ export class CloseTabService {
 
   constructor(
     public utilsService: UtilsService,
-    public profileService: ProfileService,
+    public profileService: ProfileService
   ) {
   }
   /* TAB WRAPPER */
@@ -303,21 +302,6 @@ export class CloseTabService {
       toTime: toTimeH + ':' + toTimeM
     }
   }
-  fileUploadSingle = {
-    searchBy: 1,
-    item: '',
-    searchType: []
-  }
-  fileUploadSingleReq: IUploadForm = {
-    file: File,
-    description: '',
-    onOffLoadId: ''
-  }
-  offlineTextOut = {
-    zoneId: null,
-    counterReaderId: '',
-  }
-
   public imgResultDetails: IImageResultDetails = {
     zoneId: null,
     fromDate: '',

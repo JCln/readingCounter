@@ -16,12 +16,6 @@ export interface IQotr {
     title: string,
     provinceId: any
 }
-
-export interface IUploadForm {
-    file: any,
-    description: string,
-    onOffLoadId: string,
-}
 export interface IReadingPeriod {
     id: number,
     title: string,
