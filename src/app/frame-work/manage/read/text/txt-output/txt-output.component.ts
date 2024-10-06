@@ -57,7 +57,7 @@ export class TxtOutputComponent extends FactoryONE {
     if (MathS.isNull(this.closeTabService.saveDataForTextOutput)) {
       this.callAPI();
     }
-    this.insertToAux();
+    this.convertion();
   }
   removeRow = async (rowData: ITextOutput) => {
     if (await this.branchesService.firstConfirmDialog('عنوان: ' + rowData.itemTitle + ' ناحیه: ' + rowData.dynamicId)) {
