@@ -317,6 +317,11 @@ export class CloseTabService {
     zoneId: null,
     counterReaderId: '',
   }
+  offloadFormReq = {
+    zoneId: 0,
+    counterReaderId: ''
+  }
+
 
   public imgResultDetails: IImageResultDetails = {
     zoneId: null,
@@ -2342,6 +2347,40 @@ export class CloseTabService {
     },
     { id: 2, value: ENEssentialsToSave.saveDataForIpSpecialRules, url: EN_Routes.wr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
+    {
+      id: 2,
+      req: ENEssentialsToSave.offlineTextOut,
+      url: EN_Routes.wrofflinetxtout,
+      defaultReq: {
+        zoneId: null,
+        counterReaderId: '',
+      }
+    },
+    {
+      id: 2,
+      req: ENEssentialsToSave.offloadFormReq,
+      url: EN_Routes.offlineLoad,
+      defaultReq: {
+        zoneId: 0,
+        counterReaderId: ''
+      }
+    },
+    {
+      id: 2,
+      req: ENEssentialsToSave.fileUploadSingle,
+      value: ENEssentialsToSave.fileUploadSingleReq,
+      url: EN_Routes.uploadSingle,
+      defaultReq: {
+        searchBy: 1,
+        item: '',
+        searchType: []
+      },
+      defaultValue: {
+        file: File,
+        description: '',
+        onOffLoadId: ''
+      }
+    },
     { id: 13, req: ENEssentialsToSave.offlineSingleReadingCounterReq, value: ENEssentialsToSave.offlineSingleReadingCounter, url: EN_Routes.offlineSingleReading },
     { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
     { id: 2, value: ENEssentialsToSave.saveDataForMsDriveInfo, url: EN_Routes.driveInfo },

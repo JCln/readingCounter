@@ -9,7 +9,7 @@
                 <div class="_key">ناحیه</div>
                 <div class="_value">
                     <p-dropdown name="zone" #zoneId [options]="zoneDictionary"
-                        [(ngModel)]="offlineModeService.loadForm.zoneId" optionLabel="title" [filter]="true"
+                        [(ngModel)]="closeTabService.offloadFormReq.zoneId" optionLabel="title" [filter]="true"
                         filterBy="title" optionValue="id" placeholder="انتخاب مورد" (onChange)="getCounterReader()">
                     </p-dropdown>
                 </div>
@@ -21,7 +21,7 @@
                 <div class="_key">قرائت کننده</div>
                 <div class="_value">
                     <p-dropdown name="counterreader" #counterreader [options]="userCounterReaderDictionary"
-                        [(ngModel)]="offlineModeService.loadForm.counterReaderId" optionLabel="title" [filter]="true"
+                        [(ngModel)]="closeTabService.offloadFormReq.counterReaderId" optionLabel="title" [filter]="true"
                         filterBy="title" optionValue="id" placeholder="انتخاب مورد">
                     </p-dropdown>
                 </div>

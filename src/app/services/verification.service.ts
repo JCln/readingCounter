@@ -14,6 +14,7 @@ import { IAutomaticImportAddEdit, ICounterState, IDynamicTraverse, IFragmentDeta
 import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from 'interfaces/tools';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IPolicies } from './DI/privacies';
+import { ISingleReadingCounterReq } from 'interfaces/isearchs';
 
 @Injectable({
   providedIn: 'root'
@@ -2217,6 +2218,74 @@ export class VerificationService {
     }
     return true;
 
+  }
+  vertificationSingleReadingRequest = (dataSource: ISingleReadingCounterReq): boolean => {
+    if (MathS.isNull(dataSource.searchBy)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
+      return false;
+    }
+    if (MathS.isNull(dataSource.item)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+      return false;
+    }
+    return true;
+  }
+  checkVertiticationFileUploadSingle = (body: any, fileForm: FileList): boolean => {
+    const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png'];
+    const allowedNames = ['jpeg', 'jpg', 'png'];
+
+    if (MathS.isNull(body.searchBy)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_searchType, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(body.item.toString().trim())) {
+      this.utilsService.snackBarMessage(EN_messages.insert_value, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(fileForm)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_Image, ENSnackBarColors.warn);
+      return false;
+    }
+    if (allowedExtension.indexOf(fileForm[0].type) == -1) {
+      this.utilsService.snackBarMessage(EN_messages.insertIsNotImage, ENSnackBarColors.warn);
+      return false;
+    }
+    if (allowedNames.indexOf(fileForm[0].name.split('.').pop().toLowerCase()) == -1) {
+      this.utilsService.snackBarMessage(EN_messages.should_insert_image, ENSnackBarColors.warn);
+      return false;
+    }
+
+    return true;
+  }
+  vertificationLoadManual = (body: any): boolean => {
+    if (MathS.isNull(body.zoneId)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(body.counterReaderId)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarColors.warn);
+      return false;
+    }
+    return true;
+  }
+  checkVertiticationOfflineTxtOut = (filesList: FileList, body: any): boolean => {
+    if (MathS.isNull(body.zoneId)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_zone, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(body.counterReaderId)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_CounterReader, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(filesList)) {
+      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarColors.warn);
+      return false;
+    }
+    if (filesList[0].name.split('.').pop() !== 'zip') {
+      this.utilsService.snackBarMessage(EN_messages.should_insert_ZIP, ENSnackBarColors.warn);
+      return false;
+    }
+    return true;
   }
   verificationImageCarousel = (dataSource: IRandomImages) => {
     if (MathS.isNull(dataSource.zoneId)) {

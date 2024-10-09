@@ -44,44 +44,44 @@ export class FileUploadSingleComponent {
     this.choosenFileName = a.files.item(0).name;
     FileList = event.target.files;
   }
-  uploadFile = async (form: NgForm, isSubscription?: boolean) => {
+  uploadFile = async (form: NgForm) => {
     if (!this.screenshotInput) {
       throw new Error("this.screenshotInput is null.");
     }
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
+      const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
+      if (fileInput.files) {
+        this.ioPolicy = await this.offlineModeService.dictionaryWrapperService.getIOPolicy(false);
 
-      this.closeTabService.saveDataForImportDataFileExcel.fileUploadSingleForm = fileInput.files;
-      this.ioPolicy = await this.offlineModeService.dictionaryWrapperService.getIOPolicy(false);
-      console.log(this.ioPolicy);
-
-      if (this.offlineModeService.checkVertiticationFileUploadSingle()) {
-        const policyVerification = await this.offlineModeService.iOService.policyContent(this.offlineModeService.fileUploadSingleForm);
-        if (policyVerification) {
-          await this.getLatestOnOffloadId();
-          this.offlineModeService.postTicketFileUploadSingle(fileInput.files).subscribe({
-            next: (event: HttpEvent<any>) => {
-              switch (event.type) {
-                case HttpEventType.Sent:
-                  break;
-                case HttpEventType.ResponseHeader:
-                  break;
-                case HttpEventType.UploadProgress:
-                  this.progress = Math.round(event.loaded / event.total * 100);
-                  break;
-                case HttpEventType.Response: {
-                  console.log(event.body);
-                  this.offlineModeService.showSuccessMessage(event.body.message);
+        if (this.offlineModeService.verificationService.checkVertiticationFileUploadSingle(this.closeTabService.fileUploadSingle, fileInput.files)) {
+          const policyVerification = await this.offlineModeService.iOService.policyContent(fileInput.files);
+          if (policyVerification) {
+            await this.getLatestOnOffloadId();
+            this.offlineModeService.postTicketFileUploadSingle(this.closeTabService.fileUploadSingleReq, fileInput.files).subscribe({
+              next: (event: HttpEvent<any>) => {
+                switch (event.type) {
+                  case HttpEventType.Sent:
+                    break;
+                  case HttpEventType.ResponseHeader:
+                    break;
+                  case HttpEventType.UploadProgress:
+                    this.progress = Math.round(event.loaded / event.total * 100);
+                    break;
+                  case HttpEventType.Response: {
+                    console.log(event.body);
+                    this.offlineModeService.utilsService.snackBarMessageSuccess(event.body.message);
+                  }
+                    setTimeout(() => {
+                      this.progress = 0;
+                    }, 1500);
                 }
-                  setTimeout(() => {
-                    this.progress = 0;
-                  }, 1500);
+              },
+              error: () => {
+                this.progress = 0
               }
-            },
-            error: () => {
-              this.progress = 0
-            }
-          })
+            })
+          }
         }
       }
     }

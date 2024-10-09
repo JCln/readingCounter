@@ -105,7 +105,7 @@ export enum EN_Routes {
     'wrmtrackoffloadedoffloadMfy/' = '/wr/m/track/offloaded/offloadMfy/',
     'downloadAI' = '/wr/tools/downloadAI',
     'downloadAITwo' = '/wr/tools/downloadAITwo',
-    'uploadSingle' = '/wr/tools/uploadSingle',
+    uploadSingle = '/wr/tools/uploadSingle',
     'wrExcelviewer' = '/wr/rpts/exlview',
     excelBuilder = '/wr/tools/excelBuild',
     'wrtoolsrandomImg' = '/wr/tools/randomImg',

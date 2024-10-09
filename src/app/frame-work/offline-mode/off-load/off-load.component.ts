@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { CloseTabService } from 'services/close-tab.service';
 import { OfflineModeService } from 'services/offline-mode.service';
 import { OutputManagerService } from 'services/output-manager.service';
 
@@ -16,7 +17,8 @@ export class OffLoadComponent {
 
   constructor(
     public offlineModeService: OfflineModeService,
-    private outputManagerService: OutputManagerService
+    private outputManagerService: OutputManagerService,
+    public closeTabService: CloseTabService
   ) {
     this.classWrapper();
   }
@@ -27,17 +29,17 @@ export class OffLoadComponent {
   }
 
   downloadTextFile = async () => {
-    if (this.offlineModeService.vertificationLoadManual()) {
-      const a = await this.offlineModeService.ajaxReqWrapperService.getBlob(ENInterfaces.loadManual + '?userId=' + this.offlineModeService.loadForm.counterReaderId);
-      this.outputManagerService.downloadFileWithContentDisposition(a);
+    if (this.offlineModeService.verificationService.vertificationLoadManual(this.closeTabService.offloadFormReq)) {
+      const res = await this.offlineModeService.ajaxReqWrapperService.getBlob(ENInterfaces.loadManual + '?userId=' + this.closeTabService.offloadFormReq.counterReaderId);
+      this.outputManagerService.downloadFileWithContentDisposition(res);
     }
   }
   getZoneDictionary = async () => {
     this.zoneDictionary = await this.offlineModeService.dictionaryWrapperService.getZoneDictionary();
   }
   getCounterReader = async () => {
-    if (this.offlineModeService.loadForm.zoneId) {
-      this.userCounterReaderDictionary = await this.offlineModeService.dictionaryWrapperService.getUserCounterReaderDictionary(this.offlineModeService.loadForm.zoneId);
+    if (this.closeTabService.offloadFormReq.zoneId) {
+      this.userCounterReaderDictionary = await this.offlineModeService.dictionaryWrapperService.getUserCounterReaderDictionary(this.closeTabService.offloadFormReq.zoneId);
     }
   }
 

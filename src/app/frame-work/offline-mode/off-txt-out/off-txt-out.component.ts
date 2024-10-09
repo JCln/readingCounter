@@ -26,7 +26,7 @@ export class OffTxtOutComponent {
     this.choosenFileName = a.files.item(0).name;
     FileList = event.target.files;
   }
-  uploadFile = (form: NgForm, isSubscription?: boolean) => {
+  uploadFile = (form: NgForm) => {
     if (!this.screenshotInput) {
       throw new Error("this.screenshotInput is null.");
     }
@@ -34,8 +34,8 @@ export class OffTxtOutComponent {
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
 
-      if (this.offlineModeService.checkVertiticationOfflineTxtOut(this.closeTabService.offlineTextOut, fileInput.files, form.value)) {
-        this.offlineModeService.postTicketOfflineTxtOut(this.closeTabService.offlineTextOut).subscribe({
+      if (this.offlineModeService.verificationService.checkVertiticationOfflineTxtOut(fileInput.files, this.closeTabService.offlineTextOut)) {
+        this.offlineModeService.postTicketOfflineTxtOut(this.closeTabService.offlineTextOut, fileInput.files).subscribe({
           next: (event: HttpEvent<any>) => {
             switch (event.type) {
               case HttpEventType.Sent:
@@ -46,7 +46,7 @@ export class OffTxtOutComponent {
                 this.progress = Math.round(event.loaded / event.total * 100);
                 break;
               case HttpEventType.Response: {
-                this.offlineModeService.showSuccessMessage(event.body.message);
+                this.offlineModeService.utilsService.snackBarMessageSuccess(event.body.message);
               }
                 setTimeout(() => {
                   this.progress = 0;
