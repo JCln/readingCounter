@@ -29,7 +29,9 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.dictionaryWrapperService.getZoneDictionary();
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationService.verificationRRShared(this.closeTabService.imgAttrAnalyzeReq, true);
+    console.log(this.closeTabService.imgAttrAnalyzeReq);
+
+    const temp = this.readingReportManagerService.verificationService.verificationBySingleZone(this.closeTabService.imgAttrAnalyzeReq, true);
 
     if (temp)
       this.callAPI();

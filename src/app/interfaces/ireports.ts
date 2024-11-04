@@ -1,5 +1,3 @@
-import { TreeNode } from "primeng/api"
-
 export interface IReadingReportChartDisposeRes {
     inProvince: IRRChartResWrapper,
     inRegion: IRRChartResWrapper,
