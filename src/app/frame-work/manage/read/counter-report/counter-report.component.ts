@@ -77,7 +77,7 @@ export class CounterReportComponent extends FactoryONE {
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: object) => {
+  onRowEditSave = async (dataSource: object) => {    
     if (!this.readManagerService.verification(dataSource['dataSource'])) {
       this.closeTabService.saveDataForCounterReport[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;

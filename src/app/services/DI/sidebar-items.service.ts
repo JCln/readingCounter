@@ -19,13 +19,13 @@ export class SidebarItemsService {
   getLatestItems = (): Observable<any> => {
     return this.tabItemsSource.asObservable();
   }
-  getTestSideTest = () => {
+  getStaticSidebars = () => {
     return sidebarItemsTest.sidebarApps;
   }
   getSideBarItems = async (): Promise<ISidebarItems> => {
     const res = await this.ajaxReqWrapperService.getDataSource(ENInterfaces.getSideBar);
     this.tabItemsSource.next(res.sidebarApps);
-    this.tabItemsSource.next(this.getTestSideTest());
+    this.tabItemsSource.next(this.getStaticSidebars());
     return res;
   }
 

@@ -59,10 +59,8 @@ export class CounterStateComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: ICounterState) => {
     this.defaultAddStatus();
-
     dataSource['dataSource'].moshtarakinId = Number(dataSource['dataSource'].moshtarakinId);
-    dataSource['dataSource'].clientOrder = Number(dataSource['dataSource'].clientOrder);
-    dataSource['dataSource'].zoneId = dataSource['dataSource'].changableZoneId;
+    dataSource['dataSource'].clientOrder = Number(dataSource['dataSource'].clientOrder);    
 
     if (!this.readManagerService.verificationCounterState(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
@@ -110,6 +108,6 @@ export class CounterStateComponent extends FactoryONE {
   defaultAddStatus = () => this.newRowLimit = 1;
   testChangedValue() { this.newRowLimit = 2; }
   onRowEditCancel() {
-   this.convertion();
+    this.convertion();
   }
 }
