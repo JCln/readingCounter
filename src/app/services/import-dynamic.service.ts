@@ -129,7 +129,10 @@ export class ImportDynamicService {
     formData.append('file', fileForm[0]);
 
     const res = await this.ajaxReqWrapperService.postDataSourceByObject(method, formData);
-    this.utilsService.snackBarMessageSuccess(res.message);
+    console.log(res);
+    console.log(1);
+    
+    this.utilsService.snackBarMessageSuccess(EN_messages.requestAddedSuccessfully);
   }
 
   showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
