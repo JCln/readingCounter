@@ -75,13 +75,7 @@ export class TrackingManagerService {
       fromDate: dbfData.fromDate,
       toDate: dbfData.toDate
     }
-    return new Promise((resolve) => {
-      this.ajaxReqWrapperService.interfaceManagerService.POSTBLOB(method, a).toPromise().then(res => {
-        resolve(res);
-      }).catch(() => {
-        this.utilsService.snackBarMessageFailed(EN_messages.server_noDataFounded);
-      })
-    });
+    return this.ajaxReqWrapperService.postBlobObserve(method, a);
   }
   downloadOutputDBFEqamatBagh = (method: ENInterfaces, dbfData: any): Promise<any> => {
     return new Promise((resolve) => {

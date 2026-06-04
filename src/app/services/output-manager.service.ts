@@ -69,7 +69,6 @@ export class OutputManagerService {
   // Exports
   downloadFileWithContentDisposition(data: any) {
     const fileName = this.getFileNameFromHeader(data.headers.get(this.contentDisposition));
-
     import("file-saver").then(FileSaver => {
       const blob = new Blob([data.body], { type: data.body.type });
       FileSaver.saveAs(blob, fileName);
@@ -238,5 +237,5 @@ export class OutputManagerService {
       this.makePDF(datas, fileName) :
       this.makeEXCEL(datas, outputConfig, fileName)
   }
-  
+
 }
