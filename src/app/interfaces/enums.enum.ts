@@ -20,6 +20,7 @@ export enum EN_messages {
     not_found_zoneId = 'ناحیه ای تعریف نشده است',
     try_uploadAgain = 'مجددا امتحان نمایید',
     notFound = 'موردی یافت نشد',
+    pleaseWaitFordownloadedFile = 'درحال آماده سازی فایل، لطفا تا کامل شدن فرآیند صبر نمایید',
     notFoundToExport = 'موردی برای ذخیره وجود ندارد',
     notFoundDataToRegister = 'مقداری برای ثبت وجود ندارد',
     highLow100 = 'مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد',

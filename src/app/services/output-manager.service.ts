@@ -22,7 +22,7 @@ export class OutputManagerService {
   private readonly excelType = 'xlsx';
 
   constructor(
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dateJalaliService: DateJalaliService,
     private profileService: ProfileService
   ) {
